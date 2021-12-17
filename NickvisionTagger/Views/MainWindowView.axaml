@@ -119,7 +119,7 @@
 
 		<ui:CommandBar HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,40,0,0" DefaultLabelPosition="Right">
 			<ui:CommandBar.Content>
-				<TextBlock Margin="6,14,6,0" Text="{Binding MusicFolder.Path}"/>
+				<TextBlock Margin="6,12,6,0" Text="{Binding MusicFolder.Path}"/>
 			</ui:CommandBar.Content>
 			
 			<ui:CommandBar.PrimaryCommands>
@@ -198,7 +198,7 @@
 				</Border>
 
 				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="350,6,6,6" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}" CornerRadius="6">
-					<DataGrid Name="DataMusicFiles" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Extended" GridLinesVisibility="Horizontal" Items="{Binding MusicFolder.Files}">
+					<DataGrid Name="DataMusicFiles" Margin="6,6,6,6" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Extended" GridLinesVisibility="Horizontal" Items="{Binding MusicFolder.Files}">
 						<DataGrid.Columns>
 							<DataGridTextColumn Header="Filename" Binding="{Binding Filename}"/>
 							<DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
