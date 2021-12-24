@@ -357,7 +357,7 @@ namespace NickvisionTagger.ViewModels
 
         private async Task CheckForUpdates(ICloseable window)
         {
-            var updater = new Updater(_httpClient, new Uri("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json"), new Version("2021.12.1"));
+            var updater = new Updater(_httpClient, new Uri("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json"), new Version("2021.12.2"));
             await _serviceCollection.GetService<IProgressDialogService>().ShowAsync("Checking for updates...", async () => await updater.CheckForUpdatesAsync());
             if (updater.UpdateAvailable)
             {
@@ -402,7 +402,7 @@ namespace NickvisionTagger.ViewModels
             await _serviceCollection.GetService<IContentDialogService>().ShowMessageAsync(new ContentDialogInfo()
             {
                 Title = "What's New?",
-                Description  = "- Fixed an issue where the status text looked cut off",
+                Description  = "- Moved status to a bar at the bottom\n- Updated dependencies",
                 CloseButtonText = "OK",
                 DefaultButton = ContentDialogButton.Close
             });
@@ -413,7 +413,7 @@ namespace NickvisionTagger.ViewModels
             await _serviceCollection.GetService<IContentDialogService>().ShowMessageAsync(new ContentDialogInfo()
             {
                 Title = "About",
-                Description  = "Nickvision Tagger Version 2021.12.1\nAn easy-to-use music tag (metadata) editor.\n\nUsing Avalonia and .NET 6",
+                Description  = "Nickvision Tagger Version 2021.12.2\nAn easy-to-use music tag (metadata) editor.\n\nUsing Avalonia and .NET 6",
                 CloseButtonText = "OK",
                 DefaultButton = ContentDialogButton.Close
             });
