@@ -179,12 +179,16 @@ namespace NickvisionTagger::Views
             if(response == Gtk::ResponseType::OK)
             {
                 m_musicFolder.setPath(dialog->get_file()->get_path());
+                delete dialog;
                 set_title("Nickvision Tagger (" + m_musicFolder.getPath() + ")");
                 m_headerBar.getActionReloadMusicFolder()->set_enabled(true);
                 m_headerBar.getActionCloseMusicFolder()->set_enabled(true);
                 reloadMusicFolder({});
             }
-            delete dialog;
+            else
+            {
+                delete dialog;
+            }
         }, folderDialog));
         folderDialog->show();
     }
@@ -194,18 +198,19 @@ namespace NickvisionTagger::Views
         m_dataMusicFilesModel->clear();
         m_infoBar.showMessage("Please Wait", "Loading music files...", false);
         m_musicFolder.reloadFiles();
-        for(size_t i = 0; i < m_musicFolder.getFiles().size(); i++)
+        int i = 1;
+        for(const std::shared_ptr<MusicFile>& musicFile : m_musicFolder.getFiles())
         {
-            m_infoBar.showMessage("Please Wait", "Loading music files (" + std::to_string(i + 1) + " / " + std::to_string(m_musicFolder.getFiles().size()) + ")...", false);
             Gtk::TreeRow row = *(m_dataMusicFilesModel->append());
-            row[m_dataMusicFilesColumns.getColID()] = i + 1;
-            row[m_dataMusicFilesColumns.getColFilename()] = m_musicFolder.getFiles()[i]->getFilename();
-            row[m_dataMusicFilesColumns.getColTitle()] = m_musicFolder.getFiles()[i]->getTitle();
-            row[m_dataMusicFilesColumns.getColArtist()] = m_musicFolder.getFiles()[i]->getArtist();
-            row[m_dataMusicFilesColumns.getColAlbum()] = m_musicFolder.getFiles()[i]->getAlbum();
-            row[m_dataMusicFilesColumns.getColDuration()] = m_musicFolder.getFiles()[i]->getDurationAsString();
-            row[m_dataMusicFilesColumns.getColComment()] = m_musicFolder.getFiles()[i]->getComment();
-            row[m_dataMusicFilesColumns.getColPath()] = m_musicFolder.getFiles()[i]->getPath();
+            row[m_dataMusicFilesColumns.getColID()] = i;
+            row[m_dataMusicFilesColumns.getColFilename()] = musicFile->getFilename();
+            row[m_dataMusicFilesColumns.getColTitle()] = musicFile->getTitle();
+            row[m_dataMusicFilesColumns.getColArtist()] = musicFile->getArtist();
+            row[m_dataMusicFilesColumns.getColAlbum()] = musicFile->getAlbum();
+            row[m_dataMusicFilesColumns.getColDuration()] = musicFile->getDurationAsString();
+            row[m_dataMusicFilesColumns.getColComment()] = musicFile->getComment();
+            row[m_dataMusicFilesColumns.getColPath()] = musicFile->getPath();
+            i++;
         }
         m_dataMusicFiles.columns_autosize();
         m_infoBar.hide();
@@ -222,30 +227,30 @@ namespace NickvisionTagger::Views
 
     void MainWindow::saveTags()
     {
-        for(size_t i = 0; i < m_selectedMusicFiles.size(); i++)
+        m_infoBar.showMessage("Please Wait", "Saving tags...", false);
+        for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
         {
-            m_infoBar.showMessage("Please Wait", "Saving tags (" + std::to_string(i + 1) + " / " + std::to_string(m_selectedMusicFiles.size()) + ")...", false);
-            if(std::string(m_txtFilename.get_text()) != m_selectedMusicFiles[i]->getFilename() && m_txtFilename.get_text() != "<keep>")
+            if(std::string(m_txtFilename.get_text()) != musicFile->getFilename() && m_txtFilename.get_text() != "<keep>")
             {
-                m_selectedMusicFiles[i]->setFilename(m_txtFilename.get_text());
+                musicFile->setFilename(m_txtFilename.get_text());
             }
             if(m_txtTitle.get_text() != "<keep>")
             {
-                m_selectedMusicFiles[i]->setTitle(m_txtTitle.get_text());
+                musicFile->setTitle(m_txtTitle.get_text());
             }
             if(m_txtArtist.get_text() != "<keep>")
             {
-                m_selectedMusicFiles[i]->setArtist(m_txtArtist.get_text());
+                musicFile->setArtist(m_txtArtist.get_text());
             }
             if(m_txtAlbum.get_text() != "<keep>")
             {
-                m_selectedMusicFiles[i]->setAlbum(m_txtAlbum.get_text());
+                musicFile->setAlbum(m_txtAlbum.get_text());
             }
             if(m_txtYear.get_text() != "<keep>")
             {
                 try
                 {
-                    m_selectedMusicFiles[i]->setYear(stoui(m_txtYear.get_text()));
+                    musicFile->setYear(stoui(m_txtYear.get_text()));
                 }
                 catch(...) { }
             }
@@ -253,31 +258,33 @@ namespace NickvisionTagger::Views
             {
                 try
                 {
-                    m_selectedMusicFiles[i]->setTrack(stoui(m_txtTrack.get_text()));
+                    musicFile->setTrack(stoui(m_txtTrack.get_text()));
                 }
                 catch(...) { }
             }
             if(m_txtGenre.get_text() != "<keep>")
             {
-                m_selectedMusicFiles[i]->setGenre(m_txtGenre.get_text());
+                musicFile->setGenre(m_txtGenre.get_text());
             }
             if(m_txtComment.get_text() != "<keep>")
             {
-                m_selectedMusicFiles[i]->setComment(m_txtComment.get_text());
+                musicFile->setComment(m_txtComment.get_text());
             }
-            m_selectedMusicFiles[i]->saveTag();
+            musicFile->saveTag();
         }
+        m_infoBar.hide();
         reloadMusicFolder({});
     }
 
     void MainWindow::removeTags()
     {
         m_headerBar.getPopRemoveTags().popdown();
-        for(size_t i = 0; i < m_selectedMusicFiles.size(); i++)
+        m_infoBar.showMessage("Please Wait", "Removing tags...", false);
+        for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
         {
-            m_infoBar.showMessage("Please Wait", "Removing tags (" + std::to_string(i + 1) + " / " + std::to_string(m_selectedMusicFiles.size()) + ")...", false);
-            m_selectedMusicFiles[i]->removeTag();
+            musicFile->removeTag();
         }
+        m_infoBar.hide();
         reloadMusicFolder({});
     }
 
@@ -287,12 +294,12 @@ namespace NickvisionTagger::Views
         std::string formatString = m_headerBar.getCmbFTTFormatString().get_active_text();
         int success = 0;
         std::string total = std::to_string(m_selectedMusicFiles.size());
-        for(size_t i = 0; i < m_selectedMusicFiles.size(); i++)
+        m_infoBar.showMessage("Please Wait", "Converting filenames to tags...", false);
+        for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
         {
-            m_infoBar.showMessage("Please Wait", "Converting filenames to tags (" + std::to_string(i + 1) + " / " + total + ")...", false);
             try
             {
-                m_selectedMusicFiles[i]->filenameToTag(formatString);
+                musicFile->filenameToTag(formatString);
                 success++;
             }
             catch (...) { }
@@ -307,12 +314,12 @@ namespace NickvisionTagger::Views
          std::string formatString = m_headerBar.getCmbTTFFormatString().get_active_text();
          int success = 0;
          std::string total = std::to_string(m_selectedMusicFiles.size());
-         for(size_t i = 0; i < m_selectedMusicFiles.size(); i++)
+         m_infoBar.showMessage("Please Wait", "Converting tags to filenames...", false);
+         for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
          {
-             m_infoBar.showMessage("Please Wait", "Converting tags to filenames (" + std::to_string(i + 1) + " / " + total + ")...", false);
              try
              {
-                 m_selectedMusicFiles[i]->tagToFilename(formatString);
+                 musicFile->tagToFilename(formatString);
                  success++;
              }
              catch (...) { }
@@ -336,7 +343,7 @@ namespace NickvisionTagger::Views
 
     void MainWindow::checkForUpdates(const Glib::VariantBase& args)
     {
-        Updater updater("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.1.0" });
+        Updater updater("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.1.1" });
         m_infoBar.showMessage("Please Wait", "Checking for updates...", false);
         updater.checkForUpdates();
         m_infoBar.hide();
@@ -369,7 +376,7 @@ namespace NickvisionTagger::Views
     void MainWindow::changelog(const Glib::VariantBase& args)
     {
         Gtk::MessageDialog* changelogDialog = new Gtk::MessageDialog(*this, "What's New?", false, Gtk::MessageType::INFO, Gtk::ButtonsType::OK, true);
-        changelogDialog->set_secondary_text("\n- Rewrote Tagger in C++ using gtkmm\n- Removed support for Windows OS. Only Linux is now supported");
+        changelogDialog->set_secondary_text("\n- Updated UX");
         changelogDialog->signal_response().connect(sigc::bind([](int response, Gtk::MessageDialog* dialog)
         {
            delete dialog;
@@ -384,7 +391,7 @@ namespace NickvisionTagger::Views
         aboutDialog->set_modal(true);
         aboutDialog->set_hide_on_close(true);
         aboutDialog->set_program_name("Nickvision Tagger");
-        aboutDialog->set_version("2022.1.0");
+        aboutDialog->set_version("2022.1.1");
         aboutDialog->set_comments("An easy to use music tag (metadata) editor.");
         aboutDialog->set_copyright("(C) Nickvision 2021-2022");
         aboutDialog->set_license_type(Gtk::License::GPL_3_0);
