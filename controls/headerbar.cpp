@@ -112,12 +112,10 @@ namespace NickvisionTagger::Controls
         m_btnHelp.set_tooltip_text("Help");
         //==Layout==//
         pack_start(m_btnFolder);
-        Gtk::Separator sep1;
-        pack_start(sep1);
+        pack_start(m_sep1);
         pack_start(m_btnSaveTags);
         pack_start(m_btnRemoveTags);
-        Gtk::Separator sep2;
-        pack_start(sep2);
+        pack_start(m_sep2);
         pack_start(m_btnFilenameToTag);
         pack_start(m_btnTagToFilename);
         pack_end(m_btnHelp);

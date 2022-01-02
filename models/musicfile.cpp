@@ -6,7 +6,7 @@ namespace NickvisionTagger::Models
 {
     using namespace NickvisionTagger::Helpers;
 
-    MusicFile::MusicFile(const std::string& path) : m_path(path), m_file(std::make_shared<TagLib::FileRef>(m_path.c_str()))
+    MusicFile::MusicFile(const std::filesystem::path& path) : m_path(path), m_file(std::make_shared<TagLib::FileRef>(m_path.c_str()))
     {
 
     }

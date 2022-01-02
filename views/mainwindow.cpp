@@ -195,8 +195,8 @@ namespace NickvisionTagger::Views
 
     void MainWindow::reloadMusicFolder(const Glib::VariantBase& args)
     {
-        m_dataMusicFilesModel->clear();
         m_infoBar.showMessage("Please Wait", "Loading music files...", false);
+        m_dataMusicFilesModel->clear();
         m_musicFolder.reloadFiles();
         int i = 1;
         for(const std::shared_ptr<MusicFile>& musicFile : m_musicFolder.getFiles())

@@ -11,7 +11,7 @@ namespace NickvisionTagger::Models
     class MusicFile
     {
     public:
-        MusicFile(const std::string& path);
+        MusicFile(const std::filesystem::path& path);
         const std::filesystem::path& getPath() const;
         std::string getFilename() const;
         void setFilename(const std::string& filename);

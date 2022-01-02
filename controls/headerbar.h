@@ -82,6 +82,9 @@ namespace NickvisionTagger::Controls
         std::shared_ptr<Gio::Menu> m_menuHelpLinks;
         std::shared_ptr<Gio::Menu> m_menuHelpActions;
         Gtk::MenuButton m_btnHelp;
+        //==Separators==//
+        Gtk::Separator m_sep1;
+        Gtk::Separator m_sep2;
     };
 }
 
