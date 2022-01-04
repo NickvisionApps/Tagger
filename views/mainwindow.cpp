@@ -1,10 +1,10 @@
 #include "mainwindow.h"
 #include <stdexcept>
 #include <filesystem>
-#include "../models/configuration.h"
-#include "../models/update/updater.h"
-#include "settingsdialog.h"
 #include "../helpers/mediahelpers.h"
+#include "../models/configuration.h"
+#include "../controls/progressdialog.h"
+#include "settingsdialog.h"
 
 unsigned int stoui(const std::string& str, size_t* idx = 0, int base = 10)
 {
@@ -18,11 +18,11 @@ unsigned int stoui(const std::string& str, size_t* idx = 0, int base = 10)
 
 namespace NickvisionTagger::Views
 {
-    using namespace NickvisionTagger::Models;
-    using namespace NickvisionTagger::Models::Update;
     using namespace NickvisionTagger::Helpers;
+    using namespace NickvisionTagger::Models;
+    using namespace NickvisionTagger::Controls;
 
-    MainWindow::MainWindow()
+    MainWindow::MainWindow() : m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.1.2" })
     {
         //==Settings==//
         set_default_size(800, 600);
@@ -195,25 +195,28 @@ namespace NickvisionTagger::Views
 
     void MainWindow::reloadMusicFolder(const Glib::VariantBase& args)
     {
-        m_infoBar.showMessage("Please Wait", "Loading music files...", false);
         m_dataMusicFilesModel->clear();
-        m_musicFolder.reloadFiles();
-        int i = 1;
-        for(const std::shared_ptr<MusicFile>& musicFile : m_musicFolder.getFiles())
+        ProgressDialog* loadingDialog = new ProgressDialog(*this, "Loading music files...", [&]() { m_musicFolder.reloadFiles(); });
+        loadingDialog->signal_hide().connect(sigc::bind([&](ProgressDialog* dialog)
         {
-            Gtk::TreeRow row = *(m_dataMusicFilesModel->append());
-            row[m_dataMusicFilesColumns.getColID()] = i;
-            row[m_dataMusicFilesColumns.getColFilename()] = musicFile->getFilename();
-            row[m_dataMusicFilesColumns.getColTitle()] = musicFile->getTitle();
-            row[m_dataMusicFilesColumns.getColArtist()] = musicFile->getArtist();
-            row[m_dataMusicFilesColumns.getColAlbum()] = musicFile->getAlbum();
-            row[m_dataMusicFilesColumns.getColDuration()] = musicFile->getDurationAsString();
-            row[m_dataMusicFilesColumns.getColComment()] = musicFile->getComment();
-            row[m_dataMusicFilesColumns.getColPath()] = musicFile->getPath();
-            i++;
-        }
-        m_dataMusicFiles.columns_autosize();
-        m_infoBar.hide();
+            delete dialog;
+            int i = 1;
+            for(const std::shared_ptr<MusicFile>& musicFile : m_musicFolder.getFiles())
+            {
+                Gtk::TreeRow row = *(m_dataMusicFilesModel->append());
+                row[m_dataMusicFilesColumns.getColID()] = i;
+                row[m_dataMusicFilesColumns.getColFilename()] = musicFile->getFilename();
+                row[m_dataMusicFilesColumns.getColTitle()] = musicFile->getTitle();
+                row[m_dataMusicFilesColumns.getColArtist()] = musicFile->getArtist();
+                row[m_dataMusicFilesColumns.getColAlbum()] = musicFile->getAlbum();
+                row[m_dataMusicFilesColumns.getColDuration()] = musicFile->getDurationAsString();
+                row[m_dataMusicFilesColumns.getColComment()] = musicFile->getComment();
+                row[m_dataMusicFilesColumns.getColPath()] = musicFile->getPath();
+                i++;
+             }
+             m_dataMusicFiles.columns_autosize();
+        }, loadingDialog));
+        loadingDialog->show();
     }
 
     void MainWindow::closeMusicFolder(const Glib::VariantBase& args)
@@ -227,105 +230,131 @@ namespace NickvisionTagger::Views
 
     void MainWindow::saveTags()
     {
-        m_infoBar.showMessage("Please Wait", "Saving tags...", false);
-        for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+        ProgressDialog* savingDialog = new ProgressDialog(*this, "Saving tags...", [&]()
         {
-            if(std::string(m_txtFilename.get_text()) != musicFile->getFilename() && m_txtFilename.get_text() != "<keep>")
+            for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
             {
-                musicFile->setFilename(m_txtFilename.get_text());
-            }
-            if(m_txtTitle.get_text() != "<keep>")
-            {
-                musicFile->setTitle(m_txtTitle.get_text());
-            }
-            if(m_txtArtist.get_text() != "<keep>")
-            {
-                musicFile->setArtist(m_txtArtist.get_text());
-            }
-            if(m_txtAlbum.get_text() != "<keep>")
-            {
-                musicFile->setAlbum(m_txtAlbum.get_text());
-            }
-            if(m_txtYear.get_text() != "<keep>")
-            {
-                try
+                if(std::string(m_txtFilename.get_text()) != musicFile->getFilename() && m_txtFilename.get_text() != "<keep>")
                 {
-                    musicFile->setYear(stoui(m_txtYear.get_text()));
+                    musicFile->setFilename(m_txtFilename.get_text());
                 }
-                catch(...) { }
-            }
-            if(m_txtTrack.get_text() != "<keep>")
-            {
-                try
+                if(m_txtTitle.get_text() != "<keep>")
                 {
-                    musicFile->setTrack(stoui(m_txtTrack.get_text()));
+                    musicFile->setTitle(m_txtTitle.get_text());
                 }
-                catch(...) { }
+                if(m_txtArtist.get_text() != "<keep>")
+                {
+                    musicFile->setArtist(m_txtArtist.get_text());
+                }
+                if(m_txtAlbum.get_text() != "<keep>")
+                {
+                    musicFile->setAlbum(m_txtAlbum.get_text());
+                }
+                if(m_txtYear.get_text() != "<keep>")
+                {
+                    try
+                    {
+                        musicFile->setYear(stoui(m_txtYear.get_text()));
+                    }
+                    catch(...) { }
+                }
+                if(m_txtTrack.get_text() != "<keep>")
+                {
+                    try
+                    {
+                        musicFile->setTrack(stoui(m_txtTrack.get_text()));
+                    }
+                    catch(...) { }
+                }
+                if(m_txtGenre.get_text() != "<keep>")
+                {
+                    musicFile->setGenre(m_txtGenre.get_text());
+                }
+                if(m_txtComment.get_text() != "<keep>")
+                {
+                    musicFile->setComment(m_txtComment.get_text());
+                }
+                musicFile->saveTag();
             }
-            if(m_txtGenre.get_text() != "<keep>")
-            {
-                musicFile->setGenre(m_txtGenre.get_text());
-            }
-            if(m_txtComment.get_text() != "<keep>")
-            {
-                musicFile->setComment(m_txtComment.get_text());
-            }
-            musicFile->saveTag();
-        }
-        m_infoBar.hide();
-        reloadMusicFolder({});
+        });
+        savingDialog->signal_hide().connect(sigc::bind([&](ProgressDialog* dialog)
+        {
+            delete dialog;
+            reloadMusicFolder({});
+        }, savingDialog));
+        savingDialog->show();
     }
 
     void MainWindow::removeTags()
     {
         m_headerBar.getPopRemoveTags().popdown();
-        m_infoBar.showMessage("Please Wait", "Removing tags...", false);
-        for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+        ProgressDialog* removingDialog = new ProgressDialog(*this, "Removing tags...", [&]()
         {
-            musicFile->removeTag();
-        }
-        m_infoBar.hide();
-        reloadMusicFolder({});
+            for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+            {
+                musicFile->removeTag();
+            }
+        });
+        removingDialog->signal_hide().connect(sigc::bind([&](ProgressDialog* dialog)
+        {
+            delete dialog;
+            reloadMusicFolder({});
+        }, removingDialog));
+        removingDialog->show();
     }
 
     void MainWindow::filenameToTag()
     {
         m_headerBar.getPopFilenameToTag().popdown();
-        std::string formatString = m_headerBar.getCmbFTTFormatString().get_active_text();
-        int success = 0;
-        std::string total = std::to_string(m_selectedMusicFiles.size());
-        m_infoBar.showMessage("Please Wait", "Converting filenames to tags...", false);
-        for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+        int* success = new int(0);
+        ProgressDialog* convertingDialog = new ProgressDialog(*this, "Converting filenames to tags", [&]()
         {
-            try
+            std::string formatString = m_headerBar.getCmbFTTFormatString().get_active_text();
+            for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
             {
-                musicFile->filenameToTag(formatString);
-                success++;
+                try
+                {
+                    musicFile->filenameToTag(formatString);
+                    (*success)++;
+                }
+                catch (...) { }
             }
-            catch (...) { }
-        }
-        reloadMusicFolder({});
-        m_infoBar.showMessage("Conversion Complete", "Converted " + std::to_string(success) + " out of " + total + " filenames to tags.");
+        });
+        convertingDialog->signal_hide().connect(sigc::bind([&](ProgressDialog* dialog, int* success)
+        {
+            delete dialog;
+            m_infoBar.showMessage("Conversion Completed", "Converted " + std::to_string(*success) + " out of " + std::to_string(m_selectedMusicFiles.size()) + " filenames to tags.");
+            delete success;
+            reloadMusicFolder({});
+        }, convertingDialog, success));
+        convertingDialog->show();
     }
 
     void MainWindow::tagToFilename()
     {
-         m_headerBar.getPopTagToFilename().popdown();
-         std::string formatString = m_headerBar.getCmbTTFFormatString().get_active_text();
-         int success = 0;
-         std::string total = std::to_string(m_selectedMusicFiles.size());
-         m_infoBar.showMessage("Please Wait", "Converting tags to filenames...", false);
-         for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
-         {
-             try
-             {
-                 musicFile->tagToFilename(formatString);
-                 success++;
-             }
-             catch (...) { }
-         }
-         reloadMusicFolder({});
-         m_infoBar.showMessage("Conversion Complete", "Converted " + std::to_string(success) + " out of " + total + " tags to filenames.");
+        m_headerBar.getPopTagToFilename().popdown();
+        int* success = new int(0);
+        ProgressDialog* convertingDialog = new ProgressDialog(*this, "Converting tags to filenames", [&]()
+        {
+            std::string formatString = m_headerBar.getCmbTTFFormatString().get_active_text();
+            for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+            {
+                try
+                {
+                    musicFile->tagToFilename(formatString);
+                    (*success)++;
+                }
+                catch (...) { }
+            }
+        });
+        convertingDialog->signal_hide().connect(sigc::bind([&](ProgressDialog* dialog, int* success)
+        {
+            delete dialog;
+            m_infoBar.showMessage("Conversion Completed", "Converted " + std::to_string(*success) + " out of " + std::to_string(m_selectedMusicFiles.size()) + " tags to filenames.");
+            delete success;
+            reloadMusicFolder({});
+        }, convertingDialog, success));
+        convertingDialog->show();
     }
 
     void MainWindow::settings()
@@ -343,24 +372,26 @@ namespace NickvisionTagger::Views
 
     void MainWindow::checkForUpdates(const Glib::VariantBase& args)
     {
-        Updater updater("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.1.1" });
-        m_infoBar.showMessage("Please Wait", "Checking for updates...", false);
-        updater.checkForUpdates();
-        m_infoBar.hide();
-        if(updater.updateAvailable())
+        ProgressDialog* checkingDialog = new ProgressDialog(*this, "Checking for updates...", [&]() { m_updater.checkForUpdates(); });
+        checkingDialog->signal_hide().connect(sigc::bind([&](ProgressDialog* dialog)
         {
-            Gtk::MessageDialog* updateDialog = new Gtk::MessageDialog(*this, "Update Available", false, Gtk::MessageType::INFO, Gtk::ButtonsType::OK, true);
-            updateDialog->set_secondary_text("\n===V" + updater.getLatestVersion()->toString() + " Changelog===\n" + updater.getChangelog() + "\n\nPlease visit the GitHub repo or update through your package manager to get the latest version.");
-            updateDialog->signal_response().connect(sigc::bind([](int response, Gtk::MessageDialog* dialog)
+            delete dialog;
+            if(m_updater.updateAvailable())
             {
-               delete dialog;
-            }, updateDialog));
-            updateDialog->show();
-        }
-        else
-        {
-            m_infoBar.showMessage("No Update Available", "There is no update at this time. Please check again later.");
-        }
+                Gtk::MessageDialog* updateDialog = new Gtk::MessageDialog(*this, "Update Available", false, Gtk::MessageType::INFO, Gtk::ButtonsType::OK, true);
+                updateDialog->set_secondary_text("\n===V" + m_updater.getLatestVersion()->toString() + " Changelog===\n" + m_updater.getChangelog() + "\n\nPlease visit the GitHub repo or update through your package manager to get the latest version.");
+                updateDialog->signal_response().connect(sigc::bind([](int response, Gtk::MessageDialog* dialog)
+                {
+                    delete dialog;
+                }, updateDialog));
+                updateDialog->show();
+            }
+            else
+            {
+                m_infoBar.showMessage("No Update Available", "There is no update at this time. Please check again later.");
+            }
+        }, checkingDialog));
+        checkingDialog->show();
     }
 
     void MainWindow::gitHubRepo(const Glib::VariantBase& args)
@@ -376,7 +407,7 @@ namespace NickvisionTagger::Views
     void MainWindow::changelog(const Glib::VariantBase& args)
     {
         Gtk::MessageDialog* changelogDialog = new Gtk::MessageDialog(*this, "What's New?", false, Gtk::MessageType::INFO, Gtk::ButtonsType::OK, true);
-        changelogDialog->set_secondary_text("\n- Updated UX");
+        changelogDialog->set_secondary_text("\n- Created a ProgressDialog for long operations");
         changelogDialog->signal_response().connect(sigc::bind([](int response, Gtk::MessageDialog* dialog)
         {
            delete dialog;
@@ -391,7 +422,7 @@ namespace NickvisionTagger::Views
         aboutDialog->set_modal(true);
         aboutDialog->set_hide_on_close(true);
         aboutDialog->set_program_name("Nickvision Tagger");
-        aboutDialog->set_version("2022.1.1");
+        aboutDialog->set_version("2022.1.2");
         aboutDialog->set_comments("An easy to use music tag (metadata) editor.");
         aboutDialog->set_copyright("(C) Nickvision 2021-2022");
         aboutDialog->set_license_type(Gtk::License::GPL_3_0);

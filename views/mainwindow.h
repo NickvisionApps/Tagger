@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <gtkmm.h>
+#include "../models/update/updater.h"
 #include "../models/musicfile.h"
 #include "../models/musicfolder.h"
 #include "../models/datamusicfilescolumns.h"
@@ -18,6 +19,7 @@ namespace NickvisionTagger::Views
         ~MainWindow();
 
     private:
+        NickvisionTagger::Models::Update::Updater m_updater;
         NickvisionTagger::Models::MusicFolder m_musicFolder;
         std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
         //==UI==//

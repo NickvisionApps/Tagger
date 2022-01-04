@@ -45,7 +45,7 @@ namespace NickvisionTagger::Controls
         m_cmbFTTFormatString.append("%artist%- %title%");
         m_cmbFTTFormatString.append("%title%- %artist%");
         m_cmbFTTFormatString.append("%title%");
-        m_cmbFTTFormatString.set_active_text("%artist%- %title%");
+        m_cmbFTTFormatString.set_active(0);
         m_btnFTTConvert.set_label("Convert");
         m_btnFTTCancel.set_label("Cancel");
         m_btnFTTCancel.signal_clicked().connect(sigc::mem_fun(m_popFilenameToTag, &Gtk::Popover::popdown));
@@ -68,7 +68,7 @@ namespace NickvisionTagger::Controls
         m_cmbTTFFormatString.append("%artist%- %title%");
         m_cmbTTFFormatString.append("%title%- %artist%");
         m_cmbTTFFormatString.append("%title%");
-        m_cmbTTFFormatString.set_active_text("%artist%- %title%");
+        m_cmbTTFFormatString.set_active(0);
         m_btnTTFConvert.set_label("Convert");
         m_btnTTFCancel.set_label("Cancel");
         m_btnTTFCancel.signal_clicked().connect(sigc::mem_fun(m_popTagToFilename, &Gtk::Popover::popdown));

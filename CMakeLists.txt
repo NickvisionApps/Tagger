@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(HELPERS helpers/mediahelpers.h helpers/mediahelpers.cpp)
 set(MODELS models/configuration.h models/configuration.cpp models/update/version.h models/update/version.cpp models/update/updateconfig.h models/update/updateconfig.cpp models/update/updater.h models/update/updater.cpp models/musicfile.h models/musicfile.cpp models/musicfolder.h models/musicfolder.cpp models/datamusicfilescolumns.h models/datamusicfilescolumns.cpp)
-set(CONTROLS controls/headerbar.h controls/headerbar.cpp controls/infobar.h controls/infobar.cpp)
+set(CONTROLS controls/headerbar.h controls/headerbar.cpp controls/infobar.h controls/infobar.cpp controls/progressdialog.h controls/progressdialog.cpp)
 set(VIEWS views/mainwindow.h views/mainwindow.cpp views/settingsdialog.h views/settingsdialog.cpp)
 
 add_executable(NickvisionTagger main.cpp ${HELPERS} ${MODELS} ${CONTROLS} ${VIEWS})
