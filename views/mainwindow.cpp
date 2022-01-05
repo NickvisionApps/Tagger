@@ -22,7 +22,7 @@ namespace NickvisionTagger::Views
     using namespace NickvisionTagger::Models;
     using namespace NickvisionTagger::Controls;
 
-    MainWindow::MainWindow() : m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.1.2" })
+    MainWindow::MainWindow() : m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.1.3" })
     {
         //==Settings==//
         set_default_size(800, 600);
@@ -378,11 +378,26 @@ namespace NickvisionTagger::Views
             delete dialog;
             if(m_updater.updateAvailable())
             {
-                Gtk::MessageDialog* updateDialog = new Gtk::MessageDialog(*this, "Update Available", false, Gtk::MessageType::INFO, Gtk::ButtonsType::OK, true);
-                updateDialog->set_secondary_text("\n===V" + m_updater.getLatestVersion()->toString() + " Changelog===\n" + m_updater.getChangelog() + "\n\nPlease visit the GitHub repo or update through your package manager to get the latest version.");
-                updateDialog->signal_response().connect(sigc::bind([](int response, Gtk::MessageDialog* dialog)
+                Gtk::MessageDialog* updateDialog = new Gtk::MessageDialog(*this, "Update Available", false, Gtk::MessageType::INFO, Gtk::ButtonsType::YES_NO, true);
+                updateDialog->set_secondary_text("\n===V" + m_updater.getLatestVersion()->toString() + " Changelog===\n" + m_updater.getChangelog() + "\n\nNickvision Tagger can automatically download the latest executable to your Downloads directory. Would you like to continue?");
+                updateDialog->signal_response().connect(sigc::bind([&](int response, Gtk::MessageDialog* dialog)
                 {
                     delete dialog;
+                    if(response == Gtk::ResponseType::YES)
+                    {
+                        bool* success = new bool(false);
+                        ProgressDialog* downloadingDialog = new ProgressDialog(*this, "Downloading the update...", [&]() { *success = m_updater.update(); });
+                        downloadingDialog->signal_hide().connect(sigc::bind([&](ProgressDialog* dialog, bool* success)
+                        {
+                            delete dialog;
+                            if(!(*success))
+                            {
+                                m_infoBar.showMessage("Error", "Unable to download the executable. Please try again. If the issue continues, file a bug report.");
+                            }
+                            delete success;
+                        }, downloadingDialog, success));
+                        downloadingDialog->show();
+                    }
                 }, updateDialog));
                 updateDialog->show();
             }
@@ -407,7 +422,7 @@ namespace NickvisionTagger::Views
     void MainWindow::changelog(const Glib::VariantBase& args)
     {
         Gtk::MessageDialog* changelogDialog = new Gtk::MessageDialog(*this, "What's New?", false, Gtk::MessageType::INFO, Gtk::ButtonsType::OK, true);
-        changelogDialog->set_secondary_text("\n- Created a ProgressDialog for long operations");
+        changelogDialog->set_secondary_text("\n- Added the ability for Tagger to automatically download an updated executable when available");
         changelogDialog->signal_response().connect(sigc::bind([](int response, Gtk::MessageDialog* dialog)
         {
            delete dialog;
@@ -422,7 +437,7 @@ namespace NickvisionTagger::Views
         aboutDialog->set_modal(true);
         aboutDialog->set_hide_on_close(true);
         aboutDialog->set_program_name("Nickvision Tagger");
-        aboutDialog->set_version("2022.1.2");
+        aboutDialog->set_version("2022.1.3");
         aboutDialog->set_comments("An easy to use music tag (metadata) editor.");
         aboutDialog->set_copyright("(C) Nickvision 2021-2022");
         aboutDialog->set_license_type(Gtk::License::GPL_3_0);
