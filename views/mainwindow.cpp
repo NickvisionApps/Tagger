@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include <stdexcept>
 #include <filesystem>
 #include "../helpers/mediahelpers.h"
 #include "../models/configuration.h"
@@ -22,12 +21,13 @@ namespace NickvisionTagger::Views
     using namespace NickvisionTagger::Models;
     using namespace NickvisionTagger::Controls;
 
-    MainWindow::MainWindow() : m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.1.3" })
+    MainWindow::MainWindow() : m_opened(false), m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.1.4" })
     {
         //==Settings==//
         set_default_size(800, 600);
         set_title("Nickvision Tagger");
         set_titlebar(m_headerBar);
+        signal_show().connect(sigc::mem_fun(*this, &MainWindow::onShow));
         //==HeaderBar==//
         m_headerBar.getActionOpenMusicFolder()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::openMusicFolder));
         m_headerBar.getActionReloadMusicFolder()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::reloadMusicFolder));
@@ -144,17 +144,6 @@ namespace NickvisionTagger::Views
         m_mainBox.append(m_boxWindow);
         set_child(m_mainBox);
         maximize();
-        //==Load Config==//
-        Configuration configuration;
-        m_musicFolder.setIncludeSubfolders(configuration.includeSubfolders());
-        if(configuration.rememberLastOpenedFolder() && std::filesystem::exists(configuration.getLastOpenedFolder()))
-        {
-            m_musicFolder.setPath(configuration.getLastOpenedFolder());
-            set_title("Nickvision Tagger (" + m_musicFolder.getPath() + ")");
-            m_headerBar.getActionReloadMusicFolder()->set_enabled(true);
-            m_headerBar.getActionCloseMusicFolder()->set_enabled(true);
-            reloadMusicFolder({});
-        }
     }
 
     MainWindow::~MainWindow()
@@ -166,6 +155,25 @@ namespace NickvisionTagger::Views
             configuration.setLastOpenedFolder(m_musicFolder.getPath());
         }
         configuration.save();
+    }
+
+    void MainWindow::onShow()
+    {
+        if(!m_opened)
+        {
+            m_opened = true;
+            //==Load Config==//
+            Configuration configuration;
+            m_musicFolder.setIncludeSubfolders(configuration.includeSubfolders());
+            if(configuration.rememberLastOpenedFolder() && std::filesystem::exists(configuration.getLastOpenedFolder()))
+            {
+                m_musicFolder.setPath(configuration.getLastOpenedFolder());
+                set_title("Nickvision Tagger (" + m_musicFolder.getPath() + ")");
+                m_headerBar.getActionReloadMusicFolder()->set_enabled(true);
+                m_headerBar.getActionCloseMusicFolder()->set_enabled(true);
+                reloadMusicFolder({});
+            }
+        }
     }
 
     void MainWindow::openMusicFolder(const Glib::VariantBase& args)
@@ -422,7 +430,7 @@ namespace NickvisionTagger::Views
     void MainWindow::changelog(const Glib::VariantBase& args)
     {
         Gtk::MessageDialog* changelogDialog = new Gtk::MessageDialog(*this, "What's New?", false, Gtk::MessageType::INFO, Gtk::ButtonsType::OK, true);
-        changelogDialog->set_secondary_text("\n- Added the ability for Tagger to automatically download an updated executable when available");
+        changelogDialog->set_secondary_text("\n- Created a startup function to better handle application startup");
         changelogDialog->signal_response().connect(sigc::bind([](int response, Gtk::MessageDialog* dialog)
         {
            delete dialog;
@@ -437,7 +445,7 @@ namespace NickvisionTagger::Views
         aboutDialog->set_modal(true);
         aboutDialog->set_hide_on_close(true);
         aboutDialog->set_program_name("Nickvision Tagger");
-        aboutDialog->set_version("2022.1.3");
+        aboutDialog->set_version("2022.1.4");
         aboutDialog->set_comments("An easy to use music tag (metadata) editor.");
         aboutDialog->set_copyright("(C) Nickvision 2021-2022");
         aboutDialog->set_license_type(Gtk::License::GPL_3_0);

@@ -19,6 +19,7 @@ namespace NickvisionTagger::Views
         ~MainWindow();
 
     private:
+        bool m_opened;
         NickvisionTagger::Models::Update::Updater m_updater;
         NickvisionTagger::Models::MusicFolder m_musicFolder;
         std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
@@ -54,6 +55,7 @@ namespace NickvisionTagger::Views
         NickvisionTagger::Models::DataMusicFilesColumns m_dataMusicFilesColumns;
         std::shared_ptr<Gtk::ListStore> m_dataMusicFilesModel;
         //==Slots==//
+        void onShow();
         void openMusicFolder(const Glib::VariantBase& args);
         void reloadMusicFolder(const Glib::VariantBase& args);
         void closeMusicFolder(const Glib::VariantBase& args);
