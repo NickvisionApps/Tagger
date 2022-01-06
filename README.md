@@ -2,7 +2,7 @@
  An easy-to-use music tag (metadata) editor
  
 # Dependencies
-- [gtkmm](https://gtkmm.org/en/)
+- [gtkmm 4](https://gtkmm.org/en/)
 - [curlpp](http://www.curlpp.org/)
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
 - [taglib](https://taglib.org/)
