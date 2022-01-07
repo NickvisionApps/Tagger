@@ -85,7 +85,7 @@ namespace NickvisionTagger::Controls
         m_btnTagToFilename.set_popover(m_popTagToFilename);
         m_btnTagToFilename.set_tooltip_text("Tag to Filename");
         //==Settings==//
-        m_btnSettings.set_icon_name("settings");
+        m_btnSettings.set_icon_name("preferences-system");
         m_btnSettings.set_tooltip_text("Settings");
         //==Help==//
         m_actionHelp = Gio::SimpleActionGroup::create();
