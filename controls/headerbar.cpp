@@ -4,7 +4,14 @@ namespace NickvisionTagger::Controls
 {
     HeaderBar::HeaderBar()
     {
-        //==Folder==//
+        //==Title==//
+        m_boxTitle.set_orientation(Gtk::Orientation::VERTICAL);
+        m_boxTitle.set_halign(Gtk::Align::CENTER);
+        m_boxTitle.set_valign(Gtk::Align::CENTER);
+        m_lblTitle.get_style_context()->add_class("title");
+        m_lblSubtitle.get_style_context()->add_class("subtitle");
+        m_boxTitle.append(m_lblTitle);
+        //==Folder Actions==//
         m_actionFolder = Gio::SimpleActionGroup::create();
         m_actionOpenMusicFolder = m_actionFolder->add_action("openMusicFolder");
         m_actionReloadMusicfolder = m_actionFolder->add_action("reloadMusicFolder");
@@ -84,14 +91,12 @@ namespace NickvisionTagger::Controls
         m_btnTagToFilename.set_icon_name("edit");
         m_btnTagToFilename.set_popover(m_popTagToFilename);
         m_btnTagToFilename.set_tooltip_text("Tag to Filename");
-        //==Settings==//
-        m_btnSettings.set_icon_name("preferences-system");
-        m_btnSettings.set_tooltip_text("Settings");
         //==Help==//
         m_actionHelp = Gio::SimpleActionGroup::create();
         m_actionCheckForUpdates = m_actionHelp->add_action("checkForUpdates");
         m_actionGitHubRepo = m_actionHelp->add_action("gitHubRepo");
         m_actionReportABug = m_actionHelp->add_action("reportABug");
+        m_actionSettings = m_actionHelp->add_action("settings");
         m_actionChangelog = m_actionHelp->add_action("changelog");
         m_actionAbout = m_actionHelp->add_action("about");
         insert_action_group("help", m_actionHelp);
@@ -102,8 +107,9 @@ namespace NickvisionTagger::Controls
         m_menuHelpLinks->append("GitHub Repo", "help.gitHubRepo");
         m_menuHelpLinks->append("Report a Bug", "help.reportABug");
         m_menuHelpActions = Gio::Menu::create();
+        m_menuHelpActions->append("Settings", "help.settings");
         m_menuHelpActions->append("Changelog", "help.changelog");
-        m_menuHelpActions->append("About", "help.about");
+        m_menuHelpActions->append("About Tagger", "help.about");
         m_menuHelp->append_section(m_menuHelpUpdate);
         m_menuHelp->append_section(m_menuHelpLinks);
         m_menuHelp->append_section(m_menuHelpActions);
@@ -111,6 +117,7 @@ namespace NickvisionTagger::Controls
         m_btnHelp.set_menu_model(m_menuHelp);
         m_btnHelp.set_tooltip_text("Help");
         //==Layout==//
+        set_title_widget(m_boxTitle);
         pack_start(m_btnFolder);
         pack_start(m_sep1);
         pack_start(m_btnSaveTags);
@@ -119,7 +126,21 @@ namespace NickvisionTagger::Controls
         pack_start(m_btnFilenameToTag);
         pack_start(m_btnTagToFilename);
         pack_end(m_btnHelp);
-        pack_end(m_btnSettings);
+    }
+
+    void HeaderBar::setTitle(const std::string& title)
+    {
+        m_lblTitle.set_text(title);
+    }
+
+    void HeaderBar::setSubtitle(const std::string& subtitle)
+    {
+        m_boxTitle.remove(m_lblSubtitle);
+        if(!subtitle.empty())
+        {
+            m_boxTitle.append(m_lblSubtitle);
+            m_lblSubtitle.set_text(subtitle);
+        }
     }
 
     const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionOpenMusicFolder() const
@@ -197,11 +218,6 @@ namespace NickvisionTagger::Controls
         return m_btnTagToFilename;
     }
 
-    Gtk::Button& HeaderBar::getBtnSettings()
-    {
-        return m_btnSettings;
-    }
-
     const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionCheckForUpdates() const
     {
         return m_actionCheckForUpdates;
@@ -215,6 +231,11 @@ namespace NickvisionTagger::Controls
     const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionReportABug() const
     {
         return m_actionReportABug;
+    }
+
+    const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionSettings() const
+    {
+        return m_actionSettings;
     }
 
     const std::shared_ptr<Gio::SimpleAction>& HeaderBar::getActionChangelog() const

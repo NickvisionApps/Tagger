@@ -20,7 +20,7 @@ namespace NickvisionTagger::Views
         m_chkIncludeSubfolders.set_label("Include Subfolders");
         m_chkIncludeSubfolders.set_tooltip_text("If checked, Tagger will scan for files in the subfolders of the opened folder.");
         m_chkRememberLastOpenedFolder.set_label("Remember Last Opened Folder");
-        m_chkRememberLastOpenedFolder.set_tooltip_text("If checked, Tagger will remember that last opened music folder and automatically open it again when that application starts again.");
+        m_chkRememberLastOpenedFolder.set_tooltip_text("If checked, Tagger will remember the last opened music folder and automatically open it again when that application starts again.");
         m_listGeneral.append(m_chkIncludeSubfolders);
         m_listGeneral.append(m_chkRememberLastOpenedFolder);
         //==Layout==//

@@ -21,12 +21,13 @@ namespace NickvisionTagger::Views
     using namespace NickvisionTagger::Models;
     using namespace NickvisionTagger::Controls;
 
-    MainWindow::MainWindow() : m_opened(false), m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.1.6" })
+    MainWindow::MainWindow() : m_opened(false), m_updater("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.1.7" })
     {
         //==Settings==//
         set_default_size(800, 600);
-        set_title("Nickvision Tagger");
         set_titlebar(m_headerBar);
+        m_headerBar.setTitle("Nickvision Tagger");
+        m_headerBar.setSubtitle("No Folder Open");
         signal_show().connect(sigc::mem_fun(*this, &MainWindow::onShow));
         //==HeaderBar==//
         m_headerBar.getActionOpenMusicFolder()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::openMusicFolder));
@@ -36,10 +37,10 @@ namespace NickvisionTagger::Views
         m_headerBar.getBtnRTRemove().signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::removeTags));
         m_headerBar.getBtnFTTConvert().signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::filenameToTag));
         m_headerBar.getBtnTTFConvert().signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::tagToFilename));
-        m_headerBar.getBtnSettings().signal_clicked().connect(sigc::mem_fun(*this, &MainWindow::settings));
         m_headerBar.getActionCheckForUpdates()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::checkForUpdates));
         m_headerBar.getActionGitHubRepo()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::gitHubRepo));
         m_headerBar.getActionReportABug()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::reportABug));
+        m_headerBar.getActionSettings()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::settings));
         m_headerBar.getActionChangelog()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::changelog));
         m_headerBar.getActionAbout()->signal_activate().connect(sigc::mem_fun(*this, &MainWindow::about));
         m_headerBar.getActionReloadMusicFolder()->set_enabled(false);
@@ -168,7 +169,7 @@ namespace NickvisionTagger::Views
             if(configuration.rememberLastOpenedFolder() && std::filesystem::exists(configuration.getLastOpenedFolder()))
             {
                 m_musicFolder.setPath(configuration.getLastOpenedFolder());
-                set_title("Nickvision Tagger (" + m_musicFolder.getPath() + ")");
+                m_headerBar.setSubtitle(m_musicFolder.getPath());
                 m_headerBar.getActionReloadMusicFolder()->set_enabled(true);
                 m_headerBar.getActionCloseMusicFolder()->set_enabled(true);
                 reloadMusicFolder({});
@@ -188,7 +189,7 @@ namespace NickvisionTagger::Views
             {
                 m_musicFolder.setPath(dialog->get_file()->get_path());
                 delete dialog;
-                set_title("Nickvision Tagger (" + m_musicFolder.getPath() + ")");
+                m_headerBar.setSubtitle(m_musicFolder.getPath());
                 m_headerBar.getActionReloadMusicFolder()->set_enabled(true);
                 m_headerBar.getActionCloseMusicFolder()->set_enabled(true);
                 reloadMusicFolder({});
@@ -230,7 +231,7 @@ namespace NickvisionTagger::Views
     void MainWindow::closeMusicFolder(const Glib::VariantBase& args)
     {
         m_musicFolder.setPath("");
-        set_title("Nickvision Tagger");
+        m_headerBar.setSubtitle("No Folder Open");
         m_headerBar.getActionReloadMusicFolder()->set_enabled(false);
         m_headerBar.getActionCloseMusicFolder()->set_enabled(false);
         reloadMusicFolder({});
@@ -365,19 +366,6 @@ namespace NickvisionTagger::Views
         convertingDialog->show();
     }
 
-    void MainWindow::settings()
-    {
-        SettingsDialog* settingsDialog = new SettingsDialog(*this);
-        settingsDialog->signal_hide().connect(sigc::bind([&](SettingsDialog* dialog)
-        {
-            delete dialog;
-            Configuration configuration;
-            m_musicFolder.setIncludeSubfolders(configuration.includeSubfolders());
-            reloadMusicFolder({});
-        }, settingsDialog));
-        settingsDialog->show();
-    }
-
     void MainWindow::checkForUpdates(const Glib::VariantBase& args)
     {
         ProgressDialog* checkingDialog = new ProgressDialog(*this, "Checking for updates...", [&]() { m_updater.checkForUpdates(); });
@@ -431,10 +419,23 @@ namespace NickvisionTagger::Views
         Gio::AppInfo::launch_default_for_uri("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     }
 
+    void MainWindow::settings(const Glib::VariantBase& args)
+    {
+        SettingsDialog* settingsDialog = new SettingsDialog(*this);
+        settingsDialog->signal_hide().connect(sigc::bind([&](SettingsDialog* dialog)
+        {
+            delete dialog;
+            Configuration configuration;
+            m_musicFolder.setIncludeSubfolders(configuration.includeSubfolders());
+            reloadMusicFolder({});
+        }, settingsDialog));
+        settingsDialog->show();
+    }
+
     void MainWindow::changelog(const Glib::VariantBase& args)
     {
         Gtk::MessageDialog* changelogDialog = new Gtk::MessageDialog(*this, "What's New?", false, Gtk::MessageType::INFO, Gtk::ButtonsType::OK, true);
-        changelogDialog->set_secondary_text("\n- UX improvements");
+        changelogDialog->set_secondary_text("\n- Added subtitle to headerbar\n- Moved settings to help menu\n- Other UX improvements");
         changelogDialog->signal_response().connect(sigc::bind([](int response, Gtk::MessageDialog* dialog)
         {
            delete dialog;
@@ -449,7 +450,7 @@ namespace NickvisionTagger::Views
         aboutDialog->set_modal(true);
         aboutDialog->set_hide_on_close(true);
         aboutDialog->set_program_name("Nickvision Tagger");
-        aboutDialog->set_version("2022.1.6");
+        aboutDialog->set_version("2022.1.7");
         aboutDialog->set_comments("An easy to use music tag (metadata) editor.");
         aboutDialog->set_copyright("(C) Nickvision 2021-2022");
         aboutDialog->set_license_type(Gtk::License::GPL_3_0);
