@@ -1,0 +1,126 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="using:FluentAvalonia.UI.Controls"
+        xmlns:i="using:Avalonia.Xaml.Interactivity"
+        xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
+        x:Class="NickvisionTagger.Views.MainWindowView"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        Name="MainWindow" Title="{Binding Title}"
+        Width="800" Height="600" WindowState="Maximized">
+    <i:Interaction.Behaviors>
+        <ia:EventTriggerBehavior EventName="Opened" SourceObject="{Binding #MainWindow}">
+            <ia:InvokeCommandAction Command="{Binding OpenedCommand}"/>
+        </ia:EventTriggerBehavior>
+        
+        <ia:EventTriggerBehavior EventName="Closing" SourceObject="{Binding #MainWindow}">
+            <ia:InvokeCommandAction Command="{Binding ClosingCommand}" PassEventArgsToCommand="True"/>
+        </ia:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+    
+    <Grid>
+        <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New File" HotKey="Ctrl+N" InputGesture="Ctrl+N" Command="{Binding NewFileCommand}">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="Document"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <MenuItem Header="_Open File" HotKey="Ctrl+O" InputGesture="Ctrl+O" Command="{Binding OpenFileCommand}">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="OpenFile"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <MenuItem Header="_Close File" HotKey="Ctrl+W" InputGesture="Ctrl+W" Command="{Binding CloseFileCommand}">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="Cancel"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <Separator/>
+                
+                <MenuItem Header="E_xit" HotKey="Alt+F4" InputGesture="Alt+F4" Command="{Binding ExitCommand}">
+                    <MenuItem.Icon>
+                        <ui:FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="18" Glyph="&#xe7e8;"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Settings" HotKey="Ctrl+." InputGesture="Ctrl+." Command="{Binding SettingsCommand}">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="Settings"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            
+            <MenuItem Header="_Help">
+                <MenuItem Header="Check for _Updates" Command="{Binding CheckForUpdatesCommand}">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="Sync"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <Separator/>
+                
+                <MenuItem Header="_GitHub Repo" Command="{Binding GitHubRepoCommand}">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="Library"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <MenuItem Header="_Report a Bug" Command="{Binding ReportABugCommand}">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="ReportHacked"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <Separator/>
+                
+                <MenuItem Header="_Changelog" Command="{Binding ChangelogCommand}">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="List"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                
+                <MenuItem Header="_About" HotKey="F1" InputGesture="F1" Command="{Binding AboutCommand}">
+                    <MenuItem.Icon>
+                        <ui:SymbolIcon Symbol="Help"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+		<ui:CommandBar HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}" Margin="0,40,0,0" DefaultLabelPosition="Right">
+			<ui:CommandBar.PrimaryCommands>
+				<ui:CommandBarButton Label="Font" Icon="Font">
+					<ui:CommandBarButton.Flyout>
+						<Flyout Placement="Bottom">
+							<StackPanel Orientation="Vertical" Spacing="6">
+								<TextBlock Text="Font Size"/>
+
+								<ComboBox Width="140" PlaceholderText="Select font size" Items="{Binding FontSizes}" SelectedItem="{Binding SelectedFontSize}"/>
+							</StackPanel>
+						</Flyout>
+					</ui:CommandBarButton.Flyout>
+				</ui:CommandBarButton>
+			</ui:CommandBar.PrimaryCommands>
+		</ui:CommandBar>
+
+		<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,90,0,42" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}">
+			<TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,6,6,6" IsReadOnly="True"
+				 AcceptsReturn="True" TextWrapping="Wrap" FontSize="{Binding DocFontSize, Mode=OneWay}" Text="{Binding FileContents, Mode=OneWay}"/>
+		</Grid>
+
+		<Border HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="6,0,6,6" Height="36" Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}" CornerRadius="6">
+			<DockPanel>
+				<TextBlock DockPanel.Dock="Left" Margin="6,6,0,0" Text="{Binding Path}"/>
+			</DockPanel>
+		</Border>
+		
+        <ui:InfoBar Name="InfoBar" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0"/>
+    </Grid>
+</Window>
