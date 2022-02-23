@@ -23,6 +23,7 @@ namespace NickvisionTagger.Views
             serviceCollection.AddService(new IOService(this));
             serviceCollection.AddService(new ContentDialogService());
             serviceCollection.AddService(new ProgressDialogService());
+            serviceCollection.AddService(new ComboBoxDialogService());
             serviceCollection.AddService(new InfoBarService(this.FindControl<InfoBar>("InfoBar")));
             DataContext = new MainWindowViewModel(this, serviceCollection);
         }

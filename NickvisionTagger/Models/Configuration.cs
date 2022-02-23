@@ -13,11 +13,17 @@ namespace NickvisionTagger.Models
 
         public Theme Theme { get; set; }
         public AccentColor AccentColor { get; set; }
+        public bool IncludeSubfolders { get; set; }
+        public bool RememberLastOpenedFolder { get; set; }
+        public string LastOpenedFolder { get; set; }
 
         public Configuration()
         {
             Theme = Theme.Dark;
             AccentColor = AccentColor.Blue;
+            IncludeSubfolders = true;
+            RememberLastOpenedFolder = true;
+            LastOpenedFolder = "No Folder Open";
         }
 
         public static Configuration Load()

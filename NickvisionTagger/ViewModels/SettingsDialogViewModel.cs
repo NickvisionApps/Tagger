@@ -87,5 +87,29 @@ namespace NickvisionTagger.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public bool IncludeSubfolders
+        {
+            get => _configuration.IncludeSubfolders;
+
+            set
+            {
+                _configuration.IncludeSubfolders = value;
+                _configuration.Save();
+                OnPropertyChanged();
+            }
+        }
+
+        public bool RememberLastOpenedFolder
+        {
+            get => _configuration.RememberLastOpenedFolder;
+
+            set
+            {
+                _configuration.RememberLastOpenedFolder = value;
+                _configuration.Save();
+                OnPropertyChanged();
+            }
+        }
     }
 }

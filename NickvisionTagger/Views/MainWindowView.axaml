@@ -13,34 +13,38 @@
         <ia:EventTriggerBehavior EventName="Opened" SourceObject="{Binding #MainWindow}">
             <ia:InvokeCommandAction Command="{Binding OpenedCommand}"/>
         </ia:EventTriggerBehavior>
-        
-        <ia:EventTriggerBehavior EventName="Closing" SourceObject="{Binding #MainWindow}">
-            <ia:InvokeCommandAction Command="{Binding ClosingCommand}" PassEventArgsToCommand="True"/>
-        </ia:EventTriggerBehavior>
     </i:Interaction.Behaviors>
     
     <Grid>
         <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}">
             <MenuItem Header="_File">
-                <MenuItem Header="_New File" HotKey="Ctrl+N" InputGesture="Ctrl+N" Command="{Binding NewFileCommand}">
-                    <MenuItem.Icon>
-                        <ui:SymbolIcon Symbol="Document"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                
-                <MenuItem Header="_Open File" HotKey="Ctrl+O" InputGesture="Ctrl+O" Command="{Binding OpenFileCommand}">
-                    <MenuItem.Icon>
-                        <ui:SymbolIcon Symbol="OpenFile"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                
-                <MenuItem Header="_Close File" HotKey="Ctrl+W" InputGesture="Ctrl+W" Command="{Binding CloseFileCommand}">
-                    <MenuItem.Icon>
-                        <ui:SymbolIcon Symbol="Cancel"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                
-                <Separator/>
+				<MenuItem Header="_Open Music Folder" InputGesture="Ctrl+O" HotKey="Ctrl+O" Command="{Binding OpenMusicFolderCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="OpenLocal"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<MenuItem Header="_Refresh Music Folder" InputGesture="F5" HotKey="F5" Command="{Binding RefreshMusicFolderCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Refresh"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<MenuItem Header="_Close Music Folder" InputGesture="Ctrl+W" HotKey="Ctrl+W" Command="{Binding CloseMusicFolderCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Cancel"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<Separator/>
+
+				<MenuItem Header="_Save Tags" InputGesture="Ctrl+S" HotKey="Ctrl+S" Command="{Binding SaveTagsCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Save"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<Separator/>
                 
                 <MenuItem Header="E_xit" HotKey="Alt+F4" InputGesture="Alt+F4" Command="{Binding ExitCommand}">
                     <MenuItem.Icon>
@@ -50,12 +54,34 @@
             </MenuItem>
             
             <MenuItem Header="_Edit">
-                <MenuItem Header="_Settings" HotKey="Ctrl+." InputGesture="Ctrl+." Command="{Binding SettingsCommand}">
+				<MenuItem Header="_Remove Tags" InputGesture="Delete" HotKey="Delete" Command="{Binding RemoveTagsCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Delete"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<Separator/>
+
+				<MenuItem Header="_Settings" HotKey="Ctrl+." InputGesture="Ctrl+." Command="{Binding SettingsCommand}">
                     <MenuItem.Icon>
                         <ui:SymbolIcon Symbol="Settings"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+
+			<MenuItem Header="_Convert">
+				<MenuItem Header="F_ilename to Tag" InputGesture="Ctrl+Shift+F" HotKey="Ctrl+Shift+F" Command="{Binding FilenameToTagCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="More"/>
+					</MenuItem.Icon>
+				</MenuItem>
+
+				<MenuItem Header="_Tag to Filename" InputGesture="Ctrl+Shift+T" HotKey="Ctrl+Shift+T" Command="{Binding TagToFilenameCommand}">
+					<MenuItem.Icon>
+						<ui:SymbolIcon Symbol="Tag"/>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
             
             <MenuItem Header="_Help">
                 <MenuItem Header="Check for _Updates" Command="{Binding CheckForUpdatesCommand}">
@@ -96,28 +122,159 @@
 
 		<ui:CommandBar HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}" Margin="0,40,0,0" DefaultLabelPosition="Right">
 			<ui:CommandBar.PrimaryCommands>
-				<ui:CommandBarButton Label="Font" Icon="Font">
-					<ui:CommandBarButton.Flyout>
-						<Flyout Placement="Bottom">
-							<StackPanel Orientation="Vertical" Spacing="6">
-								<TextBlock Text="Font Size"/>
+				<ui:CommandBarButton Label="Save Tags" Icon="Save" Command="{Binding SaveTagsCommand}"/>
 
-								<ComboBox Width="140" PlaceholderText="Select font size" Items="{Binding FontSizes}" SelectedItem="{Binding SelectedFontSize}"/>
-							</StackPanel>
-						</Flyout>
-					</ui:CommandBarButton.Flyout>
-				</ui:CommandBarButton>
+				<ui:CommandBarButton Label="Remove Tags" Icon="Delete" Command="{Binding RemoveTagsCommand}"/>
+
+				<ui:CommandBarSeparator />
+
+				<ui:CommandBarButton Label="Filename to Tag" Icon="More" Command="{Binding FilenameToTagCommand}"/>
+
+				<ui:CommandBarButton Label="Tag to Filename" Icon="Tag" Command="{Binding TagToFilenameCommand}"/>
 			</ui:CommandBar.PrimaryCommands>
 		</ui:CommandBar>
 
 		<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,90,0,42" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}">
-			<TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="6,6,6,6" IsReadOnly="True"
-				 AcceptsReturn="True" TextWrapping="Wrap" FontSize="{Binding DocFontSize, Mode=OneWay}" Text="{Binding FileContents, Mode=OneWay}"/>
+			<Border HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="6,6,0,6" Width="340" Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}" CornerRadius="6">
+				<ScrollViewer>
+					<StackPanel Margin="0,0,0,6">
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="Filename"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" IsEnabled="{Binding TagFilenameEnabled}" Watermark="Enter filename here" Text="{Binding TagFilename}"/>
+
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="Title"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" Watermark="Enter title here" Text="{Binding TagTitle}"/>
+
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="Artist"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" Watermark="Enter artist here" Text="{Binding TagArtist}"/>
+
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="Album"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" Watermark="Enter album here" Text="{Binding TagAlbum}"/>
+
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="Year"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" Watermark="Enter year here" Text="{Binding TagYear}"/>
+
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="Track"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" Watermark="Enter track here" Text="{Binding TagTrack}"/>
+
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="Album Artist"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" Watermark="Enter album artist here" Text="{Binding TagAlbumArtist}"/>
+
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="Composer"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" Watermark="Enter composer here" Text="{Binding TagComposer}"/>
+
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="Genre"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" Watermark="Enter genre here" Text="{Binding TagGenre}"/>
+
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="Comment"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" Watermark="Enter comment here" Text="{Binding TagComment}"/>
+
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="Duration"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" IsReadOnly="True" Watermark="00:00:00" Text="{Binding TagDuration}"/>
+
+						<TextBlock HorizontalAlignment="Left" Margin="12,10,0,0" Text="File Size"/>
+
+						<TextBox HorizontalAlignment="Left" Margin="10,4,0,0" Width="310" IsReadOnly="True" Watermark="0 MB" Text="{Binding TagFileSize}"/>
+					</StackPanel>
+				</ScrollViewer>
+			</Border>
+
+			<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="354,6,6,6" Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}" CornerRadius="6">
+				<DataGrid Name="DataMusicFiles" Margin="6,6,6,6" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Extended" GridLinesVisibility="Horizontal" Items="{Binding MusicFolder.Files}">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Filename">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Grid Margin="6,6,6,6">
+										<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Filename}"/>
+									</Grid>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+
+						<DataGridTemplateColumn Header="Title">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Grid Margin="6,6,6,6">
+										<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Title}"/>
+									</Grid>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+
+						<DataGridTemplateColumn Header="Artist">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Grid Margin="6,6,6,6">
+										<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Artist}"/>
+									</Grid>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+
+						<DataGridTemplateColumn Header="Album">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Grid Margin="6,6,6,6">
+										<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Album}"/>
+									</Grid>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+
+						<DataGridTemplateColumn Header="Duration">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Grid Margin="6,6,6,6">
+										<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding DurationAsString}"/>
+									</Grid>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+
+						<DataGridTemplateColumn Header="Comment">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Grid Margin="6,6,6,6">
+										<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Comment}"/>
+									</Grid>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+
+						<DataGridTemplateColumn Header="Path">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Grid Margin="6,6,6,6">
+										<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Path}"/>
+									</Grid>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+
+					<i:Interaction.Behaviors>
+						<ia:EventTriggerBehavior EventName="SelectionChanged" SourceObject="{Binding #DataMusicFiles}">
+							<ia:InvokeCommandAction Command="{Binding DataMusicFiles_SelectionChangedCommand}" CommandParameter="{Binding Path=SelectedItems, ElementName=DataMusicFiles}"/>
+						</ia:EventTriggerBehavior>
+					</i:Interaction.Behaviors>
+				</DataGrid>
+			</Border>
 		</Grid>
 
 		<Border HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="6,0,6,6" Height="36" Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}" CornerRadius="6">
 			<DockPanel>
-				<TextBlock DockPanel.Dock="Left" Margin="6,6,0,0" Text="{Binding Path}"/>
+				<TextBlock DockPanel.Dock="Left" Margin="6,6,0,0" Text="{Binding MusicFolder.Path}"/>
 			</DockPanel>
 		</Border>
 		

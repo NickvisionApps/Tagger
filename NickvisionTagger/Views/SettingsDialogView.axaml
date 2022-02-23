@@ -7,15 +7,15 @@
              xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
              x:Class="NickvisionTagger.Views.SettingsDialogView"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
-             Name="SettingsDialog" Title="{Binding Title}" 
+             Name="SettingsDialog" Title="{Binding Title}"
              CloseButtonText="Close" DefaultButton="Close" CloseButtonCommand="{Binding CloseCommand}">
     <i:Interaction.Behaviors>
         <ia:EventTriggerBehavior EventName="Opened" SourceObject="{Binding #SettingsDialog}">
             <ia:InvokeCommandAction Command="{Binding OpenedCommand}" />
         </ia:EventTriggerBehavior>
     </i:Interaction.Behaviors>
-    
-    <ScrollViewer>
+
+	<ScrollViewer>
         <StackPanel Orientation="Vertical" Spacing="6">
             <Expander IsExpanded="True">
                 <Expander.Header>
@@ -50,8 +50,10 @@
 
                 <Expander.Content>
                     <StackPanel Spacing="6">
-						
-                    </StackPanel>
+						<CheckBox Content="Include Subfolders" IsChecked="{Binding IncludeSubfolders}" ToolTip.Tip="If checked, Tagger will include the files in subfolders of the opened music folder."/>
+
+						<CheckBox Content="Remember Last Opened Folder" IsChecked="{Binding RememberLastOpenedFolder}" ToolTip.Tip="If checked, Tagger will remember the last opened music folder and automatically open it again on the next application startup."/>
+					</StackPanel>
                 </Expander.Content>
             </Expander>
         </StackPanel>
