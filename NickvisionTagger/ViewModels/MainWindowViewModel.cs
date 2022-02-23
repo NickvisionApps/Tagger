@@ -439,7 +439,7 @@ namespace NickvisionTagger.ViewModels
             await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
             {
                 Title = "What's New?",
-                Message = "- Rewrote application in C# and Avalonia",
+                Message = "- Rewrote application in C# and Avalonia\n\nNew in Alpha 2:\n- Added icon",
                 CloseButtonText = "OK",
                 DefaultButton = ContentDialogButton.Close
             })!;
@@ -450,7 +450,7 @@ namespace NickvisionTagger.ViewModels
             await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
             {
                 Title = "About",
-                Message = "Nickvision Tagger Version 2022.2.0-alpha1\nAn easy-to-use music tag (metadata) editor.\n\nBuilt with C# and Avalonia\n(C) Nickvision 2021-2022",
+                Message = "Nickvision Tagger Version 2022.2.0-alpha2\nAn easy-to-use music tag (metadata) editor.\n\nBuilt with C# and Avalonia\n(C) Nickvision 2021-2022",
                 CloseButtonText = "OK",
                 DefaultButton = ContentDialogButton.Close
             })!;
