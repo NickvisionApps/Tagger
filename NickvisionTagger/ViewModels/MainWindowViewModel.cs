@@ -307,7 +307,18 @@ namespace NickvisionTagger.ViewModels
             await RefreshMusicFolder(null);
         }
 
-        private async Task Settings(object? parameter) => await _serviceCollection.GetService<IContentDialogService>()?.ShowCustomAsync(new SettingsDialogViewModel(_serviceCollection))!;
+        private async Task Settings(object? parameter)
+        {
+            await _serviceCollection.GetService<IContentDialogService>()?.ShowCustomAsync(new SettingsDialogViewModel(_serviceCollection))!;
+            var config = await Configuration.LoadAsync();
+            MusicFolder.IncludeSubfolders = config.IncludeSubfolders;
+            if (!config.RememberLastOpenedFolder)
+            {
+                config.LastOpenedFolder = "No Folder Opened";
+                await config.SaveAsync();
+            }
+            await RefreshMusicFolder(null);
+        }
 
         private async Task FilenameToTag(object? parameter)
         {
@@ -439,7 +450,7 @@ namespace NickvisionTagger.ViewModels
             await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
             {
                 Title = "What's New?",
-                Message = "- Rewrote application in C# and Avalonia\n\nNew in Alpha 2:\n- Added icon",
+                Message = "- Rewrote application in C# and Avalonia\n- Added support for editing Composer property\n\nNew in Alpha 3:\n- The app will now refresh when settings is updated\n- Fixed bug where composer wasn't displayed when multiple files were selected\n- UX tweaks",
                 CloseButtonText = "OK",
                 DefaultButton = ContentDialogButton.Close
             })!;
@@ -450,7 +461,7 @@ namespace NickvisionTagger.ViewModels
             await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
             {
                 Title = "About",
-                Message = "Nickvision Tagger Version 2022.2.0-alpha2\nAn easy-to-use music tag (metadata) editor.\n\nBuilt with C# and Avalonia\n(C) Nickvision 2021-2022",
+                Message = "Nickvision Tagger Version 2022.2.0-alpha3\nAn easy-to-use music tag (metadata) editor.\n\nBuilt with C# and Avalonia\n(C) Nickvision 2021-2022",
                 CloseButtonText = "OK",
                 DefaultButton = ContentDialogButton.Close
             })!;
@@ -463,7 +474,7 @@ namespace NickvisionTagger.ViewModels
             {
                 foreach (var item in selectedItems)
                 {
-                    SelectedMusicFiles.Add(item as MusicFile);
+                    SelectedMusicFiles.Add((MusicFile)item);
                 }
             }
             SaveTagsCommand.RaiseCanExecuteChanged();
@@ -565,6 +576,7 @@ namespace NickvisionTagger.ViewModels
                 TagYear = haveSameYear ? (firstMusicFile.Year == null ? "" : firstMusicFile.Year.ToString()) : "<keep>";
                 TagTrack = haveSameTrack ? (firstMusicFile.Track == null ? "" : firstMusicFile.Track.ToString()) : "<keep>";
                 TagAlbumArtist = haveSameAlbumArtist ? firstMusicFile.AlbumArtist : "<keep>";
+                TagComposer = haveSameComposer ? firstMusicFile.Composer : "<keep>";
                 TagGenre = haveSameGenre ? firstMusicFile.Genre : "<keep>";
                 TagComment = haveSameComment ? firstMusicFile.Comment : "<keep>";
                 TagDuration = totalDuration.DurationToString();
