@@ -72,7 +72,7 @@
 					</MenuItem>
 
 					<MenuItem Header="_Insert">
-						<MenuItem Header="_Album Art" InputGesture="Ctrl+Shift+A" HotKey="Ctrl+Shift+A" Command="{Binding InsertAlbmArtCommand}">
+						<MenuItem Header="_Album Art" InputGesture="Ctrl+Shift+A" HotKey="Ctrl+Shift+A" Command="{Binding InsertAlbumArtCommand}">
 							<MenuItem.Icon>
 								<ui:SymbolIcon Symbol="Image"/>
 							</MenuItem.Icon>

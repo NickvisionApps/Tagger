@@ -362,8 +362,8 @@ public class MainWindowViewModel : ViewModelBase
         var fileFilters = new List<FileDialogFilter>();
         fileFilters.Add(new FileDialogFilter()
         {
-            Name = "JPEG Image",
-            Extensions = new List<string>() { "jpg" }
+            Name = "Supported Images",
+            Extensions = new List<string>() { "jpg", "png" }
         });
         var result = await _serviceCollection.GetService<IIOService>()?.ShowOpenFileDialogAsync("Open Album Art Image", fileFilters)!;
         if (result != null)
@@ -493,7 +493,7 @@ public class MainWindowViewModel : ViewModelBase
         await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
         {
             Title = "What's New?",
-            Message = "- Rewrote application in C# and Avalonia\n- Added support for editing Composer property\n- Added support for adding album art to music file\n\nNew in Alpha 5:\n- Fixed an issue where AccentButton's foreground was wrong\n- Added support for adding album art to a music file",
+            Message = "- Rewrote application in C# and Avalonia\n- Added support for editing Composer property\n- Added support for adding album art to music file",
             CloseButtonText = "OK",
             DefaultButton = ContentDialogButton.Close
         })!;
@@ -504,7 +504,7 @@ public class MainWindowViewModel : ViewModelBase
         await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
         {
             Title = "About",
-            Message = "Nickvision Tagger Version 2022.2.0-alpha5\nAn easy-to-use music tag (metadata) editor.\n\nBuilt with C# and Avalonia\n(C) Nickvision 2021-2022",
+            Message = "Nickvision Tagger Version 2022.2.0\nAn easy-to-use music tag (metadata) editor.\n\nBuilt with C# and Avalonia\n(C) Nickvision 2021-2022",
             CloseButtonText = "OK",
             DefaultButton = ContentDialogButton.Close
         })!;
