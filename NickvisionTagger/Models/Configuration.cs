@@ -4,74 +4,73 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace NickvisionTagger.Models
+namespace NickvisionTagger.Models;
+
+public class Configuration
 {
-    public class Configuration
+    private static readonly string ConfigDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}NickvisionTagger";
+    private static readonly string ConfigPath = $"{ConfigDir}{Path.DirectorySeparatorChar}config.json";
+
+    public Theme Theme { get; set; }
+    public AccentColor AccentColor { get; set; }
+    public bool IncludeSubfolders { get; set; }
+    public bool RememberLastOpenedFolder { get; set; }
+    public string LastOpenedFolder { get; set; }
+
+    public Configuration()
     {
-        private static readonly string ConfigDir = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}NickvisionTagger";
-        private static readonly string ConfigPath = $"{ConfigDir}{Path.DirectorySeparatorChar}config.json";
+        Theme = Theme.Dark;
+        AccentColor = AccentColor.Blue;
+        IncludeSubfolders = true;
+        RememberLastOpenedFolder = true;
+        LastOpenedFolder = "No Folder Open";
+    }
 
-        public Theme Theme { get; set; }
-        public AccentColor AccentColor { get; set; }
-        public bool IncludeSubfolders { get; set; }
-        public bool RememberLastOpenedFolder { get; set; }
-        public string LastOpenedFolder { get; set; }
-
-        public Configuration()
+    public static Configuration Load()
+    {
+        if (!Directory.Exists(ConfigDir))
         {
-            Theme = Theme.Dark;
-            AccentColor = AccentColor.Blue;
-            IncludeSubfolders = true;
-            RememberLastOpenedFolder = true;
-            LastOpenedFolder = "No Folder Open";
+            Directory.CreateDirectory(ConfigDir);
         }
-
-        public static Configuration Load()
+        try
         {
-            if (!Directory.Exists(ConfigDir))
-            {
-                Directory.CreateDirectory(ConfigDir);
-            }
-            try
-            {
-                var json = File.ReadAllText(ConfigPath);
-                var config = JsonSerializer.Deserialize<Configuration>(json);
-                return config ?? new Configuration();
-            }
-            catch
-            {
-                return new Configuration();
-            }
+            var json = File.ReadAllText(ConfigPath);
+            var config = JsonSerializer.Deserialize<Configuration>(json);
+            return config ?? new Configuration();
         }
-
-        public static async Task<Configuration> LoadAsync()
+        catch
         {
-            if (!Directory.Exists(ConfigDir))
-            {
-                Directory.CreateDirectory(ConfigDir);
-            }
-            try
-            {
-                var json = await File.ReadAllTextAsync(ConfigPath);
-                var config = JsonSerializer.Deserialize<Configuration>(json);
-                return config ?? new Configuration();
-            }
-            catch
-            {
-                return new Configuration();
-            }
+            return new Configuration();
         }
+    }
 
-        public void Save()
+    public static async Task<Configuration> LoadAsync()
+    {
+        if (!Directory.Exists(ConfigDir))
         {
-            var json = JsonSerializer.Serialize(this);
-            File.WriteAllText(ConfigPath, json);
+            Directory.CreateDirectory(ConfigDir);
         }
+        try
+        {
+            var json = await File.ReadAllTextAsync(ConfigPath);
+            var config = JsonSerializer.Deserialize<Configuration>(json);
+            return config ?? new Configuration();
+        }
+        catch
+        {
+            return new Configuration();
+        }
+    }
 
-        public async Task SaveAsync()
-        {
-            var json = JsonSerializer.Serialize(this);
-            await File.WriteAllTextAsync(ConfigPath, json);
-        }
+    public void Save()
+    {
+        var json = JsonSerializer.Serialize(this);
+        File.WriteAllText(ConfigPath, json);
+    }
+
+    public async Task SaveAsync()
+    {
+        var json = JsonSerializer.Serialize(this);
+        await File.WriteAllTextAsync(ConfigPath, json);
     }
 }

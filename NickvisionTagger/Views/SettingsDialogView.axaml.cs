@@ -4,19 +4,18 @@ using Avalonia.Styling;
 using FluentAvalonia.UI.Controls;
 using System;
 
-namespace NickvisionTagger.Views
-{
-    public class SettingsDialogView : ContentDialog, IStyleable
-    {
-        Type IStyleable.StyleKey => typeof(ContentDialog);
+namespace NickvisionTagger.Views;
 
-        public SettingsDialogView()
+public class SettingsDialogView : ContentDialog, IStyleable
+{
+    Type IStyleable.StyleKey => typeof(ContentDialog);
+
+    public SettingsDialogView()
+    {
+        AvaloniaXamlLoader.Load(this);
+        if (Environment.OSVersion.Platform == PlatformID.Unix)
         {
-            AvaloniaXamlLoader.Load(this);
-            if (Environment.OSVersion.Platform == PlatformID.Unix)
-            {
-                FontFamily = new FontFamily("Cantarell");
-            }
+            FontFamily = new FontFamily("Cantarell");
         }
     }
 }

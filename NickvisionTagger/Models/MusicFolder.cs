@@ -14,6 +14,8 @@ public class MusicFolder : ObservableObject
 
     public bool IncludeSubfolders { get; set; }
 
+    public bool IsOpen => Path != "No Folder Open";
+
     public MusicFolder()
     {
         _path = "No Folder Open";
@@ -25,7 +27,11 @@ public class MusicFolder : ObservableObject
     {
         get => _path;
 
-        set => SetProperty(ref _path, value);
+        set
+        {
+            SetProperty(ref _path, value);
+            OnPropertyChanged("IsOpen");
+        }
     }
 
     public ObservableCollection<MusicFile>? Files
@@ -37,9 +43,10 @@ public class MusicFolder : ObservableObject
 
     public async Task ReloadFilesAsync()
     {
-        var files = new List<MusicFile>();
+        Files = null;
         if (Directory.Exists(Path))
         {
+            var files = new List<MusicFile>();
             var searchOption = IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
             var extensions = new string[] { ".mp3", ".wav", ".wma", ".flac", ".ogg" };
             await Task.Run(() =>

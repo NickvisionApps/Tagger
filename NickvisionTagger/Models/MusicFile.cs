@@ -166,7 +166,7 @@ public class MusicFile : IComparable<MusicFile>
         }
         else if (formatString == "%title%")
         {
-            if (string.IsNullOrEmpty(Artist))
+            if (string.IsNullOrEmpty(Title))
             {
                 throw new ArgumentException("Invalid Tag. Title is empty.");
             }
