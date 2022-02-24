@@ -1,6 +1,8 @@
 ﻿using ATL;
+using Avalonia.Media.Imaging;
 using NickvisionTagger.Extensions;
 using System;
+using System.IO;
 
 namespace NickvisionTagger.Models;
 
@@ -97,6 +99,30 @@ public class MusicFile : IComparable<MusicFile>
         get => _file!.Comment;
 
         set => _file!.Comment = value;
+    }
+
+    public Bitmap? AlbumArt
+    {
+        get
+        {
+            if(_file!.EmbeddedPictures.Count > 0)
+            {
+                using var memoryStream = new MemoryStream(_file!.EmbeddedPictures[0].PictureData);
+                return new Bitmap(memoryStream);
+            }
+            return null;
+        }
+
+        set
+        {
+            _file!.EmbeddedPictures.Clear();
+            if(value != null)
+            {
+                using var memoryStream = new MemoryStream();
+                value.Save(memoryStream);
+                _file.EmbeddedPictures.Add(PictureInfo.fromBinaryData(memoryStream.ToArray()));
+            }
+        }
     }
 
     public int Duration => _file!.Duration;

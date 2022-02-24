@@ -1,3 +1,5 @@
+using Avalonia.Controls;
+using Avalonia.Media.Imaging;
 using FluentAvalonia.UI.Controls;
 using Nickvision.Avalonia.Extensions;
 using Nickvision.Avalonia.Models;
@@ -9,6 +11,7 @@ using NickvisionTagger.Extensions;
 using NickvisionTagger.Models;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -33,6 +36,7 @@ public class MainWindowViewModel : ViewModelBase
     private string _tagComment;
     private string _tagDuration;
     private string _tagFileSize;
+    private Bitmap? _tagAlbumArt;
     private string _fttFormatString;
     private string _ttfFormatString;
 
@@ -47,6 +51,7 @@ public class MainWindowViewModel : ViewModelBase
     public DelegateCommand<object?> ExitCommand { get; init; }
     public DelegateAsyncCommand<object?> RemoveTagsCommand { get; init; }
     public DelegateAsyncCommand<object?> SettingsCommand { get; init; }
+    public DelegateAsyncCommand<object?> InsertAlbumArtCommand { get; init; }
     public DelegateAsyncCommand<object?> FilenameToTagCommand { get; init; }
     public DelegateAsyncCommand<object?> TagToFilenameCommand { get; init; }
     public DelegateAsyncCommand<object?> CheckForUpdatesCommand { get; init; }
@@ -75,6 +80,7 @@ public class MainWindowViewModel : ViewModelBase
         _tagComment = "";
         _tagDuration = "";
         _tagFileSize = "";
+        _tagAlbumArt = null;
         _fttFormatString = "%artist%- %title%";
         _ttfFormatString = "%artist%- %title%";
         MusicFolder = new MusicFolder();
@@ -88,6 +94,7 @@ public class MainWindowViewModel : ViewModelBase
         ExitCommand = new DelegateCommand<object?>(Exit);
         RemoveTagsCommand = new DelegateAsyncCommand<object?>(RemoveTags, () => SelectedMusicFiles.Count > 0);
         SettingsCommand = new DelegateAsyncCommand<object?>(Settings);
+        InsertAlbumArtCommand = new DelegateAsyncCommand<object?>(InsertAlbumArt, () => SelectedMusicFiles.Count > 0);
         FilenameToTagCommand = new DelegateAsyncCommand<object?>(FilenameToTag, () => SelectedMusicFiles.Count > 0);
         TagToFilenameCommand = new DelegateAsyncCommand<object?>(TagToFilename, () => SelectedMusicFiles.Count > 0);
         CheckForUpdatesCommand = new DelegateAsyncCommand<object?>(CheckForUpdates);
@@ -187,6 +194,13 @@ public class MainWindowViewModel : ViewModelBase
         get => _tagFileSize;
 
         set => SetProperty(ref _tagFileSize, value);
+    }
+
+    public Bitmap? TagAlbumArt
+    {
+        get => _tagAlbumArt;
+
+        set => SetProperty(ref _tagAlbumArt, value);
     }
 
     public string FttFormatString
@@ -302,6 +316,10 @@ public class MainWindowViewModel : ViewModelBase
                     {
                         musicFile.Comment = TagComment;
                     }
+                    if (TagAlbumArt != null)
+                    {
+                        musicFile.AlbumArt = TagAlbumArt;
+                    }
                     musicFile.SaveTag();
                 }
             });
@@ -337,6 +355,22 @@ public class MainWindowViewModel : ViewModelBase
             await config.SaveAsync();
         }
         await RefreshMusicFolder(null);
+    }
+
+    private async Task InsertAlbumArt(object? parameter)
+    {
+        var fileFilters = new List<FileDialogFilter>();
+        fileFilters.Add(new FileDialogFilter()
+        {
+            Name = "JPEG Image",
+            Extensions = new List<string>() { "jpg" }
+        });
+        var result = await _serviceCollection.GetService<IIOService>()?.ShowOpenFileDialogAsync("Open Album Art Image", fileFilters)!;
+        if (result != null)
+        {
+            TagAlbumArt = new Bitmap(result[0]);
+            await SaveTags(null);
+        }
     }
 
     private async Task FilenameToTag(object? parameter)
@@ -459,7 +493,7 @@ public class MainWindowViewModel : ViewModelBase
         await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
         {
             Title = "What's New?",
-            Message = "- Rewrote application in C# and Avalonia\n- Added support for editing Composer property\n\nNew in Alpha 4:\n- Removing tags will display a confirmation flyout before removing\n- Filename and tag conversions now occur in a flyout instead of a ComboBoxDialog\n- Added \"Total Number of Songs\" counter to bottom right of StatusBar\n- Improved design\n- Improved MusicFolder performance",
+            Message = "- Rewrote application in C# and Avalonia\n- Added support for editing Composer property\n- Added support for adding album art to music file\n\nNew in Alpha 5:\n- Fixed an issue where AccentButton's foreground was wrong\n- Added support for adding album art to a music file",
             CloseButtonText = "OK",
             DefaultButton = ContentDialogButton.Close
         })!;
@@ -470,7 +504,7 @@ public class MainWindowViewModel : ViewModelBase
         await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
         {
             Title = "About",
-            Message = "Nickvision Tagger Version 2022.2.0-alpha4\nAn easy-to-use music tag (metadata) editor.\n\nBuilt with C# and Avalonia\n(C) Nickvision 2021-2022",
+            Message = "Nickvision Tagger Version 2022.2.0-alpha5\nAn easy-to-use music tag (metadata) editor.\n\nBuilt with C# and Avalonia\n(C) Nickvision 2021-2022",
             CloseButtonText = "OK",
             DefaultButton = ContentDialogButton.Close
         })!;
@@ -488,6 +522,7 @@ public class MainWindowViewModel : ViewModelBase
         }
         SaveTagsCommand.RaiseCanExecuteChanged();
         RemoveTagsCommand.RaiseCanExecuteChanged();
+        InsertAlbumArtCommand.RaiseCanExecuteChanged();
         FilenameToTagCommand.RaiseCanExecuteChanged();
         TagToFilenameCommand.RaiseCanExecuteChanged();
         TagFilenameEnabled = true;
@@ -505,6 +540,7 @@ public class MainWindowViewModel : ViewModelBase
             TagComment = "";
             TagDuration = "";
             TagFileSize = "";
+            TagAlbumArt = null;
         }
         else if (SelectedMusicFiles.Count == 1)
         {
@@ -521,6 +557,7 @@ public class MainWindowViewModel : ViewModelBase
             TagComment = musicFile.Comment;
             TagDuration = musicFile.DurationAsString;
             TagFileSize = musicFile.FileSizeAsString;
+            TagAlbumArt = musicFile.AlbumArt;
         }
         else
         {
@@ -536,6 +573,7 @@ public class MainWindowViewModel : ViewModelBase
             var haveSameComposer = true;
             var haveSameGenre = true;
             var haveSameComment = true;
+            var haveSameAlbumArt = true;
             var totalDuration = 0;
             long totalFileSize = 0;
             foreach (var musicFile in SelectedMusicFiles)
@@ -576,6 +614,10 @@ public class MainWindowViewModel : ViewModelBase
                 {
                     haveSameComment = false;
                 }
+                if (firstMusicFile.AlbumArt != musicFile.AlbumArt)
+                {
+                    haveSameAlbumArt = false;
+                }
                 totalDuration += musicFile.Duration;
                 totalFileSize += musicFile.FileSize;
             }
@@ -590,6 +632,7 @@ public class MainWindowViewModel : ViewModelBase
             TagComment = haveSameComment ? firstMusicFile.Comment : "<keep>";
             TagDuration = totalDuration.DurationToString();
             TagFileSize = totalFileSize.FileSizeToString();
+            TagAlbumArt = haveSameAlbumArt ? firstMusicFile.AlbumArt : null;
         }
     }
 }

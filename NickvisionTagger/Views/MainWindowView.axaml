@@ -61,12 +61,20 @@
 								<ui:SymbolIcon Symbol="Delete"/>
 							</MenuItem.Icon>
 						</MenuItem>
-
+						
 						<Separator/>
 
 						<MenuItem Header="_Settings" HotKey="Ctrl+." InputGesture="Ctrl+." Command="{Binding SettingsCommand}">
 							<MenuItem.Icon>
 								<ui:SymbolIcon Symbol="Settings"/>
+							</MenuItem.Icon>
+						</MenuItem>
+					</MenuItem>
+
+					<MenuItem Header="_Insert">
+						<MenuItem Header="_Album Art" InputGesture="Ctrl+Shift+A" HotKey="Ctrl+Shift+A" Command="{Binding InsertAlbmArtCommand}">
+							<MenuItem.Icon>
+								<ui:SymbolIcon Symbol="Image"/>
 							</MenuItem.Icon>
 						</MenuItem>
 					</MenuItem>
@@ -135,12 +143,16 @@
 										<StackPanel Orientation="Horizontal" Spacing="6">
 											<Button Width="120" Content="Yes" Command="{Binding RemoveTagsCommand}" Click="BtnRemoveTags_CloseFlyout"/>
 
-											<Button Background="{DynamicResource AccentButtonBackground}" Foreground="{DynamicResource AccentForegroundBackground}" Width="120" Content="No" Click="BtnRemoveTags_CloseFlyout"/>
+											<Button Background="{DynamicResource AccentButtonBackground}" Foreground="{DynamicResource AccentButtonForeground}" Width="120" Content="No" Click="BtnRemoveTags_CloseFlyout"/>
 										</StackPanel>
 									</StackPanel>
 								</Flyout>
 							</ui:CommandBarButton.Flyout>
 						</ui:CommandBarButton>
+
+						<ui:CommandBarSeparator />
+
+						<ui:CommandBarButton Label="Insert Album Art" Icon="Image" Command="{Binding InsertAlbumArtCommand}"/>
 
 						<ui:CommandBarSeparator />
 
@@ -153,7 +165,7 @@
 										<ComboBox Width="300" PlaceholderText="Select format string" Items="{Binding FormatStrings}" SelectedItem="{Binding FttFormatString}"/>
 
 										<StackPanel Orientation="Horizontal" Spacing="6">
-											<Button Background="{DynamicResource AccentButtonBackground}" Foreground="{DynamicResource AccentForegroundBackground}" Width="120" Content="Convert" Command="{Binding FilenameToTagCommand}" Click="BtnFilenameToTag_CloseFlyout"/>
+											<Button Background="{DynamicResource AccentButtonBackground}" Foreground="{DynamicResource AccentButtonForeground}" Width="120" Content="Convert" Command="{Binding FilenameToTagCommand}" Click="BtnFilenameToTag_CloseFlyout"/>
 											
 											<Button Width="120" Content="Cancel" Click="BtnFilenameToTag_CloseFlyout"/>
 										</StackPanel>
@@ -171,7 +183,7 @@
 										<ComboBox Width="300" PlaceholderText="Select format string" Items="{Binding FormatStrings}" SelectedItem="{Binding TtfFormatString}"/>
 
 										<StackPanel Orientation="Horizontal" Spacing="6">
-											<Button Background="{DynamicResource AccentButtonBackground}" Foreground="{DynamicResource AccentForegroundBackground}" Width="120" Content="Convert" Command="{Binding TagToFilenameCommand}" Click="BtnTagToFilename_CloseFlyout"/>
+											<Button Background="{DynamicResource AccentButtonBackground}" Foreground="{DynamicResource AccentButtonForeground}" Width="120" Content="Convert" Command="{Binding TagToFilenameCommand}" Click="BtnTagToFilename_CloseFlyout"/>
 
 											<Button Width="120" Content="Cancel" Click="BtnTagToFilename_CloseFlyout"/>
 										</StackPanel>
@@ -234,6 +246,12 @@
 					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="File Size"/>
 
 					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" IsReadOnly="True" Watermark="0 MB" Text="{Binding TagFileSize}"/>
+					
+					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Album Art"/>
+
+					<Border HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" Height="310" BorderThickness="1" BorderBrush="Gray">
+						<Image Stretch="Fill" Source="{Binding TagAlbumArt}"/>
+					</Border>
 				</StackPanel>
 			</ScrollViewer>
 
