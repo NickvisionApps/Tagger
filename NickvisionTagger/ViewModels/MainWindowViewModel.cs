@@ -226,6 +226,7 @@ public class MainWindowViewModel : ViewModelBase
         {
             _serviceCollection.GetService<IThemeService>()?.ForceWin32WindowToTheme();
         }
+        ATL.Settings.UseFileNameWhenNoTitle = false;
         if (config.RememberLastOpenedFolder)
         {
             MusicFolder.Path = config.LastOpenedFolder;
@@ -419,7 +420,7 @@ public class MainWindowViewModel : ViewModelBase
 
     private async Task CheckForUpdates(object? parameter)
     {
-        var updater = new Updater(_httpClient, new Uri("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json"), new Version("2022.2.0"));
+        var updater = new Updater(_httpClient, new Uri("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json"), new Version("2022.2.1"));
         await _serviceCollection.GetService<IProgressDialogService>()?.ShowAsync("Checking for updates...", async () => await updater.CheckForUpdatesAsync())!;
         if (updater.UpdateAvailable)
         {
@@ -493,7 +494,7 @@ public class MainWindowViewModel : ViewModelBase
         await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
         {
             Title = "What's New?",
-            Message = "- Rewrote application in C# and Avalonia\n- Added support for editing Composer property\n- Added support for adding album art to music file",
+            Message = "- Fixed an issue where the filename was being used for the title in some cases",
             CloseButtonText = "OK",
             DefaultButton = ContentDialogButton.Close
         })!;
@@ -504,7 +505,7 @@ public class MainWindowViewModel : ViewModelBase
         await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
         {
             Title = "About",
-            Message = "Nickvision Tagger Version 2022.2.0\nAn easy-to-use music tag (metadata) editor.\n\nBuilt with C# and Avalonia\n(C) Nickvision 2021-2022",
+            Message = "Nickvision Tagger Version 2022.2.1\nAn easy-to-use music tag (metadata) editor.\n\nBuilt with C# and Avalonia\n(C) Nickvision 2021-2022",
             CloseButtonText = "OK",
             DefaultButton = ContentDialogButton.Close
         })!;
