@@ -3,6 +3,7 @@ using Nickvision.Avalonia.Extensions;
 using Nickvision.Avalonia.Models;
 using Nickvision.Avalonia.MVVM;
 using Nickvision.Avalonia.MVVM.Commands;
+using Nickvision.Avalonia.MVVM.Messaging;
 using Nickvision.Avalonia.MVVM.Services;
 using NickvisionTagger.Models;
 using System;
@@ -105,6 +106,7 @@ public class SettingsPageViewModel : ViewModelBase
         {
             _configuration.IncludeSubfolders = value;
             _configuration.Save();
+            Messenger.Default.Send("HomeSettingsUpdate", null);
             OnPropertyChanged();
         }
     }
@@ -116,6 +118,10 @@ public class SettingsPageViewModel : ViewModelBase
         set
         {
             _configuration.RememberLastOpenedFolder = value;
+            if (!value)
+            {
+                _configuration.LastOpenedFolder = "No Folder Opened";
+            }
             _configuration.Save();
             OnPropertyChanged();
         }
@@ -130,7 +136,7 @@ public class SettingsPageViewModel : ViewModelBase
         await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
         {
             Title = "What's New?",
-            Message = "- Major new design\n- Added file counter to DataGrid\n- Refreshed icon",
+            Message = "- UX improvements",
             CloseButtonText = "OK",
             DefaultButton = ContentDialogButton.Close
         })!;

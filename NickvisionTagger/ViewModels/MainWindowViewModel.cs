@@ -3,7 +3,6 @@ using FluentAvalonia.UI.Controls;
 using Nickvision.Avalonia.Models;
 using Nickvision.Avalonia.MVVM;
 using Nickvision.Avalonia.MVVM.Commands;
-using Nickvision.Avalonia.MVVM.Messaging;
 using Nickvision.Avalonia.MVVM.Services;
 using Nickvision.Avalonia.Update;
 using NickvisionTagger.Models;
@@ -51,7 +50,6 @@ public class MainWindowViewModel : ViewModelBase
             {
                 if (tag == "Home")
                 {
-                    Messenger.Default.Send("HomeSettingsUpdate", null);
                     SelectedPage = _homePageViewModel.GetUserControlView();
                 }
                 else if (tag == "Settings")
@@ -88,7 +86,7 @@ public class MainWindowViewModel : ViewModelBase
 
     private async Task CheckForUpdates(object? parameter)
     {
-        var updater = new Updater(_httpClient, new Uri("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json"), new Version("2022.3.0"));
+        var updater = new Updater(_httpClient, new Uri("https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json"), new Version("2022.3.1"));
         await _serviceCollection.GetService<IProgressDialogService>()?.ShowAsync("Checking for updates...", async () => await updater.CheckForUpdatesAsync())!;
         if (updater.UpdateAvailable)
         {

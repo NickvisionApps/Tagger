@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Nickvision Tagger"
-#define MyAppVersion "2022.3.0"
+#define MyAppVersion "2022.3.1"
 #define MyAppPublisher "Nickvision"
 #define MyAppURL "https://github.com/nlogozzo/NickvisionTagger"
 #define MyAppExeName "NickvisionTagger.exe"

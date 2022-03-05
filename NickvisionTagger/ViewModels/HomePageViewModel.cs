@@ -515,15 +515,7 @@ public class HomePageViewModel : ViewModelBase
     private async Task SettingsUpdate(object? parameter)
     {
         var config = await Configuration.LoadAsync();
-        if(MusicFolder.IncludeSubfolders != config.IncludeSubfolders)
-        {
-            MusicFolder.IncludeSubfolders = config.IncludeSubfolders;
-            await RefreshMusicFolder(null);
-        }
-        if (!config.RememberLastOpenedFolder)
-        {
-            config.LastOpenedFolder = "No Folder Opened";
-            await config.SaveAsync();
-        }
+        MusicFolder.IncludeSubfolders = config.IncludeSubfolders;
+        await RefreshMusicFolder(null);
     }
 }
