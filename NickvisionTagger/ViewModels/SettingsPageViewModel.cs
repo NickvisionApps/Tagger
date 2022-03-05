@@ -1,14 +1,17 @@
-﻿using Nickvision.Avalonia.Extensions;
+﻿using FluentAvalonia.UI.Controls;
+using Nickvision.Avalonia.Extensions;
 using Nickvision.Avalonia.Models;
 using Nickvision.Avalonia.MVVM;
+using Nickvision.Avalonia.MVVM.Commands;
 using Nickvision.Avalonia.MVVM.Services;
 using NickvisionTagger.Models;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace NickvisionTagger.ViewModels;
 
-public class SettingsDialogViewModel : ViewModelBase
+public class SettingsPageViewModel : ViewModelBase
 {
     private readonly ServiceCollection _serviceCollection;
     private readonly Configuration _configuration;
@@ -16,13 +19,19 @@ public class SettingsDialogViewModel : ViewModelBase
     private bool _isDarkTheme;
 
     public ObservableCollection<AccentColor> AccentColors { get; init; }
+    public DelegateCommand<object?> GitHubRepoCommand { get; init; }
+    public DelegateCommand<object?> ReportABugCommand { get; init; }
+    public DelegateAsyncCommand<object?> ChangelogCommand { get; init; }
 
-    public SettingsDialogViewModel(ServiceCollection serviceCollection)
+    public SettingsPageViewModel(ServiceCollection serviceCollection)
     {
         Title = "Settings";
         _serviceCollection = serviceCollection;
         _configuration = Configuration.Load();
         AccentColors = EnumExtensions.GetObservableCollection<AccentColor>();
+        GitHubRepoCommand = new DelegateCommand<object?>(GitHubRepo);
+        ReportABugCommand = new DelegateCommand<object?>(ReportAbug);
+        ChangelogCommand = new DelegateAsyncCommand<object?>(Changelog);
         if (_configuration.Theme == Theme.Light)
         {
             IsLightTheme = true;
@@ -75,7 +84,7 @@ public class SettingsDialogViewModel : ViewModelBase
         }
     }
 
-    public AccentColor AccentColor
+    public AccentColor SelectedAccentColor
     {
         get => _configuration.AccentColor;
 
@@ -110,5 +119,20 @@ public class SettingsDialogViewModel : ViewModelBase
             _configuration.Save();
             OnPropertyChanged();
         }
+    }
+
+    private void GitHubRepo(object? parameter) => new Uri("https://github.com/nlogozzo/NickvisionTagger").OpenInBrowser();
+
+    private void ReportAbug(object? parameter) => new Uri("https://github.com/nlogozzo/NickvisionTagger/issues/new").OpenInBrowser();
+
+    private async Task Changelog(object? parameter)
+    {
+        await _serviceCollection.GetService<IContentDialogService>()?.ShowMessageAsync(new ContentDialogMessageInfo()
+        {
+            Title = "What's New?",
+            Message = "- Major new design\n- Added file counter to DataGrid\n- Refreshed icon",
+            CloseButtonText = "OK",
+            DefaultButton = ContentDialogButton.Close
+        })!;
     }
 }

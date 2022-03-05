@@ -11,11 +11,13 @@ public class MusicFile : IComparable<MusicFile>
     private Track? _file;
 
     public string Path { get; private set; }
+    public int Id { get; set; }
 
     public MusicFile(string path)
     {
         Path = path;
         _file = new Track(path);
+        Id = 0;
     }
 
     public string Filename

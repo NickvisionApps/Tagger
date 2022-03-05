@@ -57,6 +57,11 @@ public class MusicFolder : ObservableObject
                 }
                 files.Sort();
                 Files = new ObservableCollection<MusicFile>(files);
+                for(int i = 0; i < files.Count; i++)
+                {
+                    var musicFile = files[i];
+                    musicFile.Id = i + 1;
+                }
             });
         }
     }

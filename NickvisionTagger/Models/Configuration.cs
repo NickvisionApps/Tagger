@@ -20,7 +20,7 @@ public class Configuration
     public Configuration()
     {
         Theme = Theme.Dark;
-        AccentColor = AccentColor.Blue;
+        AccentColor = AccentColor.Orange;
         IncludeSubfolders = true;
         RememberLastOpenedFolder = true;
         LastOpenedFolder = "No Folder Open";

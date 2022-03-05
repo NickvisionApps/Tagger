@@ -1,16 +1,13 @@
-﻿using Avalonia.Markup.Xaml;
+﻿using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using Avalonia.Styling;
-using FluentAvalonia.UI.Controls;
 using System;
 
 namespace NickvisionTagger.Views;
 
-public class SettingsDialogView : ContentDialog, IStyleable
+public class SettingsPageView : UserControl
 {
-    Type IStyleable.StyleKey => typeof(ContentDialog);
-
-    public SettingsDialogView()
+    public SettingsPageView()
     {
         AvaloniaXamlLoader.Load(this);
         if (Environment.OSVersion.Platform == PlatformID.Unix)

@@ -1,4 +1,4 @@
-<Window xmlns="https://github.com/avaloniaui"
+<ui:CoreWindow xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,341 +14,40 @@
             <ia:InvokeCommandAction Command="{Binding OpenedCommand}"/>
         </ia:EventTriggerBehavior>
     </i:Interaction.Behaviors>
-    
-    <Grid>
-		<Border HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}" Margin="6,6,6,0" CornerRadius="6">
-			<StackPanel>
-				<Menu>
-					<MenuItem Header="_File">
-						<MenuItem Header="_Open Music Folder" InputGesture="Ctrl+O" HotKey="Ctrl+O" Command="{Binding OpenMusicFolderCommand}">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="OpenLocal"/>
-							</MenuItem.Icon>
-						</MenuItem>
 
-						<MenuItem Header="_Refresh Music Folder" InputGesture="F5" HotKey="F5" Command="{Binding RefreshMusicFolderCommand}">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="Refresh"/>
-							</MenuItem.Icon>
-						</MenuItem>
+	<ui:NavigationView Name="NavView" PaneDisplayMode="Left" OpenPaneLength="240" IsBackButtonVisible="False" IsSettingsVisible="False" IsPaneToggleButtonVisible="False" SelectedItem="{Binding SelectedNavItem}">
+		<ui:NavigationView.PaneHeader>
+			<Grid Margin="20,10,0,20">
+				<Image HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="50" Source="../Resources/icon.png"/>
 
-						<MenuItem Header="_Close Music Folder" InputGesture="Ctrl+W" HotKey="Ctrl+W" Command="{Binding CloseMusicFolderCommand}">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="Cancel"/>
-							</MenuItem.Icon>
-						</MenuItem>
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,6,0,0" Text="Nickvision Tagger"/>
 
-						<Separator/>
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,26,0,0" Foreground="Gray" Text="Version 2022.3.0"/>
+			</Grid>
+		</ui:NavigationView.PaneHeader>
 
-						<MenuItem Header="_Save Tags" InputGesture="Ctrl+S" HotKey="Ctrl+S" Command="{Binding SaveTagsCommand}">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="Save"/>
-							</MenuItem.Icon>
-						</MenuItem>
+		<ui:NavigationView.MenuItems>
+			<ui:NavigationViewItem Content="Home" Tag="Home" Icon="Home" IsSelected="True"/>
+		</ui:NavigationView.MenuItems>
 
-						<Separator/>
-
-						<MenuItem Header="E_xit" HotKey="Alt+F4" InputGesture="Alt+F4" Command="{Binding ExitCommand}">
-							<MenuItem.Icon>
-								<ui:FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="18" Glyph="&#xe7e8;"/>
-							</MenuItem.Icon>
-						</MenuItem>
-					</MenuItem>
-
-					<MenuItem Header="_Edit">
-						<MenuItem Header="_Remove Tags" InputGesture="Delete" HotKey="Delete" IsEnabled="{Binding RemoveTagsCommand.IsExecutable}" Click="BtnRemoveTags_OpenFlyout">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="Delete"/>
-							</MenuItem.Icon>
-						</MenuItem>
-						
-						<Separator/>
-
-						<MenuItem Header="_Settings" HotKey="Ctrl+." InputGesture="Ctrl+." Command="{Binding SettingsCommand}">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="Settings"/>
-							</MenuItem.Icon>
-						</MenuItem>
-					</MenuItem>
-
-					<MenuItem Header="_Insert">
-						<MenuItem Header="_Album Art" InputGesture="Ctrl+Shift+A" HotKey="Ctrl+Shift+A" Command="{Binding InsertAlbumArtCommand}">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="Image"/>
-							</MenuItem.Icon>
-						</MenuItem>
-					</MenuItem>
-
-					<MenuItem Header="_Convert">
-						<MenuItem Header="F_ilename to Tag" InputGesture="Ctrl+Shift+F" HotKey="Ctrl+Shift+F" IsEnabled="{Binding FilenameToTagCommand.IsExecutable}" Click="BtnFilenameToTag_OpenFlyout">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="More"/>
-							</MenuItem.Icon>
-						</MenuItem>
-
-						<MenuItem Header="_Tag to Filename" InputGesture="Ctrl+Shift+T" HotKey="Ctrl+Shift+T" IsEnabled="{Binding TagToFilenameCommand.IsExecutable}" Click="BtnTagToFilename_OpenFlyout">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="Tag"/>
-							</MenuItem.Icon>
-						</MenuItem>
-					</MenuItem>
-
-					<MenuItem Header="_Help">
-						<MenuItem Header="Check for _Updates" Command="{Binding CheckForUpdatesCommand}">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="Sync"/>
-							</MenuItem.Icon>
-						</MenuItem>
-
-						<Separator/>
-
-						<MenuItem Header="_GitHub Repo" Command="{Binding GitHubRepoCommand}">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="Library"/>
-							</MenuItem.Icon>
-						</MenuItem>
-
-						<MenuItem Header="_Report a Bug" Command="{Binding ReportABugCommand}">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="ReportHacked"/>
-							</MenuItem.Icon>
-						</MenuItem>
-
-						<Separator/>
-
-						<MenuItem Header="_Changelog" Command="{Binding ChangelogCommand}">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="List"/>
-							</MenuItem.Icon>
-						</MenuItem>
-
-						<MenuItem Header="_About" HotKey="F1" InputGesture="F1" Command="{Binding AboutCommand}">
-							<MenuItem.Icon>
-								<ui:SymbolIcon Symbol="Help"/>
-							</MenuItem.Icon>
-						</MenuItem>
-					</MenuItem>
-				</Menu>
-
-				<ui:CommandBar DefaultLabelPosition="Right">
-					<ui:CommandBar.PrimaryCommands>
-						<ui:CommandBarButton Label="Save Tags" Icon="Save" Command="{Binding SaveTagsCommand}"/>
-
-						<ui:CommandBarButton Name="BtnRemoveTags" IsEnabled="{Binding RemoveTagsCommand.IsExecutable}" Label="Remove Tags" Icon="Delete">
-							<ui:CommandBarButton.Flyout>
-								<Flyout Placement="Bottom">
-									<StackPanel Spacing="6">
-										<TextBlock Text="Are you sure you want to remove the selected tags?"/>
-
-										<StackPanel Orientation="Horizontal" Spacing="6">
-											<Button Width="120" Content="Yes" Command="{Binding RemoveTagsCommand}" Click="BtnRemoveTags_CloseFlyout"/>
-
-											<Button Background="{DynamicResource AccentButtonBackground}" Foreground="{DynamicResource AccentButtonForeground}" Width="120" Content="No" Click="BtnRemoveTags_CloseFlyout"/>
-										</StackPanel>
-									</StackPanel>
-								</Flyout>
-							</ui:CommandBarButton.Flyout>
-						</ui:CommandBarButton>
-
-						<ui:CommandBarSeparator />
-
-						<ui:CommandBarButton Label="Insert Album Art" Icon="Image" Command="{Binding InsertAlbumArtCommand}"/>
-
-						<ui:CommandBarSeparator />
-
-						<ui:CommandBarButton Name="BtnFilenameToTag" IsEnabled="{Binding FilenameToTagCommand.IsExecutable}" Label="Filename to Tag" Icon="More">
-							<ui:CommandBarButton.Flyout>
-								<Flyout Placement="Bottom">
-									<StackPanel Spacing="6">
-										<TextBlock Text="Please select format string"/>
-										
-										<ComboBox Width="300" PlaceholderText="Select format string" Items="{Binding FormatStrings}" SelectedItem="{Binding FttFormatString}"/>
-
-										<StackPanel Orientation="Horizontal" Spacing="6">
-											<Button Background="{DynamicResource AccentButtonBackground}" Foreground="{DynamicResource AccentButtonForeground}" Width="120" Content="Convert" Command="{Binding FilenameToTagCommand}" Click="BtnFilenameToTag_CloseFlyout"/>
-											
-											<Button Width="120" Content="Cancel" Click="BtnFilenameToTag_CloseFlyout"/>
-										</StackPanel>
-									</StackPanel>
-								</Flyout>
-							</ui:CommandBarButton.Flyout>
-						</ui:CommandBarButton>
-
-						<ui:CommandBarButton Name="BtnTagToFilename" IsEnabled="{Binding TagToFilenameCommand.IsExecutable}" Label="Tag to Filename" Icon="Tag">
-							<ui:CommandBarButton.Flyout>
-								<Flyout Placement="Bottom">
-									<StackPanel Spacing="6">
-										<TextBlock Text="Please select format string"/>
-
-										<ComboBox Width="300" PlaceholderText="Select format string" Items="{Binding FormatStrings}" SelectedItem="{Binding TtfFormatString}"/>
-
-										<StackPanel Orientation="Horizontal" Spacing="6">
-											<Button Background="{DynamicResource AccentButtonBackground}" Foreground="{DynamicResource AccentButtonForeground}" Width="120" Content="Convert" Command="{Binding TagToFilenameCommand}" Click="BtnTagToFilename_CloseFlyout"/>
-
-											<Button Width="120" Content="Cancel" Click="BtnTagToFilename_CloseFlyout"/>
-										</StackPanel>
-									</StackPanel>
-								</Flyout>
-							</ui:CommandBarButton.Flyout>
-						</ui:CommandBarButton>
-					</ui:CommandBar.PrimaryCommands>
-				</ui:CommandBar>
-			</StackPanel>
-		</Border>
-
-		<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,92,0,42" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}">
-			<ScrollViewer HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="6,6,0,6" Width="326">
-				<StackPanel>
-					<TextBlock HorizontalAlignment="Left" Margin="2,0,0,0" Text="Filename"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" IsEnabled="{Binding TagFilenameEnabled}" Watermark="Enter filename here" Text="{Binding TagFilename}"/>
-
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Title"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" Watermark="Enter title here" Text="{Binding TagTitle}"/>
-
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Artist"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" Watermark="Enter artist here" Text="{Binding TagArtist}"/>
-
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Album"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" Watermark="Enter album here" Text="{Binding TagAlbum}"/>
-
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Year"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" Watermark="Enter year here" Text="{Binding TagYear}"/>
-
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Track"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" Watermark="Enter track here" Text="{Binding TagTrack}"/>
-
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Album Artist"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" Watermark="Enter album artist here" Text="{Binding TagAlbumArtist}"/>
-
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Composer"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" Watermark="Enter composer here" Text="{Binding TagComposer}"/>
-
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Genre"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" Watermark="Enter genre here" Text="{Binding TagGenre}"/>
-
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Comment"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" Watermark="Enter comment here" Text="{Binding TagComment}"/>
-
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Duration"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" IsReadOnly="True" Watermark="00:00:00" Text="{Binding TagDuration}"/>
-
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="File Size"/>
-
-					<TextBox HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" IsReadOnly="True" Watermark="0 MB" Text="{Binding TagFileSize}"/>
-					
-					<TextBlock HorizontalAlignment="Left" Margin="2,10,0,0" Text="Album Art"/>
-
-					<Border HorizontalAlignment="Left" Margin="0,4,0,0" Width="310" Height="310" BorderThickness="1" BorderBrush="Gray">
-						<Image Stretch="Fill" Source="{Binding TagAlbumArt}"/>
-					</Border>
-				</StackPanel>
-			</ScrollViewer>
-
-			<DataGrid Name="DataMusicFiles" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="340,6,6,6" AutoGenerateColumns="False" 
-					  IsReadOnly="True" SelectionMode="Extended" GridLinesVisibility="Horizontal" Items="{Binding MusicFolder.Files}">
-				<DataGrid.Columns>
-					<DataGridTemplateColumn Header="Filename">
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<Grid Margin="6,6,6,6">
-									<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Filename}"/>
-								</Grid>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
-
-					<DataGridTemplateColumn Header="Title">
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<Grid Margin="6,6,6,6">
-									<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Title}"/>
-								</Grid>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
-
-					<DataGridTemplateColumn Header="Artist">
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<Grid Margin="6,6,6,6">
-									<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Artist}"/>
-								</Grid>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
-
-					<DataGridTemplateColumn Header="Album">
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<Grid Margin="6,6,6,6">
-									<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Album}"/>
-								</Grid>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
-
-					<DataGridTemplateColumn Header="Duration">
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<Grid Margin="6,6,6,6">
-									<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding DurationAsString}"/>
-								</Grid>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
-
-					<DataGridTemplateColumn Header="Comment">
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<Grid Margin="6,6,6,6">
-									<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Comment}"/>
-								</Grid>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
-
-					<DataGridTemplateColumn Header="Path">
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<Grid Margin="6,6,6,6">
-									<TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Text="{Binding Path}"/>
-								</Grid>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
-				</DataGrid.Columns>
-
+		<ui:NavigationView.FooterMenuItems>
+			<ui:NavigationViewItem Name="NavCheckForUpdates" Content="Check for Updates" Icon="Sync" SelectsOnInvoked="False">
 				<i:Interaction.Behaviors>
-					<ia:EventTriggerBehavior EventName="SelectionChanged" SourceObject="{Binding #DataMusicFiles}">
-						<ia:InvokeCommandAction Command="{Binding DataMusicFiles_SelectionChangedCommand}" CommandParameter="{Binding Path=SelectedItems, ElementName=DataMusicFiles}"/>
+					<ia:EventTriggerBehavior EventName="Tapped" SourceObject="{Binding #NavCheckForUpdates}">
+						<ia:InvokeCommandAction Command="{Binding CheckForUpdatesCommand}"/>
 					</ia:EventTriggerBehavior>
 				</i:Interaction.Behaviors>
-			</DataGrid>
+			</ui:NavigationViewItem>
+
+			<ui:NavigationViewItem Content="Settings" Tag="Settings" Icon="Settings"/>
+		</ui:NavigationView.FooterMenuItems>
+
+		<Grid>
+			<Border HorizontalAlignment="Stretch" VerticalAlignment="Top" IsVisible="{Binding TitleBorderVisible}" Height="30" Background="{DynamicResource SolidBackgroundFillColorBaseBrush}"/>
+
+			<ui:Frame Margin="{Binding FrameMargin}" Content="{Binding SelectedPage}"/>
+
+			<ui:InfoBar Name="InfoBar" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="{Binding InfoBarMargin}"/>
 		</Grid>
-
-		<Border HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="6,0,6,6" Height="36" Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}" CornerRadius="6">
-			<Grid>
-				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0,0,0" Text="{Binding MusicFolder.Path}"/>
-
-				<StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,6,0" Orientation="Horizontal" Spacing="2">
-					<TextBlock IsVisible="{Binding MusicFolder.IsOpen}" Text="Total Number of Songs: "/>
-					
-					<TextBlock Text="{Binding MusicFolder.Files.Count}"/>
-				</StackPanel>
-			</Grid>
-		</Border>
-		
-        <ui:InfoBar Name="InfoBar" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,10,0"/>
-    </Grid>
-</Window>
+	</ui:NavigationView>
+</ui:CoreWindow>
