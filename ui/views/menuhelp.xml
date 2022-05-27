@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <menu id="gio_menuHelp">
+        <section>
+            <item>
+                <attribute name="label" translatable="yes">Update</attribute>
+                <attribute name="action">win.update</attribute>
+            </item>
+        </section>
+        <section>
+            <item>
+                <attribute name="label" translatable="yes">GitHub Repo</attribute>
+                <attribute name="action">win.gitHubRepo</attribute>
+            </item>
+            <item>
+                <attribute name="label" translatable="yes">Report a Bug</attribute>
+                <attribute name="action">win.reportABug</attribute>
+            </item>
+        </section>
+        <section>
+            <item>
+                <attribute name="label" translatable="yes">Preferences</attribute>
+                <attribute name="action">win.preferences</attribute>
+            </item>
+            <item>
+                <attribute name="label" translatable="yes">Changelog</attribute>
+                <attribute name="action">win.changelog</attribute>
+            </item>
+            <item>
+                <attribute name="label" translatable="yes">About Tagger</attribute>
+                <attribute name="action">win.about</attribute>
+            </item>
+        </section>
+    </menu>
+</interface>
