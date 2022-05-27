@@ -18,14 +18,20 @@ namespace NickvisionTagger::Models
         Configuration();
         Theme getTheme() const;
         void setTheme(Theme theme);
-        bool getIsFirstTimeOpen() const;
-        void setIsFirstTimeOpen(bool isFirstTimeOpen);
+        bool getIncludeSubfolders() const;
+        void setIncludeSubfolders(bool includeSubfolders);
+        bool getRememberLastOpenedFolder() const;
+        void setRememberLastOpenedFolder(bool rememberLastOpenedFolder);
+        const std::string& getLastOpenedFolder() const;
+        void setLastOpenedFolder(const std::string& lastOpenedFolder);
         void save() const;
 
     private:
         mutable std::mutex m_mutex;
         std::string m_configDir;
         Theme m_theme;
-        bool m_isFirstTimeOpen;
+        bool m_includeSubfolders;
+        bool m_rememberLastOpenedFolder;
+        std::string m_lastOpenedFolder;
     };
 }

@@ -65,8 +65,7 @@ void MainWindow::onStartup()
     if(!m_opened)
     {
         //==Load Configuration==//
-        m_configuration.setIsFirstTimeOpen(false);
-        m_configuration.save();
+        
         //==Check for Updates==//
         ProgressTracker* progTrackerUpdate{new ProgressTracker("Checking for updates...", [&]() { m_updater.checkForUpdates(); }, [&]()
         {

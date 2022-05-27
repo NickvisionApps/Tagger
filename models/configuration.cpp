@@ -7,7 +7,7 @@
 
 using namespace NickvisionTagger::Models;
 
-Configuration::Configuration() : m_configDir{std::string(getpwuid(getuid())->pw_dir) + "/.config/Nickvision/NickvisionTagger/"}, m_theme{Theme::System}, m_isFirstTimeOpen{true}
+Configuration::Configuration() : m_configDir{std::string(getpwuid(getuid())->pw_dir) + "/.config/Nickvision/NickvisionTagger/"}, m_theme{Theme::System}, m_includeSubfolders{true}, m_rememberLastOpenedFolder{true}, m_lastOpenedFolder{""}
 {
     if (!std::filesystem::exists(m_configDir))
     {
@@ -19,7 +19,9 @@ Configuration::Configuration() : m_configDir{std::string(getpwuid(getuid())->pw_
         Json::Value json;
         configFile >> json;
         m_theme = static_cast<Theme>(json.get("Theme", 0).asInt());
-        m_isFirstTimeOpen = json.get("IsFirstTimeOpen", true).asBool();
+        m_includeSubfolders = json.get("IncludeSubfolders", true).asBool();
+        m_rememberLastOpenedFolder = json.get("RememberLastOpenedFolder", true).asBool();
+        m_lastOpenedFolder = json.get("LastOpenedFolder", "").asString();
     }
 }
 
@@ -35,16 +37,40 @@ void Configuration::setTheme(Theme theme)
     m_theme = theme;
 }
 
-bool Configuration::getIsFirstTimeOpen() const
+bool Configuration::getIncludeSubfolders() const
 {
     std::lock_guard<std::mutex> lock{m_mutex};
-    return m_isFirstTimeOpen;
+    return m_includeSubfolders;
 }
 
-void Configuration::setIsFirstTimeOpen(bool isFirstTimeOpen)
+void Configuration::setIncludeSubfolders(bool includeSubfolders)
 {
     std::lock_guard<std::mutex> lock{m_mutex};
-    m_isFirstTimeOpen = isFirstTimeOpen;
+    m_includeSubfolders = includeSubfolders;
+}
+
+bool Configuration::getRememberLastOpenedFolder() const
+{
+    std::lock_guard<std::mutex> lock{m_mutex};
+    return m_rememberLastOpenedFolder;
+}
+
+void Configuration::setRememberLastOpenedFolder(bool rememberLastOpenedFolder)
+{
+    std::lock_guard<std::mutex> lock{m_mutex};
+    m_rememberLastOpenedFolder = rememberLastOpenedFolder;
+}
+
+const std::string& Configuration::getLastOpenedFolder() const
+{
+    std::lock_guard<std::mutex> lock{m_mutex};
+    return m_lastOpenedFolder;
+}
+
+void Configuration::setLastOpenedFolder(const std::string& lastOpenedFolder)
+{
+    std::lock_guard<std::mutex> lock{m_mutex};
+    m_lastOpenedFolder = lastOpenedFolder;
 }
 
 void Configuration::save() const
@@ -55,7 +81,9 @@ void Configuration::save() const
     {
         Json::Value json;
         json["Theme"] = static_cast<int>(m_theme);
-        json["IsFirstTimeOpen"] = m_isFirstTimeOpen;
+        json["IncludeSubfolders"] = m_includeSubfolders;
+        json["RememberLastOpenedFolder"] = m_rememberLastOpenedFolder;
+        json["LastOpenedFolder"] = m_lastOpenedFolder;
         configFile << json;
     }
 }

@@ -17,6 +17,7 @@ namespace NickvisionTagger::UI::Views
         //==Signals==//
         void cancel();
         void save();
-        void onRowIsFirstTimeOpenActivate();
+        void onRowIncludeSubfoldersActivate();
+        void onRowRememberLastOpenedFolderActivate();
     };
 }

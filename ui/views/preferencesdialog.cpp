@@ -11,7 +11,8 @@ PreferencesDialog::PreferencesDialog(GtkWidget* parent, Configuration& configura
     //==Signals==//
     g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnCancel"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<PreferencesDialog*>(data)->cancel(); }), this);
     g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnSave"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<PreferencesDialog*>(data)->save(); }), this);
-    g_signal_connect(gtk_builder_get_object(m_builder, "adw_rowIsFirstTimeOpen"), "activated", G_CALLBACK((void (*)(AdwActionRow*, gpointer*))[](AdwActionRow* row, gpointer* data) { reinterpret_cast<PreferencesDialog*>(data)->onRowIsFirstTimeOpenActivate(); }), this);
+    g_signal_connect(gtk_builder_get_object(m_builder, "adw_rowIncludeSubfolders"), "activated", G_CALLBACK((void (*)(AdwActionRow*, gpointer*))[](AdwActionRow* row, gpointer* data) { reinterpret_cast<PreferencesDialog*>(data)->onRowIncludeSubfoldersActivate(); }), this);
+    g_signal_connect(gtk_builder_get_object(m_builder, "adw_rowRememberLastOpenedFolder"), "activated", G_CALLBACK((void (*)(AdwActionRow*, gpointer*))[](AdwActionRow* row, gpointer* data) { reinterpret_cast<PreferencesDialog*>(data)->onRowRememberLastOpenedFolderActivate(); }), this);
     //==Load Config==//
     if(m_configuration.getTheme() == Theme::System)
     {
@@ -25,7 +26,8 @@ PreferencesDialog::PreferencesDialog(GtkWidget* parent, Configuration& configura
     {
         adw_combo_row_set_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "adw_rowTheme")), 2);
     }
-    gtk_switch_set_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchIsFirstTimeOpen")), m_configuration.getIsFirstTimeOpen());
+    gtk_switch_set_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchIncludeSubfolders")), m_configuration.getIncludeSubfolders());
+    gtk_switch_set_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchRememberLastOpenedFolder")), m_configuration.getRememberLastOpenedFolder());
 }
 
 PreferencesDialog::~PreferencesDialog()
@@ -41,12 +43,17 @@ void PreferencesDialog::cancel()
 void PreferencesDialog::save()
 {
     m_configuration.setTheme(static_cast<Theme>(adw_combo_row_get_selected(ADW_COMBO_ROW(gtk_builder_get_object(m_builder, "adw_rowTheme")))));
-    m_configuration.setIsFirstTimeOpen(gtk_switch_get_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchIsFirstTimeOpen"))));
+    m_configuration.setIncludeSubfolders(gtk_switch_get_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchIncludeSubfolders"))));
+    m_configuration.setRememberLastOpenedFolder(gtk_switch_get_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchRememberLastOpenedFolder"))));
     m_configuration.save();
     gtk_widget_hide(m_gobj);
 }
 
-void PreferencesDialog::onRowIsFirstTimeOpenActivate()
+void PreferencesDialog::onRowIncludeSubfoldersActivate()
 {
-    gtk_switch_set_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchIsFirstTimeOpen")), !gtk_switch_get_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchIsFirstTimeOpen"))));
+    gtk_switch_set_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchIncludeSubfolders")), !gtk_switch_get_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchIncludeSubfolders"))));
+}
+void PreferencesDialog::onRowRememberLastOpenedFolderActivate()
+{
+    gtk_switch_set_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchRememberLastOpenedFolder")), !gtk_switch_get_active(GTK_SWITCH(gtk_builder_get_object(m_builder, "gtk_switchRememberLastOpenedFolder"))));
 }

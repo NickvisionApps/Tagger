@@ -8,9 +8,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "-g -Wall -Wextra")
 
 #Source Files
-set(HELPERS helpers/curlhelpers.h helpers/curlhelpers.cpp)
+set(HELPERS helpers/curlhelpers.h helpers/curlhelpers.cpp helpers/mediahelpers.h helpers/mediahelpers.cpp)
 set(UPDATE update/version.h update/version.cpp update/updateconfig.h update/updateconfig.cpp update/updater.h update/updater.cpp)
-set(MODELS models/configuration.h models/configuration.cpp)
+set(MODELS models/configuration.h models/configuration.cpp models/mediafiletype.h models/mediafiletype.cpp models/musicfile.h models/musicfile.cpp models/musiclibrary.h models/musiclibrary.cpp)
 set(UI ui/application.h ui/application.cpp ui/widget.h ui/widget.cpp)
 set(XML ui/controls/progressdialog.xml ui/controls/progresstracker.xml ui/views/menuhelp.xml ui/views/mainwindow.xml ui/views/preferencesdialog.xml)
 set(CONTROLS ui/controls/progressdialog.h ui/controls/progressdialog.cpp ui/controls/progresstracker.h ui/controls/progresstracker.cpp)
@@ -25,12 +25,14 @@ pkg_check_modules(GTK REQUIRED IMPORTED_TARGET gtk4)
 pkg_check_modules(ADWAITA REQUIRED IMPORTED_TARGET libadwaita-1)
 pkg_check_modules(JSONCPP REQUIRED IMPORTED_TARGET jsoncpp)
 pkg_check_modules(CURLPP REQUIRED curlpp)
+pkg_check_modules(TAGLIB REQUIRED IMPORTED_TARGET taglib)
 
 #Link Libraries
 target_link_libraries(NickvisionTagger PRIVATE PkgConfig::GTK)
 target_link_libraries(NickvisionTagger PRIVATE PkgConfig::ADWAITA)
 target_link_libraries(NickvisionTagger PRIVATE PkgConfig::JSONCPP)
 target_link_libraries(NickvisionTagger PRIVATE ${CURLPP_LDFLAGS})
+target_link_libraries(NickvisionTagger PRIVATE PkgConfig::TAGLIB)
 
 #Generate GResources
 list(APPEND CMAKE_MODULE_PATH /home/nlogozzo/Documents/Programming/GCR_CMake/macros)

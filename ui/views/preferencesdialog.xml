@@ -57,16 +57,30 @@
                         </child>
                         <child>
                             <object class="AdwPreferencesGroup">
-                                <property name="title" translatable="yes">Application</property>
-                                <property name="description" translatable="yes">Customize application settings.</property>
+                                <property name="title" translatable="yes">Tagger</property>
+                                <property name="description" translatable="yes">Customize tagger settings.</property>
                                 <child>
-                                    <object class="AdwActionRow" id="adw_rowIsFirstTimeOpen">
-                                        <property name="title" translatable="yes">Is First Time Open</property>
+                                    <object class="AdwActionRow" id="adw_rowIncludeSubfolders">
+                                        <property name="title" translatable="yes">Include Subfolders</property>
                                         <binding name="activatable-widget">
-                                            <lookup name="child">adw_rowIsFirstTimeOpen</lookup>
+                                            <lookup name="child">adw_rowIncludeSubfolders</lookup>
                                         </binding>
                                         <child>
-                                            <object class="GtkSwitch" id="gtk_switchIsFirstTimeOpen">
+                                            <object class="GtkSwitch" id="gtk_switchIncludeSubfolders">
+                                                <property name="valign">center</property>
+                                                <property name="active">true</property>
+                                            </object>
+                                        </child>
+                                    </object>
+                                </child>
+                                <child>
+                                    <object class="AdwActionRow" id="adw_rowRememberLastOpenedFolder">
+                                        <property name="title" translatable="yes">Remember Last Opened Folder</property>
+                                        <binding name="activatable-widget">
+                                            <lookup name="child">adw_rowRememberLastOpenedFolder</lookup>
+                                        </binding>
+                                        <child>
+                                            <object class="GtkSwitch" id="gtk_switchRememberLastOpenedFolder">
                                                 <property name="valign">center</property>
                                                 <property name="active">true</property>
                                             </object>
