@@ -9,22 +9,20 @@
 
 namespace NickvisionTagger::Models
 {
-    class MusicLibrary
+    class MusicFolder
     {
     public:
-        MusicLibrary();
-        const std::vector<std::filesystem::path>& getPaths() const;
+        MusicFolder();
+        const std::filesystem::path& getPath() const;
+        void setPath(const std::filesystem::path& path);
         bool getIncludeSubfolders() const;
         void setIncludeSubfolders(bool includeSubfolders);
         const std::vector<std::shared_ptr<MusicFile>>& getFiles() const;
-        void addPath(const std::filesystem::path& path);
-        bool removePath(std::size_t index);
-        void clearPaths();
         void reloadFiles();
 
     private:
         mutable std::mutex m_mutex;
-        std::vector<std::filesystem::path> m_paths;
+        std::filesystem::path m_path;
         bool m_includeSubfolders;
         std::vector<std::shared_ptr<MusicFile>> m_files;
     };
