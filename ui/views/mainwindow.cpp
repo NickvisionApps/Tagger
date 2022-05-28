@@ -3,6 +3,7 @@
 #include <regex>
 #include "../controls/progressdialog.h"
 #include "../controls/progresstracker.h"
+#include "../controls/comboboxdialog.h"
 #include "preferencesdialog.h"
 #include "../../helpers/mediahelpers.h"
 
@@ -162,29 +163,145 @@ void MainWindow::reloadMusicFolder()
 
 void MainWindow::saveTags()
 {
-
+    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnSaveTags")), false);
+    ProgressTracker* progTrackerSaving{new ProgressTracker("Saving tags...", [&]() 
+    { 
+        for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+        {
+            if(std::string(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFilename")))) != musicFile->getFilename() && std::string(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFilename")))) != "<keep>")
+            {
+                musicFile->setFilename(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFilename"))));
+            }
+            if(std::string(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTitle")))) != "<keep>")
+            {
+                musicFile->setTitle(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTitle"))));
+            }
+            if(std::string(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtArtist")))) != "<keep>")
+            {
+                musicFile->setArtist(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtArtist"))));
+            }
+            if(std::string(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbum")))) != "<keep>")
+            {
+                musicFile->setAlbum(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbum"))));
+            }
+            if(std::string(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtYear")))) != "<keep>")
+            {
+                try
+                {
+                    musicFile->setYear(MediaHelpers::stoui(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtYear")))));
+                }
+                catch(...) { }
+            }
+            if(std::string(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTrack")))) != "<keep>")
+            {
+                try
+                {
+                    musicFile->setTrack(MediaHelpers::stoui(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTrack")))));
+                }
+                catch(...) { }
+            }
+            if(std::string(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtGenre")))) != "<keep>")
+            {
+                musicFile->setGenre(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtGenre"))));
+            }
+            if(std::string(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment")))) != "<keep>")
+            {
+                musicFile->setComment(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment"))));
+            }
+            musicFile->saveTag();
+        }
+    }, [&]() { reloadMusicFolder(); })};
+    adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(m_builder, "adw_headerBar")), progTrackerSaving->gobj());
+    progTrackerSaving->show();
 }
 
 void MainWindow::removeTags()
 {
-
+    GtkWidget* removeDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
+        GTK_MESSAGE_INFO, GTK_BUTTONS_YES_NO, "Remove Tags?")};
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(removeDialog), "Are you sure you want to remove the selected tags?\nThis action is irreversible.");
+    g_signal_connect(removeDialog, "response", G_CALLBACK((void (*)(GtkDialog*, gint, gpointer*))([](GtkDialog* dialog, gint response_id, gpointer* data)
+    {
+        gtk_window_destroy(GTK_WINDOW(dialog));
+        if(response_id == GTK_RESPONSE_YES)
+        {
+            MainWindow* mainWindow{reinterpret_cast<MainWindow*>(data)};
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(mainWindow->m_builder, "gtk_btnRemoveTags")), false);
+            ProgressTracker* progTrackerRemoving{new ProgressTracker("Removing tags...", [mainWindow]() 
+            { 
+                for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
+                {
+                    musicFile->removeTag();
+                }
+            }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
+            adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(mainWindow->m_builder, "adw_headerBar")), progTrackerRemoving->gobj());
+            progTrackerRemoving->show();
+        }
+    })), this);
+    gtk_widget_show(removeDialog);
 }
 
 void MainWindow::filenameToTag()
 {
-
+    ComboBoxDialog* formatStringDialog{new ComboBoxDialog(gobj(), "Filename to Tag", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%title%" })};
+    std::pair<ComboBoxDialog*, MainWindow*>* pointers{new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this)};
+    g_signal_connect(formatStringDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer*))([](GtkWidget* widget, gpointer* data)
+    {
+        std::pair<ComboBoxDialog*, MainWindow*>* pointers{reinterpret_cast<std::pair<ComboBoxDialog*, MainWindow*>*>(data)};
+        std::string formatString{pointers->first->getSelectedChoice()};
+        delete pointers->first;
+        if(!formatString.empty())
+        {
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(pointers->second->m_builder, "gtk_btnRemoveTags")), false);
+            MainWindow* mainWindow{pointers->second};
+            ProgressTracker* progTrackingConverting{new ProgressTracker("Converting filenames to tags...", [mainWindow, formatString]() 
+            { 
+                for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
+                {
+                    musicFile->filenameToTag(formatString);
+                }
+            }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
+            adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(pointers->second->m_builder, "adw_headerBar")), progTrackingConverting->gobj());
+            progTrackingConverting->show();
+        }
+        delete pointers;
+    })), pointers);
+    formatStringDialog->show();
 }
 
 void MainWindow::tagToFilename()
 {
-
+    ComboBoxDialog* formatStringDialog{new ComboBoxDialog(gobj(), "Tag to Filename", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%title%" })};
+    std::pair<ComboBoxDialog*, MainWindow*>* pointers{new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this)};
+    g_signal_connect(formatStringDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer*))([](GtkWidget* widget, gpointer* data)
+    {
+        std::pair<ComboBoxDialog*, MainWindow*>* pointers{reinterpret_cast<std::pair<ComboBoxDialog*, MainWindow*>*>(data)};
+        std::string formatString{pointers->first->getSelectedChoice()};
+        delete pointers->first;
+        if(!formatString.empty())
+        {
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(pointers->second->m_builder, "gtk_btnRemoveTags")), false);
+            MainWindow* mainWindow{pointers->second};
+            ProgressTracker* progTrackingConverting{new ProgressTracker("Converting tags to filenames...", [mainWindow, formatString]() 
+            { 
+                for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
+                {
+                    musicFile->tagToFilename(formatString);
+                }
+            }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
+            adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(pointers->second->m_builder, "adw_headerBar")), progTrackingConverting->gobj());
+            progTrackingConverting->show();
+        }
+        delete pointers;
+    })), pointers);
+    formatStringDialog->show();
 }
 
 void MainWindow::update()
 {
     if(m_updater.getUpdateAvailable())
     {
-        GtkWidget* updateDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL),
+        GtkWidget* updateDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
             GTK_MESSAGE_INFO, GTK_BUTTONS_YES_NO, "Update Available")};
         gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(updateDialog), std::string("\n===V" + m_updater.getLatestVersion().toString() + " Changelog===\n" + m_updater.getChangelog() + "\n\nTagger can automatically download the update tar.gz file to your Downloads directory. Would you like to continue?").c_str());
         g_signal_connect(updateDialog, "response", G_CALLBACK((void (*)(GtkDialog*, gint, gpointer*))([](GtkDialog* dialog, gint response_id, gpointer* data)
@@ -193,7 +310,7 @@ void MainWindow::update()
             if(response_id == GTK_RESPONSE_YES)
             {
                 MainWindow* mainWindow{reinterpret_cast<MainWindow*>(data)};
-                ProgressTracker* proTrackerDownloading{new ProgressTracker("Downloading the update...", [&]() { mainWindow->m_updater.update(); }, [&]()
+                ProgressTracker* progTrackerDownloading{new ProgressTracker("Downloading the update...", [mainWindow]() { mainWindow->m_updater.update(); }, [mainWindow]()
                 {
                     if(mainWindow->m_updater.getUpdateSuccessful())
                     {
@@ -204,8 +321,8 @@ void MainWindow::update()
                         mainWindow->sendToast("Error: Unable to download the update.");
                     }
                 })};
-                adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(mainWindow->m_builder, "adw_headerBar")), proTrackerDownloading->gobj());
-                proTrackerDownloading->show();
+                adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(mainWindow->m_builder, "adw_headerBar")), progTrackerDownloading->gobj());
+                progTrackerDownloading->show();
             }
         })), this);
         gtk_widget_show(updateDialog);
@@ -258,9 +375,9 @@ void MainWindow::preferences()
 
 void MainWindow::changelog()
 {
-    GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL),
+    GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Initial Release");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Application rewrite in C++ with GTK4 and libadwaita");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
