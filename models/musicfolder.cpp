@@ -16,6 +16,12 @@ const std::filesystem::path& MusicFolder::getPath() const
     return m_path;
 }
 
+void MusicFolder::setPath(const std::filesystem::path& path)
+{
+    std::lock_guard<std::mutex> lock{m_mutex};
+    m_path = path;
+}
+
 bool MusicFolder::getIncludeSubfolders() const
 {
     std::lock_guard<std::mutex> lock{m_mutex};
@@ -64,7 +70,7 @@ void MusicFolder::reloadFiles()
         }
         std::sort(m_files.begin(), m_files.end(), [](const std::shared_ptr<MusicFile>& a, const std::shared_ptr<MusicFile>& b)
         {
-            return a.get() < b.get();
+            return *a < *b;
         });
     }
 }

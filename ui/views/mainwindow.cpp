@@ -1,8 +1,12 @@
 #include "mainwindow.h"
+#include <filesystem>
+#include <regex>
 #include "../controls/progressdialog.h"
 #include "../controls/progresstracker.h"
 #include "preferencesdialog.h"
+#include "../../helpers/mediahelpers.h"
 
+using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
 using namespace NickvisionTagger::UI;
 using namespace NickvisionTagger::UI::Controls;
@@ -13,10 +17,18 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
 {
     //==Signals==//
     g_signal_connect(m_gobj, "show", G_CALLBACK((void (*)(GtkWidget*, gpointer*))[](GtkWidget* widget, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onStartup(); }), this);
-    //==Open Folder==//
-    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnOpenFolder"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->openFolder(); }), this);
-    //==Close Folder==//
-    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnCloseFolder"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->closeFolder(); }), this);
+    //==Open Music Folder==//
+    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnOpenMusicFolder"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->openMusicFolder(); }), this);
+    //==Reload Music Folder==//
+    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnReloadMusicFolder"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->reloadMusicFolder(); }), this);
+    //==Save Tags==//
+    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnSaveTags"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->saveTags(); }), this);
+    //==Remove Tags==//
+    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->removeTags(); }), this);
+    //==Filename To Tag==//
+    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->filenameToTag(); }), this);
+    //==Tag To Filename==//
+    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->tagToFilename(); }), this);
     //==Help Actions==//
     //Check for Updates
     m_gio_actUpdate = g_simple_action_new("update", nullptr);
@@ -46,11 +58,12 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     GtkBuilder* builderMenu{gtk_builder_new_from_resource("/ui/views/menuhelp.xml")};
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(gtk_builder_get_object(m_builder, "gtk_btnMenuHelp")), G_MENU_MODEL(gtk_builder_get_object(builderMenu, "gio_menuHelp")));
     g_object_unref(builderMenu);
+    //==List Music Files==//
+    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_listMusicFiles"), "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer*))[](GtkListBox* listBox, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
 }
 
 MainWindow::~MainWindow()
 {
-    m_configuration.save();
     gtk_window_destroy(GTK_WINDOW(m_gobj));
 }
 
@@ -65,7 +78,13 @@ void MainWindow::onStartup()
     if(!m_opened)
     {
         //==Load Configuration==//
-        
+        m_musicFolder.setIncludeSubfolders(m_configuration.getIncludeSubfolders());
+        if(m_configuration.getRememberLastOpenedFolder() && std::filesystem::exists(m_configuration.getLastOpenedFolder()))
+        {
+            m_musicFolder.setPath(m_configuration.getLastOpenedFolder());
+            adw_window_title_set_subtitle(ADW_WINDOW_TITLE(gtk_builder_get_object(GTK_BUILDER(m_builder), "adw_title")), m_musicFolder.getPath().c_str());
+            reloadMusicFolder();
+        }
         //==Check for Updates==//
         ProgressTracker* progTrackerUpdate{new ProgressTracker("Checking for updates...", [&]() { m_updater.checkForUpdates(); }, [&]()
         {
@@ -80,9 +99,9 @@ void MainWindow::onStartup()
     }
 }
 
-void MainWindow::openFolder()
+void MainWindow::openMusicFolder()
 {
-    GtkWidget* openFolderDialog {gtk_file_chooser_dialog_new("Open Folder", GTK_WINDOW(gtk_widget_get_root(gobj())), 
+    GtkWidget* openFolderDialog {gtk_file_chooser_dialog_new("Open Music Folder", GTK_WINDOW(gtk_widget_get_root(gobj())), 
         GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER, "_Cancel", GTK_RESPONSE_CANCEL, "_Select", GTK_RESPONSE_ACCEPT, nullptr)};
     gtk_window_set_modal(GTK_WINDOW(openFolderDialog), true);
     g_signal_connect(openFolderDialog, "response", G_CALLBACK((void (*)(GtkDialog*, gint, gpointer*))([](GtkDialog* dialog, gint response_id, gpointer* data)
@@ -94,18 +113,71 @@ void MainWindow::openFolder()
             GFile* file{gtk_file_chooser_get_file(chooser)};
             std::string path{g_file_get_path(file)};
             g_object_unref(file);
+            mainWindow->m_musicFolder.setPath(path);
             adw_window_title_set_subtitle(ADW_WINDOW_TITLE(gtk_builder_get_object(GTK_BUILDER(mainWindow->m_builder), "adw_title")), path.c_str());
-            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(mainWindow->m_builder, "gtk_btnCloseFolder")), true);
+            if(mainWindow->m_configuration.getRememberLastOpenedFolder())
+            {
+                mainWindow->m_configuration.setLastOpenedFolder(mainWindow->m_musicFolder.getPath());
+                mainWindow->m_configuration.save();
+            }
+            mainWindow->reloadMusicFolder();
         }
         gtk_window_destroy(GTK_WINDOW(dialog));
     })), this);
     gtk_widget_show(openFolderDialog);
 }
 
-void MainWindow::closeFolder()
+void MainWindow::reloadMusicFolder()
 {
-    adw_window_title_set_subtitle(ADW_WINDOW_TITLE(gtk_builder_get_object(GTK_BUILDER(m_builder), "adw_title")), nullptr);
-    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnCloseFolder")), false);
+    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnOpenMusicFolder")), false);
+    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnReloadMusicFolder")), false);
+    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")), false);
+    gtk_list_box_unselect_all(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")));
+    for(GtkWidget* row : m_listMusicFilesRows)
+    {
+        gtk_list_box_remove(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")), row);
+    }
+    m_listMusicFilesRows.clear();
+    ProgressTracker* progTrackerReload{new ProgressTracker("Loading music files...", [&]() { m_musicFolder.reloadFiles(); }, [&]()
+    {
+        for(const std::shared_ptr<MusicFile>& musicFile : m_musicFolder.getFiles())
+        {
+            GtkWidget* row = adw_action_row_new();
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+            gtk_list_box_append(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")), row);
+            m_listMusicFilesRows.push_back(row);
+            g_main_context_iteration(g_main_context_default(), false);
+        }
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnOpenMusicFolder")), true);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnReloadMusicFolder")), true);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")), true);
+        if(m_musicFolder.getFiles().size() > 0)
+        {
+            sendToast("Loaded " + std::to_string(m_musicFolder.getFiles().size()) + " music files.");
+        }
+    })};
+    adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(m_builder, "adw_headerBar")), progTrackerReload->gobj());
+    progTrackerReload->show();
+}
+
+void MainWindow::saveTags()
+{
+
+}
+
+void MainWindow::removeTags()
+{
+
+}
+
+void MainWindow::filenameToTag()
+{
+
+}
+
+void MainWindow::tagToFilename()
+{
+
 }
 
 void MainWindow::update()
@@ -174,6 +246,11 @@ void MainWindow::preferences()
         {
            adw_style_manager_set_color_scheme(adw_style_manager_get_default(), ADW_COLOR_SCHEME_FORCE_DARK);
         }
+        if(pointers->second->m_configuration.getIncludeSubfolders() != pointers->second->m_musicFolder.getIncludeSubfolders())
+        {
+            pointers->second->m_musicFolder.setIncludeSubfolders(pointers->second->m_configuration.getIncludeSubfolders());
+            pointers->second->reloadMusicFolder();
+        }
         delete pointers;
     })), pointers);
     preferencesDialog->show();
@@ -200,4 +277,114 @@ void MainWindow::sendToast(const std::string& message)
 {
     AdwToast* toast{adw_toast_new(message.c_str())};
     adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(gtk_builder_get_object(m_builder, "adw_toastOverlay")), toast);
+}
+
+void MainWindow::onListMusicFilesSelectionChanged()
+{
+    //==Update Selected Music Files==//
+    m_selectedMusicFiles.clear();
+    GList* selectedRows = gtk_list_box_get_selected_rows(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")));
+    for(GList* list = selectedRows; list; list = list->next)
+    {
+        GtkListBoxRow* row = GTK_LIST_BOX_ROW(list->data);
+        m_selectedMusicFiles.push_back(m_musicFolder.getFiles()[gtk_list_box_row_get_index(row)]);
+    }
+    g_list_free(selectedRows);
+    //==Update UI==//
+    gtk_editable_set_editable(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFilename")), true);
+    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnSaveTags")), true);
+    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags")), true);
+    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag")), true);
+    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename")), true);
+    adw_flap_set_reveal_flap(ADW_FLAP(gtk_builder_get_object(m_builder, "adw_flap")), true);
+    //==No Files Selected==//
+    if(m_selectedMusicFiles.size() == 0)
+    {
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFilename")), "");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTitle")), "");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtArtist")), "");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbum")), "");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtYear")), "");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTrack")), "");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtGenre")), "");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment")), "");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), "");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFileSize")), "");
+        adw_flap_set_reveal_flap(ADW_FLAP(gtk_builder_get_object(m_builder, "adw_flap")), false);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnSaveTags")), false);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags")), false);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag")), false);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename")), false);
+    }
+    //==One File Selected==//
+    else if(m_selectedMusicFiles.size() == 1)
+    {
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFilename")), std::regex_replace(m_selectedMusicFiles[0]->getFilename(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTitle")), std::regex_replace(m_selectedMusicFiles[0]->getTitle(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtArtist")), std::regex_replace(m_selectedMusicFiles[0]->getArtist(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbum")), std::regex_replace(m_selectedMusicFiles[0]->getAlbum(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtYear")), std::to_string(m_selectedMusicFiles[0]->getYear()).c_str());
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTrack")), std::to_string(m_selectedMusicFiles[0]->getTrack()).c_str());
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtGenre")), std::regex_replace(m_selectedMusicFiles[0]->getGenre(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment")), std::regex_replace(m_selectedMusicFiles[0]->getComment(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), m_selectedMusicFiles[0]->getDurationAsString().c_str());
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFileSize")), m_selectedMusicFiles[0]->getFileSizeAsString().c_str());
+    }
+        //==Multiple Files Selected==//
+    else
+    {
+        bool haveSameTitle = true;
+        bool haveSameArtist = true;
+        bool haveSameAlbum = true;
+        bool haveSameYear = true;
+        bool haveSameTrack = true;
+        bool haveSameGenre = true;
+        bool haveSameComment = true;
+        int totalDuration = 0;
+        std::uintmax_t totalFileSize = 0;
+        for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+        {
+            if (m_selectedMusicFiles[0]->getTitle() != musicFile->getTitle())
+            {
+                haveSameTitle = false;
+            }
+            if (m_selectedMusicFiles[0]->getArtist() != musicFile->getArtist())
+            {
+                haveSameArtist = false;
+            }
+            if (m_selectedMusicFiles[0]->getAlbum() != musicFile->getAlbum())
+            {
+                haveSameAlbum = false;
+            }
+            if (m_selectedMusicFiles[0]->getYear() != musicFile->getYear())
+            {
+                haveSameYear = false;
+            }
+            if (m_selectedMusicFiles[0]->getTrack() != musicFile->getTrack())
+            {
+                haveSameTrack = false;
+            }
+            if (m_selectedMusicFiles[0]->getGenre() != musicFile->getGenre())
+            {
+                haveSameGenre = false;
+            }
+            if (m_selectedMusicFiles[0]->getComment() != musicFile->getComment())
+            {
+                haveSameComment = false;
+            }
+            totalDuration += musicFile->getDuration();
+            totalFileSize += musicFile->getFileSize();
+        }
+        gtk_editable_set_editable(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFilename")), false);
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFilename")), "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTitle")), haveSameTitle ? std::regex_replace(m_selectedMusicFiles[0]->getTitle(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtArtist")), haveSameArtist ? std::regex_replace(m_selectedMusicFiles[0]->getArtist(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbum")), haveSameAlbum ? std::regex_replace(m_selectedMusicFiles[0]->getAlbum(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtYear")), haveSameYear ? std::to_string(m_selectedMusicFiles[0]->getYear()).c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTrack")), haveSameTrack ? std::to_string(m_selectedMusicFiles[0]->getTrack()).c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtGenre")), haveSameGenre ? std::regex_replace(m_selectedMusicFiles[0]->getGenre(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment")), haveSameComment ? std::regex_replace(m_selectedMusicFiles[0]->getComment(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), MediaHelpers::durationToString(totalDuration).c_str());
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFileSize")), MediaHelpers::fileSizeToString(totalFileSize).c_str());
+    }
 }
