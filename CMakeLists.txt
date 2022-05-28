@@ -12,8 +12,8 @@ set(HELPERS helpers/curlhelpers.h helpers/curlhelpers.cpp helpers/mediahelpers.h
 set(UPDATE update/version.h update/version.cpp update/updateconfig.h update/updateconfig.cpp update/updater.h update/updater.cpp)
 set(MODELS models/configuration.h models/configuration.cpp models/mediafiletype.h models/mediafiletype.cpp models/musicfile.h models/musicfile.cpp models/musicfolder.h models/musicfolder.cpp)
 set(UI ui/application.h ui/application.cpp ui/widget.h ui/widget.cpp)
-set(XML ui/controls/progressdialog.xml ui/controls/progresstracker.xml ui/views/menuhelp.xml ui/views/mainwindow.xml ui/views/preferencesdialog.xml)
-set(CONTROLS ui/controls/progressdialog.h ui/controls/progressdialog.cpp ui/controls/progresstracker.h ui/controls/progresstracker.cpp)
+set(XML ui/controls/progressdialog.xml ui/controls/progresstracker.xml ui/controls/comboboxdialog.xml ui/views/menuhelp.xml ui/views/mainwindow.xml ui/views/preferencesdialog.xml)
+set(CONTROLS ui/controls/progressdialog.h ui/controls/progressdialog.cpp ui/controls/progresstracker.h ui/controls/progresstracker.cpp ui/controls/comboboxdialog.h ui/controls/comboboxdialog.cpp)
 set(VIEWS ui/views/mainwindow.h ui/views/mainwindow.cpp ui/views/preferencesdialog.h ui/views/preferencesdialog.cpp)
 
 #Create Exe
