@@ -5,7 +5,7 @@
 using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
 
-MusicFile::MusicFile(const std::filesystem::path& path, const MediaFileType& fileType) : m_path{path}, m_fileType{fileType}, m_file(std::make_shared<TagLib::FileRef>(m_path.c_str()))
+MusicFile::MusicFile(const std::filesystem::path& path, const MediaFileType& fileType) : m_path{path}, m_fileType{fileType}, m_file(std::make_shared<TagLib::FileRef>(m_path.c_str())), m_id(0)
 {
     if(!fileType.isAudio())
     {
@@ -17,6 +17,18 @@ const std::filesystem::path& MusicFile::getPath() const
 {
     std::lock_guard<std::mutex> lock{m_mutex};
     return m_path;
+}
+
+int MusicFile::getId() const
+{
+    std::lock_guard<std::mutex> lock{m_mutex};
+    return m_id;
+}
+
+void MusicFile::setId(int id)
+{
+    std::lock_guard<std::mutex> lock{m_mutex};
+    m_id = id;
 }
 
 std::string MusicFile::getFilename() const

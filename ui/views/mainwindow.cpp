@@ -145,6 +145,7 @@ void MainWindow::reloadMusicFolder()
         {
             GtkWidget* row = adw_action_row_new();
             adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+            adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(musicFile->getId()).c_str());
             gtk_list_box_append(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")), row);
             m_listMusicFilesRows.push_back(row);
             g_main_context_iteration(g_main_context_default(), false);

@@ -72,5 +72,9 @@ void MusicFolder::reloadFiles()
         {
             return *a < *b;
         });
+        for(size_t i = 0; i < m_files.size(); i++)
+        {
+            m_files[i]->setId(i + 1);
+        }
     }
 }

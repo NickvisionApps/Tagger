@@ -14,6 +14,8 @@ namespace NickvisionTagger::Models
     public:
         MusicFile(const std::filesystem::path& path, const MediaFileType& fileType);
         const std::filesystem::path& getPath() const;
+        int getId() const;
+        void setId(int id);
         std::string getFilename() const;
         void setFilename(const std::string& filename);
         std::string getTitle() const;
@@ -48,5 +50,6 @@ namespace NickvisionTagger::Models
         std::filesystem::path m_path;
         MediaFileType m_fileType;
         std::shared_ptr<TagLib::FileRef> m_file;
+        int m_id;
     };
 }
