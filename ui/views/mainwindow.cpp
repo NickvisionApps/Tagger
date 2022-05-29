@@ -5,6 +5,7 @@
 #include "../controls/progresstracker.h"
 #include "../controls/comboboxdialog.h"
 #include "preferencesdialog.h"
+#include "shortcutsdialog.h"
 #include "../../helpers/mediahelpers.h"
 
 using namespace NickvisionTagger::Helpers;
@@ -14,7 +15,7 @@ using namespace NickvisionTagger::UI::Controls;
 using namespace NickvisionTagger::UI::Views;
 using namespace NickvisionTagger::Update;
 
-MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwindow.xml", "adw_winMain"}, m_configuration{configuration}, m_updater{"https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.5.2" }}, m_opened{false}
+MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwindow.xml", "adw_winMain"}, m_configuration{configuration}, m_updater{"https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.5.3" }}, m_opened{false}
 {
     //==Signals==//
     g_signal_connect(m_gobj, "show", G_CALLBACK((void (*)(GtkWidget*, gpointer*))[](GtkWidget* widget, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onStartup(); }), this);
@@ -39,18 +40,14 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     m_gio_actUpdate = g_simple_action_new("update", nullptr);
     g_signal_connect(m_gio_actUpdate, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->update(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actUpdate));
-    //GitHub Repo
-    m_gio_actGitHubRepo = g_simple_action_new("gitHubRepo", nullptr);
-    g_signal_connect(m_gio_actGitHubRepo, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->gitHubRepo(); }), this);
-    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actGitHubRepo));
-    //Report a Bug
-    m_gio_actReportABug = g_simple_action_new("reportABug", nullptr);
-    g_signal_connect(m_gio_actReportABug, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->reportABug(); }), this);
-    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actReportABug));
-    //Settings
+    //Preferences
     m_gio_actPreferences = g_simple_action_new("preferences", nullptr);
     g_signal_connect(m_gio_actPreferences, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->preferences(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actPreferences));
+    //Keyboard Shortcuts
+    m_gio_actKeyboardShortcuts = g_simple_action_new("keyboardShortcuts", nullptr);
+    g_signal_connect(m_gio_actKeyboardShortcuts, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->keyboardShortcuts(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actKeyboardShortcuts));
     //Changelog
     m_gio_actChangelog = g_simple_action_new("changelog", nullptr);
     g_signal_connect(m_gio_actChangelog, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->changelog(); }), this);
@@ -63,6 +60,8 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     GtkBuilder* builderMenu{gtk_builder_new_from_resource("/ui/views/menuhelp.xml")};
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(gtk_builder_get_object(m_builder, "gtk_btnMenuHelp")), G_MENU_MODEL(gtk_builder_get_object(builderMenu, "gio_menuHelp")));
     g_object_unref(builderMenu);
+    //==No Files Page==//
+    adw_status_page_set_paintable(ADW_STATUS_PAGE(gtk_builder_get_object(m_builder, "adw_pageNoFiles")), gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/icon.svg"))));
 }
 
 MainWindow::~MainWindow()
@@ -86,7 +85,7 @@ void MainWindow::onStartup()
         {
             m_musicFolder.setPath(m_configuration.getLastOpenedFolder());
             adw_window_title_set_subtitle(ADW_WINDOW_TITLE(gtk_builder_get_object(GTK_BUILDER(m_builder), "adw_title")), m_musicFolder.getPath().c_str());
-            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnReloadMusicFolder")), true);
+            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnReloadMusicFolder")), true);
             reloadMusicFolder();
         }
         //==Check for Updates==//
@@ -119,7 +118,7 @@ void MainWindow::openMusicFolder()
             g_object_unref(file);
             mainWindow->m_musicFolder.setPath(path);
             adw_window_title_set_subtitle(ADW_WINDOW_TITLE(gtk_builder_get_object(GTK_BUILDER(mainWindow->m_builder), "adw_title")), path.c_str());
-            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(mainWindow->m_builder, "gtk_btnReloadMusicFolder")), true);
+            gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(mainWindow->m_builder, "gtk_btnReloadMusicFolder")), true);
             if(mainWindow->m_configuration.getRememberLastOpenedFolder())
             {
                 mainWindow->m_configuration.setLastOpenedFolder(mainWindow->m_musicFolder.getPath());
@@ -153,7 +152,12 @@ void MainWindow::reloadMusicFolder()
         }
         if(m_musicFolder.getFiles().size() > 0)
         {
+            adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "adw_viewStack")), "page_tagger");
             sendToast("Loaded " + std::to_string(m_musicFolder.getFiles().size()) + " music files.");
+        }
+        else
+        {
+            adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "adw_viewStack")), "page_noFiles");
         }
     })};
     progDialogReloading->show();
@@ -328,7 +332,7 @@ void MainWindow::update()
                 {
                     if(mainWindow->m_updater.getUpdateSuccessful())
                     {
-                        mainWindow->sendToast("Update downloaded successfully. Please visit your Downloads folder to upack and run the new update.");
+                        mainWindow->sendToast("Update downloaded successfully. Please visit your Downloads folder to unpack and run the new update.");
                     }
                     else
                     {
@@ -345,16 +349,6 @@ void MainWindow::update()
     {
         sendToast("There is no update at this time. Please try again later.");
     }
-}
-
-void MainWindow::gitHubRepo()
-{
-    g_app_info_launch_default_for_uri("https://github.com/nlogozzo/NickvisionTagger", nullptr, nullptr);
-}
-
-void MainWindow::reportABug()
-{
-    g_app_info_launch_default_for_uri("https://github.com/nlogozzo/NickvisionTagger/issues/new", nullptr, nullptr);
 }
 
 void MainWindow::preferences()
@@ -387,11 +381,22 @@ void MainWindow::preferences()
     preferencesDialog->show();
 }
 
+void MainWindow::keyboardShortcuts()
+{
+    ShortcutsDialog* shortcutsDialog{new ShortcutsDialog(m_gobj)};
+    g_signal_connect(shortcutsDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer*))([](GtkWidget* widget, gpointer* data)
+    {
+        ShortcutsDialog* dialog{reinterpret_cast<ShortcutsDialog*>(data)};
+        delete dialog;
+    })), shortcutsDialog);
+    shortcutsDialog->show();
+}
+
 void MainWindow::changelog()
 {
     GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Fixed an issue where Tagger was unable to download updates successfully, although saying otherwise.");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added keyboard shortcuts to application\n- Added an overlay status page to display when a directory contains no music files\n- Added application icon to about dialog\n- HeaderBar buttons will only be visible when needed, instead of being always visible and sensitive when needed.\n- Other minor UX improvements");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
@@ -399,9 +404,10 @@ void MainWindow::changelog()
 void MainWindow::about()
 {
     const char* authors[]{ "Nicholas Logozzo", nullptr };
-    gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.5.2", "comments", "An easy-to-use music tag (metadata) editor.",
-                          "copyright", "(C) Nickvision 2021-2022", "license-type", GTK_LICENSE_GPL_3_0, "website", "https://github.com/nlogozzo", "website-label", "GitHub",
-                          "authors", authors, nullptr);
+    const char* artists[]{ "Nicholas Logozzo", "daudix-UFO (Icons)", nullptr };
+    gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.5.3", "comments", "An easy-to-use music tag (metadata) editor.",
+                          "copyright", "(C) Nickvision 2021-2022", "license-type", GTK_LICENSE_GPL_3_0, "website", "https://github.com/nlogozzo/NickvisionTagger", "website-label", "GitHub",
+                          "authors", authors, "artists", artists, "logo", gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/icon.svg"))), nullptr);
 }
 
 void MainWindow::sendToast(const std::string& message)
@@ -423,11 +429,11 @@ void MainWindow::onListMusicFilesSelectionChanged()
     g_list_free(selectedRows);
     //==Update UI==//
     gtk_editable_set_editable(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFilename")), true);
-    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnSaveTags")), true);
-    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags")), true);
-    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag")), true);
-    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename")), true);
-    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnDownloadMetadataFromInternet")), true);
+    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnSaveTags")), true);
+    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags")), true);
+    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag")), true);
+    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename")), true);
+    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnDownloadMetadataFromInternet")), true);
     adw_flap_set_reveal_flap(ADW_FLAP(gtk_builder_get_object(m_builder, "adw_flap")), true);
     //==No Files Selected==//
     if(m_selectedMusicFiles.size() == 0)
@@ -443,11 +449,11 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), "");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFileSize")), "");
         adw_flap_set_reveal_flap(ADW_FLAP(gtk_builder_get_object(m_builder, "adw_flap")), false);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnSaveTags")), false);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags")), false);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag")), false);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename")), false);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnDownloadMetadataFromInternet")), false);
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnSaveTags")), false);
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags")), false);
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag")), false);
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename")), false);
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnDownloadMetadataFromInternet")), false);
     }
     //==One File Selected==//
     else if(m_selectedMusicFiles.size() == 1)

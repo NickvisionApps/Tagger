@@ -26,9 +26,8 @@ namespace NickvisionTagger::UI::Views
         std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
         //==Help Actions==//
         GSimpleAction* m_gio_actUpdate;
-        GSimpleAction* m_gio_actGitHubRepo;
-        GSimpleAction* m_gio_actReportABug;
         GSimpleAction* m_gio_actPreferences;
+        GSimpleAction* m_gio_actKeyboardShortcuts;
         GSimpleAction* m_gio_actChangelog;
         GSimpleAction* m_gio_actAbout;
         //==Signals==//
@@ -41,9 +40,8 @@ namespace NickvisionTagger::UI::Views
         void tagToFilename();
         void downloadMetadataFromInternet();
         void update();
-        void gitHubRepo();
-        void reportABug();
         void preferences();
+        void keyboardShortcuts();
         void changelog();
         void about();
         void onListMusicFilesSelectionChanged();

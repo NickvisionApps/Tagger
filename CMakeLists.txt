@@ -14,10 +14,10 @@ set(HELPERS helpers/curlhelpers.h helpers/curlhelpers.cpp helpers/mediahelpers.h
 set(UPDATE update/version.h update/version.cpp update/updateconfig.h update/updateconfig.cpp update/updater.h update/updater.cpp)
 set(MODELS models/configuration.h models/configuration.cpp models/mediafiletype.h models/mediafiletype.cpp models/musicfile.h models/musicfile.cpp models/musicfolder.h models/musicfolder.cpp)
 set(UI ui/application.h ui/application.cpp ui/widget.h ui/widget.cpp)
-set(XML ui/controls/progressdialog.xml ui/controls/progresstracker.xml ui/controls/comboboxdialog.xml ui/views/menuhelp.xml ui/views/mainwindow.xml ui/views/preferencesdialog.xml)
+set(XML ui/controls/progressdialog.xml ui/controls/progresstracker.xml ui/controls/comboboxdialog.xml ui/views/menuhelp.xml ui/views/mainwindow.xml ui/views/preferencesdialog.xml ui/views/shortcutsdialog.xml)
 set(RESOURCES resources/icon.png resources/icon.svg resources/icon-symbolic.png resources/icon-symbolic.svg)
 set(CONTROLS ui/controls/progressdialog.h ui/controls/progressdialog.cpp ui/controls/progresstracker.h ui/controls/progresstracker.cpp ui/controls/comboboxdialog.h ui/controls/comboboxdialog.cpp)
-set(VIEWS ui/views/mainwindow.h ui/views/mainwindow.cpp ui/views/preferencesdialog.h ui/views/preferencesdialog.cpp)
+set(VIEWS ui/views/mainwindow.h ui/views/mainwindow.cpp ui/views/preferencesdialog.h ui/views/preferencesdialog.cpp ui/views/shortcutsdialog.h ui/views/shortcutsdialog.cpp)
 
 #Create Exe
 add_executable(NickvisionTagger main.cpp ${HELPERS} ${UPDATE} ${MODELS} ${UI} ${XML} ${RESOURCES} ${CONTROLS} ${VIEWS})
@@ -42,5 +42,5 @@ target_link_libraries(NickvisionTagger PRIVATE PkgConfig::MUSICBRAINZ)
 #Generate GResources
 list(APPEND CMAKE_MODULE_PATH /home/nlogozzo/Documents/Programming/GCR_CMake/macros)
 include(GlibCompileResourcesSupport)
-compile_gresources(RESOURCE_FILE XML_OUT TYPE BUNDLE RESOURCES ${XML} COMPRESS_ALL)
+compile_gresources(RESOURCE_FILE XML_OUT TYPE BUNDLE RESOURCES ${XML} ${RESOURCES} COMPRESS_ALL)
 add_custom_target(resource ALL DEPENDS ${RESOURCE_FILE})
