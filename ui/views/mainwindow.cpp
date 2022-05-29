@@ -78,7 +78,7 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(gtk_builder_get_object(m_builder, "gtk_btnMenuHelp")), G_MENU_MODEL(gtk_builder_get_object(builderMenuHelp, "gio_menuHelp")));
     g_object_unref(builderMenuHelp);
     //==No Files Page==//
-    adw_status_page_set_paintable(ADW_STATUS_PAGE(gtk_builder_get_object(m_builder, "adw_pageNoFiles")), gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/icon.svg"))));
+    adw_status_page_set_paintable(ADW_STATUS_PAGE(gtk_builder_get_object(m_builder, "adw_pageNoFiles")), gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/com.nickvision.tagger.svg"))));
     //==List Music Files==//
     g_signal_connect(gtk_builder_get_object(m_builder, "gtk_listMusicFiles"), "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer*))[](GtkListBox* listBox, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
 }

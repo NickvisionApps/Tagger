@@ -1,6 +1,7 @@
 # Nickvision Tagger
-![icon](https://user-images.githubusercontent.com/17648453/170840456-58ae059f-10e3-44b2-aca7-f2be5d488ecf.svg)
-An easy-to-use music tag (metadata) editor
+![icon](https://user-images.githubusercontent.com/77155297/170881295-9c429afa-a254-4ec1-adb0-b2535bb9bd08.svg)
+
+**An easy-to-use music tag (metadata) editor**
 
 # Features
 - Edit tags of multiple files at once
