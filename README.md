@@ -10,12 +10,14 @@ An easy-to-use music tag (metadata) editor
 - Easily download tag data from the internet with the click of a button (powered by libmusicbrainz5)
 
 # Screenshots
-![MainWindow](https://user-images.githubusercontent.com/17648453/170810802-03d6fd19-3df1-4a4b-9710-791857eb58d0.png)
-![SingleEdit](https://user-images.githubusercontent.com/17648453/170810806-bcf1be93-6423-4df5-9460-72cd04743d57.png)
-![MultiEdit](https://user-images.githubusercontent.com/17648453/170810808-9b804478-fe51-4364-b744-aeb4a017a37c.png)
+![MainWindow](https://user-images.githubusercontent.com/17648453/170878307-6d26200e-27ad-4a5e-8711-1fad44c0b850.png)
+![MusicFolder](https://user-images.githubusercontent.com/17648453/170878314-ccceb274-88ae-41ab-b3b3-34eb2c291d75.png)
+![SelectedFile](https://user-images.githubusercontent.com/17648453/170878322-6cac6fc7-8ed1-4cc7-9db5-aa0602ea54bd.png)
+![MultipleSelection](https://user-images.githubusercontent.com/17648453/170878326-a979d637-62ad-4057-9e25-65a82856cdfa.png)
 ![FilenameToTagConversion](https://user-images.githubusercontent.com/17648453/170810816-406b65fd-7f37-4d11-b821-8e7a82ab9029.png)
+![LightTheme](https://user-images.githubusercontent.com/17648453/170878332-1612137d-266b-4036-a178-b681c9825efd.png)
 ![Settings](https://user-images.githubusercontent.com/17648453/170810823-6fe3baf0-2826-4ecf-8d30-c75a715095aa.png)
-![LightMode](https://user-images.githubusercontent.com/17648453/170810825-b3fd1979-4e8f-4940-ace7-45943c1e80c2.png)
+![KeyboardShortcuts](https://user-images.githubusercontent.com/17648453/170878181-85b28a8a-dc00-4302-89b7-7e2749b143a9.png)
 
 # Dependencies
 - [c++20](https://en.cppreference.com/w/cpp/20) [Only for building the app]
