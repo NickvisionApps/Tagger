@@ -78,7 +78,7 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(gtk_builder_get_object(m_builder, "gtk_btnMenuHelp")), G_MENU_MODEL(gtk_builder_get_object(builderMenuHelp, "gio_menuHelp")));
     g_object_unref(builderMenuHelp);
     //==No Files Page==//
-    adw_status_page_set_paintable(ADW_STATUS_PAGE(gtk_builder_get_object(m_builder, "adw_pageNoFiles")), gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/com.nickvision.tagger.svg"))));
+    adw_status_page_set_paintable(ADW_STATUS_PAGE(gtk_builder_get_object(m_builder, "adw_pageNoFiles")), gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/org.nickvision.tagger.svg"))));
     //==List Music Files==//
     g_signal_connect(gtk_builder_get_object(m_builder, "gtk_listMusicFiles"), "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer*))[](GtkListBox* listBox, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
 }
@@ -443,7 +443,7 @@ void MainWindow::about()
 {
     gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.5.3", "comments", "An easy-to-use music tag (metadata) editor.",
                           "copyright", "(C) Nickvision 2021-2022", "license-type", GTK_LICENSE_GPL_3_0, "website", "https://github.com/nlogozzo/NickvisionTagger", "website-label", "GitHub",
-                          "authors", new const char*[2]{ "Nicholas Logozzo", nullptr }, "artists", new const char*[3]{ "Nicholas Logozzo", "daudix-UFO (Icons)", nullptr }, "logo", gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/icon.svg"))), nullptr);
+                          "authors", new const char*[2]{ "Nicholas Logozzo", nullptr }, "artists", new const char*[3]{ "Nicholas Logozzo", "daudix-UFO (Icons)", nullptr }, "logo", gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/org.nickvision.tagger.svg"))), nullptr);
 }
 
 void MainWindow::sendToast(const std::string& message)
