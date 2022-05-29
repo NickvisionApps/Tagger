@@ -9,18 +9,12 @@
         </section>
         <section>
             <item>
-                <attribute name="label" translatable="yes">GitHub Repo</attribute>
-                <attribute name="action">win.gitHubRepo</attribute>
-            </item>
-            <item>
-                <attribute name="label" translatable="yes">Report a Bug</attribute>
-                <attribute name="action">win.reportABug</attribute>
-            </item>
-        </section>
-        <section>
-            <item>
                 <attribute name="label" translatable="yes">Preferences</attribute>
                 <attribute name="action">win.preferences</attribute>
+            </item>
+            <item>
+                <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
+                <attribute name="action">win.keyboardShortcuts</attribute>
             </item>
             <item>
                 <attribute name="label" translatable="yes">Changelog</attribute>

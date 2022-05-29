@@ -24,11 +24,18 @@ namespace NickvisionTagger::UI::Views
         NickvisionTagger::Models::MusicFolder m_musicFolder;
         std::vector<GtkWidget*> m_listMusicFilesRows;
         std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
+        //==Tagger Actions==//
+        GSimpleAction* m_gio_actOpenMusicFolder;
+        GSimpleAction* m_gio_actReloadMusicFolder;
+        GSimpleAction* m_gio_actSaveTags;
+        GSimpleAction* m_gio_actRemoveTags;
+        GSimpleAction* m_gio_actFilenameToTag;
+        GSimpleAction* m_gio_actTagToFilename;
+        GSimpleAction* m_gio_actDownloadMetadata;
         //==Help Actions==//
         GSimpleAction* m_gio_actUpdate;
-        GSimpleAction* m_gio_actGitHubRepo;
-        GSimpleAction* m_gio_actReportABug;
         GSimpleAction* m_gio_actPreferences;
+        GSimpleAction* m_gio_actKeyboardShortcuts;
         GSimpleAction* m_gio_actChangelog;
         GSimpleAction* m_gio_actAbout;
         //==Signals==//
@@ -39,11 +46,10 @@ namespace NickvisionTagger::UI::Views
         void removeTags();
         void filenameToTag();
         void tagToFilename();
-        void downloadMetadataFromInternet();
+        void downloadMetadata();
         void update();
-        void gitHubRepo();
-        void reportABug();
         void preferences();
+        void keyboardShortcuts();
         void changelog();
         void about();
         void onListMusicFilesSelectionChanged();

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <menu id="gio_menuTagActions">
+        <section>
+            <item>
+                <attribute name="label" translatable="yes">Remove Tags</attribute>
+                <attribute name="action">win.removeTags</attribute>
+            </item>
+        </section>
+        <section>
+            <item>
+                <attribute name="label" translatable="yes">Convert Filename To Tag</attribute>
+                <attribute name="action">win.filenameToTag</attribute>
+            </item>
+            <item>
+                <attribute name="label" translatable="yes">Convert Tag To Filename</attribute>
+                <attribute name="action">win.tagToFilename</attribute>
+            </item>
+        </section>
+        <section>
+            <item>
+                <attribute name="label" translatable="yes">Download Metadata From Internet</attribute>
+                <attribute name="action">win.downloadMetadata</attribute>
+            </item>
+        </section>
+    </menu>
+</interface>
