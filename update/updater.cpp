@@ -65,43 +65,6 @@ bool Updater::update()
         std::filesystem::create_directories(downloadsDir);
     }
     std::string tarGzPath{downloadsDir + "/NickvisionTagger.tar.gz"};
-    if(!CurlHelpers::downloadFile(m_updateConfig->getLinkToTarGz(), tarGzPath))
-    {
-        m_updateSuccessful = false;
-        return m_updateSuccessful;
-    }
-    if(!validateUpdate(tarGzPath))
-    {
-        m_updateSuccessful = false;
-    }
-    m_updateSuccessful = true;
+    m_updateSuccessful = CurlHelpers::downloadFile(m_updateConfig->getLinkToTarGz(), tarGzPath);
     return m_updateSuccessful;
-}
-
-bool Updater::validateUpdate(const std::string& pathToUpdate)
-{
-    std::string copyUpdatePath{std::string(getpwuid(getuid())->pw_dir) + "/.config/Nickvision/NickvisionTagger/update.tar.gz"};
-    std::filesystem::copy(pathToUpdate, copyUpdatePath, std::filesystem::copy_options::overwrite_existing);
-    std::string cmdUnzip{"tar --overwrite -zxf " + copyUpdatePath};
-    std::string cmdOutput{""};
-    std::array<char, 128> buffer;
-    FILE* pipe{popen(cmdUnzip.c_str(), "r")};
-    if(!pipe)
-    {
-        return false;
-    }
-    while (!feof(pipe))
-    {
-        if (fgets(buffer.data(), 128, pipe) != nullptr)
-        {
-            cmdOutput += buffer.data();
-        }
-    }
-    int resultCode = pclose(pipe);
-    if(resultCode != EXIT_SUCCESS)
-    {
-        std::filesystem::remove(pathToUpdate);
-        return false;
-    }
-    return true;
 }

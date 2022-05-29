@@ -26,6 +26,5 @@ namespace NickvisionTagger::Update
         std::optional<UpdateConfig> m_updateConfig;
         bool m_updateAvailable;
         bool m_updateSuccessful;
-        bool validateUpdate(const std::string& pathToUpdate);
     };
 }
