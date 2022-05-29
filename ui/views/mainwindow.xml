@@ -118,7 +118,7 @@
                         </child>
                         <child type="start">
                             <object class="GtkButton" id="gtk_btnTagToFilename">
-                                <property name="icon-name">edit-tag-symbolic</property>
+                                <property name="icon-name">audio-card-symbolic</property>
                                 <property name="tooltip-text" translatable="yes">Tag to Filename (Ctrl+Shift+T)</property>
                                 <property name="visible">false</property>
                                 <child>
@@ -144,6 +144,7 @@
                         <child type="end">
                             <object class="GtkMenuButton" id="gtk_btnMenuHelp">
                                 <property name="direction">none</property>
+                                <property name="tooltip-text">Main Menu</property>
                             </object>
                         </child>
                         <child type="end">
