@@ -434,7 +434,7 @@ void MainWindow::changelog()
 {
     GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added keyboard shortcuts to application\n- Added an overlay status page to display when a directory contains no music files\n- Added application icon to about dialog\n- HeaderBar buttons will only be visible when needed, instead of being always visible and sensitive when needed.\n- Other minor UX improvements");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Redesigned HeaderBar with an improved UX\n- Added keyboard shortcuts to application\n- Added an overlay status page to display when a directory contains no music files\n- Added application icon to about dialog\n- Other minor UX improvements");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
