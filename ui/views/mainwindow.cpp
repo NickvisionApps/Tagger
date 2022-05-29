@@ -19,22 +19,35 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
 {
     //==Signals==//
     g_signal_connect(m_gobj, "show", G_CALLBACK((void (*)(GtkWidget*, gpointer*))[](GtkWidget* widget, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onStartup(); }), this);
-    //==Open Music Folder==//
-    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnOpenMusicFolder"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->openMusicFolder(); }), this);
-    //==Reload Music Folder==//
-    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnReloadMusicFolder"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->reloadMusicFolder(); }), this);
-    //==Save Tags==//
-    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnSaveTags"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->saveTags(); }), this);
-    //==Remove Tags==//
-    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->removeTags(); }), this);
-    //==Filename To Tag==//
-    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->filenameToTag(); }), this);
-    //==Tag To Filename==//
-    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->tagToFilename(); }), this);
-    //==Download Tag From Internet==//
-    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnDownloadMetadataFromInternet"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->downloadMetadataFromInternet(); }), this);
-    //==List Music Files==//
-    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_listMusicFiles"), "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer*))[](GtkListBox* listBox, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
+    //==Tagger Actions==//
+    //Open Music Folder
+    m_gio_actOpenMusicFolder = g_simple_action_new("openMusicFolder", nullptr);
+    g_signal_connect(m_gio_actOpenMusicFolder, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->openMusicFolder(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actOpenMusicFolder));
+    //Reload Music Folder
+    m_gio_actReloadMusicFolder = g_simple_action_new("reloadMusicFolder", nullptr);
+    g_signal_connect(m_gio_actReloadMusicFolder, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->reloadMusicFolder(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actReloadMusicFolder));
+    //Save Tags
+    m_gio_actSaveTags = g_simple_action_new("saveTags", nullptr);
+    g_signal_connect(m_gio_actSaveTags, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->saveTags(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actSaveTags));
+    //Remove Tags
+    m_gio_actRemoveTags = g_simple_action_new("removeTags", nullptr);
+    g_signal_connect(m_gio_actRemoveTags, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->removeTags(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actRemoveTags));
+    //Filename To Tag
+    m_gio_actFilenameToTag = g_simple_action_new("filenameToTag", nullptr);
+    g_signal_connect(m_gio_actFilenameToTag, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->filenameToTag(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actFilenameToTag));
+    //Tag To Filename
+    m_gio_actTagToFilename = g_simple_action_new("tagToFilename", nullptr);
+    g_signal_connect(m_gio_actTagToFilename, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->tagToFilename(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actTagToFilename));
+    //Download Metadata
+    m_gio_actDownloadMetadata = g_simple_action_new("downloadMetadata", nullptr);
+    g_signal_connect(m_gio_actDownloadMetadata, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->downloadMetadata(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actDownloadMetadata));
     //==Help Actions==//
     //Check for Updates
     m_gio_actUpdate = g_simple_action_new("update", nullptr);
@@ -56,12 +69,18 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     m_gio_actAbout = g_simple_action_new("about", nullptr);
     g_signal_connect(m_gio_actAbout, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->about(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actAbout));
+    //==Tag Actions Menu Button==//
+    GtkBuilder* builderMenuTagActions{gtk_builder_new_from_resource("/ui/views/menutagactions.xml")};
+    gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(gtk_builder_get_object(m_builder, "gtk_btnMenuTagActions")), G_MENU_MODEL(gtk_builder_get_object(builderMenuTagActions, "gio_menuTagActions")));
+    g_object_unref(builderMenuTagActions);
     //==Help Menu Button==//
-    GtkBuilder* builderMenu{gtk_builder_new_from_resource("/ui/views/menuhelp.xml")};
-    gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(gtk_builder_get_object(m_builder, "gtk_btnMenuHelp")), G_MENU_MODEL(gtk_builder_get_object(builderMenu, "gio_menuHelp")));
-    g_object_unref(builderMenu);
+    GtkBuilder* builderMenuHelp{gtk_builder_new_from_resource("/ui/views/menuhelp.xml")};
+    gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(gtk_builder_get_object(m_builder, "gtk_btnMenuHelp")), G_MENU_MODEL(gtk_builder_get_object(builderMenuHelp, "gio_menuHelp")));
+    g_object_unref(builderMenuHelp);
     //==No Files Page==//
     adw_status_page_set_paintable(ADW_STATUS_PAGE(gtk_builder_get_object(m_builder, "adw_pageNoFiles")), gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/icon.svg"))));
+    //==List Music Files==//
+    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_listMusicFiles"), "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer*))[](GtkListBox* listBox, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
 }
 
 MainWindow::~MainWindow()
@@ -79,6 +98,23 @@ void MainWindow::onStartup()
 {
     if(!m_opened)
     {
+        //==Set Action Shortcuts==//
+        //Open Music Folder
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.openMusicFolder", new const char*[2]{ "<Ctrl>o", nullptr });
+        //Reload Music Folder
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.reloadMusicFolder", new const char*[2]{ "F5", nullptr });
+        //Save Tags
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.saveTags", new const char*[2]{ "<Ctrl>s", nullptr });
+        //Remove Tags
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.removeTags", new const char*[2]{ "Delete", nullptr });
+        //Filename To Tag
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.filenameToTag", new const char*[2]{ "<Ctrl><Shift>f", nullptr });
+        //Tag To Filename
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.tagToFilename", new const char*[2]{ "<Ctrl><Shift>t", nullptr });
+        //Download Metadata
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.downloadMetadata", new const char*[2]{ "<Ctrl><Shift>m", nullptr });
+        //About
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.about", new const char*[2]{ "F1", nullptr });
         //==Load Configuration==//
         m_musicFolder.setIncludeSubfolders(m_configuration.getIncludeSubfolders());
         if(m_configuration.getRememberLastOpenedFolder() && std::filesystem::exists(m_configuration.getLastOpenedFolder()))
@@ -293,7 +329,7 @@ void MainWindow::tagToFilename()
     formatStringDialog->show();
 }
 
-void MainWindow::downloadMetadataFromInternet()
+void MainWindow::downloadMetadata()
 {
     GtkWidget* downloadDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_YES_NO, "Required Information")};
@@ -405,11 +441,9 @@ void MainWindow::changelog()
 
 void MainWindow::about()
 {
-    const char* authors[]{ "Nicholas Logozzo", nullptr };
-    const char* artists[]{ "Nicholas Logozzo", "daudix-UFO (Icons)", nullptr };
     gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.5.3", "comments", "An easy-to-use music tag (metadata) editor.",
                           "copyright", "(C) Nickvision 2021-2022", "license-type", GTK_LICENSE_GPL_3_0, "website", "https://github.com/nlogozzo/NickvisionTagger", "website-label", "GitHub",
-                          "authors", authors, "artists", artists, "logo", gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/icon.svg"))), nullptr);
+                          "authors", new const char*[2]{ "Nicholas Logozzo", nullptr }, "artists", new const char*[3]{ "Nicholas Logozzo", "daudix-UFO (Icons)", nullptr }, "logo", gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/icon.svg"))), nullptr);
 }
 
 void MainWindow::sendToast(const std::string& message)
@@ -432,10 +466,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
     //==Update UI==//
     gtk_editable_set_editable(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFilename")), true);
     gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnSaveTags")), true);
-    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags")), true);
-    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag")), true);
-    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename")), true);
-    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnDownloadMetadataFromInternet")), true);
+    gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnMenuTagActions")), true);
     adw_flap_set_reveal_flap(ADW_FLAP(gtk_builder_get_object(m_builder, "adw_flap")), true);
     //==No Files Selected==//
     if(m_selectedMusicFiles.size() == 0)
@@ -452,10 +483,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFileSize")), "");
         adw_flap_set_reveal_flap(ADW_FLAP(gtk_builder_get_object(m_builder, "adw_flap")), false);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnSaveTags")), false);
-        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags")), false);
-        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag")), false);
-        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename")), false);
-        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnDownloadMetadataFromInternet")), false);
+        gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnMenuTagActions")), false);
     }
     //==One File Selected==//
     else if(m_selectedMusicFiles.size() == 1)

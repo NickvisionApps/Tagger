@@ -60,6 +60,17 @@
                         </child>
                     </object>
                 </child>
+                <child>
+                    <object class="GtkShortcutsGroup">
+                        <property name="title">Application</property>
+                        <child>
+                            <object class="GtkShortcutsShortcut">
+                                <property name="title">About</property>
+                                <property name="accelerator">F1</property>
+                            </object>
+                        </child>
+                    </object>
+                </child>
             </object>
         </child>
     </object>

@@ -15,130 +15,20 @@
                         </property>
                         <child type="start">
                             <object class="GtkButton" id="gtk_btnOpenMusicFolder">
-                                <property name="icon-name">folder-open-symbolic</property>
+                                <style>
+                                    <class name="flat"></class>
+                                </style>
+                                <property name="action-name">win.openMusicFolder</property>
+                                <property name="label" translatable="yes">Open</property>
                                 <property name="tooltip-text" translatable="yes">Open Music Folder (Ctrl+O)</property>
-                                <child>
-                                    <object class="GtkShortcutController">
-                                        <property name='scope'>managed</property>
-                                        <child>
-                                            <object class="GtkShortcut">
-                                                <property name='trigger'>&lt;Control&gt;o</property>
-                                                <property name='action'>activate</property>
-                                            </object>
-                                        </child>
-                                    </object>
-                                </child>
                             </object>
                         </child>
                         <child type="start">
                             <object class="GtkButton" id="gtk_btnReloadMusicFolder">
+                                <property name="action-name">win.reloadMusicFolder</property>
                                 <property name="icon-name">view-refresh-symbolic</property>
                                 <property name="tooltip-text" translatable="yes">Reload Music Folder (F5)</property>
                                 <property name="visible">false</property>
-                                <child>
-                                    <object class="GtkShortcutController">
-                                        <property name='scope'>managed</property>
-                                        <child>
-                                            <object class="GtkShortcut">
-                                                <property name='trigger'>F5</property>
-                                                <property name='action'>activate</property>
-                                            </object>
-                                        </child>
-                                    </object>
-                                </child>
-                            </object>
-                        </child>
-                        <child type="start">
-                            <object class="GtkSeparator">
-                                <style>
-                                    <class name="spacer"></class>
-                                </style>
-                            </object>
-                        </child>
-                        <child type="start">
-                            <object class="GtkButton" id="gtk_btnSaveTags">
-                                <property name="icon-name">document-save-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Save Tags (Ctrl+S)</property>
-                                <property name="visible">false</property>
-                                <child>
-                                    <object class="GtkShortcutController">
-                                        <property name='scope'>managed</property>
-                                        <child>
-                                            <object class="GtkShortcut">
-                                                <property name='trigger'>&lt;Control&gt;s</property>
-                                                <property name='action'>activate</property>
-                                            </object>
-                                        </child>
-                                    </object>
-                                </child>
-                            </object>
-                        </child>
-                        <child type="start">
-                            <object class="GtkButton" id="gtk_btnRemoveTags">
-                                <property name="icon-name">edit-delete-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Remove Tags (Delete)</property>
-                                <property name="visible">false</property>
-                                <child>
-                                    <object class="GtkShortcutController">
-                                        <property name='scope'>managed</property>
-                                        <child>
-                                            <object class="GtkShortcut">
-                                                <property name='trigger'>Delete</property>
-                                                <property name='action'>activate</property>
-                                            </object>
-                                        </child>
-                                    </object>
-                                </child>
-                            </object>
-                        </child>
-                        <child type="start">
-                            <object class="GtkSeparator">
-                                <style>
-                                    <class name="spacer"></class>
-                                </style>
-                            </object>
-                        </child>
-                        <child type="start">
-                            <object class="GtkButton" id="gtk_btnFilenameToTag">
-                                <property name="icon-name">document-properties-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Filename to Tag (Ctrl+Shift+F)</property>
-                                <property name="visible">false</property>
-                                <child>
-                                    <object class="GtkShortcutController">
-                                        <property name='scope'>managed</property>
-                                        <child>
-                                            <object class="GtkShortcut">
-                                                <property name='trigger'>&lt;Control&gt;&lt;Shift&gt;f</property>
-                                                <property name='action'>activate</property>
-                                            </object>
-                                        </child>
-                                    </object>
-                                </child>
-                            </object>
-                        </child>
-                        <child type="start">
-                            <object class="GtkButton" id="gtk_btnTagToFilename">
-                                <property name="icon-name">audio-card-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Tag to Filename (Ctrl+Shift+T)</property>
-                                <property name="visible">false</property>
-                                <child>
-                                    <object class="GtkShortcutController">
-                                        <property name='scope'>managed</property>
-                                        <child>
-                                            <object class="GtkShortcut">
-                                                <property name='trigger'>&lt;Control&gt;&lt;Shift&gt;t</property>
-                                                <property name='action'>activate</property>
-                                            </object>
-                                        </child>
-                                    </object>
-                                </child>
-                            </object>
-                        </child>
-                        <child type="start">
-                            <object class="GtkSeparator">
-                                <style>
-                                    <class name="spacer"></class>
-                                </style>
                             </object>
                         </child>
                         <child type="end">
@@ -148,21 +38,29 @@
                             </object>
                         </child>
                         <child type="end">
-                            <object class="GtkButton" id="gtk_btnDownloadMetadataFromInternet">
-                                <property name="icon-name">globe-symbolic</property>
-                                <property name="tooltip-text" translatable="yes">Download Metadata From Internet (Control+Shift+M)</property>
+                            <object class="GtkSeparator">
+                                <style>
+                                    <class name="spacer"></class>
+                                </style>
+                            </object>
+                        </child>
+                        <child type="end">
+                            <object class="GtkButton" id="gtk_btnSaveTags">
+                                <style>
+                                    <class name="suggested-action"></class>
+                                </style>
+                                <property name="action-name">win.saveTags</property>
+                                <property name="label" translatable="yes">Apply</property>
+                                <property name="tooltip-text" translatable="yes">Save Tags (Ctrl+S)</property>
                                 <property name="visible">false</property>
-                                <child>
-                                    <object class="GtkShortcutController">
-                                        <property name='scope'>managed</property>
-                                        <child>
-                                            <object class="GtkShortcut">
-                                                <property name='trigger'>&lt;Control&gt;&lt;Shift&gt;m</property>
-                                                <property name='action'>activate</property>
-                                            </object>
-                                        </child>
-                                    </object>
-                                </child>
+                            </object>
+                        </child>
+                        <child type="end">
+                            <object class="GtkMenuButton" id="gtk_btnMenuTagActions">
+                                <property name="direction">none</property>
+                                <property name="icon-name">document-properties-symbolic</property>
+                                <property name="tooltip-text">Tag Actions</property>
+                                <property name="visible">false</property>
                             </object>
                         </child>
                     </object>
