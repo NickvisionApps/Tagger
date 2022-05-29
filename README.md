@@ -28,4 +28,4 @@ An easy-to-use music tag (metadata) editor
 - [libmusicbrainz5](https://musicbrainz.org/doc/libmusicbrainz)
 
 # Special Thanks
-- @daudix-UFO for our application icon
+- [daudix-UFO](https://github.com/daudix-UFO) for our application icon
