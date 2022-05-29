@@ -15,7 +15,7 @@ set(UPDATE update/version.h update/version.cpp update/updateconfig.h update/upda
 set(MODELS models/configuration.h models/configuration.cpp models/mediafiletype.h models/mediafiletype.cpp models/musicfile.h models/musicfile.cpp models/musicfolder.h models/musicfolder.cpp)
 set(UI ui/application.h ui/application.cpp ui/widget.h ui/widget.cpp)
 set(XML ui/controls/progressdialog.xml ui/controls/progresstracker.xml ui/controls/comboboxdialog.xml ui/views/menuhelp.xml ui/views/menutagactions.xml ui/views/mainwindow.xml ui/views/preferencesdialog.xml ui/views/shortcutsdialog.xml)
-set(RESOURCES resources/icon.svg resources/com.nickvision.tagger.svg)
+set(RESOURCES resources/com.nickvision.tagger.svg resources/com.nickvision.tagger-symbolic.svg )
 set(CONTROLS ui/controls/progressdialog.h ui/controls/progressdialog.cpp ui/controls/progresstracker.h ui/controls/progresstracker.cpp ui/controls/comboboxdialog.h ui/controls/comboboxdialog.cpp)
 set(VIEWS ui/views/mainwindow.h ui/views/mainwindow.cpp ui/views/preferencesdialog.h ui/views/preferencesdialog.cpp ui/views/shortcutsdialog.h ui/views/shortcutsdialog.cpp)
 
