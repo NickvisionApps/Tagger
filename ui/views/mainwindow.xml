@@ -189,10 +189,6 @@
                                         <property name="name">page_tagger</property>
                                         <property name="child">
                                             <object class="AdwFlap" id="adw_flap">
-                                                <property name="margin-start">10</property>
-                                                <property name="margin-top">10</property>
-                                                <property name="margin-end">10</property>
-                                                <property name="margin-bottom">10</property>
                                                 <property name="flap-position">end</property>
                                                 <property name="fold-policy">never</property>
                                                 <property name="reveal-flap">false</property>
@@ -200,6 +196,10 @@
                                                     <object class="GtkScrolledWindow">
                                                         <child>
                                                             <object class="GtkListBox" id="gtk_listMusicFiles">
+                                                                <property name="margin-start">10</property>
+                                                                <property name="margin-top">10</property>
+                                                                <property name="margin-end">10</property>
+                                                                <property name="margin-bottom">10</property>
                                                                 <style>
                                                                     <class name="boxed-list"></class>
                                                                 </style>
@@ -208,12 +208,18 @@
                                                         </child>
                                                     </object>
                                                 </property>
+                                                <property name="separator">
+                                                    <object class="GtkSeparator"></object>
+                                                </property>
                                                 <property name="flap">
                                                     <object class="GtkScrolledWindow">
-                                                        <property name="margin-start">10</property>
-                                                        <property name="width-request">380</property>
+                                                        <property name="width-request">420</property>
                                                         <child>
                                                             <object class="GtkBox">
+                                                                <property name="margin-start">10</property>
+                                                                <property name="margin-top">10</property>
+                                                                <property name="margin-end">10</property>
+                                                                <property name="margin-bottom">10</property>
                                                                 <property name="orientation">vertical</property>
                                                                 <property name="spacing">6</property>
                                                                 <child>
