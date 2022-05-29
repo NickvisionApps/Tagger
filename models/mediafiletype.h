@@ -14,7 +14,9 @@ namespace NickvisionTagger::Models
             WEBM,
             MP3,
             OGG,
-            FLAC
+            FLAC,
+            WMA,
+            WAV
         };
 
         MediaFileType(Value fileType);

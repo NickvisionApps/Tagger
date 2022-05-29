@@ -39,6 +39,7 @@ namespace NickvisionTagger::UI::Views
         void removeTags();
         void filenameToTag();
         void tagToFilename();
+        void downloadMetadataFromInternet();
         void update();
         void gitHubRepo();
         void reportABug();

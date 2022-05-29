@@ -40,6 +40,7 @@ namespace NickvisionTagger::Models
         void removeTag();
         bool filenameToTag(const std::string& formatString);
         bool tagToFilename(const std::string& formatString);
+        bool downloadMetadataFromInternet();
         bool operator<(const MusicFile& toCompare) const;
         bool operator>(const MusicFile& toCompare) const;
         bool operator==(const MusicFile& toCompare) const;

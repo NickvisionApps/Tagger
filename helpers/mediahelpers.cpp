@@ -8,6 +8,16 @@
 
 using namespace NickvisionTagger::Helpers;
 
+unsigned int MediaHelpers::stoui(const std::string& str, size_t* idx, int base)
+{
+    unsigned long ui = std::stoul(str, idx, base);
+    if (ui > UINT_MAX)
+    {
+        throw std::out_of_range(str);
+    }
+    return ui;
+}
+
 std::string MediaHelpers::durationToString(int durationInSeconds)
 {
     std::stringstream builder;
@@ -36,12 +46,8 @@ std::string MediaHelpers::fileSizeToString(std::uintmax_t fileSize)
     return builder.str();
 }
 
-unsigned int MediaHelpers::stoui(const std::string& str, size_t* idx, int base)
+unsigned int MediaHelpers::musicBrainzDateToYear(const std::string& date)
 {
-    unsigned long ui = std::stoul(str, idx, base);
-    if (ui > UINT_MAX)
-    {
-        throw std::out_of_range(str);
-    }
-    return ui;
+    std::string year{date.substr(0, 4)};
+    return stoui(year);
 }

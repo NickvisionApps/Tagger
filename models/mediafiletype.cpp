@@ -12,25 +12,33 @@ std::optional<MediaFileType> MediaFileType::parse(const std::string& s)
 {
     std::string sToLower{s};
     std::transform(sToLower.begin(), sToLower.end(), sToLower.begin(), ::tolower);
-    if(sToLower.find("mp4") != std::string::npos)
+    if(sToLower.find(".mp4") != std::string::npos)
     {
         return MediaFileType::MP4;
     }
-    else if(sToLower.find("webm") != std::string::npos)
+    else if(sToLower.find(".webm") != std::string::npos)
     {
         return MediaFileType::WEBM;
     }
-    else if(sToLower.find("mp3") != std::string::npos)
+    else if(sToLower.find(".mp3") != std::string::npos)
     {
         return MediaFileType::MP3;
     }
-    else if(sToLower.find("ogg") != std::string::npos)
+    else if(sToLower.find(".ogg") != std::string::npos)
     {
         return MediaFileType::OGG;
     }
-    else if(sToLower.find("flac") != std::string::npos)
+    else if(sToLower.find(".flac") != std::string::npos)
     {
         return MediaFileType::FLAC;
+    }
+    else if(sToLower.find(".wma") != std::string::npos)
+    {
+        return MediaFileType::WMA;
+    }
+    else if(sToLower.find(".wav") != std::string::npos)
+    {
+        return MediaFileType::WAV;
     }
     else
     {
@@ -77,6 +85,10 @@ std::string MediaFileType::toString() const
             return "ogg";
         case MediaFileType::FLAC:
             return "flac";
+        case MediaFileType::WMA:
+            return "wma";
+        case MediaFileType::WAV:
+            return "wav";
         default:
             return "";
     }
@@ -96,6 +108,10 @@ std::string MediaFileType::toDotExtension() const
             return ".ogg";
         case MediaFileType::FLAC:
             return ".flac";
+        case MediaFileType::WMA:
+            return ".wma";
+        case MediaFileType::WAV:
+            return ".wav";
         default:
             return "";
     }
@@ -115,6 +131,10 @@ bool MediaFileType::isAudio() const
             return true;
         case MediaFileType::FLAC:
             return true;
+        case MediaFileType::WMA:
+            return true;
+        case MediaFileType::WAV:
+            return true;
         default:
             return false;
     }
@@ -133,6 +153,10 @@ bool MediaFileType::isVideo() const
         case MediaFileType::OGG:
             return false;
         case MediaFileType::FLAC:
+            return false;
+        case MediaFileType::WMA:
+            return false;
+        case MediaFileType::WAV:
             return false;
         default:
             return false;

@@ -1,4 +1,5 @@
 # Nickvision Tagger
+![icon](https://user-images.githubusercontent.com/17648453/170840456-58ae059f-10e3-44b2-aca7-f2be5d488ecf.svg)
 An easy-to-use music tag (metadata) editor
 
 # Features
@@ -6,6 +7,7 @@ An easy-to-use music tag (metadata) editor
 - Multiple music file types supported (mp3, ogg, and flac)
 - Edit files across subfolders all at once
 - Convert filenames to tags and tags to filenames with ease
+- Easily download tag data from the internet with the click of a button (powered by libmusicbrainz5)
 
 # Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/170810802-03d6fd19-3df1-4a4b-9710-791857eb58d0.png)
@@ -23,3 +25,7 @@ An easy-to-use music tag (metadata) editor
 - [curlpp](http://www.curlpp.org/)
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
 - [taglib](https://taglib.org/)
+- [libmusicbrainz5](https://musicbrainz.org/doc/libmusicbrainz)
+
+# Special Thanks
+- @daudix-UFO for our application icon

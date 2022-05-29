@@ -1,5 +1,10 @@
 #include "musicfile.h"
 #include <stdexcept>
+#include <musicbrainz5/Query.h>
+#include <musicbrainz5/Metadata.h>
+#include <musicbrainz5/Artist.h>
+#include <musicbrainz5/Release.h>
+#include <musicbrainz5/ReleaseGroup.h>
 #include "../helpers/mediahelpers.h"
 
 using namespace NickvisionTagger::Helpers;
@@ -242,6 +247,34 @@ bool MusicFile::tagToFilename(const std::string& formatString)
         return false;
     }
     return true;
+}
+
+bool MusicFile::downloadMetadataFromInternet()
+{
+    MusicBrainz5::CQuery Query{"NickvisionTagger/2022.5.1 ( nlogozzo225@gmail.com )"};
+    if(!getTitle().empty() && !getArtist().empty())
+    {
+        try
+        {
+            MusicBrainz5::CMetadata metadataRelease{Query.Query("release", "", "", { {"query", "artist:" + getArtist() + " release:" + getTitle()} })};
+            if(metadataRelease.ReleaseList() && metadataRelease.ReleaseList()->Item(0))
+            {
+                MusicBrainz5::CRelease* release{metadataRelease.ReleaseList()->Item(0)};
+                setYear(MediaHelpers::musicBrainzDateToYear(release->Date()));
+                if(release->ReleaseGroup() && release->ReleaseGroup()->PrimaryType() == "Album")
+                {
+                    setAlbum(release->ReleaseGroup()->Title());
+                }
+                saveTag();
+                return true;
+            }
+        }
+        catch(...)
+        {
+            return false;
+        }
+    }
+    return false;
 }
 
 bool MusicFile::operator<(const MusicFile& toCompare) const

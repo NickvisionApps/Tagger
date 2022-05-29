@@ -14,7 +14,7 @@ using namespace NickvisionTagger::UI::Controls;
 using namespace NickvisionTagger::UI::Views;
 using namespace NickvisionTagger::Update;
 
-MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwindow.xml", "adw_winMain"}, m_configuration{configuration}, m_updater{"https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.5.0" }}, m_opened{false}
+MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwindow.xml", "adw_winMain"}, m_configuration{configuration}, m_updater{"https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.5.1" }}, m_opened{false}
 {
     //==Signals==//
     g_signal_connect(m_gobj, "show", G_CALLBACK((void (*)(GtkWidget*, gpointer*))[](GtkWidget* widget, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onStartup(); }), this);
@@ -30,6 +30,10 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->filenameToTag(); }), this);
     //==Tag To Filename==//
     g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->tagToFilename(); }), this);
+    //==Download Tag From Internet==//
+    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_btnDownloadMetadataFromInternet"), "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton* button, gpointer* data) { reinterpret_cast<MainWindow*>(data)->downloadMetadataFromInternet(); }), this);
+    //==List Music Files==//
+    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_listMusicFiles"), "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer*))[](GtkListBox* listBox, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
     //==Help Actions==//
     //Check for Updates
     m_gio_actUpdate = g_simple_action_new("update", nullptr);
@@ -59,8 +63,6 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     GtkBuilder* builderMenu{gtk_builder_new_from_resource("/ui/views/menuhelp.xml")};
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(gtk_builder_get_object(m_builder, "gtk_btnMenuHelp")), G_MENU_MODEL(gtk_builder_get_object(builderMenu, "gio_menuHelp")));
     g_object_unref(builderMenu);
-    //==List Music Files==//
-    g_signal_connect(gtk_builder_get_object(m_builder, "gtk_listMusicFiles"), "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer*))[](GtkListBox* listBox, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
 }
 
 MainWindow::~MainWindow()
@@ -84,6 +86,7 @@ void MainWindow::onStartup()
         {
             m_musicFolder.setPath(m_configuration.getLastOpenedFolder());
             adw_window_title_set_subtitle(ADW_WINDOW_TITLE(gtk_builder_get_object(GTK_BUILDER(m_builder), "adw_title")), m_musicFolder.getPath().c_str());
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnReloadMusicFolder")), true);
             reloadMusicFolder();
         }
         //==Check for Updates==//
@@ -102,7 +105,7 @@ void MainWindow::onStartup()
 
 void MainWindow::openMusicFolder()
 {
-    GtkWidget* openFolderDialog {gtk_file_chooser_dialog_new("Open Music Folder", GTK_WINDOW(gtk_widget_get_root(gobj())), 
+    GtkWidget* openFolderDialog {gtk_file_chooser_dialog_new("Open Music Folder", GTK_WINDOW(m_gobj), 
         GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER, "_Cancel", GTK_RESPONSE_CANCEL, "_Select", GTK_RESPONSE_ACCEPT, nullptr)};
     gtk_window_set_modal(GTK_WINDOW(openFolderDialog), true);
     g_signal_connect(openFolderDialog, "response", G_CALLBACK((void (*)(GtkDialog*, gint, gpointer*))([](GtkDialog* dialog, gint response_id, gpointer* data)
@@ -116,6 +119,7 @@ void MainWindow::openMusicFolder()
             g_object_unref(file);
             mainWindow->m_musicFolder.setPath(path);
             adw_window_title_set_subtitle(ADW_WINDOW_TITLE(gtk_builder_get_object(GTK_BUILDER(mainWindow->m_builder), "adw_title")), path.c_str());
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(mainWindow->m_builder, "gtk_btnReloadMusicFolder")), true);
             if(mainWindow->m_configuration.getRememberLastOpenedFolder())
             {
                 mainWindow->m_configuration.setLastOpenedFolder(mainWindow->m_musicFolder.getPath());
@@ -130,16 +134,13 @@ void MainWindow::openMusicFolder()
 
 void MainWindow::reloadMusicFolder()
 {
-    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnOpenMusicFolder")), false);
-    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnReloadMusicFolder")), false);
-    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")), false);
     gtk_list_box_unselect_all(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")));
     for(GtkWidget* row : m_listMusicFilesRows)
     {
         gtk_list_box_remove(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")), row);
     }
     m_listMusicFilesRows.clear();
-    ProgressTracker* progTrackerReload{new ProgressTracker("Loading music files...", [&]() { m_musicFolder.reloadFiles(); }, [&]()
+    ProgressDialog* progDialogReloading{new ProgressDialog(m_gobj, "Loading music files...", [&]() { m_musicFolder.reloadFiles(); }, [&]()
     {
         for(const std::shared_ptr<MusicFile>& musicFile : m_musicFolder.getFiles())
         {
@@ -150,22 +151,17 @@ void MainWindow::reloadMusicFolder()
             m_listMusicFilesRows.push_back(row);
             g_main_context_iteration(g_main_context_default(), false);
         }
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnOpenMusicFolder")), true);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnReloadMusicFolder")), true);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")), true);
         if(m_musicFolder.getFiles().size() > 0)
         {
             sendToast("Loaded " + std::to_string(m_musicFolder.getFiles().size()) + " music files.");
         }
     })};
-    adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(m_builder, "adw_headerBar")), progTrackerReload->gobj());
-    progTrackerReload->show();
+    progDialogReloading->show();
 }
 
 void MainWindow::saveTags()
 {
-    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnSaveTags")), false);
-    ProgressTracker* progTrackerSaving{new ProgressTracker("Saving tags...", [&]() 
+    ProgressDialog* progDialogSaving{new ProgressDialog(m_gobj, "Saving tags...", [&]() 
     { 
         for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
         {
@@ -212,8 +208,7 @@ void MainWindow::saveTags()
             musicFile->saveTag();
         }
     }, [&]() { reloadMusicFolder(); })};
-    adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(m_builder, "adw_headerBar")), progTrackerSaving->gobj());
-    progTrackerSaving->show();
+    progDialogSaving->show();
 }
 
 void MainWindow::removeTags()
@@ -227,16 +222,14 @@ void MainWindow::removeTags()
         if(response_id == GTK_RESPONSE_YES)
         {
             MainWindow* mainWindow{reinterpret_cast<MainWindow*>(data)};
-            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(mainWindow->m_builder, "gtk_btnRemoveTags")), false);
-            ProgressTracker* progTrackerRemoving{new ProgressTracker("Removing tags...", [mainWindow]() 
+            ProgressDialog* progDialogRemoving{new ProgressDialog(mainWindow->m_gobj, "Removing tags...", [mainWindow]() 
             { 
                 for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
                 {
                     musicFile->removeTag();
                 }
             }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
-            adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(mainWindow->m_builder, "adw_headerBar")), progTrackerRemoving->gobj());
-            progTrackerRemoving->show();
+            progDialogRemoving->show();
         }
     })), this);
     gtk_widget_show(removeDialog);
@@ -244,7 +237,7 @@ void MainWindow::removeTags()
 
 void MainWindow::filenameToTag()
 {
-    ComboBoxDialog* formatStringDialog{new ComboBoxDialog(gobj(), "Filename to Tag", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%title%" })};
+    ComboBoxDialog* formatStringDialog{new ComboBoxDialog(m_gobj, "Filename to Tag", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%title%" })};
     std::pair<ComboBoxDialog*, MainWindow*>* pointers{new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this)};
     g_signal_connect(formatStringDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer*))([](GtkWidget* widget, gpointer* data)
     {
@@ -253,17 +246,15 @@ void MainWindow::filenameToTag()
         delete pointers->first;
         if(!formatString.empty())
         {
-            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(pointers->second->m_builder, "gtk_btnRemoveTags")), false);
             MainWindow* mainWindow{pointers->second};
-            ProgressTracker* progTrackingConverting{new ProgressTracker("Converting filenames to tags...", [mainWindow, formatString]() 
+            ProgressDialog* progDialogConverting{new ProgressDialog(pointers->second->m_gobj, "Converting filenames to tags...", [mainWindow, formatString]() 
             { 
                 for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
                 {
                     musicFile->filenameToTag(formatString);
                 }
             }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
-            adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(pointers->second->m_builder, "adw_headerBar")), progTrackingConverting->gobj());
-            progTrackingConverting->show();
+            progDialogConverting->show();
         }
         delete pointers;
     })), pointers);
@@ -272,7 +263,7 @@ void MainWindow::filenameToTag()
 
 void MainWindow::tagToFilename()
 {
-    ComboBoxDialog* formatStringDialog{new ComboBoxDialog(gobj(), "Tag to Filename", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%title%" })};
+    ComboBoxDialog* formatStringDialog{new ComboBoxDialog(m_gobj, "Tag to Filename", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%title%" })};
     std::pair<ComboBoxDialog*, MainWindow*>* pointers{new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this)};
     g_signal_connect(formatStringDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer*))([](GtkWidget* widget, gpointer* data)
     {
@@ -281,21 +272,43 @@ void MainWindow::tagToFilename()
         delete pointers->first;
         if(!formatString.empty())
         {
-            gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(pointers->second->m_builder, "gtk_btnRemoveTags")), false);
             MainWindow* mainWindow{pointers->second};
-            ProgressTracker* progTrackingConverting{new ProgressTracker("Converting tags to filenames...", [mainWindow, formatString]() 
+            ProgressDialog* progDialogConverting{new ProgressDialog(pointers->second->m_gobj, "Converting tags to filenames...", [mainWindow, formatString]() 
             { 
                 for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
                 {
                     musicFile->tagToFilename(formatString);
                 }
             }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
-            adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(pointers->second->m_builder, "adw_headerBar")), progTrackingConverting->gobj());
-            progTrackingConverting->show();
+            progDialogConverting->show();
         }
         delete pointers;
     })), pointers);
     formatStringDialog->show();
+}
+
+void MainWindow::downloadMetadataFromInternet()
+{
+    GtkWidget* downloadDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
+        GTK_MESSAGE_INFO, GTK_BUTTONS_YES_NO, "Required Information")};
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(downloadDialog), "Downloading tag metadata from the internet requires the music file to have its title and artist properties already set.\nAre you sure you want to continue?");
+    g_signal_connect(downloadDialog, "response", G_CALLBACK((void (*)(GtkDialog*, gint, gpointer*))([](GtkDialog* dialog, gint response_id, gpointer* data)
+    {
+        gtk_window_destroy(GTK_WINDOW(dialog));
+        if(response_id == GTK_RESPONSE_YES)
+        {
+            MainWindow* mainWindow{reinterpret_cast<MainWindow*>(data)};
+            ProgressDialog* progDialogDownloading{new ProgressDialog(mainWindow->m_gobj, "Downloading metadata from internet...", [mainWindow]() 
+            { 
+                for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
+                {
+                    musicFile->downloadMetadataFromInternet();
+                }
+            }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
+            progDialogDownloading->show();
+        }
+    })), this);
+    gtk_widget_show(downloadDialog);
 }
 
 void MainWindow::update()
@@ -378,7 +391,7 @@ void MainWindow::changelog()
 {
     GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Application rewrite in C++ with GTK4 and libadwaita");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added support for downloading tag data from the internet (powered by libmusicbrainz5)\n- Added support for wma and wav file types\n- Replaced ProgressTracker with ProgressDialog where needed");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
@@ -386,7 +399,7 @@ void MainWindow::changelog()
 void MainWindow::about()
 {
     const char* authors[]{ "Nicholas Logozzo", nullptr };
-    gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.5.0", "comments", "An easy-to-use music tag (metadata) editor.",
+    gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.5.1", "comments", "An easy-to-use music tag (metadata) editor.",
                           "copyright", "(C) Nickvision 2021-2022", "license-type", GTK_LICENSE_GPL_3_0, "website", "https://github.com/nlogozzo", "website-label", "GitHub",
                           "authors", authors, nullptr);
 }
@@ -414,6 +427,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
     gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags")), true);
     gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag")), true);
     gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename")), true);
+    gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnDownloadMetadataFromInternet")), true);
     adw_flap_set_reveal_flap(ADW_FLAP(gtk_builder_get_object(m_builder, "adw_flap")), true);
     //==No Files Selected==//
     if(m_selectedMusicFiles.size() == 0)
@@ -433,6 +447,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnRemoveTags")), false);
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnFilenameToTag")), false);
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnTagToFilename")), false);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnDownloadMetadataFromInternet")), false);
     }
     //==One File Selected==//
     else if(m_selectedMusicFiles.size() == 1)

@@ -68,6 +68,20 @@
                                 <property name="sensitive">false</property>
                             </object>
                         </child>
+                        <child type="start">
+                            <object class="GtkSeparator">
+                                <style>
+                                    <class name="spacer"></class>
+                                </style>
+                            </object>
+                        </child>
+                        <child type="start">
+                            <object class="GtkButton" id="gtk_btnDownloadMetadataFromInternet">
+                                <property name="icon-name">globe-symbolic</property>
+                                <property name="tooltip-text" translatable="yes">Download Metadata From Internet</property>
+                                <property name="sensitive">false</property>
+                            </object>
+                        </child>
                         <child type="end">
                             <object class="GtkMenuButton" id="gtk_btnMenuHelp">
                                 <property name="direction">none</property>
