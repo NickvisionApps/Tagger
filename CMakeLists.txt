@@ -40,7 +40,7 @@ target_link_libraries(NickvisionTagger PRIVATE PkgConfig::TAGLIB)
 target_link_libraries(NickvisionTagger PRIVATE PkgConfig::MUSICBRAINZ)
 
 #Generate GResources
-list(APPEND CMAKE_MODULE_PATH ../GCR_CMake/macros)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/GCR_CMake/macros)
 include(GlibCompileResourcesSupport)
 compile_gresources(RESOURCE_FILE XML_OUT TYPE BUNDLE RESOURCES ${XML} ${RESOURCES} COMPRESS_ALL)
 add_custom_target(resource ALL DEPENDS ${RESOURCE_FILE})
