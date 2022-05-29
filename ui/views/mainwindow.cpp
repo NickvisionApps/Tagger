@@ -78,7 +78,7 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(gtk_builder_get_object(m_builder, "gtk_btnMenuHelp")), G_MENU_MODEL(gtk_builder_get_object(builderMenuHelp, "gio_menuHelp")));
     g_object_unref(builderMenuHelp);
     //==No Files Page==//
-    adw_status_page_set_paintable(ADW_STATUS_PAGE(gtk_builder_get_object(m_builder, "adw_pageNoFiles")), gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/icon.svg"))));
+    adw_status_page_set_paintable(ADW_STATUS_PAGE(gtk_builder_get_object(m_builder, "adw_pageNoFiles")), gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/com.nickvision.tagger.svg"))));
     //==List Music Files==//
     g_signal_connect(gtk_builder_get_object(m_builder, "gtk_listMusicFiles"), "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer*))[](GtkListBox* listBox, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
 }
@@ -434,7 +434,8 @@ void MainWindow::changelog()
 {
     GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Redesigned HeaderBar with an improved UX\n- Added keyboard shortcuts to application\n- Added an overlay status page to display when a directory contains no music files\n- Added application icon to about dialog\n- Other minor UX improvements");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Redesigned HeaderBar with an improved UX\n- Added keyboard shortcuts to application\n- Added an overlay status page to display when a directory contains no music files\n- Added application 
+                                             to about dialog\n- Other minor UX improvements");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
