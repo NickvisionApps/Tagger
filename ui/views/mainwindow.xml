@@ -15,12 +15,14 @@
                         </property>
                         <child type="start">
                             <object class="GtkButton" id="gtk_btnOpenMusicFolder">
-                                <style>
-                                    <class name="flat"></class>
-                                </style>
                                 <property name="action-name">win.openMusicFolder</property>
-                                <property name="label" translatable="yes">Open</property>
                                 <property name="tooltip-text" translatable="yes">Open Music Folder (Ctrl+O)</property>
+                                <property name="child">
+                                    <object class="AdwButtonContent">
+                                        <property name="icon-name" translatable="yes">folder-open-symbolic</property>
+                                        <property name="label" translatable="yes">Open</property>
+                                    </object>
+                                </property>
                             </object>
                         </child>
                         <child type="start">
