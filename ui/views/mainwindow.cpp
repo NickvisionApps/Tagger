@@ -15,7 +15,7 @@ using namespace NickvisionTagger::UI::Controls;
 using namespace NickvisionTagger::UI::Views;
 using namespace NickvisionTagger::Update;
 
-MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwindow.xml", "adw_winMain"}, m_configuration{configuration}, m_updater{"https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.5.3" }}, m_opened{false}
+MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwindow.xml", "adw_winMain"}, m_configuration{configuration}, m_updater{"https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.5.4" }}, m_opened{false}
 {
     //==Signals==//
     g_signal_connect(m_gobj, "show", G_CALLBACK((void (*)(GtkWidget*, gpointer*))[](GtkWidget* widget, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onStartup(); }), this);
@@ -44,6 +44,10 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     m_gio_actTagToFilename = g_simple_action_new("tagToFilename", nullptr);
     g_signal_connect(m_gio_actTagToFilename, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->tagToFilename(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actTagToFilename));
+    //Insert Album Art
+    m_gio_actInsertAlbumArt = g_simple_action_new("insertAlbumArt", nullptr);
+    g_signal_connect(m_gio_actInsertAlbumArt, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->insertAlbumArt(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actInsertAlbumArt));
     //Download Metadata
     m_gio_actDownloadMetadata = g_simple_action_new("downloadMetadata", nullptr);
     g_signal_connect(m_gio_actDownloadMetadata, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->downloadMetadata(); }), this);
@@ -111,6 +115,8 @@ void MainWindow::onStartup()
         gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.filenameToTag", new const char*[2]{ "<Ctrl><Shift>f", nullptr });
         //Tag To Filename
         gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.tagToFilename", new const char*[2]{ "<Ctrl><Shift>t", nullptr });
+        //Insert Album Art
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.insertAlbumArt", new const char*[2]{ "<Ctrl><Shift>o", nullptr });
         //Download Metadata
         gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.downloadMetadata", new const char*[2]{ "<Ctrl><Shift>m", nullptr });
         //About
@@ -329,6 +335,11 @@ void MainWindow::tagToFilename()
     formatStringDialog->show();
 }
 
+void MainWindow::insertAlbumArt()
+{
+
+}
+
 void MainWindow::downloadMetadata()
 {
     GtkWidget* downloadDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
@@ -434,16 +445,16 @@ void MainWindow::changelog()
 {
     GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Redesigned HeaderBar with an improved UX\n- Added keyboard shortcuts to application\n- Added an overlay status page to display when a directory contains no music files\n- Added application icon to about dialog\n- Other minor UX improvements");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added support for adding album art to a tag");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
 
 void MainWindow::about()
 {
-    gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.5.3", "comments", "An easy-to-use music tag (metadata) editor.",
+    gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.5.4", "comments", "An easy-to-use music tag (metadata) editor.",
                           "copyright", "(C) Nickvision 2021-2022", "license-type", GTK_LICENSE_GPL_3_0, "website", "https://github.com/nlogozzo/NickvisionTagger", "website-label", "GitHub",
-                          "authors", new const char*[2]{ "Nicholas Logozzo", nullptr }, "artists", new const char*[3]{ "Nicholas Logozzo", "daudix-UFO (Icons)", nullptr }, "logo", gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/org.nickvision.tagger.svg"))), nullptr);
+                          "authors", new const char*[2]{ "Nicholas Logozzo", nullptr }, "artists", new const char*[3]{ "Nicholas Logozzo", "daudix-UFO (Icons)", nullptr }, "logo", gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/org.nickvision.tagger-devel.svg"))), nullptr);
 }
 
 void MainWindow::sendToast(const std::string& message)

@@ -3,7 +3,15 @@
     <menu id="gio_menuTagActions">
         <section>
             <item>
-                <attribute name="label" translatable="yes">Remove Tags</attribute>
+                <attribute name="label" translatable="yes">Download MusicBrainz Metadata</attribute>
+                <attribute name="action">win.downloadMetadata</attribute>
+            </item>
+            <item>
+                <attribute name="label" translatable="yes">Insert Album Art</attribute>
+                <attribute name="action">win.insertAlbumArt</attribute>
+            </item>
+            <item>
+                <attribute name="label" translatable="yes">Remove Tag</attribute>
                 <attribute name="action">win.removeTags</attribute>
             </item>
         </section>
@@ -15,12 +23,6 @@
             <item>
                 <attribute name="label" translatable="yes">Convert Tag To Filename</attribute>
                 <attribute name="action">win.tagToFilename</attribute>
-            </item>
-        </section>
-        <section>
-            <item>
-                <attribute name="label" translatable="yes">Download Metadata From Internet</attribute>
-                <attribute name="action">win.downloadMetadata</attribute>
             </item>
         </section>
     </menu>
