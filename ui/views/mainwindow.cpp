@@ -356,7 +356,7 @@ void MainWindow::downloadMetadata()
             { 
                 for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
                 {
-                    musicFile->downloadMetadataFromInternet();
+                    musicFile->downloadMusicBrainzMetadata();
                 }
             }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
             progDialogDownloading->show();

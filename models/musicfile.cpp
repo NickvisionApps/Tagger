@@ -659,7 +659,7 @@ bool MusicFile::tagToFilename(const std::string& formatString)
     return true;
 }
 
-bool MusicFile::downloadMetadataFromInternet()
+bool MusicFile::downloadMusicBrainzMetadata()
 {
     MusicBrainz5::CQuery Query{"NickvisionTagger/2022.5.1 ( nlogozzo225@gmail.com )"};
     if(!getTitle().empty() && !getArtist().empty())
