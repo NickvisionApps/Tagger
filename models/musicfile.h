@@ -4,7 +4,12 @@
 #include <string>
 #include <filesystem>
 #include <memory>
-#include <taglib/fileref.h>
+#include <taglib/mpegfile.h>
+#include <taglib/opusfile.h>
+#include <taglib/flacfile.h>
+#include <taglib/asffile.h>
+#include <taglib/wavfile.h>
+#include <taglib/tbytevector.h>
 #include "mediafiletype.h"
 
 namespace NickvisionTagger::Models
@@ -30,6 +35,8 @@ namespace NickvisionTagger::Models
         void setGenre(const std::string& genre);
         std::string getComment() const;
         void setComment(const std::string& comment);
+        TagLib::ByteVector getAlbumArt() const;
+        void setAlbumArt(const TagLib::ByteVector& albumArt);
         int getDuration() const;
         std::string getDurationAsString() const;
         std::uintmax_t getFileSize() const;
@@ -48,6 +55,10 @@ namespace NickvisionTagger::Models
         mutable std::mutex m_mutex;
         std::filesystem::path m_path;
         MediaFileType m_fileType;
-        std::shared_ptr<TagLib::FileRef> m_file;
+        std::shared_ptr<TagLib::MPEG::File> m_fileMP3;
+        std::shared_ptr<TagLib::Ogg::Opus::File> m_fileOGG;
+        std::shared_ptr<TagLib::FLAC::File> m_fileFLAC;
+        std::shared_ptr<TagLib::ASF::File> m_fileWMA;
+        std::shared_ptr<TagLib::RIFF::WAV::File> m_fileWAV;
     };
 }

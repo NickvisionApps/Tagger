@@ -244,6 +244,22 @@
                                                                         <property name="editable" translatable="yes">false</property>
                                                                     </object>
                                                                 </child>
+                                                                <child>
+                                                                    <object class="GtkLabel">
+                                                                        <property name="halign">start</property>
+                                                                        <property name="label" translatable="yes">Album Art</property>
+                                                                    </object>
+                                                                </child>
+                                                                <child>
+                                                                    <object class="GtkFrame">
+                                                                        <child>
+                                                                            <object class="GtkImage" id="gtk_imgAlbumArt">
+                                                                                <property name="width-request">380</property>
+                                                                                <property name="height-request">380</property>
+                                                                            </object>
+                                                                        </child>
+                                                                    </object>
+                                                                </child>
                                                             </object>
                                                         </child>
                                                     </object>

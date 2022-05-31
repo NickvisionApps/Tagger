@@ -493,6 +493,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment")), "");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), "");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFileSize")), "");
+        gtk_image_clear(GTK_IMAGE(gtk_builder_get_object(m_builder, "gtk_imgAlbumArt")));
         adw_flap_set_reveal_flap(ADW_FLAP(gtk_builder_get_object(m_builder, "adw_flap")), false);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnSaveTags")), false);
         gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnMenuTagActions")), false);
@@ -510,8 +511,13 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment")), std::regex_replace(m_selectedMusicFiles[0]->getComment(), std::regex("\\&"), "&amp;").c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), m_selectedMusicFiles[0]->getDurationAsString().c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFileSize")), m_selectedMusicFiles[0]->getFileSizeAsString().c_str());
+        GdkPixbufLoader* pixbufLoader{gdk_pixbuf_loader_new()};
+        const TagLib::ByteVector& albumArt = m_selectedMusicFiles[0]->getAlbumArt();
+        gdk_pixbuf_loader_write(pixbufLoader, (unsigned char*)albumArt.data(), albumArt.size(), nullptr);
+        gtk_image_set_from_pixbuf(GTK_IMAGE(gtk_builder_get_object(m_builder, "gtk_imgAlbumArt")), gdk_pixbuf_loader_get_pixbuf(pixbufLoader));
+        gdk_pixbuf_loader_close(pixbufLoader, nullptr);
     }
-        //==Multiple Files Selected==//
+    //==Multiple Files Selected==//
     else
     {
         bool haveSameTitle = true;
@@ -521,6 +527,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         bool haveSameTrack = true;
         bool haveSameGenre = true;
         bool haveSameComment = true;
+        bool haveSameAlbumArt = true;
         int totalDuration = 0;
         std::uintmax_t totalFileSize = 0;
         for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
@@ -553,6 +560,10 @@ void MainWindow::onListMusicFilesSelectionChanged()
             {
                 haveSameComment = false;
             }
+            if  (m_selectedMusicFiles[0]->getAlbumArt() != musicFile->getAlbumArt())
+            {
+                haveSameAlbumArt = false;
+            }
             totalDuration += musicFile->getDuration();
             totalFileSize += musicFile->getFileSize();
         }
@@ -567,5 +578,17 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment")), haveSameComment ? std::regex_replace(m_selectedMusicFiles[0]->getComment(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), MediaHelpers::durationToString(totalDuration).c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFileSize")), MediaHelpers::fileSizeToString(totalFileSize).c_str());
+        if(haveSameAlbumArt)
+        {
+            GdkPixbufLoader* pixbufLoader{gdk_pixbuf_loader_new()};
+            const TagLib::ByteVector& albumArt = m_selectedMusicFiles[0]->getAlbumArt();
+            gdk_pixbuf_loader_write(pixbufLoader, (unsigned char*)albumArt.data(), albumArt.size(), nullptr);
+            gtk_image_set_from_pixbuf(GTK_IMAGE(gtk_builder_get_object(m_builder, "gtk_imgAlbumArt")), gdk_pixbuf_loader_get_pixbuf(pixbufLoader));
+            gdk_pixbuf_loader_close(pixbufLoader, nullptr);
+        }
+        else
+        {
+            gtk_image_clear(GTK_IMAGE(gtk_builder_get_object(m_builder, "gtk_imgAlbumArt")));
+        }
     }
 }
