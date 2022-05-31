@@ -129,6 +129,7 @@ void MainWindow::onStartup()
             adw_window_title_set_subtitle(ADW_WINDOW_TITLE(gtk_builder_get_object(GTK_BUILDER(m_builder), "adw_title")), m_musicFolder.getPath().c_str());
             gtk_widget_set_visible(GTK_WIDGET(gtk_builder_get_object(m_builder, "gtk_btnReloadMusicFolder")), true);
             reloadMusicFolder();
+            sendToast("Loaded " + std::to_string(m_musicFolder.getFiles().size()) + " music files.");
         }
         //==Check for Updates==//
         ProgressTracker* progTrackerUpdate{new ProgressTracker("Checking for updates...", [&]() { m_updater.checkForUpdates(); }, [&]()
@@ -167,6 +168,7 @@ void MainWindow::openMusicFolder()
                 mainWindow->m_configuration.save();
             }
             mainWindow->reloadMusicFolder();
+            mainWindow->sendToast("Loaded " + std::to_string(mainWindow->m_musicFolder.getFiles().size()) + " music files.");
         }
         gtk_window_destroy(GTK_WINDOW(dialog));
     })), this);
@@ -197,7 +199,6 @@ void MainWindow::reloadMusicFolder()
         if(m_musicFolder.getFiles().size() > 0)
         {
             adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(gtk_builder_get_object(m_builder, "adw_viewStack")), "page_tagger");
-            sendToast("Loaded " + std::to_string(m_musicFolder.getFiles().size()) + " music files.");
         }
         else
         {
@@ -445,7 +446,7 @@ void MainWindow::changelog()
 {
     GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added support for adding album art to a tag");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added support for adding album art to a tag\n- Loaded notification will now only show on startup and when a new folder is opened, not for every folder refresh");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
