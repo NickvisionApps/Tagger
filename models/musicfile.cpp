@@ -557,7 +557,7 @@ void MusicFile::saveTag()
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        m_fileMP3->save();
+        m_fileMP3->save(TagLib::MPEG::File::TagTypes::ID3v2);
     }
     else if(m_fileType == MediaFileType::OGG)
     {
