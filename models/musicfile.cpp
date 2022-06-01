@@ -100,7 +100,7 @@ std::string MusicFile::getTitle() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->ID3v2Tag()->title().toCString();
+        return m_fileFLAC->xiphComment()->title().toCString();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -126,7 +126,7 @@ void MusicFile::setTitle(const std::string& title)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->ID3v2Tag()->setTitle(title);
+        m_fileFLAC->xiphComment()->setTitle(title);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -151,7 +151,7 @@ std::string MusicFile::getArtist() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->ID3v2Tag()->artist().toCString();
+        return m_fileFLAC->xiphComment()->artist().toCString();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -177,7 +177,7 @@ void MusicFile::setArtist(const std::string& artist)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->ID3v2Tag()->setArtist(artist);
+        m_fileFLAC->xiphComment()->setArtist(artist);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -202,7 +202,7 @@ std::string MusicFile::getAlbum() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->ID3v2Tag()->album().toCString();
+        return m_fileFLAC->xiphComment()->album().toCString();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -228,7 +228,7 @@ void MusicFile::setAlbum(const std::string& album)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->ID3v2Tag()->setAlbum(album);
+        m_fileFLAC->xiphComment()->setAlbum(album);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -253,7 +253,7 @@ unsigned int MusicFile::getYear() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->ID3v2Tag()->year();
+        return m_fileFLAC->xiphComment()->year();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -279,7 +279,7 @@ void MusicFile::setYear(unsigned int year)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->ID3v2Tag()->setYear(year);
+        m_fileFLAC->xiphComment()->setYear(year);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -304,7 +304,7 @@ unsigned int MusicFile::getTrack() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->ID3v2Tag()->track();
+        return m_fileFLAC->xiphComment()->track();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -330,7 +330,7 @@ void MusicFile::setTrack(unsigned int track)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->ID3v2Tag()->setTrack(track);
+        m_fileFLAC->xiphComment()->setTrack(track);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -355,7 +355,7 @@ std::string MusicFile::getGenre() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->ID3v2Tag()->genre().toCString();
+        return m_fileFLAC->xiphComment()->genre().toCString();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -381,7 +381,7 @@ void MusicFile::setGenre(const std::string& genre)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->ID3v2Tag()->setGenre(genre);
+        m_fileFLAC->xiphComment()->setGenre(genre);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -406,7 +406,7 @@ std::string MusicFile::getComment() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->ID3v2Tag()->comment().toCString();
+        return m_fileFLAC->xiphComment()->comment().toCString();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -432,7 +432,7 @@ void MusicFile::setComment(const std::string& comment)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->ID3v2Tag()->setComment(comment);
+        m_fileFLAC->xiphComment()->setComment(comment);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -456,16 +456,16 @@ TagLib::ByteVector MusicFile::getAlbumArt() const
     }
     else if(m_fileType == MediaFileType::OGG)
     {
-        if(m_fileOGG->tag()->pictureList()[0])
+        if(!m_fileOGG->tag()->pictureList().isEmpty())
         {
             return m_fileOGG->tag()->pictureList()[0]->data();
         }
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        if(m_fileFLAC->ID3v2Tag()->frameList("APIC").front())
+        if(!m_fileFLAC->pictureList().isEmpty())
         {
-            return ((TagLib::ID3v2::AttachedPictureFrame*)m_fileFLAC->ID3v2Tag()->frameList("APIC").front())->picture();
+            return m_fileFLAC->pictureList()[0]->data();
         }
     }
     else if(m_fileType == MediaFileType::WMA)
@@ -573,7 +573,7 @@ void MusicFile::saveTag()
     }
     else if(m_fileType == MediaFileType::WAV)
     {
-        m_fileWAV->save();
+        m_fileWAV->save(TagLib::RIFF::WAV::File::TagTypes::ID3v2);
     }
 }
 
