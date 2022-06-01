@@ -6,6 +6,7 @@
 #include "../controls/comboboxdialog.h"
 #include "preferencesdialog.h"
 #include "shortcutsdialog.h"
+#include "../../helpers/gtkhelpers.h"
 #include "../../helpers/mediahelpers.h"
 
 using namespace NickvisionTagger::Helpers;
@@ -511,11 +512,8 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment")), std::regex_replace(m_selectedMusicFiles[0]->getComment(), std::regex("\\&"), "&amp;").c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), m_selectedMusicFiles[0]->getDurationAsString().c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFileSize")), m_selectedMusicFiles[0]->getFileSizeAsString().c_str());
-        GdkPixbufLoader* pixbufLoader{gdk_pixbuf_loader_new()};
-        const TagLib::ByteVector& albumArt = m_selectedMusicFiles[0]->getAlbumArt();
-        gdk_pixbuf_loader_write(pixbufLoader, (unsigned char*)albumArt.data(), albumArt.size(), nullptr);
-        gtk_image_set_from_pixbuf(GTK_IMAGE(gtk_builder_get_object(m_builder, "gtk_imgAlbumArt")), gdk_pixbuf_loader_get_pixbuf(pixbufLoader));
-        gdk_pixbuf_loader_close(pixbufLoader, nullptr);
+        GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(gtk_builder_get_object(m_builder, "gtk_imgAlbumArt")), m_selectedMusicFiles[0]->getAlbumArt());
+        
     }
     //==Multiple Files Selected==//
     else
@@ -580,11 +578,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFileSize")), MediaHelpers::fileSizeToString(totalFileSize).c_str());
         if(haveSameAlbumArt)
         {
-            GdkPixbufLoader* pixbufLoader{gdk_pixbuf_loader_new()};
-            const TagLib::ByteVector& albumArt = m_selectedMusicFiles[0]->getAlbumArt();
-            gdk_pixbuf_loader_write(pixbufLoader, (unsigned char*)albumArt.data(), albumArt.size(), nullptr);
-            gtk_image_set_from_pixbuf(GTK_IMAGE(gtk_builder_get_object(m_builder, "gtk_imgAlbumArt")), gdk_pixbuf_loader_get_pixbuf(pixbufLoader));
-            gdk_pixbuf_loader_close(pixbufLoader, nullptr);
+            GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(gtk_builder_get_object(m_builder, "gtk_imgAlbumArt")), m_selectedMusicFiles[0]->getAlbumArt());
         }
         else
         {
