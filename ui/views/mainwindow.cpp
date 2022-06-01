@@ -148,10 +148,9 @@ void MainWindow::onStartup()
 
 void MainWindow::openMusicFolder()
 {
-    GtkWidget* openFolderDialog {gtk_file_chooser_dialog_new("Open Music Folder", GTK_WINDOW(m_gobj), 
-        GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER, "_Cancel", GTK_RESPONSE_CANCEL, "_Select", GTK_RESPONSE_ACCEPT, nullptr)};
-    gtk_window_set_modal(GTK_WINDOW(openFolderDialog), true);
-    g_signal_connect(openFolderDialog, "response", G_CALLBACK((void (*)(GtkDialog*, gint, gpointer*))([](GtkDialog* dialog, gint response_id, gpointer* data)
+    GtkFileChooserNative* openFolderDialog{gtk_file_chooser_native_new("Open Music Folder", GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER, "_Open", "_Cancel")};
+    gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFolderDialog), true);
+    g_signal_connect(openFolderDialog, "response", G_CALLBACK((void (*)(GtkNativeDialog*, gint, gpointer*))([](GtkNativeDialog* dialog, gint response_id, gpointer* data)
     {
         if(response_id == GTK_RESPONSE_ACCEPT)
         {
@@ -171,9 +170,9 @@ void MainWindow::openMusicFolder()
             mainWindow->reloadMusicFolder();
             mainWindow->sendToast("Loaded " + std::to_string(mainWindow->m_musicFolder.getFiles().size()) + " music files.");
         }
-        gtk_window_destroy(GTK_WINDOW(dialog));
+        g_object_unref(dialog);
     })), this);
-    gtk_widget_show(openFolderDialog);
+    gtk_native_dialog_show(GTK_NATIVE_DIALOG(openFolderDialog));
 }
 
 void MainWindow::reloadMusicFolder()
@@ -339,14 +338,13 @@ void MainWindow::tagToFilename()
 
 void MainWindow::insertAlbumArt()
 {
-    GtkWidget* openPictureDialog {gtk_file_chooser_dialog_new("Open Album Art", GTK_WINDOW(m_gobj), 
-        GTK_FILE_CHOOSER_ACTION_OPEN, "_Cancel", GTK_RESPONSE_CANCEL, "_Select", GTK_RESPONSE_ACCEPT, nullptr)};
-    gtk_window_set_modal(GTK_WINDOW(openPictureDialog), true);
+    GtkFileChooserNative* openPictureDialog{gtk_file_chooser_native_new("Insert Album Art", GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, "_Open", "_Cancel")};
+    gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openPictureDialog), true);
     GtkFileFilter* imageFilter{gtk_file_filter_new()};
     gtk_file_filter_add_mime_type(imageFilter, "image/*");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openPictureDialog), imageFilter);
     g_object_unref(imageFilter);
-    g_signal_connect(openPictureDialog, "response", G_CALLBACK((void (*)(GtkDialog*, gint, gpointer*))([](GtkDialog* dialog, gint response_id, gpointer* data)
+    g_signal_connect(openPictureDialog, "response", G_CALLBACK((void (*)(GtkNativeDialog*, gint, gpointer*))([](GtkNativeDialog* dialog, gint response_id, gpointer* data)
     {
         if(response_id == GTK_RESPONSE_ACCEPT)
         {
@@ -368,9 +366,9 @@ void MainWindow::insertAlbumArt()
             }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
             progDialogInserting->show();
         }
-        gtk_window_destroy(GTK_WINDOW(dialog));
+        g_object_unref(dialog);
     })), this);
-    gtk_widget_show(openPictureDialog);
+    gtk_native_dialog_show(GTK_NATIVE_DIALOG(openPictureDialog));
 }
 
 void MainWindow::downloadMetadata()
@@ -478,7 +476,7 @@ void MainWindow::changelog()
 {
     GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added support for adding album art to a tag\n- Loaded notification will now only show on startup and when a new folder is opened, not for every folder refresh");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added support for adding album art to a tag\n- Loaded notification will now only show on startup and when a new folder is opened, not for every folder refresh\n- Updated icon");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
