@@ -31,4 +31,4 @@
 - [libmusicbrainz5](https://musicbrainz.org/doc/libmusicbrainz)
 
 # Special Thanks
-- [daudix-UFO](https://github.com/daudix-UFO) for our application icon
+- [daudix-UFO](https://github.com/daudix-UFO) and [jannuary](https://github.com/jannuary) for our application icons

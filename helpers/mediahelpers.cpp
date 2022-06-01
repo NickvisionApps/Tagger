@@ -48,6 +48,5 @@ std::string MediaHelpers::fileSizeToString(std::uintmax_t fileSize)
 
 unsigned int MediaHelpers::musicBrainzDateToYear(const std::string& date)
 {
-    std::string year{date.substr(0, 4)};
-    return stoui(year);
+    return stoui({date.substr(0, 4)});
 }
