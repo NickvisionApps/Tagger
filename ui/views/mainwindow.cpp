@@ -339,7 +339,38 @@ void MainWindow::tagToFilename()
 
 void MainWindow::insertAlbumArt()
 {
-
+    GtkWidget* openPictureDialog {gtk_file_chooser_dialog_new("Open Album Art", GTK_WINDOW(m_gobj), 
+        GTK_FILE_CHOOSER_ACTION_OPEN, "_Cancel", GTK_RESPONSE_CANCEL, "_Select", GTK_RESPONSE_ACCEPT, nullptr)};
+    gtk_window_set_modal(GTK_WINDOW(openPictureDialog), true);
+    GtkFileFilter* imageFilter{gtk_file_filter_new()};
+    gtk_file_filter_add_mime_type(imageFilter, "image/*");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openPictureDialog), imageFilter);
+    g_object_unref(imageFilter);
+    g_signal_connect(openPictureDialog, "response", G_CALLBACK((void (*)(GtkDialog*, gint, gpointer*))([](GtkDialog* dialog, gint response_id, gpointer* data)
+    {
+        if(response_id == GTK_RESPONSE_ACCEPT)
+        {
+            MainWindow* mainWindow{reinterpret_cast<MainWindow*>(data)};
+            GtkFileChooser* chooser{GTK_FILE_CHOOSER(dialog)};
+            GFile* file{gtk_file_chooser_get_file(chooser)};
+            std::string path{g_file_get_path(file)};
+            g_object_unref(file);
+            GdkPixbuf* pixbuf{gdk_pixbuf_new_from_file(path.c_str(), nullptr)};
+            TagLib::ByteVector byteVector{GtkHelpers::gdk_pixbuf_get_byte_vector(pixbuf)};
+            g_object_unref(pixbuf);
+            ProgressDialog* progDialogInserting{new ProgressDialog(mainWindow->m_gobj, "Inserting album art...", [mainWindow, byteVector]() 
+            { 
+                for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
+                {
+                    musicFile->setAlbumArt(byteVector);
+                    musicFile->saveTag();
+                }
+            }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
+            progDialogInserting->show();
+        }
+        gtk_window_destroy(GTK_WINDOW(dialog));
+    })), this);
+    gtk_widget_show(openPictureDialog);
 }
 
 void MainWindow::downloadMetadata()
@@ -513,7 +544,6 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), m_selectedMusicFiles[0]->getDurationAsString().c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtFileSize")), m_selectedMusicFiles[0]->getFileSizeAsString().c_str());
         GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(gtk_builder_get_object(m_builder, "gtk_imgAlbumArt")), m_selectedMusicFiles[0]->getAlbumArt());
-        
     }
     //==Multiple Files Selected==//
     else

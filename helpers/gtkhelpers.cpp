@@ -17,3 +17,10 @@ void GtkHelpers::gtk_image_set_from_byte_vector(GtkImage* image, const TagLib::B
         g_object_unref(pixbufLoader);
     }
 }
+
+TagLib::ByteVector GtkHelpers::gdk_pixbuf_get_byte_vector(GdkPixbuf* pixbuf)
+{
+    unsigned int pixbufLength = 0;
+    char* data = (char*)gdk_pixbuf_get_pixels_with_length(pixbuf, &pixbufLength);
+    return {data, pixbufLength};
+}
