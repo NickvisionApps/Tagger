@@ -1,5 +1,4 @@
 # Maintainer: Nick Logozzo <nlogozzo225@gmail.com>
-
 pkgname=nickvision-tagger
 pkgver=2022.5.5
 pkgrel=1
@@ -11,8 +10,8 @@ depends=(gtk4 libadwaita jsoncpp libcurlpp taglib libmusicbrainz5)
 makedepends=(git cmake)
 source=("git+https://github.com/nlogozzo/NickvisionTagger.git#tag=${pkgver}"
         "git+https://github.com/Makman2/GCR_CMake.git")
-sha256sums=('SKIP'
-            'SKIP')
+sha256sums=("SKIP"
+            "SKIP")
 
 prepare() {
     mkdir -p build
@@ -33,5 +32,5 @@ build() {
 package() {
 	cd build
 	make DESTDIR="$pkgdir/" install
-    ln -s /usr/bin/org.nickvision.tagger ${pkgdir}/usr/bin/nickvision
+    sudo gtk-update-icon-cache -f /usr/share/icons/hicolor
 }
