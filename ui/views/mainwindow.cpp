@@ -16,7 +16,7 @@ using namespace NickvisionTagger::UI::Controls;
 using namespace NickvisionTagger::UI::Views;
 using namespace NickvisionTagger::Update;
 
-MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwindow.xml", "adw_winMain"}, m_configuration{configuration}, m_updater{"https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.5.4" }}, m_opened{false}
+MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwindow.xml", "adw_winMain"}, m_configuration{configuration}, m_updater{"https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", {"2022.5.4"}}, m_opened{false}
 {
     //==Signals==//
     g_signal_connect(m_gobj, "show", G_CALLBACK((void (*)(GtkWidget*, gpointer*))[](GtkWidget* widget, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onStartup(); }), this);
@@ -245,6 +245,10 @@ void MainWindow::saveTags()
                     musicFile->setTrack(MediaHelpers::stoui(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTrack")))));
                 }
                 catch(...) { }
+            }
+            if(std::string(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbumArtist")))) != "<keep>")
+            {
+                musicFile->setAlbumArtist(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbumArtist"))));
             }
             if(std::string(gtk_editable_get_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtGenre")))) != "<keep>")
             {
@@ -476,7 +480,7 @@ void MainWindow::changelog()
 {
     GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added support for adding album art to a tag\n- Loaded notification will now only show on startup and when a new folder is opened, not for every folder refresh\n- Updated icon");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added support for adding album art to a tag\n- Added support for adding album artist to tag\n- Loaded notification will now only show on startup and when a new folder is opened, not for every folder refresh\n- Updated icon");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
@@ -519,6 +523,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbum")), "");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtYear")), "");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTrack")), "");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbumArtist")), "");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtGenre")), "");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment")), "");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), "");
@@ -537,6 +542,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbum")), std::regex_replace(m_selectedMusicFiles[0]->getAlbum(), std::regex("\\&"), "&amp;").c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtYear")), std::to_string(m_selectedMusicFiles[0]->getYear()).c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTrack")), std::to_string(m_selectedMusicFiles[0]->getTrack()).c_str());
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbumArtist")), std::regex_replace(m_selectedMusicFiles[0]->getAlbumArtist(), std::regex("\\&"), "&amp;").c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtGenre")), std::regex_replace(m_selectedMusicFiles[0]->getGenre(), std::regex("\\&"), "&amp;").c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment")), std::regex_replace(m_selectedMusicFiles[0]->getComment(), std::regex("\\&"), "&amp;").c_str());
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), m_selectedMusicFiles[0]->getDurationAsString().c_str());
@@ -551,6 +557,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         bool haveSameAlbum = true;
         bool haveSameYear = true;
         bool haveSameTrack = true;
+        bool haveSameAlbumArtist = true;
         bool haveSameGenre = true;
         bool haveSameComment = true;
         bool haveSameAlbumArt = true;
@@ -578,6 +585,10 @@ void MainWindow::onListMusicFilesSelectionChanged()
             {
                 haveSameTrack = false;
             }
+            if (m_selectedMusicFiles[0]->getAlbumArtist() != musicFile->getAlbumArtist())
+            {
+                haveSameAlbumArtist = false;
+            }
             if (m_selectedMusicFiles[0]->getGenre() != musicFile->getGenre())
             {
                 haveSameGenre = false;
@@ -600,6 +611,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbum")), haveSameAlbum ? std::regex_replace(m_selectedMusicFiles[0]->getAlbum(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtYear")), haveSameYear ? std::to_string(m_selectedMusicFiles[0]->getYear()).c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtTrack")), haveSameTrack ? std::to_string(m_selectedMusicFiles[0]->getTrack()).c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtAlbumArtist")), haveSameAlbumArtist ? std::regex_replace(m_selectedMusicFiles[0]->getAlbumArtist(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtGenre")), haveSameGenre ? std::regex_replace(m_selectedMusicFiles[0]->getGenre(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtComment")), haveSameComment ? std::regex_replace(m_selectedMusicFiles[0]->getComment(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(gtk_builder_get_object(m_builder, "gtk_txtDuration")), MediaHelpers::durationToString(totalDuration).c_str());

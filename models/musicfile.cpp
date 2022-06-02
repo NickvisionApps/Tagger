@@ -1,5 +1,6 @@
 #include "musicfile.h"
 #include <stdexcept>
+#include <textidentificationframe.h>
 #include <musicbrainz5/Query.h>
 #include <musicbrainz5/Metadata.h>
 #include <musicbrainz5/Artist.h>
@@ -342,6 +343,96 @@ void MusicFile::setTrack(unsigned int track)
     }
 }
 
+std::string MusicFile::getAlbumArtist() const
+{
+    std::lock_guard<std::mutex> lock{m_mutex};
+    if(m_fileType == MediaFileType::MP3)
+    {
+        const TagLib::ID3v2::FrameList& frameList{m_fileMP3->ID3v2Tag(true)->frameList("TPE2")};
+        if(!frameList.isEmpty())
+        {
+            return frameList.front()->toString().toCString();
+        }
+    }
+    else if(m_fileType == MediaFileType::OGG)
+    {
+        const TagLib::Ogg::FieldListMap& fieldListMap{m_fileOGG->tag()->fieldListMap()};
+        if(fieldListMap.contains("ALBUMARTIST"))
+        {
+            const TagLib::StringList& stringList{fieldListMap["ALBUMARTIST"]};
+            if(!stringList.isEmpty())
+            {
+                return stringList[0].toCString();
+            }
+        }
+    }
+    else if(m_fileType == MediaFileType::FLAC)
+    {
+        const TagLib::Ogg::FieldListMap& fieldListMap{m_fileFLAC->xiphComment(true)->fieldListMap()};
+        if(fieldListMap.contains("ALBUMARTIST"))
+        {
+            const TagLib::StringList& stringList{fieldListMap["ALBUMARTIST"]};
+            if(!stringList.isEmpty())
+            {
+                return stringList[0].toCString();
+            }
+        }
+    }
+    else if(m_fileType == MediaFileType::WMA)
+    {
+        const TagLib::ASF::AttributeListMap& attributeListMap{m_fileWMA->tag()->attributeListMap()};
+        if(attributeListMap.contains("ALBUMARTIST"))
+        {
+            const TagLib::ASF::AttributeList& attributeList{attributeListMap["ALBUMARTIST"]};
+            if(!attributeList.isEmpty())
+            {
+                return attributeList[0].toString().toCString();
+            }
+        }
+    }
+    else if(m_fileType == MediaFileType::WAV)
+    {
+        const TagLib::ID3v2::FrameList& frameList{m_fileWAV->ID3v2Tag()->frameList("TPE2")};
+        if(!frameList.isEmpty())
+        {
+            return frameList.front()->toString().toCString();
+        }
+    }
+    return "";
+}
+
+void MusicFile::setAlbumArtist(const std::string& albumArtist)
+{
+    std::lock_guard<std::mutex> lock{m_mutex};
+    if(m_fileType == MediaFileType::MP3)
+    {
+        m_fileMP3->ID3v2Tag(true)->removeFrames("TPE2");
+        TagLib::ID3v2::TextIdentificationFrame* textFrame{new TagLib::ID3v2::TextIdentificationFrame("TPE2", TagLib::String::UTF8)};
+        textFrame->setText(albumArtist);
+        m_fileMP3->ID3v2Tag(true)->addFrame(textFrame);
+    }
+    else if(m_fileType == MediaFileType::OGG)
+    {
+        m_fileOGG->tag()->addField("ALBUMARTIST", albumArtist);
+    }
+    else if(m_fileType == MediaFileType::FLAC)
+    {
+        m_fileFLAC->xiphComment(true)->addField("ALBUMARTIST", albumArtist);
+    }
+    else if(m_fileType == MediaFileType::WMA)
+    {
+        m_fileWMA->tag()->removeItem("ALBUMARTIST");
+        m_fileWMA->tag()->addAttribute("ALBUMARTIST", {albumArtist});
+    }
+    else if(m_fileType == MediaFileType::WAV)
+    {
+        m_fileWAV->ID3v2Tag()->removeFrames("TPE2");
+        TagLib::ID3v2::TextIdentificationFrame* textFrame{new TagLib::ID3v2::TextIdentificationFrame("TPE2", TagLib::String::UTF8)};
+        textFrame->setText(albumArtist);
+        m_fileWAV->ID3v2Tag()->addFrame(textFrame);
+    }
+}
+
 std::string MusicFile::getGenre() const
 {
     std::lock_guard<std::mutex> lock{m_mutex};
@@ -449,7 +540,7 @@ TagLib::ByteVector MusicFile::getAlbumArt() const
     std::lock_guard<std::mutex> lock(m_mutex);
     if(m_fileType == MediaFileType::MP3)
     {
-        const TagLib::ID3v2::FrameList& frameList = m_fileMP3->ID3v2Tag(true)->frameList("APIC");
+        const TagLib::ID3v2::FrameList& frameList{m_fileMP3->ID3v2Tag(true)->frameList("APIC")};
         if(!frameList.isEmpty())
         {
             return ((TagLib::ID3v2::AttachedPictureFrame*)frameList.front())->picture();
@@ -457,7 +548,7 @@ TagLib::ByteVector MusicFile::getAlbumArt() const
     }
     else if(m_fileType == MediaFileType::OGG)
     {
-        const TagLib::List<TagLib::FLAC::Picture*>& pictureList = m_fileOGG->tag()->pictureList();
+        const TagLib::List<TagLib::FLAC::Picture*>& pictureList{m_fileOGG->tag()->pictureList()};
         if(!pictureList.isEmpty())
         {
             return pictureList[0]->data();
@@ -465,7 +556,7 @@ TagLib::ByteVector MusicFile::getAlbumArt() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        const TagLib::List<TagLib::FLAC::Picture*>& pictureList = m_fileFLAC->pictureList();
+        const TagLib::List<TagLib::FLAC::Picture*>& pictureList{m_fileFLAC->pictureList()};
         if(!pictureList.isEmpty())
         {
             return pictureList[0]->data();
@@ -473,10 +564,10 @@ TagLib::ByteVector MusicFile::getAlbumArt() const
     }
     else if(m_fileType == MediaFileType::WMA)
     {
-        const TagLib::ASF::AttributeListMap& attributeListMap = m_fileWMA->tag()->attributeListMap();
+        const TagLib::ASF::AttributeListMap& attributeListMap{m_fileWMA->tag()->attributeListMap()};
         if(attributeListMap.contains("WM/Picture"))
         {
-            const TagLib::ASF::AttributeList& attributeList = attributeListMap["WM/Picture"];
+            const TagLib::ASF::AttributeList& attributeList{attributeListMap["WM/Picture"]};
             if(!attributeList.isEmpty())
             {
                 return attributeList[0].toPicture().picture();
@@ -485,7 +576,7 @@ TagLib::ByteVector MusicFile::getAlbumArt() const
     }
     else if(m_fileType == MediaFileType::WAV)
     {
-        const TagLib::ID3v2::FrameList& frameList = m_fileWAV->ID3v2Tag()->frameList("APIC");
+        const TagLib::ID3v2::FrameList& frameList{m_fileWAV->ID3v2Tag()->frameList("APIC")};
         if(!frameList.isEmpty())
         {
             return ((TagLib::ID3v2::AttachedPictureFrame*)frameList.front())->picture();
@@ -593,6 +684,7 @@ void MusicFile::removeTag()
     setAlbum("");
     setYear(0);
     setTrack(0);
+    setAlbumArtist("");
     setGenre("");
     setComment("");
     setAlbumArt({});

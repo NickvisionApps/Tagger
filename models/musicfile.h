@@ -31,6 +31,8 @@ namespace NickvisionTagger::Models
         void setYear(unsigned int year);
         unsigned int getTrack() const;
         void setTrack(unsigned int track);
+        std::string getAlbumArtist() const;
+        void setAlbumArtist(const std::string& albumArtist);
         std::string getGenre() const;
         void setGenre(const std::string& genre);
         std::string getComment() const;
