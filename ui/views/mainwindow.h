@@ -5,7 +5,6 @@
 #include <adwaita.h>
 #include "../widget.h"
 #include "../../models/configuration.h"
-#include "../../update/updater.h"
 #include "../../models/musicfolder.h"
 
 namespace NickvisionTagger::UI::Views
@@ -19,7 +18,6 @@ namespace NickvisionTagger::UI::Views
 
     private:
         NickvisionTagger::Models::Configuration& m_configuration;
-        NickvisionTagger::Update::Updater m_updater;
         bool m_opened;
         NickvisionTagger::Models::MusicFolder m_musicFolder;
         std::vector<GtkWidget*> m_listMusicFilesRows;
@@ -34,7 +32,6 @@ namespace NickvisionTagger::UI::Views
         GSimpleAction* m_gio_actInsertAlbumArt;
         GSimpleAction* m_gio_actDownloadMetadata;
         //==Help Actions==//
-        GSimpleAction* m_gio_actUpdate;
         GSimpleAction* m_gio_actPreferences;
         GSimpleAction* m_gio_actKeyboardShortcuts;
         GSimpleAction* m_gio_actChangelog;
@@ -49,7 +46,6 @@ namespace NickvisionTagger::UI::Views
         void tagToFilename();
         void insertAlbumArt();
         void downloadMetadata();
-        void update();
         void preferences();
         void keyboardShortcuts();
         void changelog();

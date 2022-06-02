@@ -3,7 +3,7 @@
 using namespace NickvisionTagger::UI;
 using namespace NickvisionTagger::UI::Controls;
 
-ProgressDialog::ProgressDialog(GtkWidget* parent, const std::string& description, const std::function<void()>& work, const std::function<void()>& then) : Widget{"/ui/controls/progressdialog.xml", "adw_progDialog"}, m_work{work}, m_then{then}, m_isFinished{false}
+ProgressDialog::ProgressDialog(GtkWidget* parent, const std::string& description, const std::function<void()>& work, const std::function<void()>& then) : Widget{"/org/nickvision/tagger/ui/controls/progressdialog.xml", "adw_progDialog"}, m_work{work}, m_then{then}, m_isFinished{false}
 {
     //==Dialog==//
     gtk_window_set_transient_for(GTK_WINDOW(m_gobj), GTK_WINDOW(parent));

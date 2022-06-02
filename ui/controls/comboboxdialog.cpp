@@ -3,7 +3,7 @@
 using namespace NickvisionTagger::UI;
 using namespace NickvisionTagger::UI::Controls;
 
-ComboBoxDialog::ComboBoxDialog(GtkWidget* parent, const std::string& title, const std::string& description, const std::string& rowTitle, const std::vector<std::string>& choices) : Widget{"/ui/controls/comboboxdialog.xml", "gtk_comboBoxDialog"}, m_choices{choices}, m_selectedChoice{""}
+ComboBoxDialog::ComboBoxDialog(GtkWidget* parent, const std::string& title, const std::string& description, const std::string& rowTitle, const std::vector<std::string>& choices) : Widget{"/org/nickvision/tagger/ui/controls/comboboxdialog.xml", "gtk_comboBoxDialog"}, m_choices{choices}, m_selectedChoice{""}
 {
     //==Dialog==//
     gtk_window_set_transient_for(GTK_WINDOW(m_gobj), GTK_WINDOW(parent));

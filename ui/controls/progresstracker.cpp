@@ -3,7 +3,7 @@
 using namespace NickvisionTagger::UI;
 using namespace NickvisionTagger::UI::Controls;
 
-ProgressTracker::ProgressTracker(const std::string& description, const std::function<void()>& work, const std::function<void()>& then) : Widget{"/ui/controls/progresstracker.xml", "gtk_btnProgTracker"}, m_work{work}, m_then{then}, m_isFinished{false}
+ProgressTracker::ProgressTracker(const std::string& description, const std::function<void()>& work, const std::function<void()>& then) : Widget{"/org/nickvision/tagger/ui/controls/progresstracker.xml", "gtk_btnProgTracker"}, m_work{work}, m_then{then}, m_isFinished{false}
 {
     //==Signals==//
     g_timeout_add(50, [](void* data) -> int 

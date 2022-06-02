@@ -14,9 +14,8 @@ using namespace NickvisionTagger::Models;
 using namespace NickvisionTagger::UI;
 using namespace NickvisionTagger::UI::Controls;
 using namespace NickvisionTagger::UI::Views;
-using namespace NickvisionTagger::Update;
 
-MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwindow.xml", "adw_winMain"}, m_configuration{configuration}, m_updater{"https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", {"2022.5.4"}}, m_opened{false}
+MainWindow::MainWindow(Configuration& configuration) : Widget{"/org/nickvision/tagger/ui/views/mainwindow.xml", "adw_winMain"}, m_configuration{configuration}, m_opened{false}
 {
     //==Signals==//
     g_signal_connect(m_gobj, "show", G_CALLBACK((void (*)(GtkWidget*, gpointer*))[](GtkWidget* widget, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onStartup(); }), this);
@@ -54,10 +53,6 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     g_signal_connect(m_gio_actDownloadMetadata, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->downloadMetadata(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actDownloadMetadata));
     //==Help Actions==//
-    //Check for Updates
-    m_gio_actUpdate = g_simple_action_new("update", nullptr);
-    g_signal_connect(m_gio_actUpdate, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->update(); }), this);
-    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actUpdate));
     //Preferences
     m_gio_actPreferences = g_simple_action_new("preferences", nullptr);
     g_signal_connect(m_gio_actPreferences, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->preferences(); }), this);
@@ -75,15 +70,13 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/ui/views/mainwin
     g_signal_connect(m_gio_actAbout, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->about(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actAbout));
     //==Tag Actions Menu Button==//
-    GtkBuilder* builderMenuTagActions{gtk_builder_new_from_resource("/ui/views/menutagactions.xml")};
+    GtkBuilder* builderMenuTagActions{gtk_builder_new_from_resource("/org/nickvision/tagger/ui/views/menutagactions.xml")};
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(gtk_builder_get_object(m_builder, "gtk_btnMenuTagActions")), G_MENU_MODEL(gtk_builder_get_object(builderMenuTagActions, "gio_menuTagActions")));
     g_object_unref(builderMenuTagActions);
     //==Help Menu Button==//
-    GtkBuilder* builderMenuHelp{gtk_builder_new_from_resource("/ui/views/menuhelp.xml")};
+    GtkBuilder* builderMenuHelp{gtk_builder_new_from_resource("/org/nickvision/tagger/ui/views/menuhelp.xml")};
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(gtk_builder_get_object(m_builder, "gtk_btnMenuHelp")), G_MENU_MODEL(gtk_builder_get_object(builderMenuHelp, "gio_menuHelp")));
     g_object_unref(builderMenuHelp);
-    //==No Files Page==//
-    adw_status_page_set_paintable(ADW_STATUS_PAGE(gtk_builder_get_object(m_builder, "adw_pageNoFiles")), gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/org.nickvision.tagger.svg"))));
     //==List Music Files==//
     g_signal_connect(gtk_builder_get_object(m_builder, "gtk_listMusicFiles"), "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer*))[](GtkListBox* listBox, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
 }
@@ -132,16 +125,6 @@ void MainWindow::onStartup()
             reloadMusicFolder();
             sendToast("Loaded " + std::to_string(m_musicFolder.getFiles().size()) + " music files.");
         }
-        //==Check for Updates==//
-        ProgressTracker* progTrackerUpdate{new ProgressTracker("Checking for updates...", [&]() { m_updater.checkForUpdates(); }, [&]()
-        {
-            if(m_updater.getUpdateAvailable())
-            {
-                sendToast("A new update is avaliable.");
-            }
-        })};
-        adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(m_builder, "adw_headerBar")), progTrackerUpdate->gobj());
-        progTrackerUpdate->show();
         m_opened = true;
     }
 }
@@ -397,42 +380,6 @@ void MainWindow::downloadMetadata()
     gtk_widget_show(downloadDialog);
 }
 
-void MainWindow::update()
-{
-    if(m_updater.getUpdateAvailable())
-    {
-        GtkWidget* updateDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
-            GTK_MESSAGE_INFO, GTK_BUTTONS_YES_NO, "Update Available")};
-        gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(updateDialog), std::string("\n===V" + m_updater.getLatestVersion().toString() + " Changelog===\n" + m_updater.getChangelog() + "\n\nTagger can automatically download the update tar.gz file to your Downloads directory. Would you like to continue?").c_str());
-        g_signal_connect(updateDialog, "response", G_CALLBACK((void (*)(GtkDialog*, gint, gpointer*))([](GtkDialog* dialog, gint response_id, gpointer* data)
-        {
-            gtk_window_destroy(GTK_WINDOW(dialog));
-            if(response_id == GTK_RESPONSE_YES)
-            {
-                MainWindow* mainWindow{reinterpret_cast<MainWindow*>(data)};
-                ProgressTracker* progTrackerDownloading{new ProgressTracker("Downloading the update...", [mainWindow]() { mainWindow->m_updater.update(); }, [mainWindow]()
-                {
-                    if(mainWindow->m_updater.getUpdateSuccessful())
-                    {
-                        mainWindow->sendToast("Update downloaded successfully. Please visit your Downloads folder to unpack and run the new update.");
-                    }
-                    else
-                    {
-                        mainWindow->sendToast("Error: Unable to download the update.");
-                    }
-                })};
-                adw_header_bar_pack_end(ADW_HEADER_BAR(gtk_builder_get_object(mainWindow->m_builder, "adw_headerBar")), progTrackerDownloading->gobj());
-                progTrackerDownloading->show();
-            }
-        })), this);
-        gtk_widget_show(updateDialog);
-    }
-    else
-    {
-        sendToast("There is no update at this time. Please try again later.");
-    }
-}
-
 void MainWindow::preferences()
 {
     PreferencesDialog* preferencesDialog{new PreferencesDialog(m_gobj, m_configuration)};
@@ -478,16 +425,16 @@ void MainWindow::changelog()
 {
     GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added support for adding album art to a tag\n- Added support for adding album artist to tag\n- Loaded notification will now only show on startup and when a new folder is opened, not for every folder refresh\n- Updated icon");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added Tagger to AUR");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
 
 void MainWindow::about()
 {
-    gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.5.4", "comments", "An easy-to-use music tag (metadata) editor.",
+    gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.5.5", "comments", "An easy-to-use music tag (metadata) editor.",
                           "copyright", "(C) Nickvision 2021-2022", "license-type", GTK_LICENSE_GPL_3_0, "website", "https://github.com/nlogozzo/NickvisionTagger", "website-label", "GitHub",
-                          "authors", new const char*[2]{ "Nicholas Logozzo", nullptr }, "artists", new const char*[4]{ "Nicholas Logozzo", "daudix-UFO (Icons)", "jannuary (Icons)", nullptr }, "logo", gtk_image_get_paintable(GTK_IMAGE(gtk_image_new_from_resource("/resources/org.nickvision.tagger.svg"))), nullptr);
+                          "authors", new const char*[2]{ "Nicholas Logozzo", nullptr }, "artists", new const char*[4]{ "Nicholas Logozzo", "daudix-UFO (Icons)", "jannuary (Icons)", nullptr }, "logo-icon-name", "org.nickvision.tagger", nullptr);
 }
 
 void MainWindow::sendToast(const std::string& message)
