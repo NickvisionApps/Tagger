@@ -1,5 +1,6 @@
 #include "mediahelpers.h"
 #include <vector>
+#include <fstream>
 #include <sstream>
 #include <cmath>
 #include <iomanip>
@@ -46,7 +47,11 @@ std::string MediaHelpers::fileSizeToString(std::uintmax_t fileSize)
     return builder.str();
 }
 
-unsigned int MediaHelpers::musicBrainzDateToYear(const std::string& date)
+TagLib::ByteVector MediaHelpers::byteVectorFromFile(const std::filesystem::path& path)
 {
-    return stoui({date.substr(0, 4)});
+    std::ifstream pictureFile{path, std::ios::binary};
+    std::stringstream builder;
+    builder << pictureFile.rdbuf();
+    std::string data{builder.str()};
+    return TagLib::ByteVector::fromCString(data.c_str(), data.size());
 }

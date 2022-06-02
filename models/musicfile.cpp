@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include <textidentificationframe.h>
 #include <musicbrainz5/Query.h>
-#include <musicbrainz5/Metadata.h>
 #include <musicbrainz5/Artist.h>
 #include <musicbrainz5/ArtistCredit.h>
 #include <musicbrainz5/Release.h>
@@ -595,10 +594,9 @@ void MusicFile::setAlbumArt(const TagLib::ByteVector& albumArt)
         m_fileMP3->ID3v2Tag(true)->removeFrames("APIC");
         if(!albumArt.isEmpty())
         {
-            std::cout << albumArt.size() << std::endl;
             TagLib::ID3v2::AttachedPictureFrame* pictureFrame{new TagLib::ID3v2::AttachedPictureFrame};
             pictureFrame->setType(TagLib::ID3v2::AttachedPictureFrame::Type::FrontCover);
-            pictureFrame->setPicture(albumArt.data());
+            pictureFrame->setPicture(albumArt);
             m_fileMP3->ID3v2Tag(true)->addFrame(pictureFrame);
         }
     }
@@ -630,7 +628,7 @@ void MusicFile::setAlbumArt(const TagLib::ByteVector& albumArt)
         {
             TagLib::ID3v2::AttachedPictureFrame* pictureFrame{new TagLib::ID3v2::AttachedPictureFrame};
             pictureFrame->setType(TagLib::ID3v2::AttachedPictureFrame::Type::FrontCover);
-            pictureFrame->setPicture(albumArt.data());
+            pictureFrame->setPicture(albumArt);
             m_fileWAV->ID3v2Tag()->addFrame(pictureFrame);
         }
     }
@@ -798,7 +796,7 @@ bool MusicFile::downloadMusicBrainzMetadata()
             {
                 MusicBrainz5::CRelease* release{releaseList->Item(0)};
                 MusicBrainz5::CReleaseGroup* releaseGroup{release->ReleaseGroup()};
-                setYear(MediaHelpers::musicBrainzDateToYear(release->Date()));
+                setYear(MediaHelpers::stoui(release->Date().substr(0, 4)));
                 if(releaseGroup && releaseGroup->PrimaryType() == "Album")
                 {
                     MusicBrainz5::CArtistCredit* artistCredit{releaseGroup->ArtistCredit()};

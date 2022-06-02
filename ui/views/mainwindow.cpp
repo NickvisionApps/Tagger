@@ -357,9 +357,7 @@ void MainWindow::insertAlbumArt()
             GFile* file{gtk_file_chooser_get_file(chooser)};
             std::string path{g_file_get_path(file)};
             g_object_unref(file);
-            GdkPixbuf* pixbuf{gdk_pixbuf_new_from_file(path.c_str(), nullptr)};
-            TagLib::ByteVector byteVector{GtkHelpers::gdk_pixbuf_get_byte_vector(pixbuf)};
-            g_object_unref(pixbuf);
+            TagLib::ByteVector byteVector{MediaHelpers::byteVectorFromFile(path)};
             ProgressDialog* progDialogInserting{new ProgressDialog(mainWindow->m_gobj, "Inserting album art...", [mainWindow, byteVector]() 
             { 
                 for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
