@@ -4,9 +4,8 @@
 **An easy-to-use music tag (metadata) editor**
 
 # Features
-- Edit tags of multiple files at once
-- Multiple music file types supported (mp3, ogg, and flac)
-- Edit files across subfolders all at once
+- Edit tags and album art of multiple files, even across subfolders, all at once
+- Support for multiple music file types (mp3, ogg, flac, wma, and wav)
 - Convert filenames to tags and tags to filenames with ease
 - Easily download tag data from the internet with the click of a button (powered by libmusicbrainz5)
 
