@@ -92,7 +92,7 @@ std::string MusicFile::getTitle() const
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        return m_fileMP3->ID3v2Tag()->title().toCString();
+        return m_fileMP3->ID3v2Tag(true)->title().toCString();
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -100,7 +100,7 @@ std::string MusicFile::getTitle() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->xiphComment()->title().toCString();
+        return m_fileFLAC->xiphComment(true)->title().toCString();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -118,7 +118,7 @@ void MusicFile::setTitle(const std::string& title)
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        m_fileMP3->ID3v2Tag()->setTitle(title);
+        m_fileMP3->ID3v2Tag(true)->setTitle(title);
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -126,7 +126,7 @@ void MusicFile::setTitle(const std::string& title)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->xiphComment()->setTitle(title);
+        m_fileFLAC->xiphComment(true)->setTitle(title);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -143,7 +143,7 @@ std::string MusicFile::getArtist() const
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        return m_fileMP3->ID3v2Tag()->artist().toCString();
+        return m_fileMP3->ID3v2Tag(true)->artist().toCString();
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -151,7 +151,7 @@ std::string MusicFile::getArtist() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->xiphComment()->artist().toCString();
+        return m_fileFLAC->xiphComment(true)->artist().toCString();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -169,7 +169,7 @@ void MusicFile::setArtist(const std::string& artist)
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        m_fileMP3->ID3v2Tag()->setArtist(artist);
+        m_fileMP3->ID3v2Tag(true)->setArtist(artist);
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -177,7 +177,7 @@ void MusicFile::setArtist(const std::string& artist)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->xiphComment()->setArtist(artist);
+        m_fileFLAC->xiphComment(true)->setArtist(artist);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -194,7 +194,7 @@ std::string MusicFile::getAlbum() const
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        return m_fileMP3->ID3v2Tag()->album().toCString();
+        return m_fileMP3->ID3v2Tag(true)->album().toCString();
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -202,7 +202,7 @@ std::string MusicFile::getAlbum() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->xiphComment()->album().toCString();
+        return m_fileFLAC->xiphComment(true)->album().toCString();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -220,7 +220,7 @@ void MusicFile::setAlbum(const std::string& album)
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        m_fileMP3->ID3v2Tag()->setAlbum(album);
+        m_fileMP3->ID3v2Tag(true)->setAlbum(album);
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -228,7 +228,7 @@ void MusicFile::setAlbum(const std::string& album)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->xiphComment()->setAlbum(album);
+        m_fileFLAC->xiphComment(true)->setAlbum(album);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -245,7 +245,7 @@ unsigned int MusicFile::getYear() const
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        return m_fileMP3->ID3v2Tag()->year();
+        return m_fileMP3->ID3v2Tag(true)->year();
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -253,7 +253,7 @@ unsigned int MusicFile::getYear() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->xiphComment()->year();
+        return m_fileFLAC->xiphComment(true)->year();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -271,7 +271,7 @@ void MusicFile::setYear(unsigned int year)
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        m_fileMP3->ID3v2Tag()->setYear(year);
+        m_fileMP3->ID3v2Tag(true)->setYear(year);
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -279,7 +279,7 @@ void MusicFile::setYear(unsigned int year)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->xiphComment()->setYear(year);
+        m_fileFLAC->xiphComment(true)->setYear(year);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -296,7 +296,7 @@ unsigned int MusicFile::getTrack() const
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        return m_fileMP3->ID3v2Tag()->track();
+        return m_fileMP3->ID3v2Tag(true)->track();
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -304,7 +304,7 @@ unsigned int MusicFile::getTrack() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->xiphComment()->track();
+        return m_fileFLAC->xiphComment(true)->track();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -322,7 +322,7 @@ void MusicFile::setTrack(unsigned int track)
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        m_fileMP3->ID3v2Tag()->setTrack(track);
+        m_fileMP3->ID3v2Tag(true)->setTrack(track);
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -330,7 +330,7 @@ void MusicFile::setTrack(unsigned int track)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->xiphComment()->setTrack(track);
+        m_fileFLAC->xiphComment(true)->setTrack(track);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -347,7 +347,7 @@ std::string MusicFile::getGenre() const
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        return m_fileMP3->ID3v2Tag()->genre().toCString();
+        return m_fileMP3->ID3v2Tag(true)->genre().toCString();
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -355,7 +355,7 @@ std::string MusicFile::getGenre() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->xiphComment()->genre().toCString();
+        return m_fileFLAC->xiphComment(true)->genre().toCString();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -373,7 +373,7 @@ void MusicFile::setGenre(const std::string& genre)
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        m_fileMP3->ID3v2Tag()->setGenre(genre);
+        m_fileMP3->ID3v2Tag(true)->setGenre(genre);
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -381,7 +381,7 @@ void MusicFile::setGenre(const std::string& genre)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->xiphComment()->setGenre(genre);
+        m_fileFLAC->xiphComment(true)->setGenre(genre);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -398,7 +398,7 @@ std::string MusicFile::getComment() const
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        return m_fileMP3->ID3v2Tag()->comment().toCString();
+        return m_fileMP3->ID3v2Tag(true)->comment().toCString();
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -406,7 +406,7 @@ std::string MusicFile::getComment() const
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        return m_fileFLAC->xiphComment()->comment().toCString();
+        return m_fileFLAC->xiphComment(true)->comment().toCString();
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -424,7 +424,7 @@ void MusicFile::setComment(const std::string& comment)
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        m_fileMP3->ID3v2Tag()->setComment(comment);
+        m_fileMP3->ID3v2Tag(true)->setComment(comment);
     }
     else if(m_fileType == MediaFileType::OGG)
     {
@@ -432,7 +432,7 @@ void MusicFile::setComment(const std::string& comment)
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        m_fileFLAC->xiphComment()->setComment(comment);
+        m_fileFLAC->xiphComment(true)->setComment(comment);
     }
     else if(m_fileType == MediaFileType::WMA)
     {
@@ -449,37 +449,46 @@ TagLib::ByteVector MusicFile::getAlbumArt() const
     std::lock_guard<std::mutex> lock(m_mutex);
     if(m_fileType == MediaFileType::MP3)
     {
-        if(m_fileMP3->ID3v2Tag()->frameList("APIC").front())
+        const TagLib::ID3v2::FrameList& frameList = m_fileMP3->ID3v2Tag(true)->frameList("APIC");
+        if(!frameList.isEmpty())
         {
-            return ((TagLib::ID3v2::AttachedPictureFrame*)m_fileMP3->ID3v2Tag()->frameList("APIC").front())->picture();
+            return ((TagLib::ID3v2::AttachedPictureFrame*)frameList.front())->picture();
         }
     }
     else if(m_fileType == MediaFileType::OGG)
     {
-        if(!m_fileOGG->tag()->pictureList().isEmpty())
+        const TagLib::List<TagLib::FLAC::Picture*>& pictureList = m_fileOGG->tag()->pictureList();
+        if(!pictureList.isEmpty())
         {
-            return m_fileOGG->tag()->pictureList()[0]->data();
+            return pictureList[0]->data();
         }
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        if(!m_fileFLAC->pictureList().isEmpty())
+        const TagLib::List<TagLib::FLAC::Picture*>& pictureList = m_fileFLAC->pictureList();
+        if(!pictureList.isEmpty())
         {
-            return m_fileFLAC->pictureList()[0]->data();
+            return pictureList[0]->data();
         }
     }
     else if(m_fileType == MediaFileType::WMA)
     {
-        if(!m_fileWMA->tag()->attributeListMap()["WM/Picture"].isEmpty())
+        const TagLib::ASF::AttributeListMap& attributeListMap = m_fileWMA->tag()->attributeListMap();
+        if(attributeListMap.contains("WM/Picture"))
         {
-            return m_fileWMA->tag()->attributeListMap()["WM/Picture"][0].toPicture().picture();
+            const TagLib::ASF::AttributeList& attributeList = attributeListMap["WM/Picture"];
+            if(!attributeList.isEmpty())
+            {
+                return attributeList[0].toPicture().picture();
+            }
         }
     }
     else if(m_fileType == MediaFileType::WAV)
     {
-        if(m_fileWAV->ID3v2Tag()->frameList("APIC").front())
+        const TagLib::ID3v2::FrameList& frameList = m_fileWAV->ID3v2Tag()->frameList("APIC");
+        if(!frameList.isEmpty())
         {
-            return ((TagLib::ID3v2::AttachedPictureFrame*)m_fileWAV->ID3v2Tag()->frameList("APIC").front())->picture();
+            return ((TagLib::ID3v2::AttachedPictureFrame*)frameList.front())->picture();
         }
     }
     return {};

@@ -1,13 +1,13 @@
 #include "mainwindow.h"
 #include <filesystem>
 #include <regex>
+#include "../../helpers/gtkhelpers.h"
+#include "../../helpers/mediahelpers.h"
 #include "../controls/progressdialog.h"
 #include "../controls/progresstracker.h"
 #include "../controls/comboboxdialog.h"
 #include "preferencesdialog.h"
 #include "shortcutsdialog.h"
-#include "../../helpers/gtkhelpers.h"
-#include "../../helpers/mediahelpers.h"
 
 using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
