@@ -1,5 +1,5 @@
 # Nickvision Tagger
-![icon](https://user-images.githubusercontent.com/17648453/171425770-6418fb27-267f-456b-a0cc-c3af165333ce.svg)
+![icon](resources/readme-tagger-icon.png)
 
 **An easy-to-use music tag (metadata) editor**
 
