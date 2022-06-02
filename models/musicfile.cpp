@@ -4,8 +4,10 @@
 #include <musicbrainz5/Query.h>
 #include <musicbrainz5/Metadata.h>
 #include <musicbrainz5/Artist.h>
+#include <musicbrainz5/ArtistCredit.h>
 #include <musicbrainz5/Release.h>
 #include <musicbrainz5/ReleaseGroup.h>
+#include <musicbrainz5/NameCredit.h>
 #include "../helpers/mediahelpers.h"
 
 using namespace NickvisionTagger::Helpers;
@@ -537,7 +539,7 @@ void MusicFile::setComment(const std::string& comment)
 
 TagLib::ByteVector MusicFile::getAlbumArt() const
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
         const TagLib::ID3v2::FrameList& frameList{m_fileMP3->ID3v2Tag(true)->frameList("APIC")};
@@ -587,7 +589,7 @@ TagLib::ByteVector MusicFile::getAlbumArt() const
 
 void MusicFile::setAlbumArt(const TagLib::ByteVector& albumArt)
 {
-    std::lock_guard<std::mutex> lock(m_mutex);
+    std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
         
@@ -762,19 +764,25 @@ bool MusicFile::tagToFilename(const std::string& formatString)
 
 bool MusicFile::downloadMusicBrainzMetadata()
 {
-    MusicBrainz5::CQuery Query{"NickvisionTagger/2022.5.1 ( nlogozzo225@gmail.com )"};
+    MusicBrainz5::CQuery Query{"NickvisionTagger/2022.5.4 ( nlogozzo225@gmail.com )"};
     if(!getTitle().empty() && !getArtist().empty())
     {
         try
         {
-            MusicBrainz5::CMetadata metadataRelease{Query.Query("release", "", "", { {"query", "artist:" + getArtist() + " release:" + getTitle()} })};
-            if(metadataRelease.ReleaseList() && metadataRelease.ReleaseList()->Item(0))
+            MusicBrainz5::CReleaseList* releaseList{Query.Query("release", "", "", {{"query", "artist:" + getArtist() + " release:" + getTitle()}}).ReleaseList()};
+            if(releaseList && releaseList->Item(0))
             {
-                MusicBrainz5::CRelease* release{metadataRelease.ReleaseList()->Item(0)};
+                MusicBrainz5::CRelease* release{releaseList->Item(0)};
+                MusicBrainz5::CReleaseGroup* releaseGroup{release->ReleaseGroup()};
                 setYear(MediaHelpers::musicBrainzDateToYear(release->Date()));
-                if(release->ReleaseGroup() && release->ReleaseGroup()->PrimaryType() == "Album")
+                if(releaseGroup && releaseGroup->PrimaryType() == "Album")
                 {
-                    setAlbum(release->ReleaseGroup()->Title());
+                    MusicBrainz5::CArtistCredit* artistCredit{releaseGroup->ArtistCredit()};
+                    setAlbum(releaseGroup->Title());
+                    if(artistCredit)
+                    {
+                        setAlbumArtist(artistCredit->NameCreditList()->Item(0)->Name());
+                    }
                 }
                 saveTag();
                 return true;
