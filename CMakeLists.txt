@@ -24,6 +24,7 @@ add_executable(NickvisionTagger main.cpp ${HELPERS} ${UPDATE} ${MODELS} ${UI} ${
 
 #Find Libraries
 find_package(PkgConfig)
+find_package(Threads REQUIRED)
 pkg_check_modules(GTK REQUIRED IMPORTED_TARGET gtk4)
 pkg_check_modules(ADWAITA REQUIRED IMPORTED_TARGET libadwaita-1)
 pkg_check_modules(JSONCPP REQUIRED IMPORTED_TARGET jsoncpp)
@@ -32,6 +33,7 @@ pkg_check_modules(TAGLIB REQUIRED IMPORTED_TARGET taglib)
 pkg_check_modules(MUSICBRAINZ REQUIRED IMPORTED_TARGET libmusicbrainz5)
 
 #Link Libraries
+target_link_libraries(NickvisionTagger PRIVATE Threads::Threads)
 target_link_libraries(NickvisionTagger PRIVATE PkgConfig::GTK)
 target_link_libraries(NickvisionTagger PRIVATE PkgConfig::ADWAITA)
 target_link_libraries(NickvisionTagger PRIVATE PkgConfig::JSONCPP)
