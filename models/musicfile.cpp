@@ -592,23 +592,47 @@ void MusicFile::setAlbumArt(const TagLib::ByteVector& albumArt)
     std::lock_guard<std::mutex> lock{m_mutex};
     if(m_fileType == MediaFileType::MP3)
     {
-        
+        m_fileMP3->ID3v2Tag(true)->removeFrames("APIC");
+        if(!albumArt.isEmpty())
+        {
+            std::cout << albumArt.size() << std::endl;
+            TagLib::ID3v2::AttachedPictureFrame* pictureFrame{new TagLib::ID3v2::AttachedPictureFrame};
+            pictureFrame->setType(TagLib::ID3v2::AttachedPictureFrame::Type::FrontCover);
+            pictureFrame->setPicture(albumArt.data());
+            m_fileMP3->ID3v2Tag(true)->addFrame(pictureFrame);
+        }
     }
     else if(m_fileType == MediaFileType::OGG)
     {
-        
+        m_fileOGG->tag()->removeAllPictures();
+        if(!albumArt.isEmpty())
+        {
+            m_fileOGG->tag()->addPicture(new TagLib::FLAC::Picture(albumArt));
+        }
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
-        
+        m_fileFLAC->removePictures();
+        if(!albumArt.isEmpty())
+        {
+            m_fileFLAC->addPicture(new TagLib::FLAC::Picture(albumArt));
+        }
     }
     else if(m_fileType == MediaFileType::WMA)
     {
-        
+        m_fileWMA->tag()->removeItem("WM/Picture");
+        m_fileWMA->tag()->addAttribute("WM/Picture", {albumArt});
     }
     else if(m_fileType == MediaFileType::WAV)
     {
-        
+        m_fileWAV->ID3v2Tag()->removeFrames("APIC");
+        if(!albumArt.isEmpty())
+        {
+            TagLib::ID3v2::AttachedPictureFrame* pictureFrame{new TagLib::ID3v2::AttachedPictureFrame};
+            pictureFrame->setType(TagLib::ID3v2::AttachedPictureFrame::Type::FrontCover);
+            pictureFrame->setPicture(albumArt.data());
+            m_fileWAV->ID3v2Tag()->addFrame(pictureFrame);
+        }
     }
 }
 
