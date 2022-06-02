@@ -11,14 +11,15 @@
 - Easily download tag data from the internet with the click of a button (powered by libmusicbrainz5)
 
 # Screenshots
-![MainWindow](https://user-images.githubusercontent.com/17648453/170878307-6d26200e-27ad-4a5e-8711-1fad44c0b850.png)
-![MusicFolder](https://user-images.githubusercontent.com/17648453/170878314-ccceb274-88ae-41ab-b3b3-34eb2c291d75.png)
-![SelectedFile](https://user-images.githubusercontent.com/17648453/170878322-6cac6fc7-8ed1-4cc7-9db5-aa0602ea54bd.png)
-![MultipleSelection](https://user-images.githubusercontent.com/17648453/170878326-a979d637-62ad-4057-9e25-65a82856cdfa.png)
+![MainWindow](https://user-images.githubusercontent.com/17648453/171565066-5c715e90-61e7-40c7-80a6-77a2bf3079e8.png)
+![MusicFolder](https://user-images.githubusercontent.com/17648453/171565079-5287d6c1-2698-48be-b9fd-eea1be912697.png)
+![SingleFile](https://user-images.githubusercontent.com/17648453/171565097-69b1195a-4eac-4178-a809-fe0c1f4e81e5.png)
+![MultipleFiles](https://user-images.githubusercontent.com/17648453/171565114-e223a9f1-4785-4ec2-bc03-4e9a6976466a.png)
+![AlbumArtSupport](https://user-images.githubusercontent.com/17648453/171565137-aba8028e-40d7-473b-92f1-febfc1883fb2.png)
 ![FilenameToTagConversion](https://user-images.githubusercontent.com/17648453/170810816-406b65fd-7f37-4d11-b821-8e7a82ab9029.png)
-![LightTheme](https://user-images.githubusercontent.com/17648453/170878332-1612137d-266b-4036-a178-b681c9825efd.png)
+![LightTheme](https://user-images.githubusercontent.com/17648453/171565160-0d6dca47-886d-405b-8a11-58f20263cfdc.png)
 ![Settings](https://user-images.githubusercontent.com/17648453/170810823-6fe3baf0-2826-4ecf-8d30-c75a715095aa.png)
-![KeyboardShortcuts](https://user-images.githubusercontent.com/17648453/170878181-85b28a8a-dc00-4302-89b7-7e2749b143a9.png)
+![KeyboardShortcuts](https://user-images.githubusercontent.com/17648453/171565179-e859fc7e-af7f-4f61-beed-f7c3294cfff9.png)
 
 # Dependencies
 - [c++20](https://en.cppreference.com/w/cpp/20) [Only for building the app]
