@@ -32,5 +32,6 @@ build() {
 package() {
 	cd build
 	make DESTDIR="$pkgdir/" install
-    sudo gtk-update-icon-cache -f /usr/share/icons/hicolor
+    ln -s /usr/bin/org.nickvision.tagger ${pkgdir}/usr/bin/nickvision-tagger
+    ln -s /usr/bin/org.nickvision.tagger ${pkgdir}/usr/bin/tagger
 }
