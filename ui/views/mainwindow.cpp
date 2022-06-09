@@ -4,7 +4,6 @@
 #include "../../helpers/gtkhelpers.h"
 #include "../../helpers/mediahelpers.h"
 #include "../controls/progressdialog.h"
-#include "../controls/progresstracker.h"
 #include "../controls/comboboxdialog.h"
 #include "preferencesdialog.h"
 #include "shortcutsdialog.h"
@@ -171,7 +170,7 @@ void MainWindow::reloadMusicFolder()
         int id = 1;
         for(const std::shared_ptr<MusicFile>& musicFile : m_musicFolder.getFiles())
         {
-            GtkWidget* row = adw_action_row_new();
+            GtkWidget* row{adw_action_row_new()};
             adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
             adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(id).c_str());
             gtk_list_box_append(GTK_LIST_BOX(gtk_builder_get_object(m_builder, "gtk_listMusicFiles")), row);

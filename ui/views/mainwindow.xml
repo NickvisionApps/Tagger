@@ -19,7 +19,7 @@
                                 <property name="tooltip-text" translatable="yes">Open Music Folder (Ctrl+O)</property>
                                 <property name="child">
                                     <object class="AdwButtonContent">
-                                        <property name="icon-name" translatable="yes">folder-open-symbolic</property>
+                                        <property name="icon-name">folder-open-symbolic</property>
                                         <property name="label" translatable="yes">Open</property>
                                     </object>
                                 </property>
@@ -36,7 +36,7 @@
                         <child type="end">
                             <object class="GtkMenuButton" id="gtk_btnMenuHelp">
                                 <property name="direction">none</property>
-                                <property name="tooltip-text">Main Menu</property>
+                                <property name="tooltip-text" translatable="yes">Main Menu</property>
                             </object>
                         </child>
                         <child type="end">
