@@ -43,14 +43,14 @@ MainWindow::MainWindow(Configuration& configuration) : Widget{"/org/nickvision/t
     m_gio_actTagToFilename = g_simple_action_new("tagToFilename", nullptr);
     g_signal_connect(m_gio_actTagToFilename, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->tagToFilename(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actTagToFilename));
-    //Insert Album Art
-    m_gio_actInsertAlbumArt = g_simple_action_new("insertAlbumArt", nullptr);
-    g_signal_connect(m_gio_actInsertAlbumArt, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->insertAlbumArt(); }), this);
-    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actInsertAlbumArt));
     //Download Metadata
     m_gio_actDownloadMetadata = g_simple_action_new("downloadMetadata", nullptr);
     g_signal_connect(m_gio_actDownloadMetadata, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->downloadMetadata(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actDownloadMetadata));
+    //Insert Album Art
+    m_gio_actInsertAlbumArt = g_simple_action_new("insertAlbumArt", nullptr);
+    g_signal_connect(m_gio_actInsertAlbumArt, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction* action, GVariant* parameter, gpointer* data) { reinterpret_cast<MainWindow*>(data)->insertAlbumArt(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_gio_actInsertAlbumArt));
     //==Help Actions==//
     //Preferences
     m_gio_actPreferences = g_simple_action_new("preferences", nullptr);
@@ -105,13 +105,13 @@ void MainWindow::onStartup()
         //Remove Tags
         gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.removeTags", new const char*[2]{ "Delete", nullptr });
         //Filename To Tag
-        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.filenameToTag", new const char*[2]{ "<Ctrl><Shift>f", nullptr });
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.filenameToTag", new const char*[2]{ "<Ctrl>f", nullptr });
         //Tag To Filename
-        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.tagToFilename", new const char*[2]{ "<Ctrl><Shift>t", nullptr });
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.tagToFilename", new const char*[2]{ "<Ctrl>t", nullptr });
+        //Download Metadata
+        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.downloadMetadata", new const char*[2]{ "<Ctrl>m", nullptr });
         //Insert Album Art
         gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.insertAlbumArt", new const char*[2]{ "<Ctrl><Shift>o", nullptr });
-        //Download Metadata
-        gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.downloadMetadata", new const char*[2]{ "<Ctrl><Shift>m", nullptr });
         //About
         gtk_application_set_accels_for_action(gtk_window_get_application(GTK_WINDOW(m_gobj)), "win.about", new const char*[2]{ "F1", nullptr });
         //==Load Configuration==//
@@ -272,7 +272,7 @@ void MainWindow::removeTags()
 
 void MainWindow::filenameToTag()
 {
-    ComboBoxDialog* formatStringDialog{new ComboBoxDialog(m_gobj, "Filename to Tag", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%title%" })};
+    ComboBoxDialog* formatStringDialog{new ComboBoxDialog(m_gobj, "Filename to Tag", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" })};
     std::pair<ComboBoxDialog*, MainWindow*>* pointers{new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this)};
     g_signal_connect(formatStringDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer*))([](GtkWidget* widget, gpointer* data)
     {
@@ -298,7 +298,7 @@ void MainWindow::filenameToTag()
 
 void MainWindow::tagToFilename()
 {
-    ComboBoxDialog* formatStringDialog{new ComboBoxDialog(m_gobj, "Tag to Filename", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%title%" })};
+    ComboBoxDialog* formatStringDialog{new ComboBoxDialog(m_gobj, "Tag to Filename", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" })};
     std::pair<ComboBoxDialog*, MainWindow*>* pointers{new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this)};
     g_signal_connect(formatStringDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer*))([](GtkWidget* widget, gpointer* data)
     {
@@ -320,6 +320,30 @@ void MainWindow::tagToFilename()
         delete pointers;
     })), pointers);
     formatStringDialog->show();
+}
+
+void MainWindow::downloadMetadata()
+{
+    GtkWidget* downloadDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
+        GTK_MESSAGE_INFO, GTK_BUTTONS_YES_NO, "Required Information")};
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(downloadDialog), "Downloading tag metadata from the internet requires the music file to have its title and artist properties already set.\nAre you sure you want to continue?");
+    g_signal_connect(downloadDialog, "response", G_CALLBACK((void (*)(GtkDialog*, gint, gpointer*))([](GtkDialog* dialog, gint response_id, gpointer* data)
+    {
+        gtk_window_destroy(GTK_WINDOW(dialog));
+        if(response_id == GTK_RESPONSE_YES)
+        {
+            MainWindow* mainWindow{reinterpret_cast<MainWindow*>(data)};
+            ProgressDialog* progDialogDownloading{new ProgressDialog(mainWindow->m_gobj, "Downloading metadata from internet...", [mainWindow]() 
+            { 
+                for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
+                {
+                    musicFile->downloadMusicBrainzMetadata();
+                }
+            }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
+            progDialogDownloading->show();
+        }
+    })), this);
+    gtk_widget_show(downloadDialog);
 }
 
 void MainWindow::insertAlbumArt()
@@ -353,30 +377,6 @@ void MainWindow::insertAlbumArt()
         g_object_unref(dialog);
     })), this);
     gtk_native_dialog_show(GTK_NATIVE_DIALOG(openPictureDialog));
-}
-
-void MainWindow::downloadMetadata()
-{
-    GtkWidget* downloadDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
-        GTK_MESSAGE_INFO, GTK_BUTTONS_YES_NO, "Required Information")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(downloadDialog), "Downloading tag metadata from the internet requires the music file to have its title and artist properties already set.\nAre you sure you want to continue?");
-    g_signal_connect(downloadDialog, "response", G_CALLBACK((void (*)(GtkDialog*, gint, gpointer*))([](GtkDialog* dialog, gint response_id, gpointer* data)
-    {
-        gtk_window_destroy(GTK_WINDOW(dialog));
-        if(response_id == GTK_RESPONSE_YES)
-        {
-            MainWindow* mainWindow{reinterpret_cast<MainWindow*>(data)};
-            ProgressDialog* progDialogDownloading{new ProgressDialog(mainWindow->m_gobj, "Downloading metadata from internet...", [mainWindow]() 
-            { 
-                for(const std::shared_ptr<MusicFile>& musicFile : mainWindow->m_selectedMusicFiles)
-                {
-                    musicFile->downloadMusicBrainzMetadata();
-                }
-            }, [mainWindow]() { mainWindow->reloadMusicFolder(); })};
-            progDialogDownloading->show();
-        }
-    })), this);
-    gtk_widget_show(downloadDialog);
 }
 
 void MainWindow::preferences()
@@ -424,14 +424,14 @@ void MainWindow::changelog()
 {
     GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added Tagger to AUR");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added \"track- title\" format string\n- Updated shortcuts");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
 
 void MainWindow::about()
 {
-    gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.5.5", "comments", "An easy-to-use music tag (metadata) editor.",
+    gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.6.0", "comments", "An easy-to-use music tag (metadata) editor.",
                           "copyright", "(C) Nickvision 2021-2022", "license-type", GTK_LICENSE_GPL_3_0, "website", "https://github.com/nlogozzo/NickvisionTagger", "website-label", "GitHub",
                           "authors", new const char*[2]{ "Nicholas Logozzo", nullptr }, "artists", new const char*[4]{ "Nicholas Logozzo", "daudix-UFO (Icons)", "jannuary (Icons)", nullptr }, "logo-icon-name", "org.nickvision.tagger", nullptr);
 }

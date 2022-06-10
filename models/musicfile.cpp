@@ -719,7 +719,7 @@ bool MusicFile::filenameToTag(const std::string& formatString)
 {
     if (formatString == "%artist%- %title%")
     {
-        std::size_t dashIndex = getFilename().find("- ");
+        std::size_t dashIndex{getFilename().find("- ")};
         if(dashIndex == std::string::npos)
         {
             return false;
@@ -730,7 +730,7 @@ bool MusicFile::filenameToTag(const std::string& formatString)
     }
     else if (formatString == "%title%- %artist%")
     {
-        std::size_t dashIndex = getFilename().find("- ");
+        std::size_t dashIndex{getFilename().find("- ")};
         if(dashIndex == std::string::npos)
         {
             return false;
@@ -738,6 +738,24 @@ bool MusicFile::filenameToTag(const std::string& formatString)
         setTitle(getFilename().substr(0, dashIndex));
         setArtist(getFilename().substr(dashIndex + 2, getFilename().find(m_path.extension()) - (getTitle().size() + 2)));
         saveTag();
+    }
+    else if (formatString == "%track%- %title")
+    {
+        std::size_t dashIndex{getFilename().find("- ")};
+        if(dashIndex == std::string::npos)
+        {
+            return false;
+        }
+        std::string track{getFilename().substr(0, dashIndex)};
+        try
+        {
+            setTrack(MediaHelpers::stoui(track));
+        }
+        catch(...)
+        {
+            setTrack(0);
+        }
+        setTitle(getFilename().substr(dashIndex + 2, getFilename().find(m_path.extension()) - (track.size() + 2)));
     }
     else if (formatString == "%title%")
     {
@@ -768,6 +786,14 @@ bool MusicFile::tagToFilename(const std::string& formatString)
             return false;
         }
         setFilename(getTitle() + "- " + getArtist() + m_path.extension().string());
+    }
+    else if (formatString == "%track%- %title")
+    {
+        if(getTitle().empty())
+        {
+            return false;
+        }
+        setFilename(std::to_string(getTrack()) + "- " + getTitle() +  m_path.extension().string());
     }
     else if (formatString == "%title%")
     {

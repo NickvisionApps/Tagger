@@ -29,8 +29,8 @@ namespace NickvisionTagger::UI::Views
         GSimpleAction* m_gio_actRemoveTags;
         GSimpleAction* m_gio_actFilenameToTag;
         GSimpleAction* m_gio_actTagToFilename;
-        GSimpleAction* m_gio_actInsertAlbumArt;
         GSimpleAction* m_gio_actDownloadMetadata;
+        GSimpleAction* m_gio_actInsertAlbumArt;
         //==Help Actions==//
         GSimpleAction* m_gio_actPreferences;
         GSimpleAction* m_gio_actKeyboardShortcuts;
@@ -44,8 +44,8 @@ namespace NickvisionTagger::UI::Views
         void removeTags();
         void filenameToTag();
         void tagToFilename();
-        void insertAlbumArt();
         void downloadMetadata();
+        void insertAlbumArt();
         void preferences();
         void keyboardShortcuts();
         void changelog();
