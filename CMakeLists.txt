@@ -52,4 +52,4 @@ install(FILES ${CMAKE_SOURCE_DIR}/resources/org.nickvision.tagger.svg DESTINATIO
 install(FILES ${CMAKE_SOURCE_DIR}/resources/org.nickvision.tagger-devel.svg DESTINATION share/icons/hicolor/scalable/apps)
 install(FILES ${CMAKE_SOURCE_DIR}/resources/org.nickvision.tagger-symbolic.svg DESTINATION share/icons/hicolor/symbolic/apps)
 install(FILES ${CMAKE_SOURCE_DIR}/resources/org.nickvision.tagger-source.svg DESTINATION share/icons/hicolor/scalable/apps)
-install(FILES ${CMAKE_BINARY_DIR}/org.nickvision.tagger PERMISSIONS WORLD_EXECUTE WORLD_WRITE WORLD_READ DESTINATION bin)
+install(FILES ${CMAKE_BINARY_DIR}/org.nickvision.tagger PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE WORLD_READ WORLD_WRITE WORLD_EXECUTE DESTINATION bin)
