@@ -1,13 +1,12 @@
 #include "configuration.h"
 #include <filesystem>
 #include <fstream>
-#include <unistd.h>
-#include <pwd.h>
+#include <adwaita.h>
 #include <json/json.h>
 
 using namespace NickvisionTagger::Models;
 
-Configuration::Configuration() : m_configDir{std::string(getpwuid(getuid())->pw_dir) + "/.config/Nickvision/NickvisionTagger/"}, m_theme{Theme::System}, m_includeSubfolders{true}, m_rememberLastOpenedFolder{true}, m_lastOpenedFolder{""}
+Configuration::Configuration() : m_configDir{std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/"}, m_theme{Theme::System}, m_includeSubfolders{true}, m_rememberLastOpenedFolder{true}, m_lastOpenedFolder{""}
 {
     if (!std::filesystem::exists(m_configDir))
     {
