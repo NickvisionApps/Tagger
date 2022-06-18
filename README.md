@@ -9,6 +9,23 @@
 - Convert filenames to tags and tags to filenames with ease
 - Easily download tag data from the internet with the click of a button (powered by libmusicbrainz5)
 
+# Installation
+
+<table>
+  <tr>
+    <td>Flatpak</td>
+    <td>AUR</td>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://flathub.org/apps/details/org.nickvision.tagger'><img width='130' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+    </td>
+    <td>
+      <a href='https://aur.archlinux.org/packages/nickvision-tagger'>Stable</a>
+    </td>
+  </tr>
+</table>
+
 # Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/173400558-ec011b3b-fdeb-4718-99ff-f5028c02e423.png)
 ![MusicFolder](https://user-images.githubusercontent.com/17648453/171565079-5287d6c1-2698-48be-b9fd-eea1be912697.png)
