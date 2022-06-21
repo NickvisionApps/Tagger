@@ -787,7 +787,7 @@ bool MusicFile::tagToFilename(const std::string& formatString)
         }
         setFilename(getTitle() + "- " + getArtist() + m_path.extension().string());
     }
-    else if (formatString == "%track%- %title")
+    else if (formatString == "%track%- %title%")
     {
         if(getTitle().empty())
         {
