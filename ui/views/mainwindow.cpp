@@ -433,7 +433,7 @@ void MainWindow::about()
 {
     gtk_show_about_dialog(GTK_WINDOW(m_gobj), "program-name", "Nickvision Tagger", "version", "2022.6.3", "comments", "An easy-to-use music tag (metadata) editor.",
                           "copyright", "(C) Nickvision 2021-2022", "license-type", GTK_LICENSE_GPL_3_0, "website", "https://github.com/nlogozzo/NickvisionTagger", "website-label", "GitHub",
-                          "authors", new const char*[2]{ "Nicholas Logozzo", nullptr }, "artists", new const char*[4]{ "Nicholas Logozzo", "daudix-UFO (Icons)", "jannuary (Icons)", nullptr }, "logo-icon-name", "org.nickvision.tagger-devel", nullptr);
+                          "authors", new const char*[2]{ "Nicholas Logozzo", nullptr }, "artists", new const char*[4]{ "Nicholas Logozzo", "daudix-UFO (Icons)", "jannuary (Icons)", nullptr }, "logo-icon-name", "org.nickvision.tagger", nullptr);
 }
 
 void MainWindow::sendToast(const std::string& message)
