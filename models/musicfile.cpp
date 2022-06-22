@@ -22,9 +22,9 @@ MusicFile::MusicFile(const std::filesystem::path& path, const MediaFileType& fil
     {
         m_fileMP3 = std::make_shared<TagLib::MPEG::File>(m_path.c_str());
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
-        m_fileOGG = std::make_shared<TagLib::Ogg::Opus::File>(m_path.c_str());
+        m_fileOGG = std::make_shared<TagLib::Ogg::Vorbis::File>(m_path.c_str());
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
@@ -71,9 +71,9 @@ void MusicFile::setFilename(const std::string& filename)
     {
         m_fileMP3 = std::make_shared<TagLib::MPEG::File>(m_path.c_str());
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
-        m_fileOGG = std::make_shared<TagLib::Ogg::Opus::File>(m_path.c_str());
+        m_fileOGG = std::make_shared<TagLib::Ogg::Vorbis::File>(m_path.c_str());
     }
     else if(m_fileType == MediaFileType::FLAC)
     {
@@ -96,7 +96,7 @@ std::string MusicFile::getTitle() const
     {
         return m_fileMP3->ID3v2Tag(true)->title().toCString();
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         return m_fileOGG->tag()->title().toCString();
     }
@@ -122,7 +122,7 @@ void MusicFile::setTitle(const std::string& title)
     {
         m_fileMP3->ID3v2Tag(true)->setTitle(title);
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         m_fileOGG->tag()->setTitle(title);
     }
@@ -147,7 +147,7 @@ std::string MusicFile::getArtist() const
     {
         return m_fileMP3->ID3v2Tag(true)->artist().toCString();
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         return m_fileOGG->tag()->artist().toCString();
     }
@@ -173,7 +173,7 @@ void MusicFile::setArtist(const std::string& artist)
     {
         m_fileMP3->ID3v2Tag(true)->setArtist(artist);
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         m_fileOGG->tag()->setArtist(artist);
     }
@@ -198,7 +198,7 @@ std::string MusicFile::getAlbum() const
     {
         return m_fileMP3->ID3v2Tag(true)->album().toCString();
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         return m_fileOGG->tag()->album().toCString();
     }
@@ -224,7 +224,7 @@ void MusicFile::setAlbum(const std::string& album)
     {
         m_fileMP3->ID3v2Tag(true)->setAlbum(album);
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         m_fileOGG->tag()->setAlbum(album);
     }
@@ -249,7 +249,7 @@ unsigned int MusicFile::getYear() const
     {
         return m_fileMP3->ID3v2Tag(true)->year();
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         return m_fileOGG->tag()->year();
     }
@@ -275,7 +275,7 @@ void MusicFile::setYear(unsigned int year)
     {
         m_fileMP3->ID3v2Tag(true)->setYear(year);
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         m_fileOGG->tag()->setYear(year);
     }
@@ -300,7 +300,7 @@ unsigned int MusicFile::getTrack() const
     {
         return m_fileMP3->ID3v2Tag(true)->track();
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         return m_fileOGG->tag()->track();
     }
@@ -326,7 +326,7 @@ void MusicFile::setTrack(unsigned int track)
     {
         m_fileMP3->ID3v2Tag(true)->setTrack(track);
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         m_fileOGG->tag()->setTrack(track);
     }
@@ -355,7 +355,7 @@ std::string MusicFile::getAlbumArtist() const
             return frameList.front()->toString().toCString();
         }
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         const TagLib::Ogg::FieldListMap& fieldListMap{m_fileOGG->tag()->fieldListMap()};
         if(fieldListMap.contains("ALBUMARTIST"))
@@ -412,7 +412,7 @@ void MusicFile::setAlbumArtist(const std::string& albumArtist)
         textFrame->setText(albumArtist);
         m_fileMP3->ID3v2Tag(true)->addFrame(textFrame);
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         m_fileOGG->tag()->addField("ALBUMARTIST", albumArtist);
     }
@@ -441,7 +441,7 @@ std::string MusicFile::getGenre() const
     {
         return m_fileMP3->ID3v2Tag(true)->genre().toCString();
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         return m_fileOGG->tag()->genre().toCString();
     }
@@ -467,7 +467,7 @@ void MusicFile::setGenre(const std::string& genre)
     {
         m_fileMP3->ID3v2Tag(true)->setGenre(genre);
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         m_fileOGG->tag()->setGenre(genre);
     }
@@ -492,7 +492,7 @@ std::string MusicFile::getComment() const
     {
         return m_fileMP3->ID3v2Tag(true)->comment().toCString();
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         return m_fileOGG->tag()->comment().toCString();
     }
@@ -518,7 +518,7 @@ void MusicFile::setComment(const std::string& comment)
     {
         m_fileMP3->ID3v2Tag(true)->setComment(comment);
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         m_fileOGG->tag()->setComment(comment);
     }
@@ -547,7 +547,7 @@ TagLib::ByteVector MusicFile::getAlbumArt() const
             return ((TagLib::ID3v2::AttachedPictureFrame*)frameList.front())->picture();
         }
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         const TagLib::List<TagLib::FLAC::Picture*>& pictureList{m_fileOGG->tag()->pictureList()};
         if(!pictureList.isEmpty())
@@ -600,7 +600,7 @@ void MusicFile::setAlbumArt(const TagLib::ByteVector& albumArt)
             m_fileMP3->ID3v2Tag(true)->addFrame(pictureFrame);
         }
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         m_fileOGG->tag()->removeAllPictures();
         if(!albumArt.isEmpty())
@@ -641,7 +641,7 @@ int MusicFile::getDuration() const
     {
         return m_fileMP3->audioProperties()->lengthInSeconds();
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         return m_fileOGG->audioProperties()->lengthInSeconds();
     }
@@ -683,7 +683,7 @@ void MusicFile::saveTag()
     {
         m_fileMP3->save(TagLib::MPEG::File::TagTypes::ID3v2);
     }
-    else if(m_fileType == MediaFileType::OGG)
+    else if(m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
     {
         m_fileOGG->save();
     }

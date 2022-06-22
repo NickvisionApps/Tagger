@@ -1,6 +1,5 @@
 #include "musicfolder.h"
 #include <algorithm>
-#include <filesystem>
 #include <optional>
 
 using namespace NickvisionTagger::Models;

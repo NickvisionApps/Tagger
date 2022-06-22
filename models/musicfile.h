@@ -5,7 +5,7 @@
 #include <filesystem>
 #include <memory>
 #include <taglib/mpegfile.h>
-#include <taglib/opusfile.h>
+#include <taglib/vorbisfile.h>
 #include <taglib/flacfile.h>
 #include <taglib/asffile.h>
 #include <taglib/wavfile.h>
@@ -58,7 +58,7 @@ namespace NickvisionTagger::Models
         std::filesystem::path m_path;
         MediaFileType m_fileType;
         std::shared_ptr<TagLib::MPEG::File> m_fileMP3;
-        std::shared_ptr<TagLib::Ogg::Opus::File> m_fileOGG;
+        std::shared_ptr<TagLib::Ogg::Vorbis::File> m_fileOGG;
         std::shared_ptr<TagLib::FLAC::File> m_fileFLAC;
         std::shared_ptr<TagLib::ASF::File> m_fileWMA;
         std::shared_ptr<TagLib::RIFF::WAV::File> m_fileWAV;

@@ -14,6 +14,7 @@ namespace NickvisionTagger::Models
             WEBM,
             MP3,
             OGG,
+            OPUS,
             FLAC,
             WMA,
             WAV

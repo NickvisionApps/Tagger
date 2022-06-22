@@ -28,6 +28,10 @@ std::optional<MediaFileType> MediaFileType::parse(const std::string& s)
     {
         return MediaFileType::OGG;
     }
+    else if(sToLower.find(".opus") != std::string::npos)
+    {
+        return MediaFileType::OPUS;
+    }
     else if(sToLower.find(".flac") != std::string::npos)
     {
         return MediaFileType::FLAC;
@@ -83,6 +87,8 @@ std::string MediaFileType::toString() const
             return "mp3";
         case MediaFileType::OGG:
             return "ogg";
+        case MediaFileType::OPUS:
+            return "opus";
         case MediaFileType::FLAC:
             return "flac";
         case MediaFileType::WMA:
@@ -106,6 +112,8 @@ std::string MediaFileType::toDotExtension() const
             return ".mp3";
         case MediaFileType::OGG:
             return ".ogg";
+        case MediaFileType::OPUS:
+            return ".opus";
         case MediaFileType::FLAC:
             return ".flac";
         case MediaFileType::WMA:
@@ -129,6 +137,8 @@ bool MediaFileType::isAudio() const
             return true;
         case MediaFileType::OGG:
             return true;
+        case MediaFileType::OPUS:
+            return true;
         case MediaFileType::FLAC:
             return true;
         case MediaFileType::WMA:
@@ -151,6 +161,8 @@ bool MediaFileType::isVideo() const
         case MediaFileType::MP3:
             return false;
         case MediaFileType::OGG:
+            return false;
+        case MediaFileType::OPUS:
             return false;
         case MediaFileType::FLAC:
             return false;

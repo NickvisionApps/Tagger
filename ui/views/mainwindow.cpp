@@ -424,7 +424,7 @@ void MainWindow::changelog()
 {
     GtkWidget* changelogDialog{gtk_message_dialog_new(GTK_WINDOW(m_gobj), GtkDialogFlags(GTK_DIALOG_MODAL),
         GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "What's New?")};
-    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added a filesystem watcher to the application to watch for file changes\n- Fixed an issue where Tag to Filename wasn't working correctly for \"track- title\"");
+    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(changelogDialog), "- Added a filesystem watcher to the application to watch for file changes\n- Added support for OPUS file extension\n- Fixed an issue where attempting to tag an ogg file would crash the program\n- Fixed an issue where Tag to Filename wasn't working correctly for \"track- title\"");
     g_signal_connect(changelogDialog, "response", G_CALLBACK(gtk_window_destroy), nullptr);
     gtk_widget_show(changelogDialog);
 }
