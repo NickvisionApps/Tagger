@@ -1,7 +1,8 @@
-# Nickvision Tagger
-![icon](resources/org.nickvision.tagger.svg)
+<img align="left" style="vertical-align: middle" width="120" height="120" src="resources/org.nickvision.tagger.svg">
 
-**An easy-to-use music tag (metadata) editor**
+# Nickvision Tagger
+
+An easy-to-use music tag (metadata) editor
 
 # Features
 - Edit tags and album art of multiple files, even across subfolders, all at once
