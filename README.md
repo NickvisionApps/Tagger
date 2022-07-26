@@ -1,5 +1,5 @@
 # Nickvision Tagger
-![icon](NickvisionTagger/Resources/icon.svg)
+![icon](NickvisionTagger/Resources/icon.png)
 
 **An easy-to-use music tag (metadata) editor**
 
