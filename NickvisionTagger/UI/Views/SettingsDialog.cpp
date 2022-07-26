@@ -13,14 +13,7 @@ namespace NickvisionTagger::UI::Views
 		//==Views==//
 		changeView(Views::UserInterface);
 		//==Theme==//
-		if (m_configuration.getTheme() == Theme::Light)
-		{
-			m_ui.separator->setStyleSheet("background-color: #c4c2c2;");
-		}
-		else
-		{
-			m_ui.separator->setStyleSheet("background-color: #2b2b2b;");
-		}
+		m_ui.separator->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
 		ThemeHelpers::applyWin32Theme(this);
 		//==Load Config==//
 		m_ui.cmbTheme->setCurrentIndex(static_cast<int>(m_configuration.getTheme(false)));

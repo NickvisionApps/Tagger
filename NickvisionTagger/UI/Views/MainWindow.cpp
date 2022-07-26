@@ -95,19 +95,11 @@ namespace NickvisionTagger::UI::Views
 
 	void MainWindow::refreshTheme()
 	{
-		m_currentTheme = Configuration::getInstance().getTheme();
-		if (m_currentTheme == Theme::Light)
-		{
-			QApplication::setPalette(ThemeHelpers::getLightPalette());
-			m_ui.separator->setStyleSheet("background-color: #c4c2c2;");
-		}
-		else if (m_currentTheme == Theme::Dark)
-		{
-			QApplication::setPalette(ThemeHelpers::getDarkPalette());
-			m_ui.separator->setStyleSheet("background-color: #2b2b2b;");
-		}
+		QApplication::setPalette(ThemeHelpers::getThemedPalette());
+		m_ui.separator->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
 		setStyleSheet("QCommandLinkButton { font-weight: normal; }");
 		ThemeHelpers::applyWin32Theme(this);
+		m_currentTheme = Configuration::getInstance().getTheme();
 	}
 
 	void MainWindow::changePage(Pages page)

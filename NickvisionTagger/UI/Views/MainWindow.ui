@@ -12,7 +12,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../../resources.qrc">
-    <normaloff>:/Resources/icon.ico</normaloff>:/Resources/icon.ico</iconset>
+    <normaloff>:/Resources/icon.svg</normaloff>:/Resources/icon.svg</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -73,6 +73,9 @@
       </item>
       <item>
        <widget class="QCommandLinkButton" name="navCheckForUpdates">
+        <property name="toolTip">
+         <string>Check for Updates (Ctrl+Shift+U)</string>
+        </property>
         <property name="text">
          <string>Check for Updates</string>
         </property>
@@ -93,6 +96,9 @@
       </item>
       <item>
        <widget class="QCommandLinkButton" name="navSettings">
+        <property name="toolTip">
+         <string>Settings (Ctrl+.)</string>
+        </property>
         <property name="text">
          <string>Settings</string>
         </property>
@@ -113,6 +119,9 @@
       </item>
       <item>
        <widget class="QCommandLinkButton" name="navAbout">
+        <property name="toolTip">
+         <string>About (F1)</string>
+        </property>
         <property name="text">
          <string>About</string>
         </property>

@@ -9,15 +9,15 @@
 namespace NickvisionTagger::Helpers::ThemeHelpers
 {
 	/// <summary>
-	/// Gets a light themed QPalette
+	/// Gets a themed QPalette
 	/// </summary>
-	/// <returns>Light themed QPalette</returns>
-	QPalette getLightPalette();
+	/// <returns>QPalette themed for Configuration::getTheme()</returns>
+	QPalette getThemedPalette();
 	/// <summary>
-	/// Gets a dark themed QPalette
+	/// Gets a themed stylesheet for a separator 
 	/// </summary>
-	/// <returns>Dark themed QPalette</returns>
-	QPalette getDarkPalette();
+	/// <returns>Separator stylesheet themed for Configuration::getTheme()</returns>
+	QString getThemedSeparatorStyle();
 	/// <summary>
 	/// Applys Win32 theming to QWidget's Title Bar
 	/// </summary>

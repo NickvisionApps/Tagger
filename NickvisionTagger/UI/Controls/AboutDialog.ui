@@ -74,18 +74,18 @@
        <widget class="QLabel" name="lblIcon">
         <property name="minimumSize">
          <size>
-          <width>80</width>
+          <width>90</width>
           <height>90</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>80</width>
+          <width>90</width>
           <height>90</height>
          </size>
         </property>
         <property name="pixmap">
-         <pixmap resource="../../resources.qrc">:/Resources/icon.png</pixmap>
+         <pixmap resource="../../resources.qrc">:/Resources/icon.svg</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -151,7 +151,8 @@ Nickvision</string>
         <widget class="QLabel" name="lblArc">
          <property name="text">
           <string>Built with C++ and Qt 6
-Icons provided by Icons8</string>
+Icons provided by Icons8
+Application Icon by daudix-UFO and jannuary</string>
          </property>
          <property name="margin">
           <number>0</number>
@@ -177,7 +178,26 @@ Icons provided by Icons8</string>
       </layout>
      </item>
      <item>
+      <widget class="QWidget" name="separator" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>1</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>1</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <layout class="QVBoxLayout" name="verticalLayout_5">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QLabel" name="lblWhatsNew">
          <property name="frameShape">
