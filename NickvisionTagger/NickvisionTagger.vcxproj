@@ -102,8 +102,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Helpers\ThemeHelpers.cpp" />
+    <ClCompile Include="Helpers\MediaHelpers.cpp" />
+    <ClCompile Include="Models\MediaFileType.cpp" />
     <ClCompile Include="Models\AppInfo.cpp" />
     <ClCompile Include="Models\Configuration.cpp" />
+    <ClCompile Include="Models\MusicFile.cpp" />
+    <ClCompile Include="Models\MusicFolder.cpp" />
     <ClCompile Include="UI\Controls\ProgressDialog.cpp" />
     <ClCompile Include="UI\Messenger.cpp" />
     <ClCompile Include="UI\Controls\AboutDialog.cpp" />
@@ -126,10 +130,14 @@
   <ItemGroup>
     <ClInclude Include="Helpers\CurlHelpers.h" />
     <ClInclude Include="Helpers\ThemeHelpers.h" />
+    <ClInclude Include="Helpers\MediaHelpers.h" />
+    <ClInclude Include="Models\MediaFileType.h" />
     <ClInclude Include="Models\AppInfo.h" />
     <ClInclude Include="Models\Configuration.h" />
     <ClInclude Include="Models\Theme.h" />
     <QtMoc Include="UI\Controls\ProgressDialog.h" />
+    <ClInclude Include="Models\MusicFile.h" />
+    <ClInclude Include="Models\MusicFolder.h" />
     <ClInclude Include="UI\Messenger.h" />
     <QtMoc Include="UI\Views\SettingsDialog.h" />
     <QtMoc Include="UI\Controls\AboutDialog.h" />
