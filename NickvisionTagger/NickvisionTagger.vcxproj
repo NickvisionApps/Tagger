@@ -32,12 +32,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.2.4_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets;</QtModules>
+    <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>6.2.4_msvc2019_64</QtInstall>
-    <QtModules>core;gui;widgets;</QtModules>
+    <QtModules>core;gui;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -113,6 +113,7 @@
     <ClCompile Include="UI\Controls\AboutDialog.cpp" />
     <ClCompile Include="UI\Views\HomePage.cpp" />
     <ClCompile Include="UI\Views\SettingsDialog.cpp" />
+    <ClCompile Include="UI\Views\TaggerPage.cpp" />
     <ClCompile Include="Update\UpdateConfig.cpp" />
     <ClCompile Include="Update\Updater.cpp" />
     <ClCompile Include="Update\Version.cpp" />
@@ -126,6 +127,7 @@
     <ClCompile Include="UI\Views\MainWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <QtUic Include="UI\Views\SettingsDialog.ui" />
+    <QtUic Include="UI\Views\TaggerPage.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helpers\CurlHelpers.h" />
@@ -143,6 +145,7 @@
     <QtMoc Include="UI\Controls\AboutDialog.h" />
     <QtMoc Include="UI\Views\HomePage.h" />
     <ClInclude Include="UI\Views\Pages.h" />
+    <QtMoc Include="UI\Views\TaggerPage.h" />
     <ClInclude Include="Update\UpdateConfig.h" />
     <ClInclude Include="Update\Updater.h" />
     <ClInclude Include="Update\Version.h" />
@@ -153,12 +156,16 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\About.png" />
+    <Image Include="Resources\Delete.png" />
     <Image Include="Resources\Edit.png" />
     <Image Include="Resources\Home.png" />
     <Image Include="Resources\Interface.png" />
     <Image Include="Resources\MusicLibrary.png" />
     <Image Include="Resources\NewFile.png" />
     <Image Include="Resources\OpenFile.png" />
+    <Image Include="Resources\Picture.png" />
+    <Image Include="Resources\Refresh.png" />
+    <Image Include="Resources\Save.png" />
     <Image Include="Resources\Settings.png" />
     <Image Include="Resources\Tag.png" />
     <Image Include="Resources\Update.png" />

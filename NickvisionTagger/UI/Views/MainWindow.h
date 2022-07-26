@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include "ui_MainWindow.h"
 #include "HomePage.h"
+#include "TaggerPage.h"
 #include "Pages.h"
 #include "../../Models/Theme.h"
 #include "../../Update/Updater.h"
@@ -52,6 +53,7 @@ namespace NickvisionTagger::UI::Views
         //==UI==//
         Ui::MainWindow m_ui;
         HomePage m_homePage;
+        TaggerPage m_taggerPage;
         //==Functions==//
         /// <summary>
         /// Refreshes the theme of the window

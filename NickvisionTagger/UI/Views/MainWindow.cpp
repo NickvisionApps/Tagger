@@ -23,7 +23,7 @@ namespace NickvisionTagger::UI::Views
 		setWindowTitle(QString::fromStdString(AppInfo::getInstance().getName()));
 		//==Pages==//
 		m_ui.viewStack->addWidget(&m_homePage);
-		m_ui.viewStack->addWidget(new QFrame());
+		m_ui.viewStack->addWidget(&m_taggerPage);
 		changePage(Pages::Home);
 		//==Theme==//
 		refreshTheme();
