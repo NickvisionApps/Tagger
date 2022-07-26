@@ -26,9 +26,9 @@ namespace NickvisionTagger::UI::Views
 		/// </summary>
 		void on_navUserInterface_clicked();
 		/// <summary>
-		/// Navigate to application view
+		/// Navigate to tagger view
 		/// </summary>
-		void on_navApplication_clicked();
+		void on_navTagger_clicked();
 		/// <summary>
 		/// Saves the configuration and closes the dialog
 		/// </summary>
@@ -45,7 +45,7 @@ namespace NickvisionTagger::UI::Views
 		enum class Views
 		{
 			UserInterface = 0,
-			Application
+			Tagger
 		};
 		//==Vars==//
 		NickvisionTagger::Models::Configuration& m_configuration;

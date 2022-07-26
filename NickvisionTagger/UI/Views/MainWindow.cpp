@@ -43,9 +43,9 @@ namespace NickvisionTagger::UI::Views
 		changePage(Pages::Home);
 	}
 
-	void MainWindow::on_navEditor_clicked()
+	void MainWindow::on_navTagger_clicked()
 	{
-		changePage(Pages::Editor);
+		changePage(Pages::Tagger);
 	}
 
 	void MainWindow::on_navCheckForUpdates_clicked()
@@ -108,12 +108,12 @@ namespace NickvisionTagger::UI::Views
 		if (page == Pages::Home)
 		{
 			m_ui.navHome->setChecked(true);
-			m_ui.navEditor->setChecked(false);
+			m_ui.navTagger->setChecked(false);
 		}
-		else if (page == Pages::Editor)
+		else if (page == Pages::Tagger)
 		{
 			m_ui.navHome->setChecked(false);
-			m_ui.navEditor->setChecked(true);
+			m_ui.navTagger->setChecked(true);
 		}
 	}
 }

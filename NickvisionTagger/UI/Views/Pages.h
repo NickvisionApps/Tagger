@@ -8,6 +8,6 @@ namespace NickvisionTagger::UI::Views
 	enum class Pages
 	{
 		Home = 0,
-		Editor
+		Tagger
 	};
 }

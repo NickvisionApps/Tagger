@@ -17,6 +17,8 @@ namespace NickvisionTagger::UI::Views
 		ThemeHelpers::applyWin32Theme(this);
 		//==Load Config==//
 		m_ui.cmbTheme->setCurrentIndex(static_cast<int>(m_configuration.getTheme(false)));
+		m_ui.chkIncludeSubfolders->setChecked(m_configuration.getIncludeSubfolders());
+		m_ui.chkRememberLastOpenedFolder->setChecked(m_configuration.getRememberLastOpenedFolder());
 	}
 
 	void SettingsDialog::on_navUserInterface_clicked()
@@ -24,14 +26,16 @@ namespace NickvisionTagger::UI::Views
 		changeView(Views::UserInterface);
 	}
 
-	void SettingsDialog::on_navApplication_clicked()
+	void SettingsDialog::on_navTagger_clicked()
 	{
-		changeView(Views::Application);
+		changeView(Views::Tagger);
 	}
 
 	void SettingsDialog::on_btnSave_clicked()
 	{
 		m_configuration.setTheme(static_cast<Theme>(m_ui.cmbTheme->currentIndex()));
+		m_configuration.setIncludeSubfolders(m_ui.chkIncludeSubfolders->isChecked());
+		m_configuration.setRememberLastOpenedFolder(m_ui.chkRememberLastOpenedFolder->isChecked());
 		m_configuration.save();
 		close();
 	}
@@ -47,12 +51,12 @@ namespace NickvisionTagger::UI::Views
 		if (view == Views::UserInterface)
 		{
 			m_ui.navUserInterface->setChecked(true);
-			m_ui.navApplication->setChecked(false);
+			m_ui.navTagger->setChecked(false);
 		}
-		else if (view == Views::Application)
+		else if (view == Views::Tagger)
 		{
 			m_ui.navUserInterface->setChecked(false);
-			m_ui.navApplication->setChecked(true);
+			m_ui.navTagger->setChecked(true);
 		}
 	}
 }

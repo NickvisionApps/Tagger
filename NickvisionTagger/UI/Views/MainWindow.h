@@ -29,9 +29,9 @@ namespace NickvisionTagger::UI::Views
         /// </summary>
         void on_navHome_clicked();
         /// <summary>
-        /// Navigate to editor page
+        /// Navigate to tagger page
         /// </summary>
-        void on_navEditor_clicked();
+        void on_navTagger_clicked();
         /// <summary>
         /// Checks for an application update
         /// </summary>

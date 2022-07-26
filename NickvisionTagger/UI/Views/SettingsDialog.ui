@@ -51,7 +51,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QCommandLinkButton" name="navApplication">
+        <widget class="QCommandLinkButton" name="navTagger">
          <property name="maximumSize">
           <size>
            <width>140</width>
@@ -59,11 +59,11 @@
           </size>
          </property>
          <property name="text">
-          <string>Application</string>
+          <string>Tagger</string>
          </property>
          <property name="icon">
           <iconset resource="../../resources.qrc">
-           <normaloff>:/Resources/Edit.png</normaloff>:/Resources/Edit.png</iconset>
+           <normaloff>:/Resources/Tag.png</normaloff>:/Resources/Tag.png</iconset>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -107,7 +107,7 @@
      <item>
       <widget class="QStackedWidget" name="viewStack">
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="pageUserInterface">
         <layout class="QVBoxLayout" name="verticalLayout">
@@ -169,7 +169,58 @@
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="pageApplication"/>
+       <widget class="QWidget" name="pageApplication">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="leftMargin">
+          <number>6</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QGroupBox" name="groupMusicFolder">
+           <property name="title">
+            <string>Music Folder</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QCheckBox" name="chkIncludeSubfolders">
+              <property name="text">
+               <string>Include Subfolders</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="chkRememberLastOpenedFolder">
+              <property name="text">
+               <string>Remember Last Opened Music Folder</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
     </layout>
