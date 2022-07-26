@@ -224,7 +224,10 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QScrollArea" name="scrollArea">
+      <widget class="QTableWidget" name="tblMusicFiles"/>
+     </item>
+     <item>
+      <widget class="QScrollArea" name="scrollTagProperties">
        <property name="minimumSize">
         <size>
          <width>320</width>
@@ -243,7 +246,7 @@
        <property name="widgetResizable">
         <bool>true</bool>
        </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents">
+       <widget class="QWidget" name="scrollTagPropertiesContent">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -515,16 +518,6 @@
          </item>
         </layout>
        </widget>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTableWidget" name="tblMusicFiles">
-       <property name="minimumSize">
-        <size>
-         <width>400</width>
-         <height>0</height>
-        </size>
-       </property>
       </widget>
      </item>
     </layout>

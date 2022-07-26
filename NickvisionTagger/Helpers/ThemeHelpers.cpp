@@ -20,7 +20,7 @@ namespace NickvisionTagger::Helpers
             palette.setColor(QPalette::ToolTipText, Qt::black);
             palette.setColor(QPalette::Text, Qt::black);
             palette.setColor(QPalette::Disabled, QPalette::Text, QColor(127, 127, 127));
-            palette.setColor(QPalette::Button, QColor(250, 250, 250));
+            palette.setColor(QPalette::Button, QColor(243, 243, 243));
             palette.setColor(QPalette::ButtonText, Qt::black);
             palette.setColor(QPalette::Disabled, QPalette::ButtonText, QColor(127, 127, 127));
             palette.setColor(QPalette::BrightText, Qt::red);

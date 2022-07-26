@@ -19,8 +19,11 @@ namespace NickvisionTagger::UI::Views
 		/// <param name="parent">The parent of the widget, if any</param>
 		TaggerPage(QWidget* parent = nullptr);
 
+	private slots:
+		void on_btnOpenMusicFolder_clicked();
+
 	private:
 		//==UI==//
-		Ui::TaggerPage ui;
+		Ui::TaggerPage m_ui;
 	};
 }
