@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>869</width>
-    <height>568</height>
+    <width>1024</width>
+    <height>654</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -150,6 +150,29 @@
        </widget>
       </item>
       <item>
+       <widget class="QCommandLinkButton" name="btnInsertAlbumArt">
+        <property name="maximumSize">
+         <size>
+          <width>130</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Insert Album Art (Ctrl+Shift+A)</string>
+        </property>
+        <property name="text">
+         <string>Insert Album Art</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../resources.qrc">
+          <normaloff>:/Resources/Picture.png</normaloff>:/Resources/Picture.png</iconset>
+        </property>
+        <property name="shortcut">
+         <string>Ctrl+Shift+A</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCommandLinkButton" name="btnFilenameToTag">
         <property name="maximumSize">
          <size>
@@ -195,36 +218,17 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QCommandLinkButton" name="btnInsertAlbumArt">
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Insert Album Art (Ctrl+Shift+A)</string>
-        </property>
-        <property name="text">
-         <string>Insert Album Art</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../../resources.qrc">
-          <normaloff>:/Resources/Picture.png</normaloff>:/Resources/Picture.png</iconset>
-        </property>
-        <property name="shortcut">
-         <string>Ctrl+Shift+A</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QTableWidget" name="tblMusicFiles"/>
+      <widget class="QTableWidget" name="tblMusicFiles">
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QScrollArea" name="scrollTagProperties">
@@ -252,7 +256,7 @@
           <x>0</x>
           <y>0</y>
           <width>303</width>
-          <height>868</height>
+          <height>966</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -277,7 +281,7 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>26</height>
+             <height>30</height>
             </size>
            </property>
            <property name="placeholderText">
@@ -297,7 +301,7 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>26</height>
+             <height>30</height>
             </size>
            </property>
            <property name="placeholderText">
@@ -317,11 +321,31 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>26</height>
+             <height>30</height>
             </size>
            </property>
            <property name="placeholderText">
             <string>Enter artist here</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="lblAlbum">
+           <property name="text">
+            <string>Album</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="txtAlbum">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="placeholderText">
+            <string>Enter album here</string>
            </property>
           </widget>
          </item>
@@ -337,8 +361,14 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>26</height>
+             <height>30</height>
             </size>
+           </property>
+           <property name="minimum">
+            <number>-1</number>
+           </property>
+           <property name="maximum">
+            <number>9999</number>
            </property>
           </widget>
          </item>
@@ -354,8 +384,14 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>26</height>
+             <height>30</height>
             </size>
+           </property>
+           <property name="minimum">
+            <number>-1</number>
+           </property>
+           <property name="maximum">
+            <number>9999</number>
            </property>
           </widget>
          </item>
@@ -371,7 +407,7 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>26</height>
+             <height>30</height>
             </size>
            </property>
            <property name="placeholderText">
@@ -391,7 +427,7 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>26</height>
+             <height>30</height>
             </size>
            </property>
            <property name="placeholderText">
@@ -411,7 +447,7 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>26</height>
+             <height>30</height>
             </size>
            </property>
            <property name="placeholderText">
@@ -431,7 +467,7 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>26</height>
+             <height>30</height>
             </size>
            </property>
            <property name="readOnly">
@@ -454,7 +490,7 @@
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>26</height>
+             <height>30</height>
             </size>
            </property>
            <property name="readOnly">

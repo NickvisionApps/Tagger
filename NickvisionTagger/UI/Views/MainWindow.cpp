@@ -85,6 +85,7 @@ namespace NickvisionTagger::UI::Views
 		{
 			refreshTheme();
 		}
+		m_taggerPage.updateConfig();
 	}
 
 	void MainWindow::on_navAbout_clicked()
