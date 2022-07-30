@@ -24,8 +24,6 @@ namespace NickvisionTagger::UI::Views
 		m_ui.btnInsertAlbumArt->setVisible(false);
 		m_ui.btnFilenameToTag->setVisible(false);
 		m_ui.btnTagToFilename->setVisible(false);
-		//Tag Properties
-		m_ui.scrollTagProperties->setVisible(false);
 		//==Load Config==//
 		updateConfig();
 		Configuration& configuration{ Configuration::getInstance() };
@@ -132,7 +130,6 @@ namespace NickvisionTagger::UI::Views
 		m_ui.btnInsertAlbumArt->setVisible(true);
 		m_ui.btnFilenameToTag->setVisible(true);
 		m_ui.btnTagToFilename->setVisible(true);
-		m_ui.scrollTagProperties->setVisible(true);
 		m_ui.txtFilename->setReadOnly(false);
 		//==No Files Selected==//
 		if (m_selectedMusicFiles.size() == 0)
@@ -154,7 +151,6 @@ namespace NickvisionTagger::UI::Views
 			m_ui.btnInsertAlbumArt->setVisible(false);
 			m_ui.btnFilenameToTag->setVisible(false);
 			m_ui.btnTagToFilename->setVisible(false);
-			m_ui.scrollTagProperties->setVisible(false);
 		}
 		//==One File Selected==//
 		else if (m_selectedMusicFiles.size() == 1)
