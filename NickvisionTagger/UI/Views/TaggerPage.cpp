@@ -66,12 +66,15 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::on_btnRefreshMusicFolder_clicked()
 	{
+		m_ui.tblMusicFiles->clear();
+		//==Load Files==//
 		ProgressDialog loadingDialog{ this, "Loading music files...", [&]() { m_musicFolder.reloadFiles(); } };
 		loadingDialog.exec();
-		m_ui.tblMusicFiles->clear();
+		//==Setup Table==//
 		m_ui.tblMusicFiles->setColumnCount(7);
 		m_ui.tblMusicFiles->setRowCount(m_musicFolder.getFiles().size());
 		m_ui.tblMusicFiles->setHorizontalHeaderLabels({ "Filename", "Title", "Artist", "Album", "Comment", "Duration", "Path" });
+		//==Load Files In Table==//
 		int id = 0;
 		for (const std::shared_ptr<MusicFile>& musicFile : m_musicFolder.getFiles())
 		{
