@@ -92,7 +92,51 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::on_btnSaveTags_clicked()
 	{
-
+		ProgressDialog savingDialog{ this, "Saving tags...", [&]()
+		{
+			for (const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+			{
+				if (m_ui.txtFilename->text().toStdString() != musicFile->getFilename() && m_ui.txtFilename->text().toStdString() != "<keep>")
+				{
+					musicFile->setFilename(m_ui.txtFilename->text().toStdString());
+				}
+				if (m_ui.txtTitle->text().toStdString() != "<keep>")
+				{
+					musicFile->setTitle(m_ui.txtTitle->text().toStdString());
+				}
+				if (m_ui.txtArtist->text().toStdString() != "<keep>")
+				{
+					musicFile->setArtist(m_ui.txtArtist->text().toStdString());
+				}
+				if (m_ui.txtAlbum->text().toStdString() != "<keep>")
+				{
+					musicFile->setAlbum(m_ui.txtAlbum->text().toStdString());
+				}
+				if (m_ui.txtYear->value() != -1)
+				{
+					musicFile->setYear(m_ui.txtYear->value());
+				}
+				if (m_ui.txtTrack->value() != -1)
+				{
+					musicFile->setTrack(m_ui.txtTrack->value());
+				}
+				if (m_ui.txtAlbumArtist->text().toStdString() != "<keep>")
+				{
+					musicFile->setAlbumArtist(m_ui.txtAlbumArtist->text().toStdString());
+				}
+				if (m_ui.txtGenre->text().toStdString() != "<keep>")
+				{
+					musicFile->setGenre(m_ui.txtGenre->text().toStdString());
+				}
+				if (m_ui.txtComment->text().toStdString() != "<keep>")
+				{
+					musicFile->setComment(m_ui.txtComment->text().toStdString());
+				}
+				musicFile->saveTag();
+			}
+		}};
+		savingDialog.exec();
+		on_btnRefreshMusicFolder_clicked();
 	}
 
 	void TaggerPage::on_btnDeleteTags_clicked()
