@@ -1,6 +1,7 @@
 #include "TaggerPage.h"
 #include <filesystem>
 #include <QFileDialog>
+#include <QInputDialog>
 #include <QMessageBox>
 #include "../Messenger.h"
 #include "../Controls/ProgressDialog.h"
@@ -147,7 +148,7 @@ namespace NickvisionTagger::UI::Views
 	{
 		QMessageBox msgDeleteTags{ QMessageBox::Icon::Warning, "Remove Tags", "Are you sure you want to remove the selected tags?", QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No, this };
 		ThemeHelpers::applyWin32Theme(&msgDeleteTags);
-		int result = msgDeleteTags.exec();
+		int result{ msgDeleteTags.exec() };
 		if (result == QMessageBox::StandardButton::Yes)
 		{
 			ProgressDialog removingDialog{ this, "Removing tags...", [&]()
@@ -169,12 +170,50 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::on_btnFilenameToTag_clicked()
 	{
-
+		QInputDialog formatStringDialog{ this };
+		formatStringDialog.setFixedSize(320, 120);
+		formatStringDialog.setWindowTitle("Filename to Tag");
+		formatStringDialog.setLabelText("Select a format string: ");
+		formatStringDialog.setComboBoxItems({ "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" });
+		ThemeHelpers::applyWin32Theme(&formatStringDialog);
+		int result{ formatStringDialog.exec() };
+		if (result == QDialog::Accepted)
+		{
+			std::string selectedFormatString{ formatStringDialog.textValue().toStdString() };
+			ProgressDialog convertingDialog{ this, "Converting filenames to tags...", [&]()
+			{
+				for (const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+				{
+					musicFile->filenameToTag(selectedFormatString);
+				}
+			}};
+			convertingDialog.exec();
+			on_btnRefreshMusicFolder_clicked();
+		}
 	}
 
 	void TaggerPage::on_btnTagToFilename_clicked()
 	{
-
+		QInputDialog formatStringDialog{ this };
+		formatStringDialog.setFixedSize(320, 120);
+		formatStringDialog.setWindowTitle("Tag to Filename");
+		formatStringDialog.setLabelText("Select a format string: ");
+		formatStringDialog.setComboBoxItems({ "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" });
+		ThemeHelpers::applyWin32Theme(&formatStringDialog);
+		int result{ formatStringDialog.exec() };
+		if (result == QDialog::Accepted)
+		{
+			std::string selectedFormatString{ formatStringDialog.textValue().toStdString() };
+			ProgressDialog convertingDialog{ this, "Converting tags to filenames...", [&]()
+			{
+				for (const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+				{
+					musicFile->tagToFilename(selectedFormatString);
+				}
+			}};
+			convertingDialog.exec();
+			on_btnRefreshMusicFolder_clicked();
+		}
 	}
 
 	void TaggerPage::on_tblMusicFiles_itemSelectionChanged()

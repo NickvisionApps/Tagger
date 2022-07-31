@@ -56,7 +56,7 @@ namespace NickvisionTagger::UI::Views
 		{
 			QMessageBox msgUpdate{ QMessageBox::Icon::Information, "Update Available", QString::fromStdString("===V" + m_updater.getLatestVersion().toString() + " Changelog===\n" + m_updater.getChangelog() + "\n\nNickvisionTagger will automatically download and install the update. Please save all work before continuing. Are you ready to update?"), QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No, this };
 			ThemeHelpers::applyWin32Theme(&msgUpdate);
-			int result = msgUpdate.exec();
+			int result{ msgUpdate.exec() };
 			if (result == QMessageBox::StandardButton::Yes)
 			{
 				ProgressDialog updateDialog{ this, "Downloading and installing the update...", [&]() { m_updater.windowsUpdate(this); } };
