@@ -1,9 +1,11 @@
 #include "TaggerPage.h"
 #include <filesystem>
 #include <QFileDialog>
+#include <QMessageBox>
 #include "../Messenger.h"
 #include "../Controls/ProgressDialog.h"
 #include "../../Helpers/MediaHelpers.h"
+#include "../../Helpers/ThemeHelpers.h"
 #include "../../Models/Configuration.h"
 
 using namespace NickvisionTagger::Helpers;
@@ -20,10 +22,12 @@ namespace NickvisionTagger::UI::Views
 		//Buttons
 		m_ui.btnRefreshMusicFolder->setVisible(false);
 		m_ui.btnSaveTags->setVisible(false);
-		m_ui.btnDeleteTags->setVisible(false);
+		m_ui.btnRemoveTags->setVisible(false);
 		m_ui.btnInsertAlbumArt->setVisible(false);
 		m_ui.btnFilenameToTag->setVisible(false);
 		m_ui.btnTagToFilename->setVisible(false);
+		//Tag Properties
+		m_ui.groupTagProperties->setVisible(false);
 		//==Load Config==//
 		updateConfig();
 		Configuration& configuration{ Configuration::getInstance() };
@@ -139,9 +143,23 @@ namespace NickvisionTagger::UI::Views
 		on_btnRefreshMusicFolder_clicked();
 	}
 
-	void TaggerPage::on_btnDeleteTags_clicked()
+	void TaggerPage::on_btnRemoveTags_clicked()
 	{
-
+		QMessageBox msgDeleteTags{ QMessageBox::Icon::Warning, "Remove Tags", "Are you sure you want to remove the selected tags?", QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No, this };
+		ThemeHelpers::applyWin32Theme(&msgDeleteTags);
+		int result = msgDeleteTags.exec();
+		if (result == QMessageBox::StandardButton::Yes)
+		{
+			ProgressDialog removingDialog{ this, "Removing tags...", [&]()
+			{
+				for (const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+				{
+					musicFile->removeTag();
+				}
+			}};
+			removingDialog.exec();
+			on_btnRefreshMusicFolder_clicked();
+		}
 	}
 
 	void TaggerPage::on_btnInsertAlbumArt_clicked()
@@ -173,10 +191,11 @@ namespace NickvisionTagger::UI::Views
 		}
 		//==Update UI==//
 		m_ui.btnSaveTags->setVisible(true);
-		m_ui.btnDeleteTags->setVisible(true);
+		m_ui.btnRemoveTags->setVisible(true);
 		m_ui.btnInsertAlbumArt->setVisible(true);
 		m_ui.btnFilenameToTag->setVisible(true);
 		m_ui.btnTagToFilename->setVisible(true);
+		m_ui.groupTagProperties->setVisible(true);
 		m_ui.txtFilename->setReadOnly(false);
 		//==No Files Selected==//
 		if (m_selectedMusicFiles.size() == 0)
@@ -194,10 +213,11 @@ namespace NickvisionTagger::UI::Views
 			m_ui.txtFileSize->setText("");
 			m_ui.imgAlbumArt->setPixmap({});
 			m_ui.btnSaveTags->setVisible(false);
-			m_ui.btnDeleteTags->setVisible(false);
+			m_ui.btnRemoveTags->setVisible(false);
 			m_ui.btnInsertAlbumArt->setVisible(false);
 			m_ui.btnFilenameToTag->setVisible(false);
 			m_ui.btnTagToFilename->setVisible(false);
+			m_ui.groupTagProperties->setVisible(false);
 		}
 		//==One File Selected==//
 		else if (m_selectedMusicFiles.size() == 1)

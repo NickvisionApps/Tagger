@@ -27,7 +27,7 @@ namespace NickvisionTagger::UI::Views
 		void on_btnOpenMusicFolder_clicked();
 		void on_btnRefreshMusicFolder_clicked();
 		void on_btnSaveTags_clicked();
-		void on_btnDeleteTags_clicked();
+		void on_btnRemoveTags_clicked();
 		void on_btnInsertAlbumArt_clicked();
 		void on_btnFilenameToTag_clicked();
 		void on_btnTagToFilename_clicked();
