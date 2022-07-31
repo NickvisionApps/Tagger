@@ -170,6 +170,7 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::on_btnFilenameToTag_clicked()
 	{
+		//==Format String==//
 		QInputDialog formatStringDialog{ this };
 		formatStringDialog.setFixedSize(320, 120);
 		formatStringDialog.setWindowTitle("Filename to Tag");
@@ -177,6 +178,7 @@ namespace NickvisionTagger::UI::Views
 		formatStringDialog.setComboBoxItems({ "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" });
 		ThemeHelpers::applyWin32Theme(&formatStringDialog);
 		int result{ formatStringDialog.exec() };
+		//==Convert==//
 		if (result == QDialog::Accepted)
 		{
 			std::string selectedFormatString{ formatStringDialog.textValue().toStdString() };
@@ -194,6 +196,7 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::on_btnTagToFilename_clicked()
 	{
+		//==Format String==//
 		QInputDialog formatStringDialog{ this };
 		formatStringDialog.setFixedSize(320, 120);
 		formatStringDialog.setWindowTitle("Tag to Filename");
@@ -201,6 +204,7 @@ namespace NickvisionTagger::UI::Views
 		formatStringDialog.setComboBoxItems({ "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" });
 		ThemeHelpers::applyWin32Theme(&formatStringDialog);
 		int result{ formatStringDialog.exec() };
+		//==Convert==//
 		if (result == QDialog::Accepted)
 		{
 			std::string selectedFormatString{ formatStringDialog.textValue().toStdString() };
