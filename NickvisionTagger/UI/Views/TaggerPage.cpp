@@ -36,6 +36,7 @@ namespace NickvisionTagger::UI::Views
 		{
 			m_musicFolder.setPath(configuration.getLastOpenedFolder());
 			m_ui.btnRefreshMusicFolder->setVisible(true);
+			m_ui.txtStatus->setText(QString::fromStdString(m_musicFolder.getPath().string()));
 			on_btnRefreshMusicFolder_clicked();
 		}
 	}
@@ -65,6 +66,7 @@ namespace NickvisionTagger::UI::Views
 			}
 			//==Update UI==//
 			m_ui.btnRefreshMusicFolder->setVisible(true);
+			m_ui.txtStatus->setText(QString::fromStdString(m_musicFolder.getPath().string()));
 			on_btnRefreshMusicFolder_clicked();
 		}
 	}
