@@ -21,16 +21,47 @@ namespace NickvisionTagger::UI::Views
 		/// </summary>
 		/// <param name="parent">The parent of the widget, if any</param>
 		TaggerPage(QWidget* parent = nullptr);
+		/// <summary>
+		/// Updates the page's objects with the latest configuration
+		/// </summary>
 		void updateConfig();
 
 	private slots:
+		/// <summary>
+		/// Prompts the user to open a music folder
+		/// </summary>
 		void on_btnOpenMusicFolder_clicked();
+		/// <summary>
+		/// Rescans the music folder for music files
+		/// </summary>
 		void on_btnRefreshMusicFolder_clicked();
+		/// <summary>
+		/// Closes the music folder
+		/// </summary>
+		void on_btnCloseMusicFolder_clicked();
+		/// <summary>
+		/// Saves the tags of the selected music files
+		/// </summary>
 		void on_btnSaveTags_clicked();
+		/// <summary>
+		/// Removes the tags of the selected music files
+		/// </summary>
 		void on_btnRemoveTags_clicked();
+		/// <summary>
+		/// Prompts the user to select an image to use as a music file's album art
+		/// </summary>
 		void on_btnInsertAlbumArt_clicked();
+		/// <summary>
+		/// Converts selected music files' filename into it's tag
+		/// </summary>
 		void on_btnFilenameToTag_clicked();
+		/// <summary>
+		/// Converts selected music files' tag into it's filename
+		/// </summary>
 		void on_btnTagToFilename_clicked();
+		/// <summary>
+		/// Updates the selected music files
+		/// </summary>
 		void on_tblMusicFiles_itemSelectionChanged();
 
 	private:

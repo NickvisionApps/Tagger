@@ -22,6 +22,7 @@ namespace NickvisionTagger::UI::Views
 		m_ui.setupUi(this);
 		//Buttons
 		m_ui.btnRefreshMusicFolder->setVisible(false);
+		m_ui.btnCloseMusicFolder->setVisible(false);
 		m_ui.btnSaveTags->setVisible(false);
 		m_ui.btnRemoveTags->setVisible(false);
 		m_ui.btnInsertAlbumArt->setVisible(false);
@@ -30,15 +31,15 @@ namespace NickvisionTagger::UI::Views
 		//Tag Properties
 		m_ui.groupTagProperties->setVisible(false);
 		//==Load Config==//
-		updateConfig();
 		Configuration& configuration{ Configuration::getInstance() };
+		m_musicFolder.setIncludeSubfolders(configuration.getIncludeSubfolders());
 		if (configuration.getRememberLastOpenedFolder() && std::filesystem::exists(configuration.getLastOpenedFolder()))
 		{
 			m_musicFolder.setPath(configuration.getLastOpenedFolder());
 			m_ui.btnRefreshMusicFolder->setVisible(true);
 			m_ui.txtStatus->setText(QString::fromStdString(m_musicFolder.getPath().string()));
-			on_btnRefreshMusicFolder_clicked();
 		}
+		on_btnRefreshMusicFolder_clicked();
 	}
 
 	void TaggerPage::updateConfig()
@@ -66,6 +67,7 @@ namespace NickvisionTagger::UI::Views
 			}
 			//==Update UI==//
 			m_ui.btnRefreshMusicFolder->setVisible(true);
+			m_ui.btnCloseMusicFolder->setVisible(true);
 			m_ui.txtStatus->setText(QString::fromStdString(m_musicFolder.getPath().string()));
 			on_btnRefreshMusicFolder_clicked();
 		}
@@ -95,6 +97,23 @@ namespace NickvisionTagger::UI::Views
 			++id;
 		}
 		m_ui.tblMusicFiles->resizeColumnsToContents();
+	}
+
+	void TaggerPage::on_btnCloseMusicFolder_clicked()
+	{
+		m_musicFolder.setPath("");
+		//==Update Config==//
+		Configuration& configuration{ Configuration::getInstance() };
+		if (configuration.getRememberLastOpenedFolder())
+		{
+			configuration.setLastOpenedFolder("");
+			configuration.save();
+		}
+		//==Update UI==//
+		m_ui.btnRefreshMusicFolder->setVisible(false);
+		m_ui.btnCloseMusicFolder->setVisible(false);
+		m_ui.txtStatus->setText("No Folder Opened");
+		on_btnRefreshMusicFolder_clicked();
 	}
 
 	void TaggerPage::on_btnSaveTags_clicked()
