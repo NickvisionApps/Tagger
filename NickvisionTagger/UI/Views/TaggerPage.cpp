@@ -36,7 +36,9 @@ namespace NickvisionTagger::UI::Views
 		if (configuration.getRememberLastOpenedFolder() && std::filesystem::exists(configuration.getLastOpenedFolder()))
 		{
 			m_musicFolder.setPath(configuration.getLastOpenedFolder());
+			//Update UI
 			m_ui.btnRefreshMusicFolder->setVisible(true);
+			m_ui.btnCloseMusicFolder->setVisible(true);
 			m_ui.txtStatus->setText(QString::fromStdString(m_musicFolder.getPath().string()));
 		}
 		on_btnRefreshMusicFolder_clicked();
