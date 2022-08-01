@@ -20,6 +20,18 @@
      <layout class="QVBoxLayout" name="navBar">
       <item>
        <widget class="QCommandLinkButton" name="navHome">
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>160</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>Home</string>
         </property>
@@ -40,6 +52,18 @@
       </item>
       <item>
        <widget class="QCommandLinkButton" name="navTagger">
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>160</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
          <string>Tagger</string>
         </property>
@@ -73,6 +97,18 @@
       </item>
       <item>
        <widget class="QCommandLinkButton" name="navCheckForUpdates">
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>160</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Check for Updates (Ctrl+Shift+U)</string>
         </property>
@@ -96,6 +132,18 @@
       </item>
       <item>
        <widget class="QCommandLinkButton" name="navSettings">
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>160</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>Settings (Ctrl+.)</string>
         </property>
@@ -119,6 +167,18 @@
       </item>
       <item>
        <widget class="QCommandLinkButton" name="navAbout">
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>160</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="toolTip">
          <string>About (F1)</string>
         </property>
