@@ -22,6 +22,10 @@ namespace NickvisionTagger::UI::Views
 		/// <param name="parent">The parent of the widget, if any</param>
 		TaggerPage(QWidget* parent = nullptr);
 		/// <summary>
+		/// Refreshes the theme of the page
+		/// </summary>
+		void refreshTheme();
+		/// <summary>
 		/// Updates the page's objects with the latest configuration
 		/// </summary>
 		void updateConfig();

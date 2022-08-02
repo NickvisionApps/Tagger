@@ -29,7 +29,8 @@ namespace NickvisionTagger::UI::Views
 		m_ui.btnFilenameToTag->setVisible(false);
 		m_ui.btnTagToFilename->setVisible(false);
 		//Tag Properties
-		m_ui.groupTagProperties->setVisible(false);
+		m_ui.separator->setVisible(false);
+		m_ui.scrollTagProperties->setVisible(false);
 		//==Messages==//
 		Messenger::getInstance().registerMessage("TaggerPage.openMusicFolder", [&](void* parameter) { on_btnOpenMusicFolder_clicked(); });
 		//==Load Config==//
@@ -42,6 +43,11 @@ namespace NickvisionTagger::UI::Views
 			m_ui.btnRefreshMusicFolder->setVisible(true);
 			m_ui.btnCloseMusicFolder->setVisible(true);
 		}
+	}
+
+	void TaggerPage::refreshTheme()
+	{
+		m_ui.separator->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
 	}
 
 	void TaggerPage::updateConfig()
@@ -292,7 +298,8 @@ namespace NickvisionTagger::UI::Views
 		m_ui.btnInsertAlbumArt->setVisible(true);
 		m_ui.btnFilenameToTag->setVisible(true);
 		m_ui.btnTagToFilename->setVisible(true);
-		m_ui.groupTagProperties->setVisible(true);
+		m_ui.separator->setVisible(true);
+		m_ui.scrollTagProperties->setVisible(true);
 		m_ui.txtFilename->setReadOnly(false);
 		//==No Files Selected==//
 		if (m_selectedMusicFiles.size() == 0)
@@ -314,7 +321,8 @@ namespace NickvisionTagger::UI::Views
 			m_ui.btnInsertAlbumArt->setVisible(false);
 			m_ui.btnFilenameToTag->setVisible(false);
 			m_ui.btnTagToFilename->setVisible(false);
-			m_ui.groupTagProperties->setVisible(false);
+			m_ui.separator->setVisible(false);
+			m_ui.scrollTagProperties->setVisible(false);
 		}
 		//==One File Selected==//
 		else if (m_selectedMusicFiles.size() == 1)

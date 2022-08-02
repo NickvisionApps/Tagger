@@ -2,7 +2,9 @@
 #include <ctime>
 #include "Pages.h"
 #include "../Messenger.h"
+#include "../../Helpers/ThemeHelpers.h"
 
+using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::UI;
 
 namespace NickvisionTagger::UI::Views
@@ -26,7 +28,14 @@ namespace NickvisionTagger::UI::Views
         {
             m_ui.lblWelcome->setText("Good evening!");
         }
+        //==Theme==//
+        refreshTheme();
 	}
+
+    void HomePage::refreshTheme()
+    {
+        m_ui.separator->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
+    }
 
     void HomePage::on_btnOpenMusicFolder_clicked()
     {
