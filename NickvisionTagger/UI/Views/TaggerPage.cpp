@@ -205,7 +205,21 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::on_btnInsertAlbumArt_clicked()
 	{
-
+		std::string albumArtPath{ QFileDialog::getOpenFileName(this, "Open Album Art", {}, "Images (*.png *.jpg)").toStdString() };
+		if (!albumArtPath.empty())
+		{
+			TagLib::ByteVector byteVector{ MediaHelpers::getByteVectorFromFile(albumArtPath) };
+			ProgressDialog insertingDialog{ this, "Inserting album art...", [&]()
+			{
+				for (const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+				{
+					musicFile->setAlbumArt(byteVector);
+					musicFile->saveTag();
+				}
+			}};
+			insertingDialog.exec();
+			on_btnRefreshMusicFolder_clicked();
+		}
 	}
 
 	void TaggerPage::on_btnFilenameToTag_clicked()
@@ -317,7 +331,9 @@ namespace NickvisionTagger::UI::Views
 			m_ui.txtComment->setText(QString::fromStdString(firstMusicFile->getComment()));
 			m_ui.txtDuration->setText(QString::fromStdString(firstMusicFile->getDurationAsString()));
 			m_ui.txtFileSize->setText(QString::fromStdString(firstMusicFile->getFileSizeAsString()));
-			m_ui.imgAlbumArt->setPixmap({});
+			QPixmap albumArt;
+			albumArt.loadFromData({ firstMusicFile->getAlbumArt().data(), firstMusicFile->getAlbumArt().size() });
+			m_ui.imgAlbumArt->setPixmap(albumArt);
 		}
 		//==Multiple Files Selected==//
 		else
@@ -387,7 +403,9 @@ namespace NickvisionTagger::UI::Views
 			m_ui.txtComment->setText(haveSameComment ? QString::fromStdString(firstMusicFile->getComment()) : "<keep>");
 			m_ui.txtDuration->setText(QString::fromStdString(MediaHelpers::durationToString(totalDuration)));
 			m_ui.txtFileSize->setText(QString::fromStdString(MediaHelpers::fileSizeToString(totalFileSize)));
-			m_ui.imgAlbumArt->setPixmap(haveSameAlbumArt ? QPixmap() : QPixmap());
+			QPixmap albumArt;
+			albumArt.loadFromData({ firstMusicFile->getAlbumArt().data(), firstMusicFile->getAlbumArt().size() });
+			m_ui.imgAlbumArt->setPixmap(haveSameAlbumArt ? albumArt : QPixmap());
 		}
 	}
 }

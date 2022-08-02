@@ -47,7 +47,7 @@ namespace NickvisionTagger::Helpers
         return builder.str();
     }
 
-    TagLib::ByteVector MediaHelpers::byteVectorFromFile(const std::filesystem::path& path)
+    TagLib::ByteVector MediaHelpers::getByteVectorFromFile(const std::filesystem::path& path)
     {
         std::ifstream pictureFile{ path, std::ios::binary };
         std::stringstream builder;
