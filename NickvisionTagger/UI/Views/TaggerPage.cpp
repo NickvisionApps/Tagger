@@ -16,7 +16,7 @@ using namespace NickvisionTagger::UI::Controls;
 
 namespace NickvisionTagger::UI::Views
 {
-	TaggerPage::TaggerPage(QWidget* parent) : QWidget(parent)
+	TaggerPage::TaggerPage(QWidget* parent) : QWidget{ parent }, m_opened{ false }
 	{
 		//==UI==//
 		m_ui.setupUi(this);
@@ -41,7 +41,6 @@ namespace NickvisionTagger::UI::Views
 			m_ui.btnCloseMusicFolder->setVisible(true);
 			m_ui.txtStatus->setText(QString::fromStdString(m_musicFolder.getPath().string()));
 		}
-		on_btnRefreshMusicFolder_clicked();
 	}
 
 	void TaggerPage::updateConfig()
@@ -51,6 +50,16 @@ namespace NickvisionTagger::UI::Views
 		{
 			m_musicFolder.setIncludeSubfolders(configuration.getIncludeSubfolders());
 			on_btnRefreshMusicFolder_clicked();
+		}
+	}
+
+	void TaggerPage::showEvent(QShowEvent* event)
+	{
+		QWidget::showEvent(event);
+		if (!m_opened)
+		{
+			on_btnRefreshMusicFolder_clicked();
+			m_opened = true;
 		}
 	}
 

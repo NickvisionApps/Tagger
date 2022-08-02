@@ -26,6 +26,9 @@ namespace NickvisionTagger::UI::Views
 		/// </summary>
 		void updateConfig();
 
+	protected:
+		void showEvent(QShowEvent* event) override;
+
 	private slots:
 		/// <summary>
 		/// Prompts the user to open a music folder
@@ -66,6 +69,7 @@ namespace NickvisionTagger::UI::Views
 
 	private:
 		//==Vars==//
+		bool m_opened;
 		NickvisionTagger::Models::MusicFolder m_musicFolder;
 		std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
 		//==UI==//
