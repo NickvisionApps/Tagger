@@ -36,6 +36,14 @@ namespace NickvisionTagger::UI::Views
 				changePage(*page);
 			}
 		});
+		Messenger::getInstance().registerMessage("MainWindow.setTitle", [&](void* parameter)
+		{
+			std::string* title{ static_cast<std::string*>(parameter) };
+			if (title)
+			{
+				setWindowTitle(QString::fromStdString(AppInfo::getInstance().getName() + " - " + *title));
+			}
+		});
 	}
 
 	void MainWindow::on_navHome_clicked()

@@ -1,5 +1,9 @@
 #include "HomePage.h"
 #include <ctime>
+#include "Pages.h"
+#include "../Messenger.h"
+
+using namespace NickvisionTagger::UI;
 
 namespace NickvisionTagger::UI::Views
 {
@@ -23,4 +27,11 @@ namespace NickvisionTagger::UI::Views
             m_ui.lblWelcome->setText("Good evening!");
         }
 	}
+
+    void HomePage::on_btnOpenMusicFolder_clicked()
+    {
+        Messenger::getInstance().sendMessage("TaggerPage.openMusicFolder", nullptr);
+        Pages taggerPage{ Pages::Tagger };
+        Messenger::getInstance().sendMessage("MainWindow.changePage", &taggerPage);
+    }
 }
