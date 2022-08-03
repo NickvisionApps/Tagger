@@ -7,7 +7,7 @@
 
 namespace NickvisionTagger::Models
 {
-    Configuration::Configuration() : m_configDir{ QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).toStdString() }, m_theme{ Theme::System }, m_alwaysStartOnHomePage{ true }, m_includeSubfolders{ true }, m_rememberLastOpenedFolder{ true }, m_lastOpenedFolder{ "" }
+    Configuration::Configuration() : m_configDir{ QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).toStdString() }, m_theme{ Theme::System }, m_alwaysStartOnHomePage{ true }, m_includeSubfolders{ true }, m_recentFolder1{ "" }, m_recentFolder2{ "" }, m_recentFolder3{ "" }
     {
         if (!std::filesystem::exists(m_configDir))
         {
@@ -23,8 +23,9 @@ namespace NickvisionTagger::Models
                 m_theme = static_cast<Theme>(json.get("Theme", 2).asInt());
                 m_alwaysStartOnHomePage = json.get("AlwaysStartOnHomePage", true).asBool();
                 m_includeSubfolders = json.get("IncludeSubfolders", true).asBool();
-                m_rememberLastOpenedFolder = json.get("RememberLastOpenedFolder", true).asBool();
-                m_lastOpenedFolder = json.get("LastOpenedFolder", "").asString();
+                m_recentFolder1 = json.get("RecentFolder1", "").asString();
+                m_recentFolder2 = json.get("RecentFolder2", "").asString();
+                m_recentFolder3 = json.get("RecentFolder3", "").asString();
             }
             catch (...) { }
         }
@@ -71,24 +72,30 @@ namespace NickvisionTagger::Models
         m_includeSubfolders = includeSubfolders;
     }
 
-    bool Configuration::getRememberLastOpenedFolder() const
+    const std::string& Configuration::getRecentFolder1() const
     {
-        return m_rememberLastOpenedFolder;
+        return m_recentFolder1;
     }
 
-    void Configuration::setRememberLastOpenedFolder(bool rememberLastOpenedFolder)
+    const std::string& Configuration::getRecentFolder2() const
     {
-        m_rememberLastOpenedFolder = rememberLastOpenedFolder;
+        return m_recentFolder2;
     }
 
-    const std::string& Configuration::getLastOpenedFolder() const
+    const std::string& Configuration::getRecentFolder3() const
     {
-        return m_lastOpenedFolder;
+        return m_recentFolder3;
     }
 
-    void Configuration::setLastOpenedFolder(const std::string& lastOpenedFolder)
+    void Configuration::addRecentFolder(const std::string& newRecentFolder)
     {
-        m_lastOpenedFolder = lastOpenedFolder;
+        if (newRecentFolder == m_recentFolder1 || newRecentFolder == m_recentFolder2 || newRecentFolder == m_recentFolder3)
+        {
+            return;
+        }
+        m_recentFolder3 = m_recentFolder2;
+        m_recentFolder2 = m_recentFolder1;
+        m_recentFolder1 = newRecentFolder;
     }
 
     void Configuration::save() const
@@ -100,8 +107,9 @@ namespace NickvisionTagger::Models
             json["Theme"] = static_cast<int>(m_theme);
             json["AlwaysStartOnHomePage"] = m_alwaysStartOnHomePage;
             json["IncludeSubfolders"] = m_includeSubfolders;
-            json["RememberLastOpenedFolder"] = m_rememberLastOpenedFolder;
-            json["LastOpenedFolder"] = m_lastOpenedFolder;
+            json["RecentFolder1"] = m_recentFolder1;
+            json["RecentFolder2"] = m_recentFolder2;
+            json["RecentFolder3"] = m_recentFolder3;
             configFile << json;
         }
     }

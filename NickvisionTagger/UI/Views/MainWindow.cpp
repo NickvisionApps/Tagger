@@ -16,7 +16,7 @@ using namespace NickvisionTagger::UI::Controls;
 
 namespace NickvisionTagger::UI::Views
 {
-	MainWindow::MainWindow(QWidget* parent) : QMainWindow{ parent }, m_opened{ false }, m_updater{ "https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.8.0" } }
+	MainWindow::MainWindow(QWidget* parent) : QMainWindow{ parent }, m_updater{ "https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.8.0" } }
 	{
 		//==UI==//
 		m_ui.setupUi(this);
@@ -45,19 +45,10 @@ namespace NickvisionTagger::UI::Views
 				setWindowTitle(QString::fromStdString(AppInfo::getInstance().getName() + " - " + *title));
 			}
 		});
-	}
-
-	void MainWindow::showEvent(QShowEvent* event)
-	{
-		QWidget::showEvent(event);
-		if (!m_opened)
+		//==Load Config==//
+		if (!Configuration::getInstance().getAlwaysStartOnHomePage())
 		{
-			//==Load Config==//
-			if (!Configuration::getInstance().getAlwaysStartOnHomePage())
-			{
-				changePage(Pages::Tagger);
-			}
-			m_opened = true;
+			changePage(Pages::Tagger);
 		}
 	}
 

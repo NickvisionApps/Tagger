@@ -1,5 +1,6 @@
 #include "HomePage.h"
 #include <ctime>
+#include <filesystem>
 #include "Pages.h"
 #include "../Messenger.h"
 #include "../../Helpers/ThemeHelpers.h"
@@ -30,15 +31,59 @@ namespace NickvisionTagger::UI::Views
         {
             m_ui.lblWelcome->setText("Good evening!");
         }
+        //Recent Folder Buttons
+        m_ui.btnRecentFolder1->setVisible(false);
+        m_ui.btnRecentFolder2->setVisible(false);
+        m_ui.btnRecentFolder3->setVisible(false);
         //==Theme==//
         refreshTheme();
         //==Load Config==//
-        m_ui.chkAlwaysStartOnHomePage->setChecked(Configuration::getInstance().getAlwaysStartOnHomePage());
+        Configuration& configuration{ Configuration::getInstance() };
+        if (!configuration.getRecentFolder1().empty() && std::filesystem::exists(configuration.getRecentFolder1()))
+        {
+            m_ui.btnRecentFolder1->setText(QString::fromStdString(configuration.getRecentFolder1()));
+            m_ui.btnRecentFolder1->setVisible(true);
+        }
+        if (!configuration.getRecentFolder2().empty() && std::filesystem::exists(configuration.getRecentFolder2()))
+        {
+            m_ui.btnRecentFolder2->setText(QString::fromStdString(configuration.getRecentFolder2()));
+            m_ui.btnRecentFolder2->setVisible(true);
+        }
+        if (!configuration.getRecentFolder3().empty() && std::filesystem::exists(configuration.getRecentFolder3()))
+        {
+            m_ui.btnRecentFolder3->setText(QString::fromStdString(configuration.getRecentFolder3()));
+            m_ui.btnRecentFolder3->setVisible(true);
+        }
+        m_ui.chkAlwaysStartOnHomePage->setChecked(configuration.getAlwaysStartOnHomePage());
 	}
 
     void HomePage::refreshTheme()
     {
         m_ui.separator->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
+    }
+
+    void HomePage::on_btnRecentFolder1_clicked()
+    {
+        std::string recentFolderPath{ m_ui.btnRecentFolder1->text().toStdString() };
+        Messenger::getInstance().sendMessage("TaggerPage.openRecentMusicFolder", &recentFolderPath);
+        Pages taggerPage{ Pages::Tagger };
+        Messenger::getInstance().sendMessage("MainWindow.changePage", &taggerPage);
+    }
+
+    void HomePage::on_btnRecentFolder2_clicked()
+    {
+        std::string recentFolderPath{ m_ui.btnRecentFolder2->text().toStdString() };
+        Messenger::getInstance().sendMessage("TaggerPage.openRecentMusicFolder", &recentFolderPath);
+        Pages taggerPage{ Pages::Tagger };
+        Messenger::getInstance().sendMessage("MainWindow.changePage", &taggerPage);
+    }
+
+    void HomePage::on_btnRecentFolder3_clicked()
+    {
+        std::string recentFolderPath{ m_ui.btnRecentFolder3->text().toStdString() };
+        Messenger::getInstance().sendMessage("TaggerPage.openRecentMusicFolder", &recentFolderPath);
+        Pages taggerPage{ Pages::Tagger };
+        Messenger::getInstance().sendMessage("MainWindow.changePage", &taggerPage);
     }
 
     void HomePage::on_btnOpenMusicFolder_clicked()

@@ -18,7 +18,6 @@ namespace NickvisionTagger::UI::Views
 		//==Load Config==//
 		m_ui.cmbTheme->setCurrentIndex(static_cast<int>(m_configuration.getTheme(false)));
 		m_ui.chkIncludeSubfolders->setChecked(m_configuration.getIncludeSubfolders());
-		m_ui.chkRememberLastOpenedFolder->setChecked(m_configuration.getRememberLastOpenedFolder());
 	}
 
 	void SettingsDialog::on_navUserInterface_clicked()
@@ -35,7 +34,6 @@ namespace NickvisionTagger::UI::Views
 	{
 		m_configuration.setTheme(static_cast<Theme>(m_ui.cmbTheme->currentIndex()));
 		m_configuration.setIncludeSubfolders(m_ui.chkIncludeSubfolders->isChecked());
-		m_configuration.setRememberLastOpenedFolder(m_ui.chkRememberLastOpenedFolder->isChecked());
 		m_configuration.save();
 		close();
 	}

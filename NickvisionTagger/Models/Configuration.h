@@ -50,25 +50,25 @@ namespace NickvisionTagger::Models
 		/// <param name="includeSubfolders">True for yes, false for no</param>
 		void setIncludeSubfolders(bool includeSubfolders);
 		/// <summary>
-		/// Gets whether or not to remember last opened folder
+		/// Gets the first recent folder
 		/// </summary>
-		/// <returns>True to remember, else false</returns>
-		bool getRememberLastOpenedFolder() const;
+		/// <returns>The first recent folder</returns>
+		const std::string& getRecentFolder1() const;
 		/// <summary>
-		/// Sets whether or not to remember last opened folder
+		/// Gets the second recent folder
 		/// </summary>
-		/// <param name="rememberLastOpenedFolder">True to remember, else false</param>
-		void setRememberLastOpenedFolder(bool rememberLastOpenedFolder);
+		/// <returns>The second recent folder</returns>
+		const std::string& getRecentFolder2() const;
 		/// <summary>
-		/// Gets the last opened folder
+		/// Gets the third recent folder
 		/// </summary>
-		/// <returns>The last opened folder</returns>
-		const std::string& getLastOpenedFolder() const;
+		/// <returns>The third recent folder</returns>
+		const std::string& getRecentFolder3() const;
 		/// <summary>
-		/// Sets the last opened folder
+		/// Adds a recent folder to the list of recent folders
 		/// </summary>
-		/// <param name="lastOpenedFolder">The last opened folder</param>
-		void setLastOpenedFolder(const std::string& lastOpenedFolder);
+		/// <param name="newRecentFolder">The new recent folder to add to the list</param>
+		void addRecentFolder(const std::string& newRecentFolder);
 		/// <summary>
 		/// Saves the configuration file to disk
 		/// </summary>
@@ -83,8 +83,9 @@ namespace NickvisionTagger::Models
 		Theme m_theme;
 		bool m_alwaysStartOnHomePage;
 		bool m_includeSubfolders;
-		bool m_rememberLastOpenedFolder;
-		std::string m_lastOpenedFolder;
+		std::string m_recentFolder1;
+		std::string m_recentFolder2;
+		std::string m_recentFolder3;
 	};
 }
 

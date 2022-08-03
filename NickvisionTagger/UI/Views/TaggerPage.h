@@ -30,13 +30,6 @@ namespace NickvisionTagger::UI::Views
 		/// </summary>
 		void updateConfig();
 
-	protected:
-		/// <summary>
-		/// Occurs when the TaggerPage is shown
-		/// </summary>
-		/// <param name="event">QShowEvent*</param>
-		void showEvent(QShowEvent* event) override;
-
 	private slots:
 		/// <summary>
 		/// Prompts the user to open a music folder
@@ -82,5 +75,11 @@ namespace NickvisionTagger::UI::Views
 		std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
 		//==UI==//
 		Ui::TaggerPage m_ui;
+		//==Functions==//
+		/// <summary>
+		/// Opens a recent music folder via path
+		/// </summary>
+		/// <param name="recentFolderPath">The path of the recent music folder</param>
+		void openRecentMusicFolder(const std::string& recentFolderPath);
 	};
 }

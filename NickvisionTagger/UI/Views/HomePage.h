@@ -25,6 +25,18 @@ namespace NickvisionTagger::UI::Views
 
 	private slots:
 		/// <summary>
+		/// Sends the "TaggerPage.openRecentMusicFolder" message with btnRecentFolder1.text
+		/// </summary>
+		void on_btnRecentFolder1_clicked();
+		/// <summary>
+		/// Sends the "TaggerPage.openRecentMusicFolder" message with btnRecentFolder2.text
+		/// </summary>
+		void on_btnRecentFolder2_clicked();
+		/// <summary>
+		/// Sends the "TaggerPage.openRecentMusicFolder" message with btnRecentFolder3.text
+		/// </summary>
+		void on_btnRecentFolder3_clicked();
+		/// <summary>
 		/// Sends the "TaggerPage.openMusicFolder" message
 		/// </summary>
 		void on_btnOpenMusicFolder_clicked();

@@ -2,6 +2,14 @@
 <ui version="4.0">
  <class>HomePage</class>
  <widget class="QWidget" name="HomePage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>447</width>
+    <height>341</height>
+   </rect>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <property name="leftMargin">
     <number>40</number>
@@ -85,8 +93,8 @@
          </item>
          <item>
           <widget class="QCommandLinkButton" name="btnRecentFolder1">
-           <property name="text">
-            <string>C:/Folder1</string>
+           <property name="toolTip">
+            <string>Recent Folder 1</string>
            </property>
            <property name="icon">
             <iconset resource="../../resources.qrc">
@@ -96,8 +104,8 @@
          </item>
          <item>
           <widget class="QCommandLinkButton" name="btnRecentFolder2">
-           <property name="text">
-            <string>C:/Folder2</string>
+           <property name="toolTip">
+            <string>Recent Folder 2</string>
            </property>
            <property name="icon">
             <iconset resource="../../resources.qrc">
@@ -107,8 +115,8 @@
          </item>
          <item>
           <widget class="QCommandLinkButton" name="btnRecentFolder3">
-           <property name="text">
-            <string>C:/Folder3</string>
+           <property name="toolTip">
+            <string>Recent Folder 3</string>
            </property>
            <property name="icon">
             <iconset resource="../../resources.qrc">
@@ -147,12 +155,18 @@
          </item>
          <item>
           <widget class="QCommandLinkButton" name="btnOpenMusicFolder">
+           <property name="toolTip">
+            <string>Open Music Folder (Ctrl+O)</string>
+           </property>
            <property name="text">
             <string>Open a Music Folder</string>
            </property>
            <property name="icon">
             <iconset resource="../../resources.qrc">
              <normaloff>:/Resources/MusicLibrary.png</normaloff>:/Resources/MusicLibrary.png</iconset>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+O</string>
            </property>
           </widget>
          </item>

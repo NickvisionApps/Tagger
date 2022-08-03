@@ -34,16 +34,16 @@ namespace NickvisionTagger::UI::Views
 		m_ui.scrollTagProperties->setVisible(false);
 		//==Messages==//
 		Messenger::getInstance().registerMessage("TaggerPage.openMusicFolder", [&](void* parameter) { on_btnOpenMusicFolder_clicked(); });
+		Messenger::getInstance().registerMessage("TaggerPage.openRecentMusicFolder", [&](void* parameter) 
+		{ 
+			std::string* recentFolderPath{ static_cast<std::string*>(parameter) };
+			if (recentFolderPath)
+			{
+				openRecentMusicFolder(*recentFolderPath);
+			}
+		});
 		//==Load Config==//
-		Configuration& configuration{ Configuration::getInstance() };
-		m_musicFolder.setIncludeSubfolders(configuration.getIncludeSubfolders());
-		if (configuration.getRememberLastOpenedFolder() && std::filesystem::exists(configuration.getLastOpenedFolder()))
-		{
-			m_musicFolder.setPath(configuration.getLastOpenedFolder());
-			//Update UI
-			m_ui.btnRefreshMusicFolder->setVisible(true);
-			m_ui.btnCloseMusicFolder->setVisible(true);
-		}
+		m_musicFolder.setIncludeSubfolders(Configuration::getInstance().getIncludeSubfolders());
 	}
 
 	void TaggerPage::refreshTheme()
@@ -62,21 +62,6 @@ namespace NickvisionTagger::UI::Views
 		}
 	}
 
-	void TaggerPage::showEvent(QShowEvent* event)
-	{
-		QWidget::showEvent(event);
-		if (!m_opened)
-		{
-			if (!m_musicFolder.getPath().empty())
-			{
-				std::string path{ m_musicFolder.getPath().string() };
-				Messenger::getInstance().sendMessage("MainWindow.setTitle", &path);
-			}
-			on_btnRefreshMusicFolder_clicked();
-			m_opened = true;
-		}
-	}
-
 	void TaggerPage::on_btnOpenMusicFolder_clicked()
 	{
 		std::string folderPath{ QFileDialog::getExistingDirectory(this, "Open Music Folder").toStdString() };
@@ -85,11 +70,8 @@ namespace NickvisionTagger::UI::Views
 			m_musicFolder.setPath(folderPath);
 			//==Update Config==//
 			Configuration& configuration{ Configuration::getInstance() };
-			if (configuration.getRememberLastOpenedFolder())
-			{
-				configuration.setLastOpenedFolder(m_musicFolder.getPath().string());
-				configuration.save();
-			}
+			configuration.addRecentFolder(m_musicFolder.getPath().string());
+			configuration.save();
 			//==Update UI==//
 			m_ui.btnRefreshMusicFolder->setVisible(true);
 			m_ui.btnCloseMusicFolder->setVisible(true);
@@ -128,13 +110,6 @@ namespace NickvisionTagger::UI::Views
 	void TaggerPage::on_btnCloseMusicFolder_clicked()
 	{
 		m_musicFolder.setPath("");
-		//==Update Config==//
-		Configuration& configuration{ Configuration::getInstance() };
-		if (configuration.getRememberLastOpenedFolder())
-		{
-			configuration.setLastOpenedFolder("");
-			configuration.save();
-		}
 		//==Update UI==//
 		m_ui.btnRefreshMusicFolder->setVisible(false);
 		m_ui.btnCloseMusicFolder->setVisible(false);
@@ -419,5 +394,16 @@ namespace NickvisionTagger::UI::Views
 			albumArt.loadFromData({ firstMusicFile->getAlbumArt().data(), firstMusicFile->getAlbumArt().size() });
 			m_ui.imgAlbumArt->setPixmap(haveSameAlbumArt ? albumArt : QPixmap());
 		}
+	}
+
+	void TaggerPage::openRecentMusicFolder(const std::string& recentFolderPath)
+	{
+		m_musicFolder.setPath(recentFolderPath);
+		//==Update UI==//
+		m_ui.btnRefreshMusicFolder->setVisible(true);
+		m_ui.btnCloseMusicFolder->setVisible(true);
+		std::string path{ m_musicFolder.getPath().string() };
+		Messenger::getInstance().sendMessage("MainWindow.setTitle", &path);
+		on_btnRefreshMusicFolder_clicked();
 	}
 }
