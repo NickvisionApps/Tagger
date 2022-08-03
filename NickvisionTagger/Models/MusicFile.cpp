@@ -84,23 +84,23 @@ namespace NickvisionTagger::Models
     {
         if (m_fileType == MediaFileType::MP3)
         {
-            return m_fileMP3->ID3v2Tag(true)->title().toCString();
+            return m_fileMP3->ID3v2Tag(true)->title().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
         {
-            return m_fileOGG->tag()->title().toCString();
+            return m_fileOGG->tag()->title().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::FLAC)
         {
-            return m_fileFLAC->xiphComment(true)->title().toCString();
+            return m_fileFLAC->xiphComment(true)->title().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::WMA)
         {
-            return m_fileWMA->tag()->title().toCString();
+            return m_fileWMA->tag()->title().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::WAV)
         {
-            return m_fileWAV->ID3v2Tag()->title().toCString();
+            return m_fileWAV->ID3v2Tag()->title().to8Bit(true);
         }
         return "";
     }
@@ -133,23 +133,23 @@ namespace NickvisionTagger::Models
     {
         if (m_fileType == MediaFileType::MP3)
         {
-            return m_fileMP3->ID3v2Tag(true)->artist().toCString();
+            return m_fileMP3->ID3v2Tag(true)->artist().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
         {
-            return m_fileOGG->tag()->artist().toCString();
+            return m_fileOGG->tag()->artist().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::FLAC)
         {
-            return m_fileFLAC->xiphComment(true)->artist().toCString();
+            return m_fileFLAC->xiphComment(true)->artist().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::WMA)
         {
-            return m_fileWMA->tag()->artist().toCString();
+            return m_fileWMA->tag()->artist().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::WAV)
         {
-            return m_fileWAV->ID3v2Tag()->artist().toCString();
+            return m_fileWAV->ID3v2Tag()->artist().to8Bit(true);
         }
         return "";
     }
@@ -182,23 +182,23 @@ namespace NickvisionTagger::Models
     {
         if (m_fileType == MediaFileType::MP3)
         {
-            return m_fileMP3->ID3v2Tag(true)->album().toCString();
+            return m_fileMP3->ID3v2Tag(true)->album().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
         {
-            return m_fileOGG->tag()->album().toCString();
+            return m_fileOGG->tag()->album().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::FLAC)
         {
-            return m_fileFLAC->xiphComment(true)->album().toCString();
+            return m_fileFLAC->xiphComment(true)->album().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::WMA)
         {
-            return m_fileWMA->tag()->album().toCString();
+            return m_fileWMA->tag()->album().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::WAV)
         {
-            return m_fileWAV->ID3v2Tag()->album().toCString();
+            return m_fileWAV->ID3v2Tag()->album().to8Bit(true);
         }
         return "";
     }
@@ -332,7 +332,7 @@ namespace NickvisionTagger::Models
             const TagLib::ID3v2::FrameList& frameList{ m_fileMP3->ID3v2Tag(true)->frameList("TPE2") };
             if (!frameList.isEmpty())
             {
-                return frameList.front()->toString().toCString();
+                return frameList.front()->toString().to8Bit(true);
             }
         }
         else if (m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
@@ -343,7 +343,7 @@ namespace NickvisionTagger::Models
                 const TagLib::StringList& stringList{ fieldListMap["ALBUMARTIST"] };
                 if (!stringList.isEmpty())
                 {
-                    return stringList[0].toCString();
+                    return stringList[0].to8Bit(true);
                 }
             }
         }
@@ -355,7 +355,7 @@ namespace NickvisionTagger::Models
                 const TagLib::StringList& stringList{ fieldListMap["ALBUMARTIST"] };
                 if (!stringList.isEmpty())
                 {
-                    return stringList[0].toCString();
+                    return stringList[0].to8Bit(true);
                 }
             }
         }
@@ -367,7 +367,7 @@ namespace NickvisionTagger::Models
                 const TagLib::ASF::AttributeList& attributeList{ attributeListMap["ALBUMARTIST"] };
                 if (!attributeList.isEmpty())
                 {
-                    return attributeList[0].toString().toCString();
+                    return attributeList[0].toString().to8Bit(true);
                 }
             }
         }
@@ -376,7 +376,7 @@ namespace NickvisionTagger::Models
             const TagLib::ID3v2::FrameList& frameList{ m_fileWAV->ID3v2Tag()->frameList("TPE2") };
             if (!frameList.isEmpty())
             {
-                return frameList.front()->toString().toCString();
+                return frameList.front()->toString().to8Bit(true);
             }
         }
         return "";
@@ -417,23 +417,23 @@ namespace NickvisionTagger::Models
     {
         if (m_fileType == MediaFileType::MP3)
         {
-            return m_fileMP3->ID3v2Tag(true)->genre().toCString();
+            return m_fileMP3->ID3v2Tag(true)->genre().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
         {
-            return m_fileOGG->tag()->genre().toCString();
+            return m_fileOGG->tag()->genre().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::FLAC)
         {
-            return m_fileFLAC->xiphComment(true)->genre().toCString();
+            return m_fileFLAC->xiphComment(true)->genre().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::WMA)
         {
-            return m_fileWMA->tag()->genre().toCString();
+            return m_fileWMA->tag()->genre().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::WAV)
         {
-            return m_fileWAV->ID3v2Tag()->genre().toCString();
+            return m_fileWAV->ID3v2Tag()->genre().to8Bit(true);
         }
         return "";
     }
@@ -466,23 +466,23 @@ namespace NickvisionTagger::Models
     {
         if (m_fileType == MediaFileType::MP3)
         {
-            return m_fileMP3->ID3v2Tag(true)->comment().toCString();
+            return m_fileMP3->ID3v2Tag(true)->comment().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
         {
-            return m_fileOGG->tag()->comment().toCString();
+            return m_fileOGG->tag()->comment().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::FLAC)
         {
-            return m_fileFLAC->xiphComment(true)->comment().toCString();
+            return m_fileFLAC->xiphComment(true)->comment().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::WMA)
         {
-            return m_fileWMA->tag()->comment().toCString();
+            return m_fileWMA->tag()->comment().to8Bit(true);
         }
         else if (m_fileType == MediaFileType::WAV)
         {
-            return m_fileWAV->ID3v2Tag()->comment().toCString();
+            return m_fileWAV->ID3v2Tag()->comment().to8Bit(true);
         }
         return "";
     }
