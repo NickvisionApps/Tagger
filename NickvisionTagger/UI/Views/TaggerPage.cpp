@@ -3,6 +3,7 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QMessageBox>
+#include "../IgnoreWheelEventFilter.h"
 #include "../Messenger.h"
 #include "../Controls/ProgressDialog.h"
 #include "../../Helpers/MediaHelpers.h"
@@ -32,6 +33,8 @@ namespace NickvisionTagger::UI::Views
 		//Tag Properties
 		m_ui.separator2->setVisible(false);
 		m_ui.scrollTagProperties->setVisible(false);
+		m_ui.txtYear->installEventFilter(new IgnoreWheelEventFilter(m_ui.txtYear));
+		m_ui.txtTrack->installEventFilter(new IgnoreWheelEventFilter(m_ui.txtTrack));
 		//==Messages==//
 		Messenger::getInstance().registerMessage("TaggerPage.openMusicFolder", [&](void* parameter) { on_btnOpenMusicFolder_clicked(); });
 		Messenger::getInstance().registerMessage("TaggerPage.openRecentMusicFolder", [&](void* parameter) 

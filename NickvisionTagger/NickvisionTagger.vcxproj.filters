@@ -91,6 +91,9 @@
     <ClCompile Include="UI\Views\TaggerPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UI\IgnoreWheelEventFilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Helpers\CurlHelpers.h">
@@ -204,6 +207,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="UI\Views\TaggerPage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="UI\IgnoreWheelEventFilter.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
