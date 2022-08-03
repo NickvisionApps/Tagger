@@ -7,7 +7,7 @@
 
 namespace NickvisionTagger::Models
 {
-    Configuration::Configuration() : m_configDir{ QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).toStdString() }, m_theme{ Theme::System }, m_includeSubfolders{ true }, m_rememberLastOpenedFolder{ true }, m_lastOpenedFolder{ "" }
+    Configuration::Configuration() : m_configDir{ QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).toStdString() }, m_theme{ Theme::System }, m_alwaysStartOnHomePage{ true }, m_includeSubfolders{ true }, m_rememberLastOpenedFolder{ true }, m_lastOpenedFolder{ "" }
     {
         if (!std::filesystem::exists(m_configDir))
         {
@@ -21,6 +21,7 @@ namespace NickvisionTagger::Models
             try
             {
                 m_theme = static_cast<Theme>(json.get("Theme", 2).asInt());
+                m_alwaysStartOnHomePage = json.get("AlwaysStartOnHomePage", true).asBool();
                 m_includeSubfolders = json.get("IncludeSubfolders", true).asBool();
                 m_rememberLastOpenedFolder = json.get("RememberLastOpenedFolder", true).asBool();
                 m_lastOpenedFolder = json.get("LastOpenedFolder", "").asString();
@@ -48,6 +49,16 @@ namespace NickvisionTagger::Models
     void Configuration::setTheme(Theme theme)
     {
         m_theme = theme;
+    }
+
+    bool Configuration::getAlwaysStartOnHomePage() const
+    {
+        return m_alwaysStartOnHomePage;
+    }
+
+    void Configuration::setAlwaysStartOnHomePage(bool alwaysStartOnHomePage)
+    {
+        m_alwaysStartOnHomePage = alwaysStartOnHomePage;
     }
 
     bool Configuration::getIncludeSubfolders() const
@@ -87,6 +98,7 @@ namespace NickvisionTagger::Models
         {
             Json::Value json;
             json["Theme"] = static_cast<int>(m_theme);
+            json["AlwaysStartOnHomePage"] = m_alwaysStartOnHomePage;
             json["IncludeSubfolders"] = m_includeSubfolders;
             json["RememberLastOpenedFolder"] = m_rememberLastOpenedFolder;
             json["LastOpenedFolder"] = m_lastOpenedFolder;

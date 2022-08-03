@@ -159,6 +159,22 @@
       </widget>
      </item>
      <item>
+      <widget class="QWidget" name="separator" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>1</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>1</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QCommandLinkButton" name="btnFilenameToTag">
        <property name="maximumSize">
         <size>
@@ -216,7 +232,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="separator" native="true">
+      <widget class="QWidget" name="separator2" native="true">
        <property name="minimumSize">
         <size>
          <width>1</width>

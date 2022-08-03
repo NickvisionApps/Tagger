@@ -31,6 +31,10 @@ namespace NickvisionTagger::UI::Views
 		void updateConfig();
 
 	protected:
+		/// <summary>
+		/// Occurs when the TaggerPage is shown
+		/// </summary>
+		/// <param name="event">QShowEvent*</param>
 		void showEvent(QShowEvent* event) override;
 
 	private slots:

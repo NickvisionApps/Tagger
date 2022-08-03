@@ -3,8 +3,10 @@
 #include "Pages.h"
 #include "../Messenger.h"
 #include "../../Helpers/ThemeHelpers.h"
+#include "../../Models/Configuration.h"
 
 using namespace NickvisionTagger::Helpers;
+using namespace NickvisionTagger::Models;
 using namespace NickvisionTagger::UI;
 
 namespace NickvisionTagger::UI::Views
@@ -30,6 +32,8 @@ namespace NickvisionTagger::UI::Views
         }
         //==Theme==//
         refreshTheme();
+        //==Load Config==//
+        m_ui.chkAlwaysStartOnHomePage->setChecked(Configuration::getInstance().getAlwaysStartOnHomePage());
 	}
 
     void HomePage::refreshTheme()
@@ -42,5 +46,12 @@ namespace NickvisionTagger::UI::Views
         Messenger::getInstance().sendMessage("TaggerPage.openMusicFolder", nullptr);
         Pages taggerPage{ Pages::Tagger };
         Messenger::getInstance().sendMessage("MainWindow.changePage", &taggerPage);
+    }
+
+    void HomePage::on_chkAlwaysStartOnHomePage_clicked()
+    {
+        Configuration& configuration{ Configuration::getInstance() };
+        configuration.setAlwaysStartOnHomePage(m_ui.chkAlwaysStartOnHomePage->isChecked());
+        configuration.save();
     }
 }

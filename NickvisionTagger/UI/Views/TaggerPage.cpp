@@ -48,6 +48,7 @@ namespace NickvisionTagger::UI::Views
 	void TaggerPage::refreshTheme()
 	{
 		m_ui.separator->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
+		m_ui.separator2->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
 	}
 
 	void TaggerPage::updateConfig()

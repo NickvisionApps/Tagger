@@ -30,6 +30,16 @@ namespace NickvisionTagger::Models
 		/// <param name="theme">The theme of the application</param>
 		void setTheme(Theme theme);
 		/// <summary>
+		/// Gets whether or not to start on home page
+		/// </summary>
+		/// <returns>True to start on home page, else false</returns>
+		bool getAlwaysStartOnHomePage() const;
+		/// <summary>
+		/// Sets whether or not to start on home page
+		/// </summary>
+		/// <param name="alwaysStartOnHomePage">True for yes, false for no</param>
+		void setAlwaysStartOnHomePage(bool alwaysStartOnHomePage);
+		/// <summary>
 		/// Gets whether or not to include subfolders
 		/// </summary>
 		/// <returns>True to include subfolders, else false</returns>
@@ -71,6 +81,7 @@ namespace NickvisionTagger::Models
 		Configuration();
 		std::string m_configDir;
 		Theme m_theme;
+		bool m_alwaysStartOnHomePage;
 		bool m_includeSubfolders;
 		bool m_rememberLastOpenedFolder;
 		std::string m_lastOpenedFolder;

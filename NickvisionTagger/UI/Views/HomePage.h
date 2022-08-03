@@ -28,6 +28,10 @@ namespace NickvisionTagger::UI::Views
 		/// Sends the "TaggerPage.openMusicFolder" message
 		/// </summary>
 		void on_btnOpenMusicFolder_clicked();
+		/// <summary>
+		/// Updated the alwaysStartOnHomePage configuration preference
+		/// </summary>
+		void on_chkAlwaysStartOnHomePage_clicked();
 
 	private:
 		//==UI==//

@@ -7,6 +7,7 @@
 #include "../Controls/ProgressDialog.h"
 #include "../../Helpers/ThemeHelpers.h"
 #include "../../Models/AppInfo.h"
+#include "../../Models/Configuration.h"
 
 using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
@@ -44,6 +45,15 @@ namespace NickvisionTagger::UI::Views
 				setWindowTitle(QString::fromStdString(AppInfo::getInstance().getName() + " - " + *title));
 			}
 		});
+	}
+
+	void MainWindow::showEvent(QShowEvent* event)
+	{
+		//==Load Config==//
+		if (!Configuration::getInstance().getAlwaysStartOnHomePage())
+		{
+			changePage(Pages::Tagger);
+		}
 	}
 
 	void MainWindow::on_navHome_clicked()

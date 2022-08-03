@@ -24,6 +24,13 @@ namespace NickvisionTagger::UI::Views
         /// <param name="parent">The parent of the widget, if any</param>
         MainWindow(QWidget* parent = nullptr);
 
+    protected:
+        /// <summary>
+        /// Occurs when the MainWindow is shown
+        /// </summary>
+        /// <param name="event">QShowEvent*</param>
+        void showEvent(QShowEvent* event) override;
+
     private slots:
         /// <summary>
         /// Navigate to home page
