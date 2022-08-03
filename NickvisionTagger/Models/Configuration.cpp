@@ -89,13 +89,30 @@ namespace NickvisionTagger::Models
 
     void Configuration::addRecentFolder(const std::string& newRecentFolder)
     {
-        if (newRecentFolder == m_recentFolder1 || newRecentFolder == m_recentFolder2 || newRecentFolder == m_recentFolder3)
+        if (newRecentFolder == m_recentFolder1)
         {
             return;
         }
-        m_recentFolder3 = m_recentFolder2;
-        m_recentFolder2 = m_recentFolder1;
-        m_recentFolder1 = newRecentFolder;
+        else if (newRecentFolder == m_recentFolder2)
+        {
+            std::string temp1 = m_recentFolder1;
+            m_recentFolder1 = m_recentFolder2;
+            m_recentFolder2 = temp1;
+        }
+        else if (newRecentFolder == m_recentFolder3)
+        {
+            std::string temp1 = m_recentFolder1;
+            std::string temp2 = m_recentFolder2;
+            m_recentFolder1 = m_recentFolder3;
+            m_recentFolder2 = temp1;
+            m_recentFolder3 = temp2;
+        }
+        else
+        {
+            m_recentFolder3 = m_recentFolder2;
+            m_recentFolder2 = m_recentFolder1;
+            m_recentFolder1 = newRecentFolder;
+        }
     }
 
     void Configuration::save() const

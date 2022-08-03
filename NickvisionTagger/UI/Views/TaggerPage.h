@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <QFileSystemWatcher>
 #include <QWidget>
 #include "ui_TaggerPage.h"
 #include "../../Models/MusicFile.h"
@@ -67,6 +68,11 @@ namespace NickvisionTagger::UI::Views
 		/// Updates the selected music files
 		/// </summary>
 		void on_tblMusicFiles_itemSelectionChanged();
+		/// <summary>
+		/// Occurs when QFileSystemWatcher notices a change in the music folder
+		/// </summary>
+		/// <param name="path"></param>
+		void on_fileSystemWatcher_directoryChanged(const QString& path);
 
 	private:
 		//==Vars==//
@@ -75,6 +81,7 @@ namespace NickvisionTagger::UI::Views
 		std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
 		//==UI==//
 		Ui::TaggerPage m_ui;
+		QFileSystemWatcher m_fileSystemWatcher;
 		//==Functions==//
 		/// <summary>
 		/// Opens a recent music folder via path

@@ -35,6 +35,8 @@ namespace NickvisionTagger::UI::Views
 		m_ui.scrollTagProperties->setVisible(false);
 		m_ui.txtYear->installEventFilter(new IgnoreWheelEventFilter(m_ui.txtYear));
 		m_ui.txtTrack->installEventFilter(new IgnoreWheelEventFilter(m_ui.txtTrack));
+		//File System Watcher
+		connect(&m_fileSystemWatcher, SIGNAL(directoryChanged(QString)), this, SLOT(on_fileSystemWatcher_directoryChanged(QString)));
 		//==Messages==//
 		Messenger::getInstance().registerMessage("TaggerPage.openMusicFolder", [&](void* parameter) { on_btnOpenMusicFolder_clicked(); });
 		Messenger::getInstance().registerMessage("TaggerPage.openRecentMusicFolder", [&](void* parameter) 
@@ -70,15 +72,21 @@ namespace NickvisionTagger::UI::Views
 		std::string folderPath{ QFileDialog::getExistingDirectory(this, "Open Music Folder").toStdString() };
 		if (!folderPath.empty())
 		{
+			if (!m_musicFolder.getPath().empty())
+			{
+				m_fileSystemWatcher.removePath(QString::fromStdString(m_musicFolder.getPath().string()));
+			}
 			m_musicFolder.setPath(folderPath);
 			//==Update Config==//
 			Configuration& configuration{ Configuration::getInstance() };
 			configuration.addRecentFolder(m_musicFolder.getPath().string());
 			configuration.save();
 			//==Update UI==//
+			Messenger::getInstance().sendMessage("HomePage.updateRecentFoldersList", nullptr);
 			m_ui.btnRefreshMusicFolder->setVisible(true);
 			m_ui.btnCloseMusicFolder->setVisible(true);
 			std::string path{ m_musicFolder.getPath().string() };
+			m_fileSystemWatcher.addPath(QString::fromStdString(path));
 			Messenger::getInstance().sendMessage("MainWindow.setTitle", &path);
 			on_btnRefreshMusicFolder_clicked();
 		}
@@ -112,6 +120,7 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::on_btnCloseMusicFolder_clicked()
 	{
+		m_fileSystemWatcher.removePath(QString::fromStdString(m_musicFolder.getPath().string()));
 		m_musicFolder.setPath("");
 		//==Update UI==//
 		m_ui.btnRefreshMusicFolder->setVisible(false);
@@ -399,13 +408,30 @@ namespace NickvisionTagger::UI::Views
 		}
 	}
 
+	void TaggerPage::on_fileSystemWatcher_directoryChanged(const QString& path)
+	{
+		QMessageBox msgFolderChanged{ QMessageBox::Icon::Warning, "Music Folder Changed", "Tagger has seen a change in the music folder on disk.\nWould you like to refresh the music folder to scan for the new changes?\n\nAll unsaved tag edits will be lost.", QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No, this };
+		ThemeHelpers::applyWin32Theme(&msgFolderChanged);
+		int result = msgFolderChanged.exec();
+		if (result == QMessageBox::StandardButton::Yes)
+		{
+			on_btnRefreshMusicFolder_clicked();
+		}
+	}
+
 	void TaggerPage::openRecentMusicFolder(const std::string& recentFolderPath)
 	{
 		m_musicFolder.setPath(recentFolderPath);
+		//==Update Config==//
+		Configuration& configuration{ Configuration::getInstance() };
+		configuration.addRecentFolder(recentFolderPath);
+		configuration.save();
 		//==Update UI==//
+		Messenger::getInstance().sendMessage("HomePage.updateRecentFoldersList", nullptr);
 		m_ui.btnRefreshMusicFolder->setVisible(true);
 		m_ui.btnCloseMusicFolder->setVisible(true);
 		std::string path{ m_musicFolder.getPath().string() };
+		m_fileSystemWatcher.addPath(QString::fromStdString(path));
 		Messenger::getInstance().sendMessage("MainWindow.setTitle", &path);
 		on_btnRefreshMusicFolder_clicked();
 	}

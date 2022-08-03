@@ -41,12 +41,17 @@ namespace NickvisionTagger::UI::Views
 		/// </summary>
 		void on_btnOpenMusicFolder_clicked();
 		/// <summary>
-		/// Updated the alwaysStartOnHomePage configuration preference
+		/// Updates the alwaysStartOnHomePage configuration preference
 		/// </summary>
 		void on_chkAlwaysStartOnHomePage_clicked();
 
 	private:
 		//==UI==//
 		Ui::HomePage m_ui;
+		//==Functions==//
+		/// <summary>
+		/// Updates the list of recent folders
+		/// </summary>
+		void updateRecentFoldersList();
 	};
 }

@@ -37,24 +37,11 @@ namespace NickvisionTagger::UI::Views
         m_ui.btnRecentFolder3->setVisible(false);
         //==Theme==//
         refreshTheme();
+        //==Messages==//
+        Messenger::getInstance().registerMessage("HomePage.updateRecentFoldersList", [&](void* parameter) { updateRecentFoldersList(); });
         //==Load Config==//
-        Configuration& configuration{ Configuration::getInstance() };
-        if (!configuration.getRecentFolder1().empty() && std::filesystem::exists(configuration.getRecentFolder1()))
-        {
-            m_ui.btnRecentFolder1->setText(QString::fromStdString(configuration.getRecentFolder1()));
-            m_ui.btnRecentFolder1->setVisible(true);
-        }
-        if (!configuration.getRecentFolder2().empty() && std::filesystem::exists(configuration.getRecentFolder2()))
-        {
-            m_ui.btnRecentFolder2->setText(QString::fromStdString(configuration.getRecentFolder2()));
-            m_ui.btnRecentFolder2->setVisible(true);
-        }
-        if (!configuration.getRecentFolder3().empty() && std::filesystem::exists(configuration.getRecentFolder3()))
-        {
-            m_ui.btnRecentFolder3->setText(QString::fromStdString(configuration.getRecentFolder3()));
-            m_ui.btnRecentFolder3->setVisible(true);
-        }
-        m_ui.chkAlwaysStartOnHomePage->setChecked(configuration.getAlwaysStartOnHomePage());
+        m_ui.chkAlwaysStartOnHomePage->setChecked(Configuration::getInstance().getAlwaysStartOnHomePage());
+        updateRecentFoldersList();
 	}
 
     void HomePage::refreshTheme()
@@ -98,5 +85,25 @@ namespace NickvisionTagger::UI::Views
         Configuration& configuration{ Configuration::getInstance() };
         configuration.setAlwaysStartOnHomePage(m_ui.chkAlwaysStartOnHomePage->isChecked());
         configuration.save();
+    }
+
+    void HomePage::updateRecentFoldersList()
+    {
+        Configuration& configuration{ Configuration::getInstance() };
+        if (!configuration.getRecentFolder1().empty() && std::filesystem::exists(configuration.getRecentFolder1()))
+        {
+            m_ui.btnRecentFolder1->setText(QString::fromStdString(configuration.getRecentFolder1()));
+            m_ui.btnRecentFolder1->setVisible(true);
+        }
+        if (!configuration.getRecentFolder2().empty() && std::filesystem::exists(configuration.getRecentFolder2()))
+        {
+            m_ui.btnRecentFolder2->setText(QString::fromStdString(configuration.getRecentFolder2()));
+            m_ui.btnRecentFolder2->setVisible(true);
+        }
+        if (!configuration.getRecentFolder3().empty() && std::filesystem::exists(configuration.getRecentFolder3()))
+        {
+            m_ui.btnRecentFolder3->setText(QString::fromStdString(configuration.getRecentFolder3()));
+            m_ui.btnRecentFolder3->setVisible(true);
+        }
     }
 }
