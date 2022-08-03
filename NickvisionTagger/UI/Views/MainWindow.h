@@ -55,6 +55,7 @@ namespace NickvisionTagger::UI::Views
 
     private:
         //==Vars==//
+        bool m_opened;
         NickvisionTagger::Models::Theme m_currentTheme;
         NickvisionTagger::Update::Updater m_updater;
         //==UI==//
