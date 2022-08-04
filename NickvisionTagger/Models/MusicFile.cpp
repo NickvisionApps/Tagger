@@ -673,15 +673,42 @@ namespace NickvisionTagger::Models
 
     void MusicFile::removeTag()
     {
-        setTitle("");
-        setArtist("");
-        setAlbum("");
-        setYear(0);
-        setTrack(0);
-        setAlbumArtist("");
-        setGenre("");
-        setComment("");
-        setAlbumArt({});
+        if (m_fileType == MediaFileType::MP3)
+        {
+            m_fileMP3->strip();
+        }
+        else if (m_fileType == MediaFileType::OGG || m_fileType == MediaFileType::OPUS)
+        {
+            setTitle("");
+            setArtist("");
+            setAlbum("");
+            setYear(0);
+            setTrack(0);
+            setAlbumArtist("");
+            setGenre("");
+            setComment("");
+            setAlbumArt({});
+        }
+        else if (m_fileType == MediaFileType::FLAC)
+        {
+            m_fileFLAC->strip();
+        }
+        else if (m_fileType == MediaFileType::WMA)
+        {
+            setTitle("");
+            setArtist("");
+            setAlbum("");
+            setYear(0);
+            setTrack(0);
+            setAlbumArtist("");
+            setGenre("");
+            setComment("");
+            setAlbumArt({});
+        }
+        else if (m_fileType == MediaFileType::WAV)
+        {
+            m_fileWAV->strip();
+        }
         saveTag();
     }
 
