@@ -30,6 +30,11 @@ namespace NickvisionTagger::UI::Views
 		/// Updates the page's objects with the latest configuration
 		/// </summary>
 		void updateConfig();
+		/// <summary>
+		/// Opens a music folder via path
+		/// </summary>
+		/// <param name="folderPath">The path of the music folder</param>
+		void openMusicFolderByPath(const std::string& folderPath);
 
 	private slots:
 		/// <summary>
@@ -86,11 +91,5 @@ namespace NickvisionTagger::UI::Views
 		//==UI==//
 		Ui::TaggerPage m_ui;
 		QFileSystemWatcher m_fileSystemWatcher;
-		//==Functions==//
-		/// <summary>
-		/// Opens a recent music folder via path
-		/// </summary>
-		/// <param name="recentFolderPath">The path of the recent music folder</param>
-		void openRecentMusicFolder(const std::string& recentFolderPath);
 	};
 }

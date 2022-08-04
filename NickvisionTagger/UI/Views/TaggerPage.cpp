@@ -40,15 +40,15 @@ namespace NickvisionTagger::UI::Views
 		//File System Watcher
 		connect(&m_fileSystemWatcher, SIGNAL(directoryChanged(QString)), this, SLOT(on_fileSystemWatcher_directoryChanged(QString)));
 		//==Messages==//
-		Messenger::getInstance().registerMessage("TaggerPage.openMusicFolder", [&](void* parameter) { on_btnOpenMusicFolder_clicked(); });
-		Messenger::getInstance().registerMessage("TaggerPage.openRecentMusicFolder", [&](void* parameter) 
-		{ 
-			std::string* recentFolderPath{ static_cast<std::string*>(parameter) };
-			if (recentFolderPath)
+		Messenger::getInstance().registerMessage("TaggerPage.openMusicFolderByPath", [&](void* parameter)
+		{
+			std::string* folderPath{ static_cast<std::string*>(parameter) };
+			if (folderPath)
 			{
-				openRecentMusicFolder(*recentFolderPath);
+				openMusicFolderByPath(*folderPath);
 			}
 		});
+		Messenger::getInstance().registerMessage("TaggerPage.openMusicFolder", [&](void* parameter) { on_btnOpenMusicFolder_clicked(); });
 		//==Load Config==//
 		m_musicFolder.setIncludeSubfolders(Configuration::getInstance().getIncludeSubfolders());
 	}
@@ -70,34 +70,46 @@ namespace NickvisionTagger::UI::Views
 		}
 	}
 
-	void TaggerPage::on_btnOpenMusicFolder_clicked()
+	void TaggerPage::openMusicFolderByPath(const std::string& folderPath)
 	{
-		std::string folderPath{ QFileDialog::getExistingDirectory(this, "Open Music Folder").toStdString() };
-		if (!folderPath.empty())
+		//==Cleanup FS Watcher==//
+		if (!m_musicFolder.getParentPath().empty())
 		{
-			if (!m_musicFolder.getParentPath().empty())
-			{
-				m_fileSystemWatcher.removePath(QString::fromStdString(m_musicFolder.getParentPath().string()));
-			}
-			m_musicFolder.setParentPath(folderPath);
-			//==Update Config==//
-			Configuration& configuration{ Configuration::getInstance() };
-			configuration.addRecentFolder(m_musicFolder.getParentPath().string());
-			configuration.save();
-			//==Update FS Watcher==//
 			QStringList listPaths;
 			for (const std::filesystem::path& p : m_musicFolder.getFolderPaths())
 			{
 				listPaths.push_back(QString::fromStdString(p.string()));
 			}
-			m_fileSystemWatcher.addPaths(listPaths);
-			//==Update UI==//
-			Messenger::getInstance().sendMessage("HomePage.updateRecentFoldersList", nullptr);
-			m_ui.btnRefreshMusicFolder->setVisible(true);
-			m_ui.btnCloseMusicFolder->setVisible(true);
-			std::string path{ m_musicFolder.getParentPath().string() };
-			Messenger::getInstance().sendMessage("MainWindow.setTitle", &path);
-			on_btnRefreshMusicFolder_clicked();
+			m_fileSystemWatcher.removePaths(listPaths);
+		}
+		//==Update Music Folder==//
+		m_musicFolder.setParentPath(folderPath);
+		//==Update Config==//
+		Configuration& configuration{ Configuration::getInstance() };
+		configuration.addRecentFolder(folderPath);
+		configuration.save();
+		//==Update FS Watcher==//
+		QStringList listPaths;
+		for (const std::filesystem::path& p : m_musicFolder.getFolderPaths())
+		{
+			listPaths.push_back(QString::fromStdString(p.string()));
+		}
+		m_fileSystemWatcher.addPaths(listPaths);
+		//==Update UI==//
+		Messenger::getInstance().sendMessage("HomePage.updateRecentFoldersList", nullptr);
+		m_ui.btnRefreshMusicFolder->setVisible(true);
+		m_ui.btnCloseMusicFolder->setVisible(true);
+		std::string path{ m_musicFolder.getParentPath().string() };
+		Messenger::getInstance().sendMessage("MainWindow.setTitle", &path);
+		on_btnRefreshMusicFolder_clicked();
+	}
+
+	void TaggerPage::on_btnOpenMusicFolder_clicked()
+	{
+		std::string folderPath{ QFileDialog::getExistingDirectory(this, "Open Music Folder").toStdString() };
+		if (!folderPath.empty())
+		{
+			openMusicFolderByPath(folderPath);
 		}
 	}
 
@@ -129,7 +141,7 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::on_btnCloseMusicFolder_clicked()
 	{
-		//==Update FS Watcher==//
+		//==Cleanup FS Watcher==//
 		QStringList listPaths;
 		for (const std::filesystem::path& p : m_musicFolder.getFolderPaths())
 		{
@@ -457,28 +469,5 @@ namespace NickvisionTagger::UI::Views
 		{
 			on_btnRefreshMusicFolder_clicked();
 		}
-	}
-
-	void TaggerPage::openRecentMusicFolder(const std::string& recentFolderPath)
-	{
-		m_musicFolder.setParentPath(recentFolderPath);
-		//==Update Config==//
-		Configuration& configuration{ Configuration::getInstance() };
-		configuration.addRecentFolder(recentFolderPath);
-		configuration.save();
-		//==Update FS Watcher==//
-		QStringList listPaths;
-		for (const std::filesystem::path& p : m_musicFolder.getFolderPaths())
-		{
-			listPaths.push_back(QString::fromStdString(p.string()));
-		}
-		m_fileSystemWatcher.addPaths(listPaths);
-		//==Update UI==//
-		Messenger::getInstance().sendMessage("HomePage.updateRecentFoldersList", nullptr);
-		m_ui.btnRefreshMusicFolder->setVisible(true);
-		m_ui.btnCloseMusicFolder->setVisible(true);
-		std::string path{ m_musicFolder.getParentPath().string() };
-		Messenger::getInstance().sendMessage("MainWindow.setTitle", &path);
-		on_btnRefreshMusicFolder_clicked();
 	}
 }

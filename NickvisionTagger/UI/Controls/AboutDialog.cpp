@@ -17,7 +17,7 @@ namespace NickvisionTagger::UI::Controls
 		m_ui.lblVersion->setText(QString::fromStdString("Version " + m_appInfo.getVersion()));
 		m_ui.lblChangelog->setText(QString::fromStdString(m_appInfo.getChangelog()));
 		//==Theme==//
-		m_ui.separator->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
+		m_ui.separator1->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
 		ThemeHelpers::applyWin32Theme(this);
 	}
 

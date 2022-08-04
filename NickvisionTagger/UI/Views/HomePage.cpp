@@ -52,7 +52,7 @@ namespace NickvisionTagger::UI::Views
     void HomePage::on_btnRecentFolder1_clicked()
     {
         std::string recentFolderPath{ m_ui.btnRecentFolder1->text().toStdString() };
-        Messenger::getInstance().sendMessage("TaggerPage.openRecentMusicFolder", &recentFolderPath);
+        Messenger::getInstance().sendMessage("TaggerPage.openMusicFolderByPath", &recentFolderPath);
         Pages taggerPage{ Pages::Tagger };
         Messenger::getInstance().sendMessage("MainWindow.changePage", &taggerPage);
     }
@@ -60,7 +60,7 @@ namespace NickvisionTagger::UI::Views
     void HomePage::on_btnRecentFolder2_clicked()
     {
         std::string recentFolderPath{ m_ui.btnRecentFolder2->text().toStdString() };
-        Messenger::getInstance().sendMessage("TaggerPage.openRecentMusicFolder", &recentFolderPath);
+        Messenger::getInstance().sendMessage("TaggerPage.openMusicFolderByPath", &recentFolderPath);
         Pages taggerPage{ Pages::Tagger };
         Messenger::getInstance().sendMessage("MainWindow.changePage", &taggerPage);
     }
@@ -68,7 +68,7 @@ namespace NickvisionTagger::UI::Views
     void HomePage::on_btnRecentFolder3_clicked()
     {
         std::string recentFolderPath{ m_ui.btnRecentFolder3->text().toStdString() };
-        Messenger::getInstance().sendMessage("TaggerPage.openRecentMusicFolder", &recentFolderPath);
+        Messenger::getInstance().sendMessage("TaggerPage.openMusicFolderByPath", &recentFolderPath);
         Pages taggerPage{ Pages::Tagger };
         Messenger::getInstance().sendMessage("MainWindow.changePage", &taggerPage);
     }
