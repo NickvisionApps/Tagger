@@ -81,12 +81,18 @@ namespace NickvisionTagger::UI::Views
 			Configuration& configuration{ Configuration::getInstance() };
 			configuration.addRecentFolder(m_musicFolder.getParentPath().string());
 			configuration.save();
+			//==Update FS Watcher==//
+			QStringList listPaths;
+			for (const std::filesystem::path& p : m_musicFolder.getFolderPaths())
+			{
+				listPaths.push_back(QString::fromStdString(p.string()));
+			}
+			m_fileSystemWatcher.addPaths(listPaths);
 			//==Update UI==//
 			Messenger::getInstance().sendMessage("HomePage.updateRecentFoldersList", nullptr);
 			m_ui.btnRefreshMusicFolder->setVisible(true);
 			m_ui.btnCloseMusicFolder->setVisible(true);
 			std::string path{ m_musicFolder.getParentPath().string() };
-			m_fileSystemWatcher.addPath(QString::fromStdString(path));
 			Messenger::getInstance().sendMessage("MainWindow.setTitle", &path);
 			on_btnRefreshMusicFolder_clicked();
 		}
@@ -120,7 +126,14 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::on_btnCloseMusicFolder_clicked()
 	{
-		m_fileSystemWatcher.removePath(QString::fromStdString(m_musicFolder.getParentPath().string()));
+		//==Update FS Watcher==//
+		QStringList listPaths;
+		for (const std::filesystem::path& p : m_musicFolder.getFolderPaths())
+		{
+			listPaths.push_back(QString::fromStdString(p.string()));
+		}
+		m_fileSystemWatcher.removePaths(listPaths);
+		//==Update Music Folder==//
 		m_musicFolder.setParentPath("");
 		//==Update UI==//
 		m_ui.btnRefreshMusicFolder->setVisible(false);
@@ -426,12 +439,18 @@ namespace NickvisionTagger::UI::Views
 		Configuration& configuration{ Configuration::getInstance() };
 		configuration.addRecentFolder(recentFolderPath);
 		configuration.save();
+		//==Update FS Watcher==//
+		QStringList listPaths;
+		for (const std::filesystem::path& p : m_musicFolder.getFolderPaths())
+		{
+			listPaths.push_back(QString::fromStdString(p.string()));
+		}
+		m_fileSystemWatcher.addPaths(listPaths);
 		//==Update UI==//
 		Messenger::getInstance().sendMessage("HomePage.updateRecentFoldersList", nullptr);
 		m_ui.btnRefreshMusicFolder->setVisible(true);
 		m_ui.btnCloseMusicFolder->setVisible(true);
 		std::string path{ m_musicFolder.getParentPath().string() };
-		m_fileSystemWatcher.addPath(QString::fromStdString(path));
 		Messenger::getInstance().sendMessage("MainWindow.setTitle", &path);
 		on_btnRefreshMusicFolder_clicked();
 	}
