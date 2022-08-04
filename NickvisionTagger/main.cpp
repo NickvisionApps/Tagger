@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     appInfo.setName("Nickvision Tagger");
     appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
     appInfo.setVersion("2022.8.0-dev");
-    appInfo.setChangelog("- Application rewrite with C++ and Qt 6\n- Added a FileSystemWatcher to allow Tagger to watch for music folder changes on disk\n- Added ability to drag and drop a music folder into Tagger to open it\n- Added \"Remove Album Art\" feature to tag editor\n- Removed \"Remember Last Opened Music Folder\" feature in favor of recent folders list\n- Removed \"Download Metadata From MusicBrainz\" feature as a new library is needed to be found");
+    appInfo.setChangelog("- Application rewrite with C++ and Qt 6\n- Added a FileSystemWatcher to allow Tagger to watch for music folder changes on disk\n- Added ability to drag and drop a music folder into Tagger to open it\n- Added \"Remove Album Art\" feature to tag editor\n- Fixed an issue where FLAC and OGG files were unable to add album art\n- Removed \"Remember Last Opened Music Folder\" feature in favor of recent folders list\n- Removed \"Download Metadata From MusicBrainz\" feature as a new library is needed to be found");
     appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     //==App Settings==//

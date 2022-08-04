@@ -531,7 +531,7 @@ namespace NickvisionTagger::Models
         }
         else if (m_fileType == MediaFileType::FLAC)
         {
-            const TagLib::List<TagLib::FLAC::Picture*>& pictureList{ m_fileFLAC->pictureList() };
+            const TagLib::List<TagLib::FLAC::Picture*>& pictureList{ m_fileFLAC->xiphComment(true)->pictureList() };
             if (!pictureList.isEmpty())
             {
                 return pictureList[0]->data();
@@ -578,15 +578,21 @@ namespace NickvisionTagger::Models
             m_fileOGG->tag()->removeAllPictures();
             if (!albumArt.isEmpty())
             {
-                m_fileOGG->tag()->addPicture(new TagLib::FLAC::Picture(albumArt));
+                TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
+                picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
+                picture->setData(albumArt);
+                m_fileOGG->tag()->addPicture(picture);
             }
         }
         else if (m_fileType == MediaFileType::FLAC)
         {
-            m_fileFLAC->removePictures();
+            m_fileFLAC->xiphComment(true)->removeAllPictures();
             if (!albumArt.isEmpty())
             {
-                m_fileFLAC->addPicture(new TagLib::FLAC::Picture(albumArt));
+                TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
+                picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
+                picture->setData(albumArt);
+                m_fileFLAC->xiphComment(true)->addPicture(picture);
             }
         }
         else if (m_fileType == MediaFileType::WMA)

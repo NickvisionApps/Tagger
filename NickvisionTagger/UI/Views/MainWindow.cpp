@@ -151,8 +151,7 @@ namespace NickvisionTagger::UI::Views
 
 	void MainWindow::dropEvent(QDropEvent* event)
 	{
-		std::string folderPath{ event->mimeData()->urls()[0].toLocalFile().toStdString() };
-		Messenger::getInstance().sendMessage("TaggerPage.openMusicFolderByPath", &folderPath);
+		m_taggerPage.openMusicFolderByPath(event->mimeData()->urls()[0].toLocalFile().toStdString());
 		changePage(Pages::Tagger);
 		event->acceptProposedAction();
 	}
