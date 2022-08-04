@@ -1,5 +1,7 @@
 #include "MainWindow.h"
+#include <filesystem>
 #include <QMessageBox>
+#include <QMimeData>
 #include <QSettings>
 #include "SettingsDialog.h"
 #include "../Messenger.h"
@@ -22,6 +24,7 @@ namespace NickvisionTagger::UI::Views
 		m_ui.setupUi(this);
 		//==Window Settings==//
 		setWindowTitle(QString::fromStdString(AppInfo::getInstance().getName()));
+		setAcceptDrops(true);
 		//==Pages==//
 		m_ui.viewStack->addWidget(&m_homePage);
 		m_ui.viewStack->addWidget(&m_taggerPage);
@@ -132,5 +135,25 @@ namespace NickvisionTagger::UI::Views
 			m_ui.navHome->setChecked(false);
 			m_ui.navTagger->setChecked(true);
 		}
+	}
+
+	void MainWindow::dragEnterEvent(QDragEnterEvent* event)
+	{
+		if (event->mimeData()->hasUrls())
+		{
+			QList<QUrl> urls{ event->mimeData()->urls() };
+			if (urls.size() == 1 && std::filesystem::is_directory(urls[0].toLocalFile().toStdString()))
+			{
+				event->acceptProposedAction();
+			}
+		}
+	}
+
+	void MainWindow::dropEvent(QDropEvent* event)
+	{
+		std::string folderPath{ event->mimeData()->urls()[0].toLocalFile().toStdString() };
+		Messenger::getInstance().sendMessage("TaggerPage.openMusicFolderByPath", &folderPath);
+		changePage(Pages::Tagger);
+		event->acceptProposedAction();
 	}
 }

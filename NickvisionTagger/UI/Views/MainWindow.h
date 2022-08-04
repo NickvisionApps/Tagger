@@ -1,5 +1,7 @@
 #pragma once
 
+#include <QDragEnterEvent>
+#include <QDropEvent>
 #include <QMainWindow>
 #include "ui_MainWindow.h"
 #include "HomePage.h"
@@ -64,5 +66,15 @@ namespace NickvisionTagger::UI::Views
         /// </summary>
         /// <param name="page">The page to change to</param>
         void changePage(Pages page);
+        /// <summary>
+        /// Occurs when an item is dragged into the MainWindow area
+        /// </summary>
+        /// <param name="event"></param>
+        void dragEnterEvent(QDragEnterEvent* event) override;
+        /// <summary>
+        /// Occurs when an item is dropped into the MainWindow area
+        /// </summary>
+        /// <param name="event"></param>
+        void dropEvent(QDropEvent* event) override;
     };
 }
