@@ -15,7 +15,7 @@
 ![FileSystemUpdates](https://user-images.githubusercontent.com/17648453/182715183-2c6430c6-b11c-4678-a88e-cfb03d2e054a.png)
 ![FilenameToTagConversion](https://user-images.githubusercontent.com/17648453/182715191-b1db5dcf-3cef-46f0-80d3-b6cc8fbe1749.png)
 ![Settings](https://user-images.githubusercontent.com/17648453/182715202-d55b2698-c15b-4ec9-a834-04896e2ebb67.png)
-![AboutDialog](https://user-images.githubusercontent.com/17648453/182715210-e9710aba-20f2-4b7c-ab11-72ba4d0d127a.png)
+![AboutDialog](https://user-images.githubusercontent.com/17648453/182964865-4d05c690-a154-46bd-9e11-32d9630c5a3a.png)
 
 # Dependencies
 - [C++20](https://en.cppreference.com/w/cpp/20)
