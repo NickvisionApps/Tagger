@@ -4,19 +4,19 @@
 
 namespace NickvisionTagger::Models
 {
-    MusicFolder::MusicFolder() : m_path{ "" }, m_includeSubfolders{ true }
+    MusicFolder::MusicFolder() : m_parentPath{ "" }, m_includeSubfolders{ true }
     {
 
     }
 
-    const std::filesystem::path& MusicFolder::getPath() const
+    const std::filesystem::path& MusicFolder::getParentPath() const
     {
-        return m_path;
+        return m_parentPath;
     }
 
-    void MusicFolder::setPath(const std::filesystem::path& path)
+    void MusicFolder::setParentPath(const std::filesystem::path& parentPath)
     {
-        m_path = path;
+        m_parentPath = parentPath;
     }
 
     bool MusicFolder::getIncludeSubfolders() const
@@ -29,6 +29,23 @@ namespace NickvisionTagger::Models
         m_includeSubfolders = includeSubfolders;
     }
 
+    std::vector<std::filesystem::path> MusicFolder::getFolderPaths() const
+    {
+        std::vector<std::filesystem::path> paths;
+        paths.push_back(m_parentPath);
+        if (m_includeSubfolders)
+        {
+            for (const std::filesystem::directory_entry& path : std::filesystem::recursive_directory_iterator(m_parentPath))
+            {
+                if (path.is_directory())
+                {
+                    paths.push_back(path);
+                }
+            }
+        }
+        return paths;
+    }
+
     const std::vector<std::shared_ptr<MusicFile>>& MusicFolder::getFiles() const
     {
         return m_files;
@@ -37,11 +54,11 @@ namespace NickvisionTagger::Models
     void MusicFolder::reloadFiles()
     {
         m_files.clear();
-        if (std::filesystem::exists(m_path))
+        if (std::filesystem::exists(m_parentPath))
         {
             if (m_includeSubfolders)
             {
-                for (const std::filesystem::path& path : std::filesystem::recursive_directory_iterator(m_path))
+                for (const std::filesystem::path& path : std::filesystem::recursive_directory_iterator(m_parentPath))
                 {
                     std::optional<MediaFileType> fileType{ MediaFileType::parse(path.string()) };
                     if (fileType.has_value() && fileType.value().isAudio())
@@ -52,7 +69,7 @@ namespace NickvisionTagger::Models
             }
             else
             {
-                for (const std::filesystem::path& file : std::filesystem::directory_iterator(m_path))
+                for (const std::filesystem::path& file : std::filesystem::directory_iterator(m_parentPath))
                 {
                     std::optional<MediaFileType> fileType{ MediaFileType::parse(file.string()) };
                     if (fileType.has_value() && fileType.value().isAudio())
