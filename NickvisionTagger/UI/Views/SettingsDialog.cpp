@@ -13,7 +13,7 @@ namespace NickvisionTagger::UI::Views
 		//==Views==//
 		changeView(Views::UserInterface);
 		//==Theme==//
-		m_ui.separator->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
+		m_ui.separator1->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
 		ThemeHelpers::applyWin32Theme(this);
 		//==Load Config==//
 		m_ui.cmbTheme->setCurrentIndex(static_cast<int>(m_configuration.getTheme(false)));

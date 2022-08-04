@@ -139,6 +139,22 @@
       </widget>
      </item>
      <item>
+      <widget class="QWidget" name="separator1" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>1</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>1</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QCommandLinkButton" name="btnInsertAlbumArt">
        <property name="maximumSize">
         <size>
@@ -159,7 +175,27 @@
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="separator" native="true">
+      <widget class="QCommandLinkButton" name="btnRemoveAlbumArt">
+       <property name="maximumSize">
+        <size>
+         <width>34</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Remove Album Art (Ctrl+Delete)</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../resources.qrc">
+         <normaloff>:/Resources/NoImage.png</normaloff>:/Resources/NoImage.png</iconset>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+Del</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QWidget" name="separator2" native="true">
        <property name="minimumSize">
         <size>
          <width>1</width>
@@ -232,7 +268,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="separator2" native="true">
+      <widget class="QWidget" name="separator3" native="true">
        <property name="minimumSize">
         <size>
          <width>1</width>

@@ -57,6 +57,10 @@ namespace NickvisionTagger::UI::Views
 		/// </summary>
 		void on_btnInsertAlbumArt_clicked();
 		/// <summary>
+		/// Removes the album art from the tags of the selected music files
+		/// </summary>
+		void on_btnRemoveAlbumArt_clicked();
+		/// <summary>
 		/// Converts selected music files' filename into it's tag
 		/// </summary>
 		void on_btnFilenameToTag_clicked();

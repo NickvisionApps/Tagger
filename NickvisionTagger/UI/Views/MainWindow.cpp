@@ -111,7 +111,7 @@ namespace NickvisionTagger::UI::Views
 	void MainWindow::refreshTheme()
 	{
 		QApplication::setPalette(ThemeHelpers::getThemedPalette());
-		m_ui.separator->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
+		m_ui.separator1->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
 		setStyleSheet("QCommandLinkButton { font-weight: normal; }");
 		m_homePage.refreshTheme();
 		m_taggerPage.refreshTheme();

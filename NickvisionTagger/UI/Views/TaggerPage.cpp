@@ -26,12 +26,14 @@ namespace NickvisionTagger::UI::Views
 		m_ui.btnCloseMusicFolder->setVisible(false);
 		m_ui.btnSaveTags->setVisible(false);
 		m_ui.btnRemoveTags->setVisible(false);
+		m_ui.separator1->setVisible(false);
 		m_ui.btnInsertAlbumArt->setVisible(false);
-		m_ui.separator->setVisible(false);
+		m_ui.btnRemoveAlbumArt->setVisible(false);
+		m_ui.separator2->setVisible(false);
 		m_ui.btnFilenameToTag->setVisible(false);
 		m_ui.btnTagToFilename->setVisible(false);
 		//Tag Properties
-		m_ui.separator2->setVisible(false);
+		m_ui.separator3->setVisible(false);
 		m_ui.scrollTagProperties->setVisible(false);
 		m_ui.txtYear->installEventFilter(new IgnoreWheelEventFilter(m_ui.txtYear));
 		m_ui.txtTrack->installEventFilter(new IgnoreWheelEventFilter(m_ui.txtTrack));
@@ -53,8 +55,9 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::refreshTheme()
 	{
-		m_ui.separator->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
+		m_ui.separator1->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
 		m_ui.separator2->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
+		m_ui.separator3->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
 	}
 
 	void TaggerPage::updateConfig()
@@ -230,6 +233,26 @@ namespace NickvisionTagger::UI::Views
 		}
 	}
 
+	void TaggerPage::on_btnRemoveAlbumArt_clicked()
+	{
+		QMessageBox msgDeleteTags{ QMessageBox::Icon::Warning, "Remove Album Art", "Are you sure you want to remove the album art from the selected tags?", QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No, this };
+		ThemeHelpers::applyWin32Theme(&msgDeleteTags);
+		int result{ msgDeleteTags.exec() };
+		if (result == QMessageBox::StandardButton::Yes)
+		{
+			ProgressDialog removingDialog{ this, "Removing album art from tags...", [&]()
+			{
+				for (const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+				{
+					musicFile->setAlbumArt({});
+					musicFile->saveTag();
+				}
+			} };
+			removingDialog.exec();
+			on_btnRefreshMusicFolder_clicked();
+		}
+	}
+
 	void TaggerPage::on_btnFilenameToTag_clicked()
 	{
 		//==Format String==//
@@ -297,11 +320,13 @@ namespace NickvisionTagger::UI::Views
 		//==Update UI==//
 		m_ui.btnSaveTags->setVisible(true);
 		m_ui.btnRemoveTags->setVisible(true);
+		m_ui.separator1->setVisible(true);
 		m_ui.btnInsertAlbumArt->setVisible(true);
-		m_ui.separator->setVisible(true);
+		m_ui.btnRemoveAlbumArt->setVisible(true);
+		m_ui.separator2->setVisible(true);
 		m_ui.btnFilenameToTag->setVisible(true);
 		m_ui.btnTagToFilename->setVisible(true);
-		m_ui.separator2->setVisible(true);
+		m_ui.separator3->setVisible(true);
 		m_ui.scrollTagProperties->setVisible(true);
 		m_ui.txtFilename->setReadOnly(false);
 		//==No Files Selected==//
@@ -321,11 +346,13 @@ namespace NickvisionTagger::UI::Views
 			m_ui.imgAlbumArt->setPixmap({});
 			m_ui.btnSaveTags->setVisible(false);
 			m_ui.btnRemoveTags->setVisible(false);
+			m_ui.separator1->setVisible(false);
 			m_ui.btnInsertAlbumArt->setVisible(false);
-			m_ui.separator->setVisible(false);
+			m_ui.btnRemoveAlbumArt->setVisible(false);
+			m_ui.separator2->setVisible(false);
 			m_ui.btnFilenameToTag->setVisible(false);
 			m_ui.btnTagToFilename->setVisible(false);
-			m_ui.separator2->setVisible(false);
+			m_ui.separator3->setVisible(false);
 			m_ui.scrollTagProperties->setVisible(false);
 		}
 		//==One File Selected==//
