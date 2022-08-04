@@ -142,6 +142,7 @@
     <QtMoc Include="UI\Controls\ProgressDialog.h" />
     <ClInclude Include="Models\MusicFile.h" />
     <ClInclude Include="Models\MusicFolder.h" />
+    <ClInclude Include="resources.h" />
     <ClInclude Include="UI\Messenger.h" />
     <QtMoc Include="UI\Views\SettingsDialog.h" />
     <QtMoc Include="UI\Controls\AboutDialog.h" />
@@ -163,6 +164,8 @@
     <Image Include="Resources\Delete.png" />
     <Image Include="Resources\Edit.png" />
     <Image Include="Resources\Home.png" />
+    <Image Include="Resources\icon.ico" />
+    <Image Include="Resources\icon.png" />
     <Image Include="Resources\Interface.png" />
     <Image Include="Resources\MusicLibrary.png" />
     <Image Include="Resources\NewFile.png" />
@@ -174,6 +177,9 @@
     <Image Include="Resources\Settings.png" />
     <Image Include="Resources\Tag.png" />
     <Image Include="Resources\Update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -138,6 +138,9 @@
     <ClInclude Include="Helpers\MediaHelpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resources.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon.ai" />
@@ -195,6 +198,12 @@
     <Image Include="Resources\NoImage.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="UI\Views\SettingsDialog.h">
@@ -232,5 +241,10 @@
     <QtUic Include="UI\Views\TaggerPage.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
