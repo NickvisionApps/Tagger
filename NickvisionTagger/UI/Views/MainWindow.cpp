@@ -18,7 +18,7 @@ using namespace NickvisionTagger::UI::Controls;
 
 namespace NickvisionTagger::UI::Views
 {
-	MainWindow::MainWindow(QWidget* parent) : QMainWindow{ parent }, m_updater{ "https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/main/UpdateConfig.json", { "2022.8.0" } }
+	MainWindow::MainWindow(QWidget* parent) : QMainWindow{ parent }, m_updater{ "https://raw.githubusercontent.com/nlogozzo/NickvisionTagger/master/UpdateConfig.json", { "2022.8.0" } }
 	{
 		//==UI==//
 		m_ui.setupUi(this);
