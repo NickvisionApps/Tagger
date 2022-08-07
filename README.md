@@ -14,8 +14,8 @@
 ![DarkMode](https://user-images.githubusercontent.com/17648453/182715178-b0807e90-1877-4ec9-abab-bcd5aa3644d8.png)
 ![FileSystemUpdates](https://user-images.githubusercontent.com/17648453/182715183-2c6430c6-b11c-4678-a88e-cfb03d2e054a.png)
 ![FilenameToTagConversion](https://user-images.githubusercontent.com/17648453/182715191-b1db5dcf-3cef-46f0-80d3-b6cc8fbe1749.png)
-![Settings](https://user-images.githubusercontent.com/17648453/182715202-d55b2698-c15b-4ec9-a834-04896e2ebb67.png)
-![AboutDialog](https://user-images.githubusercontent.com/17648453/182964865-4d05c690-a154-46bd-9e11-32d9630c5a3a.png)
+![SettingsDialog](https://user-images.githubusercontent.com/17648453/183276147-05ec5847-098a-4458-bf20-ced27767860c.png)
+![AboutDialog](https://user-images.githubusercontent.com/17648453/183276148-537292cc-7734-4812-bc5e-e6c679ff9e39.png)
 
 # Dependencies
 - [C++20](https://en.cppreference.com/w/cpp/20)
