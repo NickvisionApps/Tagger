@@ -18,6 +18,7 @@ namespace NickvisionTagger::UI::Views
 		//==Load Config==//
 		m_ui.cmbTheme->setCurrentIndex(static_cast<int>(m_configuration.getTheme(false)));
 		m_ui.chkIncludeSubfolders->setChecked(m_configuration.getIncludeSubfolders());
+		m_ui.chkPreserveModificationTimeStamp->setChecked(m_configuration.getPreserveModificationTimeStamp());
 	}
 
 	void SettingsDialog::on_navUserInterface_clicked()
@@ -34,6 +35,7 @@ namespace NickvisionTagger::UI::Views
 	{
 		m_configuration.setTheme(static_cast<Theme>(m_ui.cmbTheme->currentIndex()));
 		m_configuration.setIncludeSubfolders(m_ui.chkIncludeSubfolders->isChecked());
+		m_configuration.setPreserveModificationTimeStamp(m_ui.chkPreserveModificationTimeStamp->isChecked());
 		m_configuration.save();
 		close();
 	}

@@ -7,7 +7,7 @@
 
 namespace NickvisionTagger::Models
 {
-    Configuration::Configuration() : m_configDir{ QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).toStdString() }, m_theme{ Theme::System }, m_alwaysStartOnHomePage{ true }, m_includeSubfolders{ true }, m_recentFolder1{ "" }, m_recentFolder2{ "" }, m_recentFolder3{ "" }
+    Configuration::Configuration() : m_configDir{ QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).toStdString() }, m_theme{ Theme::System }, m_alwaysStartOnHomePage{ true }, m_includeSubfolders{ true }, m_preserveModificationTimeStamp{ false }, m_recentFolder1{ "" }, m_recentFolder2{ "" }, m_recentFolder3{ "" }
     {
         if (!std::filesystem::exists(m_configDir))
         {
@@ -23,6 +23,7 @@ namespace NickvisionTagger::Models
                 m_theme = static_cast<Theme>(json.get("Theme", 2).asInt());
                 m_alwaysStartOnHomePage = json.get("AlwaysStartOnHomePage", true).asBool();
                 m_includeSubfolders = json.get("IncludeSubfolders", true).asBool();
+                m_preserveModificationTimeStamp = json.get("PreserveModificationTimeStamp", false).asBool();
                 m_recentFolder1 = json.get("RecentFolder1", "").asString();
                 m_recentFolder2 = json.get("RecentFolder2", "").asString();
                 m_recentFolder3 = json.get("RecentFolder3", "").asString();
@@ -70,6 +71,16 @@ namespace NickvisionTagger::Models
     void Configuration::setIncludeSubfolders(bool includeSubfolders)
     {
         m_includeSubfolders = includeSubfolders;
+    }
+
+    bool Configuration::getPreserveModificationTimeStamp() const
+    {
+        return m_preserveModificationTimeStamp;
+    }
+
+    void Configuration::setPreserveModificationTimeStamp(bool preserveModificationTimeStamp)
+    {
+        m_preserveModificationTimeStamp = preserveModificationTimeStamp;
     }
 
     const std::string& Configuration::getRecentFolder1() const
@@ -124,6 +135,7 @@ namespace NickvisionTagger::Models
             json["Theme"] = static_cast<int>(m_theme);
             json["AlwaysStartOnHomePage"] = m_alwaysStartOnHomePage;
             json["IncludeSubfolders"] = m_includeSubfolders;
+            json["PreserveModificationTimeStamp"] = m_preserveModificationTimeStamp;
             json["RecentFolder1"] = m_recentFolder1;
             json["RecentFolder2"] = m_recentFolder2;
             json["RecentFolder3"] = m_recentFolder3;

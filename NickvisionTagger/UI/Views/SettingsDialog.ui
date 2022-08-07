@@ -191,8 +191,30 @@
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
              <widget class="QCheckBox" name="chkIncludeSubfolders">
+              <property name="toolTip">
+               <string>If checked, Tagger will search subfolders of the parent music folder for music files.</string>
+              </property>
               <property name="text">
                <string>Include Subfolders</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupMusicFile">
+           <property name="title">
+            <string>Music File</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QCheckBox" name="chkPreserveModificationTimeStamp">
+              <property name="toolTip">
+               <string>If checked, Tagger will not update the modification time stamp of a music file when its tag is changed.</string>
+              </property>
+              <property name="text">
+               <string>Preserve Modification Time Stamp</string>
               </property>
              </widget>
             </item>

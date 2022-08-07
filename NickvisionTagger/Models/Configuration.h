@@ -50,6 +50,16 @@ namespace NickvisionTagger::Models
 		/// <param name="includeSubfolders">True for yes, false for no</param>
 		void setIncludeSubfolders(bool includeSubfolders);
 		/// <summary>
+		/// Gets whether or not to preserve the modification time stamp of a music file
+		/// </summary>
+		/// <returns>True to preserve, else false</returns>
+		bool getPreserveModificationTimeStamp() const;
+		/// <summary>
+		/// Sets whether or not to preserve the modification time stamp of a music file
+		/// </summary>
+		/// <param name="preserveModificationTimeStamp">True for yes, false for no</param>
+		void setPreserveModificationTimeStamp(bool preserveModificationTimeStamp);
+		/// <summary>
 		/// Gets the first recent folder
 		/// </summary>
 		/// <returns>The first recent folder</returns>
@@ -83,6 +93,7 @@ namespace NickvisionTagger::Models
 		Theme m_theme;
 		bool m_alwaysStartOnHomePage;
 		bool m_includeSubfolders;
+		bool m_preserveModificationTimeStamp;
 		std::string m_recentFolder1;
 		std::string m_recentFolder2;
 		std::string m_recentFolder3;
