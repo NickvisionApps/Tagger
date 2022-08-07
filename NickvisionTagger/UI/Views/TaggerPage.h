@@ -88,6 +88,7 @@ namespace NickvisionTagger::UI::Views
 		bool m_opened;
 		NickvisionTagger::Models::MusicFolder m_musicFolder;
 		std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
+		bool m_isMusicFolderChangedDialogOpen;
 		//==UI==//
 		Ui::TaggerPage m_ui;
 		QFileSystemWatcher m_fileSystemWatcher;

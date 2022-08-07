@@ -17,7 +17,7 @@ using namespace NickvisionTagger::UI::Controls;
 
 namespace NickvisionTagger::UI::Views
 {
-	TaggerPage::TaggerPage(QWidget* parent) : QWidget{ parent }, m_opened{ false }
+	TaggerPage::TaggerPage(QWidget* parent) : QWidget{ parent }, m_opened{ false }, m_isMusicFolderChangedDialogOpen{ false }
 	{
 		//==UI==//
 		m_ui.setupUi(this);
@@ -462,12 +462,17 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::on_fileSystemWatcher_directoryChanged(const QString& path)
 	{
-		QMessageBox msgFolderChanged{ QMessageBox::Icon::Warning, "Music Folder Changed", "Tagger has seen a change in the music folder on disk.\nWould you like to refresh the music folder to scan for the new changes?\n\nAll unsaved tag edits will be lost.", QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No, this };
-		ThemeHelpers::applyWin32Theme(&msgFolderChanged);
-		int result = msgFolderChanged.exec();
-		if (result == QMessageBox::StandardButton::Yes)
+		if (!m_isMusicFolderChangedDialogOpen)
 		{
-			on_btnRefreshMusicFolder_clicked();
+			m_isMusicFolderChangedDialogOpen = true;
+			QMessageBox msgFolderChanged{ QMessageBox::Icon::Warning, "Music Folder Changed", "Tagger has seen a change in the music folder on disk.\nWould you like to refresh the music folder to scan for the new changes?\n\nAll unsaved tag edits will be lost.", QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No, this };
+			ThemeHelpers::applyWin32Theme(&msgFolderChanged);
+			int result = msgFolderChanged.exec();
+			if (result == QMessageBox::StandardButton::Yes)
+			{
+				on_btnRefreshMusicFolder_clicked();
+			}
+			m_isMusicFolderChangedDialogOpen = false;
 		}
 	}
 }
