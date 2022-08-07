@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
     AppInfo& appInfo = AppInfo::getInstance();
     appInfo.setName("Nickvision Tagger");
     appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
-    appInfo.setVersion("2022.8.1");
-    appInfo.setChangelog("- Added setting to preserve modification time stamp of a music file\n- Fixed an issue where multiple \"Music Folder Changed\" dialogs would display at once");
+    appInfo.setVersion("2022.8.2");
+    appInfo.setChangelog("- Fixed an issue where updates would not install correctly");
     appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     //==App Settings==//

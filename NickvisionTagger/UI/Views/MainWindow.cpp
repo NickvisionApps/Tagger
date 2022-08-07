@@ -71,7 +71,7 @@ namespace NickvisionTagger::UI::Views
 		checkingDialog.exec();
 		if (m_updater.getUpdateAvailable())
 		{
-			QMessageBox msgUpdate{ QMessageBox::Icon::Information, "Update Available", QString::fromStdString("===V" + m_updater.getLatestVersion().toString() + " Changelog===\n" + m_updater.getChangelog() + "\n\n" + AppInfo::getInstance().getName() + " will automatically download and install the update.Please save all work before continuing.Are you ready to update ? "), QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No, this};
+			QMessageBox msgUpdate{ QMessageBox::Icon::Information, "Update Available", QString::fromStdString("===V" + m_updater.getLatestVersion().toString() + " Changelog===\n" + m_updater.getChangelog() + "\n\n" + AppInfo::getInstance().getName() + " will automatically download and install the update. Please save all work before continuing. Are you ready to update?"), QMessageBox::StandardButton::Yes | QMessageBox::StandardButton::No, this};
 			ThemeHelpers::applyWin32Theme(&msgUpdate);
 			int result{ msgUpdate.exec() };
 			if (result == QMessageBox::StandardButton::Yes)
