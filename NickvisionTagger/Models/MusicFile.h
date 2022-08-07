@@ -26,6 +26,10 @@ namespace NickvisionTagger::Models
         /// <param name="fileType">The type of the music file</param>
         MusicFile(const std::filesystem::path& path, const MediaFileType& fileType);
         /// <summary>
+        /// Destructs a MusicFile
+        /// </summary>
+        ~MusicFile();
+        /// <summary>
         /// Gets the path of the music file
         /// </summary>
         /// <returns>The path of the music file</returns>
@@ -198,6 +202,7 @@ namespace NickvisionTagger::Models
     private:
         std::filesystem::path m_path;
         MediaFileType m_fileType;
+        std::filesystem::file_time_type m_originalModificationTimeStamp;
         std::shared_ptr<TagLib::MPEG::File> m_fileMP3;
         std::shared_ptr<TagLib::Ogg::Vorbis::File> m_fileOGG;
         std::shared_ptr<TagLib::FLAC::File> m_fileFLAC;

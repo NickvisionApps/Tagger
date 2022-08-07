@@ -1,12 +1,13 @@
 #include "MusicFile.h"
 #include <taglib/textidentificationframe.h>
+#include "Configuration.h"
 #include "../Helpers/MediaHelpers.h"
 
 using namespace NickvisionTagger::Helpers;
 
 namespace NickvisionTagger::Models
 {
-    MusicFile::MusicFile(const std::filesystem::path& path, const MediaFileType& fileType) : m_path{ path }, m_fileType{ fileType }
+    MusicFile::MusicFile(const std::filesystem::path& path, const MediaFileType& fileType) : m_path{ path }, m_fileType{ fileType }, m_originalModificationTimeStamp{ std::filesystem::last_write_time(m_path) }
     {
         if (!fileType.isAudio())
         {
@@ -31,6 +32,19 @@ namespace NickvisionTagger::Models
         else if (m_fileType == MediaFileType::WAV)
         {
             m_fileWAV = std::make_shared<TagLib::RIFF::WAV::File>(m_path.c_str());
+        }
+    }
+
+    MusicFile::~MusicFile()
+    {
+        m_fileMP3.reset();
+        m_fileOGG.reset();
+        m_fileFLAC.reset();
+        m_fileWMA.reset();
+        m_fileWAV.reset();
+        if (Configuration::getInstance().getPreserveModificationTimeStamp())
+        {
+            std::filesystem::last_write_time(m_path, m_originalModificationTimeStamp);
         }
     }
 
