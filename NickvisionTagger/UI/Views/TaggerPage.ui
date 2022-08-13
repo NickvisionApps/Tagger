@@ -24,233 +24,306 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="toolbar">
-     <item>
-      <widget class="QCommandLinkButton" name="btnOpenMusicFolder">
-       <property name="maximumSize">
-        <size>
-         <width>34</width>
-         <height>16777215</height>
-        </size>
+    <widget class="QTabWidget" name="ribbon">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <widget class="QWidget" name="tabFile">
+      <attribute name="title">
+       <string>File</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="leftMargin">
+        <number>4</number>
        </property>
-       <property name="toolTip">
-        <string>Open Music Folder (Ctrl+O)</string>
+       <property name="topMargin">
+        <number>4</number>
        </property>
-       <property name="icon">
-        <iconset resource="../../resources.qrc">
-         <normaloff>:/Resources/MusicLibrary.png</normaloff>:/Resources/MusicLibrary.png</iconset>
+       <property name="rightMargin">
+        <number>4</number>
        </property>
-       <property name="shortcut">
-        <string>Ctrl+O</string>
+       <property name="bottomMargin">
+        <number>4</number>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCommandLinkButton" name="btnRefreshMusicFolder">
-       <property name="maximumSize">
-        <size>
-         <width>34</width>
-         <height>16777215</height>
-        </size>
+       <item>
+        <widget class="QCommandLinkButton" name="btnOpenMusicFolder">
+         <property name="maximumSize">
+          <size>
+           <width>34</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Open Music Folder (Ctrl+O)</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources.qrc">
+           <normaloff>:/Resources/MusicLibrary.png</normaloff>:/Resources/MusicLibrary.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+O</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCommandLinkButton" name="btnRefreshMusicFolder">
+         <property name="maximumSize">
+          <size>
+           <width>34</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Refresh Music Folder (F5)</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources.qrc">
+           <normaloff>:/Resources/Refresh.png</normaloff>:/Resources/Refresh.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string>F5</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCommandLinkButton" name="btnCloseMusicFolder">
+         <property name="maximumSize">
+          <size>
+           <width>34</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Close Music Folder (Ctrl+W)</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources.qrc">
+           <normaloff>:/Resources/Close.png</normaloff>:/Resources/Close.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+W</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabEdit">
+      <attribute name="title">
+       <string>Edit</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <property name="leftMargin">
+        <number>4</number>
        </property>
-       <property name="toolTip">
-        <string>Refresh Music Folder (F5)</string>
+       <property name="topMargin">
+        <number>4</number>
        </property>
-       <property name="icon">
-        <iconset resource="../../resources.qrc">
-         <normaloff>:/Resources/Refresh.png</normaloff>:/Resources/Refresh.png</iconset>
+       <property name="rightMargin">
+        <number>4</number>
        </property>
-       <property name="shortcut">
-        <string>F5</string>
+       <property name="bottomMargin">
+        <number>4</number>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCommandLinkButton" name="btnCloseMusicFolder">
-       <property name="maximumSize">
-        <size>
-         <width>34</width>
-         <height>16777215</height>
-        </size>
+       <item>
+        <widget class="QCommandLinkButton" name="btnSaveTags">
+         <property name="maximumSize">
+          <size>
+           <width>34</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Save Tags (Ctrl+S)</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources.qrc">
+           <normaloff>:/Resources/Save.png</normaloff>:/Resources/Save.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+S</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCommandLinkButton" name="btnRemoveTags">
+         <property name="maximumSize">
+          <size>
+           <width>34</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Remove Tags (Delete)</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources.qrc">
+           <normaloff>:/Resources/Delete.png</normaloff>:/Resources/Delete.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string>Del</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="separator1" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>1</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>1</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCommandLinkButton" name="btnInsertAlbumArt">
+         <property name="maximumSize">
+          <size>
+           <width>34</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Insert Album Art (Ctrl+Shift+A)</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources.qrc">
+           <normaloff>:/Resources/Picture.png</normaloff>:/Resources/Picture.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+Shift+A</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCommandLinkButton" name="btnRemoveAlbumArt">
+         <property name="maximumSize">
+          <size>
+           <width>34</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Remove Album Art (Ctrl+Delete)</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources.qrc">
+           <normaloff>:/Resources/NoImage.png</normaloff>:/Resources/NoImage.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+Del</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabConvert">
+      <attribute name="title">
+       <string>Convert</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <property name="leftMargin">
+        <number>4</number>
        </property>
-       <property name="toolTip">
-        <string>Close Music Folder (Ctrl+W)</string>
+       <property name="topMargin">
+        <number>4</number>
        </property>
-       <property name="icon">
-        <iconset resource="../../resources.qrc">
-         <normaloff>:/Resources/Close.png</normaloff>:/Resources/Close.png</iconset>
+       <property name="rightMargin">
+        <number>4</number>
        </property>
-       <property name="shortcut">
-        <string>Ctrl+W</string>
+       <property name="bottomMargin">
+        <number>4</number>
        </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QCommandLinkButton" name="btnSaveTags">
-       <property name="maximumSize">
-        <size>
-         <width>34</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>Save Tags (Ctrl+S)</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../resources.qrc">
-         <normaloff>:/Resources/Save.png</normaloff>:/Resources/Save.png</iconset>
-       </property>
-       <property name="shortcut">
-        <string>Ctrl+S</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCommandLinkButton" name="btnRemoveTags">
-       <property name="maximumSize">
-        <size>
-         <width>34</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>Remove Tags (Delete)</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../resources.qrc">
-         <normaloff>:/Resources/Delete.png</normaloff>:/Resources/Delete.png</iconset>
-       </property>
-       <property name="shortcut">
-        <string>Del</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QWidget" name="separator1" native="true">
-       <property name="minimumSize">
-        <size>
-         <width>1</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>1</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCommandLinkButton" name="btnInsertAlbumArt">
-       <property name="maximumSize">
-        <size>
-         <width>34</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>Insert Album Art (Ctrl+Shift+A)</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../resources.qrc">
-         <normaloff>:/Resources/Picture.png</normaloff>:/Resources/Picture.png</iconset>
-       </property>
-       <property name="shortcut">
-        <string>Ctrl+Shift+A</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCommandLinkButton" name="btnRemoveAlbumArt">
-       <property name="maximumSize">
-        <size>
-         <width>34</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>Remove Album Art (Ctrl+Delete)</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../resources.qrc">
-         <normaloff>:/Resources/NoImage.png</normaloff>:/Resources/NoImage.png</iconset>
-       </property>
-       <property name="shortcut">
-        <string>Ctrl+Del</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QWidget" name="separator2" native="true">
-       <property name="minimumSize">
-        <size>
-         <width>1</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>1</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCommandLinkButton" name="btnFilenameToTag">
-       <property name="maximumSize">
-        <size>
-         <width>34</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>Filename to Tag (Ctrl+Shift+F)</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../resources.qrc">
-         <normaloff>:/Resources/Edit.png</normaloff>:/Resources/Edit.png</iconset>
-       </property>
-       <property name="shortcut">
-        <string>Ctrl+Shift+F</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCommandLinkButton" name="btnTagToFilename">
-       <property name="maximumSize">
-        <size>
-         <width>34</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="toolTip">
-        <string>Tag to Filename (Ctrl+Shift+T)</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../resources.qrc">
-         <normaloff>:/Resources/Tag.png</normaloff>:/Resources/Tag.png</iconset>
-       </property>
-       <property name="shortcut">
-        <string>Ctrl+Shift+T</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+       <item>
+        <widget class="QCommandLinkButton" name="btnFilenameToTag">
+         <property name="maximumSize">
+          <size>
+           <width>34</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Filename to Tag (Ctrl+Shift+F)</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources.qrc">
+           <normaloff>:/Resources/Edit.png</normaloff>:/Resources/Edit.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+Shift+F</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCommandLinkButton" name="btnTagToFilename">
+         <property name="maximumSize">
+          <size>
+           <width>34</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="toolTip">
+          <string>Tag to Filename (Ctrl+Shift+T)</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources.qrc">
+           <normaloff>:/Resources/Tag.png</normaloff>:/Resources/Tag.png</iconset>
+         </property>
+         <property name="shortcut">
+          <string>Ctrl+Shift+T</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -268,7 +341,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="separator3" native="true">
+      <widget class="QWidget" name="separator2" native="true">
        <property name="minimumSize">
         <size>
          <width>1</width>

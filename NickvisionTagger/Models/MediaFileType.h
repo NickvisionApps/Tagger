@@ -10,7 +10,7 @@ namespace NickvisionTagger::Models
     public:
         enum Value
         {
-            MP4,
+            MP4 = 0,
             WEBM,
             MP3,
             OGG,
@@ -20,6 +20,7 @@ namespace NickvisionTagger::Models
             WAV
         };
 
+        MediaFileType() = delete;
         MediaFileType(Value fileType);
         static std::optional<MediaFileType> parse(const std::string& s);
         operator Value() const;
@@ -34,7 +35,6 @@ namespace NickvisionTagger::Models
         bool isVideo() const;
 
     private:
-        MediaFileType();
         Value m_value;
     };
 }

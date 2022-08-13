@@ -21,6 +21,8 @@ namespace NickvisionTagger::UI::Views
 	{
 		//==UI==//
 		m_ui.setupUi(this);
+		//Ribbon
+		m_ui.ribbon->setCurrentIndex(0);
 		//Buttons
 		m_ui.btnRefreshMusicFolder->setVisible(false);
 		m_ui.btnCloseMusicFolder->setVisible(false);
@@ -29,11 +31,10 @@ namespace NickvisionTagger::UI::Views
 		m_ui.separator1->setVisible(false);
 		m_ui.btnInsertAlbumArt->setVisible(false);
 		m_ui.btnRemoveAlbumArt->setVisible(false);
-		m_ui.separator2->setVisible(false);
 		m_ui.btnFilenameToTag->setVisible(false);
 		m_ui.btnTagToFilename->setVisible(false);
 		//Tag Properties
-		m_ui.separator3->setVisible(false);
+		m_ui.separator2->setVisible(false);
 		m_ui.scrollTagProperties->setVisible(false);
 		m_ui.txtYear->installEventFilter(new IgnoreWheelEventFilter(m_ui.txtYear));
 		m_ui.txtTrack->installEventFilter(new IgnoreWheelEventFilter(m_ui.txtTrack));
@@ -55,9 +56,9 @@ namespace NickvisionTagger::UI::Views
 
 	void TaggerPage::refreshTheme()
 	{
+		m_ui.ribbon->setStyleSheet(ThemeHelpers::getThemedRibbonStyle());
 		m_ui.separator1->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
 		m_ui.separator2->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
-		m_ui.separator3->setStyleSheet(ThemeHelpers::getThemedSeparatorStyle());
 	}
 
 	void TaggerPage::updateConfig()
@@ -330,20 +331,30 @@ namespace NickvisionTagger::UI::Views
 			m_selectedMusicFiles.push_back(m_musicFolder.getFiles()[item->row()]);
 		}
 		//==Update UI==//
+		m_ui.ribbon->setCurrentIndex(1);
 		m_ui.btnSaveTags->setVisible(true);
 		m_ui.btnRemoveTags->setVisible(true);
 		m_ui.separator1->setVisible(true);
 		m_ui.btnInsertAlbumArt->setVisible(true);
 		m_ui.btnRemoveAlbumArt->setVisible(true);
-		m_ui.separator2->setVisible(true);
 		m_ui.btnFilenameToTag->setVisible(true);
 		m_ui.btnTagToFilename->setVisible(true);
-		m_ui.separator3->setVisible(true);
+		m_ui.separator2->setVisible(true);
 		m_ui.scrollTagProperties->setVisible(true);
 		m_ui.txtFilename->setReadOnly(false);
 		//==No Files Selected==//
 		if (m_selectedMusicFiles.size() == 0)
 		{
+			m_ui.ribbon->setCurrentIndex(0);
+			m_ui.btnSaveTags->setVisible(false);
+			m_ui.btnRemoveTags->setVisible(false);
+			m_ui.separator1->setVisible(false);
+			m_ui.btnInsertAlbumArt->setVisible(false);
+			m_ui.btnRemoveAlbumArt->setVisible(false);
+			m_ui.btnFilenameToTag->setVisible(false);
+			m_ui.btnTagToFilename->setVisible(false);
+			m_ui.separator2->setVisible(false);
+			m_ui.scrollTagProperties->setVisible(false);
 			m_ui.txtFilename->setText("");
 			m_ui.txtTitle->setText("");
 			m_ui.txtArtist->setText("");
@@ -356,16 +367,6 @@ namespace NickvisionTagger::UI::Views
 			m_ui.txtDuration->setText("");
 			m_ui.txtFileSize->setText("");
 			m_ui.imgAlbumArt->setPixmap({});
-			m_ui.btnSaveTags->setVisible(false);
-			m_ui.btnRemoveTags->setVisible(false);
-			m_ui.separator1->setVisible(false);
-			m_ui.btnInsertAlbumArt->setVisible(false);
-			m_ui.btnRemoveAlbumArt->setVisible(false);
-			m_ui.separator2->setVisible(false);
-			m_ui.btnFilenameToTag->setVisible(false);
-			m_ui.btnTagToFilename->setVisible(false);
-			m_ui.separator3->setVisible(false);
-			m_ui.scrollTagProperties->setVisible(false);
 		}
 		//==One File Selected==//
 		else if (m_selectedMusicFiles.size() == 1)

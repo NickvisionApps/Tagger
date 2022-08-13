@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
     AppInfo& appInfo = AppInfo::getInstance();
     appInfo.setName("Nickvision Tagger");
     appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
-    appInfo.setVersion("2022.8.2");
-    appInfo.setChangelog("- Fixed an issue where updates would not install correctly");
+    appInfo.setVersion("2022.8.3");
+    appInfo.setChangelog("- Introduced ribbon interface for commands");
     appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     //==App Settings==//
