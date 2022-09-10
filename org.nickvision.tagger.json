@@ -1,0 +1,125 @@
+{
+    "app-id" : "org.nickvision.tagger",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "42",
+    "sdk" : "org.gnome.Sdk",
+    "command" : "org.nickvision.tagger",
+    "finish-args":[
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--share=ipc",
+        "--share=network",
+        "--filesystem=host"
+    ],
+    "modules" : [
+    	{
+            "name": "libadwaita",
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Dvapi=false",
+                "-Dtests=false",
+                "-Dexamples=false",
+                "-Dintrospection=enabled"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/libadwaita.git",
+                    "tag": "1.2.rc"
+                }
+            ],
+            "modules": [
+                {
+                    "name": "sassc",
+                    "sources": [
+                        {
+                            "type": "git",
+                            "url": "https://github.com/sass/sassc.git",
+                            "tag": "3.6.2"
+                        },
+                        {
+                            "type": "script",
+                            "dest-filename": "autogen.sh",
+                            "commands": [
+                                "autoreconf -si"
+                            ]
+                        }
+                    ],
+                    "cleanup": [
+                        "*"
+                    ],
+                    "modules": [
+                        {
+                            "name": "libsass",
+                            "sources": [
+                                {
+                                    "type": "git",
+                                    "url": "https://github.com/sass/libsass.git",
+                                    "tag": "3.6.5"
+                                },
+                                {
+                                    "type": "script",
+                                    "dest-filename": "autogen.sh",
+                                    "commands": [
+                                        "autoreconf -si"
+                                    ]
+                                }
+                            ],
+                            "cleanup": [
+                                "*"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "jsoncpp",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/open-source-parsers/jsoncpp/archive/refs/tags/1.9.5.tar.gz",
+                    "sha256": "f409856e5920c18d0c2fb85276e24ee607d2a09b5e7d5f0a371368903c275da2"
+                }
+            ]
+        },
+        {
+            "name": "curlpp",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/jpbarrette/curlpp/archive/refs/tags/v0.8.1.tar.gz",
+                    "sha256": "97e3819bdcffc3e4047b6ac57ca14e04af85380bd93afe314bee9dd5c7f46a0a"
+                }
+            ]
+        },
+        {
+            "name": "taglib",
+            "buildsystem": "cmake-ninja",
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://taglib.github.io/releases/taglib-1.12.tar.gz",
+                    "sha256": "7fccd07669a523b07a15bd24c8da1bbb92206cb19e9366c3692af3d79253b703"
+                }
+            ]
+        },
+        {
+            "name": "org.nickvision.tagger",
+            "buildsystem": "meson",
+            "config-opts": [
+                "-Dbuildtype=release"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/nlogozzo/NickvisionTagger.git",
+                    "branch": "master"
+                }
+            ]
+        }
+    ]
+}

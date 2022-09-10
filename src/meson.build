@@ -1,0 +1,24 @@
+sources = files('main.cpp', 
+		'models/appinfo.hpp',
+		'models/appinfo.cpp',
+		'models/configuration.hpp',
+		'models/configuration.cpp',
+		'helpers/curlhelpers.hpp',
+		'helpers/curlhelpers.cpp',
+		'controllers/mainwindowcontroller.hpp',
+		'controllers/mainwindowcontroller.cpp',
+		'controllers/preferencesdialogcontroller.hpp',
+		'controllers/preferencesdialogcontroller.cpp',
+		'ui/application.hpp', 
+		'ui/application.cpp',
+		'ui/controls/progressdialog.hpp',
+		'ui/controls/progressdialog.cpp',
+		'ui/views/mainwindow.hpp', 
+		'ui/views/mainwindow.cpp',
+		'ui/views/preferencesdialog.hpp',
+		'ui/views/preferencesdialog.cpp',
+		'ui/views/shortcutsdialog.hpp',
+		'ui/views/shortcutsdialog.cpp')
+
+resources = files('resources/org.nickvision.tagger.svg', 'resources/org.nickvision.tagger-devel.svg')
+resources_symbolic = files('resources/org.nickvision.tagger-symbolic.svg')
