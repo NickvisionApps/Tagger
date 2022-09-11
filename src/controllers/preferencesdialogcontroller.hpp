@@ -41,6 +41,30 @@ namespace NickvisionTagger::Controllers
     	 */
     	void setIsFirstTimeOpen(bool isFirstTimeOpen);
     	/**
+    	 * Gets whether or not to include subfolders when scanning for music files in a music folder
+    	 *
+    	 * @returns True to include subfolders, else false
+    	 */
+    	bool getIncludeSubfolders() const;
+    	/**
+    	 * Sets whether or not to include subfolders when scanning for music files in a music folder
+    	 *
+    	 * @param includeSubfolders True to include subfolders, else false
+    	 */
+    	void setIncludeSubfolders(bool includeSubfolders);
+    	/**
+    	 * Gets whether or not to remember last opened music folder to reopen on application startup
+    	 *
+    	 * @returns True to remember last opened music folder, else false
+    	 */
+    	bool getRememberLastOpenedFolder() const;
+    	/**
+    	 * Sets whether or not to remember last opened music folder to reopen on application startup
+    	 *
+    	 * @param rememberLastOpenedFolder True to remember last opened music folder, else false
+    	 */
+    	void setRememberLastOpenedFolder(bool rememberLastOpenedFolder);
+    	/**
     	 * Saves the configuration file
     	 */
     	void saveConfiguration() const;

@@ -54,7 +54,7 @@ namespace NickvisionTagger::Controllers
     	 *
     	 * @returns The opened folder path or "No Folder Path" if no folder is opened
     	 */
-    	const std::string& getFolderPath() const;
+ 	std::string getFolderPath() const;
     	/**
     	 * Gets whether or not the folder is valid
     	 *

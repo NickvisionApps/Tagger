@@ -47,10 +47,31 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowIsFirstTimeOpen), m_switchIsFirstTimeOpen);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowIsFirstTimeOpen), m_switchIsFirstTimeOpen);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpApplication), m_rowIsFirstTimeOpen);
+    //Tagger Group
+    m_grpTagger = adw_preferences_group_new();
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpTagger), "Tagger");
+    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpTagger), "Customize tagger settings.");
+    //Include Subfolders Row
+    m_rowIncludeSubfolders = adw_action_row_new();
+    m_switchIncludeSubfolders = gtk_switch_new();
+    gtk_widget_set_valign(m_switchIncludeSubfolders, GTK_ALIGN_CENTER);
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIncludeSubfolders), "Include Subfolders");
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowIncludeSubfolders), m_switchIncludeSubfolders);
+    adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowIncludeSubfolders), m_switchIncludeSubfolders);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpTagger), m_rowIncludeSubfolders);
+    //Remember Last Opened Folder Row
+    m_rowRememberLastOpenedFolder = adw_action_row_new();
+    m_switchRememberLastOpenedFolder = gtk_switch_new();
+    gtk_widget_set_valign(m_switchRememberLastOpenedFolder, GTK_ALIGN_CENTER);
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowRememberLastOpenedFolder), "Remember Last Opened Folder");
+    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowRememberLastOpenedFolder), m_switchRememberLastOpenedFolder);
+    adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowRememberLastOpenedFolder), m_switchRememberLastOpenedFolder);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpTagger), m_rowRememberLastOpenedFolder);
     //Page
     m_page = adw_preferences_page_new();
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpUserInterface));
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpApplication));
+    adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpTagger));
     //Main Box
     m_mainBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     gtk_box_append(GTK_BOX(m_mainBox), m_headerBar);
@@ -59,6 +80,8 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     //Load Configuration
     adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowTheme), m_controller.getThemeAsInt());
     gtk_switch_set_active(GTK_SWITCH(m_switchIsFirstTimeOpen), m_controller.getIsFirstTimeOpen());
+    gtk_switch_set_active(GTK_SWITCH(m_switchIncludeSubfolders), m_controller.getIncludeSubfolders());
+    gtk_switch_set_active(GTK_SWITCH(m_switchRememberLastOpenedFolder), m_controller.getRememberLastOpenedFolder());
 }
 
 PreferencesDialog::~PreferencesDialog()
@@ -85,6 +108,8 @@ void PreferencesDialog::onSave()
 {
     m_controller.setTheme(adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowTheme)));
     m_controller.setIsFirstTimeOpen(gtk_switch_get_active(GTK_SWITCH(m_switchIsFirstTimeOpen)));
+    m_controller.setIncludeSubfolders(gtk_switch_get_active(GTK_SWITCH(m_switchIncludeSubfolders)));
+    m_controller.setRememberLastOpenedFolder(gtk_switch_get_active(GTK_SWITCH(m_switchRememberLastOpenedFolder)));
     m_controller.saveConfiguration();
     if(m_controller.getThemeAsInt() == 0)
     {

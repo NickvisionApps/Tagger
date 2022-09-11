@@ -28,6 +28,26 @@ void PreferencesDialogController::setIsFirstTimeOpen(bool isFirstTimeOpen)
     m_configuration.setIsFirstTimeOpen(isFirstTimeOpen);
 }
 
+bool PreferencesDialogController::getIncludeSubfolders() const
+{
+    return m_configuration.getIncludeSubfolders();
+}
+
+void PreferencesDialogController::setIncludeSubfolders(bool includeSubfolders)
+{
+    m_configuration.setIncludeSubfolders(includeSubfolders);
+}
+
+bool PreferencesDialogController::getRememberLastOpenedFolder() const
+{
+    return m_configuration.getRememberLastOpenedFolder();
+}
+
+void PreferencesDialogController::setRememberLastOpenedFolder(bool rememberLastOpenedFolder)
+{
+    m_configuration.setRememberLastOpenedFolder(rememberLastOpenedFolder);
+}
+
 void PreferencesDialogController::saveConfiguration() const
 {
     m_configuration.save();

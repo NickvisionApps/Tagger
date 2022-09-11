@@ -46,6 +46,11 @@ namespace NickvisionTagger::UI::Views
 	GtkWidget* m_grpApplication{ nullptr };
 	GtkWidget* m_rowIsFirstTimeOpen{ nullptr };
 	GtkWidget* m_switchIsFirstTimeOpen{ nullptr };
+	GtkWidget* m_grpTagger{ nullptr };
+	GtkWidget* m_rowIncludeSubfolders{ nullptr };
+	GtkWidget* m_switchIncludeSubfolders{ nullptr };
+	GtkWidget* m_rowRememberLastOpenedFolder{ nullptr };
+	GtkWidget* m_switchRememberLastOpenedFolder{ nullptr };
 	void onCancel();
         void onSave();
     };

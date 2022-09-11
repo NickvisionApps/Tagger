@@ -45,9 +45,9 @@ void MainWindowController::startup()
     }
 }
 
-const std::string& MainWindowController::getFolderPath() const
+std::string MainWindowController::getFolderPath() const
 {
-    return m_folderPath;
+    return m_folderPath == "No Folder Opened" ? "" : m_folderPath;
 }
 
 bool MainWindowController::getIsFolderValid() const

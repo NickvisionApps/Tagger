@@ -49,6 +49,42 @@ namespace NickvisionTagger::Models
     	 */
     	void setIsFirstTimeOpen(bool isFirstTimeOpen);
     	/**
+    	 * Gets whether or not to include subfolders when scanning for music files in a music folder
+    	 *
+    	 * @returns True to include subfolders, else false
+    	 */
+    	bool getIncludeSubfolders() const;
+    	/**
+    	 * Sets whether or not to include subfolders when scanning for music files in a music folder
+    	 *
+    	 * @param includeSubfolders True to include subfolders, else false
+    	 */
+    	void setIncludeSubfolders(bool includeSubfolders);
+    	/**
+    	 * Gets whether or not to remember last opened music folder to reopen on application startup
+    	 *
+    	 * @returns True to remember last opened music folder, else false
+    	 */
+    	bool getRememberLastOpenedFolder() const;
+    	/**
+    	 * Sets whether or not to remember last opened music folder to reopen on application startup
+    	 *
+    	 * @param rememberLastOpenedFolder True to remember last opened music folder, else false
+    	 */
+    	void setRememberLastOpenedFolder(bool rememberLastOpenedFolder);
+    	/**
+    	 * Gets the last opened music folder
+    	 *
+    	 * @returns The last opened music folder
+    	 */
+    	const std::string& getLastOpenedFolder() const;
+    	/**
+    	 * Sets the last opened music folder
+    	 *
+    	 * @param lastOpenedFolder The new last opened music folder
+    	 */
+    	void setLastOpenedFolder(const std::string& lastOpenedFolder);
+    	/**
     	 * Saves the configuration to disk
     	 */
     	void save() const;
@@ -57,5 +93,8 @@ namespace NickvisionTagger::Models
     	std::string m_configDir;
     	Theme m_theme;
     	bool m_isFirstTimeOpen;
+    	bool m_includeSubfolders;
+    	bool m_rememberLastOpenedFolder;
+    	std::string m_lastOpenedFolder;
     };
 }
