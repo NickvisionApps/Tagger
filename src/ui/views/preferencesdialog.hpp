@@ -51,6 +51,8 @@ namespace NickvisionTagger::UI::Views
 	GtkWidget* m_switchIncludeSubfolders{ nullptr };
 	GtkWidget* m_rowRememberLastOpenedFolder{ nullptr };
 	GtkWidget* m_switchRememberLastOpenedFolder{ nullptr };
+	GtkWidget* m_rowPreserveModificationTimeStamp{ nullptr };
+	GtkWidget* m_switchPreserveModificationTimeStamp{ nullptr };
 	void onCancel();
         void onSave();
     };

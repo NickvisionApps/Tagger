@@ -65,6 +65,18 @@ namespace NickvisionTagger::Controllers
     	 */
     	void setRememberLastOpenedFolder(bool rememberLastOpenedFolder);
     	/**
+    	 * Gets whether or not to preserve the modification time stamp of a music file
+    	 *
+    	 * @returns True to preserve modification time stamp, else false
+    	 */
+    	bool getPreserveModificationTimeStamp() const;
+    	/**
+    	 * Sets whether or not to preserve the modification time stamp of a music file
+    	 *
+    	 * @param preserveModificationTimeStamp True to preserve modification time stamp, else false
+    	 */
+    	void setPreserveModificationTimeStamp(bool preserveModificationTimeStamp);
+    	/**
     	 * Saves the configuration file
     	 */
     	void saveConfiguration() const;

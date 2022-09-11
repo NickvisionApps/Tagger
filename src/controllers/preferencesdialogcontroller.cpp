@@ -48,6 +48,16 @@ void PreferencesDialogController::setRememberLastOpenedFolder(bool rememberLastO
     m_configuration.setRememberLastOpenedFolder(rememberLastOpenedFolder);
 }
 
+bool PreferencesDialogController::getPreserveModificationTimeStamp() const
+{
+    return m_configuration.getPreserveModificationTimeStamp();
+}
+
+void PreferencesDialogController::setPreserveModificationTimeStamp(bool preserveModificationTimeStamp)
+{
+    m_configuration.setPreserveModificationTimeStamp(preserveModificationTimeStamp);
+}
+
 void PreferencesDialogController::saveConfiguration() const
 {
     m_configuration.save();

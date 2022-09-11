@@ -6,7 +6,7 @@
 
 using namespace NickvisionTagger::Models;
 
-Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/" }, m_theme{ Theme::System }, m_isFirstTimeOpen{ true }, m_includeSubfolders{ true }, m_rememberLastOpenedFolder{ true }, m_lastOpenedFolder{ "" }
+Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/" }, m_theme{ Theme::System }, m_isFirstTimeOpen{ true }, m_includeSubfolders{ true }, m_rememberLastOpenedFolder{ true }, m_lastOpenedFolder{ "" }, m_preserveModificationTimeStamp{ false }
 {
     if(!std::filesystem::exists(m_configDir))
     {
@@ -22,7 +22,7 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
         m_includeSubfolders = json.get("IncludeSubfolders", true).asBool();
         m_rememberLastOpenedFolder = json.get("RememberLastOpenedFolder", true).asBool();
         m_lastOpenedFolder = json.get("LastOpenedFolder", "").asString();
-
+        m_preserveModificationTimeStamp = json.get("PreserveModificationTimeStamp", false).asBool();
     }
 }
 
@@ -76,6 +76,17 @@ void Configuration::setLastOpenedFolder(const std::string& lastOpenedFolder)
     m_lastOpenedFolder = lastOpenedFolder;
 }
 
+
+bool Configuration::getPreserveModificationTimeStamp() const
+{
+    return m_preserveModificationTimeStamp;
+}
+
+void Configuration::setPreserveModificationTimeStamp(bool preserveModificationTimeStamp)
+{
+    m_preserveModificationTimeStamp = preserveModificationTimeStamp;
+}
+
 void Configuration::save() const
 {
     std::ofstream configFile{ m_configDir + "config.json" };
@@ -87,6 +98,7 @@ void Configuration::save() const
         json["IncludeSubfolders"] = m_includeSubfolders;
         json["RememberLastOpenedFolder"] = m_rememberLastOpenedFolder;
         json["LastOpenedFolder"] = m_lastOpenedFolder;
+        json["PreserveModificationTimeStamp"] = m_preserveModificationTimeStamp;
         configFile << json;
     }
 }

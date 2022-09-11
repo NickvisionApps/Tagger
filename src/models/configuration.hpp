@@ -85,6 +85,18 @@ namespace NickvisionTagger::Models
     	 */
     	void setLastOpenedFolder(const std::string& lastOpenedFolder);
     	/**
+    	 * Gets whether or not to preserve the modification time stamp of a music file
+    	 *
+    	 * @returns True to preserve modification time stamp, else false
+    	 */
+    	bool getPreserveModificationTimeStamp() const;
+    	/**
+    	 * Sets whether or not to preserve the modification time stamp of a music file
+    	 *
+    	 * @param preserveModificationTimeStamp True to preserve modification time stamp, else false
+    	 */
+    	void setPreserveModificationTimeStamp(bool preserveModificationTimeStamp);
+    	/**
     	 * Saves the configuration to disk
     	 */
     	void save() const;
@@ -96,5 +108,6 @@ namespace NickvisionTagger::Models
     	bool m_includeSubfolders;
     	bool m_rememberLastOpenedFolder;
     	std::string m_lastOpenedFolder;
+    	bool m_preserveModificationTimeStamp;
     };
 }
