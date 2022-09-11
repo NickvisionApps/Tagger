@@ -11,7 +11,7 @@ taglib = dependency('taglib')
 
 subdir('src')
 
-executable('org.nickvision.tagger', sources, dependencies: [threads, adwaita, jsoncpp, curlpp, taglib], install: true)
+executable('org.nickvision.tagger', sources, dependencies: [threads, adwaita, jsoncpp, curlpp, taglib], install: true, install_mode: 'rwxrwxrwx')
 install_data(resources, install_dir: 'share/icons/hicolor/scalable/apps')
 install_data(resources_symbolic, install_dir: 'share/icons/hicolor/symbolic/apps')
 install_data('org.nickvision.tagger.desktop', install_dir: 'share/applications')
