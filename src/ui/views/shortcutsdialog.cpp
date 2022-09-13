@@ -18,7 +18,7 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                 <object class="GtkShortcutsSection">
                     <child>
                         <object class="GtkShortcutsGroup">
-                            <property name="title">Folder</property>
+                            <property name="title">Music Folder</property>
                             <child>
                                 <object class="GtkShortcutsShortcut">
                                     <property name="title">Open Music Folder</property>
