@@ -5,6 +5,8 @@
 #include "preferencesdialogcontroller.hpp"
 #include "../models/appinfo.hpp"
 #include "../models/configuration.hpp"
+#include "../models/musicfile.hpp"
+#include "../models/musicfolder.hpp"
 
 namespace NickvisionTagger::Controllers
 {
@@ -50,34 +52,27 @@ namespace NickvisionTagger::Controllers
     	 */
     	void startup();
     	/**
-    	 * Gets the opened folder path
-    	 *
-    	 * @returns The opened folder path or "No Folder Path" if no folder is opened
+    	 * Updates the controller based on the configuration changes
     	 */
- 	std::string getFolderPath() const;
+    	void onConfigurationChanged();
     	/**
-    	 * Gets whether or not the folder is valid
+    	 * Gets the opened music folder path
     	 *
-    	 * @returns True if folder is valid, else false
+    	 * @returns The opened music folder path or "No Folder Path" if no folder is opened
     	 */
-    	bool getIsFolderValid() const;
+ 	std::string getMusicFolderPath() const;
     	/**
-    	 * Registers a callback for when the folder is changed
+    	 * Registers a callback for when the music folder is changed
     	 *
     	 * @param callback A void() function
     	 */
-    	void registerFolderChangedCallback(const std::function<void()>& callback);
+    	void registerMusicFolderUpdatedCallback(const std::function<void()>& callback);
     	/**
-    	 * Opens a folder with the given path
+    	 * Opens a music folder with the given path
     	 * 
     	 * @param folderPath The path to the folder to open
-    	 * @returns True if the folderPath is valid and the folder was opened, else false
     	 */
-    	bool openFolder(const std::string& folderPath);
-    	/**
-    	 * Closes the folder if one is open
-    	 */
-    	void closeFolder();
+    	void openMusicFolder(const std::string& folderPath);
     	
     private:
     	NickvisionTagger::Models::AppInfo& m_appInfo;
@@ -85,7 +80,7 @@ namespace NickvisionTagger::Controllers
     	bool m_isOpened;
     	std::function<void(const std::string& message)> m_sendToastCallback;
     	std::function<void(const std::string& title, const std::string& message)> m_sendNotificationCallback;
-    	std::string m_folderPath;
-    	std::function<void()> m_folderChangedCallback;
+    	NickvisionTagger::Models::MusicFolder m_musicFolder;
+    	std::function<void()> m_musicFolderUpdatedCallback;
     };
 }

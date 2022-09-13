@@ -6,9 +6,9 @@
 using namespace NickvisionTagger::Controllers;
 using namespace NickvisionTagger::Models;
 
-MainWindowController::MainWindowController(AppInfo& appInfo, Configuration& configuration) : m_appInfo{ appInfo }, m_configuration{ configuration }, m_isOpened{ false }, m_folderPath{ "No Folder Opened" }
+MainWindowController::MainWindowController(AppInfo& appInfo, Configuration& configuration) : m_appInfo{ appInfo }, m_configuration{ configuration }, m_isOpened{ false }
 {
-
+    m_musicFolder.setIncludeSubfolders(m_configuration.getIncludeSubfolders());
 }
 
 const AppInfo& MainWindowController::getAppInfo() const
@@ -37,7 +37,6 @@ void MainWindowController::startup()
     {
         if(m_configuration.getIsFirstTimeOpen())
         {
-            m_sendNotificationCallback("Welcome", "Application has been opened for the first time!");
             m_configuration.setIsFirstTimeOpen(false);
             m_configuration.save();
         }
@@ -45,37 +44,23 @@ void MainWindowController::startup()
     }
 }
 
-std::string MainWindowController::getFolderPath() const
+void MainWindowController::onConfigurationChanged()
 {
-    return m_folderPath == "No Folder Opened" ? "" : m_folderPath;
+    m_musicFolder.setIncludeSubfolders(m_configuration.getIncludeSubfolders());
 }
 
-bool MainWindowController::getIsFolderValid() const
+std::string MainWindowController::getMusicFolderPath() const
 {
-    return std::filesystem::exists(m_folderPath);
+    return m_musicFolder.getParentPath();
 }
 
-void MainWindowController::registerFolderChangedCallback(const std::function<void()>& callback)
+void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void()>& callback)
 {
-    m_folderChangedCallback = callback;
+    m_musicFolderUpdatedCallback = callback;
 }
 
-bool MainWindowController::openFolder(const std::string& folderPath)
+void MainWindowController::openMusicFolder(const std::string& folderPath)
 {
-    m_folderPath = folderPath;
-    bool isValid = getIsFolderValid();
-    if(!isValid)
-    {
-        m_folderPath = "No Folder Opened";
-    }
-    m_folderChangedCallback();
-    m_sendToastCallback("Folder Opened: " + m_folderPath);
-    return isValid;
+    m_musicFolder.setParentPath(std::filesystem::exists(folderPath) ? folderPath : "");
+    m_musicFolderUpdatedCallback();
 }  
-
-void MainWindowController::closeFolder()
-{
-    m_folderPath = "No Folder Opened";
-    m_folderChangedCallback();
-    m_sendToastCallback("Folder closed successfully.");
-}

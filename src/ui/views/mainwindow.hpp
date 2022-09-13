@@ -35,12 +35,10 @@ namespace NickvisionTagger::UI::Views
 	GtkWidget* m_mainBox{ nullptr };
 	GtkWidget* m_headerBar{ nullptr };
 	GtkWidget* m_adwTitle{ nullptr };
-	GtkWidget* m_btnOpenFolder{ nullptr };
-	GtkWidget* m_btnCloseFolder{ nullptr };
+	GtkWidget* m_btnOpenMusicFolder{ nullptr };
 	GtkWidget* m_btnMenuHelp{ nullptr };
 	GtkWidget* m_toastOverlay{ nullptr };
-	GSimpleAction* m_actOpenFolder{ nullptr };
-	GSimpleAction* m_actCloseFolder{ nullptr };
+	GSimpleAction* m_actOpenMusicFolder{ nullptr };
 	GSimpleAction* m_actPreferences{ nullptr };
 	GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 	GSimpleAction* m_actAbout{ nullptr };
@@ -49,13 +47,13 @@ namespace NickvisionTagger::UI::Views
 	 */
 	void onStartup();
 	/**
-    	 * Updates the UI with the current folder
+    	 * Updates the UI when the music folder is updated
     	 */
-    	void onFolderChanged();
+    	void onMusicFolderUpdated();
     	/**
-    	 * Prompts the user to open a folder from disk and load it in the app
+    	 * Prompts the user to open a music folder from disk and load it in the app
     	 */
-    	void onOpenFolder();
+    	void onOpenMusicFolder();
     	/**
     	 * Displays the preferences dialog
     	 */

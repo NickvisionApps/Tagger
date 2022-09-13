@@ -21,14 +21,8 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                             <property name="title">Folder</property>
                             <child>
                                 <object class="GtkShortcutsShortcut">
-                                    <property name="title">Open Folder</property>
+                                    <property name="title">Open Music Folder</property>
                                     <property name="accelerator">&lt;Control&gt;o</property>
-                                </object>
-                            </child>
-                            <child>
-                                <object class="GtkShortcutsShortcut">
-                                    <property name="title">Close Folder</property>
-                                    <property name="accelerator">&lt;Control&gt;w</property>
                                 </object>
                             </child>
                         </object>
