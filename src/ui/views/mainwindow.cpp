@@ -44,6 +44,18 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuHelp), G_MENU_MODEL(menuHelp));
     gtk_widget_set_tooltip_text(m_btnMenuHelp, "Main Menu");
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnMenuHelp);
+    //Header End Separator
+    m_sepHeaderEnd = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_sepHeaderEnd), "spacer");
+    adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_sepHeaderEnd);
+    //Apply Button
+    m_btnApply = gtk_button_new();
+    gtk_button_set_label(GTK_BUTTON(m_btnApply), "Apply");
+    gtk_widget_set_tooltip_text(m_btnApply, "Apply (Ctrl+S)");
+    gtk_widget_set_visible(m_btnApply, true);
+    gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnApply), "win.apply");
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnApply), "suggested-action");
+    adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnApply);
     //Toast Overlay
     m_toastOverlay = adw_toast_overlay_new();
     gtk_widget_set_hexpand(m_toastOverlay, true);
@@ -75,6 +87,11 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_signal_connect(m_actReloadMusicFolder, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onMusicFolderUpdated(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actReloadMusicFolder));
     gtk_application_set_accels_for_action(application, "win.reloadMusicFolder", new const char*[2]{ "F5", nullptr });
+    //Apply Action
+    m_actApply = g_simple_action_new("apply", nullptr);
+    g_signal_connect(m_actApply, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onApply(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actApply));
+    gtk_application_set_accels_for_action(application, "win.apply", new const char*[2]{ "<Ctrl>s", nullptr });
     //Preferences Action
     m_actPreferences = g_simple_action_new("preferences", nullptr);
     g_signal_connect(m_actPreferences, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onPreferences(); }), this);
@@ -140,6 +157,11 @@ void MainWindow::onOpenMusicFolder()
         g_object_unref(dialog);
     })), this);
     gtk_native_dialog_show(GTK_NATIVE_DIALOG(openFolderDialog));
+}
+
+void MainWindow::onApply()
+{
+
 }
 
 void MainWindow::onPreferences()

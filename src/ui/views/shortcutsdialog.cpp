@@ -35,6 +35,17 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                     </child>
                     <child>
                         <object class="GtkShortcutsGroup">
+                            <property name="title">Tag</property>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">Apply</property>
+                                    <property name="accelerator">&lt;Control&gt;s</property>
+                                </object>
+                            </child>
+                        </object>
+                    </child>
+                    <child>
+                        <object class="GtkShortcutsGroup">
                             <property name="title">Application</property>
                             <child>
                                 <object class="GtkShortcutsShortcut">

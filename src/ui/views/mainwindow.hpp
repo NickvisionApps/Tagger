@@ -38,9 +38,12 @@ namespace NickvisionTagger::UI::Views
 	GtkWidget* m_btnOpenMusicFolder{ nullptr };
 	GtkWidget* m_btnReloadMusicFolder{ nullptr };
 	GtkWidget* m_btnMenuHelp{ nullptr };
+	GtkWidget* m_sepHeaderEnd{ nullptr };
+	GtkWidget* m_btnApply{ nullptr };
 	GtkWidget* m_toastOverlay{ nullptr };
 	GSimpleAction* m_actOpenMusicFolder{ nullptr };
 	GSimpleAction* m_actReloadMusicFolder{ nullptr };
+	GSimpleAction* m_actApply{ nullptr };
 	GSimpleAction* m_actPreferences{ nullptr };
 	GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 	GSimpleAction* m_actAbout{ nullptr };
@@ -56,6 +59,10 @@ namespace NickvisionTagger::UI::Views
     	 * Prompts the user to open a music folder from disk and load it in the app
     	 */
     	void onOpenMusicFolder();
+    	/**
+    	 * Applys the changes to the selected music file's tag
+    	 */
+    	void onApply();
     	/**
     	 * Displays the preferences dialog
     	 */
