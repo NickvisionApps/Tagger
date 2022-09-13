@@ -36,9 +36,11 @@ namespace NickvisionTagger::UI::Views
 	GtkWidget* m_headerBar{ nullptr };
 	GtkWidget* m_adwTitle{ nullptr };
 	GtkWidget* m_btnOpenMusicFolder{ nullptr };
+	GtkWidget* m_btnReloadMusicFolder{ nullptr };
 	GtkWidget* m_btnMenuHelp{ nullptr };
 	GtkWidget* m_toastOverlay{ nullptr };
 	GSimpleAction* m_actOpenMusicFolder{ nullptr };
+	GSimpleAction* m_actReloadMusicFolder{ nullptr };
 	GSimpleAction* m_actPreferences{ nullptr };
 	GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 	GSimpleAction* m_actAbout{ nullptr };

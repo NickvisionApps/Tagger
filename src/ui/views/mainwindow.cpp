@@ -27,6 +27,13 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_tooltip_text(m_btnOpenMusicFolder, "Open Music Folder (Ctrl+O)");
     gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnOpenMusicFolder), "win.openMusicFolder");
     adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnOpenMusicFolder);
+    //Reload Music Folder Button
+    m_btnReloadMusicFolder = gtk_button_new();
+    gtk_button_set_icon_name(GTK_BUTTON(m_btnReloadMusicFolder), "view-refresh-symbolic");
+    gtk_widget_set_tooltip_text(m_btnReloadMusicFolder, "Reload Music Folder (F5)");
+    gtk_widget_set_visible(m_btnReloadMusicFolder, false);
+    gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnReloadMusicFolder), "win.reloadMusicFolder");
+    adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnReloadMusicFolder);
     //Menu Help Button
     m_btnMenuHelp = gtk_menu_button_new();
     GMenu* menuHelp{ g_menu_new() };
@@ -58,11 +65,16 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     });
     //Music Folder Updated Callback
     m_controller.registerMusicFolderUpdatedCallback([&]() { onMusicFolderUpdated(); });
-    //Open Folder Action
+    //Open Music Folder Action
     m_actOpenMusicFolder = g_simple_action_new("openMusicFolder", nullptr);
     g_signal_connect(m_actOpenMusicFolder, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onOpenMusicFolder(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actOpenMusicFolder));
     gtk_application_set_accels_for_action(application, "win.openMusicFolder", new const char*[2]{ "<Ctrl>o", nullptr });
+    //Reload Music Folder Action
+    m_actReloadMusicFolder = g_simple_action_new("reloadMusicFolder", nullptr);
+    g_signal_connect(m_actReloadMusicFolder, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onMusicFolderUpdated(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actReloadMusicFolder));
+    gtk_application_set_accels_for_action(application, "win.reloadMusicFolder", new const char*[2]{ "F5", nullptr });
     //Preferences Action
     m_actPreferences = g_simple_action_new("preferences", nullptr);
     g_signal_connect(m_actPreferences, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onPreferences(); }), this);
@@ -101,6 +113,7 @@ void MainWindow::onStartup()
 void MainWindow::onMusicFolderUpdated()
 {
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getMusicFolderPath().c_str());
+    gtk_widget_set_visible(m_btnReloadMusicFolder, !m_controller.getMusicFolderPath().empty());
     ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(m_gobj), "Loading music files...", [&]()
     {
         m_controller.reloadMusicFolder();

@@ -25,6 +25,12 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                                     <property name="accelerator">&lt;Control&gt;o</property>
                                 </object>
                             </child>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">Reload Music Folder</property>
+                                    <property name="accelerator">F5</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                     <child>
