@@ -73,6 +73,10 @@ namespace NickvisionTagger::Controllers
     	 * @param folderPath The path to the folder to open
     	 */
     	void openMusicFolder(const std::string& folderPath);
+    	/**
+    	 * Reloads a music folder
+    	 */
+    	void reloadMusicFolder();
     	
     private:
     	NickvisionTagger::Models::AppInfo& m_appInfo;

@@ -2,7 +2,7 @@
 
 using namespace NickvisionTagger::UI::Controls;
 
-ProgressDialog::ProgressDialog(GtkWindow* parent, const std::string& description, const std::function<void()>& work, const std::function<void()>& then) : m_work{ work }, m_then{ then }, m_gobj{ adw_window_new() }
+ProgressDialog::ProgressDialog(GtkWindow* parent, const std::string& description, const std::function<void()>& work, const std::function<void()>& then) : m_work{ work }, m_then{ then }, m_isFinished{ false }, m_gobj{ adw_window_new() }
 {
     //Window Settings
     gtk_window_set_transient_for(GTK_WINDOW(m_gobj), parent);

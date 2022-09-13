@@ -101,6 +101,14 @@ void MainWindow::onStartup()
 void MainWindow::onMusicFolderUpdated()
 {
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getMusicFolderPath().c_str());
+    ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(m_gobj), "Loading music files...", [&]()
+    {
+        m_controller.reloadMusicFolder();
+    }, []()
+    {
+
+    }) };
+    progressDialog->show();
 }
 
 void MainWindow::onOpenMusicFolder()

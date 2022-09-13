@@ -70,6 +70,12 @@ void MainWindowController::openMusicFolder(const std::string& folderPath)
     if(m_configuration.getRememberLastOpenedFolder())
     {
         m_configuration.setLastOpenedFolder(m_musicFolder.getParentPath());
+        m_configuration.save();
     }
     m_musicFolderUpdatedCallback();
-}  
+}
+
+void MainWindowController::reloadMusicFolder()
+{
+    m_musicFolder.reloadMusicFiles();
+}
