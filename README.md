@@ -10,7 +10,7 @@ TODO
 
 # Dev Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/190164690-a20bac35-e5f9-4671-b9a5-457e25ab645a.png)
-![OpenFolder](https://user-images.githubusercontent.com/17648453/190164700-3e1cb5ad-6bc5-4bc9-95aa-0c2a11a1c5cf.png)
+![OpenFolder](https://user-images.githubusercontent.com/17648453/190229189-92235625-a025-46c6-a5f6-5ed0239e315a.png)
 ![PreferencesDialog](https://user-images.githubusercontent.com/17648453/190164715-7bd09f81-7747-40bf-902b-ffcf7353bbd2.png)
 ![KeyboardShortcuts](https://user-images.githubusercontent.com/17648453/190164726-de3ffe34-9da4-4b9c-bf2f-9e2ddd914cf6.png)
 ![AboutDialog](https://user-images.githubusercontent.com/17648453/190164747-22f029fd-239f-4665-b5c7-f5c72fcfb79f.png)
