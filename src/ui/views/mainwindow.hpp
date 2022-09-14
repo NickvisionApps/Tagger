@@ -54,6 +54,7 @@ namespace NickvisionTagger::UI::Views
 	GSimpleAction* m_actPreferences{ nullptr };
 	GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 	GSimpleAction* m_actAbout{ nullptr };
+	std::vector<GtkWidget*> m_listTaggerMusicFilesRows;
 	/**
 	 * Runs startup functions
 	 */

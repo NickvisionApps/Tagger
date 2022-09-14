@@ -54,7 +54,7 @@ void MainWindowController::onConfigurationChanged()
     m_musicFolder.setIncludeSubfolders(m_configuration.getIncludeSubfolders());
 }
 
-std::string MainWindowController::getMusicFolderPath() const
+const std::filesystem::path& MainWindowController::getMusicFolderPath() const
 {
     return m_musicFolder.getParentPath();
 }
@@ -62,6 +62,11 @@ std::string MainWindowController::getMusicFolderPath() const
 std::size_t MainWindowController::getMusicFileCount() const
 {
     return m_musicFolder.getMusicFiles().size();
+}
+
+const std::vector<std::shared_ptr<MusicFile>>& MainWindowController::getMusicFiles() const
+{
+    return m_musicFolder.getMusicFiles();
 }
 
 void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void()>& callback)

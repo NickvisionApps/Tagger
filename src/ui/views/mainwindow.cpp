@@ -1,10 +1,12 @@
 #include "mainwindow.hpp"
+#include <regex>
 #include <utility>
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
 #include "../controls/progressdialog.hpp"
 
 using namespace NickvisionTagger::Controllers;
+using namespace NickvisionTagger::Models;
 using namespace NickvisionTagger::UI::Controls;
 using namespace NickvisionTagger::UI::Views;
 
@@ -69,7 +71,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_pageFlapTagger = adw_flap_new();
     adw_flap_set_flap_position(ADW_FLAP(m_pageFlapTagger), GTK_PACK_END);
     adw_flap_set_fold_policy(ADW_FLAP(m_pageFlapTagger), ADW_FLAP_FOLD_POLICY_NEVER);
-    adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), true);
+    adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), false);
     //Tagger Flap Content
     m_scrollTaggerContent = gtk_scrolled_window_new();
     m_listTaggerMusicFiles = gtk_list_box_new();
@@ -165,12 +167,29 @@ void MainWindow::onMusicFolderUpdated()
 {
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getMusicFolderPath().c_str());
     gtk_widget_set_visible(m_btnReloadMusicFolder, !m_controller.getMusicFolderPath().empty());
+    gtk_list_box_unselect_all(GTK_LIST_BOX(m_listTaggerMusicFiles));
+    for(GtkWidget* row : m_listTaggerMusicFilesRows)
+    {
+        gtk_list_box_remove(GTK_LIST_BOX(m_listTaggerMusicFiles), row);
+    }
+    m_listTaggerMusicFilesRows.clear();
     ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(m_gobj), "Loading music files...", [&]()
     {
         m_controller.reloadMusicFolder();
     }, [&]()
     {
+        int id = 1;
         adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), m_controller.getMusicFileCount() > 0 ? "pageTagger" : "pageNoFiles");
+        for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
+        {
+            GtkWidget* row{ adw_action_row_new() };
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+            adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(id).c_str());
+            gtk_list_box_append(GTK_LIST_BOX(m_listTaggerMusicFiles), row);
+            m_listTaggerMusicFilesRows.push_back(row);
+            g_main_context_iteration(g_main_context_default(), false);
+            id++;
+        }
     }) };
     progressDialog->show();
 }

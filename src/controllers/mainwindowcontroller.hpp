@@ -2,6 +2,7 @@
 
 #include <functional>
 #include <string>
+#include <vector>
 #include "preferencesdialogcontroller.hpp"
 #include "../models/appinfo.hpp"
 #include "../models/configuration.hpp"
@@ -60,13 +61,19 @@ namespace NickvisionTagger::Controllers
     	 *
     	 * @returns The opened music folder path or "No Folder Path" if no folder is opened
     	 */
- 	std::string getMusicFolderPath() const;
+ 	const std::filesystem::path& getMusicFolderPath() const;
  	/**
  	 * Gets the number of music files in the music folder
  	 *
  	 * @returns The number of music files in the music folder (0 if no folder is opened)
  	 */
  	std::size_t getMusicFileCount() const;
+ 	/**
+ 	 * Gets the list of music files in the music folder
+ 	 *
+ 	 * @returns The list of music files in the music folder
+ 	 */
+	const std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>>& getMusicFiles() const;
     	/**
     	 * Registers a callback for when the music folder is changed
     	 *
