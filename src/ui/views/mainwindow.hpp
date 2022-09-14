@@ -41,6 +41,9 @@ namespace NickvisionTagger::UI::Views
 	GtkWidget* m_sepHeaderEnd{ nullptr };
 	GtkWidget* m_btnApply{ nullptr };
 	GtkWidget* m_toastOverlay{ nullptr };
+	GtkWidget* m_viewStack{ nullptr };
+	GtkWidget* m_pageStatusNoFiles{ nullptr };
+	GtkWidget* m_pageFlapTagger{ nullptr };
 	GSimpleAction* m_actOpenMusicFolder{ nullptr };
 	GSimpleAction* m_actReloadMusicFolder{ nullptr };
 	GSimpleAction* m_actApply{ nullptr };

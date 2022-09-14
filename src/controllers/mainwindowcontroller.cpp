@@ -59,6 +59,11 @@ std::string MainWindowController::getMusicFolderPath() const
     return m_musicFolder.getParentPath();
 }
 
+std::size_t MainWindowController::getMusicFileCount() const
+{
+    return m_musicFolder.getMusicFiles().size();
+}
+
 void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void()>& callback)
 {
     m_musicFolderUpdatedCallback = callback;

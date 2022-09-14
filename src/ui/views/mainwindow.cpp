@@ -52,7 +52,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_btnApply = gtk_button_new();
     gtk_button_set_label(GTK_BUTTON(m_btnApply), "Apply");
     gtk_widget_set_tooltip_text(m_btnApply, "Apply (Ctrl+S)");
-    gtk_widget_set_visible(m_btnApply, true);
+    gtk_widget_set_visible(m_btnApply, false);
     gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnApply), "win.apply");
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnApply), "suggested-action");
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnApply);
@@ -60,6 +60,18 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_toastOverlay = adw_toast_overlay_new();
     gtk_widget_set_hexpand(m_toastOverlay, true);
     gtk_widget_set_vexpand(m_toastOverlay, true);
+    //No Files Status Page
+    m_pageStatusNoFiles = adw_status_page_new();
+    adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoFiles), "org.nickvision.tagger-symbolic");
+    adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoFiles), "No Music Files Found");
+    adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoFiles), "Open a folder with music files inside to get started.");
+    //Tagger Flap Page
+    m_pageFlapTagger = adw_flap_new();
+    //View Stack
+    m_viewStack = adw_view_stack_new();
+    adw_view_stack_add_named(ADW_VIEW_STACK(m_viewStack), m_pageStatusNoFiles, "pageNoFiles");
+    adw_view_stack_add_named(ADW_VIEW_STACK(m_viewStack), m_pageFlapTagger, "pageTagger");
+    adw_toast_overlay_set_child(ADW_TOAST_OVERLAY(m_toastOverlay), m_viewStack);
     //Main Box
     m_mainBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     gtk_box_append(GTK_BOX(m_mainBox), m_headerBar);
@@ -134,9 +146,9 @@ void MainWindow::onMusicFolderUpdated()
     ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(m_gobj), "Loading music files...", [&]()
     {
         m_controller.reloadMusicFolder();
-    }, []()
+    }, [&]()
     {
-
+        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), m_controller.getMusicFileCount() > 0 ? "pageTagger" : "pageNoFiles");
     }) };
     progressDialog->show();
 }
