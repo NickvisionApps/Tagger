@@ -21,7 +21,7 @@ namespace NickvisionTagger::UI::Controls
          * @param work The long task to preform
          * @param then A callback to call after the work has completed
          */
-    	ProgressDialog(GtkWindow* parent, const std::string& description, const std::function<void()>& work, const std::function<void()>& then);
+    	ProgressDialog(GtkWindow* parent, const std::string& description, const std::function<void()>& work, const std::function<void()>& then = []() {});
     	/**
     	 * Shows the ProgressDialog
     	 */

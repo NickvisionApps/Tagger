@@ -67,6 +67,28 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoFiles), "Open a folder with music files inside to get started.");
     //Tagger Flap Page
     m_pageFlapTagger = adw_flap_new();
+    adw_flap_set_flap_position(ADW_FLAP(m_pageFlapTagger), GTK_PACK_END);
+    adw_flap_set_fold_policy(ADW_FLAP(m_pageFlapTagger), ADW_FLAP_FOLD_POLICY_NEVER);
+    adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), true);
+    //Tagger Flap Content
+    m_scrollTaggerContent = gtk_scrolled_window_new();
+    m_listTaggerMusicFiles = gtk_list_box_new();
+    gtk_widget_set_margin_start(m_scrollTaggerContent, 10);
+    gtk_widget_set_margin_top(m_scrollTaggerContent, 10);
+    gtk_widget_set_margin_end(m_scrollTaggerContent, 10);
+    gtk_widget_set_margin_bottom(m_scrollTaggerContent, 10);
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_listTaggerMusicFiles), "boxed-list");
+    gtk_list_box_set_selection_mode(GTK_LIST_BOX(m_listTaggerMusicFiles), GTK_SELECTION_MULTIPLE);
+    gtk_list_box_set_activate_on_single_click(GTK_LIST_BOX(m_listTaggerMusicFiles), false);
+    gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollTaggerContent), m_listTaggerMusicFiles);
+    adw_flap_set_content(ADW_FLAP(m_pageFlapTagger), m_scrollTaggerContent);
+    //Tagger Flap Separator
+    m_sepTagger = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
+    adw_flap_set_separator(ADW_FLAP(m_pageFlapTagger), m_sepTagger);
+    //Tagger Flap Flap
+    m_scrollTaggerFlap = gtk_scrolled_window_new();
+    gtk_widget_set_size_request(m_scrollTaggerFlap, 420, -1);
+    adw_flap_set_flap(ADW_FLAP(m_pageFlapTagger), m_scrollTaggerFlap);
     //View Stack
     m_viewStack = adw_view_stack_new();
     adw_view_stack_add_named(ADW_VIEW_STACK(m_viewStack), m_pageStatusNoFiles, "pageNoFiles");
@@ -135,7 +157,7 @@ void MainWindow::onStartup()
     ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(m_gobj), "Starting application...", [&]()
     {
         m_controller.startup();
-    }, []() {}) };
+    }) };
     progressDialog->show();
 }
 
