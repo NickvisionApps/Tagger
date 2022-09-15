@@ -51,7 +51,11 @@ void MainWindowController::startup()
 
 void MainWindowController::onConfigurationChanged()
 {
-    m_musicFolder.setIncludeSubfolders(m_configuration.getIncludeSubfolders());
+    if(m_musicFolder.getIncludeSubfolders() != m_configuration.getIncludeSubfolders())
+    {
+        m_musicFolder.setIncludeSubfolders(m_configuration.getIncludeSubfolders());
+        m_musicFolderUpdatedCallback();
+    }
 }
 
 const std::filesystem::path& MainWindowController::getMusicFolderPath() const

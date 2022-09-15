@@ -71,7 +71,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_pageFlapTagger = adw_flap_new();
     adw_flap_set_flap_position(ADW_FLAP(m_pageFlapTagger), GTK_PACK_END);
     adw_flap_set_fold_policy(ADW_FLAP(m_pageFlapTagger), ADW_FLAP_FOLD_POLICY_NEVER);
-    adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), false);
+    adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), true);
     //Tagger Flap Content
     m_scrollTaggerContent = gtk_scrolled_window_new();
     m_listTaggerMusicFiles = gtk_list_box_new();
