@@ -73,11 +73,6 @@ const std::vector<std::shared_ptr<MusicFile>>& MainWindowController::getMusicFil
     return m_musicFolder.getMusicFiles();
 }
 
-void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void()>& callback)
-{
-    m_musicFolderUpdatedCallback = callback;
-}
-
 void MainWindowController::openMusicFolder(const std::string& folderPath)
 {
     m_musicFolder.setParentPath(std::filesystem::exists(folderPath) ? folderPath : "");
@@ -92,4 +87,23 @@ void MainWindowController::openMusicFolder(const std::string& folderPath)
 void MainWindowController::reloadMusicFolder()
 {
     m_musicFolder.reloadMusicFiles();
+}
+
+void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void()>& callback)
+{
+    m_musicFolderUpdatedCallback = callback;
+}
+
+const std::vector<std::shared_ptr<MusicFile>>& MainWindowController::getSelectedMusicFiles() const
+{
+    return m_selectedMusicFiles;
+}
+
+void MainWindowController::updateSelectedMusicFiles(std::vector<int> indexes)
+{
+    m_selectedMusicFiles.clear();
+    for(int index : indexes)
+    {
+        m_selectedMusicFiles.push_back(m_musicFolder.getMusicFiles()[index]);
+    }
 }

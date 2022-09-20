@@ -46,7 +46,7 @@ namespace NickvisionTagger::UI::Views
 	GtkWidget* m_pageStatusNoFiles{ nullptr };
 	GtkWidget* m_pageFlapTagger{ nullptr };
 	GtkWidget* m_scrollTaggerContent{ nullptr };
-	GtkWidget* m_listTaggerMusicFiles{ nullptr };
+	GtkWidget* m_listMusicFiles{ nullptr };
 	GtkWidget* m_sepTagger{ nullptr };
 	GtkWidget* m_scrollTaggerFlap{ nullptr };
 	GtkWidget* m_boxTaggerFlap{ nullptr };
@@ -86,7 +86,7 @@ namespace NickvisionTagger::UI::Views
 	GSimpleAction* m_actPreferences{ nullptr };
 	GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 	GSimpleAction* m_actAbout{ nullptr };
-	std::vector<GtkWidget*> m_listTaggerMusicFilesRows;
+	std::vector<GtkWidget*> m_listMusicFilesRows;
 	/**
 	 * Runs startup functions
 	 */
@@ -135,5 +135,9 @@ namespace NickvisionTagger::UI::Views
     	 * Displays the about dialog
     	 */
     	void onAbout();
+    	/**
+    	 * Occurs when listMusicFile's selection is changed
+    	 */
+	void onListMusicFilesSelectionChanged();
     };
 }

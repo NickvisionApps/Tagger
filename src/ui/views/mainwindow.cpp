@@ -91,18 +91,20 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Tagger Flap Page
     m_pageFlapTagger = adw_flap_new();
     adw_flap_set_flap_position(ADW_FLAP(m_pageFlapTagger), GTK_PACK_END);
-    adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), true);
+    adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), false);
     //Tagger Flap Content
     m_scrollTaggerContent = gtk_scrolled_window_new();
-    m_listTaggerMusicFiles = gtk_list_box_new();
     gtk_widget_set_margin_start(m_scrollTaggerContent, 10);
     gtk_widget_set_margin_top(m_scrollTaggerContent, 10);
     gtk_widget_set_margin_end(m_scrollTaggerContent, 10);
     gtk_widget_set_margin_bottom(m_scrollTaggerContent, 10);
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_listTaggerMusicFiles), "boxed-list");
-    gtk_list_box_set_selection_mode(GTK_LIST_BOX(m_listTaggerMusicFiles), GTK_SELECTION_MULTIPLE);
-    gtk_list_box_set_activate_on_single_click(GTK_LIST_BOX(m_listTaggerMusicFiles), false);
-    gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollTaggerContent), m_listTaggerMusicFiles);
+    //List Music Files
+    m_listMusicFiles = gtk_list_box_new();
+    g_signal_connect(m_listMusicFiles, "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer*))[](GtkListBox*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_listMusicFiles), "boxed-list");
+    gtk_list_box_set_selection_mode(GTK_LIST_BOX(m_listMusicFiles), GTK_SELECTION_MULTIPLE);
+    gtk_list_box_set_activate_on_single_click(GTK_LIST_BOX(m_listMusicFiles), false);
+    gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollTaggerContent), m_listMusicFiles);
     adw_flap_set_content(ADW_FLAP(m_pageFlapTagger), m_scrollTaggerContent);
     //Tagger Flap Separator
     m_sepTagger = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
@@ -252,22 +254,20 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_actInsertAlbumArt = g_simple_action_new("insertAlbumArt", nullptr);
     g_signal_connect(m_actInsertAlbumArt, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actInsertAlbumArt));
-    gtk_application_set_accels_for_action(application, "win.insertAlbumArt", new const char*[2]{ "<Ctrl><Shift>a", nullptr });
     //Remove Album Art
     m_actRemoveAlbumArt = g_simple_action_new("removeAlbumArt", nullptr);
     g_signal_connect(m_actRemoveAlbumArt, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onRemoveAlbumArt(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actRemoveAlbumArt));
-    gtk_application_set_accels_for_action(application, "win.removeAlbumArt", new const char*[2]{ "<Ctrl>Delete", nullptr });
     //Filename to Tag
     m_actFilenameToTag = g_simple_action_new("filenameToTag", nullptr);
     g_signal_connect(m_actFilenameToTag, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onFilenameToTag(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actFilenameToTag));
-    gtk_application_set_accels_for_action(application, "win.filenameToTag", new const char*[2]{ "<Ctrl><Shift>f", nullptr });
+    gtk_application_set_accels_for_action(application, "win.filenameToTag", new const char*[2]{ "<Ctrl>f", nullptr });
     //Tag to Filename
     m_actTagToFilename = g_simple_action_new("tagToFilename", nullptr);
     g_signal_connect(m_actTagToFilename, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onTagToFilename(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actTagToFilename));
-    gtk_application_set_accels_for_action(application, "win.tagToFilename", new const char*[2]{ "<Ctrl><Shift>t", nullptr });
+    gtk_application_set_accels_for_action(application, "win.tagToFilename", new const char*[2]{ "<Ctrl>t", nullptr });
     //Preferences Action
     m_actPreferences = g_simple_action_new("preferences", nullptr);
     g_signal_connect(m_actPreferences, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onPreferences(); }), this);
@@ -307,12 +307,12 @@ void MainWindow::onMusicFolderUpdated()
 {
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getMusicFolderPath().c_str());
     gtk_widget_set_visible(m_btnReloadMusicFolder, !m_controller.getMusicFolderPath().empty());
-    gtk_list_box_unselect_all(GTK_LIST_BOX(m_listTaggerMusicFiles));
-    for(GtkWidget* row : m_listTaggerMusicFilesRows)
+    gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
+    for(GtkWidget* row : m_listMusicFilesRows)
     {
-        gtk_list_box_remove(GTK_LIST_BOX(m_listTaggerMusicFiles), row);
+        gtk_list_box_remove(GTK_LIST_BOX(m_listMusicFiles), row);
     }
-    m_listTaggerMusicFilesRows.clear();
+    m_listMusicFilesRows.clear();
     ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(m_gobj), "Loading music files...", [&]()
     {
         m_controller.reloadMusicFolder();
@@ -328,8 +328,8 @@ void MainWindow::onMusicFolderUpdated()
                 GtkWidget* row{ adw_action_row_new() };
                 adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
                 adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(id).c_str());
-                gtk_list_box_append(GTK_LIST_BOX(m_listTaggerMusicFiles), row);
-                m_listTaggerMusicFilesRows.push_back(row);
+                gtk_list_box_append(GTK_LIST_BOX(m_listMusicFiles), row);
+                m_listMusicFilesRows.push_back(row);
                 g_main_context_iteration(g_main_context_default(), false);
                 id++;
             }
@@ -427,4 +427,38 @@ void MainWindow::onAbout()
                           "developers", new const char*[2]{ "Nicholas Logozzo", nullptr },
                           "release-notes", m_controller.getAppInfo().getChangelog().c_str(),
                           nullptr);
+}
+
+void MainWindow::onListMusicFilesSelectionChanged()
+{
+    //Update Selected Music Files
+    std::vector<int> selectedIndexes;
+    GList* selectedRows{ gtk_list_box_get_selected_rows(GTK_LIST_BOX(m_listMusicFiles)) };
+    for(GList* list{ selectedRows }; list; list = list->next)
+    {
+        selectedIndexes.push_back(gtk_list_box_row_get_index(GTK_LIST_BOX_ROW(list->data)));
+    }
+    m_controller.updateSelectedMusicFiles(selectedIndexes);
+    //Update UI
+    gtk_editable_set_editable(GTK_EDITABLE(m_txtFilename), true);
+    gtk_widget_set_visible(m_btnApply, true);
+    gtk_widget_set_visible(m_btnMenuTagActions, true);
+    adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), true);
+    //No Selected Files
+    if(m_controller.getSelectedMusicFiles().size() == 0)
+    {
+        gtk_widget_set_visible(m_btnApply, false);
+        gtk_widget_set_visible(m_btnMenuTagActions, false);
+        adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), false);
+    }
+    //One File Selected
+    else if(m_controller.getSelectedMusicFiles().size() == 1)
+    {
+
+    }
+    //Multiple Files Selected
+    else
+    {
+
+    }
 }

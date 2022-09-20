@@ -75,12 +75,6 @@ namespace NickvisionTagger::Controllers
  	 */
 	const std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>>& getMusicFiles() const;
     	/**
-    	 * Registers a callback for when the music folder is changed
-    	 *
-    	 * @param callback A void() function
-    	 */
-    	void registerMusicFolderUpdatedCallback(const std::function<void()>& callback);
-    	/**
     	 * Opens a music folder with the given path
     	 * 
     	 * @param folderPath The path to the folder to open
@@ -90,6 +84,24 @@ namespace NickvisionTagger::Controllers
     	 * Reloads a music folder
     	 */
     	void reloadMusicFolder();
+    	/**
+    	 * Registers a callback for when the music folder is changed
+    	 *
+    	 * @param callback A void() function
+    	 */
+    	void registerMusicFolderUpdatedCallback(const std::function<void()>& callback);
+    	/**
+    	 * Gets the list of selected music files from the UI
+    	 *
+    	 * @returns The list of selected music files from the UI
+    	 */
+    	const std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>>& getSelectedMusicFiles() const;
+    	/**
+    	 * updates the list of selected music files from the list of indexes
+    	 *
+    	 * @param indexes The list of selected indexes
+    	 */
+    	void updateSelectedMusicFiles(std::vector<int> indexes);
     	
     private:
     	NickvisionTagger::Models::AppInfo& m_appInfo;
@@ -99,5 +111,6 @@ namespace NickvisionTagger::Controllers
     	std::function<void(const std::string& title, const std::string& message)> m_sendNotificationCallback;
     	NickvisionTagger::Models::MusicFolder m_musicFolder;
     	std::function<void()> m_musicFolderUpdatedCallback;
+    	std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
     };
 }

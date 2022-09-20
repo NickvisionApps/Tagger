@@ -50,26 +50,14 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                             </child>
                             <child>
                                 <object class="GtkShortcutsShortcut">
-                                    <property name="title">Insert Album Art</property>
-                                    <property name="accelerator">&lt;Control&gt;&lt;Shift&gt;a</property>
-                                </object>
-                            </child>
-                            <child>
-                                <object class="GtkShortcutsShortcut">
-                                    <property name="title">Remove Album Art</property>
-                                    <property name="accelerator">&lt;Control&gt;Delete</property>
-                                </object>
-                            </child>
-                            <child>
-                                <object class="GtkShortcutsShortcut">
                                     <property name="title">Filename to Tag</property>
-                                    <property name="accelerator">&lt;Control&gt;&lt;Shift&gt;f</property>
+                                    <property name="accelerator">&lt;Control&gt;f</property>
                                 </object>
                             </child>
                             <child>
                                 <object class="GtkShortcutsShortcut">
                                     <property name="title">Tag to Filename</property>
-                                    <property name="accelerator">&lt;Control&gt;&lt;Shift&gt;t</property>
+                                    <property name="accelerator">&lt;Control&gt;t</property>
                                 </object>
                             </child>
                         </object>
