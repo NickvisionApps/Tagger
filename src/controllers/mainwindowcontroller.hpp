@@ -41,13 +41,13 @@ namespace NickvisionTagger::Controllers
     	 *
     	 * @param callback A void(const std::string&) function
     	 */
-    	void registerSendToastCallback(const std::function<void(const std::string& message)>& callback);
+    	void registerSendToastCallback(const std::function<void(const std::string&)>& callback);
     	 /**
     	 * Registers a callback for sending a desktop notification
     	 *
     	 * @param callback A void(const std::string&, const std::string&) function
     	 */
-    	void registerSendNotificationCallback(const std::function<void(const std::string& title, const std::string& message)>& callback);
+    	void registerSendNotificationCallback(const std::function<void(const std::string&, const std::string&)>& callback);
     	/**
     	 * Runs startup functions
     	 */
@@ -93,11 +93,23 @@ namespace NickvisionTagger::Controllers
     	 */
     	void removeAlbumArt();
     	/**
+    	 * Runs the filename to tag conversion on the selected music files
+    	 *
+    	 * @param formatString The format string for the conversion
+    	 */
+    	void filenameToTag(const std::string& formatString);
+    	/**
+    	 * Runs the tag to filename conversion on the selected music files
+    	 *
+    	 * @param formatString The format string for the conversion
+    	 */
+    	void tagToFilename(const std::string& formatString);
+    	/**
     	 * Registers a callback for when the music folder is changed
     	 *
-    	 * @param callback A void() function
+    	 * @param callback A void(bool) function
     	 */
-    	void registerMusicFolderUpdatedCallback(const std::function<void()>& callback);
+    	void registerMusicFolderUpdatedCallback(const std::function<void(bool)>& callback);
     	/**
     	 * Gets the list of selected music files from the UI
     	 *
@@ -118,7 +130,7 @@ namespace NickvisionTagger::Controllers
     	std::function<void(const std::string& message)> m_sendToastCallback;
     	std::function<void(const std::string& title, const std::string& message)> m_sendNotificationCallback;
     	NickvisionTagger::Models::MusicFolder m_musicFolder;
-    	std::function<void()> m_musicFolderUpdatedCallback;
+    	std::function<void(bool sendToast)> m_musicFolderUpdatedCallback;
     	std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
     };
 }

@@ -184,18 +184,21 @@ namespace NickvisionTagger::Models
 	 *
 	 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
 	 */
-	void saveTag(bool preserveModificationTimeStamp = false);
+	void saveTag(bool preserveModificationTimeStamp);
 	/**
 	 * Removes the tag of the music file
+	 *
+	 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
 	 */
-	void removeTag();
+	void removeTag(bool preserveModificationTimeStamp);
 	/**
 	 * Uses the music file's filename to fill in tag information based on the format string
 	 *
 	 * @param formatString The format string
+	 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
 	 * @returns True if the operation was successful, else false
 	 */
-	bool filenameToTag(const std::string& formatString);
+	bool filenameToTag(const std::string& formatString, bool preserveModificationTimeStamp);
 	/**
 	 * Uses the music file's tag to set the file's filename in the format of the format string
 	 *

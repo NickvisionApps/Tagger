@@ -93,8 +93,10 @@ namespace NickvisionTagger::UI::Views
 	void onStartup();
 	/**
     	 * Updates the UI when the music folder is updated
+    	 *
+    	 * @param showToast True to show a toast with the number of files loaded, else false
     	 */
-    	void onMusicFolderUpdated();
+    	void onMusicFolderUpdated(bool sendToast);
     	/**
     	 * Prompts the user to open a music folder from disk and load it in the app
     	 */

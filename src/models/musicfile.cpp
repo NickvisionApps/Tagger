@@ -694,7 +694,7 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
     }
 }
 
-void MusicFile::removeTag()
+void MusicFile::removeTag(bool preserveModificationTimeStamp)
 {
     if (m_dotExtension == ".mp3")
     {
@@ -732,10 +732,10 @@ void MusicFile::removeTag()
     {
         m_fileWAV->strip();
     }
-    saveTag();
+    saveTag(preserveModificationTimeStamp);
 }
 
-bool MusicFile::filenameToTag(const std::string& formatString)
+bool MusicFile::filenameToTag(const std::string& formatString, bool preserveModificationTimeStamp)
 {
     if (formatString == "%artist%- %title%")
     {
@@ -746,7 +746,6 @@ bool MusicFile::filenameToTag(const std::string& formatString)
         }
         setArtist(getFilename().substr(0, dashIndex));
         setTitle(getFilename().substr(dashIndex + 2, getFilename().find(m_path.extension().string()) - (getArtist().size() + 2)));
-        saveTag();
     }
     else if (formatString == "%title%- %artist%")
     {
@@ -757,7 +756,6 @@ bool MusicFile::filenameToTag(const std::string& formatString)
         }
         setTitle(getFilename().substr(0, dashIndex));
         setArtist(getFilename().substr(dashIndex + 2, getFilename().find(m_path.extension().string()) - (getTitle().size() + 2)));
-        saveTag();
     }
     else if (formatString == "%track%- %title%")
     {
@@ -780,12 +778,12 @@ bool MusicFile::filenameToTag(const std::string& formatString)
     else if (formatString == "%title%")
     {
         setTitle(getFilename().substr(0, getFilename().find(m_path.extension().string())));
-        saveTag();
     }
     else
     {
         return false;
     }
+    saveTag(preserveModificationTimeStamp);
     return true;
 }
 

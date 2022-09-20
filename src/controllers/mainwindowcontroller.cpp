@@ -21,12 +21,12 @@ PreferencesDialogController MainWindowController::createPreferencesDialogControl
     return { m_configuration };
 }
 
-void MainWindowController::registerSendToastCallback(const std::function<void(const std::string& message)>& callback)
+void MainWindowController::registerSendToastCallback(const std::function<void(const std::string&)>& callback)
 {
     m_sendToastCallback = callback;
 }
 
-void MainWindowController::registerSendNotificationCallback(const std::function<void(const std::string& title, const std::string& message)>& callback)
+void MainWindowController::registerSendNotificationCallback(const std::function<void(const std::string&, const std::string&)>& callback)
 {
     m_sendNotificationCallback = callback;
 }
@@ -54,7 +54,7 @@ void MainWindowController::onConfigurationChanged()
     if(m_musicFolder.getIncludeSubfolders() != m_configuration.getIncludeSubfolders())
     {
         m_musicFolder.setIncludeSubfolders(m_configuration.getIncludeSubfolders());
-        m_musicFolderUpdatedCallback();
+        m_musicFolderUpdatedCallback(true);
     }
 }
 
@@ -81,7 +81,7 @@ void MainWindowController::openMusicFolder(const std::string& folderPath)
         m_configuration.setLastOpenedFolder(m_musicFolder.getParentPath());
         m_configuration.save();
     }
-    m_musicFolderUpdatedCallback();
+    m_musicFolderUpdatedCallback(true);
 }
 
 void MainWindowController::reloadMusicFolder()
@@ -93,9 +93,9 @@ void MainWindowController::deleteTags()
 {
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
-        musicFile->removeTag();
+        musicFile->removeTag(m_configuration.getPreserveModificationTimeStamp());
     }
-    m_musicFolderUpdatedCallback();
+    m_musicFolderUpdatedCallback(false);
 }
 
 void MainWindowController::removeAlbumArt()
@@ -103,12 +103,30 @@ void MainWindowController::removeAlbumArt()
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
         musicFile->setAlbumArt({});
-        musicFile->saveTag();
+        musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
     }
-    m_musicFolderUpdatedCallback();
+    m_musicFolderUpdatedCallback(false);
 }
 
-void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void()>& callback)
+void MainWindowController::filenameToTag(const std::string& formatString)
+{
+    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    {
+        musicFile->filenameToTag(formatString, m_configuration.getPreserveModificationTimeStamp());
+    }
+    m_musicFolderUpdatedCallback(false);
+}
+
+void MainWindowController::tagToFilename(const std::string& formatString)
+{
+    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    {
+        musicFile->tagToFilename(formatString);
+    }
+    m_musicFolderUpdatedCallback(false);
+}
+
+void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void(bool)>& callback)
 {
     m_musicFolderUpdatedCallback = callback;
 }

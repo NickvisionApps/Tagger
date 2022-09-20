@@ -14,29 +14,26 @@
   <screenshots>
     <screenshot type="default">
       <caption>MainWindow</caption>
-      <image>https://user-images.githubusercontent.com/17648453/173400558-ec011b3b-fdeb-4718-99ff-f5028c02e423.png</image>
+      <image>https://user-images.githubusercontent.com/17648453/190164690-a20bac35-e5f9-4671-b9a5-457e25ab645a.png</image>
+    </screenshot>
+    <screenshot>
+        <caption>OpenFolder</caption>
+      <image>https://user-images.githubusercontent.com/17648453/191148587-aae0226b-95e2-4082-9274-a46ba981631a.png</image>
     </screenshot>
     <screenshot>
         <caption>Tagging</caption>
-      <image>https://user-images.githubusercontent.com/17648453/171565097-69b1195a-4eac-4178-a809-fe0c1f4e81e5.png</image>
-    </screenshot>
-    <screenshot>
-        <caption>LightMode</caption>
-      <image>https://user-images.githubusercontent.com/17648453/171565160-0d6dca47-886d-405b-8a11-58f20263cfdc.png</image>
+      <image>https://user-images.githubusercontent.com/17648453/191148592-ee322204-41ad-47e2-a6f5-2e61dec0a47e.png</image>
     </screenshot>
   </screenshots>
   <url type="homepage">https://github.com/nlogozzo/NickvisionTagger</url>
   <project_group>Nickvision</project_group>
   <provides>
-    <binary>nickvision-tagger</binary>
+    <binary>org.nickvision.tagger</binary>
   </provides>
   <releases>
-    <release version="2022.6.3" date="2022-06-22">
+    <release version="2022.9.0" date="2022-09-01">
       <description>
-        <p>- Added support for OPUS file extension</p>
-        <p>- Improved ListBox selection handling. (Double-click to select, Ctrl+Click to expand selection, etc...)</p>
-        <p>- Fixed an issue where attempting to tag an ogg file would crash the program</p>
-        <p>- Fixed an issue where Tag to Filename wasn't working correctly for %track%- %title%</p>
+        <p>- Rewrite with C++, GTK 4, and libadwaita</p>
       </description>
     </release>
   </releases>

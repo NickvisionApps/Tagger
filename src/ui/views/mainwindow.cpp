@@ -3,6 +3,7 @@
 #include <utility>
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
+#include "../controls/comboboxdialog.hpp"
 #include "../controls/progressdialog.hpp"
 #include "../../helpers/gtkhelpers.hpp"
 #include "../../helpers/mediahelpers.hpp"
@@ -232,7 +233,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
         g_object_unref(notification);
     });
     //Music Folder Updated Callback
-    m_controller.registerMusicFolderUpdatedCallback([&]() { onMusicFolderUpdated(); });
+    m_controller.registerMusicFolderUpdatedCallback([&](bool sendToast) { onMusicFolderUpdated(sendToast); });
     //Open Music Folder Action
     m_actOpenMusicFolder = g_simple_action_new("openMusicFolder", nullptr);
     g_signal_connect(m_actOpenMusicFolder, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onOpenMusicFolder(); }), this);
@@ -240,7 +241,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_application_set_accels_for_action(application, "win.openMusicFolder", new const char*[2]{ "<Ctrl>o", nullptr });
     //Reload Music Folder Action
     m_actReloadMusicFolder = g_simple_action_new("reloadMusicFolder", nullptr);
-    g_signal_connect(m_actReloadMusicFolder, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onMusicFolderUpdated(); }), this);
+    g_signal_connect(m_actReloadMusicFolder, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onMusicFolderUpdated(true); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actReloadMusicFolder));
     gtk_application_set_accels_for_action(application, "win.reloadMusicFolder", new const char*[2]{ "F5", nullptr });
     //Apply Action
@@ -308,7 +309,7 @@ void MainWindow::onStartup()
     progressDialog->show();
 }
 
-void MainWindow::onMusicFolderUpdated()
+void MainWindow::onMusicFolderUpdated(bool sendToast)
 {
     adw_window_title_set_subtitle(ADW_WINDOW_TITLE(m_adwTitle), m_controller.getMusicFolderPath().c_str());
     gtk_widget_set_visible(m_btnReloadMusicFolder, !m_controller.getMusicFolderPath().empty());
@@ -321,23 +322,23 @@ void MainWindow::onMusicFolderUpdated()
     ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(m_gobj), "Loading music files...", [&]()
     {
         m_controller.reloadMusicFolder();
-    }, [&]()
+    }, [&, sendToast]()
     {
         std::size_t musicFilesCount{ m_controller.getMusicFileCount() };
         int id{ 1 };
         adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), musicFilesCount > 0 ? "pageTagger" : "pageNoFiles");
-        if(musicFilesCount > 0)
+        for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
         {
-            for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
-            {
-                GtkWidget* row{ adw_action_row_new() };
-                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
-                adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(id).c_str());
-                gtk_list_box_append(GTK_LIST_BOX(m_listMusicFiles), row);
-                m_listMusicFilesRows.push_back(row);
-                g_main_context_iteration(g_main_context_default(), false);
-                id++;
-            }
+            GtkWidget* row{ adw_action_row_new() };
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+            adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(id).c_str());
+            gtk_list_box_append(GTK_LIST_BOX(m_listMusicFiles), row);
+            m_listMusicFilesRows.push_back(row);
+            g_main_context_iteration(g_main_context_default(), false);
+            id++;
+        }
+        if(musicFilesCount > 0 && sendToast)
+        {
             adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(std::string("Loaded " + std::to_string(musicFilesCount) + " music files.").c_str()));
         }
     }) };
@@ -420,12 +421,48 @@ void MainWindow::onRemoveAlbumArt()
 
 void MainWindow::onFilenameToTag()
 {
-
+    ComboBoxDialog* formatStringDialog{ new ComboBoxDialog(GTK_WINDOW(m_gobj), "Filename to Tag", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" }) };
+    std::pair<ComboBoxDialog*, MainWindow*>* pointers{ new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this) };
+    g_signal_connect(formatStringDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer*))([](GtkWidget*, gpointer* data)
+    {
+        std::pair<ComboBoxDialog*, MainWindow*>* pointers{ reinterpret_cast<std::pair<ComboBoxDialog*, MainWindow*>*>(data) };
+        std::string formatString{ pointers->first->getSelectedChoice() };
+        delete pointers->first;
+        if(!formatString.empty())
+        {
+            MainWindow* mainWindow{ pointers->second };
+            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Converting filenames to tags...", [mainWindow, formatString]()
+            {
+                mainWindow->m_controller.filenameToTag(formatString);
+            }) };
+            progressDialog->show();
+        }
+        delete pointers;
+    })), pointers);
+    formatStringDialog->show();
 }
 
 void MainWindow::onTagToFilename()
 {
-
+    ComboBoxDialog* formatStringDialog{ new ComboBoxDialog(GTK_WINDOW(m_gobj), "Tag to Filename", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" }) };
+    std::pair<ComboBoxDialog*, MainWindow*>* pointers{ new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this) };
+    g_signal_connect(formatStringDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer*))([](GtkWidget*, gpointer* data)
+    {
+        std::pair<ComboBoxDialog*, MainWindow*>* pointers{ reinterpret_cast<std::pair<ComboBoxDialog*, MainWindow*>*>(data) };
+        std::string formatString{ pointers->first->getSelectedChoice() };
+        delete pointers->first;
+        if(!formatString.empty())
+        {
+            MainWindow* mainWindow{ pointers->second };
+            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Converting tags to filenames...", [mainWindow, formatString]()
+            {
+                mainWindow->m_controller.tagToFilename(formatString);
+            }) };
+            progressDialog->show();
+        }
+        delete pointers;
+    })), pointers);
+    formatStringDialog->show();
 }
 
 void MainWindow::onPreferences()
