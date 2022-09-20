@@ -71,7 +71,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_menu_append(menuAlbumArt, "Remove Album Art", "win.removeAlbumArt");
     g_menu_append(menuConvert, "Filename to Tag", "win.filenameToTag");
     g_menu_append(menuConvert, "Tag to Filename", "win.tagToFilename");
-    g_menu_append(menuTagActions, "Delete Tag", "win.deleteTag");
+    g_menu_append(menuTagActions, "Delete Tags", "win.deleteTags");
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuAlbumArt));
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuConvert));
     gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuTagActions), "document-properties-symbolic");
@@ -248,11 +248,11 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_signal_connect(m_actApply, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onApply(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actApply));
     gtk_application_set_accels_for_action(application, "win.apply", new const char*[2]{ "<Ctrl>s", nullptr });
-    //Delete Tag Action
-    m_actDeleteTag = g_simple_action_new("deleteTag", nullptr);
-    g_signal_connect(m_actDeleteTag, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onDeleteTag(); }), this);
-    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actDeleteTag));
-    gtk_application_set_accels_for_action(application, "win.deleteTag", new const char*[2]{ "Delete", nullptr });
+    //Delete Tags Action
+    m_actDeleteTags = g_simple_action_new("deleteTags", nullptr);
+    g_signal_connect(m_actDeleteTags, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onDeleteTags(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actDeleteTags));
+    gtk_application_set_accels_for_action(application, "win.deleteTags", new const char*[2]{ "Delete", nullptr });
     //Insert Album Art
     m_actInsertAlbumArt = g_simple_action_new("insertAlbumArt", nullptr);
     g_signal_connect(m_actInsertAlbumArt, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
@@ -367,7 +367,7 @@ void MainWindow::onApply()
 
 }
 
-void MainWindow::onDeleteTag()
+void MainWindow::onDeleteTags()
 {
     GtkWidget* messageDialog{ adw_message_dialog_new(GTK_WINDOW(m_gobj), "Delete Tags?", "Are you sure you want to delete the tags of the selected files?") };
     adw_message_dialog_add_responses(ADW_MESSAGE_DIALOG(messageDialog), "no", "No", "yes", "Yes", nullptr);
@@ -397,7 +397,25 @@ void MainWindow::onInsertAlbumArt()
 
 void MainWindow::onRemoveAlbumArt()
 {
-
+    GtkWidget* messageDialog{ adw_message_dialog_new(GTK_WINDOW(m_gobj), "Remove Album Art?", "Are you sure you want to remove the album art from the selected files?") };
+    adw_message_dialog_add_responses(ADW_MESSAGE_DIALOG(messageDialog), "no", "No", "yes", "Yes", nullptr);
+    adw_message_dialog_set_response_appearance(ADW_MESSAGE_DIALOG(messageDialog), "yes", ADW_RESPONSE_DESTRUCTIVE);
+    adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(messageDialog), "no");
+    adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(messageDialog), "no");
+    g_signal_connect(messageDialog, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer*))([](AdwMessageDialog* dialog, gchar* response, gpointer* data)
+    {
+        gtk_window_destroy(GTK_WINDOW(dialog));
+        MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
+        if(strcmp(response, "yes") == 0)
+        {
+            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Removing album art...", [&]()
+            {
+                mainWindow->m_controller.removeAlbumArt();
+            }) };
+            progressDialog->show();
+        }
+    })), this);
+    gtk_widget_show(messageDialog);
 }
 
 void MainWindow::onFilenameToTag()

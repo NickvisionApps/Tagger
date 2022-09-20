@@ -98,6 +98,16 @@ void MainWindowController::deleteTags()
     m_musicFolderUpdatedCallback();
 }
 
+void MainWindowController::removeAlbumArt()
+{
+    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    {
+        musicFile->setAlbumArt({});
+        musicFile->saveTag();
+    }
+    m_musicFolderUpdatedCallback();
+}
+
 void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void()>& callback)
 {
     m_musicFolderUpdatedCallback = callback;

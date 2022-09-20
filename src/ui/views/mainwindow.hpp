@@ -78,7 +78,7 @@ namespace NickvisionTagger::UI::Views
 	GSimpleAction* m_actOpenMusicFolder{ nullptr };
 	GSimpleAction* m_actReloadMusicFolder{ nullptr };
 	GSimpleAction* m_actApply{ nullptr };
-	GSimpleAction* m_actDeleteTag{ nullptr };
+	GSimpleAction* m_actDeleteTags{ nullptr };
 	GSimpleAction* m_actInsertAlbumArt{ nullptr };
 	GSimpleAction* m_actRemoveAlbumArt{ nullptr };
 	GSimpleAction* m_actFilenameToTag{ nullptr };
@@ -106,7 +106,7 @@ namespace NickvisionTagger::UI::Views
     	/**
     	 * Deletes the tags of the selected files
     	 */
-    	void onDeleteTag();
+    	void onDeleteTags();
     	/**
     	 * Prompts the user to select an image file and applys it as the album art for the selected files
     	 */

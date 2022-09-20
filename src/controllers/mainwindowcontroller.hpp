@@ -89,6 +89,10 @@ namespace NickvisionTagger::Controllers
     	 */
     	void deleteTags();
     	/**
+    	 * Removes the album art from the selected music files
+    	 */
+    	void removeAlbumArt();
+    	/**
     	 * Registers a callback for when the music folder is changed
     	 *
     	 * @param callback A void() function
