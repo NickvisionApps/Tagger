@@ -89,6 +89,15 @@ void MainWindowController::reloadMusicFolder()
     m_musicFolder.reloadMusicFiles();
 }
 
+void MainWindowController::deleteTags()
+{
+    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    {
+        musicFile->removeTag();
+    }
+    m_musicFolderUpdatedCallback();
+}
+
 void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void()>& callback)
 {
     m_musicFolderUpdatedCallback = callback;

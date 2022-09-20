@@ -367,7 +367,25 @@ void MainWindow::onApply()
 
 void MainWindow::onDeleteTag()
 {
-
+    GtkWidget* messageDialog{ adw_message_dialog_new(GTK_WINDOW(m_gobj), "Delete Tags?", "Are you sure you want to delete the tags of the selected files?") };
+    adw_message_dialog_add_responses(ADW_MESSAGE_DIALOG(messageDialog), "no", "No", "yes", "Yes", nullptr);
+    adw_message_dialog_set_response_appearance(ADW_MESSAGE_DIALOG(messageDialog), "yes", ADW_RESPONSE_DESTRUCTIVE);
+    adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(messageDialog), "no");
+    adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(messageDialog), "no");
+    g_signal_connect(messageDialog, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer*))([](AdwMessageDialog* dialog, gchar* response, gpointer* data)
+    {
+        gtk_window_destroy(GTK_WINDOW(dialog));
+        MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
+        if(strcmp(response, "yes") == 0)
+        {
+            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Deleting tags...", [&]()
+            {
+                mainWindow->m_controller.deleteTags();
+            }) };
+            progressDialog->show();
+        }
+    })), this);
+    gtk_widget_show(messageDialog);
 }
 
 void MainWindow::onInsertAlbumArt()
@@ -545,7 +563,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), haveSameArtist ? std::regex_replace(firstMusicFile->getArtist(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), haveSameAlbum ? std::regex_replace(firstMusicFile->getAlbum(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(m_txtYear), haveSameYear ? std::to_string(firstMusicFile->getYear()).c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), haveSameYear ? std::to_string(firstMusicFile->getTrack()).c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), haveSameTrack ? std::to_string(firstMusicFile->getTrack()).c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), haveSameAlbumArtist ? std::regex_replace(firstMusicFile->getAlbumArtist(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), haveSameGenre ? std::regex_replace(firstMusicFile->getGenre(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(m_txtComment), haveSameComment ? std::regex_replace(firstMusicFile->getComment(), std::regex("\\&"), "&amp;").c_str() : "<keep>");

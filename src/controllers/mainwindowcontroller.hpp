@@ -85,6 +85,10 @@ namespace NickvisionTagger::Controllers
     	 */
     	void reloadMusicFolder();
     	/**
+    	 * Deletes the tags of the selected music files
+    	 */
+    	void deleteTags();
+    	/**
     	 * Registers a callback for when the music folder is changed
     	 *
     	 * @param callback A void() function
