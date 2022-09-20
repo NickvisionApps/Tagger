@@ -4,8 +4,10 @@
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
 #include "../controls/progressdialog.hpp"
+#include "../../helpers/gtkhelpers.hpp"
 
 using namespace NickvisionTagger::Controllers;
+using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
 using namespace NickvisionTagger::UI::Controls;
 using namespace NickvisionTagger::UI::Views;
@@ -450,11 +452,35 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_widget_set_visible(m_btnApply, false);
         gtk_widget_set_visible(m_btnMenuTagActions, false);
         adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), false);
+        gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), "");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), "");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), "");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), "");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtYear), "");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), "");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), "");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), "");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtComment), "");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), "");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), "");
+        gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
     }
     //One File Selected
     else if(m_controller.getSelectedMusicFiles().size() == 1)
     {
-
+        const std::shared_ptr<MusicFile>& firstMusicFile{ m_controller.getSelectedMusicFiles()[0] };
+        gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), std::regex_replace(firstMusicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), std::regex_replace(firstMusicFile->getTitle(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), std::regex_replace(firstMusicFile->getArtist(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), std::regex_replace(firstMusicFile->getAlbum(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtYear), std::to_string(firstMusicFile->getYear()).c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), std::to_string(firstMusicFile->getTrack()).c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), std::regex_replace(firstMusicFile->getAlbumArtist(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), std::regex_replace(firstMusicFile->getGenre(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtComment), std::regex_replace(firstMusicFile->getComment(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), std::regex_replace(firstMusicFile->getDurationAsString(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), std::regex_replace(firstMusicFile->getFileSizeAsString(), std::regex("\\&"), "&amp;").c_str());
+        GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), firstMusicFile->getAlbumArt());
     }
     //Multiple Files Selected
     else
