@@ -42,6 +42,36 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                                     <property name="accelerator">&lt;Control&gt;s</property>
                                 </object>
                             </child>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">Delete Tag</property>
+                                    <property name="accelerator">Delete</property>
+                                </object>
+                            </child>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">Insert Album Art</property>
+                                    <property name="accelerator">&lt;Control&gt;&lt;Shift&gt;a</property>
+                                </object>
+                            </child>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">Remove Album Art</property>
+                                    <property name="accelerator">&lt;Control&gt;Delete</property>
+                                </object>
+                            </child>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">Filename to Tag</property>
+                                    <property name="accelerator">&lt;Control&gt;&lt;Shift&gt;f</property>
+                                </object>
+                            </child>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">Tag to Filename</property>
+                                    <property name="accelerator">&lt;Control&gt;&lt;Shift&gt;t</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                     <child>

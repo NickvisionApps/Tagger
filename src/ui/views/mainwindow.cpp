@@ -46,6 +46,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuHelp), G_MENU_MODEL(menuHelp));
     gtk_widget_set_tooltip_text(m_btnMenuHelp, "Main Menu");
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnMenuHelp);
+    g_object_unref(menuHelp);
     //Header End Separator
     m_sepHeaderEnd = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_sepHeaderEnd), "spacer");
@@ -58,6 +59,26 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnApply), "win.apply");
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnApply), "suggested-action");
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnApply);
+    //Menu Tag Actions Button
+    m_btnMenuTagActions = gtk_menu_button_new();
+    GMenu* menuTagActions{ g_menu_new() };
+    GMenu* menuAlbumArt{ g_menu_new() };
+    GMenu* menuConvert{ g_menu_new() };
+    g_menu_append(menuAlbumArt, "Insert Album Art", "win.insertAlbumArt");
+    g_menu_append(menuAlbumArt, "Remove Album Art", "win.removeAlbumArt");
+    g_menu_append(menuConvert, "Filename to Tag", "win.filenameToTag");
+    g_menu_append(menuConvert, "Tag to Filename", "win.tagToFilename");
+    g_menu_append(menuTagActions, "Delete Tag", "win.deleteTag");
+    g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuAlbumArt));
+    g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuConvert));
+    gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuTagActions), "document-properties-symbolic");
+    gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuTagActions), G_MENU_MODEL(menuTagActions));
+    gtk_widget_set_tooltip_text(m_btnMenuTagActions, "Tag Actions");
+    gtk_widget_set_visible(m_btnMenuTagActions, false);
+    adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnMenuTagActions);
+    g_object_unref(menuTagActions);
+    g_object_unref(menuAlbumArt);
+    g_object_unref(menuConvert);
     //Toast Overlay
     m_toastOverlay = adw_toast_overlay_new();
     gtk_widget_set_hexpand(m_toastOverlay, true);
@@ -70,7 +91,6 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Tagger Flap Page
     m_pageFlapTagger = adw_flap_new();
     adw_flap_set_flap_position(ADW_FLAP(m_pageFlapTagger), GTK_PACK_END);
-    adw_flap_set_fold_policy(ADW_FLAP(m_pageFlapTagger), ADW_FLAP_FOLD_POLICY_NEVER);
     adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), true);
     //Tagger Flap Content
     m_scrollTaggerContent = gtk_scrolled_window_new();
@@ -87,9 +107,104 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Tagger Flap Separator
     m_sepTagger = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     adw_flap_set_separator(ADW_FLAP(m_pageFlapTagger), m_sepTagger);
+    //Tagger Flap Box
+    m_boxTaggerFlap = gtk_box_new(GTK_ORIENTATION_VERTICAL, 6);
+    gtk_widget_set_margin_start(m_boxTaggerFlap, 10);
+    gtk_widget_set_margin_top(m_boxTaggerFlap, 10);
+    gtk_widget_set_margin_end(m_boxTaggerFlap, 10);
+    gtk_widget_set_margin_bottom(m_boxTaggerFlap, 10);
+    //Filename
+    m_lblFilename = gtk_label_new("Filename");
+    gtk_widget_set_halign(m_lblFilename, GTK_ALIGN_START);
+    m_txtFilename = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtFilename), "Enter filename here");
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblFilename);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtFilename);
+    //Title
+    m_lblTitle = gtk_label_new("Title");
+    gtk_widget_set_halign(m_lblTitle, GTK_ALIGN_START);
+    m_txtTitle = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtTitle), "Enter title here");
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblTitle);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtTitle);
+    //Artist
+    m_lblArtist = gtk_label_new("Artist");
+    gtk_widget_set_halign(m_lblArtist, GTK_ALIGN_START);
+    m_txtArtist = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtArtist), "Enter artist here");
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblArtist);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtArtist);
+    //Album
+    m_lblAlbum = gtk_label_new("Album");
+    gtk_widget_set_halign(m_lblAlbum, GTK_ALIGN_START);
+    m_txtAlbum = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtAlbum), "Enter album here");
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblAlbum);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtAlbum);
+    //Year
+    m_lblYear = gtk_label_new("Year");
+    gtk_widget_set_halign(m_lblYear, GTK_ALIGN_START);
+    m_txtYear = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtYear), "Enter year here");
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblYear);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtYear);
+    //Track
+    m_lblTrack = gtk_label_new("Track");
+    gtk_widget_set_halign(m_lblTrack, GTK_ALIGN_START);
+    m_txtTrack = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtTrack), "Enter track here");
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblTrack);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtTrack);
+    //Album Artist
+    m_lblAlbumArtist = gtk_label_new("Album Artist");
+    gtk_widget_set_halign(m_lblAlbumArtist, GTK_ALIGN_START);
+    m_txtAlbumArtist = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtAlbumArtist), "Enter album artist here");
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblAlbumArtist);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtAlbumArtist);
+    //Genre
+    m_lblGenre = gtk_label_new("Genre");
+    gtk_widget_set_halign(m_lblGenre, GTK_ALIGN_START);
+    m_txtGenre = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtGenre), "Enter genre here");
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblGenre);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtGenre);
+    //Comment
+    m_lblComment = gtk_label_new("Comment");
+    gtk_widget_set_halign(m_lblComment, GTK_ALIGN_START);
+    m_txtComment = gtk_entry_new();
+    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtComment), "Enter comment here");
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblComment);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtComment);
+    //Duration
+    m_lblDuration = gtk_label_new("Duration");
+    gtk_widget_set_halign(m_lblDuration, GTK_ALIGN_START);
+    m_txtDuration = gtk_entry_new();
+    gtk_editable_set_editable(GTK_EDITABLE(m_txtDuration), false);
+    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtDuration), "00:00:00");
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblDuration);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtDuration);
+    //File Size
+    m_lblFileSize = gtk_label_new("File Size");
+    gtk_widget_set_halign(m_lblFileSize, GTK_ALIGN_START);
+    m_txtFileSize = gtk_entry_new();
+    gtk_editable_set_editable(GTK_EDITABLE(m_txtFileSize), false);
+    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtFileSize), "0 MB");
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblFileSize);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtFileSize);
+    //Album Art
+    m_lblAlbumArt = gtk_label_new("Album Art");
+    gtk_widget_set_halign(m_lblAlbumArt, GTK_ALIGN_START);
+    m_frmAlbumArt = gtk_frame_new(nullptr);
+    m_imgAlbumArt = gtk_image_new();
+    gtk_widget_set_size_request(m_imgAlbumArt, 380, 380);
+    gtk_frame_set_child(GTK_FRAME(m_frmAlbumArt), m_imgAlbumArt);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblAlbumArt);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_frmAlbumArt);
     //Tagger Flap Flap
     m_scrollTaggerFlap = gtk_scrolled_window_new();
     gtk_widget_set_size_request(m_scrollTaggerFlap, 420, -1);
+    gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollTaggerFlap), m_boxTaggerFlap);
     adw_flap_set_flap(ADW_FLAP(m_pageFlapTagger), m_scrollTaggerFlap);
     //View Stack
     m_viewStack = adw_view_stack_new();
@@ -128,6 +243,31 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_signal_connect(m_actApply, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onApply(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actApply));
     gtk_application_set_accels_for_action(application, "win.apply", new const char*[2]{ "<Ctrl>s", nullptr });
+    //Delete Tag Action
+    m_actDeleteTag = g_simple_action_new("deleteTag", nullptr);
+    g_signal_connect(m_actDeleteTag, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onDeleteTag(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actDeleteTag));
+    gtk_application_set_accels_for_action(application, "win.deleteTag", new const char*[2]{ "Delete", nullptr });
+    //Insert Album Art
+    m_actInsertAlbumArt = g_simple_action_new("insertAlbumArt", nullptr);
+    g_signal_connect(m_actInsertAlbumArt, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actInsertAlbumArt));
+    gtk_application_set_accels_for_action(application, "win.insertAlbumArt", new const char*[2]{ "<Ctrl><Shift>a", nullptr });
+    //Remove Album Art
+    m_actRemoveAlbumArt = g_simple_action_new("removeAlbumArt", nullptr);
+    g_signal_connect(m_actRemoveAlbumArt, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onRemoveAlbumArt(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actRemoveAlbumArt));
+    gtk_application_set_accels_for_action(application, "win.removeAlbumArt", new const char*[2]{ "<Ctrl>Delete", nullptr });
+    //Filename to Tag
+    m_actFilenameToTag = g_simple_action_new("filenameToTag", nullptr);
+    g_signal_connect(m_actFilenameToTag, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onFilenameToTag(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actFilenameToTag));
+    gtk_application_set_accels_for_action(application, "win.filenameToTag", new const char*[2]{ "<Ctrl><Shift>f", nullptr });
+    //Tag to Filename
+    m_actTagToFilename = g_simple_action_new("tagToFilename", nullptr);
+    g_signal_connect(m_actTagToFilename, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onTagToFilename(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actTagToFilename));
+    gtk_application_set_accels_for_action(application, "win.tagToFilename", new const char*[2]{ "<Ctrl><Shift>t", nullptr });
     //Preferences Action
     m_actPreferences = g_simple_action_new("preferences", nullptr);
     g_signal_connect(m_actPreferences, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer*))[](GSimpleAction*, GVariant*, gpointer* data) { reinterpret_cast<MainWindow*>(data)->onPreferences(); }), this);
@@ -178,17 +318,22 @@ void MainWindow::onMusicFolderUpdated()
         m_controller.reloadMusicFolder();
     }, [&]()
     {
-        int id = 1;
-        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), m_controller.getMusicFileCount() > 0 ? "pageTagger" : "pageNoFiles");
-        for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
+        std::size_t musicFilesCount{ m_controller.getMusicFileCount() };
+        int id{ 1 };
+        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), musicFilesCount > 0 ? "pageTagger" : "pageNoFiles");
+        if(musicFilesCount > 0)
         {
-            GtkWidget* row{ adw_action_row_new() };
-            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
-            adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(id).c_str());
-            gtk_list_box_append(GTK_LIST_BOX(m_listTaggerMusicFiles), row);
-            m_listTaggerMusicFilesRows.push_back(row);
-            g_main_context_iteration(g_main_context_default(), false);
-            id++;
+            for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
+            {
+                GtkWidget* row{ adw_action_row_new() };
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+                adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(id).c_str());
+                gtk_list_box_append(GTK_LIST_BOX(m_listTaggerMusicFiles), row);
+                m_listTaggerMusicFilesRows.push_back(row);
+                g_main_context_iteration(g_main_context_default(), false);
+                id++;
+            }
+            adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(std::string("Loaded " + std::to_string(musicFilesCount) + " music files.").c_str()));
         }
     }) };
     progressDialog->show();
@@ -213,6 +358,31 @@ void MainWindow::onOpenMusicFolder()
 }
 
 void MainWindow::onApply()
+{
+
+}
+
+void MainWindow::onDeleteTag()
+{
+
+}
+
+void MainWindow::onInsertAlbumArt()
+{
+
+}
+
+void MainWindow::onRemoveAlbumArt()
+{
+
+}
+
+void MainWindow::onFilenameToTag()
+{
+
+}
+
+void MainWindow::onTagToFilename()
 {
 
 }
