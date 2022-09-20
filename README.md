@@ -10,9 +10,10 @@ TODO
 
 # Dev Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/190164690-a20bac35-e5f9-4671-b9a5-457e25ab645a.png)
-![OpenFolder](https://user-images.githubusercontent.com/17648453/190229189-92235625-a025-46c6-a5f6-5ed0239e315a.png)
+![OpenFolder](https://user-images.githubusercontent.com/17648453/191148587-aae0226b-95e2-4082-9274-a46ba981631a.png)
+![TagProperties](https://user-images.githubusercontent.com/17648453/191148592-ee322204-41ad-47e2-a6f5-2e61dec0a47e.png)
 ![PreferencesDialog](https://user-images.githubusercontent.com/17648453/190164715-7bd09f81-7747-40bf-902b-ffcf7353bbd2.png)
-![KeyboardShortcuts](https://user-images.githubusercontent.com/17648453/190164726-de3ffe34-9da4-4b9c-bf2f-9e2ddd914cf6.png)
+![KeyboardShortcuts](https://user-images.githubusercontent.com/17648453/191148597-e250d695-afa8-4ddc-939c-27e31601733f.png)
 ![AboutDialog](https://user-images.githubusercontent.com/17648453/190164747-22f029fd-239f-4665-b5c7-f5c72fcfb79f.png)
 
 # Dependencies
