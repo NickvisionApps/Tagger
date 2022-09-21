@@ -3,12 +3,12 @@
 
 **An easy-to-use music tag (metadata) editor**
 
-IN ACTIVE DEVELOPEMNT: Transitioning to GTK 4 & libadwaita
-
 # Features
-TODO
+- Edit tags and album art of multiple files, even across subfolders, all at once
+- Support for multiple music file types (mp3, ogg, flac, wma, and wav)
+- Convert filenames to tags and tags to filenames with ease
 
-# Dev Screenshots
+# Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/190164690-a20bac35-e5f9-4671-b9a5-457e25ab645a.png)
 ![OpenFolder](https://user-images.githubusercontent.com/17648453/191148587-aae0226b-95e2-4082-9274-a46ba981631a.png)
 ![TagEditing](https://user-images.githubusercontent.com/17648453/191411990-2fa0ebdb-ff16-4f37-88cd-720a8ad8f297.png)
