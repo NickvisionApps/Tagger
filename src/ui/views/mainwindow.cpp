@@ -503,6 +503,8 @@ void MainWindow::onAbout()
                           "issue-url", m_controller.getAppInfo().getIssueTracker().c_str(),
                           "website", m_controller.getAppInfo().getGitHubRepo().c_str(),
                           "developers", new const char*[2]{ "Nicholas Logozzo", nullptr },
+                          "designers", new const char*[2]{ "Nicholas Logozzo", nullptr },
+                          "artists", new const char*[3]{ "David Lapshin", "noëlle (@jannuary)", nullptr },
                           "release-notes", m_controller.getAppInfo().getChangelog().c_str(),
                           nullptr);
 }
