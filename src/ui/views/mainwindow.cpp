@@ -393,7 +393,29 @@ void MainWindow::onDeleteTags()
 
 void MainWindow::onInsertAlbumArt()
 {
-
+    GtkFileChooserNative* openPictureDialog{ gtk_file_chooser_native_new("Insert Album Art", GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, "_Open", "_Cancel") };
+    gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openPictureDialog), true);
+    GtkFileFilter* imageFilter{ gtk_file_filter_new() };
+    gtk_file_filter_add_mime_type(imageFilter, "image/*");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(openPictureDialog), imageFilter);
+    g_object_unref(imageFilter);
+    g_signal_connect(openPictureDialog, "response", G_CALLBACK((void (*)(GtkNativeDialog*, gint, gpointer*))([](GtkNativeDialog* dialog, gint response_id, gpointer* data)
+    {
+        if(response_id == GTK_RESPONSE_ACCEPT)
+        {
+            MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
+            GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
+            std::string path{ g_file_get_path(file) };
+            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Inserting album art...", [mainWindow, path]()
+            {
+                mainWindow->m_controller.insertAlbumArt(path);
+            }) };
+            progressDialog->show();
+            g_object_unref(file);
+        }
+        g_object_unref(dialog);
+    })), this);
+    gtk_native_dialog_show(GTK_NATIVE_DIALOG(openPictureDialog));
 }
 
 void MainWindow::onRemoveAlbumArt()
@@ -409,7 +431,7 @@ void MainWindow::onRemoveAlbumArt()
         MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
         if(strcmp(response, "yes") == 0)
         {
-            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Removing album art...", [&]()
+            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Removing album art...", [mainWindow]()
             {
                 mainWindow->m_controller.removeAlbumArt();
             }) };

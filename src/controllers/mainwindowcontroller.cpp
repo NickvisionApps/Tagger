@@ -2,8 +2,10 @@
 #include <chrono>
 #include <filesystem>
 #include <thread>
+#include "../helpers/mediahelpers.hpp"
 
 using namespace NickvisionTagger::Controllers;
+using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
 
 MainWindowController::MainWindowController(AppInfo& appInfo, Configuration& configuration) : m_appInfo{ appInfo }, m_configuration{ configuration }, m_isOpened{ false }
@@ -94,6 +96,17 @@ void MainWindowController::deleteTags()
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
         musicFile->removeTag(m_configuration.getPreserveModificationTimeStamp());
+    }
+    m_musicFolderUpdatedCallback(false);
+}
+
+void MainWindowController::insertAlbumArt(const std::string& pathToImage)
+{
+    TagLib::ByteVector byteVector{ MediaHelpers::byteVectorFromFile(pathToImage) };
+    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    {
+        musicFile->setAlbumArt(byteVector);
+        musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
     }
     m_musicFolderUpdatedCallback(false);
 }

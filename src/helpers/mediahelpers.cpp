@@ -1,6 +1,7 @@
 #include "mediahelpers.hpp"
 #include <climits>
 #include <cmath>
+#include <fstream>
 #include <iomanip>
 #include <sstream>
 #include <vector>
@@ -42,4 +43,13 @@ std::string MediaHelpers::fileSizeToString(std::uintmax_t fileSize)
     }
     builder << std::ceil(fileSize * 100.0) / 100.0 << " " << sizes[index];
     return builder.str();
+}
+
+TagLib::ByteVector MediaHelpers::byteVectorFromFile(const std::filesystem::path& path)
+{
+    std::ifstream pictureFile{ path, std::ios::binary };
+    std::stringstream builder;
+    builder << pictureFile.rdbuf();
+    std::string data{ builder.str() };
+    return TagLib::ByteVector::fromCString(data.c_str(), data.size());
 }

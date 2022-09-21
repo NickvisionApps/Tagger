@@ -89,6 +89,12 @@ namespace NickvisionTagger::Controllers
     	 */
     	void deleteTags();
     	/**
+    	 * Uses the provided image path to set the album art for the selected music files
+    	 *
+    	 * @param pathToImage The path to the image to use as album art
+    	 */
+    	void insertAlbumArt(const std::string& pathToImage);
+    	/**
     	 * Removes the album art from the selected music files
     	 */
     	void removeAlbumArt();

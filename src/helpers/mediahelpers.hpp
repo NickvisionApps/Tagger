@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <filesystem>
+#include <taglib/tbytevector.h>
 
 namespace NickvisionTagger::Helpers::MediaHelpers
 {
@@ -27,4 +29,11 @@ namespace NickvisionTagger::Helpers::MediaHelpers
      * @returns A human-readable version of the file size
      */
     std::string fileSizeToString(std::uintmax_t fileSize);
+    /**
+     * Creates a TagLib::ByteVector from an image on disk
+     *
+     * @param path The path to the image file
+     * @returns The TagLib::ByteVector for the provided file
+     */
+    TagLib::ByteVector byteVectorFromFile(const std::filesystem::path& path);
 }
