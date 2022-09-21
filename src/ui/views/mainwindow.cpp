@@ -291,6 +291,11 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_application_set_accels_for_action(application, "win.about", new const char*[2]{ "F1", nullptr });
 }
 
+MainWindow::~MainWindow()
+{
+    gtk_window_destroy(GTK_WINDOW(m_gobj));
+}
+
 GtkWidget* MainWindow::gobj()
 {
     return m_gobj;

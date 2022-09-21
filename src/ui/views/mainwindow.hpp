@@ -19,6 +19,10 @@ namespace NickvisionTagger::UI::Views
     	 */
     	MainWindow(GtkApplication* application, const NickvisionTagger::Controllers::MainWindowController& controller);
     	/**
+    	 * Destroys the MainWindow
+    	 */
+    	~MainWindow();
+    	/**
     	 * Gets the GtkWidget* representing the MainWindow
     	 *
     	 * @returns The GtkWidget* representing the MainWindow 
