@@ -2,6 +2,7 @@
 
 #include <functional>
 #include <string>
+#include <unordered_map>
 #include <vector>
 #include "preferencesdialogcontroller.hpp"
 #include "../models/appinfo.hpp"
@@ -84,6 +85,12 @@ namespace NickvisionTagger::Controllers
     	 * Reloads a music folder
     	 */
     	void reloadMusicFolder();
+    	/**
+    	 * Saves the tags of the selected music files
+    	 *
+    	 * @param tagMap An unordered_map of the tag properties to save
+    	 */
+    	void saveTags(const std::unordered_map<std::string, std::string>& tagMap);
     	/**
     	 * Deletes the tags of the selected music files
     	 */

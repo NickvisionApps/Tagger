@@ -91,12 +91,67 @@ void MainWindowController::reloadMusicFolder()
     m_musicFolder.reloadMusicFiles();
 }
 
+void MainWindowController::saveTags(const std::unordered_map<std::string, std::string>& tagMap)
+{
+    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    {
+        if(tagMap.at("filename") != musicFile->getFilename() && tagMap.at("filename") != "<keep>")
+        {
+            musicFile->setFilename(tagMap.at("filename"));
+        }
+        if(tagMap.at("title") != "<keep>")
+        {
+            musicFile->setTitle(tagMap.at("title"));
+        }
+        if(tagMap.at("artist") != "<keep>")
+        {
+            musicFile->setArtist(tagMap.at("artist"));
+        }
+        if(tagMap.at("album") != "<keep>")
+        {
+            musicFile->setAlbum(tagMap.at("album"));
+        }
+        if(tagMap.at("year") != "<keep>")
+        {
+            try
+            {
+                musicFile->setYear(MediaHelpers::stoui(tagMap.at("year")));
+            }
+            catch(...) { }
+        }
+        if(tagMap.at("track") != "<keep>")
+        {
+            try
+            {
+                musicFile->setTrack(MediaHelpers::stoui(tagMap.at("track")));
+            }
+            catch(...) { }
+        }
+        if(tagMap.at("albumArtist") != "<keep>")
+        {
+            musicFile->setAlbumArtist(tagMap.at("albumArtist"));
+        }
+        if(tagMap.at("genre") != "<keep>")
+        {
+            musicFile->setGenre(tagMap.at("genre"));
+        }
+        if(tagMap.at("comment") != "<keep>")
+        {
+            musicFile->setComment(tagMap.at("comment"));
+        }
+        musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
+    }
+    m_sendToastCallback("Tags saved successfully.");
+    m_musicFolderUpdatedCallback(false);
+}
+
 void MainWindowController::deleteTags()
 {
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
         musicFile->removeTag(m_configuration.getPreserveModificationTimeStamp());
     }
+    m_sendToastCallback("Tags removed successfully.");
     m_musicFolderUpdatedCallback(false);
 }
 
@@ -108,6 +163,7 @@ void MainWindowController::insertAlbumArt(const std::string& pathToImage)
         musicFile->setAlbumArt(byteVector);
         musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
     }
+    m_sendToastCallback("Album art inserted successfully.");
     m_musicFolderUpdatedCallback(false);
 }
 
@@ -118,24 +174,35 @@ void MainWindowController::removeAlbumArt()
         musicFile->setAlbumArt({});
         musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
     }
+    m_sendToastCallback("Album art removed successfully.");
     m_musicFolderUpdatedCallback(false);
 }
 
 void MainWindowController::filenameToTag(const std::string& formatString)
 {
+    int success{ 0 };
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
-        musicFile->filenameToTag(formatString, m_configuration.getPreserveModificationTimeStamp());
+        if(musicFile->filenameToTag(formatString, m_configuration.getPreserveModificationTimeStamp()))
+        {
+            success++;
+        }
     }
+    m_sendToastCallback("Converted " + std::to_string(success) + " filenames to tags successfully.");
     m_musicFolderUpdatedCallback(false);
 }
 
 void MainWindowController::tagToFilename(const std::string& formatString)
 {
+    int success{ 0 };
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
-        musicFile->tagToFilename(formatString);
+        if(musicFile->tagToFilename(formatString))
+        {
+            success++;
+        }
     }
+    m_sendToastCallback("Converted " + std::to_string(success) + " tags to filenames successfully.");
     m_musicFolderUpdatedCallback(false);
 }
 

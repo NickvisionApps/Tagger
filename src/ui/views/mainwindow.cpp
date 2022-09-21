@@ -1,5 +1,6 @@
 #include "mainwindow.hpp"
 #include <regex>
+#include <unordered_map>
 #include <utility>
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
@@ -365,7 +366,21 @@ void MainWindow::onOpenMusicFolder()
 
 void MainWindow::onApply()
 {
-
+    std::unordered_map<std::string, std::string> tagMap;
+    tagMap.insert({ "filename", gtk_editable_get_text(GTK_EDITABLE(m_txtFilename)) });
+    tagMap.insert({ "title", gtk_editable_get_text(GTK_EDITABLE(m_txtTitle)) });
+    tagMap.insert({ "artist", gtk_editable_get_text(GTK_EDITABLE(m_txtArtist)) });
+    tagMap.insert({ "album", gtk_editable_get_text(GTK_EDITABLE(m_txtAlbum)) });
+    tagMap.insert({ "year", gtk_editable_get_text(GTK_EDITABLE(m_txtYear)) });
+    tagMap.insert({ "track", gtk_editable_get_text(GTK_EDITABLE(m_txtTrack)) });
+    tagMap.insert({ "albumArtist", gtk_editable_get_text(GTK_EDITABLE(m_txtAlbumArtist)) });
+    tagMap.insert({ "genre", gtk_editable_get_text(GTK_EDITABLE(m_txtGenre)) });
+    tagMap.insert({ "comment", gtk_editable_get_text(GTK_EDITABLE(m_txtComment)) });
+    ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(m_gobj), "Saving tags...", [&, tagMap]()
+    {
+        m_controller.saveTags(tagMap);
+    }) };
+    progressDialog->show();
 }
 
 void MainWindow::onDeleteTags()
@@ -381,7 +396,7 @@ void MainWindow::onDeleteTags()
         MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
         if(strcmp(response, "yes") == 0)
         {
-            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Deleting tags...", [&]()
+            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Deleting tags...", [mainWindow]()
             {
                 mainWindow->m_controller.deleteTags();
             }) };
