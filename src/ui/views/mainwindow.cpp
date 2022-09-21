@@ -465,12 +465,12 @@ void MainWindow::onFilenameToTag()
 {
     ComboBoxDialog* formatStringDialog{ new ComboBoxDialog(GTK_WINDOW(m_gobj), "Filename to Tag", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" }) };
     std::pair<ComboBoxDialog*, MainWindow*>* pointers{ new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this) };
-    g_signal_connect(formatStringDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer*))([](GtkWidget*, gpointer* data)
+    g_signal_connect(formatStringDialog->gobj(), "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer*))([](AdwMessageDialog*, gchar* response, gpointer* data)
     {
         std::pair<ComboBoxDialog*, MainWindow*>* pointers{ reinterpret_cast<std::pair<ComboBoxDialog*, MainWindow*>*>(data) };
         std::string formatString{ pointers->first->getSelectedChoice() };
         delete pointers->first;
-        if(!formatString.empty())
+        if(strcmp(response, "ok") == 0)
         {
             MainWindow* mainWindow{ pointers->second };
             ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Converting filenames to tags...", [mainWindow, formatString]()
@@ -488,12 +488,12 @@ void MainWindow::onTagToFilename()
 {
     ComboBoxDialog* formatStringDialog{ new ComboBoxDialog(GTK_WINDOW(m_gobj), "Tag to Filename", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" }) };
     std::pair<ComboBoxDialog*, MainWindow*>* pointers{ new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this) };
-    g_signal_connect(formatStringDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer*))([](GtkWidget*, gpointer* data)
+    g_signal_connect(formatStringDialog->gobj(), "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer*))([](AdwMessageDialog*, gchar* response, gpointer* data)
     {
         std::pair<ComboBoxDialog*, MainWindow*>* pointers{ reinterpret_cast<std::pair<ComboBoxDialog*, MainWindow*>*>(data) };
         std::string formatString{ pointers->first->getSelectedChoice() };
         delete pointers->first;
-        if(!formatString.empty())
+        if(strcmp(response, "ok") == 0)
         {
             MainWindow* mainWindow{ pointers->second };
             ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Converting tags to filenames...", [mainWindow, formatString]()

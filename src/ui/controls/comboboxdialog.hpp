@@ -31,7 +31,7 @@ namespace NickvisionTagger::UI::Controls
 	 *
 	 * @returns The selected choice from the combo box
 	 */
-	const std::string& getSelectedChoice() const;
+	std::string getSelectedChoice() const;
 	/**
     	 * Gets the GtkWidget* representing the PreferencesDialog
     	 *
@@ -47,14 +47,7 @@ namespace NickvisionTagger::UI::Controls
     	std::vector<std::string> m_choices;
     	std::string m_selectedChoice;
     	GtkWidget* m_gobj{ nullptr };
-    	GtkWidget* m_mainBox{ nullptr };
-	GtkWidget* m_headerBar{ nullptr };
-	GtkWidget* m_btnCancel{ nullptr };
-	GtkWidget* m_btnOK{ nullptr };
-	GtkWidget* m_adwPreferencesPage{ nullptr };
-	GtkWidget* m_adwPreferencesGroup{ nullptr };
+    	GtkWidget* m_preferencesGroup{ nullptr };
 	GtkWidget* m_rowChoices{ nullptr };
-	void onCancel();
-	void onOK();
     };
 }
