@@ -18,13 +18,13 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     //Cancel Button
     m_btnCancel = gtk_button_new();
     gtk_button_set_label(GTK_BUTTON(m_btnCancel), "Cancel");
-    g_signal_connect(m_btnCancel, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton*, gpointer* data) { reinterpret_cast<PreferencesDialog*>(data)->onCancel(); }), this);
+    g_signal_connect(m_btnCancel, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onCancel(); }), this);
     adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnCancel);
     //Save Button
     m_btnSave = gtk_button_new();
     gtk_button_set_label(GTK_BUTTON(m_btnSave), "Save");
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnSave), "suggested-action");
-    g_signal_connect(m_btnSave, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer*))[](GtkButton*, gpointer* data) { reinterpret_cast<PreferencesDialog*>(data)->onSave(); }), this);
+    g_signal_connect(m_btnSave, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onSave(); }), this);
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnSave);
     //User Interface Group
     m_grpUserInterface = adw_preferences_group_new();

@@ -50,6 +50,8 @@ namespace NickvisionTagger::UI::Views
 	GtkWidget* m_pageStatusNoFiles{ nullptr };
 	GtkWidget* m_pageFlapTagger{ nullptr };
 	GtkWidget* m_scrollTaggerContent{ nullptr };
+	GtkWidget* m_boxTaggerContent{ nullptr };
+	GtkWidget* m_txtSearchMusicFiles{ nullptr };
 	GtkWidget* m_listMusicFiles{ nullptr };
 	GtkWidget* m_sepTagger{ nullptr };
 	GtkWidget* m_scrollTaggerFlap{ nullptr };
@@ -131,6 +133,10 @@ namespace NickvisionTagger::UI::Views
     	 * Displays the about dialog
     	 */
     	void onAbout();
+    	/**
+    	 * Occurs when txtSearchMusicFile's text is changed
+    	 */
+    	void onTxtSearchMusicFilesChanged();
     	/**
     	 * Occurs when listMusicFile's selection is changed
     	 */

@@ -13,12 +13,12 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setName("NickvisionTagger");
     m_appInfo.setShortName("Tagger");
     m_appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
-    m_appInfo.setVersion("2022.9.0-beta2");
-    m_appInfo.setChangelog("<ul><li>Redesigned with the latest libadwaita 1.2</li><li>Added a setting to preserve the file's modification time stamp when a tag is edited</li><li>Added the ability to remove album art from a file without deleting the whole tag</li><li>Better handling and mangement of tags for all file types</li></ul>");
+    m_appInfo.setVersion("2022.9.0-beta3");
+    m_appInfo.setChangelog("<ul><li>Redesigned with the latest libadwaita 1.2</li><li>Added a setting to preserve the file's modification time stamp when a tag is edited</li><li>Added the ability to remove album art from a file without deleting the whole tag</li><li>Added the ability to search for a file in the list</li><li>Better handling and mangement of tags for all file types</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     //Signals
-    g_signal_connect(m_adwApp, "activate", G_CALLBACK((void (*)(GtkApplication*, gpointer*))[](GtkApplication* app, gpointer* data) { reinterpret_cast<Application*>(data)->onActivate(app); }), this);
+    g_signal_connect(m_adwApp, "activate", G_CALLBACK((void (*)(GtkApplication*, gpointer))[](GtkApplication* app, gpointer data) { reinterpret_cast<Application*>(data)->onActivate(app); }), this);
 }
 
 int Application::run(int argc, char* argv[])
