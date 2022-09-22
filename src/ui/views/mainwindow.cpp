@@ -116,103 +116,76 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Tagger Flap Separator
     m_sepTagger = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     adw_flap_set_separator(ADW_FLAP(m_pageFlapTagger), m_sepTagger);
-    //Tagger Flap Box
-    m_boxTaggerFlap = gtk_box_new(GTK_ORIENTATION_VERTICAL, 6);
-    gtk_widget_set_margin_start(m_boxTaggerFlap, 10);
-    gtk_widget_set_margin_top(m_boxTaggerFlap, 10);
-    gtk_widget_set_margin_end(m_boxTaggerFlap, 10);
-    gtk_widget_set_margin_bottom(m_boxTaggerFlap, 10);
-    //Filename
-    m_lblFilename = gtk_label_new("Filename");
-    gtk_widget_set_halign(m_lblFilename, GTK_ALIGN_START);
-    m_txtFilename = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtFilename), "Enter filename here");
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblFilename);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtFilename);
-    //Title
-    m_lblTitle = gtk_label_new("Title");
-    gtk_widget_set_halign(m_lblTitle, GTK_ALIGN_START);
-    m_txtTitle = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtTitle), "Enter title here");
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblTitle);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtTitle);
-    //Artist
-    m_lblArtist = gtk_label_new("Artist");
-    gtk_widget_set_halign(m_lblArtist, GTK_ALIGN_START);
-    m_txtArtist = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtArtist), "Enter artist here");
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblArtist);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtArtist);
-    //Album
-    m_lblAlbum = gtk_label_new("Album");
-    gtk_widget_set_halign(m_lblAlbum, GTK_ALIGN_START);
-    m_txtAlbum = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtAlbum), "Enter album here");
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblAlbum);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtAlbum);
-    //Year
-    m_lblYear = gtk_label_new("Year");
-    gtk_widget_set_halign(m_lblYear, GTK_ALIGN_START);
-    m_txtYear = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtYear), "Enter year here");
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblYear);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtYear);
-    //Track
-    m_lblTrack = gtk_label_new("Track");
-    gtk_widget_set_halign(m_lblTrack, GTK_ALIGN_START);
-    m_txtTrack = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtTrack), "Enter track here");
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblTrack);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtTrack);
-    //Album Artist
-    m_lblAlbumArtist = gtk_label_new("Album Artist");
-    gtk_widget_set_halign(m_lblAlbumArtist, GTK_ALIGN_START);
-    m_txtAlbumArtist = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtAlbumArtist), "Enter album artist here");
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblAlbumArtist);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtAlbumArtist);
-    //Genre
-    m_lblGenre = gtk_label_new("Genre");
-    gtk_widget_set_halign(m_lblGenre, GTK_ALIGN_START);
-    m_txtGenre = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtGenre), "Enter genre here");
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblGenre);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtGenre);
-    //Comment
-    m_lblComment = gtk_label_new("Comment");
-    gtk_widget_set_halign(m_lblComment, GTK_ALIGN_START);
-    m_txtComment = gtk_entry_new();
-    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtComment), "Enter comment here");
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblComment);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtComment);
-    //Duration
-    m_lblDuration = gtk_label_new("Duration");
-    gtk_widget_set_halign(m_lblDuration, GTK_ALIGN_START);
-    m_txtDuration = gtk_entry_new();
-    gtk_editable_set_editable(GTK_EDITABLE(m_txtDuration), false);
-    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtDuration), "00:00:00");
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblDuration);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtDuration);
-    //File Size
-    m_lblFileSize = gtk_label_new("File Size");
-    gtk_widget_set_halign(m_lblFileSize, GTK_ALIGN_START);
-    m_txtFileSize = gtk_entry_new();
-    gtk_editable_set_editable(GTK_EDITABLE(m_txtFileSize), false);
-    gtk_entry_set_placeholder_text(GTK_ENTRY(m_txtFileSize), "0 MB");
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblFileSize);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_txtFileSize);
     //Album Art
-    m_lblAlbumArt = gtk_label_new("Album Art");
-    gtk_widget_set_halign(m_lblAlbumArt, GTK_ALIGN_START);
-    m_frmAlbumArt = gtk_frame_new(nullptr);
+    m_stackAlbumArt = adw_view_stack_new();
+    gtk_widget_set_halign(m_stackAlbumArt, GTK_ALIGN_CENTER);
+    gtk_widget_set_size_request(m_stackAlbumArt, 300, 300);
+    m_statusNoAlbumArt = adw_status_page_new();
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_statusNoAlbumArt), "card");
+    adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_statusNoAlbumArt), "folder-music-symbolic");
+    adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_statusNoAlbumArt, "noImage");
     m_imgAlbumArt = gtk_image_new();
-    gtk_widget_set_size_request(m_imgAlbumArt, 380, 380);
-    gtk_frame_set_child(GTK_FRAME(m_frmAlbumArt), m_imgAlbumArt);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_lblAlbumArt);
-    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_frmAlbumArt);
+    adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_imgAlbumArt, "image");
+    //Properties Group
+    m_adwGrpProperties = adw_preferences_group_new();
+    //Filename
+    m_txtFilename = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtFilename), "Filename");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtFilename);
+    //Title
+    m_txtTitle = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtTitle), "Title");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtTitle);
+    //Artist
+    m_txtArtist = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtArtist), "Artist");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtArtist);
+    //Album
+    m_txtAlbum = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtAlbum), "Album");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtAlbum);
+    //Year
+    m_txtYear = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtYear), "Year");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtYear);
+    //Track
+    m_txtTrack = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtTrack), "Track");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtTrack);
+    //Album Artist
+    m_txtAlbumArtist = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtAlbumArtist), "Album Artist");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtAlbumArtist);
+    //Genre
+    m_txtGenre = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtGenre), "Genre");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtGenre);
+    //Comment
+    m_txtComment = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtComment), "Comment");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtComment);
+    //Duration
+    m_txtDuration = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtDuration), "Duration");
+    gtk_editable_set_editable(GTK_EDITABLE(m_txtDuration), false);
+    gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), "00:00:00");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtDuration);
+    //File Size
+    m_txtFileSize = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtFileSize), "File Size");
+    gtk_editable_set_editable(GTK_EDITABLE(m_txtFileSize), false);
+    gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), "0 MB");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtFileSize);
     //Tagger Flap Flap
     m_scrollTaggerFlap = gtk_scrolled_window_new();
     gtk_widget_set_hexpand(m_scrollTaggerFlap, true);
+    m_boxTaggerFlap = gtk_box_new(GTK_ORIENTATION_VERTICAL, 40);
+    gtk_widget_set_margin_start(m_boxTaggerFlap, 60);
+    gtk_widget_set_margin_top(m_boxTaggerFlap, 20);
+    gtk_widget_set_margin_end(m_boxTaggerFlap, 60);
+    gtk_widget_set_margin_bottom(m_boxTaggerFlap, 20);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_stackAlbumArt);
+    gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_adwGrpProperties);
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollTaggerFlap), m_boxTaggerFlap);
     adw_flap_set_flap(ADW_FLAP(m_pageFlapTagger), m_scrollTaggerFlap);
     //View Stack
@@ -583,8 +556,9 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), "");
         gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), "");
         gtk_editable_set_text(GTK_EDITABLE(m_txtComment), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), "");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), "00:00:00");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), "0 MB");
+        adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_statusNoAlbumArt);
         gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
     }
     //One File Selected
@@ -602,7 +576,16 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(m_txtComment), std::regex_replace(firstMusicFile->getComment(), std::regex("\\&"), "&amp;").c_str());
         gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), firstMusicFile->getDurationAsString().c_str());
         gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), firstMusicFile->getFileSizeAsString().c_str());
-        GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), firstMusicFile->getAlbumArt());
+        if(!firstMusicFile->getAlbumArt().isEmpty())
+        {
+            adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_imgAlbumArt);
+            GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), firstMusicFile->getAlbumArt());
+        }
+        else
+        {
+            adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_statusNoAlbumArt);
+            gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
+        }
     }
     //Multiple Files Selected
     else
@@ -672,12 +655,14 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_text(GTK_EDITABLE(m_txtComment), haveSameComment ? std::regex_replace(firstMusicFile->getComment(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), MediaHelpers::durationToString(totalDuration).c_str());
         gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), MediaHelpers::fileSizeToString(totalFileSize).c_str());
-        if(haveSameAlbumArt)
+        if(haveSameAlbumArt && !firstMusicFile->getAlbumArt().isEmpty())
         {
+            adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_imgAlbumArt);
             GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), firstMusicFile->getAlbumArt());
         }
         else
         {
+            adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_statusNoAlbumArt);
             gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
         }
     }
