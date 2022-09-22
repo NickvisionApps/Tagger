@@ -34,7 +34,7 @@ std::vector<std::filesystem::path> MusicFolder::getFolderPaths() const
     paths.push_back(m_parentPath);
     if (m_includeSubfolders)
     {
-        for (const std::filesystem::directory_entry& path : std::filesystem::recursive_directory_iterator(m_parentPath))
+        for (const std::filesystem::directory_entry& path : std::filesystem::recursive_directory_iterator(m_parentPath, std::filesystem::directory_options::skip_permission_denied))
         {
             if (path.is_directory())
             {
@@ -58,7 +58,7 @@ void MusicFolder::reloadMusicFiles()
         std::vector<std::string> supportedDotFileExtensions{ ".mp3", ".ogg", ".opus", ".flac", ".wma", ".wav" };
         if (m_includeSubfolders)
         {
-            for (const std::filesystem::path& path : std::filesystem::recursive_directory_iterator(m_parentPath))
+            for (const std::filesystem::path& path : std::filesystem::recursive_directory_iterator(m_parentPath, std::filesystem::directory_options::skip_permission_denied))
             {
                 if(std::find(supportedDotFileExtensions.begin(), supportedDotFileExtensions.end(), path.extension()) != supportedDotFileExtensions.end())
                 {
