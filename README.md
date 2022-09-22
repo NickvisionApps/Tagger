@@ -10,9 +10,9 @@
 
 # Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/190164690-a20bac35-e5f9-4671-b9a5-457e25ab645a.png)
-![OpenFolder](https://user-images.githubusercontent.com/17648453/191148587-aae0226b-95e2-4082-9274-a46ba981631a.png)
-![TagEditing](https://user-images.githubusercontent.com/17648453/191650993-fc541a60-e5b3-476b-896e-8cd911f3e0f1.png)
-![AlbumArt](https://user-images.githubusercontent.com/17648453/191651001-f00b13b8-e237-462e-bb1e-979f1d4d0372.png)
+![OpenedFolder](https://user-images.githubusercontent.com/17648453/191748757-b31d4953-d12e-4261-824e-c6d38f119152.png)
+![Tagging](https://user-images.githubusercontent.com/17648453/191748768-8cfc3600-69c1-4c85-9e4c-1d89d5e74d57.png)
+![AlbumArt](https://user-images.githubusercontent.com/17648453/191748775-d5e462c8-9b0a-4f2b-a495-826a58099d1b.png)
 ![PreferencesDialog](https://user-images.githubusercontent.com/17648453/190164715-7bd09f81-7747-40bf-902b-ffcf7353bbd2.png)
 ![KeyboardShortcuts](https://user-images.githubusercontent.com/17648453/191412002-b3d14eb4-13ec-45ea-a364-ea56404fbf5c.png)
 ![AboutDialog](https://user-images.githubusercontent.com/17648453/191651006-155f6baa-149f-4654-8dc4-f98d8e9fd03a.png)
