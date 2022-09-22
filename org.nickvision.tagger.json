@@ -79,9 +79,9 @@
             "buildsystem": "meson",
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://github.com/open-source-parsers/jsoncpp/archive/refs/tags/1.9.5.tar.gz",
-                    "sha256": "f409856e5920c18d0c2fb85276e24ee607d2a09b5e7d5f0a371368903c275da2"
+                    "type": "git",
+                    "url": "https://github.com/open-source-parsers/jsoncpp.git",
+                    "tag": "1.9.5"
                 }
             ]
         },
@@ -90,9 +90,9 @@
             "buildsystem": "cmake-ninja",
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://github.com/jpbarrette/curlpp/archive/refs/tags/v0.8.1.tar.gz",
-                    "sha256": "97e3819bdcffc3e4047b6ac57ca14e04af85380bd93afe314bee9dd5c7f46a0a"
+                    "type": "git",
+                    "url": "https://github.com/jpbarrette/curlpp.git",
+                    "tag": "v0.8.1"
                 }
             ]
         },
@@ -101,9 +101,24 @@
             "buildsystem": "cmake-ninja",
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://taglib.github.io/releases/taglib-1.12.tar.gz",
-                    "sha256": "7fccd07669a523b07a15bd24c8da1bbb92206cb19e9366c3692af3d79253b703"
+                    "type": "git",
+                    "url": "https://github.com/taglib/taglib.git",
+                    "tag": "v1.12"
+                }
+            ]
+        },
+        {
+            "name": "chromaprint",
+            "buildsystem": "cmake-ninja",
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+                "-DBUILD_TOOLS=ON"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/acoustid/chromaprint.git",
+                    "tag": "v1.5.1"
                 }
             ]
         },

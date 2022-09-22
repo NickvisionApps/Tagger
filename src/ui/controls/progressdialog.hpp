@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <mutex>
 #include <string>
 #include <thread>
 #include <adwaita.h>
@@ -23,11 +24,16 @@ namespace NickvisionTagger::UI::Controls
          */
     	ProgressDialog(GtkWindow* parent, const std::string& description, const std::function<void()>& work, const std::function<void()>& then = []() {});
     	/**
-    	 * Shows the ProgressDialog
+    	 * Destroys the ProgressDialog
     	 */
-    	void show();
+    	~ProgressDialog();
+    	/**
+    	 * Starts the ProgressDialog
+    	 */
+    	void start();
 
     private:
+    	std::mutex m_mutex;
     	std::function<void()> m_work;
     	std::function<void()> m_then;
     	bool m_isFinished;
@@ -36,6 +42,6 @@ namespace NickvisionTagger::UI::Controls
 	GtkWidget* m_mainBox{ nullptr };
 	GtkWidget* m_lblDescription{ nullptr };
 	GtkWidget* m_progBar{ nullptr };
-	bool timeout();
+	bool onTimeout();
     };
 }

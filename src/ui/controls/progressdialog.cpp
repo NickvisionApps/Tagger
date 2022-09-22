@@ -26,41 +26,50 @@ ProgressDialog::ProgressDialog(GtkWindow* parent, const std::string& description
     gtk_box_append(GTK_BOX(m_mainBox), m_lblDescription);
     gtk_box_append(GTK_BOX(m_mainBox), m_progBar);
     adw_window_set_content(ADW_WINDOW(m_gobj), m_mainBox);
-    //Timeout
-    g_timeout_add(50, [](void* data) -> int
-    {
-        ProgressDialog* dialog{ reinterpret_cast<ProgressDialog*>(data) };
-        bool result = dialog->timeout();
-        if(!result)
-        {
-            delete dialog;
-        }
-        return result;
-    }, this);
     //Thread
     m_thread = std::jthread([&]()
     {
         m_work();
+        std::lock_guard<std::mutex> lock{ m_mutex };
         m_isFinished = true;
     });
 }
 
-void ProgressDialog::show()
+ProgressDialog::~ProgressDialog()
 {
+    gtk_window_destroy(GTK_WINDOW(m_gobj));
+}
+
+void ProgressDialog::start()
+{
+    std::lock_guard<std::mutex> lock{ m_mutex };
     if(!m_isFinished)
     {
         gtk_widget_show(m_gobj);
+        //Timeout
+        g_timeout_add(50, [](void* data) -> int
+        {
+            ProgressDialog* dialog{ reinterpret_cast<ProgressDialog*>(data) };
+            bool result = dialog->onTimeout();
+            if(!result)
+            {
+                delete dialog;
+            }
+            return result;
+        }, this);
     }
 }
 
-bool ProgressDialog::timeout()
+bool ProgressDialog::onTimeout()
 {
+    std::lock_guard<std::mutex> lock{ m_mutex };
     gtk_progress_bar_pulse(GTK_PROGRESS_BAR(m_progBar));
     if(m_isFinished)
     {
         m_then();
-        gtk_window_destroy(GTK_WINDOW(m_gobj));
+        gtk_widget_hide(m_gobj);
         return false;
     }
     return true;
 }
+

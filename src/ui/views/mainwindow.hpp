@@ -25,9 +25,9 @@ namespace NickvisionTagger::UI::Views
     	 */
     	GtkWidget* gobj();
     	/**
-    	 * Shows the MainWindow
+    	 * Starts the MainWindow
     	 */
-    	void show();
+    	void start();
     	
     private:
     	NickvisionTagger::Controllers::MainWindowController m_controller;
@@ -80,9 +80,9 @@ namespace NickvisionTagger::UI::Views
 	GSimpleAction* m_actAbout{ nullptr };
 	std::vector<GtkWidget*> m_listMusicFilesRows;
 	/**
-	 * Runs startup functions
+	 * Runs closing functions
 	 */
-	void onStartup();
+	void onCloseRequest();
 	/**
     	 * Updates the UI when the music folder is updated
     	 *

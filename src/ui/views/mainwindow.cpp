@@ -20,7 +20,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
 {
     //Window Settings
     gtk_window_set_default_size(GTK_WINDOW(m_gobj), 1000, 800);
-    g_signal_connect(m_gobj, "show", G_CALLBACK((void (*)(GtkWidget*, gpointer))[](GtkWidget*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onStartup(); }), this);
+    g_signal_connect(m_gobj, "close_request", G_CALLBACK((void (*)(GtkWidget*, gpointer))[](GtkWidget*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onCloseRequest(); }), this);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
     //Header Bar
     m_headerBar = adw_header_bar_new();
@@ -280,18 +280,15 @@ GtkWidget* MainWindow::gobj()
     return m_gobj;
 }
 
-void MainWindow::show()
+void MainWindow::start()
 {
     gtk_widget_show(m_gobj);
+    m_controller.startup();
 }
 
-void MainWindow::onStartup()
+void MainWindow::onCloseRequest()
 {
-    ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(m_gobj), "Starting application...", [&]()
-    {
-        m_controller.startup();
-    }) };
-    progressDialog->show();
+    gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
 }
 
 void MainWindow::onMusicFolderUpdated(bool sendToast)
@@ -327,7 +324,7 @@ void MainWindow::onMusicFolderUpdated(bool sendToast)
             adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(std::string("Loaded " + std::to_string(musicFilesCount) + " music files.").c_str()));
         }
     }) };
-    progressDialog->show();
+    progressDialog->start();
 }
 
 void MainWindow::onOpenMusicFolder()
@@ -364,7 +361,7 @@ void MainWindow::onApply()
     {
         m_controller.saveTags(tagMap);
     }) };
-    progressDialog->show();
+    progressDialog->start();
 }
 
 void MainWindow::onDeleteTags()
@@ -384,7 +381,7 @@ void MainWindow::onDeleteTags()
             {
                 mainWindow->m_controller.deleteTags();
             }) };
-            progressDialog->show();
+            progressDialog->start();
         }
     })), this);
     gtk_widget_show(messageDialog);
@@ -409,7 +406,7 @@ void MainWindow::onInsertAlbumArt()
             {
                 mainWindow->m_controller.insertAlbumArt(path);
             }) };
-            progressDialog->show();
+            progressDialog->start();
             g_object_unref(file);
         }
         g_object_unref(dialog);
@@ -434,7 +431,7 @@ void MainWindow::onRemoveAlbumArt()
             {
                 mainWindow->m_controller.removeAlbumArt();
             }) };
-            progressDialog->show();
+            progressDialog->start();
         }
     })), this);
     gtk_widget_show(messageDialog);
@@ -456,7 +453,7 @@ void MainWindow::onFilenameToTag()
             {
                 mainWindow->m_controller.filenameToTag(formatString);
             }) };
-            progressDialog->show();
+            progressDialog->start();
         }
         delete pointers;
     })), pointers);
@@ -479,7 +476,7 @@ void MainWindow::onTagToFilename()
             {
                 mainWindow->m_controller.tagToFilename(formatString);
             }) };
-            progressDialog->show();
+            progressDialog->start();
         }
         delete pointers;
     })), pointers);

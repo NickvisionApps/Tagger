@@ -14,7 +14,7 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setShortName("Tagger");
     m_appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
     m_appInfo.setVersion("2022.9.0-beta4");
-    m_appInfo.setChangelog("<ul><li>Redesigned with the latest libadwaita 1.2</li><li>Added a setting to preserve the file's modification time stamp when a tag is edited</li><li>Added the ability to remove album art from a file without deleting the whole tag</li><li>Added the ability to search for a file in the list</li><li>Better handling and mangement of tags for all file types</li></ul>");
+    m_appInfo.setChangelog("<ul><li>Redesigned with the latest libadwaita 1.2</li><li>Added a setting to preserve the file's modification time stamp when a tag is edited</li><li>Added the ability to remove album art from a file without deleting the whole tag</li><li>Added the ability to search for files in the list</li><li>Better handling and mangement of tags for all file types</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     //Signals
@@ -42,5 +42,5 @@ void Application::onActivate(GtkApplication* app)
     }
     m_mainWindow = std::make_shared<MainWindow>(app, MainWindowController(m_appInfo, m_configuration));
     gtk_application_add_window(app, GTK_WINDOW(m_mainWindow->gobj()));
-    m_mainWindow->show();
+    m_mainWindow->start();
 }

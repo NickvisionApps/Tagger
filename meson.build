@@ -4,14 +4,15 @@ gnome = import('gnome')
 
 threads = dependency('Threads')
 gtk = dependency('gtk4', version: '>= 4.6.0')
-adwaita = dependency('libadwaita-1', version: '>= 1.2.rc')
+adwaita = dependency('libadwaita-1', version: '>= 1.2.0')
 jsoncpp = dependency('jsoncpp')
 curlpp = dependency('curlpp')
 taglib = dependency('taglib')
+chromaprint = dependency('libchromaprint')
 
 subdir('src')
 
-executable('org.nickvision.tagger', sources, dependencies: [threads, adwaita, jsoncpp, curlpp, taglib], install: true, install_mode: 'rwxrwxrwx')
+executable('org.nickvision.tagger', sources, dependencies: [threads, adwaita, jsoncpp, curlpp, taglib, chromaprint], install: true, install_mode: 'rwxrwxrwx')
 install_data(resources, install_dir: 'share/icons/hicolor/scalable/apps')
 install_data(resources_symbolic, install_dir: 'share/icons/hicolor/symbolic/apps')
 install_data('org.nickvision.tagger.desktop', install_dir: 'share/applications')
