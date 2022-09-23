@@ -8,6 +8,18 @@
 - Support for multiple music file types (mp3, ogg, flac, wma, and wav)
 - Convert filenames to tags and tags to filenames with ease
 
+# Installation
+<table>
+  <tr>
+    <td>Flatpak</td>
+  </tr>
+  <tr>
+    <td>
+      <a href='https://flathub.org/apps/details/org.nickvision.tagger'><img width='130' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+    </td>
+  </tr>
+</table>
+
 # Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/191976746-a22f9a03-24d2-4045-8569-2cbf479c971c.png)
 ![OpenFolder](https://user-images.githubusercontent.com/17648453/191976770-8b9ca39d-0ae4-45ab-8d65-5d3e9e32dfb1.png)
