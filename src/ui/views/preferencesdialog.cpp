@@ -106,9 +106,13 @@ GtkWidget* PreferencesDialog::gobj()
     return m_gobj;
 }
 
-void PreferencesDialog::show()
+void PreferencesDialog::run()
 {
     gtk_widget_show(m_gobj);
+    while(gtk_widget_is_visible(m_gobj))
+    {
+        g_main_context_iteration(g_main_context_default(), false);
+    }
 }
 
 void PreferencesDialog::onCancel()

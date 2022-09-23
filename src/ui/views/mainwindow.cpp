@@ -301,30 +301,25 @@ void MainWindow::onMusicFolderUpdated(bool sendToast)
         gtk_list_box_remove(GTK_LIST_BOX(m_listMusicFiles), row);
     }
     m_listMusicFilesRows.clear();
-    ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(m_gobj), "Loading music files...", [&]()
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Loading music files...", [&]() { m_controller.reloadMusicFolder(); } };
+    progressDialog.run();
+    std::size_t musicFilesCount{ m_controller.getMusicFileCount() };
+    int id{ 1 };
+    adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), musicFilesCount > 0 ? "pageTagger" : "pageNoFiles");
+    for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
     {
-        m_controller.reloadMusicFolder();
-    }, [&, sendToast]()
+        GtkWidget* row{ adw_action_row_new() };
+        adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+        adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(id).c_str());
+        gtk_list_box_append(GTK_LIST_BOX(m_listMusicFiles), row);
+        m_listMusicFilesRows.push_back(row);
+        g_main_context_iteration(g_main_context_default(), false);
+        id++;
+    }
+    if(musicFilesCount > 0 && sendToast)
     {
-        std::size_t musicFilesCount{ m_controller.getMusicFileCount() };
-        int id{ 1 };
-        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), musicFilesCount > 0 ? "pageTagger" : "pageNoFiles");
-        for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
-        {
-            GtkWidget* row{ adw_action_row_new() };
-            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
-            adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(id).c_str());
-            gtk_list_box_append(GTK_LIST_BOX(m_listMusicFiles), row);
-            m_listMusicFilesRows.push_back(row);
-            g_main_context_iteration(g_main_context_default(), false);
-            id++;
-        }
-        if(musicFilesCount > 0 && sendToast)
-        {
-            adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(std::string("Loaded " + std::to_string(musicFilesCount) + " music files.").c_str()));
-        }
-    }) };
-    progressDialog->start();
+        adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(std::string("Loaded " + std::to_string(musicFilesCount) + " music files.").c_str()));
+    }
 }
 
 void MainWindow::onOpenMusicFolder()
@@ -357,11 +352,8 @@ void MainWindow::onApply()
     tagMap.insert({ "albumArtist", gtk_editable_get_text(GTK_EDITABLE(m_txtAlbumArtist)) });
     tagMap.insert({ "genre", gtk_editable_get_text(GTK_EDITABLE(m_txtGenre)) });
     tagMap.insert({ "comment", gtk_editable_get_text(GTK_EDITABLE(m_txtComment)) });
-    ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(m_gobj), "Saving tags...", [&, tagMap]()
-    {
-        m_controller.saveTags(tagMap);
-    }) };
-    progressDialog->start();
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Saving tags...", [&, tagMap]() { m_controller.saveTags(tagMap); } };
+    progressDialog.run();
 }
 
 void MainWindow::onDeleteTags()
@@ -377,11 +369,8 @@ void MainWindow::onDeleteTags()
         MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
         if(strcmp(response, "yes") == 0)
         {
-            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Deleting tags...", [mainWindow]()
-            {
-                mainWindow->m_controller.deleteTags();
-            }) };
-            progressDialog->start();
+            ProgressDialog progressDialog{ GTK_WINDOW(mainWindow->m_gobj), "Deleting tags...", [mainWindow]() { mainWindow->m_controller.deleteTags(); } };
+            progressDialog.run();
         }
     })), this);
     gtk_widget_show(messageDialog);
@@ -402,11 +391,8 @@ void MainWindow::onInsertAlbumArt()
             MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
             GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
             std::string path{ g_file_get_path(file) };
-            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Inserting album art...", [mainWindow, path]()
-            {
-                mainWindow->m_controller.insertAlbumArt(path);
-            }) };
-            progressDialog->start();
+            ProgressDialog progressDialog{ GTK_WINDOW(mainWindow->m_gobj), "Inserting album art...", [mainWindow, path]() { mainWindow->m_controller.insertAlbumArt(path); } };
+            progressDialog.run();
             g_object_unref(file);
         }
         g_object_unref(dialog);
@@ -427,11 +413,8 @@ void MainWindow::onRemoveAlbumArt()
         MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
         if(strcmp(response, "yes") == 0)
         {
-            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Removing album art...", [mainWindow]()
-            {
-                mainWindow->m_controller.removeAlbumArt();
-            }) };
-            progressDialog->start();
+            ProgressDialog progressDialog{ GTK_WINDOW(mainWindow->m_gobj), "Removing album art...", [mainWindow]() { mainWindow->m_controller.removeAlbumArt(); } };
+            progressDialog.run();
         }
     })), this);
     gtk_widget_show(messageDialog);
@@ -439,73 +422,37 @@ void MainWindow::onRemoveAlbumArt()
 
 void MainWindow::onFilenameToTag()
 {
-    ComboBoxDialog* formatStringDialog{ new ComboBoxDialog(GTK_WINDOW(m_gobj), "Filename to Tag", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" }) };
-    std::pair<ComboBoxDialog*, MainWindow*>* pointers{ new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this) };
-    g_signal_connect(formatStringDialog->gobj(), "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog*, gchar* response, gpointer data)
+    ComboBoxDialog formatStringDialog{ GTK_WINDOW(m_gobj), "Filename to Tag", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" } };
+    std::string formatString = formatStringDialog.run();
+    if(!formatString.empty())
     {
-        std::pair<ComboBoxDialog*, MainWindow*>* pointers{ reinterpret_cast<std::pair<ComboBoxDialog*, MainWindow*>*>(data) };
-        std::string formatString{ pointers->first->getSelectedChoice() };
-        delete pointers->first;
-        if(strcmp(response, "ok") == 0)
-        {
-            MainWindow* mainWindow{ pointers->second };
-            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Converting filenames to tags...", [mainWindow, formatString]()
-            {
-                mainWindow->m_controller.filenameToTag(formatString);
-            }) };
-            progressDialog->start();
-        }
-        delete pointers;
-    })), pointers);
-    formatStringDialog->show();
+        ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Converting filenames to tags...", [&, formatString]() { m_controller.filenameToTag(formatString); } };
+        progressDialog.run();
+    }
 }
 
 void MainWindow::onTagToFilename()
 {
-    ComboBoxDialog* formatStringDialog{ new ComboBoxDialog(GTK_WINDOW(m_gobj), "Tag to Filename", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" }) };
-    std::pair<ComboBoxDialog*, MainWindow*>* pointers{ new std::pair<ComboBoxDialog*, MainWindow*>(formatStringDialog, this) };
-    g_signal_connect(formatStringDialog->gobj(), "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog*, gchar* response, gpointer data)
+    ComboBoxDialog formatStringDialog{ GTK_WINDOW(m_gobj), "Tag to Filename", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" } };
+    std::string formatString = formatStringDialog.run();
+    if(!formatString.empty())
     {
-        std::pair<ComboBoxDialog*, MainWindow*>* pointers{ reinterpret_cast<std::pair<ComboBoxDialog*, MainWindow*>*>(data) };
-        std::string formatString{ pointers->first->getSelectedChoice() };
-        delete pointers->first;
-        if(strcmp(response, "ok") == 0)
-        {
-            MainWindow* mainWindow{ pointers->second };
-            ProgressDialog* progressDialog{ new ProgressDialog(GTK_WINDOW(mainWindow->m_gobj), "Converting tags to filenames...", [mainWindow, formatString]()
-            {
-                mainWindow->m_controller.tagToFilename(formatString);
-            }) };
-            progressDialog->start();
-        }
-        delete pointers;
-    })), pointers);
-    formatStringDialog->show();
+        ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Converting tags to filenames...", [&, formatString]() { m_controller.tagToFilename(formatString); } };
+        progressDialog.run();
+    }
 }
 
 void MainWindow::onPreferences()
 {
-    PreferencesDialog* preferencesDialog{ new PreferencesDialog(GTK_WINDOW(m_gobj), m_controller.createPreferencesDialogController()) };
-    std::pair<PreferencesDialog*, MainWindow*>* pointers{ new std::pair<PreferencesDialog*, MainWindow*>(preferencesDialog, this) };
-    g_signal_connect(preferencesDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer))([](GtkWidget*, gpointer data)
-    {
-        std::pair<PreferencesDialog*, MainWindow*>* pointers{ reinterpret_cast<std::pair<PreferencesDialog*, MainWindow*>*>(data) };
-        delete pointers->first;
-        pointers->second->m_controller.onConfigurationChanged();
-        delete pointers;
-    })), pointers);
-    preferencesDialog->show();
+    PreferencesDialog preferencesDialog{ GTK_WINDOW(m_gobj), m_controller.createPreferencesDialogController() };
+    preferencesDialog.run();
+    m_controller.onConfigurationChanged();
 }
 
 void MainWindow::onKeyboardShortcuts()
 {
-    ShortcutsDialog* shortcutsDialog{ new ShortcutsDialog(GTK_WINDOW(m_gobj)) };
-    g_signal_connect(shortcutsDialog->gobj(), "hide", G_CALLBACK((void (*)(GtkWidget*, gpointer))([](GtkWidget*, gpointer data)
-    {
-        ShortcutsDialog* dialog{ reinterpret_cast<ShortcutsDialog*>(data) };
-        delete dialog;
-    })), shortcutsDialog);
-    shortcutsDialog->show();
+    ShortcutsDialog shortcutsDialog{ GTK_WINDOW(m_gobj) };
+    shortcutsDialog.run();
 }
 
 void MainWindow::onAbout()

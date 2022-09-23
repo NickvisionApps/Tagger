@@ -29,9 +29,9 @@ namespace NickvisionTagger::UI::Views
     	 */
     	GtkWidget* gobj();
     	/**
-    	 * Shows the PreferencesDialog
+    	 * Runs the PreferencesDialog
     	 */
-    	void show();
+    	void run();
 
     private:
     	NickvisionTagger::Controllers::PreferencesDialogController m_controller;
