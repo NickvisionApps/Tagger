@@ -729,7 +729,6 @@ std::string MusicFile::getChromaprintFingerprint() const
             char* fingerprint{ nullptr };
             if(chromaprint_finish(chromaprint) && chromaprint_get_fingerprint(chromaprint, &fingerprint))
             {
-                printf("%s\n", fingerprint);
                 result = { fingerprint };
                 chromaprint_dealloc(fingerprint);
             }

@@ -1,6 +1,7 @@
 #include "mainwindow.hpp"
 #include <algorithm>
 #include <filesystem>
+#include <regex>
 #include <unordered_map>
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
@@ -127,7 +128,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Album Art
     m_stackAlbumArt = adw_view_stack_new();
     gtk_widget_set_halign(m_stackAlbumArt, GTK_ALIGN_CENTER);
-    gtk_widget_set_size_request(m_stackAlbumArt, 300, 300);
+    gtk_widget_set_size_request(m_stackAlbumArt, 240, 240);
     m_statusNoAlbumArt = adw_status_page_new();
     gtk_style_context_add_class(gtk_widget_get_style_context(m_statusNoAlbumArt), "card");
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_statusNoAlbumArt), "folder-music-symbolic");
@@ -317,11 +318,10 @@ void MainWindow::onMusicFolderUpdated(bool sendToast)
     for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
     {
         GtkWidget* row{ adw_action_row_new() };
-        adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), musicFile->getFilename().c_str());
+        adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
         adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(id).c_str());
         gtk_list_box_append(GTK_LIST_BOX(m_listMusicFiles), row);
         m_listMusicFilesRows.push_back(row);
-        g_main_context_iteration(g_main_context_default(), false);
         id++;
     }
     if(musicFilesCount > 0 && sendToast)
@@ -544,15 +544,15 @@ void MainWindow::onListMusicFilesSelectionChanged()
     else if(m_controller.getSelectedMusicFiles().size() == 1)
     {
         const std::shared_ptr<MusicFile>& firstMusicFile{ m_controller.getSelectedMusicFiles()[0] };
-        gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), firstMusicFile->getFilename().c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), firstMusicFile->getTitle().c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), firstMusicFile->getArtist().c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), firstMusicFile->getAlbum().c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), std::regex_replace(firstMusicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), std::regex_replace(firstMusicFile->getTitle(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), std::regex_replace(firstMusicFile->getArtist(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), std::regex_replace(firstMusicFile->getAlbum(), std::regex("\\&"), "&amp;").c_str());
         gtk_editable_set_text(GTK_EDITABLE(m_txtYear), std::to_string(firstMusicFile->getYear()).c_str());
         gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), std::to_string(firstMusicFile->getTrack()).c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), firstMusicFile->getAlbumArtist().c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), firstMusicFile->getGenre().c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtComment), firstMusicFile->getComment().c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), std::regex_replace(firstMusicFile->getAlbumArtist(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), std::regex_replace(firstMusicFile->getGenre(), std::regex("\\&"), "&amp;").c_str());
+        gtk_editable_set_text(GTK_EDITABLE(m_txtComment), std::regex_replace(firstMusicFile->getComment(), std::regex("\\&"), "&amp;").c_str());
         gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), firstMusicFile->getDurationAsString().c_str());
         gtk_editable_set_text(GTK_EDITABLE(m_txtChromaprintFingerprint), firstMusicFile->getChromaprintFingerprint().c_str());
         gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), firstMusicFile->getFileSizeAsString().c_str());
@@ -625,14 +625,14 @@ void MainWindow::onListMusicFilesSelectionChanged()
         }
         gtk_editable_set_editable(GTK_EDITABLE(m_txtFilename), false);
         gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), haveSameTitle ? firstMusicFile->getTitle().c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), haveSameArtist ? firstMusicFile->getArtist().c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), haveSameAlbum ? firstMusicFile->getAlbum().c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), haveSameTitle ? std::regex_replace(firstMusicFile->getTitle(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), haveSameArtist ? std::regex_replace(firstMusicFile->getArtist(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), haveSameAlbum ? std::regex_replace(firstMusicFile->getAlbum(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(m_txtYear), haveSameYear ? std::to_string(firstMusicFile->getYear()).c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), haveSameTrack ? std::to_string(firstMusicFile->getTrack()).c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), haveSameAlbumArtist ? firstMusicFile->getAlbumArtist().c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), haveSameGenre ? firstMusicFile->getGenre().c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtComment), haveSameComment ? firstMusicFile->getComment().c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), haveSameAlbumArtist ? std::regex_replace(firstMusicFile->getAlbumArtist(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), haveSameGenre ? std::regex_replace(firstMusicFile->getGenre(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
+        gtk_editable_set_text(GTK_EDITABLE(m_txtComment), haveSameComment ? std::regex_replace(firstMusicFile->getComment(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), MediaHelpers::durationToString(totalDuration).c_str());
         gtk_editable_set_text(GTK_EDITABLE(m_txtChromaprintFingerprint), "<keep>");
         gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), MediaHelpers::fileSizeToString(totalFileSize).c_str());
