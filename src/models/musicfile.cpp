@@ -1,5 +1,7 @@
 #include "musicfile.hpp"
+#include <sstream>
 #include <stdexcept>
+#include <chromaprint.h>
 #include <taglib/textidentificationframe.h>
 #include "../helpers/mediahelpers.hpp"
 
@@ -652,6 +654,56 @@ std::string MusicFile::getDurationAsString() const
     return MediaHelpers::durationToString(getDuration());
 }
 
+int MusicFile::getSampleRate() const
+{
+    if (m_dotExtension == ".mp3")
+    {
+        return m_fileMP3->audioProperties()->sampleRate();
+    }
+    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
+    {
+        return m_fileOGG->audioProperties()->sampleRate();
+    }
+    else if (m_dotExtension == ".flac")
+    {
+        return m_fileFLAC->audioProperties()->sampleRate();
+    }
+    else if (m_dotExtension == ".wma")
+    {
+        return m_fileWMA->audioProperties()->sampleRate();
+    }
+    else if (m_dotExtension == ".wav")
+    {
+        return m_fileWAV->audioProperties()->sampleRate();
+    }
+    return 0;
+}
+
+int MusicFile::getChannelCount() const
+{
+    if (m_dotExtension == ".mp3")
+    {
+        return m_fileMP3->audioProperties()->channels();
+    }
+    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
+    {
+        return m_fileOGG->audioProperties()->channels();
+    }
+    else if (m_dotExtension == ".flac")
+    {
+        return m_fileFLAC->audioProperties()->channels();
+    }
+    else if (m_dotExtension == ".wma")
+    {
+        return m_fileWMA->audioProperties()->channels();
+    }
+    else if (m_dotExtension == ".wav")
+    {
+        return m_fileWAV->audioProperties()->channels();
+    }
+    return 0;
+}
+
 std::uintmax_t MusicFile::getFileSize() const
 {
     return std::filesystem::file_size(m_path);
@@ -660,6 +712,32 @@ std::uintmax_t MusicFile::getFileSize() const
 std::string MusicFile::getFileSizeAsString() const
 {
     return MediaHelpers::fileSizeToString(getFileSize());
+}
+
+std::string MusicFile::getChromaprintFingerprint() const
+{
+    std::string result{ "ERROR" };
+    //Get Binary Data
+
+    //Get Fingerprint
+    /*
+    ChromaprintContext* chromaprint{ chromaprint_new(CHROMAPRINT_ALGORITHM_DEFAULT) };
+    if(chromaprint_start(chromaprint, getSampleRate(), getChannelCount()))
+    {
+        if(chromaprint_feed(chromaprint, reinterpret_cast<int16_t*>(byteVector.data()), byteVector.size() / 2))
+        {
+            char* fingerprint{ nullptr };
+            if(chromaprint_finish(chromaprint) && chromaprint_get_fingerprint(chromaprint, &fingerprint))
+            {
+                printf("%s\n", fingerprint);
+                result = { fingerprint };
+                chromaprint_dealloc(fingerprint);
+            }
+        }
+    }
+    chromaprint_free(chromaprint);
+    */
+    return result;
 }
 
 void MusicFile::saveTag(bool preserveModificationTimeStamp)

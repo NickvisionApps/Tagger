@@ -63,6 +63,7 @@ namespace NickvisionTagger::UI::Views
 	GtkWidget* m_txtGenre{ nullptr };
 	GtkWidget* m_txtComment{ nullptr };
 	GtkWidget* m_txtDuration{ nullptr };
+	GtkWidget* m_txtChromaprintFingerprint{ nullptr };
 	GtkWidget* m_txtFileSize{ nullptr };
 	GtkWidget* m_stackAlbumArt{ nullptr };
 	GtkWidget* m_statusNoAlbumArt{ nullptr };
@@ -78,6 +79,7 @@ namespace NickvisionTagger::UI::Views
 	GSimpleAction* m_actPreferences{ nullptr };
 	GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 	GSimpleAction* m_actAbout{ nullptr };
+	GtkDropTarget* m_dropTarget{ nullptr };
 	std::vector<GtkWidget*> m_listMusicFilesRows;
 	/**
 	 * Runs closing functions
@@ -137,5 +139,12 @@ namespace NickvisionTagger::UI::Views
     	 * Occurs when listMusicFile's selection is changed
     	 */
 	void onListMusicFilesSelectionChanged();
+	/**
+	 * Occurs when the GtkDropTarget is triggered
+	 *
+	 * @param value The value from the drop
+	 * @returns True to accept the drop, else false
+	 */
+	bool onDrop(const GValue* value);
     };
 }

@@ -47,9 +47,9 @@ std::string MediaHelpers::fileSizeToString(std::uintmax_t fileSize)
 
 TagLib::ByteVector MediaHelpers::byteVectorFromFile(const std::filesystem::path& path)
 {
-    std::ifstream pictureFile{ path, std::ios::binary };
+    std::ifstream file{ path, std::ios::binary };
     std::stringstream builder;
-    builder << pictureFile.rdbuf();
+    builder << file.rdbuf();
     std::string data{ builder.str() };
     return TagLib::ByteVector::fromCString(data.c_str(), data.size());
 }
