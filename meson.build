@@ -1,4 +1,4 @@
-project('org.nickvision.tagger', ['cpp', 'c'], version: '2022.9.0', meson_version: '>= 0.59.0', default_options: ['warning_level=3', 'werror=false', 'cpp_std=c++20'])
+project('org.nickvision.tagger', ['cpp', 'c'], version: '2022.9.1', meson_version: '>= 0.59.0', default_options: ['warning_level=3', 'werror=false', 'cpp_std=c++20'])
 
 gnome = import('gnome')
 
@@ -8,11 +8,11 @@ adwaita = dependency('libadwaita-1', version: '>= 1.2.0')
 jsoncpp = dependency('jsoncpp')
 curlpp = dependency('curlpp')
 taglib = dependency('taglib')
-chromaprint = dependency('libchromaprint')
 
 subdir('src')
 
-executable('org.nickvision.tagger', sources, dependencies: [threads, adwaita, jsoncpp, curlpp, taglib, chromaprint], install: true, install_mode: 'rwxrwxrwx')
+executable('org.nickvision.tagger', sources, dependencies: [threads, adwaita, jsoncpp, curlpp, taglib], install: true, install_mode: 'rwxrwxrwx')
+install_data('fpcalc', install_dir: 'bin', install_mode: 'rwxrwxrwx')
 install_data(resources, install_dir: 'share/icons/hicolor/scalable/apps')
 install_data(resources_symbolic, install_dir: 'share/icons/hicolor/symbolic/apps')
 install_data('org.nickvision.tagger.desktop', install_dir: 'share/applications')

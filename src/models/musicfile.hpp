@@ -168,18 +168,6 @@ namespace NickvisionTagger::Models
 	 */
 	std::string getDurationAsString() const;
 	/**
-	 * Gets the sample rate of the music file in Hz
-	 *
-	 * @returns The sample rate of the music file in Hz
-	 */
-	int getSampleRate() const;
-	/**
-	 * Gets the number of channels in the music file
-	 *
-	 * @returns The number of channels in the music file
-	 */
-	int getChannelCount() const;
-	/**
 	 * Gets the file size of the music file (in bytes)
 	 *
 	 * @returns The file size of the music file
@@ -192,11 +180,17 @@ namespace NickvisionTagger::Models
 	 */
 	std::string getFileSizeAsString() const;
 	/**
-	 * Gets the chromaprint fingerprint for the music file as a std::string
+	 * Gets the chromaprint fingerprint for the music file
 	 *
-	 * @returns The chromaprint fingerprint for the music file as a std::string
+	 * @returns The chromaprint fingerprint for the music file
 	 */
-	std::string getChromaprintFingerprint() const;
+	const std::string& getChromaprintFingerprint();
+	/**
+	 * Gets the AcoustId lookup url for the music file
+	 *
+	 * @returns The AcoustId lookup url for the music file
+	 */
+	std::string getAcoustIdLookupUrl();
 	/**
 	 * Saves the tag of the music file
 	 *
@@ -262,5 +256,6 @@ namespace NickvisionTagger::Models
         std::shared_ptr<TagLib::FLAC::File> m_fileFLAC;
         std::shared_ptr<TagLib::ASF::File> m_fileWMA;
         std::shared_ptr<TagLib::RIFF::WAV::File> m_fileWAV;
+        std::string m_fingerprint;
     };
 }

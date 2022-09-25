@@ -194,9 +194,9 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_scrollTaggerFlap = gtk_scrolled_window_new();
     gtk_widget_set_hexpand(m_scrollTaggerFlap, true);
     m_boxTaggerFlap = gtk_box_new(GTK_ORIENTATION_VERTICAL, 40);
-    gtk_widget_set_margin_start(m_boxTaggerFlap, 60);
+    gtk_widget_set_margin_start(m_boxTaggerFlap, 40);
     gtk_widget_set_margin_top(m_boxTaggerFlap, 20);
-    gtk_widget_set_margin_end(m_boxTaggerFlap, 60);
+    gtk_widget_set_margin_end(m_boxTaggerFlap, 40);
     gtk_widget_set_margin_bottom(m_boxTaggerFlap, 20);
     gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_stackAlbumArt);
     gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_adwGrpProperties);

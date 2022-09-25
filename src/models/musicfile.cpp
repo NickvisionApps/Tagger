@@ -1,14 +1,15 @@
 #include "musicfile.hpp"
+#include <array>
+#include <cstdio>
 #include <sstream>
 #include <stdexcept>
-#include <chromaprint.h>
 #include <taglib/textidentificationframe.h>
 #include "../helpers/mediahelpers.hpp"
 
 using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
 
-MusicFile::MusicFile(const std::filesystem::path& path) : m_path{ path }, m_dotExtension{ m_path.extension() }, m_modificationTimeStamp{ std::filesystem::last_write_time(m_path) }
+MusicFile::MusicFile(const std::filesystem::path& path) : m_path{ path }, m_dotExtension{ m_path.extension() }, m_modificationTimeStamp{ std::filesystem::last_write_time(m_path) }, m_fingerprint{ }
 {
     if(m_dotExtension == ".mp3")
     {
@@ -654,56 +655,6 @@ std::string MusicFile::getDurationAsString() const
     return MediaHelpers::durationToString(getDuration());
 }
 
-int MusicFile::getSampleRate() const
-{
-    if (m_dotExtension == ".mp3")
-    {
-        return m_fileMP3->audioProperties()->sampleRate();
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        return m_fileOGG->audioProperties()->sampleRate();
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        return m_fileFLAC->audioProperties()->sampleRate();
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        return m_fileWMA->audioProperties()->sampleRate();
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        return m_fileWAV->audioProperties()->sampleRate();
-    }
-    return 0;
-}
-
-int MusicFile::getChannelCount() const
-{
-    if (m_dotExtension == ".mp3")
-    {
-        return m_fileMP3->audioProperties()->channels();
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        return m_fileOGG->audioProperties()->channels();
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        return m_fileFLAC->audioProperties()->channels();
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        return m_fileWMA->audioProperties()->channels();
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        return m_fileWAV->audioProperties()->channels();
-    }
-    return 0;
-}
-
 std::uintmax_t MusicFile::getFileSize() const
 {
     return std::filesystem::file_size(m_path);
@@ -714,29 +665,43 @@ std::string MusicFile::getFileSizeAsString() const
     return MediaHelpers::fileSizeToString(getFileSize());
 }
 
-std::string MusicFile::getChromaprintFingerprint() const
+const std::string& MusicFile::getChromaprintFingerprint()
 {
-    std::string result{ "ERROR" };
-    //Get Binary Data
-
-    //Get Fingerprint
-    /*
-    ChromaprintContext* chromaprint{ chromaprint_new(CHROMAPRINT_ALGORITHM_DEFAULT) };
-    if(chromaprint_start(chromaprint, getSampleRate(), getChannelCount()))
+    if(m_fingerprint.empty() || m_fingerprint == "ERROR")
     {
-        if(chromaprint_feed(chromaprint, reinterpret_cast<int16_t*>(byteVector.data()), byteVector.size() / 2))
+        std::string cmd{ "fpcalc \"" + m_path.string() + "\"" };
+        std::string output{ "" };
+        std::array<char, 128> buffer;
+        FILE* pipe{ popen(cmd.c_str(), "r") };
+        if(pipe)
         {
-            char* fingerprint{ nullptr };
-            if(chromaprint_finish(chromaprint) && chromaprint_get_fingerprint(chromaprint, &fingerprint))
+            while(!feof(pipe))
             {
-                result = { fingerprint };
-                chromaprint_dealloc(fingerprint);
+                if(fgets(buffer.data(), 128, pipe) != nullptr)
+                {
+                    output += buffer.data();
+                }
             }
+            int resultCode{ pclose(pipe) };
+            m_fingerprint = resultCode == EXIT_SUCCESS ? output.substr(output.find("FINGERPRINT=") + 12) : "CMD ERROR";
+        }
+        else
+        {
+            m_fingerprint = "PIPE ERROR";
         }
     }
-    chromaprint_free(chromaprint);
-    */
-    return result;
+    return m_fingerprint;
+}
+
+std::string MusicFile::getAcoustIdLookupUrl()
+{
+    std::stringstream builder;
+    builder << "https://api.acoustid.org/v2/lookup?";
+    builder << "client=" << "h8zUwMlUyAw" << "&";
+    builder << "duration=" << getDuration() << "&";
+    builder << "meta=" << "recordingids" << "&";
+    builder << "fingerprint=" << getChromaprintFingerprint();
+    return builder.str();
 }
 
 void MusicFile::saveTag(bool preserveModificationTimeStamp)
