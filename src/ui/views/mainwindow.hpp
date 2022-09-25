@@ -76,6 +76,7 @@ namespace NickvisionTagger::UI::Views
 	GSimpleAction* m_actRemoveAlbumArt{ nullptr };
 	GSimpleAction* m_actFilenameToTag{ nullptr };
 	GSimpleAction* m_actTagToFilename{ nullptr };
+	GSimpleAction* m_actDownloadMusicBrainzMetadata{ nullptr };
 	GSimpleAction* m_actPreferences{ nullptr };
 	GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 	GSimpleAction* m_actAbout{ nullptr };
@@ -119,6 +120,10 @@ namespace NickvisionTagger::UI::Views
     	 * Prompts the user to select a format string and performs a tag to filename conversion for the selected files
     	 */
     	void onTagToFilename();
+    	/**
+    	 * Downloads and applys tag metadata from MusicBrainz for the selected files
+    	 */
+    	void onDownloadMusicBrainzMetadata();
     	/**
     	 * Displays the preferences dialog
     	 */

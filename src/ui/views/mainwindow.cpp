@@ -70,13 +70,16 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     GMenu* menuTagActions{ g_menu_new() };
     GMenu* menuAlbumArt{ g_menu_new() };
     GMenu* menuConvert{ g_menu_new() };
+    GMenu* menuOther{ g_menu_new() };
     g_menu_append(menuAlbumArt, "Insert Album Art", "win.insertAlbumArt");
     g_menu_append(menuAlbumArt, "Remove Album Art", "win.removeAlbumArt");
     g_menu_append(menuConvert, "Filename to Tag", "win.filenameToTag");
     g_menu_append(menuConvert, "Tag to Filename", "win.tagToFilename");
+    g_menu_append(menuOther, "Download MusicBrainz Metadata", "win.downloadMusicBrainzMetadata");
     g_menu_append(menuTagActions, "Delete Tags", "win.deleteTags");
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuAlbumArt));
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuConvert));
+    g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuOther));
     gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuTagActions), "document-properties-symbolic");
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuTagActions), G_MENU_MODEL(menuTagActions));
     gtk_widget_set_tooltip_text(m_btnMenuTagActions, "Tag Actions");
@@ -264,6 +267,11 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_signal_connect(m_actTagToFilename, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTagToFilename(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actTagToFilename));
     gtk_application_set_accels_for_action(application, "win.tagToFilename", new const char*[2]{ "<Ctrl>t", nullptr });
+    //Download MusicBrainz Metadata
+    m_actDownloadMusicBrainzMetadata = g_simple_action_new("downloadMusicBrainzMetadata", nullptr);
+    g_signal_connect(m_actDownloadMusicBrainzMetadata, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onDownloadMusicBrainzMetadata(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actDownloadMusicBrainzMetadata));
+    gtk_application_set_accels_for_action(application, "win.downloadMusicBrainzMetadata", new const char*[2]{ "<Ctrl>m", nullptr });
     //Preferences Action
     m_actPreferences = g_simple_action_new("preferences", nullptr);
     g_signal_connect(m_actPreferences, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onPreferences(); }), this);
@@ -448,6 +456,11 @@ void MainWindow::onTagToFilename()
         ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Converting tags to filenames...", [&, formatString]() { m_controller.tagToFilename(formatString); } };
         progressDialog.run();
     }
+}
+
+void MainWindow::onDownloadMusicBrainzMetadata()
+{
+
 }
 
 void MainWindow::onPreferences()

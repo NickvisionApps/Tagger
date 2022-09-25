@@ -72,6 +72,12 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                                     <property name="accelerator">&lt;Control&gt;t</property>
                                 </object>
                             </child>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">Download MusicBrainz Metadata</property>
+                                    <property name="accelerator">&lt;Control&gt;m</property>
+                                </object>
+                            </child>
                         </object>
                     </child>
                     <child>
