@@ -134,10 +134,14 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_size_request(m_stackAlbumArt, 240, 240);
     m_statusNoAlbumArt = adw_status_page_new();
     gtk_style_context_add_class(gtk_widget_get_style_context(m_statusNoAlbumArt), "card");
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_statusNoAlbumArt), "compact");
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_statusNoAlbumArt), "folder-music-symbolic");
     adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_statusNoAlbumArt, "noImage");
+    m_frameAlbumArt = gtk_frame_new(nullptr);
     m_imgAlbumArt = gtk_image_new();
-    adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_imgAlbumArt, "image");
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_frameAlbumArt), "card");
+    gtk_frame_set_child(GTK_FRAME(m_frameAlbumArt), m_imgAlbumArt);
+    adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_frameAlbumArt, "image");
     //Properties Group
     m_adwGrpProperties = adw_preferences_group_new();
     //Filename
@@ -558,12 +562,12 @@ void MainWindow::onListMusicFilesSelectionChanged()
     gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), tagMap.at("fileSize").c_str());
     if(tagMap.at("albumArt") == "hasArt")
     {
-        adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_imgAlbumArt);
+        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_stackAlbumArt), "image");
         GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), m_controller.getSelectedMusicFiles()[0]->getAlbumArt());
     }
     else
     {
-        adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_statusNoAlbumArt);
+        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_stackAlbumArt), "noImage");
         gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
     }
 }
