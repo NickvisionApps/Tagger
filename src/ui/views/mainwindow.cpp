@@ -21,7 +21,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Window Settings
     gtk_window_set_default_size(GTK_WINDOW(m_gobj), 1000, 800);
     g_signal_connect(m_gobj, "close_request", G_CALLBACK((void (*)(GtkWidget*, gpointer))[](GtkWidget*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onCloseRequest(); }), this);
-    //gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
     //Header Bar
     m_headerBar = adw_header_bar_new();
     m_adwTitle = adw_window_title_new(m_controller.getAppInfo().getShortName().c_str(), m_controller.getMusicFolderPath().c_str());
@@ -519,133 +519,38 @@ void MainWindow::onListMusicFilesSelectionChanged()
     gtk_widget_set_visible(m_btnApply, true);
     gtk_widget_set_visible(m_btnMenuTagActions, true);
     adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), true);
-    //No Selected Files
-    if(m_controller.getSelectedMusicFiles().size() == 0)
+    if(selectedIndexes.size() == 0)
     {
         gtk_widget_set_visible(m_btnApply, false);
         gtk_widget_set_visible(m_btnMenuTagActions, false);
         adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), false);
-        gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtYear), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtComment), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), "00:00:00");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtChromaprintFingerprint), "");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), "0 MB");
-        adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_statusNoAlbumArt);
-        gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
     }
-    //One File Selected
-    else if(m_controller.getSelectedMusicFiles().size() == 1)
+    else if(selectedIndexes.size() > 1)
     {
-        const std::shared_ptr<MusicFile>& firstMusicFile{ m_controller.getSelectedMusicFiles()[0] };
-        gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), std::regex_replace(firstMusicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), std::regex_replace(firstMusicFile->getTitle(), std::regex("\\&"), "&amp;").c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), std::regex_replace(firstMusicFile->getArtist(), std::regex("\\&"), "&amp;").c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), std::regex_replace(firstMusicFile->getAlbum(), std::regex("\\&"), "&amp;").c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtYear), std::to_string(firstMusicFile->getYear()).c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), std::to_string(firstMusicFile->getTrack()).c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), std::regex_replace(firstMusicFile->getAlbumArtist(), std::regex("\\&"), "&amp;").c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), std::regex_replace(firstMusicFile->getGenre(), std::regex("\\&"), "&amp;").c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtComment), std::regex_replace(firstMusicFile->getComment(), std::regex("\\&"), "&amp;").c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), firstMusicFile->getDurationAsString().c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtChromaprintFingerprint), firstMusicFile->getChromaprintFingerprint().c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), firstMusicFile->getFileSizeAsString().c_str());
-        if(!firstMusicFile->getAlbumArt().isEmpty())
-        {
-            adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_imgAlbumArt);
-            GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), firstMusicFile->getAlbumArt());
-        }
-        else
-        {
-            adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_statusNoAlbumArt);
-            gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
-        }
+        gtk_editable_set_editable(GTK_EDITABLE(m_txtFilename), false);
     }
-    //Multiple Files Selected
+    std::unordered_map<std::string, std::string> tagMap{ m_controller.getSelectedTagMap() };
+    gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), std::regex_replace(tagMap.at("filename"), std::regex("\\&"), "&amp;").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), std::regex_replace(tagMap.at("title"), std::regex("\\&"), "&amp;").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), std::regex_replace(tagMap.at("artist"), std::regex("\\&"), "&amp;").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), std::regex_replace(tagMap.at("album"), std::regex("\\&"), "&amp;").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtYear), tagMap.at("year").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), tagMap.at("track").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), std::regex_replace(tagMap.at("albumArtist"), std::regex("\\&"), "&amp;").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), std::regex_replace(tagMap.at("genre"), std::regex("\\&"), "&amp;").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtComment), std::regex_replace(tagMap.at("comment"), std::regex("\\&"), "&amp;").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), tagMap.at("duration").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtChromaprintFingerprint), tagMap.at("fingerprint").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), tagMap.at("fileSize").c_str());
+    if(tagMap.at("albumArt") == "hasArt")
+    {
+        adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_imgAlbumArt);
+        GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), m_controller.getSelectedMusicFiles()[0]->getAlbumArt());
+    }
     else
     {
-        const std::shared_ptr<MusicFile>& firstMusicFile{ m_controller.getSelectedMusicFiles()[0] };
-        bool haveSameTitle{ true };
-        bool haveSameArtist{ true };
-        bool haveSameAlbum{ true };
-        bool haveSameYear{ true };
-        bool haveSameTrack{ true };
-        bool haveSameAlbumArtist{ true };
-        bool haveSameGenre{ true };
-        bool haveSameComment{ true };
-        bool haveSameAlbumArt{ true };
-        int totalDuration{ 0 };
-        std::uintmax_t totalFileSize{ 0 };
-        for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getSelectedMusicFiles())
-        {
-            if (firstMusicFile->getTitle() != musicFile->getTitle())
-            {
-                haveSameTitle = false;
-            }
-            if (firstMusicFile->getArtist() != musicFile->getArtist())
-            {
-                haveSameArtist = false;
-            }
-            if (firstMusicFile->getAlbum() != musicFile->getAlbum())
-            {
-                haveSameAlbum = false;
-            }
-            if (firstMusicFile->getYear() != musicFile->getYear())
-            {
-                haveSameYear = false;
-            }
-            if (firstMusicFile->getTrack() != musicFile->getTrack())
-            {
-                haveSameTrack = false;
-            }
-            if (firstMusicFile->getAlbumArtist() != musicFile->getAlbumArtist())
-            {
-                haveSameAlbumArtist = false;
-            }
-            if (firstMusicFile->getGenre() != musicFile->getGenre())
-            {
-                haveSameGenre = false;
-            }
-            if (firstMusicFile->getComment() != musicFile->getComment())
-            {
-                haveSameComment = false;
-            }
-            if  (firstMusicFile->getAlbumArt() != musicFile->getAlbumArt())
-            {
-                haveSameAlbumArt = false;
-            }
-            totalDuration += musicFile->getDuration();
-            totalFileSize += musicFile->getFileSize();
-        }
-        gtk_editable_set_editable(GTK_EDITABLE(m_txtFilename), false);
-        gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), haveSameTitle ? std::regex_replace(firstMusicFile->getTitle(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), haveSameArtist ? std::regex_replace(firstMusicFile->getArtist(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), haveSameAlbum ? std::regex_replace(firstMusicFile->getAlbum(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtYear), haveSameYear ? std::to_string(firstMusicFile->getYear()).c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), haveSameTrack ? std::to_string(firstMusicFile->getTrack()).c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), haveSameAlbumArtist ? std::regex_replace(firstMusicFile->getAlbumArtist(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), haveSameGenre ? std::regex_replace(firstMusicFile->getGenre(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtComment), haveSameComment ? std::regex_replace(firstMusicFile->getComment(), std::regex("\\&"), "&amp;").c_str() : "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), MediaHelpers::durationToString(totalDuration).c_str());
-        gtk_editable_set_text(GTK_EDITABLE(m_txtChromaprintFingerprint), "<keep>");
-        gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), MediaHelpers::fileSizeToString(totalFileSize).c_str());
-        if(haveSameAlbumArt && !firstMusicFile->getAlbumArt().isEmpty())
-        {
-            adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_imgAlbumArt);
-            GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), firstMusicFile->getAlbumArt());
-        }
-        else
-        {
-            adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_statusNoAlbumArt);
-            gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
-        }
+        adw_view_stack_set_visible_child(ADW_VIEW_STACK(m_stackAlbumArt), m_statusNoAlbumArt);
+        gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
     }
 }
 

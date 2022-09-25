@@ -130,6 +130,12 @@ namespace NickvisionTagger::Controllers
     	 */
     	const std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>>& getSelectedMusicFiles() const;
     	/**
+    	 * Gets a tag properties map for the selected music files
+    	 *
+    	 * @returns The tag properties map for the selected music files
+    	 */
+    	std::unordered_map<std::string, std::string> getSelectedTagMap() const;
+    	/**
     	 * updates the list of selected music files from the list of indexes
     	 *
     	 * @param indexes The list of selected indexes
