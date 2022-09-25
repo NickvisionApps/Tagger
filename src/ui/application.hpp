@@ -21,7 +21,7 @@ namespace NickvisionTagger::UI
     	 * @param id The application id
     	 * @param flags GApplicationFlags
     	 */
-    	Application(const std::string& id, GApplicationFlags flags = G_APPLICATION_FLAGS_NONE);
+    	Application(const std::string& id, GApplicationFlags flags = G_APPLICATION_DEFAULT_FLAGS);
     	/**
     	 * Runs the application
     	 *
