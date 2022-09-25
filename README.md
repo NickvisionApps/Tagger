@@ -15,7 +15,7 @@
   </tr>
   <tr>
     <td>
-      <a href='https://flathub.org/apps/details/org.nickvision.tagger'><img width='130' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
+      <a href='https://beta.flathub.org/apps/details/org.nickvision.tagger'><img width='130' alt='Download on Flathub' src='https://flathub.org/assets/badges/flathub-badge-en.png'/></a>
     </td>
   </tr>
 </table>
