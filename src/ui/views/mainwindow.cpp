@@ -281,6 +281,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_actKeyboardShortcuts = g_simple_action_new("keyboardShortcuts", nullptr);
     g_signal_connect(m_actKeyboardShortcuts, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onKeyboardShortcuts(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actKeyboardShortcuts));
+    gtk_application_set_accels_for_action(application, "win.keyboardShortcuts", new const char*[2]{ "<Ctrl>question", nullptr });
     //About Action
     m_actAbout = g_simple_action_new("about", nullptr);
     g_signal_connect(m_actAbout, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onAbout(); }), this);
@@ -480,7 +481,7 @@ void MainWindow::onAbout()
 {
     adw_show_about_window(GTK_WINDOW(m_gobj),
                           "application-name", m_controller.getAppInfo().getShortName().c_str(),
-                          "application-icon", m_controller.getAppInfo().getId().c_str(),
+                          "application-icon", (m_controller.getAppInfo().getId() + "-devel").c_str(),
                           "version", m_controller.getAppInfo().getVersion().c_str(),
                           "comments", m_controller.getAppInfo().getDescription().c_str(),
                           "developer-name", "Nickvision",

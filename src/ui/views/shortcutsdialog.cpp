@@ -91,6 +91,12 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                             </child>
                             <child>
                                 <object class="GtkShortcutsShortcut">
+                                    <property name="title">Keyboard Shortcuts</property>
+                                    <property name="accelerator">&lt;Control&gt;question</property>
+                                </object>
+                            </child>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
                                     <property name="title">About</property>
                                     <property name="accelerator">F1</property>
                                 </object>
