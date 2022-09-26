@@ -9,23 +9,11 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     gtk_window_set_transient_for(GTK_WINDOW(m_gobj), parent);
     gtk_window_set_default_size(GTK_WINDOW(m_gobj), 800, 600);
     gtk_window_set_modal(GTK_WINDOW(m_gobj), true);
-    gtk_window_set_deletable(GTK_WINDOW(m_gobj), false);
     gtk_window_set_destroy_with_parent(GTK_WINDOW(m_gobj), false);
     gtk_window_set_hide_on_close(GTK_WINDOW(m_gobj), true);
     //Header Bar
     m_headerBar = adw_header_bar_new();
     adw_header_bar_set_title_widget(ADW_HEADER_BAR(m_headerBar), adw_window_title_new("Preferences", nullptr));
-    //Cancel Button
-    m_btnCancel = gtk_button_new();
-    gtk_button_set_label(GTK_BUTTON(m_btnCancel), "Cancel");
-    g_signal_connect(m_btnCancel, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onCancel(); }), this);
-    adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnCancel);
-    //Save Button
-    m_btnSave = gtk_button_new();
-    gtk_button_set_label(GTK_BUTTON(m_btnSave), "Save");
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnSave), "suggested-action");
-    g_signal_connect(m_btnSave, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onSave(); }), this);
-    adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnSave);
     //User Interface Group
     m_grpUserInterface = adw_preferences_group_new();
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpUserInterface), "User Interface");
@@ -113,15 +101,6 @@ void PreferencesDialog::run()
     {
         g_main_context_iteration(g_main_context_default(), false);
     }
-}
-
-void PreferencesDialog::onCancel()
-{
-    gtk_widget_hide(m_gobj);
-}
-
-void PreferencesDialog::onSave()
-{
     m_controller.setTheme(adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowTheme)));
     m_controller.setIsFirstTimeOpen(gtk_switch_get_active(GTK_SWITCH(m_switchIsFirstTimeOpen)));
     m_controller.setIncludeSubfolders(gtk_switch_get_active(GTK_SWITCH(m_switchIncludeSubfolders)));
@@ -140,5 +119,4 @@ void PreferencesDialog::onSave()
     {
         adw_style_manager_set_color_scheme(adw_style_manager_get_default(), ADW_COLOR_SCHEME_FORCE_DARK);
     }
-    gtk_widget_hide(m_gobj);
 }
