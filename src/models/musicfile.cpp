@@ -875,10 +875,8 @@ bool MusicFile::tagToFilename(const std::string& formatString)
 bool MusicFile::downloadMusicBrainzMetadata(bool preserveModificationTimeStamp)
 {
     AcoustIdQuery query{ getAcoustIdLookupUrl() };
-    query.lookup();
-    if(query.getStatus() == "ok")
+    if(query.lookup() == AcoustIdQueryStatus::OK)
     {
-        saveTag(preserveModificationTimeStamp);
         return true;
     }
     return false;

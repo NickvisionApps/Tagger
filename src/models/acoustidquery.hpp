@@ -4,16 +4,22 @@
 
 namespace NickvisionTagger::Models
 {
+    enum class AcoustIdQueryStatus
+    {
+    	Error = 0,
+    	OK
+    };
+
     class AcoustIdQuery
     {
     public:
     	AcoustIdQuery(const std::string& lookupUrl);
-	const std::string& getStatus() const;
-	void lookup();
+	AcoustIdQueryStatus getStatus() const;
+	AcoustIdQueryStatus lookup();
 
     private:
     	static int m_requestCount;
     	std::string m_lookupUrl;
-	std::string m_status;
+	AcoustIdQueryStatus m_status;
     };
 }

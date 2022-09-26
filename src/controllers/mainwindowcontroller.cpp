@@ -1,7 +1,5 @@
 #include "mainwindowcontroller.hpp"
-#include <chrono>
 #include <filesystem>
-#include <thread>
 #include "../helpers/mediahelpers.hpp"
 
 using namespace NickvisionTagger::Controllers;
