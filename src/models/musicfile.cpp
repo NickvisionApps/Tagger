@@ -4,6 +4,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <taglib/textidentificationframe.h>
+#include "acoustidquery.hpp"
 #include "../helpers/mediahelpers.hpp"
 
 using namespace NickvisionTagger::Helpers;
@@ -683,7 +684,8 @@ const std::string& MusicFile::getChromaprintFingerprint()
                 }
             }
             int resultCode{ pclose(pipe) };
-            m_fingerprint = resultCode == EXIT_SUCCESS ? output.substr(output.find("FINGERPRINT=") + 12) : "CMD ERROR";
+            m_fingerprint = resultCode == EXIT_SUCCESS ? output.substr(output.find("FINGERPRINT=") + 12) : "CMD ERROR ";
+            m_fingerprint.pop_back();
         }
         else
         {
@@ -697,7 +699,7 @@ std::string MusicFile::getAcoustIdLookupUrl()
 {
     std::stringstream builder;
     builder << "https://api.acoustid.org/v2/lookup?";
-    builder << "client=" << "h8zUwMlUyAw" << "&";
+    builder << "client=" << "Lz9ENGSGsX" << "&";
     builder << "duration=" << getDuration() << "&";
     builder << "meta=" << "recordingids" << "&";
     builder << "fingerprint=" << getChromaprintFingerprint();
@@ -868,6 +870,18 @@ bool MusicFile::tagToFilename(const std::string& formatString)
         return false;
     }
     return true;
+}
+
+bool MusicFile::downloadMusicBrainzMetadata(bool preserveModificationTimeStamp)
+{
+    AcoustIdQuery query{ getAcoustIdLookupUrl() };
+    query.lookup();
+    if(query.getStatus() == "ok")
+    {
+        saveTag(preserveModificationTimeStamp);
+        return true;
+    }
+    return false;
 }
 
 bool MusicFile::operator<(const MusicFile& toCompare) const

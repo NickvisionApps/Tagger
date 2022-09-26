@@ -219,6 +219,13 @@ namespace NickvisionTagger::Models
 	 */
 	bool tagToFilename(const std::string& formatString);
 	/**
+	 * Downloads and applys metadata from MusicBrainz to the tag
+	 *
+	 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
+	 * @returns True if the operation was successful, else false
+	 */
+	bool downloadMusicBrainzMetadata(bool preserveModificationTimeStamp);
+	/**
 	 * Compares this.filename to toCompare.filename via less-than
 	 *
 	 * @param toCompare The MusicFile to compare

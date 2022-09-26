@@ -118,6 +118,10 @@ namespace NickvisionTagger::Controllers
     	 */
     	void tagToFilename(const std::string& formatString);
     	/**
+    	 * Downloads and applys tag metadata from MusicBrainz for the selected files
+    	 */
+    	void downloadMusicBrainzMetadata();
+    	/**
     	 * Registers a callback for when the music folder is changed
     	 *
     	 * @param callback A void(bool) function
