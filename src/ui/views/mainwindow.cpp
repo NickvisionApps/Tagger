@@ -326,16 +326,13 @@ void MainWindow::onMusicFolderUpdated(bool sendToast)
     ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Loading music files...", [&]() { m_controller.reloadMusicFolder(); } };
     progressDialog.run();
     std::size_t musicFilesCount{ m_controller.getMusicFileCount() };
-    int id{ 1 };
     adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), musicFilesCount > 0 ? "pageTagger" : "pageNoFiles");
     for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
     {
         GtkWidget* row{ adw_action_row_new() };
         adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
-        adw_action_row_set_subtitle(ADW_ACTION_ROW(row), std::to_string(id).c_str());
         gtk_list_box_append(GTK_LIST_BOX(m_listMusicFiles), row);
         m_listMusicFilesRows.push_back(row);
-        id++;
     }
     if(musicFilesCount > 0 && sendToast)
     {
@@ -534,10 +531,11 @@ void MainWindow::onListMusicFilesSelectionChanged()
     }
     m_controller.updateSelectedMusicFiles(selectedIndexes);
     //Update UI
-    gtk_editable_set_editable(GTK_EDITABLE(m_txtFilename), true);
     gtk_widget_set_visible(m_btnApply, true);
     gtk_widget_set_visible(m_btnMenuTagActions, true);
+    gtk_editable_set_text(GTK_EDITABLE(m_txtSearchMusicFiles), "");
     adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), true);
+    gtk_editable_set_editable(GTK_EDITABLE(m_txtFilename), true);
     if(selectedIndexes.size() == 0)
     {
         gtk_widget_set_visible(m_btnApply, false);
