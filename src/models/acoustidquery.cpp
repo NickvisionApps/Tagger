@@ -10,10 +10,11 @@
 using namespace NickvisionTagger::Models;
 
 int AcoustIdQuery::m_requestCount = 0;
+std::chrono::time_point<std::chrono::system_clock> AcoustIdQuery::m_lastRequestTime = std::chrono::system_clock::now();
 
 AcoustIdQuery::AcoustIdQuery(int duration, const std::string& fingerprint) : m_status{ AcoustIdQueryStatus::Error }
 {
-	std::stringstream builder;
+    std::stringstream builder;
     builder << "https://api.acoustid.org/v2/lookup?";
     builder << "client=" << "Lz9ENGSGsX" << "&";
     builder << "duration=" << duration << "&";
@@ -29,10 +30,13 @@ AcoustIdQueryStatus AcoustIdQuery::getStatus() const
 
 AcoustIdQueryStatus AcoustIdQuery::lookup()
 {
-	//AcoustId has rate limit of 3 requests/second
+    //AcoustId has rate limit of 3 requests/second
     if(m_requestCount == 3)
     {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        if(std::chrono::system_clock::now() - m_lastRequestTime <= std::chrono::seconds(1))
+        {
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
         m_requestCount = 0;
     }
     //Get Json Response from Lookup
@@ -53,6 +57,7 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
         return m_status;
     }
     m_requestCount++;
+    m_lastRequestTime = std::chrono::system_clock::now();
     //Parse Response
     Json::Value json;
     response >> json;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 #include <string>
 
 namespace NickvisionTagger::Models
@@ -19,6 +20,7 @@ namespace NickvisionTagger::Models
 
     private:
     	static int m_requestCount;
+		static std::chrono::time_point<std::chrono::system_clock> m_lastRequestTime;
     	std::string m_lookupUrl;
 		AcoustIdQueryStatus m_status;
     };
