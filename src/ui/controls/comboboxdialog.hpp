@@ -22,11 +22,11 @@ namespace NickvisionTagger::UI::Controls
     	 * @param choices The list of choices
     	 */
     	ComboBoxDialog(GtkWindow* parent, const std::string& title, const std::string& description, const std::string& rowTitle, const std::vector<std::string>& choices);
-	/**
+		/**
     	 * Destroys the ComboBoxDialog
     	 */
-	~ComboBoxDialog();
-	/**
+		~ComboBoxDialog();
+		/**
     	 * Gets the GtkWidget* representing the ComboBoxDialog
     	 *
     	 * @returns The GtkWidget* representing the ComboBoxDialog
@@ -44,7 +44,7 @@ namespace NickvisionTagger::UI::Controls
     	std::string m_response;
     	GtkWidget* m_gobj{ nullptr };
     	GtkWidget* m_preferencesGroup{ nullptr };
-	GtkWidget* m_rowChoices{ nullptr };
-	void setResponse(const std::string& response);
+		GtkWidget* m_rowChoices{ nullptr };
+		void setResponse(const std::string& response);
     };
 }

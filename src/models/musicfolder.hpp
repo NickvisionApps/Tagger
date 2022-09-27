@@ -42,11 +42,11 @@ namespace NickvisionTagger::Models
     	 * @param includeSubfolders True to include subfolders, else false
     	 */
     	void setIncludeSubfolders(bool includeSubfolders);
-	/**
-	 * Gets a list of folder paths in the music folder
-	 *
-	 * @returns If includeSubfolders is true, a list containing the parent path and all subfolder paths of the music folder. If false, a list containing just the parent path of the music folder
-	 */
+		/**
+		 * Gets a list of folder paths in the music folder
+		 *
+		 * @returns If includeSubfolders is true, a list containing the parent path and all subfolder paths of the music folder. If false, a list containing just the parent path of the music folder
+		 */
     	std::vector<std::filesystem::path> getFolderPaths() const;
     	/**
     	 * Gets a list of MusicFile objects representing music files found in the music folder
@@ -60,8 +60,8 @@ namespace NickvisionTagger::Models
     	void reloadMusicFiles();
 
     private:
-	std::filesystem::path m_parentPath;
-	bool m_includeSubfolders;
-	std::vector<std::shared_ptr<MusicFile>> m_files;
+		std::filesystem::path m_parentPath;
+		bool m_includeSubfolders;
+		std::vector<std::shared_ptr<MusicFile>> m_files;
     };
 }

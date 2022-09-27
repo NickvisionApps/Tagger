@@ -695,17 +695,6 @@ const std::string& MusicFile::getChromaprintFingerprint()
     return m_fingerprint;
 }
 
-std::string MusicFile::getAcoustIdLookupUrl()
-{
-    std::stringstream builder;
-    builder << "https://api.acoustid.org/v2/lookup?";
-    builder << "client=" << "Lz9ENGSGsX" << "&";
-    builder << "duration=" << getDuration() << "&";
-    builder << "meta=" << "recordingids" << "&";
-    builder << "fingerprint=" << getChromaprintFingerprint();
-    return builder.str();
-}
-
 void MusicFile::saveTag(bool preserveModificationTimeStamp)
 {
     if (m_dotExtension == ".mp3")
@@ -874,7 +863,7 @@ bool MusicFile::tagToFilename(const std::string& formatString)
 
 bool MusicFile::downloadMusicBrainzMetadata(bool preserveModificationTimeStamp)
 {
-    AcoustIdQuery query{ getAcoustIdLookupUrl() };
+    AcoustIdQuery query{ getDuration(), getChromaprintFingerprint() };
     if(query.lookup() == AcoustIdQueryStatus::OK)
     {
         return true;

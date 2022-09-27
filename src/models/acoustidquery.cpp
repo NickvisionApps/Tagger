@@ -11,9 +11,15 @@ using namespace NickvisionTagger::Models;
 
 int AcoustIdQuery::m_requestCount = 0;
 
-AcoustIdQuery::AcoustIdQuery(const std::string& lookupUrl) : m_lookupUrl{ lookupUrl }, m_status{ AcoustIdQueryStatus::Error }
+AcoustIdQuery::AcoustIdQuery(int duration, const std::string& fingerprint) : m_status{ AcoustIdQueryStatus::Error }
 {
-
+	std::stringstream builder;
+    builder << "https://api.acoustid.org/v2/lookup?";
+    builder << "client=" << "Lz9ENGSGsX" << "&";
+    builder << "duration=" << duration << "&";
+    builder << "meta=" << "recordingids" << "&";
+    builder << "fingerprint=" << fingerprint;
+    m_lookupUrl = builder.str();
 }
 
 AcoustIdQueryStatus AcoustIdQuery::getStatus() const

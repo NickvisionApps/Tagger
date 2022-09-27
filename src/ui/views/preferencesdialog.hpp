@@ -35,21 +35,21 @@ namespace NickvisionTagger::UI::Views
 
     private:
     	NickvisionTagger::Controllers::PreferencesDialogController m_controller;
-	GtkWidget* m_gobj{ nullptr };
-	GtkWidget* m_mainBox{ nullptr };
-	GtkWidget* m_headerBar{ nullptr };
-	GtkWidget* m_page{ nullptr };
-	GtkWidget* m_grpUserInterface{ nullptr };
-	GtkWidget* m_rowTheme{ nullptr };
-	GtkWidget* m_grpApplication{ nullptr };
-	GtkWidget* m_rowIsFirstTimeOpen{ nullptr };
-	GtkWidget* m_switchIsFirstTimeOpen{ nullptr };
-	GtkWidget* m_grpTagger{ nullptr };
-	GtkWidget* m_rowIncludeSubfolders{ nullptr };
-	GtkWidget* m_switchIncludeSubfolders{ nullptr };
-	GtkWidget* m_rowRememberLastOpenedFolder{ nullptr };
-	GtkWidget* m_switchRememberLastOpenedFolder{ nullptr };
-	GtkWidget* m_rowPreserveModificationTimeStamp{ nullptr };
-	GtkWidget* m_switchPreserveModificationTimeStamp{ nullptr };
+		GtkWidget* m_gobj{ nullptr };
+		GtkWidget* m_mainBox{ nullptr };
+		GtkWidget* m_headerBar{ nullptr };
+		GtkWidget* m_page{ nullptr };
+		GtkWidget* m_grpUserInterface{ nullptr };
+		GtkWidget* m_rowTheme{ nullptr };
+		GtkWidget* m_grpApplication{ nullptr };
+		GtkWidget* m_rowIsFirstTimeOpen{ nullptr };
+		GtkWidget* m_switchIsFirstTimeOpen{ nullptr };
+		GtkWidget* m_grpTagger{ nullptr };
+		GtkWidget* m_rowIncludeSubfolders{ nullptr };
+		GtkWidget* m_switchIncludeSubfolders{ nullptr };
+		GtkWidget* m_rowRememberLastOpenedFolder{ nullptr };
+		GtkWidget* m_switchRememberLastOpenedFolder{ nullptr };
+		GtkWidget* m_rowPreserveModificationTimeStamp{ nullptr };
+		GtkWidget* m_switchPreserveModificationTimeStamp{ nullptr };
     };
 }

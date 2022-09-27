@@ -11,29 +11,29 @@ namespace NickvisionTagger::UI::Views
     class ShortcutsDialog
     {
     public:
-	/**
-	 * Constructs a ShortcutsDialog
-	 *
-	 * @param parent The parent window for the dialog
-	 */
+		/**
+		 * Constructs a ShortcutsDialog
+		 *
+		 * @param parent The parent window for the dialog
+		 */
     	ShortcutsDialog(GtkWindow* parent);
     	/**
     	 * Destroys the ShortcutsDialog
     	 */
-	~ShortcutsDialog();
-	/**
+		~ShortcutsDialog();
+		/**
     	 * Gets the GtkWidget* representing the ShortcutsDialog
     	 *
     	 * @returns The GtkWidget* representing the ShortcutsDialog
     	 */
-	GtkWidget* gobj();
-	/**
-	 * Runs the ShortcutsDialog
-	 */
-	void run();
+		GtkWidget* gobj();
+		/**
+		 * Runs the ShortcutsDialog
+		 */
+		void run();
 
     private:
-	std::string m_xml;
-	GtkWidget* m_gobj;
+		std::string m_xml;
+		GtkWidget* m_gobj;
     };
 }

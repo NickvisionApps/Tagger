@@ -13,13 +13,13 @@ namespace NickvisionTagger::Models
     class AcoustIdQuery
     {
     public:
-    	AcoustIdQuery(const std::string& lookupUrl);
-	AcoustIdQueryStatus getStatus() const;
-	AcoustIdQueryStatus lookup();
+    	AcoustIdQuery(int duration, const std::string& fingerprint);
+		AcoustIdQueryStatus getStatus() const;
+		AcoustIdQueryStatus lookup();
 
     private:
     	static int m_requestCount;
     	std::string m_lookupUrl;
-	AcoustIdQueryStatus m_status;
+		AcoustIdQueryStatus m_status;
     };
 }

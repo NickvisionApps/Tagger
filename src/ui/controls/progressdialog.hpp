@@ -37,9 +37,9 @@ namespace NickvisionTagger::UI::Controls
 
     private:
     	std::function<void()> m_work;
-	GtkWidget* m_gobj{ nullptr };
-	GtkWidget* m_mainBox{ nullptr };
-	GtkWidget* m_lblDescription{ nullptr };
-	GtkWidget* m_progBar{ nullptr };
+		GtkWidget* m_gobj{ nullptr };
+		GtkWidget* m_mainBox{ nullptr };
+		GtkWidget* m_lblDescription{ nullptr };
+		GtkWidget* m_progBar{ nullptr };
     };
 }

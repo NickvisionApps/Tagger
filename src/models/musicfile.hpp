@@ -35,11 +35,11 @@ namespace NickvisionTagger::Models
     	 * @returns The path of the music file
     	 */
     	const std::filesystem::path& getPath() const;
-	/**
-	 * Gets the filename of the music file (includes the dot extension)
-	 *
-	 * @returns The filename of the music file
-	 */
+		/**
+		 * Gets the filename of the music file (includes the dot extension)
+		 *
+		 * @returns The filename of the music file
+		 */
     	std::string getFilename() const;
     	/**
     	 * Sets the filanem of the music file (appends the dot extension of the previous filename if one is not included)
@@ -59,11 +59,11 @@ namespace NickvisionTagger::Models
     	 * @param title The new title of the music file
     	 */
     	void setTitle(const std::string& title);
-	/**
-	 * Gets the artist of the music file
-	 *
-	 * @returns The artist of the music file
-	 */
+		/**
+		 * Gets the artist of the music file
+		 *
+		 * @returns The artist of the music file
+		 */
     	std::string getArtist() const;
     	/**
     	 * Sets the artist of the music file
@@ -148,115 +148,109 @@ namespace NickvisionTagger::Models
     	 *
     	 * @returns The album art of the music file
     	 */
-	TagLib::ByteVector getAlbumArt() const;
-	/**
-	 * Sets the album art of the music file
-	 *
-	 * @param albumArt The new album art of the music file
-	 */
-	void setAlbumArt(const TagLib::ByteVector& albumArt);
-	/**
-	 * Gets the duration of the music file (in seconds)
-	 *
-	 * @returns The duration of the music file
-	 */
-	int getDuration() const;
-	/**
-	 * Gets the duration of the music file as a human-readable string (hh::mm::ss)
-	 *
-	 * @returns The duration of the music file as a human-readable string
-	 */
-	std::string getDurationAsString() const;
-	/**
-	 * Gets the file size of the music file (in bytes)
-	 *
-	 * @returns The file size of the music file
-	 */
-	std::uintmax_t getFileSize() const;
-	/**
-	 * Gets the file size of the music file as a human-readable string (0 MB)
-	 *
-	 * @returns The file size of the music file as a human-readable string
-	 */
-	std::string getFileSizeAsString() const;
-	/**
-	 * Gets the chromaprint fingerprint for the music file
-	 *
-	 * @returns The chromaprint fingerprint for the music file
-	 */
-	const std::string& getChromaprintFingerprint();
-	/**
-	 * Gets the AcoustId lookup url for the music file
-	 *
-	 * @returns The AcoustId lookup url for the music file
-	 */
-	std::string getAcoustIdLookupUrl();
-	/**
-	 * Saves the tag of the music file
-	 *
-	 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
-	 */
-	void saveTag(bool preserveModificationTimeStamp);
-	/**
-	 * Removes the tag of the music file
-	 *
-	 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
-	 */
-	void removeTag(bool preserveModificationTimeStamp);
-	/**
-	 * Uses the music file's filename to fill in tag information based on the format string
-	 *
-	 * @param formatString The format string
-	 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
-	 * @returns True if the operation was successful, else false
-	 */
-	bool filenameToTag(const std::string& formatString, bool preserveModificationTimeStamp);
-	/**
-	 * Uses the music file's tag to set the file's filename in the format of the format string
-	 *
-	 * @param formatString The format string
-	 * @returns True if the operation was successful, else false
-	 */
-	bool tagToFilename(const std::string& formatString);
-	/**
-	 * Downloads and applys metadata from MusicBrainz to the tag
-	 *
-	 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
-	 * @returns True if the operation was successful, else false
-	 */
-	bool downloadMusicBrainzMetadata(bool preserveModificationTimeStamp);
-	/**
-	 * Compares this.filename to toCompare.filename via less-than
-	 *
-	 * @param toCompare The MusicFile to compare
-	 * @returns True if this.filename < toCompare.filename, else false
-	 */
-	bool operator<(const MusicFile& toCompare) const;
-	/**
-	 * Compares this.filename to toCompare.filename via greater-than
-	 *
-	 * @param toCompare The MusicFile to compare
-	 * @returns True if this.filename > toCompare.filename, else false
-	 */
-	bool operator>(const MusicFile& toCompare) const;
-	/**
-	 * Compares this.path to toCompare.path via equals
-	 *
-	 * @param toCompare The MusicFile to compare
-	 * @returns True if this.path == toCompare.path, else false
-	 */
-	bool operator==(const MusicFile& toCompare) const;
-	/**
-	 * Compares this.path to toCompare.path via not equals
-	 *
-	 * @param toCompare The MusicFile to compare
-	 * @returns True if this.path != toCompare.path, else false
-	 */
-	bool operator!=(const MusicFile& toCompare) const;
+		TagLib::ByteVector getAlbumArt() const;
+		/**
+		 * Sets the album art of the music file
+		 *
+		 * @param albumArt The new album art of the music file
+		 */
+		void setAlbumArt(const TagLib::ByteVector& albumArt);
+		/**
+		 * Gets the duration of the music file (in seconds)
+		 *
+		 * @returns The duration of the music file
+		 */
+		int getDuration() const;
+		/**
+		 * Gets the duration of the music file as a human-readable string (hh::mm::ss)
+		 *
+		 * @returns The duration of the music file as a human-readable string
+		 */
+		std::string getDurationAsString() const;
+		/**
+		 * Gets the file size of the music file (in bytes)
+		 *
+		 * @returns The file size of the music file
+		 */
+		std::uintmax_t getFileSize() const;
+		/**
+		 * Gets the file size of the music file as a human-readable string (0 MB)
+		 *
+		 * @returns The file size of the music file as a human-readable string
+		 */
+		std::string getFileSizeAsString() const;
+		/**
+		 * Gets the chromaprint fingerprint for the music file
+		 *
+		 * @returns The chromaprint fingerprint for the music file
+		 */
+		const std::string& getChromaprintFingerprint();
+		/**
+		 * Saves the tag of the music file
+		 *
+		 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
+		 */
+		void saveTag(bool preserveModificationTimeStamp);
+		/**
+		 * Removes the tag of the music file
+		 *
+		 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
+		 */
+		void removeTag(bool preserveModificationTimeStamp);
+		/**
+		 * Uses the music file's filename to fill in tag information based on the format string
+		 *
+		 * @param formatString The format string
+		 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
+		 * @returns True if the operation was successful, else false
+		 */
+		bool filenameToTag(const std::string& formatString, bool preserveModificationTimeStamp);
+		/**
+		 * Uses the music file's tag to set the file's filename in the format of the format string
+		 *
+		 * @param formatString The format string
+		 * @returns True if the operation was successful, else false
+		 */
+		bool tagToFilename(const std::string& formatString);
+		/**
+		 * Downloads and applys metadata from MusicBrainz to the tag
+		 *
+		 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
+		 * @returns True if the operation was successful, else false
+		 */
+		bool downloadMusicBrainzMetadata(bool preserveModificationTimeStamp);
+		/**
+		 * Compares this.filename to toCompare.filename via less-than
+		 *
+		 * @param toCompare The MusicFile to compare
+		 * @returns True if this.filename < toCompare.filename, else false
+		 */
+		bool operator<(const MusicFile& toCompare) const;
+		/**
+		 * Compares this.filename to toCompare.filename via greater-than
+		 *
+		 * @param toCompare The MusicFile to compare
+		 * @returns True if this.filename > toCompare.filename, else false
+		 */
+		bool operator>(const MusicFile& toCompare) const;
+		/**
+		 * Compares this.path to toCompare.path via equals
+		 *
+		 * @param toCompare The MusicFile to compare
+		 * @returns True if this.path == toCompare.path, else false
+		 */
+		bool operator==(const MusicFile& toCompare) const;
+		/**
+		 * Compares this.path to toCompare.path via not equals
+		 *
+		 * @param toCompare The MusicFile to compare
+		 * @returns True if this.path != toCompare.path, else false
+		 */
+		bool operator!=(const MusicFile& toCompare) const;
 
     private:
-	std::filesystem::path m_path;
-	std::string m_dotExtension;
+		std::filesystem::path m_path;
+		std::string m_dotExtension;
         std::filesystem::file_time_type m_modificationTimeStamp;
         std::shared_ptr<TagLib::MPEG::File> m_fileMP3;
         std::shared_ptr<TagLib::Ogg::Vorbis::File> m_fileOGG;
