@@ -56,6 +56,14 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
     //Parse Response
     Json::Value json;
     response >> json;
-    m_status = json.get("status", "error").asString() == "ok" ? AcoustIdQueryStatus::OK : AcoustIdQueryStatus::Error;
+    try
+    {
+    	m_status = json.get("status", "error").asString() == "ok" ? AcoustIdQueryStatus::OK : AcoustIdQueryStatus::Error;
+    }
+    catch(...)
+    {
+    	return m_status;
+    }
+    const Json::Value& results{ json["results"] };
     return m_status;
 }

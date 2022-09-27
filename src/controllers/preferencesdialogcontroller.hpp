@@ -16,11 +16,11 @@ namespace NickvisionTagger::Controllers
          * @param configuration The configuration fot the application (Stored as reference)
          */
     	PreferencesDialogController(NickvisionTagger::Models::Configuration& configuration);
-	/**
-	 * Gets the theme from the configuration as an int
-	 *
-	 * @returns The theme from the configuration as an int
-	 */
+		/**
+		 * Gets the theme from the configuration as an int
+		 *
+		 * @returns The theme from the configuration as an int
+		 */
     	int getThemeAsInt() const;
     	/**
     	 * Sets the theme in the configuration
@@ -82,6 +82,6 @@ namespace NickvisionTagger::Controllers
     	void saveConfiguration() const;
 
     private:
-	NickvisionTagger::Models::Configuration& m_configuration;
+		NickvisionTagger::Models::Configuration& m_configuration;
     };
 }
