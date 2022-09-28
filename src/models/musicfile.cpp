@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <taglib/textidentificationframe.h>
 #include "acoustidquery.hpp"
+#include "musicbrainzrecordingquery.hpp"
 #include "../helpers/mediahelpers.hpp"
 
 using namespace NickvisionTagger::Helpers;
@@ -863,11 +864,14 @@ bool MusicFile::tagToFilename(const std::string& formatString)
 
 bool MusicFile::downloadMusicBrainzMetadata(bool preserveModificationTimeStamp)
 {
-    AcoustIdQuery query{ getDuration(), getChromaprintFingerprint() };
-    if(query.lookup() == AcoustIdQueryStatus::OK)
+    AcoustIdQuery acoustIdQuery{ getDuration(), getChromaprintFingerprint() };
+    if(acoustIdQuery.lookup() == AcoustIdQueryStatus::OK)
     {
-        std::string recordingId{ query.getRecordingId() };
-        return true;
+        MusicBrainzRecordingQuery musicBrainzQuery{ acoustIdQuery.getRecordingId() };
+        if(musicBrainzQuery.lookup() == MusicBrainzRecordingQueryStatus::OK)
+        {
+            return true;
+        }
     }
     return false;
 }
