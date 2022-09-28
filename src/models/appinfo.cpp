@@ -2,7 +2,7 @@
 
 using namespace NickvisionTagger::Models;
 
-AppInfo::AppInfo() : m_id{ "" }, m_name{ "" }, m_shortName{ "" }, m_description{ "" }, m_version{ "" }, m_changelog{ "" }, m_gitHubRepo{ "" }, m_issueTracker{ "" }
+AppInfo::AppInfo() : m_id{ "" }, m_name{ "" }, m_shortName{ "" }, m_description{ "" }, m_version{ "" }, m_changelog{ "" }, m_gitHubRepo{ "" }, m_issueTracker{ "" }, m_supportUrl{ "" }
 {
 
 }
@@ -85,4 +85,14 @@ const std::string& AppInfo::getIssueTracker() const
 void AppInfo::setIssueTracker(const std::string& issueTracker)
 {
 	m_issueTracker = issueTracker;
+}
+
+const std::string& AppInfo::getSupportUrl() const
+{
+	return m_supportUrl;
+}
+
+void AppInfo::setSupportUrl(const std::string& supportUrl)
+{
+	m_supportUrl = supportUrl;
 }

@@ -107,9 +107,21 @@ namespace NickvisionTagger::Models
 		/**
 		 * Sets the issue tracker link of the application
 		 *
-		 * @param issueTracker THe new issue tracker link of the application
+		 * @param issueTracker The new issue tracker link of the application
 		 */
 		void setIssueTracker(const std::string& issueTracker);
+		/**
+		 * Gets the support url of the appplication
+		 *
+		 * @returns The support url of the application
+		 */
+		const std::string& getSupportUrl() const;
+		/**
+		 * Sets the support url of the application
+		 *
+		 * @param supportUrl The new support url of the application
+		 */
+		void setSupportUrl(const std::string& supportUrl);
     	
     private:
     	std::string m_id;
@@ -120,5 +132,6 @@ namespace NickvisionTagger::Models
 		std::string m_changelog;
 		std::string m_gitHubRepo;
 		std::string m_issueTracker;
+		std::string m_supportUrl;
     };
 }

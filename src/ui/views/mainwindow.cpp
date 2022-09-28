@@ -489,11 +489,12 @@ void MainWindow::onAbout()
                           "developer-name", "Nickvision",
                           "license-type", GTK_LICENSE_GPL_3_0,
                           "copyright", "(C) Nickvision 2021-2022",
-                          "issue-url", m_controller.getAppInfo().getIssueTracker().c_str(),
                           "website", m_controller.getAppInfo().getGitHubRepo().c_str(),
-                          "developers", new const char*[2]{ "Nicholas Logozzo", nullptr },
-                          "designers", new const char*[2]{ "Nicholas Logozzo", nullptr },
-                          "artists", new const char*[3]{ "David Lapshin", "noëlle (@jannuary)", nullptr },
+                          "issue-url", m_controller.getAppInfo().getIssueTracker().c_str(),
+                          "support-url", m_controller.getAppInfo().getSupportUrl().c_str(),
+                          "developers", new const char*[3]{ "Nicholas Logozzo https://github.com/nlogozzo", "Contributors on GitHub ❤️ https://github.com/nlogozzo/NickvisionTagger/graphs/contributors", nullptr },
+                          "designers", new const char*[2]{ "Nicholas Logozzo https://github.com/nlogozzo", nullptr },
+                          "artists", new const char*[3]{ "David Lapshin https://github.com/daudix-UFO", "noëlle https://github.com/jannuary", nullptr },
                           "release-notes", m_controller.getAppInfo().getChangelog().c_str(),
                           nullptr);
 }

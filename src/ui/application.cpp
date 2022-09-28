@@ -14,9 +14,10 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setShortName("Tagger");
     m_appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
     m_appInfo.setVersion("2022.9.2-next");
-    m_appInfo.setChangelog("<ul><li>Added support for downloading tag metadata from MusicBrainz</li><li>Fixed an issue where the chromaprint fingerprint contained an extra alien unicode character</li><li>UX improvements</li></ul>");
+    m_appInfo.setChangelog("<ul><li>Added support for downloading tag metadata from MusicBrainz</li><li>Added a file system watcher to notify Tagger when a file or directory is modified on disk</li><li>Fixed an issue where the chromaprint fingerprint contained an extra alien unicode character</li><li>UX improvements</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
+    m_appInfo.setSupportUrl("https://github.com/nlogozzo/NickvisionTagger/discussions");
     //Signals
     g_signal_connect(m_adwApp, "activate", G_CALLBACK((void (*)(GtkApplication*, gpointer))[](GtkApplication* app, gpointer data) { reinterpret_cast<Application*>(data)->onActivate(app); }), this);
 }
@@ -44,3 +45,4 @@ void Application::onActivate(GtkApplication* app)
     gtk_application_add_window(app, GTK_WINDOW(m_mainWindow->gobj()));
     m_mainWindow->start();
 }
+
