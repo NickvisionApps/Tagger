@@ -1,5 +1,4 @@
 #include "acoustidquery.hpp"
-#include <chrono>
 #include <sstream>
 #include <thread>
 #include <curlpp/cURLpp.hpp>
@@ -12,7 +11,7 @@ using namespace NickvisionTagger::Models;
 int AcoustIdQuery::m_requestCount = 0;
 std::chrono::time_point<std::chrono::system_clock> AcoustIdQuery::m_lastRequestTime = std::chrono::system_clock::now();
 
-AcoustIdQuery::AcoustIdQuery(int duration, const std::string& fingerprint) : m_status{ AcoustIdQueryStatus::Error }
+AcoustIdQuery::AcoustIdQuery(int duration, const std::string& fingerprint) : m_status{ AcoustIdQueryStatus::Error }, m_recordingId{ "" }
 {
     std::stringstream builder;
     builder << "https://api.acoustid.org/v2/lookup?";
@@ -26,6 +25,11 @@ AcoustIdQuery::AcoustIdQuery(int duration, const std::string& fingerprint) : m_s
 AcoustIdQueryStatus AcoustIdQuery::getStatus() const
 {
     return m_status;
+}
+
+std::string AcoustIdQuery::getRecordingId() const
+{
+    return m_status == AcoustIdQueryStatus::OK ? m_recordingId : "";
 }
 
 AcoustIdQueryStatus AcoustIdQuery::lookup()
@@ -43,7 +47,6 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
     std::stringstream response;
     cURLpp::Cleanup cleanup;
     cURLpp::Easy handle;
-    m_status = AcoustIdQueryStatus::Error;
     handle.setOpt(cURLpp::Options::Url(m_lookupUrl));
     handle.setOpt(cURLpp::Options::FollowLocation(true));
     handle.setOpt(cURLpp::Options::HttpGet(true));
@@ -54,6 +57,7 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
     }
     catch(...)
     {
+        m_status = AcoustIdQueryStatus::CurlError;
         return m_status;
     }
     m_requestCount++;
@@ -63,12 +67,37 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
     response >> json;
     try
     {
-    	m_status = json.get("status", "error").asString() == "ok" ? AcoustIdQueryStatus::OK : AcoustIdQueryStatus::Error;
+    	m_status = json.get("status", "error").asString() == "ok" ? AcoustIdQueryStatus::OK : AcoustIdQueryStatus::AcoustIdError;
     }
     catch(...)
     {
+        m_status = AcoustIdQueryStatus::JsonError;
     	return m_status;
     }
-    const Json::Value& results{ json["results"] };
+    const Json::Value& bestResult{ json["results"][0] };
+    if(bestResult.isNull())
+    {
+        m_status = AcoustIdQueryStatus::NoResult;
+        return m_status;
+    }
+    else
+    {
+        const Json::Value& firstRecording{ bestResult["recordings"][0] };
+        if(firstRecording.isNull())
+        {
+            m_status = AcoustIdQueryStatus::NoResult;
+            return m_status;
+        }
+        else
+        {
+            m_recordingId = firstRecording.get("id", "").asString();
+            if(m_recordingId.empty())
+            {
+                m_status = AcoustIdQueryStatus::NoResult;
+            }
+        }
+    }
     return m_status;
 }
+
+

@@ -866,6 +866,7 @@ bool MusicFile::downloadMusicBrainzMetadata(bool preserveModificationTimeStamp)
     AcoustIdQuery query{ getDuration(), getChromaprintFingerprint() };
     if(query.lookup() == AcoustIdQueryStatus::OK)
     {
+        std::string recordingId{ query.getRecordingId() };
         return true;
     }
     return false;
@@ -890,3 +891,4 @@ bool MusicFile::operator!=(const MusicFile& toCompare) const
 {
     return getPath() != toCompare.getPath();
 }
+
