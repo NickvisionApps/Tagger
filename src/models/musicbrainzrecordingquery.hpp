@@ -65,6 +65,12 @@ namespace NickvisionTagger::Models
 		 */
 		const std::string& getAlbumArtist() const;
 		/**
+		 * Gets the genre from the query
+		 *
+		 * @returns The genre from the query
+		 */
+		const std::string& getGenre() const;
+		/**
 		 * Runs the query
 		 *
 		 * @returns The status of the query
@@ -81,5 +87,6 @@ namespace NickvisionTagger::Models
 		std::string m_album;
 		unsigned int m_year;
 		std::string m_albumArtist;
+		std::string m_genre;
     };
 }

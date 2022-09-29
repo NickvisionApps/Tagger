@@ -14,11 +14,11 @@ using namespace NickvisionTagger::Models;
 int MusicBrainzRecordingQuery::m_requestCount = 0;
 std::chrono::time_point<std::chrono::system_clock> MusicBrainzRecordingQuery::m_lastRequestTime = std::chrono::system_clock::now();
 
-MusicBrainzRecordingQuery::MusicBrainzRecordingQuery(const std::string& recordingId) : m_status{ MusicBrainzRecordingQueryStatus::MusicBrainzError }, m_title{ "" }, m_artist{ "" }, m_album{ "" }, m_year{ 0 }, m_albumArtist{ "" }
+MusicBrainzRecordingQuery::MusicBrainzRecordingQuery(const std::string& recordingId) : m_status{ MusicBrainzRecordingQueryStatus::MusicBrainzError }, m_title{ "" }, m_artist{ "" }, m_album{ "" }, m_year{ 0 }, m_albumArtist{ "" }, m_genre{ "" }
 {
     std::stringstream builder;
     builder << "https://musicbrainz.org/ws/2/recording/" << recordingId << "?";
-    builder << "inc=" << "artists+releases" << "&";
+    builder << "inc=" << "artists+releases+genres" << "&";
     builder << "fmt=" << "json";
     m_lookupUrl = builder.str();
 }
@@ -51,6 +51,11 @@ unsigned int MusicBrainzRecordingQuery::getYear() const
 const std::string& MusicBrainzRecordingQuery::getAlbumArtist() const
 {
     return m_albumArtist;
+}
+
+const std::string& MusicBrainzRecordingQuery::getGenre() const
+{
+    return m_genre;
 }
 
 MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::lookup()
@@ -117,6 +122,12 @@ MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::lookup()
         m_year = MediaHelpers::stoui(jsonRoot.get("first-release-date", "").asString().substr(0, 4));
     }
     catch(...) {  }
+    //Get Genre
+    const Json::Value& jsonFirstGenre{ jsonRoot["genres"][0] };
+    if(!jsonFirstGenre.isNull())
+    {
+        m_genre = jsonFirstGenre.get("name", "").asString();
+    }
     //Done
     m_status = MusicBrainzRecordingQueryStatus::OK;
     return m_status;
