@@ -1,4 +1,4 @@
-project('org.nickvision.tagger', ['cpp', 'c'], version: '2022.9.2', meson_version: '>= 0.59.0', default_options: ['warning_level=3', 'werror=false', 'cpp_std=c++20'])
+project('org.nickvision.tagger', ['cpp', 'c'], version: '2022.10.0', meson_version: '>= 0.59.0', default_options: ['warning_level=3', 'werror=false', 'cpp_std=c++20'])
 
 gnome = import('gnome')
 
