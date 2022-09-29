@@ -18,16 +18,6 @@ void PreferencesDialogController::setTheme(int theme)
     m_configuration.setTheme(static_cast<Theme>(theme));
 }
 
-bool PreferencesDialogController::getIsFirstTimeOpen() const
-{
-    return m_configuration.getIsFirstTimeOpen();
-}
-
-void PreferencesDialogController::setIsFirstTimeOpen(bool isFirstTimeOpen)
-{
-    m_configuration.setIsFirstTimeOpen(isFirstTimeOpen);
-}
-
 bool PreferencesDialogController::getIncludeSubfolders() const
 {
     return m_configuration.getIncludeSubfolders();

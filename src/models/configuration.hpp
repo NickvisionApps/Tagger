@@ -37,18 +37,6 @@ namespace NickvisionTagger::Models
     	 */
     	void setTheme(Theme theme);
     	/**
-    	 * Gets whether or not the application is being opened for the first time
-    	 * 
-    	 * @returns True if the application is being opened for the first time, else false
-    	 */
-    	bool getIsFirstTimeOpen() const;
-    	/**
-    	 * Sets whether or not the application will be treated as being opened for the first time 
-    	 *
-    	 * @param isFirstTimeOpen True to be treated as being opened for the first time, else false
-    	 */
-    	void setIsFirstTimeOpen(bool isFirstTimeOpen);
-    	/**
     	 * Gets whether or not to include subfolders when scanning for music files in a music folder
     	 *
     	 * @returns True to include subfolders, else false
@@ -104,7 +92,6 @@ namespace NickvisionTagger::Models
     private:
     	std::string m_configDir;
     	Theme m_theme;
-    	bool m_isFirstTimeOpen;
     	bool m_includeSubfolders;
     	bool m_rememberLastOpenedFolder;
     	std::string m_lastOpenedFolder;

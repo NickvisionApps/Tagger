@@ -37,11 +37,6 @@ void MainWindowController::startup()
 {
     if(!m_isOpened)
     {
-        if(m_configuration.getIsFirstTimeOpen())
-        {
-            m_configuration.setIsFirstTimeOpen(false);
-            m_configuration.save();
-        }
         m_musicFolder.setIncludeSubfolders(m_configuration.getIncludeSubfolders());
         if(m_configuration.getRememberLastOpenedFolder())
         {

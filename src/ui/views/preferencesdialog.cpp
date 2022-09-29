@@ -24,18 +24,6 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowTheme), "A theme change will be applied once the dialog is closed.");
     adw_combo_row_set_model(ADW_COMBO_ROW(m_rowTheme), G_LIST_MODEL(gtk_string_list_new(new const char*[4]{ "System", "Light", "Dark", nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTheme);
-    //Application Group
-    m_grpApplication = adw_preferences_group_new();
-    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpApplication), "Application");
-    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpApplication), "Customize application settings.");
-    //Is First Time Open Row
-    m_rowIsFirstTimeOpen = adw_action_row_new();
-    m_switchIsFirstTimeOpen = gtk_switch_new();
-    gtk_widget_set_valign(m_switchIsFirstTimeOpen, GTK_ALIGN_CENTER);
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowIsFirstTimeOpen), "Is First Time Open");
-    adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowIsFirstTimeOpen), m_switchIsFirstTimeOpen);
-    adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowIsFirstTimeOpen), m_switchIsFirstTimeOpen);
-    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpApplication), m_rowIsFirstTimeOpen);
     //Tagger Group
     m_grpTagger = adw_preferences_group_new();
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpTagger), "Tagger");
@@ -70,7 +58,6 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     //Page
     m_page = adw_preferences_page_new();
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpUserInterface));
-    adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpApplication));
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpTagger));
     //Main Box
     m_mainBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
@@ -79,7 +66,6 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_window_set_content(ADW_WINDOW(m_gobj), m_mainBox);
     //Load Configuration
     adw_combo_row_set_selected(ADW_COMBO_ROW(m_rowTheme), m_controller.getThemeAsInt());
-    gtk_switch_set_active(GTK_SWITCH(m_switchIsFirstTimeOpen), m_controller.getIsFirstTimeOpen());
     gtk_switch_set_active(GTK_SWITCH(m_switchIncludeSubfolders), m_controller.getIncludeSubfolders());
     gtk_switch_set_active(GTK_SWITCH(m_switchRememberLastOpenedFolder), m_controller.getRememberLastOpenedFolder());
     gtk_switch_set_active(GTK_SWITCH(m_switchPreserveModificationTimeStamp), m_controller.getPreserveModificationTimeStamp());
@@ -103,7 +89,6 @@ void PreferencesDialog::run()
         g_main_context_iteration(g_main_context_default(), false);
     }
     m_controller.setTheme(adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowTheme)));
-    m_controller.setIsFirstTimeOpen(gtk_switch_get_active(GTK_SWITCH(m_switchIsFirstTimeOpen)));
     m_controller.setIncludeSubfolders(gtk_switch_get_active(GTK_SWITCH(m_switchIncludeSubfolders)));
     m_controller.setRememberLastOpenedFolder(gtk_switch_get_active(GTK_SWITCH(m_switchRememberLastOpenedFolder)));
     m_controller.setPreserveModificationTimeStamp(gtk_switch_get_active(GTK_SWITCH(m_switchPreserveModificationTimeStamp)));
