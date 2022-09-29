@@ -201,7 +201,7 @@ void MainWindowController::downloadMusicBrainzMetadata()
     int success{ 0 };
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
-        if(musicFile->downloadMusicBrainzMetadata(m_configuration.getPreserveModificationTimeStamp()))
+        if(musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz(), m_configuration.getPreserveModificationTimeStamp()))
         {
             success++;
         }

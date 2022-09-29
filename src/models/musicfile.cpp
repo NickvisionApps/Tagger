@@ -432,15 +432,15 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
 
 void MusicFile::removeTag(bool preserveModificationTimeStamp)
 {
-    setTitle("");
-    setArtist("");
-    setAlbum("");
-    setYear(0);
-    setTrack(0);
-    setAlbumArtist("");
-    setGenre("");
-    setComment("");
-    setAlbumArt({});
+    m_title = "";
+    m_artist = "";
+    m_album = "";
+    m_year = 0;
+    m_track = 0;
+    m_albumArtist = "";
+    m_genre = "";
+    m_comment = "";
+    m_albumArt = TagLib::ByteVector();
     saveTag(preserveModificationTimeStamp);
 }
 
@@ -453,8 +453,8 @@ bool MusicFile::filenameToTag(const std::string& formatString, bool preserveModi
         {
             return false;
         }
-        setArtist(getFilename().substr(0, dashIndex));
-        setTitle(getFilename().substr(dashIndex + 2, getFilename().find(m_path.extension().string()) - (getArtist().size() + 2)));
+        m_artist = getFilename().substr(0, dashIndex);
+        m_title = getFilename().substr(dashIndex + 2, getFilename().find(m_path.extension().string()) - (getArtist().size() + 2));
     }
     else if (formatString == "%title%- %artist%")
     {
@@ -463,8 +463,8 @@ bool MusicFile::filenameToTag(const std::string& formatString, bool preserveModi
         {
             return false;
         }
-        setTitle(getFilename().substr(0, dashIndex));
-        setArtist(getFilename().substr(dashIndex + 2, getFilename().find(m_path.extension().string()) - (getTitle().size() + 2)));
+        m_title = getFilename().substr(0, dashIndex);
+        m_artist = getFilename().substr(dashIndex + 2, getFilename().find(m_path.extension().string()) - (getTitle().size() + 2));
     }
     else if (formatString == "%track%- %title%")
     {
@@ -476,17 +476,17 @@ bool MusicFile::filenameToTag(const std::string& formatString, bool preserveModi
         std::string track{ getFilename().substr(0, dashIndex) };
         try
         {
-            setTrack(MediaHelpers::stoui(track));
+            m_track = MediaHelpers::stoui(track);
         }
         catch (...)
         {
             setTrack(0);
         }
-        setTitle(getFilename().substr(dashIndex + 2, getFilename().find(m_path.extension().string()) - (track.size() + 2)));
+        m_title = getFilename().substr(dashIndex + 2, getFilename().find(m_path.extension().string()) - (track.size() + 2));
     }
     else if (formatString == "%title%")
     {
-        setTitle(getFilename().substr(0, getFilename().find(m_path.extension().string())));
+        m_title = getFilename().substr(0, getFilename().find(m_path.extension().string()));
     }
     else
     {
@@ -500,35 +500,35 @@ bool MusicFile::tagToFilename(const std::string& formatString)
 {
     if (formatString == "%artist%- %title%")
     {
-        if (getArtist().empty() || getTitle().empty())
+        if (m_artist.empty() || m_title.empty())
         {
             return false;
         }
-        setFilename(getArtist() + "- " + getTitle() + m_path.extension().string());
+        setFilename(m_artist + "- " + m_title + m_path.extension().string());
     }
     else if (formatString == "%title%- %artist%")
     {
-        if (getTitle().empty() || getArtist().empty())
+        if (m_title.empty() || m_artist.empty())
         {
             return false;
         }
-        setFilename(getTitle() + "- " + getArtist() + m_path.extension().string());
+        setFilename(m_title + "- " + m_artist + m_path.extension().string());
     }
     else if (formatString == "%track%- %title%")
     {
-        if (getTitle().empty())
+        if (m_title.empty())
         {
             return false;
         }
-        setFilename(std::to_string(getTrack()) + "- " + getTitle() + m_path.extension().string());
+        setFilename(std::to_string(m_track) + "- " + m_title + m_path.extension().string());
     }
     else if (formatString == "%title%")
     {
-        if (getTitle().empty())
+        if (m_title.empty())
         {
             return false;
         }
-        setFilename(getTitle() + m_path.extension().string());
+        setFilename(m_title + m_path.extension().string());
     }
     else
     {
@@ -537,7 +537,7 @@ bool MusicFile::tagToFilename(const std::string& formatString)
     return true;
 }
 
-bool MusicFile::downloadMusicBrainzMetadata(bool preserveModificationTimeStamp)
+bool MusicFile::downloadMusicBrainzMetadata(bool overwriteTagWithMusicBrainz, bool preserveModificationTimeStamp)
 {
     AcoustIdQuery acoustIdQuery{ getDuration(), getChromaprintFingerprint() };
     if(acoustIdQuery.lookup() == AcoustIdQueryStatus::OK)
@@ -545,13 +545,34 @@ bool MusicFile::downloadMusicBrainzMetadata(bool preserveModificationTimeStamp)
         MusicBrainzRecordingQuery musicBrainzQuery{ acoustIdQuery.getRecordingId() };
         if(musicBrainzQuery.lookup() == MusicBrainzRecordingQueryStatus::OK)
         {
-            setTitle(musicBrainzQuery.getTitle());
-            setArtist(musicBrainzQuery.getArtist());
-            setAlbum(musicBrainzQuery.getAlbum());
-            setYear(musicBrainzQuery.getYear());
-            setAlbumArtist(musicBrainzQuery.getAlbumArtist());
-            setGenre(musicBrainzQuery.getGenre());
-            setAlbumArt(musicBrainzQuery.getAlbumArt());
+            if(overwriteTagWithMusicBrainz || m_title.empty())
+            {
+                m_title = musicBrainzQuery.getTitle();
+            }
+            if(overwriteTagWithMusicBrainz || m_artist.empty())
+            {
+                m_artist = musicBrainzQuery.getArtist();
+            }
+            if(overwriteTagWithMusicBrainz || m_album.empty())
+            {
+                m_album = musicBrainzQuery.getAlbum();
+            }
+            if(overwriteTagWithMusicBrainz || m_year == 0)
+            {
+                m_year = musicBrainzQuery.getYear();
+            }
+            if(overwriteTagWithMusicBrainz || m_albumArtist.empty())
+            {
+                m_albumArtist = musicBrainzQuery.getAlbumArtist();
+            }
+            if(overwriteTagWithMusicBrainz || m_genre.empty())
+            {
+                m_genre = musicBrainzQuery.getGenre();
+            }
+            if(overwriteTagWithMusicBrainz || m_albumArt.isEmpty())
+            {
+                m_albumArt = musicBrainzQuery.getAlbumArt();
+            }
             saveTag(preserveModificationTimeStamp);
             return true;
         }
@@ -571,11 +592,11 @@ bool MusicFile::operator>(const MusicFile& toCompare) const
 
 bool MusicFile::operator==(const MusicFile& toCompare) const
 {
-    return getPath() == toCompare.getPath();
+    return m_path == toCompare.m_path;
 }
 
 bool MusicFile::operator!=(const MusicFile& toCompare) const
 {
-    return getPath() != toCompare.getPath();
+    return m_path != toCompare.m_path;
 }
 
