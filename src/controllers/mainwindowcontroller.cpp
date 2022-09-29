@@ -138,7 +138,6 @@ void MainWindowController::saveTags(const std::unordered_map<std::string, std::s
         musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
     }
     m_sendToastCallback("Tags saved successfully.");
-    m_musicFolderUpdatedCallback(false);
 }
 
 void MainWindowController::deleteTags()
@@ -148,7 +147,6 @@ void MainWindowController::deleteTags()
         musicFile->removeTag(m_configuration.getPreserveModificationTimeStamp());
     }
     m_sendToastCallback("Tags removed successfully.");
-    m_musicFolderUpdatedCallback(false);
 }
 
 void MainWindowController::insertAlbumArt(const std::string& pathToImage)
@@ -160,7 +158,6 @@ void MainWindowController::insertAlbumArt(const std::string& pathToImage)
         musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
     }
     m_sendToastCallback("Album art inserted successfully.");
-    m_musicFolderUpdatedCallback(false);
 }
 
 void MainWindowController::removeAlbumArt()
@@ -171,7 +168,6 @@ void MainWindowController::removeAlbumArt()
         musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
     }
     m_sendToastCallback("Album art removed successfully.");
-    m_musicFolderUpdatedCallback(false);
 }
 
 void MainWindowController::filenameToTag(const std::string& formatString)
@@ -185,7 +181,6 @@ void MainWindowController::filenameToTag(const std::string& formatString)
         }
     }
     m_sendToastCallback("Converted " + std::to_string(success) + " filenames to tags successfully.");
-    m_musicFolderUpdatedCallback(false);
 }
 
 void MainWindowController::tagToFilename(const std::string& formatString)
@@ -199,7 +194,6 @@ void MainWindowController::tagToFilename(const std::string& formatString)
         }
     }
     m_sendToastCallback("Converted " + std::to_string(success) + " tags to filenames successfully.");
-    m_musicFolderUpdatedCallback(false);
 }
 
 void MainWindowController::downloadMusicBrainzMetadata()
@@ -213,7 +207,6 @@ void MainWindowController::downloadMusicBrainzMetadata()
         }
     }
     m_sendToastCallback("Download metadata for " + std::to_string(success) + " files successfully.");
-    m_musicFolderUpdatedCallback(false);
 }
 
 void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void(bool)>& callback)

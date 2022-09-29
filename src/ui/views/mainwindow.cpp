@@ -21,7 +21,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Window Settings
     gtk_window_set_default_size(GTK_WINDOW(m_gobj), 1000, 800);
     g_signal_connect(m_gobj, "close_request", G_CALLBACK((void (*)(GtkWidget*, gpointer))[](GtkWidget*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onCloseRequest(); }), this);
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
+    //gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
     //Header Bar
     m_headerBar = adw_header_bar_new();
     m_adwTitle = adw_window_title_new(m_controller.getAppInfo().getShortName().c_str(), m_controller.getMusicFolderPath().c_str());
@@ -372,6 +372,7 @@ void MainWindow::onApply()
     tagMap.insert({ "comment", gtk_editable_get_text(GTK_EDITABLE(m_txtComment)) });
     ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Saving tags...", [&, tagMap]() { m_controller.saveTags(tagMap); } };
     progressDialog.run();
+    gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
 }
 
 void MainWindow::onDeleteTags()
@@ -389,6 +390,7 @@ void MainWindow::onDeleteTags()
         {
             ProgressDialog progressDialog{ GTK_WINDOW(mainWindow->m_gobj), "Deleting tags...", [mainWindow]() { mainWindow->m_controller.deleteTags(); } };
             progressDialog.run();
+            gtk_list_box_unselect_all(GTK_LIST_BOX(mainWindow->m_listMusicFiles));
         }
     })), this);
     gtk_widget_show(messageDialog);
@@ -411,6 +413,7 @@ void MainWindow::onInsertAlbumArt()
             std::string path{ g_file_get_path(file) };
             ProgressDialog progressDialog{ GTK_WINDOW(mainWindow->m_gobj), "Inserting album art...", [mainWindow, path]() { mainWindow->m_controller.insertAlbumArt(path); } };
             progressDialog.run();
+            gtk_list_box_unselect_all(GTK_LIST_BOX(mainWindow->m_listMusicFiles));
             g_object_unref(file);
         }
         g_object_unref(dialog);
@@ -433,6 +436,7 @@ void MainWindow::onRemoveAlbumArt()
         {
             ProgressDialog progressDialog{ GTK_WINDOW(mainWindow->m_gobj), "Removing album art...", [mainWindow]() { mainWindow->m_controller.removeAlbumArt(); } };
             progressDialog.run();
+            gtk_list_box_unselect_all(GTK_LIST_BOX(mainWindow->m_listMusicFiles));
         }
     })), this);
     gtk_widget_show(messageDialog);
@@ -446,6 +450,7 @@ void MainWindow::onFilenameToTag()
     {
         ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Converting filenames to tags...", [&, formatString]() { m_controller.filenameToTag(formatString); } };
         progressDialog.run();
+        gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
     }
 }
 
@@ -457,6 +462,7 @@ void MainWindow::onTagToFilename()
     {
         ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Converting tags to filenames...", [&, formatString]() { m_controller.tagToFilename(formatString); } };
         progressDialog.run();
+        gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
     }
 }
 
@@ -464,6 +470,7 @@ void MainWindow::onDownloadMusicBrainzMetadata()
 {
     ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Downloading MusicBrainz metadata...", [&]() { m_controller.downloadMusicBrainzMetadata(); } };
     progressDialog.run();
+    gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
 }
 
 void MainWindow::onPreferences()
@@ -483,7 +490,7 @@ void MainWindow::onAbout()
 {
     adw_show_about_window(GTK_WINDOW(m_gobj),
                           "application-name", m_controller.getAppInfo().getShortName().c_str(),
-                          "application-icon", (m_controller.getAppInfo().getId() + "-devel").c_str(),
+                          "application-icon", m_controller.getAppInfo().getId().c_str(),
                           "version", m_controller.getAppInfo().getVersion().c_str(),
                           "comments", m_controller.getAppInfo().getDescription().c_str(),
                           "developer-name", "Nickvision",
