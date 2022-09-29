@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <string>
+#include <taglib/tbytevector.h>
 
 namespace NickvisionTagger::Models
 {
@@ -71,6 +72,12 @@ namespace NickvisionTagger::Models
 		 */
 		const std::string& getGenre() const;
 		/**
+		 * Gets the album art from the query
+		 *
+		 * @returns The album art from the query
+		 */
+		const TagLib::ByteVector& getAlbumArt() const;
+		/**
 		 * Runs the query
 		 *
 		 * @returns The status of the query
@@ -88,5 +95,6 @@ namespace NickvisionTagger::Models
 		unsigned int m_year;
 		std::string m_albumArtist;
 		std::string m_genre;
+		TagLib::ByteVector m_albumArt;
     };
 }

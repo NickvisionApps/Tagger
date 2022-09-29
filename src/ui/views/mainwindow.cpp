@@ -548,15 +548,15 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_editable_set_editable(GTK_EDITABLE(m_txtFilename), false);
     }
     std::unordered_map<std::string, std::string> tagMap{ m_controller.getSelectedTagMap() };
-    gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), std::regex_replace(tagMap.at("filename"), std::regex("\\&"), "&amp;").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), std::regex_replace(tagMap.at("title"), std::regex("\\&"), "&amp;").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), std::regex_replace(tagMap.at("artist"), std::regex("\\&"), "&amp;").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), std::regex_replace(tagMap.at("album"), std::regex("\\&"), "&amp;").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), tagMap.at("filename").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), tagMap.at("title").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), tagMap.at("artist").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), tagMap.at("album").c_str());
     gtk_editable_set_text(GTK_EDITABLE(m_txtYear), tagMap.at("year").c_str());
     gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), tagMap.at("track").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), std::regex_replace(tagMap.at("albumArtist"), std::regex("\\&"), "&amp;").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), std::regex_replace(tagMap.at("genre"), std::regex("\\&"), "&amp;").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtComment), std::regex_replace(tagMap.at("comment"), std::regex("\\&"), "&amp;").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), tagMap.at("albumArtist").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), tagMap.at("genre").c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtComment), tagMap.at("comment").c_str());
     gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), tagMap.at("duration").c_str());
     gtk_editable_set_text(GTK_EDITABLE(m_txtChromaprintFingerprint), tagMap.at("fingerprint").c_str());
     gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), tagMap.at("fileSize").c_str());

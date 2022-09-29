@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <string>
+#include <taglib/tbytevector.h>
 
 namespace NickvisionTagger::Models
 {
@@ -12,6 +13,7 @@ namespace NickvisionTagger::Models
     {
     	OK,
     	CurlError,
+    	FileError,
     	MusicBrainzError,
 		NoResult
     };
@@ -47,6 +49,12 @@ namespace NickvisionTagger::Models
 		 */
 		const std::string& getArtist() const;
 		/**
+		 * Gets the album art from the query
+		 *
+		 * @returns The album art from the query
+		 */
+		const TagLib::ByteVector& getAlbumArt() const;
+		/**
 		 * Runs the query
 		 *
 		 * @returns The status of the query
@@ -57,8 +65,10 @@ namespace NickvisionTagger::Models
     	static int m_requestCount;
 		static std::chrono::time_point<std::chrono::system_clock> m_lastRequestTime;
     	std::string m_lookupUrl;
+    	std::string m_lookupUrlAlbumArt;
 		MusicBrainzReleaseQueryStatus m_status;
 		std::string m_title;
 		std::string m_artist;
+		TagLib::ByteVector m_albumArt;
     };
 }

@@ -58,6 +58,11 @@ const std::string& MusicBrainzRecordingQuery::getGenre() const
     return m_genre;
 }
 
+const TagLib::ByteVector& MusicBrainzRecordingQuery::getAlbumArt() const
+{
+    return m_albumArt;
+}
+
 MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::lookup()
 {
     //MusicBrainz has rate limit of 50 requests/second
@@ -114,6 +119,7 @@ MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::lookup()
         {
             m_album = releaseQuery.getTitle();
             m_albumArtist = releaseQuery.getArtist();
+            m_albumArt = releaseQuery.getAlbumArt();
         }
     }
     //Get Year

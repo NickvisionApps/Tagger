@@ -879,6 +879,7 @@ bool MusicFile::downloadMusicBrainzMetadata(bool preserveModificationTimeStamp)
             setYear(musicBrainzQuery.getYear());
             setAlbumArtist(musicBrainzQuery.getAlbumArtist());
             setGenre(musicBrainzQuery.getGenre());
+            setAlbumArt(musicBrainzQuery.getAlbumArt());
             saveTag(preserveModificationTimeStamp);
             return true;
         }
