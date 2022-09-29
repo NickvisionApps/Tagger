@@ -1,4 +1,4 @@
-# Nickvision Tagger
+# Tagger
 <img src="src/resources/org.nickvision.tagger.svg" width="100" height="100"/>
 
 **An easy-to-use music tag (metadata) editor**
