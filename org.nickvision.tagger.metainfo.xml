@@ -35,12 +35,11 @@
     <binary>org.nickvision.tagger</binary>
   </provides>
   <releases>
-    <release version="2022.9.1" date="2022-09-24">
+    <release version="2022.9.2-beta1" date="2022-09-28">
       <description>
-        <p>- Added the ability to open a folder by dragging one from another application</p>
-        <p>- Added the 'Fingerprint' property which contains the chromaprint fingerprint of a music file</p>
-        <p>- Fixed an issue where Tagger may crash on application startup</p>
-        <p>- Small design tweaks</p>
+        <p>- Added support for downloading tag metadata from MusicBrainz</p>
+        <p>- Fixed an issue where the chromaprint fingerprint contained an extra alien unicode character</p>
+        <p>- UX improvements</p>
       </description>
     </release>
   </releases>

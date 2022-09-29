@@ -1,5 +1,7 @@
 #include "mainwindowcontroller.hpp"
+#include <chrono>
 #include <filesystem>
+#include <curlpp/cURLpp.hpp>
 #include "../helpers/mediahelpers.hpp"
 
 using namespace NickvisionTagger::Controllers;
@@ -46,6 +48,7 @@ void MainWindowController::startup()
             openMusicFolder(m_configuration.getLastOpenedFolder());
         }
         m_isOpened = true;
+        cURLpp::initialize();
     }
 }
 

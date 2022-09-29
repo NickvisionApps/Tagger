@@ -3,7 +3,6 @@
 #include <sstream>
 #include <thread>
 #include <adwaita.h>
-#include <curlpp/cURLpp.hpp>
 #include <curlpp/Easy.hpp>
 #include <curlpp/Infos.hpp>
 #include <curlpp/Options.hpp>
@@ -58,7 +57,6 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
     }
     //Get Json Response from Lookup
     std::stringstream response;
-    cURLpp::Cleanup cleanup;
     cURLpp::Easy handle;
     handle.setOpt(cURLpp::Options::Url(m_lookupUrl));
     handle.setOpt(cURLpp::Options::FollowLocation(true));

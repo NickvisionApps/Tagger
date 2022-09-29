@@ -1,7 +1,6 @@
 #include "musicbrainzrecordingquery.hpp"
 #include <sstream>
 #include <thread>
-#include <curlpp/cURLpp.hpp>
 #include <curlpp/Easy.hpp>
 #include <curlpp/Options.hpp>
 #include <json/json.h>
@@ -76,7 +75,6 @@ MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::lookup()
     }
     //Get Json Response from Lookup
     std::stringstream response;
-    cURLpp::Cleanup cleanup;
     cURLpp::Easy handle;
     handle.setOpt(cURLpp::Options::Url(m_lookupUrl));
     handle.setOpt(cURLpp::Options::FollowLocation(true));
