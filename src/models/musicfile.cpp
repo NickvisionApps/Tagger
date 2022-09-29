@@ -65,32 +65,35 @@ void MusicFile::setFilename(const std::string& filename)
     {
         newPath += m_dotExtension;
     }
-    m_fileMP3.reset();
-    m_fileOGG.reset();
-    m_fileFLAC.reset();
-    m_fileWMA.reset();
-    m_fileWAV.reset();
-    std::filesystem::rename(m_path, newPath);
-    m_path = newPath;
-    if(m_dotExtension == ".mp3")
+    if(!std::filesystem::exists(newPath))
     {
-        m_fileMP3 = std::make_shared<TagLib::MPEG::File>(m_path.c_str());
-    }
-    else if(m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        m_fileOGG = std::make_shared<TagLib::Ogg::Vorbis::File>(m_path.c_str());
-    }
-    else if(m_dotExtension == ".flac")
-    {
-        m_fileFLAC = std::make_shared<TagLib::FLAC::File>(m_path.c_str());
-    }
-    else if(m_dotExtension == ".wma")
-    {
-        m_fileWMA = std::make_shared<TagLib::ASF::File>(m_path.c_str());
-    }
-    else if(m_dotExtension == ".wav")
-    {
-        m_fileWAV = std::make_shared<TagLib::RIFF::WAV::File>(m_path.c_str());
+        m_fileMP3.reset();
+        m_fileOGG.reset();
+        m_fileFLAC.reset();
+        m_fileWMA.reset();
+        m_fileWAV.reset();
+        std::filesystem::rename(m_path, newPath);
+        m_path = newPath;
+        if(m_dotExtension == ".mp3")
+        {
+            m_fileMP3 = std::make_shared<TagLib::MPEG::File>(m_path.c_str());
+        }
+        else if(m_dotExtension == ".ogg" || m_dotExtension == ".opus")
+        {
+            m_fileOGG = std::make_shared<TagLib::Ogg::Vorbis::File>(m_path.c_str());
+        }
+        else if(m_dotExtension == ".flac")
+        {
+            m_fileFLAC = std::make_shared<TagLib::FLAC::File>(m_path.c_str());
+        }
+        else if(m_dotExtension == ".wma")
+        {
+            m_fileWMA = std::make_shared<TagLib::ASF::File>(m_path.c_str());
+        }
+        else if(m_dotExtension == ".wav")
+        {
+            m_fileWAV = std::make_shared<TagLib::RIFF::WAV::File>(m_path.c_str());
+        }
     }
 }
 
@@ -870,6 +873,12 @@ bool MusicFile::downloadMusicBrainzMetadata(bool preserveModificationTimeStamp)
         MusicBrainzRecordingQuery musicBrainzQuery{ acoustIdQuery.getRecordingId() };
         if(musicBrainzQuery.lookup() == MusicBrainzRecordingQueryStatus::OK)
         {
+            setTitle(musicBrainzQuery.getTitle());
+            setArtist(musicBrainzQuery.getArtist());
+            setAlbum(musicBrainzQuery.getAlbum());
+            setYear(musicBrainzQuery.getYear());
+            setAlbumArtist(musicBrainzQuery.getAlbumArtist());
+            saveTag(preserveModificationTimeStamp);
             return true;
         }
     }

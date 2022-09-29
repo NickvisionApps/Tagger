@@ -5,22 +5,47 @@
 
 namespace NickvisionTagger::Models
 {
+	/**
+	 * Statuses for the AcoustIdQuery
+	 */
     enum class AcoustIdQueryStatus
     {
     	OK,
-    	Error,
     	CurlError,
     	AcoustIdError,
-		JsonError,
 		NoResult
     };
 
+	/**
+	 * A model representing a query from AcoustId
+	 */
     class AcoustIdQuery
     {
     public:
+    	/**
+    	 * Constructs an AcoustIdQuery
+    	 *
+    	 * @param duration The duration of a song in seconds
+    	 * @param fingerprint The chromaprint fingerprint of a song
+    	 */
     	AcoustIdQuery(int duration, const std::string& fingerprint);
+    	/**
+    	 * Gets the status of the query
+    	 *
+    	 * @returns The status of the query
+    	 */
 		AcoustIdQueryStatus getStatus() const;
-		std::string getRecordingId() const;
+		/**
+		 * Gets the recording id from the query
+		 *
+		 * @returns The recording id from the query
+		 */
+		const std::string& getRecordingId() const;
+		/**
+		 * Runs the query
+		 *
+		 * @returns The status of the query
+		 */
 		AcoustIdQueryStatus lookup();
 
     private:
