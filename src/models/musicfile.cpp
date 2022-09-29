@@ -3,7 +3,12 @@
 #include <cstdio>
 #include <sstream>
 #include <stdexcept>
+#include <taglib/asffile.h>
+#include <taglib/flacfile.h>
+#include <taglib/mpegfile.h>
 #include <taglib/textidentificationframe.h>
+#include <taglib/wavfile.h>
+#include <taglib/vorbisfile.h>
 #include "acoustidquery.hpp"
 #include "musicbrainzrecordingquery.hpp"
 #include "../helpers/mediahelpers.hpp"
@@ -11,41 +16,137 @@
 using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
 
-MusicFile::MusicFile(const std::filesystem::path& path) : m_path{ path }, m_dotExtension{ m_path.extension() }, m_modificationTimeStamp{ std::filesystem::last_write_time(m_path) }, m_fingerprint{ }
+MusicFile::MusicFile(const std::filesystem::path& path) : m_path{ path }, m_dotExtension{ m_path.extension() }, m_modificationTimeStamp{ std::filesystem::last_write_time(m_path) }, m_fingerprint{ "" }
 {
     if(m_dotExtension == ".mp3")
     {
-        m_fileMP3 = std::make_shared<TagLib::MPEG::File>(m_path.c_str());
+        TagLib::MPEG::File file{ m_path.c_str() };
+        m_title = file.ID3v2Tag(true)->title().to8Bit(true);
+        m_artist = file.ID3v2Tag(true)->artist().to8Bit(true);
+        m_album = file.ID3v2Tag(true)->album().to8Bit(true);
+        m_year = file.ID3v2Tag(true)->year();
+        m_track = file.ID3v2Tag(true)->track();
+        const TagLib::ID3v2::FrameList& frameAlbumArtist{ file.ID3v2Tag(true)->frameList("TPE2") };
+        if (!frameAlbumArtist.isEmpty())
+        {
+            m_albumArtist = frameAlbumArtist.front()->toString().to8Bit(true);
+        }
+        m_genre = file.ID3v2Tag(true)->genre().to8Bit(true);
+        m_comment = file.ID3v2Tag(true)->comment().to8Bit(true);
+        const TagLib::ID3v2::FrameList& frameAlbumArt{ file.ID3v2Tag(true)->frameList("APIC") };
+        if (!frameAlbumArt.isEmpty())
+        {
+            m_albumArt = ((TagLib::ID3v2::AttachedPictureFrame*)frameAlbumArt.front())->picture();
+        }
+        m_duration = file.audioProperties()->lengthInSeconds();
     }
     else if(m_dotExtension == ".ogg" || m_dotExtension == ".opus")
     {
-        m_fileOGG = std::make_shared<TagLib::Ogg::Vorbis::File>(m_path.c_str());
+        TagLib::Ogg::Vorbis::File file{ m_path.c_str() };
+        m_title = file.tag()->title().to8Bit(true);
+        m_artist = file.tag()->artist().to8Bit(true);
+        m_album = file.tag()->album().to8Bit(true);
+        m_year = file.tag()->year();
+        m_track = file.tag()->track();
+        const TagLib::Ogg::FieldListMap& fieldAlbumArtist{ file.tag()->fieldListMap() };
+        if (fieldAlbumArtist.contains("ALBUMARTIST"))
+        {
+            const TagLib::StringList& listAlbumArtist{ fieldAlbumArtist["ALBUMARTIST"] };
+            if (!listAlbumArtist.isEmpty())
+            {
+                m_albumArtist = listAlbumArtist[0].to8Bit(true);
+            }
+        }
+        m_genre = file.tag()->genre().to8Bit(true);
+        m_comment = file.tag()->comment().to8Bit(true);
+        const TagLib::List<TagLib::FLAC::Picture*>& listAlbumArt{ file.tag()->pictureList() };
+        if (!listAlbumArt.isEmpty())
+        {
+            m_albumArt = listAlbumArt[0]->data();
+        }
+        m_duration = file.audioProperties()->lengthInSeconds();
     }
     else if(m_dotExtension == ".flac")
     {
-        m_fileFLAC = std::make_shared<TagLib::FLAC::File>(m_path.c_str());
+        TagLib::FLAC::File file{ m_path.c_str() };
+        m_title = file.xiphComment(true)->title().to8Bit(true);
+        m_artist = file.xiphComment(true)->artist().to8Bit(true);
+        m_album = file.xiphComment(true)->album().to8Bit(true);
+        m_year = file.xiphComment(true)->year();
+        m_track = file.xiphComment(true)->track();
+        const TagLib::Ogg::FieldListMap& fieldAlbumArtist{ file.xiphComment(true)->fieldListMap() };
+        if (fieldAlbumArtist.contains("ALBUMARTIST"))
+        {
+            const TagLib::StringList& listAlbumArtist{ fieldAlbumArtist["ALBUMARTIST"] };
+            if (!listAlbumArtist.isEmpty())
+            {
+                m_albumArtist = listAlbumArtist[0].to8Bit(true);
+            }
+        }
+        m_genre = file.xiphComment(true)->genre().to8Bit(true);
+        m_comment = file.xiphComment(true)->comment().to8Bit(true);
+        const TagLib::List<TagLib::FLAC::Picture*>& listAlbumArt{ file.xiphComment(true)->pictureList() };
+        if (!listAlbumArt.isEmpty())
+        {
+            m_albumArt = listAlbumArt[0]->data();
+        }
+        m_duration = file.audioProperties()->lengthInSeconds();
     }
     else if(m_dotExtension == ".wma")
     {
-        m_fileWMA = std::make_shared<TagLib::ASF::File>(m_path.c_str());
+        TagLib::ASF::File file{ m_path.c_str() };
+        m_title = file.tag()->title().to8Bit(true);
+        m_artist = file.tag()->artist().to8Bit(true);
+        m_album = file.tag()->album().to8Bit(true);
+        m_year = file.tag()->year();
+        m_track = file.tag()->track();
+        const TagLib::ASF::AttributeListMap& attributeListMap{ file.tag()->attributeListMap() };
+        if (attributeListMap.contains("ALBUMARTIST"))
+        {
+            const TagLib::ASF::AttributeList& attributeList{ attributeListMap["ALBUMARTIST"] };
+            if (!attributeList.isEmpty())
+            {
+                m_albumArtist = attributeList[0].toString().to8Bit(true);
+            }
+        }
+        m_genre = file.tag()->genre().to8Bit(true);
+        m_comment = file.tag()->comment().to8Bit(true);
+        if (attributeListMap.contains("WM/Picture"))
+        {
+            const TagLib::ASF::AttributeList& attributeList{ attributeListMap["WM/Picture"] };
+            if (!attributeList.isEmpty())
+            {
+                m_albumArt = attributeList[0].toPicture().picture();
+            }
+        }
+        m_duration = file.audioProperties()->lengthInSeconds();
     }
     else if(m_dotExtension == ".wav")
     {
-        m_fileWAV = std::make_shared<TagLib::RIFF::WAV::File>(m_path.c_str());
+        TagLib::RIFF::WAV::File file{ m_path.c_str() };
+        m_title = file.ID3v2Tag()->title().to8Bit(true);
+        m_artist = file.ID3v2Tag()->artist().to8Bit(true);
+        m_album = file.ID3v2Tag()->album().to8Bit(true);
+        m_year = file.ID3v2Tag()->year();
+        m_track = file.ID3v2Tag()->track();
+        const TagLib::ID3v2::FrameList& frameAlbumArtist{ file.ID3v2Tag()->frameList("TPE2") };
+        if (!frameAlbumArtist.isEmpty())
+        {
+            m_albumArtist = frameAlbumArtist.front()->toString().to8Bit(true);
+        }
+        m_genre = file.ID3v2Tag()->genre().to8Bit(true);
+        m_comment = file.ID3v2Tag()->comment().to8Bit(true);
+        const TagLib::ID3v2::FrameList& frameAlbumArt{ file.ID3v2Tag()->frameList("APIC") };
+        if (!frameAlbumArt.isEmpty())
+        {
+            m_albumArt = ((TagLib::ID3v2::AttachedPictureFrame*)frameAlbumArt.front())->picture();
+        }
+        m_duration = file.audioProperties()->lengthInSeconds();
     }
     else
     {
         throw std::invalid_argument("Invalid Path. The path is not a valid music file.");
     }
-}
-
-MusicFile::~MusicFile()
-{
-    m_fileMP3.reset();
-    m_fileOGG.reset();
-    m_fileFLAC.reset();
-    m_fileWMA.reset();
-    m_fileWAV.reset();
 }
 
 const std::filesystem::path& MusicFile::getPath() const
@@ -67,597 +168,109 @@ void MusicFile::setFilename(const std::string& filename)
     }
     if(!std::filesystem::exists(newPath))
     {
-        m_fileMP3.reset();
-        m_fileOGG.reset();
-        m_fileFLAC.reset();
-        m_fileWMA.reset();
-        m_fileWAV.reset();
         std::filesystem::rename(m_path, newPath);
         m_path = newPath;
-        if(m_dotExtension == ".mp3")
-        {
-            m_fileMP3 = std::make_shared<TagLib::MPEG::File>(m_path.c_str());
-        }
-        else if(m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-        {
-            m_fileOGG = std::make_shared<TagLib::Ogg::Vorbis::File>(m_path.c_str());
-        }
-        else if(m_dotExtension == ".flac")
-        {
-            m_fileFLAC = std::make_shared<TagLib::FLAC::File>(m_path.c_str());
-        }
-        else if(m_dotExtension == ".wma")
-        {
-            m_fileWMA = std::make_shared<TagLib::ASF::File>(m_path.c_str());
-        }
-        else if(m_dotExtension == ".wav")
-        {
-            m_fileWAV = std::make_shared<TagLib::RIFF::WAV::File>(m_path.c_str());
-        }
     }
 }
 
-std::string MusicFile::getTitle() const
+const std::string& MusicFile::getTitle() const
 {
-    if (m_dotExtension == ".mp3")
-    {
-        return m_fileMP3->ID3v2Tag(true)->title().to8Bit(true);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        return m_fileOGG->tag()->title().to8Bit(true);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        return m_fileFLAC->xiphComment(true)->title().to8Bit(true);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        return m_fileWMA->tag()->title().to8Bit(true);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        return m_fileWAV->ID3v2Tag()->title().to8Bit(true);
-    }
-    return "";
+    return m_title;
 }
 
 void MusicFile::setTitle(const std::string& title)
 {
-    if (m_dotExtension == ".mp3")
-    {
-        m_fileMP3->ID3v2Tag(true)->setTitle(title);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        m_fileOGG->tag()->setTitle(title);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        m_fileFLAC->xiphComment(true)->setTitle(title);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        m_fileWMA->tag()->setTitle(title);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        m_fileWAV->ID3v2Tag()->setTitle(title);
-    }
+    m_title = title;
 }
 
-std::string MusicFile::getArtist() const
+const std::string& MusicFile::getArtist() const
 {
-    if (m_dotExtension == ".mp3")
-    {
-        return m_fileMP3->ID3v2Tag(true)->artist().to8Bit(true);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        return m_fileOGG->tag()->artist().to8Bit(true);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        return m_fileFLAC->xiphComment(true)->artist().to8Bit(true);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        return m_fileWMA->tag()->artist().to8Bit(true);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        return m_fileWAV->ID3v2Tag()->artist().to8Bit(true);
-    }
-    return "";
+    return m_artist;
 }
 
 void MusicFile::setArtist(const std::string& artist)
 {
-    if (m_dotExtension == ".mp3")
-    {
-        m_fileMP3->ID3v2Tag(true)->setArtist(artist);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        m_fileOGG->tag()->setArtist(artist);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        m_fileFLAC->xiphComment(true)->setArtist(artist);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        m_fileWMA->tag()->setArtist(artist);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        m_fileWAV->ID3v2Tag()->setArtist(artist);
-    }
+    m_artist = artist;
 }
 
-std::string MusicFile::getAlbum() const
+const std::string& MusicFile::getAlbum() const
 {
-    if (m_dotExtension == ".mp3")
-    {
-        return m_fileMP3->ID3v2Tag(true)->album().to8Bit(true);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        return m_fileOGG->tag()->album().to8Bit(true);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        return m_fileFLAC->xiphComment(true)->album().to8Bit(true);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        return m_fileWMA->tag()->album().to8Bit(true);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        return m_fileWAV->ID3v2Tag()->album().to8Bit(true);
-    }
-    return "";
+    return m_album;
 }
 
 void MusicFile::setAlbum(const std::string& album)
 {
-    if (m_dotExtension == ".mp3")
-    {
-        m_fileMP3->ID3v2Tag(true)->setAlbum(album);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        m_fileOGG->tag()->setAlbum(album);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        m_fileFLAC->xiphComment(true)->setAlbum(album);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        m_fileWMA->tag()->setAlbum(album);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        m_fileWAV->ID3v2Tag()->setAlbum(album);
-    }
+    m_album = album;
 }
 
 unsigned int MusicFile::getYear() const
 {
-    if (m_dotExtension == ".mp3")
-    {
-        return m_fileMP3->ID3v2Tag(true)->year();
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        return m_fileOGG->tag()->year();
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        return m_fileFLAC->xiphComment(true)->year();
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        return m_fileWMA->tag()->year();
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        return m_fileWAV->ID3v2Tag()->year();
-    }
-    return 0;
+    return m_year;
 }
 
 void MusicFile::setYear(unsigned int year)
 {
-    if (m_dotExtension == ".mp3")
-    {
-        m_fileMP3->ID3v2Tag(true)->setYear(year);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        m_fileOGG->tag()->setYear(year);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        m_fileFLAC->xiphComment(true)->setYear(year);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        m_fileWMA->tag()->setYear(year);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        m_fileWAV->ID3v2Tag()->setYear(year);
-    }
+    m_year = year;
 }
 
 unsigned int MusicFile::getTrack() const
 {
-    if (m_dotExtension == ".mp3")
-    {
-        return m_fileMP3->ID3v2Tag(true)->track();
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        return m_fileOGG->tag()->track();
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        return m_fileFLAC->xiphComment(true)->track();
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        return m_fileWMA->tag()->track();
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        return m_fileWAV->ID3v2Tag()->track();
-    }
-    return 0;
+    return m_track;
 }
 
 void MusicFile::setTrack(unsigned int track)
 {
-    if (m_dotExtension == ".mp3")
-    {
-        m_fileMP3->ID3v2Tag(true)->setTrack(track);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        m_fileOGG->tag()->setTrack(track);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        m_fileFLAC->xiphComment(true)->setTrack(track);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        m_fileWMA->tag()->setTrack(track);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        m_fileWAV->ID3v2Tag()->setTrack(track);
-    }
+    m_track = track;
 }
 
-std::string MusicFile::getAlbumArtist() const
+const std::string& MusicFile::getAlbumArtist() const
 {
-    if (m_dotExtension == ".mp3")
-    {
-        const TagLib::ID3v2::FrameList& frameList{ m_fileMP3->ID3v2Tag(true)->frameList("TPE2") };
-        if (!frameList.isEmpty())
-        {
-            return frameList.front()->toString().to8Bit(true);
-        }
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        const TagLib::Ogg::FieldListMap& fieldListMap{ m_fileOGG->tag()->fieldListMap() };
-        if (fieldListMap.contains("ALBUMARTIST"))
-        {
-            const TagLib::StringList& stringList{ fieldListMap["ALBUMARTIST"] };
-            if (!stringList.isEmpty())
-            {
-                return stringList[0].to8Bit(true);
-            }
-        }
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        const TagLib::Ogg::FieldListMap& fieldListMap{ m_fileFLAC->xiphComment(true)->fieldListMap() };
-        if (fieldListMap.contains("ALBUMARTIST"))
-        {
-            const TagLib::StringList& stringList{ fieldListMap["ALBUMARTIST"] };
-            if (!stringList.isEmpty())
-            {
-                return stringList[0].to8Bit(true);
-            }
-        }
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        const TagLib::ASF::AttributeListMap& attributeListMap{ m_fileWMA->tag()->attributeListMap() };
-        if (attributeListMap.contains("ALBUMARTIST"))
-        {
-            const TagLib::ASF::AttributeList& attributeList{ attributeListMap["ALBUMARTIST"] };
-            if (!attributeList.isEmpty())
-            {
-                return attributeList[0].toString().to8Bit(true);
-            }
-        }
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        const TagLib::ID3v2::FrameList& frameList{ m_fileWAV->ID3v2Tag()->frameList("TPE2") };
-        if (!frameList.isEmpty())
-        {
-            return frameList.front()->toString().to8Bit(true);
-        }
-    }
-    return "";
+    return m_albumArtist;
 }
 
 void MusicFile::setAlbumArtist(const std::string& albumArtist)
 {
-    if (m_dotExtension == ".mp3")
-    {
-        m_fileMP3->ID3v2Tag(true)->removeFrames("TPE2");
-        TagLib::ID3v2::TextIdentificationFrame* textFrame{ new TagLib::ID3v2::TextIdentificationFrame("TPE2", TagLib::String::UTF8) };
-        textFrame->setText(albumArtist);
-        m_fileMP3->ID3v2Tag(true)->addFrame(textFrame);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        m_fileOGG->tag()->addField("ALBUMARTIST", albumArtist);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        m_fileFLAC->xiphComment(true)->addField("ALBUMARTIST", albumArtist);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        m_fileWMA->tag()->removeItem("ALBUMARTIST");
-        m_fileWMA->tag()->addAttribute("ALBUMARTIST", { albumArtist });
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        m_fileWAV->ID3v2Tag()->removeFrames("TPE2");
-        TagLib::ID3v2::TextIdentificationFrame* textFrame{ new TagLib::ID3v2::TextIdentificationFrame("TPE2", TagLib::String::UTF8) };
-        textFrame->setText(albumArtist);
-        m_fileWAV->ID3v2Tag()->addFrame(textFrame);
-    }
+    m_albumArtist = albumArtist;
 }
 
-std::string MusicFile::getGenre() const
+const std::string& MusicFile::getGenre() const
 {
-    if (m_dotExtension == ".mp3")
-    {
-        return m_fileMP3->ID3v2Tag(true)->genre().to8Bit(true);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        return m_fileOGG->tag()->genre().to8Bit(true);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        return m_fileFLAC->xiphComment(true)->genre().to8Bit(true);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        return m_fileWMA->tag()->genre().to8Bit(true);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        return m_fileWAV->ID3v2Tag()->genre().to8Bit(true);
-    }
-    return "";
+    return m_genre;
 }
 
 void MusicFile::setGenre(const std::string& genre)
 {
-    if (m_dotExtension == ".mp3")
-    {
-        m_fileMP3->ID3v2Tag(true)->setGenre(genre);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        m_fileOGG->tag()->setGenre(genre);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        m_fileFLAC->xiphComment(true)->setGenre(genre);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        m_fileWMA->tag()->setGenre(genre);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        m_fileWAV->ID3v2Tag()->setGenre(genre);
-    }
+    m_genre = genre;
 }
 
-std::string MusicFile::getComment() const
+const std::string& MusicFile::getComment() const
 {
-    if (m_dotExtension == ".mp3")
-    {
-        return m_fileMP3->ID3v2Tag(true)->comment().to8Bit(true);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        return m_fileOGG->tag()->comment().to8Bit(true);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        return m_fileFLAC->xiphComment(true)->comment().to8Bit(true);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        return m_fileWMA->tag()->comment().to8Bit(true);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        return m_fileWAV->ID3v2Tag()->comment().to8Bit(true);
-    }
-    return "";
+    return m_comment;
 }
 
 void MusicFile::setComment(const std::string& comment)
 {
-    if (m_dotExtension == ".mp3")
-    {
-        m_fileMP3->ID3v2Tag(true)->setComment(comment);
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        m_fileOGG->tag()->setComment(comment);
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        m_fileFLAC->xiphComment(true)->setComment(comment);
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        m_fileWMA->tag()->setComment(comment);
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        m_fileWAV->ID3v2Tag()->setComment(comment);
-    }
+    m_comment = comment;
 }
 
-TagLib::ByteVector MusicFile::getAlbumArt() const
+const TagLib::ByteVector& MusicFile::getAlbumArt() const
 {
-    if (m_dotExtension == ".mp3")
-    {
-        const TagLib::ID3v2::FrameList& frameList{ m_fileMP3->ID3v2Tag(true)->frameList("APIC") };
-        if (!frameList.isEmpty())
-        {
-            return ((TagLib::ID3v2::AttachedPictureFrame*)frameList.front())->picture();
-        }
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        const TagLib::List<TagLib::FLAC::Picture*>& pictureList{ m_fileOGG->tag()->pictureList() };
-        if (!pictureList.isEmpty())
-        {
-            return pictureList[0]->data();
-        }
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        const TagLib::List<TagLib::FLAC::Picture*>& pictureList{ m_fileFLAC->xiphComment(true)->pictureList() };
-        if (!pictureList.isEmpty())
-        {
-            return pictureList[0]->data();
-        }
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        const TagLib::ASF::AttributeListMap& attributeListMap{ m_fileWMA->tag()->attributeListMap() };
-        if (attributeListMap.contains("WM/Picture"))
-        {
-            const TagLib::ASF::AttributeList& attributeList{ attributeListMap["WM/Picture"] };
-            if (!attributeList.isEmpty())
-            {
-                return attributeList[0].toPicture().picture();
-            }
-        }
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        const TagLib::ID3v2::FrameList& frameList{ m_fileWAV->ID3v2Tag()->frameList("APIC") };
-        if (!frameList.isEmpty())
-        {
-            return ((TagLib::ID3v2::AttachedPictureFrame*)frameList.front())->picture();
-        }
-    }
-    return {};
+    return m_albumArt;
 }
 
 void MusicFile::setAlbumArt(const TagLib::ByteVector& albumArt)
 {
-    if (m_dotExtension == ".mp3")
-    {
-        m_fileMP3->ID3v2Tag(true)->removeFrames("APIC");
-        if (!albumArt.isEmpty())
-        {
-            TagLib::ID3v2::AttachedPictureFrame* pictureFrame{ new TagLib::ID3v2::AttachedPictureFrame };
-            pictureFrame->setType(TagLib::ID3v2::AttachedPictureFrame::Type::FrontCover);
-            pictureFrame->setPicture(albumArt);
-            m_fileMP3->ID3v2Tag(true)->addFrame(pictureFrame);
-        }
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        m_fileOGG->tag()->removeAllPictures();
-        if (!albumArt.isEmpty())
-        {
-            TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
-            picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
-            picture->setData(albumArt);
-            m_fileOGG->tag()->addPicture(picture);
-        }
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        m_fileFLAC->xiphComment(true)->removeAllPictures();
-        if (!albumArt.isEmpty())
-        {
-            TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
-            picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
-            picture->setData(albumArt);
-            m_fileFLAC->xiphComment(true)->addPicture(picture);
-        }
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        m_fileWMA->tag()->removeItem("WM/Picture");
-        m_fileWMA->tag()->addAttribute("WM/Picture", { albumArt });
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        m_fileWAV->ID3v2Tag()->removeFrames("APIC");
-        if (!albumArt.isEmpty())
-        {
-            TagLib::ID3v2::AttachedPictureFrame* pictureFrame{ new TagLib::ID3v2::AttachedPictureFrame };
-            pictureFrame->setType(TagLib::ID3v2::AttachedPictureFrame::Type::FrontCover);
-            pictureFrame->setPicture(albumArt);
-            m_fileWAV->ID3v2Tag()->addFrame(pictureFrame);
-        }
-    }
+    m_albumArt = albumArt;
 }
 
 int MusicFile::getDuration() const
 {
-    if (m_dotExtension == ".mp3")
-    {
-        return m_fileMP3->audioProperties()->lengthInSeconds();
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        return m_fileOGG->audioProperties()->lengthInSeconds();
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        return m_fileFLAC->audioProperties()->lengthInSeconds();
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        return m_fileWMA->audioProperties()->lengthInSeconds();
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        return m_fileWAV->audioProperties()->lengthInSeconds();
-    }
-    return 0;
+    return m_duration;
 }
 
 std::string MusicFile::getDurationAsString() const
 {
-    return MediaHelpers::durationToString(getDuration());
+    return MediaHelpers::durationToString(m_duration);
 }
 
 std::uintmax_t MusicFile::getFileSize() const
@@ -703,23 +316,109 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
 {
     if (m_dotExtension == ".mp3")
     {
-        m_fileMP3->save(TagLib::MPEG::File::TagTypes::ID3v2);
+        TagLib::MPEG::File file{ m_path.c_str() };
+        file.ID3v2Tag(true)->setTitle(m_title);
+        file.ID3v2Tag(true)->setArtist(m_artist);
+        file.ID3v2Tag(true)->setAlbum(m_album);
+        file.ID3v2Tag(true)->setYear(m_year);
+        file.ID3v2Tag(true)->setTrack(m_track);
+        file.ID3v2Tag(true)->removeFrames("TPE2");
+        TagLib::ID3v2::TextIdentificationFrame* frameAlbumArtist{ new TagLib::ID3v2::TextIdentificationFrame("TPE2", TagLib::String::UTF8) };
+        frameAlbumArtist->setText(m_albumArtist);
+        file.ID3v2Tag(true)->addFrame(frameAlbumArtist);
+        file.ID3v2Tag(true)->setGenre(m_genre);
+        file.ID3v2Tag(true)->setComment(m_comment);
+        file.ID3v2Tag(true)->removeFrames("APIC");
+        if (!m_albumArt.isEmpty())
+        {
+            TagLib::ID3v2::AttachedPictureFrame* frameAlbumArt{ new TagLib::ID3v2::AttachedPictureFrame };
+            frameAlbumArt->setType(TagLib::ID3v2::AttachedPictureFrame::Type::FrontCover);
+            frameAlbumArt->setPicture(m_albumArt);
+            file.ID3v2Tag(true)->addFrame(frameAlbumArt);
+        }
+        file.save(TagLib::MPEG::File::TagTypes::ID3v2);
     }
     else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
     {
-        m_fileOGG->save();
+        TagLib::Ogg::Vorbis::File file{ m_path.c_str() };
+        file.tag()->setTitle(m_title);
+        file.tag()->setArtist(m_artist);
+        file.tag()->setAlbum(m_album);
+        file.tag()->setYear(m_year);
+        file.tag()->setTrack(m_track);
+        file.tag()->addField("ALBUMARTIST", m_albumArtist);
+        file.tag()->setGenre(m_genre);
+        file.tag()->setComment(m_comment);
+        file.tag()->removeAllPictures();
+        if (!m_albumArt.isEmpty())
+        {
+            TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
+            picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
+            picture->setData(m_albumArt);
+            file.tag()->addPicture(picture);
+        }
+        file.save();
     }
     else if (m_dotExtension == ".flac")
     {
-        m_fileFLAC->save();
+        TagLib::FLAC::File file{ m_path.c_str() };
+        file.xiphComment(true)->setTitle(m_title);
+        file.xiphComment(true)->setArtist(m_artist);
+        file.xiphComment(true)->setAlbum(m_album);
+        file.xiphComment(true)->setYear(m_year);
+        file.xiphComment(true)->setTrack(m_track);
+        file.xiphComment(true)->addField("ALBUMARTIST", m_albumArtist);
+        file.xiphComment(true)->setGenre(m_genre);
+        file.xiphComment(true)->setComment(m_comment);
+        file.xiphComment(true)->removeAllPictures();
+        if (!m_albumArt.isEmpty())
+        {
+            TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
+            picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
+            picture->setData(m_albumArt);
+            file.xiphComment(true)->addPicture(picture);
+        }
+        file.save();
     }
     else if (m_dotExtension == ".wma")
     {
-        m_fileWMA->save();
+        TagLib::ASF::File file{ m_path.c_str() };
+        file.tag()->setTitle(m_title);
+        file.tag()->setArtist(m_artist);
+        file.tag()->setAlbum(m_album);
+        file.tag()->setYear(m_year);
+        file.tag()->setTrack(m_track);
+        file.tag()->removeItem("ALBUMARTIST");
+        file.tag()->addAttribute("ALBUMARTIST", { m_albumArtist });
+        file.tag()->setGenre(m_genre);
+        file.tag()->setComment(m_comment);
+        file.tag()->removeItem("WM/Picture");
+        file.tag()->addAttribute("WM/Picture", { m_albumArt });
+        file.save();
     }
     else if (m_dotExtension == ".wav")
     {
-        m_fileWAV->save(TagLib::RIFF::WAV::File::TagTypes::ID3v2);
+        TagLib::RIFF::WAV::File file{ m_path.c_str() };
+        file.ID3v2Tag()->setTitle(m_title);
+        file.ID3v2Tag()->setArtist(m_artist);
+        file.ID3v2Tag()->setAlbum(m_album);
+        file.ID3v2Tag()->setYear(m_year);
+        file.ID3v2Tag()->setTrack(m_track);
+        file.ID3v2Tag()->removeFrames("TPE2");
+        TagLib::ID3v2::TextIdentificationFrame* frameAlbumArtist{ new TagLib::ID3v2::TextIdentificationFrame("TPE2", TagLib::String::UTF8) };
+        frameAlbumArtist->setText(m_albumArtist);
+        file.ID3v2Tag()->addFrame(frameAlbumArtist);
+        file.ID3v2Tag()->setGenre(m_genre);
+        file.ID3v2Tag()->setComment(m_comment);
+        file.ID3v2Tag()->removeFrames("APIC");
+        if (!m_albumArt.isEmpty())
+        {
+            TagLib::ID3v2::AttachedPictureFrame* frameAlbumArt{ new TagLib::ID3v2::AttachedPictureFrame };
+            frameAlbumArt->setType(TagLib::ID3v2::AttachedPictureFrame::Type::FrontCover);
+            frameAlbumArt->setPicture(m_albumArt);
+            file.ID3v2Tag()->addFrame(frameAlbumArt);
+        }
+        file.save(TagLib::RIFF::WAV::File::TagTypes::ID3v2);
     }
     if (preserveModificationTimeStamp)
     {
@@ -733,42 +432,15 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
 
 void MusicFile::removeTag(bool preserveModificationTimeStamp)
 {
-    if (m_dotExtension == ".mp3")
-    {
-        m_fileMP3->strip();
-    }
-    else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
-    {
-        setTitle("");
-        setArtist("");
-        setAlbum("");
-        setYear(0);
-        setTrack(0);
-        setAlbumArtist("");
-        setGenre("");
-        setComment("");
-        setAlbumArt({});
-    }
-    else if (m_dotExtension == ".flac")
-    {
-        m_fileFLAC->strip();
-    }
-    else if (m_dotExtension == ".wma")
-    {
-        setTitle("");
-        setArtist("");
-        setAlbum("");
-        setYear(0);
-        setTrack(0);
-        setAlbumArtist("");
-        setGenre("");
-        setComment("");
-        setAlbumArt({});
-    }
-    else if (m_dotExtension == ".wav")
-    {
-        m_fileWAV->strip();
-    }
+    setTitle("");
+    setArtist("");
+    setAlbum("");
+    setYear(0);
+    setTrack(0);
+    setAlbumArtist("");
+    setGenre("");
+    setComment("");
+    setAlbumArt({});
     saveTag(preserveModificationTimeStamp);
 }
 

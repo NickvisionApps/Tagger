@@ -1,14 +1,8 @@
 #pragma once
 
 #include <filesystem>
-#include <memory>
 #include <string>
-#include <taglib/asffile.h>
-#include <taglib/flacfile.h>
-#include <taglib/mpegfile.h>
 #include <taglib/tbytevector.h>
-#include <taglib/wavfile.h>
-#include <taglib/vorbisfile.h>
 
 namespace NickvisionTagger::Models
 {
@@ -25,10 +19,6 @@ namespace NickvisionTagger::Models
     	 * @throws std::invalid_argument Thrown when the path is an invalid music file
     	 */
     	MusicFile(const std::filesystem::path& path);
-    	/**
-    	 * Destroys the MusicFile
-    	 */
-    	~MusicFile();
     	/**
     	 * Gets the path of the music file
     	 *
@@ -52,7 +42,7 @@ namespace NickvisionTagger::Models
     	 *
     	 * @returns The title of the music file
     	 */
-    	std::string getTitle() const;
+    	const std::string& getTitle() const;
     	/**
     	 * Sets the title of the music file
     	 *
@@ -64,7 +54,7 @@ namespace NickvisionTagger::Models
 		 *
 		 * @returns The artist of the music file
 		 */
-    	std::string getArtist() const;
+    	const std::string& getArtist() const;
     	/**
     	 * Sets the artist of the music file
     	 *
@@ -76,7 +66,7 @@ namespace NickvisionTagger::Models
     	 *
     	 * @returns The album of the music file
     	 */
-    	std::string getAlbum() const;
+    	const std::string& getAlbum() const;
     	/**
     	 * Sets the album of the music file
     	 *
@@ -112,7 +102,7 @@ namespace NickvisionTagger::Models
     	 *
     	 * @returns The album artist of the music file
     	 */
-    	std::string getAlbumArtist() const;
+    	const std::string& getAlbumArtist() const;
     	/**
     	 * Sets the album artist of the music file
     	 *
@@ -124,7 +114,7 @@ namespace NickvisionTagger::Models
     	 *
     	 * @returns The genre of the music file
     	 */
-    	std::string getGenre() const;
+    	const std::string& getGenre() const;
     	/**
     	 * Sets the genre of the music file
     	 *
@@ -136,7 +126,7 @@ namespace NickvisionTagger::Models
     	 *
     	 * @returns The comment of the music file
     	 */
-    	std::string getComment() const;
+    	const std::string& getComment() const;
     	/**
     	 * Sets the comment of the music file
     	 *
@@ -148,7 +138,7 @@ namespace NickvisionTagger::Models
     	 *
     	 * @returns The album art of the music file
     	 */
-		TagLib::ByteVector getAlbumArt() const;
+		const TagLib::ByteVector& getAlbumArt() const;
 		/**
 		 * Sets the album art of the music file
 		 *
@@ -252,11 +242,16 @@ namespace NickvisionTagger::Models
 		std::filesystem::path m_path;
 		std::string m_dotExtension;
         std::filesystem::file_time_type m_modificationTimeStamp;
-        std::shared_ptr<TagLib::MPEG::File> m_fileMP3;
-        std::shared_ptr<TagLib::Ogg::Vorbis::File> m_fileOGG;
-        std::shared_ptr<TagLib::FLAC::File> m_fileFLAC;
-        std::shared_ptr<TagLib::ASF::File> m_fileWMA;
-        std::shared_ptr<TagLib::RIFF::WAV::File> m_fileWAV;
+        std::string m_title;
+        std::string m_artist;
+        std::string m_album;
+        unsigned int m_year;
+        unsigned int m_track;
+        std::string m_albumArtist;
+        std::string m_genre;
+        std::string m_comment;
+        TagLib::ByteVector m_albumArt;
+        int m_duration;
         std::string m_fingerprint;
     };
 }
