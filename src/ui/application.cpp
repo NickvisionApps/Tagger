@@ -14,7 +14,7 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setShortName("Tagger");
     m_appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
     m_appInfo.setVersion("2022.9.2-beta1");
-    m_appInfo.setChangelog("<ul><li>Added support for downloading tag metadata from MusicBrainz</li><li>Fixed an issue where the chromaprint fingerprint contained an extra alien unicode character</li><li>UX improvements</li></ul>");
+    m_appInfo.setChangelog("<ul><li>Added support for downloading tag metadata from MusicBrainz</li><li>Fixed an issue where Tagger would not allow opening more than about 1024 files</li><li>Fixed an issue where the chromaprint fingerprint contained an extra alien unicode character</li><li>UX improvements</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     m_appInfo.setSupportUrl("https://github.com/nlogozzo/NickvisionTagger/discussions");
