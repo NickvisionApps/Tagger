@@ -65,6 +65,18 @@ namespace NickvisionTagger::Controllers
     	 */
     	void setPreserveModificationTimeStamp(bool preserveModificationTimeStamp);
     	/**
+    	 * Gets whether or not to overwrite a tag with data from MusicBrainz
+    	 *
+    	 * @returns True to overwrite tag, false to preserve already filled-in properties
+    	 */
+    	bool getOverwriteTagWithMusicBrainz() const;
+    	/**
+    	 * Sets whether or not to overwrite a tag with data from MusicBrainz
+    	 *
+    	 * @param overwriteTagWithMusicBrainz True to overwrite tag, false to preserve already filled-in properties
+    	 */
+    	void setOverwriteTagWithMusicBrainz(bool overwriteTagWithMusicBrainz);
+    	/**
     	 * Saves the configuration file
     	 */
     	void saveConfiguration() const;

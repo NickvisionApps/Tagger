@@ -6,7 +6,7 @@
 
 using namespace NickvisionTagger::Models;
 
-Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/" }, m_theme{ Theme::System }, m_includeSubfolders{ true }, m_rememberLastOpenedFolder{ true }, m_lastOpenedFolder{ "" }, m_preserveModificationTimeStamp{ false }
+Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/" }, m_theme{ Theme::System }, m_includeSubfolders{ true }, m_rememberLastOpenedFolder{ true }, m_lastOpenedFolder{ "" }, m_preserveModificationTimeStamp{ false }, m_overwriteTagWithMusicBrainz{ true }
 {
     if(!std::filesystem::exists(m_configDir))
     {
@@ -22,6 +22,7 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
         m_rememberLastOpenedFolder = json.get("RememberLastOpenedFolder", true).asBool();
         m_lastOpenedFolder = json.get("LastOpenedFolder", "").asString();
         m_preserveModificationTimeStamp = json.get("PreserveModificationTimeStamp", false).asBool();
+        m_overwriteTagWithMusicBrainz = json.get("OverwriteTagWithMusicBrainz", true).asBool();
     }
 }
 
@@ -76,6 +77,17 @@ void Configuration::setPreserveModificationTimeStamp(bool preserveModificationTi
     m_preserveModificationTimeStamp = preserveModificationTimeStamp;
 }
 
+bool Configuration::getOverwriteTagWithMusicBrainz() const
+{
+    return m_overwriteTagWithMusicBrainz;
+}
+
+void Configuration::setOverwriteTagWithMusicBrainz(bool overwriteTagWithMusicBrainz)
+{
+    m_overwriteTagWithMusicBrainz = overwriteTagWithMusicBrainz;
+}
+
+
 void Configuration::save() const
 {
     std::ofstream configFile{ m_configDir + "config.json" };
@@ -87,6 +99,7 @@ void Configuration::save() const
         json["RememberLastOpenedFolder"] = m_rememberLastOpenedFolder;
         json["LastOpenedFolder"] = m_lastOpenedFolder;
         json["PreserveModificationTimeStamp"] = m_preserveModificationTimeStamp;
+        json["OverwriteTagWithMusicBrainz"] = m_overwriteTagWithMusicBrainz;
         configFile << json;
     }
 }

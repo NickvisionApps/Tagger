@@ -85,6 +85,18 @@ namespace NickvisionTagger::Models
     	 */
     	void setPreserveModificationTimeStamp(bool preserveModificationTimeStamp);
     	/**
+    	 * Gets whether or not to overwrite a tag with data from MusicBrainz
+    	 *
+    	 * @returns True to overwrite tag, false to preserve already filled-in properties
+    	 */
+    	bool getOverwriteTagWithMusicBrainz() const;
+    	/**
+    	 * Sets whether or not to overwrite a tag with data from MusicBrainz
+    	 *
+    	 * @param overwriteTagWithMusicBrainz True to overwrite tag, false to preserve already filled-in properties
+    	 */
+    	void setOverwriteTagWithMusicBrainz(bool overwriteTagWithMusicBrainz);
+    	/**
     	 * Saves the configuration to disk
     	 */
     	void save() const;
@@ -96,5 +108,6 @@ namespace NickvisionTagger::Models
     	bool m_rememberLastOpenedFolder;
     	std::string m_lastOpenedFolder;
     	bool m_preserveModificationTimeStamp;
+    	bool m_overwriteTagWithMusicBrainz;
     };
 }

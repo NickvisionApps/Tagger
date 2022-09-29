@@ -41,12 +41,15 @@ namespace NickvisionTagger::UI::Views
 		GtkWidget* m_page{ nullptr };
 		GtkWidget* m_grpUserInterface{ nullptr };
 		GtkWidget* m_rowTheme{ nullptr };
-		GtkWidget* m_grpTagger{ nullptr };
+		GtkWidget* m_grpMusicFolder{ nullptr };
 		GtkWidget* m_rowIncludeSubfolders{ nullptr };
 		GtkWidget* m_switchIncludeSubfolders{ nullptr };
 		GtkWidget* m_rowRememberLastOpenedFolder{ nullptr };
 		GtkWidget* m_switchRememberLastOpenedFolder{ nullptr };
+		GtkWidget* m_grpMusicFile{ nullptr };
 		GtkWidget* m_rowPreserveModificationTimeStamp{ nullptr };
 		GtkWidget* m_switchPreserveModificationTimeStamp{ nullptr };
+		GtkWidget* m_rowOverwriteTagWithMusicBrainz{ nullptr };
+		GtkWidget* m_switchOverwriteTagWithMusicBrainz{ nullptr };
     };
 }

@@ -48,6 +48,16 @@ void PreferencesDialogController::setPreserveModificationTimeStamp(bool preserve
     m_configuration.setPreserveModificationTimeStamp(preserveModificationTimeStamp);
 }
 
+bool PreferencesDialogController::getOverwriteTagWithMusicBrainz() const
+{
+    return m_configuration.getOverwriteTagWithMusicBrainz();
+}
+
+void PreferencesDialogController::setOverwriteTagWithMusicBrainz(bool overwriteTagWithMusicBrainz)
+{
+    m_configuration.setOverwriteTagWithMusicBrainz(overwriteTagWithMusicBrainz);
+}
+
 void PreferencesDialogController::saveConfiguration() const
 {
     m_configuration.save();
