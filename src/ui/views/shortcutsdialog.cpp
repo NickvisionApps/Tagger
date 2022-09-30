@@ -38,7 +38,7 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                             <property name="title">Tag</property>
                             <child>
                                 <object class="GtkShortcutsShortcut">
-                                    <property name="title">Apply</property>
+                                    <property name="title">Apply Changes</property>
                                     <property name="accelerator">&lt;Control&gt;s</property>
                                 </object>
                             </child>
@@ -62,13 +62,13 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                             </child>
                             <child>
                                 <object class="GtkShortcutsShortcut">
-                                    <property name="title">Filename to Tag</property>
+                                    <property name="title">Convert Filename to Tag</property>
                                     <property name="accelerator">&lt;Control&gt;f</property>
                                 </object>
                             </child>
                             <child>
                                 <object class="GtkShortcutsShortcut">
-                                    <property name="title">Tag to Filename</property>
+                                    <property name="title">Convert Tag to Filename</property>
                                     <property name="accelerator">&lt;Control&gt;t</property>
                                 </object>
                             </child>
