@@ -71,6 +71,8 @@ namespace NickvisionTagger::UI::Views
 		GtkWidget* m_btnAlbumArt{ nullptr };
 		GtkWidget* m_frmAlbumArt{ nullptr };
 		GtkWidget* m_imgAlbumArt{ nullptr };
+		GtkWidget* m_btnKeepAlbumArt{ nullptr };
+		GtkWidget* m_statusKeepAlbumArt{ nullptr };
 		GSimpleAction* m_actOpenMusicFolder{ nullptr };
 		GSimpleAction* m_actReloadMusicFolder{ nullptr };
 		GSimpleAction* m_actApply{ nullptr };

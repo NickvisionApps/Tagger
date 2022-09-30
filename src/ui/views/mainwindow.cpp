@@ -137,7 +137,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_signal_connect(m_btnNoAlbumArt, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
     m_statusNoAlbumArt = adw_status_page_new();
     gtk_style_context_add_class(gtk_widget_get_style_context(m_statusNoAlbumArt), "compact");
-    adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_statusNoAlbumArt), "folder-music-symbolic");
+    adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_statusNoAlbumArt), "image-missing-symbolic");
     gtk_button_set_child(GTK_BUTTON(m_btnNoAlbumArt), m_statusNoAlbumArt);
     adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_btnNoAlbumArt, "noImage");
     //Album Art
@@ -149,6 +149,16 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_frame_set_child(GTK_FRAME(m_frmAlbumArt), m_imgAlbumArt);
     gtk_button_set_child(GTK_BUTTON(m_btnAlbumArt), m_frmAlbumArt);
     adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_btnAlbumArt, "image");
+    //Keep Album Art
+    m_btnKeepAlbumArt = gtk_button_new();
+    gtk_widget_set_tooltip_text(m_btnKeepAlbumArt, "Selected files have different album art images.");
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnKeepAlbumArt), "card");
+    g_signal_connect(m_btnKeepAlbumArt, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
+    m_statusKeepAlbumArt = adw_status_page_new();
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_statusKeepAlbumArt), "compact");
+    adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_statusKeepAlbumArt), "folder-pictures-symbolic");
+    gtk_button_set_child(GTK_BUTTON(m_btnKeepAlbumArt), m_statusKeepAlbumArt);
+    adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_btnKeepAlbumArt, "keepImage");
     //Properties Group
     m_adwGrpProperties = adw_preferences_group_new();
     //Filename
@@ -557,6 +567,11 @@ void MainWindow::onListMusicFilesSelectionChanged()
     {
         adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_stackAlbumArt), "image");
         GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), m_controller.getSelectedMusicFiles()[0]->getAlbumArt());
+    }
+    else if(tagMap.at("albumArt") == "keepArt")
+    {
+        adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_stackAlbumArt), "keepImage");
+        gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
     }
     else
     {

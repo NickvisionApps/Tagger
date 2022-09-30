@@ -244,7 +244,7 @@ std::unordered_map<std::string, std::string> MainWindowController::getSelectedTa
         tagMap.insert({ "duration", firstMusicFile->getDurationAsString() });
         tagMap.insert({ "fingerprint", firstMusicFile->getChromaprintFingerprint() });
         tagMap.insert({ "fileSize", firstMusicFile->getFileSizeAsString() });
-        tagMap.insert({ "albumArt",  firstMusicFile->getAlbumArt().isEmpty() ? "" : "hasArt" });
+        tagMap.insert({ "albumArt",  firstMusicFile->getAlbumArt().isEmpty() ? "noArt" : "hasArt" });
     }
     else
     {
@@ -313,7 +313,14 @@ std::unordered_map<std::string, std::string> MainWindowController::getSelectedTa
         tagMap.insert({ "duration", MediaHelpers::durationToString(totalDuration) });
         tagMap.insert({ "fingerprint", "<keep>" });
         tagMap.insert({ "fileSize", MediaHelpers::fileSizeToString(totalFileSize) });
-        tagMap.insert({ "albumArt", haveSameAlbumArt && !firstMusicFile->getAlbumArt().isEmpty() ? "hasArt" : "" });
+        if(haveSameAlbumArt)
+        {
+            tagMap.insert({ "albumArt", firstMusicFile->getAlbumArt().isEmpty() ? "noArt" : "hasArt" });
+        }
+        else
+        {
+            tagMap.insert({ "albumArt", "keepArt" });
+        }
     }
     return tagMap;
 }
