@@ -133,6 +133,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_size_request(m_stackAlbumArt, 280, 280);
     //No Album Art
     m_btnNoAlbumArt = gtk_button_new();
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNoAlbumArt), "card");
     g_signal_connect(m_btnNoAlbumArt, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
     m_statusNoAlbumArt = adw_status_page_new();
     gtk_style_context_add_class(gtk_widget_get_style_context(m_statusNoAlbumArt), "compact");
@@ -141,9 +142,12 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_btnNoAlbumArt, "noImage");
     //Album Art
     m_btnAlbumArt = gtk_button_new();
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnAlbumArt), "card");
     g_signal_connect(m_btnAlbumArt, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
+    m_frmAlbumArt = gtk_frame_new(nullptr);
     m_imgAlbumArt = gtk_image_new();
-    gtk_button_set_child(GTK_BUTTON(m_btnAlbumArt), m_imgAlbumArt);
+    gtk_frame_set_child(GTK_FRAME(m_frmAlbumArt), m_imgAlbumArt);
+    gtk_button_set_child(GTK_BUTTON(m_btnAlbumArt), m_frmAlbumArt);
     adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_btnAlbumArt, "image");
     //Properties Group
     m_adwGrpProperties = adw_preferences_group_new();
