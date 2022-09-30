@@ -28,11 +28,6 @@ void MainWindowController::registerSendToastCallback(const std::function<void(co
     m_sendToastCallback = callback;
 }
 
-void MainWindowController::registerSendNotificationCallback(const std::function<void(const std::string&, const std::string&)>& callback)
-{
-    m_sendNotificationCallback = callback;
-}
-
 void MainWindowController::startup()
 {
     if(!m_isOpened)
@@ -155,9 +150,7 @@ void MainWindowController::insertAlbumArt(const std::string& pathToImage)
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
         musicFile->setAlbumArt(byteVector);
-        musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
     }
-    m_sendToastCallback("Album art inserted successfully.");
 }
 
 void MainWindowController::removeAlbumArt()
@@ -165,9 +158,7 @@ void MainWindowController::removeAlbumArt()
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
         musicFile->setAlbumArt({});
-        musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
     }
-    m_sendToastCallback("Album art removed successfully.");
 }
 
 void MainWindowController::filenameToTag(const std::string& formatString)
@@ -175,7 +166,7 @@ void MainWindowController::filenameToTag(const std::string& formatString)
     int success{ 0 };
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
-        if(musicFile->filenameToTag(formatString, m_configuration.getPreserveModificationTimeStamp()))
+        if(musicFile->filenameToTag(formatString))
         {
             success++;
         }
@@ -201,7 +192,7 @@ void MainWindowController::downloadMusicBrainzMetadata()
     int success{ 0 };
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
-        if(musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz(), m_configuration.getPreserveModificationTimeStamp()))
+        if(musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()))
         {
             success++;
         }

@@ -61,7 +61,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Apply Button
     m_btnApply = gtk_button_new();
     gtk_button_set_label(GTK_BUTTON(m_btnApply), "Apply");
-    gtk_widget_set_tooltip_text(m_btnApply, "Apply (Ctrl+S)");
+    gtk_widget_set_tooltip_text(m_btnApply, "Apply Changes To Tag (Ctrl+S)");
     gtk_widget_set_visible(m_btnApply, false);
     gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnApply), "win.apply");
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnApply), "suggested-action");
@@ -127,20 +127,24 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Tagger Flap Separator
     m_sepTagger = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
     adw_flap_set_separator(ADW_FLAP(m_pageFlapTagger), m_sepTagger);
-    //Album Art
+    //Album Art Stack
     m_stackAlbumArt = adw_view_stack_new();
     gtk_widget_set_halign(m_stackAlbumArt, GTK_ALIGN_CENTER);
-    gtk_widget_set_size_request(m_stackAlbumArt, 240, 240);
+    gtk_widget_set_size_request(m_stackAlbumArt, 280, 280);
+    //No Album Art
+    m_btnNoAlbumArt = gtk_button_new();
+    g_signal_connect(m_btnNoAlbumArt, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
     m_statusNoAlbumArt = adw_status_page_new();
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_statusNoAlbumArt), "card");
     gtk_style_context_add_class(gtk_widget_get_style_context(m_statusNoAlbumArt), "compact");
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_statusNoAlbumArt), "folder-music-symbolic");
-    adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_statusNoAlbumArt, "noImage");
-    m_frameAlbumArt = gtk_frame_new(nullptr);
+    gtk_button_set_child(GTK_BUTTON(m_btnNoAlbumArt), m_statusNoAlbumArt);
+    adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_btnNoAlbumArt, "noImage");
+    //Album Art
+    m_btnAlbumArt = gtk_button_new();
+    g_signal_connect(m_btnAlbumArt, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
     m_imgAlbumArt = gtk_image_new();
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_frameAlbumArt), "card");
-    gtk_frame_set_child(GTK_FRAME(m_frameAlbumArt), m_imgAlbumArt);
-    adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_frameAlbumArt, "image");
+    gtk_button_set_child(GTK_BUTTON(m_btnAlbumArt), m_imgAlbumArt);
+    adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_btnAlbumArt, "image");
     //Properties Group
     m_adwGrpProperties = adw_preferences_group_new();
     //Filename
@@ -220,14 +224,6 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     adw_application_window_set_content(ADW_APPLICATION_WINDOW(m_gobj), m_mainBox);
     //Send Toast Callback
     m_controller.registerSendToastCallback([&](const std::string& message) { adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(message.c_str())); });
-    //Send Notification Callback
-    m_controller.registerSendNotificationCallback([&](const std::string& title, const std::string& message)
-    {
-        GNotification* notification{ g_notification_new(title.c_str()) };
-        g_notification_set_body(notification, message.c_str());
-        g_application_send_notification(g_application_get_default(), title.c_str(), notification);
-        g_object_unref(notification);
-    });
     //Music Folder Updated Callback
     m_controller.registerMusicFolderUpdatedCallback([&](bool sendToast) { onMusicFolderUpdated(sendToast); });
     //Open Music Folder Action
@@ -412,7 +408,7 @@ void MainWindow::onInsertAlbumArt()
             std::string path{ g_file_get_path(file) };
             ProgressDialog progressDialog{ GTK_WINDOW(mainWindow->m_gobj), "Inserting album art...", [mainWindow, path]() { mainWindow->m_controller.insertAlbumArt(path); } };
             progressDialog.run();
-            gtk_list_box_unselect_all(GTK_LIST_BOX(mainWindow->m_listMusicFiles));
+            mainWindow->onListMusicFilesSelectionChanged();
             g_object_unref(file);
         }
         g_object_unref(dialog);
@@ -422,23 +418,9 @@ void MainWindow::onInsertAlbumArt()
 
 void MainWindow::onRemoveAlbumArt()
 {
-    GtkWidget* messageDialog{ adw_message_dialog_new(GTK_WINDOW(m_gobj), "Remove Album Art?", "Are you sure you want to remove the album art from the selected files?") };
-    adw_message_dialog_add_responses(ADW_MESSAGE_DIALOG(messageDialog), "no", "No", "yes", "Yes", nullptr);
-    adw_message_dialog_set_response_appearance(ADW_MESSAGE_DIALOG(messageDialog), "yes", ADW_RESPONSE_DESTRUCTIVE);
-    adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(messageDialog), "no");
-    adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(messageDialog), "no");
-    g_signal_connect(messageDialog, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog* dialog, gchar* response, gpointer data)
-    {
-        gtk_window_destroy(GTK_WINDOW(dialog));
-        MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
-        if(strcmp(response, "yes") == 0)
-        {
-            ProgressDialog progressDialog{ GTK_WINDOW(mainWindow->m_gobj), "Removing album art...", [mainWindow]() { mainWindow->m_controller.removeAlbumArt(); } };
-            progressDialog.run();
-            gtk_list_box_unselect_all(GTK_LIST_BOX(mainWindow->m_listMusicFiles));
-        }
-    })), this);
-    gtk_widget_show(messageDialog);
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Removing album art...", [&]() { m_controller.removeAlbumArt(); } };
+    progressDialog.run();
+    onListMusicFilesSelectionChanged();
 }
 
 void MainWindow::onFilenameToTag()
@@ -449,7 +431,7 @@ void MainWindow::onFilenameToTag()
     {
         ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Converting filenames to tags...", [&, formatString]() { m_controller.filenameToTag(formatString); } };
         progressDialog.run();
-        gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
+        onListMusicFilesSelectionChanged();
     }
 }
 
@@ -461,7 +443,7 @@ void MainWindow::onTagToFilename()
     {
         ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Converting tags to filenames...", [&, formatString]() { m_controller.tagToFilename(formatString); } };
         progressDialog.run();
-        gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
+        onMusicFolderUpdated(false);
     }
 }
 
@@ -469,7 +451,7 @@ void MainWindow::onDownloadMusicBrainzMetadata()
 {
     ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Downloading MusicBrainz metadata...", [&]() { m_controller.downloadMusicBrainzMetadata(); } };
     progressDialog.run();
-    gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
+    onListMusicFilesSelectionChanged();
 }
 
 void MainWindow::onPreferences()

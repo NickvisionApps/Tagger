@@ -66,8 +66,9 @@ namespace NickvisionTagger::UI::Views
 		GtkWidget* m_txtChromaprintFingerprint{ nullptr };
 		GtkWidget* m_txtFileSize{ nullptr };
 		GtkWidget* m_stackAlbumArt{ nullptr };
+		GtkWidget* m_btnNoAlbumArt{ nullptr };
 		GtkWidget* m_statusNoAlbumArt{ nullptr };
-		GtkWidget* m_frameAlbumArt{ nullptr };
+		GtkWidget* m_btnAlbumArt{ nullptr };
 		GtkWidget* m_imgAlbumArt{ nullptr };
 		GSimpleAction* m_actOpenMusicFolder{ nullptr };
 		GSimpleAction* m_actReloadMusicFolder{ nullptr };

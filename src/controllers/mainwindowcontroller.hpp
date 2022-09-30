@@ -43,12 +43,6 @@ namespace NickvisionTagger::Controllers
     	 * @param callback A void(const std::string&) function
     	 */
     	void registerSendToastCallback(const std::function<void(const std::string&)>& callback);
-    	 /**
-    	 * Registers a callback for sending a desktop notification
-    	 *
-    	 * @param callback A void(const std::string&, const std::string&) function
-    	 */
-    	void registerSendNotificationCallback(const std::function<void(const std::string&, const std::string&)>& callback);
     	/**
     	 * Runs startup functions
     	 */
@@ -151,7 +145,6 @@ namespace NickvisionTagger::Controllers
     	NickvisionTagger::Models::Configuration& m_configuration;
     	bool m_isOpened;
     	std::function<void(const std::string& message)> m_sendToastCallback;
-    	std::function<void(const std::string& title, const std::string& message)> m_sendNotificationCallback;
     	NickvisionTagger::Models::MusicFolder m_musicFolder;
     	std::function<void(bool sendToast)> m_musicFolderUpdatedCallback;
     	std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;

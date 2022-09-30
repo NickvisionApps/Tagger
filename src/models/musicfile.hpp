@@ -191,10 +191,9 @@ namespace NickvisionTagger::Models
 		 * Uses the music file's filename to fill in tag information based on the format string
 		 *
 		 * @param formatString The format string
-		 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
 		 * @returns True if the operation was successful, else false
 		 */
-		bool filenameToTag(const std::string& formatString, bool preserveModificationTimeStamp);
+		bool filenameToTag(const std::string& formatString);
 		/**
 		 * Uses the music file's tag to set the file's filename in the format of the format string
 		 *
@@ -206,10 +205,9 @@ namespace NickvisionTagger::Models
 		 * Downloads and applys metadata from MusicBrainz to the tag
 		 *
 		 * @param overwriteTagWithMusicBrainz Set true to overwrite tag properties with MusicBrainz data, else false
-		 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
 		 * @returns True if the operation was successful, else false
 		 */
-		bool downloadMusicBrainzMetadata(bool overwriteTagWithMusicBrainz, bool preserveModificationTimeStamp);
+		bool downloadMusicBrainzMetadata(bool overwriteTagWithMusicBrainz);
 		/**
 		 * Compares this.filename to toCompare.filename via less-than
 		 *

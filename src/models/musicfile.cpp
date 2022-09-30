@@ -444,7 +444,7 @@ void MusicFile::removeTag(bool preserveModificationTimeStamp)
     saveTag(preserveModificationTimeStamp);
 }
 
-bool MusicFile::filenameToTag(const std::string& formatString, bool preserveModificationTimeStamp)
+bool MusicFile::filenameToTag(const std::string& formatString)
 {
     if (formatString == "%artist%- %title%")
     {
@@ -492,7 +492,6 @@ bool MusicFile::filenameToTag(const std::string& formatString, bool preserveModi
     {
         return false;
     }
-    saveTag(preserveModificationTimeStamp);
     return true;
 }
 
@@ -537,7 +536,7 @@ bool MusicFile::tagToFilename(const std::string& formatString)
     return true;
 }
 
-bool MusicFile::downloadMusicBrainzMetadata(bool overwriteTagWithMusicBrainz, bool preserveModificationTimeStamp)
+bool MusicFile::downloadMusicBrainzMetadata(bool overwriteTagWithMusicBrainz)
 {
     AcoustIdQuery acoustIdQuery{ getDuration(), getChromaprintFingerprint() };
     if(acoustIdQuery.lookup() == AcoustIdQueryStatus::OK)
@@ -573,7 +572,6 @@ bool MusicFile::downloadMusicBrainzMetadata(bool overwriteTagWithMusicBrainz, bo
             {
                 m_albumArt = musicBrainzQuery.getAlbumArt();
             }
-            saveTag(preserveModificationTimeStamp);
             return true;
         }
     }

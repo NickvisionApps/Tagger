@@ -3,7 +3,7 @@ project('org.nickvision.tagger', ['cpp', 'c'], version: '2022.10.0', meson_versi
 gnome = import('gnome')
 
 threads = dependency('Threads')
-gtk = dependency('gtk4', version: '>= 4.6.0')
+gtk = dependency('gtk4', version: '>= 4.8.0')
 adwaita = dependency('libadwaita-1', version: '>= 1.2.0')
 jsoncpp = dependency('jsoncpp')
 curlpp = dependency('curlpp')
