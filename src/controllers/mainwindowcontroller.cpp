@@ -37,13 +37,13 @@ void MainWindowController::startup()
 {
     if(!m_isOpened)
     {
+        cURLpp::initialize();
         m_musicFolder.setIncludeSubfolders(m_configuration.getIncludeSubfolders());
         if(m_configuration.getRememberLastOpenedFolder())
         {
             openMusicFolder(m_configuration.getLastOpenedFolder());
         }
         m_isOpened = true;
-        cURLpp::initialize();
     }
 }
 
