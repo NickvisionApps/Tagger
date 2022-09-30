@@ -31,11 +31,6 @@ ProgressDialog::ProgressDialog(GtkWindow* parent, const std::string& description
     adw_window_set_content(ADW_WINDOW(m_gobj), m_mainBox);
 }
 
-ProgressDialog::~ProgressDialog()
-{
-    gtk_window_destroy(GTK_WINDOW(m_gobj));
-}
-
 GtkWidget* ProgressDialog::gobj()
 {
     return m_gobj;
@@ -53,4 +48,5 @@ void ProgressDialog::run()
         status = result.wait_for(std::chrono::milliseconds(30));
     }
     gtk_widget_hide(m_gobj);
+    gtk_window_destroy(GTK_WINDOW(m_gobj));
 }

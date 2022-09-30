@@ -86,11 +86,6 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     gtk_switch_set_active(GTK_SWITCH(m_switchOverwriteTagWithMusicBrainz), m_controller.getOverwriteTagWithMusicBrainz());
 }
 
-PreferencesDialog::~PreferencesDialog()
-{
-    gtk_window_destroy(GTK_WINDOW(m_gobj));
-}
-
 GtkWidget* PreferencesDialog::gobj()
 {
     return m_gobj;
@@ -121,4 +116,5 @@ void PreferencesDialog::run()
     {
         adw_style_manager_set_color_scheme(adw_style_manager_get_default(), ADW_COLOR_SCHEME_FORCE_DARK);
     }
+    gtk_window_destroy(GTK_WINDOW(m_gobj));
 }

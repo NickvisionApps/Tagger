@@ -17,10 +17,6 @@ namespace NickvisionTagger::UI::Views
 		 * @param parent The parent window for the dialog
 		 */
     	ShortcutsDialog(GtkWindow* parent);
-    	/**
-    	 * Destroys the ShortcutsDialog
-    	 */
-		~ShortcutsDialog();
 		/**
     	 * Gets the GtkWidget* representing the ShortcutsDialog
     	 *

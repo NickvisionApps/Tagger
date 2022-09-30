@@ -328,6 +328,7 @@ void MainWindow::onMusicFolderUpdated(bool sendToast)
         adw_preferences_row_set_title(ADW_PREFERENCES_ROW(row), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
         gtk_list_box_append(GTK_LIST_BOX(m_listMusicFiles), row);
         m_listMusicFilesRows.push_back(row);
+        g_main_context_iteration(g_main_context_default(), false);
     }
     if(musicFilesCount > 0 && sendToast)
     {
@@ -367,7 +368,7 @@ void MainWindow::onApply()
     tagMap.insert({ "comment", gtk_editable_get_text(GTK_EDITABLE(m_txtComment)) });
     ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Saving tags...", [&, tagMap]() { m_controller.saveTags(tagMap); } };
     progressDialog.run();
-    gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
+    onMusicFolderUpdated(false);
 }
 
 void MainWindow::onDeleteTags()

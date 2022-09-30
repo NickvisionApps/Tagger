@@ -23,10 +23,6 @@ namespace NickvisionTagger::UI::Controls
     	 */
     	ComboBoxDialog(GtkWindow* parent, const std::string& title, const std::string& description, const std::string& rowTitle, const std::vector<std::string>& choices);
 		/**
-    	 * Destroys the ComboBoxDialog
-    	 */
-		~ComboBoxDialog();
-		/**
     	 * Gets the GtkWidget* representing the ComboBoxDialog
     	 *
     	 * @returns The GtkWidget* representing the ComboBoxDialog

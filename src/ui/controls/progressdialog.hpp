@@ -21,10 +21,6 @@ namespace NickvisionTagger::UI::Controls
          */
     	ProgressDialog(GtkWindow* parent, const std::string& description, const std::function<void()>& work);
     	/**
-    	 * Destroys the ProgressDialog
-    	 */
-    	~ProgressDialog();
-    	/**
     	 * Gets the GtkWidget* representing the ProgressDialog
     	 *
     	 * @returns The GtkWidget* representing the ProgressDialog

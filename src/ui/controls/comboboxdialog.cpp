@@ -29,11 +29,6 @@ ComboBoxDialog::ComboBoxDialog(GtkWindow* parent, const std::string& title, cons
     adw_message_dialog_set_extra_child(ADW_MESSAGE_DIALOG(m_gobj), m_preferencesGroup);
 }
 
-ComboBoxDialog::~ComboBoxDialog()
-{
-    gtk_window_destroy(GTK_WINDOW(m_gobj));
-}
-
 GtkWidget* ComboBoxDialog::gobj()
 {
     return m_gobj;
@@ -46,7 +41,9 @@ std::string ComboBoxDialog::run()
     {
         g_main_context_iteration(g_main_context_default(), false);
     }
-    return m_response == "ok" ? m_choices[adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowChoices))] : "";
+    std::string result{ m_response == "ok" ? m_choices[adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowChoices))] : "" };
+    gtk_window_destroy(GTK_WINDOW(m_gobj));
+    return result;
 }
 
 void ComboBoxDialog::setResponse(const std::string& response)

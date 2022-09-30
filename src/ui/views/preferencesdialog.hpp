@@ -19,10 +19,6 @@ namespace NickvisionTagger::UI::Views
     	 */
     	PreferencesDialog(GtkWindow* parent, const NickvisionTagger::Controllers::PreferencesDialogController& controller);
     	/**
-    	 * Destroys the PreferencesDialog
-    	 */
-    	~PreferencesDialog();
-    	/**
     	 * Gets the GtkWidget* representing the PreferencesDialog
     	 *
     	 * @returns The GtkWidget* representing the PreferencesDialog
