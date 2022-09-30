@@ -73,8 +73,8 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     GMenu* menuOtherActions{ g_menu_new() };
     g_menu_append(menuAlbumArt, "Insert Album Art", "win.insertAlbumArt");
     g_menu_append(menuAlbumArt, "Remove Album Art", "win.removeAlbumArt");
-    g_menu_append(menuOtherActions, "Convert Filename to Tag", "win.filenameToTag");
-    g_menu_append(menuOtherActions, "Convert Tag to Filename", "win.tagToFilename");
+    g_menu_append(menuOtherActions, "Filename to Tag", "win.filenameToTag");
+    g_menu_append(menuOtherActions, "Tag to Filename", "win.tagToFilename");
     g_menu_append(menuOtherActions, "Download MusicBrainz Metadata", "win.downloadMusicBrainzMetadata");
     g_menu_append(menuTagActions, "Delete Tags", "win.deleteTags");
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuAlbumArt));
@@ -476,7 +476,7 @@ void MainWindow::onAbout()
 {
     adw_show_about_window(GTK_WINDOW(m_gobj),
                           "application-name", m_controller.getAppInfo().getShortName().c_str(),
-                          "application-icon", m_controller.getAppInfo().getId().c_str(),
+                          "application-icon", (m_controller.getAppInfo().getId() + "-devel").c_str(),
                           "version", m_controller.getAppInfo().getVersion().c_str(),
                           "comments", m_controller.getAppInfo().getDescription().c_str(),
                           "developer-name", "Nickvision",

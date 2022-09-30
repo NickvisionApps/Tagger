@@ -55,7 +55,7 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     m_switchPreserveModificationTimeStamp = gtk_switch_new();
     gtk_widget_set_valign(m_switchPreserveModificationTimeStamp, GTK_ALIGN_CENTER);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowPreserveModificationTimeStamp), "Preserve Modification Time Stamp");
-    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowPreserveModificationTimeStamp), "If checked, a music file's modification time stamp will not be updated when the tag is edited'.");
+    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowPreserveModificationTimeStamp), "If checked, a music file's modification time stamp will not be updated when the tag is edited.");
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowPreserveModificationTimeStamp), m_switchPreserveModificationTimeStamp);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowPreserveModificationTimeStamp), m_switchPreserveModificationTimeStamp);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpMusicFile), m_rowPreserveModificationTimeStamp);
@@ -64,7 +64,7 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     m_switchOverwriteTagWithMusicBrainz = gtk_switch_new();
     gtk_widget_set_valign(m_switchOverwriteTagWithMusicBrainz, GTK_ALIGN_CENTER);
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowOverwriteTagWithMusicBrainz), "Overwrite Tag With MusicBrainz");
-    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowOverwriteTagWithMusicBrainz), "If checked, Tagger will overwrite a tag's properties with the resulting data from MusicBrainz. Else, Tagger will preserve already filled-in properties and fill in only empty properties in a tag with the data from MusicBrainz.");
+    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowOverwriteTagWithMusicBrainz), "If checked, a tag's properties will be overwritten with the metadata downloaded from MusicBrainz. Else, Tagger will fill-in only empty tag properties with MusicBrainz metadata.");
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowOverwriteTagWithMusicBrainz), m_switchOverwriteTagWithMusicBrainz);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowOverwriteTagWithMusicBrainz), m_switchOverwriteTagWithMusicBrainz);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpMusicFile), m_rowOverwriteTagWithMusicBrainz);
