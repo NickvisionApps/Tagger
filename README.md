@@ -34,7 +34,7 @@
 - [curlpp](http://www.curlpp.org/)
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
 - [taglib](https://taglib.org/)
-- [libchromaprint](https://acoustid.org/chromaprint)
+- [libchromaprint for fpcalc](https://acoustid.org/chromaprint)
 
 # Special Thanks
 - [daudix-UFO](https://github.com/daudix-UFO) and [jannuary](https://github.com/jannuary) for our application icons
