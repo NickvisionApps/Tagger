@@ -464,7 +464,7 @@ void MainWindow::onTagToFilename()
 
 void MainWindow::onDownloadMusicBrainzMetadata()
 {
-    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Downloading MusicBrainz metadata...", [&]() { m_controller.downloadMusicBrainzMetadata(); } };
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Downloading MusicBrainz metadata...\n<small>(This may take a while)</small>", [&]() { m_controller.downloadMusicBrainzMetadata(); } };
     progressDialog.run();
     onListMusicFilesSelectionChanged();
 }
