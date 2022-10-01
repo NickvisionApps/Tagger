@@ -7,6 +7,7 @@
 #include <taglib/flacfile.h>
 #include <taglib/mpegfile.h>
 #include <taglib/textidentificationframe.h>
+#include <taglib/tstring.h>
 #include <taglib/wavfile.h>
 #include <taglib/vorbisfile.h>
 #include "acoustidquery.hpp"
@@ -317,17 +318,17 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
     if (m_dotExtension == ".mp3")
     {
         TagLib::MPEG::File file{ m_path.c_str() };
-        file.ID3v2Tag(true)->setTitle(m_title);
-        file.ID3v2Tag(true)->setArtist(m_artist);
-        file.ID3v2Tag(true)->setAlbum(m_album);
+        file.ID3v2Tag(true)->setTitle({ m_title, TagLib::String::Type::UTF8 });
+        file.ID3v2Tag(true)->setArtist({ m_artist, TagLib::String::Type::UTF8 });
+        file.ID3v2Tag(true)->setAlbum({ m_album, TagLib::String::Type::UTF8 });
         file.ID3v2Tag(true)->setYear(m_year);
         file.ID3v2Tag(true)->setTrack(m_track);
         file.ID3v2Tag(true)->removeFrames("TPE2");
         TagLib::ID3v2::TextIdentificationFrame* frameAlbumArtist{ new TagLib::ID3v2::TextIdentificationFrame("TPE2", TagLib::String::UTF8) };
-        frameAlbumArtist->setText(m_albumArtist);
+        frameAlbumArtist->setText({ m_albumArtist, TagLib::String::Type::UTF8 });
         file.ID3v2Tag(true)->addFrame(frameAlbumArtist);
-        file.ID3v2Tag(true)->setGenre(m_genre);
-        file.ID3v2Tag(true)->setComment(m_comment);
+        file.ID3v2Tag(true)->setGenre({ m_genre, TagLib::String::Type::UTF8 });
+        file.ID3v2Tag(true)->setComment({ m_comment, TagLib::String::Type::UTF8 });
         file.ID3v2Tag(true)->removeFrames("APIC");
         if (!m_albumArt.isEmpty())
         {
@@ -341,14 +342,14 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
     else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
     {
         TagLib::Ogg::Vorbis::File file{ m_path.c_str() };
-        file.tag()->setTitle(m_title);
-        file.tag()->setArtist(m_artist);
-        file.tag()->setAlbum(m_album);
+        file.tag()->setTitle({ m_title, TagLib::String::Type::UTF8 });
+        file.tag()->setArtist({ m_artist, TagLib::String::Type::UTF8 });
+        file.tag()->setAlbum({ m_album, TagLib::String::Type::UTF8 });
         file.tag()->setYear(m_year);
         file.tag()->setTrack(m_track);
-        file.tag()->addField("ALBUMARTIST", m_albumArtist);
-        file.tag()->setGenre(m_genre);
-        file.tag()->setComment(m_comment);
+        file.tag()->addField("ALBUMARTIST", { m_albumArtist, TagLib::String::Type::UTF8 });
+        file.tag()->setGenre({ m_genre, TagLib::String::Type::UTF8 });
+        file.tag()->setComment({ m_comment, TagLib::String::Type::UTF8 });
         file.tag()->removeAllPictures();
         if (!m_albumArt.isEmpty())
         {
@@ -362,14 +363,14 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
     else if (m_dotExtension == ".flac")
     {
         TagLib::FLAC::File file{ m_path.c_str() };
-        file.xiphComment(true)->setTitle(m_title);
-        file.xiphComment(true)->setArtist(m_artist);
-        file.xiphComment(true)->setAlbum(m_album);
+        file.xiphComment(true)->setTitle({ m_title, TagLib::String::Type::UTF8 });
+        file.xiphComment(true)->setArtist({ m_artist, TagLib::String::Type::UTF8 });
+        file.xiphComment(true)->setAlbum({ m_album, TagLib::String::Type::UTF8 });
         file.xiphComment(true)->setYear(m_year);
         file.xiphComment(true)->setTrack(m_track);
-        file.xiphComment(true)->addField("ALBUMARTIST", m_albumArtist);
-        file.xiphComment(true)->setGenre(m_genre);
-        file.xiphComment(true)->setComment(m_comment);
+        file.xiphComment(true)->addField("ALBUMARTIST", { m_albumArtist, TagLib::String::Type::UTF8 });
+        file.xiphComment(true)->setGenre({ m_genre, TagLib::String::Type::UTF8 });
+        file.xiphComment(true)->setComment({ m_comment, TagLib::String::Type::UTF8 });
         file.xiphComment(true)->removeAllPictures();
         if (!m_albumArt.isEmpty())
         {
@@ -383,15 +384,15 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
     else if (m_dotExtension == ".wma")
     {
         TagLib::ASF::File file{ m_path.c_str() };
-        file.tag()->setTitle(m_title);
-        file.tag()->setArtist(m_artist);
-        file.tag()->setAlbum(m_album);
+        file.tag()->setTitle({ m_title, TagLib::String::Type::UTF8 });
+        file.tag()->setArtist({ m_artist, TagLib::String::Type::UTF8 });
+        file.tag()->setAlbum({ m_album, TagLib::String::Type::UTF8 });
         file.tag()->setYear(m_year);
         file.tag()->setTrack(m_track);
         file.tag()->removeItem("ALBUMARTIST");
-        file.tag()->addAttribute("ALBUMARTIST", { m_albumArtist });
-        file.tag()->setGenre(m_genre);
-        file.tag()->setComment(m_comment);
+        file.tag()->addAttribute("ALBUMARTIST", { { m_albumArtist, TagLib::String::Type::UTF8 } });
+        file.tag()->setGenre({ m_genre, TagLib::String::Type::UTF8 });
+        file.tag()->setComment({ m_comment, TagLib::String::Type::UTF8 });
         file.tag()->removeItem("WM/Picture");
         file.tag()->addAttribute("WM/Picture", { m_albumArt });
         file.save();
@@ -399,17 +400,17 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
     else if (m_dotExtension == ".wav")
     {
         TagLib::RIFF::WAV::File file{ m_path.c_str() };
-        file.ID3v2Tag()->setTitle(m_title);
-        file.ID3v2Tag()->setArtist(m_artist);
-        file.ID3v2Tag()->setAlbum(m_album);
+        file.ID3v2Tag()->setTitle({ m_title, TagLib::String::Type::UTF8 });
+        file.ID3v2Tag()->setArtist({ m_artist, TagLib::String::Type::UTF8 });
+        file.ID3v2Tag()->setAlbum({ m_album, TagLib::String::Type::UTF8 });
         file.ID3v2Tag()->setYear(m_year);
         file.ID3v2Tag()->setTrack(m_track);
         file.ID3v2Tag()->removeFrames("TPE2");
         TagLib::ID3v2::TextIdentificationFrame* frameAlbumArtist{ new TagLib::ID3v2::TextIdentificationFrame("TPE2", TagLib::String::UTF8) };
-        frameAlbumArtist->setText(m_albumArtist);
+        frameAlbumArtist->setText({ m_albumArtist, TagLib::String::Type::UTF8 });
         file.ID3v2Tag()->addFrame(frameAlbumArtist);
-        file.ID3v2Tag()->setGenre(m_genre);
-        file.ID3v2Tag()->setComment(m_comment);
+        file.ID3v2Tag()->setGenre({ m_genre, TagLib::String::Type::UTF8 });
+        file.ID3v2Tag()->setComment({ m_comment, TagLib::String::Type::UTF8 });
         file.ID3v2Tag()->removeFrames("APIC");
         if (!m_albumArt.isEmpty())
         {

@@ -35,11 +35,12 @@
     <binary>org.nickvision.tagger</binary>
   </provides>
   <releases>
-    <release version="2022.10.0-beta1" date="2022-9-30">
+    <release version="2022.10.0-beta2" date="2022-9-30">
       <description>
         <p>- Tagger now requires clicking the 'Apply' button to save changes to selected tags after inserting/removing album art, converting filenames to tags, or downloading metadata from MusicBrainz. Changing a file selection without clicking 'Apply' will preserve the changes to the tags, however, if the music folder is changed/reloaded or if the application is closed without clicking 'Apply', the changes will be lost. Deleting Tags continues to be a permanent action that will take affect as soon as the action is confirmed from the message box</p>
         <p>- Added the 'Overwrite Tag With MusicBrainz' option to preferences</p>
         <p>- Added the ability to click on the album art in the tag properties pane to insert album art</p>
+        <p>- Fixed an issue where Tagger wouldn't handle UTF-8 characters correctly</p>
         <p>- Fixed an issue where applying a filename change was not updating the must files list</p>
       </description>
     </release>
