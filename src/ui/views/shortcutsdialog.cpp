@@ -35,7 +35,7 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                     </child>
                     <child>
                         <object class="GtkShortcutsGroup">
-                            <property name="title">Tag</property>
+                            <property name="title">Tag Actions</property>
                             <child>
                                 <object class="GtkShortcutsShortcut">
                                     <property name="title">Apply Changes</property>
@@ -72,10 +72,21 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                                     <property name="accelerator">&lt;Control&gt;t</property>
                                 </object>
                             </child>
+                        </object>
+                    </child>
+                    <child>
+                        <object class="GtkShortcutsGroup">
+                            <property name="title">Web Services</property>
                             <child>
                                 <object class="GtkShortcutsShortcut">
                                     <property name="title">Download MusicBrainz Metadata</property>
                                     <property name="accelerator">&lt;Control&gt;m</property>
+                                </object>
+                            </child>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">Submit to AcoustId</property>
+                                    <property name="accelerator">&lt;Control&gt;u</property>
                                 </object>
                             </child>
                         </object>

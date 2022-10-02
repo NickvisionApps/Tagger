@@ -74,7 +74,7 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpAPI), "Customize api settings.");
     //AcoustId User API Key
     m_rowAcoustIdUserAPIKey = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAcoustIdUserAPIKey), "AcoustID User API Key");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAcoustIdUserAPIKey), "AcoustId User API Key");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpAPI), m_rowAcoustIdUserAPIKey);
     //Page
     m_page = adw_preferences_page_new();

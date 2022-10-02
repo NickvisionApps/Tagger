@@ -41,6 +41,7 @@ namespace NickvisionTagger::UI::Views
 		GtkWidget* m_sepHeaderEnd{ nullptr };
 		GtkWidget* m_btnApply{ nullptr };
 		GtkWidget* m_btnMenuTagActions{ nullptr };
+		GtkWidget* m_btnMenuWebServices{ nullptr };
 		GtkWidget* m_toastOverlay{ nullptr };
 		GtkWidget* m_viewStack{ nullptr };
 		GtkWidget* m_pageStatusNoFiles{ nullptr };
@@ -82,6 +83,7 @@ namespace NickvisionTagger::UI::Views
 		GSimpleAction* m_actFilenameToTag{ nullptr };
 		GSimpleAction* m_actTagToFilename{ nullptr };
 		GSimpleAction* m_actDownloadMusicBrainzMetadata{ nullptr };
+		GSimpleAction* m_actSubmitToAcoustId{ nullptr };
 		GSimpleAction* m_actPreferences{ nullptr };
 		GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 		GSimpleAction* m_actAbout{ nullptr };
@@ -129,6 +131,10 @@ namespace NickvisionTagger::UI::Views
     	 * Downloads and applys tag metadata from MusicBrainz for the selected files
     	 */
     	void onDownloadMusicBrainzMetadata();
+    	/**
+    	 * Submits metadata about a fingerprint to AcoustId
+    	 */
+    	void onSubmitToAcoustId();
     	/**
     	 * Displays the preferences dialog
     	 */

@@ -94,9 +94,8 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     GMenu* menuOtherActions{ g_menu_new() };
     g_menu_append(menuAlbumArt, "Insert Album Art", "win.insertAlbumArt");
     g_menu_append(menuAlbumArt, "Remove Album Art", "win.removeAlbumArt");
-    g_menu_append(menuOtherActions, "Filename to Tag", "win.filenameToTag");
-    g_menu_append(menuOtherActions, "Tag to Filename", "win.tagToFilename");
-    g_menu_append(menuOtherActions, "Download MusicBrainz Metadata", "win.downloadMusicBrainzMetadata");
+    g_menu_append(menuOtherActions, "Convert Filename to Tag", "win.filenameToTag");
+    g_menu_append(menuOtherActions, "Convert Tag to Filename", "win.tagToFilename");
     g_menu_append(menuTagActions, "Delete Tags", "win.deleteTags");
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuAlbumArt));
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuOtherActions));
@@ -108,6 +107,17 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_object_unref(menuAlbumArt);
     g_object_unref(menuOtherActions);
     g_object_unref(menuTagActions);
+    //Menu Web Services Button
+    m_btnMenuWebServices = gtk_menu_button_new();
+    GMenu* menuWebServices{ g_menu_new() };
+    g_menu_append(menuWebServices, "Download MusicBrainz Metadata", "win.downloadMusicBrainzMetadata");
+    g_menu_append(menuWebServices, "Submit to AcoustId", "win.submitToAcoustId");
+    gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuWebServices), "web-browser-symbolic");
+    gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuWebServices), G_MENU_MODEL(menuWebServices));
+    gtk_widget_set_tooltip_text(m_btnMenuWebServices, "Web Services");
+    gtk_widget_set_visible(m_btnMenuWebServices, false);
+    adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnMenuWebServices);
+    g_object_unref(menuWebServices);
     //Toast Overlay
     m_toastOverlay = adw_toast_overlay_new();
     gtk_widget_set_hexpand(m_toastOverlay, true);
@@ -306,6 +316,11 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_signal_connect(m_actDownloadMusicBrainzMetadata, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onDownloadMusicBrainzMetadata(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actDownloadMusicBrainzMetadata));
     gtk_application_set_accels_for_action(application, "win.downloadMusicBrainzMetadata", new const char*[2]{ "<Ctrl>m", nullptr });
+    //Submit to AcoustId
+    m_actSubmitToAcoustId = g_simple_action_new("submitToAcoustId", nullptr);
+    g_signal_connect(m_actSubmitToAcoustId, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onSubmitToAcoustId(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actSubmitToAcoustId));
+    gtk_application_set_accels_for_action(application, "win.submitToAcoustId", new const char*[2]{ "<Ctrl>u", nullptr });
     //Preferences Action
     m_actPreferences = g_simple_action_new("preferences", nullptr);
     g_signal_connect(m_actPreferences, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onPreferences(); }), this);
@@ -490,6 +505,11 @@ void MainWindow::onDownloadMusicBrainzMetadata()
     onListMusicFilesSelectionChanged();
 }
 
+void MainWindow::onSubmitToAcoustId()
+{
+
+}
+
 void MainWindow::onPreferences()
 {
     PreferencesDialog preferencesDialog{ GTK_WINDOW(m_gobj), m_controller.createPreferencesDialogController() };
@@ -558,6 +578,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
     //Update UI
     gtk_widget_set_visible(m_btnApply, true);
     gtk_widget_set_visible(m_btnMenuTagActions, true);
+    gtk_widget_set_visible(m_btnMenuWebServices, true);
     gtk_editable_set_text(GTK_EDITABLE(m_txtSearchMusicFiles), "");
     adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), true);
     gtk_editable_set_editable(GTK_EDITABLE(m_txtFilename), true);
@@ -565,6 +586,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
     {
         gtk_widget_set_visible(m_btnApply, false);
         gtk_widget_set_visible(m_btnMenuTagActions, false);
+        gtk_widget_set_visible(m_btnMenuWebServices, false);
         adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), false);
     }
     else if(selectedIndexes.size() > 1)
