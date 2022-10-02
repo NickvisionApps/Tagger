@@ -58,12 +58,6 @@ namespace NickvisionTagger::Controllers
     	 */
 	 	const std::filesystem::path& getMusicFolderPath() const;
 	 	/**
-	 	 * Gets the number of music files in the music folder
-	 	 *
-	 	 * @returns The number of music files in the music folder (0 if no folder is opened)
-	 	 */
-	 	std::size_t getMusicFileCount() const;
-	 	/**
 	 	 * Gets the list of music files in the music folder
 	 	 *
 	 	 * @returns The list of music files in the music folder

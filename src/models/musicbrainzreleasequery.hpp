@@ -13,7 +13,6 @@ namespace NickvisionTagger::Models
     {
     	OK,
     	CurlError,
-    	FileError,
     	MusicBrainzError,
 		NoResult
     };

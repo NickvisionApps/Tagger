@@ -3,10 +3,9 @@
 #include <sstream>
 #include <thread>
 #include <adwaita.h>
-#include <curlpp/Easy.hpp>
-#include <curlpp/Infos.hpp>
-#include <curlpp/Options.hpp>
 #include <json/json.h>
+#include "../helpers/curlhelpers.hpp"
+#include "../helpers/jsonhelpers.hpp"
 #include "../helpers/mediahelpers.hpp"
 
 using namespace NickvisionTagger::Helpers;
@@ -56,18 +55,8 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
         m_requestCount = 0;
     }
     //Get Json Response from Lookup
-    std::stringstream response;
-    cURLpp::Easy handle;
-    handle.setOpt(cURLpp::Options::Url(m_lookupUrl));
-    handle.setOpt(cURLpp::Options::FollowLocation(true));
-    handle.setOpt(cURLpp::Options::HttpGet(true));
-    handle.setOpt(cURLpp::Options::WriteStream(&response));
-    handle.setOpt(cURLpp::Options::UserAgent("NickvisionTagger/2022.9.2 ( nlogozzo225@gmail.com )"));
-    try
-    {
-        handle.perform();
-    }
-    catch(...)
+    std::string response{ CurlHelpers::getResponseString(m_lookupUrl, "NickvisionTagger/2022.9.2 ( nlogozzo225@gmail.com )") };
+    if(response.empty())
     {
         m_status = MusicBrainzReleaseQueryStatus::CurlError;
         return m_status;
@@ -75,8 +64,7 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
     m_requestCount++;
     m_lastRequestTime = std::chrono::system_clock::now();
     //Parse Response
-    Json::Value jsonRoot;
-    response >> jsonRoot;
+    Json::Value jsonRoot{ JsonHelpers::getValueFromString(response) };
     if(!jsonRoot["error"].isNull())
     {
         m_status = MusicBrainzReleaseQueryStatus::MusicBrainzError;
@@ -91,46 +79,26 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
         m_artist = jsonFirstArtist.get("name", "").asString();
     }
     //Get Album Art
-    response.str("");
-    handle.setOpt(cURLpp::Options::Url(m_lookupUrlAlbumArt));
-    handle.setOpt(cURLpp::Options::WriteStream(&response));
-    try
-    {
-        handle.perform();
-    }
-    catch(...)
+    response = CurlHelpers::getResponseString(m_lookupUrlAlbumArt);
+    if(response.empty())
     {
         m_status = MusicBrainzReleaseQueryStatus::CurlError;
         return m_status;
     }
     //Download Album Art Image Url
-    if(response.str().substr(0, 1) == "{")
+    if(response.substr(0, 1) == "{")
     {
-        Json::Value jsonAlbumArt;
-        response >> jsonAlbumArt;
+        Json::Value jsonAlbumArt{ JsonHelpers::getValueFromString(response) };
         const Json::Value& jsonFirstAlbumArt{ jsonAlbumArt["images"][0] };
         if(!jsonFirstAlbumArt.isNull())
         {
             std::string albumArtLink{ jsonFirstAlbumArt.get("image", "").asString() };
             std::string pathAlbumArt{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/" + m_releaseId + ".jpg" };
-            std::ofstream fileAlbumArt{ pathAlbumArt };
-            if(!fileAlbumArt.is_open())
-            {
-                m_status = MusicBrainzReleaseQueryStatus::FileError;
-                return m_status;
-            }
-            handle.setOpt(cURLpp::Options::Url(albumArtLink));
-            handle.setOpt(cURLpp::Options::WriteStream(&fileAlbumArt));
-            try
-            {
-                handle.perform();
-            }
-            catch(...)
+            if(!CurlHelpers::downloadFile(albumArtLink, pathAlbumArt))
             {
                 m_status = MusicBrainzReleaseQueryStatus::CurlError;
                 return m_status;
             }
-            fileAlbumArt.close();
             //Extract Album Art
             m_albumArt = MediaHelpers::byteVectorFromFile(pathAlbumArt);
             std::filesystem::remove(pathAlbumArt);

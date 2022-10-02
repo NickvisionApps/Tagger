@@ -22,7 +22,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_size_request(m_gobj, 800, 600);
     gtk_window_set_default_size(GTK_WINDOW(m_gobj), 1000, 800);
     g_signal_connect(m_gobj, "close_request", G_CALLBACK((void (*)(GtkWidget*, gpointer))[](GtkWidget*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onCloseRequest(); }), this);
-    //gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
     //Header Bar
     m_headerBar = adw_header_bar_new();
     m_adwTitle = adw_window_title_new(m_controller.getAppInfo().getShortName().c_str(), m_controller.getMusicFolderPath().c_str());
@@ -334,7 +334,7 @@ void MainWindow::onMusicFolderUpdated(bool sendToast)
     m_listMusicFilesRows.clear();
     ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Loading music files...", [&]() { m_controller.reloadMusicFolder(); } };
     progressDialog.run();
-    std::size_t musicFilesCount{ m_controller.getMusicFileCount() };
+    std::size_t musicFilesCount{ m_controller.getMusicFiles().size() };
     adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), musicFilesCount > 0 ? "pageTagger" : "pageNoFiles");
     for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
     {
@@ -486,7 +486,7 @@ void MainWindow::onAbout()
 {
     adw_show_about_window(GTK_WINDOW(m_gobj),
                           "application-name", m_controller.getAppInfo().getShortName().c_str(),
-                          "application-icon", (m_controller.getAppInfo().getId() + "-devel").c_str(),
+                          "application-icon", m_controller.getAppInfo().getId().c_str(),
                           "version", m_controller.getAppInfo().getVersion().c_str(),
                           "comments", m_controller.getAppInfo().getDescription().c_str(),
                           "developer-name", "Nickvision",

@@ -1,10 +1,12 @@
 #include "acoustidquery.hpp"
 #include <sstream>
 #include <thread>
-#include <curlpp/Easy.hpp>
-#include <curlpp/Options.hpp>
+#include <json/reader.h>
 #include <json/json.h>
+#include "../helpers/curlhelpers.hpp"
+#include "../helpers/jsonhelpers.hpp"
 
+using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
 
 int AcoustIdQuery::m_requestCount = 0;
@@ -43,17 +45,8 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
         m_requestCount = 0;
     }
     //Get Json Response from Lookup
-    std::stringstream response;
-    cURLpp::Easy handle;
-    handle.setOpt(cURLpp::Options::Url(m_lookupUrl));
-    handle.setOpt(cURLpp::Options::FollowLocation(true));
-    handle.setOpt(cURLpp::Options::HttpGet(true));
-    handle.setOpt(cURLpp::Options::WriteStream(&response));
-    try
-    {
-        handle.perform();
-    }
-    catch(...)
+    std::string response{ CurlHelpers::getResponseString(m_lookupUrl) };
+    if(response.empty())
     {
         m_status = AcoustIdQueryStatus::CurlError;
         return m_status;
@@ -61,8 +54,7 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
     m_requestCount++;
     m_lastRequestTime = std::chrono::system_clock::now();
     //Parse Response
-    Json::Value jsonRoot;
-    response >> jsonRoot;
+    Json::Value jsonRoot{ JsonHelpers::getValueFromString(response) };
     try
     {
     	m_status = jsonRoot.get("status", "error").asString() == "ok" ? AcoustIdQueryStatus::OK : AcoustIdQueryStatus::AcoustIdError;

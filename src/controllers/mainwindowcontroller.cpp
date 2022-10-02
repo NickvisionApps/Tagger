@@ -57,11 +57,6 @@ const std::filesystem::path& MainWindowController::getMusicFolderPath() const
     return m_musicFolder.getParentPath();
 }
 
-std::size_t MainWindowController::getMusicFileCount() const
-{
-    return m_musicFolder.getMusicFiles().size();
-}
-
 const std::vector<std::shared_ptr<MusicFile>>& MainWindowController::getMusicFiles() const
 {
     return m_musicFolder.getMusicFiles();
