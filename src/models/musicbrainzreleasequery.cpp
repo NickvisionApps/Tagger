@@ -56,13 +56,13 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
     }
     //Get Json Response from Lookup
     std::string response{ CurlHelpers::getResponseString(m_lookupUrl, "NickvisionTagger/2022.9.2 ( nlogozzo225@gmail.com )") };
+    m_requestCount++;
+    m_lastRequestTime = std::chrono::system_clock::now();
     if(response.empty())
     {
         m_status = MusicBrainzReleaseQueryStatus::CurlError;
         return m_status;
     }
-    m_requestCount++;
-    m_lastRequestTime = std::chrono::system_clock::now();
     //Parse Response
     Json::Value jsonRoot{ JsonHelpers::getValueFromString(response) };
     if(!jsonRoot["error"].isNull())

@@ -46,22 +46,18 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
     }
     //Get Json Response from Lookup
     std::string response{ CurlHelpers::getResponseString(m_lookupUrl) };
+    m_requestCount++;
+    m_lastRequestTime = std::chrono::system_clock::now();
     if(response.empty())
     {
         m_status = AcoustIdQueryStatus::CurlError;
         return m_status;
     }
-    m_requestCount++;
-    m_lastRequestTime = std::chrono::system_clock::now();
     //Parse Response
     Json::Value jsonRoot{ JsonHelpers::getValueFromString(response) };
-    try
+    m_status = jsonRoot.get("status", "error").asString() == "ok" ? AcoustIdQueryStatus::OK : AcoustIdQueryStatus::AcoustIdError;
+    if(m_status == AcoustIdQueryStatus::AcoustIdError)
     {
-    	m_status = jsonRoot.get("status", "error").asString() == "ok" ? AcoustIdQueryStatus::OK : AcoustIdQueryStatus::AcoustIdError;
-    }
-    catch(...)
-    {
-        m_status = AcoustIdQueryStatus::AcoustIdError;
     	return m_status;
     }
     //Get First Result
@@ -71,7 +67,7 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
         m_status = AcoustIdQueryStatus::NoResult;
         return m_status;
     }
-    //Get First Recording Id
+    //Get Best Recording Id
     Json::Value& jsonRecordings{ jsonFirstResult["recordings"] };
     Json::Value& jsonBestRecording{ jsonRecordings[0] };
     for(const Json::Value& recording : jsonRecordings)
@@ -88,11 +84,8 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
         return m_status;
     }
     m_recordingId = jsonBestRecording.get("id", "").asString();
-    if(m_recordingId.empty())
-    {
-        m_status = AcoustIdQueryStatus::NoResult;
-    }
     return m_status;
 }
+
 
 
