@@ -72,3 +72,8 @@ void PreferencesDialogController::saveConfiguration() const
 {
     m_configuration.save();
 }
+
+std::string PreferencesDialogController::getAcoudtIdUserAPIKeyLink() const
+{
+    return "https://acoustid.org/api-key";
+}

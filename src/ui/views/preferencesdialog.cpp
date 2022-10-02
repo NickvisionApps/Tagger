@@ -68,20 +68,26 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowOverwriteTagWithMusicBrainz), m_switchOverwriteTagWithMusicBrainz);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowOverwriteTagWithMusicBrainz), m_switchOverwriteTagWithMusicBrainz);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpMusicFile), m_rowOverwriteTagWithMusicBrainz);
-    //API Group
-    m_grpAPI = adw_preferences_group_new();
-    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpAPI), "API");
-    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpAPI), "Customize api settings.");
+    //Fingerprinting Group
+    m_grpFingerprinting = adw_preferences_group_new();
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpFingerprinting), "Fingerprinting");
+    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpFingerprinting), "Customize fingerprinting settings.");
     //AcoustId User API Key
+    m_btnGetAcoustIdUserAPIKey = gtk_button_new();
+    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnGetAcoustIdUserAPIKey), "flat");
+    gtk_button_set_icon_name(GTK_BUTTON(m_btnGetAcoustIdUserAPIKey), "window-new-symbolic");
+    gtk_widget_set_tooltip_text(m_btnGetAcoustIdUserAPIKey, "Get New API Key");
+    g_signal_connect(m_btnGetAcoustIdUserAPIKey, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onGetAcoustIdUserAPIKeyClicked(); }), this);
     m_rowAcoustIdUserAPIKey = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAcoustIdUserAPIKey), "AcoustId User API Key");
-    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpAPI), m_rowAcoustIdUserAPIKey);
+    adw_entry_row_add_suffix(ADW_ENTRY_ROW(m_rowAcoustIdUserAPIKey), m_btnGetAcoustIdUserAPIKey);
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpFingerprinting), m_rowAcoustIdUserAPIKey);
     //Page
     m_page = adw_preferences_page_new();
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpUserInterface));
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpMusicFolder));
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpMusicFile));
-    adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpAPI));
+    adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpFingerprinting));
     //Main Box
     m_mainBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     gtk_box_append(GTK_BOX(m_mainBox), m_headerBar);
@@ -128,4 +134,9 @@ void PreferencesDialog::run()
         adw_style_manager_set_color_scheme(adw_style_manager_get_default(), ADW_COLOR_SCHEME_FORCE_DARK);
     }
     gtk_window_destroy(GTK_WINDOW(m_gobj));
+}
+
+void PreferencesDialog::onGetAcoustIdUserAPIKeyClicked()
+{
+    g_app_info_launch_default_for_uri(m_controller.getAcoudtIdUserAPIKeyLink().c_str(), nullptr, nullptr);
 }

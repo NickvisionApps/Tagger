@@ -92,6 +92,10 @@ namespace NickvisionTagger::Controllers
     	 * Saves the configuration file
     	 */
     	void saveConfiguration() const;
+    	/**
+    	 * Gets the link to the AcoustId page for a new user api key
+    	 */
+    	std::string getAcoudtIdUserAPIKeyLink() const;
 
     private:
 		NickvisionTagger::Models::Configuration& m_configuration;
