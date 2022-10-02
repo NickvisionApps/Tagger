@@ -191,29 +191,9 @@ void MainWindowController::tagToFilename(const std::string& formatString)
 void MainWindowController::downloadMusicBrainzMetadata()
 {
     int successful{ 0 };
-    //Start async
-    std::vector<std::future<bool>> futures;
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
-        futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()); }));
-    }
-    //Check futures until done
-    size_t done{ 0 };
-    while(done != futures.size())
-    {
-        done = 0;
-        for(const std::future<bool>& future : futures)
-        {
-            if(future.wait_for(std::chrono::milliseconds(100)) == std::future_status::ready)
-            {
-                done++;
-            }
-        }
-    }
-    //Determine number of successful futures
-    for(std::future<bool>& future : futures)
-    {
-        if(future.get())
+        if(musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()))
         {
             successful++;
         }

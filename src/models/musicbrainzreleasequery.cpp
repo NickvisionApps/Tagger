@@ -133,6 +133,7 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
             fileAlbumArt.close();
             //Extract Album Art
             m_albumArt = MediaHelpers::byteVectorFromFile(pathAlbumArt);
+            std::filesystem::remove(pathAlbumArt);
         }
     }
     //Done
