@@ -58,6 +58,16 @@ void PreferencesDialogController::setOverwriteTagWithMusicBrainz(bool overwriteT
     m_configuration.setOverwriteTagWithMusicBrainz(overwriteTagWithMusicBrainz);
 }
 
+const std::string& PreferencesDialogController::getAcoustIdUserAPIKey() const
+{
+    return m_configuration.getAcoustIdUserAPIKey();
+}
+
+void PreferencesDialogController::setAcoustIdUserAPIKey(const std::string& acoustIdUserAPIKey)
+{
+    m_configuration.setAcoustIdUserAPIKey(acoustIdUserAPIKey);
+}
+
 void PreferencesDialogController::saveConfiguration() const
 {
     m_configuration.save();

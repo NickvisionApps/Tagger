@@ -6,7 +6,7 @@
 
 using namespace NickvisionTagger::Models;
 
-Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/" }, m_theme{ Theme::System }, m_includeSubfolders{ true }, m_rememberLastOpenedFolder{ true }, m_lastOpenedFolder{ "" }, m_preserveModificationTimeStamp{ false }, m_overwriteTagWithMusicBrainz{ true }
+Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/" }, m_theme{ Theme::System }, m_includeSubfolders{ true }, m_rememberLastOpenedFolder{ true }, m_lastOpenedFolder{ "" }, m_preserveModificationTimeStamp{ false }, m_overwriteTagWithMusicBrainz{ true }, m_acoustIdUserAPIKey{ "" }
 {
     if(!std::filesystem::exists(m_configDir))
     {
@@ -23,6 +23,7 @@ Configuration::Configuration() : m_configDir{ std::string(g_get_user_config_dir(
         m_lastOpenedFolder = json.get("LastOpenedFolder", "").asString();
         m_preserveModificationTimeStamp = json.get("PreserveModificationTimeStamp", false).asBool();
         m_overwriteTagWithMusicBrainz = json.get("OverwriteTagWithMusicBrainz", true).asBool();
+        m_acoustIdUserAPIKey = json.get("AcoustIdUserAPIKey", "").asString();
     }
 }
 
@@ -87,6 +88,15 @@ void Configuration::setOverwriteTagWithMusicBrainz(bool overwriteTagWithMusicBra
     m_overwriteTagWithMusicBrainz = overwriteTagWithMusicBrainz;
 }
 
+const std::string& Configuration::getAcoustIdUserAPIKey() const
+{
+    return m_acoustIdUserAPIKey;
+}
+
+void Configuration::setAcoustIdUserAPIKey(const std::string& acoustIdUserAPIKey)
+{
+    m_acoustIdUserAPIKey = acoustIdUserAPIKey;
+}
 
 void Configuration::save() const
 {
@@ -100,6 +110,7 @@ void Configuration::save() const
         json["LastOpenedFolder"] = m_lastOpenedFolder;
         json["PreserveModificationTimeStamp"] = m_preserveModificationTimeStamp;
         json["OverwriteTagWithMusicBrainz"] = m_overwriteTagWithMusicBrainz;
+        json["AcoustIdUserAPIKey"] = m_acoustIdUserAPIKey;
         configFile << json;
     }
 }

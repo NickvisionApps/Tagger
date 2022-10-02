@@ -68,11 +68,20 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_action_row_add_suffix(ADW_ACTION_ROW(m_rowOverwriteTagWithMusicBrainz), m_switchOverwriteTagWithMusicBrainz);
     adw_action_row_set_activatable_widget(ADW_ACTION_ROW(m_rowOverwriteTagWithMusicBrainz), m_switchOverwriteTagWithMusicBrainz);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpMusicFile), m_rowOverwriteTagWithMusicBrainz);
+    //API Group
+    m_grpAPI = adw_preferences_group_new();
+    adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpAPI), "API");
+    adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpAPI), "Customize api settings.");
+    //AcoustId User API Key
+    m_rowAcoustIdUserAPIKey = adw_entry_row_new();
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowAcoustIdUserAPIKey), "AcoustID User API Key");
+    adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpAPI), m_rowAcoustIdUserAPIKey);
     //Page
     m_page = adw_preferences_page_new();
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpUserInterface));
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpMusicFolder));
     adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpMusicFile));
+    adw_preferences_page_add(ADW_PREFERENCES_PAGE(m_page), ADW_PREFERENCES_GROUP(m_grpAPI));
     //Main Box
     m_mainBox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     gtk_box_append(GTK_BOX(m_mainBox), m_headerBar);
@@ -84,6 +93,7 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     gtk_switch_set_active(GTK_SWITCH(m_switchRememberLastOpenedFolder), m_controller.getRememberLastOpenedFolder());
     gtk_switch_set_active(GTK_SWITCH(m_switchPreserveModificationTimeStamp), m_controller.getPreserveModificationTimeStamp());
     gtk_switch_set_active(GTK_SWITCH(m_switchOverwriteTagWithMusicBrainz), m_controller.getOverwriteTagWithMusicBrainz());
+    gtk_editable_set_text(GTK_EDITABLE(m_rowAcoustIdUserAPIKey), m_controller.getAcoustIdUserAPIKey().c_str());
 }
 
 GtkWidget* PreferencesDialog::gobj()
@@ -103,6 +113,7 @@ void PreferencesDialog::run()
     m_controller.setRememberLastOpenedFolder(gtk_switch_get_active(GTK_SWITCH(m_switchRememberLastOpenedFolder)));
     m_controller.setPreserveModificationTimeStamp(gtk_switch_get_active(GTK_SWITCH(m_switchPreserveModificationTimeStamp)));
     m_controller.setOverwriteTagWithMusicBrainz(gtk_switch_get_active(GTK_SWITCH(m_switchOverwriteTagWithMusicBrainz)));
+    m_controller.setAcoustIdUserAPIKey(gtk_editable_get_text(GTK_EDITABLE(m_rowAcoustIdUserAPIKey)));
     m_controller.saveConfiguration();
     if(m_controller.getThemeAsInt() == 0)
     {

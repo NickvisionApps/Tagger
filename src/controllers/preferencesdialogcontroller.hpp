@@ -77,6 +77,18 @@ namespace NickvisionTagger::Controllers
     	 */
     	void setOverwriteTagWithMusicBrainz(bool overwriteTagWithMusicBrainz);
     	/**
+    	 * Gets the AcoustId User API Key
+    	 *
+    	 * @returns The AcoustId User API Key
+    	 */
+    	const std::string& getAcoustIdUserAPIKey() const;
+    	/**
+    	 * Sets the AcoustId User API Key
+    	 *
+    	 * @param acoustIdUserAPIKey The new AcoustId User API Key
+    	 */
+    	void setAcoustIdUserAPIKey(const std::string& acoustIdUserAPIKey);
+    	/**
     	 * Saves the configuration file
     	 */
     	void saveConfiguration() const;

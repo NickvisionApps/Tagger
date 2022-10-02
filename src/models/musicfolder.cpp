@@ -28,23 +28,6 @@ void MusicFolder::setIncludeSubfolders(bool includeSubfolders)
     m_includeSubfolders = includeSubfolders;
 }
 
-std::vector<std::filesystem::path> MusicFolder::getFolderPaths() const
-{
-    std::vector<std::filesystem::path> paths;
-    paths.push_back(m_parentPath);
-    if (m_includeSubfolders)
-    {
-        for (const std::filesystem::directory_entry& path : std::filesystem::recursive_directory_iterator(m_parentPath, std::filesystem::directory_options::skip_permission_denied))
-        {
-            if (path.is_directory())
-            {
-                paths.push_back(path);
-            }
-        }
-    }
-    return paths;
-}
-
 const std::vector<std::shared_ptr<MusicFile>>& MusicFolder::getMusicFiles() const
 {
     return m_files;

@@ -47,5 +47,7 @@ namespace NickvisionTagger::UI::Views
 		GtkWidget* m_switchPreserveModificationTimeStamp{ nullptr };
 		GtkWidget* m_rowOverwriteTagWithMusicBrainz{ nullptr };
 		GtkWidget* m_switchOverwriteTagWithMusicBrainz{ nullptr };
+		GtkWidget* m_grpAPI{ nullptr };
+		GtkWidget* m_rowAcoustIdUserAPIKey{ nullptr };
     };
 }
