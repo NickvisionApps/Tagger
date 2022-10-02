@@ -7,7 +7,6 @@
 #include "shortcutsdialog.hpp"
 #include "../controls/comboboxdialog.hpp"
 #include "../controls/progressdialog.hpp"
-#include "../../helpers/gtkhelpers.hpp"
 #include "../../helpers/mediahelpers.hpp"
 
 using namespace NickvisionTagger::Controllers;
@@ -15,6 +14,28 @@ using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
 using namespace NickvisionTagger::UI::Controls;
 using namespace NickvisionTagger::UI::Views;
+
+/**
+ * Sets a GtkImage's source from the TagLib::ByteVector
+ *
+ * @param image The GtkImage
+ * @param byteVector The TagLib::ByteVector representing the image
+ */
+void gtk_image_set_from_byte_vector(GtkImage* image, const TagLib::ByteVector& byteVector)
+{
+    if(byteVector.isEmpty())
+    {
+        gtk_image_clear(image);
+    }
+    else
+    {
+        GdkPixbufLoader* pixbufLoader{gdk_pixbuf_loader_new()};
+        gdk_pixbuf_loader_write(pixbufLoader, (unsigned char*)byteVector.data(), byteVector.size(), nullptr);
+        gtk_image_set_from_pixbuf(image, gdk_pixbuf_loader_get_pixbuf(pixbufLoader));
+        gdk_pixbuf_loader_close(pixbufLoader, nullptr);
+        g_object_unref(pixbufLoader);
+    }
+}
 
 MainWindow::MainWindow(GtkApplication* application, const MainWindowController& controller) : m_controller{ controller }, m_gobj{ adw_application_window_new(application) }
 {
@@ -566,7 +587,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
     if(tagMap.at("albumArt") == "hasArt")
     {
         adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_stackAlbumArt), "image");
-        GtkHelpers::gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), m_controller.getSelectedMusicFiles()[0]->getAlbumArt());
+        gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), m_controller.getSelectedMusicFiles()[0]->getAlbumArt());
     }
     else if(tagMap.at("albumArt") == "keepArt")
     {
