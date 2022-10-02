@@ -64,6 +64,7 @@ namespace NickvisionTagger::Models
     private:
     	static int m_requestCount;
 		static std::chrono::time_point<std::chrono::system_clock> m_lastRequestTime;
+		std::string m_releaseId;
     	std::string m_lookupUrl;
     	std::string m_lookupUrlAlbumArt;
 		MusicBrainzReleaseQueryStatus m_status;

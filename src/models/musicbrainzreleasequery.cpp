@@ -15,10 +15,10 @@ using namespace NickvisionTagger::Models;
 int MusicBrainzReleaseQuery::m_requestCount = 0;
 std::chrono::time_point<std::chrono::system_clock> MusicBrainzReleaseQuery::m_lastRequestTime = std::chrono::system_clock::now();
 
-MusicBrainzReleaseQuery::MusicBrainzReleaseQuery(const std::string& releaseId) : m_lookupUrlAlbumArt{ "https://coverartarchive.org/release/" + releaseId }, m_status{ MusicBrainzReleaseQueryStatus::MusicBrainzError }, m_title{ "" }, m_artist{ "" }
+MusicBrainzReleaseQuery::MusicBrainzReleaseQuery(const std::string& releaseId) : m_releaseId{ releaseId }, m_lookupUrlAlbumArt{ "https://coverartarchive.org/release/" + m_releaseId }, m_status{ MusicBrainzReleaseQueryStatus::MusicBrainzError }, m_title{ "" }, m_artist{ "" }
 {
     std::stringstream builder;
-    builder << "https://musicbrainz.org/ws/2/release/" << releaseId << "?";
+    builder << "https://musicbrainz.org/ws/2/release/" << m_releaseId << "?";
     builder << "inc=" << "artists" << "&";
     builder << "fmt=" << "json";
     m_lookupUrl = builder.str();
@@ -112,7 +112,7 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
         if(!jsonFirstAlbumArt.isNull())
         {
             std::string albumArtLink{ jsonFirstAlbumArt.get("image", "").asString() };
-            std::string pathAlbumArt{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/albumArt.jpg" };
+            std::string pathAlbumArt{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/" + m_releaseId + ".jpg" };
             std::ofstream fileAlbumArt{ pathAlbumArt };
             if(!fileAlbumArt.is_open())
             {
@@ -139,5 +139,6 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
     m_status = MusicBrainzReleaseQueryStatus::OK;
     return m_status;
 }
+
 
 

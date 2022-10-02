@@ -156,7 +156,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_signal_connect(m_btnKeepAlbumArt, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
     m_statusKeepAlbumArt = adw_status_page_new();
     gtk_style_context_add_class(gtk_widget_get_style_context(m_statusKeepAlbumArt), "compact");
-    adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_statusKeepAlbumArt), "folder-pictures-symbolic");
+    adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_statusKeepAlbumArt), "folder-music-symbolic");
     gtk_button_set_child(GTK_BUTTON(m_btnKeepAlbumArt), m_statusKeepAlbumArt);
     adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_btnKeepAlbumArt, "keepImage");
     //Properties Group

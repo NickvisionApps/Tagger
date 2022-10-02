@@ -1,6 +1,7 @@
 #include "mainwindowcontroller.hpp"
 #include <chrono>
 #include <filesystem>
+#include <future>
 #include <curlpp/cURLpp.hpp>
 #include "../helpers/mediahelpers.hpp"
 
@@ -189,15 +190,35 @@ void MainWindowController::tagToFilename(const std::string& formatString)
 
 void MainWindowController::downloadMusicBrainzMetadata()
 {
-    int success{ 0 };
+    int successful{ 0 };
+    //Start async
+    std::vector<std::future<bool>> futures;
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
-        if(musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()))
+        futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()); }));
+    }
+    //Check futures until done
+    size_t done{ 0 };
+    while(done != futures.size())
+    {
+        done = 0;
+        for(const std::future<bool>& future : futures)
         {
-            success++;
+            if(future.wait_for(std::chrono::milliseconds(100)) == std::future_status::ready)
+            {
+                done++;
+            }
         }
     }
-    m_sendToastCallback("Download metadata for " + std::to_string(success) + " files successfully.");
+    //Determine number of successful futures
+    for(std::future<bool>& future : futures)
+    {
+        if(future.get())
+        {
+            successful++;
+        }
+    }
+    m_sendToastCallback("Download metadata for " + std::to_string(successful) + " files successfully.");
 }
 
 void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void(bool)>& callback)
@@ -333,3 +354,4 @@ void MainWindowController::updateSelectedMusicFiles(std::vector<int> indexes)
         m_selectedMusicFiles.push_back(m_musicFolder.getMusicFiles()[index]);
     }
 }
+
