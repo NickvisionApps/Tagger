@@ -79,24 +79,28 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
         m_artist = jsonFirstArtist.get("name", "").asString();
     }
     //Get Album Art
-    response = CurlHelpers::getResponseString(m_lookupUrlAlbumArt);
-    if(response.empty())
+    const Json::Value& jsonCoverArt{ jsonRoot["cover-art-archive"] };
+    if(jsonCoverArt.get("count", 0).asInt() > 0)
     {
-        m_status = MusicBrainzReleaseQueryStatus::CurlError;
-        return m_status;
-    }
-    if(response.substr(0, 1) == "{")
-    {
-        Json::Value jsonAlbumArt{ JsonHelpers::getValueFromString(response) };
-        const Json::Value& jsonFirstAlbumArt{ jsonAlbumArt["images"][0] };
-        if(!jsonFirstAlbumArt.isNull())
+        response = CurlHelpers::getResponseString(m_lookupUrlAlbumArt);
+        if(response.empty())
         {
-            std::string albumArtLink{ jsonFirstAlbumArt.get("image", "").asString() };
-            std::string pathAlbumArt{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/" + m_releaseId + ".jpg" };
-            if(CurlHelpers::downloadFile(albumArtLink, pathAlbumArt))
+            m_status = MusicBrainzReleaseQueryStatus::CurlError;
+            return m_status;
+        }
+        if(response.substr(0, 1) == "{")
+        {
+            Json::Value jsonAlbumArt{ JsonHelpers::getValueFromString(response) };
+            const Json::Value& jsonFirstAlbumArt{ jsonAlbumArt["images"][0] };
+            if(!jsonFirstAlbumArt.isNull())
             {
-                m_albumArt = MediaHelpers::byteVectorFromFile(pathAlbumArt);
-                std::filesystem::remove(pathAlbumArt);
+                std::string albumArtLink{ jsonFirstAlbumArt.get("image", "").asString() };
+                std::string pathAlbumArt{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/" + m_releaseId + ".jpg" };
+                if(CurlHelpers::downloadFile(albumArtLink, pathAlbumArt))
+                {
+                    m_albumArt = MediaHelpers::byteVectorFromFile(pathAlbumArt);
+                    std::filesystem::remove(pathAlbumArt);
+                }
             }
         }
     }
