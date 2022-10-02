@@ -18,7 +18,7 @@ AcoustIdQuery::AcoustIdQuery(int duration, const std::string& fingerprint) : m_s
     builder << "https://api.acoustid.org/v2/lookup?";
     builder << "client=" << "Lz9ENGSGsX" << "&";
     builder << "duration=" << duration << "&";
-    builder << "meta=" << "recordingids" << "&";
+    builder << "meta=" << "recordings+releasegroups" << "&";
     builder << "fingerprint=" << fingerprint;
     m_lookupUrl = builder.str();
 }
@@ -65,20 +65,29 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
     	return m_status;
     }
     //Get First Result
-    const Json::Value& jsonFirstResult{ jsonRoot["results"][0] };
+    Json::Value& jsonFirstResult{ jsonRoot["results"][0] };
     if(jsonFirstResult.isNull())
     {
         m_status = AcoustIdQueryStatus::NoResult;
         return m_status;
     }
     //Get First Recording Id
-    const Json::Value& jsonFirstRecording{ jsonFirstResult["recordings"][0] };
-    if(jsonFirstRecording.isNull())
+    Json::Value& jsonRecordings{ jsonFirstResult["recordings"] };
+    Json::Value& jsonBestRecording{ jsonRecordings[0] };
+    for(const Json::Value& recording : jsonRecordings)
+    {
+        if(recording.get("title", "").asString() != "")
+        {
+            jsonBestRecording = recording;
+            break;
+        }
+    }
+    if(jsonBestRecording.get("title", "").asString() == "")
     {
         m_status = AcoustIdQueryStatus::NoResult;
         return m_status;
     }
-    m_recordingId = jsonFirstRecording.get("id", "").asString();
+    m_recordingId = jsonBestRecording.get("id", "").asString();
     if(m_recordingId.empty())
     {
         m_status = AcoustIdQueryStatus::NoResult;

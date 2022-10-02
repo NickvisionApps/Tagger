@@ -85,7 +85,6 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
         m_status = MusicBrainzReleaseQueryStatus::CurlError;
         return m_status;
     }
-    //Download Album Art Image Url
     if(response.substr(0, 1) == "{")
     {
         Json::Value jsonAlbumArt{ JsonHelpers::getValueFromString(response) };
@@ -94,14 +93,11 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
         {
             std::string albumArtLink{ jsonFirstAlbumArt.get("image", "").asString() };
             std::string pathAlbumArt{ std::string(g_get_user_config_dir()) + "/Nickvision/NickvisionTagger/" + m_releaseId + ".jpg" };
-            if(!CurlHelpers::downloadFile(albumArtLink, pathAlbumArt))
+            if(CurlHelpers::downloadFile(albumArtLink, pathAlbumArt))
             {
-                m_status = MusicBrainzReleaseQueryStatus::CurlError;
-                return m_status;
+                m_albumArt = MediaHelpers::byteVectorFromFile(pathAlbumArt);
+                std::filesystem::remove(pathAlbumArt);
             }
-            //Extract Album Art
-            m_albumArt = MediaHelpers::byteVectorFromFile(pathAlbumArt);
-            std::filesystem::remove(pathAlbumArt);
         }
     }
     //Done

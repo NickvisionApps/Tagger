@@ -186,11 +186,43 @@ void MainWindowController::tagToFilename(const std::string& formatString)
 void MainWindowController::downloadMusicBrainzMetadata()
 {
     int successful{ 0 };
-    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    for(size_t i = 0; i < m_selectedMusicFiles.size(); i += 3)
     {
-        if(musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()))
+        std::vector<std::future<bool>> futures;
+        if(i < m_selectedMusicFiles.size())
         {
-            successful++;
+            const std::shared_ptr<MusicFile>& musicFile{ m_selectedMusicFiles[i] };
+            futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()); }));
+        }
+        if(i + 1 < m_selectedMusicFiles.size())
+        {
+            const std::shared_ptr<MusicFile>& musicFile{ m_selectedMusicFiles[i + 1] };
+            futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()); }));
+        }
+        if(i + 2 < m_selectedMusicFiles.size())
+        {
+            const std::shared_ptr<MusicFile>& musicFile{ m_selectedMusicFiles[i + 2] };
+            futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()); }));
+        }
+        size_t done{ 0 };
+        while(done != futures.size())
+        {
+            done = 0;
+            for(const std::future<bool>& future : futures)
+            {
+                std::future_status status{ future.wait_for(std::chrono::milliseconds(100)) };
+                if(status == std::future_status::ready)
+                {
+                    done++;
+                }
+            }
+        }
+        for(std::future<bool>& future : futures)
+        {
+            if(future.get())
+            {
+                successful++;
+            }
         }
     }
     m_sendToastCallback("Download metadata for " + std::to_string(successful) + " files successfully.");
