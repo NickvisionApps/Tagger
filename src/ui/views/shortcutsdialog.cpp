@@ -96,8 +96,8 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                             <property name="title">Application</property>
                             <child>
                                 <object class="GtkShortcutsShortcut">
-                                    <property name="title">Settings</property>
-                                    <property name="accelerator">&lt;Control&gt;period</property>
+                                    <property name="title">Preferences</property>
+                                    <property name="accelerator">&lt;Control&gt;comma</property>
                                 </object>
                             </child>
                             <child>
