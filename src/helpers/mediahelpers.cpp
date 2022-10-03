@@ -34,14 +34,15 @@ std::string MediaHelpers::durationToString(int durationInSeconds)
 std::string MediaHelpers::fileSizeToString(std::uintmax_t fileSize)
 {
     std::vector<std::string> sizes{ "B", "KB", "MB", "GB", "TB" };
+    double size{ fileSize };
     int index{ 0 };
     std::stringstream builder;
-    while (fileSize >= 1024 && index < 4)
+    while (size >= 1024 && index < 4)
     {
         index++;
-        fileSize /= 1024;
+        size /= 1024;
     }
-    builder << std::ceil(fileSize * 100.0) / 100.0 << " " << sizes[index];
+    builder << std::ceil(size * 100.0) / 100.0 << " " << sizes[index];
     return builder.str();
 }
 
