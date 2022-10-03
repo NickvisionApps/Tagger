@@ -132,7 +132,7 @@ namespace NickvisionTagger::UI::Views
     	 */
     	void onDownloadMusicBrainzMetadata();
     	/**
-    	 * Submits metadata about a fingerprint to AcoustId
+    	 * Uploads tag metadata of one selected file to AcoustId
     	 */
     	void onSubmitToAcoustId();
     	/**

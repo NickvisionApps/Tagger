@@ -579,6 +579,11 @@ bool MusicFile::downloadMusicBrainzMetadata(const std::string& acoustIdClientKey
     return false;
 }
 
+bool MusicFile::submitToAcoustId(const std::string& acoustIdClientKey, const std::string& acoustIdUserKey, const std::string& musicBrainzRecordingId)
+{
+    return false;
+}
+
 bool MusicFile::operator<(const MusicFile& toCompare) const
 {
     return getFilename() < toCompare.getFilename();

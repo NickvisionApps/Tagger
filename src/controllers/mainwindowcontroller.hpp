@@ -110,9 +110,11 @@ namespace NickvisionTagger::Controllers
     	 */
     	void downloadMusicBrainzMetadata();
     	/**
-    	 * Uploads tag metadata of the selected files to AcoustId
+    	 * Uploads tag metadata of one selected file to AcoustId
+    	 *
+    	 * @param musicBrainzRecordingId A MusicBrainz recording id to associate with the selected file
     	 */
-    	void submitToAcoustId();
+    	void submitToAcoustId(const std::string& musicBrainzRecordingId);
     	/**
     	 * Registers a callback for when the music folder is changed
     	 *

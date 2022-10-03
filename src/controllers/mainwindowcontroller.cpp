@@ -230,9 +230,13 @@ void MainWindowController::downloadMusicBrainzMetadata()
     m_sendToastCallback("Download metadata for " + std::to_string(successful) + " files successfully.");
 }
 
-void MainWindowController::submitToAcoustId()
+void MainWindowController::submitToAcoustId(const std::string& musicBrainzRecordingId)
 {
-
+    if(m_selectedMusicFiles.size() == 1)
+    {
+        const std::shared_ptr<MusicFile> selectedMusicFile{ m_selectedMusicFiles[0] };
+        m_sendToastCallback(selectedMusicFile->submitToAcoustId(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getAcoustIdUserAPIKey(), musicBrainzRecordingId) ? "Submitted metadata to AcoustId successfully." : "Unable to submit metadata to AcoustId.");
+    }
 }
 
 void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void(bool)>& callback)

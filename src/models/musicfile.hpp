@@ -210,6 +210,15 @@ namespace NickvisionTagger::Models
 		 */
 		bool downloadMusicBrainzMetadata(const std::string& acoustIdClientKey, bool overwriteTagWithMusicBrainz);
 		/**
+		 * Uploads tag metadata associated with this file's chromaprint fingerprint to AcoustId
+		 *
+		 * @param acoustIdClientKey The AcoustId client api key
+		 * @param acoustIdUserKey The AcoustId user api key
+		 * @param musicBrainzRecordingId A MusicBrainz recording id associated with this song
+		 * @returns True if the operation was successful, else false
+		 */
+		bool submitToAcoustId(const std::string& acoustIdClientKey, const std::string& acoustIdUserKey, const std::string& musicBrainzRecordingId = "");
+		/**
 		 * Compares this.filename to toCompare.filename via less-than
 		 *
 		 * @param toCompare The MusicFile to compare

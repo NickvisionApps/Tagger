@@ -6,6 +6,7 @@
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
 #include "../controls/comboboxdialog.hpp"
+#include "../controls/entrydialog.hpp"
 #include "../controls/progressdialog.hpp"
 #include "../../helpers/mediahelpers.hpp"
 
@@ -507,6 +508,21 @@ void MainWindow::onDownloadMusicBrainzMetadata()
 
 void MainWindow::onSubmitToAcoustId()
 {
+    //Check for one file selected
+    if(m_controller.getSelectedMusicFiles().size() > 1)
+    {
+        GtkWidget* messageDialog{ adw_message_dialog_new(GTK_WINDOW(m_gobj), "Too Many Files Selected", "Only one file can be submitted to AcoustId at a time. Please select only one file and try again.") };
+        adw_message_dialog_add_response(ADW_MESSAGE_DIALOG(messageDialog), "ok", "OK");
+        adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(messageDialog), "ok");
+        adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(messageDialog), "ok");
+        g_signal_connect(messageDialog, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog* dialog, gchar*, gpointer)
+        {
+            gtk_window_destroy(GTK_WINDOW(dialog));
+        })), this);
+        gtk_widget_show(messageDialog);
+        return;
+    }
+    //Check for valid AcoustId User API Key
     bool validAcoustIdUserAPIKey{ false };
     ProgressDialog progressDialogChecking{ GTK_WINDOW(m_gobj), "Checking AcoustId user api key...", [&]() { validAcoustIdUserAPIKey = m_controller.checkIfValidAcoustIdUserAPIKey(); } };
     progressDialogChecking.run();
@@ -523,6 +539,12 @@ void MainWindow::onSubmitToAcoustId()
         gtk_widget_show(messageDialog);
         return;
     }
+    //Get MusicBrainz Recording Id
+    EntryDialog entryDialog{ GTK_WINDOW(m_gobj), "Submit to AcoustId", "AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id for easy identification.\n\nIf you have a MusicBrainz Recording Id for this song, please provide it below.\n\nIf no id is provided, Tagger will submit your tag's metadata in association with the fingerprint instead.", "MusicBrainz Recording Id" };
+    std::string result{ entryDialog.run() };
+    ProgressDialog progressDialogSubmitting{ GTK_WINDOW(m_gobj), "Submitting metadata to AcoustId...", [&, result]() { m_controller.submitToAcoustId(result); } };
+    progressDialogSubmitting.run();
+    onListMusicFilesSelectionChanged();
 }
 
 void MainWindow::onPreferences()
