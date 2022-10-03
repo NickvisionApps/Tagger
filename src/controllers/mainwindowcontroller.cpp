@@ -371,6 +371,10 @@ void MainWindowController::updateSelectedMusicFiles(std::vector<int> indexes)
 
 bool MainWindowController::checkIfValidAcoustIdUserAPIKey()
 {
+    if(m_configuration.getAcoustIdUserAPIKey().empty())
+    {
+        return false;
+    }
     std::string checkQueryUrl{ "https://api.acoustid.org/v2/submit?client=" + m_appInfo.getAcoustIdClientAPIKey() + "&user=" + m_configuration.getAcoustIdUserAPIKey() };
     std::string response{ CurlHelpers::getResponseString(checkQueryUrl) };
     Json::Value jsonRoot{ JsonHelpers::getValueFromString(response) };
