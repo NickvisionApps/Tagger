@@ -122,6 +122,18 @@ namespace NickvisionTagger::Models
 		 * @param supportUrl The new support url of the application
 		 */
 		void setSupportUrl(const std::string& supportUrl);
+		/**
+		 * Gets the AcoustId client key of the application
+		 *
+		 * @returns The AcoustId client key of the application
+		 */
+		const std::string& getAcoustIdClientAPIKey() const;
+		/**
+		 * Sets the AcoustId client key of the application
+		 *
+		 * @param acoustIdClientAPIKey The new AcoustId client key of the application
+		 */
+		void setAcoustIdClientAPIKey(const std::string& acoustIdClientAPIKey);
     	
     private:
     	std::string m_id;
@@ -133,5 +145,6 @@ namespace NickvisionTagger::Models
 		std::string m_gitHubRepo;
 		std::string m_issueTracker;
 		std::string m_supportUrl;
+		std::string m_acoustIdClientAPIKey;
     };
 }

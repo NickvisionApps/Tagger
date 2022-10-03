@@ -507,7 +507,22 @@ void MainWindow::onDownloadMusicBrainzMetadata()
 
 void MainWindow::onSubmitToAcoustId()
 {
-
+    bool validAcoustIdUserAPIKey{ false };
+    ProgressDialog progressDialogChecking{ GTK_WINDOW(m_gobj), "Checking AcoustId user api key...", [&]() { validAcoustIdUserAPIKey = m_controller.checkIfValidAcoustIdUserAPIKey(); } };
+    progressDialogChecking.run();
+    if(!validAcoustIdUserAPIKey)
+    {
+        GtkWidget* messageDialog{ adw_message_dialog_new(GTK_WINDOW(m_gobj), "Invalid API Key", "The AcoustId User API Key is invalid. Please provide a valid api key in the preferences dialog.") };
+        adw_message_dialog_add_response(ADW_MESSAGE_DIALOG(messageDialog), "ok", "OK");
+        adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(messageDialog), "ok");
+        adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(messageDialog), "ok");
+        g_signal_connect(messageDialog, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog* dialog, gchar*, gpointer)
+        {
+            gtk_window_destroy(GTK_WINDOW(dialog));
+        })), this);
+        gtk_widget_show(messageDialog);
+        return;
+    }
 }
 
 void MainWindow::onPreferences()

@@ -204,10 +204,11 @@ namespace NickvisionTagger::Models
 		/**
 		 * Downloads and applys metadata from MusicBrainz to the tag
 		 *
+		 * @param acoustIdClientKey The AcoustId client api key
 		 * @param overwriteTagWithMusicBrainz Set true to overwrite tag properties with MusicBrainz data, else false
 		 * @returns True if the operation was successful, else false
 		 */
-		bool downloadMusicBrainzMetadata(bool overwriteTagWithMusicBrainz);
+		bool downloadMusicBrainzMetadata(const std::string& acoustIdClientKey, bool overwriteTagWithMusicBrainz);
 		/**
 		 * Compares this.filename to toCompare.filename via less-than
 		 *

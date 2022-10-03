@@ -2,7 +2,7 @@
 
 using namespace NickvisionTagger::Models;
 
-AppInfo::AppInfo() : m_id{ "" }, m_name{ "" }, m_shortName{ "" }, m_description{ "" }, m_version{ "" }, m_changelog{ "" }, m_gitHubRepo{ "" }, m_issueTracker{ "" }, m_supportUrl{ "" }
+AppInfo::AppInfo() : m_id{ "" }, m_name{ "" }, m_shortName{ "" }, m_description{ "" }, m_version{ "" }, m_changelog{ "" }, m_gitHubRepo{ "" }, m_issueTracker{ "" }, m_supportUrl{ "" }, m_acoustIdClientAPIKey{ "" }
 {
 
 }
@@ -95,4 +95,14 @@ const std::string& AppInfo::getSupportUrl() const
 void AppInfo::setSupportUrl(const std::string& supportUrl)
 {
 	m_supportUrl = supportUrl;
+}
+
+const std::string& AppInfo::getAcoustIdClientAPIKey() const
+{
+	return m_acoustIdClientAPIKey;
+}
+
+void AppInfo::setAcoustIdClientAPIKey(const std::string& acoustIdClientAPIKey)
+{
+	m_acoustIdClientAPIKey = acoustIdClientAPIKey;
 }

@@ -3,6 +3,8 @@
 #include <filesystem>
 #include <future>
 #include <curlpp/cURLpp.hpp>
+#include "../helpers/curlhelpers.hpp"
+#include "../helpers/jsonhelpers.hpp"
 #include "../helpers/mediahelpers.hpp"
 
 using namespace NickvisionTagger::Controllers;
@@ -192,17 +194,17 @@ void MainWindowController::downloadMusicBrainzMetadata()
         if(i < m_selectedMusicFiles.size())
         {
             const std::shared_ptr<MusicFile>& musicFile{ m_selectedMusicFiles[i] };
-            futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()); }));
+            futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getOverwriteTagWithMusicBrainz()); }));
         }
         if(i + 1 < m_selectedMusicFiles.size())
         {
             const std::shared_ptr<MusicFile>& musicFile{ m_selectedMusicFiles[i + 1] };
-            futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()); }));
+            futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getOverwriteTagWithMusicBrainz()); }));
         }
         if(i + 2 < m_selectedMusicFiles.size())
         {
             const std::shared_ptr<MusicFile>& musicFile{ m_selectedMusicFiles[i + 2] };
-            futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_configuration.getOverwriteTagWithMusicBrainz()); }));
+            futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getOverwriteTagWithMusicBrainz()); }));
         }
         size_t done{ 0 };
         while(done != futures.size())
@@ -226,6 +228,11 @@ void MainWindowController::downloadMusicBrainzMetadata()
         }
     }
     m_sendToastCallback("Download metadata for " + std::to_string(successful) + " files successfully.");
+}
+
+void MainWindowController::submitToAcoustId()
+{
+
 }
 
 void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void(bool)>& callback)
@@ -362,3 +369,16 @@ void MainWindowController::updateSelectedMusicFiles(std::vector<int> indexes)
     }
 }
 
+bool MainWindowController::checkIfValidAcoustIdUserAPIKey()
+{
+    std::string checkQueryUrl{ "https://api.acoustid.org/v2/submit?client=" + m_appInfo.getAcoustIdClientAPIKey() + "&user=" + m_configuration.getAcoustIdUserAPIKey() };
+    std::string response{ CurlHelpers::getResponseString(checkQueryUrl) };
+    Json::Value jsonRoot{ JsonHelpers::getValueFromString(response) };
+    const Json::Value& jsonError{ jsonRoot["error"] };
+    if(jsonError.isNull())
+    {
+        return false;
+    }
+    int errorCode{ jsonError.get("code", 6).asInt() };
+    return errorCode != 6;
+}

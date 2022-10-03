@@ -18,6 +18,7 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     m_appInfo.setSupportUrl("https://github.com/nlogozzo/NickvisionTagger/discussions");
+    m_appInfo.setAcoustIdClientAPIKey("Lz9ENGSGsX");
     //Signals
     g_signal_connect(m_adwApp, "activate", G_CALLBACK((void (*)(GtkApplication*, gpointer))[](GtkApplication* app, gpointer data) { reinterpret_cast<Application*>(data)->onActivate(app); }), this);
 }

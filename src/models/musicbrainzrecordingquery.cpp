@@ -1,5 +1,4 @@
 #include "musicbrainzrecordingquery.hpp"
-#include <sstream>
 #include <thread>
 #include <json/json.h>
 #include "musicbrainzreleasequery.hpp"
@@ -13,13 +12,9 @@ using namespace NickvisionTagger::Models;
 int MusicBrainzRecordingQuery::m_requestCount = 0;
 std::chrono::time_point<std::chrono::system_clock> MusicBrainzRecordingQuery::m_lastRequestTime = std::chrono::system_clock::now();
 
-MusicBrainzRecordingQuery::MusicBrainzRecordingQuery(const std::string& recordingId) : m_status{ MusicBrainzRecordingQueryStatus::MusicBrainzError }, m_title{ "" }, m_artist{ "" }, m_album{ "" }, m_year{ 0 }, m_albumArtist{ "" }, m_genre{ "" }
+MusicBrainzRecordingQuery::MusicBrainzRecordingQuery(const std::string& recordingId) : m_lookupUrl{ "https://musicbrainz.org/ws/2/recording/" + recordingId + "?inc=artists+releases+genres&fmt=json" }, m_status{ MusicBrainzRecordingQueryStatus::MusicBrainzError }, m_title{ "" }, m_artist{ "" }, m_album{ "" }, m_year{ 0 }, m_albumArtist{ "" }, m_genre{ "" }
 {
-    std::stringstream builder;
-    builder << "https://musicbrainz.org/ws/2/recording/" << recordingId << "?";
-    builder << "inc=" << "artists+releases+genres" << "&";
-    builder << "fmt=" << "json";
-    m_lookupUrl = builder.str();
+
 }
 
 MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::getStatus() const
@@ -125,5 +120,3 @@ MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::lookup()
     m_status = MusicBrainzRecordingQueryStatus::OK;
     return m_status;
 }
-
-

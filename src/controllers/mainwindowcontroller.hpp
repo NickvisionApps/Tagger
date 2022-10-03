@@ -110,6 +110,10 @@ namespace NickvisionTagger::Controllers
     	 */
     	void downloadMusicBrainzMetadata();
     	/**
+    	 * Uploads tag metadata of the selected files to AcoustId
+    	 */
+    	void submitToAcoustId();
+    	/**
     	 * Registers a callback for when the music folder is changed
     	 *
     	 * @param callback A void(bool) function
@@ -133,6 +137,12 @@ namespace NickvisionTagger::Controllers
     	 * @param indexes The list of selected indexes
     	 */
     	void updateSelectedMusicFiles(std::vector<int> indexes);
+    	/**
+    	 * Checks whether or not the configuration contains a valid AcoustId User API Key
+    	 *
+    	 * @returns True if valid, else false
+    	 */
+    	bool checkIfValidAcoustIdUserAPIKey();
     	
     private:
     	NickvisionTagger::Models::AppInfo& m_appInfo;

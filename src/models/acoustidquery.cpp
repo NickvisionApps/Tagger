@@ -1,5 +1,4 @@
 #include "acoustidquery.hpp"
-#include <sstream>
 #include <thread>
 #include <json/reader.h>
 #include <json/json.h>
@@ -12,15 +11,9 @@ using namespace NickvisionTagger::Models;
 int AcoustIdQuery::m_requestCount = 0;
 std::chrono::time_point<std::chrono::system_clock> AcoustIdQuery::m_lastRequestTime = std::chrono::system_clock::now();
 
-AcoustIdQuery::AcoustIdQuery(int duration, const std::string& fingerprint) : m_status{ AcoustIdQueryStatus::AcoustIdError }, m_recordingId{ "" }
+AcoustIdQuery::AcoustIdQuery(const std::string& clientKey, int duration, const std::string& fingerprint) : m_lookupUrl{ "https://api.acoustid.org/v2/lookup?client=" + clientKey + "&duration="  + std::to_string(duration) + "&meta=recordings&fingerprint=" + fingerprint }, m_status{ AcoustIdQueryStatus::AcoustIdError }, m_recordingId{ "" }
 {
-    std::stringstream builder;
-    builder << "https://api.acoustid.org/v2/lookup?";
-    builder << "client=" << "Lz9ENGSGsX" << "&";
-    builder << "duration=" << duration << "&";
-    builder << "meta=" << "recordings+releasegroups" << "&";
-    builder << "fingerprint=" << fingerprint;
-    m_lookupUrl = builder.str();
+
 }
 
 AcoustIdQueryStatus AcoustIdQuery::getStatus() const
@@ -86,6 +79,3 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
     m_recordingId = jsonBestRecording.get("id", "").asString();
     return m_status;
 }
-
-
-

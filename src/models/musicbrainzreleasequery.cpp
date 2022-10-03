@@ -1,6 +1,5 @@
 #include "musicbrainzreleasequery.hpp"
 #include <fstream>
-#include <sstream>
 #include <thread>
 #include <adwaita.h>
 #include <json/json.h>
@@ -14,13 +13,9 @@ using namespace NickvisionTagger::Models;
 int MusicBrainzReleaseQuery::m_requestCount = 0;
 std::chrono::time_point<std::chrono::system_clock> MusicBrainzReleaseQuery::m_lastRequestTime = std::chrono::system_clock::now();
 
-MusicBrainzReleaseQuery::MusicBrainzReleaseQuery(const std::string& releaseId) : m_releaseId{ releaseId }, m_lookupUrlAlbumArt{ "https://coverartarchive.org/release/" + m_releaseId }, m_status{ MusicBrainzReleaseQueryStatus::MusicBrainzError }, m_title{ "" }, m_artist{ "" }
+MusicBrainzReleaseQuery::MusicBrainzReleaseQuery(const std::string& releaseId) : m_releaseId{ releaseId }, m_lookupUrl{ "https://musicbrainz.org/ws/2/release/" + m_releaseId + "?inc=artists&fmt=json" }, m_lookupUrlAlbumArt{ "https://coverartarchive.org/release/" + m_releaseId }, m_status{ MusicBrainzReleaseQueryStatus::MusicBrainzError }, m_title{ "" }, m_artist{ "" }
 {
-    std::stringstream builder;
-    builder << "https://musicbrainz.org/ws/2/release/" << m_releaseId << "?";
-    builder << "inc=" << "artists" << "&";
-    builder << "fmt=" << "json";
-    m_lookupUrl = builder.str();
+
 }
 
 MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::getStatus() const

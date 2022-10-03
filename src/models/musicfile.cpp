@@ -537,9 +537,9 @@ bool MusicFile::tagToFilename(const std::string& formatString)
     return true;
 }
 
-bool MusicFile::downloadMusicBrainzMetadata(bool overwriteTagWithMusicBrainz)
+bool MusicFile::downloadMusicBrainzMetadata(const std::string& acoustIdClientKey, bool overwriteTagWithMusicBrainz)
 {
-    AcoustIdQuery acoustIdQuery{ getDuration(), getChromaprintFingerprint() };
+    AcoustIdQuery acoustIdQuery{ acoustIdClientKey, getDuration(), getChromaprintFingerprint() };
     if(acoustIdQuery.lookup() == AcoustIdQueryStatus::OK)
     {
         MusicBrainzRecordingQuery musicBrainzQuery{ acoustIdQuery.getRecordingId() };
