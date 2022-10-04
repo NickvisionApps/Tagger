@@ -3,9 +3,8 @@
 #include <filesystem>
 #include <future>
 #include <curlpp/cURLpp.hpp>
-#include "../helpers/curlhelpers.hpp"
-#include "../helpers/jsonhelpers.hpp"
 #include "../helpers/mediahelpers.hpp"
+#include "../models/acoustidsubmission.hpp"
 
 using namespace NickvisionTagger::Controllers;
 using namespace NickvisionTagger::Helpers;
@@ -373,20 +372,7 @@ void MainWindowController::updateSelectedMusicFiles(std::vector<int> indexes)
     }
 }
 
-bool MainWindowController::checkIfValidAcoustIdUserAPIKey()
+bool MainWindowController::checkIfAcoustIdUserAPIKeyValid()
 {
-    if(m_configuration.getAcoustIdUserAPIKey().empty())
-    {
-        return false;
-    }
-    std::string checkQueryUrl{ "https://api.acoustid.org/v2/submit?client=" + m_appInfo.getAcoustIdClientAPIKey() + "&user=" + m_configuration.getAcoustIdUserAPIKey() };
-    std::string response{ CurlHelpers::getResponseString(checkQueryUrl) };
-    Json::Value jsonRoot{ JsonHelpers::getValueFromString(response) };
-    const Json::Value& jsonError{ jsonRoot["error"] };
-    if(jsonError.isNull())
-    {
-        return false;
-    }
-    int errorCode{ jsonError.get("code", 6).asInt() };
-    return errorCode != 6;
+    return AcoustIdSubmission::checkIfUserAPIKeyValid(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getAcoustIdUserAPIKey());
 }

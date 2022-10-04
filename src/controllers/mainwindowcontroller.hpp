@@ -144,7 +144,7 @@ namespace NickvisionTagger::Controllers
     	 *
     	 * @returns True if valid, else false
     	 */
-    	bool checkIfValidAcoustIdUserAPIKey();
+    	bool checkIfAcoustIdUserAPIKeyValid();
     	
     private:
     	NickvisionTagger::Models::AppInfo& m_appInfo;

@@ -1,6 +1,5 @@
 #include "acoustidquery.hpp"
 #include <thread>
-#include <json/reader.h>
 #include <json/json.h>
 #include "../helpers/curlhelpers.hpp"
 #include "../helpers/jsonhelpers.hpp"

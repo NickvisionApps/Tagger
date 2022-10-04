@@ -508,11 +508,11 @@ void MainWindow::onSubmitToAcoustId()
     }
     //Check for valid AcoustId User API Key
     bool validAcoustIdUserAPIKey{ false };
-    ProgressDialog progressDialogChecking{ GTK_WINDOW(m_gobj), "Checking AcoustId user api key...", [&]() { validAcoustIdUserAPIKey = m_controller.checkIfValidAcoustIdUserAPIKey(); } };
+    ProgressDialog progressDialogChecking{ GTK_WINDOW(m_gobj), "Checking AcoustId user api key...", [&]() { validAcoustIdUserAPIKey = m_controller.checkIfAcoustIdUserAPIKeyValid(); } };
     progressDialogChecking.run();
     if(!validAcoustIdUserAPIKey)
     {
-        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Invalid API Key", "The AcoustId User API Key is invalid. Please provide a valid api key in the preferences dialog.", "OK" };
+        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Invalid User API Key", "The AcoustId User API Key is invalid.\nPlease provide a valid api key in Preferences.", "OK" };
         messageDialog.run();
         return;
     }
