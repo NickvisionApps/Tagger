@@ -26,11 +26,11 @@ namespace NickvisionTagger::Models
     	/**
     	 * Constructs an AcoustIdQuery
     	 *
-    	 * @param clientKey The AcoustId client api key
+    	 * @param clientAPIKey The AcoustId client api key
     	 * @param duration The duration of a song in seconds
     	 * @param fingerprint The chromaprint fingerprint of a song
     	 */
-    	AcoustIdQuery(const std::string& clientKey, int duration, const std::string& fingerprint);
+    	AcoustIdQuery(const std::string& clientAPIKey, int duration, const std::string& fingerprint);
     	/**
     	 * Gets the status of the query
     	 *

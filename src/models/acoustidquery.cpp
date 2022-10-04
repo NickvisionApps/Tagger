@@ -11,7 +11,7 @@ using namespace NickvisionTagger::Models;
 int AcoustIdQuery::m_requestCount = 0;
 std::chrono::time_point<std::chrono::system_clock> AcoustIdQuery::m_lastRequestTime = std::chrono::system_clock::now();
 
-AcoustIdQuery::AcoustIdQuery(const std::string& clientKey, int duration, const std::string& fingerprint) : m_lookupUrl{ "https://api.acoustid.org/v2/lookup?client=" + clientKey + "&duration="  + std::to_string(duration) + "&meta=recordings&fingerprint=" + fingerprint }, m_status{ AcoustIdQueryStatus::AcoustIdError }, m_recordingId{ "" }
+AcoustIdQuery::AcoustIdQuery(const std::string& clientAPIKey, int duration, const std::string& fingerprint) : m_lookupUrl{ "https://api.acoustid.org/v2/lookup?client=" + clientAPIKey + "&duration="  + std::to_string(duration) + "&meta=recordings&fingerprint=" + fingerprint }, m_status{ AcoustIdQueryStatus::AcoustIdError }, m_recordingId{ "" }
 {
 
 }

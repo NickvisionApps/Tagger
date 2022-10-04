@@ -1,8 +1,8 @@
 #include "musicfile.hpp"
 #include <array>
 #include <cstdio>
-#include <sstream>
 #include <stdexcept>
+#include <unordered_map>
 #include <taglib/asffile.h>
 #include <taglib/flacfile.h>
 #include <taglib/mpegfile.h>
@@ -11,6 +11,7 @@
 #include <taglib/wavfile.h>
 #include <taglib/vorbisfile.h>
 #include "acoustidquery.hpp"
+#include "acoustidsubmission.hpp"
 #include "musicbrainzrecordingquery.hpp"
 #include "../helpers/mediahelpers.hpp"
 
@@ -579,9 +580,21 @@ bool MusicFile::downloadMusicBrainzMetadata(const std::string& acoustIdClientKey
     return false;
 }
 
-bool MusicFile::submitToAcoustId(const std::string& acoustIdClientKey, const std::string& acoustIdUserKey, const std::string& musicBrainzRecordingId)
+bool MusicFile::submitToAcoustId(const std::string& acoustIdClientAPIKey, const std::string& acoustIdUserAPIKey, const std::string& musicBrainzRecordingId)
 {
-    return false;
+    AcoustIdSubmission submission{ acoustIdClientAPIKey, acoustIdUserAPIKey, getDuration(), getChromaprintFingerprint() };
+    if(musicBrainzRecordingId.empty())
+    {
+        std::unordered_map<std::string, std::string> tagMap;
+        tagMap.insert({ "title", m_title });
+        tagMap.insert({ "artist", m_artist });
+        tagMap.insert({ "album", m_album });
+        tagMap.insert({ "year", std::to_string(m_year) });
+        tagMap.insert({ "track", std::to_string(m_track) });
+        tagMap.insert({ "albumArtist", m_albumArtist });
+        return submission.submitTagMetadata(tagMap);
+    }
+    return submission.submitMusicBrainzRecordingId(musicBrainzRecordingId);
 }
 
 bool MusicFile::operator<(const MusicFile& toCompare) const
