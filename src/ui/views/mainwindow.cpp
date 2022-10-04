@@ -7,6 +7,7 @@
 #include "shortcutsdialog.hpp"
 #include "../controls/comboboxdialog.hpp"
 #include "../controls/entrydialog.hpp"
+#include "../controls/messagedialog.hpp"
 #include "../controls/progressdialog.hpp"
 #include "../../helpers/mediahelpers.hpp"
 
@@ -424,23 +425,13 @@ void MainWindow::onApply()
 
 void MainWindow::onDeleteTags()
 {
-    GtkWidget* messageDialog{ adw_message_dialog_new(GTK_WINDOW(m_gobj), "Delete Tags?", "Are you sure you want to delete the tags of the selected files?") };
-    adw_message_dialog_add_responses(ADW_MESSAGE_DIALOG(messageDialog), "no", "No", "yes", "Yes", nullptr);
-    adw_message_dialog_set_response_appearance(ADW_MESSAGE_DIALOG(messageDialog), "yes", ADW_RESPONSE_DESTRUCTIVE);
-    adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(messageDialog), "no");
-    adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(messageDialog), "no");
-    g_signal_connect(messageDialog, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog* dialog, gchar* response, gpointer data)
+    MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Delete Tags?", "Are you sure you want to delete the tags of the selected files?", "No", "Yes" };
+    if(messageDialog.run() == MessageDialogResponse::Destructive)
     {
-        gtk_window_destroy(GTK_WINDOW(dialog));
-        MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
-        if(strcmp(response, "yes") == 0)
-        {
-            ProgressDialog progressDialog{ GTK_WINDOW(mainWindow->m_gobj), "Deleting tags...", [mainWindow]() { mainWindow->m_controller.deleteTags(); } };
-            progressDialog.run();
-            gtk_list_box_unselect_all(GTK_LIST_BOX(mainWindow->m_listMusicFiles));
-        }
-    })), this);
-    gtk_widget_show(messageDialog);
+        ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Deleting tags...", [&]() { m_controller.deleteTags(); } };
+        progressDialog.run();
+        gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
+    }
 }
 
 void MainWindow::onInsertAlbumArt()
@@ -511,15 +502,8 @@ void MainWindow::onSubmitToAcoustId()
     //Check for one file selected
     if(m_controller.getSelectedMusicFiles().size() > 1)
     {
-        GtkWidget* messageDialog{ adw_message_dialog_new(GTK_WINDOW(m_gobj), "Too Many Files Selected", "Only one file can be submitted to AcoustId at a time. Please select only one file and try again.") };
-        adw_message_dialog_add_response(ADW_MESSAGE_DIALOG(messageDialog), "ok", "OK");
-        adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(messageDialog), "ok");
-        adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(messageDialog), "ok");
-        g_signal_connect(messageDialog, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog* dialog, gchar*, gpointer)
-        {
-            gtk_window_destroy(GTK_WINDOW(dialog));
-        })), this);
-        gtk_widget_show(messageDialog);
+        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Too Many Files Selected", "Only one file can be submitted to AcoustId at a time. Please select only one file and try again.", "OK" };
+        messageDialog.run();
         return;
     }
     //Check for valid AcoustId User API Key
@@ -528,15 +512,8 @@ void MainWindow::onSubmitToAcoustId()
     progressDialogChecking.run();
     if(!validAcoustIdUserAPIKey)
     {
-        GtkWidget* messageDialog{ adw_message_dialog_new(GTK_WINDOW(m_gobj), "Invalid API Key", "The AcoustId User API Key is invalid. Please provide a valid api key in the preferences dialog.") };
-        adw_message_dialog_add_response(ADW_MESSAGE_DIALOG(messageDialog), "ok", "OK");
-        adw_message_dialog_set_default_response(ADW_MESSAGE_DIALOG(messageDialog), "ok");
-        adw_message_dialog_set_close_response(ADW_MESSAGE_DIALOG(messageDialog), "ok");
-        g_signal_connect(messageDialog, "response", G_CALLBACK((void (*)(AdwMessageDialog*, gchar*, gpointer))([](AdwMessageDialog* dialog, gchar*, gpointer)
-        {
-            gtk_window_destroy(GTK_WINDOW(dialog));
-        })), this);
-        gtk_widget_show(messageDialog);
+        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Invalid API Key", "The AcoustId User API Key is invalid. Please provide a valid api key in the preferences dialog.", "OK" };
+        messageDialog.run();
         return;
     }
     //Get MusicBrainz Recording Id
