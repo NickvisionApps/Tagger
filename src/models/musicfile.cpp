@@ -541,10 +541,10 @@ bool MusicFile::tagToFilename(const std::string& formatString)
 bool MusicFile::downloadMusicBrainzMetadata(const std::string& acoustIdClientKey, bool overwriteTagWithMusicBrainz)
 {
     AcoustIdQuery acoustIdQuery{ acoustIdClientKey, getDuration(), getChromaprintFingerprint() };
-    if(acoustIdQuery.lookup() == AcoustIdQueryStatus::OK)
+    if(acoustIdQuery.lookup())
     {
         MusicBrainzRecordingQuery musicBrainzQuery{ acoustIdQuery.getRecordingId() };
-        if(musicBrainzQuery.lookup() == MusicBrainzRecordingQueryStatus::OK)
+        if(musicBrainzQuery.lookup())
         {
             if(overwriteTagWithMusicBrainz || m_title.empty())
             {

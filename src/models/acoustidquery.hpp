@@ -7,17 +7,6 @@
 namespace NickvisionTagger::Models
 {
 	/**
-	 * Statuses for the AcoustIdQuery
-	 */
-    enum class AcoustIdQueryStatus
-    {
-    	OK,
-    	CurlError,
-    	AcoustIdError,
-		NoResult
-    };
-
-	/**
 	 * A model representing a query from AcoustId
 	 */
     class AcoustIdQuery
@@ -31,12 +20,6 @@ namespace NickvisionTagger::Models
     	 * @param fingerprint The chromaprint fingerprint of a song
     	 */
     	AcoustIdQuery(const std::string& clientAPIKey, int duration, const std::string& fingerprint);
-    	/**
-    	 * Gets the status of the query
-    	 *
-    	 * @returns The status of the query
-    	 */
-		AcoustIdQueryStatus getStatus() const;
 		/**
 		 * Gets the recording id from the query
 		 *
@@ -46,15 +29,14 @@ namespace NickvisionTagger::Models
 		/**
 		 * Runs the query
 		 *
-		 * @returns The status of the query
+		 * @returns True if the query was successful, else false
 		 */
-		AcoustIdQueryStatus lookup();
+		bool lookup();
 
     private:
     	static int m_requestCount;
 		static std::chrono::time_point<std::chrono::system_clock> m_lastRequestTime;
     	std::string m_lookupUrl;
-		AcoustIdQueryStatus m_status;
 		std::string m_recordingId;
     };
 }

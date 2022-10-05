@@ -7,17 +7,6 @@
 namespace NickvisionTagger::Models
 {
 	/**
-	 * Statuses for the MusicBrainzRecordingQuery
-	 */
-    enum class MusicBrainzRecordingQueryStatus
-    {
-    	OK,
-    	CurlError,
-    	MusicBrainzError,
-		NoResult
-    };
-
-	/**
 	 * A model representing a recording query from MusicBrainz
 	 */
     class MusicBrainzRecordingQuery
@@ -29,12 +18,6 @@ namespace NickvisionTagger::Models
     	 * @param recordingId The MusicBrainz recording id
     	 */
     	MusicBrainzRecordingQuery(const std::string& recordingId);
-    	/**
-    	 * Gets the status of the query
-    	 *
-    	 * @returns The status of the query
-    	 */
-		MusicBrainzRecordingQueryStatus getStatus() const;
 		/**
 		 * Gets the title from the query
 		 *
@@ -80,15 +63,14 @@ namespace NickvisionTagger::Models
 		/**
 		 * Runs the query
 		 *
-		 * @returns The status of the query
+		 * @returns True if the query was successful, else false
 		 */
-		MusicBrainzRecordingQueryStatus lookup();
+		bool lookup();
 
     private:
     	static int m_requestCount;
 		static std::chrono::time_point<std::chrono::system_clock> m_lastRequestTime;
     	std::string m_lookupUrl;
-		MusicBrainzRecordingQueryStatus m_status;
 		std::string m_title;
 		std::string m_artist;
 		std::string m_album;

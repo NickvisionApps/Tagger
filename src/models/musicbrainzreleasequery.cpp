@@ -13,14 +13,9 @@ using namespace NickvisionTagger::Models;
 int MusicBrainzReleaseQuery::m_requestCount = 0;
 std::chrono::time_point<std::chrono::system_clock> MusicBrainzReleaseQuery::m_lastRequestTime = std::chrono::system_clock::now();
 
-MusicBrainzReleaseQuery::MusicBrainzReleaseQuery(const std::string& releaseId) : m_releaseId{ releaseId }, m_lookupUrl{ "https://musicbrainz.org/ws/2/release/" + m_releaseId + "?inc=artists&fmt=json" }, m_lookupUrlAlbumArt{ "https://coverartarchive.org/release/" + m_releaseId }, m_status{ MusicBrainzReleaseQueryStatus::MusicBrainzError }, m_title{ "" }, m_artist{ "" }
+MusicBrainzReleaseQuery::MusicBrainzReleaseQuery(const std::string& releaseId) : m_releaseId{ releaseId }, m_lookupUrl{ "https://musicbrainz.org/ws/2/release/" + m_releaseId + "?inc=artists&fmt=json" }, m_lookupUrlAlbumArt{ "https://coverartarchive.org/release/" + m_releaseId }, m_title{ "" }, m_artist{ "" }
 {
 
-}
-
-MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::getStatus() const
-{
-    return m_status;
 }
 
 const std::string& MusicBrainzReleaseQuery::getTitle() const
@@ -38,7 +33,7 @@ const TagLib::ByteVector& MusicBrainzReleaseQuery::getAlbumArt() const
     return m_albumArt;
 }
 
-MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
+bool MusicBrainzReleaseQuery::lookup()
 {
     //MusicBrainz has rate limit of 50 requests/second
     if(m_requestCount == 50)
@@ -55,15 +50,13 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
     m_lastRequestTime = std::chrono::system_clock::now();
     if(response.empty())
     {
-        m_status = MusicBrainzReleaseQueryStatus::CurlError;
-        return m_status;
+        return false;
     }
     //Parse Response
     Json::Value jsonRoot{ JsonHelpers::getValueFromString(response) };
     if(!jsonRoot["error"].isNull())
     {
-        m_status = MusicBrainzReleaseQueryStatus::MusicBrainzError;
-        return m_status;
+        return false;
     }
     //Get Title
     m_title = jsonRoot.get("title", "").asString();
@@ -80,8 +73,7 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
         response = CurlHelpers::getResponseString(m_lookupUrlAlbumArt);
         if(response.empty())
         {
-            m_status = MusicBrainzReleaseQueryStatus::CurlError;
-            return m_status;
+            return false;
         }
         if(response.substr(0, 1) == "{")
         {
@@ -100,8 +92,7 @@ MusicBrainzReleaseQueryStatus MusicBrainzReleaseQuery::lookup()
         }
     }
     //Done
-    m_status = MusicBrainzReleaseQueryStatus::OK;
-    return m_status;
+    return true;
 }
 
 

@@ -7,17 +7,6 @@
 namespace NickvisionTagger::Models
 {
 	/**
-	 * Statuses for the MusicBrainzReleaseQuery
-	 */
-    enum class MusicBrainzReleaseQueryStatus
-    {
-    	OK,
-    	CurlError,
-    	MusicBrainzError,
-		NoResult
-    };
-
-	/**
 	 * A model representing a release query from MusicBrainz
 	 */
     class MusicBrainzReleaseQuery
@@ -29,12 +18,6 @@ namespace NickvisionTagger::Models
     	 * @param releaseId The MusicBrainz release id
     	 */
     	MusicBrainzReleaseQuery(const std::string& release);
-    	/**
-    	 * Gets the status of the query
-    	 *
-    	 * @returns The status of the query
-    	 */
-		MusicBrainzReleaseQueryStatus getStatus() const;
 		/**
 		 * Gets the title from the query
 		 *
@@ -56,9 +39,9 @@ namespace NickvisionTagger::Models
 		/**
 		 * Runs the query
 		 *
-		 * @returns The status of the query
+		 * @returns True if the query was successful, else false
 		 */
-		MusicBrainzReleaseQueryStatus lookup();
+		bool lookup();
 
     private:
     	static int m_requestCount;
@@ -66,7 +49,6 @@ namespace NickvisionTagger::Models
 		std::string m_releaseId;
     	std::string m_lookupUrl;
     	std::string m_lookupUrlAlbumArt;
-		MusicBrainzReleaseQueryStatus m_status;
 		std::string m_title;
 		std::string m_artist;
 		TagLib::ByteVector m_albumArt;

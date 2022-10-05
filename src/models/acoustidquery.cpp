@@ -10,14 +10,9 @@ using namespace NickvisionTagger::Models;
 int AcoustIdQuery::m_requestCount = 0;
 std::chrono::time_point<std::chrono::system_clock> AcoustIdQuery::m_lastRequestTime = std::chrono::system_clock::now();
 
-AcoustIdQuery::AcoustIdQuery(const std::string& clientAPIKey, int duration, const std::string& fingerprint) : m_lookupUrl{ "https://api.acoustid.org/v2/lookup?client=" + clientAPIKey + "&duration="  + std::to_string(duration) + "&meta=recordings&fingerprint=" + fingerprint }, m_status{ AcoustIdQueryStatus::AcoustIdError }, m_recordingId{ "" }
+AcoustIdQuery::AcoustIdQuery(const std::string& clientAPIKey, int duration, const std::string& fingerprint) : m_lookupUrl{ "https://api.acoustid.org/v2/lookup?client=" + clientAPIKey + "&duration="  + std::to_string(duration) + "&meta=recordings&fingerprint=" + fingerprint }, m_recordingId{ "" }
 {
 
-}
-
-AcoustIdQueryStatus AcoustIdQuery::getStatus() const
-{
-    return m_status;
 }
 
 const std::string& AcoustIdQuery::getRecordingId() const
@@ -25,7 +20,7 @@ const std::string& AcoustIdQuery::getRecordingId() const
     return m_recordingId;
 }
 
-AcoustIdQueryStatus AcoustIdQuery::lookup()
+bool AcoustIdQuery::lookup()
 {
     //AcoustId has rate limit of 3 requests/second
     if(m_requestCount == 3)
@@ -42,22 +37,19 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
     m_lastRequestTime = std::chrono::system_clock::now();
     if(response.empty())
     {
-        m_status = AcoustIdQueryStatus::CurlError;
-        return m_status;
+        return false;
     }
     //Parse Response
     Json::Value jsonRoot{ JsonHelpers::getValueFromString(response) };
-    m_status = jsonRoot.get("status", "error").asString() == "ok" ? AcoustIdQueryStatus::OK : AcoustIdQueryStatus::AcoustIdError;
-    if(m_status == AcoustIdQueryStatus::AcoustIdError)
+    if(jsonRoot.get("status", "error").asString() != "ok")
     {
-    	return m_status;
+    	return false;
     }
     //Get First Result
     Json::Value& jsonFirstResult{ jsonRoot["results"][0] };
     if(jsonFirstResult.isNull())
     {
-        m_status = AcoustIdQueryStatus::NoResult;
-        return m_status;
+        return false;
     }
     //Get Best Recording Id
     Json::Value& jsonRecordings{ jsonFirstResult["recordings"] };
@@ -72,9 +64,9 @@ AcoustIdQueryStatus AcoustIdQuery::lookup()
     }
     if(jsonBestRecording.get("title", "").asString() == "")
     {
-        m_status = AcoustIdQueryStatus::NoResult;
-        return m_status;
+        return false;
     }
     m_recordingId = jsonBestRecording.get("id", "").asString();
-    return m_status;
+    //Done
+    return true;
 }

@@ -12,14 +12,9 @@ using namespace NickvisionTagger::Models;
 int MusicBrainzRecordingQuery::m_requestCount = 0;
 std::chrono::time_point<std::chrono::system_clock> MusicBrainzRecordingQuery::m_lastRequestTime = std::chrono::system_clock::now();
 
-MusicBrainzRecordingQuery::MusicBrainzRecordingQuery(const std::string& recordingId) : m_lookupUrl{ "https://musicbrainz.org/ws/2/recording/" + recordingId + "?inc=artists+releases+genres&fmt=json" }, m_status{ MusicBrainzRecordingQueryStatus::MusicBrainzError }, m_title{ "" }, m_artist{ "" }, m_album{ "" }, m_year{ 0 }, m_albumArtist{ "" }, m_genre{ "" }
+MusicBrainzRecordingQuery::MusicBrainzRecordingQuery(const std::string& recordingId) : m_lookupUrl{ "https://musicbrainz.org/ws/2/recording/" + recordingId + "?inc=artists+releases+genres&fmt=json" }, m_title{ "" }, m_artist{ "" }, m_album{ "" }, m_year{ 0 }, m_albumArtist{ "" }, m_genre{ "" }
 {
 
-}
-
-MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::getStatus() const
-{
-    return m_status;
 }
 
 const std::string& MusicBrainzRecordingQuery::getTitle() const
@@ -57,7 +52,7 @@ const TagLib::ByteVector& MusicBrainzRecordingQuery::getAlbumArt() const
     return m_albumArt;
 }
 
-MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::lookup()
+bool MusicBrainzRecordingQuery::lookup()
 {
     //MusicBrainz has rate limit of 50 requests/second
     if(m_requestCount == 50)
@@ -74,15 +69,13 @@ MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::lookup()
     m_lastRequestTime = std::chrono::system_clock::now();
     if(response.empty())
     {
-        m_status = MusicBrainzRecordingQueryStatus::CurlError;
-        return m_status;
+        return false;
     }
     //Parse Response
     Json::Value jsonRoot{ JsonHelpers::getValueFromString(response) };
     if(!jsonRoot["error"].isNull())
     {
-        m_status = MusicBrainzRecordingQueryStatus::MusicBrainzError;
-        return m_status;
+        return false;
     }
     //Get Title
     m_title = jsonRoot.get("title", "").asString();
@@ -97,7 +90,7 @@ MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::lookup()
     if(!jsonFirstRelease.isNull())
     {
         MusicBrainzReleaseQuery releaseQuery{ jsonFirstRelease.get("id", "").asString() };
-        if(releaseQuery.lookup() == MusicBrainzReleaseQueryStatus::OK)
+        if(releaseQuery.lookup())
         {
             m_album = releaseQuery.getTitle();
             m_albumArtist = releaseQuery.getArtist();
@@ -117,6 +110,5 @@ MusicBrainzRecordingQueryStatus MusicBrainzRecordingQuery::lookup()
         m_genre = jsonFirstGenre.get("name", "").asString();
     }
     //Done
-    m_status = MusicBrainzRecordingQueryStatus::OK;
-    return m_status;
+    return true;
 }
