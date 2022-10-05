@@ -42,7 +42,7 @@ void gtk_image_set_from_byte_vector(GtkImage* image, const TagLib::ByteVector& b
 MainWindow::MainWindow(GtkApplication* application, const MainWindowController& controller) : m_controller{ controller }, m_gobj{ adw_application_window_new(application) }
 {
     //Window Settings
-    gtk_widget_set_size_request(m_gobj, 800, 600);
+    gtk_widget_set_size_request(m_gobj, 1000, 800);
     gtk_window_set_default_size(GTK_WINDOW(m_gobj), 1000, 800);
     g_signal_connect(m_gobj, "close_request", G_CALLBACK((void (*)(GtkWidget*, gpointer))[](GtkWidget*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onCloseRequest(); }), this);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
@@ -251,9 +251,9 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_scrollTaggerFlap = gtk_scrolled_window_new();
     gtk_widget_set_hexpand(m_scrollTaggerFlap, true);
     m_boxTaggerFlap = gtk_box_new(GTK_ORIENTATION_VERTICAL, 40);
-    gtk_widget_set_margin_start(m_boxTaggerFlap, 40);
+    gtk_widget_set_margin_start(m_boxTaggerFlap, 80);
     gtk_widget_set_margin_top(m_boxTaggerFlap, 20);
-    gtk_widget_set_margin_end(m_boxTaggerFlap, 40);
+    gtk_widget_set_margin_end(m_boxTaggerFlap, 80);
     gtk_widget_set_margin_bottom(m_boxTaggerFlap, 20);
     gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_stackAlbumArt);
     gtk_box_append(GTK_BOX(m_boxTaggerFlap), m_adwGrpProperties);
