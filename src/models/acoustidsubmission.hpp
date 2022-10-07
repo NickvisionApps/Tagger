@@ -45,6 +45,7 @@ namespace NickvisionTagger::Models
 
 	private:
 		std::string m_lookupUrl;
+		std::string m_clientAPIKey;
 		/**
 		 * Submits a fingerprint to AcoustId
 		 *

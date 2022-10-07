@@ -6,7 +6,7 @@
 using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
 
-AcoustIdSubmission::AcoustIdSubmission(const std::string& clientAPIKey, const std::string& userAPIKey, int duration, const std::string& fingerprint) : m_lookupUrl{ "https://api.acoustid.org/v2/submit?client=" + clientAPIKey + "&user=" + userAPIKey + "&wait=3&&duration.0=" + std::to_string(duration) + "&fingerprint.0=" + fingerprint }
+AcoustIdSubmission::AcoustIdSubmission(const std::string& clientAPIKey, const std::string& userAPIKey, int duration, const std::string& fingerprint) : m_lookupUrl{ "https://api.acoustid.org/v2/submit?client=" + clientAPIKey + "&user=" + userAPIKey + "&wait=3&&duration.0=" + std::to_string(duration) + "&fingerprint.0=" + fingerprint }, m_clientAPIKey{ clientAPIKey }
 {
 
 }
@@ -74,12 +74,34 @@ bool AcoustIdSubmission::submit()
     	return false;
     }
     //Get First Submission
-    Json::Value& jsonFirstResult{ jsonRoot["submissions"][0] };
-    if(jsonFirstResult.isNull())
+    const Json::Value& jsonFirstSubmisison{ jsonRoot["submissions"][0] };
+    if(jsonFirstSubmisison.isNull())
     {
         return false;
     }
-    return true;
+    std::string submissionId{ jsonFirstSubmisison.get("id", "").asString() };
+    if(submissionId.empty())
+    {
+        return false;
+    }
+    std::string status{ jsonFirstSubmisison.get("status", "").asString() };
+    std::string statusLookupUrl{ "https://api.acoustid.org/v2/submission_status?client=" + m_clientAPIKey + "&id=" + submissionId };
+    while(status == "pending")
+    {
+        std::string statusReponse{ CurlHelpers::getResponseString(statusLookupUrl) };
+        Json::Value jsonStatusRoot{ JsonHelpers::getValueFromString(statusReponse) };
+        if(jsonRoot.get("status", "error").asString() != "ok")
+        {
+        	break;
+        }
+        const Json::Value& jsonStatusFirstSubmission{ jsonStatusRoot["submissions"][0] };
+        if(jsonStatusFirstSubmission.isNull())
+        {
+            break;
+        }
+        status = jsonFirstSubmisison.get("status", "").asString();
+    }
+    return status == "imported";
 } 
 
 
