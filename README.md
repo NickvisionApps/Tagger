@@ -31,10 +31,9 @@
 - [C++20](https://en.cppreference.com/w/cpp/20)
 - [GTK 4](https://www.gtk.org/)
 - [libadwaita](https://gnome.pages.gitlab.gnome.org/libadwaita/)
-- [curlpp](http://www.curlpp.org/)
 - [jsoncpp](https://github.com/open-source-parsers/jsoncpp)
+- [curlpp](http://www.curlpp.org/)
 - [taglib](https://taglib.org/)
-- [libchromaprint for fpcalc](https://acoustid.org/chromaprint)
 
 # Special Thanks
 - [daudix-UFO](https://github.com/daudix-UFO) and [jannuary](https://github.com/jannuary) for our application icons
