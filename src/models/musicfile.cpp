@@ -2,7 +2,6 @@
 #include <array>
 #include <cstdio>
 #include <stdexcept>
-#include <unordered_map>
 #include <taglib/asffile.h>
 #include <taglib/flacfile.h>
 #include <taglib/mpegfile.h>
@@ -13,6 +12,7 @@
 #include "acoustidquery.hpp"
 #include "acoustidsubmission.hpp"
 #include "musicbrainzrecordingquery.hpp"
+#include "tagmap.hpp"
 #include "../helpers/mediahelpers.hpp"
 
 using namespace NickvisionTagger::Helpers;
@@ -585,13 +585,13 @@ bool MusicFile::submitToAcoustId(const std::string& acoustIdClientAPIKey, const 
     AcoustIdSubmission submission{ acoustIdClientAPIKey, acoustIdUserAPIKey, getDuration(), getChromaprintFingerprint() };
     if(musicBrainzRecordingId.empty())
     {
-        std::unordered_map<std::string, std::string> tagMap;
-        tagMap.insert({ "title", m_title });
-        tagMap.insert({ "artist", m_artist });
-        tagMap.insert({ "album", m_album });
-        tagMap.insert({ "year", std::to_string(m_year) });
-        tagMap.insert({ "track", std::to_string(m_track) });
-        tagMap.insert({ "albumArtist", m_albumArtist });
+        TagMap tagMap;
+        tagMap.setTitle(m_title);
+        tagMap.setArtist(m_artist);
+        tagMap.setAlbum(m_album);
+        tagMap.setYear(std::to_string(m_year));
+        tagMap.setTrack(std::to_string(m_track));
+        tagMap.setAlbumArtist(m_albumArtist);
         return submission.submitTagMetadata(tagMap);
     }
     return submission.submitMusicBrainzRecordingId(musicBrainzRecordingId);
@@ -616,4 +616,6 @@ bool MusicFile::operator!=(const MusicFile& toCompare) const
 {
     return m_path != toCompare.m_path;
 }
+
+
 

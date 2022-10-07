@@ -2,13 +2,13 @@
 
 #include <functional>
 #include <string>
-#include <unordered_map>
 #include <vector>
 #include "preferencesdialogcontroller.hpp"
 #include "../models/appinfo.hpp"
 #include "../models/configuration.hpp"
 #include "../models/musicfile.hpp"
 #include "../models/musicfolder.hpp"
+#include "../models/tagmap.hpp"
 
 namespace NickvisionTagger::Controllers
 {
@@ -76,9 +76,9 @@ namespace NickvisionTagger::Controllers
     	/**
     	 * Saves the tags of the selected music files
     	 *
-    	 * @param tagMap An unordered_map of the tag properties to save
+    	 * @param tagMap The TagMap
     	 */
-    	void saveTags(const std::unordered_map<std::string, std::string>& tagMap);
+    	void saveTags(const NickvisionTagger::Models::TagMap& tagMap);
     	/**
     	 * Deletes the tags of the selected music files
     	 */
@@ -128,11 +128,11 @@ namespace NickvisionTagger::Controllers
     	 */
     	const std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>>& getSelectedMusicFiles() const;
     	/**
-    	 * Gets a tag properties map for the selected music files
+    	 * Gets a TagMap for the selected music files
     	 *
-    	 * @returns The tag properties map for the selected music files
+    	 * @returns The TagMap for the selected music files
     	 */
-    	std::unordered_map<std::string, std::string> getSelectedTagMap() const;
+    	NickvisionTagger::Models::TagMap getSelectedTagMap() const;
     	/**
     	 * updates the list of selected music files from the list of indexes
     	 *

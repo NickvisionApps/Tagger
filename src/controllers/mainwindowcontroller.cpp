@@ -79,53 +79,53 @@ void MainWindowController::reloadMusicFolder()
     m_musicFolder.reloadMusicFiles();
 }
 
-void MainWindowController::saveTags(const std::unordered_map<std::string, std::string>& tagMap)
+void MainWindowController::saveTags(const TagMap& tagMap)
 {
     for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
     {
-        if(tagMap.at("filename") != musicFile->getFilename() && tagMap.at("filename") != "<keep>")
+        if(tagMap.getFilename() != musicFile->getFilename() && tagMap.getFilename() != "<keep>")
         {
-            musicFile->setFilename(tagMap.at("filename"));
+            musicFile->setFilename(tagMap.getFilename());
         }
-        if(tagMap.at("title") != "<keep>")
+        if(tagMap.getTitle() != "<keep>")
         {
-            musicFile->setTitle(tagMap.at("title"));
+            musicFile->setTitle(tagMap.getTitle());
         }
-        if(tagMap.at("artist") != "<keep>")
+        if(tagMap.getArtist() != "<keep>")
         {
-            musicFile->setArtist(tagMap.at("artist"));
+            musicFile->setArtist(tagMap.getArtist());
         }
-        if(tagMap.at("album") != "<keep>")
+        if(tagMap.getAlbum() != "<keep>")
         {
-            musicFile->setAlbum(tagMap.at("album"));
+            musicFile->setAlbum(tagMap.getAlbum());
         }
-        if(tagMap.at("year") != "<keep>")
+        if(tagMap.getYear() != "<keep>")
         {
             try
             {
-                musicFile->setYear(MediaHelpers::stoui(tagMap.at("year")));
+                musicFile->setYear(MediaHelpers::stoui(tagMap.getYear()));
             }
             catch(...) { }
         }
-        if(tagMap.at("track") != "<keep>")
+        if(tagMap.getTrack() != "<keep>")
         {
             try
             {
-                musicFile->setTrack(MediaHelpers::stoui(tagMap.at("track")));
+                musicFile->setTrack(MediaHelpers::stoui(tagMap.getTrack()));
             }
             catch(...) { }
         }
-        if(tagMap.at("albumArtist") != "<keep>")
+        if(tagMap.getAlbumArtist() != "<keep>")
         {
-            musicFile->setAlbumArtist(tagMap.at("albumArtist"));
+            musicFile->setAlbumArtist(tagMap.getAlbumArtist());
         }
-        if(tagMap.at("genre") != "<keep>")
+        if(tagMap.getGenre() != "<keep>")
         {
-            musicFile->setGenre(tagMap.at("genre"));
+            musicFile->setGenre(tagMap.getGenre());
         }
-        if(tagMap.at("comment") != "<keep>")
+        if(tagMap.getComment() != "<keep>")
         {
-            musicFile->setComment(tagMap.at("comment"));
+            musicFile->setComment(tagMap.getComment());
         }
         musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
     }
@@ -248,41 +248,41 @@ const std::vector<std::shared_ptr<MusicFile>>& MainWindowController::getSelected
     return m_selectedMusicFiles;
 }
 
-std::unordered_map<std::string, std::string> MainWindowController::getSelectedTagMap() const
+TagMap MainWindowController::getSelectedTagMap() const
 {
-    std::unordered_map<std::string, std::string> tagMap;
+    TagMap tagMap;
     if(m_selectedMusicFiles.size() == 0)
     {
-        tagMap.insert({ "filename", "" });
-        tagMap.insert({ "title", "" });
-        tagMap.insert({ "artist", "" });
-        tagMap.insert({ "album", "" });
-        tagMap.insert({ "year", "" });
-        tagMap.insert({ "track", "" });
-        tagMap.insert({ "albumArtist", "" });
-        tagMap.insert({ "genre", "" });
-        tagMap.insert({ "comment", "" });
-        tagMap.insert({ "duration", "00:00:00" });
-        tagMap.insert({ "fingerprint", "" });
-        tagMap.insert({ "fileSize", "0 MB" });
-        tagMap.insert({ "albumArt", "" });
+        tagMap.setFilename("");
+        tagMap.setTitle("");
+        tagMap.setArtist("");
+        tagMap.setAlbum("");
+        tagMap.setYear("");
+        tagMap.setTrack("");
+        tagMap.setAlbumArtist("");
+        tagMap.setGenre("");
+        tagMap.setComment("");
+        tagMap.setDuration("00:00:00");
+        tagMap.setFingerprint("");
+        tagMap.setFileSize("0 MB");
+        tagMap.setAlbumArt("");
     }
     else if(m_selectedMusicFiles.size() == 1)
     {
         const std::shared_ptr<MusicFile>& firstMusicFile{ m_selectedMusicFiles[0] };
-        tagMap.insert({ "filename", firstMusicFile->getFilename() });
-        tagMap.insert({ "title", firstMusicFile->getTitle() });
-        tagMap.insert({ "artist", firstMusicFile->getArtist() });
-        tagMap.insert({ "album", firstMusicFile->getAlbum() });
-        tagMap.insert({ "year", std::to_string(firstMusicFile->getYear()) });
-        tagMap.insert({ "track", std::to_string(firstMusicFile->getTrack()) });
-        tagMap.insert({ "albumArtist", firstMusicFile->getAlbumArtist() });
-        tagMap.insert({ "genre", firstMusicFile->getGenre() });
-        tagMap.insert({ "comment", firstMusicFile->getComment() });
-        tagMap.insert({ "duration", firstMusicFile->getDurationAsString() });
-        tagMap.insert({ "fingerprint", firstMusicFile->getChromaprintFingerprint() });
-        tagMap.insert({ "fileSize", firstMusicFile->getFileSizeAsString() });
-        tagMap.insert({ "albumArt",  firstMusicFile->getAlbumArt().isEmpty() ? "noArt" : "hasArt" });
+        tagMap.setFilename(firstMusicFile->getFilename());
+        tagMap.setTitle(firstMusicFile->getTitle());
+        tagMap.setArtist(firstMusicFile->getArtist());
+        tagMap.setAlbum(firstMusicFile->getAlbum());
+        tagMap.setYear(std::to_string(firstMusicFile->getYear()));
+        tagMap.setTrack(std::to_string(firstMusicFile->getTrack()));
+        tagMap.setAlbumArtist(firstMusicFile->getAlbumArtist());
+        tagMap.setGenre(firstMusicFile->getGenre());
+        tagMap.setComment(firstMusicFile->getComment());
+        tagMap.setDuration(firstMusicFile->getDurationAsString());
+        tagMap.setFingerprint(firstMusicFile->getChromaprintFingerprint());
+        tagMap.setFileSize(firstMusicFile->getFileSizeAsString());
+        tagMap.setAlbumArt(firstMusicFile->getAlbumArt().isEmpty() ? "noArt" : "hasArt");
     }
     else
     {
@@ -339,25 +339,25 @@ std::unordered_map<std::string, std::string> MainWindowController::getSelectedTa
             totalDuration += musicFile->getDuration();
             totalFileSize += musicFile->getFileSize();
         }
-        tagMap.insert({ "filename", "<keep>" });
-        tagMap.insert({ "title", haveSameTitle ? firstMusicFile->getTitle() : "<keep>" });
-        tagMap.insert({ "artist", haveSameArtist ? firstMusicFile->getArtist() : "<keep>" });
-        tagMap.insert({ "album", haveSameAlbum ? firstMusicFile->getAlbum() : "<keep>" });
-        tagMap.insert({ "year", haveSameYear ? std::to_string(firstMusicFile->getYear()) : "<keep>" });
-        tagMap.insert({ "track", haveSameTrack ? std::to_string(firstMusicFile->getTrack()) : "<keep>" });
-        tagMap.insert({ "albumArtist", haveSameAlbumArtist ? firstMusicFile->getAlbumArtist() : "<keep>" });
-        tagMap.insert({ "genre", haveSameGenre ? firstMusicFile->getGenre() : "<keep>" });
-        tagMap.insert({ "comment", haveSameComment ? firstMusicFile->getComment() : "<keep>" });
-        tagMap.insert({ "duration", MediaHelpers::durationToString(totalDuration) });
-        tagMap.insert({ "fingerprint", "<keep>" });
-        tagMap.insert({ "fileSize", MediaHelpers::fileSizeToString(totalFileSize) });
+        tagMap.setFilename("<keep>");
+        tagMap.setTitle(haveSameTitle ? firstMusicFile->getTitle() : "<keep>");
+        tagMap.setArtist(haveSameArtist ? firstMusicFile->getArtist() : "<keep>");
+        tagMap.setAlbum(haveSameAlbum ? firstMusicFile->getAlbum() : "<keep>");
+        tagMap.setYear(haveSameYear ? std::to_string(firstMusicFile->getYear()) : "<keep>");
+        tagMap.setTrack(haveSameTrack ? std::to_string(firstMusicFile->getTrack()) : "<keep>");
+        tagMap.setAlbumArtist(haveSameAlbumArtist ? firstMusicFile->getAlbumArtist() : "<keep>");
+        tagMap.setGenre(haveSameGenre ? firstMusicFile->getGenre() : "<keep>");
+        tagMap.setComment(haveSameComment ? firstMusicFile->getComment() : "<keep>");
+        tagMap.setDuration(MediaHelpers::durationToString(totalDuration));
+        tagMap.setFingerprint("<keep>");
+        tagMap.setFileSize(MediaHelpers::fileSizeToString(totalFileSize));
         if(haveSameAlbumArt)
         {
-            tagMap.insert({ "albumArt", firstMusicFile->getAlbumArt().isEmpty() ? "noArt" : "hasArt" });
+            tagMap.setAlbumArt(firstMusicFile->getAlbumArt().isEmpty() ? "noArt" : "hasArt");
         }
         else
         {
-            tagMap.insert({ "albumArt", "keepArt" });
+            tagMap.setAlbumArt("keepArt");
         }
     }
     return tagMap;
@@ -376,3 +376,4 @@ bool MainWindowController::checkIfAcoustIdUserAPIKeyValid()
 {
     return AcoustIdSubmission::checkIfUserAPIKeyValid(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getAcoustIdUserAPIKey());
 }
+

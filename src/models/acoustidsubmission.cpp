@@ -35,36 +35,52 @@ bool AcoustIdSubmission::submitMusicBrainzRecordingId(const std::string& musicBr
     return submit();
 }
 
-bool AcoustIdSubmission::submitTagMetadata(const std::unordered_map<std::string, std::string>& tagMap)
+bool AcoustIdSubmission::submitTagMetadata(const TagMap& tagMap)
 {
-    if(!tagMap.at("title").empty())
+    if(!tagMap.getTitle().empty())
     {
-        m_lookupUrl += "&title.0=" + tagMap.at("title");
+        m_lookupUrl += "&title.0=" + tagMap.getTitle();
     }
-    if(!tagMap.at("artist").empty())
+    if(!tagMap.getArtist().empty())
     {
-        m_lookupUrl += "&artist.0=" + tagMap.at("artist");
+        m_lookupUrl += "&artist.0=" + tagMap.getArtist();
     }
-    if(!tagMap.at("album").empty())
+    if(!tagMap.getAlbum().empty())
     {
-        m_lookupUrl += "&album.0=" + tagMap.at("album");
+        m_lookupUrl += "&album.0=" + tagMap.getAlbum();
     }
-    if(tagMap.at("year") != "0")
+    if(tagMap.getYear() != "0")
     {
-        m_lookupUrl += "&year.0=" + tagMap.at("year");
+        m_lookupUrl += "&year.0=" + tagMap.getYear();
     }
-    if(tagMap.at("track") != "0")
+    if(tagMap.getTrack() != "0")
     {
-        m_lookupUrl += "&track.0=" + tagMap.at("track");
+        m_lookupUrl += "&track.0=" + tagMap.getTrack();
     }
-    if(!tagMap.at("albumArtist").empty())
+    if(!tagMap.getAlbumArtist().empty())
     {
-        m_lookupUrl += "&albumArtist.0=" + tagMap.at("albumArtist");
+        m_lookupUrl += "&albumArtist.0=" + tagMap.getAlbumArtist();
     }
     return submit();
 }
 
 bool AcoustIdSubmission::submit()
 {
+    std::string response{ CurlHelpers::getResponseString(m_lookupUrl) };
+    //Parse Response
+    Json::Value jsonRoot{ JsonHelpers::getValueFromString(response) };
+    if(jsonRoot.get("status", "error").asString() != "ok")
+    {
+    	return false;
+    }
+    //Get First Submission
+    Json::Value& jsonFirstResult{ jsonRoot["submissions"][0] };
+    if(jsonFirstResult.isNull())
+    {
+        return false;
+    }
     return true;
 } 
+
+
+

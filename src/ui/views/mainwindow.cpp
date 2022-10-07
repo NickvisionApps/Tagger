@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <filesystem>
 #include <regex>
-#include <unordered_map>
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
 #include "../controls/comboboxdialog.hpp"
@@ -10,6 +9,8 @@
 #include "../controls/messagedialog.hpp"
 #include "../controls/progressdialog.hpp"
 #include "../../helpers/mediahelpers.hpp"
+#include "../../models/musicfolder.hpp"
+#include "../../models/tagmap.hpp"
 
 using namespace NickvisionTagger::Controllers;
 using namespace NickvisionTagger::Helpers;
@@ -408,16 +409,16 @@ void MainWindow::onOpenMusicFolder()
 
 void MainWindow::onApply()
 {
-    std::unordered_map<std::string, std::string> tagMap;
-    tagMap.insert({ "filename", gtk_editable_get_text(GTK_EDITABLE(m_txtFilename)) });
-    tagMap.insert({ "title", gtk_editable_get_text(GTK_EDITABLE(m_txtTitle)) });
-    tagMap.insert({ "artist", gtk_editable_get_text(GTK_EDITABLE(m_txtArtist)) });
-    tagMap.insert({ "album", gtk_editable_get_text(GTK_EDITABLE(m_txtAlbum)) });
-    tagMap.insert({ "year", gtk_editable_get_text(GTK_EDITABLE(m_txtYear)) });
-    tagMap.insert({ "track", gtk_editable_get_text(GTK_EDITABLE(m_txtTrack)) });
-    tagMap.insert({ "albumArtist", gtk_editable_get_text(GTK_EDITABLE(m_txtAlbumArtist)) });
-    tagMap.insert({ "genre", gtk_editable_get_text(GTK_EDITABLE(m_txtGenre)) });
-    tagMap.insert({ "comment", gtk_editable_get_text(GTK_EDITABLE(m_txtComment)) });
+    TagMap tagMap;
+    tagMap.setFilename(gtk_editable_get_text(GTK_EDITABLE(m_txtFilename)));
+    tagMap.setTitle(gtk_editable_get_text(GTK_EDITABLE(m_txtTitle)));
+    tagMap.setArtist(gtk_editable_get_text(GTK_EDITABLE(m_txtArtist)));
+    tagMap.setAlbum(gtk_editable_get_text(GTK_EDITABLE(m_txtAlbum)));
+    tagMap.setYear(gtk_editable_get_text(GTK_EDITABLE(m_txtYear)));
+    tagMap.setTrack(gtk_editable_get_text(GTK_EDITABLE(m_txtTrack)));
+    tagMap.setAlbumArtist(gtk_editable_get_text(GTK_EDITABLE(m_txtAlbumArtist)));
+    tagMap.setGenre(gtk_editable_get_text(GTK_EDITABLE(m_txtGenre)));
+    tagMap.setComment(gtk_editable_get_text(GTK_EDITABLE(m_txtComment)));
     ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Saving tags...", [&, tagMap]() { m_controller.saveTags(tagMap); } };
     progressDialog.run();
     onMusicFolderUpdated(false);
@@ -607,25 +608,25 @@ void MainWindow::onListMusicFilesSelectionChanged()
     {
         gtk_editable_set_editable(GTK_EDITABLE(m_txtFilename), false);
     }
-    std::unordered_map<std::string, std::string> tagMap{ m_controller.getSelectedTagMap() };
-    gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), tagMap.at("filename").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), tagMap.at("title").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), tagMap.at("artist").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), tagMap.at("album").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtYear), tagMap.at("year").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), tagMap.at("track").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), tagMap.at("albumArtist").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), tagMap.at("genre").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtComment), tagMap.at("comment").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), tagMap.at("duration").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtChromaprintFingerprint), tagMap.at("fingerprint").c_str());
-    gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), tagMap.at("fileSize").c_str());
-    if(tagMap.at("albumArt") == "hasArt")
+    TagMap tagMap{ m_controller.getSelectedTagMap() };
+    gtk_editable_set_text(GTK_EDITABLE(m_txtFilename), tagMap.getFilename().c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtTitle), tagMap.getTitle().c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtArtist), tagMap.getArtist().c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtAlbum), tagMap.getAlbum().c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtYear), tagMap.getYear().c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtTrack), tagMap.getTrack().c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtAlbumArtist), tagMap.getAlbumArtist().c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtGenre), tagMap.getGenre().c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtComment), tagMap.getComment().c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), tagMap.getDuration().c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtChromaprintFingerprint), tagMap.getFingerprint().c_str());
+    gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), tagMap.getFileSize().c_str());
+    if(tagMap.getAlbumArt() == "hasArt")
     {
         adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_stackAlbumArt), "image");
         gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), m_controller.getSelectedMusicFiles()[0]->getAlbumArt());
     }
-    else if(tagMap.at("albumArt") == "keepArt")
+    else if(tagMap.getAlbumArt() == "keepArt")
     {
         adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_stackAlbumArt), "keepImage");
         gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
