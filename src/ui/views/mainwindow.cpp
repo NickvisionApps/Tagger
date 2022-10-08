@@ -540,9 +540,10 @@ void MainWindow::onKeyboardShortcuts()
 
 void MainWindow::onAbout()
 {
+    bool isDev{ m_controller.getAppInfo().getVersion().find("-") != std::string::npos };
     adw_show_about_window(GTK_WINDOW(m_gobj),
                           "application-name", m_controller.getAppInfo().getShortName().c_str(),
-                          "application-icon", m_controller.getAppInfo().getId().c_str(),
+                          "application-icon", (m_controller.getAppInfo().getId() + (isDev ? "-devel" : "")).c_str(),
                           "version", m_controller.getAppInfo().getVersion().c_str(),
                           "comments", m_controller.getAppInfo().getDescription().c_str(),
                           "developer-name", "Nickvision",
