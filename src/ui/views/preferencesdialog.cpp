@@ -74,6 +74,7 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     adw_preferences_group_set_description(ADW_PREFERENCES_GROUP(m_grpFingerprinting), "Customize fingerprinting settings.");
     //AcoustId User API Key
     m_btnGetAcoustIdUserAPIKey = gtk_button_new();
+    gtk_widget_set_valign(m_btnGetAcoustIdUserAPIKey, GTK_ALIGN_CENTER);
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnGetAcoustIdUserAPIKey), "flat");
     gtk_button_set_icon_name(GTK_BUTTON(m_btnGetAcoustIdUserAPIKey), "window-new-symbolic");
     gtk_widget_set_tooltip_text(m_btnGetAcoustIdUserAPIKey, "Get New API Key");
