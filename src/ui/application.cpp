@@ -13,7 +13,7 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setName("NickvisionTagger");
     m_appInfo.setShortName("Tagger");
     m_appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
-    m_appInfo.setVersion("2022.10.1-beta1");
+    m_appInfo.setVersion("2022.10.1");
     m_appInfo.setChangelog("<ul><li>Added the ability to submit tag metadata to AcoustId</li><li>Improved 'Download MusicBrainz Metadata' accuracy</li><li>Improved 'Download MusicBrainz Metadata' performance</li><li>Improved file size calculation</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
