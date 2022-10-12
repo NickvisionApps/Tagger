@@ -453,6 +453,10 @@ void MainWindow::onReloadMusicFolder()
             onMusicFolderUpdated(true);
         }
     }
+    else
+    {
+        onMusicFolderUpdated(true);
+    }
 }
 
 void MainWindow::onApply()
