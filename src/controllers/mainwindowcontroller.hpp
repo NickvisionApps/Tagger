@@ -32,6 +32,12 @@ namespace NickvisionTagger::Controllers
     	 */
     	const NickvisionTagger::Models::AppInfo& getAppInfo() const;
     	/**
+		 * Gets whether or not the application version is a development version or not
+		 *
+		 * @returns True for development version, else false
+		 */
+		bool getIsDevVersion() const;
+    	/**
     	 * Creates a PreferencesDialogController
     	 *
     	 * @returns A new PreferencesDialogController
@@ -150,6 +156,7 @@ namespace NickvisionTagger::Controllers
     	NickvisionTagger::Models::AppInfo& m_appInfo;
     	NickvisionTagger::Models::Configuration& m_configuration;
     	bool m_isOpened;
+    	bool m_isDevVersion;
     	std::function<void(const std::string& message)> m_sendToastCallback;
     	NickvisionTagger::Models::MusicFolder m_musicFolder;
     	std::function<void(bool sendToast)> m_musicFolderUpdatedCallback;

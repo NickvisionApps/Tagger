@@ -432,7 +432,7 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
     }
 }
 
-void MusicFile::removeTag(bool preserveModificationTimeStamp)
+void MusicFile::removeTag()
 {
     m_title = "";
     m_artist = "";
@@ -443,7 +443,6 @@ void MusicFile::removeTag(bool preserveModificationTimeStamp)
     m_genre = "";
     m_comment = "";
     m_albumArt = TagLib::ByteVector();
-    saveTag(preserveModificationTimeStamp);
 }
 
 bool MusicFile::filenameToTag(const std::string& formatString)

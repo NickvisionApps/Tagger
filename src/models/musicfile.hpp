@@ -183,10 +183,8 @@ namespace NickvisionTagger::Models
 		void saveTag(bool preserveModificationTimeStamp);
 		/**
 		 * Removes the tag of the music file
-		 *
-		 * @param preserveModificationTimeStamp Set true to preserve the modification time stamp of the file, else false
 		 */
-		void removeTag(bool preserveModificationTimeStamp);
+		void removeTag();
 		/**
 		 * Uses the music file's filename to fill in tag information based on the format string
 		 *

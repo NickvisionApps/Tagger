@@ -44,8 +44,11 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
 {
     //Window Settings
     gtk_window_set_default_size(GTK_WINDOW(m_gobj), 900, 700);
+    if(m_controller.getIsDevVersion())
+    {
+        gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
+    }
     g_signal_connect(m_gobj, "close_request", G_CALLBACK((void (*)(GtkWidget*, gpointer))[](GtkWidget*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onCloseRequest(); }), this);
-    //gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
     //Header Bar
     m_headerBar = adw_header_bar_new();
     m_adwTitle = adw_window_title_new(m_controller.getAppInfo().getShortName().c_str(), m_controller.getMusicFolderPath().c_str());
@@ -420,7 +423,12 @@ void MainWindow::onApply()
     tagMap.setComment(gtk_editable_get_text(GTK_EDITABLE(m_txtComment)));
     ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Saving tags...", [&, tagMap]() { m_controller.saveTags(tagMap); } };
     progressDialog.run();
-    onMusicFolderUpdated(false);
+    size_t i{ 0 };
+    for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
+    {
+        adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+        i++;
+    }
 }
 
 void MainWindow::onDeleteTags()
@@ -430,7 +438,7 @@ void MainWindow::onDeleteTags()
     {
         ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Deleting tags...", [&]() { m_controller.deleteTags(); } };
         progressDialog.run();
-        gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
+        onListMusicFilesSelectionChanged();
     }
 }
 
@@ -539,10 +547,9 @@ void MainWindow::onKeyboardShortcuts()
 
 void MainWindow::onAbout()
 {
-    bool isDev{ m_controller.getAppInfo().getVersion().find("-") != std::string::npos };
     adw_show_about_window(GTK_WINDOW(m_gobj),
                           "application-name", m_controller.getAppInfo().getShortName().c_str(),
-                          "application-icon", (m_controller.getAppInfo().getId() + (isDev ? "-devel" : "")).c_str(),
+                          "application-icon", (m_controller.getAppInfo().getId() + (m_controller.getIsDevVersion() ? "-devel" : "")).c_str(),
                           "version", m_controller.getAppInfo().getVersion().c_str(),
                           "comments", m_controller.getAppInfo().getDescription().c_str(),
                           "developer-name", "Nickvision",
