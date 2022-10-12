@@ -18,7 +18,7 @@
 using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
 
-MusicFile::MusicFile(const std::filesystem::path& path) : m_path{ path }, m_dotExtension{ m_path.extension() }, m_modificationTimeStamp{ std::filesystem::last_write_time(m_path) }, m_fingerprint{ "" }
+MusicFile::MusicFile(const std::filesystem::path& path) : m_path{ path }, m_filename{ m_path.filename().string() }, m_dotExtension{ m_path.extension() }, m_modificationTimeStamp{ std::filesystem::last_write_time(m_path) }, m_fingerprint{ "" }
 {
     if(m_dotExtension == ".mp3")
     {
@@ -158,21 +158,22 @@ const std::filesystem::path& MusicFile::getPath() const
 
 std::string MusicFile::getFilename() const
 {
-    return m_path.filename().string();
+    return m_filename;
 }
 
-void MusicFile::setFilename(const std::string& filename)
+bool MusicFile::setFilename(const std::string& filename)
 {
-    std::string newPath{ m_path.parent_path().string() + "/" + filename };
-    if (newPath.find(m_dotExtension) == std::string::npos)
+    std::string newFilename{ filename };
+    if(newFilename.find(m_dotExtension) == std::string::npos)
     {
-        newPath += m_dotExtension;
+        newFilename += m_dotExtension;
     }
-    if(!std::filesystem::exists(newPath))
+    if(std::filesystem::exists(newFilename))
     {
-        std::filesystem::rename(m_path, newPath);
-        m_path = newPath;
+        return false;
     }
+    m_filename = newFilename;
+    return true;
 }
 
 const std::string& MusicFile::getTitle() const
@@ -316,6 +317,12 @@ const std::string& MusicFile::getChromaprintFingerprint()
 
 void MusicFile::saveTag(bool preserveModificationTimeStamp)
 {
+    if(m_path.filename() != m_filename)
+    {
+        std::string newPath{ m_path.parent_path().string() + "/" + m_filename };
+        std::filesystem::rename(m_path, newPath);
+        m_path = newPath;
+    }
     if (m_dotExtension == ".mp3")
     {
         TagLib::MPEG::File file{ m_path.c_str() };
@@ -504,7 +511,7 @@ bool MusicFile::tagToFilename(const std::string& formatString)
         {
             return false;
         }
-        setFilename(m_artist + "- " + m_title + m_path.extension().string());
+        return setFilename(m_artist + "- " + m_title + m_path.extension().string());
     }
     else if (formatString == "%title%- %artist%")
     {
@@ -512,7 +519,7 @@ bool MusicFile::tagToFilename(const std::string& formatString)
         {
             return false;
         }
-        setFilename(m_title + "- " + m_artist + m_path.extension().string());
+        return setFilename(m_title + "- " + m_artist + m_path.extension().string());
     }
     else if (formatString == "%track%- %title%")
     {
@@ -520,7 +527,7 @@ bool MusicFile::tagToFilename(const std::string& formatString)
         {
             return false;
         }
-        setFilename(std::to_string(m_track) + "- " + m_title + m_path.extension().string());
+        return setFilename(std::to_string(m_track) + "- " + m_title + m_path.extension().string());
     }
     else if (formatString == "%title%")
     {
@@ -528,13 +535,9 @@ bool MusicFile::tagToFilename(const std::string& formatString)
         {
             return false;
         }
-        setFilename(m_title + m_path.extension().string());
+        return setFilename(m_title + m_path.extension().string());
     }
-    else
-    {
-        return false;
-    }
-    return true;
+    return false;
 }
 
 bool MusicFile::downloadMusicBrainzMetadata(const std::string& acoustIdClientKey, bool overwriteTagWithMusicBrainz)

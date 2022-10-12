@@ -35,10 +35,11 @@
     <binary>org.nickvision.tagger</binary>
   </provides>
   <releases>
-    <release version="2022.10.3-beta3" date="2022-10-12">
+    <release version="2022.10.3" date="2022-10-12">
       <description>
         <p>- Tagger will now notify the user of changes waiting to be applied to a file</p>
         <p>- The 'Delete Tag' action must now be applied to be saved to the file</p>
+        <p>- The 'Tag to Filename' action must now be applied to change the filename on disk</p>
         <p>- Fixed an issue where the 'Apply' action would clear the file selection</p>
         <p>- Added the ability to right-click the music files list when files are selected to access a tag actions context menu</p>
       </description>

@@ -35,8 +35,9 @@ namespace NickvisionTagger::Models
     	 * Sets the filanem of the music file (appends the dot extension of the previous filename if one is not included)
     	 *
     	 * @param filename The new filename of the music file
+    	 * @returns True if the new filename is available, else false if already exists on disk
     	 */
-    	void setFilename(const std::string& filename);
+    	bool setFilename(const std::string& filename);
     	/**
     	 * Gets the title of the music file
     	 *
@@ -247,6 +248,7 @@ namespace NickvisionTagger::Models
 
     private:
 		std::filesystem::path m_path;
+		std::string m_filename;
 		std::string m_dotExtension;
         std::filesystem::file_time_type m_modificationTimeStamp;
         std::string m_title;

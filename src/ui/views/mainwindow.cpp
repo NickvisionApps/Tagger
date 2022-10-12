@@ -48,7 +48,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     {
         gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
     }
-    g_signal_connect(m_gobj, "close_request", G_CALLBACK((void (*)(GtkWidget*, gpointer))[](GtkWidget*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onCloseRequest(); }), this);
+    g_signal_connect(m_gobj, "close_request", G_CALLBACK((bool (*)(GtkWindow*, gpointer))[](GtkWindow*, gpointer data) -> bool { return reinterpret_cast<MainWindow*>(data)->onCloseRequest(); }), this);
     //Header Bar
     m_headerBar = adw_header_bar_new();
     m_adwTitle = adw_window_title_new(m_controller.getAppInfo().getShortName().c_str(), m_controller.getMusicFolderPath().c_str());
@@ -297,7 +297,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_application_set_accels_for_action(application, "win.openMusicFolder", new const char*[2]{ "<Ctrl>o", nullptr });
     //Reload Music Folder Action
     m_actReloadMusicFolder = g_simple_action_new("reloadMusicFolder", nullptr);
-    g_signal_connect(m_actReloadMusicFolder, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onMusicFolderUpdated(true); }), this);
+    g_signal_connect(m_actReloadMusicFolder, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onReloadMusicFolder(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actReloadMusicFolder));
     gtk_application_set_accels_for_action(application, "win.reloadMusicFolder", new const char*[2]{ "F5", nullptr });
     //Apply Action
@@ -372,10 +372,19 @@ void MainWindow::start()
     m_controller.startup();
 }
 
-void MainWindow::onCloseRequest()
+bool MainWindow::onCloseRequest()
 {
+    if(!m_controller.getCanClose())
+    {
+        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Close and Discard Changes?", "Some music files still have changes waiting to be applied. Are you sure you want to close Tagger and discard the changes?", "No", "Yes" };
+        if(messageDialog.run() == MessageDialogResponse::Cancel)
+        {
+            return true;
+        }
+    }
     gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
     gtk_widget_unparent(m_popoverListMusicFiles);
+    return false;
 }
 
 void MainWindow::onMusicFolderUpdated(bool sendToast)
@@ -432,6 +441,18 @@ void MainWindow::onOpenMusicFolder()
         g_object_unref(dialog);
     })), this);
     gtk_native_dialog_show(GTK_NATIVE_DIALOG(openFolderDialog));
+}
+
+void MainWindow::onReloadMusicFolder()
+{
+    if(!m_controller.getCanClose())
+    {
+        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Reload and Discard Changes?", "Some music files still have changes waiting to be applied. Are you sure you want to reload the music folder and discard the changes?", "No", "Yes" };
+        if(messageDialog.run() == MessageDialogResponse::Destructive)
+        {
+            onMusicFolderUpdated(true);
+        }
+    }
 }
 
 void MainWindow::onApply()

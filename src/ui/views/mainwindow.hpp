@@ -93,8 +93,10 @@ namespace NickvisionTagger::UI::Views
 		std::vector<GtkWidget*> m_listMusicFilesRows;
 		/**
 		 * Runs closing functions
+		 *
+		 * @returns True to stop window from closing, else false
 		 */
-		void onCloseRequest();
+		bool onCloseRequest();
 		/**
     	 * Updates the UI when the music folder is updated
     	 *
@@ -109,6 +111,10 @@ namespace NickvisionTagger::UI::Views
     	 * Prompts the user to open a music folder from disk and load it in the app
     	 */
     	void onOpenMusicFolder();
+    	/**
+    	 * Reloads the music folder and updates the UI
+    	 */
+    	void onReloadMusicFolder();
     	/**
     	 * Applys the changes to the selected music file's tag
     	 */

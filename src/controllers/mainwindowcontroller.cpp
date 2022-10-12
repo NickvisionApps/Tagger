@@ -50,6 +50,18 @@ void MainWindowController::startup()
     }
 }
 
+bool MainWindowController::getCanClose() const
+{
+    for(bool saved : m_musicFilesSaved)
+    {
+        if(!saved)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 void MainWindowController::onConfigurationChanged()
 {
     if(m_musicFolder.getIncludeSubfolders() != m_configuration.getIncludeSubfolders())

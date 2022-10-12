@@ -13,8 +13,8 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setName("NickvisionTagger");
     m_appInfo.setShortName("Tagger");
     m_appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
-    m_appInfo.setVersion("2022.10.3-beta3");
-    m_appInfo.setChangelog("<ul><li>Tagger will now notify the user of changes waiting to be applied to a file</li><li>The 'Delete Tag' action must now be applied to be saved to the file</li><li>Fixed an issue where the 'Apply' action would clear the file selection</li><li>Added the ability to right-click the music files list when files are selected to access a tag actions context menu</li></ul>");
+    m_appInfo.setVersion("2022.10.3");
+    m_appInfo.setChangelog("<ul><li>Tagger will now notify the user of changes waiting to be applied to a file</li><li>The 'Delete Tag' action must now be applied to be saved to the file</li><li>The 'Tag to Filename' action must now be applied to change the filename on disk</li><li>Fixed an issue where the 'Apply' action would clear the file selection</li><li>Added the ability to right-click the music files list when files are selected to access a tag actions context menu</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     m_appInfo.setSupportUrl("https://github.com/nlogozzo/NickvisionTagger/discussions");

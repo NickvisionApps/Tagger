@@ -55,6 +55,12 @@ namespace NickvisionTagger::Controllers
     	 */
     	void startup();
     	/**
+    	 * Gets whether or not the window can close
+    	 *
+    	 * @returns True if window can close, else false
+    	 */
+    	bool getCanClose() const;
+    	/**
     	 * Updates the controller based on the configuration changes
     	 */
     	void onConfigurationChanged();
