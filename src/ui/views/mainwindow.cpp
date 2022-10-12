@@ -106,6 +106,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuOtherActions));
     gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuTagActions), "document-properties-symbolic");
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuTagActions), G_MENU_MODEL(menuTagActions));
+    m_popoverListMusicFiles = gtk_popover_menu_new_from_model(G_MENU_MODEL(menuTagActions));
     gtk_widget_set_tooltip_text(m_btnMenuTagActions, "Tag Actions");
     gtk_widget_set_visible(m_btnMenuTagActions, false);
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnMenuTagActions);
@@ -147,6 +148,17 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_list_box_set_selection_mode(GTK_LIST_BOX(m_listMusicFiles), GTK_SELECTION_MULTIPLE);
     gtk_list_box_set_activate_on_single_click(GTK_LIST_BOX(m_listMusicFiles), false);
     g_signal_connect(m_listMusicFiles, "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer))[](GtkListBox*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
+    //List Music Files Popover
+    gtk_widget_set_parent(m_popoverListMusicFiles, m_listMusicFiles);
+    gtk_popover_set_position(GTK_POPOVER(m_popoverListMusicFiles), GTK_POS_BOTTOM);
+    gtk_popover_set_has_arrow(GTK_POPOVER(m_popoverListMusicFiles), false);
+    gtk_widget_set_halign(m_popoverListMusicFiles, GTK_ALIGN_START);
+    //List Music Files Right Click
+    m_gestureListMusicFiles = gtk_gesture_click_new();
+    gtk_gesture_single_set_button(GTK_GESTURE_SINGLE(m_gestureListMusicFiles), 3);
+    gtk_gesture_single_set_exclusive(GTK_GESTURE_SINGLE(m_gestureListMusicFiles), true);
+    gtk_widget_add_controller(m_listMusicFiles, GTK_EVENT_CONTROLLER(m_gestureListMusicFiles));
+    g_signal_connect(m_gestureListMusicFiles, "pressed", G_CALLBACK((void (*)(GtkGesture*, int, double, double, gpointer))[](GtkGesture*, int n_press, double x, double y, gpointer data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesRightClicked(n_press, x, y); }), this);
     //Tagger Flap Content
     m_scrollTaggerContent = gtk_scrolled_window_new();
     gtk_widget_set_vexpand(m_scrollTaggerContent, true);
@@ -361,6 +373,7 @@ void MainWindow::start()
 void MainWindow::onCloseRequest()
 {
     gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
+    gtk_widget_unparent(m_popoverListMusicFiles);
 }
 
 void MainWindow::onMusicFolderUpdated(bool sendToast)
@@ -643,6 +656,24 @@ void MainWindow::onListMusicFilesSelectionChanged()
         adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_stackAlbumArt), "noImage");
         gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
     }
+}
+
+void MainWindow::onListMusicFilesRightClicked(int n_press, double x, double y)
+{
+    GdkEventSequence* sequence{ gtk_gesture_single_get_current_sequence(GTK_GESTURE_SINGLE(m_gestureListMusicFiles)) };
+    GdkEvent* event{ gtk_gesture_get_last_event(m_gestureListMusicFiles, sequence) };
+    if(n_press != 1 || !gdk_event_triggers_context_menu(event))
+    {
+        return;
+    }
+    gtk_gesture_set_sequence_state(m_gestureListMusicFiles, sequence, GTK_EVENT_SEQUENCE_CLAIMED);
+    if(!gtk_widget_get_visible(m_btnMenuTagActions))
+    {
+        return;
+    }
+    GdkRectangle rect{ x, y, 1, 1 };
+    gtk_popover_set_pointing_to(GTK_POPOVER(m_popoverListMusicFiles), &rect);
+    gtk_popover_popup(GTK_POPOVER(m_popoverListMusicFiles));
 }
 
 bool MainWindow::onDrop(const GValue* value)

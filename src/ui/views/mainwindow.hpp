@@ -50,6 +50,8 @@ namespace NickvisionTagger::UI::Views
 		GtkWidget* m_boxTaggerContent{ nullptr };
 		GtkWidget* m_txtSearchMusicFiles{ nullptr };
 		GtkWidget* m_listMusicFiles{ nullptr };
+		GtkWidget* m_popoverListMusicFiles{ nullptr };
+		GtkGesture* m_gestureListMusicFiles{ nullptr };
 		GtkWidget* m_sepTagger{ nullptr };
 		GtkWidget* m_scrollTaggerFlap{ nullptr };
 		GtkWidget* m_boxTaggerFlap{ nullptr };
@@ -155,6 +157,10 @@ namespace NickvisionTagger::UI::Views
     	 * Occurs when listMusicFile's selection is changed
     	 */
 		void onListMusicFilesSelectionChanged();
+		/**
+    	 * Occurs when listMusicFile is right clicked
+    	 */
+		void onListMusicFilesRightClicked(int n_press, double x, double y);
 		/**
 		 * Occurs when the GtkDropTarget is triggered
 		 *
