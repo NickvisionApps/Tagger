@@ -22,10 +22,9 @@
 
 # Screenshots
 ![MainWindow](https://user-images.githubusercontent.com/17648453/191976746-a22f9a03-24d2-4045-8569-2cbf479c971c.png)
-![OpenFolder](https://user-images.githubusercontent.com/17648453/191976770-8b9ca39d-0ae4-45ab-8d65-5d3e9e32dfb1.png)
-![Tagging](https://user-images.githubusercontent.com/17648453/191976795-7a9b5e20-c3d1-48a7-9cb7-85393919c753.png)
-![DarkMode](https://user-images.githubusercontent.com/17648453/191976802-39f51778-0df4-4458-bf48-a402e6b5b7e0.png)
-![AboutWindow](https://user-images.githubusercontent.com/17648453/193072997-39f8a3e5-bb87-4d49-9c28-67d41586a541.png)
+![OpenFolder](https://user-images.githubusercontent.com/17648453/195401456-c1107874-4656-4f99-b091-e31cc990c311.png)
+![TagEdit](https://user-images.githubusercontent.com/17648453/195401479-b0ba17ed-0e14-4109-aa5c-953fd930da9e.png)
+![DarkMode](https://user-images.githubusercontent.com/17648453/195401486-6b893114-e6d7-4898-9544-a70200295cf2.png)
 
 # Dependencies
 - [C++20](https://en.cppreference.com/w/cpp/20)
