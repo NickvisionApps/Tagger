@@ -2,6 +2,7 @@
 #include <chrono>
 #include <filesystem>
 #include <future>
+#include <iterator>
 #include <curlpp/cURLpp.hpp>
 #include "../helpers/mediahelpers.hpp"
 #include "../models/acoustidsubmission.hpp"
@@ -68,6 +69,21 @@ const std::vector<std::shared_ptr<MusicFile>>& MainWindowController::getMusicFil
     return m_musicFolder.getMusicFiles();
 }
 
+void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void(bool)>& callback)
+{
+    m_musicFolderUpdatedCallback = callback;
+}
+
+const std::vector<bool>& MainWindowController::getMusicFilesSaved() const
+{
+    return m_musicFilesSaved;
+}
+
+void MainWindowController::registerMusicFilesSavedUpdatedCallback(const std::function<void()>& callback)
+{
+    m_musicFilesSavedUpdatedCallback = callback;
+}
+
 void MainWindowController::openMusicFolder(const std::string& folderPath)
 {
     m_musicFolder.setParentPath(std::filesystem::exists(folderPath) ? folderPath : "");
@@ -81,34 +97,39 @@ void MainWindowController::openMusicFolder(const std::string& folderPath)
 
 void MainWindowController::reloadMusicFolder()
 {
+    m_musicFilesSaved.clear();
     m_musicFolder.reloadMusicFiles();
+    for(size_t i = 0; i < m_musicFolder.getMusicFiles().size(); i++)
+    {
+        m_musicFilesSaved.push_back(true);
+    }
 }
 
 void MainWindowController::saveTags(const TagMap& tagMap)
 {
-    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
     {
-        if(tagMap.getFilename() != musicFile->getFilename() && tagMap.getFilename() != "<keep>")
+        if(tagMap.getFilename() != pair.second->getFilename() && tagMap.getFilename() != "<keep>")
         {
-            musicFile->setFilename(tagMap.getFilename());
+            pair.second->setFilename(tagMap.getFilename());
         }
         if(tagMap.getTitle() != "<keep>")
         {
-            musicFile->setTitle(tagMap.getTitle());
+            pair.second->setTitle(tagMap.getTitle());
         }
         if(tagMap.getArtist() != "<keep>")
         {
-            musicFile->setArtist(tagMap.getArtist());
+            pair.second->setArtist(tagMap.getArtist());
         }
         if(tagMap.getAlbum() != "<keep>")
         {
-            musicFile->setAlbum(tagMap.getAlbum());
+            pair.second->setAlbum(tagMap.getAlbum());
         }
         if(tagMap.getYear() != "<keep>")
         {
             try
             {
-                musicFile->setYear(MediaHelpers::stoui(tagMap.getYear()));
+                pair.second->setYear(MediaHelpers::stoui(tagMap.getYear()));
             }
             catch(...) { }
         }
@@ -116,75 +137,87 @@ void MainWindowController::saveTags(const TagMap& tagMap)
         {
             try
             {
-                musicFile->setTrack(MediaHelpers::stoui(tagMap.getTrack()));
+                pair.second->setTrack(MediaHelpers::stoui(tagMap.getTrack()));
             }
             catch(...) { }
         }
         if(tagMap.getAlbumArtist() != "<keep>")
         {
-            musicFile->setAlbumArtist(tagMap.getAlbumArtist());
+            pair.second->setAlbumArtist(tagMap.getAlbumArtist());
         }
         if(tagMap.getGenre() != "<keep>")
         {
-            musicFile->setGenre(tagMap.getGenre());
+            pair.second->setGenre(tagMap.getGenre());
         }
         if(tagMap.getComment() != "<keep>")
         {
-            musicFile->setComment(tagMap.getComment());
+            pair.second->setComment(tagMap.getComment());
         }
-        musicFile->saveTag(m_configuration.getPreserveModificationTimeStamp());
+        pair.second->saveTag(m_configuration.getPreserveModificationTimeStamp());
+        m_musicFilesSaved[pair.first] = true;
     }
+    m_musicFilesSavedUpdatedCallback();
     m_sendToastCallback("Tags saved successfully.");
 }
 
 void MainWindowController::deleteTags()
 {
-    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
     {
-        musicFile->removeTag();
+        pair.second->removeTag();
+        m_musicFilesSaved[pair.first] = false;
     }
+    m_musicFilesSavedUpdatedCallback();
 }
 
 void MainWindowController::insertAlbumArt(const std::string& pathToImage)
 {
     TagLib::ByteVector byteVector{ MediaHelpers::byteVectorFromFile(pathToImage) };
-    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
     {
-        musicFile->setAlbumArt(byteVector);
+        pair.second->setAlbumArt(byteVector);
+        m_musicFilesSaved[pair.first] = false;
     }
+    m_musicFilesSavedUpdatedCallback();
 }
 
 void MainWindowController::removeAlbumArt()
 {
-    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
     {
-        musicFile->setAlbumArt({});
+        pair.second->setAlbumArt({});
+        m_musicFilesSaved[pair.first] = false;
     }
+    m_musicFilesSavedUpdatedCallback();
 }
 
 void MainWindowController::filenameToTag(const std::string& formatString)
 {
     int success{ 0 };
-    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
     {
-        if(musicFile->filenameToTag(formatString))
+        if(pair.second->filenameToTag(formatString))
         {
             success++;
+            m_musicFilesSaved[pair.first] = false;
         }
     }
+    m_musicFilesSavedUpdatedCallback();
     m_sendToastCallback("Converted " + std::to_string(success) + " filenames to tags successfully.");
 }
 
 void MainWindowController::tagToFilename(const std::string& formatString)
 {
     int success{ 0 };
-    for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+    for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
     {
-        if(musicFile->tagToFilename(formatString))
+        if(pair.second->tagToFilename(formatString))
         {
             success++;
+            m_musicFilesSaved[pair.first] = false;
         }
     }
+    m_musicFilesSavedUpdatedCallback();
     m_sendToastCallback("Converted " + std::to_string(success) + " tags to filenames successfully.");
 }
 
@@ -196,17 +229,17 @@ void MainWindowController::downloadMusicBrainzMetadata()
         std::vector<std::future<bool>> futures;
         if(i < m_selectedMusicFiles.size())
         {
-            const std::shared_ptr<MusicFile>& musicFile{ m_selectedMusicFiles[i] };
+            const std::shared_ptr<MusicFile>& musicFile{ std::next(m_selectedMusicFiles.begin(), i)->second };
             futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getOverwriteTagWithMusicBrainz()); }));
         }
         if(i + 1 < m_selectedMusicFiles.size())
         {
-            const std::shared_ptr<MusicFile>& musicFile{ m_selectedMusicFiles[i + 1] };
+            const std::shared_ptr<MusicFile>& musicFile{ std::next(m_selectedMusicFiles.begin(), i + 1)->second };
             futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getOverwriteTagWithMusicBrainz()); }));
         }
         if(i + 2 < m_selectedMusicFiles.size())
         {
-            const std::shared_ptr<MusicFile>& musicFile{ m_selectedMusicFiles[i + 2] };
+            const std::shared_ptr<MusicFile>& musicFile{ std::next(m_selectedMusicFiles.begin(), i + 2)->second };
             futures.push_back(std::async(std::launch::async, [&, musicFile]() -> bool { return musicFile->downloadMusicBrainzMetadata(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getOverwriteTagWithMusicBrainz()); }));
         }
         size_t done{ 0 };
@@ -222,34 +255,47 @@ void MainWindowController::downloadMusicBrainzMetadata()
                 }
             }
         }
+        size_t j{ i };
         for(std::future<bool>& future : futures)
         {
+            if(j >= i + 3)
+            {
+                j = i;
+            }
             if(future.get())
             {
                 successful++;
+                m_musicFilesSaved[std::next(m_selectedMusicFiles.begin(), j)->first] = false;
             }
+            j++;
         }
     }
+    m_musicFilesSavedUpdatedCallback();
     m_sendToastCallback("Download metadata for " + std::to_string(successful) + " files successfully.");
+}
+
+bool MainWindowController::checkIfAcoustIdUserAPIKeyValid()
+{
+    return AcoustIdSubmission::checkIfUserAPIKeyValid(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getAcoustIdUserAPIKey());
 }
 
 void MainWindowController::submitToAcoustId(const std::string& musicBrainzRecordingId)
 {
     if(m_selectedMusicFiles.size() == 1)
     {
-        const std::shared_ptr<MusicFile> selectedMusicFile{ m_selectedMusicFiles[0] };
+        const std::shared_ptr<MusicFile> selectedMusicFile{ m_selectedMusicFiles.begin()->second };
         m_sendToastCallback(selectedMusicFile->submitToAcoustId(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getAcoustIdUserAPIKey(), musicBrainzRecordingId) ? "Submitted metadata to AcoustId successfully." : "Unable to submit metadata to AcoustId.");
     }
 }
 
-void MainWindowController::registerMusicFolderUpdatedCallback(const std::function<void(bool)>& callback)
+size_t MainWindowController::getSelectedMusicFilesCount() const
 {
-    m_musicFolderUpdatedCallback = callback;
+    return m_selectedMusicFiles.size();
 }
 
-const std::vector<std::shared_ptr<MusicFile>>& MainWindowController::getSelectedMusicFiles() const
+const std::shared_ptr<NickvisionTagger::Models::MusicFile>& MainWindowController::getFirstSelectedMusicFile() const
 {
-    return m_selectedMusicFiles;
+    return m_selectedMusicFiles.begin()->second;
 }
 
 TagMap MainWindowController::getSelectedTagMap() const
@@ -273,7 +319,7 @@ TagMap MainWindowController::getSelectedTagMap() const
     }
     else if(m_selectedMusicFiles.size() == 1)
     {
-        const std::shared_ptr<MusicFile>& firstMusicFile{ m_selectedMusicFiles[0] };
+        const std::shared_ptr<MusicFile>& firstMusicFile{ m_selectedMusicFiles.begin()->second };
         tagMap.setFilename(firstMusicFile->getFilename());
         tagMap.setTitle(firstMusicFile->getTitle());
         tagMap.setArtist(firstMusicFile->getArtist());
@@ -290,7 +336,7 @@ TagMap MainWindowController::getSelectedTagMap() const
     }
     else
     {
-        const std::shared_ptr<MusicFile>& firstMusicFile{ m_selectedMusicFiles[0] };
+        const std::shared_ptr<MusicFile>& firstMusicFile{ m_selectedMusicFiles.begin()->second };
         bool haveSameTitle{ true };
         bool haveSameArtist{ true };
         bool haveSameAlbum{ true };
@@ -302,46 +348,46 @@ TagMap MainWindowController::getSelectedTagMap() const
         bool haveSameAlbumArt{ true };
         int totalDuration{ 0 };
         std::uintmax_t totalFileSize{ 0 };
-        for(const std::shared_ptr<MusicFile>& musicFile : m_selectedMusicFiles)
+        for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
         {
-            if (firstMusicFile->getTitle() != musicFile->getTitle())
+            if (firstMusicFile->getTitle() != pair.second->getTitle())
             {
                 haveSameTitle = false;
             }
-            if (firstMusicFile->getArtist() != musicFile->getArtist())
+            if (firstMusicFile->getArtist() != pair.second->getArtist())
             {
                 haveSameArtist = false;
             }
-            if (firstMusicFile->getAlbum() != musicFile->getAlbum())
+            if (firstMusicFile->getAlbum() != pair.second->getAlbum())
             {
                 haveSameAlbum = false;
             }
-            if (firstMusicFile->getYear() != musicFile->getYear())
+            if (firstMusicFile->getYear() != pair.second->getYear())
             {
                 haveSameYear = false;
             }
-            if (firstMusicFile->getTrack() != musicFile->getTrack())
+            if (firstMusicFile->getTrack() != pair.second->getTrack())
             {
                 haveSameTrack = false;
             }
-            if (firstMusicFile->getAlbumArtist() != musicFile->getAlbumArtist())
+            if (firstMusicFile->getAlbumArtist() != pair.second->getAlbumArtist())
             {
                 haveSameAlbumArtist = false;
             }
-            if (firstMusicFile->getGenre() != musicFile->getGenre())
+            if (firstMusicFile->getGenre() != pair.second->getGenre())
             {
                 haveSameGenre = false;
             }
-            if (firstMusicFile->getComment() != musicFile->getComment())
+            if (firstMusicFile->getComment() != pair.second->getComment())
             {
                 haveSameComment = false;
             }
-            if  (firstMusicFile->getAlbumArt() != musicFile->getAlbumArt())
+            if  (firstMusicFile->getAlbumArt() != pair.second->getAlbumArt())
             {
                 haveSameAlbumArt = false;
             }
-            totalDuration += musicFile->getDuration();
-            totalFileSize += musicFile->getFileSize();
+            totalDuration += pair.second->getDuration();
+            totalFileSize += pair.second->getFileSize();
         }
         tagMap.setFilename("<keep>");
         tagMap.setTitle(haveSameTitle ? firstMusicFile->getTitle() : "<keep>");
@@ -372,12 +418,6 @@ void MainWindowController::updateSelectedMusicFiles(std::vector<int> indexes)
     m_selectedMusicFiles.clear();
     for(int index : indexes)
     {
-        m_selectedMusicFiles.push_back(m_musicFolder.getMusicFiles()[index]);
+        m_selectedMusicFiles.insert({ index, m_musicFolder.getMusicFiles()[index] });
     }
 }
-
-bool MainWindowController::checkIfAcoustIdUserAPIKeyValid()
-{
-    return AcoustIdSubmission::checkIfUserAPIKeyValid(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getAcoustIdUserAPIKey());
-}
-

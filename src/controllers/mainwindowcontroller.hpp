@@ -3,6 +3,7 @@
 #include <functional>
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include "preferencesdialogcontroller.hpp"
 #include "../models/appinfo.hpp"
 #include "../models/configuration.hpp"
@@ -69,6 +70,24 @@ namespace NickvisionTagger::Controllers
 	 	 * @returns The list of music files in the music folder
 	 	 */
 		const std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>>& getMusicFiles() const;
+		/**
+    	 * Registers a callback for when the music folder is changed
+    	 *
+    	 * @param callback A void(bool) function
+    	 */
+    	void registerMusicFolderUpdatedCallback(const std::function<void(bool)>& callback);
+    	/**
+    	 * Gets a list representing whether or not music files are saved
+    	 *
+    	 * @return The list representing whether or not music files are saved
+    	 */
+    	const std::vector<bool>& getMusicFilesSaved() const;
+    	/**
+    	 * Registers a callback for when the music files saved status is changed
+    	 *
+    	 * @param callback A void() function
+    	 */
+    	void registerMusicFilesSavedUpdatedCallback(const std::function<void()>& callback);
     	/**
     	 * Opens a music folder with the given path
     	 * 
@@ -116,23 +135,29 @@ namespace NickvisionTagger::Controllers
     	 */
     	void downloadMusicBrainzMetadata();
     	/**
+    	 * Checks whether or not the configuration contains a valid AcoustId User API Key
+    	 *
+    	 * @returns True if valid, else false
+    	 */
+    	bool checkIfAcoustIdUserAPIKeyValid();
+    	/**
     	 * Uploads tag metadata of one selected file to AcoustId
     	 *
     	 * @param musicBrainzRecordingId A MusicBrainz recording id to associate with the selected file
     	 */
     	void submitToAcoustId(const std::string& musicBrainzRecordingId);
     	/**
-    	 * Registers a callback for when the music folder is changed
+    	 * Gets the count of the list of selected music files
     	 *
-    	 * @param callback A void(bool) function
+    	 * @returns The count of the list of selected music files
     	 */
-    	void registerMusicFolderUpdatedCallback(const std::function<void(bool)>& callback);
+    	size_t getSelectedMusicFilesCount() const;
     	/**
-    	 * Gets the list of selected music files from the UI
+    	 * Gets the selected music file at the beginning of the map
     	 *
-    	 * @returns The list of selected music files from the UI
+    	 * @returns The selected music file at the beginning of the map
     	 */
-    	const std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>>& getSelectedMusicFiles() const;
+    	const std::shared_ptr<NickvisionTagger::Models::MusicFile>& getFirstSelectedMusicFile() const;
     	/**
     	 * Gets a TagMap for the selected music files
     	 *
@@ -145,12 +170,6 @@ namespace NickvisionTagger::Controllers
     	 * @param indexes The list of selected indexes
     	 */
     	void updateSelectedMusicFiles(std::vector<int> indexes);
-    	/**
-    	 * Checks whether or not the configuration contains a valid AcoustId User API Key
-    	 *
-    	 * @returns True if valid, else false
-    	 */
-    	bool checkIfAcoustIdUserAPIKeyValid();
     	
     private:
     	NickvisionTagger::Models::AppInfo& m_appInfo;
@@ -160,6 +179,8 @@ namespace NickvisionTagger::Controllers
     	std::function<void(const std::string& message)> m_sendToastCallback;
     	NickvisionTagger::Models::MusicFolder m_musicFolder;
     	std::function<void(bool sendToast)> m_musicFolderUpdatedCallback;
-    	std::vector<std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
+    	std::vector<bool> m_musicFilesSaved;
+    	std::function<void()> m_musicFilesSavedUpdatedCallback;
+    	std::unordered_map<int, std::shared_ptr<NickvisionTagger::Models::MusicFile>> m_selectedMusicFiles;
     };
 }

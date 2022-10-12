@@ -288,6 +288,8 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_controller.registerSendToastCallback([&](const std::string& message) { adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(message.c_str())); });
     //Music Folder Updated Callback
     m_controller.registerMusicFolderUpdatedCallback([&](bool sendToast) { onMusicFolderUpdated(sendToast); });
+    //Music Files Saved Updated Callback
+    m_controller.registerMusicFilesSavedUpdatedCallback([&]() { onMusicFilesSavedUpdated(); });
     //Open Music Folder Action
     m_actOpenMusicFolder = g_simple_action_new("openMusicFolder", nullptr);
     g_signal_connect(m_actOpenMusicFolder, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onOpenMusicFolder(); }), this);
@@ -404,6 +406,16 @@ void MainWindow::onMusicFolderUpdated(bool sendToast)
     }
 }
 
+void MainWindow::onMusicFilesSavedUpdated()
+{
+    size_t i{ 0 };
+    for(bool saved : m_controller.getMusicFilesSaved())
+    {
+        adw_action_row_set_subtitle(ADW_ACTION_ROW(m_listMusicFilesRows[i]), !saved ? "Changes waiting to be applied." : "");
+        i++;
+    }
+}
+
 void MainWindow::onOpenMusicFolder()
 {
     GtkFileChooserNative* openFolderDialog{ gtk_file_chooser_native_new("Open Music Folder", GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER, "_Open", "_Cancel") };
@@ -439,7 +451,10 @@ void MainWindow::onApply()
     size_t i{ 0 };
     for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
     {
-        adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+        if(std::string(adw_preferences_row_get_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]))) != musicFile->getFilename())
+        {
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+        }
         i++;
     }
 }
@@ -507,7 +522,15 @@ void MainWindow::onTagToFilename()
     {
         ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Converting tags to filenames...", [&, formatString]() { m_controller.tagToFilename(formatString); } };
         progressDialog.run();
-        onMusicFolderUpdated(false);
+        size_t i{ 0 };
+        for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
+        {
+            if(std::string(adw_preferences_row_get_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]))) != musicFile->getFilename())
+            {
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+            }
+            i++;
+        }
     }
 }
 
@@ -521,7 +544,7 @@ void MainWindow::onDownloadMusicBrainzMetadata()
 void MainWindow::onSubmitToAcoustId()
 {
     //Check for one file selected
-    if(m_controller.getSelectedMusicFiles().size() > 1)
+    if(m_controller.getSelectedMusicFilesCount() > 1)
     {
         MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Too Many Files Selected", "Only one file can be submitted to AcoustId at a time. Please select only one file and try again.", "OK" };
         messageDialog.run();
@@ -644,7 +667,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
     if(tagMap.getAlbumArt() == "hasArt")
     {
         adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_stackAlbumArt), "image");
-        gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), m_controller.getSelectedMusicFiles()[0]->getAlbumArt());
+        gtk_image_set_from_byte_vector(GTK_IMAGE(m_imgAlbumArt), m_controller.getFirstSelectedMusicFile()->getAlbumArt());
     }
     else if(tagMap.getAlbumArt() == "keepArt")
     {

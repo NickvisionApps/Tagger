@@ -102,6 +102,10 @@ namespace NickvisionTagger::UI::Views
     	 */
     	void onMusicFolderUpdated(bool sendToast);
     	/**
+    	 * Updates the UI when the saved status of music files is updated
+    	 */
+    	void onMusicFilesSavedUpdated();
+    	/**
     	 * Prompts the user to open a music folder from disk and load it in the app
     	 */
     	void onOpenMusicFolder();
