@@ -590,7 +590,6 @@ void MainWindow::onSubmitToAcoustId()
     std::string result{ entryDialog.run() };
     ProgressDialog progressDialogSubmitting{ GTK_WINDOW(m_gobj), "Submitting metadata to AcoustId...", [&, result]() { m_controller.submitToAcoustId(result); } };
     progressDialogSubmitting.run();
-    onListMusicFilesSelectionChanged();
 }
 
 void MainWindow::onPreferences()
