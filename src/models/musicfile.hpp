@@ -25,6 +25,10 @@ namespace NickvisionTagger::Models
     	 * @returns The path of the music file
     	 */
     	const std::filesystem::path& getPath() const;
+    	/**
+    	 * Loads the tag metadata from the file on disk (discarding any unapplied metadata)
+    	 */
+    	void loadFromDisk();
 		/**
 		 * Gets the filename of the music file (includes the dot extension)
 		 *

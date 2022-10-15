@@ -376,10 +376,15 @@ bool MainWindow::onCloseRequest()
 {
     if(!m_controller.getCanClose())
     {
-        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Close and Discard Changes?", "Some music files still have changes waiting to be applied. Are you sure you want to close Tagger and discard the changes?", "No", "Yes" };
-        if(messageDialog.run() == MessageDialogResponse::Cancel)
+        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Apply Changes?", "Some music files still have changes waiting to be applied. Would you like to apply those changes to the file or discard them?", "Cancel", "Discard", "Apply" };
+        MessageDialogResponse response{ messageDialog.run() };
+        if(response == MessageDialogResponse::Cancel)
         {
             return true;
+        }
+        else if(response == MessageDialogResponse::Suggested)
+        {
+            onApply();
         }
     }
     gtk_list_box_unselect_all(GTK_LIST_BOX(m_listMusicFiles));
@@ -447,8 +452,13 @@ void MainWindow::onReloadMusicFolder()
 {
     if(!m_controller.getCanClose())
     {
-        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Reload and Discard Changes?", "Some music files still have changes waiting to be applied. Are you sure you want to reload the music folder and discard the changes?", "No", "Yes" };
-        if(messageDialog.run() == MessageDialogResponse::Destructive)
+        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Apply Changes?", "Some music files still have changes waiting to be applied. Would you like to apply those changes to the file or discard them?", "Cancel", "Discard", "Apply" };
+        MessageDialogResponse response{ messageDialog.run() };
+        if(response == MessageDialogResponse::Suggested)
+        {
+            onApply();
+        }
+        if(response != MessageDialogResponse::Cancel)
         {
             onMusicFolderUpdated(true);
         }
@@ -486,13 +496,9 @@ void MainWindow::onApply()
 
 void MainWindow::onDeleteTags()
 {
-    MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Delete Tags?", "Are you sure you want to delete the tags of the selected files?", "No", "Yes" };
-    if(messageDialog.run() == MessageDialogResponse::Destructive)
-    {
-        ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Deleting tags...", [&]() { m_controller.deleteTags(); } };
-        progressDialog.run();
-        onListMusicFilesSelectionChanged();
-    }
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Deleting tags...", [&]() { m_controller.deleteTags(); } };
+    progressDialog.run();
+    onListMusicFilesSelectionChanged();
 }
 
 void MainWindow::onInsertAlbumArt()

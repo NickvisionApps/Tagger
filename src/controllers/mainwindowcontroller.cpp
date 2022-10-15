@@ -300,6 +300,16 @@ void MainWindowController::submitToAcoustId(const std::string& musicBrainzRecord
     }
 }
 
+void MainWindowController::discardUnappliedChanges()
+{
+    for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
+    {
+        pair.second->loadFromDisk();
+        m_musicFilesSaved[pair.first] = true;
+    }
+    m_musicFilesSavedUpdatedCallback();
+}
+
 size_t MainWindowController::getSelectedMusicFilesCount() const
 {
     return m_selectedMusicFiles.size();

@@ -20,6 +20,16 @@ using namespace NickvisionTagger::Models;
 
 MusicFile::MusicFile(const std::filesystem::path& path) : m_path{ path }, m_filename{ m_path.filename().string() }, m_dotExtension{ m_path.extension() }, m_modificationTimeStamp{ std::filesystem::last_write_time(m_path) }, m_fingerprint{ "" }
 {
+    loadFromDisk();
+}
+
+const std::filesystem::path& MusicFile::getPath() const
+{
+    return m_path;
+}
+
+void MusicFile::loadFromDisk()
+{
     if(m_dotExtension == ".mp3")
     {
         TagLib::MPEG::File file{ m_path.c_str() };
@@ -149,11 +159,6 @@ MusicFile::MusicFile(const std::filesystem::path& path) : m_path{ path }, m_file
     {
         throw std::invalid_argument("Invalid Path. The path is not a valid music file.");
     }
-}
-
-const std::filesystem::path& MusicFile::getPath() const
-{
-    return m_path;
 }
 
 std::string MusicFile::getFilename() const

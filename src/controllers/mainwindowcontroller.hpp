@@ -153,6 +153,10 @@ namespace NickvisionTagger::Controllers
     	 */
     	void submitToAcoustId(const std::string& musicBrainzRecordingId);
     	/**
+    	 * Discards unapplied changes to the selected music files
+    	 */
+    	void discardUnappliedChanges();
+    	/**
     	 * Gets the count of the list of selected music files
     	 *
     	 * @returns The count of the list of selected music files
