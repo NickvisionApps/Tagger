@@ -48,6 +48,12 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                                     <property name="accelerator">Delete</property>
                                 </object>
                             </child>
+                            <child>
+                                <object class="GtkShortcutsShortcut">
+                                    <property name="title">Discard Unapplied Changes</property>
+                                    <property name="accelerator">&lt;Control&gt;z</property>
+                                </object>
+                            </child>
                              <child>
                                 <object class="GtkShortcutsShortcut">
                                     <property name="title">Inset Album Art</property>

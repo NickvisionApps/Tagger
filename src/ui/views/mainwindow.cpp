@@ -101,6 +101,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_menu_append(menuAlbumArt, "Remove Album Art", "win.removeAlbumArt");
     g_menu_append(menuOtherActions, "Convert Filename to Tag", "win.filenameToTag");
     g_menu_append(menuOtherActions, "Convert Tag to Filename", "win.tagToFilename");
+    g_menu_append(menuTagActions, "Discard Unapplied Changes", "win.discardUnappliedChanges");
     g_menu_append(menuTagActions, "Delete Tags", "win.deleteTags");
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuAlbumArt));
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuOtherActions));
@@ -305,6 +306,11 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_signal_connect(m_actApply, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onApply(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actApply));
     gtk_application_set_accels_for_action(application, "win.apply", new const char*[2]{ "<Ctrl>s", nullptr });
+    //Discard Unapplied Changes Action
+    m_actDiscardUnappliedChanges = g_simple_action_new("discardUnappliedChanges", nullptr);
+    g_signal_connect(m_actDiscardUnappliedChanges, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onDiscardUnappliedChanges(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actDiscardUnappliedChanges));
+    gtk_application_set_accels_for_action(application, "win.discardUnappliedChanges", new const char*[2]{ "<Ctrl>z", nullptr });
     //Delete Tags Action
     m_actDeleteTags = g_simple_action_new("deleteTags", nullptr);
     g_signal_connect(m_actDeleteTags, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onDeleteTags(); }), this);
@@ -492,6 +498,13 @@ void MainWindow::onApply()
         }
         i++;
     }
+}
+
+void MainWindow::onDiscardUnappliedChanges()
+{
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Discarding unapplied changes...", [&]() { m_controller.discardUnappliedChanges(); } };
+    progressDialog.run();
+    onListMusicFilesSelectionChanged();
 }
 
 void MainWindow::onDeleteTags()

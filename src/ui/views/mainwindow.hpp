@@ -79,6 +79,7 @@ namespace NickvisionTagger::UI::Views
 		GSimpleAction* m_actOpenMusicFolder{ nullptr };
 		GSimpleAction* m_actReloadMusicFolder{ nullptr };
 		GSimpleAction* m_actApply{ nullptr };
+		GSimpleAction* m_actDiscardUnappliedChanges{ nullptr };
 		GSimpleAction* m_actDeleteTags{ nullptr };
 		GSimpleAction* m_actInsertAlbumArt{ nullptr };
 		GSimpleAction* m_actRemoveAlbumArt{ nullptr };
@@ -116,9 +117,13 @@ namespace NickvisionTagger::UI::Views
     	 */
     	void onReloadMusicFolder();
     	/**
-    	 * Applys the changes to the selected music file's tag
+    	 * Applys the changes to the selected files' tag
     	 */
     	void onApply();
+    	/**
+    	 * Discards unapplied changes from the selected files
+    	 */
+    	void onDiscardUnappliedChanges();
     	/**
     	 * Deletes the tags of the selected files
     	 */
