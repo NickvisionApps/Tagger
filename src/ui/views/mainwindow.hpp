@@ -165,6 +165,13 @@ namespace NickvisionTagger::UI::Views
     	 */
     	void onAbout();
     	/**
+		 * Occurs when the GtkDropTarget is triggered
+		 *
+		 * @param value The value from the drop
+		 * @returns True to accept the drop, else false
+		 */
+		bool onDrop(const GValue* value);
+    	/**
     	 * Occurs when txtSearchMusicFile's text is changed
     	 */
     	void onTxtSearchMusicFilesChanged();
@@ -176,12 +183,5 @@ namespace NickvisionTagger::UI::Views
     	 * Occurs when listMusicFile is right clicked
     	 */
 		void onListMusicFilesRightClicked(int n_press, double x, double y);
-		/**
-		 * Occurs when the GtkDropTarget is triggered
-		 *
-		 * @param value The value from the drop
-		 * @returns True to accept the drop, else false
-		 */
-		bool onDrop(const GValue* value);
     };
 }

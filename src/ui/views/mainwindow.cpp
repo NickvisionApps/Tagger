@@ -644,6 +644,18 @@ void MainWindow::onAbout()
                           nullptr);
 }
 
+bool MainWindow::onDrop(const GValue* value)
+{
+    void* file{ g_value_get_object(value) };
+    std::string path{ g_file_get_path(G_FILE(file)) };
+    if(std::filesystem::is_directory(path))
+    {
+        m_controller.openMusicFolder(path);
+        return true;
+    }
+    return false;
+}
+
 void MainWindow::onTxtSearchMusicFilesChanged()
 {
     std::string* searchEntry{ new std::string(gtk_editable_get_text(GTK_EDITABLE(m_txtSearchMusicFiles))) };
@@ -737,19 +749,7 @@ void MainWindow::onListMusicFilesRightClicked(int n_press, double x, double y)
     {
         return;
     }
-    GdkRectangle rect{ x, y, 1, 1 };
+    GdkRectangle rect{ (int)x, (int)y, 1, 1 };
     gtk_popover_set_pointing_to(GTK_POPOVER(m_popoverListMusicFiles), &rect);
     gtk_popover_popup(GTK_POPOVER(m_popoverListMusicFiles));
-}
-
-bool MainWindow::onDrop(const GValue* value)
-{
-    void* file{ g_value_get_object(value) };
-    std::string path{ g_file_get_path(G_FILE(file)) };
-    if(std::filesystem::is_directory(path))
-    {
-        m_controller.openMusicFolder(path);
-        return true;
-    }
-    return false;
 }

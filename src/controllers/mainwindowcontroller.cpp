@@ -172,6 +172,16 @@ void MainWindowController::saveTags(const TagMap& tagMap)
     m_sendToastCallback("Tags saved successfully.");
 }
 
+void MainWindowController::discardUnappliedChanges()
+{
+    for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
+    {
+        pair.second->loadFromDisk();
+        m_musicFilesSaved[pair.first] = true;
+    }
+    m_musicFilesSavedUpdatedCallback();
+}
+
 void MainWindowController::deleteTags()
 {
     for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
@@ -298,16 +308,6 @@ void MainWindowController::submitToAcoustId(const std::string& musicBrainzRecord
         const std::shared_ptr<MusicFile> selectedMusicFile{ m_selectedMusicFiles.begin()->second };
         m_sendToastCallback(selectedMusicFile->submitToAcoustId(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getAcoustIdUserAPIKey(), musicBrainzRecordingId) ? "Submitted metadata to AcoustId successfully." : "Unable to submit metadata to AcoustId.");
     }
-}
-
-void MainWindowController::discardUnappliedChanges()
-{
-    for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
-    {
-        pair.second->loadFromDisk();
-        m_musicFilesSaved[pair.first] = true;
-    }
-    m_musicFilesSavedUpdatedCallback();
 }
 
 size_t MainWindowController::getSelectedMusicFilesCount() const
@@ -443,3 +443,4 @@ void MainWindowController::updateSelectedMusicFiles(std::vector<int> indexes)
         m_selectedMusicFiles.insert({ index, m_musicFolder.getMusicFiles()[index] });
     }
 }
+

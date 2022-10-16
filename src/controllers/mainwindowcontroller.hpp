@@ -111,6 +111,10 @@ namespace NickvisionTagger::Controllers
     	 */
     	void saveTags(const NickvisionTagger::Models::TagMap& tagMap);
     	/**
+    	 * Discards unapplied changes to the selected music files
+    	 */
+    	void discardUnappliedChanges();
+    	/**
     	 * Deletes the tags of the selected music files
     	 */
     	void deleteTags();
@@ -152,10 +156,6 @@ namespace NickvisionTagger::Controllers
     	 * @param musicBrainzRecordingId A MusicBrainz recording id to associate with the selected file
     	 */
     	void submitToAcoustId(const std::string& musicBrainzRecordingId);
-    	/**
-    	 * Discards unapplied changes to the selected music files
-    	 */
-    	void discardUnappliedChanges();
     	/**
     	 * Gets the count of the list of selected music files
     	 *
