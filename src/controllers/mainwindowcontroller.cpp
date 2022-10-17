@@ -117,54 +117,73 @@ void MainWindowController::reloadMusicFolder()
     }
 }
 
-void MainWindowController::saveTags(const TagMap& tagMap)
+void MainWindowController::updateTags(const TagMap& tagMap)
 {
+    bool updated{ false };
     for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
     {
         if(tagMap.getFilename() != pair.second->getFilename() && tagMap.getFilename() != "<keep>")
         {
             pair.second->setFilename(tagMap.getFilename());
+            updated = true;
         }
-        if(tagMap.getTitle() != "<keep>")
+        if(tagMap.getTitle() != pair.second->getTitle() && tagMap.getTitle() != "<keep>")
         {
             pair.second->setTitle(tagMap.getTitle());
+            updated = true;
         }
-        if(tagMap.getArtist() != "<keep>")
+        if(tagMap.getArtist() != pair.second->getArtist() && tagMap.getArtist() != "<keep>")
         {
             pair.second->setArtist(tagMap.getArtist());
+            updated = true;
         }
-        if(tagMap.getAlbum() != "<keep>")
+        if(tagMap.getAlbum() != pair.second->getAlbum() && tagMap.getAlbum() != "<keep>")
         {
             pair.second->setAlbum(tagMap.getAlbum());
+            updated = true;
         }
-        if(tagMap.getYear() != "<keep>")
+        if(tagMap.getYear() != std::to_string(pair.second->getYear()) && tagMap.getYear() != "<keep>")
         {
             try
             {
                 pair.second->setYear(MediaHelpers::stoui(tagMap.getYear()));
+                updated = true;
             }
             catch(...) { }
         }
-        if(tagMap.getTrack() != "<keep>")
+        if(tagMap.getTrack() != std::to_string(pair.second->getTrack()) && tagMap.getTrack() != "<keep>")
         {
             try
             {
                 pair.second->setTrack(MediaHelpers::stoui(tagMap.getTrack()));
+                updated = true;
             }
             catch(...) { }
         }
-        if(tagMap.getAlbumArtist() != "<keep>")
+        if(tagMap.getAlbumArtist() != pair.second->getAlbumArtist() && tagMap.getAlbumArtist() != "<keep>")
         {
             pair.second->setAlbumArtist(tagMap.getAlbumArtist());
+            updated = true;
         }
-        if(tagMap.getGenre() != "<keep>")
+        if(tagMap.getGenre() != pair.second->getGenre() && tagMap.getGenre() != "<keep>")
         {
             pair.second->setGenre(tagMap.getGenre());
+            updated = true;
         }
-        if(tagMap.getComment() != "<keep>")
+        if(tagMap.getComment() != pair.second->getComment() && tagMap.getComment() != "<keep>")
         {
             pair.second->setComment(tagMap.getComment());
+            updated = true;
         }
+        m_musicFilesSaved[pair.first] = !updated;
+    }
+    m_musicFilesSavedUpdatedCallback();
+}
+
+void MainWindowController::saveTags()
+{
+    for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
+    {
         pair.second->saveTag(m_configuration.getPreserveModificationTimeStamp());
         m_musicFilesSaved[pair.first] = true;
     }
@@ -443,4 +462,3 @@ void MainWindowController::updateSelectedMusicFiles(std::vector<int> indexes)
         m_selectedMusicFiles.insert({ index, m_musicFolder.getMusicFiles()[index] });
     }
 }
-

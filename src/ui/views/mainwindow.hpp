@@ -183,5 +183,9 @@ namespace NickvisionTagger::UI::Views
     	 * Occurs when listMusicFile is right clicked
     	 */
 		void onListMusicFilesRightClicked(int n_press, double x, double y);
+		/**
+		 * Occurs when tag property text entry is changed
+		 */
+		void onTxtTagPropertyChanged();
     };
 }

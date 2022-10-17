@@ -139,7 +139,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     adw_flap_set_flap_position(ADW_FLAP(m_pageFlapTagger), GTK_PACK_END);
     adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), false);
     adw_flap_set_fold_policy(ADW_FLAP(m_pageFlapTagger), ADW_FLAP_FOLD_POLICY_NEVER);
-    //SearchBar Music Files
+    //Text Search Music Files
     m_txtSearchMusicFiles = gtk_search_entry_new();
     g_object_set(m_txtSearchMusicFiles, "placeholder-text", "Search...", nullptr);
     g_signal_connect(m_txtSearchMusicFiles, "search-changed", G_CALLBACK((void (*)(GtkSearchEntry*, gpointer))[](GtkSearchEntry*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtSearchMusicFilesChanged(); }), this);
@@ -214,38 +214,47 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_txtFilename = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtFilename), "Filename");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtFilename);
+    g_signal_connect(m_txtFilename, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Title
     m_txtTitle = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtTitle), "Title");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtTitle);
+    g_signal_connect(m_txtTitle, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Artist
     m_txtArtist = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtArtist), "Artist");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtArtist);
+    g_signal_connect(m_txtArtist, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Album
     m_txtAlbum = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtAlbum), "Album");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtAlbum);
+    g_signal_connect(m_txtAlbum, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Year
     m_txtYear = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtYear), "Year");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtYear);
+    g_signal_connect(m_txtYear, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Track
     m_txtTrack = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtTrack), "Track");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtTrack);
+    g_signal_connect(m_txtTrack, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Album Artist
     m_txtAlbumArtist = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtAlbumArtist), "Album Artist");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtAlbumArtist);
+    g_signal_connect(m_txtAlbumArtist, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Genre
     m_txtGenre = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtGenre), "Genre");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtGenre);
+    g_signal_connect(m_txtGenre, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Comment
     m_txtComment = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtComment), "Comment");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtComment);
+    g_signal_connect(m_txtComment, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Duration
     m_txtDuration = adw_entry_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtDuration), "Duration");
@@ -477,27 +486,8 @@ void MainWindow::onReloadMusicFolder()
 
 void MainWindow::onApply()
 {
-    TagMap tagMap;
-    tagMap.setFilename(gtk_editable_get_text(GTK_EDITABLE(m_txtFilename)));
-    tagMap.setTitle(gtk_editable_get_text(GTK_EDITABLE(m_txtTitle)));
-    tagMap.setArtist(gtk_editable_get_text(GTK_EDITABLE(m_txtArtist)));
-    tagMap.setAlbum(gtk_editable_get_text(GTK_EDITABLE(m_txtAlbum)));
-    tagMap.setYear(gtk_editable_get_text(GTK_EDITABLE(m_txtYear)));
-    tagMap.setTrack(gtk_editable_get_text(GTK_EDITABLE(m_txtTrack)));
-    tagMap.setAlbumArtist(gtk_editable_get_text(GTK_EDITABLE(m_txtAlbumArtist)));
-    tagMap.setGenre(gtk_editable_get_text(GTK_EDITABLE(m_txtGenre)));
-    tagMap.setComment(gtk_editable_get_text(GTK_EDITABLE(m_txtComment)));
-    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Saving tags...", [&, tagMap]() { m_controller.saveTags(tagMap); } };
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Saving tags...", [&]() { m_controller.saveTags(); } };
     progressDialog.run();
-    size_t i{ 0 };
-    for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
-    {
-        if(std::string(adw_preferences_row_get_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]))) != musicFile->getFilename())
-        {
-            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
-        }
-        i++;
-    }
 }
 
 void MainWindow::onDiscardUnappliedChanges()
@@ -752,4 +742,28 @@ void MainWindow::onListMusicFilesRightClicked(int n_press, double x, double y)
     GdkRectangle rect{ (int)x, (int)y, 1, 1 };
     gtk_popover_set_pointing_to(GTK_POPOVER(m_popoverListMusicFiles), &rect);
     gtk_popover_popup(GTK_POPOVER(m_popoverListMusicFiles));
+}
+
+void MainWindow::onTxtTagPropertyChanged()
+{
+    TagMap tagMap;
+    tagMap.setFilename(gtk_editable_get_text(GTK_EDITABLE(m_txtFilename)));
+    tagMap.setTitle(gtk_editable_get_text(GTK_EDITABLE(m_txtTitle)));
+    tagMap.setArtist(gtk_editable_get_text(GTK_EDITABLE(m_txtArtist)));
+    tagMap.setAlbum(gtk_editable_get_text(GTK_EDITABLE(m_txtAlbum)));
+    tagMap.setYear(gtk_editable_get_text(GTK_EDITABLE(m_txtYear)));
+    tagMap.setTrack(gtk_editable_get_text(GTK_EDITABLE(m_txtTrack)));
+    tagMap.setAlbumArtist(gtk_editable_get_text(GTK_EDITABLE(m_txtAlbumArtist)));
+    tagMap.setGenre(gtk_editable_get_text(GTK_EDITABLE(m_txtGenre)));
+    tagMap.setComment(gtk_editable_get_text(GTK_EDITABLE(m_txtComment)));
+    m_controller.updateTags(tagMap);
+    size_t i{ 0 };
+    for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
+    {
+        if(std::string(adw_preferences_row_get_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]))) != musicFile->getFilename())
+        {
+            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+        }
+        i++;
+    }
 }

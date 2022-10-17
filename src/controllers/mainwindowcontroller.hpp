@@ -105,11 +105,13 @@ namespace NickvisionTagger::Controllers
     	 */
     	void reloadMusicFolder();
     	/**
-    	 * Saves the tags of the selected music files
-    	 *
-    	 * @param tagMap The TagMap
+    	 * Updates the tags of the selected music files
     	 */
-    	void saveTags(const NickvisionTagger::Models::TagMap& tagMap);
+    	void updateTags(const NickvisionTagger::Models::TagMap& tagMap);
+    	/**
+    	 * Saves the tags of the selected music files
+    	 */
+    	void saveTags();
     	/**
     	 * Discards unapplied changes to the selected music files
     	 */
