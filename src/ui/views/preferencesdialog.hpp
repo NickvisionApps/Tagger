@@ -51,6 +51,10 @@ namespace NickvisionTagger::UI::Views
 		GtkWidget* m_btnGetAcoustIdUserAPIKey{ nullptr };
 		GtkWidget* m_rowAcoustIdUserAPIKey{ nullptr };
 		/**
+		 * Ocurrs when the theme row is changed
+		 */
+		void onThemeChanged();
+		/**
 		 * Opens the browser to get a new AcoustId User API Key
 		 */
 		void onGetAcoustIdUserAPIKeyClicked();

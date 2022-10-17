@@ -21,9 +21,9 @@ PreferencesDialog::PreferencesDialog(GtkWindow* parent, const PreferencesDialogC
     //Theme Row
     m_rowTheme = adw_combo_row_new();
     adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_rowTheme), "Theme");
-    adw_action_row_set_subtitle(ADW_ACTION_ROW(m_rowTheme), "A theme change will be applied once the dialog is closed.");
     adw_combo_row_set_model(ADW_COMBO_ROW(m_rowTheme), G_LIST_MODEL(gtk_string_list_new(new const char*[4]{ "System", "Light", "Dark", nullptr })));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_grpUserInterface), m_rowTheme);
+    g_signal_connect(m_rowTheme, "notify::selected-item", G_CALLBACK((void (*)(GObject*, GParamSpec*, gpointer))[](GObject*, GParamSpec*, gpointer data) { reinterpret_cast<PreferencesDialog*>(data)->onThemeChanged(); }), this);
     //Music Folder Group
     m_grpMusicFolder = adw_preferences_group_new();
     adw_preferences_group_set_title(ADW_PREFERENCES_GROUP(m_grpMusicFolder), "Music Folder");
@@ -115,13 +115,18 @@ void PreferencesDialog::run()
     {
         g_main_context_iteration(g_main_context_default(), false);
     }
-    m_controller.setTheme(adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowTheme)));
     m_controller.setIncludeSubfolders(gtk_switch_get_active(GTK_SWITCH(m_switchIncludeSubfolders)));
     m_controller.setRememberLastOpenedFolder(gtk_switch_get_active(GTK_SWITCH(m_switchRememberLastOpenedFolder)));
     m_controller.setPreserveModificationTimeStamp(gtk_switch_get_active(GTK_SWITCH(m_switchPreserveModificationTimeStamp)));
     m_controller.setOverwriteTagWithMusicBrainz(gtk_switch_get_active(GTK_SWITCH(m_switchOverwriteTagWithMusicBrainz)));
     m_controller.setAcoustIdUserAPIKey(gtk_editable_get_text(GTK_EDITABLE(m_rowAcoustIdUserAPIKey)));
     m_controller.saveConfiguration();
+    gtk_window_destroy(GTK_WINDOW(m_gobj));
+}
+
+void PreferencesDialog::onThemeChanged()
+{
+    m_controller.setTheme(adw_combo_row_get_selected(ADW_COMBO_ROW(m_rowTheme)));
     if(m_controller.getThemeAsInt() == 0)
     {
         adw_style_manager_set_color_scheme(adw_style_manager_get_default(), ADW_COLOR_SCHEME_PREFER_LIGHT);
@@ -134,7 +139,6 @@ void PreferencesDialog::run()
     {
         adw_style_manager_set_color_scheme(adw_style_manager_get_default(), ADW_COLOR_SCHEME_FORCE_DARK);
     }
-    gtk_window_destroy(GTK_WINDOW(m_gobj));
 }
 
 void PreferencesDialog::onGetAcoustIdUserAPIKeyClicked()
