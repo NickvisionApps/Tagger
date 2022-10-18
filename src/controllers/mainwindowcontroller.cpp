@@ -119,9 +119,9 @@ void MainWindowController::reloadMusicFolder()
 
 void MainWindowController::updateTags(const TagMap& tagMap)
 {
-    bool updated{ false };
     for(const std::pair<const int, std::shared_ptr<MusicFile>>& pair : m_selectedMusicFiles)
     {
+        bool updated{ false };
         if(tagMap.getFilename() != pair.second->getFilename() && tagMap.getFilename() != "<keep>")
         {
             pair.second->setFilename(tagMap.getFilename());

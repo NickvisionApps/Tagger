@@ -31,6 +31,7 @@ namespace NickvisionTagger::UI::Views
     	
     private:
     	NickvisionTagger::Controllers::MainWindowController m_controller;
+    	bool m_isSelectionOccuring;
 		GtkWidget* m_gobj{ nullptr };
 		GtkWidget* m_mainBox{ nullptr };
 		GtkWidget* m_headerBar{ nullptr };

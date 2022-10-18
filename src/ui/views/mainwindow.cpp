@@ -40,7 +40,7 @@ void gtk_image_set_from_byte_vector(GtkImage* image, const TagLib::ByteVector& b
     }
 }
 
-MainWindow::MainWindow(GtkApplication* application, const MainWindowController& controller) : m_controller{ controller }, m_gobj{ adw_application_window_new(application) }
+MainWindow::MainWindow(GtkApplication* application, const MainWindowController& controller) : m_controller{ controller }, m_isSelectionOccuring{ false }, m_gobj{ adw_application_window_new(application) }
 {
     //Window Settings
     gtk_window_set_default_size(GTK_WINDOW(m_gobj), 900, 700);
@@ -670,6 +670,7 @@ void MainWindow::onTxtSearchMusicFilesChanged()
 
 void MainWindow::onListMusicFilesSelectionChanged()
 {
+    m_isSelectionOccuring = true;
     //Update Selected Music Files
     std::vector<int> selectedIndexes;
     GList* selectedRows{ gtk_list_box_get_selected_rows(GTK_LIST_BOX(m_listMusicFiles)) };
@@ -682,7 +683,6 @@ void MainWindow::onListMusicFilesSelectionChanged()
     gtk_widget_set_visible(m_btnApply, true);
     gtk_widget_set_visible(m_btnMenuTagActions, true);
     gtk_widget_set_visible(m_btnMenuWebServices, true);
-    gtk_editable_set_text(GTK_EDITABLE(m_txtSearchMusicFiles), "");
     adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), true);
     gtk_editable_set_editable(GTK_EDITABLE(m_txtFilename), true);
     if(selectedIndexes.size() == 0)
@@ -691,6 +691,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         gtk_widget_set_visible(m_btnMenuTagActions, false);
         gtk_widget_set_visible(m_btnMenuWebServices, false);
         adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), false);
+        gtk_editable_set_text(GTK_EDITABLE(m_txtSearchMusicFiles), "");
     }
     else if(selectedIndexes.size() > 1)
     {
@@ -724,6 +725,7 @@ void MainWindow::onListMusicFilesSelectionChanged()
         adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_stackAlbumArt), "noImage");
         gtk_image_clear(GTK_IMAGE(m_imgAlbumArt));
     }
+    m_isSelectionOccuring = false;
 }
 
 void MainWindow::onListMusicFilesRightClicked(int n_press, double x, double y)
@@ -746,24 +748,27 @@ void MainWindow::onListMusicFilesRightClicked(int n_press, double x, double y)
 
 void MainWindow::onTxtTagPropertyChanged()
 {
-    TagMap tagMap;
-    tagMap.setFilename(gtk_editable_get_text(GTK_EDITABLE(m_txtFilename)));
-    tagMap.setTitle(gtk_editable_get_text(GTK_EDITABLE(m_txtTitle)));
-    tagMap.setArtist(gtk_editable_get_text(GTK_EDITABLE(m_txtArtist)));
-    tagMap.setAlbum(gtk_editable_get_text(GTK_EDITABLE(m_txtAlbum)));
-    tagMap.setYear(gtk_editable_get_text(GTK_EDITABLE(m_txtYear)));
-    tagMap.setTrack(gtk_editable_get_text(GTK_EDITABLE(m_txtTrack)));
-    tagMap.setAlbumArtist(gtk_editable_get_text(GTK_EDITABLE(m_txtAlbumArtist)));
-    tagMap.setGenre(gtk_editable_get_text(GTK_EDITABLE(m_txtGenre)));
-    tagMap.setComment(gtk_editable_get_text(GTK_EDITABLE(m_txtComment)));
-    m_controller.updateTags(tagMap);
-    size_t i{ 0 };
-    for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
+    if(!m_isSelectionOccuring)
     {
-        if(std::string(adw_preferences_row_get_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]))) != musicFile->getFilename())
+        TagMap tagMap;
+        tagMap.setFilename(gtk_editable_get_text(GTK_EDITABLE(m_txtFilename)));
+        tagMap.setTitle(gtk_editable_get_text(GTK_EDITABLE(m_txtTitle)));
+        tagMap.setArtist(gtk_editable_get_text(GTK_EDITABLE(m_txtArtist)));
+        tagMap.setAlbum(gtk_editable_get_text(GTK_EDITABLE(m_txtAlbum)));
+        tagMap.setYear(gtk_editable_get_text(GTK_EDITABLE(m_txtYear)));
+        tagMap.setTrack(gtk_editable_get_text(GTK_EDITABLE(m_txtTrack)));
+        tagMap.setAlbumArtist(gtk_editable_get_text(GTK_EDITABLE(m_txtAlbumArtist)));
+        tagMap.setGenre(gtk_editable_get_text(GTK_EDITABLE(m_txtGenre)));
+        tagMap.setComment(gtk_editable_get_text(GTK_EDITABLE(m_txtComment)));
+        m_controller.updateTags(tagMap);
+        size_t i{ 0 };
+        for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
         {
-            adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+            if(std::string(adw_preferences_row_get_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]))) != musicFile->getFilename())
+            {
+                adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_listMusicFilesRows[i]), std::regex_replace(musicFile->getFilename(), std::regex("\\&"), "&amp;").c_str());
+            }
+            i++;
         }
-        i++;
     }
 }
