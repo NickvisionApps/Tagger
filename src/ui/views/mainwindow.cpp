@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <filesystem>
 #include <regex>
+#include <utility>
 #include "preferencesdialog.hpp"
 #include "shortcutsdialog.hpp"
 #include "../controls/comboboxdialog.hpp"
@@ -704,15 +705,32 @@ void MainWindow::onTxtSearchMusicFilesChanged()
     if(searchEntry->substr(0, 1) == "!")
     {
         gtk_widget_set_visible(m_btnAdvancedSearchInfo, true);
-        if(!m_controller.checkIfAdvancedSearchStringValid(*searchEntry))
+        std::pair<bool, std::vector<std::string>> result{ m_controller.advancedSearch(*searchEntry) };
+        if(!result.first)
         {
             gtk_style_context_remove_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "success");
             gtk_style_context_add_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "error");
+            delete searchEntry;
             return;
         }
         gtk_style_context_remove_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "error");
         gtk_style_context_add_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "success");
         delete searchEntry;
+        gtk_list_box_set_filter_func(GTK_LIST_BOX(m_listMusicFiles), [](GtkListBoxRow* row, gpointer data) -> int
+        {
+            std::vector<std::string>* filenames{ reinterpret_cast<std::vector<std::string>*>(data) };
+            if(filenames->size() == 0)
+            {
+                return false;
+            }
+            std::string rowFilename{ adw_preferences_row_get_title(ADW_PREFERENCES_ROW(row)) };
+            std::transform(rowFilename.begin(), rowFilename.end(), rowFilename.begin(), ::tolower);
+            return std::find(filenames->begin(), filenames->end(), rowFilename) != filenames->end();
+        }, new std::vector<std::string>(result.second), [](gpointer data)
+        {
+            std::vector<std::string>* filenames{ reinterpret_cast<std::vector<std::string>*>(data) };
+            delete filenames;
+        });
     }
     else
     {

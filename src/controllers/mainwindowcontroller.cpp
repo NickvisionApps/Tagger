@@ -378,6 +378,16 @@ bool MainWindowController::checkIfAdvancedSearchStringValid(const std::string& s
     return true;
 }
 
+std::pair<bool, std::vector<std::string>> MainWindowController::advancedSearch(const std::string& search)
+{
+    if(!checkIfAdvancedSearchStringValid(search))
+    {
+        return { false, {} };
+    }
+    std::vector<std::string> matches;
+    return { true, matches };
+}
+
 size_t MainWindowController::getSelectedMusicFilesCount() const
 {
     return m_selectedMusicFiles.size();

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <utility>
 #include "preferencesdialogcontroller.hpp"
 #include "../models/appinfo.hpp"
 #include "../models/configuration.hpp"
@@ -161,10 +162,17 @@ namespace NickvisionTagger::Controllers
     	/**
     	 * Checks if an advanced search string is valid or not
     	 *
-    	 * @param search The search string (!prop1="field1";prop2="field2")
+    	 * @param search The search string (!prop1="value1";prop2="value2")
     	 * @returns True if valid, else false
     	 */
     	bool checkIfAdvancedSearchStringValid(const std::string& search);
+    	/**
+    	 * Preforms an advanced search
+    	 *
+    	 * @param search The search string (!prop1="value1";prop2="value2")
+    	 * @returns A std::pair<bool, std::vector<std::string>>. The bool value represents if the search was successful or not. The std::vector<std::string> value is a list of lowercase filenames matching the search
+    	 */
+    	std::pair<bool, std::vector<std::string>> advancedSearch(const std::string& search);
     	/**
     	 * Gets the count of the list of selected music files
     	 *
