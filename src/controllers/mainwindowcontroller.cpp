@@ -443,6 +443,179 @@ std::pair<bool, std::vector<std::string>> MainWindowController::advancedSearch(c
         }
     }
     std::vector<std::string> results;
+    for(const std::shared_ptr<MusicFile>& musicFile : m_musicFolder.getMusicFiles())
+    {
+        if(!tagMap.getFilename().empty())
+        {
+            std::string value{ musicFile->getFilename() };
+            std::transform(value.begin(), value.end(), value.begin(), ::tolower);
+            if(tagMap.getFilename() == "empty")
+            {
+                if(!value.empty())
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                if(value != tagMap.getFilename())
+                {
+                    continue;
+                }
+            }
+        }
+        if(!tagMap.getTitle().empty())
+        {
+            std::string value{ musicFile->getTitle() };
+            std::transform(value.begin(), value.end(), value.begin(), ::tolower);
+            if(tagMap.getTitle() == "empty")
+            {
+                if(!value.empty())
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                if(value != tagMap.getTitle())
+                {
+                    continue;
+                }
+            }
+        }
+        if(!tagMap.getArtist().empty())
+        {
+            std::string value{ musicFile->getArtist() };
+            std::transform(value.begin(), value.end(), value.begin(), ::tolower);
+            if(tagMap.getArtist() == "empty")
+            {
+                if(!value.empty())
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                if(value != tagMap.getArtist())
+                {
+                    continue;
+                }
+            }
+        }
+        if(!tagMap.getAlbum().empty())
+        {
+            std::string value{ musicFile->getAlbum() };
+            std::transform(value.begin(), value.end(), value.begin(), ::tolower);
+            if(tagMap.getAlbum() == "empty")
+            {
+                if(!value.empty())
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                if(value != tagMap.getAlbum())
+                {
+                    continue;
+                }
+            }
+        }
+        if(!tagMap.getYear().empty())
+        {
+            if(tagMap.getYear() == "empty")
+            {
+                if(musicFile->getYear() != 0)
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                if(musicFile->getYear() != MediaHelpers::stoui(tagMap.getYear()))
+                {
+                    continue;
+                }
+            }
+        }
+        if(!tagMap.getTrack().empty())
+        {
+            if(tagMap.getTrack() == "empty")
+            {
+                if(musicFile->getTrack() != 0)
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                if(musicFile->getTrack() != MediaHelpers::stoui(tagMap.getTrack()))
+                {
+                    continue;
+                }
+            }
+        }
+        if(!tagMap.getAlbumArtist().empty())
+        {
+            std::string value{ musicFile->getAlbumArtist() };
+            std::transform(value.begin(), value.end(), value.begin(), ::tolower);
+            if(tagMap.getAlbumArtist() == "empty")
+            {
+                if(!value.empty())
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                if(value != tagMap.getAlbumArtist())
+                {
+                    continue;
+                }
+            }
+        }
+        if(!tagMap.getGenre().empty())
+        {
+            std::string value{ musicFile->getGenre() };
+            std::transform(value.begin(), value.end(), value.begin(), ::tolower);
+            if(tagMap.getGenre() == "empty")
+            {
+                if(!value.empty())
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                if(value != tagMap.getGenre())
+                {
+                    continue;
+                }
+            }
+        }
+        if(!tagMap.getComment().empty())
+        {
+            std::string value{ musicFile->getComment() };
+            std::transform(value.begin(), value.end(), value.begin(), ::tolower);
+            if(tagMap.getComment() == "empty")
+            {
+                if(!value.empty())
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                if(value != tagMap.getComment())
+                {
+                    continue;
+                }
+            }
+        }
+        std::string filename{ musicFile->getFilename() };
+        std::transform(filename.begin(), filename.end(), filename.begin(), ::tolower);
+        results.push_back(filename);
+    }
     return { true, results };
 }
 

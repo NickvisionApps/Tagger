@@ -674,11 +674,15 @@ void MainWindow::onAdvancedSearchInfo()
     - If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox
 
     Examples:
-    !genre=""
-    This search string will filter the listbox to contain music files who's genre is empty.
+    !artist=""
+    This search string will filter the listbox to contain music files who's artist is empty
+
+    !genre="";year="2022"
+    This search string will filter the listbox to contain music files who's genre is empty and who's year is 2022
+    (Year and Track properties will validate if the value string is a number).
 
     !title="";artist="bob"
-    This search string will filter the listbox to contain music files that have an empty title AND who's artist is bob
+    This search string will filter the listbox to contain music files who's title is empty and who's artist is bob
 
     * Advanced Search is case insensitive *)", "OK" };
     gtk_widget_set_size_request(messageDialog.gobj(), 600, -1);
@@ -710,6 +714,10 @@ void MainWindow::onTxtSearchMusicFilesChanged()
             gtk_style_context_remove_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "success");
             gtk_style_context_add_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "error");
             delete searchEntry;
+            gtk_list_box_set_filter_func(GTK_LIST_BOX(m_listMusicFiles), [](GtkListBoxRow*, gpointer) -> int
+            {
+                return true;
+            }, nullptr, nullptr);
             return;
         }
         gtk_style_context_remove_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "error");
