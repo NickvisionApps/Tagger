@@ -134,7 +134,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_pageStatusNoFiles = adw_status_page_new();
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoFiles), "org.nickvision.tagger-symbolic");
     adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoFiles), "No Music Files Found");
-    adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoFiles), "Open a folder with music files inside to get started.");
+    adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoFiles), "Open a folder (or drag one into the app) with music files inside to get started.");
     //Tagger Flap Page
     m_pageFlapTagger = adw_flap_new();
     adw_flap_set_flap_position(ADW_FLAP(m_pageFlapTagger), GTK_PACK_END);
