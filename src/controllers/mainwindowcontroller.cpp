@@ -345,47 +345,105 @@ void MainWindowController::submitToAcoustId(const std::string& musicBrainzRecord
     }
 }
 
-bool MainWindowController::checkIfAdvancedSearchStringValid(const std::string& search)
+std::pair<bool, std::vector<std::string>> MainWindowController::advancedSearch(const std::string& search)
 {
     //!prop1="value1";prop2="value2"
     if(search.substr(0, 1) != "!")
     {
-        return false;
+        return { false, {} };
     }
     std::string s{ search.substr(1) };
     if(s.empty())
     {
-        return false;
+        return { false, {} };
     }
     std::vector<std::string> splitProperties{ split(s, ";") };
     std::vector<std::string> properties{ "filename", "title", "artist", "album", "year", "track", "albumartist", "genre", "comment" };
+    TagMap tagMap;
     for(const std::string& property : splitProperties)
     {
         std::vector<std::string> fields{ split(property, "=") };
         if(fields.size() != 2)
         {
-            return false;
+            return { false, {} };
         }
-        if(std::find(properties.begin(), properties.end(), fields[0]) == properties.end())
+        const std::string& p{ fields[0] };
+        std::string v{ fields[1] };
+        if(std::find(properties.begin(), properties.end(), p) == properties.end())
         {
-            return false;
+            return { false, {} };
         }
-        if(fields[1].length() <= 1 || fields[1].substr(0, 1) != "\"" || fields[1].substr(fields[1].length() - 1) != "\"")
+        if(v.length() <= 1 || v.substr(0, 1) != "\"" || v.substr(v.length() - 1) != "\"")
         {
-            return false;
+            return { false, {} };
+        }
+        v.erase(0, 1);
+        v.erase(v.length() - 1, 1);
+        if(v.empty())
+        {
+            v = "empty";
+        }
+        if(p == "filename")
+        {
+            tagMap.setFilename(v);
+        }
+        else if(p == "title")
+        {
+            tagMap.setTitle(v);
+        }
+        else if(p == "artist")
+        {
+            tagMap.setArtist(v);
+        }
+        else if(p == "album")
+        {
+            tagMap.setAlbum(v);
+        }
+        else if(p == "year")
+        {
+            try
+            {
+                if(v != "empty")
+                {
+                    MediaHelpers::stoui(v);
+                }
+            }
+            catch(...)
+            {
+                return { false, {} };
+            }
+            tagMap.setYear(v);
+        }
+        else if(p == "track")
+        {
+            try
+            {
+                if(v != "empty")
+                {
+                    MediaHelpers::stoui(v);
+                }
+            }
+            catch(...)
+            {
+                return { false, {} };
+            }
+            tagMap.setTrack(v);
+        }
+        else if(p == "albumartist")
+        {
+            tagMap.setAlbumArtist(v);
+        }
+        else if(p == "genre")
+        {
+            tagMap.setGenre(v);
+        }
+        else if(p == "comment")
+        {
+            tagMap.setComment(v);
         }
     }
-    return true;
-}
-
-std::pair<bool, std::vector<std::string>> MainWindowController::advancedSearch(const std::string& search)
-{
-    if(!checkIfAdvancedSearchStringValid(search))
-    {
-        return { false, {} };
-    }
-    std::vector<std::string> matches;
-    return { true, matches };
+    std::vector<std::string> results;
+    return { true, results };
 }
 
 size_t MainWindowController::getSelectedMusicFilesCount() const
@@ -521,3 +579,4 @@ void MainWindowController::updateSelectedMusicFiles(std::vector<int> indexes)
         m_selectedMusicFiles.insert({ index, m_musicFolder.getMusicFiles()[index] });
     }
 }
+
