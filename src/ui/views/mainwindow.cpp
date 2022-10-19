@@ -176,7 +176,6 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Tagger Flap Content
     m_scrollTaggerContent = gtk_scrolled_window_new();
     gtk_widget_set_vexpand(m_scrollTaggerContent, true);
-    gtk_widget_set_size_request(m_scrollTaggerContent, 400, -1);
     gtk_scrolled_window_set_child(GTK_SCROLLED_WINDOW(m_scrollTaggerContent), m_listMusicFiles);
     m_boxTaggerContent = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
     gtk_widget_set_margin_start(m_boxTaggerContent, 10);
