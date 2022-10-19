@@ -45,7 +45,11 @@ void MusicFolder::reloadMusicFiles()
             {
                 if(std::find(supportedDotFileExtensions.begin(), supportedDotFileExtensions.end(), path.extension()) != supportedDotFileExtensions.end())
                 {
-                    m_files.push_back(std::make_shared<MusicFile>(path));
+                    try
+                    {
+                        m_files.push_back(std::make_shared<MusicFile>(path));
+                    }
+                    catch(...) {  }
                 }
             }
         }
@@ -55,7 +59,11 @@ void MusicFolder::reloadMusicFiles()
             {
                 if(std::find(supportedDotFileExtensions.begin(), supportedDotFileExtensions.end(), path.extension()) != supportedDotFileExtensions.end())
                 {
-                    m_files.push_back(std::make_shared<MusicFile>(path));
+                    try
+                    {
+                        m_files.push_back(std::make_shared<MusicFile>(path));
+                    }
+                    catch(...) {  }
                 }
             }
         }

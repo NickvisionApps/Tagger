@@ -5,6 +5,7 @@
 #include <taglib/asffile.h>
 #include <taglib/flacfile.h>
 #include <taglib/mpegfile.h>
+#include <taglib/opusfile.h>
 #include <taglib/textidentificationframe.h>
 #include <taglib/tstring.h>
 #include <taglib/wavfile.h>
@@ -54,29 +55,65 @@ void MusicFile::loadFromDisk()
     }
     else if(m_dotExtension == ".ogg" || m_dotExtension == ".opus")
     {
-        TagLib::Ogg::Vorbis::File file{ m_path.c_str() };
-        m_title = file.tag()->title().to8Bit(true);
-        m_artist = file.tag()->artist().to8Bit(true);
-        m_album = file.tag()->album().to8Bit(true);
-        m_year = file.tag()->year();
-        m_track = file.tag()->track();
-        const TagLib::Ogg::FieldListMap& fieldAlbumArtist{ file.tag()->fieldListMap() };
-        if (fieldAlbumArtist.contains("ALBUMARTIST"))
+        try
         {
-            const TagLib::StringList& listAlbumArtist{ fieldAlbumArtist["ALBUMARTIST"] };
-            if (!listAlbumArtist.isEmpty())
+            TagLib::Ogg::Opus::File file{ m_path.c_str() };
+            m_title = file.tag()->title().to8Bit(true);
+            m_artist = file.tag()->artist().to8Bit(true);
+            m_album = file.tag()->album().to8Bit(true);
+            m_year = file.tag()->year();
+            m_track = file.tag()->track();
+            const TagLib::Ogg::FieldListMap& fieldAlbumArtist{ file.tag()->fieldListMap() };
+            if (fieldAlbumArtist.contains("ALBUMARTIST"))
             {
-                m_albumArtist = listAlbumArtist[0].to8Bit(true);
+                const TagLib::StringList& listAlbumArtist{ fieldAlbumArtist["ALBUMARTIST"] };
+                if (!listAlbumArtist.isEmpty())
+                {
+                    m_albumArtist = listAlbumArtist[0].to8Bit(true);
+                }
+            }
+            m_genre = file.tag()->genre().to8Bit(true);
+            m_comment = file.tag()->comment().to8Bit(true);
+            const TagLib::List<TagLib::FLAC::Picture*>& listAlbumArt{ file.tag()->pictureList() };
+            if (!listAlbumArt.isEmpty())
+            {
+                m_albumArt = listAlbumArt[0]->data();
+            }
+            m_duration = file.audioProperties()->lengthInSeconds();
+        }
+        catch(...)
+        {
+            try
+            {
+                TagLib::Ogg::Vorbis::File file{ m_path.c_str() };
+                m_title = file.tag()->title().to8Bit(true);
+                m_artist = file.tag()->artist().to8Bit(true);
+                m_album = file.tag()->album().to8Bit(true);
+                m_year = file.tag()->year();
+                m_track = file.tag()->track();
+                const TagLib::Ogg::FieldListMap& fieldAlbumArtist{ file.tag()->fieldListMap() };
+                if (fieldAlbumArtist.contains("ALBUMARTIST"))
+                {
+                    const TagLib::StringList& listAlbumArtist{ fieldAlbumArtist["ALBUMARTIST"] };
+                    if (!listAlbumArtist.isEmpty())
+                    {
+                        m_albumArtist = listAlbumArtist[0].to8Bit(true);
+                    }
+                }
+                m_genre = file.tag()->genre().to8Bit(true);
+                m_comment = file.tag()->comment().to8Bit(true);
+                const TagLib::List<TagLib::FLAC::Picture*>& listAlbumArt{ file.tag()->pictureList() };
+                if (!listAlbumArt.isEmpty())
+                {
+                    m_albumArt = listAlbumArt[0]->data();
+                }
+                m_duration = file.audioProperties()->lengthInSeconds();
+            }
+            catch(...)
+            {
+                throw std::invalid_argument("Invalid ogg/opus file.");
             }
         }
-        m_genre = file.tag()->genre().to8Bit(true);
-        m_comment = file.tag()->comment().to8Bit(true);
-        const TagLib::List<TagLib::FLAC::Picture*>& listAlbumArt{ file.tag()->pictureList() };
-        if (!listAlbumArt.isEmpty())
-        {
-            m_albumArt = listAlbumArt[0]->data();
-        }
-        m_duration = file.audioProperties()->lengthInSeconds();
     }
     else if(m_dotExtension == ".flac")
     {
@@ -354,24 +391,48 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
     }
     else if (m_dotExtension == ".ogg" || m_dotExtension == ".opus")
     {
-        TagLib::Ogg::Vorbis::File file{ m_path.c_str() };
-        file.tag()->setTitle({ m_title, TagLib::String::Type::UTF8 });
-        file.tag()->setArtist({ m_artist, TagLib::String::Type::UTF8 });
-        file.tag()->setAlbum({ m_album, TagLib::String::Type::UTF8 });
-        file.tag()->setYear(m_year);
-        file.tag()->setTrack(m_track);
-        file.tag()->addField("ALBUMARTIST", { m_albumArtist, TagLib::String::Type::UTF8 });
-        file.tag()->setGenre({ m_genre, TagLib::String::Type::UTF8 });
-        file.tag()->setComment({ m_comment, TagLib::String::Type::UTF8 });
-        file.tag()->removeAllPictures();
-        if (!m_albumArt.isEmpty())
+        try
         {
-            TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
-            picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
-            picture->setData(m_albumArt);
-            file.tag()->addPicture(picture);
+            TagLib::Ogg::Opus::File file{ m_path.c_str() };
+            file.tag()->setTitle({ m_title, TagLib::String::Type::UTF8 });
+            file.tag()->setArtist({ m_artist, TagLib::String::Type::UTF8 });
+            file.tag()->setAlbum({ m_album, TagLib::String::Type::UTF8 });
+            file.tag()->setYear(m_year);
+            file.tag()->setTrack(m_track);
+            file.tag()->addField("ALBUMARTIST", { m_albumArtist, TagLib::String::Type::UTF8 });
+            file.tag()->setGenre({ m_genre, TagLib::String::Type::UTF8 });
+            file.tag()->setComment({ m_comment, TagLib::String::Type::UTF8 });
+            file.tag()->removeAllPictures();
+            if (!m_albumArt.isEmpty())
+            {
+                TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
+                picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
+                picture->setData(m_albumArt);
+                file.tag()->addPicture(picture);
+            }
+            file.save();
         }
-        file.save();
+        catch(...)
+        {
+            TagLib::Ogg::Vorbis::File file{ m_path.c_str() };
+            file.tag()->setTitle({ m_title, TagLib::String::Type::UTF8 });
+            file.tag()->setArtist({ m_artist, TagLib::String::Type::UTF8 });
+            file.tag()->setAlbum({ m_album, TagLib::String::Type::UTF8 });
+            file.tag()->setYear(m_year);
+            file.tag()->setTrack(m_track);
+            file.tag()->addField("ALBUMARTIST", { m_albumArtist, TagLib::String::Type::UTF8 });
+            file.tag()->setGenre({ m_genre, TagLib::String::Type::UTF8 });
+            file.tag()->setComment({ m_comment, TagLib::String::Type::UTF8 });
+            file.tag()->removeAllPictures();
+            if (!m_albumArt.isEmpty())
+            {
+                TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
+                picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
+                picture->setData(m_albumArt);
+                file.tag()->addPicture(picture);
+            }
+            file.save();
+        }
     }
     else if (m_dotExtension == ".flac")
     {
