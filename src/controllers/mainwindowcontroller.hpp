@@ -159,6 +159,13 @@ namespace NickvisionTagger::Controllers
     	 */
     	void submitToAcoustId(const std::string& musicBrainzRecordingId);
     	/**
+    	 * Checks if an advanced search string is valid or not
+    	 *
+    	 * @param search The search string (!prop1="field1";prop2="field2")
+    	 * @returns True if valid, else false
+    	 */
+    	bool checkIfAdvancedSearchStringValid(const std::string& search);
+    	/**
     	 * Gets the count of the list of selected music files
     	 *
     	 * @returns The count of the list of selected music files

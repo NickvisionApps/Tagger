@@ -1,4 +1,5 @@
 #include "mainwindowcontroller.hpp"
+#include <algorithm>
 #include <chrono>
 #include <filesystem>
 #include <future>
@@ -10,6 +11,21 @@
 using namespace NickvisionTagger::Controllers;
 using namespace NickvisionTagger::Helpers;
 using namespace NickvisionTagger::Models;
+
+std::vector<std::string> split(const std::string& s, const std::string& delim)
+{
+    std::vector<std::string> result;
+    size_t last{ 0 };
+    size_t next{ s.find(delim) };
+    while(next != std::string::npos)
+    {
+        result.push_back(s.substr(last, next - last));
+        last = next + delim.length();
+        next = s.find(delim, last);
+    }
+    result.push_back(s.substr(last));
+    return result;
+}
 
 MainWindowController::MainWindowController(AppInfo& appInfo, Configuration& configuration) : m_appInfo{ appInfo }, m_configuration{ configuration }, m_isOpened{ false }, m_isDevVersion{ m_appInfo.getVersion().find("-") != std::string::npos }
 {
@@ -327,6 +343,35 @@ void MainWindowController::submitToAcoustId(const std::string& musicBrainzRecord
         const std::shared_ptr<MusicFile> selectedMusicFile{ m_selectedMusicFiles.begin()->second };
         m_sendToastCallback(selectedMusicFile->submitToAcoustId(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getAcoustIdUserAPIKey(), musicBrainzRecordingId) ? "Submitted metadata to AcoustId successfully." : "Unable to submit metadata to AcoustId.");
     }
+}
+
+bool MainWindowController::checkIfAdvancedSearchStringValid(const std::string& search)
+{
+    //!prop1="value1";prop2="value2"
+    if(search.substr(0, 1) != "!")
+    {
+        return false;
+    }
+    std::string s{ search.substr(1) };
+    if(s.empty())
+    {
+        return false;
+    }
+    std::vector<std::string> splitProperties{ split(s, ";") };
+    std::vector<std::string> properties{ "filename", "title", "artist", "album", "year", "track", "albumartist", "genre", "comment" };
+    for(const std::string& property : splitProperties)
+    {
+        std::vector<std::string> splitFields{ split(property, "=") };
+        if(splitFields.size() != 2)
+        {
+            return false;
+        }
+        if(std::find(properties.begin(), properties.end(), splitFields[0]) == properties.end())
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 size_t MainWindowController::getSelectedMusicFilesCount() const

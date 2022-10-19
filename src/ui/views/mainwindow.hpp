@@ -49,7 +49,9 @@ namespace NickvisionTagger::UI::Views
 		GtkWidget* m_pageFlapTagger{ nullptr };
 		GtkWidget* m_scrollTaggerContent{ nullptr };
 		GtkWidget* m_boxTaggerContent{ nullptr };
+		GtkWidget* m_boxSearch{ nullptr };
 		GtkWidget* m_txtSearchMusicFiles{ nullptr };
+		GtkWidget* m_btnAdvancedSearchInfo{ nullptr };
 		GtkWidget* m_listMusicFiles{ nullptr };
 		GtkWidget* m_popoverListMusicFiles{ nullptr };
 		GtkGesture* m_gestureListMusicFiles{ nullptr };
@@ -91,6 +93,7 @@ namespace NickvisionTagger::UI::Views
 		GSimpleAction* m_actPreferences{ nullptr };
 		GSimpleAction* m_actKeyboardShortcuts{ nullptr };
 		GSimpleAction* m_actAbout{ nullptr };
+		GSimpleAction* m_actAdvancedSearchInfo{ nullptr };
 		GtkDropTarget* m_dropTarget{ nullptr };
 		std::vector<GtkWidget*> m_listMusicFilesRows;
 		/**
@@ -165,6 +168,10 @@ namespace NickvisionTagger::UI::Views
     	 * Displays the about dialog
     	 */
     	void onAbout();
+    	/**
+    	 * Displays a dialog containing information about the advanced search function
+    	 */
+    	void onAdvancedSearchInfo();
     	/**
 		 * Occurs when the GtkDropTarget is triggered
 		 *

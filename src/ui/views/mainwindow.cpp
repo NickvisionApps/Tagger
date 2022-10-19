@@ -139,10 +139,22 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     adw_flap_set_flap_position(ADW_FLAP(m_pageFlapTagger), GTK_PACK_END);
     adw_flap_set_reveal_flap(ADW_FLAP(m_pageFlapTagger), false);
     adw_flap_set_fold_policy(ADW_FLAP(m_pageFlapTagger), ADW_FLAP_FOLD_POLICY_NEVER);
+    //Box Search
+    m_boxSearch = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 6);
     //Text Search Music Files
     m_txtSearchMusicFiles = gtk_search_entry_new();
-    g_object_set(m_txtSearchMusicFiles, "placeholder-text", "Search...", nullptr);
+    gtk_widget_set_hexpand(m_txtSearchMusicFiles, true);
+    g_object_set(m_txtSearchMusicFiles, "placeholder-text", "Search for filename (type ! to activate advanced search)...", nullptr);
+    gtk_box_append(GTK_BOX(m_boxSearch), m_txtSearchMusicFiles);
     g_signal_connect(m_txtSearchMusicFiles, "search-changed", G_CALLBACK((void (*)(GtkSearchEntry*, gpointer))[](GtkSearchEntry*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtSearchMusicFilesChanged(); }), this);
+    //Button Advanced Search Info
+    m_btnAdvancedSearchInfo = gtk_button_new();
+    //gtk_style_context_remove_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_btnAdvancedSearchInfo)), "circular");
+    gtk_button_set_icon_name(GTK_BUTTON(m_btnAdvancedSearchInfo), "help-faq-symbolic");
+    gtk_widget_set_tooltip_text(m_btnAdvancedSearchInfo, "Advanced Search Info");
+    gtk_widget_set_visible(m_btnAdvancedSearchInfo, false);
+    gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnAdvancedSearchInfo), "win.advancedSearchInfo");
+    gtk_box_append(GTK_BOX(m_boxSearch), m_btnAdvancedSearchInfo);
     //List Music Files
     m_listMusicFiles = gtk_list_box_new();
     gtk_style_context_add_class(gtk_widget_get_style_context(m_listMusicFiles), "boxed-list");
@@ -170,7 +182,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_margin_top(m_boxTaggerContent, 10);
     gtk_widget_set_margin_end(m_boxTaggerContent, 10);
     gtk_widget_set_margin_bottom(m_boxTaggerContent, 10);
-    gtk_box_append(GTK_BOX(m_boxTaggerContent), m_txtSearchMusicFiles);
+    gtk_box_append(GTK_BOX(m_boxTaggerContent), m_boxSearch);
     gtk_box_append(GTK_BOX(m_boxTaggerContent), m_scrollTaggerContent);
     adw_flap_set_content(ADW_FLAP(m_pageFlapTagger), m_boxTaggerContent);
     //Tagger Flap Separator
@@ -370,6 +382,10 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_signal_connect(m_actAbout, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onAbout(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actAbout));
     gtk_application_set_accels_for_action(application, "win.about", new const char*[2]{ "F1", nullptr });
+    //Advanced Search Info Action
+    m_actAdvancedSearchInfo = g_simple_action_new("advancedSearchInfo", nullptr);
+    g_signal_connect(m_actAdvancedSearchInfo, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onAdvancedSearchInfo(); }), this);
+    g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actAdvancedSearchInfo));
     //Drop Target
     m_dropTarget = gtk_drop_target_new(G_TYPE_FILE, GDK_ACTION_COPY);
     g_signal_connect(m_dropTarget, "drop", G_CALLBACK((int (*)(GtkDropTarget*, const GValue*, gdouble, gdouble, gpointer))[](GtkDropTarget*, const GValue* value, gdouble, gdouble, gpointer data) -> int { return reinterpret_cast<MainWindow*>(data)->onDrop(value); }), this);
@@ -634,6 +650,41 @@ void MainWindow::onAbout()
                           nullptr);
 }
 
+void MainWindow::onAdvancedSearchInfo()
+{
+    MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Advanced Search", R"(Advanced Search is a powerful feature provided by Tagger that allows users to search files' tag contents for certain values, using a powerful tag syntax:
+
+    !prop1="value1";prop2="value2"
+    Where prop1, prop2 are valid tag properties and value1, value2 are the values to search wrapped in quotes.
+    Each property is separated by a comma. Notice how the last property does not end in a comma.
+
+    Valid Properties:
+    - filename
+    - title
+    - artist
+    - album
+    - year
+    - track
+    - albumartist
+    - genre
+    - comment
+
+    Syntax Checking:
+    - If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search
+    - If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox
+
+    Examples:
+    !genre=""
+    This search string will filter the listbox to contain music files who's genre is empty.
+
+    !title="";artist="bob"
+    This search string will filter the listbox to contain music files that have an empty title AND who's artist is bob
+
+    * Advanced Search is case insensitive *)", "OK" };
+    gtk_widget_set_size_request(messageDialog.gobj(), 600, -1);
+    messageDialog.run();
+}
+
 bool MainWindow::onDrop(const GValue* value)
 {
     void* file{ g_value_get_object(value) };
@@ -650,22 +701,41 @@ void MainWindow::onTxtSearchMusicFilesChanged()
 {
     std::string* searchEntry{ new std::string(gtk_editable_get_text(GTK_EDITABLE(m_txtSearchMusicFiles))) };
     std::transform(searchEntry->begin(), searchEntry->end(), searchEntry->begin(), ::tolower);
-    gtk_list_box_set_filter_func(GTK_LIST_BOX(m_listMusicFiles), [](GtkListBoxRow* row, gpointer data) -> int
+    if(searchEntry->substr(0, 1) == "!")
     {
-        std::string* searchEntry{ reinterpret_cast<std::string*>(data) };
-        std::string rowFilename{ adw_preferences_row_get_title(ADW_PREFERENCES_ROW(row)) };
-        std::transform(rowFilename.begin(), rowFilename.end(), rowFilename.begin(), ::tolower);
-        bool found{ false };
-        if(searchEntry->empty() || rowFilename.find(*searchEntry) != std::string::npos)
+        gtk_widget_set_visible(m_btnAdvancedSearchInfo, true);
+        if(!m_controller.checkIfAdvancedSearchStringValid(*searchEntry))
         {
-            found = true;
+            gtk_style_context_remove_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "success");
+            gtk_style_context_add_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "error");
+            return;
         }
-        return found;
-    }, searchEntry, [](gpointer data)
-    {
-        std::string* searchEntry{ reinterpret_cast<std::string*>(data) };
+        gtk_style_context_remove_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "error");
+        gtk_style_context_add_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "success");
         delete searchEntry;
-    });
+    }
+    else
+    {
+        gtk_widget_set_visible(m_btnAdvancedSearchInfo, false);
+        gtk_style_context_remove_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "success");
+        gtk_style_context_remove_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_txtSearchMusicFiles)), "error");
+        gtk_list_box_set_filter_func(GTK_LIST_BOX(m_listMusicFiles), [](GtkListBoxRow* row, gpointer data) -> int
+        {
+            std::string* searchEntry{ reinterpret_cast<std::string*>(data) };
+            std::string rowFilename{ adw_preferences_row_get_title(ADW_PREFERENCES_ROW(row)) };
+            std::transform(rowFilename.begin(), rowFilename.end(), rowFilename.begin(), ::tolower);
+            bool found{ false };
+            if(searchEntry->empty() || rowFilename.find(*searchEntry) != std::string::npos)
+            {
+                found = true;
+            }
+            return found;
+        }, searchEntry, [](gpointer data)
+        {
+            std::string* searchEntry{ reinterpret_cast<std::string*>(data) };
+            delete searchEntry;
+        });
+    }
 }
 
 void MainWindow::onListMusicFilesSelectionChanged()
