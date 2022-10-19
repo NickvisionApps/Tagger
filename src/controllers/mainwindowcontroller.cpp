@@ -361,12 +361,16 @@ bool MainWindowController::checkIfAdvancedSearchStringValid(const std::string& s
     std::vector<std::string> properties{ "filename", "title", "artist", "album", "year", "track", "albumartist", "genre", "comment" };
     for(const std::string& property : splitProperties)
     {
-        std::vector<std::string> splitFields{ split(property, "=") };
-        if(splitFields.size() != 2)
+        std::vector<std::string> fields{ split(property, "=") };
+        if(fields.size() != 2)
         {
             return false;
         }
-        if(std::find(properties.begin(), properties.end(), splitFields[0]) == properties.end())
+        if(std::find(properties.begin(), properties.end(), fields[0]) == properties.end())
+        {
+            return false;
+        }
+        if(fields[1].length() <= 1 || fields[1].substr(0, 1) != "\"" || fields[1].substr(fields[1].length() - 1) != "\"")
         {
             return false;
         }
