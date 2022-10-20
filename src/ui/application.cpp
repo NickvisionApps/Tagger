@@ -13,8 +13,8 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setName("NickvisionTagger");
     m_appInfo.setShortName("Tagger");
     m_appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
-    m_appInfo.setVersion("2022.10.4");
-    m_appInfo.setChangelog("<ul><li>Added an advanced search function. Type '!' (without quotes) in the search box to activate it and learn more</li><li>Added 'Discard Unapplied Changes' action</li><li>Tagger now remembers user-filled tag properties waiting to be applied</li><li>Fixed ogg file handling</li><li>Improved closing and reloading dialogs</li></ul>");
+    m_appInfo.setVersion("2022.10.5-next");
+    m_appInfo.setChangelog("<ul><li></li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     m_appInfo.setSupportUrl("https://github.com/nlogozzo/NickvisionTagger/discussions");
