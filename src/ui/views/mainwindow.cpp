@@ -504,6 +504,7 @@ void MainWindow::onApply()
 {
     ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Saving tags...", [&]() { m_controller.saveTags(); } };
     progressDialog.run();
+    onTxtSearchMusicFilesChanged();
 }
 
 void MainWindow::onDiscardUnappliedChanges()
@@ -867,3 +868,4 @@ void MainWindow::onTxtTagPropertyChanged()
         }
     }
 }
+
