@@ -15,10 +15,11 @@
 <a href='https://matrix.to/#/#nickvision:matrix.org'><img width='140' alt='Join our room' src='https://user-images.githubusercontent.com/17648453/196094077-c896527d-af6d-4b43-a5d8-e34a00ffd8f6.png'/></a>
 
 # Screenshots
-![MainWindow](https://user-images.githubusercontent.com/17648453/191976746-a22f9a03-24d2-4045-8569-2cbf479c971c.png)
-![OpenFolder](https://user-images.githubusercontent.com/17648453/195401456-c1107874-4656-4f99-b091-e31cc990c311.png)
-![TagEdit](https://user-images.githubusercontent.com/17648453/195401479-b0ba17ed-0e14-4109-aa5c-953fd930da9e.png)
-![DarkMode](https://user-images.githubusercontent.com/17648453/195401486-6b893114-e6d7-4898-9544-a70200295cf2.png)
+![MainWindow](https://user-images.githubusercontent.com/17648453/196947728-552ab0e1-6d59-4d20-b543-fb2985959958.png)
+![OpenFolder](https://user-images.githubusercontent.com/17648453/196947753-9f79761f-fbec-49cc-bfb3-a9aebd1df5e2.png)
+![AdvancedSearch](https://user-images.githubusercontent.com/17648453/196947764-aa1b463c-1036-4016-b902-fb4f0a41e085.png)
+![TagEditing](https://user-images.githubusercontent.com/17648453/196947778-128cc2ba-3ff1-4b7f-a58c-e3edc34d1552.png)
+![DarkMode](https://user-images.githubusercontent.com/17648453/196947805-2c69cf21-f071-42e6-a25c-51d4d719f6b2.png)
 
 # Dependencies
 - [C++20](https://en.cppreference.com/w/cpp/20)
