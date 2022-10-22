@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <taglib/asffile.h>
 #include <taglib/flacfile.h>
+#include <taglib/mp4file.h>
 #include <taglib/mpegfile.h>
 #include <taglib/oggflacfile.h>
 #include <taglib/opusfile.h>
@@ -51,6 +52,26 @@ void MusicFile::loadFromDisk()
         if (!frameAlbumArt.isEmpty())
         {
             m_albumArt = ((TagLib::ID3v2::AttachedPictureFrame*)frameAlbumArt.front())->picture();
+        }
+        m_duration = file.audioProperties()->lengthInSeconds();
+    }
+    else if(m_dotExtension == ".m4a")
+    {
+        TagLib::MP4::File file{ m_path.c_str() };
+        m_title = file.tag()->title().to8Bit(true);
+        m_artist = file.tag()->artist().to8Bit(true);
+        m_album = file.tag()->album().to8Bit(true);
+        m_year = file.tag()->year();
+        m_track = file.tag()->track();
+        if(file.tag()->item("aART").isValid())
+        {
+            m_albumArtist = file.tag()->item("aART").toStringList()[0].to8Bit(true);
+        }
+        m_genre = file.tag()->genre().to8Bit(true);
+        m_comment = file.tag()->comment().to8Bit(true);
+        if(file.tag()->item("covr").isValid())
+        {
+            m_albumArt = file.tag()->item("covr").toCoverArtList()[0].data();
         }
         m_duration = file.audioProperties()->lengthInSeconds();
     }
@@ -442,6 +463,24 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
         }
         file.save(TagLib::MPEG::File::TagTypes::ID3v2);
     }
+    else if (m_dotExtension == ".m4a")
+    {
+        TagLib::MP4::File file{ m_path.c_str() };
+        file.tag()->setTitle({ m_title, TagLib::String::Type::UTF8 });
+        file.tag()->setArtist({ m_artist, TagLib::String::Type::UTF8 });
+        file.tag()->setAlbum({ m_album, TagLib::String::Type::UTF8 });
+        file.tag()->setYear(m_year);
+        file.tag()->setTrack(m_track);
+        file.tag()->removeItem("aART");
+        file.tag()->setItem("aART", { TagLib::StringList({ m_albumArtist, TagLib::String::Type::UTF8 }) });
+        file.tag()->setGenre({ m_genre, TagLib::String::Type::UTF8 });
+        file.tag()->setComment({ m_comment, TagLib::String::Type::UTF8 });
+        file.tag()->removeItem("covr");
+        TagLib::MP4::CoverArtList coverArtList;
+        coverArtList.append({ TagLib::MP4::CoverArt::Format::Unknown, m_albumArt });
+        file.tag()->setItem("covr", { coverArtList });
+        file.save();
+    }
     else if (m_dotExtension == ".ogg")
     {
         try
@@ -779,6 +818,3 @@ bool MusicFile::operator!=(const MusicFile& toCompare) const
 {
     return m_path != toCompare.m_path;
 }
-
-
-
