@@ -456,7 +456,7 @@ void MainWindow::onMusicFilesSavedUpdated()
     size_t i{ 0 };
     for(bool saved : m_controller.getMusicFilesSaved())
     {
-        adw_action_row_set_subtitle(ADW_ACTION_ROW(m_listMusicFilesRows[i]), !saved ? "Changes waiting to be applied." : "");
+        adw_action_row_set_icon_name(ADW_ACTION_ROW(m_listMusicFilesRows[i]), !saved ? "document-modified-symbolic" : "");
         i++;
     }
 }

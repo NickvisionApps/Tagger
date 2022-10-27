@@ -46,3 +46,4 @@ sources = files('main.cpp',
 
 resources = files('resources/org.nickvision.tagger.svg', 'resources/org.nickvision.tagger-devel.svg')
 resources_symbolic = files('resources/org.nickvision.tagger-symbolic.svg')
+resources_actions = files('resources/document-modified-symbolic.svg')
