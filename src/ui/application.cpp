@@ -13,7 +13,7 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setName("NickvisionTagger");
     m_appInfo.setShortName("Tagger");
     m_appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
-    m_appInfo.setVersion("2022.10.6-next");
+    m_appInfo.setVersion("2022.10.6");
     m_appInfo.setChangelog("<ul><li>Improved appearance of waiting to be applied changes</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
