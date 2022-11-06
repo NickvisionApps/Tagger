@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <sstream>
 #include <vector>
+#include "../helpers/translation.hpp"
 
 using namespace NickvisionTagger::Helpers;
 
@@ -33,7 +34,7 @@ std::string MediaHelpers::durationToString(int durationInSeconds)
 
 std::string MediaHelpers::fileSizeToString(std::uintmax_t fileSize)
 {
-    std::vector<std::string> sizes{ "B", "KB", "MB", "GB", "TB" };
+    std::vector<std::string> sizes{ _("B"), _("KB"), _("MB"), _("GB"), _("TB") };
     double size{ fileSize };
     int index{ 0 };
     std::stringstream builder;

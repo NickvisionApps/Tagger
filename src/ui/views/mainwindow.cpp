@@ -10,6 +10,8 @@
 #include "../controls/messagedialog.hpp"
 #include "../controls/progressdialog.hpp"
 #include "../../helpers/mediahelpers.hpp"
+#include "../../helpers/stringhelpers.hpp"
+#include "../../helpers/translation.hpp"
 #include "../../models/musicfolder.hpp"
 #include "../../models/tagmap.hpp"
 
@@ -58,27 +60,27 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_btnOpenMusicFolder = gtk_button_new();
     GtkWidget* btnOpenMusicFolderContent{ adw_button_content_new() };
     adw_button_content_set_icon_name(ADW_BUTTON_CONTENT(btnOpenMusicFolderContent), "folder-open-symbolic");
-    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnOpenMusicFolderContent), "Open");
+    adw_button_content_set_label(ADW_BUTTON_CONTENT(btnOpenMusicFolderContent), _("Open"));
     gtk_button_set_child(GTK_BUTTON(m_btnOpenMusicFolder), btnOpenMusicFolderContent);
-    gtk_widget_set_tooltip_text(m_btnOpenMusicFolder, "Open Music Folder (Ctrl+O)");
+    gtk_widget_set_tooltip_text(m_btnOpenMusicFolder, _("Open Music Folder (Ctrl+O)"));
     gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnOpenMusicFolder), "win.openMusicFolder");
     adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnOpenMusicFolder);
     //Reload Music Folder Button
     m_btnReloadMusicFolder = gtk_button_new();
     gtk_button_set_icon_name(GTK_BUTTON(m_btnReloadMusicFolder), "view-refresh-symbolic");
-    gtk_widget_set_tooltip_text(m_btnReloadMusicFolder, "Reload Music Folder (F5)");
+    gtk_widget_set_tooltip_text(m_btnReloadMusicFolder, _("Reload Music Folder (F5)"));
     gtk_widget_set_visible(m_btnReloadMusicFolder, false);
     gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnReloadMusicFolder), "win.reloadMusicFolder");
     adw_header_bar_pack_start(ADW_HEADER_BAR(m_headerBar), m_btnReloadMusicFolder);
     //Menu Help Button
     m_btnMenuHelp = gtk_menu_button_new();
     GMenu* menuHelp{ g_menu_new() };
-    g_menu_append(menuHelp, "Preferences", "win.preferences");
-    g_menu_append(menuHelp, "Keyboard Shortcuts", "win.keyboardShortcuts");
-    g_menu_append(menuHelp, std::string("About " + m_controller.getAppInfo().getShortName()).c_str(), "win.about");
+    g_menu_append(menuHelp, _("Preferences"), "win.preferences");
+    g_menu_append(menuHelp, _("Keyboard Shortcuts"), "win.keyboardShortcuts");
+    g_menu_append(menuHelp, std::string(StringHelpers::format(_("About %s"), m_controller.getAppInfo().getShortName().c_str())).c_str(), "win.about");
     gtk_menu_button_set_direction(GTK_MENU_BUTTON(m_btnMenuHelp), GTK_ARROW_NONE);
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuHelp), G_MENU_MODEL(menuHelp));
-    gtk_widget_set_tooltip_text(m_btnMenuHelp, "Main Menu");
+    gtk_widget_set_tooltip_text(m_btnMenuHelp, _("Main Menu"));
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnMenuHelp);
     g_object_unref(menuHelp);
     //Header End Separator
@@ -87,8 +89,8 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_sepHeaderEnd);
     //Apply Button
     m_btnApply = gtk_button_new();
-    gtk_button_set_label(GTK_BUTTON(m_btnApply), "Apply");
-    gtk_widget_set_tooltip_text(m_btnApply, "Apply Changes To Tag (Ctrl+S)");
+    gtk_button_set_label(GTK_BUTTON(m_btnApply), _("Apply"));
+    gtk_widget_set_tooltip_text(m_btnApply, _("Apply Changes To Tag (Ctrl+S)"));
     gtk_widget_set_visible(m_btnApply, false);
     gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnApply), "win.apply");
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnApply), "suggested-action");
@@ -98,18 +100,18 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     GMenu* menuTagActions{ g_menu_new() };
     GMenu* menuAlbumArt{ g_menu_new() };
     GMenu* menuOtherActions{ g_menu_new() };
-    g_menu_append(menuAlbumArt, "Insert Album Art", "win.insertAlbumArt");
-    g_menu_append(menuAlbumArt, "Remove Album Art", "win.removeAlbumArt");
-    g_menu_append(menuOtherActions, "Convert Filename to Tag", "win.filenameToTag");
-    g_menu_append(menuOtherActions, "Convert Tag to Filename", "win.tagToFilename");
-    g_menu_append(menuTagActions, "Discard Unapplied Changes", "win.discardUnappliedChanges");
-    g_menu_append(menuTagActions, "Delete Tags", "win.deleteTags");
+    g_menu_append(menuAlbumArt, _("Insert Album Art"), "win.insertAlbumArt");
+    g_menu_append(menuAlbumArt, _("Remove Album Art"), "win.removeAlbumArt");
+    g_menu_append(menuOtherActions, _("Convert Filename to Tag"), "win.filenameToTag");
+    g_menu_append(menuOtherActions, _("Convert Tag to Filename"), "win.tagToFilename");
+    g_menu_append(menuTagActions, _("Discard Unapplied Changes"), "win.discardUnappliedChanges");
+    g_menu_append(menuTagActions, _("Delete Tags"), "win.deleteTags");
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuAlbumArt));
     g_menu_append_section(menuTagActions, nullptr, G_MENU_MODEL(menuOtherActions));
     gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuTagActions), "document-properties-symbolic");
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuTagActions), G_MENU_MODEL(menuTagActions));
     m_popoverListMusicFiles = gtk_popover_menu_new_from_model(G_MENU_MODEL(menuTagActions));
-    gtk_widget_set_tooltip_text(m_btnMenuTagActions, "Tag Actions");
+    gtk_widget_set_tooltip_text(m_btnMenuTagActions, _("Tag Actions"));
     gtk_widget_set_visible(m_btnMenuTagActions, false);
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnMenuTagActions);
     g_object_unref(menuAlbumArt);
@@ -118,11 +120,11 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Menu Web Services Button
     m_btnMenuWebServices = gtk_menu_button_new();
     GMenu* menuWebServices{ g_menu_new() };
-    g_menu_append(menuWebServices, "Download MusicBrainz Metadata", "win.downloadMusicBrainzMetadata");
-    g_menu_append(menuWebServices, "Submit to AcoustId", "win.submitToAcoustId");
+    g_menu_append(menuWebServices, _("Download MusicBrainz Metadata"), "win.downloadMusicBrainzMetadata");
+    g_menu_append(menuWebServices, _("Submit to AcoustId"), "win.submitToAcoustId");
     gtk_menu_button_set_icon_name(GTK_MENU_BUTTON(m_btnMenuWebServices), "web-browser-symbolic");
     gtk_menu_button_set_menu_model(GTK_MENU_BUTTON(m_btnMenuWebServices), G_MENU_MODEL(menuWebServices));
-    gtk_widget_set_tooltip_text(m_btnMenuWebServices, "Web Services");
+    gtk_widget_set_tooltip_text(m_btnMenuWebServices, _("Web Services"));
     gtk_widget_set_visible(m_btnMenuWebServices, false);
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnMenuWebServices);
     g_object_unref(menuWebServices);
@@ -133,8 +135,8 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //No Files Status Page
     m_pageStatusNoFiles = adw_status_page_new();
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_pageStatusNoFiles), "org.nickvision.tagger-symbolic");
-    adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoFiles), "No Music Files Found");
-    adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoFiles), "Open a folder (or drag one into the app) with music files inside to get started.");
+    adw_status_page_set_title(ADW_STATUS_PAGE(m_pageStatusNoFiles), _("No Music Files Found"));
+    adw_status_page_set_description(ADW_STATUS_PAGE(m_pageStatusNoFiles), _("Open a folder (or drag one into the app) with music files inside to get started."));
     //Tagger Flap Page
     m_pageFlapTagger = adw_flap_new();
     adw_flap_set_flap_position(ADW_FLAP(m_pageFlapTagger), GTK_PACK_END);
@@ -145,14 +147,14 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Text Search Music Files
     m_txtSearchMusicFiles = gtk_search_entry_new();
     gtk_widget_set_hexpand(m_txtSearchMusicFiles, true);
-    g_object_set(m_txtSearchMusicFiles, "placeholder-text", "Search for filename (type ! to activate advanced search)...", nullptr);
+    g_object_set(m_txtSearchMusicFiles, "placeholder-text", _("Search for filename (type ! to activate advanced search)..."), nullptr);
     gtk_box_append(GTK_BOX(m_boxSearch), m_txtSearchMusicFiles);
     g_signal_connect(m_txtSearchMusicFiles, "search-changed", G_CALLBACK((void (*)(GtkSearchEntry*, gpointer))[](GtkSearchEntry*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtSearchMusicFilesChanged(); }), this);
     //Button Advanced Search Info
     m_btnAdvancedSearchInfo = gtk_button_new();
     //gtk_style_context_remove_class(GTK_STYLE_CONTEXT(gtk_widget_get_style_context(m_btnAdvancedSearchInfo)), "circular");
     gtk_button_set_icon_name(GTK_BUTTON(m_btnAdvancedSearchInfo), "help-faq-symbolic");
-    gtk_widget_set_tooltip_text(m_btnAdvancedSearchInfo, "Advanced Search Info");
+    gtk_widget_set_tooltip_text(m_btnAdvancedSearchInfo, _("Advanced Search Info"));
     gtk_widget_set_visible(m_btnAdvancedSearchInfo, false);
     gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnAdvancedSearchInfo), "win.advancedSearchInfo");
     gtk_box_append(GTK_BOX(m_boxSearch), m_btnAdvancedSearchInfo);
@@ -212,7 +214,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_btnAlbumArt, "image");
     //Keep Album Art
     m_btnKeepAlbumArt = gtk_button_new();
-    gtk_widget_set_tooltip_text(m_btnKeepAlbumArt, "Selected files have different album art images.");
+    gtk_widget_set_tooltip_text(m_btnKeepAlbumArt, _("Selected files have different album art images."));
     gtk_style_context_add_class(gtk_widget_get_style_context(m_btnKeepAlbumArt), "card");
     g_signal_connect(m_btnKeepAlbumArt, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
     m_statusKeepAlbumArt = adw_status_page_new();
@@ -224,65 +226,65 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_adwGrpProperties = adw_preferences_group_new();
     //Filename
     m_txtFilename = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtFilename), "Filename");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtFilename), _("Filename"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtFilename);
     g_signal_connect(m_txtFilename, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Title
     m_txtTitle = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtTitle), "Title");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtTitle), _("Title"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtTitle);
     g_signal_connect(m_txtTitle, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Artist
     m_txtArtist = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtArtist), "Artist");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtArtist), _("Artist"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtArtist);
     g_signal_connect(m_txtArtist, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Album
     m_txtAlbum = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtAlbum), "Album");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtAlbum), _("Album"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtAlbum);
     g_signal_connect(m_txtAlbum, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Year
     m_txtYear = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtYear), "Year");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtYear), _("Year"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtYear);
     g_signal_connect(m_txtYear, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Track
     m_txtTrack = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtTrack), "Track");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtTrack), _("Track"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtTrack);
     g_signal_connect(m_txtTrack, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Album Artist
     m_txtAlbumArtist = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtAlbumArtist), "Album Artist");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtAlbumArtist), _("Album Artist"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtAlbumArtist);
     g_signal_connect(m_txtAlbumArtist, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Genre
     m_txtGenre = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtGenre), "Genre");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtGenre), _("Genre"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtGenre);
     g_signal_connect(m_txtGenre, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Comment
     m_txtComment = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtComment), "Comment");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtComment), _("Comment"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtComment);
     g_signal_connect(m_txtComment, "changed", G_CALLBACK((void (*)(GtkEditable*, gpointer))[](GtkEditable*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onTxtTagPropertyChanged(); }), this);
     //Duration
     m_txtDuration = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtDuration), "Duration");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtDuration), _("Duration"));
     gtk_editable_set_editable(GTK_EDITABLE(m_txtDuration), false);
     gtk_editable_set_text(GTK_EDITABLE(m_txtDuration), "00:00:00");
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtDuration);
     //Chromaprint Fingerprint
     m_txtChromaprintFingerprint = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtChromaprintFingerprint), "Fingerprint");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtChromaprintFingerprint), _("Fingerprint"));
     gtk_editable_set_editable(GTK_EDITABLE(m_txtChromaprintFingerprint), false);
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtChromaprintFingerprint);
     //File Size
     m_txtFileSize = adw_entry_row_new();
-    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtFileSize), "File Size");
+    adw_preferences_row_set_title(ADW_PREFERENCES_ROW(m_txtFileSize), _("File Size"));
     gtk_editable_set_editable(GTK_EDITABLE(m_txtFileSize), false);
-    gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), "0 MB");
+    gtk_editable_set_text(GTK_EDITABLE(m_txtFileSize), _("0 MB"));
     adw_preferences_group_add(ADW_PREFERENCES_GROUP(m_adwGrpProperties), m_txtFileSize);
     //Tagger Flap Flap
     m_scrollTaggerFlap = gtk_scrolled_window_new();
@@ -407,7 +409,7 @@ bool MainWindow::onCloseRequest()
 {
     if(!m_controller.getCanClose())
     {
-        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Apply Changes?", "Some music files still have changes waiting to be applied. Would you like to apply those changes to the file or discard them?", "Cancel", "Discard", "Apply" };
+        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), _("Apply Changes?"), _("Some music files still have changes waiting to be applied. Would you like to apply those changes to the file or discard them?"), _("Cancel"), _("Discard"), _("Apply") };
         MessageDialogResponse response{ messageDialog.run() };
         if(response == MessageDialogResponse::Cancel)
         {
@@ -433,7 +435,7 @@ void MainWindow::onMusicFolderUpdated(bool sendToast)
         gtk_list_box_remove(GTK_LIST_BOX(m_listMusicFiles), row);
     }
     m_listMusicFilesRows.clear();
-    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Loading music files...", [&]() { m_controller.reloadMusicFolder(); } };
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), _("Loading music files..."), [&]() { m_controller.reloadMusicFolder(); } };
     progressDialog.run();
     std::size_t musicFilesCount{ m_controller.getMusicFiles().size() };
     adw_view_stack_set_visible_child_name(ADW_VIEW_STACK(m_viewStack), musicFilesCount > 0 ? "pageTagger" : "pageNoFiles");
@@ -447,7 +449,7 @@ void MainWindow::onMusicFolderUpdated(bool sendToast)
     }
     if(musicFilesCount > 0 && sendToast)
     {
-        adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(std::string("Loaded " + std::to_string(musicFilesCount) + " music files.").c_str()));
+        adw_toast_overlay_add_toast(ADW_TOAST_OVERLAY(m_toastOverlay), adw_toast_new(StringHelpers::format(_("Loaded %d music files."), musicFilesCount).c_str()));
     }
 }
 
@@ -463,7 +465,7 @@ void MainWindow::onMusicFilesSavedUpdated()
 
 void MainWindow::onOpenMusicFolder()
 {
-    GtkFileChooserNative* openFolderDialog{ gtk_file_chooser_native_new("Open Music Folder", GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER, "_Open", "_Cancel") };
+    GtkFileChooserNative* openFolderDialog{ gtk_file_chooser_native_new(_("Open Music Folder"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER, _("_Open"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openFolderDialog), true);
     g_signal_connect(openFolderDialog, "response", G_CALLBACK((void (*)(GtkNativeDialog*, gint, gpointer))([](GtkNativeDialog* dialog, gint response_id, gpointer data)
     {
@@ -483,7 +485,7 @@ void MainWindow::onReloadMusicFolder()
 {
     if(!m_controller.getCanClose())
     {
-        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Apply Changes?", "Some music files still have changes waiting to be applied. Would you like to apply those changes to the file or discard them?", "Cancel", "Discard", "Apply" };
+        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), _("Apply Changes?"), _("Some music files still have changes waiting to be applied. Would you like to apply those changes to the file or discard them?"), _("Cancel"), _("Discard"), _("Apply") };
         MessageDialogResponse response{ messageDialog.run() };
         if(response == MessageDialogResponse::Suggested)
         {
@@ -502,28 +504,28 @@ void MainWindow::onReloadMusicFolder()
 
 void MainWindow::onApply()
 {
-    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Saving tags...", [&]() { m_controller.saveTags(); } };
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), _("Saving tags..."), [&]() { m_controller.saveTags(); } };
     progressDialog.run();
     onTxtSearchMusicFilesChanged();
 }
 
 void MainWindow::onDiscardUnappliedChanges()
 {
-    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Discarding unapplied changes...", [&]() { m_controller.discardUnappliedChanges(); } };
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), _("Discarding unapplied changes..."), [&]() { m_controller.discardUnappliedChanges(); } };
     progressDialog.run();
     onListMusicFilesSelectionChanged();
 }
 
 void MainWindow::onDeleteTags()
 {
-    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Deleting tags...", [&]() { m_controller.deleteTags(); } };
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), _("Deleting tags..."), [&]() { m_controller.deleteTags(); } };
     progressDialog.run();
     onListMusicFilesSelectionChanged();
 }
 
 void MainWindow::onInsertAlbumArt()
 {
-    GtkFileChooserNative* openPictureDialog{ gtk_file_chooser_native_new("Insert Album Art", GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, "_Open", "_Cancel") };
+    GtkFileChooserNative* openPictureDialog{ gtk_file_chooser_native_new(_("Insert Album Art"), GTK_WINDOW(m_gobj), GTK_FILE_CHOOSER_ACTION_OPEN, _("_Open"), _("_Cancel")) };
     gtk_native_dialog_set_modal(GTK_NATIVE_DIALOG(openPictureDialog), true);
     GtkFileFilter* imageFilter{ gtk_file_filter_new() };
     gtk_file_filter_add_mime_type(imageFilter, "image/*");
@@ -536,7 +538,7 @@ void MainWindow::onInsertAlbumArt()
             MainWindow* mainWindow{ reinterpret_cast<MainWindow*>(data) };
             GFile* file{ gtk_file_chooser_get_file(GTK_FILE_CHOOSER(dialog)) };
             std::string path{ g_file_get_path(file) };
-            ProgressDialog progressDialog{ GTK_WINDOW(mainWindow->m_gobj), "Inserting album art...", [mainWindow, path]() { mainWindow->m_controller.insertAlbumArt(path); } };
+            ProgressDialog progressDialog{ GTK_WINDOW(mainWindow->m_gobj), _("Inserting album art..."), [mainWindow, path]() { mainWindow->m_controller.insertAlbumArt(path); } };
             progressDialog.run();
             mainWindow->onListMusicFilesSelectionChanged();
             g_object_unref(file);
@@ -548,18 +550,18 @@ void MainWindow::onInsertAlbumArt()
 
 void MainWindow::onRemoveAlbumArt()
 {
-    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Removing album art...", [&]() { m_controller.removeAlbumArt(); } };
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), _("Removing album art..."), [&]() { m_controller.removeAlbumArt(); } };
     progressDialog.run();
     onListMusicFilesSelectionChanged();
 }
 
 void MainWindow::onFilenameToTag()
 {
-    ComboBoxDialog formatStringDialog{ GTK_WINDOW(m_gobj), "Filename to Tag", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" } };
+    ComboBoxDialog formatStringDialog{ GTK_WINDOW(m_gobj), _("Filename to Tag"), _("Please select a format string."), _("Format String"), { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" } };
     std::string formatString = formatStringDialog.run();
     if(!formatString.empty())
     {
-        ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Converting filenames to tags...", [&, formatString]() { m_controller.filenameToTag(formatString); } };
+        ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), _("Converting filenames to tags..."), [&, formatString]() { m_controller.filenameToTag(formatString); } };
         progressDialog.run();
         onListMusicFilesSelectionChanged();
     }
@@ -567,11 +569,11 @@ void MainWindow::onFilenameToTag()
 
 void MainWindow::onTagToFilename()
 {
-    ComboBoxDialog formatStringDialog{ GTK_WINDOW(m_gobj), "Tag to Filename", "Please select a format string.", "Format String", { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" } };
+    ComboBoxDialog formatStringDialog{ GTK_WINDOW(m_gobj), _("Tag to Filename"), _("Please select a format string."), _("Format String"), { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" } };
     std::string formatString = formatStringDialog.run();
     if(!formatString.empty())
     {
-        ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Converting tags to filenames...", [&, formatString]() { m_controller.tagToFilename(formatString); } };
+        ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), _("Converting tags to filenames..."), [&, formatString]() { m_controller.tagToFilename(formatString); } };
         progressDialog.run();
         size_t i{ 0 };
         for(const std::shared_ptr<MusicFile>& musicFile : m_controller.getMusicFiles())
@@ -587,7 +589,7 @@ void MainWindow::onTagToFilename()
 
 void MainWindow::onDownloadMusicBrainzMetadata()
 {
-    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), "Downloading MusicBrainz metadata...\n<small>(This may take a while)</small>", [&]() { m_controller.downloadMusicBrainzMetadata(); } };
+    ProgressDialog progressDialog{ GTK_WINDOW(m_gobj), _("Downloading MusicBrainz metadata...\n<small>(This may take a while)</small>"), [&]() { m_controller.downloadMusicBrainzMetadata(); } };
     progressDialog.run();
     onListMusicFilesSelectionChanged();
 }
@@ -597,24 +599,24 @@ void MainWindow::onSubmitToAcoustId()
     //Check for one file selected
     if(m_controller.getSelectedMusicFilesCount() > 1)
     {
-        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Too Many Files Selected", "Only one file can be submitted to AcoustId at a time. Please select only one file and try again.", "OK" };
+        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), _("Too Many Files Selected"), _("Only one file can be submitted to AcoustId at a time. Please select only one file and try again."), _("OK") };
         messageDialog.run();
         return;
     }
     //Check for valid AcoustId User API Key
     bool validAcoustIdUserAPIKey{ false };
-    ProgressDialog progressDialogChecking{ GTK_WINDOW(m_gobj), "Checking AcoustId user api key...", [&]() { validAcoustIdUserAPIKey = m_controller.checkIfAcoustIdUserAPIKeyValid(); } };
+    ProgressDialog progressDialogChecking{ GTK_WINDOW(m_gobj), _("Checking AcoustId user api key..."), [&]() { validAcoustIdUserAPIKey = m_controller.checkIfAcoustIdUserAPIKeyValid(); } };
     progressDialogChecking.run();
     if(!validAcoustIdUserAPIKey)
     {
-        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Invalid User API Key", "The AcoustId User API Key is invalid.\nPlease provide a valid api key in Preferences.", "OK" };
+        MessageDialog messageDialog{ GTK_WINDOW(m_gobj), _("Invalid User API Key"), _("The AcoustId User API Key is invalid.\nPlease provide a valid api key in Preferences."), _("OK") };
         messageDialog.run();
         return;
     }
     //Get MusicBrainz Recording Id
-    EntryDialog entryDialog{ GTK_WINDOW(m_gobj), "Submit to AcoustId", "AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id for easy identification.\n\nIf you have a MusicBrainz Recording Id for this song, please provide it below.\n\nIf no id is provided, Tagger will submit your tag's metadata in association with the fingerprint instead.", "MusicBrainz Recording Id" };
+    EntryDialog entryDialog{ GTK_WINDOW(m_gobj), _("Submit to AcoustId"), _("AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id for easy identification.\n\nIf you have a MusicBrainz Recording Id for this song, please provide it below.\n\nIf no id is provided, Tagger will submit your tag's metadata in association with the fingerprint instead."), _("MusicBrainz Recording Id") };
     std::string result{ entryDialog.run() };
-    ProgressDialog progressDialogSubmitting{ GTK_WINDOW(m_gobj), "Submitting metadata to AcoustId...", [&, result]() { m_controller.submitToAcoustId(result); } };
+    ProgressDialog progressDialogSubmitting{ GTK_WINDOW(m_gobj), _("Submitting metadata to AcoustId..."), [&, result]() { m_controller.submitToAcoustId(result); } };
     progressDialogSubmitting.run();
 }
 
@@ -653,7 +655,7 @@ void MainWindow::onAbout()
 
 void MainWindow::onAdvancedSearchInfo()
 {
-    MessageDialog messageDialog{ GTK_WINDOW(m_gobj), "Advanced Search", R"(Advanced Search is a powerful feature provided by Tagger that allows users to search files' tag contents for certain values, using a powerful tag syntax:
+    MessageDialog messageDialog{ GTK_WINDOW(m_gobj), _("Advanced Search"), _(R"(Advanced Search is a powerful feature provided by Tagger that allows users to search files' tag contents for certain values, using a powerful tag syntax:
 
     !prop1="value1";prop2="value2"
     Where prop1, prop2 are valid tag properties and value1, value2 are the values to search wrapped in quotes.
@@ -685,7 +687,7 @@ void MainWindow::onAdvancedSearchInfo()
     !title="";artist="bob"
     This search string will filter the listbox to contain music files who's title is empty and who's artist is bob
 
-    * Advanced Search is case insensitive *)", "OK" };
+    * Advanced Search is case insensitive *)"), _("OK") };
     gtk_widget_set_size_request(messageDialog.gobj(), 600, -1);
     messageDialog.run();
 }

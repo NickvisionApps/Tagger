@@ -1,3 +1,4 @@
+#include <libintl.h>
 #include "ui/application.hpp"
 
 using namespace NickvisionTagger::UI;
@@ -12,6 +13,12 @@ using namespace NickvisionTagger::UI;
  */
 int main(int argc, char* argv[])
 {
+    //Translations
+    setlocale(LC_ALL, "");
+    bindtextdomain(GETTEXT_PACKAGE, LOCALE_DIR);
+    bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+    textdomain(GETTEXT_PACKAGE);
+    //Start App
     Application app("org.nickvision.tagger");
     return app.run(argc, argv);
 }

@@ -6,6 +6,8 @@
 #include <iterator>
 #include <curlpp/cURLpp.hpp>
 #include "../helpers/mediahelpers.hpp"
+#include "../helpers/stringhelpers.hpp"
+#include "../helpers/translation.hpp"
 #include "../models/acoustidsubmission.hpp"
 
 using namespace NickvisionTagger::Controllers;
@@ -204,7 +206,7 @@ void MainWindowController::saveTags()
         m_musicFilesSaved[pair.first] = true;
     }
     m_musicFilesSavedUpdatedCallback();
-    m_sendToastCallback("Tags saved successfully.");
+    m_sendToastCallback(_("Tags saved successfully."));
 }
 
 void MainWindowController::discardUnappliedChanges()
@@ -260,7 +262,7 @@ void MainWindowController::filenameToTag(const std::string& formatString)
         }
     }
     m_musicFilesSavedUpdatedCallback();
-    m_sendToastCallback("Converted " + std::to_string(success) + " filenames to tags successfully.");
+    m_sendToastCallback(StringHelpers::format(_("Converted %d filenames to tags successfully"), success));
 }
 
 void MainWindowController::tagToFilename(const std::string& formatString)
@@ -275,7 +277,7 @@ void MainWindowController::tagToFilename(const std::string& formatString)
         }
     }
     m_musicFilesSavedUpdatedCallback();
-    m_sendToastCallback("Converted " + std::to_string(success) + " tags to filenames successfully.");
+    m_sendToastCallback(StringHelpers::format(_("Converted %d tags to filenames successfully"), success));
 }
 
 void MainWindowController::downloadMusicBrainzMetadata()
@@ -328,7 +330,7 @@ void MainWindowController::downloadMusicBrainzMetadata()
         }
     }
     m_musicFilesSavedUpdatedCallback();
-    m_sendToastCallback("Download metadata for " + std::to_string(successful) + " files successfully.");
+    m_sendToastCallback(StringHelpers::format(_("Downloaded metadata for %d files successfully"), successful));
 }
 
 bool MainWindowController::checkIfAcoustIdUserAPIKeyValid()
@@ -341,7 +343,7 @@ void MainWindowController::submitToAcoustId(const std::string& musicBrainzRecord
     if(m_selectedMusicFiles.size() == 1)
     {
         const std::shared_ptr<MusicFile> selectedMusicFile{ m_selectedMusicFiles.begin()->second };
-        m_sendToastCallback(selectedMusicFile->submitToAcoustId(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getAcoustIdUserAPIKey(), musicBrainzRecordingId) ? "Submitted metadata to AcoustId successfully." : "Unable to submit metadata to AcoustId.");
+        m_sendToastCallback(selectedMusicFile->submitToAcoustId(m_appInfo.getAcoustIdClientAPIKey(), m_configuration.getAcoustIdUserAPIKey(), musicBrainzRecordingId) ? _("Submitted metadata to AcoustId successfully.") : _("Unable to submit metadata to AcoustId."));
     }
 }
 

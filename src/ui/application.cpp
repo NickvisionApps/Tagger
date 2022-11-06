@@ -1,5 +1,6 @@
 #include "application.hpp"
 #include "../controllers/mainwindowcontroller.hpp"
+#include "../helpers/translation.hpp"
 
 using namespace NickvisionTagger::Controllers;
 using namespace NickvisionTagger::Models;
@@ -12,9 +13,9 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setId(id);
     m_appInfo.setName("NickvisionTagger");
     m_appInfo.setShortName("Tagger");
-    m_appInfo.setDescription("An easy-to-use music tag (metadata) editor.");
-    m_appInfo.setVersion("2022.10.6");
-    m_appInfo.setChangelog("<ul><li>Improved appearance of waiting to be applied changes</li></ul>");
+    m_appInfo.setDescription(_("An easy-to-use music tag (metadata) editor."));
+    m_appInfo.setVersion("2022.11.0-beta1");
+    m_appInfo.setChangelog("<ul><li>Added translation support</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     m_appInfo.setSupportUrl("https://github.com/nlogozzo/NickvisionTagger/discussions");

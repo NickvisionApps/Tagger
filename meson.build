@@ -1,4 +1,4 @@
-project('org.nickvision.tagger', ['cpp', 'c'], version: '2022.10.6', meson_version: '>= 0.63.0', default_options: ['warning_level=3', 'werror=false', 'cpp_std=c++20'])
+project('org.nickvision.tagger', ['cpp', 'c'], version: '2022.11.0', meson_version: '>= 0.63.0', default_options: ['warning_level=3', 'werror=false', 'cpp_std=c++20'])
 
 gnome = import('gnome')
 
@@ -10,6 +10,7 @@ curlpp = dependency('curlpp')
 taglib = dependency('taglib')
 
 subdir('src')
+subdir('po')
 
 executable('org.nickvision.tagger', sources, dependencies: [threads, adwaita, jsoncpp, curlpp, taglib], install: true, install_mode: 'rwxrwxrwx')
 install_data('fpcalc', install_dir: 'bin', install_mode: 'rwxrwxrwx')
