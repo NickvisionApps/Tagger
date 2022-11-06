@@ -30,7 +30,7 @@ meson build
 cd build
 meson compile org.nickvision.tagger-pot
 ```
-This would generate a `NickvisionTagger/po/org.nickvision.tagger.pot` file, now you can use this file to translate the strings into your target language. You may use [Gtranslator](https://flathub.org/apps/details/org.gnome.Gtranslator) or [poedit.com](https://poedit.com) if you do not know how to translate manually in text itself. After translating (either through tools or directly in text editor), make sure to include the required metadata on the top of translation file (see existing files in `NickvisionTagger/po/` directory.)
+This would generate a `NickvisionTagger/po/org.nickvision.tagger.pot` file, now you can use this file to translate the strings into your target language. You may use [Gtranslator](https://flathub.org/apps/details/org.gnome.Gtranslator) or [poedit](poedit.net) if you do not know how to translate manually in text itself. After translating (either through tools or directly in text editor), make sure to include the required metadata on the top of translation file (see existing files in `NickvisionTagger/po/` directory.)
 
 One particular thing you should keep in mind is that some strings in this project are bifurcated into multiple strings to cater to responsiveness of the application, like:
 ```
