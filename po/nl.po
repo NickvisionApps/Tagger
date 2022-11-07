@@ -1,0 +1,599 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the org.nickvision.tagger package.
+#
+# Heimen Stoffels <vistausss@fastmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: org.nickvision.tagger\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-07 17:16+0100\n"
+"PO-Revision-Date: 2022-11-07 18:25+0100\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: Dutch\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.1\n"
+
+#: src/controllers/mainwindowcontroller.cpp:209
+msgid "Tags saved successfully."
+msgstr "De tags zijn opgeslagen."
+
+#: src/controllers/mainwindowcontroller.cpp:265
+#, c-format
+msgid "Converted %d filenames to tags successfully"
+msgstr "Er zijn %d bestandsnamen omgezet in tags"
+
+#: src/controllers/mainwindowcontroller.cpp:280
+#, c-format
+msgid "Converted %d tags to filenames successfully"
+msgstr "Er zijn %d tags omgezet in bestandsnamen"
+
+#: src/controllers/mainwindowcontroller.cpp:333
+#, c-format
+msgid "Downloaded metadata for %d files successfully"
+msgstr "Er zijn metagegevens van %d bestanden opgehaald"
+
+#: src/controllers/mainwindowcontroller.cpp:346
+msgid "Submitted metadata to AcoustId successfully."
+msgstr "De metagegevens zijn verstuurd naar AcoustId."
+
+#: src/controllers/mainwindowcontroller.cpp:346
+msgid "Unable to submit metadata to AcoustId."
+msgstr "De metagegevens kunnen niet worden verstuurd naar AcoustId."
+
+#: src/helpers/mediahelpers.cpp:37
+msgid "B"
+msgstr "B"
+
+#: src/helpers/mediahelpers.cpp:37
+msgid "KB"
+msgstr "KB"
+
+#: src/helpers/mediahelpers.cpp:37
+msgid "MB"
+msgstr "MB"
+
+#: src/helpers/mediahelpers.cpp:37
+msgid "GB"
+msgstr "GB"
+
+#: src/helpers/mediahelpers.cpp:37
+msgid "TB"
+msgstr "TB"
+
+#: src/ui/application.cpp:16
+msgid "An easy-to-use music tag (metadata) editor."
+msgstr "Een eenvoudig te gebruiken (muziek)tagbewerker."
+
+#: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
+#: src/ui/views/mainwindow.cpp:413 src/ui/views/mainwindow.cpp:489
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
+#: src/ui/views/mainwindow.cpp:603 src/ui/views/mainwindow.cpp:613
+#: src/ui/views/mainwindow.cpp:691
+msgid "OK"
+msgstr "Oké"
+
+#: src/ui/views/mainwindow.cpp:64
+msgid "Open"
+msgstr "Openen"
+
+#: src/ui/views/mainwindow.cpp:66
+msgid "Open Music Folder (Ctrl+O)"
+msgstr "Muziekmap openen (Ctrl+O)"
+
+#: src/ui/views/mainwindow.cpp:72
+msgid "Reload Music Folder (F5)"
+msgstr "Muziekmap herladen (F5)"
+
+#: src/ui/views/mainwindow.cpp:79 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/shortcutsdialog.cpp:146
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#: src/ui/views/mainwindow.cpp:80 src/ui/views/shortcutsdialog.cpp:147
+msgid "Keyboard Shortcuts"
+msgstr "Sneltoetsen"
+
+#: src/ui/views/mainwindow.cpp:81
+#, c-format
+msgid "About %s"
+msgstr "Over %s"
+
+#: src/ui/views/mainwindow.cpp:84
+msgid "Main Menu"
+msgstr "Hoofdmenu"
+
+#: src/ui/views/mainwindow.cpp:93 src/ui/views/mainwindow.cpp:413
+#: src/ui/views/mainwindow.cpp:489
+msgid "Apply"
+msgstr "Toepassen"
+
+#: src/ui/views/mainwindow.cpp:94
+msgid "Apply Changes To Tag (Ctrl+S)"
+msgstr "Tagwijzigingen opslaan (Ctrl+S)"
+
+#: src/ui/views/mainwindow.cpp:104 src/ui/views/mainwindow.cpp:529
+#: src/ui/views/shortcutsdialog.cpp:138
+msgid "Insert Album Art"
+msgstr "Albumhoes toevoegen"
+
+#: src/ui/views/mainwindow.cpp:105 src/ui/views/shortcutsdialog.cpp:139
+msgid "Remove Album Art"
+msgstr "Albumhoes verwijderen"
+
+#: src/ui/views/mainwindow.cpp:106 src/ui/views/shortcutsdialog.cpp:140
+msgid "Convert Filename to Tag"
+msgstr "Bestandsnaam omzetten in tag"
+
+#: src/ui/views/mainwindow.cpp:107 src/ui/views/shortcutsdialog.cpp:141
+msgid "Convert Tag to Filename"
+msgstr "Tag omzetten in bestandsnaam"
+
+#: src/ui/views/mainwindow.cpp:108 src/ui/views/shortcutsdialog.cpp:137
+msgid "Discard Unapplied Changes"
+msgstr "Wijzigingen verwerpen"
+
+#: src/ui/views/mainwindow.cpp:109
+msgid "Delete Tags"
+msgstr "Tags verwijderen"
+
+#: src/ui/views/mainwindow.cpp:115 src/ui/views/shortcutsdialog.cpp:134
+msgid "Tag Actions"
+msgstr "Tagacties"
+
+#: src/ui/views/mainwindow.cpp:124 src/ui/views/shortcutsdialog.cpp:143
+msgid "Download MusicBrainz Metadata"
+msgstr "MusicBrainz-metagegevens ophalen"
+
+#: src/ui/views/mainwindow.cpp:125 src/ui/views/mainwindow.cpp:618
+#: src/ui/views/shortcutsdialog.cpp:144
+msgid "Submit to AcoustId"
+msgstr "Versturen naar AcoustId"
+
+#: src/ui/views/mainwindow.cpp:128 src/ui/views/shortcutsdialog.cpp:142
+msgid "Web Services"
+msgstr "Online-diensten"
+
+#: src/ui/views/mainwindow.cpp:139
+msgid "No Music Files Found"
+msgstr "Er zijn geen muziekbestanden aangetroffen"
+
+#: src/ui/views/mainwindow.cpp:140
+msgid ""
+"Open a folder (or drag one into the app) with music files inside to get "
+"started."
+msgstr ""
+"Open een map met muziekbestanden of sleep een map hierheen om aan de slag te "
+"gaan."
+
+#: src/ui/views/mainwindow.cpp:151
+msgid "Search for filename (type ! to activate advanced search)..."
+msgstr "Zoeken naar bestand (typ ! om geavanceerd te zoeken)…"
+
+#: src/ui/views/mainwindow.cpp:158
+msgid "Advanced Search Info"
+msgstr "Geavanceerd zoeken"
+
+#: src/ui/views/mainwindow.cpp:218
+msgid "Selected files have different album art images."
+msgstr "De geselecteerde bestanden zijn voorzien van verschillende albumhoezen."
+
+#: src/ui/views/mainwindow.cpp:230
+msgid "Filename"
+msgstr "Bestandsnaam"
+
+#: src/ui/views/mainwindow.cpp:235
+msgid "Title"
+msgstr "Titel"
+
+#: src/ui/views/mainwindow.cpp:240
+msgid "Artist"
+msgstr "Artiest"
+
+#: src/ui/views/mainwindow.cpp:245
+msgid "Album"
+msgstr "Album"
+
+#: src/ui/views/mainwindow.cpp:250
+msgid "Year"
+msgstr "Jaar"
+
+#: src/ui/views/mainwindow.cpp:255
+msgid "Track"
+msgstr "Volgnummer"
+
+#: src/ui/views/mainwindow.cpp:260
+msgid "Album Artist"
+msgstr "Albumartiest"
+
+#: src/ui/views/mainwindow.cpp:265
+msgid "Genre"
+msgstr "Genre"
+
+#: src/ui/views/mainwindow.cpp:270
+msgid "Comment"
+msgstr "Opmerking"
+
+#: src/ui/views/mainwindow.cpp:275
+msgid "Duration"
+msgstr "Duur"
+
+#: src/ui/views/mainwindow.cpp:281
+msgid "Fingerprint"
+msgstr "Controlesom"
+
+#: src/ui/views/mainwindow.cpp:286
+msgid "File Size"
+msgstr "Bestandsgrootte"
+
+#: src/ui/views/mainwindow.cpp:288
+msgid "0 MB"
+msgstr "0 MB"
+
+#: src/ui/views/mainwindow.cpp:413 src/ui/views/mainwindow.cpp:489
+msgid "Apply Changes?"
+msgstr "Wijzigingen toepassen?"
+
+#: src/ui/views/mainwindow.cpp:413 src/ui/views/mainwindow.cpp:489
+msgid ""
+"Some music files still have changes waiting to be applied. Would you like to "
+"apply those changes to the file or discard them?"
+msgstr ""
+"Enkele muziekbestanden zijn gewijzigd, maar nog niet opgeslagen. Wilt u dat "
+"nu doen of de wijzigingen verwerpen?"
+
+#: src/ui/views/mainwindow.cpp:413 src/ui/views/mainwindow.cpp:489
+msgid "Discard"
+msgstr "Verwerpen"
+
+#: src/ui/views/mainwindow.cpp:439
+msgid "Loading music files..."
+msgstr "Bezig met laden van muziekbestanden…"
+
+#: src/ui/views/mainwindow.cpp:453
+#, c-format
+msgid "Loaded %d music files."
+msgstr "Er zijn %d muziekbestanden geladen."
+
+#: src/ui/views/mainwindow.cpp:469 src/ui/views/shortcutsdialog.cpp:132
+msgid "Open Music Folder"
+msgstr "Muziekmap openen"
+
+#: src/ui/views/mainwindow.cpp:469 src/ui/views/mainwindow.cpp:529
+msgid "_Open"
+msgstr "_Openen"
+
+#: src/ui/views/mainwindow.cpp:469 src/ui/views/mainwindow.cpp:529
+msgid "_Cancel"
+msgstr "_Annuleren"
+
+#: src/ui/views/mainwindow.cpp:508
+msgid "Saving tags..."
+msgstr "Bezig met opslaan van tags…"
+
+#: src/ui/views/mainwindow.cpp:515
+msgid "Discarding unapplied changes..."
+msgstr "Bezig met verwerpen van wijzigingen…"
+
+#: src/ui/views/mainwindow.cpp:522
+msgid "Deleting tags..."
+msgstr "Bezig met verwijderen van tags…"
+
+#: src/ui/views/mainwindow.cpp:542
+msgid "Inserting album art..."
+msgstr "Bezig met toevoegen van albumhoes…"
+
+#: src/ui/views/mainwindow.cpp:554
+msgid "Removing album art..."
+msgstr "Bezig met verwijderen van albumhoes…"
+
+#: src/ui/views/mainwindow.cpp:561
+msgid "Filename to Tag"
+msgstr "Bestandsnaam naar tag"
+
+#: src/ui/views/mainwindow.cpp:561 src/ui/views/mainwindow.cpp:573
+msgid "Please select a format string."
+msgstr "Kies een opmaakmethode."
+
+#: src/ui/views/mainwindow.cpp:561 src/ui/views/mainwindow.cpp:573
+msgid "Format String"
+msgstr "Opmaakmethode"
+
+#: src/ui/views/mainwindow.cpp:565
+msgid "Converting filenames to tags..."
+msgstr "Bezig met omzetten van bestandsnamen in tags…"
+
+#: src/ui/views/mainwindow.cpp:573
+msgid "Tag to Filename"
+msgstr "Tag naar bestandsnaam"
+
+#: src/ui/views/mainwindow.cpp:577
+msgid "Converting tags to filenames..."
+msgstr "Bezig met omzetten van tags in bestandsnamen…"
+
+#: src/ui/views/mainwindow.cpp:593
+msgid ""
+"Downloading MusicBrainz metadata...\n"
+"<small>(This may take a while)</small>"
+msgstr ""
+"Bezig met ophalen van MusicBrainz-metagegevens…\n"
+" <small>(Dit kan even duren.)</small>"
+
+#: src/ui/views/mainwindow.cpp:603
+msgid "Too Many Files Selected"
+msgstr "Teveel bestanden geselecteerd"
+
+#: src/ui/views/mainwindow.cpp:603
+msgid ""
+"Only one file can be submitted to AcoustId at a time. Please select only one "
+"file and try again."
+msgstr ""
+"U kunt slechts één bestand tegelijk naar AcoustId versturen. Kies een bestand "
+"en probeer het opnieuw."
+
+#: src/ui/views/mainwindow.cpp:609
+msgid "Checking AcoustId user api key..."
+msgstr "Bezig met controleren van api-sleutel…"
+
+#: src/ui/views/mainwindow.cpp:613
+msgid "Invalid User API Key"
+msgstr "Ongeldige api-sleutel"
+
+#: src/ui/views/mainwindow.cpp:613
+msgid ""
+"The AcoustId User API Key is invalid.\n"
+"Please provide a valid api key in Preferences."
+msgstr ""
+"De AcoustId-api-sleutel is ongeldig. Voer een geldige sleutel in in de "
+"voorkeuren."
+
+#: src/ui/views/mainwindow.cpp:618
+msgid ""
+"AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id "
+"for easy identification.\n"
+"\n"
+"If you have a MusicBrainz Recording Id for this song, please provide it "
+"below.\n"
+"\n"
+"If no id is provided, Tagger will submit your tag's metadata in association "
+"with the fingerprint instead."
+msgstr ""
+"AcoustId kan de controlesom van nummers koppelen aan een MusicBrainz-opname-"
+"id, zodat identificatie eenvoudiger wordt.\n"
+"\n"
+"Als de MusicBrainz-opname-id van dit nummer heeft, voer deze dan hieronder "
+"in.\n"
+"\n"
+"Als u geen id opgeeft, zal Tagger de metagegevens op basis van de controlesom "
+"versturen."
+
+#: src/ui/views/mainwindow.cpp:618
+msgid "MusicBrainz Recording Id"
+msgstr "MusicBrainz-opname-id"
+
+#: src/ui/views/mainwindow.cpp:620
+msgid "Submitting metadata to AcoustId..."
+msgstr "Bezig met versturen naar AcoustId…"
+
+#: src/ui/views/mainwindow.cpp:659
+msgid "Advanced Search"
+msgstr "Geavanceerd zoeken"
+
+#: src/ui/views/mainwindow.cpp:659
+msgid ""
+"Advanced Search is a powerful feature provided by Tagger that allows users to "
+"search files' tag contents for certain values, using a powerful tag syntax:\n"
+"\n"
+"    !prop1=\"value1\";prop2=\"value2\"\n"
+"    Where prop1, prop2 are valid tag properties and value1, value2 are the "
+"values to search wrapped in quotes.\n"
+"    Each property is separated by a comma. Notice how the last property does "
+"not end in a comma.\n"
+"\n"
+"    Valid Properties:\n"
+"    - filename\n"
+"    - title\n"
+"    - artist\n"
+"    - album\n"
+"    - year\n"
+"    - track\n"
+"    - albumartist\n"
+"    - genre\n"
+"    - comment\n"
+"\n"
+"    Syntax Checking:\n"
+"    - If the syntax of your string is valid, the textbox will turn green and "
+"will filter the listbox with your search\n"
+"    - If the syntax of your string is invalid, the textbox will turn red and "
+"will not filter the listbox\n"
+"\n"
+"    Examples:\n"
+"    !artist=\"\"\n"
+"    This search string will filter the listbox to contain music files who's "
+"artist is empty\n"
+"\n"
+"    !genre=\"\";year=\"2022\"\n"
+"    This search string will filter the listbox to contain music files who's "
+"genre is empty and who's year is 2022\n"
+"    (Year and Track properties will validate if the value string is a "
+"number).\n"
+"\n"
+"    !title=\"\";artist=\"bob\"\n"
+"    This search string will filter the listbox to contain music files who's "
+"title is empty and who's artist is bob\n"
+"\n"
+"    * Advanced Search is case insensitive *"
+msgstr ""
+"Met geavanceerd zoeken kunt u de taginhoud doorzoeken om te filteren op "
+"bepaalde waarden. Hieronder vindt u een lijst met de syntaxis die u kunt "
+"gebruiken:\n"
+"\n"
+"    !eigenschap1=\"waarde1\";eigenschap2=\"waarde2\"\n"
+"    eigenschap1 en eigenschap2 zijn tageigenschappen; waarde1 en waarde2     "
+"zijn de waarden waarnaar gezocht moet worden.\n"
+"    Scheid items met komma's en plaats geen komma aan het einde van de "
+"syntaxis.\n"
+"\n"
+"    Geldige eigenschappen:\n"
+"    - filename\n"
+"    - title\n"
+"    - artist\n"
+"    - album\n"
+"    - year\n"
+"    - track\n"
+"    - albumartist\n"
+"    - genre\n"
+"    - comment\n"
+"\n"
+"    Syntaxiscontrole:\n"
+"    - Als de syntaxis van uw opdracht geldig is, dan kleurt het tekstvak "
+"groen en wordt de lijst gefilterd op basis van uw zoekopdracht;\n"
+"    - Als de syntaxis van uw opdracht ongeldig is, dan kleurt het tekstvak "
+"rood en wordt de lijst niet gefilterd.\n"
+"\n"
+"    Voorbeelden:\n"
+"    !artist=\"\"\n"
+"    Met deze opdracht kunt u filteren op muziekbestanden zonder artiesttag;\n"
+"\n"
+"    !genre=\"\";year=\"2022\"\n"
+"    Met deze opdracht kunt u filteren op muziekbestanden zonder genre uit het "
+"jaar 2022;\n"
+"    (‘Year’ en ‘Track’ controleren of de waarde een getal is.)\n"
+"\n"
+"    !title=\"\";artist=\"bob\"\n"
+"    Met deze opdracht kunt u filteren op muziekbestanden zonder titeltag van "
+"de artiest genaamd ‘bob’.\n"
+"\n"
+"    * Zoekopdrachten zijn niet hoofdlettergevoelig. *"
+
+#: src/ui/views/preferencesdialog.cpp:20
+msgid "User Interface"
+msgstr "Vormgeving"
+
+#: src/ui/views/preferencesdialog.cpp:21
+msgid "Customize the application's user interface."
+msgstr "Zet de vormgeving van de toepassing naar eigen hand."
+
+#: src/ui/views/preferencesdialog.cpp:24
+msgid "Theme"
+msgstr "Thema"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "System"
+msgstr "Systeemthema"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "Light"
+msgstr "Licht thema"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "Dark"
+msgstr "Donker thema"
+
+#: src/ui/views/preferencesdialog.cpp:30 src/ui/views/shortcutsdialog.cpp:131
+msgid "Music Folder"
+msgstr "Muziekmap"
+
+#: src/ui/views/preferencesdialog.cpp:31
+msgid "Customize music folder settings."
+msgstr "Pas de muziekmapvoorkeuren aan."
+
+#: src/ui/views/preferencesdialog.cpp:36
+msgid "Include Subfolders"
+msgstr "Ook onderliggende mappen doorzoeken"
+
+#: src/ui/views/preferencesdialog.cpp:37
+msgid ""
+"If checked, subfolders will be included when scanning for music files in a "
+"music folder."
+msgstr ""
+"Schakel in om onderliggende mappen te doorzoeken tijdens het het doorzoeken "
+"van de muziekmap."
+
+#: src/ui/views/preferencesdialog.cpp:45
+msgid "Remember Last Opened Folder"
+msgstr "Vorige map heropenen na opstarten"
+
+#: src/ui/views/preferencesdialog.cpp:46
+msgid ""
+"If checked, the last opened music folder will be remembered and opened again "
+"when Tagger starts."
+msgstr ""
+"Schakel in om de vorige muziekmap te heropenen als Tagger wordt afgesloten en "
+"weer wordt gestart."
+
+#: src/ui/views/preferencesdialog.cpp:52
+msgid "Music File"
+msgstr "Muziekbestand"
+
+#: src/ui/views/preferencesdialog.cpp:53
+msgid "Customize music file settings."
+msgstr "Pas de muziekbestandvoorkeuren aan."
+
+#: src/ui/views/preferencesdialog.cpp:58
+msgid "Preserve Modification Time Stamp"
+msgstr "Bewerktijdstip niet aanpassen"
+
+#: src/ui/views/preferencesdialog.cpp:59
+msgid ""
+"If checked, a music file's modification time stamp will not be updated when "
+"the tag is edited."
+msgstr ""
+"Schakel in om het bewerktijdstip van een muziekbestand niet bij te werken na "
+"het aanpassen van de bijbehorende tag."
+
+#: src/ui/views/preferencesdialog.cpp:67
+msgid "Overwrite Tag With MusicBrainz"
+msgstr "Tageigenschappen vervangen door die van MusicBrainz"
+
+#: src/ui/views/preferencesdialog.cpp:68
+msgid ""
+"If checked, a tag's properties will be overwritten with the metadata "
+"downloaded from MusicBrainz. Else, Tagger will fill-in only empty tag "
+"properties with MusicBrainz metadata."
+msgstr ""
+"Schakel in om de tageigenschappen te vervangen door die van MusicBrainz. "
+"Schakel uit om alleen blanco eigenschappen te vervangen door die van "
+"MusicBrainz."
+
+#: src/ui/views/preferencesdialog.cpp:74
+msgid "Fingerprinting"
+msgstr "Controlesommen"
+
+#: src/ui/views/preferencesdialog.cpp:75
+msgid "Customize fingerprinting settings."
+msgstr "Pas de controlesomvoorkeuren aan."
+
+#: src/ui/views/preferencesdialog.cpp:81
+msgid "Get New API Key"
+msgstr "Api-sleutel ophalen"
+
+#: src/ui/views/preferencesdialog.cpp:84
+msgid "AcoustId User API Key"
+msgstr "AcoustId-api-sleutel"
+
+#: src/ui/views/shortcutsdialog.cpp:133
+msgid "Reload Music Folder"
+msgstr "Muziekmap herladen"
+
+#: src/ui/views/shortcutsdialog.cpp:135
+msgid "Apply Changes"
+msgstr "Wijzigingen toepassen"
+
+#: src/ui/views/shortcutsdialog.cpp:136
+msgid "Delete Tag"
+msgstr "Tag verwijderen"
+
+#: src/ui/views/shortcutsdialog.cpp:145
+msgid "Application"
+msgstr "Toepassing"
+
+#: src/ui/views/shortcutsdialog.cpp:148
+msgid "About"
+msgstr "Over"
