@@ -7,6 +7,7 @@
 #include "shortcutsdialog.hpp"
 #include "../controls/comboboxdialog.hpp"
 #include "../controls/entrydialog.hpp"
+#include "../controls/longmessagedialog.hpp"
 #include "../controls/messagedialog.hpp"
 #include "../controls/progressdialog.hpp"
 #include "../../helpers/mediahelpers.hpp"
@@ -655,7 +656,7 @@ void MainWindow::onAbout()
 
 void MainWindow::onAdvancedSearchInfo()
 {
-    MessageDialog messageDialog{ GTK_WINDOW(m_gobj), _("Advanced Search"), _(R"(Advanced Search is a powerful feature provided by Tagger that allows users to search files' tag contents for certain values, using a powerful tag syntax:
+    LongMessageDialog messageDialog{ GTK_WINDOW(m_gobj), _("Advanced Search"), _(R"(Advanced Search is a powerful feature provided by Tagger that allows users to search files' tag contents for certain values, using a powerful tag syntax:
 
     !prop1="value1";prop2="value2"
     Where prop1, prop2 are valid tag properties and value1, value2 are the values to search wrapped in quotes.
@@ -688,7 +689,7 @@ void MainWindow::onAdvancedSearchInfo()
     This search string will filter the listbox to contain music files who's title is empty and who's artist is bob
 
     * Advanced Search is case insensitive *)"), _("OK") };
-    gtk_widget_set_size_request(messageDialog.gobj(), 600, -1);
+    gtk_widget_set_size_request(messageDialog.gobj(), 700, -1);
     messageDialog.run();
 }
 
