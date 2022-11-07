@@ -15,7 +15,7 @@ Application::Application(const std::string& id, GApplicationFlags flags) : m_adw
     m_appInfo.setShortName("Tagger");
     m_appInfo.setDescription(_("An easy-to-use music tag (metadata) editor."));
     m_appInfo.setVersion("2022.11.0-beta1");
-    m_appInfo.setChangelog("<ul><li>Added translation support</li><li>Added French translation (Thanks @zothma!)</li></ul>");
+    m_appInfo.setChangelog("<ul><li>Added translation support</li><li>Added French translation (Thanks @zothma!)</li><li>Added Russian translation (Thanks @fsobolev!)</li></ul>");
     m_appInfo.setGitHubRepo("https://github.com/nlogozzo/NickvisionTagger");
     m_appInfo.setIssueTracker("https://github.com/nlogozzo/NickvisionTagger/issues/new");
     m_appInfo.setSupportUrl("https://github.com/nlogozzo/NickvisionTagger/discussions");
