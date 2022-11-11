@@ -50,7 +50,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_window_set_default_size(GTK_WINDOW(m_gobj), 900, 700);
     if(m_controller.getIsDevVersion())
     {
-        gtk_style_context_add_class(gtk_widget_get_style_context(m_gobj), "devel");
+        gtk_widget_add_css_class(m_gobj, "devel");
     }
     g_signal_connect(m_gobj, "close_request", G_CALLBACK((bool (*)(GtkWindow*, gpointer))[](GtkWindow*, gpointer data) -> bool { return reinterpret_cast<MainWindow*>(data)->onCloseRequest(); }), this);
     //Header Bar
@@ -86,7 +86,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     g_object_unref(menuHelp);
     //Header End Separator
     m_sepHeaderEnd = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_sepHeaderEnd), "spacer");
+    gtk_widget_add_css_class(m_sepHeaderEnd, "spacer");
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_sepHeaderEnd);
     //Apply Button
     m_btnApply = gtk_button_new();
@@ -94,7 +94,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_tooltip_text(m_btnApply, _("Apply Changes To Tag (Ctrl+S)"));
     gtk_widget_set_visible(m_btnApply, false);
     gtk_actionable_set_action_name(GTK_ACTIONABLE(m_btnApply), "win.apply");
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnApply), "suggested-action");
+    gtk_widget_add_css_class(m_btnApply, "suggested-action");
     adw_header_bar_pack_end(ADW_HEADER_BAR(m_headerBar), m_btnApply);
     //Menu Tag Actions Button
     m_btnMenuTagActions = gtk_menu_button_new();
@@ -161,7 +161,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_box_append(GTK_BOX(m_boxSearch), m_btnAdvancedSearchInfo);
     //List Music Files
     m_listMusicFiles = gtk_list_box_new();
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_listMusicFiles), "boxed-list");
+    gtk_widget_add_css_class(m_listMusicFiles, "boxed-list");
     gtk_list_box_set_selection_mode(GTK_LIST_BOX(m_listMusicFiles), GTK_SELECTION_MULTIPLE);
     gtk_list_box_set_activate_on_single_click(GTK_LIST_BOX(m_listMusicFiles), false);
     g_signal_connect(m_listMusicFiles, "selected-rows-changed", G_CALLBACK((void (*)(GtkListBox*, gpointer))[](GtkListBox*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onListMusicFilesSelectionChanged(); }), this);
@@ -197,16 +197,16 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     gtk_widget_set_size_request(m_stackAlbumArt, 280, 280);
     //No Album Art
     m_btnNoAlbumArt = gtk_button_new();
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnNoAlbumArt), "card");
+    gtk_widget_add_css_class(m_btnNoAlbumArt, "card");
     g_signal_connect(m_btnNoAlbumArt, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
     m_statusNoAlbumArt = adw_status_page_new();
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_statusNoAlbumArt), "compact");
+    gtk_widget_add_css_class(m_statusNoAlbumArt, "compact");
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_statusNoAlbumArt), "image-missing-symbolic");
     gtk_button_set_child(GTK_BUTTON(m_btnNoAlbumArt), m_statusNoAlbumArt);
     adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_btnNoAlbumArt, "noImage");
     //Album Art
     m_btnAlbumArt = gtk_button_new();
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnAlbumArt), "card");
+    gtk_widget_add_css_class(m_btnAlbumArt, "card");
     g_signal_connect(m_btnAlbumArt, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
     m_frmAlbumArt = gtk_frame_new(nullptr);
     m_imgAlbumArt = gtk_image_new();
@@ -216,10 +216,10 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     //Keep Album Art
     m_btnKeepAlbumArt = gtk_button_new();
     gtk_widget_set_tooltip_text(m_btnKeepAlbumArt, _("Selected files have different album art images."));
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_btnKeepAlbumArt), "card");
+    gtk_widget_add_css_class(m_btnKeepAlbumArt, "card");
     g_signal_connect(m_btnKeepAlbumArt, "clicked", G_CALLBACK((void (*)(GtkButton*, gpointer))[](GtkButton*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
     m_statusKeepAlbumArt = adw_status_page_new();
-    gtk_style_context_add_class(gtk_widget_get_style_context(m_statusKeepAlbumArt), "compact");
+    gtk_widget_add_css_class(m_statusKeepAlbumArt, "compact");
     adw_status_page_set_icon_name(ADW_STATUS_PAGE(m_statusKeepAlbumArt), "folder-music-symbolic");
     gtk_button_set_child(GTK_BUTTON(m_btnKeepAlbumArt), m_statusKeepAlbumArt);
     adw_view_stack_add_named(ADW_VIEW_STACK(m_stackAlbumArt), m_btnKeepAlbumArt, "keepImage");
