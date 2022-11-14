@@ -55,7 +55,7 @@ void MusicFile::loadFromDisk()
         }
         m_duration = file.audioProperties()->lengthInSeconds();
     }
-    else if(m_dotExtension == ".m4a")
+    else if(m_dotExtension == ".m4a" || m_dotExtension == ".m4b")
     {
         TagLib::MP4::File file{ m_path.c_str() };
         m_title = file.tag()->title().to8Bit(true);
@@ -463,7 +463,7 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
         }
         file.save(TagLib::MPEG::File::TagTypes::ID3v2);
     }
-    else if (m_dotExtension == ".m4a")
+    else if (m_dotExtension == ".m4a" || m_dotExtension == ".m4b")
     {
         TagLib::MP4::File file{ m_path.c_str() };
         file.tag()->setTitle({ m_title, TagLib::String::Type::UTF8 });

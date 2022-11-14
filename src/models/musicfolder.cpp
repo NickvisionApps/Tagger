@@ -38,7 +38,7 @@ void MusicFolder::reloadMusicFiles()
     m_files.clear();
     if (std::filesystem::exists(m_parentPath))
     {
-        std::vector<std::string> supportedDotFileExtensions{ ".mp3", ".m4a", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav" };
+        std::vector<std::string> supportedDotFileExtensions{ ".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav" };
         if (m_includeSubfolders)
         {
             for (const std::filesystem::path& path : std::filesystem::recursive_directory_iterator(m_parentPath, std::filesystem::directory_options::skip_permission_denied))
