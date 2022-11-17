@@ -1,0 +1,592 @@
+# Croatian translation for Tagger
+# Copyright (C) 2022
+# This file is distributed under the same license as the org.nickvision.tagger package.
+# Milo Ivir <mail@milotype.de>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: org.nickvision.tagger\n"
+"Report-Msgid-Bugs-To: https://github.com/nlogozzo/NickvisionTagger/issues\n"
+"POT-Creation-Date: 2022-11-06 21:29+0100\n"
+"PO-Revision-Date: 2022-11-17 15:03+0100\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n"
+"%100<12 || n%100>14) ? 1 : 2);\n"
+"Language-Team: \n"
+"X-Generator: Poedit 3.0\n"
+
+#: src/controllers/mainwindowcontroller.cpp:209
+msgid "Tags saved successfully."
+msgstr "Oznake su uspješno spremljene."
+
+#: src/controllers/mainwindowcontroller.cpp:265
+#, c-format
+msgid "Converted %d filenames to tags successfully"
+msgstr "Broj uspješno pretvorenih imena datoteka u oznake: %d"
+
+#: src/controllers/mainwindowcontroller.cpp:280
+#, c-format
+msgid "Converted %d tags to filenames successfully"
+msgstr "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
+
+#: src/controllers/mainwindowcontroller.cpp:333
+#, c-format
+msgid "Downloaded metadata for %d files successfully"
+msgstr "Broj uspješno preuzetih metapodataka za datoteke: %d"
+
+#: src/controllers/mainwindowcontroller.cpp:346
+msgid "Submitted metadata to AcoustId successfully."
+msgstr "Metapodaci su uspješno poslani AcoustId-u."
+
+#: src/controllers/mainwindowcontroller.cpp:346
+msgid "Unable to submit metadata to AcoustId."
+msgstr "Nije moguće poslati metapodatke AcoustId-u."
+
+#: src/helpers/mediahelpers.cpp:37
+msgid "B"
+msgstr "B"
+
+#: src/helpers/mediahelpers.cpp:37
+msgid "KB"
+msgstr "KB"
+
+#: src/helpers/mediahelpers.cpp:37
+msgid "MB"
+msgstr "MB"
+
+#: src/helpers/mediahelpers.cpp:37
+msgid "GB"
+msgstr "GB"
+
+#: src/helpers/mediahelpers.cpp:37
+msgid "TB"
+msgstr "TB"
+
+#: src/ui/application.cpp:16
+msgid "An easy-to-use music tag (metadata) editor."
+msgstr "Jednostavan uređivač oznaka (metapodataka) glazbe."
+
+#: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
+#: src/ui/views/mainwindow.cpp:412 src/ui/views/mainwindow.cpp:488
+msgid "Cancel"
+msgstr "Odustani"
+
+#: src/ui/controls/comboboxdialog.cpp:10 src/ui/controls/entrydialog.cpp:10
+#: src/ui/views/mainwindow.cpp:602 src/ui/views/mainwindow.cpp:612
+#: src/ui/views/mainwindow.cpp:690
+msgid "OK"
+msgstr "U redu"
+
+#: src/ui/views/mainwindow.cpp:63
+msgid "Open"
+msgstr "Otvori"
+
+#: src/ui/views/mainwindow.cpp:65
+msgid "Open Music Folder (Ctrl+O)"
+msgstr "Otvori mapu glazbe (Ctrl+O)"
+
+#: src/ui/views/mainwindow.cpp:71
+msgid "Reload Music Folder (F5)"
+msgstr "Ponovo učitaj mapu glazbe (F5)"
+
+#: src/ui/views/mainwindow.cpp:78 src/ui/views/preferencesdialog.cpp:17
+#: src/ui/views/shortcutsdialog.cpp:146
+msgid "Preferences"
+msgstr "Postavke"
+
+#: src/ui/views/mainwindow.cpp:79 src/ui/views/shortcutsdialog.cpp:147
+msgid "Keyboard Shortcuts"
+msgstr "Tipkovni prečaci"
+
+#: src/ui/views/mainwindow.cpp:80
+#, c-format
+msgid "About %s"
+msgstr "Informacije o %s"
+
+#: src/ui/views/mainwindow.cpp:83
+msgid "Main Menu"
+msgstr "Glavni izbornik"
+
+#: src/ui/views/mainwindow.cpp:92 src/ui/views/mainwindow.cpp:412
+#: src/ui/views/mainwindow.cpp:488
+msgid "Apply"
+msgstr "Primijeni"
+
+#: src/ui/views/mainwindow.cpp:93
+msgid "Apply Changes To Tag (Ctrl+S)"
+msgstr "Primijeni promjene na oznaku (Ctrl+S)"
+
+#: src/ui/views/mainwindow.cpp:103 src/ui/views/mainwindow.cpp:528
+#: src/ui/views/shortcutsdialog.cpp:138
+msgid "Insert Album Art"
+msgstr "Umetni sliku albuma"
+
+#: src/ui/views/mainwindow.cpp:104 src/ui/views/shortcutsdialog.cpp:139
+msgid "Remove Album Art"
+msgstr "Ukloni sliku albuma"
+
+#: src/ui/views/mainwindow.cpp:105 src/ui/views/shortcutsdialog.cpp:140
+msgid "Convert Filename to Tag"
+msgstr "Pretvori ime datoteke u oznaku"
+
+#: src/ui/views/mainwindow.cpp:106 src/ui/views/shortcutsdialog.cpp:141
+msgid "Convert Tag to Filename"
+msgstr "Pretvori oznaku u ime datoteke"
+
+#: src/ui/views/mainwindow.cpp:107 src/ui/views/shortcutsdialog.cpp:137
+msgid "Discard Unapplied Changes"
+msgstr "Odbaci neprimjenjene promjene"
+
+#: src/ui/views/mainwindow.cpp:108
+msgid "Delete Tags"
+msgstr "Izbriši oznake"
+
+#: src/ui/views/mainwindow.cpp:114 src/ui/views/shortcutsdialog.cpp:134
+msgid "Tag Actions"
+msgstr "Radnje oznaka"
+
+#: src/ui/views/mainwindow.cpp:123 src/ui/views/shortcutsdialog.cpp:143
+msgid "Download MusicBrainz Metadata"
+msgstr "Preuzmi MusicBrainz metapodatke"
+
+#: src/ui/views/mainwindow.cpp:124 src/ui/views/mainwindow.cpp:617
+#: src/ui/views/shortcutsdialog.cpp:144
+msgid "Submit to AcoustId"
+msgstr "Pošalji AcoustId-u"
+
+#: src/ui/views/mainwindow.cpp:127 src/ui/views/shortcutsdialog.cpp:142
+msgid "Web Services"
+msgstr "Web usluge"
+
+#: src/ui/views/mainwindow.cpp:138
+msgid "No Music Files Found"
+msgstr "Nijedna glazbena datoteka nije pronađena"
+
+#: src/ui/views/mainwindow.cpp:139
+msgid ""
+"Open a folder (or drag one into the app) with music files inside to get started."
+msgstr "Otvori mapu s glazbenim datotekama (ili povuci jednu mapu u aplikaciju)."
+
+#: src/ui/views/mainwindow.cpp:150
+msgid "Search for filename (type ! to activate advanced search)..."
+msgstr "Traži ime datoteke (utipkaj ! za aktiviranje napredne pretrage) …"
+
+#: src/ui/views/mainwindow.cpp:157
+msgid "Advanced Search Info"
+msgstr "Informacije napredne pretrage"
+
+#: src/ui/views/mainwindow.cpp:217
+msgid "Selected files have different album art images."
+msgstr "Odabrane datoteke imaju različite slike albuma."
+
+#: src/ui/views/mainwindow.cpp:229
+msgid "Filename"
+msgstr "Ime datoteke"
+
+#: src/ui/views/mainwindow.cpp:234
+msgid "Title"
+msgstr "Naslov"
+
+#: src/ui/views/mainwindow.cpp:239
+msgid "Artist"
+msgstr "Izvođač"
+
+#: src/ui/views/mainwindow.cpp:244
+msgid "Album"
+msgstr "Album"
+
+#: src/ui/views/mainwindow.cpp:249
+msgid "Year"
+msgstr "Godina"
+
+#: src/ui/views/mainwindow.cpp:254
+msgid "Track"
+msgstr "Pjesma"
+
+#: src/ui/views/mainwindow.cpp:259
+msgid "Album Artist"
+msgstr "Izvođač albuma"
+
+#: src/ui/views/mainwindow.cpp:264
+msgid "Genre"
+msgstr "Žanr"
+
+#: src/ui/views/mainwindow.cpp:269
+msgid "Comment"
+msgstr "Komentar"
+
+#: src/ui/views/mainwindow.cpp:274
+msgid "Duration"
+msgstr "Trajanje"
+
+#: src/ui/views/mainwindow.cpp:280
+msgid "Fingerprint"
+msgstr "Digitalni otisak"
+
+#: src/ui/views/mainwindow.cpp:285
+msgid "File Size"
+msgstr "Veličina datoteke"
+
+#: src/ui/views/mainwindow.cpp:287
+msgid "0 MB"
+msgstr "0 MB"
+
+#: src/ui/views/mainwindow.cpp:412 src/ui/views/mainwindow.cpp:488
+msgid "Apply Changes?"
+msgstr "Primijeniti promjene?"
+
+#: src/ui/views/mainwindow.cpp:412 src/ui/views/mainwindow.cpp:488
+msgid ""
+"Some music files still have changes waiting to be applied. Would you like to apply "
+"those changes to the file or discard them?"
+msgstr ""
+"Neke glazbene datoteke još uvijek imaju promjene koje čekaju da se primijene. Želiš "
+"li primijeniti te promjene na datoteku ili ih odbaciti?"
+
+#: src/ui/views/mainwindow.cpp:412 src/ui/views/mainwindow.cpp:488
+msgid "Discard"
+msgstr "Odbaci"
+
+#: src/ui/views/mainwindow.cpp:438
+msgid "Loading music files..."
+msgstr "Učitavanje glazbenih datoteka …"
+
+#: src/ui/views/mainwindow.cpp:452
+#, c-format
+msgid "Loaded %d music files."
+msgstr "Učitane glazbene datoteke: %d."
+
+#: src/ui/views/mainwindow.cpp:468 src/ui/views/shortcutsdialog.cpp:132
+msgid "Open Music Folder"
+msgstr "Otvori mapu glazbe"
+
+#: src/ui/views/mainwindow.cpp:468 src/ui/views/mainwindow.cpp:528
+msgid "_Open"
+msgstr "_Otvori"
+
+#: src/ui/views/mainwindow.cpp:468 src/ui/views/mainwindow.cpp:528
+msgid "_Cancel"
+msgstr "Odu_stani"
+
+#: src/ui/views/mainwindow.cpp:507
+msgid "Saving tags..."
+msgstr "Spremanje oznaka …"
+
+#: src/ui/views/mainwindow.cpp:514
+msgid "Discarding unapplied changes..."
+msgstr "Odbacivanje neprimjenjenih promjena …"
+
+#: src/ui/views/mainwindow.cpp:521
+msgid "Deleting tags..."
+msgstr "Brisanje oznaka …"
+
+#: src/ui/views/mainwindow.cpp:541
+msgid "Inserting album art..."
+msgstr "Umetanje slike albuma …"
+
+#: src/ui/views/mainwindow.cpp:553
+msgid "Removing album art..."
+msgstr "Uklanjanje slike albuma …"
+
+#: src/ui/views/mainwindow.cpp:560
+msgid "Filename to Tag"
+msgstr "Ime datoteke u oznaku"
+
+#: src/ui/views/mainwindow.cpp:560 src/ui/views/mainwindow.cpp:572
+msgid "Please select a format string."
+msgstr "Odaberi jedan znakovni niz formata."
+
+#: src/ui/views/mainwindow.cpp:560 src/ui/views/mainwindow.cpp:572
+msgid "Format String"
+msgstr "Znakovni niz formata"
+
+#: src/ui/views/mainwindow.cpp:564
+msgid "Converting filenames to tags..."
+msgstr "Pretvaranje imena datoteka u oznake …"
+
+#: src/ui/views/mainwindow.cpp:572
+msgid "Tag to Filename"
+msgstr "Oznaka u ime datoteke"
+
+#: src/ui/views/mainwindow.cpp:576
+msgid "Converting tags to filenames..."
+msgstr "Pretvaranje oznaka u imena datoteka …"
+
+#: src/ui/views/mainwindow.cpp:592
+msgid ""
+"Downloading MusicBrainz metadata...\n"
+"<small>(This may take a while)</small>"
+msgstr ""
+"Preuzimanje MusicBrainz metapodataka …\n"
+"<small>(ovo može potrajati)</small>"
+
+#: src/ui/views/mainwindow.cpp:602
+msgid "Too Many Files Selected"
+msgstr "Odabrano je previše datoteka"
+
+#: src/ui/views/mainwindow.cpp:602
+msgid ""
+"Only one file can be submitted to AcoustId at a time. Please select only one file "
+"and try again."
+msgstr ""
+"AcoustId-u se može poslati samo jedna datoteka po slanju. Odaberi samo jednu "
+"datoteku i pokušaj ponovo."
+
+#: src/ui/views/mainwindow.cpp:608
+msgid "Checking AcoustId user api key..."
+msgstr "Provjeravanje API ključa AcoustId korisnika …"
+
+#: src/ui/views/mainwindow.cpp:612
+msgid "Invalid User API Key"
+msgstr "Neispravan API ključ korisnika"
+
+#: src/ui/views/mainwindow.cpp:612
+msgid ""
+"The AcoustId User API Key is invalid.\n"
+"Please provide a valid api key in Preferences."
+msgstr ""
+"API ključ AcoustId korisnika nije ispravan.\n"
+"Navedi ispravan API ključ u postavkama."
+
+#: src/ui/views/mainwindow.cpp:617
+msgid ""
+"AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id for easy "
+"identification.\n"
+"\n"
+"If you have a MusicBrainz Recording Id for this song, please provide it below.\n"
+"\n"
+"If no id is provided, Tagger will submit your tag's metadata in association with the "
+"fingerprint instead."
+msgstr ""
+"AcoustId može povezati digitalni otisak pjesme s glazbenom ID oznakom MusicBrainz "
+"snimke za jednostavnu identifikaciju.\n"
+"\n"
+"Ako za ovu pjesmu imaš glazbenu ID oznaku MusicBrainz snimke. Navedi je u nastavku.\n"
+"\n"
+"Ako se ne navede, Tagger će umjesto toga poslati metapodatke tvoje oznake u suradnji "
+"s digitalnim otiskom."
+
+#: src/ui/views/mainwindow.cpp:617
+msgid "MusicBrainz Recording Id"
+msgstr "ID oznaka MusicBrainz snimke"
+
+#: src/ui/views/mainwindow.cpp:619
+msgid "Submitting metadata to AcoustId..."
+msgstr "Slanje metapodatka AcoustId-u …"
+
+#: src/ui/views/mainwindow.cpp:658
+msgid "Advanced Search"
+msgstr "Napredna pretraga"
+
+#: src/ui/views/mainwindow.cpp:658
+msgid ""
+"Advanced Search is a powerful feature provided by Tagger that allows users to search "
+"files' tag contents for certain values, using a powerful tag syntax:\n"
+"\n"
+"    !prop1=\"value1\";prop2=\"value2\"\n"
+"    Where prop1, prop2 are valid tag properties and value1, value2 are the values to "
+"search wrapped in quotes.\n"
+"    Each property is separated by a comma. Notice how the last property does not end "
+"in a comma.\n"
+"\n"
+"    Valid Properties:\n"
+"    - filename\n"
+"    - title\n"
+"    - artist\n"
+"    - album\n"
+"    - year\n"
+"    - track\n"
+"    - albumartist\n"
+"    - genre\n"
+"    - comment\n"
+"\n"
+"    Syntax Checking:\n"
+"    - If the syntax of your string is valid, the textbox will turn green and will "
+"filter the listbox with your search\n"
+"    - If the syntax of your string is invalid, the textbox will turn red and will "
+"not filter the listbox\n"
+"\n"
+"    Examples:\n"
+"    !artist=\"\"\n"
+"    This search string will filter the listbox to contain music files who's artist "
+"is empty\n"
+"\n"
+"    !genre=\"\";year=\"2022\"\n"
+"    This search string will filter the listbox to contain music files who's genre is "
+"empty and who's year is 2022\n"
+"    (Year and Track properties will validate if the value string is a number).\n"
+"\n"
+"    !title=\"\";artist=\"bob\"\n"
+"    This search string will filter the listbox to contain music files who's title is "
+"empty and who's artist is bob\n"
+"\n"
+"    * Advanced Search is case insensitive *"
+msgstr ""
+"Napredna pretraga je moćna Tagger funkcija koja korisnicima omogućuje pretraživanje "
+"sadržaja oznaka datoteka za određene vrijednosti, koristeći moćnu sintaksu oznaka:\n"
+"\n"
+"    !prop1=\"value1\";prop2=\"value2\"\n"
+"    Gdje su prop1, prop2 valjana svojstva oznaka, a value1 (vrijednost1), value2 "
+"(vrijednost2) tražene vrijednosti pod navodnicima.\n"
+"    Svako svojstvo je odvojeno zarezom. Zadnje svojsto ne završava sa zarezom.\n"
+"\n"
+"    Valjana svojstva:\n"
+"    - filename (ime datoteke)\n"
+"    - title (naslov)\n"
+"    - artist (izvođač)\n"
+"    - album\n"
+"    - year (godina)\n"
+"    - track (pjesma)\n"
+"    - albumartist (izvođač albuma)\n"
+"    - genre (žanr)\n"
+"    - comment (komentar)\n"
+"\n"
+"    Provjera sintakse:\n"
+"    - Ako je sintaksa ispravna, tekstualno polje će se označiti zelenom bojom i "
+"filtrirat će polje popisa s tvojom pretragom\n"
+"    - Ako je sintaksa neispravna, tekstualno polje će se označiti crvenom bojom i "
+"neće filtrirat polje popisa\n"
+"\n"
+"    Primjeri:\n"
+"    !artist=\"\"\n"
+"    Pronalazi glazbene datoteke u kojima izvođač nije naveden\n"
+"\n"
+"    !genre=\"\";year=\"2022\"\n"
+"    Pronalazi glazbene datoteke u kojima žanr nije naveden, a godina je 2022.\n"
+"    (Svojstva „godina” i „pjesma” će proći provjeru ako je njihova vrijednost "
+"broj).\n"
+"\n"
+"    !title=\"\";artist=\"bob\"\n"
+"    Pronalazi glazbene datoteke u kojima naslov nije naveden, a izvođač je Bob\n"
+"\n"
+"    * Napredna pretraga ne razlikuje velika i mala slova *"
+
+#: src/ui/views/preferencesdialog.cpp:20
+msgid "User Interface"
+msgstr "Korisničko sučelje"
+
+#: src/ui/views/preferencesdialog.cpp:21
+msgid "Customize the application's user interface."
+msgstr "Prilagodi korisničko sučelje aplikacije."
+
+#: src/ui/views/preferencesdialog.cpp:24
+msgid "Theme"
+msgstr "Tema"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "System"
+msgstr "Sustav"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "Light"
+msgstr "Svijetla"
+
+#: src/ui/views/preferencesdialog.cpp:25
+msgid "Dark"
+msgstr "Tamna"
+
+#: src/ui/views/preferencesdialog.cpp:30 src/ui/views/shortcutsdialog.cpp:131
+msgid "Music Folder"
+msgstr "Mapa glazbe"
+
+#: src/ui/views/preferencesdialog.cpp:31
+msgid "Customize music folder settings."
+msgstr "Prilagodi postavke mape glazbe."
+
+#: src/ui/views/preferencesdialog.cpp:36
+msgid "Include Subfolders"
+msgstr "Uključi podmape"
+
+#: src/ui/views/preferencesdialog.cpp:37
+msgid ""
+"If checked, subfolders will be included when scanning for music files in a music "
+"folder."
+msgstr ""
+"Ako je označeno, podmape će se uključiti prilikom skeniranja glazbenih datoteka u "
+"mapi glazbe."
+
+#: src/ui/views/preferencesdialog.cpp:45
+msgid "Remember Last Opened Folder"
+msgstr "Zapamti zadnju otvorenu mapu"
+
+#: src/ui/views/preferencesdialog.cpp:46
+msgid ""
+"If checked, the last opened music folder will be remembered and opened again when "
+"Tagger starts."
+msgstr ""
+"Ako je označeno, zadnja otvorena glazbena mapa će se zapamtiti i ponovno otvoriti "
+"kada Tagger započne."
+
+#: src/ui/views/preferencesdialog.cpp:52
+msgid "Music File"
+msgstr "Glazbena datoteka"
+
+#: src/ui/views/preferencesdialog.cpp:53
+msgid "Customize music file settings."
+msgstr "Prilagodi postavke glazbenih datoteka."
+
+#: src/ui/views/preferencesdialog.cpp:58
+msgid "Preserve Modification Time Stamp"
+msgstr "Sačuvaj vremensku oznaku modifikacije"
+
+#: src/ui/views/preferencesdialog.cpp:59
+msgid ""
+"If checked, a music file's modification time stamp will not be updated when the tag "
+"is edited."
+msgstr ""
+"Ako je označeno, vremenska oznaka modifikacije glazbene datoteke neće se "
+"aktualizirati kad se oznaka uredi."
+
+#: src/ui/views/preferencesdialog.cpp:67
+msgid "Overwrite Tag With MusicBrainz"
+msgstr "Prepiši oznaku s MusicBrainz"
+
+#: src/ui/views/preferencesdialog.cpp:68
+msgid ""
+"If checked, a tag's properties will be overwritten with the metadata downloaded from "
+"MusicBrainz. Else, Tagger will fill-in only empty tag properties with MusicBrainz "
+"metadata."
+msgstr ""
+"Ako je označeno, svojstva oznake će se prepisati preuzetim metapodacima "
+"MusicBrainza. U suprotnom, Tagger će ispuniti samo prazna svojstva oznaka "
+"MusicBrainz metapodacima."
+
+#: src/ui/views/preferencesdialog.cpp:74
+msgid "Fingerprinting"
+msgstr "Digitalni otisci"
+
+#: src/ui/views/preferencesdialog.cpp:75
+msgid "Customize fingerprinting settings."
+msgstr "Prilagodi postavke digitalnih otisaka."
+
+#: src/ui/views/preferencesdialog.cpp:81
+msgid "Get New API Key"
+msgstr "Nabavi novi API ključ"
+
+#: src/ui/views/preferencesdialog.cpp:84
+msgid "AcoustId User API Key"
+msgstr "API ključ AcoustId korisnika"
+
+#: src/ui/views/shortcutsdialog.cpp:133
+msgid "Reload Music Folder"
+msgstr "Ponovo učitaj mapu glazbe"
+
+#: src/ui/views/shortcutsdialog.cpp:135
+msgid "Apply Changes"
+msgstr "Primijeni promjene"
+
+#: src/ui/views/shortcutsdialog.cpp:136
+msgid "Delete Tag"
+msgstr "Izbriši oznaku"
+
+#: src/ui/views/shortcutsdialog.cpp:145
+msgid "Application"
+msgstr "Aplikacija"
+
+#: src/ui/views/shortcutsdialog.cpp:148
+msgid "About"
+msgstr "Informacije"
