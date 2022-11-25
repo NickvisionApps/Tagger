@@ -459,6 +459,7 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
             TagLib::ID3v2::AttachedPictureFrame* frameAlbumArt{ new TagLib::ID3v2::AttachedPictureFrame };
             frameAlbumArt->setType(TagLib::ID3v2::AttachedPictureFrame::Type::FrontCover);
             frameAlbumArt->setPicture(m_albumArt);
+            frameAlbumArt->setMimeType("image/jpeg");
             file.ID3v2Tag(true)->addFrame(frameAlbumArt);
         }
         file.save(TagLib::MPEG::File::TagTypes::ID3v2);
@@ -477,7 +478,7 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
         file.tag()->setComment({ m_comment, TagLib::String::Type::UTF8 });
         file.tag()->removeItem("covr");
         TagLib::MP4::CoverArtList coverArtList;
-        coverArtList.append({ TagLib::MP4::CoverArt::Format::Unknown, m_albumArt });
+        coverArtList.append({ TagLib::MP4::CoverArt::Format::JPEG, m_albumArt });
         file.tag()->setItem("covr", { coverArtList });
         file.save();
     }
@@ -500,6 +501,7 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
                 TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
                 picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
                 picture->setData(m_albumArt);
+                picture->setMimeType("image/jpeg");
                 file.tag()->addPicture(picture);
             }
             file.save();
@@ -521,6 +523,7 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
                 TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
                 picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
                 picture->setData(m_albumArt);
+                picture->setMimeType("image/jpeg");
                 file.tag()->addPicture(picture);
             }
             file.save();
@@ -543,6 +546,7 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
             TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
             picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
             picture->setData(m_albumArt);
+            picture->setMimeType("image/jpeg");
             file.tag()->addPicture(picture);
         }
         file.save();
@@ -564,6 +568,7 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
             TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
             picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
             picture->setData(m_albumArt);
+            picture->setMimeType("image/jpeg");
             file.tag()->addPicture(picture);
         }
         file.save();
@@ -585,6 +590,7 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
             TagLib::FLAC::Picture* picture{ new TagLib::FLAC::Picture() };
             picture->setType(TagLib::FLAC::Picture::Type::FrontCover);
             picture->setData(m_albumArt);
+            picture->setMimeType("image/jpeg");
             file.xiphComment(true)->addPicture(picture);
         }
         file.save();
@@ -625,6 +631,7 @@ void MusicFile::saveTag(bool preserveModificationTimeStamp)
             TagLib::ID3v2::AttachedPictureFrame* frameAlbumArt{ new TagLib::ID3v2::AttachedPictureFrame };
             frameAlbumArt->setType(TagLib::ID3v2::AttachedPictureFrame::Type::FrontCover);
             frameAlbumArt->setPicture(m_albumArt);
+            frameAlbumArt->setMimeType("image/jpeg");
             file.ID3v2Tag()->addFrame(frameAlbumArt);
         }
         file.save(TagLib::RIFF::WAV::File::TagTypes::ID3v2);
