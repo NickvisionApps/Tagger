@@ -48,7 +48,7 @@ ShortcutsDialog::ShortcutsDialog(GtkWindow* parent)
                             <child>
                                 <object class="GtkShortcutsShortcut">
                                     <property name="title">%s</property>
-                                    <property name="accelerator">Delete</property>
+                                    <property name="accelerator">&lt;Shift&gt;Delete</property>
                                 </object>
                             </child>
                             <child>

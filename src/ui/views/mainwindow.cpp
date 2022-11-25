@@ -339,7 +339,7 @@ MainWindow::MainWindow(GtkApplication* application, const MainWindowController& 
     m_actDeleteTags = g_simple_action_new("deleteTags", nullptr);
     g_signal_connect(m_actDeleteTags, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onDeleteTags(); }), this);
     g_action_map_add_action(G_ACTION_MAP(m_gobj), G_ACTION(m_actDeleteTags));
-    gtk_application_set_accels_for_action(application, "win.deleteTags", new const char*[2]{ "Delete", nullptr });
+    gtk_application_set_accels_for_action(application, "win.deleteTags", new const char*[2]{ "<Shift>Delete", nullptr });
     //Insert Album Art
     m_actInsertAlbumArt = g_simple_action_new("insertAlbumArt", nullptr);
     g_signal_connect(m_actInsertAlbumArt, "activate", G_CALLBACK((void (*)(GSimpleAction*, GVariant*, gpointer))[](GSimpleAction*, GVariant*, gpointer data) { reinterpret_cast<MainWindow*>(data)->onInsertAlbumArt(); }), this);
