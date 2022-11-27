@@ -1,8 +1,12 @@
 #include "appinfo.hpp"
+#include <algorithm>
+#include <filesystem>
+#include <fstream>
+#include <json/json.h>
 
 using namespace NickvisionTagger::Models;
 
-AppInfo::AppInfo() : m_id{ "" }, m_name{ "" }, m_shortName{ "" }, m_description{ "" }, m_version{ "" }, m_changelog{ "" }, m_gitHubRepo{ "" }, m_issueTracker{ "" }, m_supportUrl{ "" }, m_acoustIdClientAPIKey{ "" }
+AppInfo::AppInfo() : m_id{ "" }, m_name{ "" }, m_shortName{ "" }, m_description{ "" }, m_version{ "" }, m_changelog{ "" }, m_gitHubRepo{ "" }, m_issueTracker{ "" }, m_supportUrl{ "" }, m_acoustIdClientAPIKey{ "" }, m_translatorCredits{ "" }
 {
 
 }
@@ -105,4 +109,69 @@ const std::string& AppInfo::getAcoustIdClientAPIKey() const
 void AppInfo::setAcoustIdClientAPIKey(const std::string& acoustIdClientAPIKey)
 {
 	m_acoustIdClientAPIKey = acoustIdClientAPIKey;
+}
+
+const std::string& AppInfo::getTranslatorCredits() const
+{
+    return m_translatorCredits;
+}
+
+void AppInfo::generateTranslatorCredits()
+{
+    std::string translatorCredits;
+    std::string path;
+    if(std::filesystem::exists("/usr/share/org.nickvision.tagger/CREDITS.json"))
+    {
+        path = "/usr/share/org.nickvision.tagger/CREDITS.json";
+    }
+    else if(std::filesystem::exists("/app/share/org.nickvision.tagger/CREDITS.json"))
+    {
+        path = "/app/share/org.nickvision.tagger/CREDITS.json";
+    }
+    else
+    {
+        path = "CREDITS.json";
+    }
+    std::ifstream creditsFile{ path };
+    if(creditsFile.is_open())
+    {
+        Json::Value json;
+        creditsFile >> json;
+        for(std::string translator : json.getMemberNames())
+        {
+            translatorCredits += translator;
+            if(json[translator]["lang"].isString())
+            {
+                translatorCredits += " (" + json[translator]["lang"].asString() + ")";
+            }
+            else if(json[translator]["lang"].isArray())
+            {
+                translatorCredits += " (";
+                std::vector<std::string> langs;
+                for(Json::Value langJson : json[translator]["lang"])
+                {
+                    langs.push_back(langJson.asString());
+                }
+                std::sort(langs.begin(), langs.end(), std::less<std::string>());
+                for(std::string lang : langs)
+                {
+                    translatorCredits += lang + ", ";
+                }
+                translatorCredits.erase(translatorCredits.size() - 2);
+                translatorCredits += ")";
+            }
+            if(!json[translator]["email"].isNull())
+            {
+                translatorCredits += " <" + json[translator]["email"].asString() + ">";
+            }
+            else if(!json[translator]["url"].isNull())
+            {
+                translatorCredits += " " + json[translator]["url"].asString();
+            }
+            translatorCredits += "\n";
+        }
+        translatorCredits.pop_back();
+    }
+
+    m_translatorCredits = translatorCredits;
 }
