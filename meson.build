@@ -19,5 +19,6 @@ install_data(resources_symbolic, install_dir: 'share/icons/hicolor/symbolic/apps
 install_data(resources_actions, install_dir: 'share/icons/hicolor/scalable/actions')
 install_data('org.nickvision.tagger.desktop', install_dir: 'share/applications')
 install_data('org.nickvision.tagger.metainfo.xml', install_dir: 'share/metainfo')
+install_data('po/CREDITS.json', install_dir: 'share/org.nickvision.tagger')
 
 gnome.post_install(gtk_update_icon_cache: true, update_desktop_database: true)

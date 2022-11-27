@@ -134,6 +134,16 @@ namespace NickvisionTagger::Models
 		 * @param acoustIdClientAPIKey The new AcoustId client key of the application
 		 */
 		void setAcoustIdClientAPIKey(const std::string& acoustIdClientAPIKey);
+		/**
+		 * Gets the list of translators
+		 *
+		 * @returns The list of translators
+		 */
+		const std::string& getTranslatorCredits() const;
+		/**
+		 * Generate the list of translators from po/CREDITS.json file
+		 */
+		void generateTranslatorCredits();
     	
     private:
     	std::string m_id;
@@ -146,5 +156,6 @@ namespace NickvisionTagger::Models
 		std::string m_issueTracker;
 		std::string m_supportUrl;
 		std::string m_acoustIdClientAPIKey;
+		std::string m_translatorCredits;
     };
 }
