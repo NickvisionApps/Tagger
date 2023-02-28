@@ -35,7 +35,7 @@ std::string MediaHelpers::durationToString(int durationInSeconds)
 std::string MediaHelpers::fileSizeToString(std::uintmax_t fileSize)
 {
     std::vector<std::string> sizes{ _("B"), _("KB"), _("MB"), _("GB"), _("TB") };
-    double size{ fileSize };
+    double size{ static_cast<double>(fileSize) };
     int index{ 0 };
     std::stringstream builder;
     while (size >= 1024 && index < 4)
