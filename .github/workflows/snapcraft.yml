@@ -20,12 +20,3 @@ jobs:
         with:
           name: tagger-snap
           path: ${{ steps.snapcraft-build.outputs.snap }}    
-          
-      - uses: diddlesnaps/snapcraft-review-action@v1
-        with:
-          snap: ${{ steps.snapcraft-build.outputs.snap }}
-          isClassic: 'false'
-          # Plugs and Slots declarations to override default denial (requires store assertion to publish)
-          # plugs: ./plug-declaration.json
-          # slots: ./slot-declaration.json
-      
