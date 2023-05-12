@@ -1,0 +1,55 @@
+name: tagger # you probably want to 'snapcraft register <name>'
+base: core22 # the base snap is the execution environment for this snap
+version: '2022.11.2' # just for humans, typically '1.2+git' or '1.3.2'
+icon: src/resources/org.nickvision.tagger.svg
+adopt-info: tagger
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+architectures:
+  - build-on: amd64
+  - build-on: arm64
+  - build-on: armhf
+parts:
+  taglib:
+    plugin: cmake
+    source: https://github.com/taglib/taglib.git
+    source-tag: v1.12
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
+  tagger:
+    after: [taglib]
+    # See 'snapcraft plugins'
+    plugin: meson
+    source: https://github.com/NickvisionApps/Tagger.git
+    source-tag: $SNAPCRAFT_PROJECT_VERSION
+    build-packages:
+      - libjsoncpp-dev
+      - libcurlpp-dev
+    stage-packages:
+      - libjsoncpp25
+      - libcurlpp0
+    meson-parameters:
+      - --prefix=/snap/tagger/current/usr
+      - -Dbuildtype=release
+    build-environment:
+      - CPPLAGS: "-I/$CRAFT_PRIME/usr/include"
+    organize:
+      snap/tagger/current: .
+    parse-info: [usr/share/metainfo/org.nickvision.tagger.metainfo.xml]
+
+
+slots:
+  tagger:
+    interface: dbus
+    bus: session
+    name: org.nickvision.tagger
+    
+apps:
+  tagger:
+    command: usr/bin/org.nickvision.tagger
+    desktop: usr/share/applications/org.nickvision.tagger.desktop
+    common-id: org.nickvision.tagger
+    extensions: [gnome]
+    plugs:
+      - home
+      - removable-media
