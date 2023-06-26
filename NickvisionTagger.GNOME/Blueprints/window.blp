@@ -1,0 +1,86 @@
+using Gtk 4.0;
+using Adw 1;
+
+menu mainMenu {
+  item(_("Preferences"), "win.preferences")
+  item(_("Keyboard Shortcuts"), "win.keyboardShortcuts")
+  item(_("About Tagger"), "win.about")
+}
+
+Adw.ApplicationWindow _root {
+  default-width: 800;
+  default-height: 600;
+
+  Gtk.Box {
+    orientation: vertical;
+
+    Adw.HeaderBar _headerBar {
+      title-widget: Adw.WindowTitle _title {};
+      
+      [start]
+      Gtk.Button _openFolderButton {
+        tooltip-text: _("Open Folder (Ctrl+O)");
+        visible: false;
+        action-name: "win.openFolder";
+        
+        Adw.ButtonContent {
+          label: _("Open");
+          icon-name: "folder-open-symbolic";
+        }
+      }
+      
+      [start]
+      Gtk.Button _closeFolderButton {
+        icon-name: "window-close-symbolic";
+        tooltip-text: _("Close Folder (Ctrl+W)");
+        action-name: "win.closeFolder";
+        visible: false;
+      }
+      
+      [end]
+      Gtk.MenuButton {
+        direction: none;
+        menu-model: mainMenu;
+        tooltip-text: _("Main Menu");
+        primary: true;
+      }
+
+      styles ["flat"]
+    }
+    
+    Adw.ToastOverlay _toastOverlay {
+      hexpand: true;
+      vexpand: true;
+      
+      Adw.ViewStack _viewStack {
+        Adw.ViewStackPage {
+          name: "NoFolder";
+          child: Adw.StatusPage _greeting {
+            icon-name: "org.nickvision.tagger";
+            description: _("Open a folder (or drag one into the app) to get started.");
+            child: Gtk.Button {
+              label: _("Open");
+              halign: center;
+              action-name: "win.openFolder";
+              styles ["pill", "suggested-action"]
+            };
+            
+            styles ["icon-dropshadow"]
+          };
+        }
+
+        Adw.ViewStackPage {
+          name: "Folder";
+          child: Gtk.Box {
+            orientation: vertical;
+
+            Gtk.Label _filesLabel {
+              hexpand: true;
+              vexpand: true;
+            }
+          };
+        }
+      }
+    }
+  }
+}

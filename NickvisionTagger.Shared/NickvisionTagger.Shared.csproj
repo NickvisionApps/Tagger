@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\org.nickvision.tagger-devel.svg" />
+    <None Remove="Resources\org.nickvision.tagger-symbolic.svg" />
+    <None Remove="Resources\org.nickvision.tagger.png" />
+    <None Remove="Resources\org.nickvision.tagger.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GetText.NET" Version="1.8.7" />
+    <PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\org.nickvision.tagger-devel.svg" />
+    <Resource Include="Resources\org.nickvision.tagger-symbolic.svg" />
+    <Resource Include="Resources\org.nickvision.tagger.png" />
+    <Resource Include="Resources\org.nickvision.tagger.svg" />
+  </ItemGroup>
+
+</Project>

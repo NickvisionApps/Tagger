@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GirCore.Adw-1" Version="0.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NickvisionTagger.Shared\NickvisionTagger.Shared.csproj" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="echo Compiling extra resources..." />
+    <Exec Command="blueprint-compiler batch-compile ./Blueprints ./Blueprints ./Blueprints/*.blp" />
+    <Exec Command="glib-compile-resources --sourcedir ./Resources ./Resources/org.nickvision.tagger.gresource.xml --target=$(OutDir)/org.nickvision.tagger.gresource" />
+    <Exec Command="
+      while read lang_code; do \
+        mkdir -p $(OutDir)/${lang_code}; \
+        msgfmt ../NickvisionTagger.Shared/Resources/po/${lang_code}.po -o $(OutDir)/${lang_code}/application.mo; \
+      done %3C ../NickvisionTagger.Shared/Resources/po/LINGUAS" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="rm ./Blueprints/*.ui" />
+  </Target>
+
+  <Target Name="PostPublish" AfterTargets="Publish">
+    <Exec Command="cp $(OutDir)/org.nickvision.tagger.gresource $(PublishDir)/org.nickvision.tagger.gresource" />
+    <Exec Command="
+      while read lang_code; do \
+        cp -r $(OutDir)/${lang_code} $(PublishDir)/; \
+      done %3C ../NickvisionTagger.Shared/Resources/po/LINGUAS" />
+  </Target>
+
+  <Target Name="EmbedUIFiles" BeforeTargets="BeforeResGen">
+    <ItemGroup>
+      <EmbeddedResource Include="Blueprints\*.ui" Type="Non-Resx" WithCulture="false" />
+    </ItemGroup>
+  </Target>
+
+</Project>
