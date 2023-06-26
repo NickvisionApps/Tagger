@@ -47,7 +47,7 @@ public partial class Program
         _mainWindowController.AppInfo.ID = "org.nickvision.tagger";
         _mainWindowController.AppInfo.Name = "Nickvision Tagger";
         _mainWindowController.AppInfo.ShortName = _("Tagger");
-        _mainWindowController.AppInfo.Description = $"{_("Manage your music library with ease")}.";
+        _mainWindowController.AppInfo.Description = $"{_("Tag your music")}.";
         _mainWindowController.AppInfo.Version = "2023.7.0-next";
         _mainWindowController.AppInfo.Changelog = "<ul><li>Initial Release</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Tagger");
