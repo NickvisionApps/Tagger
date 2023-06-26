@@ -1,4 +1,4 @@
-# Application
+# Tagger
 <img src="NickvisionTagger.Shared/Resources/org.nickvision.tagger.png" width="100" height="100"/>
 
  **Tag your music**
