@@ -334,51 +334,22 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
-# Gettext model
-*.pot
+#Intellij
+.idea/
 
-# Prerequisites
-*.d
+#Resources
+*.Designer.cs
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Flatpak Builder
+.flatpak-builder/
+.flatpak/
 
-# Precompiled Headers
-*.gch
-*.pch
+# Temporary build files
+_nickbuild/
+*.ui
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Backup files
+*.bak
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Qt Creator Settings
-*.user
-*.user.*
-
-# VSCode
-build/
-.vscode/
-
-# GNOME Builder
-_build/*
-.goutputstream-*
-tags.*
+# Cake tools
+tools/

@@ -21,41 +21,31 @@ public partial class MainWindow : Adw.ApplicationWindow
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_new();
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_set_title(nint dialog, string title);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_select_folder(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_select_folder_finish(nint dialog, nint result, nint error);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_file_new_for_path(string path);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint g_file_icon_new(nint gfile);
-
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_notification_set_icon(nint notification, nint icon);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private GAsyncReadyCallback? _saveCallback;
+    private readonly Gtk.DropTarget _dropTarget;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Button _openFolderButton;
-    [Gtk.Connect] private readonly Gtk.Button _closeFolderButton;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
-    [Gtk.Connect] private readonly Adw.StatusPage _greeting;
-    [Gtk.Connect] private readonly Gtk.Label _filesLabel;
-    private readonly Gtk.DropTarget _dropTarget;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
@@ -73,21 +63,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Build UI
         builder.Connect(this);
         _title.SetTitle(_controller.AppInfo.ShortName);
-        _greeting.SetTitle(_controller.Greeting);
         //Register Events 
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
-        _controller.FolderChanged += FolderChanged;
         //Open Folder Action
         var actOpenFolder = Gio.SimpleAction.New("openFolder", null);
         actOpenFolder.OnActivate += OpenFolder;
         AddAction(actOpenFolder);
         application.SetAccelsForAction("win.openFolder", new string[] { "<Ctrl>O" });
-        //Close Folder Action
-        var actCloseFolder = Gio.SimpleAction.New("closeFolder", null);
-        actCloseFolder.OnActivate += CloseFolder;
-        AddAction(actCloseFolder);
-        application.SetAccelsForAction("win.closeFolder", new string[] { "<Ctrl>W" });
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
@@ -140,11 +123,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void NotificationSent(object? sender, NotificationSentEventArgs e)
     {
         var toast = Adw.Toast.New(e.Message);
-        if (e.Action == "close")
-        {
-            toast.SetButtonLabel(_("Close"));
-            toast.OnButtonClicked += (sender, ex) => _controller.CloseFolder();
-        }
         _toastOverlay.AddToast(toast);
     }
 
@@ -189,32 +167,11 @@ public partial class MainWindow : Adw.ApplicationWindow
             var path = g_file_get_path(obj.Handle);
             if (Directory.Exists(path))
             {
-                _controller.OpenFolder(path);
+                //TODO
                 return true;
             }
         }
         return false;
-    }
-
-    /// <summary>
-    /// Occurs when the folder is changed
-    /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">EventArgs</param>
-    private void FolderChanged(object? sender, EventArgs e)
-    {
-        _title.SetSubtitle(_controller.IsFolderOpened ? _controller.FolderPath : "");
-        _openFolderButton.SetVisible(_controller.IsFolderOpened);
-        _closeFolderButton.SetVisible(_controller.IsFolderOpened);
-        _viewStack.SetVisibleChildName(_controller.IsFolderOpened ? "Folder" : "NoFolder");
-        if(_controller.IsFolderOpened)
-        {
-            _headerBar.RemoveCssClass("flat");
-        }
-        else
-        {
-            _headerBar.AddCssClass("flat");
-        }
     }
 
     /// <summary>
@@ -232,30 +189,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             if (fileHandle != IntPtr.Zero)
             {
                 var path = g_file_get_path(fileHandle);
-                _controller.OpenFolder(path);
-                _filesLabel.SetLabel(_n("There is {0} file in the folder.", "There are {0} files in the folder.", Directory.GetFiles(path, "*", SearchOption.TopDirectoryOnly).Length));
+                //TODO
             }
         };
         gtk_file_dialog_select_folder(folderDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
-    }
-
-    /// <summary>
-    /// Occurs when the close folder action is triggered
-    /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void CloseFolder(Gio.SimpleAction sender, EventArgs e)
-    {
-        var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Close Folder?"), _("Are you sure you want to close the folder?"), _("Cancel"), _("Close"));
-        dialog.Present();
-        dialog.OnResponse += (sender, e) =>
-        {
-            if (dialog.Response == MessageDialogResponse.Destructive)
-            {
-                _controller.CloseFolder();
-            }
-            dialog.Destroy();
-        };
     }
 
     /// <summary>

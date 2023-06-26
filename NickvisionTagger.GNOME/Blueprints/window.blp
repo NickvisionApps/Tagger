@@ -29,14 +29,6 @@ Adw.ApplicationWindow _root {
         }
       }
       
-      [start]
-      Gtk.Button _closeFolderButton {
-        icon-name: "window-close-symbolic";
-        tooltip-text: _("Close Folder (Ctrl+W)");
-        action-name: "win.closeFolder";
-        visible: false;
-      }
-      
       [end]
       Gtk.MenuButton {
         direction: none;
@@ -55,11 +47,12 @@ Adw.ApplicationWindow _root {
       Adw.ViewStack _viewStack {
         Adw.ViewStackPage {
           name: "NoFolder";
-          child: Adw.StatusPage _greeting {
+          child: Adw.StatusPage {
             icon-name: "org.nickvision.tagger";
-            description: _("Open a folder (or drag one into the app) to get started.");
+            title: _("Tag Your Music");
+            description: _("Open a folder with music to get started.");
             child: Gtk.Button {
-              label: _("Open");
+              label: _("Open Folder");
               halign: center;
               action-name: "win.openFolder";
               styles ["pill", "suggested-action"]
@@ -74,10 +67,6 @@ Adw.ApplicationWindow _root {
           child: Gtk.Box {
             orientation: vertical;
 
-            Gtk.Label _filesLabel {
-              hexpand: true;
-              vexpand: true;
-            }
           };
         }
       }
