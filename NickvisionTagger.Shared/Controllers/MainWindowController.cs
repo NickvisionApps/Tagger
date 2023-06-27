@@ -95,6 +95,15 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Closes a music folder
+    /// </summary>
+    public void CloseFolder()
+    {
+        _musicFolder = null;
+        MusicFolderUpdated?.Invoke(this, true);
+    }
+
+    /// <summary>
     /// Occurs when the configuration is saved
     /// </summary>
     /// <param name="sender">object?</param>

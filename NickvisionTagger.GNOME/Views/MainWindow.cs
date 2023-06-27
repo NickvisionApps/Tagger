@@ -73,6 +73,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         actOpenFolder.OnActivate += OpenFolder;
         AddAction(actOpenFolder);
         application.SetAccelsForAction("win.openFolder", new string[] { "<Ctrl>O" });
+        //Close Folder Action
+        var actCloseFolder = Gio.SimpleAction.New("closeFolder", null);
+        actCloseFolder.OnActivate += (sender, e) => _controller.CloseFolder();
+        AddAction(actCloseFolder);
+        application.SetAccelsForAction("win.closeFolder", new string[] { "<Ctrl>W" });
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
@@ -304,12 +309,23 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="sendToast">Whether or not to send a toast of loaded files</param>
     private void MusicFolderUpdated(object? sender, bool sendToast)
     {
-        _headerBar.RemoveCssClass("flat");
-        _title.SetSubtitle(_controller.MusicFolderPath);
-        _viewStack.SetVisibleChildName("Folder");
-        if(sendToast)
+        if(!string.IsNullOrEmpty(_controller.MusicFolderPath))
         {
-            _toastOverlay.AddToast(Adw.Toast.New(string.Format(_("Loaded {0} music files."), _controller.MusicFiles.Count)));
+            _headerBar.RemoveCssClass("flat");
+            _title.SetSubtitle(_controller.MusicFolderPath);
+            _viewStack.SetVisibleChildName("Folder");
+            _openFolderButton.SetVisible(true);
+            if(sendToast)
+            {
+                _toastOverlay.AddToast(Adw.Toast.New(string.Format(_("Loaded {0} music files."), _controller.MusicFiles.Count)));
+            }
+        }
+        else
+        {
+            _headerBar.AddCssClass("flat");
+            _title.SetSubtitle(null);
+            _viewStack.SetVisibleChildName("NoFolder");
+            _openFolderButton.SetVisible(false);
         }
     }
 
