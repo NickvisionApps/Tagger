@@ -106,7 +106,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Build UI
         builder.Connect(this);
         _title.SetTitle(_controller.AppInfo.ShortName);
-        //Register Events 
+        //Register Events
+        OnCloseRequest += OnCloseRequested;
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
         _controller.MusicFolderUpdated += (sender, e) => g_main_context_invoke(0, _musicFolderUpdatedFunc, (IntPtr)GCHandle.Alloc(e));
@@ -218,6 +219,40 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
+    /// Occurs when the window tries to close
+    /// </summary>
+    /// <param name="sender">Gtk.Window</param>
+    /// <param name="e">EventArgs</param>
+    /// <returns>True to stop close, else false</returns>
+    private bool OnCloseRequested(Gtk.Window sender, EventArgs e)
+    {
+        if (!_controller.CanClose)
+        {
+            var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
+            dialog.OnResponse += async (s, ex) =>
+            {
+                if(dialog.Response == MessageDialogResponse.Suggested)
+                {
+                    _viewStack.SetVisibleChildName("Loading");
+                    _loadingLabel.SetText(_("Saving tags..."));
+                    await _controller.SaveAllTagsAsync();
+                    Close();
+                }
+                else if(dialog.Response == MessageDialogResponse.Destructive)
+                {
+                    _controller.ForceAllowClose();
+                    Close();
+                }
+                dialog.Destroy();
+            };
+            dialog.Present();
+            return true;
+        }
+        _listMusicFiles.UnselectAll();
+        return false;
+    }
+
+    /// <summary>
     /// Occurs when something is dropped onto the window
     /// </summary>
     /// <param name="sender">Gtk.DropTarget</param>
@@ -278,7 +313,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 {
                     _viewStack.SetVisibleChildName("Loading");
                     _loadingLabel.SetText(_("Saving tags..."));
-                    await _controller.SaveTagsAsync(false);
+                    await _controller.SaveAllTagsAsync();
                 }
                 if(dialog.Response != MessageDialogResponse.Cancel)
                 {
@@ -301,7 +336,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _viewStack.SetVisibleChildName("Loading");
         _loadingLabel.SetText(_("Saving tags..."));
-        await _controller.SaveTagsAsync(true);
+        await _controller.SaveSelectedTagsAsync();
     }
 
     /// <summary>

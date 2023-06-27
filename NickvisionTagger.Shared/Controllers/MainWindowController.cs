@@ -14,6 +14,7 @@ namespace NickvisionTagger.Shared.Controllers;
 public class MainWindowController
 {
     private MusicFolder? _musicFolder;
+    private bool _forceAllowClose;
 
     /// <summary>
     /// The list of music file save states
@@ -68,6 +69,7 @@ public class MainWindowController
     public MainWindowController()
     {
         _musicFolder = null;
+        _forceAllowClose = false;
         MusicFileSaveStates = new List<bool>();
         SelectedMusicFiles = new Dictionary<int, MusicFile>();
     }
@@ -79,6 +81,10 @@ public class MainWindowController
     {
         get
         {
+            if(_forceAllowClose)
+            {
+                return true;
+            }
             foreach(var saved in MusicFileSaveStates)
             {
                 if(!saved)
@@ -111,6 +117,11 @@ public class MainWindowController
             MusicFolderUpdated?.Invoke(this, true);
         }
     }
+
+    /// <summary>
+    /// Forces CanClose to be true
+    /// </summary>
+    public void ForceAllowClose() => _forceAllowClose = true;
 
     /// <summary>
     /// Opens a music folder
@@ -162,9 +173,9 @@ public class MainWindowController
     }
 
     /// <summary>
-    /// Saves the tags
+    /// Saves the selected files' tags
     /// </summary>
-    public async Task SaveTagsAsync(bool sendToast)
+    public async Task SaveSelectedTagsAsync()
     {
         if(_musicFolder != null)
         {
@@ -177,10 +188,28 @@ public class MainWindowController
                 }
             });
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
-            if(sendToast)
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Tags saved successfully."), NotificationSeverity.Success));
+        }
+    }
+
+    /// <summary>
+    /// Saves all files' tags
+    /// </summary>
+    public async Task SaveAllTagsAsync()
+    {
+        if(_musicFolder != null)
+        {
+            await Task.Run(() =>
             {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Tags saved successfully."), NotificationSeverity.Success));
-            }
+                var i = 0;
+                foreach(var file in _musicFolder.MusicFiles)
+                {
+                    file.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp);
+                    MusicFileSaveStates[i] = true;
+                    i++;
+                }
+            });
+            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
