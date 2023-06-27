@@ -14,8 +14,8 @@ menu tagActionsMenu {
   }
 
   section {
-    item(_("Convert Filename to Tag"), "win.filenameToTag")
-    item(_("Discard Tag to Filename"), "win.tagToFilename")
+    item(_("Convert File Name to Tag"), "win.filenameToTag")
+    item(_("Convert Tag to File Name"), "win.tagToFilename")
   }
 
   section {
@@ -219,10 +219,10 @@ Adw.ApplicationWindow _root {
               child: Adw.Clamp {
                 child: Gtk.Box {
                   orientation: vertical;
-                  spacing: 40;
-                  margin-start: 6;
+                  spacing: 12;
+                  margin-start: 12;
                   margin-top: 6;
-                  margin-end: 6;
+                  margin-end: 12;
                   margin-bottom: 6;
 
                   Adw.ViewStack _artViewStack {
@@ -230,10 +230,13 @@ Adw.ApplicationWindow _root {
                     width-request: 280;
                     height-request: 280;
                     margin-top: 12;
+                    margin-bottom: 12;
 
                     Adw.ViewStackPage {
                       name: "NoImage";
                       child: Gtk.Button _noAlbumArtButton {
+                        action-name: "win.insertAlbumArt";
+
                         Adw.StatusPage {
                           icon-name: _("image-missing-symbolic");
 
@@ -247,6 +250,8 @@ Adw.ApplicationWindow _root {
                     Adw.ViewStackPage {
                       name: "Image";
                       child: Gtk.Button _albumArtButton {
+                        action-name: "win.insertAlbumArt";
+
                         Gtk.Frame {
                           Gtk.Image _albumArtImage {
 
@@ -260,6 +265,7 @@ Adw.ApplicationWindow _root {
                     Adw.ViewStackPage {
                       name: "KeepImage";
                       child: Gtk.Button _keepAlbumArtButton {
+                        action-name: "win.insertAlbumArt";
                         tooltip-text: _("Selected files have different album art images");
 
                         Adw.StatusPage {
@@ -274,11 +280,13 @@ Adw.ApplicationWindow _root {
                   }
 
                   Adw.PreferencesGroup {
-                    title: _("Properties");
-
                     Adw.EntryRow _filenameRow {
                       title: _("File Name");
                     }
+                  }
+
+                  Adw.PreferencesGroup {
+                    title: _("Tag Properties");
 
                     Adw.EntryRow _titleRow {
                       title: _("Title");
@@ -311,6 +319,10 @@ Adw.ApplicationWindow _root {
                     Adw.EntryRow _commentRow {
                       title: _("Comment");
                     }
+                  }
+
+                  Adw.PreferencesGroup {
+                    title: _("File Properties");
 
                     Adw.EntryRow _durationRow {
                       title: _("Duration");

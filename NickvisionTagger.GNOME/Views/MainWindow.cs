@@ -106,6 +106,71 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Build UI
         builder.Connect(this);
         _title.SetTitle(_controller.AppInfo.ShortName);
+        _musicFilesSearch.OnSearchChanged += SearchChanged;
+        _listMusicFiles.OnSelectedRowsChanged += ListMusicFiles_SelectionChanged;
+        _filenameRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _titleRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _artistRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _albumRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _yearRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _trackRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _albumArtistRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _genreRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _commentRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
         //Register Events
         OnCloseRequest += OnCloseRequested;
         _controller.NotificationSent += NotificationSent;
@@ -137,6 +202,41 @@ public partial class MainWindow : Adw.ApplicationWindow
         actDiscard.OnActivate += DiscardUnappliedChanges;
         AddAction(actDiscard);
         application.SetAccelsForAction("win.discardUnappliedChanges", new string[] { "<Ctrl>Z" });
+        //Delete Tags Action
+        var actDeleteTags = Gio.SimpleAction.New("deleteTags", null);
+        actDeleteTags.OnActivate += DeleteTags;
+        AddAction(actDeleteTags);
+        application.SetAccelsForAction("win.deleteTags", new string[] { "<Shift>Delete" });
+        //Convert Filename To Tag Action
+        var actFTT = Gio.SimpleAction.New("filenameToTag", null);
+        actFTT.OnActivate += FilenameToTag;
+        AddAction(actFTT);
+        application.SetAccelsForAction("win.filenameToTag", new string[] { "<Ctrl>F" });
+        //Convert Tag To Filename Action
+        var actTTF = Gio.SimpleAction.New("tagToFilename", null);
+        actTTF.OnActivate += TagToFilename;
+        AddAction(actTTF);
+        application.SetAccelsForAction("win.tagToFilename", new string[] { "<Ctrl>T" });
+        //Insert Album Art Action
+        var actInsertAlbumArt = Gio.SimpleAction.New("insertAlbumArt", null);
+        actInsertAlbumArt.OnActivate += InsertAlbumArt;
+        AddAction(actInsertAlbumArt);
+        application.SetAccelsForAction("win.insertAlbumArt", new string[] { "<Ctrl><Shift>O" });
+        //Remove Album Art Action
+        var actRemoveAlbumArt = Gio.SimpleAction.New("removeAlbumArt", null);
+        actRemoveAlbumArt.OnActivate += RemoveAlbumArt;
+        AddAction(actRemoveAlbumArt);
+        application.SetAccelsForAction("win.removeAlbumArt", new string[] { "<Ctrl>Delete" });
+        //Download MusicBrainz Metadata Action
+        var actMusicBrainz = Gio.SimpleAction.New("downloadMusicBrainzMetadata", null);
+        actMusicBrainz.OnActivate += DownloadMusicBrainzMetadata;
+        AddAction(actMusicBrainz);
+        application.SetAccelsForAction("win.downloadMusicBrainzMetadata", new string[] { "<Ctrl>m" });
+        //Submit to AcoustId Action
+        var actAcoustId = Gio.SimpleAction.New("submitToAcoustId", null);
+        actAcoustId.OnActivate += SubmitToAcoustId;
+        AddAction(actAcoustId);
+        application.SetAccelsForAction("win.submitToAcoustId", new string[] { "<Ctrl>u" });
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
@@ -362,6 +462,76 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
+    /// Occurs when the delete tags action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private async void DeleteTags(Gio.SimpleAction sender, EventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the filename to tag action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private async void FilenameToTag(Gio.SimpleAction sender, EventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the tag to filename action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private async void TagToFilename(Gio.SimpleAction sender, EventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the insert album art action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private async void InsertAlbumArt(Gio.SimpleAction sender, EventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the remove album art action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private async void RemoveAlbumArt(Gio.SimpleAction sender, EventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the download musicbrainz metadata action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private async void DownloadMusicBrainzMetadata(Gio.SimpleAction sender, EventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the submit to acoustid action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private async void SubmitToAcoustId(Gio.SimpleAction sender, EventArgs e)
+    {
+
+    }
+
+    /// <summary>
     /// Occurs when the preferences action is triggered
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
@@ -526,5 +696,33 @@ public partial class MainWindow : Adw.ApplicationWindow
             i++;
         }
         return false;
+    }
+
+    /// <summary>
+    /// Occurs when the _musicFilesSearch's text is changed
+    /// </summary>
+    /// <param name="sender">Gtk.SearchEntry</param>
+    /// <param name="e">EventArgs</param>
+    private void SearchChanged(Gtk.SearchEntry sender, EventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the _listMusicFiles's selection is changed
+    /// </summary>
+    /// <param name="sender">Gtk.ListBox</param>
+    /// <param name="e">EventArgs</param>
+    private void ListMusicFiles_SelectionChanged(Gtk.ListBox sender, EventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when a tag property's row text is changed
+    /// </summary>
+    private void TagPropertyChanged()
+    {
+
     }
 }

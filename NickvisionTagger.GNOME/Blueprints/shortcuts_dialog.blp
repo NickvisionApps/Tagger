@@ -41,6 +41,45 @@ Gtk.ShortcutsWindow _shortcuts {
         title: _("Discard Unapplied Changes");
         accelerator: "<Control>z";
       }
+
+      Gtk.ShortcutsShortcut {
+        title: _("Delete Tags");
+        accelerator: "<Shift>Delete";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("Convert File Name to Tag");
+        accelerator: "<Control>f";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("Convert Tag to File Name");
+        accelerator: "<Control>t";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("Insert Album Art");
+        accelerator: "<Control><Shift>o";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("Remove Album Art");
+        accelerator: "<Control>Delete";
+      }
+    }
+
+    Gtk.ShortcutsGroup {
+      title: C_("Shortcut", "Web Services");
+
+      Gtk.ShortcutsShortcut {
+        title: _("Download MusicBrainz Metadata");
+        accelerator: "<Control>m";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("Submit to AcoustId");
+        accelerator: "<Control>u";
+      }
     }
 
     Gtk.ShortcutsGroup {
