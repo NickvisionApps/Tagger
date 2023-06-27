@@ -17,6 +17,34 @@ public class Configuration
     /// The preferred theme for the application
     /// </summary>
     public Theme Theme { get; set; }
+    /// <summary>
+    /// Whether or not to remember the last opened folder
+    /// </summary>
+    public bool RememberLastOpenedFolder { get; set; }
+    /// <summary>
+    /// Whether or not to scan subfolders for music
+    /// </summary>
+    public bool IncludeSubfolders { get; set; }
+    /// <summary>
+    /// The last opened folder (if available)
+    /// </summary>
+    public string LastOpenedFolder { get; set; }
+    /// <summary>
+    /// Whether or not to preserve (not change) a file's modification timestamp
+    /// </summary>
+    public bool PreserveModificationTimestamp { get; set; }
+    /// <summary>
+    /// Whether or not to overwrite a tag's existing data with data from MusicBrainz
+    /// </summary>
+    public bool OverwriteTagWithMusicBrainz { get; set; }
+    /// <summary>
+    /// Whether or not to overwrite a tag's existing album art with album art from MusicBrainz
+    /// </summary>
+    public bool OverwriteAlbumArtWithMusicBrainz { get; set; }
+    /// <summary>
+    /// The user's AcoustId API Key
+    /// </summary>
+    public string AcoustIdUserAPIKey { get; set; }
 
     /// <summary>
     /// Occurs when the configuration is saved to disk
@@ -33,6 +61,13 @@ public class Configuration
             Directory.CreateDirectory(ConfigDir);
         }
         Theme = Theme.System;
+        RememberLastOpenedFolder = true;
+        IncludeSubfolders = true;
+        LastOpenedFolder = "";
+        PreserveModificationTimestamp = false;
+        OverwriteTagWithMusicBrainz = true;
+        OverwriteAlbumArtWithMusicBrainz = true;
+        AcoustIdUserAPIKey = "";
     }
 
     /// <summary>
