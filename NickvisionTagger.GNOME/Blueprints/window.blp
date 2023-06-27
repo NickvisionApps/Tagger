@@ -145,9 +145,76 @@ Adw.ApplicationWindow _root {
 
         Adw.ViewStackPage {
           name: "Folder";
-          child: Gtk.Box {
-            orientation: vertical;
+          child: Adw.Flap {
+            flap-position: end;
+            reveal-flap: true;
+            fold-policy: never;
 
+            [content]
+            Adw.ViewStack _filesViewStack {
+              Adw.ViewStackPage {
+                name: "NoFiles";
+                child: Adw.StatusPage {
+                  icon-name: "library-music-symbolic";
+                  title: _("No Music Files Found");
+                  description: _("Try a different folder");
+                };
+              }
+
+              Adw.ViewStackPage {
+                name: "Files";
+                child: Gtk.Box {
+                  orientation: vertical;
+                  spacing: 6;
+
+                  Gtk.Box {
+                    orientation: horizontal;
+                    spacing: 6;
+                    margin-start: 6;
+                    margin-top: 6;
+                    margin-end: 6;
+
+                    Gtk.SearchEntry _musicFilesSearch {
+                      hexpand: true;
+                      placeholder-text: _("Search for filename (type ! to activate advanced search)...");
+                    }
+
+                    Gtk.Button _advancedSearchInfoButton {
+                      icon-name: "help-faq-symbolic";
+                      tooltip-text: _("Advanced Search Info");
+                      visible: false;
+                      action-name: "win.advancedSearchInfo";
+                    }
+                  }
+
+                  Gtk.ScrolledWindow {
+                    hexpand: true;
+                    vexpand: true;
+
+                    child: Gtk.ListBox _listMusicFiles {
+                      margin-start: 6;
+                      margin-top: 6;
+                      margin-end: 6;
+                      margin-bottom: 6;
+                      selection-mode: multiple;
+                      activate-on-single-click: false;
+
+                      styles ["card", "boxed-list"]
+                    };
+                  }
+                };
+              }
+            }
+
+            [separator]
+            Gtk.Separator {
+              orientation: vertical;
+            }
+
+            [flap]
+            Gtk.ScrolledWindow {
+
+            }
           };
         }
       }

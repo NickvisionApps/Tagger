@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
@@ -24,6 +25,10 @@ public partial class MainWindow : Adw.ApplicationWindow
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_main_context_default();
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool may_block);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -60,6 +65,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Gtk.Label _loadingLabel;
+    [Gtk.Connect] private readonly Adw.ViewStack _filesViewStack;
+    [Gtk.Connect] private readonly Gtk.SearchEntry _musicFilesSearch;
+    [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
+    [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
@@ -386,8 +395,20 @@ public partial class MainWindow : Adw.ApplicationWindow
         if(target != null)
         {
             var sendToast = target.Value;
+            foreach(var row in _listMusicFilesRows)
+            {
+                _listMusicFiles.Remove(row);
+            }
+            _listMusicFilesRows.Clear();
             if(!string.IsNullOrEmpty(_controller.MusicFolderPath))
             {
+                foreach(var musicFile in _controller.MusicFiles)
+                {
+                    var row = Adw.ActionRow.New();
+                    row.SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+                    _listMusicFiles.Append(row);
+                    _listMusicFilesRows.Add(row);
+                }
                 _headerBar.RemoveCssClass("flat");
                 _title.SetSubtitle(_controller.MusicFolderPath);
                 _openFolderButton.SetVisible(true);
@@ -396,6 +417,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _tagActionsButton.SetVisible(false);
                 _webServicesButton.SetVisible(false);
                 _viewStack.SetVisibleChildName("Folder");
+                _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
                 if(sendToast)
                 {
                     _toastOverlay.AddToast(Adw.Toast.New(string.Format(_("Loaded {0} music files."), _controller.MusicFiles.Count)));
