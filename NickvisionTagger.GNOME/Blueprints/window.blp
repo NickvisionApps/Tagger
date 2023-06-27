@@ -19,14 +19,22 @@ Adw.ApplicationWindow _root {
       
       [start]
       Gtk.Button _openFolderButton {
-        tooltip-text: _("Open Folder (Ctrl+O)");
+        tooltip-text: _("Open Music Folder (Ctrl+O)");
         visible: false;
         action-name: "win.openFolder";
-        
+
         Adw.ButtonContent {
           label: _("Open");
           icon-name: "folder-open-symbolic";
         }
+      }
+
+      [start]
+      Gtk.Button _reloadFolderButton {
+        tooltip-text: _("Reload Music Folder (F5)");
+        visible: false;
+        icon-name: "view-refresh-symbolic";
+        action-name: "win.reloadFolder";
       }
       
       [end]
@@ -76,9 +84,7 @@ Adw.ApplicationWindow _root {
               spinning: bind _loadingPage.visible;
             }
 
-            Gtk.Label {
-              label: _("Loading music files in folder...");
-
+            Gtk.Label _loadingLabel {
               styles ["title-3"]
             }
           };

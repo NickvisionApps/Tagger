@@ -70,6 +70,24 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Whether or not the window can close freely
+    /// </summary>
+    public bool CanClose
+    {
+        get
+        {
+            foreach(var saved in _musicFilesSaved)
+            {
+                if(!saved)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    /// <summary>
     /// Creates a new PreferencesViewController
     /// </summary>
     /// <returns>The PreferencesViewController</returns>
@@ -99,13 +117,12 @@ public class MainWindowController
     {
         _musicFolder = new MusicFolder(path);
         _musicFolder.IncludeSubfolders = Configuration.Current.IncludeSubfolders;
-        await _musicFolder.ReloadMusicFilesAsync();
         if(Configuration.Current.RememberLastOpenedFolder)
         {
             Configuration.Current.LastOpenedFolder = _musicFolder.ParentPath;
             Configuration.Current.Save();
         }
-        MusicFolderUpdated?.Invoke(this, true);
+        await ReloadFolderAsync();
     }
 
     /// <summary>
@@ -114,12 +131,54 @@ public class MainWindowController
     public void CloseFolder()
     {
         _musicFolder = null;
+        _musicFilesSaved.Clear();
+        SelectedMusicFiles.Clear();
         if(Configuration.Current.RememberLastOpenedFolder)
         {
             Configuration.Current.LastOpenedFolder = "";
             Configuration.Current.Save();
         }
         MusicFolderUpdated?.Invoke(this, true);
+    }
+
+    /// <summary>
+    /// Reloads the music folder
+    /// </summary>
+    public async Task ReloadFolderAsync()
+    {
+        if(_musicFolder != null)
+        {
+            _musicFilesSaved.Clear();
+            await _musicFolder.ReloadMusicFilesAsync();
+            for(var i = 0; i < _musicFolder.MusicFiles.Count; i++)
+            {
+                _musicFilesSaved.Add(true);
+            }
+            MusicFolderUpdated?.Invoke(this, true);
+        }
+    }
+
+    /// <summary>
+    /// Saves the tags
+    /// </summary>
+    public async Task SaveTagsAsync(bool sendToast)
+    {
+        if(_musicFolder != null)
+        {
+            await Task.Run(() =>
+            {
+                foreach(var pair in SelectedMusicFiles)
+                {
+                    pair.Value.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp);
+                    _musicFilesSaved[pair.Key] = true;
+                }
+            });
+            MusicFilesSaveStateChanged?.Invoke(this, EventArgs.Empty);
+            if(sendToast)
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Tags saved successfully."), NotificationSeverity.Success));
+            }
+        }
     }
 
     /// <summary>

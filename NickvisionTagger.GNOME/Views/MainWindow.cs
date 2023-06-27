@@ -45,8 +45,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Button _openFolderButton;
+    [Gtk.Connect] private readonly Gtk.Button _reloadFolderButton;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
+    [Gtk.Connect] private readonly Gtk.Label _loadingLabel;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
@@ -79,6 +81,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         actCloseFolder.OnActivate += (sender, e) => _controller.CloseFolder();
         AddAction(actCloseFolder);
         application.SetAccelsForAction("win.closeFolder", new string[] { "<Ctrl>W" });
+        //Reload Folder Action
+        var actReloadFolder = Gio.SimpleAction.New("reloadFolder", null);
+        actReloadFolder.OnActivate += ReloadFolder;
+        AddAction(actReloadFolder);
+        application.SetAccelsForAction("win.reloadFolder", new string[] { "F5" });
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
@@ -122,6 +129,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _application.AddWindow(this);
         Present();
         _viewStack.SetVisibleChildName("Loading");
+        _loadingLabel.SetText(_("Loading music files from folder..."));
         await _controller.StartupAsync();
     }
 
@@ -178,6 +186,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             if (Directory.Exists(path))
             {
                 _viewStack.SetVisibleChildName("Loading");
+                _loadingLabel.SetText(_("Loading music files from folder..."));
                 _controller.OpenFolderAsync(path).Wait();
                 return true;
             }
@@ -201,10 +210,53 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 var path = g_file_get_path(fileHandle);
                 _viewStack.SetVisibleChildName("Loading");
+                _loadingLabel.SetText(_("Loading music files from folder..."));
                 await _controller.OpenFolderAsync(path);
             }
         };
         gtk_file_dialog_select_folder(folderDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+    }
+
+    /// <summary>
+    /// Occurs when the reload folder action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private async void ReloadFolder(Gio.SimpleAction sender, EventArgs e)
+    {
+        if(!_controller.CanClose)
+        {
+            var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
+            dialog.OnResponse += async (s, ex) =>
+            {
+                if(dialog.Response == MessageDialogResponse.Suggested)
+                {
+                    _viewStack.SetVisibleChildName("Loading");
+                    _loadingLabel.SetText(_("Saving tags..."));
+                    await _controller.SaveTagsAsync(false);
+                }
+                if(dialog.Response != MessageDialogResponse.Cancel)
+                {
+                    _viewStack.SetVisibleChildName("Loading");
+                    _loadingLabel.SetText(_("Loading music files from folder..."));
+                    await _controller.ReloadFolderAsync();
+                }
+                dialog.Destroy();
+            };
+            dialog.Present();
+        }
+        else
+        {
+            _viewStack.SetVisibleChildName("Loading");
+            await _controller.ReloadFolderAsync();
+        }
+    }
+
+    private async void Apply(Gio.SimpleAction sender, EventArgs e)
+    {
+        _viewStack.SetVisibleChildName("Loading");
+        _loadingLabel.SetText(_("Saving tags..."));
+        await _controller.SaveTagsAsync(true);
     }
 
     /// <summary>
@@ -315,8 +367,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _headerBar.RemoveCssClass("flat");
             _title.SetSubtitle(_controller.MusicFolderPath);
-            _viewStack.SetVisibleChildName("Folder");
             _openFolderButton.SetVisible(true);
+            _reloadFolderButton.SetVisible(true);
+            _viewStack.SetVisibleChildName("Folder");
             if(sendToast)
             {
                 _toastOverlay.AddToast(Adw.Toast.New(string.Format(_("Loaded {0} music files."), _controller.MusicFiles.Count)));
@@ -326,8 +379,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _headerBar.AddCssClass("flat");
             _title.SetSubtitle(null);
-            _viewStack.SetVisibleChildName("NoFolder");
             _openFolderButton.SetVisible(false);
+            _reloadFolderButton.SetVisible(false);
+            _viewStack.SetVisibleChildName("NoFolder");
         }
     }
 
