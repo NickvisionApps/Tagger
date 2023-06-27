@@ -32,7 +32,11 @@
   <releases>
     <release version="2023.7.0-next" date="2023-07-01">
       <description translatable="no">
-        <p>- Initial Release</p>
+        <p>- Tagger has been completely rewritten in C#! With this new language comes better performance and more stable features. To signify this great change, we also updated the app icon (Thanks @daudix-UFO)!</p>
+        <p>- There is now a separte option in Preferences for overwriting album art with MusicBrainz metadata independently of the overwritting tag data setting</p>
+        <p>- Fixed an issue where some file types were not loading album art correctly</p>
+        <p>- Improved UI/UX</p>
+        <p>- Updated translations (Thanks everyone on Weblate!)</p>
       </description>
     </release>
   </releases>
