@@ -155,35 +155,43 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     {
         TagLib.File? file = null;
         Tag? tag = null;
-        if(_dotExtension == ".mp3")
+        try
         {
-            file = new TagLib.Mpeg.File(Path);
-            tag = file.GetTag(TagTypes.Id3v2, true);
+            if(_dotExtension == ".mp3")
+            {
+                file = new TagLib.Mpeg.File(Path);
+                tag = file.GetTag(TagTypes.Id3v2, true);
+            }
+            else if(_dotExtension == ".m4a" || _dotExtension == ".m4b")
+            {
+                file = new TagLib.Mpeg4.File(Path);
+                tag = file.GetTag(TagTypes.Apple, true);
+            }
+            else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga")
+            {
+                file = new TagLib.Ogg.File(Path);
+                tag = file.GetTag(TagTypes.Xiph, true);
+            }
+            else if(_dotExtension == ".flac")
+            {
+                file = new TagLib.Flac.File(Path);
+                tag = file.GetTag(TagTypes.Xiph, true);
+            }
+            else if(_dotExtension == ".wma")
+            {
+                file = new TagLib.Asf.File(Path);
+                tag = file.GetTag(TagTypes.Asf, true);
+            }
+            else if(_dotExtension == ".wav")
+            {
+                file = new TagLib.Riff.File(Path);
+                tag = file.GetTag(TagTypes.Id3v2, true);
+            }
         }
-        else if(_dotExtension == ".m4a" || _dotExtension == ".m4b")
+        catch
         {
-            file = new TagLib.Mpeg4.File(Path);
-            tag = file.GetTag(TagTypes.Apple, true);
-        }
-        else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga")
-        {
-            file = new TagLib.Ogg.File(Path);
-            tag = file.GetTag(TagTypes.Xiph, true);
-        }
-        else if(_dotExtension == ".flac")
-        {
-            file = new TagLib.Flac.File(Path);
-            tag = file.GetTag(TagTypes.Xiph, true);
-        }
-        else if(_dotExtension == ".wma")
-        {
-            file = new TagLib.Asf.File(Path);
-            tag = file.GetTag(TagTypes.Asf, true);
-        }
-        else if(_dotExtension == ".wav")
-        {
-            file = new TagLib.Riff.File(Path);
-            tag = file.GetTag(TagTypes.Id3v2, true);
+           file = TagLib.File.Create(Path);
+           tag = file.Tag;
         }
         if(file != null && tag != null)
         {
@@ -337,35 +345,43 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     {
         TagLib.File? file = null;
         Tag? tag = null;
-        if(_dotExtension == ".mp3")
+        try
         {
-            file = new TagLib.Mpeg.File(Path);
-            tag = file.GetTag(TagTypes.Id3v2, true);
+            if(_dotExtension == ".mp3")
+            {
+                file = new TagLib.Mpeg.File(Path);
+                tag = file.GetTag(TagTypes.Id3v2, true);
+            }
+            else if(_dotExtension == ".m4a" || _dotExtension == ".m4b")
+            {
+                file = new TagLib.Mpeg4.File(Path);
+                tag = file.GetTag(TagTypes.Apple, true);
+            }
+            else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga")
+            {
+                file = new TagLib.Ogg.File(Path);
+                tag = file.GetTag(TagTypes.Xiph, true);
+            }
+            else if(_dotExtension == ".flac")
+            {
+                file = new TagLib.Flac.File(Path);
+                tag = file.GetTag(TagTypes.Xiph, true);
+            }
+            else if(_dotExtension == ".wma")
+            {
+                file = new TagLib.Asf.File(Path);
+                tag = file.GetTag(TagTypes.Asf, true);
+            }
+            else if(_dotExtension == ".wav")
+            {
+                file = new TagLib.Riff.File(Path);
+                tag = file.GetTag(TagTypes.Id3v2, true);
+            }
         }
-        else if(_dotExtension == ".m4a" || _dotExtension == ".m4b")
+        catch
         {
-            file = new TagLib.Mpeg4.File(Path);
-            tag = file.GetTag(TagTypes.Apple, true);
-        }
-        else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga")
-        {
-            file = new TagLib.Ogg.File(Path);
-            tag = file.GetTag(TagTypes.Xiph, true);
-        }
-        else if(_dotExtension == ".flac")
-        {
-            file = new TagLib.Flac.File(Path);
-            tag = file.GetTag(TagTypes.Xiph, true);
-        }
-        else if(_dotExtension == ".wma")
-        {
-            file = new TagLib.Asf.File(Path);
-            tag = file.GetTag(TagTypes.Asf, true);
-        }
-        else if(_dotExtension == ".wav")
-        {
-            file = new TagLib.Riff.File(Path);
-            tag = file.GetTag(TagTypes.Id3v2, true);
+            file = TagLib.File.Create(Path);
+            tag = file.Tag;
         }
         if(file != null && tag != null)
         {

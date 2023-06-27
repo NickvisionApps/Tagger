@@ -66,6 +66,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Register Events 
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
+        _controller.MusicFolderUpdated += MusicFolderUpdated;
+        _controller.MusicFilesSaveStateChanged += MusicFilesSaveStateChanged;
         //Open Folder Action
         var actOpenFolder = Gio.SimpleAction.New("openFolder", null);
         actOpenFolder.OnActivate += OpenFolder;
@@ -113,6 +115,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _application.AddWindow(this);
         Present();
+        _controller.Startup();
     }
 
     /// <summary>
@@ -167,7 +170,8 @@ public partial class MainWindow : Adw.ApplicationWindow
             var path = g_file_get_path(obj.Handle);
             if (Directory.Exists(path))
             {
-                //TODO
+                _viewStack.SetVisibleChildName("Loading");
+                _controller.OpenFolderAsync(path).Wait();
                 return true;
             }
         }
@@ -183,13 +187,14 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         var folderDialog = gtk_file_dialog_new();
         gtk_file_dialog_set_title(folderDialog, _("Open Folder"));
-        _saveCallback = (source, res, data) =>
+        _saveCallback = async (source, res, data) =>
         {
             var fileHandle = gtk_file_dialog_select_folder_finish(folderDialog, res, IntPtr.Zero);
             if (fileHandle != IntPtr.Zero)
             {
                 var path = g_file_get_path(fileHandle);
-                //TODO
+                _viewStack.SetVisibleChildName("Loading");
+                await _controller.OpenFolderAsync(path);
             }
         };
         gtk_file_dialog_select_folder(folderDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
@@ -290,5 +295,26 @@ public partial class MainWindow : Adw.ApplicationWindow
         dialog.SetTranslatorCredits(_("translator-credits"));
         dialog.SetReleaseNotes(_controller.AppInfo.Changelog);
         dialog.Present();
+    }
+
+    /// <summary>
+    /// Occurs when the music folder is updated
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="sendToast">Whether or not to send a toast of loaded files</param>
+    private void MusicFolderUpdated(object? sender, bool sendToast)
+    {
+        _headerBar.RemoveCssClass("flat");
+        _title.SetSubtitle(_controller.MusicFolderPath);
+        _viewStack.SetVisibleChildName("Folder");
+        if(sendToast)
+        {
+            _toastOverlay.AddToast(Adw.Toast.New(string.Format(_("Loaded {0} music files."), _controller.MusicFiles.Count)));
+        }
+    }
+
+    private void MusicFilesSaveStateChanged(object? sender, EventArgs e)
+    {
+
     }
 }
