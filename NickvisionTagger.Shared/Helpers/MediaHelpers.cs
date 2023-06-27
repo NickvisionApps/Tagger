@@ -30,7 +30,7 @@ public static class MediaHelpers
     /// <returns>The file size string (~ MB)</returns>
     public static string ToFileSizeString(long fileSize)
     {
-        var sizes = new string[] { _("B"), _("KB"), _("MB"), _("GB"), _("TB") };
+        var sizes = new string[] { _("B"), _("KiB"), _("MiB"), _("GiB"), _("TiB") };
         var size = (double)fileSize;
         var index = 0;
         while (size >= 1024 && index < 4)
