@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 19:29-0400\n"
+"POT-Creation-Date: 2023-06-26 20:25-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,38 +17,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:185
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
-#: NickvisionTagger.GNOME/Blueprints/window.blp:55
-msgid "Open Folder"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:286
-msgid "Matrix Chat"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:285
-msgid "GitHub Repo"
-msgstr ""
-
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:288
 msgid ""
 "Nicholas Logozzo {0}\n"
 "Fyodor Sobolev {1}"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Program.cs:50
-#: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:5
-#: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:8
-msgid "Tag your music"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:290
-msgid "translator-credits"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:289
-msgid "Nicholas Logozzo {0}"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Program.cs:49
@@ -57,24 +29,48 @@ msgstr ""
 msgid "Tagger"
 msgstr ""
 
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:289
+msgid "Nicholas Logozzo {0}"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:285
+msgid "GitHub Repo"
+msgstr ""
+
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:287
 msgid ""
 "Nicholas Logozzo {0}\n"
 "Contributors on GitHub ❤️ {1}"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:10
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:290
+msgid "translator-credits"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:185
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
+#: NickvisionTagger.GNOME/Blueprints/window.blp:55
+msgid "Open Folder"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Program.cs:50
+#: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:5
+#: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:8
+msgid "Tag your music"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:286
+msgid "Matrix Chat"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:31
 #: NickvisionTagger.GNOME/Blueprints/window.blp:5
 msgid "Preferences"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:14
-msgid "User Interface"
-msgstr ""
-
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:15
-msgid "Customize the application's user interface."
+msgid "User Interface"
 msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:18
@@ -94,6 +90,56 @@ msgstr ""
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
 msgctxt "Theme"
 msgid "System"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:30
+msgid "Remember Last Opened Folder"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:46
+msgid "Music Folder"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:49
+msgid "Include Subfolders"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:65
+msgid "Music File"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:68
+msgid "Preserve Modification Timestamp"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:83
+msgid "Overwrite Tag With MusicBrainz"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:84
+msgid ""
+"Enable to overwrite existing tag metadata with data found from MusicBrainz. "
+"If disabled, only blank tag properties will be filled."
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:99
+msgid "Overwrite Album Art With MusicBrainz"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:100
+msgid "Enable to overwrite existing album art with art found from MusicBrainz."
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:116
+msgid "Fingerprinting"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:119
+msgid "AcoustId User API Key"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:129
+msgid "Get New API Key"
 msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:14
