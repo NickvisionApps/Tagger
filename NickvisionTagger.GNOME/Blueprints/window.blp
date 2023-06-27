@@ -147,11 +147,11 @@ Adw.ApplicationWindow _root {
           name: "Folder";
           child: Adw.Flap {
             flap-position: end;
-            reveal-flap: true;
-            fold-policy: never;
 
             [content]
             Adw.ViewStack _filesViewStack {
+              width-request: 320;
+
               Adw.ViewStackPage {
                 name: "NoFiles";
                 child: Adw.StatusPage {
