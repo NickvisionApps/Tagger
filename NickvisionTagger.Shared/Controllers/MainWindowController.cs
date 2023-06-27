@@ -14,8 +14,11 @@ namespace NickvisionTagger.Shared.Controllers;
 public class MainWindowController
 {
     private MusicFolder? _musicFolder;
-    private List<bool> _musicFilesSaved;
 
+    /// <summary>
+    /// The list of music file save states
+    /// </summary>
+    public List<bool> MusicFileSaveStates { get; init; }
     /// <summary>
     /// The list of selected music files
     /// </summary>
@@ -57,7 +60,7 @@ public class MainWindowController
     /// <summary>
     /// Occurs when a music file's save state is changed
     /// </summary>
-    public event EventHandler<EventArgs> MusicFilesSaveStateChanged;
+    public event EventHandler<EventArgs> MusicFileSaveStatesChanged;
 
     /// <summary>
     /// Constructs a MainWindowController
@@ -65,7 +68,7 @@ public class MainWindowController
     public MainWindowController()
     {
         _musicFolder = null;
-        _musicFilesSaved = new List<bool>();
+        MusicFileSaveStates = new List<bool>();
         SelectedMusicFiles = new Dictionary<int, MusicFile>();
     }
 
@@ -76,7 +79,7 @@ public class MainWindowController
     {
         get
         {
-            foreach(var saved in _musicFilesSaved)
+            foreach(var saved in MusicFileSaveStates)
             {
                 if(!saved)
                 {
@@ -131,7 +134,7 @@ public class MainWindowController
     public void CloseFolder()
     {
         _musicFolder = null;
-        _musicFilesSaved.Clear();
+        MusicFileSaveStates.Clear();
         SelectedMusicFiles.Clear();
         if(Configuration.Current.RememberLastOpenedFolder)
         {
@@ -148,11 +151,11 @@ public class MainWindowController
     {
         if(_musicFolder != null)
         {
-            _musicFilesSaved.Clear();
+            MusicFileSaveStates.Clear();
             await _musicFolder.ReloadMusicFilesAsync();
             for(var i = 0; i < _musicFolder.MusicFiles.Count; i++)
             {
-                _musicFilesSaved.Add(true);
+                MusicFileSaveStates.Add(true);
             }
             MusicFolderUpdated?.Invoke(this, true);
         }
@@ -170,10 +173,10 @@ public class MainWindowController
                 foreach(var pair in SelectedMusicFiles)
                 {
                     pair.Value.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp);
-                    _musicFilesSaved[pair.Key] = true;
+                    MusicFileSaveStates[pair.Key] = true;
                 }
             });
-            MusicFilesSaveStateChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
             if(sendToast)
             {
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Tags saved successfully."), NotificationSeverity.Success));

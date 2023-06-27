@@ -45,6 +45,21 @@ Adw.ApplicationWindow _root {
         primary: true;
       }
 
+      [end]
+      Gtk.Separator _headerEndSeparator {
+        styles ["spacer"]
+      }
+
+      [end]
+      Gtk.Button _applyButton {
+        label: _("Apply");
+        tooltip-text: _("Apply Changes To Tag (Ctrl+S)");
+        visible: false;
+        action-name: "win.apply";
+
+        styles ["suggested-action"]
+      }
+
       styles ["flat"]
     }
     

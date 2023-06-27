@@ -3,6 +3,7 @@ using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Controllers;
 using NickvisionTagger.Shared.Events;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -18,8 +19,11 @@ namespace NickvisionTagger.GNOME.Views;
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
+    private delegate bool GSourceFunc(nint data);
     private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
 
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -41,11 +45,16 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Adw.Application _application;
     private GAsyncReadyCallback? _saveCallback;
     private readonly Gtk.DropTarget _dropTarget;
+    private List<Adw.ActionRow> _listMusicFilesRows;
+    private readonly GSourceFunc _musicFolderUpdatedFunc;
+    private readonly GSourceFunc _musicFileSaveStatesFunc;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Button _openFolderButton;
     [Gtk.Connect] private readonly Gtk.Button _reloadFolderButton;
+    [Gtk.Connect] private readonly Gtk.Separator _headerEndSeparator;
+    [Gtk.Connect] private readonly Gtk.Button _applyButton;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Gtk.Label _loadingLabel;
@@ -56,6 +65,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller = controller;
         _application = application;
         _saveCallback = null;
+        _listMusicFilesRows = new List<Adw.ActionRow>();
+        _musicFolderUpdatedFunc =  MusicFolderUpdated;
+        _musicFileSaveStatesFunc = (x) => MusicFileSaveStatesChanged();
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
         SetIconName(_controller.AppInfo.ID);
@@ -69,8 +81,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Register Events 
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
-        _controller.MusicFolderUpdated += MusicFolderUpdated;
-        _controller.MusicFilesSaveStateChanged += MusicFilesSaveStateChanged;
+        _controller.MusicFolderUpdated += (sender, e) => g_main_context_invoke(0, _musicFolderUpdatedFunc, (IntPtr)GCHandle.Alloc(e));
+        _controller.MusicFileSaveStatesChanged += (sender, e) => g_main_context_invoke(0, _musicFileSaveStatesFunc, 0);
         //Open Folder Action
         var actOpenFolder = Gio.SimpleAction.New("openFolder", null);
         actOpenFolder.OnActivate += OpenFolder;
@@ -86,6 +98,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         actReloadFolder.OnActivate += ReloadFolder;
         AddAction(actReloadFolder);
         application.SetAccelsForAction("win.reloadFolder", new string[] { "F5" });
+        //Apply Action
+        var actApply = Gio.SimpleAction.New("apply", null);
+        actApply.OnActivate += Apply;
+        AddAction(actApply);
+        application.SetAccelsForAction("win.apply", new string[] { "Ctrl+S" });
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
@@ -359,34 +376,52 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the music folder is updated
     /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="sendToast">Whether or not to send a toast of loaded files</param>
-    private void MusicFolderUpdated(object? sender, bool sendToast)
+    /// <param name="data">bool on whether or not to send a toast of loaded files</param>
+    private bool MusicFolderUpdated(nint data)
     {
-        if(!string.IsNullOrEmpty(_controller.MusicFolderPath))
+        var handle = GCHandle.FromIntPtr(data);
+        var target = (bool?)handle.Target;
+        if(target != null)
         {
-            _headerBar.RemoveCssClass("flat");
-            _title.SetSubtitle(_controller.MusicFolderPath);
-            _openFolderButton.SetVisible(true);
-            _reloadFolderButton.SetVisible(true);
-            _viewStack.SetVisibleChildName("Folder");
-            if(sendToast)
+            var sendToast = target.Value;
+            if(!string.IsNullOrEmpty(_controller.MusicFolderPath))
             {
-                _toastOverlay.AddToast(Adw.Toast.New(string.Format(_("Loaded {0} music files."), _controller.MusicFiles.Count)));
+                _headerBar.RemoveCssClass("flat");
+                _title.SetSubtitle(_controller.MusicFolderPath);
+                _openFolderButton.SetVisible(true);
+                _reloadFolderButton.SetVisible(true);
+                _applyButton.SetVisible(false);
+                _viewStack.SetVisibleChildName("Folder");
+                if(sendToast)
+                {
+                    _toastOverlay.AddToast(Adw.Toast.New(string.Format(_("Loaded {0} music files."), _controller.MusicFiles.Count)));
+                }
+            }
+            else
+            {
+                _headerBar.AddCssClass("flat");
+                _title.SetSubtitle(null);
+                _openFolderButton.SetVisible(false);
+                _reloadFolderButton.SetVisible(false);
+                _applyButton.SetVisible(false);
+                _viewStack.SetVisibleChildName("NoFolder");
             }
         }
-        else
-        {
-            _headerBar.AddCssClass("flat");
-            _title.SetSubtitle(null);
-            _openFolderButton.SetVisible(false);
-            _reloadFolderButton.SetVisible(false);
-            _viewStack.SetVisibleChildName("NoFolder");
-        }
+        handle.Free();
+        return false;
     }
 
-    private void MusicFilesSaveStateChanged(object? sender, EventArgs e)
+    /// <summary>
+    /// Occurs when a music file's save state is changed
+    /// </summary>
+    private bool MusicFileSaveStatesChanged()
     {
-
+        var i = 0;
+        foreach(var saved in _controller.MusicFileSaveStates)
+        {
+            _listMusicFilesRows[i].SetIconName(!saved ? "document-modified-symbolic" : "");
+            i++;
+        }
+        return false;
     }
 }
