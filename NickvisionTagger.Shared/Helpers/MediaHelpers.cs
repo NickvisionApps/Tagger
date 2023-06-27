@@ -13,7 +13,7 @@ public static class MediaHelpers
     /// </summary>
     /// <param name="duration">The duration in seconds</param>
     /// <returns>The duration string (HH:MM:SS)</returns>
-    public static string ToDurationString(int duration)
+    public static string ToDurationString(this int duration)
     {
         var seconds = duration % 60;
         duration /= 60;
@@ -28,7 +28,7 @@ public static class MediaHelpers
     /// </summary>
     /// <param name="fileSize">The file size in bytes</param>
     /// <returns>The file size string (~ MB)</returns>
-    public static string ToFileSizeString(long fileSize)
+    public static string ToFileSizeString(this long fileSize)
     {
         var sizes = new string[] { _("B"), _("KiB"), _("MiB"), _("GiB"), _("TiB") };
         var size = (double)fileSize;

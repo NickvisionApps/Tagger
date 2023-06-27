@@ -138,10 +138,8 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 process.Start();
                 _fingerprint = process.StandardOutput.ReadToEnd();
                 process.WaitForExit();
-                if(process.ExitCode != 0)
-                {
-                    _fingerprint = "ERROR";
-                }
+                _fingerprint = process.ExitCode != 0 ? "ERROR " : _fingerprint.Substring(_fingerprint.IndexOf("FINGERPRINT=") + 12);
+                _fingerprint = _fingerprint.Remove(_fingerprint.Length - 1);
             }
             return _fingerprint;
         }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -20,9 +21,19 @@ namespace NickvisionTagger.GNOME.Views;
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public unsafe struct GLibList
+    {
+        public nint data;
+        public GLibList* next;
+        public GLibList* prev;
+    }
+
     private delegate bool GSourceFunc(nint data);
     private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
 
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_object_unref(nint obj);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -45,12 +56,27 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial nint g_file_icon_new(nint gfile);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_notification_set_icon(nint notification, nint icon);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static unsafe partial GLibList* gtk_list_box_get_selected_rows(nint box);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial int gtk_list_box_row_get_index(nint row);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gdk_pixbuf_loader_new();
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gdk_pixbuf_loader_write(nint loader, [MarshalAs(UnmanagedType.LPArray)] byte[] buf, uint count, nint error);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gdk_pixbuf_loader_get_pixbuf(nint loader);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_image_set_from_pixbuf(nint image, nint pixbuf);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gdk_pixbuf_loader_close(nint loader, nint error);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private GAsyncReadyCallback? _saveCallback;
     private readonly Gtk.DropTarget _dropTarget;
     private List<Adw.ActionRow> _listMusicFilesRows;
+    private bool _isSelectionOccuring;
     private readonly GSourceFunc _musicFolderUpdatedFunc;
     private readonly GSourceFunc _musicFileSaveStatesFunc;
 
@@ -94,6 +120,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _application = application;
         _saveCallback = null;
         _listMusicFilesRows = new List<Adw.ActionRow>();
+        _isSelectionOccuring = false;
         _musicFolderUpdatedFunc =  MusicFolderUpdated;
         _musicFileSaveStatesFunc = (x) => MusicFileSaveStatesChanged();
         SetDefaultSize(800, 600);
@@ -639,6 +666,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         if(target != null)
         {
             var sendToast = target.Value;
+            _listMusicFiles.UnselectAll();
             foreach(var row in _listMusicFilesRows)
             {
                 _listMusicFiles.Remove(row);
@@ -713,9 +741,66 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gtk.ListBox</param>
     /// <param name="e">EventArgs</param>
-    private void ListMusicFiles_SelectionChanged(Gtk.ListBox sender, EventArgs e)
+    private unsafe void ListMusicFiles_SelectionChanged(Gtk.ListBox sender, EventArgs e)
     {
-
+        _isSelectionOccuring = true;
+        //Update Selected Files
+        var selectedIndexes = new List<int>();
+        var firstSelectedRowPtr = gtk_list_box_get_selected_rows(_listMusicFiles.Handle);
+        for(var ptr = firstSelectedRowPtr; ptr != null; ptr = ptr->next)
+        {
+            selectedIndexes.Add(gtk_list_box_row_get_index(ptr->data));
+        }
+        _controller.UpdateSelectedMusicFiles(selectedIndexes);
+        //Update UI
+        _applyButton.SetVisible(selectedIndexes.Count != 0);
+        _tagActionsButton.SetVisible(selectedIndexes.Count != 0);
+        _webServicesButton.SetVisible(selectedIndexes.Count != 0);
+        _filenameRow.SetEditable(selectedIndexes.Count < 1);
+        if(selectedIndexes.Count == 0)
+        {
+            _musicFilesSearch.SetText("");
+        }
+        _filenameRow.SetText(_controller.SelectedPropertyMap.Filename);
+        _titleRow.SetText(_controller.SelectedPropertyMap.Title);
+        _artistRow.SetText(_controller.SelectedPropertyMap.Artist);
+        _albumRow.SetText(_controller.SelectedPropertyMap.Album);
+        _yearRow.SetText(_controller.SelectedPropertyMap.Year);
+        _trackRow.SetText(_controller.SelectedPropertyMap.Track);
+        _albumArtistRow.SetText(_controller.SelectedPropertyMap.AlbumArtist);
+        _genreRow.SetText(_controller.SelectedPropertyMap.Genre);
+        _commentRow.SetText(_controller.SelectedPropertyMap.Comment);
+        _durationRow.SetText(_controller.SelectedPropertyMap.Duration);
+        _fingerprintRow.SetText(_controller.SelectedPropertyMap.Fingerprint);
+        _fileSizeRow.SetText(_controller.SelectedPropertyMap.FileSize);
+        if(_controller.SelectedPropertyMap.AlbumArt == "hasArt")
+        {
+            _artViewStack.SetVisibleChildName("Image");
+            var art = _controller.SelectedMusicFiles.First().Value.AlbumArt;
+            if(art.IsEmpty)
+            {
+                _albumArtImage.Clear();
+            }
+            else
+            {
+                var loader = gdk_pixbuf_loader_new();
+                gdk_pixbuf_loader_write(loader, art.Data, (uint)art.Data.Length, 0);
+                gtk_image_set_from_pixbuf(_albumArtImage.Handle, gdk_pixbuf_loader_get_pixbuf(loader));
+                gdk_pixbuf_loader_close(loader, 0);
+                g_object_unref(loader);
+            }
+        }
+        else if(_controller.SelectedPropertyMap.AlbumArt == "keepArt")
+        {
+            _artViewStack.SetVisibleChildName("KeepImage");
+            _albumArtImage.Clear();
+        }
+        else
+        {
+            _artViewStack.SetVisibleChildName("NoImage");
+            _albumArtImage.Clear();
+        }
+        _isSelectionOccuring = false;
     }
 
     /// <summary>
@@ -723,6 +808,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private void TagPropertyChanged()
     {
-
+        if(!_isSelectionOccuring && _controller.SelectedMusicFiles.Count > 0)
+        {
+            Console.WriteLine("Here2");
+        }
     }
 }
