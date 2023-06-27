@@ -13,9 +13,8 @@ public static class MediaHelpers
     /// </summary>
     /// <param name="duration">The duration in seconds</param>
     /// <returns>The duration string (HH:MM:SS)</returns>
-    public static string ToDurationString(double duration)
+    public static string ToDurationString(int duration)
     {
-        duration = Math.Round(duration);
         var seconds = duration % 60;
         duration /= 60;
         var minutes = duration % 60;

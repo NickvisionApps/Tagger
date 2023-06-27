@@ -1,7 +1,11 @@
+using AcoustID.Web;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using System.Threading.Tasks;
+using MetaBrainz.MusicBrainz;
+using MetaBrainz.MusicBrainz.CoverArt;
+using MetaBrainz.MusicBrainz.Interfaces.Entities;
 using TagLib;
 
 namespace NickvisionTagger.Shared.Models;
@@ -59,7 +63,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <summary>
     /// The duration of the music file
     /// </summary>
-    public double Duration { get; private set; }
+    public int Duration { get; private set; }
     
     /// <summary>
     /// The size of the music file
@@ -191,7 +195,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             AlbumArtist = tag.FirstAlbumArtist;
             Genre = tag.FirstGenre;
             Comment = tag.Comment;
-            Duration = file.Properties.Duration.TotalSeconds;
+            Duration = (int)Math.Round(file.Properties.Duration.TotalSeconds);
             if(tag.Pictures.Length > 0)
             {
                 foreach(var picture in tag.Pictures)
@@ -213,12 +217,114 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// Loads tag metadata from MusicBrainz (discarding any unapplied metadata)
     /// </summary>
     /// <param name="acoustIdClientKey">The app's AcoustId Key</param>
+    /// <param name="appInfo">The AppInfo object for the app</param>
     /// <param name="overwriteTagWithMusicBrainz">Whether or not to overwrite a tag's existing data with data from MusicBrainz</param>
     /// <param name="overwriteAlbumArtWithMusicBrainz">Whether or not to overwrite a tag's existing album art with album art from MusicBrainz</param>
     /// <returns>True if successful, else false</returns>
-    public bool LoadTagFromMusicBrainz(string acoustIdClientKey, bool overwriteTagWithMusicBrainz, bool overwriteAlbumArtWithMusicBrainz)
+    public async Task<bool> LoadTagFromMusicBrainzAsync(string acoustIdClientKey, AppInfo appInfo, bool overwriteTagWithMusicBrainz, bool overwriteAlbumArtWithMusicBrainz)
     {
-        // TODO
+        //Use AcoustID to get MBID
+        AcoustID.Configuration.ClientKey = acoustIdClientKey;
+        var service = new LookupService();
+        var response = await service.GetAsync(Fingerprint, Duration);
+        if(response.Results.Count > 0)
+        {
+            //AcoustID Results
+            var bestResult = response.Results[0];
+            foreach (var r in response.Results)
+            {
+                if(r.Score > bestResult.Score && r.Recordings.Count > 0)
+                {
+                    bestResult = r;
+                }
+            }
+            //AcoustID Recordings
+            var bestRecordingId = bestResult.Recordings[0].Id;
+            foreach (var r in bestResult.Recordings)
+            {
+                if(r.Title != "")
+                {
+                    bestRecordingId = r.Id;
+                    break;
+                }
+            }
+            //MusicBrainz
+            using var query = new Query(appInfo.Version, appInfo.Version, "mailto:nlogozzo225@gmail.com");
+            IRecording? recording = null;
+            IRelease? album = null;
+            try
+            {
+                recording = await query.LookupRecordingAsync(Guid.Parse(bestRecordingId));
+            }
+            catch
+            {
+                return false;
+            }
+            if(recording.Releases != null && recording.Releases.Count > 0)
+            {
+                album = recording.Releases[0];
+            }
+            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Title))
+            {
+                Title = recording.Title ?? "";
+            }
+            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Artist))
+            {
+                if(recording.ArtistCredit != null && recording.ArtistCredit.Count > 0)
+                {
+                    Artist = recording.ArtistCredit[0].Name ?? "";
+                }
+            }
+            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Album))
+            {
+                if(album != null)
+                {
+                    Album = album.Title ?? "";
+                }
+            }
+            if(overwriteTagWithMusicBrainz || Year == 0)
+            {
+                if(recording.FirstReleaseDate != null)
+                {
+                    Year = (uint)(recording.FirstReleaseDate.Year ?? 0);
+                }
+            }
+            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(AlbumArtist))
+            {
+                if(album != null && album.ArtistCredit != null && album.ArtistCredit.Count > 0)
+                {
+                    AlbumArtist = album.ArtistCredit[0].Name ?? "";
+                }
+            }
+            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Genre))
+            {
+                if(recording.Genres != null && recording.Genres.Count > 0)
+                {
+                    Genre = recording.Genres[0].Name ?? "";
+                }
+            }
+            if(overwriteAlbumArtWithMusicBrainz || AlbumArt.IsEmpty)
+            {
+                if(album != null && album.CoverArtArchive != null && album.CoverArtArchive.Count > 0)
+                {
+                    using var caQuery = new CoverArt(appInfo.Version, appInfo.Version, "mailto:nlogozzo225@gmail.com");
+                    CoverArtImage? img = null;
+                    try
+                    {
+                        img = await caQuery.FetchFrontAsync(Guid.Parse(bestRecordingId));
+                    }
+                    catch { }
+                    if(img != null)
+                    {
+                        var reader = new StreamReader(img.Data);
+                        AlbumArt = await reader.ReadToEndAsync();
+                        reader.Dispose();
+                        img.Dispose();
+                    }
+                }
+            }
+            return true;
+        }
         return false;
     }
     
@@ -281,6 +387,14 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             };
             file.Save();
             file.Dispose();
+            if(preserveModificationTimestamp)
+            {
+                System.IO.File.SetLastWriteTime(Path, _modificationTimestamp);
+            }
+            else
+            {
+                _modificationTimestamp = System.IO.File.GetLastWriteTime(Path);
+            }
             return true;
         }
         return false;
@@ -309,8 +423,53 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool FilenameToTag(string formatString)
     {
-        // TODO
-        return false;
+        if (formatString == "%artist%- %title%")
+        {
+            var dashIndex = Filename.IndexOf("- ");
+            if(dashIndex == -1)
+            {
+                return false;
+            }
+            Artist = Filename.Substring(0, dashIndex);
+            Title = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Artist.Length + 2));
+        }
+        else if (formatString == "%title%- %artist%")
+        {
+            var dashIndex = Filename.IndexOf("- ");
+            if(dashIndex == -1)
+            {
+                return false;
+            }
+            Title = Filename.Substring(0, dashIndex);
+            Artist = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Title.Length - 2));
+        }
+        else if (formatString == "%track%- %title%")
+        {
+            var dashIndex = Filename.IndexOf("- ");
+            if(dashIndex == -1)
+            {
+                return false;
+            }
+            try
+            {
+                Track = uint.Parse(Filename.Substring(0, dashIndex));
+                Title = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Track.ToString().Length - 2));
+            }
+            catch
+            {
+                Track = 0;
+                Title = "";
+            }
+        }
+        else if (formatString == "%title%")
+        {
+            Title = Filename.Substring(0, Filename.IndexOf(System.IO.Path.GetExtension(Path)));
+        }
+        else
+        {
+            return false;
+        }
+        return true;
     }
     
     /// <summary>
@@ -320,8 +479,71 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool TagToFilename(string formatString)
     {
-        // TODO
-        return false;
+        if (formatString == "%artist%- %title%")
+        {
+            if(string.IsNullOrEmpty(Artist) || string.IsNullOrEmpty(Title))
+            {
+                return false;
+            }
+            try
+            {
+                Filename = $"{Artist}- {Title}{_dotExtension}";
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        else if (formatString == "%title%- %artist%")
+        {
+            if(string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(Artist))
+            {
+                return false;
+            }
+            try
+            {
+                Filename = $"{Title}- {Artist}{_dotExtension}";
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        else if (formatString == "%track%- %title%")
+        {
+            if(string.IsNullOrEmpty(Title))
+            {
+                return false;
+            }
+            try
+            {
+                Filename = $"{Track:D2}- {Title}{_dotExtension}";
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        else if (formatString == "%title%")
+        {
+            if(string.IsNullOrEmpty(Title))
+            {
+                return false;
+            }
+            try
+            {
+                Filename = $"{Title}{_dotExtension}";
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+        return true;
     }
     
     /// <summary>
@@ -331,10 +553,31 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <param name="acoustIdUserKey">The users's AcoustId Key</param>
     /// <param name="musicBrainzRecordingId">The MusicBrainz recourding id of the file</param>
     /// <returns>True if successful, else false</returns>
-    public bool SubmitToAcoustId(string acoustIdClientKey, string acoustIdUserKey, string musicBrainzRecordingId)
+    public async Task<bool> SubmitToAcoustIdAsync(string acoustIdClientKey, string acoustIdUserKey, string musicBrainzRecordingId)
     {
-        // TODO
-        return false;
+        AcoustID.Configuration.ClientKey = acoustIdClientKey;
+        var service = new SubmitService(acoustIdUserKey);
+        if(string.IsNullOrEmpty(musicBrainzRecordingId))
+        {
+            var response = await service.SubmitAsync(new SubmitRequest(Fingerprint, Duration)
+            {
+                MBID = musicBrainzRecordingId
+            });
+            return string.IsNullOrEmpty(response.ErrorMessage);
+        }
+        else
+        {
+            var response = await service.SubmitAsync(new SubmitRequest(Fingerprint, Duration)
+            {
+                Title = Title,
+                Artist = Artist,
+                Album = Album,
+                AlbumArtist = AlbumArtist,
+                Year = (int)Year,
+                TrackNumber = (int)Track
+            });
+            return string.IsNullOrEmpty(response.ErrorMessage);
+        }
     }
     
     /// <summary>
