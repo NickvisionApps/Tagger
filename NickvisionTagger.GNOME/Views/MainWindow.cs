@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.GNOME.Views;
@@ -116,11 +117,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Starts the MainWindow
     /// </summary>
-    public void Start()
+    public async Task StartAsync()
     {
         _application.AddWindow(this);
         Present();
-        _controller.Startup();
+        _viewStack.SetVisibleChildName("Loading");
+        await _controller.StartupAsync();
     }
 
     /// <summary>

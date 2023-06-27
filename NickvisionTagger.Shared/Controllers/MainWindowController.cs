@@ -2,6 +2,7 @@ using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
@@ -77,9 +78,17 @@ public class MainWindowController
     /// <summary>
     /// Starts the application
     /// </summary>
-    public void Startup()
+    public async Task StartupAsync()
     {
         Configuration.Current.Saved += ConfigurationSaved;
+        if(Configuration.Current.RememberLastOpenedFolder && Directory.Exists(Configuration.Current.LastOpenedFolder))
+        {
+            await OpenFolderAsync(Configuration.Current.LastOpenedFolder);
+        }
+        else
+        {
+            MusicFolderUpdated?.Invoke(this, true);
+        }
     }
 
     /// <summary>
@@ -91,6 +100,11 @@ public class MainWindowController
         _musicFolder = new MusicFolder(path);
         _musicFolder.IncludeSubfolders = Configuration.Current.IncludeSubfolders;
         await _musicFolder.ReloadMusicFilesAsync();
+        if(Configuration.Current.RememberLastOpenedFolder)
+        {
+            Configuration.Current.LastOpenedFolder = _musicFolder.ParentPath;
+            Configuration.Current.Save();
+        }
         MusicFolderUpdated?.Invoke(this, true);
     }
 
@@ -100,6 +114,11 @@ public class MainWindowController
     public void CloseFolder()
     {
         _musicFolder = null;
+        if(Configuration.Current.RememberLastOpenedFolder)
+        {
+            Configuration.Current.LastOpenedFolder = "";
+            Configuration.Current.Save();
+        }
         MusicFolderUpdated?.Invoke(this, true);
     }
 

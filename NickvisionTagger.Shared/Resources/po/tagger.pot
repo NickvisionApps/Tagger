@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-27 10:19-0400\n"
+"POT-Creation-Date: 2023-06-27 10:32-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,10 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:301
+#, csharp-format
+msgid "David Lapshin {0}"
+msgstr ""
+
+#: ../../../Helpers/MediaHelpers.cs:33
+msgid "MiB"
+msgstr ""
+
 #: ../../../../NickvisionTagger.GNOME/Program.cs:50
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:5
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:8
 msgid "Tag your music"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:298
+msgid "Matrix Chat"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Program.cs:49
@@ -29,45 +42,23 @@ msgstr ""
 msgid "Tagger"
 msgstr ""
 
-#: ../../../Helpers/MediaHelpers.cs:33
-msgid "GiB"
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:322
+msgid "Loaded {0} music files."
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:302
+msgid "translator-credits"
 msgstr ""
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:194
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
-#: NickvisionTagger.GNOME/Blueprints/window.blp:55
-msgid "Open Folder"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:295
-msgid "GitHub Repo"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:297
-#, csharp-format
-msgid ""
-"Nicholas Logozzo {0}\n"
-"Contributors on GitHub ❤️ {1}"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:320
-msgid "Loaded {0} music files."
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:299
-#, csharp-format
-msgid "David Lapshin {0}"
-msgstr ""
-
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:298
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:300
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -75,16 +66,25 @@ msgid ""
 "DaPigGuy {2}"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:296
-msgid "Matrix Chat"
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:196
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
+#: NickvisionTagger.GNOME/Blueprints/window.blp:55
+msgid "Open Folder"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:299
+#, csharp-format
+msgid ""
+"Nicholas Logozzo {0}\n"
+"Contributors on GitHub ❤️ {1}"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:297
+msgid "GitHub Repo"
 msgstr ""
 
 #: ../../../Helpers/MediaHelpers.cs:33
-msgid "MiB"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:300
-msgid "translator-credits"
+msgid "GiB"
 msgstr ""
 
 #: ../../../Helpers/MediaHelpers.cs:33
@@ -216,6 +216,10 @@ msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:53
 msgid "Open a folder with music to get started."
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:80
+msgid "Loading music files in folder..."
 msgstr ""
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:11

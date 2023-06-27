@@ -64,14 +64,23 @@ Adw.ApplicationWindow _root {
 
         Adw.ViewStackPage _loadingPage {
           name: "Loading";
-          child: Gtk.Spinner {
-            width-request: 48;
-            height-request: 48;
-            hexpand: true;
-            vexpand: true;
+          child: Gtk.Box {
+            orientation: vertical;
             halign: center;
             valign: center;
-            spinning: bind _loadingPage.visible;
+            spacing: 24;
+
+            Gtk.Spinner {
+              width-request: 42;
+              height-request: 42;
+              spinning: bind _loadingPage.visible;
+            }
+
+            Gtk.Label {
+              label: _("Loading music files in folder...");
+
+              styles ["title-3"]
+            }
           };
         }
 
