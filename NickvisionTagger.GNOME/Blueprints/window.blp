@@ -7,6 +7,28 @@ menu mainMenu {
   item(_("About Tagger"), "win.about")
 }
 
+menu tagActionsMenu {
+  section {
+    item(_("Discard Unapplied Changes"), "win.discardUnappliedChanges")
+    item(_("Delete Tags"), "win.deleteTags")
+  }
+
+  section {
+    item(_("Convert Filename to Tag"), "win.filenameToTag")
+    item(_("Discard Tag to Filename"), "win.tagToFilename")
+  }
+
+  section {
+    item(_("Insert Album Art"), "win.insertAlbumArt")
+    item(_("Remove Album Art"), "win.removeAlbumArt")
+  }
+}
+
+menu webServicesMenu {
+  item(_("Download MusicBrainz Metadata"), "win.downloadMusicBrainzMetadata")
+  item(_("Submit to AcoustId"), "win.submitToAcoustId")
+}
+
 Adw.ApplicationWindow _root {
   default-width: 800;
   default-height: 600;
@@ -60,6 +82,22 @@ Adw.ApplicationWindow _root {
         styles ["suggested-action"]
       }
 
+      [end]
+      Gtk.MenuButton _tagActionsButton {
+        icon-name: "document-properties-symbolic";
+        menu-model: tagActionsMenu;
+        visible: false;
+        tooltip-text: _("Tag Actions");
+      }
+
+      [end]
+      Gtk.MenuButton _webServicesButton {
+        icon-name: "web-browser-symbolic";
+        menu-model: webServicesMenu;
+        visible: false;
+        tooltip-text: _("Web Services");
+      }
+
       styles ["flat"]
     }
     
@@ -100,7 +138,7 @@ Adw.ApplicationWindow _root {
             }
 
             Gtk.Label _loadingLabel {
-              styles ["title-3"]
+              styles ["title-4"]
             }
           };
         }

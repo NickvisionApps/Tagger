@@ -55,6 +55,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Button _reloadFolderButton;
     [Gtk.Connect] private readonly Gtk.Separator _headerEndSeparator;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
+    [Gtk.Connect] private readonly Gtk.MenuButton _tagActionsButton;
+    [Gtk.Connect] private readonly Gtk.MenuButton _webServicesButton;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Gtk.Label _loadingLabel;
@@ -102,7 +104,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var actApply = Gio.SimpleAction.New("apply", null);
         actApply.OnActivate += Apply;
         AddAction(actApply);
-        application.SetAccelsForAction("win.apply", new string[] { "Ctrl+S" });
+        application.SetAccelsForAction("win.apply", new string[] { "<Ctrl>S" });
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
@@ -391,6 +393,8 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _openFolderButton.SetVisible(true);
                 _reloadFolderButton.SetVisible(true);
                 _applyButton.SetVisible(false);
+                _tagActionsButton.SetVisible(false);
+                _webServicesButton.SetVisible(false);
                 _viewStack.SetVisibleChildName("Folder");
                 if(sendToast)
                 {
@@ -404,6 +408,8 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _openFolderButton.SetVisible(false);
                 _reloadFolderButton.SetVisible(false);
                 _applyButton.SetVisible(false);
+                _tagActionsButton.SetVisible(false);
+                _webServicesButton.SetVisible(false);
                 _viewStack.SetVisibleChildName("NoFolder");
             }
         }
