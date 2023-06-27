@@ -173,6 +173,27 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Saves all files' tags
+    /// </summary>
+    public async Task SaveAllTagsAsync()
+    {
+        if(_musicFolder != null)
+        {
+            await Task.Run(() =>
+            {
+                var i = 0;
+                foreach(var file in _musicFolder.MusicFiles)
+                {
+                    file.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp);
+                    MusicFileSaveStates[i] = true;
+                    i++;
+                }
+            });
+            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    /// <summary>
     /// Saves the selected files' tags
     /// </summary>
     public async Task SaveSelectedTagsAsync()
@@ -193,20 +214,18 @@ public class MainWindowController
     }
 
     /// <summary>
-    /// Saves all files' tags
+    /// Discards the selected files' unsaved tag changes
     /// </summary>
-    public async Task SaveAllTagsAsync()
+    public async Task DiscardSelectedUnappliedChanges()
     {
         if(_musicFolder != null)
         {
             await Task.Run(() =>
             {
-                var i = 0;
-                foreach(var file in _musicFolder.MusicFiles)
+                foreach(var pair in SelectedMusicFiles)
                 {
-                    file.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp);
-                    MusicFileSaveStates[i] = true;
-                    i++;
+                    pair.Value.LoadTagFromDisk();
+                    MusicFileSaveStates[pair.Key] = true;
                 }
             });
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);

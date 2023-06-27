@@ -132,6 +132,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         actApply.OnActivate += Apply;
         AddAction(actApply);
         application.SetAccelsForAction("win.apply", new string[] { "<Ctrl>S" });
+        //Discard Unapplied Changes Action
+        var actDiscard = Gio.SimpleAction.New("discardUnappliedChanges", null);
+        actDiscard.OnActivate += DiscardUnappliedChanges;
+        AddAction(actDiscard);
+        application.SetAccelsForAction("win.discardUnappliedChanges", new string[] { "<Ctrl>Z" });
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
         actPreferences.OnActivate += Preferences;
@@ -332,11 +337,28 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
     }
 
+    /// <summary>
+    /// Occurs when the apply action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
     private async void Apply(Gio.SimpleAction sender, EventArgs e)
     {
         _viewStack.SetVisibleChildName("Loading");
         _loadingLabel.SetText(_("Saving tags..."));
         await _controller.SaveSelectedTagsAsync();
+    }
+
+    /// <summary>
+    /// Occurs when the discard unapplied changes action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private async void DiscardUnappliedChanges(Gio.SimpleAction sender, EventArgs e)
+    {
+        _viewStack.SetVisibleChildName("Loading");
+        _loadingLabel.SetText(_("Discarding unapplied changes..."));
+        await _controller.DiscardSelectedUnappliedChanges();
     }
 
     /// <summary>
@@ -496,6 +518,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private bool MusicFileSaveStatesChanged()
     {
+        _viewStack.SetVisibleChildName("Folder");
         var i = 0;
         foreach(var saved in _controller.MusicFileSaveStates)
         {

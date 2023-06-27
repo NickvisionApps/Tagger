@@ -22,6 +22,25 @@ Gtk.ShortcutsWindow _shortcuts {
         title: _("Close Folder");
         accelerator: "<Control>w";
       }
+
+      Gtk.ShortcutsShortcut {
+        title: _("Reload Folder");
+        accelerator: "F5";
+      }
+    }
+
+    Gtk.ShortcutsGroup {
+      title: C_("Shortcut", "Music File");
+
+      Gtk.ShortcutsShortcut {
+        title: _("Save Tag");
+        accelerator: "<Control>s";
+      }
+
+      Gtk.ShortcutsShortcut {
+        title: _("Discard Unapplied Changes");
+        accelerator: "<Control>z";
+      }
     }
 
     Gtk.ShortcutsGroup {

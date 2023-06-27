@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-27 15:24-0400\n"
+"POT-Creation-Date: 2023-06-27 15:56-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,46 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:395
-msgid "Matrix Chat"
+#: ../../../Helpers/MediaHelpers.cs:33
+msgid "KiB"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:274
-msgid "Cancel"
+#: ../../../Helpers/MediaHelpers.cs:33
+msgid "GiB"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:398
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:455
 #, csharp-format
 msgid "David Lapshin {0}"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:182
+#: ../../../Controllers/MainWindowController.cs:212
 msgid "Tags saved successfully."
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:274
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:453
+#, csharp-format
 msgid ""
-"Some music files still have changes waiting to be applied. What would you "
-"like to do?"
+"Nicholas Logozzo {0}\n"
+"Contributors on GitHub ❤️ {1}"
+msgstr ""
+
+#: ../../../Helpers/MediaHelpers.cs:33
+msgid "TiB"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:360
+msgid "Discarding unapplied changes..."
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:236
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:314
+#: NickvisionTagger.GNOME/Blueprints/window.blp:77
+msgid "Apply"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:451
+msgid "GitHub Repo"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Program.cs:49
@@ -47,64 +66,54 @@ msgid "Tagger"
 msgstr ""
 
 #: ../../../Helpers/MediaHelpers.cs:33
-msgid "GiB"
+msgid "MiB"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:396
-#, csharp-format
-msgid ""
-"Nicholas Logozzo {0}\n"
-"Contributors on GitHub ❤️ {1}"
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:452
+msgid "Matrix Chat"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:394
-msgid "GitHub Repo"
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:236
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:314
+msgid "Apply Changes?"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:440
-msgid "Loaded {0} music files."
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:236
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:314
+msgid "Discard"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:250
+#: ../../../Helpers/MediaHelpers.cs:33
+msgid "B"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:290
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
 #: NickvisionTagger.GNOME/Blueprints/window.blp:116
 msgid "Open Folder"
 msgstr ""
 
-#: ../../../Helpers/MediaHelpers.cs:33
-msgid "KiB"
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:454
+#, csharp-format
+msgid ""
+"Nicholas Logozzo {0}\n"
+"Fyodor Sobolev {1}\n"
+"DaPigGuy {2}"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:280
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:303
-msgid "Saving tags..."
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:177
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:234
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:258
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:286
-msgid "Loading music files from folder..."
-msgstr ""
-
-#: ../../../Helpers/MediaHelpers.cs:33
-msgid "MiB"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:274
-msgid "Apply Changes?"
-msgstr ""
-
-#: ../../../Helpers/MediaHelpers.cs:33
-msgid "TiB"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:274
-msgid "Discard"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:399
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:456
 msgid "translator-credits"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:497
+msgid "Loaded {0} music files."
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:183
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:274
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:298
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:326
+msgid "Loading music files from folder..."
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Program.cs:50
@@ -113,25 +122,26 @@ msgstr ""
 msgid "Tag your music"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:274
-#: NickvisionTagger.GNOME/Blueprints/window.blp:77
-msgid "Apply"
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:236
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:314
+msgid "Cancel"
 msgstr ""
 
-#: ../../../Helpers/MediaHelpers.cs:33
-msgid "B"
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:242
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:320
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:348
+msgid "Saving tags..."
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:397
-#, csharp-format
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:236
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:314
 msgid ""
-"Nicholas Logozzo {0}\n"
-"Fyodor Sobolev {1}\n"
-"DaPigGuy {2}"
+"Some music files still have changes waiting to be applied. What would you "
+"like to do?"
 msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:31
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:50
 #: NickvisionTagger.GNOME/Blueprints/window.blp:5
 msgid "Preferences"
 msgstr ""
@@ -218,27 +228,41 @@ msgstr ""
 msgid "Close Folder"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:28
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:27
+msgid "Reload Folder"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:33
+msgctxt "Shortcut"
+msgid "Music File"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:36
+msgid "Save Tag"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:41
+#: NickvisionTagger.GNOME/Blueprints/window.blp:12
+msgid "Discard Unapplied Changes"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:47
 msgctxt "Shortcut"
 msgid "Application"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:36
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:55
 #: NickvisionTagger.GNOME/Blueprints/window.blp:6
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:41
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:60
 #: NickvisionTagger.GNOME/Blueprints/window.blp:7
 msgid "About Tagger"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:46
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:65
 msgid "Quit"
-msgstr ""
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:12
-msgid "Discard Unapplied Changes"
 msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:13
