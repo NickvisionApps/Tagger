@@ -1,7 +1,6 @@
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Models;
 using System;
-using System.IO;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Controllers;
