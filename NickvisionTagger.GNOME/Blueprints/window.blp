@@ -30,8 +30,8 @@ menu webServicesMenu {
 }
 
 Adw.ApplicationWindow _root {
-  default-width: 800;
-  default-height: 600;
+  default-width: 900;
+  default-height: 700;
 
   Gtk.Box {
     orientation: vertical;
@@ -213,7 +213,124 @@ Adw.ApplicationWindow _root {
 
             [flap]
             Gtk.ScrolledWindow {
+              hexpand: true;
+              vexpand: true;
 
+              child: Adw.Clamp {
+                child: Gtk.Box {
+                  orientation: vertical;
+                  spacing: 40;
+                  margin-start: 6;
+                  margin-top: 6;
+                  margin-end: 6;
+                  margin-bottom: 6;
+
+                  Adw.ViewStack _artViewStack {
+                    halign: center;
+                    width-request: 280;
+                    height-request: 280;
+                    margin-top: 12;
+
+                    Adw.ViewStackPage {
+                      name: "NoImage";
+                      child: Gtk.Button _noAlbumArtButton {
+                        Adw.StatusPage {
+                          icon-name: _("image-missing-symbolic");
+
+                          styles ["compact"]
+                        }
+
+                        styles ["card"]
+                      };
+                    }
+
+                    Adw.ViewStackPage {
+                      name: "Image";
+                      child: Gtk.Button _albumArtButton {
+                        Gtk.Frame {
+                          Gtk.Image _albumArtImage {
+
+                          }
+                        }
+
+                        styles ["card"]
+                      };
+                    }
+
+                    Adw.ViewStackPage {
+                      name: "KeepImage";
+                      child: Gtk.Button _keepAlbumArtButton {
+                        tooltip-text: _("Selected files have different album art images");
+
+                        Adw.StatusPage {
+                          icon-name: _("library-music-symbolic");
+
+                          styles ["compact"]
+                        }
+
+                        styles ["card"]
+                      };
+                    }
+                  }
+
+                  Adw.PreferencesGroup {
+                    title: _("Properties");
+
+                    Adw.EntryRow _filenameRow {
+                      title: _("File Name");
+                    }
+
+                    Adw.EntryRow _titleRow {
+                      title: _("Title");
+                    }
+
+                    Adw.EntryRow _artistRow {
+                      title: _("Artist");
+                    }
+
+                    Adw.EntryRow _albumRow {
+                      title: _("Album");
+                    }
+
+                    Adw.EntryRow _yearRow {
+                      title: _("Year");
+                    }
+
+                    Adw.EntryRow _trackRow {
+                      title: _("Track");
+                    }
+
+                    Adw.EntryRow _albumArtistRow {
+                      title: _("Album Artist");
+                    }
+
+                    Adw.EntryRow _genreRow {
+                      title: _("Genre");
+                    }
+
+                    Adw.EntryRow _commentRow {
+                      title: _("Comment");
+                    }
+
+                    Adw.EntryRow _durationRow {
+                      title: _("Duration");
+                      text: "00:00:00";
+                      editable: false;
+                    }
+
+                    Adw.EntryRow _fingerprintRow {
+                      title: _("Fingerprint");
+                      editable: false;
+                    }
+
+                    Adw.EntryRow _fileSizeRow {
+                      title: _("File Size");
+                      text: "0 MB";
+                      editable: false;
+                    }
+                  }
+                };
+              };
             }
           };
         }

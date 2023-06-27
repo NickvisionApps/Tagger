@@ -69,6 +69,23 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.SearchEntry _musicFilesSearch;
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
     [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
+    [Gtk.Connect] private readonly Adw.ViewStack _artViewStack;
+    [Gtk.Connect] private readonly Gtk.Button _noAlbumArtButton;
+    [Gtk.Connect] private readonly Gtk.Button _albumArtButton;
+    [Gtk.Connect] private readonly Gtk.Image _albumArtImage;
+    [Gtk.Connect] private readonly Gtk.Button _keepAlbumArtButton;
+    [Gtk.Connect] private readonly Adw.EntryRow _filenameRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _titleRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _artistRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _albumRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _yearRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _trackRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _albumArtistRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _genreRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _commentRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _durationRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _fingerprintRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _fileSizeRow;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
