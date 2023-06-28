@@ -813,7 +813,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
                 if(sendToast)
                 {
-                    _toastOverlay.AddToast(Adw.Toast.New(string.Format(_("Loaded {0} music files."), _controller.MusicFiles.Count)));
+                    _toastOverlay.AddToast(Adw.Toast.New(_n("Loaded {0} music file.", "Loaded {0} music files.", _controller.MusicFiles.Count, _controller.MusicFiles.Count)));
                 }
             }
             else
