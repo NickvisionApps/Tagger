@@ -29,11 +29,41 @@
     ],
     "modules" : [
         {
+            "name": "ffmpeg",
+            "config-opts": [
+                "--disable-debug",
+                "--disable-doc",
+                "--disable-static",
+                "--enable-gpl",
+                "--enable-shared",
+                "--disable-ffplay",
+                "--disable-devices",
+                "--enable-gnutls",
+                "--enable-libmp3lame",
+                "--enable-libvorbis"
+            ],
+            "cleanup": [
+                "/share/ffmpeg"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz",
+                    "sha256": "57be87c22d9b49c112b6d24bc67d42508660e6b718b3db89c44e47e289137082",
+                    "x-checker-data": {
+                        "type": "html",
+                        "url": "https://ffmpeg.org/releases/",
+                        "pattern": ">(ffmpeg-([\\d.]+)\\.tar\\.xz)<"
+                    }
+                }
+            ]
+        },
+        {
             "name": "chromaprint",
             "buildsystem": "cmake-ninja",
             "config-opts": [
-                "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
-                "-DBUILD_SHARED_LIBS=ON"
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DBUILD_TOOLS:ON"
             ],
             "sources": [
                 {
@@ -41,6 +71,10 @@
                     "url": "https://github.com/acoustid/chromaprint/releases/download/v1.5.1/chromaprint-1.5.1.tar.gz",
                     "sha256": "a1aad8fa3b8b18b78d3755b3767faff9abb67242e01b478ec9a64e190f335e1c"
                 }
+            ],
+            "cleanup": [
+                "/include",
+                "/lib/pkgconfig"
             ]
         },
         {
