@@ -104,6 +104,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.SearchEntry _musicFilesSearch;
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
     [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
+    [Gtk.Connect] private readonly Adw.ViewStack _selectedViewStack;
     [Gtk.Connect] private readonly Adw.ViewStack _artViewStack;
     [Gtk.Connect] private readonly Gtk.Button _noAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Button _albumArtButton;
@@ -1011,6 +1012,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             selectedIndexes.Add(gtk_list_box_row_get_index(ptr->data));
         }
+        _selectedViewStack.SetVisibleChildName(selectedIndexes.Count > 0 ? "Selected" : "NoSelected");
         _controller.UpdateSelectedMusicFiles(selectedIndexes);
         _isSelectionOccuring = false;
     }

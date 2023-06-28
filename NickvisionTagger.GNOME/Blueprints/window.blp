@@ -211,137 +211,154 @@ Adw.ApplicationWindow _root {
             }
 
             [flap]
-            Gtk.ScrolledWindow {
+            Adw.ViewStack _selectedViewStack {
               hexpand: true;
               vexpand: true;
 
-              child: Adw.Clamp {
-                child: Gtk.Box {
-                  orientation: vertical;
-                  spacing: 12;
-                  margin-start: 12;
-                  margin-top: 6;
-                  margin-end: 12;
-                  margin-bottom: 6;
-
-                  Adw.ViewStack _artViewStack {
-                    halign: center;
-                    width-request: 260;
-                    height-request: 260;
-                    margin-top: 12;
-                    margin-bottom: 12;
-
-                    Adw.ViewStackPage {
-                      name: "NoImage";
-                      child: Gtk.Button _noAlbumArtButton {
-                        action-name: "win.insertAlbumArt";
-
-                        Adw.StatusPage {
-                          icon-name: "image-missing-symbolic";
-
-                          styles ["compact"]
-                        }
-
-                        styles ["card"]
-                      };
-                    }
-
-                    Adw.ViewStackPage {
-                      name: "Image";
-                      child: Gtk.Button _albumArtButton {
-                        action-name: "win.insertAlbumArt";
-
-                        Gtk.Frame {
-                          Gtk.Image _albumArtImage {
-
-                          }
-                        }
-
-                        styles ["card"]
-                      };
-                    }
-
-                    Adw.ViewStackPage {
-                      name: "KeepImage";
-                      child: Gtk.Button _keepAlbumArtButton {
-                        action-name: "win.insertAlbumArt";
-                        tooltip-text: _("Selected files have different album art images");
-
-                        Adw.StatusPage {
-                          icon-name: "library-music-symbolic";
-
-                          styles ["compact"]
-                        }
-
-                        styles ["card"]
-                      };
-                    }
-                  }
-
-                  Adw.PreferencesGroup {
-                    Adw.EntryRow _filenameRow {
-                      title: _("File Name");
-                    }
-                  }
-
-                  Adw.PreferencesGroup {
-                    title: _("Tag Properties");
-
-                    Adw.EntryRow _titleRow {
-                      title: _("Title");
-                    }
-
-                    Adw.EntryRow _artistRow {
-                      title: _("Artist");
-                    }
-
-                    Adw.EntryRow _albumRow {
-                      title: _("Album");
-                    }
-
-                    Adw.EntryRow _yearRow {
-                      title: _("Year");
-                    }
-
-                    Adw.EntryRow _trackRow {
-                      title: _("Track");
-                    }
-
-                    Adw.EntryRow _albumArtistRow {
-                      title: _("Album Artist");
-                    }
-
-                    Adw.EntryRow _genreRow {
-                      title: _("Genre");
-                    }
-
-                    Adw.EntryRow _commentRow {
-                      title: _("Comment");
-                    }
-                  }
-
-                  Adw.PreferencesGroup {
-                    title: _("File Properties");
-
-                    Adw.EntryRow _durationRow {
-                      title: _("Duration");
-                      text: "00:00:00";
-                      editable: false;
-                    }
-
-                    Adw.EntryRow _fingerprintRow {
-                      title: _("Fingerprint");
-                      editable: false;
-                    }
-
-                    Adw.EntryRow _fileSizeRow {
-                      title: _("File Size");
-                      text: _("0 MiB");
-                      editable: false;
-                    }
-                  }
+              Adw.ViewStackPage {
+                name: "NoSelected";
+                child: Adw.StatusPage {
+                  icon-name: "library-music-symbolic";
+                  title: _("No Selected Music Files");
+                  description: _("Select some files");
                 };
-              };
+              }
+
+              Adw.ViewStackPage {
+                name: "Selected";
+                child: Gtk.ScrolledWindow {
+                  hexpand: true;
+                  vexpand: true;
+
+                  child: Adw.Clamp {
+                    child: Gtk.Box {
+                      orientation: vertical;
+                      spacing: 12;
+                      margin-start: 12;
+                      margin-top: 6;
+                      margin-end: 12;
+                      margin-bottom: 6;
+
+                      Adw.ViewStack _artViewStack {
+                        halign: center;
+                        width-request: 260;
+                        height-request: 260;
+                        margin-top: 12;
+                        margin-bottom: 12;
+
+                        Adw.ViewStackPage {
+                          name: "NoImage";
+                          child: Gtk.Button _noAlbumArtButton {
+                            action-name: "win.insertAlbumArt";
+
+                            Adw.StatusPage {
+                              icon-name: "image-missing-symbolic";
+
+                              styles ["compact"]
+                            }
+
+                            styles ["card"]
+                          };
+                        }
+
+                        Adw.ViewStackPage {
+                          name: "Image";
+                          child: Gtk.Button _albumArtButton {
+                            action-name: "win.insertAlbumArt";
+
+                            Gtk.Frame {
+                              Gtk.Image _albumArtImage {
+
+                              }
+                            }
+
+                            styles ["card"]
+                          };
+                        }
+
+                        Adw.ViewStackPage {
+                          name: "KeepImage";
+                          child: Gtk.Button _keepAlbumArtButton {
+                            action-name: "win.insertAlbumArt";
+                            tooltip-text: _("Selected files have different album art images");
+
+                            Adw.StatusPage {
+                              icon-name: "library-music-symbolic";
+
+                              styles ["compact"]
+                            }
+
+                            styles ["card"]
+                          };
+                        }
+                      }
+
+                      Adw.PreferencesGroup {
+                        Adw.EntryRow _filenameRow {
+                          title: _("File Name");
+                        }
+                      }
+
+                      Adw.PreferencesGroup {
+                        title: _("Tag Properties");
+
+                        Adw.EntryRow _titleRow {
+                          title: _("Title");
+                        }
+
+                        Adw.EntryRow _artistRow {
+                          title: _("Artist");
+                        }
+
+                        Adw.EntryRow _albumRow {
+                          title: _("Album");
+                        }
+
+                        Adw.EntryRow _yearRow {
+                          title: _("Year");
+                        }
+
+                        Adw.EntryRow _trackRow {
+                          title: _("Track");
+                        }
+
+                        Adw.EntryRow _albumArtistRow {
+                          title: _("Album Artist");
+                        }
+
+                        Adw.EntryRow _genreRow {
+                          title: _("Genre");
+                        }
+
+                        Adw.EntryRow _commentRow {
+                          title: _("Comment");
+                        }
+                      }
+
+                      Adw.PreferencesGroup {
+                        title: _("File Properties");
+
+                        Adw.EntryRow _durationRow {
+                          title: _("Duration");
+                          text: "00:00:00";
+                          editable: false;
+                        }
+
+                        Adw.EntryRow _fingerprintRow {
+                          title: _("Fingerprint");
+                          editable: false;
+                        }
+
+                        Adw.EntryRow _fileSizeRow {
+                          title: _("File Size");
+                          text: _("0 MiB");
+                          editable: false;
+                        }
+                      }
+                    };
+                  };
+                };
+              }
             }
           };
         }
