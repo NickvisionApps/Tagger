@@ -772,6 +772,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private bool SelectedMusicFilesPropertiesChanged()
     {
         _isSelectionOccuring = true;
+        //Update Properties
         _applyButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         _tagActionsButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         _webServicesButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
@@ -824,7 +825,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             if(!string.IsNullOrEmpty(pair.Value.Title))
             {
-                _listMusicFilesRows[pair.Key].SetTitle(Regex.Replace(pair.Value.Title, "\\&", "&amp;"));
+                _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
                 _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
             }
             else
@@ -889,7 +890,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if(!string.IsNullOrEmpty(pair.Value.Title))
                 {
-                    _listMusicFilesRows[pair.Key].SetTitle(Regex.Replace(pair.Value.Title, "\\&", "&amp;"));
+                    _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
                     _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
                 }
                 else
