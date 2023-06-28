@@ -17,7 +17,7 @@ All types of contributions are encouraged and valued. See the [Table of Contents
   - [Reporting Bugs](#reporting-bugs)
   - [Suggesting Enhancements/New Features](#suggesting-enhancements)
   - [Providing translations](#providing-translations)
-    <!--- [Via Weblate](#via-weblate)-->
+    - [Via Weblate](#via-weblate)
     - [Manually](#manually)
   - [Your First Code Contribution](#your-first-code-contribution)
     - [Developing on Linux](#developing-on-linux)
@@ -102,10 +102,10 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/Nickvi
 
 Everyone is welcome to translate this app into their native or known languages, so that the application is accessible to everyone.
 
-<!--##### Via Weblate
+##### Via Weblate
 
-Application is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-application/)!
--->
+Tagger is available to translate on [Weblate](https://hosted.weblate.org/engage/nickvision-tagger/)!
+
 ##### Manually
 
 To start translating the app, fork the repository and clone it locally.

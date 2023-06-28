@@ -3,6 +3,8 @@
 
  **Tag your music**
 
+ [![Translation status](https://hosted.weblate.org/widgets/nickvision-tagger/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-tagger/) ✨Powered by [Weblate](https://weblate.org/en/)✨
+
 # Features
 - Edit tags and album art of multiple files, even across subfolders, all at once
 - Support for multiple music file types (mp3, ogg, flac, wma, and wav)
