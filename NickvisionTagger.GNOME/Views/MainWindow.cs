@@ -99,6 +99,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Gtk.Label _loadingLabel;
+    [Gtk.Connect] private readonly Adw.Flap _folderFlap;
     [Gtk.Connect] private readonly Adw.ViewStack _filesViewStack;
     [Gtk.Connect] private readonly Gtk.SearchEntry _musicFilesSearch;
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
@@ -808,6 +809,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _tagActionsButton.SetVisible(false);
                 _webServicesButton.SetVisible(false);
                 _viewStack.SetVisibleChildName("Folder");
+                _folderFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
                 _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
                 if(sendToast)
                 {
