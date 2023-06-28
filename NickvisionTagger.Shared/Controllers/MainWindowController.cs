@@ -334,7 +334,7 @@ public class MainWindowController
                 SelectedPropertyMap.AlbumArtist = haveSameAlbumArtist ? first.AlbumArtist : "<keep>";
                 SelectedPropertyMap.Genre = haveSameGenre ? first.Genre : "<keep>";
                 SelectedPropertyMap.Comment = haveSameComment ? first.Comment : "<keep>";
-                SelectedPropertyMap.AlbumArtist = haveSameAlbumArt ? (first.AlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
+                SelectedPropertyMap.AlbumArt = haveSameAlbumArt ? (first.AlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
                 SelectedPropertyMap.Duration = totalDuration.ToDurationString();
                 SelectedPropertyMap.Fingerprint = "<keep>";
                 SelectedPropertyMap.FileSize = totalFileSize.ToFileSizeString();
