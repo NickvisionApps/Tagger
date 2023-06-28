@@ -118,7 +118,7 @@ public class MainWindowController
 
             !prop1=""value1"";prop2=""value2""
             Where prop1, prop2 are valid tag properties and value1, value2 are the values to search wrapped in quotes.
-            Each property is separated by a comma. Notice how the last property does not end in a comma.
+            Each property is separated by a semicolon. Notice how the last property does not end in a semicolon.
 
             [Valid Properties]
             - filename
@@ -523,6 +523,281 @@ public class MainWindowController
         UpdateSelectedMusicFilesProperties();
         MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
         NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Downloaded metadata for {0} files successfully"), successful), NotificationSeverity.Success));
+    }
+
+    /// <summary>
+    /// Performs an advanced search
+    /// </summary>
+    /// <param name="s">The search string in the format: !prop1="value1";prop2="value2"</param>
+    /// <returns>A bool based on whether or not the search was successful and a list of lowercase filenames matching the search</returns>
+    public (bool Success, List<string>? LowerFilenames) AdvancedSearch(string s)
+    {
+        if(_musicFolder != null)
+        {
+            if(string.IsNullOrEmpty(s) || s[0] != '!')
+            {
+                return (false, null);
+            }
+            var search = s.Substring(1);
+            if(string.IsNullOrEmpty(search))
+            {
+                return (false, null);
+            }
+            var propValPairs = search.Split(';');
+            var validProperties = new string[] { "filename", "title", "artist", "album", "year", "track", "albumartist", "genre", "comment" };
+            var propertyMap = new PropertyMap();
+            foreach(var propVal in propValPairs)
+            {
+                var fields = propVal.Split('=');
+                if(fields.Length != 2)
+                {
+                    return (false, null);
+                }
+                var prop = fields[0];
+                var val = fields[1];
+                if(!validProperties.Contains(prop))
+                {
+                    return (false, null);
+                }
+                if(val.Length <= 1 || val.Substring(0, 1) != "\"" || val.Substring(val.Length - 1) != "\"")
+                {
+                    return (false, null);
+                }
+                val = val.Remove(0, 1);
+                val = val.Remove(val.Length - 1, 1);
+                if(string.IsNullOrEmpty(val))
+                {
+                    val = "NULL";
+                }
+                if(prop == "filename")
+                {
+                    propertyMap.Filename = val;
+                }
+                else if(prop == "title")
+                {
+                    propertyMap.Title = val;
+                }
+                else if(prop == "artist")
+                {
+                    propertyMap.Artist = val;
+                }
+                else if(prop == "album")
+                {
+                    propertyMap.Album = val;
+                }
+                else if(prop == "year")
+                {
+                    if(val != "NULL")
+                    {
+                        try
+                        {
+                            uint.Parse(val);
+                        }
+                        catch
+                        {
+                            return (false, null);
+                        }
+                    }
+                    propertyMap.Year = val;
+                }
+                else if(prop == "track")
+                {
+                    if(val != "NULL")
+                    {
+                        try
+                        {
+                            uint.Parse(val);
+                        }
+                        catch
+                        {
+                            return (false, null);
+                        }
+                    }
+                    propertyMap.Track = val;
+                }
+                else if(prop == "albumartist")
+                {
+                    propertyMap.AlbumArtist = val;
+                }
+                else if(prop == "genre")
+                {
+                    propertyMap.Genre = val;
+                }
+                else if(prop == "comment")
+                {
+                    propertyMap.Comment = val;
+                }
+            }
+            var matches = new List<string>();
+            foreach(var musicFile in _musicFolder.MusicFiles)
+            {
+                if(!string.IsNullOrEmpty(propertyMap.Filename))
+                {
+                    var value = musicFile.Filename.ToLower();
+                    if(propertyMap.Filename == "NULL")
+                    {
+                        if(!string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != propertyMap.Filename)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.Title))
+                {
+                    var value = musicFile.Title.ToLower();
+                    if(propertyMap.Title == "NULL")
+                    {
+                        if(!string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != propertyMap.Title)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.Artist))
+                {
+                    var value = musicFile.Artist.ToLower();
+                    if(propertyMap.Artist == "NULL")
+                    {
+                        if(!string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != propertyMap.Artist)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.Album))
+                {
+                    var value = musicFile.Album.ToLower();
+                    if(propertyMap.Album == "NULL")
+                    {
+                        if(!string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != propertyMap.Album)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.Year))
+                {
+                    var value = musicFile.Year;
+                    if(propertyMap.Year == "NULL")
+                    {
+                        if(value != 0)
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != uint.Parse(propertyMap.Year))
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.Track))
+                {
+                    var value = musicFile.Track;
+                    if(propertyMap.Track == "NULL")
+                    {
+                        if(value != 0)
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != uint.Parse(propertyMap.Track))
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.AlbumArtist))
+                {
+                    var value = musicFile.AlbumArtist.ToLower();
+                    if(propertyMap.AlbumArtist == "NULL")
+                    {
+                        if(!string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != propertyMap.AlbumArtist)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.Genre))
+                {
+                    var value = musicFile.Genre.ToLower();
+                    if(propertyMap.Genre == "NULL")
+                    {
+                        if(!string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != propertyMap.Genre)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.Comment))
+                {
+                    var value = musicFile.Comment.ToLower();
+                    if(propertyMap.Comment == "NULL")
+                    {
+                        if(!string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != propertyMap.Comment)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                matches.Add(musicFile.Filename.ToLower());
+            }
+            return (true, matches);
+        }
+        return (false, null);
     }
 
     /// <summary>

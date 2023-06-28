@@ -869,7 +869,57 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void SearchChanged(Gtk.SearchEntry sender, EventArgs e)
     {
-        //TODO
+        var search = _musicFilesSearch.GetText().ToLower();
+        if(!string.IsNullOrEmpty(search) && search[0] == '!')
+        {
+            _advancedSearchInfoButton.SetVisible(true);
+            var result = _controller.AdvancedSearch(search);
+            if(!result.Success)
+            {
+                _musicFilesSearch.RemoveCssClass("success");
+                _musicFilesSearch.AddCssClass("error");
+                _listMusicFiles.SetFilterFunc((row) => true);
+            }
+            else
+            {
+                _musicFilesSearch.RemoveCssClass("error");
+                _musicFilesSearch.AddCssClass("success");
+                _listMusicFiles.SetFilterFunc((row) =>
+                {
+                    if(result.LowerFilenames!.Count == 0)
+                    {
+                        return false;
+                    }
+                    var rowFilename = (row as Adw.ActionRow)!.GetSubtitle() ?? "";
+                    if(string.IsNullOrEmpty(rowFilename))
+                    {
+                        rowFilename = (row as Adw.ActionRow)!.GetTitle();
+                    }
+                    rowFilename = rowFilename.ToLower();
+                    return result.LowerFilenames.Contains(rowFilename);
+                });
+            }
+        }
+        else
+        {
+            _advancedSearchInfoButton.SetVisible(false);
+            _musicFilesSearch.RemoveCssClass("success");
+            _musicFilesSearch.RemoveCssClass("error");
+            _listMusicFiles.SetFilterFunc((row) =>
+            {
+                var rowFilename = (row as Adw.ActionRow)!.GetSubtitle() ?? "";
+                if(string.IsNullOrEmpty(rowFilename))
+                {
+                    rowFilename = (row as Adw.ActionRow)!.GetTitle();
+                }
+                rowFilename = rowFilename.ToLower();
+                if(string.IsNullOrEmpty(search) || rowFilename.Contains(search))
+                {
+                    return true;
+                }
+                return false;
+            });
+        }
     }
 
     /// <summary>
