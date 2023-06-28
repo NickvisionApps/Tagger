@@ -48,7 +48,7 @@ public partial class Program
         _mainWindowController.AppInfo.Name = "Nickvision Tagger";
         _mainWindowController.AppInfo.ShortName = _("Tagger");
         _mainWindowController.AppInfo.Description = $"{_("Tag your music")}.";
-        _mainWindowController.AppInfo.Version = "2023.7.0-next";
+        _mainWindowController.AppInfo.Version = "2023.7.0-beta1";
         _mainWindowController.AppInfo.Changelog = "<ul><li>Tagger has been completely rewritten in C#! With this new language comes better performance and more stable features. To signify this great change, we also updated the app icon (Thanks @daudix-UFO)!</li><li>Added a separate option in Preferences for overwriting album art with MusicBrainz metadata independently of the overwriting tag data setting</li><li>Added an option in Preferences for controlling how music files are sorted</li><li>Track values will now be padded into double digits</li><li>Fixed an issue where some file types were not loading album art correctly</li><li>Fixed an issue where applying unapplied changes would sometimes not work</li><li>Improved UI/UX</li><li>Updated translations (Thanks everyone on Weblate!)</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Tagger");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");
