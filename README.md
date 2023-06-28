@@ -28,8 +28,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
 <details>
  <summary>GNOME</summary>
 
- ![GNOMELight](NickvisionTagger.GNOME/Screenshots/Light.png)
- ![GNOMEDark](NickvisionTagger.GNOME/Screenshots/Dark.png)
+ ![Start](NickvisionTagger.GNOME/Screenshots/Start.png)
+ ![Folder](NickvisionTagger.GNOME/Screenshots/Folder.png)
+ ![Editing](NickvisionTagger.GNOME/Screenshots/Editing.png)
+ ![Dark](NickvisionTagger.GNOME/Screenshots/Dark.png)
+ ![AdvancedSearch](NickvisionTagger.GNOME/Screenshots/AdvancedSearch.png)
 </details>
 
 # Dependencies
