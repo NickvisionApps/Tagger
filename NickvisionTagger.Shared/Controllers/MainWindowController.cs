@@ -423,7 +423,7 @@ public class MainWindowController
             }
             UpdateSelectedMusicFilesProperties();
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} file name to tags successfully", "Converted {0} file names to tags successfully", success, success), NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} file name to tag successfully", "Converted {0} file names to tags successfully", success, success), NotificationSeverity.Success));
         }
     }
 
