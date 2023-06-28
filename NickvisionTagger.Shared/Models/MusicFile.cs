@@ -581,13 +581,13 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     /// <param name="acoustIdClientKey">The app's AcoustId Key</param>
     /// <param name="acoustIdUserKey">The users's AcoustId Key</param>
-    /// <param name="musicBrainzRecordingId">The MusicBrainz recourding id of the file</param>
+    /// <param name="musicBrainzRecordingId">The MusicBrainz recourding id of the file, if available</param>
     /// <returns>True if successful, else false</returns>
-    public async Task<bool> SubmitToAcoustIdAsync(string acoustIdClientKey, string acoustIdUserKey, string musicBrainzRecordingId)
+    public async Task<bool> SubmitToAcoustIdAsync(string acoustIdClientKey, string acoustIdUserKey, string? musicBrainzRecordingId)
     {
         AcoustID.Configuration.ClientKey = acoustIdClientKey;
         var service = new SubmitService(acoustIdUserKey);
-        if(string.IsNullOrEmpty(musicBrainzRecordingId))
+        if(!string.IsNullOrEmpty(musicBrainzRecordingId))
         {
             var response = await service.SubmitAsync(new SubmitRequest(Fingerprint, Duration)
             {

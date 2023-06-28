@@ -101,7 +101,12 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         };
     }
 
-    private void LaunchNewAcoustIdPage(object? sender, EventArgs e)
+    /// <summary>
+    /// Occurs when the AcoustId Get New API Key button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
+    private void LaunchNewAcoustIdPage(Gtk.Button sender, EventArgs e)
     {
         var uriLauncher = gtk_uri_launcher_new(_controller.AcoustIdUserAPIKeyLink);
         gtk_uri_launcher_launch(uriLauncher, 0, 0, (source, res, data) => { }, 0);

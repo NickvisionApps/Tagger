@@ -603,9 +603,26 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void SubmitToAcoustId(Gio.SimpleAction sender, EventArgs e)
+    private void SubmitToAcoustId(Gio.SimpleAction sender, EventArgs e)
     {
-        //TODO
+        if(_controller.SelectedMusicFiles.Count > 1)
+        {
+            var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Too Many Files Selected"), _("Only one file can be submitted to AcoustID at a time. Please select only one file and try again."), _("OK"));
+            dialog.OnResponse += (s, ex) => dialog.Destroy();
+            dialog.Present();
+            return;
+        }
+        var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("Submit to AcoustId"), _("AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id for easy identification.\n\nIf you have a MusicBrainz Recording Id for this song, please provide it below.\n\nIf none is provided, Tagger will submit your tag's metadata in association with the fingerprint instead."), _("MusicBrainz Recording Id"), _("Cancel"), _("Submit"));
+        entryDialog.OnResponse += async (s, ex) =>
+        {
+            if(!string.IsNullOrEmpty(entryDialog.Response))
+            {
+                SetLoadingState(_("Submitting data to AcoustId..."));
+                await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
+            }
+            entryDialog.Destroy();
+        };
+        entryDialog.Present();
     }
 
     /// <summary>

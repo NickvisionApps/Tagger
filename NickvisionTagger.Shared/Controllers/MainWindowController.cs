@@ -526,6 +526,20 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Submits tag information to AcoustId for the selected file
+    /// </summary>
+    /// <param name="recordingID">The MusicBrainz Recording Id to associate, if available</param>
+    public async Task SubmitToAcoustIdAsync(string? recordingID)
+    {
+        if(SelectedMusicFiles.Count == 1)
+        {
+            var result = await SelectedMusicFiles[0].SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
+            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(result ? _("Submitted metadata to AcoustId successfully") : _("Unable to submit to AcoustId. Check API key"), result ? NotificationSeverity.Success : NotificationSeverity.Error));
+        }
+    }
+
+    /// <summary>
     /// Performs an advanced search
     /// </summary>
     /// <param name="s">The search string in the format: !prop1="value1";prop2="value2"</param>
