@@ -505,9 +505,19 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void FilenameToTag(Gio.SimpleAction sender, EventArgs e)
+    private void FilenameToTag(Gio.SimpleAction sender, EventArgs e)
     {
-        //TODO
+        var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("File Name to Tag"), _("Please select a format string."), _("Format String"),
+            new string[] { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" }, _("Cancel"), _("Convert"));
+        dialog.OnResponse += (s, ex) =>
+        {
+            if(!string.IsNullOrEmpty(dialog.Response))
+            {
+                _controller.FilenameToTag(dialog.Response);
+            }
+            dialog.Destroy();
+        };
+        dialog.Present();
     }
 
     /// <summary>
@@ -515,9 +525,19 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void TagToFilename(Gio.SimpleAction sender, EventArgs e)
+    private void TagToFilename(Gio.SimpleAction sender, EventArgs e)
     {
-        //TODO
+        var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("Tag to File Name"), _("Please select a format string."), _("Format String"),
+            new string[] { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" }, _("Cancel"), _("Convert"));
+        dialog.OnResponse += (s, ex) =>
+        {
+            if(!string.IsNullOrEmpty(dialog.Response))
+            {
+                _controller.TagToFilename(dialog.Response);
+            }
+            dialog.Destroy();
+        };
+        dialog.Present();
     }
 
     /// <summary>

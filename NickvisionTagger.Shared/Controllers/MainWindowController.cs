@@ -308,27 +308,24 @@ public class MainWindowController
     /// </summary>
     public async Task DiscardSelectedUnappliedChangesAsync()
     {
-        if(_musicFolder != null)
+        var discarded = false;
+        await Task.Run(() =>
         {
-            var discarded = false;
-            await Task.Run(() =>
+            foreach(var pair in SelectedMusicFiles)
             {
-                foreach(var pair in SelectedMusicFiles)
+                if(!MusicFileSaveStates[pair.Key])
                 {
-                    if(!MusicFileSaveStates[pair.Key])
-                    {
-                        pair.Value.LoadTagFromDisk();
-                        MusicFileSaveStates[pair.Key] = true;
-                        discarded = true;
-                    }
+                    pair.Value.LoadTagFromDisk();
+                    MusicFileSaveStates[pair.Key] = true;
+                    discarded = true;
                 }
-            });
-            if(discarded)
-            {
-                UpdateSelectedMusicFilesProperties();
             }
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        });
+        if(discarded)
+        {
+            UpdateSelectedMusicFilesProperties();
         }
+        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -336,15 +333,59 @@ public class MainWindowController
     /// </summary>
     public void DeleteSelectedTags()
     {
-        if(_musicFolder != null)
+        foreach(var pair in SelectedMusicFiles)
         {
+            pair.Value.ClearTag();
+            MusicFileSaveStates[pair.Key] = false;
+        }
+        UpdateSelectedMusicFilesProperties();
+        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Converts the selected files' file names to tags
+    /// </summary>
+    /// <param name="formatString">The format string</param>
+    public void FilenameToTag(string formatString)
+    {
+        if(!string.IsNullOrEmpty(formatString))
+        {
+            var success = 0;
             foreach(var pair in SelectedMusicFiles)
             {
-                pair.Value.ClearTag();
-                MusicFileSaveStates[pair.Key] = false;
+                if(pair.Value.FilenameToTag(formatString))
+                {
+                    success++;
+                    MusicFileSaveStates[pair.Key] = false;
+                }
             }
             UpdateSelectedMusicFilesProperties();
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Converted {0} file names to tags successfully."), success), NotificationSeverity.Success));
+        }
+    }
+
+    /// <summary>
+    /// Converts the selected files' tags to file names
+    /// </summary>
+    /// <param name="formatString">The format string</param>
+    public void TagToFilename(string formatString)
+    {
+        if(_musicFolder != null && !string.IsNullOrEmpty(formatString))
+        {
+            var success = 0;
+            foreach(var pair in SelectedMusicFiles)
+            {
+                if(pair.Value.TagToFilename(formatString))
+                {
+                    success++;
+                    MusicFileSaveStates[pair.Key] = false;
+                }
+            }
+            UpdateSelectedMusicFilesProperties();
+            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Converted {0} tags to file names successfully."), success), NotificationSeverity.Success));
+
         }
     }
 
@@ -356,14 +397,11 @@ public class MainWindowController
     {
         SelectedMusicFiles.Clear();
         SelectedPropertyMap.Clear();
-        if(_musicFolder != null)
+        foreach(var index in indexes)
         {
-            foreach(var index in indexes)
-            {
-                SelectedMusicFiles.Add(index, _musicFolder.MusicFiles[index]);
-            }
-            UpdateSelectedMusicFilesProperties();
+            SelectedMusicFiles.Add(index, _musicFolder.MusicFiles[index]);
         }
+        UpdateSelectedMusicFilesProperties();
     }
 
     /// <summary>
