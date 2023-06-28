@@ -703,7 +703,16 @@ public partial class MainWindow : Adw.ApplicationWindow
                 foreach(var musicFile in _controller.MusicFiles)
                 {
                     var row = Adw.ActionRow.New();
-                    row.SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+                    if(!string.IsNullOrEmpty(musicFile.Title))
+                    {
+                        row.SetTitle(Regex.Replace(musicFile.Title, "\\&", "&amp;"));
+                        row.SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+                    }
+                    else
+                    {
+                        row.SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+                        row.SetSubtitle("");
+                    }
                     _listMusicFiles.Append(row);
                     _listMusicFilesRows.Add(row);
                 }
@@ -771,11 +780,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _musicFilesSearch.SetText("");
         }
-        else if(_controller.SelectedMusicFiles.Count == 1)
-        {
-            var i = _listMusicFiles.GetSelectedRow()!.GetIndex();
-            _listMusicFilesRows[i].SetTitle(Regex.Replace(_controller.SelectedPropertyMap.Filename, "\\&", "&amp;"));
-        }
         _filenameRow.SetText(_controller.SelectedPropertyMap.Filename);
         _titleRow.SetText(_controller.SelectedPropertyMap.Title);
         _artistRow.SetText(_controller.SelectedPropertyMap.Artist);
@@ -814,6 +818,20 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _artViewStack.SetVisibleChildName("NoImage");
             _albumArtImage.Clear();
+        }
+        //Update Rows
+        foreach(var pair in _controller.SelectedMusicFiles)
+        {
+            if(!string.IsNullOrEmpty(pair.Value.Title))
+            {
+                _listMusicFilesRows[pair.Key].SetTitle(Regex.Replace(pair.Value.Title, "\\&", "&amp;"));
+                _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
+            }
+            else
+            {
+                _listMusicFilesRows[pair.Key].SetTitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
+                _listMusicFilesRows[pair.Key].SetSubtitle("");
+            }
         }
         _isSelectionOccuring = false;
         return false;
@@ -866,10 +884,19 @@ public partial class MainWindow : Adw.ApplicationWindow
                 Genre = _genreRow.GetText(),
                 Comment = _commentRow.GetText()
             }, false);
-            if(_controller.SelectedMusicFiles.Count == 1)
+            //Update Rows
+            foreach(var pair in _controller.SelectedMusicFiles)
             {
-                var i = _listMusicFiles.GetSelectedRow()!.GetIndex();
-                _listMusicFilesRows[i].SetTitle(Regex.Replace(_filenameRow.GetText(), "\\&", "&amp;"));
+                if(!string.IsNullOrEmpty(pair.Value.Title))
+                {
+                    _listMusicFilesRows[pair.Key].SetTitle(Regex.Replace(pair.Value.Title, "\\&", "&amp;"));
+                    _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
+                }
+                else
+                {
+                    _listMusicFilesRows[pair.Key].SetTitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
+                    _listMusicFilesRows[pair.Key].SetSubtitle("");
+                }
             }
         }
     }
