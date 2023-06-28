@@ -1,11 +1,12 @@
 using AcoustID.Web;
+using MetaBrainz.MusicBrainz;
+using MetaBrainz.MusicBrainz.CoverArt;
+using MetaBrainz.MusicBrainz.Interfaces.Entities;
+using NickvisionTagger.Shared.Helpers;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using MetaBrainz.MusicBrainz;
-using MetaBrainz.MusicBrainz.CoverArt;
-using MetaBrainz.MusicBrainz.Interfaces.Entities;
 using TagLib;
 
 namespace NickvisionTagger.Shared.Models;
@@ -145,7 +146,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 {
                     StartInfo = new ProcessStartInfo()
                     {
-                        FileName = "fpcalc",
+                        FileName = DependencyManager.FpcalcPath,
                         Arguments = $"\"{Path}\"",
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
