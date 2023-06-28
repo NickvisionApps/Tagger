@@ -48,6 +48,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_set_title(nint dialog, string title);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_set_filters(nint dialog, nint filters);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_select_folder(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_select_folder_finish(nint dialog, nint result, nint error);
@@ -74,13 +80,13 @@ public partial class MainWindow : Adw.ApplicationWindow
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
-    private GAsyncReadyCallback? _saveCallback;
     private readonly Gtk.DropTarget _dropTarget;
     private List<Adw.ActionRow> _listMusicFilesRows;
     private bool _isSelectionOccuring;
     private readonly GSourceFunc _musicFolderUpdatedFunc;
     private readonly GSourceFunc _musicFileSaveStatesChangedFunc;
     private readonly GSourceFunc _selectedMusicFilesPropertiesChangedFunc;
+    private GAsyncReadyCallback? _openCallback;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
@@ -120,7 +126,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Window Settings
         _controller = controller;
         _application = application;
-        _saveCallback = null;
+        _openCallback = null;
         _listMusicFilesRows = new List<Adw.ActionRow>();
         _isSelectionOccuring = false;
         _musicFolderUpdatedFunc =  MusicFolderUpdated;
@@ -431,7 +437,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         var folderDialog = gtk_file_dialog_new();
         gtk_file_dialog_set_title(folderDialog, _("Open Folder"));
-        _saveCallback = async (source, res, data) =>
+        _openCallback = async (source, res, data) =>
         {
             var fileHandle = gtk_file_dialog_select_folder_finish(folderDialog, res, IntPtr.Zero);
             if (fileHandle != IntPtr.Zero)
@@ -441,7 +447,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 await _controller.OpenFolderAsync(path);
             }
         };
-        gtk_file_dialog_select_folder(folderDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+        gtk_file_dialog_select_folder(folderDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
     }
 
     /// <summary>
@@ -551,9 +557,26 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void InsertAlbumArt(Gio.SimpleAction sender, EventArgs e)
+    private void InsertAlbumArt(Gio.SimpleAction sender, EventArgs e)
     {
-        //TODO
+        var filterImages = Gtk.FileFilter.New();
+        filterImages.AddMimeType("image/*");
+        var openFileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(openFileDialog, _("Insert Album Art"));
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        filters.Append(filterImages);
+        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
+        _openCallback = async (source, res, data) =>
+        {
+            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
+            {
+                var path = g_file_get_path(fileHandle);
+                SetLoadingState(_("Inserting album art..."));
+                await _controller.InsertSelectedAlbumArtAsync(path);
+            }
+        };
+        gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
     }
 
     /// <summary>

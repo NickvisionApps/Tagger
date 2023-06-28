@@ -404,6 +404,42 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Inserts the image to the selected files' album art
+    /// </summary>
+    /// <param="path">The path to the image</param>
+    public async Task InsertSelectedAlbumArtAsync(string path)
+    {
+        TagLib.ByteVector? byteVector = null;
+        try
+        {
+            byteVector = TagLib.ByteVector.FromPath(path);
+        }
+        catch { }
+        if(byteVector == null)
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to load image file"), NotificationSeverity.Error));
+        }
+        else
+        {
+            var inserted = false;
+            foreach(var pair in SelectedMusicFiles)
+            {
+                if(pair.Value.AlbumArt != byteVector)
+                {
+                    pair.Value.AlbumArt = byteVector;
+                    MusicFileSaveStates[pair.Key] = false;
+                    inserted = true;
+                }
+            }
+            if(inserted)
+            {
+                UpdateSelectedMusicFilesProperties();
+            }
+            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    /// <summary>
     /// Removes the selected files' album art
     /// </summary>
     public void RemoveSelectedAlbumArt()
