@@ -375,7 +375,7 @@ public class MainWindowController
             }
             UpdateSelectedMusicFilesProperties();
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Converted {0} file names to tags successfully."), success), NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Converted {0} file names to tags successfully"), success), NotificationSeverity.Success));
         }
     }
 
@@ -398,7 +398,7 @@ public class MainWindowController
             }
             UpdateSelectedMusicFilesProperties();
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Converted {0} tags to file names successfully."), success), NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Converted {0} tags to file names successfully"), success), NotificationSeverity.Success));
 
         }
     }
@@ -423,6 +423,25 @@ public class MainWindowController
             UpdateSelectedMusicFilesProperties();
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    /// <summary>
+    /// Downloads MusicBrainz metadata for the selected files
+    /// </summary>
+    public async Task DownloadMusicBrainzMetadataAsync()
+    {
+        var successful = 0;
+        foreach(var pair in SelectedMusicFiles)
+        {
+            if(await pair.Value.LoadTagFromMusicBrainzAsync("b'Ch3cuJ0d", AppInfo.Current, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz))
+            {
+                successful++;
+                MusicFileSaveStates[pair.Key] = false;
+            }
+        }
+        UpdateSelectedMusicFilesProperties();
+        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Downloaded metadata for {0} files successfully"), successful), NotificationSeverity.Success));
     }
 
     /// <summary>

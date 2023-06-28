@@ -570,7 +570,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private async void DownloadMusicBrainzMetadata(Gio.SimpleAction sender, EventArgs e)
     {
-        //TODO
+        SetLoadingState(_("Downloading MusicBrainz metadata..."));
+        await _controller.DownloadMusicBrainzMetadataAsync();
     }
 
     /// <summary>

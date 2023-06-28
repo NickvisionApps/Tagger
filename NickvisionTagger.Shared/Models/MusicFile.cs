@@ -250,6 +250,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 }
             }
             //AcoustID Recordings
+            if(bestResult.Recordings.Count < 1)
+            {
+                return false;
+            }
             var bestRecordingId = bestResult.Recordings[0].Id;
             foreach (var r in bestResult.Recordings)
             {
