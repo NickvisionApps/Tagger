@@ -69,6 +69,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// The size of the music file
     /// </summary>
     public long FileSize => new FileInfo(Path).Length;
+    /// <summary>
+    /// Whether or not the tag is empty
+    /// </summary>
+    public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && AlbumArt.IsEmpty;
     
     /// <summary>
     /// Constructs a MusicFile
@@ -144,7 +148,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             return _fingerprint;
         }
     }
-    
+
     /// <summary>
     /// Loads the tag metadata from the file on disk (discarding any unapplied metadata)
     /// </summary>

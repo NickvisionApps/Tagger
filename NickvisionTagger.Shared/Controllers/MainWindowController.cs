@@ -339,13 +339,21 @@ public class MainWindowController
     /// </summary>
     public void DeleteSelectedTags()
     {
+        var deleted = false;
         foreach(var pair in SelectedMusicFiles)
         {
-            pair.Value.ClearTag();
-            MusicFileSaveStates[pair.Key] = false;
+            if(!pair.Value.IsTagEmpty)
+            {
+                pair.Value.ClearTag();
+                MusicFileSaveStates[pair.Key] = false;
+                deleted = true;
+            }
         }
-        UpdateSelectedMusicFilesProperties();
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        if(deleted)
+        {
+            UpdateSelectedMusicFilesProperties();
+            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     /// <summary>
