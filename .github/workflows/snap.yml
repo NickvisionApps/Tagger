@@ -1,0 +1,42 @@
+on:
+  push:
+    branches: [ "snap" ]
+  pull_request:
+    branches: [ "snap" ]
+    types: [ "review_requested", "ready_for_review" ]
+  workflow_dispatch:
+name: CI
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  snap:
+    name: "GNOME on Snap"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [x86_64]
+      fail-fast: false
+    steps:
+      - name: Checkout Git repository
+        uses: actions/checkout@v3
+      - name: Build Snap
+        uses: snapcore/action-build@v1
+        id: snapcraft-build
+        with:
+            snapcraft-args: "-v"
+      - uses: actions/upload-artifact@v3
+        with:
+            name: org.nickvision.tagger-snap-x86_64
+            path: ${{ steps.snapcraft-build.outputs.snap }} 
+      #- uses: diddlesnaps/snapcraft-review-action@v1
+      #with:
+      #snap: ${{ steps.snapcraft-build.outputs.snap }}
+      #isClassic: 'false'          
+      #- name: Upload and release denaro Snap
+      #uses: snapcore/action-publish@v1
+      #env: 
+      #SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
+      #with:
+      #snap: ${{ steps.snapcraft-build.outputs.snap }}
+      #release: ${{ startsWith(github.ref, 'refs/tags/') && 'candidate' || 'edge'}}

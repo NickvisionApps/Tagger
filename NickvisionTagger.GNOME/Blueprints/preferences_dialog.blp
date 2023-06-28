@@ -1,0 +1,149 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.PreferencesWindow _root {
+  default-width: 600;
+  default-height: 500;
+  width-request: 360;
+  modal: true;
+  destroy-with-parent: false;
+  hide-on-close: true;
+  title: _("Preferences");
+
+  Adw.PreferencesPage {
+    Adw.PreferencesGroup {
+      title: _("User Interface");
+
+      Adw.ComboRow _themeRow {
+        title: _("Theme");
+        model: Gtk.StringList {
+          strings [C_("Theme", "Light"), C_("Theme", "Dark"), C_("Theme", "System")]
+        };
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "dark-mode-symbolic";
+        }
+      }
+
+      Adw.ActionRow {
+        title: _("Remember Last Opened Folder");
+        activatable-widget: _rememberLastOpenedFolderSwitch;
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "folder-symbolic";
+        }
+
+        [suffix]
+        Gtk.Switch _rememberLastOpenedFolderSwitch {
+          valign: center;
+        }
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("Music Folder");
+
+      Adw.ActionRow {
+        title: _("Include Subfolders");
+        activatable-widget: _includeSubfoldersSwitch;
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "folder-remote-symbolic";
+        }
+
+        [suffix]
+        Gtk.Switch _includeSubfoldersSwitch {
+          valign: center;
+        }
+      }
+
+      Adw.ComboRow _sortFilesRow {
+        title: _("Sort Files By");
+        model: Gtk.StringList {
+          strings [C_("Sort", "File Name"), C_("Sort", "Title"), C_("Sort", "Track")]
+        };
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "view-sort-descending-symbolic";
+        }
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("Music File");
+
+      Adw.ActionRow {
+        title: _("Preserve Modification Timestamp");
+        activatable-widget: _preserveModificationTimestampSwitch;
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "editor-symbolic";
+        }
+
+        [suffix]
+        Gtk.Switch _preserveModificationTimestampSwitch {
+          valign: center;
+        }
+      }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("Web Services");
+
+      Adw.ActionRow {
+        title: _("Overwrite Tag With MusicBrainz");
+        subtitle: _("Enable to overwrite existing tag metadata with data found from MusicBrainz. If disabled, only blank tag properties will be filled.");
+        activatable-widget: _overwriteTagWithMusicBrainzSwitch;
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "tag-outline-symbolic";
+        }
+
+        [suffix]
+        Gtk.Switch _overwriteTagWithMusicBrainzSwitch {
+          valign: center;
+        }
+      }
+
+      Adw.ActionRow {
+        title: _("Overwrite Album Art With MusicBrainz");
+        subtitle: _("Enable to overwrite existing album art with art found from MusicBrainz.");
+        activatable-widget: _overwriteAlbumArtWithMusicBrainzSwitch;
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "image-symbolic";
+        }
+
+        [suffix]
+        Gtk.Switch _overwriteAlbumArtWithMusicBrainzSwitch {
+          valign: center;
+        }
+      }
+
+      Adw.EntryRow _acoustIdRow {
+        title: _("AcoustId User API Key");
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "fingerprint-symbolic";
+        }
+
+        [suffix]
+        Gtk.Button _acoustIdButton {
+          valign: center;
+          tooltip-text: _("Get New API Key");
+          icon-name: "window-new-symbolic";
+
+          styles ["flat"]
+        }
+      }
+    }
+  }
+}

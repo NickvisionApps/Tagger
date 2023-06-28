@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.nickvision.tagger</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Tagger</name>
+  <developer_name>Nickvision</developer_name>
+  <summary>Tag your music</summary>
+  <description>
+    <p>— Edit tags and album art of multiple files, even across subfolders, all at once</p>
+    <p>— Support for multiple music file types (mp3, ogg, flac, wma, and wav)</p>
+    <p>— Convert filenames to tags and tags to filenames with ease</p>
+    <p>— Lookup file information using MusicBrainz</p>
+  </description>
+  <launchable type="desktop-id">org.nickvision.tagger.desktop</launchable>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/NickvisionApps/Tagger/main/@PROJECT@/Screenshots/Light.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/NickvisionApps/Tagger/main/@PROJECT@/Screenshots/Dark.png</image>
+    </screenshot>
+  </screenshots>
+  <url type="homepage">https://github.com/NickvisionApps/Tagger</url>
+  <url type="bugtracker">https://github.com/NickvisionApps/Tagger/issues</url>
+  <url type="donation">https://github.com/sponsors/nlogozzo</url>
+  <url type="translate">https://github.com/NickvisionApps/Tagger/blob/master/CONTRIBUTING.md#providing-translations</url>
+  <project_group>Nickvision</project_group>
+  <provides>
+    <binary>org.nickvision.tagger</binary>
+  </provides>
+  <releases>
+    <release version="2023.7.0-next" date="2023-07-01">
+      <description translatable="no">
+        <p>- Tagger has been completely rewritten in C#! With this new language comes better performance and more stable features. To signify this great change, we also updated the app icon (Thanks @daudix-UFO)!</p>
+        <p>- Added a separate option in Preferences for overwriting album art with MusicBrainz metadata independently of the overwriting tag data setting</p>
+        <p>- Added an option in Preferences for controlling how music files are sorted</p>
+        <p>- Track values will now be padded into double digits</p>
+        <p>- Fixed an issue where some file types were not loading album art correctly</p>
+        <p>- Fixed an issue where applying unapplied changes would sometimes not work</p>
+        <p>- Improved UI/UX</p>
+        <p>- Updated translations (Thanks everyone on Weblate!)</p>
+      </description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
+</component>

@@ -1,0 +1,101 @@
+{
+    "app-id" : "org.nickvision.tagger",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "44",
+    "sdk" : "org.gnome.Sdk",
+    "sdk-extensions": [
+        "org.freedesktop.Sdk.Extension.dotnet7"
+    ],
+    "build-options": {
+        "append-path": "/usr/lib/sdk/dotnet7/bin",
+        "append-ld-library-path": "/usr/lib/sdk/dotnet7/lib",
+        "env": {
+            "PKG_CONFIG_PATH": "/app/lib/pkgconfig:/app/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/usr/lib/sdk/dotnet7/lib/pkgconfig"
+        }
+    },
+    "command" : "/app/bin/org.nickvision.tagger",
+    "finish-args":[
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--share=ipc",
+        "--share=network"
+    ],
+    "cleanup":[
+        "/include",
+        "/lib/pkgconfig",
+        "*.a"
+    ],
+    "add-extensions": {
+        "org.freedesktop.Platform.ffmpeg-full": {
+            "directory": "lib/ffmpeg",
+            "version": "22.08",
+            "add-ld-path": ".",
+            "autodelete": false
+        }
+    },
+    "cleanup-commands": [
+        "mkdir -p /app/lib/ffmpeg"
+    ],
+    "modules" : [
+        {
+            "name": "chromaprint",
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE:STRING=Release",
+                "-DBUILD_TOOLS:BOOL=ON",
+                "-DFFT_LIB:STRING=avfft"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/acoustid/chromaprint/releases/download/v1.5.1/chromaprint-1.5.1.tar.gz",
+                    "sha256": "a1aad8fa3b8b18b78d3755b3767faff9abb67242e01b478ec9a64e190f335e1c",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 286,
+                        "stable-only": true,
+                        "url-template": "https://github.com/acoustid/chromaprint/releases/download/v$version/chromaprint-$version.tar.gz"
+                    }
+                },
+                {
+                    "type": "patch",
+                    "path": "chromaprint_ffmpeg5.patch"
+                }
+            ],
+            "cleanup": [
+                "/include",
+                "/lib/pkgconfig"
+            ]
+        },
+        {
+            "name": "blueprint-compiler",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/jwestman/blueprint-compiler",
+                    "tag": "v0.6.0",
+                    "commit": "9adcab2d225fd6435edc85c72a0b67e33880e00b"
+                }
+            ]
+        },
+        {
+            "name": "org.nickvision.tagger",
+            "buildsystem": "simple",
+            "build-commands": [
+                "chmod +x ./flatpak/build.sh",
+                "./flatpak/build.sh gnome"
+            ],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": ".."
+                },
+                "cake-sources.json",
+                "../NickvisionTagger.GNOME/nuget-sources.json"
+            ]
+        }
+    ]
+}

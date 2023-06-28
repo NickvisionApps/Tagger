@@ -1,0 +1,351 @@
+using Gtk 4.0;
+using Adw 1;
+
+menu mainMenu {
+  item(_("Preferences"), "win.preferences")
+  item(_("Keyboard Shortcuts"), "win.keyboardShortcuts")
+  item(_("About Tagger"), "win.about")
+}
+
+menu tagActionsMenu {
+  section {
+    item(_("Discard Unapplied Changes"), "win.discardUnappliedChanges")
+    item(_("Delete Tags"), "win.deleteTags")
+  }
+
+  section {
+    item(_("Convert File Name to Tag"), "win.filenameToTag")
+    item(_("Convert Tag to File Name"), "win.tagToFilename")
+  }
+
+  section {
+    item(_("Insert Album Art"), "win.insertAlbumArt")
+    item(_("Remove Album Art"), "win.removeAlbumArt")
+  }
+}
+
+menu webServicesMenu {
+  item(_("Download MusicBrainz Metadata"), "win.downloadMusicBrainzMetadata")
+  item(_("Submit to AcoustId"), "win.submitToAcoustId")
+}
+
+Adw.ApplicationWindow _root {
+  default-width: 900;
+  default-height: 700;
+
+  Gtk.Box {
+    orientation: vertical;
+
+    Adw.HeaderBar _headerBar {
+      title-widget: Adw.WindowTitle _title {};
+      
+      [start]
+      Gtk.Button _openFolderButton {
+        tooltip-text: _("Open Music Folder (Ctrl+O)");
+        visible: false;
+        action-name: "win.openFolder";
+
+        Adw.ButtonContent {
+          label: _("Open");
+          icon-name: "folder-open-symbolic";
+        }
+      }
+
+      [start]
+      Gtk.Button _reloadFolderButton {
+        tooltip-text: _("Reload Music Folder (F5)");
+        visible: false;
+        icon-name: "view-refresh-symbolic";
+        action-name: "win.reloadFolder";
+      }
+      
+      [end]
+      Gtk.MenuButton {
+        direction: none;
+        menu-model: mainMenu;
+        tooltip-text: _("Main Menu");
+        primary: true;
+      }
+
+      [end]
+      Gtk.Separator _headerEndSeparator {
+        styles ["spacer"]
+      }
+
+      [end]
+      Gtk.Button _applyButton {
+        label: _("Apply");
+        tooltip-text: _("Apply Changes To Tag (Ctrl+S)");
+        visible: false;
+        action-name: "win.apply";
+
+        styles ["suggested-action"]
+      }
+
+      [end]
+      Gtk.MenuButton _tagActionsButton {
+        icon-name: "document-properties-symbolic";
+        menu-model: tagActionsMenu;
+        visible: false;
+        tooltip-text: _("Tag Actions");
+      }
+
+      [end]
+      Gtk.MenuButton _webServicesButton {
+        icon-name: "web-browser-symbolic";
+        menu-model: webServicesMenu;
+        visible: false;
+        tooltip-text: _("Web Services");
+      }
+
+      styles ["flat"]
+    }
+    
+    Adw.ToastOverlay _toastOverlay {
+      hexpand: true;
+      vexpand: true;
+      
+      Adw.ViewStack _viewStack {
+        Adw.ViewStackPage {
+          name: "NoFolder";
+          child: Adw.StatusPage {
+            icon-name: "org.nickvision.tagger";
+            title: _("Tag Your Music");
+            description: _("Open a folder with music to get started.");
+            child: Gtk.Button {
+              label: _("Open Folder");
+              halign: center;
+              action-name: "win.openFolder";
+              styles ["pill", "suggested-action"]
+            };
+            
+            styles ["icon-dropshadow"]
+          };
+        }
+
+        Adw.ViewStackPage _loadingPage {
+          name: "Loading";
+          child: Gtk.Box {
+            orientation: vertical;
+            halign: center;
+            valign: center;
+            spacing: 24;
+
+            Gtk.Spinner {
+              width-request: 42;
+              height-request: 42;
+              spinning: bind _loadingPage.visible;
+            }
+
+            Gtk.Label _loadingLabel {
+              styles ["title-4"]
+            }
+          };
+        }
+
+        Adw.ViewStackPage {
+          name: "Folder";
+          child: Adw.Flap {
+            flap-position: end;
+
+            [content]
+            Adw.ViewStack _filesViewStack {
+              width-request: 320;
+
+              Adw.ViewStackPage {
+                name: "NoFiles";
+                child: Adw.StatusPage {
+                  icon-name: "library-music-symbolic";
+                  title: _("No Music Files Found");
+                  description: _("Try a different folder");
+                };
+              }
+
+              Adw.ViewStackPage {
+                name: "Files";
+                child: Gtk.Box {
+                  orientation: vertical;
+                  spacing: 6;
+
+                  Gtk.Box {
+                    orientation: horizontal;
+                    spacing: 6;
+                    margin-start: 6;
+                    margin-top: 6;
+                    margin-end: 6;
+
+                    Gtk.SearchEntry _musicFilesSearch {
+                      hexpand: true;
+                      placeholder-text: _("Search for filename (type ! to activate advanced search)...");
+                    }
+
+                    Gtk.Button _advancedSearchInfoButton {
+                      icon-name: "help-faq-symbolic";
+                      tooltip-text: _("Advanced Search Info");
+                      visible: false;
+                    }
+                  }
+
+                  Gtk.ScrolledWindow {
+                    hexpand: true;
+                    vexpand: true;
+
+                    child: Gtk.ListBox _listMusicFiles {
+                      margin-start: 6;
+                      margin-top: 6;
+                      margin-end: 6;
+                      margin-bottom: 6;
+                      selection-mode: multiple;
+                      activate-on-single-click: false;
+
+                      styles ["card", "boxed-list"]
+                    };
+                  }
+                };
+              }
+            }
+
+            [separator]
+            Gtk.Separator {
+              orientation: vertical;
+            }
+
+            [flap]
+            Gtk.ScrolledWindow {
+              hexpand: true;
+              vexpand: true;
+
+              child: Adw.Clamp {
+                child: Gtk.Box {
+                  orientation: vertical;
+                  spacing: 12;
+                  margin-start: 12;
+                  margin-top: 6;
+                  margin-end: 12;
+                  margin-bottom: 6;
+
+                  Adw.ViewStack _artViewStack {
+                    halign: center;
+                    width-request: 260;
+                    height-request: 260;
+                    margin-top: 12;
+                    margin-bottom: 12;
+
+                    Adw.ViewStackPage {
+                      name: "NoImage";
+                      child: Gtk.Button _noAlbumArtButton {
+                        action-name: "win.insertAlbumArt";
+
+                        Adw.StatusPage {
+                          icon-name: _("image-missing-symbolic");
+
+                          styles ["compact"]
+                        }
+
+                        styles ["card"]
+                      };
+                    }
+
+                    Adw.ViewStackPage {
+                      name: "Image";
+                      child: Gtk.Button _albumArtButton {
+                        action-name: "win.insertAlbumArt";
+
+                        Gtk.Frame {
+                          Gtk.Image _albumArtImage {
+
+                          }
+                        }
+
+                        styles ["card"]
+                      };
+                    }
+
+                    Adw.ViewStackPage {
+                      name: "KeepImage";
+                      child: Gtk.Button _keepAlbumArtButton {
+                        action-name: "win.insertAlbumArt";
+                        tooltip-text: _("Selected files have different album art images");
+
+                        Adw.StatusPage {
+                          icon-name: _("library-music-symbolic");
+
+                          styles ["compact"]
+                        }
+
+                        styles ["card"]
+                      };
+                    }
+                  }
+
+                  Adw.PreferencesGroup {
+                    Adw.EntryRow _filenameRow {
+                      title: _("File Name");
+                    }
+                  }
+
+                  Adw.PreferencesGroup {
+                    title: _("Tag Properties");
+
+                    Adw.EntryRow _titleRow {
+                      title: _("Title");
+                    }
+
+                    Adw.EntryRow _artistRow {
+                      title: _("Artist");
+                    }
+
+                    Adw.EntryRow _albumRow {
+                      title: _("Album");
+                    }
+
+                    Adw.EntryRow _yearRow {
+                      title: _("Year");
+                    }
+
+                    Adw.EntryRow _trackRow {
+                      title: _("Track");
+                    }
+
+                    Adw.EntryRow _albumArtistRow {
+                      title: _("Album Artist");
+                    }
+
+                    Adw.EntryRow _genreRow {
+                      title: _("Genre");
+                    }
+
+                    Adw.EntryRow _commentRow {
+                      title: _("Comment");
+                    }
+                  }
+
+                  Adw.PreferencesGroup {
+                    title: _("File Properties");
+
+                    Adw.EntryRow _durationRow {
+                      title: _("Duration");
+                      text: "00:00:00";
+                      editable: false;
+                    }
+
+                    Adw.EntryRow _fingerprintRow {
+                      title: _("Fingerprint");
+                      editable: false;
+                    }
+
+                    Adw.EntryRow _fileSizeRow {
+                      title: _("File Size");
+                      text: _("0 MB");
+                      editable: false;
+                    }
+                  }
+                };
+              };
+            }
+          };
+        }
+      }
+    }
+  }
+}
