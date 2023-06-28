@@ -272,8 +272,11 @@ public class MainWindowController
                 var i = 0;
                 foreach(var file in _musicFolder.MusicFiles)
                 {
-                    file.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp);
-                    MusicFileSaveStates[i] = true;
+                    if(!MusicFileSaveStates[i])
+                    {
+                        file.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp);
+                        MusicFileSaveStates[i] = true;
+                    }
                     i++;
                 }
             });
@@ -295,8 +298,11 @@ public class MainWindowController
             {
                 foreach(var pair in SelectedMusicFiles)
                 {
-                    pair.Value.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp);
-                    MusicFileSaveStates[pair.Key] = true;
+                    if(!MusicFileSaveStates[pair.Key])
+                    {
+                        pair.Value.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp);
+                        MusicFileSaveStates[pair.Key] = true;
+                    }
                 }
             });
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);

@@ -310,8 +310,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _application.AddWindow(this);
         Present();
-        _viewStack.SetVisibleChildName("Loading");
-        _loadingLabel.SetText(_("Loading music files from folder..."));
+        SetLoadingState(_("Loading music files from folder..."));
         await _controller.StartupAsync();
     }
 
@@ -355,6 +354,21 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
+    /// Sets the app into a loading state
+    /// </summary>
+    /// <param name="message">The message to show on the loading screen</param>
+    private void SetLoadingState(string message)
+    {
+        _viewStack.SetVisibleChildName("Loading");
+        _loadingLabel.SetText(message);
+        _openFolderButton.SetVisible(false);
+        _reloadFolderButton.SetVisible(false);
+        _applyButton.SetVisible(false);
+        _tagActionsButton.SetVisible(false);
+        _webServicesButton.SetVisible(false);
+    }
+
+    /// <summary>
     /// Occurs when the window tries to close
     /// </summary>
     /// <param name="sender">Gtk.Window</param>
@@ -369,8 +383,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if(dialog.Response == MessageDialogResponse.Suggested)
                 {
-                    _viewStack.SetVisibleChildName("Loading");
-                    _loadingLabel.SetText(_("Saving tags..."));
+                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                     Close();
                 }
@@ -401,8 +414,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             var path = g_file_get_path(obj.Handle);
             if (Directory.Exists(path))
             {
-                _viewStack.SetVisibleChildName("Loading");
-                _loadingLabel.SetText(_("Loading music files from folder..."));
+                SetLoadingState(_("Loading music files from folder..."));
                 _controller.OpenFolderAsync(path).Wait();
                 return true;
             }
@@ -425,8 +437,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             if (fileHandle != IntPtr.Zero)
             {
                 var path = g_file_get_path(fileHandle);
-                _viewStack.SetVisibleChildName("Loading");
-                _loadingLabel.SetText(_("Loading music files from folder..."));
+                SetLoadingState(_("Loading music files from folder..."));
                 await _controller.OpenFolderAsync(path);
             }
         };
@@ -447,14 +458,12 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if(dialog.Response == MessageDialogResponse.Suggested)
                 {
-                    _viewStack.SetVisibleChildName("Loading");
-                    _loadingLabel.SetText(_("Saving tags..."));
+                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                 }
                 if(dialog.Response != MessageDialogResponse.Cancel)
                 {
-                    _viewStack.SetVisibleChildName("Loading");
-                    _loadingLabel.SetText(_("Loading music files from folder..."));
+                    SetLoadingState(_("Loading music files from folder..."));
                     await _controller.ReloadFolderAsync();
                 }
                 dialog.Destroy();
@@ -463,8 +472,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
-            _viewStack.SetVisibleChildName("Loading");
-            _loadingLabel.SetText(_("Loading music files from folder..."));
+            SetLoadingState(_("Loading music files from folder..."));
             await _controller.ReloadFolderAsync();
         }
     }
@@ -476,8 +484,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private async void Apply(Gio.SimpleAction sender, EventArgs e)
     {
-        _viewStack.SetVisibleChildName("Loading");
-        _loadingLabel.SetText(_("Saving tags..."));
+        SetLoadingState(_("Saving tags..."));
         await _controller.SaveSelectedTagsAsync();
     }
 
@@ -488,8 +495,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private async void DiscardUnappliedChanges(Gio.SimpleAction sender, EventArgs e)
     {
-        _viewStack.SetVisibleChildName("Loading");
-        _loadingLabel.SetText(_("Discarding unapplied changes...."));
+        SetLoadingState(_("Discarding unapplied changes..."));
         await _controller.DiscardSelectedUnappliedChangesAsync();
     }
 
@@ -739,6 +745,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     private bool MusicFileSaveStatesChanged()
     {
         _viewStack.SetVisibleChildName("Folder");
+        _openFolderButton.SetVisible(true);
+        _reloadFolderButton.SetVisible(true);
+        _applyButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
+        _tagActionsButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
+        _webServicesButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         var i = 0;
         foreach(var saved in _controller.MusicFileSaveStates)
         {
