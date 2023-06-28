@@ -1,7 +1,4 @@
-# Tagger
-<img src="NickvisionTagger.Shared/Resources/org.nickvision.tagger.png" width="100" height="100"/>
-
- **Tag your music**
+![](NickvisionTagger.Shared/Resources/banner.png)
 
  [![Translation status](https://hosted.weblate.org/widgets/nickvision-tagger/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-tagger/) ✨Powered by [Weblate](https://weblate.org/en/)✨
 
