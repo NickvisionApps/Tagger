@@ -350,6 +350,7 @@ Adw.ApplicationWindow _root {
 
                         Adw.ActionRow {
                           title: _("Fingerprint");
+                          title-lines: 1;
 
                           [suffix]
                           Adw.Clamp {
@@ -357,6 +358,7 @@ Adw.ApplicationWindow _root {
                             maximum-size: 200;
 
                             child: Gtk.Label _fingerprintLabel {
+                              halign: end;
                               valign: center;
                             };
                           }
