@@ -143,6 +143,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         builder.Connect(this);
         _title.SetTitle(_controller.AppInfo.ShortName);
         _musicFilesSearch.OnSearchChanged += SearchChanged;
+        _advancedSearchInfoButton.OnClicked += AdvancedSearchInfo;
         _listMusicFiles.OnSelectedRowsChanged += ListMusicFiles_SelectionChanged;
         _filenameRow.OnNotify += (sender, e) =>
         {
@@ -869,6 +870,19 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void SearchChanged(Gtk.SearchEntry sender, EventArgs e)
     {
         //TODO
+    }
+
+    /// <summary>
+    /// Occurs when the _advancedSearchInfoButton is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
+    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e)
+    {
+        var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Advanced Search"), _controller.AdvancedSearchInfo, _("OK"));
+        dialog.SetSizeRequest(700, -1);
+        dialog.OnResponse += (s, ex) => dialog.Destroy();
+        dialog.Present();
     }
 
     /// <summary>

@@ -82,6 +82,13 @@ public partial class MessageDialog
     public void Destroy() => _dialog.Destroy();
 
     /// <summary>
+    /// Sets the size request of the dialog
+    /// </summary>
+    /// <param name="width">The width request</param>
+    /// <param name="height">The height request</param>
+    public void SetSizeRequest(int width, int height) => _dialog.SetSizeRequest(width, height);
+
+    /// <summary>
     /// Resets the destructive response appearance to default
     /// </summary>
     public void UnsetDestructiveApperance() => _dialog.SetResponseAppearance("destructive", Adw.ResponseAppearance.Default);

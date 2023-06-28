@@ -108,6 +108,51 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// The information string about advanced search
+    // </summary>
+    public string AdvancedSearchInfo
+    {
+        get
+        {
+            return _(@"Advanced Search is a powerful feature provided by Tagger that allows users to search files' tag contents for certain values, using a powerful tag-based syntax:
+
+            !prop1=""value1"";prop2=""value2""
+            Where prop1, prop2 are valid tag properties and value1, value2 are the values to search wrapped in quotes.
+            Each property is separated by a comma. Notice how the last property does not end in a comma.
+
+            [Valid Properties]
+            - filename
+            - title
+            - artist
+            - album
+            - year
+            - track
+            - albumartist
+            - genre
+            - comment
+
+            [Syntax Checking]
+            - If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search
+            - If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox
+
+            [Examples]
+            !artist=""""
+            This search string will filter the listbox to contain music files who's artist is empty
+
+            !genre="""";year=""2022""
+            This search string will filter the listbox to contain music files who's genre is empty and who's year is 2022
+            (Year and Track properties will validate if the value string is a number).
+
+            !title="""";artist=""bob""
+            This search string will filter the listbox to contain music files who's title is empty and who's artist is bob
+
+            [Notes]
+            * Advanced Search is case insensitive
+            * Property names must be in English");
+        }
+    }
+
+    /// <summary>
     /// Creates a new PreferencesViewController
     /// </summary>
     /// <returns>The PreferencesViewController</returns>
