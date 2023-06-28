@@ -8,12 +8,17 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-28 17:00-0400\n"
-"PO-Revision-Date: 2022-11-07 02:38+0300\n"
-"Last-Translator: Fyodor Sobolev\n"
+"PO-Revision-Date: 2023-06-28 22:21+0000\n"
+"Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.18.1\n"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:523
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:543
@@ -25,13 +30,12 @@ msgid "Inserting album art..."
 msgstr "Добавление обложки альбома..."
 
 #: ../../../Controllers/MainWindowController.cs:541
-#, fuzzy
 msgid "Submitted metadata to AcoustId successfully"
-msgstr "Метаданные для AcoustId предоставлены успешно."
+msgstr "Метаданные для AcoustId предоставлены успешно"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:615
 msgid "Submit"
-msgstr ""
+msgstr "Отправить"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:388
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:463
@@ -42,7 +46,6 @@ msgid "Apply"
 msgstr "Применить"
 
 #: ../../../Controllers/MainWindowController.cs:117
-#, fuzzy
 msgid ""
 "Advanced Search is a powerful feature provided by Tagger that allows users "
 "to search files' tag contents for certain values, using a powerful tag-based "
@@ -93,44 +96,46 @@ msgstr ""
 "Продвинутый поиск — это мощный инструмент, который позволяет осуществлять "
 "поиск по определённым значениям в тегах файлов, используя особый синтаксис:\n"
 "\n"
-"    !prop1=\"value1\";prop2=\"value2\"\n"
-"    Где prop1, prop2 — корректные названия тегов, а value1, value2 — "
+"            !prop1=\"value1\";prop2=\"value2\"\n"
+"            Где prop1, prop2 — корректные названия тегов, а value1, value2 — "
 "значения для поиска, указанные в кавычках.\n"
-"    Команды отделяются друг от друга точкой с запятой. Обратите внимение, "
-"что точка с запятой не ставится в конце последней команды.\n"
+"            Команды отделяются друг от друга точкой с запятой. Обратите "
+"внимание, что точка с запятой не ставится в конце последней команды.\n"
 "\n"
-"    Допустимые имена тегов:\n"
-"    - filename (имя файла)\n"
-"    - title (название)\n"
-"    - artist (исполнитель)\n"
-"    - album (альбом)\n"
-"    - year (год)\n"
-"    - track (номер трека)\n"
-"    - albumartist (исполнитель альбома)\n"
-"    - genre (жанр)\n"
-"    - comment (комментарий)\n"
+"            [Допустимые имена тегов]\n"
+"            - filename (имя файла)\n"
+"            - title (название)\n"
+"            - artist (исполнитель)\n"
+"            - album (альбом)\n"
+"            - year (год)\n"
+"            - track (номер трека)\n"
+"            - albumartist (исполнитель альбома)\n"
+"            - genre (жанр)\n"
+"            - comment (комментарий)\n"
 "\n"
-"    Проверка синтаксиса:\n"
-"    - Если синтаксис указанной вами строки корректен, текстовое поле станет "
-"зелёным и список будет отфильтрован в соответствии с запросом\n"
-"    - Если синтаксис строки некорректен, текстовое поле станет красным и "
-"список не будет отфильтрован\n"
+"            [Проверка синтаксиса]\n"
+"            - Если синтаксис указанной вами строки корректен, текстовое поле "
+"станет зелёным и список будет отфильтрован в соответствии с запросом\n"
+"            - Если синтаксис строки некорректен, текстовое поле станет "
+"красным и список не будет отфильтрован\n"
 "\n"
-"    Примеры:\n"
-"    !artist=\"\"\n"
-"    Эта команда отфильтрует список таким образом, чтобы он содержал только "
-"файлы с пустым тегом исполнителя.\n"
+"            [Примеры]\n"
+"            !artist=\"\"\n"
+"            Эта команда отфильтрует список таким образом, чтобы он содержал "
+"только файлы с пустым тегом исполнителя.\n"
 "\n"
-"    !genre=\"\";year=\"2022\"\n"
-"    Эта команда отфильтрует список таким образом, чтобы он содержал только "
-"файлы с пустым тегом жанра и указанным 2022 годом.\n"
-"    (Теги года и номера трека принимают числа в строке.)\n"
+"            !genre=\"\";year=\"2022\"\n"
+"            Эта команда отфильтрует список таким образом, чтобы он содержал "
+"только файлы с пустым тегом жанра и указанным 2022 годом.\n"
+"            (Теги года и номера трека принимают числа в строке.)\n"
 "\n"
-"    !title=\"\";artist=\"bob\"\n"
-"    Эта команда отфильтрует список таким образом, чтобы он содержал только "
-"файлы с пустым тегом названия и с тегом исполнителя \"bob\".\n"
+"            !title=\"\";artist=\"bob\"\n"
+"            Эта команда отфильтрует список таким образом, чтобы он содержал "
+"только файлы с пустым тегом названия и с тегом исполнителя \"bob\".\n"
 "\n"
-"    * Продвинутый поиск не чувствителен к регистру *"
+"            [Заметки]\n"
+"            * Продвинутый поиск не чувствителен к регистру\n"
+"            * Имена тегов должны быть на английском языке"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:615
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:80
@@ -144,48 +149,44 @@ msgid "OK"
 msgstr "ОК"
 
 #: ../../../Controllers/MainWindowController.cs:449
-#, fuzzy
 msgid "Converted {0} tags to file names successfully"
-msgstr "Успешно конвертировано из тегов в имена файлов: %d"
+msgstr "Успешно преобразованы {0} тегов в имена файлов"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:524
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:544
 msgid "Convert"
-msgstr ""
+msgstr "Конвертировать"
 
 #: ../../../../NickvisionTagger.GNOME/Program.cs:50
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:5
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:8
 msgid "Tag your music"
-msgstr ""
+msgstr "Отметьте свою музыку"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:388
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:463
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:622
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:660
-#, fuzzy
 msgid ""
 "Some music files still have changes waiting to be applied. What would you "
 "like to do?"
 msgstr ""
-"Изменения для некоторых файлов не были применены. Хотите ли вы применитьили "
-"отменить изменения?"
+"Некоторые музыкальные файлы все еще содержат изменения, ожидающие "
+"применения. Что бы вы хотели сделать?"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:440
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
 #: NickvisionTagger.GNOME/Blueprints/window.blp:116
-#, fuzzy
 msgid "Open Folder"
-msgstr "Открыть папку с музыкой"
+msgstr "Открыть папку"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:615
 msgid "MusicBrainz Recording Id"
 msgstr "ID записи MusicBrainz"
 
 #: ../../../Helpers/MediaHelpers.cs:33
-#, fuzzy
 msgid "TiB"
-msgstr "Тб"
+msgstr "TiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:523
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:543
@@ -194,22 +195,21 @@ msgstr "Формат строки"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:759
 msgid "Matrix Chat"
-msgstr ""
+msgstr "Matrix Чат"
 
 #: ../../../../NickvisionTagger.GNOME/Program.cs:49
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:4
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:6
 msgid "Tagger"
-msgstr ""
+msgstr "Tagger"
 
 #: ../../../Controllers/MainWindowController.cs:468
 msgid "Unable to load image file"
-msgstr ""
+msgstr "Не удалось загрузить файл изображения"
 
 #: ../../../Helpers/MediaHelpers.cs:33
-#, fuzzy
 msgid "GiB"
-msgstr "Гб"
+msgstr "GiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:610
 msgid "Too Many Files Selected"
@@ -228,17 +228,15 @@ msgstr "Отмена"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:762
 #, csharp-format
 msgid "David Lapshin {0}"
-msgstr ""
+msgstr "Давид Лапшин {0}"
 
 #: ../../../Controllers/MainWindowController.cs:541
-#, fuzzy
 msgid "Unable to submit to AcoustId. Check API key"
-msgstr "Невозможно отправить метаданные в AcoustId."
+msgstr "Невозможно отправить заявку на AcoustId. Проверьте ключ API"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:523
-#, fuzzy
 msgid "File Name to Tag"
-msgstr "Имя файла в теги"
+msgstr "Имя файла в тег"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:760
 #, csharp-format
@@ -246,6 +244,8 @@ msgid ""
 "Nicholas Logozzo {0}\n"
 "Contributors on GitHub ❤️ {1}"
 msgstr ""
+"Nicholas Logozzo {0}\n"
+"Участники на GitHub ❤️ {1}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:505
 msgid "Discarding unapplied changes..."
@@ -258,24 +258,25 @@ msgid ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 msgstr ""
+"Nicholas Logozzo {0}\n"
+"Fyodor Sobolev {1}\n"
+"DaPigGuy {2}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:610
-#, fuzzy
 msgid ""
 "Only one file can be submitted to AcoustID at a time. Please select only one "
 "file and try again."
 msgstr ""
-"Файлы для AcoustId могут быть отправлены только по одному. Пожалуйста,"
-"выберите один файл и попробуйте снова."
+"Одновременно в AcoustID может быть представлен только один файл. Пожалуйста, "
+"выберите только один файл и повторите попытку."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:320
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:424
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:447
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:473
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:482
-#, fuzzy
 msgid "Loading music files from folder..."
-msgstr "Загрузка файлов..."
+msgstr "Загрузка музыкальных файлов из папки..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:388
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:463
@@ -285,15 +286,13 @@ msgid "Apply Changes?"
 msgstr "Применить изменения?"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:814
-#, fuzzy
 msgid "Loaded {0} music files."
-msgstr "Загружено файлов: %d"
+msgstr "Загружено {0} музыкальных файлов."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:632
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:641
-#, fuzzy
 msgid "Submitting data to AcoustId..."
-msgstr "Отправка метаданных в AcoustId..."
+msgstr "Отправка данных в AcoustId..."
 
 #: ../../../Models/PropertyMap.cs:88
 #: NickvisionTagger.GNOME/Blueprints/window.blp:339
@@ -302,38 +301,33 @@ msgstr "0 Мб"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:758
 msgid "GitHub Repo"
-msgstr ""
+msgstr "Репозиторий GitHub"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:543
-#, fuzzy
 msgid "Tag to File Name"
-msgstr "Теги в имя файла"
+msgstr "Тег в имя файла"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:597
-#, fuzzy
 msgid "Downloading MusicBrainz metadata..."
-msgstr "Скачать метаданные MusicBrainz"
+msgstr "Загрузка метаданных MusicBrainz..."
 
 #: ../../../Helpers/MediaHelpers.cs:33
-#, fuzzy
 msgid "MiB"
 msgstr "Мб"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:763
 msgid "translator-credits"
-msgstr ""
+msgstr "Давид Лапшин"
 
 #: ../../../Controllers/MainWindowController.cs:528
-#, fuzzy
 msgid "Downloaded metadata for {0} files successfully"
-msgstr "Успешно скачаны метаданные для файлов: %d"
+msgstr "Метаданные для {0} файлов загружены успешно"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:992
 msgid "Advanced Search"
 msgstr "Продвинутый поиск"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:615
-#, fuzzy
 msgid ""
 "AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id "
 "for easy identification.\n"
@@ -344,13 +338,14 @@ msgid ""
 "If none is provided, Tagger will submit your tag's metadata in association "
 "with the fingerprint instead."
 msgstr ""
-"AcoustId может связать отпечаток песни с ID записи MusicBrainz для лёгкой "
-"идентификации.\n"
+"AcoustId может связать отпечаток песни с идентификатором записи MusicBrainz "
+"для легкой идентификации.\n"
 "\n"
-"Если вам известен ID записи MusicBrainz для этой песни, пожалуйста, "
-"укажитеего ниже.\n"
+"Если у вас есть идентификатор записи MusicBrainz для этой песни, пожалуйста, "
+"укажите его ниже.\n"
 "\n"
-"Если ID не указан, Tagger отправит метаданные тегов в сочетании с отпечатком."
+"Если он не указан, Tagger отправит метаданные вашего тега вместе с "
+"отпечатком."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:566
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:61
@@ -359,12 +354,10 @@ msgid "Insert Album Art"
 msgstr "Вставить обложку альбома"
 
 #: ../../../Controllers/MainWindowController.cs:426
-#, fuzzy
 msgid "Converted {0} file names to tags successfully"
-msgstr "Успешно конвертировано из имён файлов в теги: %d"
+msgstr "Успешно преобразовано {0} имен файлов в теги"
 
 #: ../../../Helpers/MediaHelpers.cs:33
-#, fuzzy
 msgid "KiB"
 msgstr "Кб"
 
@@ -402,19 +395,16 @@ msgid "Theme"
 msgstr "Тема"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
-#, fuzzy
 msgctxt "Theme"
 msgid "Light"
 msgstr "Светлая"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
-#, fuzzy
 msgctxt "Theme"
 msgid "Dark"
 msgstr "Тёмная"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
-#, fuzzy
 msgctxt "Theme"
 msgid "System"
 msgstr "Системная"
@@ -433,34 +423,30 @@ msgstr "Включать подпапки"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:64
 msgid "Sort Files By"
-msgstr ""
+msgstr "Сортировать файлы по"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "File Name"
 msgstr "Имя файла"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "Title"
 msgstr "Название"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "Track"
-msgstr "Номер трека"
+msgstr "Трек"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:77
 msgid "Music File"
 msgstr "Файлы"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:80
-#, fuzzy
 msgid "Preserve Modification Timestamp"
-msgstr "Не обновлять метку времени изменения"
+msgstr "Сохранение временной метки модификации"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:96
 #: NickvisionTagger.GNOME/Blueprints/window.blp:98
@@ -476,15 +462,18 @@ msgid ""
 "Enable to overwrite existing tag metadata with data found from MusicBrainz. "
 "If disabled, only blank tag properties will be filled."
 msgstr ""
+"Включает перезапись существующих метаданных тега данными, найденными из "
+"MusicBrainz. Если отключить, будут заполнены только пустые свойства тегов."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:115
-#, fuzzy
 msgid "Overwrite Album Art With MusicBrainz"
-msgstr "Перезапись тегов с помощью MusicBrainz"
+msgstr "Переписать обложку альбома с помощью MusicBrainz"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:116
 msgid "Enable to overwrite existing album art with art found from MusicBrainz."
 msgstr ""
+"Включите чтобы перезаписывать существующие обложки альбомов обложками, "
+"найденными из MusicBrainz."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:131
 msgid "AcoustId User API Key"
@@ -495,30 +484,26 @@ msgid "Get New API Key"
 msgstr "Получить новый ключ API"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:14
-#, fuzzy
 msgctxt "Shortcut"
 msgid "Music Folder"
-msgstr "Папка с музыкой"
+msgstr "Музыкальная папка"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:22
-#, fuzzy
 msgid "Close Folder"
-msgstr "Папка с музыкой"
+msgstr "Закрыть папку"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:27
-#, fuzzy
 msgid "Reload Folder"
-msgstr "Перезагрузить папку с музыкой"
+msgstr "Перезагрузить папку"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:33
-#, fuzzy
 msgctxt "Shortcut"
 msgid "Music File"
-msgstr "Файлы"
+msgstr "Музыкальный файл"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:36
 msgid "Save Tag"
-msgstr ""
+msgstr "Сохранить тег"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:41
 #: NickvisionTagger.GNOME/Blueprints/window.blp:12
@@ -532,15 +517,13 @@ msgstr "Удалить теги"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:51
 #: NickvisionTagger.GNOME/Blueprints/window.blp:17
-#, fuzzy
 msgid "Convert File Name to Tag"
-msgstr "Конвертировать имя файла в теги"
+msgstr "Конвертировать имя файла в тег"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:56
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
-#, fuzzy
 msgid "Convert Tag to File Name"
-msgstr "Конвертировать теги в имя файла"
+msgstr "Конвертировать тег в имя файла"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:66
 #: NickvisionTagger.GNOME/Blueprints/window.blp:23
@@ -548,7 +531,6 @@ msgid "Remove Album Art"
 msgstr "Удалить обложку альбома"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:72
-#, fuzzy
 msgctxt "Shortcut"
 msgid "Web Services"
 msgstr "Веб-сервисы"
@@ -559,7 +541,6 @@ msgid "Download MusicBrainz Metadata"
 msgstr "Скачать метаданные MusicBrainz"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:86
-#, fuzzy
 msgctxt "Shortcut"
 msgid "Application"
 msgstr "Приложение"
@@ -571,9 +552,8 @@ msgstr "Сочетания клавиш"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:99
 #: NickvisionTagger.GNOME/Blueprints/window.blp:7
-#, fuzzy
 msgid "About Tagger"
-msgstr "О приложении %s"
+msgstr "О Tagger"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:104
 msgid "Quit"
