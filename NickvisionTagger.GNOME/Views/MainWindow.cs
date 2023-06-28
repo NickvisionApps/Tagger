@@ -705,7 +705,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     var row = Adw.ActionRow.New();
                     if(!string.IsNullOrEmpty(musicFile.Title))
                     {
-                        row.SetTitle(Regex.Replace(musicFile.Title, "\\&", "&amp;"));
+                        row.SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
                         row.SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
                     }
                     else
