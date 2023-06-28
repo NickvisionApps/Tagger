@@ -497,7 +497,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             try
             {
                 Track = uint.Parse(Filename.Substring(0, dashIndex));
-                Title = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Track.ToString().Length - 2));
+                Title = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Track.ToString("D2").Length - 2));
             }
             catch
             {

@@ -789,7 +789,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     var row = Adw.ActionRow.New();
                     if(!string.IsNullOrEmpty(musicFile.Title))
                     {
-                        row.SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
+                        row.SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
                         row.SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
                     }
                     else
@@ -909,7 +909,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             if(!string.IsNullOrEmpty(pair.Value.Title))
             {
-                _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
+                _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
                 _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
             }
             else
@@ -1020,6 +1020,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         if(!_isSelectionOccuring && _controller.SelectedMusicFiles.Count > 0)
         {
+            //Update Tags
             _controller.UpdateTags(new PropertyMap()
             {
                 Filename = _filenameRow.GetText(),
@@ -1037,7 +1038,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if(!string.IsNullOrEmpty(pair.Value.Title))
                 {
-                    _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
+                    _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
                     _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
                 }
                 else
