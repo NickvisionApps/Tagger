@@ -121,6 +121,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _commentRow;
     [Gtk.Connect] private readonly Gtk.Label _durationLabel;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
+    [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
     [Gtk.Connect] private readonly Gtk.Label _fileSizeLabel;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
@@ -211,6 +212,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
+        _copyFingerprintButton.OnClicked += CopyFingerprintToClipboard;
         //Register Events
         OnCloseRequest += OnCloseRequested;
         _controller.NotificationSent += NotificationSent;
@@ -1053,5 +1055,16 @@ public partial class MainWindow : Adw.ApplicationWindow
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Occurs when the _copyFingerprintButton is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
+    private void CopyFingerprintToClipboard(Gtk.Button sender, EventArgs e)
+    {
+        _fingerprintLabel.GetClipboard().SetText(_fingerprintLabel.GetText());
+        _toastOverlay.AddToast(Adw.Toast.New(_("Fingerprint was copied to clipboard.")));
     }
 }

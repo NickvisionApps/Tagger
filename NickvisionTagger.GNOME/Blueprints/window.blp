@@ -352,8 +352,22 @@ Adw.ApplicationWindow _root {
                           title: _("Fingerprint");
 
                           [suffix]
-                          Gtk.Label _fingerprintLabel {
+                          Adw.Clamp {
+                            orientation: horizontal;
+                            maximum-size: 200;
+
+                            child: Gtk.Label _fingerprintLabel {
+                              valign: center;
+                            };
+                          }
+
+                          [suffix]
+                          Gtk.Button _copyFingerprintButton {
                             valign: center;
+                            icon-name: "edit-copy-symbolic";
+                            tooltip-text: _("Copy Fingerprint To Clipboard");
+
+                            styles ["flat"]
                           }
                         }
 
