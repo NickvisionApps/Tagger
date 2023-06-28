@@ -1,4 +1,4 @@
-# Contributing to Nickvision Application
+# Contributing to Nickvision Tagger
 
 First off, thanks for taking the time to contribute! ❤️
 
@@ -53,7 +53,7 @@ A good bug report shouldn't leave others needing to chase you up for more inform
 - Collect information about the bug:
   - Debug information provided by the application
 
-    - GNOME: from main menu open About Application → Troubleshooting → Debugging Information, here you can copy information to clipboard or save to a file.
+    - GNOME: from main menu open About Tagger → Troubleshooting → Debugging Information, here you can copy information to clipboard or save to a file.
   - Stack trace (Traceback)
     - Including any error messages thrown by the application
     - You may need to start the application via the terminal/console to receive an error message for a crash.
@@ -80,7 +80,7 @@ Once it's filed:
 
 ### Suggesting Enhancements
 
-This section guides you through submitting an enhancement suggestion for Nickvision Application, **including completely new features and minor improvements to existing functionality**. Following these guidelines will help maintainers and the community to understand your suggestion and find related suggestions.
+This section guides you through submitting an enhancement suggestion for Nickvision Tagger, **including completely new features and minor improvements to existing functionality**. Following these guidelines will help maintainers and the community to understand your suggestion and find related suggestions.
 
 #### Before Submitting an Enhancement
 
@@ -96,7 +96,7 @@ Enhancement suggestions are tracked as [GitHub issues](https://github.com/Nickvi
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.
 - **Describe the current behavior** and **explain which behavior you expected to see instead** and why. At this point you can also tell which alternatives do not work for you.
 - You may want to **include screenshots and animated GIFs** which help you demonstrate the steps or point out the part which the suggestion is related to. You can use [this tool](https://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://flathub.org/apps/details/io.github.seadve.Kooha) on Linux.
-- **Explain why this enhancement would be useful** to most Nickvision Application users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
+- **Explain why this enhancement would be useful** to most Nickvision Tagger users. You may also want to point out the other projects that solved it better and which could serve as inspiration.
 
 ### Providing Translations
 
@@ -126,7 +126,7 @@ Once all changes to your translated file are made, commit these changes and crea
 
 #### Structure
 
-Application is built using .NET 7 and C#. With these technologies, Application is built for GNOME (Linux).
+Tagger is built using .NET 7 and C#. With these technologies, Tagger is built for GNOME (Linux).
 The solution is setup into 2 projects:
  - NickvisionTagger.Shared
  - NickvisionTagger.GNOME
@@ -180,7 +180,7 @@ Use one of the commands to build the app:
 
 ## Styleguides
 
-Application follows [Microsoft's C# Coding Conventions](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions).
+Tagger follows [Microsoft's C# Coding Conventions](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions).
 
 See [Microsoft's C# Identifier Names](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/identifier-names) as well.
 
