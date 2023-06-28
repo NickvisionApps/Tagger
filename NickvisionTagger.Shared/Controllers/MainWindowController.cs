@@ -180,7 +180,78 @@ public class MainWindowController
     }
 
     /// <summary>
-    /// Saves all files' tags
+    /// Updates the tags with values from the property map
+    /// </summary>
+    /// <param name="map">The PropertyMap with values</param>
+    public void UpdateTags(PropertyMap map)
+    {
+        foreach(var pair in SelectedMusicFiles)
+        {
+            var updated = false;
+            if(map.Filename != pair.Value.Filename && map.Filename != "<keep>")
+            {
+                try
+                {
+                    pair.Value.Filename = map.Filename;
+                    updated = true;
+                }
+                catch { }
+            }
+            if(map.Title != pair.Value.Title && map.Title != "<keep>")
+            {
+                pair.Value.Title = map.Title;
+                updated = true;
+            }
+            if(map.Artist != pair.Value.Artist && map.Artist != "<keep>")
+            {
+                pair.Value.Artist = map.Artist;
+                updated = true;
+            }
+            if(map.Album != pair.Value.Album && map.Album != "<keep>")
+            {
+                pair.Value.Album = map.Album;
+                updated = true;
+            }
+            if(map.Year != pair.Value.Year.ToString() && map.Year != "<keep>")
+            {
+                try
+                {
+                    pair.Value.Year = uint.Parse(map.Year);
+                    updated = true;
+                }
+                catch { }
+            }
+            if(map.Track != pair.Value.Track.ToString() && map.Track != "<keep>")
+            {
+                try
+                {
+                    pair.Value.Track = uint.Parse(map.Track);
+                    updated = true;
+                }
+                catch { }
+            }
+            if(map.AlbumArtist != pair.Value.AlbumArtist && map.AlbumArtist != "<keep>")
+            {
+                pair.Value.AlbumArtist = map.AlbumArtist;
+                updated = true;
+            }
+            if(map.Genre != pair.Value.Genre && map.Genre != "<keep>")
+            {
+                pair.Value.Genre = map.Genre;
+                updated = true;
+            }
+            if(map.Comment != pair.Value.Comment && map.Comment != "<keep>")
+            {
+                pair.Value.Comment = map.Comment;
+                updated = true;
+            }
+            MusicFileSaveStates[pair.Key] = !updated;
+        }
+        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
+    /// Saves all files' tags to disk
     /// </summary>
     public async Task SaveAllTagsAsync()
     {

@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using NickvisionTagger.Shared.Models;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.GNOME.Views;
@@ -810,7 +811,28 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         if(!_isSelectionOccuring && _controller.SelectedMusicFiles.Count > 0)
         {
-            Console.WriteLine("Here2");
+            _controller.UpdateTags(new PropertyMap()
+            {
+                Filename = _filenameRow.GetText(),
+                Title = _titleRow.GetText(),
+                Artist = _artistRow.GetText(),
+                Album = _albumRow.GetText(),
+                Year = _yearRow.GetText(),
+                Track = _trackRow.GetText(),
+                AlbumArtist = _albumArtistRow.GetText(),
+                Genre = _genreRow.GetText(),
+                Comment = _commentRow.GetText()
+            });
+            //Update Filenames
+            var i = 0;
+            foreach(var musicFile in _controller.MusicFiles)
+            {
+                if(_listMusicFilesRows[i].GetTitle() != musicFile.Filename)
+                {
+                    _listMusicFilesRows[i].SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+                }
+                i++;
+            }
         }
     }
 }
