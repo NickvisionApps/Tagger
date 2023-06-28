@@ -185,8 +185,11 @@ public class MainWindowController
     /// <param name="path">The path to the music folder</param>
     public async Task OpenFolderAsync(string path)
     {
-        _musicFolder = new MusicFolder(path);
-        _musicFolder.IncludeSubfolders = Configuration.Current.IncludeSubfolders;
+        _musicFolder = new MusicFolder(path)
+        {
+            IncludeSubfolders = Configuration.Current.IncludeSubfolders,
+            SortFilesBy = Configuration.Current.SortFilesBy
+        };
         if(Configuration.Current.RememberLastOpenedFolder)
         {
             Configuration.Current.LastOpenedFolder = _musicFolder.ParentPath;
@@ -930,11 +933,20 @@ public class MainWindowController
     /// <param name="e">EventArgs</param>
     private async void ConfigurationSaved(object? sender, EventArgs e)
     {
-        if(_musicFolder != null && _musicFolder.IncludeSubfolders != Configuration.Current.IncludeSubfolders)
+        if(_musicFolder != null)
         {
-            _musicFolder.IncludeSubfolders = Configuration.Current.IncludeSubfolders;
-            await _musicFolder.ReloadMusicFilesAsync();
-            MusicFolderUpdated?.Invoke(this, true);
+            if(_musicFolder.IncludeSubfolders != Configuration.Current.IncludeSubfolders)
+            {
+                _musicFolder.IncludeSubfolders = Configuration.Current.IncludeSubfolders;
+                await _musicFolder.ReloadMusicFilesAsync();
+                MusicFolderUpdated?.Invoke(this, true);
+            }
+            if(_musicFolder.SortFilesBy != Configuration.Current.SortFilesBy)
+            {
+                _musicFolder.SortFilesBy = Configuration.Current.SortFilesBy;
+                await _musicFolder.ReloadMusicFilesAsync();
+                MusicFolderUpdated?.Invoke(this, false);
+            }
         }
     }
 }

@@ -21,6 +21,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     private string _fingerprint;
     
     /// <summary>
+    /// What to sort files in a music folder by
+    /// </summary>
+    public static SortBy SortFilesBy { get; set; }
+
+    /// <summary>
     /// The path of the music file
     /// </summary>
     public string Path { get; private set; }
@@ -74,6 +79,14 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && AlbumArt.IsEmpty;
     
+    /// <summary>
+    /// Constructs a static MusicFile
+    /// </summary>
+    static MusicFile()
+    {
+        SortFilesBy = SortBy.Filename;
+    }
+
     /// <summary>
     /// Constructs a MusicFile
     /// </summary>
@@ -669,7 +682,18 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <param name="a">The first MusicFile object</param>
     /// <param name="b">The second MusicFile object</param>
     /// <returns>True if a == b, else false</returns>
-    public static bool operator ==(MusicFile? a, MusicFile? b) => a?.Path == b?.Path;
+    public static bool operator ==(MusicFile? a, MusicFile? b)
+    {
+        if(SortFilesBy == SortBy.Title)
+        {
+            return a?.Title == b?.Title;
+        }
+        else if(SortFilesBy == SortBy.Track)
+        {
+            return a?.Track == b?.Track;
+        }
+        return a?.Path == b?.Path;
+    }
 
     /// <summary>
     /// Compares two MusicFile objects by !=
@@ -677,7 +701,18 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <param name="a">The first MusicFile object</param>
     /// <param name="b">The second MusicFile object</param>
     /// <returns>True if a != b, else false</returns>
-    public static bool operator !=(MusicFile? a, MusicFile? b) => a?.Path != b?.Path;
+    public static bool operator !=(MusicFile? a, MusicFile? b)
+    {
+        if(SortFilesBy == SortBy.Title)
+        {
+            return a?.Title != b?.Title;
+        }
+        else if(SortFilesBy == SortBy.Track)
+        {
+            return a?.Track != b?.Track;
+        }
+        return a?.Path != b?.Path;
+    }
 
     /// <summary>
     /// Compares two MusicFile objects by <
@@ -685,7 +720,18 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <param name="a">The first MusicFile object</param>
     /// <param name="b">The second MusicFile object</param>
     /// <returns>True if a < b, else false</returns>
-    public static bool operator <(MusicFile? a, MusicFile? b) => a?.Filename.CompareTo(b?.Filename) == -1;
+    public static bool operator <(MusicFile? a, MusicFile? b)
+    {
+        if(SortFilesBy == SortBy.Title)
+        {
+            return a?.Title.CompareTo(b?.Title) == -1;
+        }
+        else if(SortFilesBy == SortBy.Track)
+        {
+            return a?.Track < b?.Track;
+        }
+        return a?.Filename.CompareTo(b?.Filename) == -1;
+    }
 
     /// <summary>
     /// Compares two MusicFile objects by >
@@ -693,5 +739,16 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <param name="a">The first MusicFile object</param>
     /// <param name="b">The second MusicFile object</param>
     /// <returns>True if a > b, else false</returns>
-    public static bool operator >(MusicFile? a, MusicFile? b) => a?.Filename.CompareTo(b?.Filename) == 1;
+    public static bool operator >(MusicFile? a, MusicFile? b)
+    {
+        if(SortFilesBy == SortBy.Title)
+        {
+            return a?.Title.CompareTo(b?.Title) == 1;
+        }
+        else if(SortFilesBy == SortBy.Track)
+        {
+            return a?.Track > b?.Track;
+        }
+        return a?.Filename.CompareTo(b?.Filename) == 1;
+    }
 }

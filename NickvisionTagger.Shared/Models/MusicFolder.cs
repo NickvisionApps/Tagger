@@ -19,6 +19,10 @@ public class MusicFolder
     /// </summary>
     public bool IncludeSubfolders { get; set; }
     /// <summary>
+    /// What to sort files in a music folder by
+    /// </summary>
+    public SortBy SortFilesBy { get; set; }
+    /// <summary>
     /// The list of MusicFile objects from the folder
     /// </summary>
     public List<MusicFile> MusicFiles { get; init; }
@@ -31,6 +35,7 @@ public class MusicFolder
     {
         ParentPath = path;
         IncludeSubfolders = true;
+        SortFilesBy = SortBy.Filename;
         MusicFiles = new List<MusicFile>();
     }
     
@@ -40,6 +45,7 @@ public class MusicFolder
     public async Task ReloadMusicFilesAsync()
     {
         MusicFiles.Clear();
+        MusicFile.SortFilesBy = SortFilesBy;
         if(Directory.Exists(ParentPath))
         {
             var supportedExtensions = new string[] { ".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav" };

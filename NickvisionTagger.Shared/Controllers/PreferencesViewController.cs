@@ -55,6 +55,16 @@ public class PreferencesViewController
     }
 
     /// <summary>
+    /// What to sort files in a music folder by
+    /// </summary>
+    public SortBy SortFilesBy
+    {
+        get => Configuration.Current.SortFilesBy;
+
+        set => Configuration.Current.SortFilesBy = value;
+    }
+
+    /// <summary>
     /// Whether or not to preserve (not change) a file's modification timestamp
     /// </summary>
     public bool PreserveModificationTimestamp

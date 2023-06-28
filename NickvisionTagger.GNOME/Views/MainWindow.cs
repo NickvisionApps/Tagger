@@ -617,8 +617,30 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             if(!string.IsNullOrEmpty(entryDialog.Response))
             {
-                SetLoadingState(_("Submitting data to AcoustId..."));
-                await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
+                if(!_controller.CanClose)
+                {
+                    var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
+                    dialog.OnResponse += async (ss, exx) =>
+                    {
+                        if(dialog.Response == MessageDialogResponse.Suggested)
+                        {
+                            SetLoadingState(_("Saving tags..."));
+                            await _controller.SaveAllTagsAsync(false);
+                        }
+                        if(dialog.Response != MessageDialogResponse.Cancel)
+                        {
+                            SetLoadingState(_("Submitting data to AcoustId..."));
+                            await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
+                        }
+                        dialog.Destroy();
+                    };
+                    dialog.Present();
+                }
+                else
+                {
+                    SetLoadingState(_("Submitting data to AcoustId..."));
+                    await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
+                }
             }
             entryDialog.Destroy();
         };
@@ -633,7 +655,28 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void Preferences(Gio.SimpleAction sender, EventArgs e)
     {
         var preferencesDialog = new PreferencesDialog(_controller.CreatePreferencesViewController(), _application, this);
-        preferencesDialog.Present();
+        if(!_controller.CanClose)
+        {
+            var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
+            dialog.OnResponse += async (ss, exx) =>
+            {
+                if(dialog.Response != MessageDialogResponse.Cancel)
+                {
+                    preferencesDialog.Present();
+                }
+                if(dialog.Response == MessageDialogResponse.Suggested)
+                {
+                    SetLoadingState(_("Saving tags..."));
+                    await _controller.SaveAllTagsAsync(true);
+                }
+                dialog.Destroy();
+            };
+            dialog.Present();
+        }
+        else
+        {
+            preferencesDialog.Present();
+        }
     }
 
     /// <summary>

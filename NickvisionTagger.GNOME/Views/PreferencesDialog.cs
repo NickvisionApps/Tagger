@@ -25,6 +25,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Adw.ComboRow _themeRow;
     [Gtk.Connect] private readonly Gtk.Switch _rememberLastOpenedFolderSwitch;
     [Gtk.Connect] private readonly Gtk.Switch _includeSubfoldersSwitch;
+    [Gtk.Connect] private readonly Adw.ComboRow _sortFilesRow;
     [Gtk.Connect] private readonly Gtk.Switch _preserveModificationTimestampSwitch;
     [Gtk.Connect] private readonly Gtk.Switch _overwriteTagWithMusicBrainzSwitch;
     [Gtk.Connect] private readonly Gtk.Switch _overwriteAlbumArtWithMusicBrainzSwitch;
@@ -53,6 +54,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _themeRow.SetSelected((uint)_controller.Theme);
         _rememberLastOpenedFolderSwitch.SetActive(_controller.RememberLastOpenedFolder);
         _includeSubfoldersSwitch.SetActive(_controller.IncludeSubfolders);
+        _sortFilesRow.SetSelected((uint)_controller.SortFilesBy);
         _preserveModificationTimestampSwitch.SetActive(_controller.PreserveModificationTimestamp);
         _overwriteTagWithMusicBrainzSwitch.SetActive(_controller.OverwriteTagWithMusicBrainz);
         _overwriteAlbumArtWithMusicBrainzSwitch.SetActive(_controller.OverwriteAlbumArtWithMusicBrainz);
@@ -78,6 +80,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     {
         _controller.RememberLastOpenedFolder = _rememberLastOpenedFolderSwitch.GetActive();
         _controller.IncludeSubfolders = _includeSubfoldersSwitch.GetActive();
+        _controller.SortFilesBy = (SortBy)_sortFilesRow.GetSelected();
         _controller.PreserveModificationTimestamp = _preserveModificationTimestampSwitch.GetActive();
         _controller.OverwriteTagWithMusicBrainz = _overwriteTagWithMusicBrainzSwitch.GetActive();
         _controller.OverwriteAlbumArtWithMusicBrainz = _overwriteAlbumArtWithMusicBrainzSwitch.GetActive();

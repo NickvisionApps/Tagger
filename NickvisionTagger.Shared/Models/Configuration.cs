@@ -5,6 +5,16 @@ using System.Text.Json;
 namespace NickvisionTagger.Shared.Models;
 
 /// <summary>
+/// Ways to sort transactions
+/// </summary>
+public enum SortBy
+{
+    Filename = 0,
+    Title,
+    Track
+}
+
+/// <summary>
 /// A model for the configuration of the application
 /// </summary>
 public class Configuration
@@ -25,6 +35,10 @@ public class Configuration
     /// Whether or not to scan subfolders for music
     /// </summary>
     public bool IncludeSubfolders { get; set; }
+    /// <summary>
+    /// What to sort files in a music folder by
+    /// </summary>
+    public SortBy SortFilesBy { get; set; }
     /// <summary>
     /// The last opened folder (if available)
     /// </summary>
@@ -63,6 +77,7 @@ public class Configuration
         Theme = Theme.System;
         RememberLastOpenedFolder = true;
         IncludeSubfolders = true;
+        SortFilesBy = SortBy.Filename;
         LastOpenedFolder = "";
         PreserveModificationTimestamp = false;
         OverwriteTagWithMusicBrainz = true;

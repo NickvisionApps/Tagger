@@ -59,6 +59,18 @@ Adw.PreferencesWindow _root {
           valign: center;
         }
       }
+
+      Adw.ComboRow _sortFilesRow {
+        title: _("Sort Files By");
+        model: Gtk.StringList {
+          strings [C_("Sort", "File Name"), C_("Sort", "Title"), C_("Sort", "Track")]
+        };
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "view-sort-descending-symbolic";
+        }
+      }
     }
 
     Adw.PreferencesGroup {
@@ -78,6 +90,10 @@ Adw.PreferencesWindow _root {
           valign: center;
         }
       }
+    }
+
+    Adw.PreferencesGroup {
+      title: _("Web Services");
 
       Adw.ActionRow {
         title: _("Overwrite Tag With MusicBrainz");
@@ -110,10 +126,6 @@ Adw.PreferencesWindow _root {
           valign: center;
         }
       }
-    }
-
-    Adw.PreferencesGroup {
-      title: _("Fingerprinting");
 
       Adw.EntryRow _acoustIdRow {
         title: _("AcoustId User API Key");
