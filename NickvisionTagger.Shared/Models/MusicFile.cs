@@ -193,14 +193,14 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         if(file != null && tag != null)
         {
-            Title = tag.Title;
-            Artist = tag.FirstPerformer;
-            Album = tag.Album;
+            Title = tag.Title ?? "";
+            Artist = tag.FirstPerformer ?? "";
+            Album = tag.Album ?? "";
             Year = tag.Year;
             Track = tag.Track;
-            AlbumArtist = tag.FirstAlbumArtist;
-            Genre = tag.FirstGenre;
-            Comment = tag.Comment;
+            AlbumArtist = tag.FirstAlbumArtist ?? "";
+            Genre = tag.FirstGenre ?? "";
+            Comment = tag.Comment ?? "";
             Duration = (int)Math.Round(file.Properties.Duration.TotalSeconds);
             if(tag.Pictures.Length > 0)
             {

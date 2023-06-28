@@ -269,6 +269,7 @@ public class MainWindowController
                 SelectedPropertyMap.Fingerprint = first.Fingerprint;
                 SelectedPropertyMap.FileSize = first.FileSize.ToFileSizeString();
                 SelectedPropertyMap.AlbumArt = first.AlbumArt.IsEmpty ? "noArt" : "hasArt";
+                Console.WriteLine(SelectedPropertyMap);
             }
             else if(SelectedMusicFiles.Count > 1)
             {

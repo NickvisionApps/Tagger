@@ -698,7 +698,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             else
             {
                 _headerBar.AddCssClass("flat");
-                _title.SetSubtitle(null);
+                _title.SetSubtitle("");
                 _openFolderButton.SetVisible(false);
                 _reloadFolderButton.SetVisible(false);
                 _applyButton.SetVisible(false);
