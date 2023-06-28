@@ -119,9 +119,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _albumArtistRow;
     [Gtk.Connect] private readonly Adw.EntryRow _genreRow;
     [Gtk.Connect] private readonly Adw.EntryRow _commentRow;
-    [Gtk.Connect] private readonly Adw.EntryRow _durationRow;
-    [Gtk.Connect] private readonly Adw.EntryRow _fingerprintRow;
-    [Gtk.Connect] private readonly Adw.EntryRow _fileSizeRow;
+    [Gtk.Connect] private readonly Gtk.Label _durationLabel;
+    [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
+    [Gtk.Connect] private readonly Gtk.Label _fileSizeLabel;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
@@ -210,6 +210,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 TagPropertyChanged();
             }
         };
+        _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
         //Register Events
         OnCloseRequest += OnCloseRequested;
         _controller.NotificationSent += NotificationSent;
@@ -877,9 +878,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         _albumArtistRow.SetText(_controller.SelectedPropertyMap.AlbumArtist);
         _genreRow.SetText(_controller.SelectedPropertyMap.Genre);
         _commentRow.SetText(_controller.SelectedPropertyMap.Comment);
-        _durationRow.SetText(_controller.SelectedPropertyMap.Duration);
-        _fingerprintRow.SetText(_controller.SelectedPropertyMap.Fingerprint);
-        _fileSizeRow.SetText(_controller.SelectedPropertyMap.FileSize);
+        _durationLabel.SetLabel(_controller.SelectedPropertyMap.Duration);
+        _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
+        _fileSizeLabel.SetLabel(_controller.SelectedPropertyMap.FileSize);
         if(_controller.SelectedPropertyMap.AlbumArt == "hasArt")
         {
             _artViewStack.SetVisibleChildName("Image");

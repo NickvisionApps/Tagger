@@ -338,21 +338,33 @@ Adw.ApplicationWindow _root {
                       Adw.PreferencesGroup {
                         title: _("File Properties");
 
-                        Adw.EntryRow _durationRow {
+                        Adw.ActionRow _durationRow {
                           title: _("Duration");
-                          text: "00:00:00";
-                          editable: false;
+
+                          [suffix]
+                          Gtk.Label _durationLabel {
+                            valign: center;
+                            label: "00:00:00";
+                          }
                         }
 
-                        Adw.EntryRow _fingerprintRow {
+                        Adw.ActionRow {
                           title: _("Fingerprint");
-                          editable: false;
+
+                          [suffix]
+                          Gtk.Label _fingerprintLabel {
+                            valign: center;
+                          }
                         }
 
-                        Adw.EntryRow _fileSizeRow {
+                        Adw.ActionRow {
                           title: _("File Size");
-                          text: _("0 MiB");
-                          editable: false;
+
+                          [suffix]
+                          Gtk.Label _fileSizeLabel {
+                            valign: center;
+                            label: _("0 MiB");
+                          }
                         }
                       }
                     };
