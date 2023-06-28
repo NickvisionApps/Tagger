@@ -85,7 +85,7 @@ public class PropertyMap
         AlbumArt = "";
         Duration = "00:00:00";
         Fingerprint = "";
-        FileSize = _("0 MB");
+        FileSize = _("0 MiB");
     }
     
     /// <summary>
