@@ -68,6 +68,10 @@ public class MainWindowController
     /// Occurs when a music file's save state is changed
     /// </summary>
     public event EventHandler<EventArgs> MusicFileSaveStatesChanged;
+    /// <summary>
+    /// Occurs when the selected music files' properties are changed
+    /// </summary>
+    public event EventHandler<EventArgs> SelectedMusicFilesPropertiesChanged;
 
     /// <summary>
     /// Constructs a MainWindowController
@@ -183,7 +187,8 @@ public class MainWindowController
     /// Updates the tags with values from the property map
     /// </summary>
     /// <param name="map">The PropertyMap with values</param>
-    public void UpdateTags(PropertyMap map)
+    /// <param name="triggerSelectedMusicFilesPropertiesChanged">Whether or not to trigger the SelectedMusicFilesPropertiesChanged event</param>
+    public void UpdateTags(PropertyMap map, bool triggerSelectedMusicFilesPropertiesChanged)
     {
         foreach(var pair in SelectedMusicFiles)
         {
@@ -247,13 +252,18 @@ public class MainWindowController
             }
             MusicFileSaveStates[pair.Key] = !updated;
         }
+        if(triggerSelectedMusicFilesPropertiesChanged)
+        {
+            UpdateSelectedMusicFilesProperties();
+        }
         MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
     /// Saves all files' tags to disk
     /// </summary>
-    public async Task SaveAllTagsAsync()
+    /// <param name="triggerMusicFileSaveStatesChanged">Whether or not to trigger the MusicFileSaveStatesChanged event</param>
+    public async Task SaveAllTagsAsync(bool triggerMusicFileSaveStatesChanged)
     {
         if(_musicFolder != null)
         {
@@ -267,7 +277,10 @@ public class MainWindowController
                     i++;
                 }
             });
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            if(triggerMusicFileSaveStatesChanged)
+            {
+                MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 
@@ -287,31 +300,56 @@ public class MainWindowController
                 }
             });
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Tags saved successfully."), NotificationSeverity.Success));
         }
     }
 
     /// <summary>
     /// Discards the selected files' unsaved tag changes
     /// </summary>
-    public async Task DiscardSelectedUnappliedChanges()
+    public async Task DiscardSelectedUnappliedChangesAsync()
     {
         if(_musicFolder != null)
         {
+            var discarded = false;
             await Task.Run(() =>
             {
                 foreach(var pair in SelectedMusicFiles)
                 {
-                    pair.Value.LoadTagFromDisk();
-                    MusicFileSaveStates[pair.Key] = true;
+                    if(!MusicFileSaveStates[pair.Key])
+                    {
+                        pair.Value.LoadTagFromDisk();
+                        MusicFileSaveStates[pair.Key] = true;
+                        discarded = true;
+                    }
                 }
             });
+            if(discarded)
+            {
+                UpdateSelectedMusicFilesProperties();
+            }
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
     /// <summary>
-    /// Updates the list of selected music files and the property map from a list of selected indexes
+    /// Deletes the selected files' tags
+    /// </summary>
+    public void DeleteSelectedTags()
+    {
+        if(_musicFolder != null)
+        {
+            foreach(var pair in SelectedMusicFiles)
+            {
+                pair.Value.ClearTag();
+                MusicFileSaveStates[pair.Key] = false;
+            }
+            UpdateSelectedMusicFilesProperties();
+            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    /// <summary>
+    /// Updates the list of selected music files from a list of selected indexes
     /// </summary>
     /// <param name="indexes">The list of selected indexes</param>
     public void UpdateSelectedMusicFiles(List<int> indexes)
@@ -324,93 +362,102 @@ public class MainWindowController
             {
                 SelectedMusicFiles.Add(index, _musicFolder.MusicFiles[index]);
             }
-            if(SelectedMusicFiles.Count == 1)
-            {
-                var first = SelectedMusicFiles.First().Value;
-                SelectedPropertyMap.Filename = first.Filename;
-                SelectedPropertyMap.Title = first.Title;
-                SelectedPropertyMap.Artist = first.Artist;
-                SelectedPropertyMap.Album = first.Album;
-                SelectedPropertyMap.Year = first.Year.ToString();
-                SelectedPropertyMap.Track = first.Track.ToString();
-                SelectedPropertyMap.AlbumArtist = first.AlbumArtist;
-                SelectedPropertyMap.Genre = first.Genre;
-                SelectedPropertyMap.Comment = first.Comment;
-                SelectedPropertyMap.Duration = first.Duration.ToDurationString();
-                SelectedPropertyMap.Fingerprint = first.Fingerprint;
-                SelectedPropertyMap.FileSize = first.FileSize.ToFileSizeString();
-                SelectedPropertyMap.AlbumArt = first.AlbumArt.IsEmpty ? "noArt" : "hasArt";
-            }
-            else if(SelectedMusicFiles.Count > 1)
-            {
-                var first = SelectedMusicFiles.First().Value;
-                var haveSameTitle = true;
-                var haveSameArtist = true;
-                var haveSameAlbum = true;
-                var haveSameYear = true;
-                var haveSameTrack = true;
-                var haveSameAlbumArtist = true;
-                var haveSameGenre = true;
-                var haveSameComment = true;
-                var haveSameAlbumArt = true;
-                var totalDuration = 0;
-                var totalFileSize = 0l;
-                foreach(var pair in SelectedMusicFiles)
-                {
-                    if(first.Title != pair.Value.Title)
-                    {
-                        haveSameTitle = false;
-                    }
-                    if(first.Artist != pair.Value.Artist)
-                    {
-                        haveSameArtist = false;
-                    }
-                    if(first.Album != pair.Value.Album)
-                    {
-                        haveSameAlbum = false;
-                    }
-                    if(first.Year != pair.Value.Year)
-                    {
-                        haveSameYear = false;
-                    }
-                    if(first.Track != pair.Value.Track)
-                    {
-                        haveSameTrack = false;
-                    }
-                    if(first.AlbumArtist != pair.Value.AlbumArtist)
-                    {
-                        haveSameAlbumArtist = false;
-                    }
-                    if(first.Genre != pair.Value.Genre)
-                    {
-                        haveSameGenre = false;
-                    }
-                    if(first.Comment != pair.Value.Comment)
-                    {
-                        haveSameComment = false;
-                    }
-                    if(first.AlbumArt != pair.Value.AlbumArt)
-                    {
-                        haveSameAlbumArt = false;
-                    }
-                    totalDuration += pair.Value.Duration;
-                    totalFileSize += pair.Value.FileSize;
-                }
-                SelectedPropertyMap.Filename = "<keep>";
-                SelectedPropertyMap.Title = haveSameTitle ? first.Title : "<keep>";
-                SelectedPropertyMap.Artist = haveSameArtist ? first.Artist : "<keep>";
-                SelectedPropertyMap.Album = haveSameAlbum ? first.Album : "<keep>";
-                SelectedPropertyMap.Year = haveSameYear ? first.Year.ToString() : "<keep>";
-                SelectedPropertyMap.Track = haveSameTrack ? first.Track.ToString() : "<keep>";
-                SelectedPropertyMap.AlbumArtist = haveSameAlbumArtist ? first.AlbumArtist : "<keep>";
-                SelectedPropertyMap.Genre = haveSameGenre ? first.Genre : "<keep>";
-                SelectedPropertyMap.Comment = haveSameComment ? first.Comment : "<keep>";
-                SelectedPropertyMap.AlbumArt = haveSameAlbumArt ? (first.AlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
-                SelectedPropertyMap.Duration = totalDuration.ToDurationString();
-                SelectedPropertyMap.Fingerprint = "<keep>";
-                SelectedPropertyMap.FileSize = totalFileSize.ToFileSizeString();
-            }
+            UpdateSelectedMusicFilesProperties();
         }
+    }
+
+    /// <summary>
+    /// Updates the property map of the selected music files
+    /// </summary>
+    private void UpdateSelectedMusicFilesProperties()
+    {
+        if(SelectedMusicFiles.Count == 1)
+        {
+            var first = SelectedMusicFiles.First().Value;
+            SelectedPropertyMap.Filename = first.Filename;
+            SelectedPropertyMap.Title = first.Title;
+            SelectedPropertyMap.Artist = first.Artist;
+            SelectedPropertyMap.Album = first.Album;
+            SelectedPropertyMap.Year = first.Year.ToString();
+            SelectedPropertyMap.Track = first.Track.ToString();
+            SelectedPropertyMap.AlbumArtist = first.AlbumArtist;
+            SelectedPropertyMap.Genre = first.Genre;
+            SelectedPropertyMap.Comment = first.Comment;
+            SelectedPropertyMap.Duration = first.Duration.ToDurationString();
+            SelectedPropertyMap.Fingerprint = first.Fingerprint;
+            SelectedPropertyMap.FileSize = first.FileSize.ToFileSizeString();
+            SelectedPropertyMap.AlbumArt = first.AlbumArt.IsEmpty ? "noArt" : "hasArt";
+        }
+        else if(SelectedMusicFiles.Count > 1)
+        {
+            var first = SelectedMusicFiles.First().Value;
+            var haveSameTitle = true;
+            var haveSameArtist = true;
+            var haveSameAlbum = true;
+            var haveSameYear = true;
+            var haveSameTrack = true;
+            var haveSameAlbumArtist = true;
+            var haveSameGenre = true;
+            var haveSameComment = true;
+            var haveSameAlbumArt = true;
+            var totalDuration = 0;
+            var totalFileSize = 0l;
+            foreach(var pair in SelectedMusicFiles)
+            {
+                if(first.Title != pair.Value.Title)
+                {
+                    haveSameTitle = false;
+                }
+                if(first.Artist != pair.Value.Artist)
+                {
+                    haveSameArtist = false;
+                }
+                if(first.Album != pair.Value.Album)
+                {
+                    haveSameAlbum = false;
+                }
+                if(first.Year != pair.Value.Year)
+                {
+                    haveSameYear = false;
+                }
+                if(first.Track != pair.Value.Track)
+                {
+                    haveSameTrack = false;
+                }
+                if(first.AlbumArtist != pair.Value.AlbumArtist)
+                {
+                    haveSameAlbumArtist = false;
+                }
+                if(first.Genre != pair.Value.Genre)
+                {
+                    haveSameGenre = false;
+                }
+                if(first.Comment != pair.Value.Comment)
+                {
+                    haveSameComment = false;
+                }
+                if(first.AlbumArt != pair.Value.AlbumArt)
+                {
+                    haveSameAlbumArt = false;
+                }
+                totalDuration += pair.Value.Duration;
+                totalFileSize += pair.Value.FileSize;
+            }
+            SelectedPropertyMap.Filename = "<keep>";
+            SelectedPropertyMap.Title = haveSameTitle ? first.Title : "<keep>";
+            SelectedPropertyMap.Artist = haveSameArtist ? first.Artist : "<keep>";
+            SelectedPropertyMap.Album = haveSameAlbum ? first.Album : "<keep>";
+            SelectedPropertyMap.Year = haveSameYear ? first.Year.ToString() : "<keep>";
+            SelectedPropertyMap.Track = haveSameTrack ? first.Track.ToString() : "<keep>";
+            SelectedPropertyMap.AlbumArtist = haveSameAlbumArtist ? first.AlbumArtist : "<keep>";
+            SelectedPropertyMap.Genre = haveSameGenre ? first.Genre : "<keep>";
+            SelectedPropertyMap.Comment = haveSameComment ? first.Comment : "<keep>";
+            SelectedPropertyMap.AlbumArt = haveSameAlbumArt ? (first.AlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
+            SelectedPropertyMap.Duration = totalDuration.ToDurationString();
+            SelectedPropertyMap.Fingerprint = "<keep>";
+            SelectedPropertyMap.FileSize = totalFileSize.ToFileSizeString();
+        }
+        SelectedMusicFilesPropertiesChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>

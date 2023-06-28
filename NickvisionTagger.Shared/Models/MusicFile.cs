@@ -23,7 +23,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <summary>
     /// The path of the music file
     /// </summary>
-    public string Path { get; init; }
+    public string Path { get; private set; }
     /// <summary>
     /// The title of the music file
     /// </summary>
@@ -111,7 +111,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 throw new ArgumentException($"A file already exists with this filename: {newFilename}");
             }
-            _filename = value;
+            _filename = newFilename;
         }
     }
     
@@ -151,6 +151,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool LoadTagFromDisk()
     {
+        _filename = System.IO.Path.GetFileName(Path);
         TagLib.File? file = null;
         Tag? tag = null;
         try
@@ -341,6 +342,12 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool SaveTagToDisk(bool preserveModificationTimestamp)
     {
+        if(System.IO.Path.GetFileName(Path) != Filename)
+        {
+            var newPath = $"{System.IO.Path.GetDirectoryName(Path)}{System.IO.Path.DirectorySeparatorChar}{Filename}";
+            System.IO.File.Move(Path, newPath);
+            Path = newPath;
+        }
         TagLib.File? file = null;
         Tag? tag = null;
         try
@@ -419,6 +426,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     public void ClearTag()
     {
+        _filename = System.IO.Path.GetFileName(Path);
         Title = "";
         Artist = "";
         Album = "";

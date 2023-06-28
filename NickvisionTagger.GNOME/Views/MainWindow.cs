@@ -79,7 +79,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     private List<Adw.ActionRow> _listMusicFilesRows;
     private bool _isSelectionOccuring;
     private readonly GSourceFunc _musicFolderUpdatedFunc;
-    private readonly GSourceFunc _musicFileSaveStatesFunc;
+    private readonly GSourceFunc _musicFileSaveStatesChangedFunc;
+    private readonly GSourceFunc _selectedMusicFilesPropertiesChangedFunc;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
@@ -123,7 +124,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         _listMusicFilesRows = new List<Adw.ActionRow>();
         _isSelectionOccuring = false;
         _musicFolderUpdatedFunc =  MusicFolderUpdated;
-        _musicFileSaveStatesFunc = (x) => MusicFileSaveStatesChanged();
+        _musicFileSaveStatesChangedFunc = (x) => MusicFileSaveStatesChanged();
+        _selectedMusicFilesPropertiesChangedFunc = (x) => SelectedMusicFilesPropertiesChanged();
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
         SetIconName(_controller.AppInfo.ID);
@@ -204,7 +206,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
         _controller.MusicFolderUpdated += (sender, e) => g_main_context_invoke(0, _musicFolderUpdatedFunc, (IntPtr)GCHandle.Alloc(e));
-        _controller.MusicFileSaveStatesChanged += (sender, e) => g_main_context_invoke(0, _musicFileSaveStatesFunc, 0);
+        _controller.MusicFileSaveStatesChanged += (sender, e) => g_main_context_invoke(0, _musicFileSaveStatesChangedFunc, 0);
+        _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => g_main_context_invoke(0, _selectedMusicFilesPropertiesChangedFunc, 0);
         //Open Folder Action
         var actOpenFolder = Gio.SimpleAction.New("openFolder", null);
         actOpenFolder.OnActivate += OpenFolder;
@@ -368,7 +371,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 {
                     _viewStack.SetVisibleChildName("Loading");
                     _loadingLabel.SetText(_("Saving tags..."));
-                    await _controller.SaveAllTagsAsync();
+                    await _controller.SaveAllTagsAsync(false);
                     Close();
                 }
                 else if(dialog.Response == MessageDialogResponse.Destructive)
@@ -446,7 +449,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 {
                     _viewStack.SetVisibleChildName("Loading");
                     _loadingLabel.SetText(_("Saving tags..."));
-                    await _controller.SaveAllTagsAsync();
+                    await _controller.SaveAllTagsAsync(false);
                 }
                 if(dialog.Response != MessageDialogResponse.Cancel)
                 {
@@ -461,6 +464,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         else
         {
             _viewStack.SetVisibleChildName("Loading");
+            _loadingLabel.SetText(_("Loading music files from folder..."));
             await _controller.ReloadFolderAsync();
         }
     }
@@ -485,8 +489,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     private async void DiscardUnappliedChanges(Gio.SimpleAction sender, EventArgs e)
     {
         _viewStack.SetVisibleChildName("Loading");
-        _loadingLabel.SetText(_("Discarding unapplied changes..."));
-        await _controller.DiscardSelectedUnappliedChanges();
+        _loadingLabel.SetText(_("Discarding unapplied changes...."));
+        await _controller.DiscardSelectedUnappliedChangesAsync();
     }
 
     /// <summary>
@@ -494,10 +498,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void DeleteTags(Gio.SimpleAction sender, EventArgs e)
-    {
-
-    }
+    private void DeleteTags(Gio.SimpleAction sender, EventArgs e) => _controller.DeleteSelectedTags();
 
     /// <summary>
     /// Occurs when the filename to tag action is triggered
@@ -506,7 +507,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private async void FilenameToTag(Gio.SimpleAction sender, EventArgs e)
     {
-
+        //TODO
     }
 
     /// <summary>
@@ -516,7 +517,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private async void TagToFilename(Gio.SimpleAction sender, EventArgs e)
     {
-
+        //TODO
     }
 
     /// <summary>
@@ -526,7 +527,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private async void InsertAlbumArt(Gio.SimpleAction sender, EventArgs e)
     {
-
+        //TODO
     }
 
     /// <summary>
@@ -536,7 +537,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private async void RemoveAlbumArt(Gio.SimpleAction sender, EventArgs e)
     {
-
+        //TODO
     }
 
     /// <summary>
@@ -546,7 +547,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private async void DownloadMusicBrainzMetadata(Gio.SimpleAction sender, EventArgs e)
     {
-
+        //TODO
     }
 
     /// <summary>
@@ -556,7 +557,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private async void SubmitToAcoustId(Gio.SimpleAction sender, EventArgs e)
     {
-
+        //TODO
     }
 
     /// <summary>
@@ -728,39 +729,23 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
-    /// Occurs when the _musicFilesSearch's text is changed
+    /// Occurs when the selected music files' properties are changed
     /// </summary>
-    /// <param name="sender">Gtk.SearchEntry</param>
-    /// <param name="e">EventArgs</param>
-    private void SearchChanged(Gtk.SearchEntry sender, EventArgs e)
-    {
-
-    }
-
-    /// <summary>
-    /// Occurs when the _listMusicFiles's selection is changed
-    /// </summary>
-    /// <param name="sender">Gtk.ListBox</param>
-    /// <param name="e">EventArgs</param>
-    private unsafe void ListMusicFiles_SelectionChanged(Gtk.ListBox sender, EventArgs e)
+    private bool SelectedMusicFilesPropertiesChanged()
     {
         _isSelectionOccuring = true;
-        //Update Selected Files
-        var selectedIndexes = new List<int>();
-        var firstSelectedRowPtr = gtk_list_box_get_selected_rows(_listMusicFiles.Handle);
-        for(var ptr = firstSelectedRowPtr; ptr != null; ptr = ptr->next)
-        {
-            selectedIndexes.Add(gtk_list_box_row_get_index(ptr->data));
-        }
-        _controller.UpdateSelectedMusicFiles(selectedIndexes);
-        //Update UI
-        _applyButton.SetVisible(selectedIndexes.Count != 0);
-        _tagActionsButton.SetVisible(selectedIndexes.Count != 0);
-        _webServicesButton.SetVisible(selectedIndexes.Count != 0);
-        _filenameRow.SetEditable(selectedIndexes.Count < 1);
-        if(selectedIndexes.Count == 0)
+        _applyButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
+        _tagActionsButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
+        _webServicesButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
+        _filenameRow.SetEditable(_controller.SelectedMusicFiles.Count < 2);
+        if(_controller.SelectedMusicFiles.Count == 0)
         {
             _musicFilesSearch.SetText("");
+        }
+        else if(_controller.SelectedMusicFiles.Count == 1)
+        {
+            var i = _listMusicFiles.GetSelectedRow()!.GetIndex();
+            _listMusicFilesRows[i].SetTitle(Regex.Replace(_controller.SelectedPropertyMap.Filename, "\\&", "&amp;"));
         }
         _filenameRow.SetText(_controller.SelectedPropertyMap.Filename);
         _titleRow.SetText(_controller.SelectedPropertyMap.Title);
@@ -802,6 +787,35 @@ public partial class MainWindow : Adw.ApplicationWindow
             _albumArtImage.Clear();
         }
         _isSelectionOccuring = false;
+        return false;
+    }
+
+    /// <summary>
+    /// Occurs when the _musicFilesSearch's text is changed
+    /// </summary>
+    /// <param name="sender">Gtk.SearchEntry</param>
+    /// <param name="e">EventArgs</param>
+    private void SearchChanged(Gtk.SearchEntry sender, EventArgs e)
+    {
+        //TODO
+    }
+
+    /// <summary>
+    /// Occurs when the _listMusicFiles's selection is changed
+    /// </summary>
+    /// <param name="sender">Gtk.ListBox</param>
+    /// <param name="e">EventArgs</param>
+    private unsafe void ListMusicFiles_SelectionChanged(Gtk.ListBox sender, EventArgs e)
+    {
+        _isSelectionOccuring = true;
+        var selectedIndexes = new List<int>();
+        var firstSelectedRowPtr = gtk_list_box_get_selected_rows(_listMusicFiles.Handle);
+        for(var ptr = firstSelectedRowPtr; ptr != null; ptr = ptr->next)
+        {
+            selectedIndexes.Add(gtk_list_box_row_get_index(ptr->data));
+        }
+        _controller.UpdateSelectedMusicFiles(selectedIndexes);
+        _isSelectionOccuring = false;
     }
 
     /// <summary>
@@ -822,16 +836,11 @@ public partial class MainWindow : Adw.ApplicationWindow
                 AlbumArtist = _albumArtistRow.GetText(),
                 Genre = _genreRow.GetText(),
                 Comment = _commentRow.GetText()
-            });
-            //Update Filenames
-            var i = 0;
-            foreach(var musicFile in _controller.MusicFiles)
+            }, false);
+            if(_controller.SelectedMusicFiles.Count == 1)
             {
-                if(_listMusicFilesRows[i].GetTitle() != musicFile.Filename)
-                {
-                    _listMusicFilesRows[i].SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
-                }
-                i++;
+                var i = _listMusicFiles.GetSelectedRow()!.GetIndex();
+                _listMusicFilesRows[i].SetTitle(Regex.Replace(_filenameRow.GetText(), "\\&", "&amp;"));
             }
         }
     }
