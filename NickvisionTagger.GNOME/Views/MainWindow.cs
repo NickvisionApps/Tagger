@@ -561,10 +561,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void RemoveAlbumArt(Gio.SimpleAction sender, EventArgs e)
-    {
-        //TODO
-    }
+    private async void RemoveAlbumArt(Gio.SimpleAction sender, EventArgs e) => _controller.RemoveSelectedAlbumArt();
 
     /// <summary>
     /// Occurs when the download musicbrainz metadata action is triggered

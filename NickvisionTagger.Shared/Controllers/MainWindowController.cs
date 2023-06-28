@@ -396,6 +396,28 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Removes the selected files' album art
+    /// </summary>
+    public void RemoveSelectedAlbumArt()
+    {
+        var removed = false;
+        foreach(var pair in SelectedMusicFiles)
+        {
+            if(!pair.Value.AlbumArt.IsEmpty)
+            {
+                pair.Value.AlbumArt = new TagLib.ByteVector();
+                MusicFileSaveStates[pair.Key] = false;
+                removed = true;
+            }
+        }
+        if(removed)
+        {
+            UpdateSelectedMusicFilesProperties();
+            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    /// <summary>
     /// Updates the list of selected music files from a list of selected indexes
     /// </summary>
     /// <param name="indexes">The list of selected indexes</param>
