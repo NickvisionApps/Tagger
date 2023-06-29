@@ -33,10 +33,10 @@ parts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DBUILD_TOOLS=ON
       - -DBUILD_TESTS=OFF
-      - -DFFMPEG_LIBRARIES=/snap/ffmpeg-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET
-      - -DFFMPEG_LIBAVCODEC_INCLUDE_DIRS=/snap/ffmpeg-2204-sdk/current/usr/include/libavcodec
-      - -DFFMPEG_LIBAVFORMAT_INCLUDE_DIRS=/snap/ffmpeg-2204-sdk/current/usr/include/libavformat
-      - -DFFMPEG_LIBAVUTIL_INCLUDE_DIRS=/snap/ffmpeg-2204-sdk/current/usr/include/libavutil
+      - -DFFMPEG_LIBRARIES="-lavcodec -lavformat -lswresample -lavutil"
+      - -DFFMPEG_LIBAVCODEC_INCLUDE_DIRS=/snap/ffmpeg-2204-sdk/current/usr/include
+      - -DFFMPEG_LIBAVFORMAT_INCLUDE_DIRS=/snap/ffmpeg-2204-sdk/current/usr/include
+      - -DFFMPEG_LIBAVUTIL_INCLUDE_DIRS=/snap/ffmpeg-2204-sdk/current/usr/include
       - -DCMAKE_INSTALL_PREFIX=/usr
     prime:
       - -usr/lib/pkgconfig
