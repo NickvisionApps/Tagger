@@ -11,8 +11,6 @@ permissions:
   contents: read
 jobs:
   snap:
-    name: Get latest tag
-      run: echo "::set-output name=latest_tag::$(git describe --tags --abbrev=0)"
     name: "GNOME on Snap"
     runs-on: ubuntu-latest
     strategy:
@@ -22,6 +20,9 @@ jobs:
     steps:
       - name: Checkout Git repository
         uses: actions/checkout@v3
+      - name: Get latest tag
+        id: get-latest-tag
+        run: echo "::set-output name=latest_tag::$(git describe --tags --abbrev=0)"
       - name: Build Snap
         uses: snapcore/action-build@v1
         id: snapcraft-build
@@ -29,16 +30,5 @@ jobs:
             snapcraft-args: "-v"
       - uses: actions/upload-artifact@v3
         with:
-            name: tagger_{{env.latest_tag}}_amd64
+            name: "tagger_${{ steps.get-latest-tag.outputs.latest_tag }}_amd64"
             path: ${{ steps.snapcraft-build.outputs.snap }}
-      #- uses: diddlesnaps/snapcraft-review-action@v1
-      #with:
-      #snap: ${{ steps.snapcraft-build.outputs.snap }}
-      #isClassic: 'false'
-      #- name: Upload and release denaro Snap
-      #uses: snapcore/action-publish@v1
-      #env:
-      #SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
-      #with:
-      #snap: ${{ steps.snapcraft-build.outputs.snap }}
-      #release: ${{ startsWith(github.ref, 'refs/tags/') && 'candidate' || 'edge'}}
