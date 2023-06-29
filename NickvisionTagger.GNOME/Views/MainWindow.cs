@@ -96,7 +96,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Separator _headerEndSeparator;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
     [Gtk.Connect] private readonly Gtk.MenuButton _tagActionsButton;
-    [Gtk.Connect] private readonly Gtk.MenuButton _webServicesButton;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Gtk.Label _loadingLabel;
@@ -378,7 +377,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _reloadFolderButton.SetVisible(false);
         _applyButton.SetVisible(false);
         _tagActionsButton.SetVisible(false);
-        _webServicesButton.SetVisible(false);
     }
 
     /// <summary>
@@ -812,7 +810,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _reloadFolderButton.SetVisible(true);
                 _applyButton.SetVisible(false);
                 _tagActionsButton.SetVisible(false);
-                _webServicesButton.SetVisible(false);
                 _viewStack.SetVisibleChildName("Folder");
                 _folderFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
                 _flapToggleButton.SetVisible(_controller.MusicFiles.Count > 0);
@@ -830,7 +827,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _reloadFolderButton.SetVisible(false);
                 _applyButton.SetVisible(false);
                 _tagActionsButton.SetVisible(false);
-                _webServicesButton.SetVisible(false);
                 _viewStack.SetVisibleChildName("NoFolder");
             }
         }
@@ -848,7 +844,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _reloadFolderButton.SetVisible(true);
         _applyButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         _tagActionsButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
-        _webServicesButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         var i = 0;
         foreach(var saved in _controller.MusicFileSaveStates)
         {
@@ -867,7 +862,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Update Properties
         _applyButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         _tagActionsButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
-        _webServicesButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         _filenameRow.SetEditable(_controller.SelectedMusicFiles.Count < 2);
         if(_controller.SelectedMusicFiles.Count == 0)
         {
