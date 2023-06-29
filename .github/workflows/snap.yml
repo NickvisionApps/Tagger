@@ -20,9 +20,6 @@ jobs:
     steps:
       - name: Checkout Git repository
         uses: actions/checkout@v3
-      - name: Get latest tag
-        id: get-latest-tag
-        run: echo "::set-output name=latest_tag::$(git describe --tags --abbrev=0)"
       - name: Build Snap
         uses: snapcore/action-build@v1
         id: snapcraft-build
@@ -30,5 +27,5 @@ jobs:
             snapcraft-args: "-v"
       - uses: actions/upload-artifact@v3
         with:
-            name: "tagger_${{ steps.get-latest-tag.outputs.latest_tag }}_amd64"
+            name: ${{ steps.snapcraft-build.outputs.snap }} | rev | cut -c 6- | rev
             path: ${{ steps.snapcraft-build.outputs.snap }}
