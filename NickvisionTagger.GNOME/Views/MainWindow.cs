@@ -92,6 +92,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Button _openFolderButton;
     [Gtk.Connect] private readonly Gtk.Button _reloadFolderButton;
+    [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
     [Gtk.Connect] private readonly Gtk.Separator _headerEndSeparator;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
     [Gtk.Connect] private readonly Gtk.MenuButton _tagActionsButton;
@@ -814,6 +815,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _webServicesButton.SetVisible(false);
                 _viewStack.SetVisibleChildName("Folder");
                 _folderFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
+                _flapToggleButton.SetVisible(_controller.MusicFiles.Count > 0);
                 _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
                 if(sendToast)
                 {

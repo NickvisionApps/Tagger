@@ -58,6 +58,16 @@ Adw.ApplicationWindow _root {
         icon-name: "view-refresh-symbolic";
         action-name: "win.reloadFolder";
       }
+
+      [start]
+      Gtk.Button _applyButton {
+        label: _("Apply");
+        tooltip-text: _("Apply Changes To Tag (Ctrl+S)");
+        visible: false;
+        action-name: "win.apply";
+
+        styles ["suggested-action"]
+      }
       
       [end]
       Gtk.MenuButton {
@@ -68,18 +78,15 @@ Adw.ApplicationWindow _root {
       }
 
       [end]
-      Gtk.Separator _headerEndSeparator {
-        styles ["spacer"]
+      Gtk.ToggleButton _flapToggleButton {
+        icon-name: "sidebar-show-right-symbolic";
+        tooltip-text: _("Toggle Tags Pane");
+        active: bind _folderFlap.reveal-flap bidirectional;
       }
 
       [end]
-      Gtk.Button _applyButton {
-        label: _("Apply");
-        tooltip-text: _("Apply Changes To Tag (Ctrl+S)");
-        visible: false;
-        action-name: "win.apply";
-
-        styles ["suggested-action"]
+      Gtk.Separator _headerEndSeparator {
+        styles ["spacer"]
       }
 
       [end]
@@ -215,6 +222,7 @@ Adw.ApplicationWindow _root {
             Adw.ViewStack _selectedViewStack {
               hexpand: true;
               vexpand: true;
+              styles [ "background" ]
 
               Adw.ViewStackPage {
                 name: "NoSelected";
