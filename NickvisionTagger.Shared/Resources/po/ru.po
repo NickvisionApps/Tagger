@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-28 20:30-0400\n"
-"PO-Revision-Date: 2023-06-28 22:21+0000\n"
+"PO-Revision-Date: 2023-06-29 04:18+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.18.1\n"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:325
@@ -42,11 +42,11 @@ msgstr "Не удалось загрузить файл изображения"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:763
 msgid "Matrix Chat"
-msgstr "Matrix Чат"
+msgstr "Чат Matrix"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1064
 msgid "Fingerprint was copied to clipboard."
-msgstr ""
+msgstr "Отпечаток был скопирован в буфер обмена."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:392
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:467
@@ -161,10 +161,10 @@ msgid "B"
 msgstr "Б"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:819
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Loaded {0} music file."
 msgid_plural "Loaded {0} music files."
-msgstr[0] "Загружено {0} музыкальных файлов."
+msgstr[0] "Загружен {0} музыкальный файл."
 msgstr[1] "Загружено {0} музыкальных файлов."
 msgstr[2] "Загружено {0} музыкальных файлов."
 
@@ -192,10 +192,10 @@ msgid "Cancel"
 msgstr "Отмена"
 
 #: ../../../Controllers/MainWindowController.cs:426
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
-msgstr[0] "Успешно преобразовано {0} имен файлов в теги"
+msgstr[0] "Успешно преобразовано {0} имя файла в тег"
 msgstr[1] "Успешно преобразовано {0} имен файлов в теги"
 msgstr[2] "Успешно преобразовано {0} имен файлов в теги"
 
@@ -270,7 +270,7 @@ msgstr "Отправить"
 #: ../../../Models/PropertyMap.cs:88
 #: NickvisionTagger.GNOME/Blueprints/window.blp:392
 msgid "0 MiB"
-msgstr ""
+msgstr "0 МиБ"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:619
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:80
@@ -379,10 +379,10 @@ msgid "MiB"
 msgstr "МиБ"
 
 #: ../../../Controllers/MainWindowController.cs:449
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
-msgstr[0] "Успешно преобразованы {0} тегов в имена файлов"
+msgstr[0] "Успешно преобразован {0} тег в имя файла"
 msgstr[1] "Успешно преобразованы {0} тегов в имена файлов"
 msgstr[2] "Успешно преобразованы {0} тегов в имена файлов"
 
@@ -575,17 +575,16 @@ msgid "Quit"
 msgstr "Выйти"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
-#, fuzzy
 msgid "Album Art"
-msgstr "Исполнитель альбома"
+msgstr "Обложка альбома"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:20
 msgid "Insert"
-msgstr ""
+msgstr "Вставить"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:21
 msgid "Remove"
-msgstr ""
+msgstr "Удалить"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:52
 msgid "Open Music Folder (Ctrl+O)"
@@ -605,7 +604,7 @@ msgstr "Главное меню"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:81
 msgid "Toggle Tags Pane"
-msgstr ""
+msgstr "Переключить панели тегов"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:93
 msgid "Apply Changes To Tag (Ctrl+S)"
@@ -640,13 +639,12 @@ msgid "Advanced Search Info"
 msgstr "Информация по продвинутому поиску"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:231
-#, fuzzy
 msgid "No Selected Music Files"
-msgstr "Не найдено музыкальных файлов"
+msgstr "Нет выбранных музыкальных файлов"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:232
 msgid "Select some files"
-msgstr ""
+msgstr "Выберите несколько файлов"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:293
 msgid "Selected files have different album art images"
@@ -706,7 +704,7 @@ msgstr "Отпечаток"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:380
 msgid "Copy Fingerprint To Clipboard"
-msgstr ""
+msgstr "Скопировать отпечаток в буфер обмена"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:387
 msgid "File Size"
