@@ -12,7 +12,7 @@ permissions:
 jobs:
   snap:
     name: Get latest tag
-    run: echo "::set-output name=latest_tag::$(git describe --tags --abbrev=0)"
+      run: echo "::set-output name=latest_tag::$(git describe --tags --abbrev=0)"
     name: "GNOME on Snap"
     runs-on: ubuntu-latest
     strategy:
