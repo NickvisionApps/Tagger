@@ -37,6 +37,7 @@ parts:
       - -DFFMPEG_LIBAVCODEC_INCLUDE_DIRS=/snap/ffmpeg-2204-sdk/current/usr/include
       - -DFFMPEG_LIBAVFORMAT_INCLUDE_DIRS=/snap/ffmpeg-2204-sdk/current/usr/include
       - -DFFMPEG_LIBAVUTIL_INCLUDE_DIRS=/snap/ffmpeg-2204-sdk/current/usr/include
+      - -DFFMPEG_LIBSWRESAMPLE_INCLUDE_DIRS=/snap/ffmpeg-2204-sdk/current/usr/include
       - -DCMAKE_INSTALL_PREFIX=/usr
     prime:
       - -usr/lib/pkgconfig
