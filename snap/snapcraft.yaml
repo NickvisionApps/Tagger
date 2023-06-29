@@ -34,7 +34,7 @@ parts:
       - -DBUILD_TOOLS=ON
       - -DBUILD_TESTS=OFF
       - -DCMAKE_INSTALL_PREFIX=/usr
-    prime:FFMPEG_LIBAVCODEC_INCLUDE_DIRS
+    prime:
       - -usr/lib/pkgconfig
       - -usr/include
 
