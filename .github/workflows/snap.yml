@@ -27,5 +27,5 @@ jobs:
             snapcraft-args: "-v"
       - uses: actions/upload-artifact@v3
         with:
-            name: ${{ steps.snapcraft-build.outputs.snap | rev | cut -c 6- | rev }}
+            name: ${{ steps.snapcraft-build.outputs.snap }}
             path: ${{ steps.snapcraft-build.outputs.snap }}
