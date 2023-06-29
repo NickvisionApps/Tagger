@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-29 01:53+0300\n"
+"POT-Creation-Date: 2023-06-28 20:30-0400\n"
 "PO-Revision-Date: 2022-11-17 15:03+0100\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: \n"
@@ -19,31 +19,43 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.0\n"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:523
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:543
-msgid "Please select a format string."
-msgstr "Odaberi jedan znakovni niz formata."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:576
-msgid "Inserting album art..."
-msgstr "Umetanje slike albuma …"
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:325
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:428
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:451
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:477
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:486
+#, fuzzy
+msgid "Loading music files from folder..."
+msgstr "Učitavanje glazbenih datoteka …"
 
 #: ../../../Controllers/MainWindowController.cs:541
 #, fuzzy
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "Metapodaci su uspješno poslani AcoustId-u."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:615
-msgid "Submit"
+#: ../../../Controllers/MainWindowController.cs:528
+#, fuzzy
+msgid "Downloaded metadata for {0} files successfully"
+msgstr "Broj uspješno preuzetih metapodataka za datoteke: %d"
+
+#: ../../../Controllers/MainWindowController.cs:468
+msgid "Unable to load image file"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:388
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:463
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:622
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:660
-#: NickvisionTagger.GNOME/Blueprints/window.blp:77
-msgid "Apply"
-msgstr "Primijeni"
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:763
+msgid "Matrix Chat"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1064
+msgid "Fingerprint was copied to clipboard."
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:392
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:467
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
+msgid "Discard"
+msgstr "Odbaci"
 
 #: ../../../Controllers/MainWindowController.cs:117
 #, fuzzy
@@ -137,126 +149,75 @@ msgstr ""
 "\n"
 "    * Napredna pretraga ne razlikuje velika i mala slova *"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:615
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:80
-#: NickvisionTagger.GNOME/Blueprints/window.blp:29
-msgid "Submit to AcoustId"
-msgstr "Pošalji AcoustId-u"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:610
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:992
-msgid "OK"
-msgstr "U redu"
-
-#: ../../../Controllers/MainWindowController.cs:449
-#, fuzzy
-msgid "Converted {0} tags to file names successfully"
-msgstr "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:524
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:544
-msgid "Convert"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Program.cs:50
-#: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:5
-#: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:8
-msgid "Tag your music"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:388
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:463
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:622
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:660
-#, fuzzy
-msgid ""
-"Some music files still have changes waiting to be applied. What would you "
-"like to do?"
-msgstr ""
-"Neke glazbene datoteke još uvijek imaju promjene koje čekaju da se "
-"primijene. Želiš li primijeniti te promjene na datoteku ili ih odbaciti?"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:440
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
-#: NickvisionTagger.GNOME/Blueprints/window.blp:116
-#, fuzzy
-msgid "Open Folder"
-msgstr "Otvori mapu glazbe"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:615
-msgid "MusicBrainz Recording Id"
-msgstr "ID oznaka MusicBrainz snimke"
-
-#: ../../../Helpers/MediaHelpers.cs:33
-#, fuzzy
-msgid "TiB"
-msgstr "TB"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:523
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:543
-msgid "Format String"
-msgstr "Znakovni niz formata"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:759
-msgid "Matrix Chat"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Program.cs:49
-#: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:4
-#: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:6
-msgid "Tagger"
-msgstr ""
-
-#: ../../../Controllers/MainWindowController.cs:468
-msgid "Unable to load image file"
-msgstr ""
-
-#: ../../../Helpers/MediaHelpers.cs:33
-#, fuzzy
-msgid "GiB"
-msgstr "GB"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:610
-msgid "Too Many Files Selected"
-msgstr "Odabrano je previše datoteka"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:388
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:463
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:524
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:544
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:615
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:622
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:660
-msgid "Cancel"
-msgstr "Odustani"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:762
-#, csharp-format
-msgid "David Lapshin {0}"
-msgstr ""
-
-#: ../../../Controllers/MainWindowController.cs:541
-#, fuzzy
-msgid "Unable to submit to AcoustId. Check API key"
-msgstr "Nije moguće poslati metapodatke AcoustId-u."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:523
-#, fuzzy
-msgid "File Name to Tag"
-msgstr "Ime datoteke u oznaku"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:760
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:764
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
 "Contributors on GitHub ❤️ {1}"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:505
+#: ../../../Helpers/MediaHelpers.cs:33
+msgid "B"
+msgstr "B"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:819
+#, fuzzy, csharp-format
+msgid "Loaded {0} music file."
+msgid_plural "Loaded {0} music files."
+msgstr[0] "Učitane glazbene datoteke: %d."
+msgstr[1] "Učitane glazbene datoteke: %d."
+msgstr[2] "Učitane glazbene datoteke: %d."
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:570
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:61
+msgid "Insert Album Art"
+msgstr "Umetni sliku albuma"
+
+#: ../../../Helpers/MediaHelpers.cs:33
+#, fuzzy
+msgid "TiB"
+msgstr "TB"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:509
 msgid "Discarding unapplied changes..."
 msgstr "Odbacivanje neprimjenjenih promjena …"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:761
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:392
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:467
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:528
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:548
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:619
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
+msgid "Cancel"
+msgstr "Odustani"
+
+#: ../../../Controllers/MainWindowController.cs:426
+#, fuzzy, csharp-format
+msgid "Converted {0} file name to tag successfully"
+msgid_plural "Converted {0} file names to tags successfully"
+msgstr[0] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
+msgstr[1] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
+msgstr[2] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:767
+msgid "translator-credits"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:614
+msgid "Too Many Files Selected"
+msgstr "Odabrano je previše datoteka"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:994
+msgid "Advanced Search"
+msgstr "Napredna pretraga"
+
+#: ../../../Controllers/MainWindowController.cs:541
+#, fuzzy
+msgid "Unable to submit to AcoustId. Check API key"
+msgstr "Nije moguće poslati metapodatke AcoustId-u."
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:765
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -264,80 +225,11 @@ msgid ""
 "DaPigGuy {2}"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:610
-#, fuzzy
-msgid ""
-"Only one file can be submitted to AcoustID at a time. Please select only one "
-"file and try again."
-msgstr ""
-"AcoustId-u se može poslati samo jedna datoteka po slanju. Odaberi samo jednu "
-"datoteku i pokušaj ponovo."
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:580
+msgid "Inserting album art..."
+msgstr "Umetanje slike albuma …"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:320
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:424
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:447
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:473
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:482
-#, fuzzy
-msgid "Loading music files from folder..."
-msgstr "Učitavanje glazbenih datoteka …"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:388
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:463
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:622
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:660
-msgid "Apply Changes?"
-msgstr "Primijeniti promjene?"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:814
-#, fuzzy
-msgid "Loaded {0} music files."
-msgstr "Učitane glazbene datoteke: %d."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:632
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:641
-#, fuzzy
-msgid "Submitting data to AcoustId..."
-msgstr "Slanje metapodatka AcoustId-u …"
-
-#: ../../../Models/PropertyMap.cs:88
-#: NickvisionTagger.GNOME/Blueprints/window.blp:339
-msgid "0 MB"
-msgstr "0 MB"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:758
-msgid "GitHub Repo"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:543
-#, fuzzy
-msgid "Tag to File Name"
-msgstr "Oznaka u ime datoteke"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:597
-#, fuzzy
-msgid "Downloading MusicBrainz metadata..."
-msgstr "Preuzmi MusicBrainz metapodatke"
-
-#: ../../../Helpers/MediaHelpers.cs:33
-#, fuzzy
-msgid "MiB"
-msgstr "MB"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:763
-msgid "translator-credits"
-msgstr ""
-
-#: ../../../Controllers/MainWindowController.cs:528
-#, fuzzy
-msgid "Downloaded metadata for {0} files successfully"
-msgstr "Broj uspješno preuzetih metapodataka za datoteke: %d"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:992
-msgid "Advanced Search"
-msgstr "Napredna pretraga"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:615
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:619
 #, fuzzy
 msgid ""
 "AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id "
@@ -358,40 +250,163 @@ msgstr ""
 "Ako se ne navede, Tagger će umjesto toga poslati metapodatke tvoje oznake u "
 "suradnji s digitalnim otiskom."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:566
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:61
-#: NickvisionTagger.GNOME/Blueprints/window.blp:22
-msgid "Insert Album Art"
-msgstr "Umetni sliku albuma"
-
-#: ../../../Controllers/MainWindowController.cs:426
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:614
 #, fuzzy
-msgid "Converted {0} file names to tags successfully"
-msgstr "Broj uspješno pretvorenih imena datoteka u oznake: %d"
+msgid ""
+"Only one file can be submitted to AcoustID at a time. Please select only one "
+"file and try again."
+msgstr ""
+"AcoustId-u se može poslati samo jedna datoteka po slanju. Odaberi samo jednu "
+"datoteku i pokušaj ponovo."
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:614
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:994
+msgid "OK"
+msgstr "U redu"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:619
+msgid "Submit"
+msgstr ""
+
+#: ../../../Models/PropertyMap.cs:88
+#: NickvisionTagger.GNOME/Blueprints/window.blp:392
+msgid "0 MiB"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:619
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:80
+#: NickvisionTagger.GNOME/Blueprints/window.blp:35
+msgid "Submit to AcoustId"
+msgstr "Pošalji AcoustId-u"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:636
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:645
+#, fuzzy
+msgid "Submitting data to AcoustId..."
+msgstr "Slanje metapodatka AcoustId-u …"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:392
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:467
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
+#, fuzzy
+msgid ""
+"Some music files still have changes waiting to be applied. What would you "
+"like to do?"
+msgstr ""
+"Neke glazbene datoteke još uvijek imaju promjene koje čekaju da se "
+"primijene. Želiš li primijeniti te promjene na datoteku ili ih odbaciti?"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:527
+#: NickvisionTagger.GNOME/Blueprints/window.blp:27
+#, fuzzy
+msgid "File Name to Tag"
+msgstr "Ime datoteke u oznaku"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:619
+msgid "MusicBrainz Recording Id"
+msgstr "ID oznaka MusicBrainz snimke"
+
+#: ../../../../NickvisionTagger.GNOME/Program.cs:49
+#: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:4
+#: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:6
+msgid "Tagger"
+msgstr ""
+
+#: ../../../Helpers/MediaHelpers.cs:33
+#, fuzzy
+msgid "GiB"
+msgstr "GB"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:528
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:548
+#: NickvisionTagger.GNOME/Blueprints/window.blp:25
+msgid "Convert"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:527
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:547
+msgid "Format String"
+msgstr "Znakovni niz formata"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:762
+msgid "GitHub Repo"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:601
+#, fuzzy
+msgid "Downloading MusicBrainz metadata..."
+msgstr "Preuzmi MusicBrainz metapodatke"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:397
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:472
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:498
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:631
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:673
+msgid "Saving tags..."
+msgstr "Spremanje oznaka …"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:444
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
+#: NickvisionTagger.GNOME/Blueprints/window.blp:123
+#, fuzzy
+msgid "Open Folder"
+msgstr "Otvori mapu glazbe"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:547
+#: NickvisionTagger.GNOME/Blueprints/window.blp:28
+#, fuzzy
+msgid "Tag to File Name"
+msgstr "Oznaka u ime datoteke"
+
+#: ../../../../NickvisionTagger.GNOME/Program.cs:50
+#: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:5
+#: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:8
+msgid "Tag your music"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:392
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:467
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
+#: NickvisionTagger.GNOME/Blueprints/window.blp:92
+msgid "Apply"
+msgstr "Primijeni"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:766
+#, csharp-format
+msgid "David Lapshin {0}"
+msgstr ""
 
 #: ../../../Helpers/MediaHelpers.cs:33
 #, fuzzy
 msgid "KiB"
 msgstr "KB"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:393
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:468
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:494
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:627
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:669
-msgid "Saving tags..."
-msgstr "Spremanje oznaka …"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:388
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:463
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:622
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:660
-msgid "Discard"
-msgstr "Odbaci"
-
 #: ../../../Helpers/MediaHelpers.cs:33
-msgid "B"
-msgstr "B"
+#, fuzzy
+msgid "MiB"
+msgstr "MB"
+
+#: ../../../Controllers/MainWindowController.cs:449
+#, fuzzy, csharp-format
+msgid "Converted {0} tag to file name successfully"
+msgid_plural "Converted {0} tags to file names successfully"
+msgstr[0] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
+msgstr[1] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
+msgstr[2] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:527
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:547
+msgid "Please select a format string."
+msgstr "Odaberi jedan znakovni niz formata."
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:392
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:467
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
+msgid "Apply Changes?"
+msgstr "Primijeniti promjene?"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:89
@@ -469,7 +484,7 @@ msgid "Preserve Modification Timestamp"
 msgstr "Sačuvaj vremensku oznaku modifikacije"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:96
-#: NickvisionTagger.GNOME/Blueprints/window.blp:98
+#: NickvisionTagger.GNOME/Blueprints/window.blp:32
 msgid "Web Services"
 msgstr "Web usluge"
 
@@ -537,19 +552,16 @@ msgid "Delete Tags"
 msgstr "Izbriši oznake"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:51
-#: NickvisionTagger.GNOME/Blueprints/window.blp:17
 #, fuzzy
 msgid "Convert File Name to Tag"
 msgstr "Pretvori ime datoteke u oznaku"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:56
-#: NickvisionTagger.GNOME/Blueprints/window.blp:18
 #, fuzzy
 msgid "Convert Tag to File Name"
 msgstr "Pretvori oznaku u ime datoteke"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:66
-#: NickvisionTagger.GNOME/Blueprints/window.blp:23
 msgid "Remove Album Art"
 msgstr "Ukloni sliku albuma"
 
@@ -560,7 +572,7 @@ msgid "Web Services"
 msgstr "Web usluge"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:75
-#: NickvisionTagger.GNOME/Blueprints/window.blp:28
+#: NickvisionTagger.GNOME/Blueprints/window.blp:34
 msgid "Download MusicBrainz Metadata"
 msgstr "Preuzmi MusicBrainz metapodatke"
 
@@ -585,123 +597,145 @@ msgstr "Informacije o %s"
 msgid "Quit"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:44
+#: NickvisionTagger.GNOME/Blueprints/window.blp:18
+#, fuzzy
+msgid "Album Art"
+msgstr "Izvođač albuma"
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:20
+msgid "Insert"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:21
+msgid "Remove"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:52
 msgid "Open Music Folder (Ctrl+O)"
 msgstr "Otvori mapu glazbe (Ctrl+O)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:49
+#: NickvisionTagger.GNOME/Blueprints/window.blp:57
 msgid "Open"
 msgstr "Otvori"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:56
+#: NickvisionTagger.GNOME/Blueprints/window.blp:64
 msgid "Reload Music Folder (F5)"
 msgstr "Ponovo učitaj mapu glazbe (F5)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:66
+#: NickvisionTagger.GNOME/Blueprints/window.blp:74
 msgid "Main Menu"
 msgstr "Glavni izbornik"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:78
+#: NickvisionTagger.GNOME/Blueprints/window.blp:81
+msgid "Toggle Tags Pane"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:93
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Primijeni promjene na oznaku (Ctrl+S)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:90
+#: NickvisionTagger.GNOME/Blueprints/window.blp:105
 msgid "Tag Actions"
 msgstr "Radnje oznaka"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:113
+#: NickvisionTagger.GNOME/Blueprints/window.blp:120
 msgid "Tag Your Music"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:114
+#: NickvisionTagger.GNOME/Blueprints/window.blp:121
 #, fuzzy
 msgid "Open a folder with music to get started."
 msgstr ""
 "Otvori mapu s glazbenim datotekama (ili povuci jednu mapu u aplikaciju)."
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:159
+#: NickvisionTagger.GNOME/Blueprints/window.blp:166
 msgid "No Music Files Found"
 msgstr "Nijedna glazbena datoteka nije pronađena"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:160
+#: NickvisionTagger.GNOME/Blueprints/window.blp:167
 msgid "Try a different folder"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:179
+#: NickvisionTagger.GNOME/Blueprints/window.blp:186
 msgid "Search for filename (type ! to activate advanced search)..."
 msgstr "Traži ime datoteke (utipkaj ! za aktiviranje napredne pretrage) …"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:184
+#: NickvisionTagger.GNOME/Blueprints/window.blp:191
 msgid "Advanced Search Info"
 msgstr "Informacije napredne pretrage"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:240
-msgid "image-missing-symbolic"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:231
+#, fuzzy
+msgid "No Selected Music Files"
+msgstr "Nijedna glazbena datoteka nije pronađena"
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:232
+msgid "Select some files"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:268
+#: NickvisionTagger.GNOME/Blueprints/window.blp:293
 #, fuzzy
 msgid "Selected files have different album art images"
 msgstr "Odabrane datoteke imaju različite slike albuma."
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:271
-msgid "library-music-symbolic"
-msgstr ""
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:283
+#: NickvisionTagger.GNOME/Blueprints/window.blp:308
 #, fuzzy
 msgid "File Name"
 msgstr "Ime datoteke"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:288
+#: NickvisionTagger.GNOME/Blueprints/window.blp:313
 msgid "Tag Properties"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:291
+#: NickvisionTagger.GNOME/Blueprints/window.blp:316
 msgid "Title"
 msgstr "Naslov"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:295
+#: NickvisionTagger.GNOME/Blueprints/window.blp:320
 msgid "Artist"
 msgstr "Izvođač"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:299
+#: NickvisionTagger.GNOME/Blueprints/window.blp:324
 msgid "Album"
 msgstr "Album"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:303
+#: NickvisionTagger.GNOME/Blueprints/window.blp:328
 msgid "Year"
 msgstr "Godina"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:307
+#: NickvisionTagger.GNOME/Blueprints/window.blp:332
 msgid "Track"
 msgstr "Pjesma"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:311
+#: NickvisionTagger.GNOME/Blueprints/window.blp:336
 msgid "Album Artist"
 msgstr "Izvođač albuma"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:315
+#: NickvisionTagger.GNOME/Blueprints/window.blp:340
 msgid "Genre"
 msgstr "Žanr"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:319
+#: NickvisionTagger.GNOME/Blueprints/window.blp:344
 msgid "Comment"
 msgstr "Komentar"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:324
+#: NickvisionTagger.GNOME/Blueprints/window.blp:349
 msgid "File Properties"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:327
+#: NickvisionTagger.GNOME/Blueprints/window.blp:352
 msgid "Duration"
 msgstr "Trajanje"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:333
+#: NickvisionTagger.GNOME/Blueprints/window.blp:362
 msgid "Fingerprint"
 msgstr "Digitalni otisak"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:338
+#: NickvisionTagger.GNOME/Blueprints/window.blp:380
+msgid "Copy Fingerprint To Clipboard"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:387
 msgid "File Size"
 msgstr "Veličina datoteke"
 
@@ -732,9 +766,8 @@ msgstr "Pretvaranje oznaka u imena datoteka …"
 msgid "— Lookup file information using MusicBrainz"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:339
-msgid "0 MiB"
-msgstr ""
+#~ msgid "0 MB"
+#~ msgstr "0 MB"
 
 #~ msgid "Tags saved successfully."
 #~ msgstr "Oznake su uspješno spremljene."

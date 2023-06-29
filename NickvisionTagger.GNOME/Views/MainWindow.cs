@@ -92,17 +92,19 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Button _openFolderButton;
     [Gtk.Connect] private readonly Gtk.Button _reloadFolderButton;
+    [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
     [Gtk.Connect] private readonly Gtk.Separator _headerEndSeparator;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
     [Gtk.Connect] private readonly Gtk.MenuButton _tagActionsButton;
-    [Gtk.Connect] private readonly Gtk.MenuButton _webServicesButton;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Gtk.Label _loadingLabel;
+    [Gtk.Connect] private readonly Adw.Flap _folderFlap;
     [Gtk.Connect] private readonly Adw.ViewStack _filesViewStack;
     [Gtk.Connect] private readonly Gtk.SearchEntry _musicFilesSearch;
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
     [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
+    [Gtk.Connect] private readonly Adw.ViewStack _selectedViewStack;
     [Gtk.Connect] private readonly Adw.ViewStack _artViewStack;
     [Gtk.Connect] private readonly Gtk.Button _noAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Button _albumArtButton;
@@ -117,9 +119,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _albumArtistRow;
     [Gtk.Connect] private readonly Adw.EntryRow _genreRow;
     [Gtk.Connect] private readonly Adw.EntryRow _commentRow;
-    [Gtk.Connect] private readonly Adw.EntryRow _durationRow;
-    [Gtk.Connect] private readonly Adw.EntryRow _fingerprintRow;
-    [Gtk.Connect] private readonly Adw.EntryRow _fileSizeRow;
+    [Gtk.Connect] private readonly Gtk.Label _durationLabel;
+    [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
+    [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
+    [Gtk.Connect] private readonly Gtk.Label _fileSizeLabel;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
@@ -208,6 +211,8 @@ public partial class MainWindow : Adw.ApplicationWindow
                 TagPropertyChanged();
             }
         };
+        _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
+        _copyFingerprintButton.OnClicked += CopyFingerprintToClipboard;
         //Register Events
         OnCloseRequest += OnCloseRequested;
         _controller.NotificationSent += NotificationSent;
@@ -372,7 +377,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _reloadFolderButton.SetVisible(false);
         _applyButton.SetVisible(false);
         _tagActionsButton.SetVisible(false);
-        _webServicesButton.SetVisible(false);
     }
 
     /// <summary>
@@ -806,8 +810,9 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _reloadFolderButton.SetVisible(true);
                 _applyButton.SetVisible(false);
                 _tagActionsButton.SetVisible(false);
-                _webServicesButton.SetVisible(false);
                 _viewStack.SetVisibleChildName("Folder");
+                _folderFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
+                _flapToggleButton.SetVisible(_controller.MusicFiles.Count > 0);
                 _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
                 if(sendToast)
                 {
@@ -822,7 +827,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _reloadFolderButton.SetVisible(false);
                 _applyButton.SetVisible(false);
                 _tagActionsButton.SetVisible(false);
-                _webServicesButton.SetVisible(false);
                 _viewStack.SetVisibleChildName("NoFolder");
             }
         }
@@ -840,7 +844,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _reloadFolderButton.SetVisible(true);
         _applyButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         _tagActionsButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
-        _webServicesButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         var i = 0;
         foreach(var saved in _controller.MusicFileSaveStates)
         {
@@ -859,7 +862,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Update Properties
         _applyButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         _tagActionsButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
-        _webServicesButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         _filenameRow.SetEditable(_controller.SelectedMusicFiles.Count < 2);
         if(_controller.SelectedMusicFiles.Count == 0)
         {
@@ -874,9 +876,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         _albumArtistRow.SetText(_controller.SelectedPropertyMap.AlbumArtist);
         _genreRow.SetText(_controller.SelectedPropertyMap.Genre);
         _commentRow.SetText(_controller.SelectedPropertyMap.Comment);
-        _durationRow.SetText(_controller.SelectedPropertyMap.Duration);
-        _fingerprintRow.SetText(_controller.SelectedPropertyMap.Fingerprint);
-        _fileSizeRow.SetText(_controller.SelectedPropertyMap.FileSize);
+        _durationLabel.SetLabel(_controller.SelectedPropertyMap.Duration);
+        _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
+        _fileSizeLabel.SetLabel(_controller.SelectedPropertyMap.FileSize);
         if(_controller.SelectedPropertyMap.AlbumArt == "hasArt")
         {
             _artViewStack.SetVisibleChildName("Image");
@@ -1009,6 +1011,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             selectedIndexes.Add(gtk_list_box_row_get_index(ptr->data));
         }
+        _selectedViewStack.SetVisibleChildName(selectedIndexes.Count > 0 ? "Selected" : "NoSelected");
         _controller.UpdateSelectedMusicFiles(selectedIndexes);
         _isSelectionOccuring = false;
     }
@@ -1048,5 +1051,16 @@ public partial class MainWindow : Adw.ApplicationWindow
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Occurs when the _copyFingerprintButton is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
+    private void CopyFingerprintToClipboard(Gtk.Button sender, EventArgs e)
+    {
+        _fingerprintLabel.GetClipboard().SetText(_fingerprintLabel.GetText());
+        _toastOverlay.AddToast(Adw.Toast.New(_("Fingerprint was copied to clipboard.")));
     }
 }
