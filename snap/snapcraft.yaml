@@ -28,8 +28,11 @@ parts:
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE:STRING=Release
       - -DBUILD_TOOLS=ON
-      - -DFFT_LIB=avfft
       - -DCMAKE_INSTALL_PREFIX=/usr
+    prime:
+      - -usr/lib/pkgconfig
+      - -usr/include
+      
   tagger:
     after: [ chromaprint ]
     # See 'snapcraft plugins'
