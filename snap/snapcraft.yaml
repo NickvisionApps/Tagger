@@ -28,6 +28,7 @@ parts:
       patch -p1 < $CRAFT_PROJECT_DIR/snap/patches/02_libchromaprint_ffmpeg.patch
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
+      - -DFFMPEG_ROOT=/snap/ffmpeg-2204-sdk/current/usr
       - -DBUILD_TOOLS=ON
       - -DBUILD_TESTS=OFF
       - -DCMAKE_INSTALL_PREFIX=/usr
