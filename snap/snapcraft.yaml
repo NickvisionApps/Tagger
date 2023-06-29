@@ -9,24 +9,32 @@ architectures:
   - build-on: amd64
   - build-on: arm64
   - build-on: armhf
-layout:
-  /usr/share/help:
-    symlink: $SNAP/usr/share/help
 
 parts:
   chromaprint:
     plugin: cmake
     source: https://github.com/acoustid/chromaprint.git
     source-tag: v1.5.1
+    build-snaps:
+      - ffmpeg-2204-sdk
+    build-environment:
+      - PKG_CONFIG_PATH: /snap/ffmpeg-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/pkgconfig:$PKG_CONFIG_PATH
+      - PATH: /snap/ffmpeg-2204-sdk/current/usr/bin:$PATH
+      - LD_LIBRARY_PATH: /snap/ffmpeg-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+    override-pull: |
+      craftctl default
+      patch -p1 < $CRAFT_PROJECT_DIR/snap/patches/01_libchromaprint_ffmpeg.patch
+      patch -p1 < $CRAFT_PROJECT_DIR/snap/patches/02_libchromaprint_ffmpeg.patch
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_SHARED_LIBS=ON
       - -DCMAKE_INSTALL_PREFIX=/usr
   tagger:
+    after: [ chromaprint ]
     # See 'snapcraft plugins'
     plugin: nil
     source: https://github.com/NickvisionApps/Tagger.git
-    source-branch: snap
+    source-tag: '2023.7.0-beta2'
     build-packages:
       - blueprint-compiler
       - wget
@@ -35,7 +43,7 @@ parts:
       wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
       chmod +x ./dotnet-install.sh
       ./dotnet-install.sh --channel 7.0
-      patch -p1 < $CRAFT_PROJECT_DIR/snap/tagger.patch
+      patch -p1 < $CRAFT_PROJECT_DIR/snap/patches/tagger.patch
     override-build: |
       export DOTNET_ROOT=$HOME/.dotnet
       export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin
@@ -51,11 +59,25 @@ parts:
     organize:
       snap/tagger/current: .
     parse-info: [ usr/share/metainfo/org.nickvision.tagger.metainfo.xml ]
+
+slots:
+  tagger:
+    interface: dbus
+    bus: session
+    name: org.nickvision.tagger
+plugs:
+  ffmpeg-2204:
+    interface: content
+    target: ffmpeg-platform
+    default-provider: ffmpeg-2204
+
 apps:
   tagger:
     command: usr/bin/org.nickvision.tagger
     extensions: [gnome]
     common-id: org.nickvision.tagger
+    environment:
+      PATH: $SNAP/ffmpeg-platform/usr/bin:$PATH
+      LD_LIBRARY_PATH: $SNAP/ffmpeg-platform/usr/lib/$CRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
     plugs:
       - home
-       - removable-media
