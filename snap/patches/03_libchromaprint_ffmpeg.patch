@@ -1,0 +1,21 @@
+diff -Naur a/cmake/modules/FindFFmpeg.cmake b/cmake/modules/FindFFmpeg.cmake
+--- a/cmake/modules/FindFFmpeg.cmake	2023-06-29 22:38:59.970274092 +0530
++++ b/cmake/modules/FindFFmpeg.cmake	2023-06-29 22:42:32.525602548 +0530
+@@ -36,6 +36,7 @@
+ 		/sw/include # Fink
+ 		/opt/local/include # DarwinPorts
+ 		/opt/csw/include # Blastwave
++		/snap/ffmpeg-2204-sdk/current/usr/include
+ 		/opt/include
+ 		/usr/freeware/include
+ 		NO_DEFAULT_PATH
+@@ -58,6 +59,9 @@
+         /usr/local/lib64
+         /usr/lib
+         /usr/lib64
++				/snap/ffmpeg-2204-sdk/current/usr/lib/x86_64-linux-gnu
++				/snap/ffmpeg-2204-sdk/current/usr/lib/arm-linux-gnueabihf
++				/snap/ffmpeg-2204-sdk/current/usr/lib/aarch64-linux-gnu
+         /sw/lib
+         /opt/local/lib
+         /opt/csw/lib
