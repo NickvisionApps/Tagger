@@ -26,8 +26,9 @@ parts:
       patch -p1 < $CRAFT_PROJECT_DIR/snap/patches/01_libchromaprint_ffmpeg.patch
       patch -p1 < $CRAFT_PROJECT_DIR/snap/patches/02_libchromaprint_ffmpeg.patch
     cmake-parameters:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_SHARED_LIBS=ON
+      - -DCMAKE_BUILD_TYPE:STRING=Release
+      - -DBUILD_TOOLS=ON
+      - -DFFT_LIB=avfft
       - -DCMAKE_INSTALL_PREFIX=/usr
   tagger:
     after: [ chromaprint ]
