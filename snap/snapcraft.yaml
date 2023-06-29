@@ -21,14 +21,13 @@ parts:
       - PKG_CONFIG_PATH: /snap/ffmpeg-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/pkgconfig:$PKG_CONFIG_PATH
       - PATH: /snap/ffmpeg-2204-sdk/current/usr/bin:$PATH
       - LD_LIBRARY_PATH: /snap/ffmpeg-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
-      - FFMPEG_DIR: /snap/ffmpeg-2204-sdk/current/usr
     override-pull: |
       craftctl default
       patch -p1 < $CRAFT_PROJECT_DIR/snap/patches/01_libchromaprint_ffmpeg.patch
       patch -p1 < $CRAFT_PROJECT_DIR/snap/patches/02_libchromaprint_ffmpeg.patch
+      patch -p1 < $CRAFT_PROJECT_DIR/snap/patches/03_libchromaprint_ffmpeg.patch
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
-      - -DFFMPEG_ROOT=/snap/ffmpeg-2204-sdk/current/usr
       - -DBUILD_TOOLS=ON
       - -DBUILD_TESTS=OFF
       - -DCMAKE_INSTALL_PREFIX=/usr
