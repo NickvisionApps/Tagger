@@ -463,6 +463,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                     Type = PictureType.FrontCover
                 }
             };
+            tag.DateTagged = DateTime.Now;
             file.Save();
             file.Dispose();
             if(preserveModificationTimestamp)
