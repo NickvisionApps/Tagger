@@ -485,7 +485,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 return false;
             }
             Title = Filename.Substring(0, dashIndex);
-            Artist = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Title.Length - 2));
+            Artist = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Title.Length + 2));
         }
         else if (formatString == "%track%- %title%")
         {
@@ -496,8 +496,9 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             }
             try
             {
-                Track = uint.Parse(Filename.Substring(0, dashIndex));
-                Title = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Track.ToString("D2").Length - 2));
+                var trackString = Filename.Substring(0, dashIndex);
+                Track = uint.Parse(trackString);
+                Title = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (trackString.Length + 2));
             }
             catch
             {
