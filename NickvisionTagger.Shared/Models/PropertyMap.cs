@@ -48,6 +48,22 @@ public class PropertyMap
     /// </summary>
     public string BPM { get; set; }
     /// <summary>
+    /// The composer of the file
+    /// </summary>
+    public string Composer { get; set; }
+    /// <summary>
+    /// The description of the file
+    /// </summary>
+    public string Description { get; set; }
+    /// <summary>
+    /// The publisher of the file
+    /// </summary>
+    public string Publisher { get; set; }
+    /// <summary>
+    /// The ISRC of the file
+    /// </summary>
+    public string ISRC { get; set; }
+    /// <summary>
     /// The album art of the file
     /// </summary>
     public string AlbumArt { get; set; }
@@ -87,6 +103,10 @@ public class PropertyMap
         Genre = "";
         Comment = "";
         BPM = "";
+        Composer = "";
+        Description = "";
+        Publisher = "";
+        ISRC = "";
         AlbumArt = "";
         Duration = "00:00:00";
         Fingerprint = "";
@@ -110,6 +130,10 @@ public class PropertyMap
         s += $"Genre: {Genre}\n";
         s += $"Comment: {Comment}\n";
         s += $"BPM: {BPM}\n";
+        s += $"Composer: {Composer}\n";
+        s += $"Description: {Description}\n";
+        s += $"Publisher: {Publisher}\n";
+        s += $"ISRC: {ISRC}\n";
         s += $"AlbumArt: {AlbumArt}\n";
         s += $"Duration: {Duration}\n";
         s += $"Fingerprint: {Fingerprint}\n";

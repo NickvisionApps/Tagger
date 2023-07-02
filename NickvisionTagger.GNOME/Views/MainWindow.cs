@@ -120,6 +120,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _genreRow;
     [Gtk.Connect] private readonly Adw.EntryRow _commentRow;
     [Gtk.Connect] private readonly Adw.EntryRow _bpmRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _composerRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _isrcRow;
     [Gtk.Connect] private readonly Gtk.Label _durationLabel;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
     [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
@@ -213,6 +217,34 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         _bpmRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _composerRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _descriptionRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _publisherRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _isrcRow.OnNotify += (sender, e) =>
         {
             if(e.Pspec.GetName() == "text")
             {
@@ -888,6 +920,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         _genreRow.SetText(_controller.SelectedPropertyMap.Genre);
         _commentRow.SetText(_controller.SelectedPropertyMap.Comment);
         _bpmRow.SetText(_controller.SelectedPropertyMap.BPM);
+        _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
+        _descriptionRow.SetText(_controller.SelectedPropertyMap.Description);
+        _publisherRow.SetText(_controller.SelectedPropertyMap.Publisher);
+        _isrcRow.SetText(_controller.SelectedPropertyMap.ISRC);
         _durationLabel.SetLabel(_controller.SelectedPropertyMap.Duration);
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
         _fileSizeLabel.SetLabel(_controller.SelectedPropertyMap.FileSize);
@@ -1047,7 +1083,11 @@ public partial class MainWindow : Adw.ApplicationWindow
                 AlbumArtist = _albumArtistRow.GetText(),
                 Genre = _genreRow.GetText(),
                 Comment = _commentRow.GetText(),
-                BPM = _bpmRow.GetText()
+                BPM = _bpmRow.GetText(),
+                Composer = _composerRow.GetText(),
+                Description = _descriptionRow.GetText(),
+                Publisher = _publisherRow.GetText(),
+                ISRC = _isrcRow.GetText()
             }, false);
             //Update Rows
             foreach(var pair in _controller.SelectedMusicFiles)

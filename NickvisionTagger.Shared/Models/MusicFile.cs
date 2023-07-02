@@ -67,6 +67,22 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     public uint BPM { get; set; }
     /// <summary>
+    /// The composer of the music file
+    /// </summary>
+    public string Composer { get; set; }
+    /// <summary>
+    /// The description of the music file
+    /// </summary>
+    public string Description { get; set; }
+    /// <summary>
+    /// The publisher of the music file
+    /// </summary>
+    public string Publisher { get; set; }
+    /// <summary>
+    /// The ISRC of the music file
+    /// </summary>
+    public string ISRC { get; set; }
+    /// <summary>
     /// The album art of the music file
     /// </summary>
     public TagLib.ByteVector AlbumArt { get; set; }
@@ -112,6 +128,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         Genre = "";
         Comment = "";
         BPM = 0;
+        Composer = "";
+        Description = "";
+        Publisher = "";
+        ISRC = "";
         AlbumArt = new ByteVector();
         LoadTagFromDisk();
     }
@@ -226,6 +246,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             Genre = tag.FirstGenre ?? "";
             Comment = tag.Comment ?? "";
             BPM = tag.BeatsPerMinute;
+            Composer = tag.FirstComposer ?? "";
+            Description = tag.Description ?? "";
+            Publisher = tag.Publisher ?? "";
+            ISRC = tag.ISRC ?? "";
             Duration = (int)Math.Round(file.Properties.Duration.TotalSeconds);
             if(tag.Pictures.Length > 0)
             {
@@ -427,6 +451,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             tag.Genres = new string[] { Genre };
             tag.Comment = Comment;
             tag.BeatsPerMinute = BPM;
+            tag.Composers = new string[] { Composer };
+            tag.Description = Description;
+            tag.Publisher = Publisher;
+            tag.ISRC = ISRC;
             tag.Pictures = new IPicture[]
             {
                 new Picture(AlbumArt)
