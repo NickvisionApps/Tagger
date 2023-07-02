@@ -130,6 +130,7 @@ public class MainWindowController
             - albumartist
             - genre
             - comment
+            - bpm
 
             [Syntax Checking]
             - If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search
@@ -297,6 +298,15 @@ public class MainWindowController
             {
                 pair.Value.Comment = map.Comment;
                 updated = true;
+            }
+            if(map.BPM != pair.Value.BPM.ToString() && map.BPM != "<keep>")
+            {
+                try
+                {
+                    pair.Value.BPM = uint.Parse(map.BPM);
+                    updated = true;
+                }
+                catch { }
             }
             MusicFileSaveStates[pair.Key] = !updated;
         }
@@ -561,7 +571,7 @@ public class MainWindowController
                 return (false, null);
             }
             var propValPairs = search.Split(';');
-            var validProperties = new string[] { "filename", "title", "artist", "album", "year", "track", "albumartist", "genre", "comment" };
+            var validProperties = new string[] { "filename", "title", "artist", "album", "year", "track", "albumartist", "genre", "comment", "bpm" };
             var propertyMap = new PropertyMap();
             foreach(var propVal in propValPairs)
             {
@@ -643,6 +653,21 @@ public class MainWindowController
                 else if(prop == "comment")
                 {
                     propertyMap.Comment = val;
+                }
+                else if(prop == "bpm")
+                {
+                    if(val != "NULL")
+                    {
+                        try
+                        {
+                            uint.Parse(val);
+                        }
+                        catch
+                        {
+                            return (false, null);
+                        }
+                    }
+                    propertyMap.BPM = val;
                 }
             }
             var matches = new List<string>();
@@ -810,6 +835,24 @@ public class MainWindowController
                         }
                     }
                 }
+                if(!string.IsNullOrEmpty(propertyMap.BPM))
+                {
+                    var value = musicFile.BPM;
+                    if(propertyMap.BPM == "NULL")
+                    {
+                        if(value != 0)
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != uint.Parse(propertyMap.BPM))
+                        {
+                            continue;
+                        }
+                    }
+                }
                 matches.Add(musicFile.Filename.ToLower());
             }
             return (true, matches);
@@ -849,6 +892,7 @@ public class MainWindowController
             SelectedPropertyMap.AlbumArtist = first.AlbumArtist;
             SelectedPropertyMap.Genre = first.Genre;
             SelectedPropertyMap.Comment = first.Comment;
+            SelectedPropertyMap.BPM = first.BPM.ToString();
             SelectedPropertyMap.Duration = first.Duration.ToDurationString();
             SelectedPropertyMap.Fingerprint = first.Fingerprint;
             SelectedPropertyMap.FileSize = first.FileSize.ToFileSizeString();
@@ -865,6 +909,7 @@ public class MainWindowController
             var haveSameAlbumArtist = true;
             var haveSameGenre = true;
             var haveSameComment = true;
+            var haveSameBPM = true;
             var haveSameAlbumArt = true;
             var totalDuration = 0;
             var totalFileSize = 0l;
@@ -902,6 +947,10 @@ public class MainWindowController
                 {
                     haveSameComment = false;
                 }
+                if(first.BPM != pair.Value.BPM)
+                {
+                    haveSameBPM = false;
+                }
                 if(first.AlbumArt != pair.Value.AlbumArt)
                 {
                     haveSameAlbumArt = false;
@@ -918,6 +967,7 @@ public class MainWindowController
             SelectedPropertyMap.AlbumArtist = haveSameAlbumArtist ? first.AlbumArtist : "<keep>";
             SelectedPropertyMap.Genre = haveSameGenre ? first.Genre : "<keep>";
             SelectedPropertyMap.Comment = haveSameComment ? first.Comment : "<keep>";
+            SelectedPropertyMap.BPM = haveSameBPM ? first.BPM.ToString() : "<keep>";
             SelectedPropertyMap.AlbumArt = haveSameAlbumArt ? (first.AlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
             SelectedPropertyMap.Duration = totalDuration.ToDurationString();
             SelectedPropertyMap.Fingerprint = "<keep>";
