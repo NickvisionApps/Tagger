@@ -375,6 +375,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _loadingLabel.SetText(message);
         _openFolderButton.SetVisible(false);
         _reloadFolderButton.SetVisible(false);
+        _flapToggleButton.SetVisible(false);
         _applyButton.SetVisible(false);
         _tagActionsButton.SetVisible(false);
     }
@@ -825,6 +826,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _title.SetSubtitle("");
                 _openFolderButton.SetVisible(false);
                 _reloadFolderButton.SetVisible(false);
+                _flapToggleButton.SetVisible(false);
                 _applyButton.SetVisible(false);
                 _tagActionsButton.SetVisible(false);
                 _viewStack.SetVisibleChildName("NoFolder");
@@ -842,6 +844,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _viewStack.SetVisibleChildName("Folder");
         _openFolderButton.SetVisible(true);
         _reloadFolderButton.SetVisible(true);
+        _flapToggleButton.SetVisible(_controller.MusicFiles.Count > 0);
         _applyButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         _tagActionsButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
         var i = 0;
