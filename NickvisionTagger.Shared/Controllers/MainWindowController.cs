@@ -130,6 +130,11 @@ public class MainWindowController
             - albumartist
             - genre
             - comment
+            - bpm
+            - composer
+            - description
+            - publisher
+            - isrc
 
             [Syntax Checking]
             - If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search
@@ -296,6 +301,35 @@ public class MainWindowController
             if(map.Comment != pair.Value.Comment && map.Comment != "<keep>")
             {
                 pair.Value.Comment = map.Comment;
+                updated = true;
+            }
+            if(map.BPM != pair.Value.BPM.ToString() && map.BPM != "<keep>")
+            {
+                try
+                {
+                    pair.Value.BPM = uint.Parse(map.BPM);
+                    updated = true;
+                }
+                catch { }
+            }
+            if(map.Composer != pair.Value.Composer && map.Composer != "<keep>")
+            {
+                pair.Value.Composer = map.Composer;
+                updated = true;
+            }
+            if(map.Description != pair.Value.Description && map.Description != "<keep>")
+            {
+                pair.Value.Description = map.Description;
+                updated = true;
+            }
+            if(map.Publisher != pair.Value.Publisher && map.Publisher != "<keep>")
+            {
+                pair.Value.Publisher = map.Publisher;
+                updated = true;
+            }
+            if(map.ISRC != pair.Value.ISRC && map.ISRC != "<keep>")
+            {
+                pair.Value.ISRC = map.ISRC;
                 updated = true;
             }
             MusicFileSaveStates[pair.Key] = !updated;
@@ -561,7 +595,7 @@ public class MainWindowController
                 return (false, null);
             }
             var propValPairs = search.Split(';');
-            var validProperties = new string[] { "filename", "title", "artist", "album", "year", "track", "albumartist", "genre", "comment" };
+            var validProperties = new string[] { "filename", "title", "artist", "album", "year", "track", "albumartist", "genre", "comment", "bpm", "composer", "description", "publisher", "isrc" };
             var propertyMap = new PropertyMap();
             foreach(var propVal in propValPairs)
             {
@@ -643,6 +677,37 @@ public class MainWindowController
                 else if(prop == "comment")
                 {
                     propertyMap.Comment = val;
+                }
+                else if(prop == "bpm")
+                {
+                    if(val != "NULL")
+                    {
+                        try
+                        {
+                            uint.Parse(val);
+                        }
+                        catch
+                        {
+                            return (false, null);
+                        }
+                    }
+                    propertyMap.BPM = val;
+                }
+                else if(prop == "composer")
+                {
+                    propertyMap.Composer = val;
+                }
+                else if(prop == "description")
+                {
+                    propertyMap.Description = val;
+                }
+                else if(prop == "publisher")
+                {
+                    propertyMap.Publisher = val;
+                }
+                else if(prop == "isrc")
+                {
+                    propertyMap.ISRC = val;
                 }
             }
             var matches = new List<string>();
@@ -810,6 +875,96 @@ public class MainWindowController
                         }
                     }
                 }
+                if(!string.IsNullOrEmpty(propertyMap.BPM))
+                {
+                    var value = musicFile.BPM;
+                    if(propertyMap.BPM == "NULL")
+                    {
+                        if(value != 0)
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != uint.Parse(propertyMap.BPM))
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.Composer))
+                {
+                    var value = musicFile.Composer.ToLower();
+                    if(propertyMap.Composer == "NULL")
+                    {
+                        if(!string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != propertyMap.Composer)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.Description))
+                {
+                    var value = musicFile.Description.ToLower();
+                    if(propertyMap.Description == "NULL")
+                    {
+                        if(!string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != propertyMap.Description)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.Publisher))
+                {
+                    var value = musicFile.Publisher.ToLower();
+                    if(propertyMap.Publisher == "NULL")
+                    {
+                        if(!string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != propertyMap.Publisher)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.ISRC))
+                {
+                    var value = musicFile.ISRC.ToLower();
+                    if(propertyMap.ISRC == "NULL")
+                    {
+                        if(!string.IsNullOrEmpty(value))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if(value != propertyMap.ISRC)
+                        {
+                            continue;
+                        }
+                    }
+                }
                 matches.Add(musicFile.Filename.ToLower());
             }
             return (true, matches);
@@ -849,6 +1004,11 @@ public class MainWindowController
             SelectedPropertyMap.AlbumArtist = first.AlbumArtist;
             SelectedPropertyMap.Genre = first.Genre;
             SelectedPropertyMap.Comment = first.Comment;
+            SelectedPropertyMap.BPM = first.BPM.ToString();
+            SelectedPropertyMap.Composer = first.Composer;
+            SelectedPropertyMap.Description = first.Description;
+            SelectedPropertyMap.Publisher = first.Publisher;
+            SelectedPropertyMap.ISRC = first.ISRC;
             SelectedPropertyMap.Duration = first.Duration.ToDurationString();
             SelectedPropertyMap.Fingerprint = first.Fingerprint;
             SelectedPropertyMap.FileSize = first.FileSize.ToFileSizeString();
@@ -865,6 +1025,11 @@ public class MainWindowController
             var haveSameAlbumArtist = true;
             var haveSameGenre = true;
             var haveSameComment = true;
+            var haveSameBPM = true;
+            var haveSameComposer = true;
+            var haveSameDescription = true;
+            var haveSamePublisher = true;
+            var haveSameISRC = true;
             var haveSameAlbumArt = true;
             var totalDuration = 0;
             var totalFileSize = 0l;
@@ -902,6 +1067,26 @@ public class MainWindowController
                 {
                     haveSameComment = false;
                 }
+                if(first.BPM != pair.Value.BPM)
+                {
+                    haveSameBPM = false;
+                }
+                if(first.Composer != pair.Value.Composer)
+                {
+                    haveSameComposer = false;
+                }
+                if(first.Description != pair.Value.Description)
+                {
+                    haveSameDescription = false;
+                }
+                if(first.Publisher != pair.Value.Publisher)
+                {
+                    haveSamePublisher = false;
+                }
+                if(first.ISRC != pair.Value.ISRC)
+                {
+                    haveSameISRC = false;
+                }
                 if(first.AlbumArt != pair.Value.AlbumArt)
                 {
                     haveSameAlbumArt = false;
@@ -918,6 +1103,11 @@ public class MainWindowController
             SelectedPropertyMap.AlbumArtist = haveSameAlbumArtist ? first.AlbumArtist : "<keep>";
             SelectedPropertyMap.Genre = haveSameGenre ? first.Genre : "<keep>";
             SelectedPropertyMap.Comment = haveSameComment ? first.Comment : "<keep>";
+            SelectedPropertyMap.BPM = haveSameBPM ? first.BPM.ToString() : "<keep>";
+            SelectedPropertyMap.Composer = haveSameComposer ? first.Composer : "<keep>";
+            SelectedPropertyMap.Description = haveSameDescription ? first.Description : "<keep>";
+            SelectedPropertyMap.Publisher = haveSamePublisher ? first.Publisher : "<keep>";
+            SelectedPropertyMap.ISRC = haveSameISRC ? first.ISRC : "<keep>";
             SelectedPropertyMap.AlbumArt = haveSameAlbumArt ? (first.AlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
             SelectedPropertyMap.Duration = totalDuration.ToDurationString();
             SelectedPropertyMap.Fingerprint = "<keep>";

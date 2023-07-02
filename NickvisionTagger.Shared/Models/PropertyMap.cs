@@ -44,6 +44,26 @@ public class PropertyMap
     /// </summary>
     public string Comment { get; set; }
     /// <summary>
+    /// The BPM of the file
+    /// </summary>
+    public string BPM { get; set; }
+    /// <summary>
+    /// The composer of the file
+    /// </summary>
+    public string Composer { get; set; }
+    /// <summary>
+    /// The description of the file
+    /// </summary>
+    public string Description { get; set; }
+    /// <summary>
+    /// The publisher of the file
+    /// </summary>
+    public string Publisher { get; set; }
+    /// <summary>
+    /// The ISRC of the file
+    /// </summary>
+    public string ISRC { get; set; }
+    /// <summary>
     /// The album art of the file
     /// </summary>
     public string AlbumArt { get; set; }
@@ -70,7 +90,7 @@ public class PropertyMap
     
     /// <summary>
     /// Resets the PropertyMap to default values
-    /// <summary>
+    /// </summary>
     public void Clear()
     {
         Filename = "";
@@ -82,6 +102,11 @@ public class PropertyMap
         AlbumArtist = "";
         Genre = "";
         Comment = "";
+        BPM = "";
+        Composer = "";
+        Description = "";
+        Publisher = "";
+        ISRC = "";
         AlbumArt = "";
         Duration = "00:00:00";
         Fingerprint = "";
@@ -90,7 +115,7 @@ public class PropertyMap
     
     /// <summary>
     /// Gets a string representation of the PropertyMap
-    /// <summary>
+    /// </summary>
     /// <returns>The string representation of the PropertyMap</returns>
     public override string ToString()
     {
@@ -104,6 +129,11 @@ public class PropertyMap
         s += $"AlbumArtist: {AlbumArtist}\n";
         s += $"Genre: {Genre}\n";
         s += $"Comment: {Comment}\n";
+        s += $"BPM: {BPM}\n";
+        s += $"Composer: {Composer}\n";
+        s += $"Description: {Description}\n";
+        s += $"Publisher: {Publisher}\n";
+        s += $"ISRC: {ISRC}\n";
         s += $"AlbumArt: {AlbumArt}\n";
         s += $"Duration: {Duration}\n";
         s += $"Fingerprint: {Fingerprint}\n";
