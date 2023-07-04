@@ -8,10 +8,11 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-02 10:14-0400\n"
-"PO-Revision-Date: 2023-07-02 01:57+0000\n"
-"Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/es/>\n"
+"PO-Revision-Date: 2023-07-04 02:50+0000\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
+".org>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -271,7 +272,6 @@ msgid "GiB"
 msgstr "GiB"
 
 #: ../../../Controllers/MainWindowController.cs:117
-#, fuzzy
 msgid ""
 "Advanced Search is a powerful feature provided by Tagger that allows users "
 "to search files' tag contents for certain values, using a powerful tag-based "
@@ -326,7 +326,7 @@ msgid ""
 msgstr ""
 "La búsqueda avanzada es una potente función de Tagger que permite a los "
 "usuarios buscar determinados valores en el contenido de las etiquetas de los "
-"archivos, usando una potente sintaxis basada en etiquetas:\n"
+"archivos mediante una potente sintaxis basada en etiquetas:\n"
 "\n"
 "            !prop1=\"valor1\";prop2=\"valor2\"\n"
 "            Donde prop1, prop2 son propiedades de etiqueta válidas y valor1, "
@@ -344,6 +344,11 @@ msgstr ""
 "            - álbumartista\n"
 "            - género\n"
 "            - comentario\n"
+"            - bpm\n"
+"            - compositor\n"
+"            - descripción\n"
+"            - editor\n"
+"            - isrc\n"
 "\n"
 "            [Comprobación de sintaxis]\n"
 "            - Si la sintaxis de su cadena es válida, el cuadro de texto se "
@@ -357,9 +362,9 @@ msgstr ""
 "contenga archivos de música cuyo artista esté vacío\n"
 "\n"
 "            !genre=\"\";year=\"2022\"\n"
-"            Esta cadena de búsqueda filtrará el cuadro de lista para que "
-"contenga archivos de música cuyo género esté vacío y cuyo año sea 2022.\n"
-"            (Las propiedades Year y Track se validarán si la cadena de "
+"            Esta cadena de búsqueda filtrará la lista para que contenga "
+"archivos de música cuyo género esté vacío y cuyo año sea 2022.\n"
+"            (Las propiedades Año y Pista se validarán si la cadena de "
 "valores es un número).\n"
 "\n"
 "            title=\"\";artist=\"bob\"\n"
@@ -698,30 +703,28 @@ msgid "Comment"
 msgstr "Comentario"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:349
-#, fuzzy
 msgid "More Properties"
-msgstr "Propiedades del archivo"
+msgstr "Más propiedades"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:352
 msgid "Beats Per Minute"
-msgstr ""
+msgstr "Pulsaciones por minuto"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:356
 msgid "Composer"
-msgstr ""
+msgstr "Compositor"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:360
-#, fuzzy
 msgid "Description"
-msgstr "Duración"
+msgstr "Descripción"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:364
 msgid "Publisher"
-msgstr ""
+msgstr "Editor"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:368
 msgid "ISRC"
-msgstr ""
+msgstr "ISRC"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:374
 msgid "File Properties"
