@@ -87,6 +87,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly GSourceFunc _musicFileSaveStatesChangedFunc;
     private readonly GSourceFunc _selectedMusicFilesPropertiesChangedFunc;
     private GAsyncReadyCallback? _openCallback;
+    private AlbumArtType _currentAlbumArtType;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
@@ -105,11 +106,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
     [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
     [Gtk.Connect] private readonly Adw.ViewStack _selectedViewStack;
+    [Gtk.Connect] private readonly Gtk.Popover _albumArtPopover;
     [Gtk.Connect] private readonly Adw.ViewStack _artViewStack;
-    [Gtk.Connect] private readonly Gtk.Button _noAlbumArtButton;
-    [Gtk.Connect] private readonly Gtk.Button _albumArtButton;
     [Gtk.Connect] private readonly Gtk.Image _albumArtImage;
-    [Gtk.Connect] private readonly Gtk.Button _keepAlbumArtButton;
+    [Gtk.Connect] private readonly Adw.ComboRow _albumArtTypeRow;
     [Gtk.Connect] private readonly Adw.EntryRow _filenameRow;
     [Gtk.Connect] private readonly Adw.EntryRow _titleRow;
     [Gtk.Connect] private readonly Adw.EntryRow _artistRow;
@@ -140,6 +140,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _musicFolderUpdatedFunc =  MusicFolderUpdated;
         _musicFileSaveStatesChangedFunc = (x) => MusicFileSaveStatesChanged();
         _selectedMusicFilesPropertiesChangedFunc = (x) => SelectedMusicFilesPropertiesChanged();
+        _currentAlbumArtType = AlbumArtType.Front;
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
         SetIconName(_controller.AppInfo.ID);
@@ -153,6 +154,15 @@ public partial class MainWindow : Adw.ApplicationWindow
         _musicFilesSearch.OnSearchChanged += SearchChanged;
         _advancedSearchInfoButton.OnClicked += AdvancedSearchInfo;
         _listMusicFiles.OnSelectedRowsChanged += ListMusicFiles_SelectionChanged;
+        _albumArtTypeRow.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "selected-item")
+            {
+                _currentAlbumArtType = (AlbumArtType)_albumArtTypeRow.GetSelected();
+                SelectedMusicFilesPropertiesChanged();
+                _albumArtPopover.Popdown();
+            }
+        };
         _filenameRow.OnNotify += (sender, e) =>
         {
             if(e.Pspec.GetName() == "text")
@@ -302,14 +312,30 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.tagToFilename", new string[] { "<Ctrl>T" });
         //Insert Album Art Action
         var actInsertAlbumArt = Gio.SimpleAction.New("insertAlbumArt", null);
-        actInsertAlbumArt.OnActivate += InsertAlbumArt;
+        actInsertAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(_currentAlbumArtType);
         AddAction(actInsertAlbumArt);
-        application.SetAccelsForAction("win.insertAlbumArt", new string[] { "<Ctrl><Shift>O" });
         //Remove Album Art Action
         var actRemoveAlbumArt = Gio.SimpleAction.New("removeAlbumArt", null);
-        actRemoveAlbumArt.OnActivate += RemoveAlbumArt;
+        actRemoveAlbumArt.OnActivate += (sender, e) => RemoveAlbumArt(_currentAlbumArtType);
         AddAction(actRemoveAlbumArt);
-        application.SetAccelsForAction("win.removeAlbumArt", new string[] { "<Ctrl>Delete" });
+        //Insert Front Album Art Action
+        var actInsertFrontAlbumArt = Gio.SimpleAction.New("insertFrontAlbumArt", null);
+        actInsertFrontAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(AlbumArtType.Front);
+        AddAction(actInsertFrontAlbumArt);
+        application.SetAccelsForAction("win.insertFrontAlbumArt", new string[] { "<Ctrl><Shift>O" });
+        //Remove Front Album Art Action
+        var actRemoveFrontAlbumArt = Gio.SimpleAction.New("removeFrontAlbumArt", null);
+        actRemoveFrontAlbumArt.OnActivate += (sender, e) => RemoveAlbumArt(AlbumArtType.Front);
+        AddAction(actRemoveFrontAlbumArt);
+        application.SetAccelsForAction("win.removeFrontAlbumArt", new string[] { "<Ctrl>Delete" });
+        //Insert Back Album Art Action
+        var actInsertBackAlbumArt = Gio.SimpleAction.New("insertBackAlbumArt", null);
+        actInsertBackAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(AlbumArtType.Back);
+        AddAction(actInsertBackAlbumArt);
+        //Remove Back Album Art Action
+        var actRemoveBackAlbumArt = Gio.SimpleAction.New("removeBackAlbumArt", null);
+        actRemoveBackAlbumArt.OnActivate += (sender, e) => RemoveAlbumArt(AlbumArtType.Back);
+        AddAction(actRemoveBackAlbumArt);
         //Download MusicBrainz Metadata Action
         var actMusicBrainz = Gio.SimpleAction.New("downloadMusicBrainzMetadata", null);
         actMusicBrainz.OnActivate += DownloadMusicBrainzMetadata;
@@ -601,14 +627,14 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the insert album art action is triggered
     /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void InsertAlbumArt(Gio.SimpleAction sender, EventArgs e)
+    /// <param name="type">AlbumArtType</param>
+    private void InsertAlbumArt(AlbumArtType type)
     {
+        _albumArtPopover.Popdown();
         var filterImages = Gtk.FileFilter.New();
         filterImages.AddMimeType("image/*");
         var openFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(openFileDialog, _("Insert Album Art"));
+        gtk_file_dialog_set_title(openFileDialog, type == AlbumArtType.Front ? _("Insert Front Album Art") : _("Insert Back Album Art"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterImages);
         gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
@@ -619,7 +645,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 var path = g_file_get_path(fileHandle);
                 SetLoadingState(_("Inserting album art..."));
-                await _controller.InsertSelectedAlbumArtAsync(path, AlbumArtType.Front);
+                await _controller.InsertSelectedAlbumArtAsync(path, type);
             }
         };
         gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
@@ -628,9 +654,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the remove album art action is triggered
     /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void RemoveAlbumArt(Gio.SimpleAction sender, EventArgs e) => _controller.RemoveSelectedAlbumArt(AlbumArtType.Front);
+    /// <param name="type">AlbumArtType</param>
+    private void RemoveAlbumArt(AlbumArtType type)
+    {
+        _albumArtPopover.Popdown();
+        _controller.RemoveSelectedAlbumArt(type);
+    }
 
     /// <summary>
     /// Occurs when the download musicbrainz metadata action is triggered
@@ -927,10 +956,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         _durationLabel.SetLabel(_controller.SelectedPropertyMap.Duration);
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
         _fileSizeLabel.SetLabel(_controller.SelectedPropertyMap.FileSize);
-        if(_controller.SelectedPropertyMap.FrontAlbumArt == "hasArt")
+        var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
+        if(albumArt == "hasArt")
         {
             _artViewStack.SetVisibleChildName("Image");
-            var art = _controller.SelectedMusicFiles.First().Value.FrontAlbumArt;
+            var art = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedMusicFiles.First().Value.FrontAlbumArt : _controller.SelectedMusicFiles.First().Value.BackAlbumArt;
             if(art.IsEmpty)
             {
                 _albumArtImage.Clear();
@@ -944,7 +974,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 g_object_unref(loader);
             }
         }
-        else if(_controller.SelectedPropertyMap.FrontAlbumArt == "keepArt")
+        else if(albumArt == "keepArt")
         {
             _artViewStack.SetVisibleChildName("KeepImage");
             _albumArtImage.Clear();

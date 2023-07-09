@@ -15,7 +15,7 @@ namespace NickvisionTagger.Shared.Controllers;
 /// </summary>
 public enum AlbumArtType
 {
-    Front,
+    Front = 0,
     Back
 }
 
