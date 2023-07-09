@@ -646,14 +646,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterImages);
         gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
-        _openCallback = async (source, res, data) =>
+        _openCallback = (source, res, data) =>
         {
             var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
             if (fileHandle != IntPtr.Zero)
             {
                 var path = g_file_get_path(fileHandle);
-                SetLoadingState(_("Inserting album art..."));
-                await _controller.InsertSelectedAlbumArtAsync(path, type);
+                _controller.InsertSelectedAlbumArt(path, type);
             }
         };
         gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);

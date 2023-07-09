@@ -499,48 +499,45 @@ public class MainWindowController
     /// </summary>
     /// <param name="path">The path to the image</param>
     /// <param name="type">AlbumArtType</param>
-    public async Task InsertSelectedAlbumArtAsync(string path, AlbumArtType type)
+    public void InsertSelectedAlbumArt(string path, AlbumArtType type)
     {
         TagLib.ByteVector? byteVector = null;
         try
         {
             byteVector = TagLib.ByteVector.FromPath(path);
         }
-        catch { }
-        if(byteVector == null)
+        catch
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to load image file"), NotificationSeverity.Error));
+            return;
         }
-        else
+        var inserted = false;
+        foreach(var pair in SelectedMusicFiles)
         {
-            var inserted = false;
-            foreach(var pair in SelectedMusicFiles)
+            if(type == AlbumArtType.Front)
             {
-                if(type == AlbumArtType.Front)
+                if(pair.Value.FrontAlbumArt != byteVector!)
                 {
-                    if(pair.Value.FrontAlbumArt != byteVector)
-                    {
-                        pair.Value.FrontAlbumArt = byteVector;
-                        MusicFileSaveStates[pair.Key] = false;
-                        inserted = true;
-                    }
-                }
-                else if(type == AlbumArtType.Back)
-                {
-                    if(pair.Value.BackAlbumArt != byteVector)
-                    {
-                        pair.Value.BackAlbumArt = byteVector;
-                        MusicFileSaveStates[pair.Key] = false;
-                        inserted = true;
-                    }
+                    pair.Value.FrontAlbumArt = byteVector;
+                    MusicFileSaveStates[pair.Key] = false;
+                    inserted = true;
                 }
             }
-            if(inserted)
+            else if(type == AlbumArtType.Back)
             {
-                UpdateSelectedMusicFilesProperties();
+                if(pair.Value.BackAlbumArt != byteVector)
+                {
+                    pair.Value.BackAlbumArt = byteVector;
+                    MusicFileSaveStates[pair.Key] = false;
+                    inserted = true;
+                }
             }
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
         }
+        if(inserted)
+        {
+            UpdateSelectedMusicFilesProperties();
+        }
+        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
