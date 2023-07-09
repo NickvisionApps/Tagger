@@ -77,6 +77,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial void gtk_image_set_from_pixbuf(nint image, nint pixbuf);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gdk_pixbuf_loader_close(nint loader, nint error);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_menu_append_item(nint menu, nint item);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -88,6 +90,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly GSourceFunc _selectedMusicFilesPropertiesChangedFunc;
     private GAsyncReadyCallback? _openCallback;
     private AlbumArtType _currentAlbumArtType;
+    private Gio.Menu _albumArtMenu;
+    private Gio.MenuItem _switchAlbumArtMenuItem;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
@@ -106,10 +110,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
     [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
     [Gtk.Connect] private readonly Adw.ViewStack _selectedViewStack;
-    [Gtk.Connect] private readonly Gtk.Popover _albumArtPopover;
     [Gtk.Connect] private readonly Adw.ViewStack _artViewStack;
+    [Gtk.Connect] private readonly Gtk.MenuButton _noAlbumArtButton;
+    [Gtk.Connect] private readonly Gtk.MenuButton _albumArtButton;
+    [Gtk.Connect] private readonly Gtk.MenuButton _keepAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Image _albumArtImage;
-    [Gtk.Connect] private readonly Adw.ComboRow _albumArtTypeRow;
     [Gtk.Connect] private readonly Adw.EntryRow _filenameRow;
     [Gtk.Connect] private readonly Adw.EntryRow _titleRow;
     [Gtk.Connect] private readonly Adw.EntryRow _artistRow;
@@ -154,15 +159,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _musicFilesSearch.OnSearchChanged += SearchChanged;
         _advancedSearchInfoButton.OnClicked += AdvancedSearchInfo;
         _listMusicFiles.OnSelectedRowsChanged += ListMusicFiles_SelectionChanged;
-        _albumArtTypeRow.OnNotify += (sender, e) =>
-        {
-            if (e.Pspec.GetName() == "selected-item")
-            {
-                _currentAlbumArtType = (AlbumArtType)_albumArtTypeRow.GetSelected();
-                SelectedMusicFilesPropertiesChanged();
-                _albumArtPopover.Popdown();
-            }
-        };
         _filenameRow.OnNotify += (sender, e) =>
         {
             if(e.Pspec.GetName() == "text")
@@ -310,6 +306,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         actTTF.OnActivate += TagToFilename;
         AddAction(actTTF);
         application.SetAccelsForAction("win.tagToFilename", new string[] { "<Ctrl>T" });
+        //Switch Album Art Action
+        var actSwitchAlbumArt = Gio.SimpleAction.New("switchAlbumArt", null);
+        actSwitchAlbumArt.OnActivate += SwitchAlbumArt;
+        AddAction(actSwitchAlbumArt);
         //Insert Album Art Action
         var actInsertAlbumArt = Gio.SimpleAction.New("insertAlbumArt", null);
         actInsertAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(_currentAlbumArtType);
@@ -370,6 +370,15 @@ public partial class MainWindow : Adw.ApplicationWindow
         _dropTarget = Gtk.DropTarget.New(Gio.FileHelper.GetGType(), Gdk.DragAction.Copy);
         _dropTarget.OnDrop += OnDrop;
         AddController(_dropTarget);
+        //Album Art Menu
+        _albumArtMenu = Gio.Menu.New();
+        _albumArtMenu.Append(_("Insert"), "win.insertAlbumArt");
+        _albumArtMenu.Append(_("Remove"), "win.removeAlbumArt");
+        _switchAlbumArtMenuItem = Gio.MenuItem.New(_("Switch to Back Cover"), "win.switchAlbumArt");
+        _albumArtMenu.AppendItem(_switchAlbumArtMenuItem);
+        _noAlbumArtButton.SetMenuModel(_albumArtMenu);
+        _albumArtButton.SetMenuModel(_albumArtMenu);
+        _keepAlbumArtButton.SetMenuModel(_albumArtMenu);
     }
 
     /// <summary>
@@ -625,12 +634,23 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
+    /// Occurs when the switch album art action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void SwitchAlbumArt(Gio.SimpleAction sender, EventArgs e)
+    {
+        _currentAlbumArtType = _currentAlbumArtType == AlbumArtType.Front ? AlbumArtType.Back : AlbumArtType.Front;
+        _switchAlbumArtMenuItem.SetLabel(_currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover"));
+        SelectedMusicFilesPropertiesChanged();
+    }
+
+    /// <summary>
     /// Occurs when the insert album art action is triggered
     /// </summary>
     /// <param name="type">AlbumArtType</param>
     private void InsertAlbumArt(AlbumArtType type)
     {
-        _albumArtPopover.Popdown();
         var filterImages = Gtk.FileFilter.New();
         filterImages.AddMimeType("image/*");
         var openFileDialog = gtk_file_dialog_new();
@@ -655,11 +675,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when the remove album art action is triggered
     /// </summary>
     /// <param name="type">AlbumArtType</param>
-    private void RemoveAlbumArt(AlbumArtType type)
-    {
-        _albumArtPopover.Popdown();
-        _controller.RemoveSelectedAlbumArt(type);
-    }
+    private void RemoveAlbumArt(AlbumArtType type) => _controller.RemoveSelectedAlbumArt(type);
 
     /// <summary>
     /// Occurs when the download musicbrainz metadata action is triggered

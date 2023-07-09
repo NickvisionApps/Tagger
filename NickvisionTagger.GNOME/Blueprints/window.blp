@@ -48,56 +48,6 @@ menu tagActionsMenu {
   }
 }
 
-Gtk.Popover _albumArtPopover {
-  position: bottom;
-
-  child: Adw.PreferencesGroup {
-    title: _("Album Art");
-    width-request: 280;
-    margin-start: 6;
-    margin-top: 6;
-    margin-end: 6;
-    margin-bottom: 6;
-
-    Adw.ComboRow  _albumArtTypeRow {
-      title: _("Type");
-      model: Gtk.StringList {
-        strings [C_("AlbumArt", "Front"), C_("AlbumArt", "Back")]
-      };
-    }
-
-    Adw.ActionRow _albumArtManageRow {
-      title: _("Manage");
-
-      [suffix]
-      Gtk.Button {
-        valign: center;
-        action-name: "win.insertAlbumArt";
-
-        Adw.ButtonContent {
-          icon-name: "list-add-symbolic";
-          label: _("Insert");
-        }
-
-        styles ["flat"]
-      }
-
-      [suffix]
-      Gtk.Button {
-        valign: center;
-        action-name: "win.removeAlbumArt";
-
-        Adw.ButtonContent {
-          icon-name: "list-remove-symbolic";
-          label: _("Remove");
-        }
-
-        styles ["flat"]
-      }
-    }
-  };
-}
-
 Adw.ApplicationWindow _root {
   default-width: 900;
   default-height: 700;
@@ -321,7 +271,6 @@ Adw.ApplicationWindow _root {
                         Adw.ViewStackPage {
                           name: "NoImage";
                           child: Gtk.MenuButton _noAlbumArtButton {
-                            popover: _albumArtPopover;
                             has-frame: false;
 
                             Adw.StatusPage {
@@ -337,7 +286,6 @@ Adw.ApplicationWindow _root {
                         Adw.ViewStackPage {
                           name: "Image";
                           child: Gtk.MenuButton _albumArtButton {
-                            popover: _albumArtPopover;
                             has-frame: false;
 
                             child: Gtk.Image _albumArtImage {
@@ -352,7 +300,6 @@ Adw.ApplicationWindow _root {
                         Adw.ViewStackPage {
                           name: "KeepImage";
                           child: Gtk.MenuButton _keepAlbumArtButton {
-                            popover: _albumArtPopover;
                             tooltip-text: _("Selected files have different album art images");
                             has-frame: false;
 
