@@ -74,7 +74,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gdk_pixbuf_loader_get_pixbuf(nint loader);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_image_set_from_pixbuf(nint image, nint pixbuf);
+    private static partial void gtk_picture_set_pixbuf(nint picture, nint pixbuf);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_picture_set_paintable(nint picture, nint paintable);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gdk_pixbuf_loader_close(nint loader, nint error);
 
@@ -111,7 +113,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Button _removeAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Button _switchAlbumArtButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _switchAlbumArtButtonContent;
-    [Gtk.Connect] private readonly Gtk.Image _albumArtImage;
+    [Gtk.Connect] private readonly Gtk.Picture _albumArtImage;
     [Gtk.Connect] private readonly Adw.EntryRow _filenameRow;
     [Gtk.Connect] private readonly Adw.EntryRow _titleRow;
     [Gtk.Connect] private readonly Adw.EntryRow _artistRow;
@@ -970,13 +972,13 @@ public partial class MainWindow : Adw.ApplicationWindow
             var art = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedMusicFiles.First().Value.FrontAlbumArt : _controller.SelectedMusicFiles.First().Value.BackAlbumArt;
             if(art.IsEmpty)
             {
-                _albumArtImage.Clear();
+                gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
             }
             else
             {
                 var loader = gdk_pixbuf_loader_new();
                 gdk_pixbuf_loader_write(loader, art.Data, (uint)art.Data.Length, 0);
-                gtk_image_set_from_pixbuf(_albumArtImage.Handle, gdk_pixbuf_loader_get_pixbuf(loader));
+                gtk_picture_set_pixbuf(_albumArtImage.Handle, gdk_pixbuf_loader_get_pixbuf(loader));
                 gdk_pixbuf_loader_close(loader, 0);
                 g_object_unref(loader);
             }
@@ -984,12 +986,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         else if(albumArt == "keepArt")
         {
             _artViewStack.SetVisibleChildName("KeepImage");
-            _albumArtImage.Clear();
+            gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
         }
         else
         {
             _artViewStack.SetVisibleChildName("NoImage");
-            _albumArtImage.Clear();
+            gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
         }
         //Update Rows
         foreach(var pair in _controller.SelectedMusicFiles)
