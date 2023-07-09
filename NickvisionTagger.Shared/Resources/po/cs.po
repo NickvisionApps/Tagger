@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-02 10:14-0400\n"
-"PO-Revision-Date: 2023-07-09 14:02+0000\n"
+"PO-Revision-Date: 2023-07-09 21:51+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/cs/>\n"
@@ -22,12 +22,12 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:568
 #: NickvisionTagger.GNOME/Blueprints/window.blp:27
 msgid "File Name to Tag"
-msgstr "Název souboru na štítek"
+msgstr "Název souboru na značku"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:588
 #: NickvisionTagger.GNOME/Blueprints/window.blp:28
 msgid "Tag to File Name"
-msgstr "Štítek na název souboru"
+msgstr "Značka na název souboru"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:365
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:469
@@ -91,53 +91,61 @@ msgid ""
 "If none is provided, Tagger will submit your tag's metadata in association "
 "with the fingerprint instead."
 msgstr ""
+"AcoustId dokáže přiřadit otisk skladby s ID nahrávky MusicBrainz pro "
+"snadnější identifikaci.\n"
+"\n"
+"Pokud máte u této skladby její ID nahrávání, zadejte jej prosím níže.\n"
+"\n"
+"Pokud nezadáte nic, odešle místo toho aplikace metadata vaší značky společně "
+"s otiskem."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:485
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
 #: NickvisionTagger.GNOME/Blueprints/window.blp:124
 msgid "Open Folder"
-msgstr ""
+msgstr "Otevřít složku"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:550
 msgid "Discarding unapplied changes..."
-msgstr ""
+msgstr "Rušení nepoužitých změn..."
 
 #: ../../../Controllers/MainWindowController.cs:483
 #, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Úspěšně převedena {0} značka na název souboru"
+msgstr[1] "Úspěšně převedeny {0} značky na názvy souborů"
+msgstr[2] "Úspěšně převedeno {0} značek na názvy souborů"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1042
 msgid "Advanced Search"
-msgstr ""
+msgstr "Pokročilé vyhledávání"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:568
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:588
 msgid "Please select a format string."
-msgstr ""
+msgstr "Vyberte prosím formátový řetězec."
 
 #: ../../../../NickvisionTagger.GNOME/Program.cs:50
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:5
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:8
 msgid "Tag your music"
-msgstr ""
+msgstr "Označte svou hudbu"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
-msgstr ""
+msgstr "TiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:660
 msgid "Submit"
-msgstr ""
+msgstr "Potvrdit"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:433
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:508
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:705
 msgid "Discard"
-msgstr ""
+msgstr "Zrušit"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:433
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:508
@@ -147,54 +155,56 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:705
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1117
 msgid "Fingerprint was copied to clipboard."
-msgstr ""
+msgstr "Otisk byl zkopírován do schránky."
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "MiB"
-msgstr ""
+msgstr "MiB"
 
 #: ../../../Controllers/MainWindowController.cs:575
 msgid "Submitted metadata to AcoustId successfully"
-msgstr ""
+msgstr "Metadata úspěšně odeslána do AcoustId"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:807
 #, csharp-format
 msgid "David Lapshin {0}"
-msgstr ""
+msgstr "David Lapshin {0}"
 
 #: ../../../../NickvisionTagger.GNOME/Program.cs:49
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:4
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:6
 msgid "Tagger"
-msgstr ""
+msgstr "Označovač"
 
 #: ../../../Controllers/MainWindowController.cs:575
 msgid "Unable to submit to AcoustId. Check API key"
-msgstr ""
+msgstr "Nepodařilo se odeslat AcoustId. Zkontrolujte klíč API"
 
 #: ../../../Models/PropertyMap.cs:113
 #: NickvisionTagger.GNOME/Blueprints/window.blp:417
 msgid "0 MiB"
-msgstr ""
+msgstr "0 MiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:655
 msgid ""
 "Only one file can be submitted to AcoustID at a time. Please select only one "
 "file and try again."
 msgstr ""
+"Do AcoustId lze najednou odeslat pouze jeden soubor. Vyberte prosím pouze "
+"jeden soubor a zkuste to znovu."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:803
 msgid "GitHub Repo"
-msgstr ""
+msgstr "GitHub repozitář"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:677
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:686
 msgid "Submitting data to AcoustId..."
-msgstr ""
+msgstr "Odesílání dat do AcoustId..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:806
 #, csharp-format
@@ -203,58 +213,61 @@ msgid ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 msgstr ""
+"Nicholas Logozzo {0}\n"
+"Fyodor Sobolev {1}\n"
+"DaPigGuy {2}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:568
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:588
 msgid "Format String"
-msgstr ""
+msgstr "Formátový řetězec"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:808
 msgid "translator-credits"
-msgstr ""
+msgstr "Jonáš Loskot <jonas.loskot@pm.me>, 2023"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:660
 msgid "MusicBrainz Recording Id"
-msgstr ""
+msgstr "ID nahrávky MusicBrainz"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
-msgstr ""
+msgstr "KiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:569
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:589
 #: NickvisionTagger.GNOME/Blueprints/window.blp:25
 msgid "Convert"
-msgstr ""
+msgstr "Převést"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:433
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:508
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:705
 msgid "Apply Changes?"
-msgstr ""
+msgstr "Použít změny?"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:642
 msgid "Downloading MusicBrainz metadata..."
-msgstr ""
+msgstr "Stahování metadat z MusicBrainz..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:660
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:80
 #: NickvisionTagger.GNOME/Blueprints/window.blp:35
 msgid "Submit to AcoustId"
-msgstr ""
+msgstr "Odeslat do AcoustId"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:621
 msgid "Inserting album art..."
-msgstr ""
+msgstr "Vkládání obalu alba..."
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "GiB"
-msgstr ""
+msgstr "GiB"
 
 #: ../../../Controllers/MainWindowController.cs:117
 msgid ""
@@ -309,6 +322,56 @@ msgid ""
 "            * Advanced Search is case insensitive\n"
 "            * Property names must be in English"
 msgstr ""
+"Pokročilé vyhledávání je výkonná funkce programu Označovač, která umožňuje "
+"uživatelům vyhledávat určité hodnoty v obsahu značek, pomocí výkonné syntaxe "
+"založené na značkách:\n"
+"\n"
+"            !vlastnost1=\"hodnota1\";vlastnost2=\"hodnota2\"\n"
+"            Kde vlastnost1, vlastnost2 jsou platné vlastnosti značek a "
+"hodnota1, hodnota2 jsou hodnoty k vyhledání vložené mezi uvozovky.\n"
+"            Každá vlastnost je oddělená středníkem. Poslední vlastnost jej "
+"nicméně nemá.\n"
+"\n"
+"            [Platné vlastnosti]\n"
+"            - filename\n"
+"            - title\n"
+"            - artist\n"
+"            - album\n"
+"            - year\n"
+"            - track\n"
+"            - albumartist\n"
+"            - genre\n"
+"            - comment\n"
+"            - bpm\n"
+"            - composer\n"
+"            - description\n"
+"            - publisher\n"
+"            - isrc\n"
+"\n"
+"            [Kontrola syntaxe]\n"
+"            - Pokud je syntaxe vašeho řetězce platná, barva textového pole "
+"se změní na zelenou a seznam vašeho vyhledávání bude filtrován\n"
+"            - Pokud je syntaxe vašeho řetězce neplatná, barva textového pole "
+"se změní na červenou a seznam vašeho vyhledávání nebude filtrován\n"
+"\n"
+"            [Příklady]\n"
+"            !artist=\"\"\n"
+"            Tento řetězec bude filtrovat seznam, aby obsahoval jen hudební "
+"soubory, které nemají vyplněného umělce\n"
+"\n"
+"            !genre=\"\";year=\"2022\"\n"
+"            Tento řetězec bude filtrovat seznam, aby obsahoval jen hudební "
+"soubory, které nemají vyplněného umělce a které mají rok 2022\n"
+"            (vlastnosti Year a Track budou fungovat pouze pokud řetězec "
+"hodnoty bude číslo).\n"
+"\n"
+"            !title=\"\";artist=\"bob\"\n"
+"            Tento řetězec bude filtrovat seznam, aby obsahoval jen hudební "
+"soubory, které nemají název a jejichž autor je bob\n"
+"\n"
+"            [Poznámky]\n"
+"            * Pokročilé vyhledávání nerozlišuje velká a malá písmena\n"
+"            * Názvy vlastností musí být anglicky"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:438
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:513
@@ -316,11 +379,11 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:672
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:714
 msgid "Saving tags..."
-msgstr ""
+msgstr "Ukládání značek..."
 
 #: ../../../Controllers/MainWindowController.cs:502
 msgid "Unable to load image file"
-msgstr ""
+msgstr "Nepodařilo se načíst soubor s obrázkem"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:433
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:508
@@ -328,370 +391,374 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:705
 #: NickvisionTagger.GNOME/Blueprints/window.blp:93
 msgid "Apply"
-msgstr ""
+msgstr "Použít"
 
 #: ../../../Controllers/MainWindowController.cs:460
 #, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Úspěšně převeden {0} název souboru na značku"
+msgstr[1] "Úspěšně převedeny {0} názvy souborů na značky"
+msgstr[2] "Úspěšně převedeno {0} názvů souborů na značky"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:655
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1042
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:89
 #: NickvisionTagger.GNOME/Blueprints/window.blp:5
 msgid "Preferences"
-msgstr ""
+msgstr "Předvolby"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:15
 msgid "User Interface"
-msgstr ""
+msgstr "Uživatelské rozhraní"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:18
 msgid "Theme"
-msgstr ""
+msgstr "Motiv"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
 msgctxt "Theme"
 msgid "Light"
-msgstr ""
+msgstr "Světlý"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
 msgctxt "Theme"
 msgid "Dark"
-msgstr ""
+msgstr "Tmavý"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
 msgctxt "Theme"
 msgid "System"
-msgstr ""
+msgstr "Podle systému"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:30
 msgid "Remember Last Opened Folder"
-msgstr ""
+msgstr "Zapamatovat si naposledy otevřenou složku"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:46
 msgid "Music Folder"
-msgstr ""
+msgstr "Složka s hudbou"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:49
 msgid "Include Subfolders"
-msgstr ""
+msgstr "Zahrnout podsložky"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:64
 msgid "Sort Files By"
-msgstr ""
+msgstr "Seřadit soubory podle"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 msgctxt "Sort"
 msgid "File Name"
-msgstr ""
+msgstr "Název souboru"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 msgctxt "Sort"
 msgid "Title"
-msgstr ""
+msgstr "Název"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 msgctxt "Sort"
 msgid "Track"
-msgstr ""
+msgstr "Stopa"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:77
 msgid "Music File"
-msgstr ""
+msgstr "Hudební soubor"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:80
 msgid "Preserve Modification Timestamp"
-msgstr ""
+msgstr "Zachovat časové razítko změny"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:96
 #: NickvisionTagger.GNOME/Blueprints/window.blp:32
 msgid "Web Services"
-msgstr ""
+msgstr "Webové služby"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:99
 msgid "Overwrite Tag With MusicBrainz"
-msgstr ""
+msgstr "Přepsat značku s MusicBrainz"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:100
 msgid ""
 "Enable to overwrite existing tag metadata with data found from MusicBrainz. "
 "If disabled, only blank tag properties will be filled."
 msgstr ""
+"Povolte pro přepsání metadat existující značky metadaty nalezenými na "
+"MusicBrainz. Při zakázání budou vyplněny pouze prázdné vlastnosti značek."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:115
 msgid "Overwrite Album Art With MusicBrainz"
-msgstr ""
+msgstr "Přepsat obal alba s MusicBrainz"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:116
 msgid "Enable to overwrite existing album art with art found from MusicBrainz."
-msgstr ""
+msgstr "Povolte pro přepsání existujícího obalu alba nalezeného na MusicBrainz."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:131
 msgid "AcoustId User API Key"
-msgstr ""
+msgstr "Klíč API uživatele AcoustId"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:141
 msgid "Get New API Key"
-msgstr ""
+msgstr "Získat nový klíč API"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:14
 msgctxt "Shortcut"
 msgid "Music Folder"
-msgstr ""
+msgstr "Složka s hudbou"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:22
 msgid "Close Folder"
-msgstr ""
+msgstr "Zavřít složku"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:27
 msgid "Reload Folder"
-msgstr ""
+msgstr "Znovu načíst složku"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:33
 msgctxt "Shortcut"
 msgid "Music File"
-msgstr ""
+msgstr "Hudební soubor"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:36
 msgid "Save Tag"
-msgstr ""
+msgstr "Uložit značku"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:41
 #: NickvisionTagger.GNOME/Blueprints/window.blp:12
 msgid "Discard Unapplied Changes"
-msgstr ""
+msgstr "Zrušit nepoužité změny"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:46
 #: NickvisionTagger.GNOME/Blueprints/window.blp:13
 msgid "Delete Tags"
-msgstr ""
+msgstr "Odstranit značky"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:51
 msgid "Convert File Name to Tag"
-msgstr ""
+msgstr "Převést název souboru na značku"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:56
 msgid "Convert Tag to File Name"
-msgstr ""
+msgstr "Převést značku na název souboru"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:66
 msgid "Remove Album Art"
-msgstr ""
+msgstr "Odstranit obal alba"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:72
 msgctxt "Shortcut"
 msgid "Web Services"
-msgstr ""
+msgstr "Webové služby"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:75
 #: NickvisionTagger.GNOME/Blueprints/window.blp:34
 msgid "Download MusicBrainz Metadata"
-msgstr ""
+msgstr "Stáhnout metadata z MusicBrainz"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:86
 msgctxt "Shortcut"
 msgid "Application"
-msgstr ""
+msgstr "Aplikace"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:94
 #: NickvisionTagger.GNOME/Blueprints/window.blp:6
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Klávesové zkratky"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:99
 #: NickvisionTagger.GNOME/Blueprints/window.blp:7
 msgid "About Tagger"
-msgstr ""
+msgstr "O aplikaci Označovač"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:104
 msgid "Quit"
-msgstr ""
+msgstr "Opustit"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
 msgid "Album Art"
-msgstr ""
+msgstr "Obal alba"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:20
 msgid "Insert"
-msgstr ""
+msgstr "Vložit"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:21
 msgid "Remove"
-msgstr ""
+msgstr "Odebrat"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:52
 msgid "Open Music Folder (Ctrl+O)"
-msgstr ""
+msgstr "Otevřít složku s hudbou (Ctrl+O)"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:57
 msgid "Open"
-msgstr ""
+msgstr "Otevřít"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:64
 msgid "Reload Music Folder (F5)"
-msgstr ""
+msgstr "Znovu načíst složku s hudbou (F5)"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:74
 msgid "Main Menu"
-msgstr ""
+msgstr "Hlavní nabídka"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:81
 msgid "Toggle Tags Pane"
-msgstr ""
+msgstr "Přepnout panel značek"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:94
 msgid "Apply Changes To Tag (Ctrl+S)"
-msgstr ""
+msgstr "Použít změny u značky (Ctrl+S)"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:106
 msgid "Tag Actions"
-msgstr ""
+msgstr "Akce značky"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:121
 msgid "Tag Your Music"
-msgstr ""
+msgstr "Označte svou hudbu"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:122
 msgid "Open a folder with music to get started"
-msgstr ""
+msgstr "Začněte otevřením složky s hudbou"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:167
 msgid "No Music Files Found"
-msgstr ""
+msgstr "Nenalezeny žádné hudební soubory"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:168
 msgid "Try a different folder"
-msgstr ""
+msgstr "Zkuste jinou složku"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:187
 msgid "Search for filename (type ! to activate advanced search)..."
 msgstr ""
+"Hledat název souboru (zadejte ! pro aktivaci pokročilého vyhledávání)..."
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:192
 msgid "Advanced Search Info"
-msgstr ""
+msgstr "Informace o pokročilém vyhledávání"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:232
 msgid "No Selected Music Files"
-msgstr ""
+msgstr "Žádné vybrané hudební soubory"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:233
 msgid "Select some files"
-msgstr ""
+msgstr "Vyberte nějaké soubory"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:294
 msgid "Selected files have different album art images"
-msgstr ""
+msgstr "Vybrané soubory mají rozdílné obaly alb"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:309
 msgid "File Name"
-msgstr ""
+msgstr "Název souboru"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:314
 msgid "Tag Properties"
-msgstr ""
+msgstr "Vlastnosti značky"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:317
 msgid "Title"
-msgstr ""
+msgstr "Název"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:321
 msgid "Artist"
-msgstr ""
+msgstr "Umělec"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:325
 msgid "Album"
-msgstr ""
+msgstr "Album"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:329
 msgid "Year"
-msgstr ""
+msgstr "Rok"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:333
 msgid "Track"
-msgstr ""
+msgstr "Stopa"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:337
 msgid "Album Artist"
-msgstr ""
+msgstr "Umělec alba"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:341
 msgid "Genre"
-msgstr ""
+msgstr "Žánr"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:345
 msgid "Comment"
-msgstr ""
+msgstr "Komentář"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:349
 msgid "More Properties"
-msgstr ""
+msgstr "Další vlastnosti"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:352
 msgid "Beats Per Minute"
-msgstr ""
+msgstr "Údery za minutu"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:356
 msgid "Composer"
-msgstr ""
+msgstr "Skladatel"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:360
 msgid "Description"
-msgstr ""
+msgstr "Popis"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:364
 msgid "Publisher"
-msgstr ""
+msgstr "Vydavatel"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:368
 msgid "ISRC"
-msgstr ""
+msgstr "ISRC"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:374
 msgid "File Properties"
-msgstr ""
+msgstr "Vlastnosti souboru"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:377
 msgid "Duration"
-msgstr ""
+msgstr "Doba trvání"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:387
 msgid "Fingerprint"
-msgstr ""
+msgstr "Otisk"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:405
 msgid "Copy Fingerprint To Clipboard"
-msgstr ""
+msgstr "Zkopírovat otisk do schránky"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:412
 msgid "File Size"
-msgstr ""
+msgstr "Velikost souboru"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:11
 msgid "Tag;Music;Editor;Library;"
-msgstr ""
+msgstr "Značka;Hudba;Editor;Knihovna;"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:10
 msgid ""
 "— Edit tags and album art of multiple files, even across subfolders, all at "
 "once"
-msgstr ""
+msgstr "— Úprava značek a obalů alb více souborů najednou, a to i v podsložkách"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:11
 msgid "— Support for multiple music file types (mp3, ogg, flac, wma, and wav)"
-msgstr ""
+msgstr "— Podpora několika typů hudebních souborů (mp3, ogg, flac, wma, a wav)"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:12
 msgid "— Convert filenames to tags and tags to filenames with ease"
-msgstr ""
+msgstr "— Snadný převod názvů souborů na značky a značkek na názvy souborů"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Lookup file information using MusicBrainz"
-msgstr ""
+msgstr "— Vyhledávání informací o souborech pomocí MusicBrainz"
