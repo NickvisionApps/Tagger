@@ -1099,6 +1099,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             selectedIndexes.Add(gtk_list_box_row_get_index(ptr->data));
         }
         _selectedViewStack.SetVisibleChildName(selectedIndexes.Count > 0 ? "Selected" : "NoSelected");
+        if(_currentAlbumArtType != AlbumArtType.Front)
+        {
+            SwitchAlbumArt(null, e);
+        }
         _controller.UpdateSelectedMusicFiles(selectedIndexes);
         _isSelectionOccuring = false;
     }
