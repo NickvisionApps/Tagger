@@ -372,10 +372,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         AddController(_dropTarget);
         //Album Art Menu
         _albumArtMenu = Gio.Menu.New();
-        _albumArtMenu.Append(_("Insert"), "win.insertAlbumArt");
-        _albumArtMenu.Append(_("Remove"), "win.removeAlbumArt");
+        var albumArtManageMenu = Gio.Menu.New();
+        albumArtManageMenu.Append(_("Insert"), "win.insertAlbumArt");
+        albumArtManageMenu.Append(_("Remove"), "win.removeAlbumArt");
+        var albumArtSwitchMenu = Gio.Menu.New();
         _switchAlbumArtMenuItem = Gio.MenuItem.New(_("Switch to Back Cover"), "win.switchAlbumArt");
-        _albumArtMenu.AppendItem(_switchAlbumArtMenuItem);
+        albumArtSwitchMenu.AppendItem(_switchAlbumArtMenuItem);
+        _albumArtMenu.AppendSection(_("Album Art"), albumArtManageMenu);
+        _albumArtMenu.AppendSection(null, albumArtSwitchMenu);
         _noAlbumArtButton.SetMenuModel(_albumArtMenu);
         _albumArtButton.SetMenuModel(_albumArtMenu);
         _keepAlbumArtButton.SetMenuModel(_albumArtMenu);
