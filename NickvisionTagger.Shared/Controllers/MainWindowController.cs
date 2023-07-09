@@ -11,6 +11,15 @@ using static NickvisionTagger.Shared.Helpers.Gettext;
 namespace NickvisionTagger.Shared.Controllers;
 
 /// <summary>
+/// Types of album arts
+/// </summary>
+public enum AlbumArtType
+{
+    Front,
+    Back
+}
+
+/// <summary>
 /// A controller for a MainWindow
 /// </summary>
 public class MainWindowController
@@ -488,8 +497,9 @@ public class MainWindowController
     /// <summary>
     /// Inserts the image to the selected files' album art
     /// </summary>
-    /// <param="path">The path to the image</param>
-    public async Task InsertSelectedAlbumArtAsync(string path)
+    /// <param name="path">The path to the image</param>
+    /// <param name="type">AlbumArtType</param>
+    public async Task InsertSelectedAlbumArtAsync(string path, AlbumArtType type)
     {
         TagLib.ByteVector? byteVector = null;
         try
@@ -506,11 +516,23 @@ public class MainWindowController
             var inserted = false;
             foreach(var pair in SelectedMusicFiles)
             {
-                if(pair.Value.AlbumArt != byteVector)
+                if(type == AlbumArtType.Front)
                 {
-                    pair.Value.AlbumArt = byteVector;
-                    MusicFileSaveStates[pair.Key] = false;
-                    inserted = true;
+                    if(pair.Value.FrontAlbumArt != byteVector)
+                    {
+                        pair.Value.FrontAlbumArt = byteVector;
+                        MusicFileSaveStates[pair.Key] = false;
+                        inserted = true;
+                    }
+                }
+                else if(type == AlbumArtType.Back)
+                {
+                    if(pair.Value.BackAlbumArt != byteVector)
+                    {
+                        pair.Value.BackAlbumArt = byteVector;
+                        MusicFileSaveStates[pair.Key] = false;
+                        inserted = true;
+                    }
                 }
             }
             if(inserted)
@@ -524,16 +546,29 @@ public class MainWindowController
     /// <summary>
     /// Removes the selected files' album art
     /// </summary>
-    public void RemoveSelectedAlbumArt()
+    /// <param name="type">AlbumArtType</param>
+    public void RemoveSelectedAlbumArt(AlbumArtType type)
     {
         var removed = false;
         foreach(var pair in SelectedMusicFiles)
         {
-            if(!pair.Value.AlbumArt.IsEmpty)
+            if(type == AlbumArtType.Front)
             {
-                pair.Value.AlbumArt = new TagLib.ByteVector();
-                MusicFileSaveStates[pair.Key] = false;
-                removed = true;
+                if(!pair.Value.FrontAlbumArt.IsEmpty)
+                {
+                    pair.Value.FrontAlbumArt = new TagLib.ByteVector();
+                    MusicFileSaveStates[pair.Key] = false;
+                    removed = true;
+                }
+            }
+            else if(type == AlbumArtType.Back)
+            {
+                if(!pair.Value.BackAlbumArt.IsEmpty)
+                {
+                    pair.Value.BackAlbumArt = new TagLib.ByteVector();
+                    MusicFileSaveStates[pair.Key] = false;
+                    removed = true;
+                }
             }
         }
         if(removed)
@@ -1012,7 +1047,8 @@ public class MainWindowController
             SelectedPropertyMap.Duration = first.Duration.ToDurationString();
             SelectedPropertyMap.Fingerprint = first.Fingerprint;
             SelectedPropertyMap.FileSize = first.FileSize.ToFileSizeString();
-            SelectedPropertyMap.AlbumArt = first.AlbumArt.IsEmpty ? "noArt" : "hasArt";
+            SelectedPropertyMap.FrontAlbumArt = first.FrontAlbumArt.IsEmpty ? "noArt" : "hasArt";
+            SelectedPropertyMap.BackAlbumArt = first.BackAlbumArt.IsEmpty ? "noArt" : "hasArt";
         }
         else if(SelectedMusicFiles.Count > 1)
         {
@@ -1030,7 +1066,8 @@ public class MainWindowController
             var haveSameDescription = true;
             var haveSamePublisher = true;
             var haveSameISRC = true;
-            var haveSameAlbumArt = true;
+            var haveSameFrontAlbumArt = true;
+            var haveSameBackAlbumArt = true;
             var totalDuration = 0;
             var totalFileSize = 0l;
             foreach(var pair in SelectedMusicFiles)
@@ -1087,9 +1124,13 @@ public class MainWindowController
                 {
                     haveSameISRC = false;
                 }
-                if(first.AlbumArt != pair.Value.AlbumArt)
+                if(first.FrontAlbumArt != pair.Value.FrontAlbumArt)
                 {
-                    haveSameAlbumArt = false;
+                    haveSameFrontAlbumArt = false;
+                }
+                if(first.BackAlbumArt != pair.Value.BackAlbumArt)
+                {
+                    haveSameBackAlbumArt = false;
                 }
                 totalDuration += pair.Value.Duration;
                 totalFileSize += pair.Value.FileSize;
@@ -1108,7 +1149,8 @@ public class MainWindowController
             SelectedPropertyMap.Description = haveSameDescription ? first.Description : "<keep>";
             SelectedPropertyMap.Publisher = haveSamePublisher ? first.Publisher : "<keep>";
             SelectedPropertyMap.ISRC = haveSameISRC ? first.ISRC : "<keep>";
-            SelectedPropertyMap.AlbumArt = haveSameAlbumArt ? (first.AlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
+            SelectedPropertyMap.FrontAlbumArt = haveSameFrontAlbumArt ? (first.FrontAlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
+            SelectedPropertyMap.BackAlbumArt = haveSameBackAlbumArt ? (first.BackAlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
             SelectedPropertyMap.Duration = totalDuration.ToDurationString();
             SelectedPropertyMap.Fingerprint = "<keep>";
             SelectedPropertyMap.FileSize = totalFileSize.ToFileSizeString();

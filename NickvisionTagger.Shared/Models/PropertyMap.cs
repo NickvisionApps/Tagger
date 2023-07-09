@@ -64,9 +64,13 @@ public class PropertyMap
     /// </summary>
     public string ISRC { get; set; }
     /// <summary>
-    /// The album art of the file
+    /// The front album art of the file
     /// </summary>
-    public string AlbumArt { get; set; }
+    public string FrontAlbumArt { get; set; }
+    /// <summary>
+    /// The back album art of the file
+    /// </summary>
+    public string BackAlbumArt { get; set; }
     /// <summary>
     /// The duration of the file
     /// </summary>
@@ -107,7 +111,8 @@ public class PropertyMap
         Description = "";
         Publisher = "";
         ISRC = "";
-        AlbumArt = "";
+        FrontAlbumArt = "";
+        BackAlbumArt = "";
         Duration = "00:00:00";
         Fingerprint = "";
         FileSize = _("0 MiB");
@@ -134,7 +139,8 @@ public class PropertyMap
         s += $"Description: {Description}\n";
         s += $"Publisher: {Publisher}\n";
         s += $"ISRC: {ISRC}\n";
-        s += $"AlbumArt: {AlbumArt}\n";
+        s += $"FrontAlbumArt: {FrontAlbumArt}\n";
+        s += $"BackAlbumArt: {BackAlbumArt}\n";
         s += $"Duration: {Duration}\n";
         s += $"Fingerprint: {Fingerprint}\n";
         s += $"FileSize: {FileSize}\n";
