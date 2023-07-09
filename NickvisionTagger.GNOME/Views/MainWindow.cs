@@ -68,13 +68,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int gtk_list_box_row_get_index(nint row);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gdk_pixbuf_loader_new();
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gdk_pixbuf_loader_write(nint loader, [MarshalAs(UnmanagedType.LPArray)] byte[] buf, uint count, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gdk_pixbuf_loader_get_pixbuf(nint loader);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_picture_set_pixbuf(nint picture, nint pixbuf);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_picture_set_paintable(nint picture, nint paintable);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -83,6 +77,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.DropTarget _dropTarget;
+    private readonly Gio.SimpleAction _removeAlbumArtAction;
     private List<Adw.ActionRow> _listMusicFilesRows;
     private bool _isSelectionOccuring;
     private readonly GSourceFunc _musicFolderUpdatedFunc;
@@ -316,9 +311,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         AddAction(actInsertAlbumArt);
         _insertAlbumArtButton.SetDetailedActionName("win.insertAlbumArt");
         //Remove Album Art Action
-        var actRemoveAlbumArt = Gio.SimpleAction.New("removeAlbumArt", null);
-        actRemoveAlbumArt.OnActivate += (sender, e) => RemoveAlbumArt(_currentAlbumArtType);
-        AddAction(actRemoveAlbumArt);
+        _removeAlbumArtAction = Gio.SimpleAction.New("removeAlbumArt", null);
+        _removeAlbumArtAction.OnActivate += (sender, e) => RemoveAlbumArt(_currentAlbumArtType);
+        AddAction(_removeAlbumArtAction);
         _removeAlbumArtButton.SetDetailedActionName("win.removeAlbumArt");
         //Insert Front Album Art Action
         var actInsertFrontAlbumArt = Gio.SimpleAction.New("insertFrontAlbumArt", null);
@@ -976,11 +971,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
             else
             {
-                var loader = gdk_pixbuf_loader_new();
-                gdk_pixbuf_loader_write(loader, art.Data, (uint)art.Data.Length, 0);
-                gtk_picture_set_pixbuf(_albumArtImage.Handle, gdk_pixbuf_loader_get_pixbuf(loader));
-                gdk_pixbuf_loader_close(loader, 0);
-                g_object_unref(loader);
+                using var loader = GdkPixbuf.PixbufLoader.New();
+                gdk_pixbuf_loader_write(loader.Handle, art.Data, (uint)art.Data.Length, 0);
+                _albumArtImage.SetPixbuf(loader.GetPixbuf());
+                gdk_pixbuf_loader_close(loader.Handle, IntPtr.Zero);
             }
         }
         else if(albumArt == "keepArt")
@@ -993,6 +987,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _artViewStack.SetVisibleChildName("NoImage");
             gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
         }
+        _removeAlbumArtAction.SetEnabled(_artViewStack.GetVisibleChildName() != "NoImage");
         //Update Rows
         foreach(var pair in _controller.SelectedMusicFiles)
         {
