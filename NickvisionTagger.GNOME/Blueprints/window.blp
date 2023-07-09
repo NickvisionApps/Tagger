@@ -17,8 +17,19 @@ menu tagActionsMenu {
     submenu {
       label: _("Album Art");
 
-      item(_("Insert"), "win.insertAlbumArt")
-      item(_("Remove"), "win.removeAlbumArt")
+      submenu {
+        label: _("Front");
+
+        item(_("Insert"), "win.insertFrontAlbumArt")
+        item(_("Remove"), "win.removeFrontAlbumArt")
+      }
+
+      submenu {
+        label: _("Back");
+
+        item(_("Insert"), "win.insertBackAlbumArt")
+        item(_("Remove"), "win.removeBackAlbumArt")
+      }
     }
 
     submenu {
@@ -250,58 +261,88 @@ Adw.ApplicationWindow _root {
                       margin-end: 12;
                       margin-bottom: 6;
 
-                      Adw.ViewStack _artViewStack {
-                        halign: center;
-                        width-request: 260;
-                        height-request: 260;
-                        margin-top: 12;
-                        margin-bottom: 12;
+                      Gtk.Overlay {
+                        [overlay]
+                        Adw.Bin {
+                          margin-top: 12;
+                          margin-bottom: 12;
+                          halign: center;
+                          valign: center;
+                          width-request: 260;
+                          height-request: 260;
 
-                        Adw.ViewStackPage {
-                          name: "NoImage";
-                          child: Gtk.Button _noAlbumArtButton {
-                            action-name: "win.insertAlbumArt";
+                          Gtk.Box {
+                            orientation: vertical;
+                            halign: center;
+                            valign: center;
 
-                            Adw.StatusPage {
+                            Gtk.Button _insertAlbumArtButton {
+                              Adw.ButtonContent {
+                                icon-name: "list-add-symbolic";
+                                label: _("Insert");
+                              }
+
+                              styles [ "opaque" ]
+                            }
+
+                            Gtk.Button _removeAlbumArtButton {
+                              Adw.ButtonContent {
+                                icon-name: "list-remove-symbolic";
+                                label: _("Remove");
+                              }
+
+                              styles [ "opaque" ]
+                            }
+
+                            Gtk.Button _switchAlbumArtButton {
+                              Adw.ButtonContent _switchAlbumArtButtonContent {
+                                icon-name: "view-paged-symbolic";
+                                label: _("Switch to Back Cover");
+                              }
+
+                              styles [ "opaque" ]
+                            }
+
+                            styles [ "linked", "art-box" ]
+                          }
+
+                          styles [ "art-bin", "osd" ]
+                        }
+
+                        child: Adw.ViewStack _artViewStack {
+                          halign: center;
+                          width-request: 260;
+                          height-request: 260;
+                          margin-top: 12;
+                          margin-bottom: 12;
+
+                          Adw.ViewStackPage {
+                            name: "NoImage";
+                            child: Adw.StatusPage {
                               icon-name: "image-missing-symbolic";
 
                               styles ["compact"]
-                            }
+                            };
+                          }
 
-                            styles ["card"]
-                          };
-                        }
+                          Adw.ViewStackPage {
+                            name: "Image";
+                            child: Gtk.Picture _albumArtImage {
+                              styles ["album-art-img"]
+                            };
+                          }
 
-                        Adw.ViewStackPage {
-                          name: "Image";
-                          child: Gtk.Button _albumArtButton {
-                            action-name: "win.insertAlbumArt";
-
-                            Gtk.Frame {
-                              Gtk.Image _albumArtImage {
-
-                              }
-                            }
-
-                            styles ["card"]
-                          };
-                        }
-
-                        Adw.ViewStackPage {
-                          name: "KeepImage";
-                          child: Gtk.Button _keepAlbumArtButton {
-                            action-name: "win.insertAlbumArt";
-                            tooltip-text: _("Selected files have different album art images");
-
-                            Adw.StatusPage {
+                          Adw.ViewStackPage {
+                            name: "KeepImage";
+                            child: Adw.StatusPage {
                               icon-name: "library-music-symbolic";
 
                               styles ["compact"]
-                            }
+                            };
+                          }
 
-                            styles ["card"]
-                          };
-                        }
+                          styles ["card"]
+                        };
                       }
 
                       Adw.PreferencesGroup {

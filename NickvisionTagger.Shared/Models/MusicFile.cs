@@ -83,9 +83,13 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     public string ISRC { get; set; }
     /// <summary>
-    /// The album art of the music file
+    /// The front album art of the music file
     /// </summary>
-    public TagLib.ByteVector AlbumArt { get; set; }
+    public ByteVector FrontAlbumArt { get; set; }
+    /// <summary>
+    /// The back album art of the music file
+    /// </summary>
+    public ByteVector BackAlbumArt { get; set; }
     /// <summary>
     /// The duration of the music file
     /// </summary>
@@ -98,7 +102,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <summary>
     /// Whether or not the tag is empty
     /// </summary>
-    public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && AlbumArt.IsEmpty;
+    public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && FrontAlbumArt.IsEmpty && BackAlbumArt.IsEmpty;
     
     /// <summary>
     /// Constructs a static MusicFile
@@ -132,7 +136,8 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         Description = "";
         Publisher = "";
         ISRC = "";
-        AlbumArt = new ByteVector();
+        FrontAlbumArt = new ByteVector();
+        BackAlbumArt = new ByteVector();
         LoadTagFromDisk();
     }
     
@@ -257,8 +262,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 {
                     if(picture.Type == PictureType.FrontCover)
                     {
-                        AlbumArt = picture.Data;
-                        break;
+                        FrontAlbumArt = picture.Data;
+                    }
+                    if(picture.Type == PictureType.BackCover)
+                    {
+                        BackAlbumArt = picture.Data;
                     }
                 }
             }
@@ -362,7 +370,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                     Genre = recording.Genres[0].Name ?? "";
                 }
             }
-            if(overwriteAlbumArtWithMusicBrainz || AlbumArt.IsEmpty)
+            if(overwriteAlbumArtWithMusicBrainz || FrontAlbumArt.IsEmpty)
             {
                 if(album != null && album.CoverArtArchive != null && album.CoverArtArchive.Count > 0)
                 {
@@ -376,7 +384,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                     if(img != null)
                     {
                         var reader = new StreamReader(img.Data);
-                        AlbumArt = await reader.ReadToEndAsync();
+                        FrontAlbumArt = await reader.ReadToEndAsync();
                         reader.Dispose();
                         img.Dispose();
                     }
@@ -457,10 +465,15 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             tag.ISRC = ISRC;
             tag.Pictures = new IPicture[]
             {
-                new Picture(AlbumArt)
+                new Picture(FrontAlbumArt)
                 {
                     MimeType = "image/jpeg",
                     Type = PictureType.FrontCover
+                },
+                new Picture(BackAlbumArt)
+                {
+                    MimeType = "image/jpeg",
+                    Type = PictureType.BackCover
                 }
             };
             tag.DateTagged = DateTime.Now;
@@ -493,7 +506,8 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         AlbumArtist = "";
         Genre = "";
         Comment = "";
-        AlbumArt = new ByteVector();
+        FrontAlbumArt = new ByteVector();
+        BackAlbumArt = new ByteVector();
     }
     
     /// <summary>
