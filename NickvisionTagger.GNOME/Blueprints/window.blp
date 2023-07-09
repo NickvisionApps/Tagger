@@ -261,56 +261,77 @@ Adw.ApplicationWindow _root {
                       margin-end: 12;
                       margin-bottom: 6;
 
-                      Adw.ViewStack _artViewStack {
-                        halign: center;
-                        width-request: 260;
-                        height-request: 260;
-                        margin-top: 12;
-                        margin-bottom: 12;
+                      Gtk.Overlay {
+                        [overlay]
+                        Adw.Bin {
+                          margin-top: 12;
+                          margin-bottom: 12;
+                          halign: center;
+                          valign: center;
+                          width-request: 260;
+                          height-request: 260;
 
-                        Adw.ViewStackPage {
-                          name: "NoImage";
-                          child: Gtk.MenuButton _noAlbumArtButton {
-                            has-frame: false;
+                          Gtk.Box {
+                            orientation: vertical;
+                            halign: center;
+                            valign: center;
 
-                            Adw.StatusPage {
+                            Gtk.Button _insertAlbumArtButton {
+                              label: _("Insert");
+
+                              styles [ "opaque" ]
+                            }
+
+                            Gtk.Button _removeAlbumArtButton {
+                              label: _("Remove");
+
+                              styles [ "opaque" ]
+                            }
+
+                            Gtk.Button _switchAlbumArtButton {
+                              label: _("Switch to Back Cover");
+
+                              styles [ "opaque" ]
+                            }
+
+                            styles [ "linked" ]
+                          }
+
+                          styles [ "osd", "art-bin" ]
+                        }
+
+                        child: Adw.ViewStack _artViewStack {
+                          halign: center;
+                          width-request: 260;
+                          height-request: 260;
+                          margin-top: 12;
+                          margin-bottom: 12;
+
+                          Adw.ViewStackPage {
+                            name: "NoImage";
+                            child: Adw.StatusPage {
                               icon-name: "image-missing-symbolic";
 
                               styles ["compact"]
-                            }
+                            };
+                          }
 
-                            styles ["card"]
-                          };
-                        }
-
-                        Adw.ViewStackPage {
-                          name: "Image";
-                          child: Gtk.MenuButton _albumArtButton {
-                            has-frame: false;
-
+                          Adw.ViewStackPage {
+                            name: "Image";
                             child: Gtk.Image _albumArtImage {
 
                             };
+                          }
 
-                            styles ["card"]
-                          };
-                        }
-
-                        Adw.ViewStackPage {
-                          name: "KeepImage";
-                          child: Gtk.MenuButton _keepAlbumArtButton {
-                            tooltip-text: _("Selected files have different album art images");
-                            has-frame: false;
-
-                            Adw.StatusPage {
+                          Adw.ViewStackPage {
+                            name: "KeepImage";
+                            child: Adw.StatusPage {
                               icon-name: "library-music-symbolic";
 
                               styles ["compact"]
-                            }
-
-                            styles ["card"]
-                          };
-                        }
+                            };
+                          }
+                        };
                       }
 
                       Adw.PreferencesGroup {

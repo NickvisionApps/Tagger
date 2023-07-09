@@ -111,9 +111,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
     [Gtk.Connect] private readonly Adw.ViewStack _selectedViewStack;
     [Gtk.Connect] private readonly Adw.ViewStack _artViewStack;
-    [Gtk.Connect] private readonly Gtk.MenuButton _noAlbumArtButton;
-    [Gtk.Connect] private readonly Gtk.MenuButton _albumArtButton;
-    [Gtk.Connect] private readonly Gtk.MenuButton _keepAlbumArtButton;
+    [Gtk.Connect] private readonly Gtk.Button _insertAlbumArtButton;
+    [Gtk.Connect] private readonly Gtk.Button _removeAlbumArtButton;
+    [Gtk.Connect] private readonly Gtk.Button _switchAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Image _albumArtImage;
     [Gtk.Connect] private readonly Adw.EntryRow _filenameRow;
     [Gtk.Connect] private readonly Adw.EntryRow _titleRow;
@@ -310,14 +310,17 @@ public partial class MainWindow : Adw.ApplicationWindow
         var actSwitchAlbumArt = Gio.SimpleAction.New("switchAlbumArt", null);
         actSwitchAlbumArt.OnActivate += SwitchAlbumArt;
         AddAction(actSwitchAlbumArt);
+        _switchAlbumArtButton.SetDetailedActionName("win.switchAlbumArt");
         //Insert Album Art Action
         var actInsertAlbumArt = Gio.SimpleAction.New("insertAlbumArt", null);
         actInsertAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(_currentAlbumArtType);
         AddAction(actInsertAlbumArt);
+        _insertAlbumArtButton.SetDetailedActionName("win.insertAlbumArt");
         //Remove Album Art Action
         var actRemoveAlbumArt = Gio.SimpleAction.New("removeAlbumArt", null);
         actRemoveAlbumArt.OnActivate += (sender, e) => RemoveAlbumArt(_currentAlbumArtType);
         AddAction(actRemoveAlbumArt);
+        _removeAlbumArtButton.SetDetailedActionName("win.removeAlbumArt");
         //Insert Front Album Art Action
         var actInsertFrontAlbumArt = Gio.SimpleAction.New("insertFrontAlbumArt", null);
         actInsertFrontAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(AlbumArtType.Front);
@@ -380,9 +383,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         albumArtSwitchMenu.AppendItem(_switchAlbumArtMenuItem);
         _albumArtMenu.AppendSection(_("Album Art"), albumArtManageMenu);
         _albumArtMenu.AppendSection(null, albumArtSwitchMenu);
-        _noAlbumArtButton.SetMenuModel(_albumArtMenu);
-        _albumArtButton.SetMenuModel(_albumArtMenu);
-        _keepAlbumArtButton.SetMenuModel(_albumArtMenu);
     }
 
     /// <summary>
@@ -645,7 +645,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void SwitchAlbumArt(Gio.SimpleAction sender, EventArgs e)
     {
         _currentAlbumArtType = _currentAlbumArtType == AlbumArtType.Front ? AlbumArtType.Back : AlbumArtType.Front;
-        _switchAlbumArtMenuItem.SetLabel(_currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover"));
+        _switchAlbumArtButton.SetLabel(_currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover"));
         SelectedMusicFilesPropertiesChanged();
     }
 
