@@ -619,7 +619,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 var path = g_file_get_path(fileHandle);
                 SetLoadingState(_("Inserting album art..."));
-                await _controller.InsertSelectedAlbumArtAsync(path);
+                await _controller.InsertSelectedAlbumArtAsync(path, AlbumArtType.Front);
             }
         };
         gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
@@ -630,7 +630,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private void RemoveAlbumArt(Gio.SimpleAction sender, EventArgs e) => _controller.RemoveSelectedAlbumArt();
+    private void RemoveAlbumArt(Gio.SimpleAction sender, EventArgs e) => _controller.RemoveSelectedAlbumArt(AlbumArtType.Front);
 
     /// <summary>
     /// Occurs when the download musicbrainz metadata action is triggered
@@ -927,10 +927,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         _durationLabel.SetLabel(_controller.SelectedPropertyMap.Duration);
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
         _fileSizeLabel.SetLabel(_controller.SelectedPropertyMap.FileSize);
-        if(_controller.SelectedPropertyMap.AlbumArt == "hasArt")
+        if(_controller.SelectedPropertyMap.FrontAlbumArt == "hasArt")
         {
             _artViewStack.SetVisibleChildName("Image");
-            var art = _controller.SelectedMusicFiles.First().Value.AlbumArt;
+            var art = _controller.SelectedMusicFiles.First().Value.FrontAlbumArt;
             if(art.IsEmpty)
             {
                 _albumArtImage.Clear();
@@ -944,7 +944,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 g_object_unref(loader);
             }
         }
-        else if(_controller.SelectedPropertyMap.AlbumArt == "keepArt")
+        else if(_controller.SelectedPropertyMap.FrontAlbumArt == "keepArt")
         {
             _artViewStack.SetVisibleChildName("KeepImage");
             _albumArtImage.Clear();
