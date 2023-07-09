@@ -1,5 +1,6 @@
 .art-bin {
   opacity: 0;
+  border-radius: 12px;
 }
 
 .art-bin:hover {
@@ -8,4 +9,12 @@
 
 .album-art-img {
   border-radius: 12px;
+}
+
+.art-box {
+  background-color: @view_bg_color;
+  border-width: 1px;
+  border-style: solid;
+  border-color: @borders;
+  border-radius: 8px;
 }
