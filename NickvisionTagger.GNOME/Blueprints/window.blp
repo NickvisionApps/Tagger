@@ -277,19 +277,28 @@ Adw.ApplicationWindow _root {
                             valign: center;
 
                             Gtk.Button _insertAlbumArtButton {
-                              label: _("Insert");
+                              Adw.ButtonContent {
+                                icon-name: "list-add-symbolic";
+                                label: _("Insert");
+                              }
 
                               styles [ "opaque" ]
                             }
 
                             Gtk.Button _removeAlbumArtButton {
-                              label: _("Remove");
+                              Adw.ButtonContent {
+                                icon-name: "list-remove-symbolic";
+                                label: _("Remove");
+                              }
 
                               styles [ "opaque" ]
                             }
 
                             Gtk.Button _switchAlbumArtButton {
-                              label: _("Switch to Back Cover");
+                              Adw.ButtonContent _switchAlbumArtButtonContent {
+                                icon-name: "view-paged-symbolic";
+                                label: _("Switch to Back Cover");
+                              }
 
                               styles [ "opaque" ]
                             }
@@ -297,7 +306,7 @@ Adw.ApplicationWindow _root {
                             styles [ "linked" ]
                           }
 
-                          styles [ "osd", "art-bin" ]
+                          styles [ "card", "osd", "art-bin" ]
                         }
 
                         child: Adw.ViewStack _artViewStack {
@@ -331,6 +340,8 @@ Adw.ApplicationWindow _root {
                               styles ["compact"]
                             };
                           }
+
+                          styles ["card"]
                         };
                       }
 

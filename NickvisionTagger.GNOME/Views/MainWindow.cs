@@ -77,8 +77,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial void gtk_image_set_from_pixbuf(nint image, nint pixbuf);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gdk_pixbuf_loader_close(nint loader, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_menu_append_item(nint menu, nint item);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -90,8 +88,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly GSourceFunc _selectedMusicFilesPropertiesChangedFunc;
     private GAsyncReadyCallback? _openCallback;
     private AlbumArtType _currentAlbumArtType;
-    private Gio.Menu _albumArtMenu;
-    private Gio.MenuItem _switchAlbumArtMenuItem;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
@@ -114,6 +110,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Button _insertAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Button _removeAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Button _switchAlbumArtButton;
+    [Gtk.Connect] private readonly Adw.ButtonContent _switchAlbumArtButtonContent;
     [Gtk.Connect] private readonly Gtk.Image _albumArtImage;
     [Gtk.Connect] private readonly Adw.EntryRow _filenameRow;
     [Gtk.Connect] private readonly Adw.EntryRow _titleRow;
@@ -373,16 +370,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _dropTarget = Gtk.DropTarget.New(Gio.FileHelper.GetGType(), Gdk.DragAction.Copy);
         _dropTarget.OnDrop += OnDrop;
         AddController(_dropTarget);
-        //Album Art Menu
-        _albumArtMenu = Gio.Menu.New();
-        var albumArtManageMenu = Gio.Menu.New();
-        albumArtManageMenu.Append(_("Insert"), "win.insertAlbumArt");
-        albumArtManageMenu.Append(_("Remove"), "win.removeAlbumArt");
-        var albumArtSwitchMenu = Gio.Menu.New();
-        _switchAlbumArtMenuItem = Gio.MenuItem.New(_("Switch to Back Cover"), "win.switchAlbumArt");
-        albumArtSwitchMenu.AppendItem(_switchAlbumArtMenuItem);
-        _albumArtMenu.AppendSection(_("Album Art"), albumArtManageMenu);
-        _albumArtMenu.AppendSection(null, albumArtSwitchMenu);
     }
 
     /// <summary>
@@ -645,7 +632,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void SwitchAlbumArt(Gio.SimpleAction sender, EventArgs e)
     {
         _currentAlbumArtType = _currentAlbumArtType == AlbumArtType.Front ? AlbumArtType.Back : AlbumArtType.Front;
-        _switchAlbumArtButton.SetLabel(_currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover"));
+        _switchAlbumArtButtonContent.SetLabel(_currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover"));
         SelectedMusicFilesPropertiesChanged();
     }
 
