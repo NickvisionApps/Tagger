@@ -256,7 +256,7 @@ public class MainWindowController
         foreach(var pair in SelectedMusicFiles)
         {
             var updated = false;
-            if(map.Filename != pair.Value.Filename && map.Filename != "<keep>")
+            if(map.Filename != pair.Value.Filename && map.Filename != _("<keep>"))
             {
                 try
                 {
@@ -265,22 +265,22 @@ public class MainWindowController
                 }
                 catch { }
             }
-            if(map.Title != pair.Value.Title && map.Title != "<keep>")
+            if(map.Title != pair.Value.Title && map.Title != _("<keep>"))
             {
                 pair.Value.Title = map.Title;
                 updated = true;
             }
-            if(map.Artist != pair.Value.Artist && map.Artist != "<keep>")
+            if(map.Artist != pair.Value.Artist && map.Artist != _("<keep>"))
             {
                 pair.Value.Artist = map.Artist;
                 updated = true;
             }
-            if(map.Album != pair.Value.Album && map.Album != "<keep>")
+            if(map.Album != pair.Value.Album && map.Album != _("<keep>"))
             {
                 pair.Value.Album = map.Album;
                 updated = true;
             }
-            if(map.Year != pair.Value.Year.ToString() && map.Year != "<keep>")
+            if(map.Year != pair.Value.Year.ToString() && map.Year != _("<keep>"))
             {
                 try
                 {
@@ -289,7 +289,7 @@ public class MainWindowController
                 }
                 catch { }
             }
-            if(map.Track != pair.Value.Track.ToString() && map.Track != "<keep>")
+            if(map.Track != pair.Value.Track.ToString() && map.Track != _("<keep>"))
             {
                 try
                 {
@@ -298,22 +298,22 @@ public class MainWindowController
                 }
                 catch { }
             }
-            if(map.AlbumArtist != pair.Value.AlbumArtist && map.AlbumArtist != "<keep>")
+            if(map.AlbumArtist != pair.Value.AlbumArtist && map.AlbumArtist != _("<keep>"))
             {
                 pair.Value.AlbumArtist = map.AlbumArtist;
                 updated = true;
             }
-            if(map.Genre != pair.Value.Genre && map.Genre != "<keep>")
+            if(map.Genre != pair.Value.Genre && map.Genre != _("<keep>"))
             {
                 pair.Value.Genre = map.Genre;
                 updated = true;
             }
-            if(map.Comment != pair.Value.Comment && map.Comment != "<keep>")
+            if(map.Comment != pair.Value.Comment && map.Comment != _("<keep>"))
             {
                 pair.Value.Comment = map.Comment;
                 updated = true;
             }
-            if(map.BPM != pair.Value.BPM.ToString() && map.BPM != "<keep>")
+            if(map.BPM != pair.Value.BPM.ToString() && map.BPM != _("<keep>"))
             {
                 try
                 {
@@ -322,22 +322,22 @@ public class MainWindowController
                 }
                 catch { }
             }
-            if(map.Composer != pair.Value.Composer && map.Composer != "<keep>")
+            if(map.Composer != pair.Value.Composer && map.Composer != _("<keep>"))
             {
                 pair.Value.Composer = map.Composer;
                 updated = true;
             }
-            if(map.Description != pair.Value.Description && map.Description != "<keep>")
+            if(map.Description != pair.Value.Description && map.Description != _("<keep>"))
             {
                 pair.Value.Description = map.Description;
                 updated = true;
             }
-            if(map.Publisher != pair.Value.Publisher && map.Publisher != "<keep>")
+            if(map.Publisher != pair.Value.Publisher && map.Publisher != _("<keep>"))
             {
                 pair.Value.Publisher = map.Publisher;
                 updated = true;
             }
-            if(map.ISRC != pair.Value.ISRC && map.ISRC != "<keep>")
+            if(map.ISRC != pair.Value.ISRC && map.ISRC != _("<keep>"))
             {
                 pair.Value.ISRC = map.ISRC;
                 updated = true;
@@ -1181,24 +1181,24 @@ public class MainWindowController
                 totalDuration += pair.Value.Duration;
                 totalFileSize += pair.Value.FileSize;
             }
-            SelectedPropertyMap.Filename = "<keep>";
-            SelectedPropertyMap.Title = haveSameTitle ? first.Title : "<keep>";
-            SelectedPropertyMap.Artist = haveSameArtist ? first.Artist : "<keep>";
-            SelectedPropertyMap.Album = haveSameAlbum ? first.Album : "<keep>";
-            SelectedPropertyMap.Year = haveSameYear ? first.Year.ToString() : "<keep>";
-            SelectedPropertyMap.Track = haveSameTrack ? first.Track.ToString() : "<keep>";
-            SelectedPropertyMap.AlbumArtist = haveSameAlbumArtist ? first.AlbumArtist : "<keep>";
-            SelectedPropertyMap.Genre = haveSameGenre ? first.Genre : "<keep>";
-            SelectedPropertyMap.Comment = haveSameComment ? first.Comment : "<keep>";
-            SelectedPropertyMap.BPM = haveSameBPM ? first.BPM.ToString() : "<keep>";
-            SelectedPropertyMap.Composer = haveSameComposer ? first.Composer : "<keep>";
-            SelectedPropertyMap.Description = haveSameDescription ? first.Description : "<keep>";
-            SelectedPropertyMap.Publisher = haveSamePublisher ? first.Publisher : "<keep>";
-            SelectedPropertyMap.ISRC = haveSameISRC ? first.ISRC : "<keep>";
+            SelectedPropertyMap.Filename = _("<keep>");
+            SelectedPropertyMap.Title = haveSameTitle ? first.Title : _("<keep>");
+            SelectedPropertyMap.Artist = haveSameArtist ? first.Artist : _("<keep>");
+            SelectedPropertyMap.Album = haveSameAlbum ? first.Album : _("<keep>");
+            SelectedPropertyMap.Year = haveSameYear ? first.Year.ToString() : _("<keep>");
+            SelectedPropertyMap.Track = haveSameTrack ? first.Track.ToString() : _("<keep>");
+            SelectedPropertyMap.AlbumArtist = haveSameAlbumArtist ? first.AlbumArtist : _("<keep>");
+            SelectedPropertyMap.Genre = haveSameGenre ? first.Genre : _("<keep>");
+            SelectedPropertyMap.Comment = haveSameComment ? first.Comment : _("<keep>");
+            SelectedPropertyMap.BPM = haveSameBPM ? first.BPM.ToString() : _("<keep>");
+            SelectedPropertyMap.Composer = haveSameComposer ? first.Composer : _("<keep>");
+            SelectedPropertyMap.Description = haveSameDescription ? first.Description : _("<keep>");
+            SelectedPropertyMap.Publisher = haveSamePublisher ? first.Publisher : _("<keep>");
+            SelectedPropertyMap.ISRC = haveSameISRC ? first.ISRC : _("<keep>");
             SelectedPropertyMap.FrontAlbumArt = haveSameFrontAlbumArt ? (first.FrontAlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
             SelectedPropertyMap.BackAlbumArt = haveSameBackAlbumArt ? (first.BackAlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
             SelectedPropertyMap.Duration = totalDuration.ToDurationString();
-            SelectedPropertyMap.Fingerprint = "<keep>";
+            SelectedPropertyMap.Fingerprint = _("<keep>");
             SelectedPropertyMap.FileSize = totalFileSize.ToFileSizeString();
         }
         SelectedMusicFilesPropertiesChanged?.Invoke(this, EventArgs.Empty);
