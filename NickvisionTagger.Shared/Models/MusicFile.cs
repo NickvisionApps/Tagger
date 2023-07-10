@@ -467,12 +467,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 new Picture(FrontAlbumArt)
                 {
-                    MimeType = "image/jpeg",
                     Type = PictureType.FrontCover
                 },
                 new Picture(BackAlbumArt)
                 {
-                    MimeType = "image/jpeg",
                     Type = PictureType.BackCover
                 }
             };

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using TagLib;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Controllers;
@@ -574,6 +575,54 @@ public class MainWindowController
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
         }
     }
+
+    /// <summary>
+    /// Exports the selected album art of first selected music file
+    /// </summary>
+    /// <param name="path">The path for new image file</param>
+    /// <param name="type">AlbumArtType</param>
+    public void ExportSelectedAlbumArt(string path, AlbumArtType type)
+    {
+        var musicFile = SelectedMusicFiles.First().Value;
+        if(type == AlbumArtType.Front)
+        {
+            if(!musicFile.FrontAlbumArt.IsEmpty)
+            {
+                try
+                {
+                    System.IO.File.WriteAllBytes(path, musicFile.FrontAlbumArt.Data);
+                    NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Exported front album art to file successfully"), NotificationSeverity.Success));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Failed to export front album art to a file"), NotificationSeverity.Error));
+                }
+            }
+        }
+        else if(type == AlbumArtType.Back)
+        {
+            if(!musicFile.BackAlbumArt.IsEmpty)
+            {
+                try
+                {
+                    System.IO.File.WriteAllBytes(path, musicFile.BackAlbumArt.Data);
+                    NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Exported back album art to file successfully"), NotificationSeverity.Success));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Failed to export back album art to a file"), NotificationSeverity.Error));
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets MimeType of album art for the first selected file
+    /// </summary>
+    /// <param name="type">AlbumArtType</param>
+    public string GetFirstAlbumArtMimeType(AlbumArtType type) => new Picture(type == AlbumArtType.Front ? SelectedMusicFiles.First().Value.FrontAlbumArt : SelectedMusicFiles.First().Value.BackAlbumArt).MimeType;
 
     /// <summary>
     /// Downloads MusicBrainz metadata for the selected files

@@ -34,13 +34,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_object_unref(nint obj);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_main_context_default();
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_main_context_iteration(nint context, [MarshalAs(UnmanagedType.I1)] bool may_block);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -53,6 +47,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_file_dialog_save(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_file_dialog_save_finish(nint dialog, nint result, nint error);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_select_folder(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -78,12 +76,14 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Adw.Application _application;
     private readonly Gtk.DropTarget _dropTarget;
     private readonly Gio.SimpleAction _removeAlbumArtAction;
+    private readonly Gio.SimpleAction _exportAlbumArtAction;
     private List<Adw.ActionRow> _listMusicFilesRows;
     private bool _isSelectionOccuring;
     private readonly GSourceFunc _musicFolderUpdatedFunc;
     private readonly GSourceFunc _musicFileSaveStatesChangedFunc;
     private readonly GSourceFunc _selectedMusicFilesPropertiesChangedFunc;
     private GAsyncReadyCallback? _openCallback;
+    private GAsyncReadyCallback? _saveCallback;
     private AlbumArtType _currentAlbumArtType;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
@@ -106,6 +106,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.ViewStack _artViewStack;
     [Gtk.Connect] private readonly Gtk.Button _insertAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Button _removeAlbumArtButton;
+    [Gtk.Connect] private readonly Gtk.Button _exportAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Button _switchAlbumArtButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _switchAlbumArtButtonContent;
     [Gtk.Connect] private readonly Gtk.Picture _albumArtImage;
@@ -304,6 +305,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var actSwitchAlbumArt = Gio.SimpleAction.New("switchAlbumArt", null);
         actSwitchAlbumArt.OnActivate += SwitchAlbumArt;
         AddAction(actSwitchAlbumArt);
+        application.SetAccelsForAction("win.switchAlbumArt", new string[] { "<Ctrl><Shift>S" });
         _switchAlbumArtButton.SetDetailedActionName("win.switchAlbumArt");
         //Insert Album Art Action
         var actInsertAlbumArt = Gio.SimpleAction.New("insertAlbumArt", null);
@@ -315,24 +317,41 @@ public partial class MainWindow : Adw.ApplicationWindow
         _removeAlbumArtAction.OnActivate += (sender, e) => RemoveAlbumArt(_currentAlbumArtType);
         AddAction(_removeAlbumArtAction);
         _removeAlbumArtButton.SetDetailedActionName("win.removeAlbumArt");
+        //Export Album Art Action
+        _exportAlbumArtAction = Gio.SimpleAction.New("exportAlbumArt", null);
+        _exportAlbumArtAction.OnActivate += (sender, e) => ExportAlbumArt(_currentAlbumArtType);
+        AddAction(_exportAlbumArtAction);
+        _exportAlbumArtButton.SetDetailedActionName("win.exportAlbumArt");
         //Insert Front Album Art Action
         var actInsertFrontAlbumArt = Gio.SimpleAction.New("insertFrontAlbumArt", null);
         actInsertFrontAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(AlbumArtType.Front);
         AddAction(actInsertFrontAlbumArt);
-        application.SetAccelsForAction("win.insertFrontAlbumArt", new string[] { "<Ctrl><Shift>O" });
+        application.SetAccelsForAction("win.insertFrontAlbumArt", new string[] { "<Ctrl>I" });
         //Remove Front Album Art Action
         var actRemoveFrontAlbumArt = Gio.SimpleAction.New("removeFrontAlbumArt", null);
         actRemoveFrontAlbumArt.OnActivate += (sender, e) => RemoveAlbumArt(AlbumArtType.Front);
         AddAction(actRemoveFrontAlbumArt);
         application.SetAccelsForAction("win.removeFrontAlbumArt", new string[] { "<Ctrl>Delete" });
+        //Export Front Album Art Action
+        var actExportFrontAlbumArt = Gio.SimpleAction.New("exportFrontAlbumArt", null);
+        actExportFrontAlbumArt.OnActivate += (sender, e) => ExportAlbumArt(AlbumArtType.Front);
+        AddAction(actExportFrontAlbumArt);
+        application.SetAccelsForAction("win.exportFrontAlbumArt", new string[] { "<Ctrl>E" });
         //Insert Back Album Art Action
         var actInsertBackAlbumArt = Gio.SimpleAction.New("insertBackAlbumArt", null);
         actInsertBackAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(AlbumArtType.Back);
         AddAction(actInsertBackAlbumArt);
+        application.SetAccelsForAction("win.insertBackAlbumArt", new string[] { "<Ctrl><Shift>I" });
         //Remove Back Album Art Action
         var actRemoveBackAlbumArt = Gio.SimpleAction.New("removeBackAlbumArt", null);
         actRemoveBackAlbumArt.OnActivate += (sender, e) => RemoveAlbumArt(AlbumArtType.Back);
         AddAction(actRemoveBackAlbumArt);
+        application.SetAccelsForAction("win.removeBackAlbumArt", new string[] { "<Ctrl><Shift>Delete" });
+        //Export Front Album Art Action
+        var actExportBackAlbumArt = Gio.SimpleAction.New("exportBackAlbumArt", null);
+        actExportBackAlbumArt.OnActivate += (sender, e) => ExportAlbumArt(AlbumArtType.Back);
+        AddAction(actExportBackAlbumArt);
+        application.SetAccelsForAction("win.exportBackAlbumArt", new string[] { "<Ctrl><Shift>E" });
         //Download MusicBrainz Metadata Action
         var actMusicBrainz = Gio.SimpleAction.New("downloadMusicBrainzMetadata", null);
         actMusicBrainz.OnActivate += DownloadMusicBrainzMetadata;
@@ -665,6 +684,36 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void RemoveAlbumArt(AlbumArtType type) => _controller.RemoveSelectedAlbumArt(type);
 
     /// <summary>
+    /// Occurs when the export album art action is triggered
+    /// </summary>
+    /// <param name="type">AlbumArtType</param>
+    private void ExportAlbumArt(AlbumArtType type)
+    {
+        var albumArt = type == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
+        if (albumArt != "hasArt")
+        {
+            return;
+        }
+        var filter = Gtk.FileFilter.New();
+        filter.AddMimeType(_controller.GetFirstAlbumArtMimeType(type));
+        var saveFileDialog = gtk_file_dialog_new();
+        gtk_file_dialog_set_title(saveFileDialog, type == AlbumArtType.Front ? _("Export Front Album Art") : _("Export Back Album Art"));
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        filters.Append(filter);
+        gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
+        _saveCallback = (source, res, data) =>
+        {
+            var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
+            if (fileHandle != IntPtr.Zero)
+            {
+                var path = g_file_get_path(fileHandle);
+                _controller.ExportSelectedAlbumArt(path, type);
+            }
+        };
+        gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+    }
+
+    /// <summary>
     /// Occurs when the download musicbrainz metadata action is triggered
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
@@ -987,6 +1036,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
         }
         _removeAlbumArtAction.SetEnabled(_artViewStack.GetVisibleChildName() != "NoImage");
+        _exportAlbumArtAction.SetEnabled(albumArt == "hasArt");
         //Update Rows
         foreach(var pair in _controller.SelectedMusicFiles)
         {
