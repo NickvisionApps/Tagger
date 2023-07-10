@@ -103,6 +103,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
     [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
     [Gtk.Connect] private readonly Adw.ViewStack _selectedViewStack;
+    [Gtk.Connect] private readonly Gtk.Label _artTypeLabel;
     [Gtk.Connect] private readonly Adw.ViewStack _artViewStack;
     [Gtk.Connect] private readonly Gtk.Button _insertAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Button _removeAlbumArtButton;
@@ -154,6 +155,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _musicFilesSearch.OnSearchChanged += SearchChanged;
         _advancedSearchInfoButton.OnClicked += AdvancedSearchInfo;
         _listMusicFiles.OnSelectedRowsChanged += ListMusicFiles_SelectionChanged;
+        _artTypeLabel.SetLabel(_currentAlbumArtType == AlbumArtType.Front ? _("Front") : _("Back"));
         _filenameRow.OnNotify += (sender, e) =>
         {
             if(e.Pspec.GetName() == "text")
@@ -649,6 +651,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _currentAlbumArtType = _currentAlbumArtType == AlbumArtType.Front ? AlbumArtType.Back : AlbumArtType.Front;
         _switchAlbumArtButtonContent.SetLabel(_currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover"));
+        _artTypeLabel.SetLabel(_currentAlbumArtType == AlbumArtType.Front ? _("Front") : _("Back"));
         SelectedMusicFilesPropertiesChanged();
     }
 

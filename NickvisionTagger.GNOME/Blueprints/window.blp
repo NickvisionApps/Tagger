@@ -318,39 +318,51 @@ Adw.ApplicationWindow _root {
                           styles [ "art-bin", "osd" ]
                         }
 
-                        child: Adw.ViewStack _artViewStack {
+                        child: Gtk.Overlay {
                           halign: center;
                           width-request: 260;
                           height-request: 260;
                           margin-top: 12;
                           margin-bottom: 12;
 
-                          Adw.ViewStackPage {
-                            name: "NoImage";
-                            child: Adw.StatusPage {
-                              icon-name: "image-missing-symbolic";
+                          [overlay]
+                          Gtk.Label _artTypeLabel {
+                            halign: start;
+                            valign: end;
+                            margin-start: 6;
+                            margin-bottom: 6;
 
-                              styles ["compact"]
-                            };
+                            styles [ "osd", "toolbar", "caption" ]
                           }
 
-                          Adw.ViewStackPage {
-                            name: "Image";
-                            child: Gtk.Picture _albumArtImage {
-                              styles ["album-art-img"]
-                            };
-                          }
+                          child: Adw.ViewStack _artViewStack {
+                            Adw.ViewStackPage {
+                              name: "NoImage";
+                              child: Adw.StatusPage {
+                                icon-name: "image-missing-symbolic";
 
-                          Adw.ViewStackPage {
-                            name: "KeepImage";
-                            child: Adw.StatusPage {
-                              icon-name: "library-music-symbolic";
+                                styles ["compact"]
+                              };
+                            }
 
-                              styles ["compact"]
-                            };
-                          }
+                            Adw.ViewStackPage {
+                              name: "Image";
+                              child: Gtk.Picture _albumArtImage {
+                                styles ["album-art-img"]
+                              };
+                            }
 
-                          styles ["card"]
+                            Adw.ViewStackPage {
+                              name: "KeepImage";
+                              child: Adw.StatusPage {
+                                icon-name: "library-music-symbolic";
+
+                                styles ["compact"]
+                              };
+                            }
+
+                            styles ["card"]
+                          };
                         };
                       }
 
