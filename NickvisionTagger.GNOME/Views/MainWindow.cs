@@ -89,9 +89,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Button _openFolderButton;
-    [Gtk.Connect] private readonly Gtk.Button _reloadFolderButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
-    [Gtk.Connect] private readonly Gtk.Separator _headerEndSeparator;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
     [Gtk.Connect] private readonly Gtk.MenuButton _tagActionsButton;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
@@ -457,11 +455,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _viewStack.SetVisibleChildName("Loading");
         _loadingLabel.SetText(message);
-        _openFolderButton.SetVisible(false);
-        _reloadFolderButton.SetVisible(false);
-        _flapToggleButton.SetVisible(false);
-        _applyButton.SetVisible(false);
-        _tagActionsButton.SetVisible(false);
+        _applyButton.SetSensitive(false);
+        _tagActionsButton.SetSensitive(false);
     }
 
     /// <summary>
@@ -932,12 +927,12 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _headerBar.RemoveCssClass("flat");
                 _title.SetSubtitle(_controller.MusicFolderPath);
                 _openFolderButton.SetVisible(true);
-                _reloadFolderButton.SetVisible(true);
-                _applyButton.SetVisible(false);
-                _tagActionsButton.SetVisible(false);
+                _applyButton.SetSensitive(false);
+                _tagActionsButton.SetSensitive(false);
                 _viewStack.SetVisibleChildName("Folder");
                 _folderFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
-                _flapToggleButton.SetVisible(_controller.MusicFiles.Count > 0);
+                _folderFlap.SetRevealFlap(true);
+                _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
                 _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
                 if(sendToast)
                 {
@@ -948,11 +943,6 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 _headerBar.AddCssClass("flat");
                 _title.SetSubtitle("");
-                _openFolderButton.SetVisible(false);
-                _reloadFolderButton.SetVisible(false);
-                _flapToggleButton.SetVisible(false);
-                _applyButton.SetVisible(false);
-                _tagActionsButton.SetVisible(false);
                 _viewStack.SetVisibleChildName("NoFolder");
             }
         }
@@ -967,10 +957,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _viewStack.SetVisibleChildName("Folder");
         _openFolderButton.SetVisible(true);
-        _reloadFolderButton.SetVisible(true);
-        _flapToggleButton.SetVisible(_controller.MusicFiles.Count > 0);
-        _applyButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
-        _tagActionsButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
+        _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
+        _applyButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
+        _tagActionsButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         var i = 0;
         foreach(var saved in _controller.MusicFileSaveStates)
         {
@@ -987,8 +976,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _isSelectionOccuring = true;
         //Update Properties
-        _applyButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
-        _tagActionsButton.SetVisible(_controller.SelectedMusicFiles.Count != 0);
+        _applyButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
+        _tagActionsButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         _filenameRow.SetEditable(_controller.SelectedMusicFiles.Count < 2);
         if(_controller.SelectedMusicFiles.Count == 0)
         {

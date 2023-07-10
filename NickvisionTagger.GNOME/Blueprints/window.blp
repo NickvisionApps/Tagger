@@ -22,6 +22,7 @@ menu tagActionsMenu {
 
         item(_("Insert"), "win.insertFrontAlbumArt")
         item(_("Remove"), "win.removeFrontAlbumArt")
+        item(_("Export"), "win.exportFrontAlbumArt")
       }
 
       submenu {
@@ -29,6 +30,7 @@ menu tagActionsMenu {
 
         item(_("Insert"), "win.insertBackAlbumArt")
         item(_("Remove"), "win.removeBackAlbumArt")
+        item(_("Export"), "win.exportBackAlbumArt")
       }
     }
 
@@ -69,14 +71,6 @@ Adw.ApplicationWindow _root {
           icon-name: "folder-open-symbolic";
         }
       }
-
-      [start]
-      Gtk.Button _reloadFolderButton {
-        tooltip-text: _("Reload Music Folder (F5)");
-        visible: false;
-        icon-name: "view-refresh-symbolic";
-        action-name: "win.reloadFolder";
-      }
       
       [end]
       Gtk.MenuButton {
@@ -84,37 +78,6 @@ Adw.ApplicationWindow _root {
         menu-model: mainMenu;
         tooltip-text: _("Main Menu");
         primary: true;
-      }
-
-      [end]
-      Gtk.ToggleButton _flapToggleButton {
-        icon-name: "sidebar-show-right-symbolic";
-        tooltip-text: _("Toggle Tags Pane");
-        active: bind _folderFlap.reveal-flap bidirectional;
-        visible: false;
-      }
-
-      [end]
-      Gtk.Separator _headerEndSeparator {
-        styles ["spacer"]
-      }
-
-      [end]
-      Gtk.Button _applyButton {
-        label: _("Apply");
-        tooltip-text: _("Apply Changes To Tag (Ctrl+S)");
-        visible: false;
-        action-name: "win.apply";
-
-        styles ["suggested-action"]
-      }
-
-      [end]
-      Gtk.MenuButton _tagActionsButton {
-        icon-name: "document-properties-symbolic";
-        menu-model: tagActionsMenu;
-        visible: false;
-        tooltip-text: _("Tag Actions");
       }
 
       styles ["flat"]
@@ -164,326 +127,374 @@ Adw.ApplicationWindow _root {
 
         Adw.ViewStackPage {
           name: "Folder";
-          child: Adw.Flap _folderFlap {
-            flap-position: end;
+          child: Gtk.Box {
+            orientation: vertical;
+            Adw.Flap _folderFlap {
+              flap-position: start;
 
-            [content]
-            Adw.ViewStack _filesViewStack {
-              width-request: 320;
+              [flap]
+              Adw.ViewStack _filesViewStack {
+                width-request: 320;
 
-              Adw.ViewStackPage {
-                name: "NoFiles";
-                child: Adw.StatusPage {
-                  icon-name: "library-music-symbolic";
-                  title: _("No Music Files Found");
-                  description: _("Try a different folder");
-                };
+                Adw.ViewStackPage {
+                  name: "NoFiles";
+                  child: Adw.StatusPage {
+                    icon-name: "library-music-symbolic";
+                    title: _("No Music Files Found");
+                    description: _("Try a different folder");
+                  };
+                }
+
+                Adw.ViewStackPage {
+                  name: "Files";
+                  child: Gtk.Box {
+                    orientation: vertical;
+                    spacing: 6;
+
+                    Gtk.Box {
+                      orientation: horizontal;
+                      spacing: 12;
+                      margin-start: 12;
+                      margin-top: 12;
+                      margin-end: 12;
+
+                      Gtk.SearchEntry _musicFilesSearch {
+                        hexpand: true;
+                        placeholder-text: _("Search for filename (type ! to activate advanced search)...");
+                      }
+
+                      Gtk.Button _advancedSearchInfoButton {
+                        icon-name: "help-faq-symbolic";
+                        tooltip-text: _("Advanced Search Info");
+                      }
+                    }
+
+                    Gtk.ScrolledWindow {
+                      hexpand: true;
+                      vexpand: true;
+                      hscrollbar-policy: never;
+
+                      child: Gtk.ListBox _listMusicFiles {
+                        margin-start: 12;
+                        margin-top: 12;
+                        margin-end: 12;
+                        margin-bottom: 12;
+                        selection-mode: multiple;
+                        activate-on-single-click: false;
+
+                        styles ["card", "boxed-list"]
+                      };
+                    }
+                  };
+                }
+
+                styles [ "background" ]
               }
 
-              Adw.ViewStackPage {
-                name: "Files";
-                child: Gtk.Box {
-                  orientation: vertical;
-                  spacing: 6;
+              [separator]
+              Gtk.Separator {
+                orientation: vertical;
+              }
 
-                  Gtk.Box {
-                    orientation: horizontal;
-                    spacing: 6;
-                    margin-start: 6;
-                    margin-top: 6;
-                    margin-end: 6;
+              [content]
+              Adw.ViewStack _selectedViewStack {
+                hexpand: true;
+                vexpand: true;
+                styles [ "background" ]
 
-                    Gtk.SearchEntry _musicFilesSearch {
-                      hexpand: true;
-                      placeholder-text: _("Search for filename (type ! to activate advanced search)...");
-                    }
+                Adw.ViewStackPage {
+                  name: "NoSelected";
+                  child: Adw.StatusPage {
+                    icon-name: "library-music-symbolic";
+                    title: _("No Selected Music Files");
+                    description: _("Select some files");
+                  };
+                }
 
-                    Gtk.Button _advancedSearchInfoButton {
-                      icon-name: "help-faq-symbolic";
-                      tooltip-text: _("Advanced Search Info");
-                      visible: false;
-                    }
-                  }
-
-                  Gtk.ScrolledWindow {
+                Adw.ViewStackPage {
+                  name: "Selected";
+                  child: Gtk.ScrolledWindow {
                     hexpand: true;
                     vexpand: true;
                     hscrollbar-policy: never;
 
-                    child: Gtk.ListBox _listMusicFiles {
-                      margin-start: 6;
-                      margin-top: 6;
-                      margin-end: 6;
-                      margin-bottom: 6;
-                      selection-mode: multiple;
-                      activate-on-single-click: false;
+                    child: Adw.Clamp {
+                      child: Gtk.Box {
+                        orientation: vertical;
+                        spacing: 12;
+                        margin-start: 12;
+                        margin-top: 12;
+                        margin-end: 12;
 
-                      styles ["card", "boxed-list"]
-                    };
-                  }
-                };
-              }
-            }
-
-            [separator]
-            Gtk.Separator {
-              orientation: vertical;
-            }
-
-            [flap]
-            Adw.ViewStack _selectedViewStack {
-              hexpand: true;
-              vexpand: true;
-              styles [ "background" ]
-
-              Adw.ViewStackPage {
-                name: "NoSelected";
-                child: Adw.StatusPage {
-                  icon-name: "library-music-symbolic";
-                  title: _("No Selected Music Files");
-                  description: _("Select some files");
-                };
-              }
-
-              Adw.ViewStackPage {
-                name: "Selected";
-                child: Gtk.ScrolledWindow {
-                  hexpand: true;
-                  vexpand: true;
-                  hscrollbar-policy: never;
-
-                  child: Adw.Clamp {
-                    child: Gtk.Box {
-                      orientation: vertical;
-                      spacing: 12;
-                      margin-start: 12;
-                      margin-top: 6;
-                      margin-end: 12;
-                      margin-bottom: 6;
-
-                      Gtk.Overlay {
-                        [overlay]
-                        Adw.Bin {
-                          margin-top: 12;
-                          margin-bottom: 12;
-                          halign: center;
-                          valign: center;
-                          width-request: 260;
-                          height-request: 260;
-
-                          Gtk.Box {
-                            orientation: vertical;
+                        Gtk.Overlay {
+                          [overlay]
+                          Adw.Bin {
+                            margin-top: 12;
+                            margin-bottom: 12;
                             halign: center;
                             valign: center;
+                            width-request: 260;
+                            height-request: 260;
 
-                            Gtk.Button _insertAlbumArtButton {
-                              Adw.ButtonContent {
-                                icon-name: "list-add-symbolic";
-                                label: _("Insert");
-                              }
-
-                              styles [ "opaque" ]
-                            }
-
-                            Gtk.Button _removeAlbumArtButton {
-                              Adw.ButtonContent {
-                                icon-name: "list-remove-symbolic";
-                                label: _("Remove");
-                              }
-
-                              styles [ "opaque" ]
-                            }
-
-                            Gtk.Button _exportAlbumArtButton {
-                              Adw.ButtonContent {
-                                icon-name: "document-save-symbolic";
-                                label: _("Export");
-                              }
-
-                              styles [ "opaque" ]
-                            }
-
-                            Gtk.Button _switchAlbumArtButton {
-                              Adw.ButtonContent _switchAlbumArtButtonContent {
-                                icon-name: "view-paged-symbolic";
-                                label: _("Switch to Back Cover");
-                              }
-
-                              styles [ "opaque" ]
-                            }
-
-                            styles [ "linked", "art-box" ]
-                          }
-
-                          styles [ "art-bin", "osd" ]
-                        }
-
-                        child: Gtk.Overlay {
-                          halign: center;
-                          width-request: 260;
-                          height-request: 260;
-                          margin-top: 12;
-                          margin-bottom: 12;
-
-                          [overlay]
-                          Gtk.Label _artTypeLabel {
-                            halign: start;
-                            valign: end;
-                            margin-start: 6;
-                            margin-bottom: 6;
-
-                            styles [ "osd", "toolbar", "caption" ]
-                          }
-
-                          child: Adw.ViewStack _artViewStack {
-                            Adw.ViewStackPage {
-                              name: "NoImage";
-                              child: Adw.StatusPage {
-                                icon-name: "image-missing-symbolic";
-
-                                styles ["compact"]
-                              };
-                            }
-
-                            Adw.ViewStackPage {
-                              name: "Image";
-                              child: Gtk.Picture _albumArtImage {
-                                styles ["album-art-img"]
-                              };
-                            }
-
-                            Adw.ViewStackPage {
-                              name: "KeepImage";
-                              child: Adw.StatusPage {
-                                icon-name: "library-music-symbolic";
-
-                                styles ["compact"]
-                              };
-                            }
-
-                            styles ["card"]
-                          };
-                        };
-                      }
-
-                      Adw.PreferencesGroup {
-                        Adw.EntryRow _filenameRow {
-                          title: _("File Name");
-                        }
-                      }
-
-                      Adw.PreferencesGroup {
-                        title: _("Tag Properties");
-
-                        Adw.EntryRow _titleRow {
-                          title: _("Title");
-                        }
-
-                        Adw.EntryRow _artistRow {
-                          title: _("Artist");
-                        }
-
-                        Adw.EntryRow _albumRow {
-                          title: _("Album");
-                        }
-
-                        Adw.EntryRow _yearRow {
-                          title: _("Year");
-                        }
-
-                        Adw.EntryRow _trackRow {
-                          title: _("Track");
-                        }
-
-                        Adw.EntryRow _albumArtistRow {
-                          title: _("Album Artist");
-                        }
-
-                        Adw.EntryRow _genreRow {
-                          title: _("Genre");
-                        }
-
-                        Adw.EntryRow _commentRow {
-                          title: _("Comment");
-                        }
-
-                        Adw.ExpanderRow _morePropertiesRow {
-                          title: _("More Properties");
-
-                          Adw.EntryRow _bpmRow {
-                            title: _("Beats Per Minute");
-                          }
-
-                          Adw.EntryRow _composerRow {
-                            title: _("Composer");
-                          }
-
-                          Adw.EntryRow _descriptionRow {
-                            title: _("Description");
-                          }
-
-                          Adw.EntryRow _publisherRow {
-                            title: _("Publisher");
-                          }
-
-                          Adw.EntryRow _isrcRow {
-                            title: _("ISRC");
-                          }
-                        }
-                      }
-
-                      Adw.PreferencesGroup {
-                        title: _("File Properties");
-
-                        Adw.ActionRow _durationRow {
-                          title: _("Duration");
-
-                          [suffix]
-                          Gtk.Label _durationLabel {
-                            valign: center;
-                            label: "00:00:00";
-                          }
-                        }
-
-                        Adw.ActionRow {
-                          title: _("Fingerprint");
-                          title-lines: 1;
-
-                          [suffix]
-                          Adw.Clamp {
-                            orientation: horizontal;
-                            maximum-size: 200;
-
-                            child: Gtk.Label _fingerprintLabel {
-                              halign: end;
+                            Gtk.Box {
+                              orientation: vertical;
+                              halign: center;
                               valign: center;
+
+                              Gtk.Button _insertAlbumArtButton {
+                                Adw.ButtonContent {
+                                  icon-name: "list-add-symbolic";
+                                  label: _("Insert");
+                                }
+
+                                styles [ "opaque" ]
+                              }
+
+                              Gtk.Button _removeAlbumArtButton {
+                                Adw.ButtonContent {
+                                  icon-name: "list-remove-symbolic";
+                                  label: _("Remove");
+                                }
+
+                                styles [ "opaque" ]
+                              }
+
+                              Gtk.Button _exportAlbumArtButton {
+                                Adw.ButtonContent {
+                                  icon-name: "document-save-symbolic";
+                                  label: _("Export");
+                                }
+
+                                styles [ "opaque" ]
+                              }
+
+                              Gtk.Button _switchAlbumArtButton {
+                                Adw.ButtonContent _switchAlbumArtButtonContent {
+                                  icon-name: "view-paged-symbolic";
+                                  label: _("Switch to Back Cover");
+                                }
+
+                                styles [ "opaque" ]
+                              }
+
+                              styles [ "linked", "art-box" ]
+                            }
+
+                            styles [ "art-bin", "osd" ]
+                          }
+
+                          child: Gtk.Overlay {
+                            halign: center;
+                            width-request: 260;
+                            height-request: 260;
+                            margin-top: 12;
+                            margin-bottom: 12;
+
+                            [overlay]
+                            Gtk.Label _artTypeLabel {
+                              halign: start;
+                              valign: end;
+                              margin-start: 6;
+                              margin-bottom: 6;
+
+                              styles [ "osd", "toolbar", "caption" ]
+                            }
+
+                            child: Adw.ViewStack _artViewStack {
+                              Adw.ViewStackPage {
+                                name: "NoImage";
+                                child: Adw.StatusPage {
+                                  icon-name: "image-missing-symbolic";
+
+                                  styles ["compact"]
+                                };
+                              }
+
+                              Adw.ViewStackPage {
+                                name: "Image";
+                                child: Gtk.Picture _albumArtImage {
+                                  styles ["album-art-img"]
+                                };
+                              }
+
+                              Adw.ViewStackPage {
+                                name: "KeepImage";
+                                child: Adw.StatusPage {
+                                  icon-name: "library-music-symbolic";
+
+                                  styles ["compact"]
+                                };
+                              }
+
+                              styles ["card"]
                             };
-                          }
+                          };
+                        }
 
-                          [suffix]
-                          Gtk.Button _copyFingerprintButton {
-                            valign: center;
-                            icon-name: "edit-copy-symbolic";
-                            tooltip-text: _("Copy Fingerprint To Clipboard");
-
-                            styles ["flat"]
+                        Adw.PreferencesGroup {
+                          Adw.EntryRow _filenameRow {
+                            title: _("File Name");
                           }
                         }
 
-                        Adw.ActionRow {
-                          title: _("File Size");
+                        Adw.PreferencesGroup {
+                          title: _("Tag Properties");
 
-                          [suffix]
-                          Gtk.Label _fileSizeLabel {
-                            valign: center;
-                            label: _("0 MiB");
+                          Adw.EntryRow _titleRow {
+                            title: _("Title");
+                          }
+
+                          Adw.EntryRow _artistRow {
+                            title: _("Artist");
+                          }
+
+                          Adw.EntryRow _albumRow {
+                            title: _("Album");
+                          }
+
+                          Adw.EntryRow _yearRow {
+                            title: _("Year");
+                          }
+
+                          Adw.EntryRow _trackRow {
+                            title: _("Track");
+                          }
+
+                          Adw.EntryRow _albumArtistRow {
+                            title: _("Album Artist");
+                          }
+
+                          Adw.EntryRow _genreRow {
+                            title: _("Genre");
+                          }
+
+                          Adw.EntryRow _commentRow {
+                            title: _("Comment");
+                          }
+
+                          Adw.ExpanderRow _morePropertiesRow {
+                            title: _("More Properties");
+
+                            Adw.EntryRow _bpmRow {
+                              title: _("Beats Per Minute");
+                            }
+
+                            Adw.EntryRow _composerRow {
+                              title: _("Composer");
+                            }
+
+                            Adw.EntryRow _descriptionRow {
+                              title: _("Description");
+                            }
+
+                            Adw.EntryRow _publisherRow {
+                              title: _("Publisher");
+                            }
+
+                            Adw.EntryRow _isrcRow {
+                              title: _("ISRC");
+                            }
                           }
                         }
-                      }
+
+                        Adw.PreferencesGroup {
+                          title: _("File Properties");
+
+                          Adw.ActionRow _durationRow {
+                            title: _("Duration");
+
+                            [suffix]
+                            Gtk.Label _durationLabel {
+                              valign: center;
+                              label: "00:00:00";
+                            }
+                          }
+
+                          Adw.ActionRow {
+                            title: _("Fingerprint");
+                            title-lines: 1;
+
+                            [suffix]
+                            Adw.Clamp {
+                              orientation: horizontal;
+                              maximum-size: 200;
+
+                              child: Gtk.Label _fingerprintLabel {
+                                halign: end;
+                                valign: center;
+                              };
+                            }
+
+                            [suffix]
+                            Gtk.Button _copyFingerprintButton {
+                              valign: center;
+                              icon-name: "edit-copy-symbolic";
+                              tooltip-text: _("Copy Fingerprint To Clipboard");
+
+                              styles ["flat"]
+                            }
+                          }
+
+                          Adw.ActionRow {
+                            title: _("File Size");
+
+                            [suffix]
+                            Gtk.Label _fileSizeLabel {
+                              valign: center;
+                              label: _("0 MiB");
+                            }
+                          }
+                        }
+                      };
                     };
                   };
-                };
+                }
               }
+            }
+
+            Gtk.Separator { }
+
+            Gtk.CenterBox {
+              [start]
+              Gtk.Box {
+                spacing: 6;
+
+                Gtk.ToggleButton _flapToggleButton {
+                  icon-name: "sidebar-show-symbolic";
+                  tooltip-text: _("Toggle Tags Pane");
+                  active: bind _folderFlap.reveal-flap bidirectional;
+                  sensitive: false;
+                }
+
+                Gtk.Button {
+                  tooltip-text: _("Reload Music Folder (F5)");
+                  sensitive: false;
+                  icon-name: "view-refresh-symbolic";
+                  action-name: "win.reloadFolder";
+                }
+              }
+
+              [end]
+              Gtk.Box {
+                spacing: 6;
+
+                Gtk.MenuButton _tagActionsButton {
+                  icon-name: "document-properties-symbolic";
+                  menu-model: tagActionsMenu;
+                  tooltip-text: _("Tag Actions");
+                }
+
+                Gtk.Button _applyButton {
+                  label: _("Apply");
+                  tooltip-text: _("Apply Changes To Tag (Ctrl+S)");
+                  sensitive: false;
+                  action-name: "win.apply";
+
+                  styles ["suggested-action"]
+                }
+              }
+
+              styles [ "toolbar" ]
             }
           };
         }
