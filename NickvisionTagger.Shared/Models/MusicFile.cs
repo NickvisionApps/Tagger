@@ -237,8 +237,15 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         catch
         {
-           file = TagLib.File.Create(Path);
-           tag = file.Tag;
+           try
+           {
+               file = TagLib.File.Create(Path);
+               tag = file.Tag;
+           }
+           catch
+           {
+               throw new FileLoadException($"Unable to load music file: \"{Path}\". Might be corrupted,");
+           }
         }
         if(file != null && tag != null)
         {

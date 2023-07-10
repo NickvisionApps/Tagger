@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -55,7 +56,14 @@ public class MusicFolder
                 {
                     if(supportedExtensions.Any(x => Path.GetExtension(file).ToLower() == x))
                     {
-                        MusicFiles.Add(new MusicFile(file));
+                        try
+                        {
+                            MusicFiles.Add(new MusicFile(file));
+                        }
+                        catch (FileLoadException e)
+                        {
+                            Console.WriteLine(e);
+                        }
                     }
                 }
                 MusicFiles.Sort();
