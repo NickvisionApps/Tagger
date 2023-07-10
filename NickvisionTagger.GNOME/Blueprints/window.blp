@@ -149,14 +149,14 @@ Adw.ApplicationWindow _root {
                   name: "Files";
                   child: Gtk.Box {
                     orientation: vertical;
-                    spacing: 6;
 
                     Gtk.Box {
                       orientation: horizontal;
                       spacing: 12;
                       margin-start: 12;
-                      margin-top: 12;
+                      margin-top: 6;
                       margin-end: 12;
+                      margin-bottom: 6;
 
                       Gtk.SearchEntry _musicFilesSearch {
                         hexpand: true;
@@ -169,14 +169,18 @@ Adw.ApplicationWindow _root {
                       }
                     }
 
-                    Gtk.ScrolledWindow {
+                    Gtk.Separator _searchSeparator {
+                      visible: false;
+                    }
+
+                    Gtk.ScrolledWindow _scrolledWindowMusicFiles {
                       hexpand: true;
                       vexpand: true;
                       hscrollbar-policy: never;
 
                       child: Gtk.ListBox _listMusicFiles {
                         margin-start: 12;
-                        margin-top: 12;
+                        margin-top: 6;
                         margin-end: 12;
                         margin-bottom: 12;
                         selection-mode: multiple;
@@ -225,6 +229,7 @@ Adw.ApplicationWindow _root {
                         margin-start: 12;
                         margin-top: 12;
                         margin-end: 12;
+                        margin-bottom: 12;
 
                         Gtk.Overlay {
                           [overlay]
@@ -482,6 +487,7 @@ Adw.ApplicationWindow _root {
                   icon-name: "document-properties-symbolic";
                   menu-model: tagActionsMenu;
                   tooltip-text: _("Tag Actions");
+                  direction: up;
                 }
 
                 Gtk.Button _applyButton {

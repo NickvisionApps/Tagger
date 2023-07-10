@@ -99,6 +99,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.ViewStack _filesViewStack;
     [Gtk.Connect] private readonly Gtk.SearchEntry _musicFilesSearch;
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
+    [Gtk.Connect] private readonly Gtk.Separator _searchSeparator;
+    [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindowMusicFiles;
     [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
     [Gtk.Connect] private readonly Adw.ViewStack _selectedViewStack;
     [Gtk.Connect] private readonly Gtk.Label _artTypeLabel;
@@ -152,6 +154,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         _title.SetTitle(_controller.AppInfo.ShortName);
         _musicFilesSearch.OnSearchChanged += SearchChanged;
         _advancedSearchInfoButton.OnClicked += AdvancedSearchInfo;
+        var musicFilesVadjustment = _scrolledWindowMusicFiles.GetVadjustment();
+        musicFilesVadjustment.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "value")
+            {
+                _searchSeparator.SetVisible(musicFilesVadjustment.GetValue() > 0);
+            }
+        };
         _listMusicFiles.OnSelectedRowsChanged += ListMusicFiles_SelectionChanged;
         _artTypeLabel.SetLabel(_currentAlbumArtType == AlbumArtType.Front ? _("Front") : _("Back"));
         _filenameRow.OnNotify += (sender, e) =>
