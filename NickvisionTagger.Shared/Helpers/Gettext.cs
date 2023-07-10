@@ -6,7 +6,7 @@ namespace NickvisionTagger.Shared.Helpers;
 
 public static class Gettext
 {
-    private static readonly ICatalog _catalog = new Catalog("application", Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+    private static readonly ICatalog _catalog = new Catalog("tagger", Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
     
     public static string _(string text)
     {

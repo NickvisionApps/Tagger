@@ -676,7 +676,7 @@ public class MainWindowController
                 return (false, null);
             }
             var propValPairs = search.Split(';');
-            var validProperties = new string[] { "filename", "title", "artist", "album", "year", "track", "albumartist", "genre", "comment", "bpm", "composer", "description", "publisher", "isrc" };
+            var validProperties = new string[] { "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "isrc", _("isrc") };
             var propertyMap = new PropertyMap();
             foreach(var propVal in propValPairs)
             {
@@ -685,7 +685,7 @@ public class MainWindowController
                 {
                     return (false, null);
                 }
-                var prop = fields[0];
+                var prop = fields[0].ToLower();
                 var val = fields[1];
                 if(!validProperties.Contains(prop))
                 {
@@ -701,23 +701,23 @@ public class MainWindowController
                 {
                     val = "NULL";
                 }
-                if(prop == "filename")
+                if(prop == "filename" || prop == _("filename"))
                 {
                     propertyMap.Filename = val;
                 }
-                else if(prop == "title")
+                else if(prop == "title" || prop == _("title"))
                 {
                     propertyMap.Title = val;
                 }
-                else if(prop == "artist")
+                else if(prop == "artist" || prop == _("artist"))
                 {
                     propertyMap.Artist = val;
                 }
-                else if(prop == "album")
+                else if(prop == "album" || prop == _("album"))
                 {
                     propertyMap.Album = val;
                 }
-                else if(prop == "year")
+                else if(prop == "year" || prop == _("year"))
                 {
                     if(val != "NULL")
                     {
@@ -732,7 +732,7 @@ public class MainWindowController
                     }
                     propertyMap.Year = val;
                 }
-                else if(prop == "track")
+                else if(prop == "track" || prop == _("track"))
                 {
                     if(val != "NULL")
                     {
@@ -747,19 +747,19 @@ public class MainWindowController
                     }
                     propertyMap.Track = val;
                 }
-                else if(prop == "albumartist")
+                else if(prop == "albumartist" || prop == _("albumartist"))
                 {
                     propertyMap.AlbumArtist = val;
                 }
-                else if(prop == "genre")
+                else if(prop == "genre" || prop == _("genre"))
                 {
                     propertyMap.Genre = val;
                 }
-                else if(prop == "comment")
+                else if(prop == "comment" || prop == _("comment"))
                 {
                     propertyMap.Comment = val;
                 }
-                else if(prop == "bpm")
+                else if(prop == "bpm" || prop == _("bpm"))
                 {
                     if(val != "NULL")
                     {
@@ -774,19 +774,19 @@ public class MainWindowController
                     }
                     propertyMap.BPM = val;
                 }
-                else if(prop == "composer")
+                else if(prop == "composer" || prop == _("composer"))
                 {
                     propertyMap.Composer = val;
                 }
-                else if(prop == "description")
+                else if(prop == "description" || prop == _("description"))
                 {
                     propertyMap.Description = val;
                 }
-                else if(prop == "publisher")
+                else if(prop == "publisher" || prop == _("publisher"))
                 {
                     propertyMap.Publisher = val;
                 }
-                else if(prop == "isrc")
+                else if(prop == "isrc" || prop == _("isrc"))
                 {
                     propertyMap.ISRC = val;
                 }
