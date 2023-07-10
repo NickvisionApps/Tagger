@@ -1067,7 +1067,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         var search = _musicFilesSearch.GetText().ToLower();
         if(!string.IsNullOrEmpty(search) && search[0] == '!')
         {
-            _advancedSearchInfoButton.SetVisible(true);
             var result = _controller.AdvancedSearch(search);
             if(!result.Success)
             {
@@ -1097,7 +1096,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
-            _advancedSearchInfoButton.SetVisible(false);
             _musicFilesSearch.RemoveCssClass("success");
             _musicFilesSearch.RemoveCssClass("error");
             _listMusicFiles.SetFilterFunc((row) =>
