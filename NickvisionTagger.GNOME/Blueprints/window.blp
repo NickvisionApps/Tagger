@@ -241,48 +241,52 @@ Adw.ApplicationWindow _root {
                             width-request: 260;
                             height-request: 260;
 
-                            Gtk.Box {
-                              orientation: vertical;
-                              halign: center;
-                              valign: center;
+                            Adw.Clamp {
+                              maximum-size: 240;
 
-                              Gtk.Button _insertAlbumArtButton {
-                                Adw.ButtonContent {
-                                  icon-name: "list-add-symbolic";
-                                  label: _("Insert");
+                              Gtk.Box {
+                                orientation: vertical;
+                                halign: center;
+                                valign: center;
+
+                                Gtk.Button _insertAlbumArtButton {
+                                  Adw.ButtonContent {
+                                    icon-name: "list-add-symbolic";
+                                    label: _("Insert");
+                                  }
+
+                                  styles [ "opaque" ]
                                 }
 
-                                styles [ "opaque" ]
-                              }
+                                Gtk.Button _removeAlbumArtButton {
+                                  Adw.ButtonContent {
+                                    icon-name: "list-remove-symbolic";
+                                    label: _("Remove");
+                                  }
 
-                              Gtk.Button _removeAlbumArtButton {
-                                Adw.ButtonContent {
-                                  icon-name: "list-remove-symbolic";
-                                  label: _("Remove");
+                                  styles [ "opaque" ]
                                 }
 
-                                styles [ "opaque" ]
-                              }
+                                Gtk.Button _exportAlbumArtButton {
+                                  Adw.ButtonContent {
+                                    icon-name: "document-save-symbolic";
+                                    label: _("Export");
+                                  }
 
-                              Gtk.Button _exportAlbumArtButton {
-                                Adw.ButtonContent {
-                                  icon-name: "document-save-symbolic";
-                                  label: _("Export");
+                                  styles [ "opaque" ]
                                 }
 
-                                styles [ "opaque" ]
-                              }
+                                Gtk.Button _switchAlbumArtButton {
+                                  Adw.ButtonContent _switchAlbumArtButtonContent {
+                                    icon-name: "view-paged-symbolic";
+                                    label: _("Switch to Back Cover");
+                                  }
 
-                              Gtk.Button _switchAlbumArtButton {
-                                Adw.ButtonContent _switchAlbumArtButtonContent {
-                                  icon-name: "view-paged-symbolic";
-                                  label: _("Switch to Back Cover");
+                                  styles [ "opaque" ]
                                 }
 
-                                styles [ "opaque" ]
+                                styles [ "linked", "art-box" ]
                               }
-
-                              styles [ "linked", "art-box" ]
                             }
 
                             styles [ "art-bin", "osd" ]
