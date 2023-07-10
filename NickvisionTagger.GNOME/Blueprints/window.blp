@@ -321,8 +321,12 @@ Adw.ApplicationWindow _root {
 
                               Adw.ViewStackPage {
                                 name: "Image";
-                                child: Gtk.Picture _albumArtImage {
-                                  styles ["album-art-img"]
+                                child: Adw.Clamp {
+                                  maximum-size: 260;
+
+                                  child: Gtk.Picture _albumArtImage {
+                                    styles ["album-art-img"]
+                                  };
                                 };
                               }
 
