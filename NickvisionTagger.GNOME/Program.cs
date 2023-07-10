@@ -49,7 +49,7 @@ public partial class Program
         _mainWindowController.AppInfo.ShortName = _("Tagger");
         _mainWindowController.AppInfo.Description = $"{_("Tag your music")}.";
         _mainWindowController.AppInfo.Version = "2023.7.1-next";
-        _mainWindowController.AppInfo.Changelog = "<ul><li>Added support for the following tag properties: BPM, Composer, Description, Publisher, ISRC</li><li>Improved album art design and added support for managing back cover art</li><li>Updated translations (Thanks everyone on Weblate!)</li></ul>";
+        _mainWindowController.AppInfo.Changelog = "<ul><li>Added support for the following tag properties: BPM, Composer, Description, Publisher, ISRC</li><li>Improved album art design and added support for managing back cover art</li><li>Fixed an issue where corrupted music files would crash the app. Now they will be skipped and a message will be logged through the console</li><li>Updated translations (Thanks everyone on Weblate!)</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Tagger");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Tagger/discussions");
