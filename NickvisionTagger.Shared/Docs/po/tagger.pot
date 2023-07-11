@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-11 19:21+0300\n"
+"POT-Creation-Date: 2023-07-12 00:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,6 +12,135 @@ msgstr ""
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
+msgstr ""
+
+#. (itstool) path: info/title
+#: yelp/C/configuration.page:8
+msgctxt "link"
+msgid "Configuration 🔧"
+msgstr ""
+
+#. (itstool) path: credit/name
+#: yelp/C/configuration.page:10
+#: yelp/C/configuration.page:14
+#: yelp/C/index.page:14
+#: yelp/C/search.page:14
+msgid "Nicholas Logozzo"
+msgstr ""
+
+#. (itstool) path: page/title
+#: yelp/C/configuration.page:20
+msgid "Configuration"
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/configuration.page:21
+msgid "This page describes what you can change in the application configuration."
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/configuration.page:22
+msgid "Depending on your platform, in the application interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/configuration.page:25
+msgid "Theme"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:26
+msgid "Set light or dark theme, or make <app>Denaro</app> follow your system theme. Changing this on Windows requires the application restart to apply."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/configuration.page:29
+msgid "Remember Last Opened Folder"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:30
+msgid "Whether or not to remember the previously used music folder and reopen it when Tagger starts the next time."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/configuration.page:33
+msgid "Include Subfolders"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:34
+msgid "Whether or not to scan for music files into subdirectories of a music folder."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/configuration.page:37
+msgid "Sort Files By"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:38
+msgid "The property to use when sorting and displaying music files. It can be one of the following options:"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:40
+msgid "<code>File Name</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:41
+msgid "<code>Title</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:42
+msgid "<code>Track</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:43
+msgid "<code>File Path</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:44
+msgid "<code>Album</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:45
+msgid "<code>Genre</code>"
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/configuration.page:49
+msgid "Preserve Modification Timestamp"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:50
+msgid "Whether or not to not update a file's write (modified) timestamp when its tag is saved."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/configuration.page:53
+msgid "Overwrite Tag With MusicBrainz"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:54
+msgid "Whether or not to overwrite existing tag metadata with data found from MusicBrainz. If disabled, only blank tag properties will be filled."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/configuration.page:57
+msgid "Overwrite Album Art With MusicBrainz"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:58
+msgid "Whether or not to overwrite overwrite existing album art with art found from MusicBrainz."
 msgstr ""
 
 #. (itstool) path: info/title
@@ -30,12 +159,6 @@ msgstr ""
 #: yelp/C/index.page:10
 #: yelp/C/search.page:10
 msgid "Fyodor Sobolev"
-msgstr ""
-
-#. (itstool) path: credit/name
-#: yelp/C/index.page:14
-#: yelp/C/search.page:14
-msgid "Nicholas Logozzo"
 msgstr ""
 
 #. (itstool) path: page/title
