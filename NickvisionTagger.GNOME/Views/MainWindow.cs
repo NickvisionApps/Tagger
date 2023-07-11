@@ -390,11 +390,15 @@ public partial class MainWindow : Adw.ApplicationWindow
         actQuit.OnActivate += Quit;
         AddAction(actQuit);
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
+        //Help Action
+        var actHelp = Gio.SimpleAction.New("help", null);
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger", 0);
+        AddAction(actHelp);
+        application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action
         var actAbout = Gio.SimpleAction.New("about", null);
         actAbout.OnActivate += About;
         AddAction(actAbout);
-        application.SetAccelsForAction("win.about", new string[] { "F1" });
         //Drop Target
         _dropTarget = Gtk.DropTarget.New(Gio.FileHelper.GetGType(), Gdk.DragAction.Copy);
         _dropTarget.OnDrop += OnDrop;
@@ -1070,6 +1074,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var search = _musicFilesSearch.GetText().ToLower();
         if(!string.IsNullOrEmpty(search) && search[0] == '!')
         {
+            _advancedSearchInfoButton.SetVisible(true);
             var result = _controller.AdvancedSearch(search);
             if(!result.Success)
             {
@@ -1099,6 +1104,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
+            _advancedSearchInfoButton.SetVisible(false);
             _musicFilesSearch.RemoveCssClass("success");
             _musicFilesSearch.RemoveCssClass("error");
             _listMusicFiles.SetFilterFunc((row) =>
@@ -1123,13 +1129,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e)
-    {
-        var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Advanced Search"), _controller.AdvancedSearchInfo, _("OK"));
-        dialog.SetSizeRequest(700, -1);
-        dialog.OnResponse += (s, ex) => dialog.Destroy();
-        dialog.Present();
-    }
+    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, "help:tagger/search", 0);
 
     /// <summary>
     /// Occurs when the _listMusicFiles's selection is changed
