@@ -41,7 +41,7 @@ public partial class Program
     public Program()
     {
         gtk_file_chooser_cell_get_type();
-        _application = Adw.Application.New("org.nickvision.tagger", Gio.ApplicationFlags.FlagsNone);
+        _application = Adw.Application.New("org.nickvision.tagger", Gio.ApplicationFlags.NonUnique);
         _mainWindow = null;
         _mainWindowController = new MainWindowController();
         _mainWindowController.AppInfo.ID = "org.nickvision.tagger";
