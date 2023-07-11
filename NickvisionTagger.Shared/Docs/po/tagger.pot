@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-07-11 19:21+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
+msgctxt "_"
+msgid "translator-credits"
+msgstr ""
+
+#. (itstool) path: info/title
+#: yelp/C/index.page:7
+msgctxt "link"
+msgid "Tagger Help"
+msgstr ""
+
+#. (itstool) path: info/title
+#: yelp/C/index.page:8
+msgctxt "text"
+msgid "Tagger Help"
+msgstr ""
+
+#. (itstool) path: credit/name
+#: yelp/C/index.page:10
+#: yelp/C/search.page:10
+msgid "Fyodor Sobolev"
+msgstr ""
+
+#. (itstool) path: credit/name
+#: yelp/C/index.page:14
+#: yelp/C/search.page:14
+msgid "Nicholas Logozzo"
+msgstr ""
+
+#. (itstool) path: page/title
+#: yelp/C/index.page:20
+msgid "<_:media-1/> Tagger Help"
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/index.page:21
+msgid "This documentation will help you understand how to configure <app>Tagger</app> to get the most of the application."
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/index.page:22
+msgid "To get support, use <link href=\"https://github.com/NickvisionApps/Tagger/issues\">issues</link> or <link href=\"https://github.com/NickvisionApps/Tagger/discussions\">discussions</link> on Github, or <link href=\"https://bit.ly/3GrfEid\">join our Matrix channel</link>."
+msgstr ""
+
+#. (itstool) path: info/title
+#: yelp/C/search.page:8
+msgctxt "link"
+msgid "Advanced Search 🔍"
+msgstr ""
+
+#. (itstool) path: page/title
+#: yelp/C/search.page:20
+msgid "Advanced Search"
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/search.page:21
+msgid "This page explains how to use Advanced Search in <app>Tagger</app>."
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/search.page:23
+msgid "Advanced Search is a powerful feature provided by <app>Tagger</app> that allows users to search files' tag contents for certain values, using a powerful tag-based syntax:"
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/search.page:24
+msgid "<code>!prop1=\"value1\";prop2=\"value2\"</code>"
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/search.page:25
+msgid "Where <code>prop1</code>, <code>prop2</code> are valid tag properties and <code>value1</code>, <code>value2</code> are the values to search wrapped in quotes. Each property is separated by a semicolon. Notice how the last property does not end with a semicolon."
+msgstr ""
+
+#. (itstool) path: section/title
+#: yelp/C/search.page:28
+msgid "Valid Properties"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:30
+msgid "<code>filename</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:31
+msgid "<code>title</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:32
+msgid "<code>artist</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:33
+msgid "<code>album</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:34
+msgid "<code>year</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:35
+msgid "<code>track</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:36
+msgid "<code>albumartist</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:37
+msgid "<code>genre</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:38
+msgid "<code>comment</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:39
+msgid "<code>bpm</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:40
+msgid "<code>composer</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:41
+msgid "<code>description</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:42
+msgid "<code>publisher</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/search.page:43
+msgid "<code>isrc</code>"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/search.page:45
+msgid "Properties are case-insensitive."
+msgstr ""
+
+#. (itstool) path: section/title
+#: yelp/C/search.page:47
+msgid "Syntax Checking"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/search.page:48
+msgid "If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search. If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox."
+msgstr ""
+
+#. (itstool) path: section/title
+#: yelp/C/search.page:50
+msgid "Examples"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/search.page:51
+msgid "<code>!artist=\"\"</code>"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/search.page:52
+msgid "This search string will filter the listbox to contain music files which artist is empty."
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/search.page:53
+msgid "<code>!genre=\"\";year=\"2022\"</code>"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/search.page:54
+msgid "This search string will filter the listbox to contain music files which genre is empty and which year is 2022 (Year and Track properties will validate if the value string is a number)."
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/search.page:55
+msgid "<code>!title=\"\";artist=\"bob\"</code>"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/search.page:56
+msgid "This search string will filter the listbox to contain music files which title is empty and which artist is <code>bob</code>."
+msgstr ""
+
