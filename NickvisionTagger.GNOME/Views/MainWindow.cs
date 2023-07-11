@@ -271,6 +271,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         OnCloseRequest += OnCloseRequested;
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
+        _controller.LoadingStateUpdated += (sender, e) => SetLoadingState(e);
         _controller.MusicFolderUpdated += (sender, e) => g_main_context_invoke(0, _musicFolderUpdatedFunc, (IntPtr)GCHandle.Alloc(e));
         _controller.MusicFileSaveStatesChanged += (sender, e) => g_main_context_invoke(0, _musicFileSaveStatesChangedFunc, 0);
         _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => g_main_context_invoke(0, _selectedMusicFilesPropertiesChangedFunc, 0);

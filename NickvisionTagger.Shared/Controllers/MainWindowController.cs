@@ -71,6 +71,10 @@ public class MainWindowController
     /// </summary>
     public event EventHandler<ShellNotificationSentEventArgs>? ShellNotificationSent;
     /// <summary>
+    /// Occurs when the loading state is updated
+    /// </summary>
+    public event EventHandler<string> LoadingStateUpdated;
+    /// <summary>
     /// Occurs when the music folder is updated. The boolean arg represents whether or not to send a toast
     /// </summary>
     public event EventHandler<bool> MusicFolderUpdated;
@@ -1213,17 +1217,15 @@ public class MainWindowController
     {
         if(_musicFolder != null)
         {
-            if(_musicFolder.IncludeSubfolders != Configuration.Current.IncludeSubfolders)
+            var includeSubfoldersChanged = _musicFolder.IncludeSubfolders != Configuration.Current.IncludeSubfolders;
+            var sortingChanged = _musicFolder.SortFilesBy != Configuration.Current.SortFilesBy;
+            if(includeSubfoldersChanged || sortingChanged)
             {
+                LoadingStateUpdated?.Invoke(this, _("Loading music files from folder..."));
                 _musicFolder.IncludeSubfolders = Configuration.Current.IncludeSubfolders;
-                await _musicFolder.ReloadMusicFilesAsync();
-                MusicFolderUpdated?.Invoke(this, true);
-            }
-            if(_musicFolder.SortFilesBy != Configuration.Current.SortFilesBy)
-            {
                 _musicFolder.SortFilesBy = Configuration.Current.SortFilesBy;
                 await _musicFolder.ReloadMusicFilesAsync();
-                MusicFolderUpdated?.Invoke(this, false);
+                MusicFolderUpdated?.Invoke(this, includeSubfoldersChanged);
             }
         }
     }
