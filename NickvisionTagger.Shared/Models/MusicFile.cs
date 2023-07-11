@@ -739,18 +739,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <param name="a">The first MusicFile object</param>
     /// <param name="b">The second MusicFile object</param>
     /// <returns>True if a == b, else false</returns>
-    public static bool operator ==(MusicFile? a, MusicFile? b)
-    {
-        if(SortFilesBy == SortBy.Title)
-        {
-            return a?.Title == b?.Title;
-        }
-        else if(SortFilesBy == SortBy.Track)
-        {
-            return a?.Track == b?.Track;
-        }
-        return a?.Path == b?.Path;
-    }
+    public static bool operator ==(MusicFile? a, MusicFile? b) => a?.Path == b?.Path;
 
     /// <summary>
     /// Compares two MusicFile objects by !=
@@ -758,18 +747,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <param name="a">The first MusicFile object</param>
     /// <param name="b">The second MusicFile object</param>
     /// <returns>True if a != b, else false</returns>
-    public static bool operator !=(MusicFile? a, MusicFile? b)
-    {
-        if(SortFilesBy == SortBy.Title)
-        {
-            return a?.Title != b?.Title;
-        }
-        else if(SortFilesBy == SortBy.Track)
-        {
-            return a?.Track != b?.Track;
-        }
-        return a?.Path != b?.Path;
-    }
+    public static bool operator !=(MusicFile? a, MusicFile? b) =>  a?.Path != b?.Path;
 
     /// <summary>
     /// Compares two MusicFile objects by <
@@ -786,6 +764,18 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         else if(SortFilesBy == SortBy.Track)
         {
             return a?.Track < b?.Track;
+        }
+        else if(SortFilesBy == SortBy.Path)
+        {
+            return a?.Path.CompareTo(b?.Path) == -1;
+        }
+        else if(SortFilesBy == SortBy.Album)
+        {
+            return a?.Album.CompareTo(b?.Album) == -1;
+        }
+        else if(SortFilesBy == SortBy.Genre)
+        {
+            return a?.Genre.CompareTo(b?.Genre) == -1;
         }
         return a?.Filename.CompareTo(b?.Filename) == -1;
     }
@@ -805,6 +795,18 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         else if(SortFilesBy == SortBy.Track)
         {
             return a?.Track > b?.Track;
+        }
+        else if(SortFilesBy == SortBy.Path)
+        {
+            return a?.Path.CompareTo(b?.Path) == 1;
+        }
+        else if(SortFilesBy == SortBy.Album)
+        {
+            return a?.Album.CompareTo(b?.Album) == 1;
+        }
+        else if(SortFilesBy == SortBy.Genre)
+        {
+            return a?.Genre.CompareTo(b?.Genre) == 1;
         }
         return a?.Filename.CompareTo(b?.Filename) == 1;
     }
