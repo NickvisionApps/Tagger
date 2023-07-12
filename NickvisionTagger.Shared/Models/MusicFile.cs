@@ -763,7 +763,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         else if(SortFilesBy == SortBy.Track)
         {
-            return a?.Track < b?.Track;
+            return a?.Track.CompareTo(b?.Track) == -1 || a?.Track.CompareTo(b?.Track) == 0 && a?.Title.CompareTo(b?.Title) == -1;
         }
         else if(SortFilesBy == SortBy.Path)
         {
@@ -771,11 +771,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         else if(SortFilesBy == SortBy.Album)
         {
-            return a?.Album.CompareTo(b?.Album) == -1;
+            return a?.Album.CompareTo(b?.Album) == -1 || a?.Album.CompareTo(b?.Album) == 0 && a?.Track.CompareTo(b?.Track) == -1;
         }
         else if(SortFilesBy == SortBy.Genre)
         {
-            return a?.Genre.CompareTo(b?.Genre) == -1;
+            return a?.Genre.CompareTo(b?.Genre) == -1 || a?.Genre.CompareTo(b?.Genre) == 0 && a?.Path.CompareTo(b?.Path) == -1;
         }
         return a?.Filename.CompareTo(b?.Filename) == -1;
     }
@@ -794,7 +794,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         else if(SortFilesBy == SortBy.Track)
         {
-            return a?.Track > b?.Track;
+            return a?.Track.CompareTo(b?.Track) == 1 || a?.Track.CompareTo(b?.Track) == 0 && a?.Title.CompareTo(b?.Title) == 1;
         }
         else if(SortFilesBy == SortBy.Path)
         {
@@ -802,11 +802,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         else if(SortFilesBy == SortBy.Album)
         {
-            return a?.Album.CompareTo(b?.Album) == 1;
+            return a?.Album.CompareTo(b?.Album) == 1 || a?.Album.CompareTo(b?.Album) == 0 && a?.Track.CompareTo(b?.Track) == 1;
         }
         else if(SortFilesBy == SortBy.Genre)
         {
-            return a?.Genre.CompareTo(b?.Genre) == 1;
+            return a?.Genre.CompareTo(b?.Genre) == 1 || a?.Genre.CompareTo(b?.Genre) == 0 && a?.Path.CompareTo(b?.Path) == 1;
         }
         return a?.Filename.CompareTo(b?.Filename) == 1;
     }
