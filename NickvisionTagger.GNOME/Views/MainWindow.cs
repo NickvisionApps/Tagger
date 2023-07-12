@@ -82,6 +82,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly GSourceFunc _musicFolderUpdatedFunc;
     private readonly GSourceFunc _musicFileSaveStatesChangedFunc;
     private readonly GSourceFunc _selectedMusicFilesPropertiesChangedFunc;
+    private readonly GSourceFunc _updateFingerprintFunc;
     private GAsyncReadyCallback? _openCallback;
     private GAsyncReadyCallback? _saveCallback;
     private AlbumArtType _currentAlbumArtType;
@@ -128,6 +129,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Label _durationLabel;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
     [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
+    [Gtk.Connect] private readonly Gtk.Spinner _fingerprintSpinner;
     [Gtk.Connect] private readonly Gtk.Label _fileSizeLabel;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
@@ -141,6 +143,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _musicFolderUpdatedFunc =  MusicFolderUpdated;
         _musicFileSaveStatesChangedFunc = (x) => MusicFileSaveStatesChanged();
         _selectedMusicFilesPropertiesChangedFunc = (x) => SelectedMusicFilesPropertiesChanged();
+        _updateFingerprintFunc = (x) => UpdateFingerprint();
         _currentAlbumArtType = AlbumArtType.Front;
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
@@ -275,6 +278,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.MusicFolderUpdated += (sender, e) => g_main_context_invoke(0, _musicFolderUpdatedFunc, (IntPtr)GCHandle.Alloc(e));
         _controller.MusicFileSaveStatesChanged += (sender, e) => g_main_context_invoke(0, _musicFileSaveStatesChangedFunc, 0);
         _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => g_main_context_invoke(0, _selectedMusicFilesPropertiesChangedFunc, 0);
+        _controller.FingerprintCalculated += (sender, e) => g_main_context_invoke(0, _updateFingerprintFunc, 0);
         //Open Folder Action
         var actOpenFolder = Gio.SimpleAction.New("openFolder", null);
         actOpenFolder.OnActivate += OpenFolder;
@@ -1150,6 +1154,12 @@ public partial class MainWindow : Adw.ApplicationWindow
             SwitchAlbumArt(null, e);
         }
         _controller.UpdateSelectedMusicFiles(selectedIndexes);
+        if (string.IsNullOrEmpty(_fingerprintLabel.GetLabel()))
+        {
+            _fingerprintSpinner.SetVisible(true);
+            _fingerprintSpinner.SetSpinning(true);
+            _copyFingerprintButton.SetVisible(false);
+        }
         _isSelectionOccuring = false;
     }
 
@@ -1193,6 +1203,17 @@ public partial class MainWindow : Adw.ApplicationWindow
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Occurs when fingerprint is ready to be shown
+    /// </summary>
+    private bool UpdateFingerprint()
+    {
+        _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
+        _fingerprintSpinner.SetVisible(false);
+        _copyFingerprintButton.SetVisible(true);
+        return false;
     }
 
     /// <summary>

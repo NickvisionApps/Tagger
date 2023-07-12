@@ -86,6 +86,10 @@ public class MainWindowController
     /// Occurs when the selected music files' properties are changed
     /// </summary>
     public event EventHandler<EventArgs> SelectedMusicFilesPropertiesChanged;
+    /// <summary>
+    /// Occurs when fingerprint calculating is done
+    /// </summary>
+    public event EventHandler<EventArgs> FingerprintCalculated;
 
     /// <summary>
     /// Constructs a MainWindowController
@@ -1045,7 +1049,16 @@ public class MainWindowController
             SelectedPropertyMap.Publisher = first.Publisher;
             SelectedPropertyMap.ISRC = first.ISRC;
             SelectedPropertyMap.Duration = first.Duration.ToDurationString();
-            SelectedPropertyMap.Fingerprint = first.Fingerprint;
+            SelectedPropertyMap.Fingerprint = "";
+            Task.Run(() =>
+            {
+                var fingerprint = first.Fingerprint;
+                if(first == SelectedMusicFiles.First().Value)
+                {
+                    SelectedPropertyMap.Fingerprint = fingerprint;
+                    FingerprintCalculated?.Invoke(this, EventArgs.Empty);
+                }
+            });
             SelectedPropertyMap.FileSize = first.FileSize.ToFileSizeString();
             SelectedPropertyMap.FrontAlbumArt = first.FrontAlbumArt.IsEmpty ? "noArt" : "hasArt";
             SelectedPropertyMap.BackAlbumArt = first.BackAlbumArt.IsEmpty ? "noArt" : "hasArt";
