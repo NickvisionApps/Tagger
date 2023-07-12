@@ -197,6 +197,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <summary>
     /// Loads the tag metadata from the file on disk (discarding any unapplied metadata)
     /// </summary>
+    /// <exception cref="FileLoadException">Thrown if unable to load MusicFile because of corrupted tag</exception>
     /// <returns>True if successful, else false</returns>
     public bool LoadTagFromDisk()
     {
@@ -243,9 +244,9 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                file = TagLib.File.Create(Path);
                tag = file.Tag;
            }
-           catch
+           catch(CorruptFileException)
            {
-               throw new FileLoadException($"Unable to load music file: \"{Path}\". Might be corrupted,");
+               throw new FileLoadException($"Unable to load music file: \"{Path}\". Tag is corrupted,");
            }
         }
         if(file != null && tag != null)
