@@ -4,6 +4,7 @@ using Adw 1;
 menu mainMenu {
   item(_("Preferences"), "win.preferences")
   item(_("Keyboard Shortcuts"), "win.keyboardShortcuts")
+  item(_("Help"), "win.help")
   item(_("About Tagger"), "win.about")
 }
 
@@ -160,12 +161,13 @@ Adw.ApplicationWindow _root {
 
                       Gtk.SearchEntry _musicFilesSearch {
                         hexpand: true;
-                        placeholder-text: _("Search for filename (type ! to activate advanced search)...");
+                        placeholder-text: _("Search for filename (type ! for advanced search)...");
                       }
 
                       Gtk.Button _advancedSearchInfoButton {
                         icon-name: "help-faq-symbolic";
                         tooltip-text: _("Advanced Search Info");
+                        visible: false;
                       }
                     }
 
@@ -179,6 +181,7 @@ Adw.ApplicationWindow _root {
                       hscrollbar-policy: never;
 
                       child: Gtk.ListBox _listMusicFiles {
+                        valign: start;
                         margin-start: 12;
                         margin-top: 6;
                         margin-end: 12;
@@ -441,10 +444,17 @@ Adw.ApplicationWindow _root {
                             [suffix]
                             Gtk.Button _copyFingerprintButton {
                               valign: center;
+                              visible: false;
                               icon-name: "edit-copy-symbolic";
                               tooltip-text: _("Copy Fingerprint To Clipboard");
 
                               styles ["flat"]
+                            }
+
+                            [suffix]
+                            Gtk.Spinner _fingerprintSpinner {
+                              valign: center;
+                              spinning: true;
                             }
                           }
 

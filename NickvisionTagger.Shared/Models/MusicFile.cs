@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using TagLib;
+using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Models;
 
@@ -170,7 +171,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     {
         get
         {
-            if(string.IsNullOrEmpty(_fingerprint) || _fingerprint == "ERROR")
+            if(string.IsNullOrEmpty(_fingerprint) || _fingerprint == _("ERROR"))
             {
                 using var process = new Process()
                 {
@@ -186,7 +187,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 process.Start();
                 _fingerprint = process.StandardOutput.ReadToEnd();
                 process.WaitForExit();
-                _fingerprint = process.ExitCode != 0 ? "ERROR " : _fingerprint.Substring(_fingerprint.IndexOf("FINGERPRINT=") + 12);
+                _fingerprint = process.ExitCode != 0 ? _("ERROR") : _fingerprint.Substring(_fingerprint.IndexOf("FINGERPRINT=") + 12);
                 _fingerprint = _fingerprint.Remove(_fingerprint.Length - 1);
             }
             return _fingerprint;
@@ -696,13 +697,13 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return -1;
         }
-        else if (this == other)
+        else if (this > other)
         {
-            return 0;
+            return 1;
         }
         else
         {
-            return 1;
+            return 0;
         }
     }
 
@@ -739,18 +740,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <param name="a">The first MusicFile object</param>
     /// <param name="b">The second MusicFile object</param>
     /// <returns>True if a == b, else false</returns>
-    public static bool operator ==(MusicFile? a, MusicFile? b)
-    {
-        if(SortFilesBy == SortBy.Title)
-        {
-            return a?.Title == b?.Title;
-        }
-        else if(SortFilesBy == SortBy.Track)
-        {
-            return a?.Track == b?.Track;
-        }
-        return a?.Path == b?.Path;
-    }
+    public static bool operator ==(MusicFile? a, MusicFile? b) => a?.Path == b?.Path;
 
     /// <summary>
     /// Compares two MusicFile objects by !=
@@ -758,18 +748,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <param name="a">The first MusicFile object</param>
     /// <param name="b">The second MusicFile object</param>
     /// <returns>True if a != b, else false</returns>
-    public static bool operator !=(MusicFile? a, MusicFile? b)
-    {
-        if(SortFilesBy == SortBy.Title)
-        {
-            return a?.Title != b?.Title;
-        }
-        else if(SortFilesBy == SortBy.Track)
-        {
-            return a?.Track != b?.Track;
-        }
-        return a?.Path != b?.Path;
-    }
+    public static bool operator !=(MusicFile? a, MusicFile? b) =>  a?.Path != b?.Path;
 
     /// <summary>
     /// Compares two MusicFile objects by <
@@ -785,7 +764,19 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         else if(SortFilesBy == SortBy.Track)
         {
-            return a?.Track < b?.Track;
+            return a?.Track.CompareTo(b?.Track) == -1 || a?.Track.CompareTo(b?.Track) == 0 && a?.Title.CompareTo(b?.Title) == -1;
+        }
+        else if(SortFilesBy == SortBy.Path)
+        {
+            return a?.Path.CompareTo(b?.Path) == -1;
+        }
+        else if(SortFilesBy == SortBy.Album)
+        {
+            return a?.Album.CompareTo(b?.Album) == -1 || a?.Album.CompareTo(b?.Album) == 0 && a?.Track.CompareTo(b?.Track) == -1;
+        }
+        else if(SortFilesBy == SortBy.Genre)
+        {
+            return a?.Genre.CompareTo(b?.Genre) == -1 || a?.Genre.CompareTo(b?.Genre) == 0 && a?.Path.CompareTo(b?.Path) == -1;
         }
         return a?.Filename.CompareTo(b?.Filename) == -1;
     }
@@ -804,7 +795,19 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         else if(SortFilesBy == SortBy.Track)
         {
-            return a?.Track > b?.Track;
+            return a?.Track.CompareTo(b?.Track) == 1 || a?.Track.CompareTo(b?.Track) == 0 && a?.Title.CompareTo(b?.Title) == 1;
+        }
+        else if(SortFilesBy == SortBy.Path)
+        {
+            return a?.Path.CompareTo(b?.Path) == 1;
+        }
+        else if(SortFilesBy == SortBy.Album)
+        {
+            return a?.Album.CompareTo(b?.Album) == 1 || a?.Album.CompareTo(b?.Album) == 0 && a?.Track.CompareTo(b?.Track) == 1;
+        }
+        else if(SortFilesBy == SortBy.Genre)
+        {
+            return a?.Genre.CompareTo(b?.Genre) == 1 || a?.Genre.CompareTo(b?.Genre) == 0 && a?.Path.CompareTo(b?.Path) == 1;
         }
         return a?.Filename.CompareTo(b?.Filename) == 1;
     }

@@ -11,7 +11,10 @@ public enum SortBy
 {
     Filename = 0,
     Title,
-    Track
+    Track,
+    Path,
+    Album,
+    Genre
 }
 
 /// <summary>

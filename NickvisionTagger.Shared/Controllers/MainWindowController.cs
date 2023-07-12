@@ -71,6 +71,10 @@ public class MainWindowController
     /// </summary>
     public event EventHandler<ShellNotificationSentEventArgs>? ShellNotificationSent;
     /// <summary>
+    /// Occurs when the loading state is updated
+    /// </summary>
+    public event EventHandler<string> LoadingStateUpdated;
+    /// <summary>
     /// Occurs when the music folder is updated. The boolean arg represents whether or not to send a toast
     /// </summary>
     public event EventHandler<bool> MusicFolderUpdated;
@@ -82,6 +86,10 @@ public class MainWindowController
     /// Occurs when the selected music files' properties are changed
     /// </summary>
     public event EventHandler<EventArgs> SelectedMusicFilesPropertiesChanged;
+    /// <summary>
+    /// Occurs when fingerprint calculating is done
+    /// </summary>
+    public event EventHandler<EventArgs> FingerprintCalculated;
 
     /// <summary>
     /// Constructs a MainWindowController
@@ -114,56 +122,6 @@ public class MainWindowController
                 }
             }
             return true;
-        }
-    }
-
-    /// <summary>
-    /// The information string about advanced search
-    // </summary>
-    public string AdvancedSearchInfo
-    {
-        get
-        {
-            return _(@"Advanced Search is a powerful feature provided by Tagger that allows users to search files' tag contents for certain values, using a powerful tag-based syntax:
-
-            !prop1=""value1"";prop2=""value2""
-            Where prop1, prop2 are valid tag properties and value1, value2 are the values to search wrapped in quotes.
-            Each property is separated by a semicolon. Notice how the last property does not end in a semicolon.
-
-            [Valid Properties]
-            - filename
-            - title
-            - artist
-            - album
-            - year
-            - track
-            - albumartist
-            - genre
-            - comment
-            - bpm
-            - composer
-            - description
-            - publisher
-            - isrc
-
-            [Syntax Checking]
-            - If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search
-            - If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox
-
-            [Examples]
-            !artist=""""
-            This search string will filter the listbox to contain music files who's artist is empty
-
-            !genre="""";year=""2022""
-            This search string will filter the listbox to contain music files who's genre is empty and who's year is 2022
-            (Year and Track properties will validate if the value string is a number).
-
-            !title="""";artist=""bob""
-            This search string will filter the listbox to contain music files who's title is empty and who's artist is bob
-
-            [Notes]
-            * Advanced Search is case insensitive
-            * Property names must be in English");
         }
     }
 
@@ -1091,7 +1049,16 @@ public class MainWindowController
             SelectedPropertyMap.Publisher = first.Publisher;
             SelectedPropertyMap.ISRC = first.ISRC;
             SelectedPropertyMap.Duration = first.Duration.ToDurationString();
-            SelectedPropertyMap.Fingerprint = first.Fingerprint;
+            SelectedPropertyMap.Fingerprint = "";
+            Task.Run(() =>
+            {
+                var fingerprint = first.Fingerprint;
+                if(first == SelectedMusicFiles.First().Value)
+                {
+                    SelectedPropertyMap.Fingerprint = fingerprint;
+                    FingerprintCalculated?.Invoke(this, EventArgs.Empty);
+                }
+            });
             SelectedPropertyMap.FileSize = first.FileSize.ToFileSizeString();
             SelectedPropertyMap.FrontAlbumArt = first.FrontAlbumArt.IsEmpty ? "noArt" : "hasArt";
             SelectedPropertyMap.BackAlbumArt = first.BackAlbumArt.IsEmpty ? "noArt" : "hasArt";
@@ -1213,17 +1180,15 @@ public class MainWindowController
     {
         if(_musicFolder != null)
         {
-            if(_musicFolder.IncludeSubfolders != Configuration.Current.IncludeSubfolders)
+            var includeSubfoldersChanged = _musicFolder.IncludeSubfolders != Configuration.Current.IncludeSubfolders;
+            var sortingChanged = _musicFolder.SortFilesBy != Configuration.Current.SortFilesBy;
+            if(includeSubfoldersChanged || sortingChanged)
             {
+                LoadingStateUpdated?.Invoke(this, _("Loading music files from folder..."));
                 _musicFolder.IncludeSubfolders = Configuration.Current.IncludeSubfolders;
-                await _musicFolder.ReloadMusicFilesAsync();
-                MusicFolderUpdated?.Invoke(this, true);
-            }
-            if(_musicFolder.SortFilesBy != Configuration.Current.SortFilesBy)
-            {
                 _musicFolder.SortFilesBy = Configuration.Current.SortFilesBy;
                 await _musicFolder.ReloadMusicFilesAsync();
-                MusicFolderUpdated?.Invoke(this, false);
+                MusicFolderUpdated?.Invoke(this, includeSubfoldersChanged);
             }
         }
     }

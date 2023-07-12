@@ -66,11 +66,15 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int gtk_list_box_row_get_index(nint row);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gdk_pixbuf_loader_write(nint loader, [MarshalAs(UnmanagedType.LPArray)] byte[] buf, uint count, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_picture_set_paintable(nint picture, nint paintable);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gdk_pixbuf_loader_close(nint loader, nint error);
+    private static partial nint gdk_texture_new_from_bytes(nint gbytes, nint error);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_bytes_new(byte[] bytes, uint size);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_object_unref(nint obj);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_bytes_unref(nint gbytes);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -82,6 +86,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly GSourceFunc _musicFolderUpdatedFunc;
     private readonly GSourceFunc _musicFileSaveStatesChangedFunc;
     private readonly GSourceFunc _selectedMusicFilesPropertiesChangedFunc;
+    private readonly GSourceFunc _updateFingerprintFunc;
     private GAsyncReadyCallback? _openCallback;
     private GAsyncReadyCallback? _saveCallback;
     private AlbumArtType _currentAlbumArtType;
@@ -128,6 +133,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Label _durationLabel;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
     [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
+    [Gtk.Connect] private readonly Gtk.Spinner _fingerprintSpinner;
     [Gtk.Connect] private readonly Gtk.Label _fileSizeLabel;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
@@ -141,6 +147,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _musicFolderUpdatedFunc =  MusicFolderUpdated;
         _musicFileSaveStatesChangedFunc = (x) => MusicFileSaveStatesChanged();
         _selectedMusicFilesPropertiesChangedFunc = (x) => SelectedMusicFilesPropertiesChanged();
+        _updateFingerprintFunc = (x) => UpdateFingerprint();
         _currentAlbumArtType = AlbumArtType.Front;
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
@@ -271,9 +278,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         OnCloseRequest += OnCloseRequested;
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
+        _controller.LoadingStateUpdated += (sender, e) => SetLoadingState(e);
         _controller.MusicFolderUpdated += (sender, e) => g_main_context_invoke(0, _musicFolderUpdatedFunc, (IntPtr)GCHandle.Alloc(e));
         _controller.MusicFileSaveStatesChanged += (sender, e) => g_main_context_invoke(0, _musicFileSaveStatesChangedFunc, 0);
         _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => g_main_context_invoke(0, _selectedMusicFilesPropertiesChangedFunc, 0);
+        _controller.FingerprintCalculated += (sender, e) => g_main_context_invoke(0, _updateFingerprintFunc, 0);
         //Open Folder Action
         var actOpenFolder = Gio.SimpleAction.New("openFolder", null);
         actOpenFolder.OnActivate += OpenFolder;
@@ -390,11 +399,15 @@ public partial class MainWindow : Adw.ApplicationWindow
         actQuit.OnActivate += Quit;
         AddAction(actQuit);
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
+        //Help Action
+        var actHelp = Gio.SimpleAction.New("help", null);
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger", 0);
+        AddAction(actHelp);
+        application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action
         var actAbout = Gio.SimpleAction.New("about", null);
         actAbout.OnActivate += About;
         AddAction(actAbout);
-        application.SetAccelsForAction("win.about", new string[] { "F1" });
         //Drop Target
         _dropTarget = Gtk.DropTarget.New(Gio.FileHelper.GetGType(), Gdk.DragAction.Copy);
         _dropTarget.OnDrop += OnDrop;
@@ -1024,10 +1037,11 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
             else
             {
-                using var loader = GdkPixbuf.PixbufLoader.New();
-                gdk_pixbuf_loader_write(loader.Handle, art.Data, (uint)art.Data.Length, 0);
-                _albumArtImage.SetPixbuf(loader.GetPixbuf());
-                gdk_pixbuf_loader_close(loader.Handle, IntPtr.Zero);
+                var bytes = g_bytes_new(art.Data, (uint)art.Data.Length);
+                var texture = gdk_texture_new_from_bytes(bytes, IntPtr.Zero);
+                gtk_picture_set_paintable(_albumArtImage.Handle, texture);
+                g_object_unref(texture);
+                g_bytes_unref(bytes);
             }
         }
         else if(albumArt == "keepArt")
@@ -1070,6 +1084,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var search = _musicFilesSearch.GetText().ToLower();
         if(!string.IsNullOrEmpty(search) && search[0] == '!')
         {
+            _advancedSearchInfoButton.SetVisible(true);
             var result = _controller.AdvancedSearch(search);
             if(!result.Success)
             {
@@ -1099,6 +1114,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
+            _advancedSearchInfoButton.SetVisible(false);
             _musicFilesSearch.RemoveCssClass("success");
             _musicFilesSearch.RemoveCssClass("error");
             _listMusicFiles.SetFilterFunc((row) =>
@@ -1123,13 +1139,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e)
-    {
-        var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Advanced Search"), _controller.AdvancedSearchInfo, _("OK"));
-        dialog.SetSizeRequest(700, -1);
-        dialog.OnResponse += (s, ex) => dialog.Destroy();
-        dialog.Present();
-    }
+    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, "help:tagger/search", 0);
 
     /// <summary>
     /// Occurs when the _listMusicFiles's selection is changed
@@ -1151,6 +1161,12 @@ public partial class MainWindow : Adw.ApplicationWindow
             SwitchAlbumArt(null, e);
         }
         _controller.UpdateSelectedMusicFiles(selectedIndexes);
+        if (string.IsNullOrEmpty(_fingerprintLabel.GetLabel()))
+        {
+            _fingerprintSpinner.SetVisible(true);
+            _fingerprintSpinner.SetSpinning(true);
+            _copyFingerprintButton.SetVisible(false);
+        }
         _isSelectionOccuring = false;
     }
 
@@ -1194,6 +1210,17 @@ public partial class MainWindow : Adw.ApplicationWindow
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Occurs when fingerprint is ready to be shown
+    /// </summary>
+    private bool UpdateFingerprint()
+    {
+        _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
+        _fingerprintSpinner.SetVisible(false);
+        _copyFingerprintButton.SetVisible(true);
+        return false;
     }
 
     /// <summary>
