@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-10 18:53+0300\n"
-"PO-Revision-Date: 2023-07-09 21:51+0000\n"
+"PO-Revision-Date: 2023-07-12 19:29+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/cs/>\n"
@@ -49,7 +49,7 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:1197
 #: ../../../Controllers/MainWindowController.cs:1201
 msgid "<keep>"
-msgstr ""
+msgstr "<ponechat>"
 
 #: ../../../Models/PropertyMap.cs:118
 #: NickvisionTagger.GNOME/Blueprints/window.blp:449
@@ -185,15 +185,13 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:716
-#, fuzzy
 msgid "album"
-msgstr "Album"
+msgstr "album"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:750
-#, fuzzy
 msgid "albumartist"
-msgstr "Umělec alba"
+msgstr "umělecalba"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:482
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:557
@@ -212,9 +210,8 @@ msgstr "Použít změny?"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:712
-#, fuzzy
 msgid "artist"
-msgstr "Umělec"
+msgstr "umělec"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "B"
@@ -229,7 +226,7 @@ msgstr "Zadní"
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:762
 msgid "bpm"
-msgstr ""
+msgstr "bpm"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:482
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:557
@@ -243,15 +240,13 @@ msgstr "Zrušit"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:758
-#, fuzzy
 msgid "comment"
-msgstr "Komentář"
+msgstr "komentář"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:777
-#, fuzzy
 msgid "composer"
-msgstr "Skladatel"
+msgstr "skladatel"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:618
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:638
@@ -282,9 +277,8 @@ msgstr "David Lapshin {0}"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:781
-#, fuzzy
 msgid "description"
-msgstr "Popis"
+msgstr "popis"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:482
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:557
@@ -307,33 +301,29 @@ msgstr "Stahování metadat z MusicBrainz..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:708
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
-#, fuzzy
 msgid "Export Back Album Art"
-msgstr "Vložit obal alba"
+msgstr "Exportovat zadní obal alba"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:708
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:71
-#, fuzzy
 msgid "Export Front Album Art"
-msgstr "Vložit obal alba"
+msgstr "Exportovat přední obal alba"
 
 #: ../../../Controllers/MainWindowController.cs:610
-#, fuzzy
 msgid "Exported back album art to file successfully"
-msgstr "Úspěšně převedena {0} značka na název souboru"
+msgstr "Zadní obal alba úspěšně exportován do souboru"
 
 #: ../../../Controllers/MainWindowController.cs:594
-#, fuzzy
 msgid "Exported front album art to file successfully"
-msgstr "Úspěšně převedena {0} značka na název souboru"
+msgstr "Přední obal alba úspěšně exportován do souboru"
 
 #: ../../../Controllers/MainWindowController.cs:615
 msgid "Failed to export back album art to a file"
-msgstr ""
+msgstr "Nepodařilo se exportovat zadní obal alba do souboru"
 
 #: ../../../Controllers/MainWindowController.cs:599
 msgid "Failed to export front album art to a file"
-msgstr ""
+msgstr "Nepodařilo se exportovat přední obal alba do souboru"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:617
 #: NickvisionTagger.GNOME/Blueprints/window.blp:40
@@ -343,7 +333,7 @@ msgstr "Název souboru na značku"
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:704
 msgid "filename"
-msgstr ""
+msgstr "názevsouboru"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1204
 msgid "Fingerprint was copied to clipboard."
@@ -362,9 +352,8 @@ msgstr "Přední"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:754
-#, fuzzy
 msgid "genre"
-msgstr "Žánr"
+msgstr "žánr"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "GiB"
@@ -387,7 +376,7 @@ msgstr "Vložit přední obal alba"
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:789
 msgid "isrc"
-msgstr ""
+msgstr "isrc"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
@@ -467,9 +456,8 @@ msgstr "Vyberte prosím formátový řetězec."
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:785
-#, fuzzy
 msgid "publisher"
-msgstr "Vydavatel"
+msgstr "vydavatel"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:487
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:562
@@ -539,9 +527,8 @@ msgstr "TiB"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:708
-#, fuzzy
 msgid "title"
-msgstr "Název"
+msgstr "název"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:744
 msgid "Too Many Files Selected"
@@ -549,9 +536,8 @@ msgstr "Vybráno příliš mnoho souborů"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:735
-#, fuzzy
 msgid "track"
-msgstr "Stopa"
+msgstr "stopa"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:897
 msgid "translator-credits"
@@ -568,7 +554,7 @@ msgstr "Nepodařilo se odeslat AcoustId. Zkontrolujte klíč API"
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:720
 msgid "year"
-msgstr ""
+msgstr "rok"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:114
@@ -717,14 +703,12 @@ msgid "Remove Front Album Art"
 msgstr "Odebrat přední obal alba"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:76
-#, fuzzy
 msgid "Switch Album Art"
-msgstr "Obal alba"
+msgstr "Přepnout obal alba"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:86
-#, fuzzy
 msgid "Remove Back Album Art"
-msgstr "Odstranit obal alba"
+msgstr "Odebrat zadní obal alba"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:97
 msgctxt "Shortcut"
@@ -775,7 +759,7 @@ msgstr "Odebrat"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:33
 #: NickvisionTagger.GNOME/Blueprints/window.blp:270
 msgid "Export"
-msgstr ""
+msgstr "Exportovat"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:65
 msgid "Open Music Folder (Ctrl+O)"
