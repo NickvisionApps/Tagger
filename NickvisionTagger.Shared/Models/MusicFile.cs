@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using TagLib;
+using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Models;
 
@@ -170,7 +171,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     {
         get
         {
-            if(string.IsNullOrEmpty(_fingerprint) || _fingerprint == "ERROR")
+            if(string.IsNullOrEmpty(_fingerprint) || _fingerprint == _("ERROR"))
             {
                 using var process = new Process()
                 {
@@ -186,7 +187,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 process.Start();
                 _fingerprint = process.StandardOutput.ReadToEnd();
                 process.WaitForExit();
-                _fingerprint = process.ExitCode != 0 ? "ERROR " : _fingerprint.Substring(_fingerprint.IndexOf("FINGERPRINT=") + 12);
+                _fingerprint = process.ExitCode != 0 ? _("ERROR") : _fingerprint.Substring(_fingerprint.IndexOf("FINGERPRINT=") + 12);
                 _fingerprint = _fingerprint.Remove(_fingerprint.Length - 1);
             }
             return _fingerprint;
