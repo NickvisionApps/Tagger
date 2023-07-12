@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-12 00:48+0200\n"
+"POT-Creation-Date: 2023-07-12 05:55+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,123 +40,118 @@ msgstr ""
 msgid "This page describes what you can change in the application configuration."
 msgstr ""
 
-#. (itstool) path: page/p
-#: yelp/C/configuration.page:22
-msgid "Depending on your platform, in the application interface the configuration is referred as either <gui>Preferences</gui> or <gui>Settings</gui>."
-msgstr ""
-
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:25
+#: yelp/C/configuration.page:24
 msgid "Theme"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:26
-msgid "Set light or dark theme, or make <app>Denaro</app> follow your system theme. Changing this on Windows requires the application restart to apply."
+#: yelp/C/configuration.page:25
+msgid "Set light or dark theme, or make <app>Tagger</app> follow your system theme."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:29
+#: yelp/C/configuration.page:28
 msgid "Remember Last Opened Folder"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:30
+#: yelp/C/configuration.page:29
 msgid "Whether or not to remember the previously used music folder and reopen it when Tagger starts the next time."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:33
+#: yelp/C/configuration.page:32
 msgid "Include Subfolders"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:34
+#: yelp/C/configuration.page:33
 msgid "Whether or not to scan for music files into subdirectories of a music folder."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:37
+#: yelp/C/configuration.page:36
 msgid "Sort Files By"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:38
+#: yelp/C/configuration.page:37
 msgid "The property to use when sorting and displaying music files. It can be one of the following options:"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:40
+#: yelp/C/configuration.page:39
 msgid "<code>File Name</code>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:41
+#: yelp/C/configuration.page:40
 msgid "<code>Title</code>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:42
+#: yelp/C/configuration.page:41
 msgid "<code>Track</code>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:43
+#: yelp/C/configuration.page:42
 msgid "<code>File Path</code>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:44
+#: yelp/C/configuration.page:43
 msgid "<code>Album</code>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:45
+#: yelp/C/configuration.page:44
 msgid "<code>Genre</code>"
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:49
+#: yelp/C/configuration.page:48
 msgid "Preserve Modification Timestamp"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:50
+#: yelp/C/configuration.page:49
 msgid "Whether or not to not update a file's write (modified) timestamp when its tag is saved."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:53
+#: yelp/C/configuration.page:52
 msgid "Overwrite Tag With MusicBrainz"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:54
+#: yelp/C/configuration.page:53
 msgid "Whether or not to overwrite existing tag metadata with data found from MusicBrainz. If disabled, only blank tag properties will be filled."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:57
+#: yelp/C/configuration.page:56
 msgid "Overwrite Album Art With MusicBrainz"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:58
+#: yelp/C/configuration.page:57
 msgid "Whether or not to overwrite overwrite existing album art with art found from MusicBrainz."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:61
+#: yelp/C/configuration.page:60
 msgid "AcoustId User API Key"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:62
+#: yelp/C/configuration.page:61
 msgid "An AcoustId User API key to use when fingerprinting music files and looking up song information."
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/configuration.page:64
+#: yelp/C/configuration.page:63
 msgid "A key can be obtained <link href=\"https://acoustid.org/api-key\">here</link>"
 msgstr ""
 
