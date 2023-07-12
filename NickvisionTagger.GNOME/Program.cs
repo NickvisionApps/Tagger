@@ -114,6 +114,11 @@ public partial class Program
             _ => Adw.ColorScheme.PreferLight
         };
         //Main Window
+        if (_mainWindow != null)
+        {
+            _mainWindow.Present();
+            return;
+        }
         _mainWindow = new MainWindow(_mainWindowController, _application);
         await _mainWindow.StartAsync();
     }
