@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-10 18:53+0300\n"
-"PO-Revision-Date: 2023-07-02 01:57+0000\n"
-"Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
+"PO-Revision-Date: 2023-07-12 19:29+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/fr/>\n"
 "Language: fr\n"
@@ -49,7 +49,7 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:1197
 #: ../../../Controllers/MainWindowController.cs:1201
 msgid "<keep>"
-msgstr ""
+msgstr "<conserver>"
 
 #: ../../../Models/PropertyMap.cs:118
 #: NickvisionTagger.GNOME/Blueprints/window.blp:449
@@ -81,7 +81,6 @@ msgid "Advanced Search"
 msgstr "Recherche avancée"
 
 #: ../../../Controllers/MainWindowController.cs:127
-#, fuzzy
 msgid ""
 "Advanced Search is a powerful feature provided by Tagger that allows users "
 "to search files' tag contents for certain values, using a powerful tag-based "
@@ -154,6 +153,11 @@ msgstr ""
 "            - albumartist (artiste de l’album)\n"
 "            - genre\n"
 "            - comment (commentaire)\n"
+"            - bpm\n"
+"            - composer (compositeur)\n"
+"            - description\n"
+"            - publisher (maison de disques)\n"
+"            - isrc (code isrc)\n"
 "\n"
 "            [Vérification de la syntaxe]\n"
 "            - Si la syntaxe de votre saisie est valide, le champ de saisie "
@@ -167,14 +171,14 @@ msgstr ""
 "n'est pas renseigné\n"
 "\n"
 "            !genre=\"\";year=\"2022\"\n"
-"            Cette recherche filtrera les fichiers pour lesquels le genre "
-"n’est pas renseigné et l’année de sortie est 2022\n"
+"            Cette recherche filtrera les fichiers pour lesquels le genre n’"
+"est pas renseigné et l’année de sortie est 2022\n"
 "            (Les propriétés Année et Piste seront valides si les valeurs "
 "saisies sont des chiffres).\n"
 "\n"
 "            !title=\"\";artist=\"bob\"\n"
-"            Cette recherche filtrera les fichiers pour lesquels le titre "
-"n’est pas renseigné mais ayant pour artiste bob\n"
+"            Cette recherche filtrera les fichiers pour lesquels le titre n’"
+"est pas renseigné mais ayant pour artiste bob\n"
 "\n"
 "            [Notes]\n"
 "            * La recherche avancée est sensible à la casse\n"
@@ -182,15 +186,13 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:716
-#, fuzzy
 msgid "album"
-msgstr "Album"
+msgstr "album"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:750
-#, fuzzy
 msgid "albumartist"
-msgstr "Artiste de l'album"
+msgstr "artiste de l’album"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:482
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:557
@@ -205,13 +207,12 @@ msgstr "Appliquer"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:756
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:794
 msgid "Apply Changes?"
-msgstr "Appliquer les changements ?"
+msgstr "Appliquer les changements ?"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:712
-#, fuzzy
 msgid "artist"
-msgstr "Artiste"
+msgstr "artiste"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "B"
@@ -221,12 +222,12 @@ msgstr "o"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:659
 #: NickvisionTagger.GNOME/Blueprints/window.blp:29
 msgid "Back"
-msgstr ""
+msgstr "Retour"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:762
 msgid "bpm"
-msgstr ""
+msgstr "bpm"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:482
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:557
@@ -240,14 +241,13 @@ msgstr "Annuler"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:758
-#, fuzzy
 msgid "comment"
-msgstr "Commentaire"
+msgstr "commentaire"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:777
 msgid "composer"
-msgstr ""
+msgstr "compositeur"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:618
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:638
@@ -276,9 +276,8 @@ msgstr "David Lapshin {0}"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:781
-#, fuzzy
 msgid "description"
-msgstr "Durée"
+msgstr "description"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:482
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:557
@@ -301,33 +300,31 @@ msgstr "Téléchargement des métadonnées depuis MusicBrainz…"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:708
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
-#, fuzzy
 msgid "Export Back Album Art"
-msgstr "Ajouter une pochette d'album"
+msgstr "Exporter le dos de la pochette d’album"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:708
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:71
-#, fuzzy
 msgid "Export Front Album Art"
-msgstr "Ajouter une pochette d'album"
+msgstr "Exporter la face de la pochette d’album"
 
 #: ../../../Controllers/MainWindowController.cs:610
-#, fuzzy
 msgid "Exported back album art to file successfully"
-msgstr "{0} balise convertie en nom de fichier avec succès"
+msgstr "Le dos de la pochette d’album a été exporté vers le fichier avec succès"
 
 #: ../../../Controllers/MainWindowController.cs:594
-#, fuzzy
 msgid "Exported front album art to file successfully"
-msgstr "{0} balise convertie en nom de fichier avec succès"
+msgstr ""
+"La face de la pochette d’album a été exportée vers le fichier avec succès"
 
 #: ../../../Controllers/MainWindowController.cs:615
 msgid "Failed to export back album art to a file"
-msgstr ""
+msgstr "Échec de l’exportation du dos de la pochette d’album vers le fichier"
 
 #: ../../../Controllers/MainWindowController.cs:599
 msgid "Failed to export front album art to a file"
 msgstr ""
+"Échec de l’exportation de la face de la pochette d’album vers le fichier"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:617
 #: NickvisionTagger.GNOME/Blueprints/window.blp:40
@@ -337,7 +334,7 @@ msgstr "Nom de fichier vers balise"
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:704
 msgid "filename"
-msgstr ""
+msgstr "nom de fichier"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1204
 msgid "Fingerprint was copied to clipboard."
@@ -352,13 +349,12 @@ msgstr "Format"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:659
 #: NickvisionTagger.GNOME/Blueprints/window.blp:21
 msgid "Front"
-msgstr ""
+msgstr "Face"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:754
-#, fuzzy
 msgid "genre"
-msgstr "Genre"
+msgstr "genre"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "GiB"
@@ -370,20 +366,18 @@ msgstr "Dépôt GitHub"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:672
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:81
-#, fuzzy
 msgid "Insert Back Album Art"
-msgstr "Ajouter une pochette d'album"
+msgstr "Insérer le dos de la pochette d’album"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:672
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:61
-#, fuzzy
 msgid "Insert Front Album Art"
-msgstr "Ajouter une pochette d'album"
+msgstr "Insérer la face de la pochette d’album"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:789
 msgid "isrc"
-msgstr ""
+msgstr "isrc"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
@@ -463,7 +457,7 @@ msgstr "Sélectionnez un format."
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:785
 msgid "publisher"
-msgstr ""
+msgstr "maison de disques"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:487
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:562
@@ -535,9 +529,8 @@ msgstr "Tio"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:708
-#, fuzzy
 msgid "title"
-msgstr "Titre"
+msgstr "titre"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:744
 msgid "Too Many Files Selected"
@@ -545,9 +538,8 @@ msgstr "Trop de fichiers sélectionnés"
 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:735
-#, fuzzy
 msgid "track"
-msgstr "Morceau"
+msgstr "piste"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:897
 msgid "translator-credits"
@@ -564,7 +556,7 @@ msgstr "Impossible d’envoyer les métadonnées à AcoustId. Vérifiez la clé 
 #: ../../../Controllers/MainWindowController.cs:679
 #: ../../../Controllers/MainWindowController.cs:720
 msgid "year"
-msgstr ""
+msgstr "année"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:114
@@ -711,19 +703,16 @@ msgid "Convert Tag to File Name"
 msgstr "Convertir la balise en nom de fichier"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:66
-#, fuzzy
 msgid "Remove Front Album Art"
-msgstr "Retirer la pochette d'album"
+msgstr "Retirer la face de la pochette d’album"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:76
-#, fuzzy
 msgid "Switch Album Art"
-msgstr "Couverture de l’album"
+msgstr "Échanger la couverture de l’album"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:86
-#, fuzzy
 msgid "Remove Back Album Art"
-msgstr "Retirer la pochette d'album"
+msgstr "Retirer le dos de la pochette d’album"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:97
 msgctxt "Shortcut"
@@ -774,7 +763,7 @@ msgstr "Supprimer"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:33
 #: NickvisionTagger.GNOME/Blueprints/window.blp:270
 msgid "Export"
-msgstr ""
+msgstr "Exporter"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:65
 msgid "Open Music Folder (Ctrl+O)"
@@ -861,30 +850,28 @@ msgid "Comment"
 msgstr "Commentaire"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:381
-#, fuzzy
 msgid "More Properties"
-msgstr "Propriétés du fichier"
+msgstr "Propriétés supplémentaires"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:384
 msgid "Beats Per Minute"
-msgstr ""
+msgstr "Battements par minute"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:388
 msgid "Composer"
-msgstr ""
+msgstr "Compositeur"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:392
-#, fuzzy
 msgid "Description"
-msgstr "Durée"
+msgstr "Description"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:396
 msgid "Publisher"
-msgstr ""
+msgstr "Maison de disques"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:400
 msgid "ISRC"
-msgstr ""
+msgstr "ISRC"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:406
 msgid "File Properties"
