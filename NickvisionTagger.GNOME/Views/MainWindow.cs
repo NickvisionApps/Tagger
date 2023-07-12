@@ -66,11 +66,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int gtk_list_box_row_get_index(nint row);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gdk_pixbuf_loader_write(nint loader, [MarshalAs(UnmanagedType.LPArray)] byte[] buf, uint count, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_picture_set_paintable(nint picture, nint paintable);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gdk_pixbuf_loader_close(nint loader, nint error);
+    private static partial nint gdk_texture_new_from_bytes(nint gbytes, nint error);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint g_bytes_new(byte[] bytes, uint size);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -1029,10 +1029,8 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
             else
             {
-                using var loader = GdkPixbuf.PixbufLoader.New();
-                gdk_pixbuf_loader_write(loader.Handle, art.Data, (uint)art.Data.Length, 0);
-                _albumArtImage.SetPixbuf(loader.GetPixbuf());
-                gdk_pixbuf_loader_close(loader.Handle, IntPtr.Zero);
+                var texture = gdk_texture_new_from_bytes(g_bytes_new(art.Data, (uint)art.Data.Length), IntPtr.Zero);
+                gtk_picture_set_paintable(_albumArtImage.Handle, texture);
             }
         }
         else if(albumArt == "keepArt")
