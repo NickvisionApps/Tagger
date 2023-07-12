@@ -696,13 +696,13 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return -1;
         }
-        else if (this == other)
+        else if (this > other)
         {
-            return 0;
+            return 1;
         }
         else
         {
-            return 1;
+            return 0;
         }
     }
 
