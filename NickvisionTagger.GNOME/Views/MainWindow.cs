@@ -73,6 +73,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial nint g_bytes_new(byte[] bytes, uint size);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_object_unref(nint obj);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void g_bytes_unref(nint gbytes);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -1035,9 +1037,11 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
             else
             {
-                var texture = gdk_texture_new_from_bytes(g_bytes_new(art.Data, (uint)art.Data.Length), IntPtr.Zero);
+                var bytes = g_bytes_new(art.Data, (uint)art.Data.Length);
+                var texture = gdk_texture_new_from_bytes(bytes, IntPtr.Zero);
                 gtk_picture_set_paintable(_albumArtImage.Handle, texture);
                 g_object_unref(texture);
+                g_bytes_unref(bytes);
             }
         }
         else if(albumArt == "keepArt")
