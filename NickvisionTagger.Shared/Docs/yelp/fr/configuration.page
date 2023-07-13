@@ -12,52 +12,58 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Irénée Thirion</mal:name>
+      <mal:email>irenee.thirion@e.email</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
 
 <title>Configuration</title>
-<p>This page describes what you can change in the application configuration.</p>
+<p>Cette page décrit ce que vous pouvez modifier dans la configuration de l’application.</p>
 <terms>
     <item>
-		<title>Theme</title>
-		<p>Set light or dark theme, or make <app>Tagger</app> follow your system theme.</p>
+		<title>Thème</title>
+		<p>Définissez un thème clair ou sombre, ou commandez à <app>Tagger</app> de suivre votre thème système.</p>
 	</item>
     <item>
-		<title>Remember Last Opened Folder</title>
-		<p>Whether or not to remember the previously used music folder and reopen it when Tagger starts the next time.</p>
+		<title>Mémoriser le dernier dossier ouvert</title>
+		<p>Indique s’il faut mémoriser ou non le dossier de musique précédemment utilisé et le rouvrir par défaut au prochain lancement de Tagger.</p>
 	</item>
     <item>
-		<title>Include Subfolders</title>
-		<p>Whether or not to scan for music files into subdirectories of a music folder.</p>
+		<title>Inclure les sous-dossiers</title>
+		<p>Indique s’il faut ou non inspecter les sous-répertoires d’un dossier de musique pour y rechercher des fichiers musicaux.</p>
 	</item>
     <item>
-		<title>Sort Files By</title>
-		<p>The property to use when sorting and displaying music files. It can be one of the following options:</p>
+		<title>Trier les fichiers par</title>
+		<p>Il s’agit de la propriété utilisée pour trier et afficher les fichiers musicaux. Cela peut être une des options suivantes :</p>
         <list>
-            <item><p><code>File Name</code></p></item>
-            <item><p><code>Title</code></p></item>
-            <item><p><code>Track</code></p></item>
-            <item><p><code>File Path</code></p></item>
+            <item><p><code>Nom du fichier</code></p></item>
+            <item><p><code>Titre</code></p></item>
+            <item><p><code>Piste</code></p></item>
+            <item><p><code>Chemin d’accès du fichier</code></p></item>
             <item><p><code>Album</code></p></item>
             <item><p><code>Genre</code></p></item>
         </list>
 	</item>
     <item>
-		<title>Preserve Modification Timestamp</title>
-		<p>Whether or not to not update a file's write (modified) timestamp when its tag is saved.</p>
+		<title>Conserver l’horodatage de modification</title>
+		<p>Indique s’il faut ou non mettre à jour l’horodatage de la dernière écriture (modification) d’un fichier lorsqu’une balise est enregistrée.</p>
 	</item>
     <item>
-		<title>Overwrite Tag With MusicBrainz</title>
-		<p>Whether or not to overwrite existing tag metadata with data found from MusicBrainz. If disabled, only blank tag properties will be filled.</p>
+		<title>Écraser la balise avec MusicBrainz</title>
+		<p>Indique s’il faut ou non écraser les métadonnées des balises existantes avec les données récupérées depuis MusicBrainz. Si cette option est désactivée, seules les propriétés des balises laissées vides seront remplies.</p>
 	</item>
     <item>
-		<title>Overwrite Album Art With MusicBrainz</title>
-		<p>Whether or not to overwrite overwrite existing album art with art found from MusicBrainz.</p>
+		<title>Écraser la couverture d’album avec MusicBrainz</title>
+		<p>Indique s’il faut ou non remplacer la couverture de l’album existante avec celle récupérée depuis MusicBrainz.</p>
 	</item>
     <item>
-		<title>AcoustId User API Key</title>
-		<p>An AcoustId User API key to use when fingerprinting music files and looking up song information.</p>
+		<title>Clé d’API AcoustId</title>
+		<p>Une clé d’API AcoustId utilisateur à utiliser pour récupérer l’empreinte des fichiers musicaux et regarder les informations du morceau.</p>
 		<note>
-			<p>A key can be obtained <link href="https://acoustid.org/api-key">here</link></p>
+			<p>Une clé peut être obtenue <link href="https://acoustid.org/api-key">ici</link></p>
 		</note>
 	</item>
 </terms>

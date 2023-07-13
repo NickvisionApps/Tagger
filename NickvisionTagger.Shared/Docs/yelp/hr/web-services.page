@@ -14,11 +14,11 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Web Services</title>
+<title>Web usluge</title>
 <p>This page describes the web services available in Tagger</p>
 <terms>
     <item>
-		<title>Download MusicBrainz Metadata</title>
+		<title>Preuzmi MusicBrainz metapodatke</title>
 		<p>Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
         <p>This service utilizies the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
         <note>
@@ -26,7 +26,7 @@
         </note>
 	</item>
     <item>
-		<title>Submit to AcoustId</title>
+		<title>Pošalji AcoustId-u</title>
 		<p>Submits data about a music file (identified via its fingerprint) to AcoustId's database. There are two things that can be submitted about a music file:</p>
         <list>
             <item>

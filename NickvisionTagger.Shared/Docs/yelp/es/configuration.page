@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="es">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Configuration 🔧</title>
+	<title type="link">Configuración🔧</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -12,52 +12,58 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
 
-<title>Configuration</title>
-<p>This page describes what you can change in the application configuration.</p>
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Óscar Fernández Díaz</mal:name>
+      <mal:email>oscfdezdz@tuta.io</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title>Configuración</title>
+<p>Esta página describe lo que puede cambiar en la configuración de la aplicación.</p>
 <terms>
     <item>
-		<title>Theme</title>
-		<p>Set light or dark theme, or make <app>Tagger</app> follow your system theme.</p>
+		<title>Tema</title>
+		<p>Establezca un tema claro u oscuro, o haga que <app>Tagger</app> siga el tema de su sistema.</p>
 	</item>
     <item>
-		<title>Remember Last Opened Folder</title>
-		<p>Whether or not to remember the previously used music folder and reopen it when Tagger starts the next time.</p>
+		<title>Recordar última carpeta abierta</title>
+		<p>Recordar o no la carpeta de música usada anteriormente y volver a abrirla cuando Tagger se inicie la próxima vez.</p>
 	</item>
     <item>
-		<title>Include Subfolders</title>
-		<p>Whether or not to scan for music files into subdirectories of a music folder.</p>
+		<title>Incluir subcarpetas</title>
+		<p>Buscar o no archivos de música en subdirectorios de una carpeta de música.</p>
 	</item>
     <item>
-		<title>Sort Files By</title>
-		<p>The property to use when sorting and displaying music files. It can be one of the following options:</p>
+		<title>Ordenar archivos por</title>
+		<p>La propiedad que se usará para ordenar y mostrar los archivos de música. Puede ser una de las siguientes opciones:</p>
         <list>
-            <item><p><code>File Name</code></p></item>
-            <item><p><code>Title</code></p></item>
-            <item><p><code>Track</code></p></item>
-            <item><p><code>File Path</code></p></item>
-            <item><p><code>Album</code></p></item>
-            <item><p><code>Genre</code></p></item>
+            <item><p><code>Nombre de archivo</code></p></item>
+            <item><p><code>Título</code></p></item>
+            <item><p><code>Pista</code></p></item>
+            <item><p><code>Ruta del archivo</code></p></item>
+            <item><p><code>Álbum</code></p></item>
+            <item><p><code>Género</code></p></item>
         </list>
 	</item>
     <item>
-		<title>Preserve Modification Timestamp</title>
-		<p>Whether or not to not update a file's write (modified) timestamp when its tag is saved.</p>
+		<title>Conservar fecha de modificación</title>
+		<p>Si actualizar o no la marca de tiempo de escritura (modificado) de un archivo cuando se guarda su etiqueta.</p>
 	</item>
     <item>
-		<title>Overwrite Tag With MusicBrainz</title>
-		<p>Whether or not to overwrite existing tag metadata with data found from MusicBrainz. If disabled, only blank tag properties will be filled.</p>
+		<title>Sobreescribir etiqueta con MusicBrainz</title>
+		<p>Si sobreescribir o no los metadatos de las etiquetas existentes con los datos encontrados en MusicBrainz. Si se desactiva, sólo se rellenarán las propiedades de etiqueta en blanco.</p>
 	</item>
     <item>
-		<title>Overwrite Album Art With MusicBrainz</title>
-		<p>Whether or not to overwrite overwrite existing album art with art found from MusicBrainz.</p>
+		<title>Sobreescribir la portada del álbum con MusicBrainz</title>
+		<p>Sobreescribir o no las portadas de los álbumes existentes con las encontradas en MusicBrainz.</p>
 	</item>
     <item>
-		<title>AcoustId User API Key</title>
-		<p>An AcoustId User API key to use when fingerprinting music files and looking up song information.</p>
+		<title>Clave API de usuario de AcoustId</title>
+		<p>Una clave API de usuario de AcoustId que se usará para identificar archivos de música y buscar información sobre canciones.</p>
 		<note>
-			<p>A key can be obtained <link href="https://acoustid.org/api-key">here</link></p>
+			<p>Puede obtener una clave <link href="https://acoustid.org/api-key">aquí</link></p>
 		</note>
 	</item>
 </terms>

@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="web-services" its:version="2.0" xml:lang="es">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Web Services 🌐</title>
+	<title type="link">Servicios web 🌐</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -12,34 +12,40 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
 
-<title>Web Services</title>
-<p>This page describes the web services available in Tagger</p>
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Óscar Fernández Díaz</mal:name>
+      <mal:email>oscfdezdz@tuta.io</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title>Servicios web</title>
+<p>Esta página describe los servicios web disponibles en Tagger</p>
 <terms>
     <item>
-		<title>Download MusicBrainz Metadata</title>
-		<p>Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
-        <p>This service utilizies the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+		<title>Descargar metadatos de MusicBrainz</title>
+		<p>Identifica un archivo de música a través de MusicBrainz y descarga sus metadatos para usarlos en Tagger.</p>
+        <p>Este servicio usa la firma AcoustId del archivo (generada con <code>fpcalc</code>) para determinar los ID de grabación y publicación de MusicBrainz. Si se encuentran los ID, los metadatos como título, artista, álbum y arte se descargarán y se establecerán en Tagger.</p>
         <note>
-            <p>Finding metadata through MusicBrainz isn't 100% realiable and may not be available for uncommom songs.</p>
+            <p>Encontrar metadatos a través de MusicBrainz no es 100% fiable y puede que no estén disponibles para canciones poco comunes.</p>
         </note>
 	</item>
     <item>
-		<title>Submit to AcoustId</title>
-		<p>Submits data about a music file (identified via its fingerprint) to AcoustId's database. There are two things that can be submitted about a music file:</p>
+		<title>Enviar a AcoustId</title>
+		<p>Envía datos sobre un archivo de música (identificados mediante su firma) a la base de datos de AcoustId. Se pueden enviar dos datos sobre un archivo de música:</p>
         <list>
             <item>
-        		<title>MusicBrainz Recording ID</title>
-        		<p>A user can submit a MusicBrainz Recording ID to submit to AcoustId. This will pull all data from the associated recording id and use that for sending metadata to AcoustId.</p>
+        		<title>ID de grabación de MusicBrainz</title>
+        		<p>Un usuario puede enviar un ID de grabación de MusicBrainz para enviarlo a AcoustId. Esto extraerá todos los datos del identificador de grabación asociado y los usará para enviar metadatos a AcoustId.</p>
         	</item>
             <item>
-        		<title>User Metadata</title>
-        		<p>A user can submit their metadata from Tagger to AcoustId.</p>
+        		<title>Metadatos de usuario</title>
+        		<p>Un usuario puede enviar sus metadatos desde Tagger a AcoustId.</p>
         	</item>
         </list>
 		<note>
-			<p>A proper <code>AcoustId User API Key</code> must be set in <code>Preferences</code> for this service to work.</p>
+			<p>Para que este servicio funcione, debe configurarse en <code>Preferencias</code> una <code>Clave API de usuario de AcoustId</code> adecuada.</p>
 		</note>
 	</item>
 </terms>

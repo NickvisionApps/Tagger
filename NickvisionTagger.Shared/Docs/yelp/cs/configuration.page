@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="cs">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Configuration 🔧</title>
+	<title type="link">Nastavení 🔧</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -12,13 +12,19 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
 
-<title>Configuration</title>
-<p>This page describes what you can change in the application configuration.</p>
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Jonáš Loskot</mal:name>
+      <mal:email>jonas.loskot@pm.me</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
+
+<title>Nastavení</title>
+<p>Na této stránce je popsáno, co můžete změnit v nastavení aplikace.</p>
 <terms>
     <item>
-		<title>Theme</title>
+		<title>Motiv</title>
 		<p>Set light or dark theme, or make <app>Tagger</app> follow your system theme.</p>
 	</item>
     <item>

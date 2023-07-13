@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="search" its:version="2.0" xml:lang="es">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Advanced Search 🔍</title>
+	<title type="link">Búsqueda avanzada 🔍</title>
 	<credit type="author copyright">
 		<name>Fyodor Sobolev</name>
 		<years its:translate="no">2023</years>
@@ -12,43 +12,49 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
 
-<title>Advanced Search</title>
-<p>This page explains how to use Advanced Search in <app>Tagger</app>.</p>
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Óscar Fernández Díaz</mal:name>
+      <mal:email>oscfdezdz@tuta.io</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
 
-<p>Advanced Search is a powerful feature provided by <app>Tagger</app> that allows users to search files' tag contents for certain values, using a powerful tag-based syntax:</p>
-<p><code>!prop1="value1";prop2="value2"</code></p>
-<p>Where <code>prop1</code>, <code>prop2</code> are valid tag properties and <code>value1</code>, <code>value2</code> are the values to search wrapped in quotes. Each property is separated by a semicolon. Notice how the last property does not end with a semicolon.</p>
+<title>Búsqueda avanzada</title>
+<p>En esta página se explica cómo usar la búsqueda avanzada en <app>Tagger</app>.</p>
+
+<p>La búsqueda avanzada es una potente función proporcionada por <app>Tagger</app> que permite a los usuarios buscar determinados valores en el contenido de las etiquetas de los archivos, usando una potente sintaxis basada en etiquetas:</p>
+<p><code>!prop1="valor1";prop2="valor2"</code></p>
+<p>Donde <code>prop1</code>, <code>prop2</code> son propiedades de etiqueta válidas y <code>value1</code>, <code>value2</code> son los valores a buscar entre comillas. Cada propiedad está separada por un punto y coma. Observe que la última propiedad no termina con punto y coma.</p>
 
 <section>
-<title>Valid Properties</title>
+<title>Propiedades válidas</title>
 <list>
-<item><p><code>filename</code></p></item>
-<item><p><code>title</code></p></item>
-<item><p><code>artist</code></p></item>
-<item><p><code>album</code></p></item>
-<item><p><code>year</code></p></item>
-<item><p><code>track</code></p></item>
-<item><p><code>albumartist</code></p></item>
-<item><p><code>genre</code></p></item>
-<item><p><code>comment</code></p></item>
-<item><p><code>bpm</code></p></item>
-<item><p><code>composer</code></p></item>
-<item><p><code>description</code></p></item>
-<item><p><code>publisher</code></p></item>
+<item><p><code>nombredearchivo</code></p></item>
+<item><p><code>título</code></p></item>
+<item><p><code>artista</code></p></item>
+<item><p><code>álbum</code></p></item>
+<item><p><code>año</code></p></item>
+<item><p><code>pista</code></p></item>
+<item><p><code>artistadelálbum</code></p></item>
+<item><p><code>género</code></p></item>
+<item><p><code>comentario</code></p></item>
+<item><p><code>ppm</code></p></item>
+<item><p><code>compositor</code></p></item>
+<item><p><code>descripción</code></p></item>
+<item><p><code>editor</code></p></item>
 <item><p><code>isrc</code></p></item>
 </list>
-<p>Properties are case-insensitive.</p></section>
+<p>Las propiedades distinguen entre mayúsculas y minúsculas.</p></section>
 
-<section><title>Syntax Checking</title>
-<p>If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search. If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox.</p></section>
+<section><title>Comprobación sintáctica</title>
+<p>Si la sintaxis de su cadena es válida, el cuadro de texto se volverá verde y filtrará la lista con su búsqueda. Si la sintaxis de la cadena no es válida, el cuadro de texto se volverá rojo y no filtrará la lista.</p></section>
 
-<section><title>Examples</title>
-<p><code>!artist=""</code></p>
-<p>This search string will filter the listbox to contain music files which artist is empty.</p>
-<p><code>!genre="";year="2022"</code></p>
-<p>This search string will filter the listbox to contain music files which genre is empty and which year is 2022 (Year and Track properties will validate if the value string is a number).</p>
-<p><code>!title="";artist="bob"</code></p>
-<p>This search string will filter the listbox to contain music files which title is empty and which artist is <code>bob</code>.</p></section>
+<section><title>Ejemplos</title>
+<p><code>!artista=""</code></p>
+<p>Esta cadena de búsqueda filtrará el cuadro de lista para que contenga archivos de música cuyo artista esté vacío.</p>
+<p><code>!género="";año="2022"</code></p>
+<p>Esta cadena de búsqueda filtrará el cuadro de lista para que contenga archivos de música cuyo género esté vacío y cuyo año sea 2022 (las propiedades Año y Pista se validarán si la cadena de valores es un número).</p>
+<p><code>!título="";artista="bob"</code></p>
+<p>Esta cadena de búsqueda filtrará el cuadro de lista para que contenga archivos de música cuyo título esté vacío y cuyo artista sea <code>bob</code>.</p></section>
 </page>
