@@ -1242,7 +1242,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private bool CorruptedFilesFound()
     {
-        var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Corrupted Files Found"), _("This music folder contains music files whose tags are corrupted. What would you like to do?"), _("Ignore Files"), _("Clear Tags"));
+        var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Corrupted Files Found"), _("This music folder contains music files whose tags are corrupted. What would you like to do with corrupted files?"), _("Ignore Files"), _("Clear Tags"));
         dialog.OnResponse += async (sender, e) =>
         {
             if(dialog.Response == MessageDialogResponse.Destructive)
