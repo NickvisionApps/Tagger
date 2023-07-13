@@ -23,7 +23,7 @@ public partial class CorruptedFilesDialog
     /// </summary>
     public CorruptedFilesDialog(Gtk.Window parent, string iconName, List<string> files)
     {
-        _dialog = Adw.MessageDialog.New(parent, "Corrupted Files Found", _("This music folder contains music files that have corrupted tags. This means that they could be encoded improperly or have structual issues affecting playback.\nTry re-encoding the affected files to fix these issues.\n\nThe following files are affected and will be ignored by Tagger:"));
+        _dialog = Adw.MessageDialog.New(parent, "Corrupted Files Found", _("This music folder contains music files that have corrupted tags. This means that they could be encoded improperly or have structural issues affecting playback.\nTry re-encoding the affected files to fix these issues.\n\nThe following files are affected and will be ignored by Tagger:"));
         _dialog.SetIconName(iconName);
         _dialog.AddResponse("ok", _("Continue"));
         var group = new Adw.PreferencesGroup();
