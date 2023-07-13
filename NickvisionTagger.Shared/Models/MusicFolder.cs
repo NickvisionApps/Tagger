@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using TagLib;
+using File = System.IO.File;
 
 namespace NickvisionTagger.Shared.Models;
 
@@ -27,6 +29,10 @@ public class MusicFolder
     /// The list of MusicFile objects from the folder
     /// </summary>
     public List<MusicFile> MusicFiles { get; init; }
+    /// <summary>
+    /// The list of paths of corrupted music files
+    /// </summary>
+    public List<string> CorruptedFiles { get; init; }
     
     /// <summary>
     /// Constructs a MusicFolder
@@ -38,30 +44,34 @@ public class MusicFolder
         IncludeSubfolders = true;
         SortFilesBy = SortBy.Filename;
         MusicFiles = new List<MusicFile>();
+        CorruptedFiles = new List<string>();
     }
     
     /// <summary>
     /// Scans the music folder for music files and populates the files list. If includeSubfolders is true, scans subfolders as well. If false, only the parent path
     /// </summary>
-    public async Task ReloadMusicFilesAsync()
+    /// <returns>Whether or not there are corrupted files</returns>
+    public async Task<bool> ReloadMusicFilesAsync()
     {
         MusicFiles.Clear();
+        CorruptedFiles.Clear();
         MusicFile.SortFilesBy = SortFilesBy;
         if(Directory.Exists(ParentPath))
         {
             var supportedExtensions = new string[] { ".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav" };
             await Task.Run(() =>
             {
-                foreach(var file in Directory.EnumerateFiles(ParentPath, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+                foreach(var path in Directory.EnumerateFiles(ParentPath, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
                 {
-                    if(supportedExtensions.Any(x => Path.GetExtension(file).ToLower() == x))
+                    if(supportedExtensions.Any(x => Path.GetExtension(path).ToLower() == x))
                     {
                         try
                         {
-                            MusicFiles.Add(new MusicFile(file));
+                            MusicFiles.Add(new MusicFile(path));
                         }
                         catch (FileLoadException e)
                         {
+                            CorruptedFiles.Add(path);
                             Console.WriteLine(e);
                         }
                     }
@@ -69,5 +79,6 @@ public class MusicFolder
                 MusicFiles.Sort();
             });
         }
+        return CorruptedFiles.Count > 0;
     }
 }

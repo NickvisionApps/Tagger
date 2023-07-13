@@ -61,6 +61,10 @@ public class MainWindowController
     /// The list of all music files in the music folder
     /// </summary>
     public List<MusicFile> MusicFiles => _musicFolder?.MusicFiles ?? new List<MusicFile>();
+    /// <summary>
+    /// The list of paths to corrupted music files in the music folder
+    /// </summary>
+    public List<string> CorruptedFiles => _musicFolder?.CorruptedFiles ?? new List<string>();
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -90,6 +94,10 @@ public class MainWindowController
     /// Occurs when fingerprint calculating is done
     /// </summary>
     public event EventHandler<EventArgs> FingerprintCalculated;
+    /// <summary>
+    /// Occurs when there are corrupted music files found in a music folder
+    /// </summary>
+    public event EventHandler<EventArgs> CorruptedFilesFound;
 
     /// <summary>
     /// Constructs a MainWindowController
@@ -195,12 +203,16 @@ public class MainWindowController
         if(_musicFolder != null)
         {
             MusicFileSaveStates.Clear();
-            await _musicFolder.ReloadMusicFilesAsync();
+            var corruptedFound = await _musicFolder.ReloadMusicFilesAsync();
             for(var i = 0; i < _musicFolder.MusicFiles.Count; i++)
             {
                 MusicFileSaveStates.Add(true);
             }
             MusicFolderUpdated?.Invoke(this, true);
+            if(corruptedFound)
+            {
+                CorruptedFilesFound?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 
@@ -1187,8 +1199,7 @@ public class MainWindowController
                 LoadingStateUpdated?.Invoke(this, _("Loading music files from folder..."));
                 _musicFolder.IncludeSubfolders = Configuration.Current.IncludeSubfolders;
                 _musicFolder.SortFilesBy = Configuration.Current.SortFilesBy;
-                await _musicFolder.ReloadMusicFilesAsync();
-                MusicFolderUpdated?.Invoke(this, includeSubfoldersChanged);
+                await ReloadFolderAsync();
             }
         }
     }

@@ -87,6 +87,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly GSourceFunc _musicFileSaveStatesChangedFunc;
     private readonly GSourceFunc _selectedMusicFilesPropertiesChangedFunc;
     private readonly GSourceFunc _updateFingerprintFunc;
+    private readonly GSourceFunc _corruptedFilesFunc;
     private GAsyncReadyCallback? _openCallback;
     private GAsyncReadyCallback? _saveCallback;
     private AlbumArtType _currentAlbumArtType;
@@ -148,6 +149,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _musicFileSaveStatesChangedFunc = (x) => MusicFileSaveStatesChanged();
         _selectedMusicFilesPropertiesChangedFunc = (x) => SelectedMusicFilesPropertiesChanged();
         _updateFingerprintFunc = (x) => UpdateFingerprint();
+        _corruptedFilesFunc = (x) => CorruptedFilesFound();
         _currentAlbumArtType = AlbumArtType.Front;
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
@@ -283,6 +285,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.MusicFileSaveStatesChanged += (sender, e) => g_main_context_invoke(0, _musicFileSaveStatesChangedFunc, 0);
         _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => g_main_context_invoke(0, _selectedMusicFilesPropertiesChangedFunc, 0);
         _controller.FingerprintCalculated += (sender, e) => g_main_context_invoke(0, _updateFingerprintFunc, 0);
+        _controller.CorruptedFilesFound += (sender, e) => g_main_context_invoke(0, _corruptedFilesFunc, 0);
         //Open Folder Action
         var actOpenFolder = Gio.SimpleAction.New("openFolder", null);
         actOpenFolder.OnActivate += OpenFolder;
@@ -1232,5 +1235,15 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _fingerprintLabel.GetClipboard().SetText(_fingerprintLabel.GetText());
         _toastOverlay.AddToast(Adw.Toast.New(_("Fingerprint was copied to clipboard.")));
+    }
+
+    /// <summary>
+    /// Occurs when there are corrupted music files found in a music folder
+    /// </summary>
+    private bool CorruptedFilesFound()
+    {
+        var dialog = new CorruptedFilesDialog(this, _controller.AppInfo.ID, _controller.CorruptedFiles);
+        dialog.Present();
+        return false;
     }
 }
