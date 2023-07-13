@@ -1253,6 +1253,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
             dialog.Destroy();
         };
+        dialog.Present();
         return false;
     }
 }

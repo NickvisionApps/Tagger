@@ -79,7 +79,7 @@ public class MusicFolder
                 MusicFiles.Sort();
             });
         }
-        return CorruptedFiles.Count > 1;
+        return CorruptedFiles.Count > 0;
     }
 
     /// <summary>
