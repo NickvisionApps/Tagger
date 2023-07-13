@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="web-services" its:version="2.0" xml:lang="it">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Web Services 🌐</title>
+	<credit type="author copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Web Services</title>
+<p>This page describes the web services available in Tagger</p>
+<terms>
+    <item>
+		<title>Download MusicBrainz Metadata</title>
+		<p>Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
+        <p>This service utilizies the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+        <note>
+            <p>Finding metadata through MusicBrainz isn't 100% realiable and may not be available for uncommom songs.</p>
+        </note>
+	</item>
+    <item>
+		<title>Submit to AcoustId</title>
+		<p>Submits data about a music file (identified via its fingerprint) to AcoustId's database. There are two things that can be submitted about a music file:</p>
+        <list>
+            <item>
+        		<title>MusicBrainz Recording ID</title>
+        		<p>A user can submit a MusicBrainz Recording ID to submit to AcoustId. This will pull all data from the associated recording id and use that for sending metadata to AcoustId.</p>
+        	</item>
+            <item>
+        		<title>User Metadata</title>
+        		<p>A user can submit their metadata from Tagger to AcoustId.</p>
+        	</item>
+        </list>
+		<note>
+			<p>A proper <code>AcoustId User API Key</code> must be set in <code>Preferences</code> for this service to work.</p>
+		</note>
+	</item>
+</terms>
+</page>
