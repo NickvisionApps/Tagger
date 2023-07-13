@@ -61,6 +61,10 @@ public class MainWindowController
     /// The list of all music files in the music folder
     /// </summary>
     public List<MusicFile> MusicFiles => _musicFolder?.MusicFiles ?? new List<MusicFile>();
+    /// <summary>
+    /// The list of paths to corrupted music files in the music folder
+    /// </summary>
+    public List<string> CorruptedFiles => _musicFolder?.CorruptedFiles ?? new List<string>();
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -211,11 +215,6 @@ public class MainWindowController
             }
         }
     }
-
-    /// <summary>
-    /// Clears the corrupted tags of affected music files
-    /// </summary>
-    public async Task ClearCorruptedTagsAsync() => await _musicFolder?.ClearCorruptedTagsAsync();
 
     /// <summary>
     /// Updates the tags with values from the property map
