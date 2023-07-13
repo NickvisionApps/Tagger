@@ -8,11 +8,11 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-13 14:31+0300\n"
-"PO-Revision-Date: 2023-07-12 19:29+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
-"weblate.org>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/es/>\n"
+"PO-Revision-Date: 2023-07-13 17:26+0000\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
+".org>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -144,7 +144,7 @@ msgstr "compositor"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
 msgid "Continue"
-msgstr ""
+msgstr "Continuar"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:657
@@ -197,7 +197,7 @@ msgstr "Descargando metadatos de MusicBrainz…"
 
 #: ../../../Models/MusicFile.cs:174 ../../../Models/MusicFile.cs:190
 msgid "ERROR"
-msgstr ""
+msgstr "ERROR"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:727
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
@@ -431,6 +431,13 @@ msgid ""
 "\n"
 "The following files are affected and will be ignored by Tagger:"
 msgstr ""
+"Esta carpeta de música contiene archivos de música que tienen etiquetas "
+"dañadas. Esto significa que podrían estar codificados incorrectamente o "
+"tener problemas estructurales que afectan a la reproducción.\n"
+"Intente volver a codificar los archivos afectados para solucionar estos "
+"problemas.\n"
+"\n"
+"Los siguientes archivos están afectados y serán ignorados por Tagger:"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -528,19 +535,16 @@ msgid "Track"
 msgstr "Pista"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "File Path"
-msgstr "Nombre del archivo"
+msgstr "Ruta del archivo"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "Album"
 msgstr "Álbum"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "Genre"
 msgstr "Género"
@@ -664,7 +668,7 @@ msgstr "Atajos del teclado"
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:124
 #: NickvisionTagger.GNOME/Blueprints/window.blp:7
 msgid "Help"
-msgstr ""
+msgstr "Ayuda"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:129
 msgid "Quit"
@@ -725,10 +729,8 @@ msgid "Try a different folder"
 msgstr "Pruebe con otra carpeta"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:164
-#, fuzzy
 msgid "Search for filename (type ! for advanced search)..."
-msgstr ""
-"Buscar nombre de archivo (escriba ! para activar la búsqueda avanzada)…"
+msgstr "Buscar por nombre de archivo (escriba ! para búsqueda avanzada)…"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:169
 msgid "Advanced Search Info"
