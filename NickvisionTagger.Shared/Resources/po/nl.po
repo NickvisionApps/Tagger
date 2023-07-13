@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 08:32+0300\n"
+"POT-Creation-Date: 2023-07-13 14:31+0300\n"
 "PO-Revision-Date: 2023-07-01 12:52+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -18,20 +18,21 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
-#: ../../../Controllers/MainWindowController.cs:230
-#: ../../../Controllers/MainWindowController.cs:239
-#: ../../../Controllers/MainWindowController.cs:244
-#: ../../../Controllers/MainWindowController.cs:249
-#: ../../../Controllers/MainWindowController.cs:254
-#: ../../../Controllers/MainWindowController.cs:263
-#: ../../../Controllers/MainWindowController.cs:272
-#: ../../../Controllers/MainWindowController.cs:277
-#: ../../../Controllers/MainWindowController.cs:282
-#: ../../../Controllers/MainWindowController.cs:287
-#: ../../../Controllers/MainWindowController.cs:296
-#: ../../../Controllers/MainWindowController.cs:301
-#: ../../../Controllers/MainWindowController.cs:306
-#: ../../../Controllers/MainWindowController.cs:311
+#: ../../../Controllers/MainWindowController.cs:229
+#: ../../../Controllers/MainWindowController.cs:238
+#: ../../../Controllers/MainWindowController.cs:243
+#: ../../../Controllers/MainWindowController.cs:248
+#: ../../../Controllers/MainWindowController.cs:253
+#: ../../../Controllers/MainWindowController.cs:262
+#: ../../../Controllers/MainWindowController.cs:271
+#: ../../../Controllers/MainWindowController.cs:276
+#: ../../../Controllers/MainWindowController.cs:281
+#: ../../../Controllers/MainWindowController.cs:286
+#: ../../../Controllers/MainWindowController.cs:295
+#: ../../../Controllers/MainWindowController.cs:300
+#: ../../../Controllers/MainWindowController.cs:305
+#: ../../../Controllers/MainWindowController.cs:310
+#: ../../../Controllers/MainWindowController.cs:1163
 #: ../../../Controllers/MainWindowController.cs:1164
 #: ../../../Controllers/MainWindowController.cs:1165
 #: ../../../Controllers/MainWindowController.cs:1166
@@ -45,8 +46,7 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:1174
 #: ../../../Controllers/MainWindowController.cs:1175
 #: ../../../Controllers/MainWindowController.cs:1176
-#: ../../../Controllers/MainWindowController.cs:1177
-#: ../../../Controllers/MainWindowController.cs:1181
+#: ../../../Controllers/MainWindowController.cs:1180
 msgid "<keep>"
 msgstr ""
 
@@ -76,14 +76,14 @@ msgstr ""
 "Als u geen id opgeeft, zal Tagger de metagegevens op basis van de "
 "controlesom versturen."
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:687
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:686
 #, fuzzy
 msgid "album"
 msgstr "Album"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:721
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:720
 #, fuzzy
 msgid "albumartist"
 msgstr "Albumartiest"
@@ -103,8 +103,8 @@ msgstr "Toepassen"
 msgid "Apply Changes?"
 msgstr "Wijzigingen toepassen?"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:683
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:682
 #, fuzzy
 msgid "artist"
 msgstr "Artiest"
@@ -119,8 +119,8 @@ msgstr "B"
 msgid "Back"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:733
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:732
 msgid "bpm"
 msgstr ""
 
@@ -134,20 +134,19 @@ msgstr ""
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-#, fuzzy
-msgid "Clear Tags"
-msgstr "Tags verwijderen"
-
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:729
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:728
 #, fuzzy
 msgid "comment"
 msgstr "Opmerking"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:748
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:747
 msgid "composer"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
+msgid "Continue"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
@@ -156,32 +155,27 @@ msgstr ""
 msgid "Convert"
 msgstr "Converteren"
 
-#: ../../../Controllers/MainWindowController.cs:441
+#: ../../../Controllers/MainWindowController.cs:440
 #, fuzzy, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
 msgstr[0] "Er zijn %d bestandsnamen omgezet in tags"
 msgstr[1] "Er zijn %d bestandsnamen omgezet in tags"
 
-#: ../../../Controllers/MainWindowController.cs:464
+#: ../../../Controllers/MainWindowController.cs:463
 #, fuzzy, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
 msgstr[0] "Er zijn %d tags omgezet in bestandsnamen"
 msgstr[1] "Er zijn %d tags omgezet in bestandsnamen"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-#, fuzzy
-msgid "Corrupted Files Found"
-msgstr "Er zijn geen muziekbestanden aangetroffen"
-
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:915
 #, csharp-format
 msgid "David Lapshin {0}"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:752
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:751
 #, fuzzy
 msgid "description"
 msgstr "Duur"
@@ -197,7 +191,7 @@ msgstr "Verwerpen"
 msgid "Discarding unapplied changes..."
 msgstr "Bezig met verwerpen van wijzigingen…"
 
-#: ../../../Controllers/MainWindowController.cs:614
+#: ../../../Controllers/MainWindowController.cs:613
 #, fuzzy
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Er zijn metagegevens van %d bestanden opgehaald"
@@ -223,21 +217,21 @@ msgstr "Albumhoes toevoegen"
 msgid "Export Front Album Art"
 msgstr "Albumhoes toevoegen"
 
-#: ../../../Controllers/MainWindowController.cs:581
+#: ../../../Controllers/MainWindowController.cs:580
 #, fuzzy
 msgid "Exported back album art to file successfully"
 msgstr "Er zijn %d tags omgezet in bestandsnamen"
 
-#: ../../../Controllers/MainWindowController.cs:565
+#: ../../../Controllers/MainWindowController.cs:564
 #, fuzzy
 msgid "Exported front album art to file successfully"
 msgstr "Er zijn %d tags omgezet in bestandsnamen"
 
-#: ../../../Controllers/MainWindowController.cs:586
+#: ../../../Controllers/MainWindowController.cs:585
 msgid "Failed to export back album art to a file"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:570
+#: ../../../Controllers/MainWindowController.cs:569
 msgid "Failed to export front album art to a file"
 msgstr ""
 
@@ -247,8 +241,8 @@ msgstr ""
 msgid "File Name to Tag"
 msgstr "Bestandsnaam naar tag"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:675
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:674
 msgid "filename"
 msgstr ""
 
@@ -267,8 +261,8 @@ msgstr "Opmaakmethode"
 msgid "Front"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:725
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:724
 #, fuzzy
 msgid "genre"
 msgstr "Genre"
@@ -279,10 +273,6 @@ msgstr "GiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:911
 msgid "GitHub Repo"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-msgid "Ignore Files"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:691
@@ -297,8 +287,8 @@ msgstr "Albumhoes toevoegen"
 msgid "Insert Front Album Art"
 msgstr "Albumhoes toevoegen"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:760
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:759
 msgid "isrc"
 msgstr ""
 
@@ -318,8 +308,7 @@ msgstr[1] "Er zijn %d muziekbestanden geladen."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:560
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:586
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:595
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1250
-#: ../../../Controllers/MainWindowController.cs:1200
+#: ../../../Controllers/MainWindowController.cs:1199
 #, fuzzy
 msgid "Loading music files from folder..."
 msgstr "Bezig met laden van muziekbestanden…"
@@ -376,8 +365,8 @@ msgstr "Muziekmap openen"
 msgid "Please select a format string."
 msgstr "Kies een opmaakmethode."
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:756
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:755
 msgid "publisher"
 msgstr ""
 
@@ -411,7 +400,7 @@ msgstr ""
 msgid "Submit to AcoustId"
 msgstr "Versturen naar AcoustId"
 
-#: ../../../Controllers/MainWindowController.cs:627
+#: ../../../Controllers/MainWindowController.cs:626
 #, fuzzy
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "De metagegevens zijn verstuurd naar AcoustId."
@@ -449,21 +438,22 @@ msgstr ""
 msgid "Tagger"
 msgstr "Tagger"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-#, fuzzy
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:26
 msgid ""
-"This music folder contains music files whose tags are corrupted. What would "
-"you like to do with corrupted files?"
+"This music folder contains music files that have corrupted tags. This means "
+"that they could be encoded improperly or have structual issues affecting "
+"playback.\n"
+"Try re-encoding the affected files to fix these issues.\n"
+"\n"
+"The following files are affected and will be ignored by Tagger:"
 msgstr ""
-"Enkele muziekbestanden zijn gewijzigd, maar nog niet opgeslagen. Wilt u dat "
-"nu doen of de wijzigingen verwerpen?"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "TiB"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:679
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:678
 #, fuzzy
 msgid "title"
 msgstr "Titel"
@@ -472,8 +462,8 @@ msgstr "Titel"
 msgid "Too Many Files Selected"
 msgstr "Teveel bestanden geselecteerd"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:706
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:705
 #, fuzzy
 msgid "track"
 msgstr "Volgnummer"
@@ -482,17 +472,17 @@ msgstr "Volgnummer"
 msgid "translator-credits"
 msgstr "Philip Goto https://philipgoto.nl/"
 
-#: ../../../Controllers/MainWindowController.cs:483
+#: ../../../Controllers/MainWindowController.cs:482
 msgid "Unable to load image file"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:627
+#: ../../../Controllers/MainWindowController.cs:626
 #, fuzzy
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "De metagegevens kunnen niet worden verstuurd naar AcoustId."
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:691
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:690
 msgid "year"
 msgstr ""
 
@@ -910,6 +900,22 @@ msgstr "Bezig met omzetten van tags in bestandsnamen…"
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Lookup file information using MusicBrainz"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Clear Tags"
+#~ msgstr "Tags verwijderen"
+
+#, fuzzy
+#~ msgid "Corrupted Files Found"
+#~ msgstr "Er zijn geen muziekbestanden aangetroffen"
+
+#, fuzzy
+#~ msgid ""
+#~ "This music folder contains music files whose tags are corrupted. What "
+#~ "would you like to do with corrupted files?"
+#~ msgstr ""
+#~ "Enkele muziekbestanden zijn gewijzigd, maar nog niet opgeslagen. Wilt u "
+#~ "dat nu doen of de wijzigingen verwerpen?"
 
 #, fuzzy
 #~ msgid ""

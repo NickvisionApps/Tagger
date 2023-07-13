@@ -81,23 +81,4 @@ public class MusicFolder
         }
         return CorruptedFiles.Count > 0;
     }
-
-    /// <summary>
-    /// Clears the corrupted tags of affected music files
-    /// </summary>
-    public async Task ClearCorruptedTagsAsync()
-    {
-        await Task.Run(() =>
-        {
-            foreach(var corrupted in CorruptedFiles)
-            {
-                if(File.Exists(corrupted))
-                {
-                    using var file = TagLib.File.Create(corrupted);
-                    file.RemoveTags(TagTypes.AllTags);
-                }
-            }
-        });
-        CorruptedFiles.Clear();
-    }
 }

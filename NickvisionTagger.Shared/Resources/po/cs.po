@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 08:32+0300\n"
+"POT-Creation-Date: 2023-07-13 14:31+0300\n"
 "PO-Revision-Date: 2023-07-12 19:29+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -19,20 +19,21 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
-#: ../../../Controllers/MainWindowController.cs:230
-#: ../../../Controllers/MainWindowController.cs:239
-#: ../../../Controllers/MainWindowController.cs:244
-#: ../../../Controllers/MainWindowController.cs:249
-#: ../../../Controllers/MainWindowController.cs:254
-#: ../../../Controllers/MainWindowController.cs:263
-#: ../../../Controllers/MainWindowController.cs:272
-#: ../../../Controllers/MainWindowController.cs:277
-#: ../../../Controllers/MainWindowController.cs:282
-#: ../../../Controllers/MainWindowController.cs:287
-#: ../../../Controllers/MainWindowController.cs:296
-#: ../../../Controllers/MainWindowController.cs:301
-#: ../../../Controllers/MainWindowController.cs:306
-#: ../../../Controllers/MainWindowController.cs:311
+#: ../../../Controllers/MainWindowController.cs:229
+#: ../../../Controllers/MainWindowController.cs:238
+#: ../../../Controllers/MainWindowController.cs:243
+#: ../../../Controllers/MainWindowController.cs:248
+#: ../../../Controllers/MainWindowController.cs:253
+#: ../../../Controllers/MainWindowController.cs:262
+#: ../../../Controllers/MainWindowController.cs:271
+#: ../../../Controllers/MainWindowController.cs:276
+#: ../../../Controllers/MainWindowController.cs:281
+#: ../../../Controllers/MainWindowController.cs:286
+#: ../../../Controllers/MainWindowController.cs:295
+#: ../../../Controllers/MainWindowController.cs:300
+#: ../../../Controllers/MainWindowController.cs:305
+#: ../../../Controllers/MainWindowController.cs:310
+#: ../../../Controllers/MainWindowController.cs:1163
 #: ../../../Controllers/MainWindowController.cs:1164
 #: ../../../Controllers/MainWindowController.cs:1165
 #: ../../../Controllers/MainWindowController.cs:1166
@@ -46,8 +47,7 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:1174
 #: ../../../Controllers/MainWindowController.cs:1175
 #: ../../../Controllers/MainWindowController.cs:1176
-#: ../../../Controllers/MainWindowController.cs:1177
-#: ../../../Controllers/MainWindowController.cs:1181
+#: ../../../Controllers/MainWindowController.cs:1180
 msgid "<keep>"
 msgstr "<ponechat>"
 
@@ -75,13 +75,13 @@ msgstr ""
 "Pokud nezadáte nic, odešle místo toho aplikace metadata vaší značky společně "
 "s otiskem."
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:687
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:686
 msgid "album"
 msgstr "album"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:721
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:720
 msgid "albumartist"
 msgstr "umělecalba"
 
@@ -100,8 +100,8 @@ msgstr "Použít"
 msgid "Apply Changes?"
 msgstr "Použít změny?"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:683
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:682
 msgid "artist"
 msgstr "umělec"
 
@@ -115,8 +115,8 @@ msgstr "B"
 msgid "Back"
 msgstr "Zadní"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:733
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:732
 msgid "bpm"
 msgstr "bpm"
 
@@ -130,20 +130,19 @@ msgstr "bpm"
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-#, fuzzy
-msgid "Clear Tags"
-msgstr "Odstranit značky"
-
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:729
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:728
 msgid "comment"
 msgstr "komentář"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:748
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:747
 msgid "composer"
 msgstr "skladatel"
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
+msgid "Continue"
+msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:657
@@ -151,7 +150,7 @@ msgstr "skladatel"
 msgid "Convert"
 msgstr "Převést"
 
-#: ../../../Controllers/MainWindowController.cs:441
+#: ../../../Controllers/MainWindowController.cs:440
 #, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
@@ -159,7 +158,7 @@ msgstr[0] "Úspěšně převeden {0} název souboru na značku"
 msgstr[1] "Úspěšně převedeny {0} názvy souborů na značky"
 msgstr[2] "Úspěšně převedeno {0} názvů souborů na značky"
 
-#: ../../../Controllers/MainWindowController.cs:464
+#: ../../../Controllers/MainWindowController.cs:463
 #, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
@@ -167,18 +166,13 @@ msgstr[0] "Úspěšně převedena {0} značka na název souboru"
 msgstr[1] "Úspěšně převedeny {0} značky na názvy souborů"
 msgstr[2] "Úspěšně převedeno {0} značek na názvy souborů"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-#, fuzzy
-msgid "Corrupted Files Found"
-msgstr "Nenalezeny žádné hudební soubory"
-
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:915
 #, csharp-format
 msgid "David Lapshin {0}"
 msgstr "David Lapshin {0}"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:752
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:751
 msgid "description"
 msgstr "popis"
 
@@ -193,7 +187,7 @@ msgstr "Zrušit"
 msgid "Discarding unapplied changes..."
 msgstr "Rušení nepoužitých změn..."
 
-#: ../../../Controllers/MainWindowController.cs:614
+#: ../../../Controllers/MainWindowController.cs:613
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Metadata pro {0} souborů úspěšně stažena"
 
@@ -215,19 +209,19 @@ msgstr "Exportovat zadní obal alba"
 msgid "Export Front Album Art"
 msgstr "Exportovat přední obal alba"
 
-#: ../../../Controllers/MainWindowController.cs:581
+#: ../../../Controllers/MainWindowController.cs:580
 msgid "Exported back album art to file successfully"
 msgstr "Zadní obal alba úspěšně exportován do souboru"
 
-#: ../../../Controllers/MainWindowController.cs:565
+#: ../../../Controllers/MainWindowController.cs:564
 msgid "Exported front album art to file successfully"
 msgstr "Přední obal alba úspěšně exportován do souboru"
 
-#: ../../../Controllers/MainWindowController.cs:586
+#: ../../../Controllers/MainWindowController.cs:585
 msgid "Failed to export back album art to a file"
 msgstr "Nepodařilo se exportovat zadní obal alba do souboru"
 
-#: ../../../Controllers/MainWindowController.cs:570
+#: ../../../Controllers/MainWindowController.cs:569
 msgid "Failed to export front album art to a file"
 msgstr "Nepodařilo se exportovat přední obal alba do souboru"
 
@@ -236,8 +230,8 @@ msgstr "Nepodařilo se exportovat přední obal alba do souboru"
 msgid "File Name to Tag"
 msgstr "Název souboru na značku"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:675
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:674
 msgid "filename"
 msgstr "názevsouboru"
 
@@ -256,8 +250,8 @@ msgstr "Formátový řetězec"
 msgid "Front"
 msgstr "Přední"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:725
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:724
 msgid "genre"
 msgstr "žánr"
 
@@ -269,11 +263,6 @@ msgstr "GiB"
 msgid "GitHub Repo"
 msgstr "GitHub repozitář"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-#, fuzzy
-msgid "Ignore Files"
-msgstr "Seřadit soubory podle"
-
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:691
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:81
 msgid "Insert Back Album Art"
@@ -284,8 +273,8 @@ msgstr "Vložit zadní obal alba"
 msgid "Insert Front Album Art"
 msgstr "Vložit přední obal alba"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:760
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:759
 msgid "isrc"
 msgstr "isrc"
 
@@ -306,8 +295,7 @@ msgstr[2] "Načteno {0} hudebních souborů."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:560
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:586
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:595
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1250
-#: ../../../Controllers/MainWindowController.cs:1200
+#: ../../../Controllers/MainWindowController.cs:1199
 msgid "Loading music files from folder..."
 msgstr "Načítání hudebních souborů ze složky..."
 
@@ -366,8 +354,8 @@ msgstr "Otevřít složku"
 msgid "Please select a format string."
 msgstr "Vyberte prosím formátový řetězec."
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:756
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:755
 msgid "publisher"
 msgstr "vydavatel"
 
@@ -398,7 +386,7 @@ msgstr "Potvrdit"
 msgid "Submit to AcoustId"
 msgstr "Odeslat do AcoustId"
 
-#: ../../../Controllers/MainWindowController.cs:627
+#: ../../../Controllers/MainWindowController.cs:626
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "Metadata úspěšně odeslána do AcoustId"
 
@@ -433,19 +421,22 @@ msgstr "Označte svou hudbu"
 msgid "Tagger"
 msgstr "Označovač"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-#, fuzzy
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:26
 msgid ""
-"This music folder contains music files whose tags are corrupted. What would "
-"you like to do with corrupted files?"
-msgstr "Některé hudební soubory mají stále čekající změny. Co chcete udělat?"
+"This music folder contains music files that have corrupted tags. This means "
+"that they could be encoded improperly or have structual issues affecting "
+"playback.\n"
+"Try re-encoding the affected files to fix these issues.\n"
+"\n"
+"The following files are affected and will be ignored by Tagger:"
+msgstr ""
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "TiB"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:679
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:678
 msgid "title"
 msgstr "název"
 
@@ -453,8 +444,8 @@ msgstr "název"
 msgid "Too Many Files Selected"
 msgstr "Vybráno příliš mnoho souborů"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:706
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:705
 msgid "track"
 msgstr "stopa"
 
@@ -462,16 +453,16 @@ msgstr "stopa"
 msgid "translator-credits"
 msgstr "Jonáš Loskot <jonas.loskot@pm.me>, 2023"
 
-#: ../../../Controllers/MainWindowController.cs:483
+#: ../../../Controllers/MainWindowController.cs:482
 msgid "Unable to load image file"
 msgstr "Nepodařilo se načíst soubor s obrázkem"
 
-#: ../../../Controllers/MainWindowController.cs:627
+#: ../../../Controllers/MainWindowController.cs:626
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "Nepodařilo se odeslat AcoustId. Zkontrolujte klíč API"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:691
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:690
 msgid "year"
 msgstr "rok"
 
@@ -870,6 +861,25 @@ msgstr "— Snadný převod názvů souborů na značky a značkek na názvy sou
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Lookup file information using MusicBrainz"
 msgstr "— Vyhledávání informací o souborech pomocí MusicBrainz"
+
+#, fuzzy
+#~ msgid "Clear Tags"
+#~ msgstr "Odstranit značky"
+
+#, fuzzy
+#~ msgid "Corrupted Files Found"
+#~ msgstr "Nenalezeny žádné hudební soubory"
+
+#, fuzzy
+#~ msgid "Ignore Files"
+#~ msgstr "Seřadit soubory podle"
+
+#, fuzzy
+#~ msgid ""
+#~ "This music folder contains music files whose tags are corrupted. What "
+#~ "would you like to do with corrupted files?"
+#~ msgstr ""
+#~ "Některé hudební soubory mají stále čekající změny. Co chcete udělat?"
 
 #~ msgid "Advanced Search"
 #~ msgstr "Pokročilé vyhledávání"

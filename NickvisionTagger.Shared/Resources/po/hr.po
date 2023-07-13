@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 08:32+0300\n"
+"POT-Creation-Date: 2023-07-13 14:31+0300\n"
 "PO-Revision-Date: 2023-07-12 19:29+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -20,20 +20,21 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
-#: ../../../Controllers/MainWindowController.cs:230
-#: ../../../Controllers/MainWindowController.cs:239
-#: ../../../Controllers/MainWindowController.cs:244
-#: ../../../Controllers/MainWindowController.cs:249
-#: ../../../Controllers/MainWindowController.cs:254
-#: ../../../Controllers/MainWindowController.cs:263
-#: ../../../Controllers/MainWindowController.cs:272
-#: ../../../Controllers/MainWindowController.cs:277
-#: ../../../Controllers/MainWindowController.cs:282
-#: ../../../Controllers/MainWindowController.cs:287
-#: ../../../Controllers/MainWindowController.cs:296
-#: ../../../Controllers/MainWindowController.cs:301
-#: ../../../Controllers/MainWindowController.cs:306
-#: ../../../Controllers/MainWindowController.cs:311
+#: ../../../Controllers/MainWindowController.cs:229
+#: ../../../Controllers/MainWindowController.cs:238
+#: ../../../Controllers/MainWindowController.cs:243
+#: ../../../Controllers/MainWindowController.cs:248
+#: ../../../Controllers/MainWindowController.cs:253
+#: ../../../Controllers/MainWindowController.cs:262
+#: ../../../Controllers/MainWindowController.cs:271
+#: ../../../Controllers/MainWindowController.cs:276
+#: ../../../Controllers/MainWindowController.cs:281
+#: ../../../Controllers/MainWindowController.cs:286
+#: ../../../Controllers/MainWindowController.cs:295
+#: ../../../Controllers/MainWindowController.cs:300
+#: ../../../Controllers/MainWindowController.cs:305
+#: ../../../Controllers/MainWindowController.cs:310
+#: ../../../Controllers/MainWindowController.cs:1163
 #: ../../../Controllers/MainWindowController.cs:1164
 #: ../../../Controllers/MainWindowController.cs:1165
 #: ../../../Controllers/MainWindowController.cs:1166
@@ -47,8 +48,7 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:1174
 #: ../../../Controllers/MainWindowController.cs:1175
 #: ../../../Controllers/MainWindowController.cs:1176
-#: ../../../Controllers/MainWindowController.cs:1177
-#: ../../../Controllers/MainWindowController.cs:1181
+#: ../../../Controllers/MainWindowController.cs:1180
 msgid "<keep>"
 msgstr "<zadrži>"
 
@@ -76,13 +76,13 @@ msgstr ""
 "Ako se ne navede, Tagger će umjesto toga poslati metapodatke tvoje oznake "
 "koje su povezane s digitalnim otiskom."
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:687
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:686
 msgid "album"
 msgstr "album"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:721
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:720
 msgid "albumartist"
 msgstr "izvođač albuma"
 
@@ -101,8 +101,8 @@ msgstr "Primijeni"
 msgid "Apply Changes?"
 msgstr "Primijeniti promjene?"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:683
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:682
 msgid "artist"
 msgstr "izvođač"
 
@@ -116,8 +116,8 @@ msgstr "B"
 msgid "Back"
 msgstr "Natrag"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:733
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:732
 msgid "bpm"
 msgstr "bpm"
 
@@ -131,20 +131,19 @@ msgstr "bpm"
 msgid "Cancel"
 msgstr "Odustani"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-#, fuzzy
-msgid "Clear Tags"
-msgstr "Izbriši oznake"
-
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:729
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:728
 msgid "comment"
 msgstr "komentar"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:748
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:747
 msgid "composer"
 msgstr "skladatelj"
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
+msgid "Continue"
+msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:657
@@ -152,7 +151,7 @@ msgstr "skladatelj"
 msgid "Convert"
 msgstr "Konvertiraj"
 
-#: ../../../Controllers/MainWindowController.cs:441
+#: ../../../Controllers/MainWindowController.cs:440
 #, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
@@ -160,7 +159,7 @@ msgstr[0] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
 msgstr[1] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
 msgstr[2] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
 
-#: ../../../Controllers/MainWindowController.cs:464
+#: ../../../Controllers/MainWindowController.cs:463
 #, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
@@ -168,18 +167,13 @@ msgstr[0] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
 msgstr[1] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
 msgstr[2] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-#, fuzzy
-msgid "Corrupted Files Found"
-msgstr "Nijedna glazbena datoteka nije pronađena"
-
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:915
 #, csharp-format
 msgid "David Lapshin {0}"
 msgstr "David Lapshin {0}"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:752
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:751
 msgid "description"
 msgstr "opis"
 
@@ -194,7 +188,7 @@ msgstr "Odbaci"
 msgid "Discarding unapplied changes..."
 msgstr "Odbacivanje neprimjenjenih promjena …"
 
-#: ../../../Controllers/MainWindowController.cs:614
+#: ../../../Controllers/MainWindowController.cs:613
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Uspješno preuzeti metapodaci za {0} datoteke(a)"
 
@@ -216,19 +210,19 @@ msgstr "Izvezi stražnju sliku albuma"
 msgid "Export Front Album Art"
 msgstr "Izvezi prednju sliku albuma"
 
-#: ../../../Controllers/MainWindowController.cs:581
+#: ../../../Controllers/MainWindowController.cs:580
 msgid "Exported back album art to file successfully"
 msgstr "Stražnja slika albuma je uspješno izvezena u datoteku"
 
-#: ../../../Controllers/MainWindowController.cs:565
+#: ../../../Controllers/MainWindowController.cs:564
 msgid "Exported front album art to file successfully"
 msgstr "Prednja slika albuma je uspješno izvezena u datoteku"
 
-#: ../../../Controllers/MainWindowController.cs:586
+#: ../../../Controllers/MainWindowController.cs:585
 msgid "Failed to export back album art to a file"
 msgstr "Stražnja slika albuma nije uspješno izvezena u datoteku"
 
-#: ../../../Controllers/MainWindowController.cs:570
+#: ../../../Controllers/MainWindowController.cs:569
 msgid "Failed to export front album art to a file"
 msgstr "Prednja slika albuma nije uspješno izvezena u datoteku"
 
@@ -237,8 +231,8 @@ msgstr "Prednja slika albuma nije uspješno izvezena u datoteku"
 msgid "File Name to Tag"
 msgstr "Ime datoteke u oznaku"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:675
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:674
 msgid "filename"
 msgstr "ime datoteke"
 
@@ -257,8 +251,8 @@ msgstr "Znakovni niz formata"
 msgid "Front"
 msgstr "Prednja strana"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:725
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:724
 msgid "genre"
 msgstr "žanr"
 
@@ -270,11 +264,6 @@ msgstr "GiB"
 msgid "GitHub Repo"
 msgstr "GitHub repozitorij"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-#, fuzzy
-msgid "Ignore Files"
-msgstr "Redoslijed datoteka"
-
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:691
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:81
 msgid "Insert Back Album Art"
@@ -285,8 +274,8 @@ msgstr "Umetni stražnju sliku albuma"
 msgid "Insert Front Album Art"
 msgstr "Umetni prednju sliku albuma"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:760
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:759
 msgid "isrc"
 msgstr "isrc"
 
@@ -307,8 +296,7 @@ msgstr[2] "Učitano je {0} glazbenih datoteka."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:560
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:586
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:595
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1250
-#: ../../../Controllers/MainWindowController.cs:1200
+#: ../../../Controllers/MainWindowController.cs:1199
 msgid "Loading music files from folder..."
 msgstr "Učitavanje glazbenih datoteka iz mape …"
 
@@ -367,8 +355,8 @@ msgstr "Otvori mapu"
 msgid "Please select a format string."
 msgstr "Odaberi jedan znakovni niz formata."
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:756
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:755
 msgid "publisher"
 msgstr "izdavač"
 
@@ -401,7 +389,7 @@ msgstr "Pošalji"
 msgid "Submit to AcoustId"
 msgstr "Pošalji AcoustId-u"
 
-#: ../../../Controllers/MainWindowController.cs:627
+#: ../../../Controllers/MainWindowController.cs:626
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "Metapodaci su uspješno poslani AcoustId-u"
 
@@ -436,21 +424,22 @@ msgstr "Označite svoju glazbu"
 msgid "Tagger"
 msgstr "Tagger"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1245
-#, fuzzy
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:26
 msgid ""
-"This music folder contains music files whose tags are corrupted. What would "
-"you like to do with corrupted files?"
+"This music folder contains music files that have corrupted tags. This means "
+"that they could be encoded improperly or have structual issues affecting "
+"playback.\n"
+"Try re-encoding the affected files to fix these issues.\n"
+"\n"
+"The following files are affected and will be ignored by Tagger:"
 msgstr ""
-"Neke glazbene datoteke još uvijek imaju promjene koje čekaju da se "
-"primijene. Želiš li primijeniti te promjene?"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "TiB"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:679
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:678
 msgid "title"
 msgstr "naslov"
 
@@ -458,8 +447,8 @@ msgstr "naslov"
 msgid "Too Many Files Selected"
 msgstr "Odabrano je previše datoteka"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:706
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:705
 msgid "track"
 msgstr "pjesma"
 
@@ -467,16 +456,16 @@ msgstr "pjesma"
 msgid "translator-credits"
 msgstr "Milo Ivir <mail@milotype.de>"
 
-#: ../../../Controllers/MainWindowController.cs:483
+#: ../../../Controllers/MainWindowController.cs:482
 msgid "Unable to load image file"
 msgstr "Neuspjelo učitavanje slikovne datoteke"
 
-#: ../../../Controllers/MainWindowController.cs:627
+#: ../../../Controllers/MainWindowController.cs:626
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "Neuspjelo slanje metapodatke AcoustId-u. Provjeri API ključ"
 
-#: ../../../Controllers/MainWindowController.cs:650
-#: ../../../Controllers/MainWindowController.cs:691
+#: ../../../Controllers/MainWindowController.cs:649
+#: ../../../Controllers/MainWindowController.cs:690
 msgid "year"
 msgstr "godina"
 
@@ -876,6 +865,26 @@ msgstr "– Pretvori imena datoteka u oznake i oznake u imena datoteka"
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Lookup file information using MusicBrainz"
 msgstr "– Pronađi informacije o datoteci koristeći MusicBrainz"
+
+#, fuzzy
+#~ msgid "Clear Tags"
+#~ msgstr "Izbriši oznake"
+
+#, fuzzy
+#~ msgid "Corrupted Files Found"
+#~ msgstr "Nijedna glazbena datoteka nije pronađena"
+
+#, fuzzy
+#~ msgid "Ignore Files"
+#~ msgstr "Redoslijed datoteka"
+
+#, fuzzy
+#~ msgid ""
+#~ "This music folder contains music files whose tags are corrupted. What "
+#~ "would you like to do with corrupted files?"
+#~ msgstr ""
+#~ "Neke glazbene datoteke još uvijek imaju promjene koje čekaju da se "
+#~ "primijene. Želiš li primijeniti te promjene?"
 
 #~ msgid "Advanced Search"
 #~ msgstr "Napredna pretraga"
