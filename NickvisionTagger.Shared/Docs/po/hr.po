@@ -2,58 +2,64 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-07-12 05:55+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-07-13 17:26+0000\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/docs/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr ""
+msgstr "Milo Ivir <mail@milotype.de>"
 
 #. (itstool) path: info/title
 #: yelp/C/configuration.page:8
 msgctxt "link"
 msgid "Configuration 🔧"
-msgstr ""
+msgstr "Konfiguracija 🔧"
 
 #. (itstool) path: credit/name
 #: yelp/C/configuration.page:10 yelp/C/configuration.page:14
 #: yelp/C/index.page:14 yelp/C/search.page:14 yelp/C/web-services.page:10
 #: yelp/C/web-services.page:14
 msgid "Nicholas Logozzo"
-msgstr ""
+msgstr "Nicholas Logozzo"
 
 #. (itstool) path: page/title
 #: yelp/C/configuration.page:20
 msgid "Configuration"
-msgstr ""
+msgstr "Konfiguracija"
 
 #. (itstool) path: page/p
 #: yelp/C/configuration.page:21
 msgid ""
 "This page describes what you can change in the application configuration."
-msgstr ""
+msgstr "Ova stranica opisuje što možeš promijeniti u konfiguraciji aplikacije."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:24
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:25
 msgid ""
 "Set light or dark theme, or make <app>Tagger</app> follow your system theme."
 msgstr ""
+"Postavi svijetlu ili tamnu temu ili omogući aplikaciji <app>Tagger</app> "
+"slijediti temu tvog sustava."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:28
 msgid "Remember Last Opened Folder"
-msgstr ""
+msgstr "Zapamti zadnju otvorenu mapu"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:29
@@ -61,22 +67,24 @@ msgid ""
 "Whether or not to remember the previously used music folder and reopen it "
 "when Tagger starts the next time."
 msgstr ""
+"Da li zapamtiti prethodno korištenu mapu s glazbom i ponovo je otvoriti kada "
+"se Tagger sljedeći put pokrene."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:32
 msgid "Include Subfolders"
-msgstr ""
+msgstr "Uključi podmape"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:33
 msgid ""
 "Whether or not to scan for music files into subdirectories of a music folder."
-msgstr ""
+msgstr "Da li tražiti glazbene datoteke u poddirektorijima mape s glazbom."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:36
 msgid "Sort Files By"
-msgstr ""
+msgstr "Redoslijed datoteka"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:37
@@ -84,41 +92,43 @@ msgid ""
 "The property to use when sorting and displaying music files. It can be one "
 "of the following options:"
 msgstr ""
+"Svojstvo koje se koristi prilikom razvrstavanja i prikaza glazbenih "
+"datoteka. To može biti jedna od sljedećih opcija:"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:39
 msgid "<code>File Name</code>"
-msgstr ""
+msgstr "<code>Ime datoteke</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:40
 msgid "<code>Title</code>"
-msgstr ""
+msgstr "<code>Naslov</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:41
 msgid "<code>Track</code>"
-msgstr ""
+msgstr "<code>Pjesma</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:42
 msgid "<code>File Path</code>"
-msgstr ""
+msgstr "<code>Staza do datoteke</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:43
 msgid "<code>Album</code>"
-msgstr ""
+msgstr "<code>Album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:44
 msgid "<code>Genre</code>"
-msgstr ""
+msgstr "<code>Žanr</code>"
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:48
 msgid "Preserve Modification Timestamp"
-msgstr ""
+msgstr "Sačuvaj vremensku oznaku modifikacije"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:49
@@ -126,11 +136,13 @@ msgid ""
 "Whether or not to not update a file's write (modified) timestamp when its "
 "tag is saved."
 msgstr ""
+"Da li aktualizirati vremensku oznaku pisanja (promjene) datoteke kada je "
+"njezina oznaka spremljena."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:52
 msgid "Overwrite Tag With MusicBrainz"
-msgstr ""
+msgstr "Prepiši oznaku s MusicBrainz"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:53
@@ -142,7 +154,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:56
 msgid "Overwrite Album Art With MusicBrainz"
-msgstr ""
+msgstr "Prepiši sliku albuma s MusicBrainz"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:57
@@ -154,7 +166,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:60
 msgid "AcoustId User API Key"
-msgstr ""
+msgstr "API ključ AcoustId korisnika"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:61
@@ -168,28 +180,29 @@ msgstr ""
 msgid ""
 "A key can be obtained <link href=\"https://acoustid.org/api-key\">here</link>"
 msgstr ""
+"Ključ se može dobiti <link href=\"https://acoustid.org/api-key\">ovdje</link>"
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
 msgctxt "link"
 msgid "Tagger Help"
-msgstr ""
+msgstr "Pomoć za Tagger"
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:8
 msgctxt "text"
 msgid "Tagger Help"
-msgstr ""
+msgstr "Pomoć za Tagger"
 
 #. (itstool) path: credit/name
 #: yelp/C/index.page:10 yelp/C/search.page:10
 msgid "Fyodor Sobolev"
-msgstr ""
+msgstr "Fyodor Sobolev"
 
 #. (itstool) path: page/title
 #: yelp/C/index.page:20
 msgid "<_:media-1/> Tagger Help"
-msgstr ""
+msgstr "<_:media-1/> Pomoć za Tagger"
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:21
@@ -211,17 +224,19 @@ msgstr ""
 #: yelp/C/search.page:8
 msgctxt "link"
 msgid "Advanced Search 🔍"
-msgstr ""
+msgstr "Napredna pretraga 🔍"
 
 #. (itstool) path: page/title
 #: yelp/C/search.page:20
 msgid "Advanced Search"
-msgstr ""
+msgstr "Napredna pretraga"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:21
 msgid "This page explains how to use Advanced Search in <app>Tagger</app>."
 msgstr ""
+"Ova stranica objašnjava kako koristiti naprednu pretragu u aplikaciji "
+"<app>Tagger</app>."
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:23
@@ -230,11 +245,14 @@ msgid ""
 "allows users to search files' tag contents for certain values, using a "
 "powerful tag-based syntax:"
 msgstr ""
+"Napredna pretraga je moćna značajka koju pruža <app>Tagger</app>, koja "
+"korisnicima omogućuje pretraživanje određenih vrijednosti u sadržaju oznaka "
+"datoteka koristeći moćnu sintaksu temeljenu na oznakama:"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:24
 msgid "<code>!prop1=\"value1\";prop2=\"value2\"</code>"
-msgstr ""
+msgstr "<code>!prop1=\"vrijednost1\";prop2=\"vrijednost2\"</code>"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:25
@@ -248,37 +266,37 @@ msgstr ""
 #. (itstool) path: section/title
 #: yelp/C/search.page:28
 msgid "Valid Properties"
-msgstr ""
+msgstr "Važeća svojstva"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:30
 msgid "<code>filename</code>"
-msgstr ""
+msgstr "<code>ime datoteke</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:31
 msgid "<code>title</code>"
-msgstr ""
+msgstr "<code>naslov</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:32
 msgid "<code>artist</code>"
-msgstr ""
+msgstr "<code>izvođač</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:33
 msgid "<code>album</code>"
-msgstr ""
+msgstr "<code>album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:34
 msgid "<code>year</code>"
-msgstr ""
+msgstr "<code>godina</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:35
 msgid "<code>track</code>"
-msgstr ""
+msgstr "<code>pjesma</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:36
@@ -288,47 +306,47 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/search.page:37
 msgid "<code>genre</code>"
-msgstr ""
+msgstr "<code>žanr</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:38
 msgid "<code>comment</code>"
-msgstr ""
+msgstr "<code>komentar</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:39
 msgid "<code>bpm</code>"
-msgstr ""
+msgstr "<code>bpm</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:40
 msgid "<code>composer</code>"
-msgstr ""
+msgstr "<code>skladatelj</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:41
 msgid "<code>description</code>"
-msgstr ""
+msgstr "<code>opis</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:42
 msgid "<code>publisher</code>"
-msgstr ""
+msgstr "<code>izdavač</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:43
 msgid "<code>isrc</code>"
-msgstr ""
+msgstr "<code>isrc</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:45
 msgid "Properties are case-insensitive."
-msgstr ""
+msgstr "Svojstva ne razlikuju velika i mala slova."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:47
 msgid "Syntax Checking"
-msgstr ""
+msgstr "Provjera sintakse"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:48
@@ -341,7 +359,7 @@ msgstr ""
 #. (itstool) path: section/title
 #: yelp/C/search.page:50
 msgid "Examples"
-msgstr ""
+msgstr "Primjeri"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:51
@@ -389,7 +407,7 @@ msgstr ""
 #. (itstool) path: page/title
 #: yelp/C/web-services.page:20
 msgid "Web Services"
-msgstr ""
+msgstr "Web usluge"
 
 #. (itstool) path: page/p
 #: yelp/C/web-services.page:21
@@ -399,7 +417,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:24
 msgid "Download MusicBrainz Metadata"
-msgstr ""
+msgstr "Preuzmi MusicBrainz metapodatke"
 
 #. (itstool) path: item/p
 #: yelp/C/web-services.page:25
@@ -427,7 +445,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:32
 msgid "Submit to AcoustId"
-msgstr ""
+msgstr "Pošalji AcoustId-u"
 
 #. (itstool) path: item/p
 #: yelp/C/web-services.page:33
