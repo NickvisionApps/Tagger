@@ -973,6 +973,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _headerBar.AddCssClass("flat");
                 _title.SetSubtitle("");
                 _viewStack.SetVisibleChildName("NoFolder");
+                _openFolderButton.SetVisible(false);
             }
         }
         handle.Free();
