@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-12 05:55+0300\n"
+"POT-Creation-Date: 2023-07-15 00:59+0200\n"
 "PO-Revision-Date: 2023-07-13 11:34+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -26,7 +26,8 @@ msgstr "Configuration 🔧"
 
 #. (itstool) path: credit/name
 #: yelp/C/configuration.page:10 yelp/C/configuration.page:14
-#: yelp/C/index.page:14 yelp/C/search.page:14 yelp/C/web-services.page:10
+#: yelp/C/corrupted.page:10 yelp/C/corrupted.page:14 yelp/C/index.page:14
+#: yelp/C/search.page:14 yelp/C/web-services.page:10
 #: yelp/C/web-services.page:14
 msgid "Nicholas Logozzo"
 msgstr "Nicholas Logozzo"
@@ -190,8 +191,57 @@ msgstr ""
 msgid ""
 "A key can be obtained <link href=\"https://acoustid.org/api-key\">here</link>"
 msgstr ""
-"Une clé peut être obtenue <link href=\"https://acoustid.org/api-key\""
-">ici</link>"
+"Une clé peut être obtenue <link href=\"https://acoustid.org/api-key\">ici</"
+"link>"
+
+#. (itstool) path: info/title
+#: yelp/C/corrupted.page:8
+msgctxt "link"
+msgid "Corrupted Tags 🪲"
+msgstr ""
+
+#. (itstool) path: page/title
+#: yelp/C/corrupted.page:20
+msgid "Corrupted Tags"
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/corrupted.page:21
+msgid "This page explains music files with corrupted tags."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/corrupted.page:24
+msgid "Invalid Header"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/corrupted.page:25
+msgid ""
+"An invalid tag header can cause issues when reading information about a file "
+"and even cause playback issues."
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/corrupted.page:26
+msgid ""
+"Some websites add extra data in a tag header which in turn causes corruption."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/corrupted.page:28
+msgid ""
+"Ffmpeg can be used to fix corruption issues. Run the following command to re-"
+"encode a file's tag and remove junk data:"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/corrupted.page:29
+msgid ""
+"<code>ffmpeg -i in.mp3 out.mp3</code> where <code>in.mp3</code> is the file "
+"path of the corrupted file and <code>out.mp3</code> is the path to export "
+"the re-encoded file."
+msgstr ""
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
@@ -233,10 +283,10 @@ msgid ""
 "bit.ly/3GrfEid\">join our Matrix channel</link>."
 msgstr ""
 "Pour obtenir de l’aide, utilisez les <link href=\"https://github.com/"
-"NickvisionApps/Tagger/issues\">signalements</link> ou les <link href=\"https"
-"://github.com/NickvisionApps/Tagger/discussions\">discussions</link> sur "
-"Github, ou <link href=\"https://bit.ly/3GrfEid\">rejoignez notre salon de "
-"discussion Matrix</link>."
+"NickvisionApps/Tagger/issues\">signalements</link> ou les <link "
+"href=\"https://github.com/NickvisionApps/Tagger/discussions\">discussions</"
+"link> sur Github, ou <link href=\"https://bit.ly/3GrfEid\">rejoignez notre "
+"salon de discussion Matrix</link>."
 
 #. (itstool) path: info/title
 #: yelp/C/search.page:8
@@ -253,8 +303,8 @@ msgstr "Recherche avancée"
 #: yelp/C/search.page:21
 msgid "This page explains how to use Advanced Search in <app>Tagger</app>."
 msgstr ""
-"Cette page explique comment utiliser la recherche avancée dans "
-"<app>Tagger</app>."
+"Cette page explique comment utiliser la recherche avancée dans <app>Tagger</"
+"app>."
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:23

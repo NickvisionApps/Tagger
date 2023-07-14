@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="corrupted" its:version="2.0" xml:lang="it">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Corrupted Tags 🪲</title>
+	<credit type="author copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Corrupted Tags</title>
+<p>This page explains music files with corrupted tags.</p>
+<terms>
+    <item>
+		<title>Invalid Header</title>
+		<p>An invalid tag header can cause issues when reading information about a file and even cause playback issues.</p>
+        <p>Some websites add extra data in a tag header which in turn causes corruption.</p>
+        <note style="advanced">
+            <p>Ffmpeg can be used to fix corruption issues. Run the following command to re-encode a file's tag and remove junk data:</p>
+            <p><code>ffmpeg -i in.mp3 out.mp3</code> where <code>in.mp3</code> is the file path of the corrupted file and <code>out.mp3</code> is the path to export the re-encoded file.</p>
+        </note>
+	</item>
+</terms>
+</page>

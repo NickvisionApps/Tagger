@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-12 05:55+0300\n"
+"POT-Creation-Date: 2023-07-15 00:59+0200\n"
 "PO-Revision-Date: 2023-07-14 02:25+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/"
-"nickvision-tagger/docs/hr/>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
+"tagger/docs/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,8 @@ msgstr "Konfiguracija 🔧"
 
 #. (itstool) path: credit/name
 #: yelp/C/configuration.page:10 yelp/C/configuration.page:14
-#: yelp/C/index.page:14 yelp/C/search.page:14 yelp/C/web-services.page:10
+#: yelp/C/corrupted.page:10 yelp/C/corrupted.page:14 yelp/C/index.page:14
+#: yelp/C/search.page:14 yelp/C/web-services.page:10
 #: yelp/C/web-services.page:14
 msgid "Nicholas Logozzo"
 msgstr "Nicholas Logozzo"
@@ -188,6 +189,55 @@ msgstr ""
 "Ključ se može dobiti <link href=\"https://acoustid.org/api-key\">ovdje</link>"
 
 #. (itstool) path: info/title
+#: yelp/C/corrupted.page:8
+msgctxt "link"
+msgid "Corrupted Tags 🪲"
+msgstr ""
+
+#. (itstool) path: page/title
+#: yelp/C/corrupted.page:20
+msgid "Corrupted Tags"
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/corrupted.page:21
+msgid "This page explains music files with corrupted tags."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/corrupted.page:24
+msgid "Invalid Header"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/corrupted.page:25
+msgid ""
+"An invalid tag header can cause issues when reading information about a file "
+"and even cause playback issues."
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/corrupted.page:26
+msgid ""
+"Some websites add extra data in a tag header which in turn causes corruption."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/corrupted.page:28
+msgid ""
+"Ffmpeg can be used to fix corruption issues. Run the following command to re-"
+"encode a file's tag and remove junk data:"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/corrupted.page:29
+msgid ""
+"<code>ffmpeg -i in.mp3 out.mp3</code> where <code>in.mp3</code> is the file "
+"path of the corrupted file and <code>out.mp3</code> is the path to export "
+"the re-encoded file."
+msgstr ""
+
+#. (itstool) path: info/title
 #: yelp/C/index.page:7
 msgctxt "link"
 msgid "Tagger Help"
@@ -226,8 +276,8 @@ msgid ""
 msgstr ""
 "Za podršku koiristi <link href=\"https://github.com/NickvisionApps/Tagger/"
 "issues\">probleme</link>, <link href=\"https://github.com/NickvisionApps/"
-"Tagger/discussions\">diskusije</link> na Githubu ili <link href=\"https://bit"
-".ly/3GrfEid\">se pridruži našem Matrix kanalu</link>."
+"Tagger/discussions\">diskusije</link> na Githubu ili <link href=\"https://"
+"bit.ly/3GrfEid\">se pridruži našem Matrix kanalu</link>."
 
 #. (itstool) path: info/title
 #: yelp/C/search.page:8
