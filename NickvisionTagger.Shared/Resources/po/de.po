@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-13 14:31+0300\n"
-"PO-Revision-Date: 2023-07-02 01:57+0000\n"
-"Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
+"PO-Revision-Date: 2023-07-14 12:30+0000\n"
+"Last-Translator: Jummit <jummit@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/de/>\n"
 "Language: de\n"
@@ -49,7 +49,7 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:1176
 #: ../../../Controllers/MainWindowController.cs:1180
 msgid "<keep>"
-msgstr ""
+msgstr "<behalten>"
 
 #: ../../../Models/PropertyMap.cs:118
 #: NickvisionTagger.GNOME/Blueprints/window.blp:467
@@ -117,12 +117,12 @@ msgstr "B"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:678
 #: NickvisionTagger.GNOME/Blueprints/window.blp:30
 msgid "Back"
-msgstr ""
+msgstr "Zurück"
 
 #: ../../../Controllers/MainWindowController.cs:649
 #: ../../../Controllers/MainWindowController.cs:732
 msgid "bpm"
-msgstr ""
+msgstr "bpm"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:501
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:576
@@ -143,11 +143,11 @@ msgstr "Kommentar"
 #: ../../../Controllers/MainWindowController.cs:649
 #: ../../../Controllers/MainWindowController.cs:747
 msgid "composer"
-msgstr ""
+msgstr "Komponist"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
 msgid "Continue"
-msgstr ""
+msgstr "Weiter"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:657
@@ -176,9 +176,8 @@ msgstr "David Lapshin {0}"
 
 #: ../../../Controllers/MainWindowController.cs:649
 #: ../../../Controllers/MainWindowController.cs:751
-#, fuzzy
 msgid "description"
-msgstr "Länge"
+msgstr "Beschreibung"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:501
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:576
@@ -201,37 +200,33 @@ msgstr "Metadaten werden von MusicBrainz heruntergeladen..."
 
 #: ../../../Models/MusicFile.cs:174 ../../../Models/MusicFile.cs:190
 msgid "ERROR"
-msgstr ""
+msgstr "FEHLER"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:727
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
-#, fuzzy
 msgid "Export Back Album Art"
-msgstr "Albumcover einfügen"
+msgstr "Rücken-Albumcover exportieren"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:727
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:71
-#, fuzzy
 msgid "Export Front Album Art"
-msgstr "Albumcover einfügen"
+msgstr "Vorder-Albumcover exportieren"
 
 #: ../../../Controllers/MainWindowController.cs:580
-#, fuzzy
 msgid "Exported back album art to file successfully"
-msgstr "{0} Tag erfolgreich zu Dateiname konvertiert"
+msgstr "Rücken-Albumcover erfolgreich zu Datei exportiert"
 
 #: ../../../Controllers/MainWindowController.cs:564
-#, fuzzy
 msgid "Exported front album art to file successfully"
-msgstr "{0} Tag erfolgreich zu Dateiname konvertiert"
+msgstr "Vorder-Albumcover erfolgreich zu Datei exportiert"
 
 #: ../../../Controllers/MainWindowController.cs:585
 msgid "Failed to export back album art to a file"
-msgstr ""
+msgstr "Fehler beim exportieren des Rücken-Albumcovers zur Datei"
 
 #: ../../../Controllers/MainWindowController.cs:569
 msgid "Failed to export front album art to a file"
-msgstr ""
+msgstr "Fehler beim exportieren des Vorder-Albumcovers zur Datei"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:636
 #: NickvisionTagger.GNOME/Blueprints/window.blp:41
@@ -241,7 +236,7 @@ msgstr "Dateiname zu Tag"
 #: ../../../Controllers/MainWindowController.cs:649
 #: ../../../Controllers/MainWindowController.cs:674
 msgid "filename"
-msgstr ""
+msgstr "Dateiname"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1237
 msgid "Fingerprint was copied to clipboard."
@@ -256,7 +251,7 @@ msgstr "Formatvorlage"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:678
 #: NickvisionTagger.GNOME/Blueprints/window.blp:22
 msgid "Front"
-msgstr ""
+msgstr "Vorne"
 
 #: ../../../Controllers/MainWindowController.cs:649
 #: ../../../Controllers/MainWindowController.cs:724
@@ -274,20 +269,18 @@ msgstr "GitHub-Repo"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:691
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:81
-#, fuzzy
 msgid "Insert Back Album Art"
-msgstr "Albumcover einfügen"
+msgstr "Rücken-Albumcover einfügen"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:691
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:61
-#, fuzzy
 msgid "Insert Front Album Art"
-msgstr "Albumcover einfügen"
+msgstr "Vorder-Albumcover einfügen"
 
 #: ../../../Controllers/MainWindowController.cs:649
 #: ../../../Controllers/MainWindowController.cs:759
 msgid "isrc"
-msgstr ""
+msgstr "isrc"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
@@ -367,7 +360,7 @@ msgstr "Bitte Formatvorlage auswählen."
 #: ../../../Controllers/MainWindowController.cs:649
 #: ../../../Controllers/MainWindowController.cs:755
 msgid "publisher"
-msgstr ""
+msgstr "Verlag"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:506
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:581
@@ -409,11 +402,11 @@ msgstr "Daten werden zu AcoustId gesendet..."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:677
 #: NickvisionTagger.GNOME/Blueprints/window.blp:285
 msgid "Switch to Back Cover"
-msgstr ""
+msgstr "Zu Rückencover wechseln"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:677
 msgid "Switch to Front Cover"
-msgstr ""
+msgstr "Zu vorderem Cover wechseln"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:656
 #: NickvisionTagger.GNOME/Blueprints/window.blp:42
@@ -441,6 +434,13 @@ msgid ""
 "\n"
 "The following files are affected and will be ignored by Tagger:"
 msgstr ""
+"Dieser Musikordner enthält Musikdateien mit korrupten Tags. Es könnte sein "
+"dass sie falsch kodiert wurden oder strukturelle Probleme haben die das "
+"abspielen betreffen.\n"
+"Versuche die betroffenen Dateien neu zu kodieren um die Probleme zu beheben."
+"\n"
+"\n"
+"Die folgenden Dateien sind betroffen und werden von Tagger ignoriert:"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -477,7 +477,7 @@ msgstr "Konnte nicht zu AcoustId senden. Prüfe API-Key"
 #: ../../../Controllers/MainWindowController.cs:649
 #: ../../../Controllers/MainWindowController.cs:690
 msgid "year"
-msgstr ""
+msgstr "Jahr"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:114
@@ -540,10 +540,9 @@ msgid "Track"
 msgstr "Track"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "File Path"
-msgstr "Dateiname"
+msgstr "Dateipfad"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 #, fuzzy
@@ -639,9 +638,8 @@ msgid "Convert Tag to File Name"
 msgstr "Tag zu Dateinamen konvertieren"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:66
-#, fuzzy
 msgid "Remove Front Album Art"
-msgstr "Albumcover entfernen"
+msgstr "Vorder-Albumcover entfernen"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:76
 #, fuzzy
