@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-13 14:31+0300\n"
-"PO-Revision-Date: 2023-07-12 19:29+0000\n"
+"PO-Revision-Date: 2023-07-14 19:39+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/cs/>\n"
@@ -142,7 +142,7 @@ msgstr "skladatel"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
 msgid "Continue"
-msgstr ""
+msgstr "Pokračovat"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:657
@@ -197,7 +197,7 @@ msgstr "Stahování metadat z MusicBrainz..."
 
 #: ../../../Models/MusicFile.cs:174 ../../../Models/MusicFile.cs:190
 msgid "ERROR"
-msgstr ""
+msgstr "CHYBA"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:727
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
@@ -430,6 +430,12 @@ msgid ""
 "\n"
 "The following files are affected and will be ignored by Tagger:"
 msgstr ""
+"Tato hudební složka obsahuje hudební soubory s poškozenými značkami. To "
+"znamená, že mohou být nesprávně zakódovány nebo mohou mít strukturální "
+"problémy ovlivňující přehrávání.\n"
+"Zkuste dotčené soubory znovu zakódovat a tyto problémy odstranit.\n"
+"\n"
+"Postiženy jsou následující soubory, které bude aplikace Označovač ignorovat:"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -527,19 +533,16 @@ msgid "Track"
 msgstr "Stopa"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "File Path"
-msgstr "Název souboru"
+msgstr "Cesta k souboru"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "Album"
 msgstr "Album"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "Genre"
 msgstr "Žánr"
@@ -661,7 +664,7 @@ msgstr "Klávesové zkratky"
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:124
 #: NickvisionTagger.GNOME/Blueprints/window.blp:7
 msgid "Help"
-msgstr ""
+msgstr "Nápověda"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:129
 msgid "Quit"
@@ -722,10 +725,10 @@ msgid "Try a different folder"
 msgstr "Zkuste jinou složku"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:164
-#, fuzzy
 msgid "Search for filename (type ! for advanced search)..."
 msgstr ""
-"Hledat název souboru (zadejte ! pro aktivaci pokročilého vyhledávání)..."
+"Hledat název souboru (zadejte ! pro aktivaci pokročilého vyhledávání)... "
+"https://hosted.weblate.org/js/ignore-check/19983055/?revert=1"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:169
 msgid "Advanced Search Info"
