@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-13 14:31+0300\n"
-"PO-Revision-Date: 2023-07-12 19:29+0000\n"
+"PO-Revision-Date: 2023-07-14 02:25+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/hr/>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
 #: ../../../Controllers/MainWindowController.cs:229
@@ -143,7 +143,7 @@ msgstr "skladatelj"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
 msgid "Continue"
-msgstr ""
+msgstr "Nastavi"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:657
@@ -198,7 +198,7 @@ msgstr "Preuzmi MusicBrainz metapodatke …"
 
 #: ../../../Models/MusicFile.cs:174 ../../../Models/MusicFile.cs:190
 msgid "ERROR"
-msgstr ""
+msgstr "GREŠKA"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:727
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
@@ -433,6 +433,12 @@ msgid ""
 "\n"
 "The following files are affected and will be ignored by Tagger:"
 msgstr ""
+"Ova mapa sadrži glazbene datoteke koje imaju oštećene oznake. To znači da su "
+"možda neispravno kodirane ili da imaju strukturne probleme koji utječu na "
+"reprodukciju.\n"
+"Za rješavanje tog problema pokušaj ponovo kodirati te datoteke.\n"
+"\n"
+"Pogođene su sljedeće datoteke i Tagger će ih zanemariti:"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -530,19 +536,16 @@ msgid "Track"
 msgstr "Pjesma"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "File Path"
-msgstr "Ime datoteke"
+msgstr "Staza do datoteke"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "Album"
 msgstr "Album"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgctxt "Sort"
 msgid "Genre"
 msgstr "Žanr"
@@ -665,7 +668,7 @@ msgstr "Tipkovni prečaci"
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:124
 #: NickvisionTagger.GNOME/Blueprints/window.blp:7
 msgid "Help"
-msgstr ""
+msgstr "Pomoć"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:129
 msgid "Quit"
@@ -726,7 +729,6 @@ msgid "Try a different folder"
 msgstr "Pokušaj koristiti jednu drugu mapu"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:164
-#, fuzzy
 msgid "Search for filename (type ! for advanced search)..."
 msgstr "Traži ime datoteke (utipkaj ! za aktiviranje napredne pretrage) …"
 
