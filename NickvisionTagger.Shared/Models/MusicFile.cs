@@ -16,6 +16,7 @@ namespace NickvisionTagger.Shared.Models;
 
 /// <summary>
 /// A model of a music file
+/// NOTE: Custom properties are stored in a tag under the "tagger-custom" field and is a string in the following format: [[prop]]value\n[[prop]]value
 /// </summary>
 public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
 {
@@ -221,39 +222,65 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     public bool LoadTagFromDisk()
     {
         _filename = System.IO.Path.GetFileName(Path);
+        _customProperties.Clear();
         TagLib.File? file = null;
         Tag? tag = null;
+        string? custom = null;
         try
         {
             if(_dotExtension == ".mp3")
             {
                 file = new TagLib.Mpeg.File(Path);
-                tag = file.GetTag(TagTypes.Id3v2, true);
+                var id3 = (TagLib.Id3v2.Tag)file.GetTag(TagTypes.Id3v2, true);
+                tag = id3;
+                var taggerCustom = TagLib.Id3v2.UserTextInformationFrame.Get(id3, "tagger-custom", StringType.UTF8, false, true);
+                if(taggerCustom.Text.Length > 0)
+                {
+                    custom = taggerCustom.Text[0];
+                }
             }
             else if(_dotExtension == ".m4a" || _dotExtension == ".m4b")
             {
                 file = new TagLib.Mpeg4.File(Path);
-                tag = file.GetTag(TagTypes.Apple, true);
+                var app = (TagLib.Mpeg4.AppleTag)file.GetTag(TagTypes.Apple, true);
+                tag = app;
+                var taggerCustom = app.GetText(ByteVector.FromString("tagger-custom", StringType.UTF8));
+                if(taggerCustom.Length > 0)
+                {
+                    custom = taggerCustom[0];
+                }
             }
             else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga")
             {
                 file = new TagLib.Ogg.File(Path);
-                tag = file.GetTag(TagTypes.Xiph, true);
+                var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
+                tag = xiph;
+                custom = xiph.GetFirstField("tagger-custom");
             }
             else if(_dotExtension == ".flac")
             {
                 file = new TagLib.Flac.File(Path);
-                tag = file.GetTag(TagTypes.Xiph, true);
+                var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
+                tag = xiph;
+                custom = xiph.GetFirstField("tagger-custom");
             }
             else if(_dotExtension == ".wma")
             {
                 file = new TagLib.Asf.File(Path);
-                tag = file.GetTag(TagTypes.Asf, true);
+                var asf = (TagLib.Asf.Tag)file.GetTag(TagTypes.Asf, true);
+                tag = asf;
+                custom = asf.GetDescriptorString("tagger-custom");
             }
             else if(_dotExtension == ".wav")
             {
                 file = new TagLib.Riff.File(Path);
-                tag = file.GetTag(TagTypes.Id3v2, true);
+                var id3 = (TagLib.Id3v2.Tag)file.GetTag(TagTypes.Id3v2, true);
+                tag = id3;
+                var taggerCustom = TagLib.Id3v2.UserTextInformationFrame.Get(id3, "tagger-custom", StringType.UTF8, false, true);
+                if(taggerCustom.Text.Length > 0)
+                {
+                    custom = taggerCustom.Text[0];
+                }
             }
         }
         catch
@@ -295,6 +322,17 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                     if(picture.Type == PictureType.BackCover)
                     {
                         BackAlbumArt = picture.Data;
+                    }
+                }
+            }
+            if(custom != null)
+            {
+                foreach (var propVal in custom.Split('\n'))
+                {
+                    if(propVal[0] == '[' && propVal[1] == '[')
+                    {
+                        var i = propVal.IndexOf("]]");
+                        _customProperties.Add(propVal.Substring(2, i), propVal.Substring(i + 2));
                     }
                 }
             }
