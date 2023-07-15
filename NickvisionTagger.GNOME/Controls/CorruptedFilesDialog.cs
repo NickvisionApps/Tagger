@@ -26,14 +26,15 @@ public partial class CorruptedFilesDialog
         _dialog = Adw.MessageDialog.New(parent, "Corrupted Files Found", _("This music folder contains music files that have corrupted tags. This means that they could be encoded improperly or have structural issues affecting playback.\nTry re-encoding the affected files to fix these issues.\n\nThe following files are affected and will be ignored by Tagger:"));
         _dialog.SetIconName(iconName);
         _dialog.AddResponse("ok", _("Continue"));
-        var group = new Adw.PreferencesGroup();
+        _dialog.SetDefaultResponse("ok");
+        var group = Adw.PreferencesGroup.New();
         _dialog.SetExtraChild(group);
         foreach (var path in files)
         {
             var row = Adw.ActionRow.New();
             row.SetTitle(path);
             row.SetTitleLines(1);
-            var button = new Gtk.Button();
+            var button = Gtk.Button.New();
             button.SetIconName("folder-symbolic");
             button.SetTooltipText("Open Folder");
             button.SetValign(Gtk.Align.Center);
