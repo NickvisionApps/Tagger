@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 14:31+0300\n"
+"POT-Creation-Date: 2023-07-15 20:17+0200\n"
 "PO-Revision-Date: 2023-07-02 01:57+0000\n"
 "Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
@@ -52,7 +52,7 @@ msgid "<keep>"
 msgstr ""
 
 #: ../../../Models/PropertyMap.cs:118
-#: NickvisionTagger.GNOME/Blueprints/window.blp:467
+#: NickvisionTagger.GNOME/Blueprints/window.blp:472
 msgid "0 MiB"
 msgstr "0 MiB"
 
@@ -92,7 +92,7 @@ msgstr "Artista dell'album"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:576
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:775
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:813
-#: NickvisionTagger.GNOME/Blueprints/window.blp:512
+#: NickvisionTagger.GNOME/Blueprints/window.blp:517
 msgid "Apply"
 msgstr "Applica"
 
@@ -199,7 +199,7 @@ msgstr "I metadati per {0} sono stati scaricati con successo"
 msgid "Downloading MusicBrainz metadata..."
 msgstr "Download dei metadati da MusicBrainz in corso..."
 
-#: ../../../Models/MusicFile.cs:174 ../../../Models/MusicFile.cs:190
+#: ../../../Models/MusicFile.cs:180 ../../../Models/MusicFile.cs:196
 msgid "ERROR"
 msgstr ""
 
@@ -243,7 +243,7 @@ msgstr "Nome del file a etichetta"
 msgid "filename"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1237
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1238
 msgid "Fingerprint was copied to clipboard."
 msgstr "La firma è stata copiata negli appunti."
 
@@ -821,39 +821,48 @@ msgstr ""
 msgid "ISRC"
 msgstr ""
 
+#: NickvisionTagger.GNOME/Blueprints/window.blp:416
+#, fuzzy
+msgid "Custom Properties"
+msgstr "Proprietà del file"
+
 #: NickvisionTagger.GNOME/Blueprints/window.blp:417
+msgid "These properties can only be managed with Tagger"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:422
 msgid "File Properties"
 msgstr "Proprietà del file"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:420
+#: NickvisionTagger.GNOME/Blueprints/window.blp:425
 msgid "Duration"
 msgstr "Durata"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:430
+#: NickvisionTagger.GNOME/Blueprints/window.blp:435
 msgid "Fingerprint"
 msgstr "Firma"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:449
+#: NickvisionTagger.GNOME/Blueprints/window.blp:454
 msgid "Copy Fingerprint To Clipboard"
 msgstr "Copia l'impronta negli appunti"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:462
+#: NickvisionTagger.GNOME/Blueprints/window.blp:467
 msgid "File Size"
 msgstr "Dimensione"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:487
+#: NickvisionTagger.GNOME/Blueprints/window.blp:492
 msgid "Toggle Tags Pane"
 msgstr "Commuta i pannelli delle etichette"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:493
+#: NickvisionTagger.GNOME/Blueprints/window.blp:498
 msgid "Reload Music Folder (F5)"
 msgstr "Ricarica la cartella contenente i brani (F5)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:507
+#: NickvisionTagger.GNOME/Blueprints/window.blp:512
 msgid "Tag Actions"
 msgstr "Azioni sulle etichette"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:513
+#: NickvisionTagger.GNOME/Blueprints/window.blp:518
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Applica le modifiche alle etichette (Ctrl+S)"
 
