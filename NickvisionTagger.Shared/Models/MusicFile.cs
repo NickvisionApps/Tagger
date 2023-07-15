@@ -4,8 +4,10 @@ using MetaBrainz.MusicBrainz.CoverArt;
 using MetaBrainz.MusicBrainz.Interfaces.Entities;
 using NickvisionTagger.Shared.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using TagLib;
 using static NickvisionTagger.Shared.Helpers.Gettext;
@@ -21,6 +23,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     private string _filename;
     private DateTime _modificationTimestamp;
     private string _fingerprint;
+    private Dictionary<string, string> _customProperties;
     
     /// <summary>
     /// What to sort files in a music folder by
@@ -104,6 +107,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// Whether or not the tag is empty
     /// </summary>
     public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && FrontAlbumArt.IsEmpty && BackAlbumArt.IsEmpty;
+    /// <summary>
+    /// The list of custom property names
+    /// </summary>
+    public List<string> CustomPropertyNames => _customProperties.Keys.ToList();
     
     /// <summary>
     /// Constructs a static MusicFile
@@ -124,6 +131,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         _filename = System.IO.Path.GetFileName(Path);
         _modificationTimestamp = System.IO.File.GetLastWriteTime(Path);
         _fingerprint = "";
+        _customProperties = new Dictionary<string, string>();
         Title = "";
         Artist = "";
         Album = "";
@@ -139,6 +147,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         ISRC = "";
         FrontAlbumArt = new ByteVector();
         BackAlbumArt = new ByteVector();
+        Duration = 0;
         LoadTagFromDisk();
     }
     
@@ -515,6 +524,43 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         Comment = "";
         FrontAlbumArt = new ByteVector();
         BackAlbumArt = new ByteVector();
+        _customProperties = new Dictionary<string, string>();
+    }
+
+    /// <summary>
+    /// Gets a custom property value
+    /// </summary>
+    /// <param name="name">The name of the custom property</param>
+    /// <returns>The value of the custom property. Null if no custom property exists with the provided name</returns>
+    public string? GetCustomProperty(string name)
+    {
+        if(!_customProperties.ContainsValue(name))
+        {
+            return null;
+        }
+        return _customProperties[name];
+    }
+
+    /// <summary>
+    /// Sets a custom property value
+    /// </summary>
+    /// <param name="name">The name of the custom property</param>
+    /// <param name="value">The value of the custom property</param>
+    public void SetCustomProperty(string name, string value) => _customProperties[name] = value;
+
+    /// <summary>
+    /// Removes a custom property
+    /// </summary>
+    /// <param name="name">The name of the custom property</param>
+    /// <returns>Whether or not the property was removed. If no property exists with the provided name, false will be returned</returns>
+    public bool RemoveCustomProperty(string name)
+    {
+        if(!_customProperties.ContainsKey(name))
+        {
+            return false;
+        }
+        _customProperties.Remove(name);
+        return true;
     }
     
     /// <summary>
