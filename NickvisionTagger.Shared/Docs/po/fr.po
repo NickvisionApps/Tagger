@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-15 00:59+0200\n"
+"POT-Creation-Date: 2023-07-15 06:13+0300\n"
 "PO-Revision-Date: 2023-07-13 11:34+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -27,7 +27,7 @@ msgstr "Configuration 🔧"
 #. (itstool) path: credit/name
 #: yelp/C/configuration.page:10 yelp/C/configuration.page:14
 #: yelp/C/corrupted.page:10 yelp/C/corrupted.page:14 yelp/C/index.page:14
-#: yelp/C/search.page:14 yelp/C/web-services.page:10
+#: yelp/C/search.page:10 yelp/C/search.page:14 yelp/C/web-services.page:10
 #: yelp/C/web-services.page:14
 msgid "Nicholas Logozzo"
 msgstr "Nicholas Logozzo"
@@ -196,51 +196,67 @@ msgstr ""
 
 #. (itstool) path: info/title
 #: yelp/C/corrupted.page:8
+#, fuzzy
 msgctxt "link"
-msgid "Corrupted Tags 🪲"
-msgstr ""
+msgid "Corrupted Files 🪲"
+msgstr "Trier les fichiers par"
 
 #. (itstool) path: page/title
 #: yelp/C/corrupted.page:20
-msgid "Corrupted Tags"
-msgstr ""
+#, fuzzy
+msgid "Corrupted Files"
+msgstr "Trier les fichiers par"
 
 #. (itstool) path: page/p
 #: yelp/C/corrupted.page:21
-msgid "This page explains music files with corrupted tags."
+msgid "This page explains music files with corrupted data."
 msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/corrupted.page:24
-msgid "Invalid Header"
+msgid "Invalid Data"
 msgstr ""
 
 #. (itstool) path: item/p
 #: yelp/C/corrupted.page:25
 msgid ""
-"An invalid tag header can cause issues when reading information about a file "
-"and even cause playback issues."
+"An invalid tag header or junk data in a file can cause issues when reading "
+"information about a file and even cause playback issues. Some websites add "
+"extra junk data in files which in turn causes corruption."
 msgstr ""
 
 #. (itstool) path: item/p
 #: yelp/C/corrupted.page:26
 msgid ""
-"Some websites add extra data in a tag header which in turn causes corruption."
+"<app>Tagger</app> ignores corrupted files, but shows you the list of them "
+"with full file paths and buttons to open files locations."
 msgstr ""
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:28
 msgid ""
-"Ffmpeg can be used to fix corruption issues. Run the following command to re-"
+"FFmpeg can be used to fix corruption issues. Run the following command to re-"
 "encode a file's tag and remove junk data:"
 msgstr ""
 
-#. (itstool) path: note/p
+#. (itstool) path: note/code
 #: yelp/C/corrupted.page:29
+#, no-wrap
+msgid "ffmpeg -i in.mp3 out.mp3"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/corrupted.page:30
 msgid ""
-"<code>ffmpeg -i in.mp3 out.mp3</code> where <code>in.mp3</code> is the file "
-"path of the corrupted file and <code>out.mp3</code> is the path to export "
-"the re-encoded file."
+"where <code>in.mp3</code> is the file path of the corrupted file and "
+"<code>out.mp3</code> is the path to export the re-encoded file."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/corrupted.page:31
+msgid ""
+"You can also use <link href=\"https://www.freac.org\">fre:ac</link> to re-"
+"encode files without convertion to another format."
 msgstr ""
 
 #. (itstool) path: info/title
@@ -256,7 +272,7 @@ msgid "Tagger Help"
 msgstr "Aide de Tagger"
 
 #. (itstool) path: credit/name
-#: yelp/C/index.page:10 yelp/C/search.page:10
+#: yelp/C/index.page:10
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Corrupted Tags</title>
+<title>Corrupted Files</title>
 <link rel="stylesheet" type="text/css" href="../C/C.css">
 <script type="text/javascript" src="../C/highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,15 +15,15 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="hr" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Pomoć za Tagger">Pomoć za Tagger</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Corrupted Tags</span></h1></div>
+<a class="trail" href="index.html" title="Pomoć za Tagger">Pomoć za Tagger</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Corrupted Files</span></h1></div>
 <div class="region">
 <div class="contents pagewide">
-<p class="p">This page explains music files with corrupted tags.</p>
+<p class="p">This page explains music files with corrupted data.</p>
 <div class="terms"><div class="inner"><div class="region"><dl class="terms">
-<dt class="terms">Invalid Header</dt>
+<dt class="terms">Invalid Data</dt>
 <dd class="terms">
-<p class="p">An invalid tag header can cause issues when reading information about a file and even cause playback issues.</p>
-<p class="p">Some websites add extra data in a tag header which in turn causes corruption.</p>
+<p class="p">An invalid tag header or junk data in a file can cause issues when reading information about a file and even cause playback issues. Some websites add extra junk data in files which in turn causes corruption.</p>
+<p class="p"><span class="app">Tagger</span> ignores corrupted files, but shows you the list of them with full file paths and buttons to open files locations.</p>
 <div class="note note-advanced" title="Napredna">
 <svg height="24" width="24" version="1.1">
  <g>
@@ -39,8 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
  </g>
 </svg><div class="inner"><div class="region"><div class="contents">
-<p class="p">Ffmpeg can be used to fix corruption issues. Run the following command to re-encode a file's tag and remove junk data:</p>
-<p class="p"><span class="code">ffmpeg -i in.mp3 out.mp3</span> where <span class="code">in.mp3</span> is the file path of the corrupted file and <span class="code">out.mp3</span> is the path to export the re-encoded file.</p>
+<p class="p">FFmpeg can be used to fix corruption issues. Run the following command to re-encode a file's tag and remove junk data:</p>
+<div class="code"><pre class="contents"><code>ffmpeg -i in.mp3 out.mp3</code></pre></div>
+<p class="p">where <span class="code">in.mp3</span> is the file path of the corrupted file and <span class="code">out.mp3</span> is the path to export the re-encoded file.</p>
+<p class="p">You can also use <span class="link"><a href="https://www.freac.org" title="https://www.freac.org">fre:ac</a></span> to re-encode files without convertion to another format.</p>
 </div></div></div>
 </div>
 </dd>
