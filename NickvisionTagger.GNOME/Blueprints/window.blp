@@ -415,11 +415,13 @@ Adw.ApplicationWindow _root {
                           Adw.ExpanderRow _customPropertiesRow {
                             title: _("Custom Properties");
                             subtitle: _("These properties can only be managed with Tagger");
+                          }
+                        }
 
-                            Adw.EntryRow _newCustomPropertyRow {
-                              title: _("New Property Name");
-                              show-apply-button: true;
-                            }
+                        Adw.PreferencesGroup {
+                          Adw.EntryRow _newCustomPropertyRow {
+                            title: _("Add Custom Property");
+                            show-apply-button: true;
                           }
                         }
 
