@@ -91,6 +91,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private GAsyncReadyCallback? _openCallback;
     private GAsyncReadyCallback? _saveCallback;
     private AlbumArtType _currentAlbumArtType;
+    private List<Adw.EntryRow> _customPropertyRows;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
@@ -131,6 +132,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
     [Gtk.Connect] private readonly Adw.EntryRow _isrcRow;
+    [Gtk.Connect] private readonly Adw.ExpanderRow _customPropertiesRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _newCustomPropertyRow;
     [Gtk.Connect] private readonly Gtk.Label _durationLabel;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
     [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
@@ -151,6 +154,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _updateFingerprintFunc = (x) => UpdateFingerprint();
         _corruptedFilesFunc = (x) => CorruptedFilesFound();
         _currentAlbumArtType = AlbumArtType.Front;
+        _customPropertyRows = new List<Adw.EntryRow>();
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
         SetIconName(_controller.AppInfo.ID);
@@ -274,6 +278,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 TagPropertyChanged();
             }
         };
+        _newCustomPropertyRow.OnApply += (sender, e) => _controller.AddCustomProperty(_newCustomPropertyRow.GetText());
         _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
         _copyFingerprintButton.OnClicked += CopyFingerprintToClipboard;
         //Register Events
@@ -1060,6 +1065,37 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         _removeAlbumArtAction.SetEnabled(_artViewStack.GetVisibleChildName() != "NoImage");
         _exportAlbumArtAction.SetEnabled(albumArt == "hasArt");
+        //Update Custom Properties
+        foreach(var row in _customPropertyRows)
+        {
+            _customPropertiesRow.Remove(row);
+        }
+        _customPropertyRows.Clear();
+        _customPropertiesRow.SetVisible(_controller.SelectedMusicFiles.Count == 1);
+        if(_controller.SelectedMusicFiles.Count == 1)
+        {
+            foreach(var pair in _controller.SelectedPropertyMap.CustomProperties)
+            {
+                var row = Adw.EntryRow.New();
+                row.SetTitle(pair.Key);
+                row.SetText(pair.Value);
+                var removeButton = Gtk.Button.New();
+                removeButton.SetValign(Gtk.Align.Center);
+                removeButton.SetTooltipText(_("Remove Custom Property"));
+                removeButton.SetIconName("user-trash-symbolic");
+                removeButton.AddCssClass("flat");
+                removeButton.OnClicked += (sender, e) => _controller.RemoveCustomProperty(pair.Key);
+                row.OnNotify += (sender, e) =>
+                {
+                    if(e.Pspec.GetName() == "text")
+                    {
+                        TagPropertyChanged();
+                    }
+                };
+                _customPropertyRows.Add(row);
+                _customPropertiesRow.AddRow(row);
+            }
+        }
         //Update Rows
         foreach(var pair in _controller.SelectedMusicFiles)
         {
@@ -1182,7 +1218,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         if(!_isSelectionOccuring && _controller.SelectedMusicFiles.Count > 0)
         {
             //Update Tags
-            _controller.UpdateTags(new PropertyMap()
+            var propMap = new PropertyMap()
             {
                 Filename = _filenameRow.GetText(),
                 Title = _titleRow.GetText(),
@@ -1198,7 +1234,15 @@ public partial class MainWindow : Adw.ApplicationWindow
                 Description = _descriptionRow.GetText(),
                 Publisher = _publisherRow.GetText(),
                 ISRC = _isrcRow.GetText()
-            }, false);
+            };
+            if(_controller.SelectedMusicFiles.Count == 1)
+            {
+                foreach(var row in _customPropertyRows)
+                {
+                    propMap.CustomProperties.Add(row.GetTitle(), row.GetText());
+                }
+            }
+            _controller.UpdateTags(propMap, false);
             //Update Rows
             foreach(var pair in _controller.SelectedMusicFiles)
             {

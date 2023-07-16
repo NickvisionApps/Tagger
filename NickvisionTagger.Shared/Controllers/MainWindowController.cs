@@ -312,12 +312,15 @@ public class MainWindowController
                 pair.Value.ISRC = map.ISRC;
                 updated = true;
             }
-            foreach(var p in map.CustomProperties)
+            if(SelectedMusicFiles.Count == 1)
             {
-                if(p.Value != pair.Value.GetCustomProperty(p.Key) && p.Value != _("<keep>"))
+                foreach(var p in map.CustomProperties)
                 {
-                    pair.Value.SetCustomProperty(p.Key, p.Value);
-                    updated = true;
+                    if(p.Value != pair.Value.GetCustomProperty(p.Key) && p.Value != _("<keep>"))
+                    {
+                        pair.Value.SetCustomProperty(p.Key, p.Value);
+                        updated = true;
+                    }
                 }
             }
             MusicFileSaveStates[pair.Key] = !updated;
@@ -594,6 +597,26 @@ public class MainWindowController
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Adds a custom property to the selected music files
+    /// </summary>
+    /// <param name="The name of the property to add"></param>
+    public void AddCustomProperty(string name)
+    {
+        var added = false;
+        foreach(var pair in SelectedMusicFiles)
+        {
+            pair.Value.SetCustomProperty(name, "");
+            MusicFileSaveStates[pair.Key] = false;
+            added = true;
+        }
+        if(added)
+        {
+            UpdateSelectedMusicFilesProperties();
+        }
+        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -1089,7 +1112,6 @@ public class MainWindowController
     /// </summary>
     private void UpdateSelectedMusicFilesProperties()
     {
-        SelectedPropertyMap.CustomProperties.Clear();
         if(SelectedMusicFiles.Count == 1)
         {
             var first = SelectedMusicFiles.First().Value;
