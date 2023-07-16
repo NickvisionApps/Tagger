@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Models;
@@ -72,6 +73,10 @@ public class PropertyMap
     /// </summary>
     public string BackAlbumArt { get; set; }
     /// <summary>
+    /// The custom properties of the file
+    /// </summary>
+    public Dictionary<string, string> CustomProperties { get; init; }
+    /// <summary>
     /// The duration of the file
     /// </summary>
     public string Duration { get; set; }
@@ -89,6 +94,7 @@ public class PropertyMap
     /// </summary>
     public PropertyMap()
     {
+        CustomProperties = new Dictionary<string, string>();
         Clear();
     }
     
@@ -113,6 +119,7 @@ public class PropertyMap
         ISRC = "";
         FrontAlbumArt = "";
         BackAlbumArt = "";
+        CustomProperties.Clear();
         Duration = "00:00:00";
         Fingerprint = "";
         FileSize = _("0 MiB");
@@ -141,6 +148,7 @@ public class PropertyMap
         s += $"ISRC: {ISRC}\n";
         s += $"FrontAlbumArt: {FrontAlbumArt}\n";
         s += $"BackAlbumArt: {BackAlbumArt}\n";
+        s += $"CustomPropertiesCount: {CustomProperties.Count}\n";
         s += $"Duration: {Duration}\n";
         s += $"Fingerprint: {Fingerprint}\n";
         s += $"FileSize: {FileSize}\n";

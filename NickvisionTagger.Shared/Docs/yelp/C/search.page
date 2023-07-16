@@ -41,6 +41,7 @@
 <item><p><code>description</code></p></item>
 <item><p><code>publisher</code></p></item>
 <item><p><code>isrc</code></p></item>
+<item><p><code>custom</code></p></item>
 </list>
 <p>Properties are case-insensitive.</p></section>
 
@@ -49,9 +50,11 @@
 
 <section><title>Examples</title>
 <p><code>!artist=""</code></p>
-<p>This search string will filter the listbox to contain music files which artist is empty.</p>
+<p>This search string will filter the listbox to contain music files whose artist is empty.</p>
 <p><code>!genre="";year="2022"</code></p>
-<p>This search string will filter the listbox to contain music files which genre is empty and which year is 2022 (Year and Track properties will validate if the value string is a number).</p>
+<p>This search string will filter the listbox to contain music files whose genre is empty and whose year is 2022 (Year and Track properties will validate if the value string is a number).</p>
 <p><code>!title="";artist="bob"</code></p>
-<p>This search string will filter the listbox to contain music files which title is empty and which artist is <code>bob</code>.</p></section>
+<p>This search string will filter the listbox to contain music files whose title is empty and whose artist is <code>bob</code>.</p>
+<p><code>!custom="mbrd"</code></p>
+<p>This search string will filter the listbox to contain music files that contain a custom property with the name <code>mbrd</code>.</p></section>
 </page>

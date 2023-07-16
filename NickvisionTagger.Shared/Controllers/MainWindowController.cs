@@ -312,6 +312,14 @@ public class MainWindowController
                 pair.Value.ISRC = map.ISRC;
                 updated = true;
             }
+            foreach(var p in map.CustomProperties)
+            {
+                if(p.Value != pair.Value.GetCustomProperty(p.Key) && p.Value != _("<keep>"))
+                {
+                    pair.Value.SetCustomProperty(p.Key, p.Value);
+                    updated = true;
+                }
+            }
             MusicFileSaveStates[pair.Key] = !updated;
         }
         if(triggerSelectedMusicFilesPropertiesChanged)
@@ -589,6 +597,28 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Removes the custom property from selected music files
+    /// </summary>
+    /// <param name="The name of the property to remove"></param>
+    public void RemoveCustomProperty(string name)
+    {
+        var removed = false;
+        foreach(var pair in SelectedMusicFiles)
+        {
+            if(pair.Value.RemoveCustomProperty(name))
+            {
+                MusicFileSaveStates[pair.Key] = false;
+                removed = true;
+            }
+        }
+        if(removed)
+        {
+            UpdateSelectedMusicFilesProperties();
+        }
+        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    /// <summary>
     /// Gets MimeType of album art for the first selected file
     /// </summary>
     /// <param name="type">AlbumArtType</param>
@@ -646,8 +676,9 @@ public class MainWindowController
                 return (false, null);
             }
             var propValPairs = search.Split(';');
-            var validProperties = new string[] { "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "isrc", _("isrc") };
+            var validProperties = new string[] { "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "isrc", _("isrc"), "custom", _("custom") };
             var propertyMap = new PropertyMap();
+            var customPropName = "";
             foreach(var propVal in propValPairs)
             {
                 var fields = propVal.Split('=');
@@ -759,6 +790,10 @@ public class MainWindowController
                 else if(prop == "isrc" || prop == _("isrc"))
                 {
                     propertyMap.ISRC = val;
+                }
+                else if(prop == "custom" || prop == _("custom"))
+                {
+                    customPropName = val;
                 }
             }
             var matches = new List<string>();
@@ -1016,6 +1051,17 @@ public class MainWindowController
                         }
                     }
                 }
+                if(!string.IsNullOrEmpty(customPropName))
+                {
+                    if(customPropName == "NULL")
+                    {
+                        continue;
+                    }
+                    if(!musicFile.CustomPropertyNames.Select(x => x.ToLower()).Contains(customPropName))
+                    {
+                        continue;
+                    }
+                }
                 matches.Add(musicFile.Filename.ToLower());
             }
             return (true, matches);
@@ -1043,6 +1089,7 @@ public class MainWindowController
     /// </summary>
     private void UpdateSelectedMusicFilesProperties()
     {
+        SelectedPropertyMap.CustomProperties.Clear();
         if(SelectedMusicFiles.Count == 1)
         {
             var first = SelectedMusicFiles.First().Value;
@@ -1074,6 +1121,10 @@ public class MainWindowController
             SelectedPropertyMap.FileSize = first.FileSize.ToFileSizeString();
             SelectedPropertyMap.FrontAlbumArt = first.FrontAlbumArt.IsEmpty ? "noArt" : "hasArt";
             SelectedPropertyMap.BackAlbumArt = first.BackAlbumArt.IsEmpty ? "noArt" : "hasArt";
+            foreach (var custom in first.CustomPropertyNames)
+            {
+                SelectedPropertyMap.CustomProperties.Add(custom, first.GetCustomProperty(custom)!);
+            }
         }
         else if(SelectedMusicFiles.Count > 1)
         {

@@ -201,7 +201,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     }
 
     /// <summary>
-    /// The list of the names of the custom properties
+    /// The sorted list of the names of the custom properties
     /// </summary>
     public List<string> CustomPropertyNames
     {
@@ -594,7 +594,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         Comment = "";
         FrontAlbumArt = new ByteVector();
         BackAlbumArt = new ByteVector();
-        _customProperties = new Dictionary<string, string>();
+        _customProperties.Clear();
     }
 
     /// <summary>
