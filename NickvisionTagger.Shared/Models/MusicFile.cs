@@ -476,37 +476,60 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         TagLib.File? file = null;
         Tag? tag = null;
+        var customPropertiesString = "";
+        foreach(var pair in _customProperties)
+        {
+            customPropertiesString += $"[[{pair.Key}]]{pair.Value}\n";
+        }
+        if(!string.IsNullOrEmpty(customPropertiesString))
+        {
+            customPropertiesString = customPropertiesString.Remove(customPropertiesString.Length - 1);
+        }
         try
         {
             if(_dotExtension == ".mp3")
             {
                 file = new TagLib.Mpeg.File(Path);
-                tag = file.GetTag(TagTypes.Id3v2, true);
+                var id3 = (TagLib.Id3v2.Tag)file.GetTag(TagTypes.Id3v2, true);
+                tag = id3;
+                var taggerCustom = TagLib.Id3v2.UserTextInformationFrame.Get(id3, "tagger-custom", StringType.UTF8, true, true);
+                taggerCustom.Text = new string[] { customPropertiesString };
             }
             else if(_dotExtension == ".m4a" || _dotExtension == ".m4b")
             {
                 file = new TagLib.Mpeg4.File(Path);
-                tag = file.GetTag(TagTypes.Apple, true);
+                var app = (TagLib.Mpeg4.AppleTag)file.GetTag(TagTypes.Apple, true);
+                tag = app;
+                app.SetText(ByteVector.FromString("tagger-custom", StringType.UTF8), customPropertiesString);
             }
             else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga")
             {
                 file = new TagLib.Ogg.File(Path);
-                tag = file.GetTag(TagTypes.Xiph, true);
+                var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
+                tag = xiph;
+                xiph.SetField("tagger-custom", customPropertiesString);
             }
             else if(_dotExtension == ".flac")
             {
                 file = new TagLib.Flac.File(Path);
-                tag = file.GetTag(TagTypes.Xiph, true);
+                var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
+                tag = xiph;
+                xiph.SetField("tagger-custom", customPropertiesString);
             }
             else if(_dotExtension == ".wma")
             {
                 file = new TagLib.Asf.File(Path);
-                tag = file.GetTag(TagTypes.Asf, true);
+                var asf = (TagLib.Asf.Tag)file.GetTag(TagTypes.Asf, true);
+                tag = asf;
+                asf.SetDescriptorString("tagger-custom", customPropertiesString);
             }
             else if(_dotExtension == ".wav")
             {
                 file = new TagLib.Riff.File(Path);
-                tag = file.GetTag(TagTypes.Id3v2, true);
+                var id3 = (TagLib.Id3v2.Tag)file.GetTag(TagTypes.Id3v2, true);
+                tag = id3;
+                var taggerCustom = TagLib.Id3v2.UserTextInformationFrame.Get(id3, "tagger-custom", StringType.UTF8, true, true);
+                taggerCustom.Text = new string[] { customPropertiesString };
             }
         }
         catch
