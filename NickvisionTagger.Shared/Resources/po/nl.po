@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-15 20:17+0200\n"
+"POT-Creation-Date: 2023-07-16 07:10+0300\n"
 "PO-Revision-Date: 2023-07-01 12:52+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -51,7 +51,7 @@ msgid "<keep>"
 msgstr ""
 
 #: ../../../Models/PropertyMap.cs:118
-#: NickvisionTagger.GNOME/Blueprints/window.blp:472
+#: NickvisionTagger.GNOME/Blueprints/window.blp:467
 msgid "0 MiB"
 msgstr ""
 
@@ -92,7 +92,7 @@ msgstr "Albumartiest"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:576
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:775
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:813
-#: NickvisionTagger.GNOME/Blueprints/window.blp:517
+#: NickvisionTagger.GNOME/Blueprints/window.blp:512
 msgid "Apply"
 msgstr "Toepassen"
 
@@ -143,10 +143,6 @@ msgstr "Opmerking"
 #: ../../../Controllers/MainWindowController.cs:649
 #: ../../../Controllers/MainWindowController.cs:747
 msgid "composer"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
-msgid "Continue"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
@@ -201,7 +197,7 @@ msgstr "Er zijn metagegevens van %d bestanden opgehaald"
 msgid "Downloading MusicBrainz metadata..."
 msgstr "MusicBrainz-metagegevens ophalen"
 
-#: ../../../Models/MusicFile.cs:180 ../../../Models/MusicFile.cs:196
+#: ../../../Models/MusicFile.cs:174 ../../../Models/MusicFile.cs:190
 msgid "ERROR"
 msgstr ""
 
@@ -438,16 +434,6 @@ msgstr ""
 msgid "Tagger"
 msgstr "Tagger"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:26
-msgid ""
-"This music folder contains music files that have corrupted tags. This means "
-"that they could be encoded improperly or have structural issues affecting "
-"playback.\n"
-"Try re-encoding the affected files to fix these issues.\n"
-"\n"
-"The following files are affected and will be ignored by Tagger:"
-msgstr ""
-
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "TiB"
@@ -484,6 +470,21 @@ msgstr "De metagegevens kunnen niet worden verstuurd naar AcoustId."
 #: ../../../Controllers/MainWindowController.cs:649
 #: ../../../Controllers/MainWindowController.cs:690
 msgid "year"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:22
+#, fuzzy
+msgid "Corrupted Files Found"
+msgstr "Er zijn geen muziekbestanden aangetroffen"
+
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:27
+msgid ""
+"This music folder contains music files that have corrupted tags. This means "
+"that they could be encoded improperly or have structural issues affecting "
+"playback.\n"
+"Try re-encoding the affected files to fix these issues.\n"
+"\n"
+"The following files are affected and will be ignored by Tagger."
 msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
@@ -842,47 +843,39 @@ msgstr ""
 msgid "ISRC"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:416
-msgid "Custom Properties"
-msgstr ""
-
 #: NickvisionTagger.GNOME/Blueprints/window.blp:417
-msgid "These properties can only be managed with Tagger"
-msgstr ""
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:422
 msgid "File Properties"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:425
+#: NickvisionTagger.GNOME/Blueprints/window.blp:420
 msgid "Duration"
 msgstr "Duur"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:435
+#: NickvisionTagger.GNOME/Blueprints/window.blp:430
 msgid "Fingerprint"
 msgstr "Controlesom"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:454
+#: NickvisionTagger.GNOME/Blueprints/window.blp:449
 msgid "Copy Fingerprint To Clipboard"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:467
+#: NickvisionTagger.GNOME/Blueprints/window.blp:462
 msgid "File Size"
 msgstr "Bestandsgrootte"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:492
+#: NickvisionTagger.GNOME/Blueprints/window.blp:487
 msgid "Toggle Tags Pane"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:498
+#: NickvisionTagger.GNOME/Blueprints/window.blp:493
 msgid "Reload Music Folder (F5)"
 msgstr "Muziekmap herladen (F5)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:512
+#: NickvisionTagger.GNOME/Blueprints/window.blp:507
 msgid "Tag Actions"
 msgstr "Tagacties"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:518
+#: NickvisionTagger.GNOME/Blueprints/window.blp:513
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Tagwijzigingen opslaan (Ctrl+S)"
 
@@ -912,10 +905,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Clear Tags"
 #~ msgstr "Tags verwijderen"
-
-#, fuzzy
-#~ msgid "Corrupted Files Found"
-#~ msgstr "Er zijn geen muziekbestanden aangetroffen"
 
 #, fuzzy
 #~ msgid ""

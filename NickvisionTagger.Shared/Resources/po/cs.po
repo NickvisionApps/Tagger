@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-15 20:17+0200\n"
+"POT-Creation-Date: 2023-07-16 07:10+0300\n"
 "PO-Revision-Date: 2023-07-14 19:39+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -52,7 +52,7 @@ msgid "<keep>"
 msgstr "<ponechat>"
 
 #: ../../../Models/PropertyMap.cs:118
-#: NickvisionTagger.GNOME/Blueprints/window.blp:472
+#: NickvisionTagger.GNOME/Blueprints/window.blp:467
 msgid "0 MiB"
 msgstr "0 MiB"
 
@@ -89,7 +89,7 @@ msgstr "umělecalba"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:576
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:775
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:813
-#: NickvisionTagger.GNOME/Blueprints/window.blp:517
+#: NickvisionTagger.GNOME/Blueprints/window.blp:512
 msgid "Apply"
 msgstr "Použít"
 
@@ -139,10 +139,6 @@ msgstr "komentář"
 #: ../../../Controllers/MainWindowController.cs:747
 msgid "composer"
 msgstr "skladatel"
-
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
-msgid "Continue"
-msgstr "Pokračovat"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:657
@@ -195,7 +191,7 @@ msgstr "Metadata pro {0} souborů úspěšně stažena"
 msgid "Downloading MusicBrainz metadata..."
 msgstr "Stahování metadat z MusicBrainz..."
 
-#: ../../../Models/MusicFile.cs:180 ../../../Models/MusicFile.cs:196
+#: ../../../Models/MusicFile.cs:174 ../../../Models/MusicFile.cs:190
 msgid "ERROR"
 msgstr "CHYBA"
 
@@ -421,22 +417,6 @@ msgstr "Označte svou hudbu"
 msgid "Tagger"
 msgstr "Označovač"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:26
-msgid ""
-"This music folder contains music files that have corrupted tags. This means "
-"that they could be encoded improperly or have structural issues affecting "
-"playback.\n"
-"Try re-encoding the affected files to fix these issues.\n"
-"\n"
-"The following files are affected and will be ignored by Tagger:"
-msgstr ""
-"Tato hudební složka obsahuje hudební soubory s poškozenými značkami. To "
-"znamená, že mohou být nesprávně zakódovány nebo mohou mít strukturální "
-"problémy ovlivňující přehrávání.\n"
-"Zkuste dotčené soubory znovu zakódovat a tyto problémy odstranit.\n"
-"\n"
-"Postiženy jsou následující soubory, které bude aplikace Označovač ignorovat:"
-
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "TiB"
@@ -471,6 +451,28 @@ msgstr "Nepodařilo se odeslat AcoustId. Zkontrolujte klíč API"
 #: ../../../Controllers/MainWindowController.cs:690
 msgid "year"
 msgstr "rok"
+
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:22
+#, fuzzy
+msgid "Corrupted Files Found"
+msgstr "Nenalezeny žádné hudební soubory"
+
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:27
+#, fuzzy
+msgid ""
+"This music folder contains music files that have corrupted tags. This means "
+"that they could be encoded improperly or have structural issues affecting "
+"playback.\n"
+"Try re-encoding the affected files to fix these issues.\n"
+"\n"
+"The following files are affected and will be ignored by Tagger."
+msgstr ""
+"Tato hudební složka obsahuje hudební soubory s poškozenými značkami. To "
+"znamená, že mohou být nesprávně zakódovány nebo mohou mít strukturální "
+"problémy ovlivňující přehrávání.\n"
+"Zkuste dotčené soubory znovu zakódovat a tyto problémy odstranit.\n"
+"\n"
+"Postiženy jsou následující soubory, které bude aplikace Označovač ignorovat:"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:114
@@ -806,48 +808,39 @@ msgstr "Vydavatel"
 msgid "ISRC"
 msgstr "ISRC"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:416
-#, fuzzy
-msgid "Custom Properties"
-msgstr "Další vlastnosti"
-
 #: NickvisionTagger.GNOME/Blueprints/window.blp:417
-msgid "These properties can only be managed with Tagger"
-msgstr ""
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:422
 msgid "File Properties"
 msgstr "Vlastnosti souboru"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:425
+#: NickvisionTagger.GNOME/Blueprints/window.blp:420
 msgid "Duration"
 msgstr "Doba trvání"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:435
+#: NickvisionTagger.GNOME/Blueprints/window.blp:430
 msgid "Fingerprint"
 msgstr "Otisk"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:454
+#: NickvisionTagger.GNOME/Blueprints/window.blp:449
 msgid "Copy Fingerprint To Clipboard"
 msgstr "Zkopírovat otisk do schránky"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:467
+#: NickvisionTagger.GNOME/Blueprints/window.blp:462
 msgid "File Size"
 msgstr "Velikost souboru"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:492
+#: NickvisionTagger.GNOME/Blueprints/window.blp:487
 msgid "Toggle Tags Pane"
 msgstr "Přepnout panel značek"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:498
+#: NickvisionTagger.GNOME/Blueprints/window.blp:493
 msgid "Reload Music Folder (F5)"
 msgstr "Znovu načíst složku s hudbou (F5)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:512
+#: NickvisionTagger.GNOME/Blueprints/window.blp:507
 msgid "Tag Actions"
 msgstr "Akce značky"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:518
+#: NickvisionTagger.GNOME/Blueprints/window.blp:513
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Použít změny u značky (Ctrl+S)"
 
@@ -874,13 +867,12 @@ msgstr "— Snadný převod názvů souborů na značky a značkek na názvy sou
 msgid "— Lookup file information using MusicBrainz"
 msgstr "— Vyhledávání informací o souborech pomocí MusicBrainz"
 
+#~ msgid "Continue"
+#~ msgstr "Pokračovat"
+
 #, fuzzy
 #~ msgid "Clear Tags"
 #~ msgstr "Odstranit značky"
-
-#, fuzzy
-#~ msgid "Corrupted Files Found"
-#~ msgstr "Nenalezeny žádné hudební soubory"
 
 #, fuzzy
 #~ msgid "Ignore Files"

@@ -1,13 +1,13 @@
+using NickvisionTagger.GNOME.Helpers;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using static NickvisionTagger.Shared.Helpers.Gettext;
 
-namespace NickvisionTagger.GNOME.Controls;
+﻿namespace NickvisionTagger.GNOME.Controls;
 
 /// <summary>
-/// A dialog to show info about corrupted files
+/// A dialog showing the list of corrupted files
 /// </summary>
-public partial class CorruptedFilesDialog
+public partial class CorruptedFilesDialog : Adw.Window
 {
     private delegate void GAsyncReadyCallback(nint source, nint res, nint userData);
 
@@ -15,26 +15,30 @@ public partial class CorruptedFilesDialog
     private static partial nint gtk_file_launcher_new(nint file);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_launcher_open_containing_folder(nint fileLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
-    
-    private readonly Adw.MessageDialog _dialog;
-    
+
+    [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindow;
+    [Gtk.Connect] private readonly Adw.PreferencesGroup _filesGroup;
+
     /// <summary>
-    /// Constructs CorruptedFilesDialog
+    /// Constructs a CorruptedFilesDialog
     /// </summary>
-    public CorruptedFilesDialog(Gtk.Window parent, string iconName, List<string> files)
+    /// <param name="builder">Gtk.Builder</param>
+    /// <param name="parent">Gtk.Window</param>
+    /// <param name="iconName">Icon name for the window</param>
+    /// <param name="files">List of corrupted files</param>
+    private CorruptedFilesDialog(Gtk.Builder builder, Gtk.Window parent, string iconName, List<string> files) : base(builder.GetPointer("_root"), false)
     {
-        _dialog = Adw.MessageDialog.New(parent, "Corrupted Files Found", _("This music folder contains music files that have corrupted tags. This means that they could be encoded improperly or have structural issues affecting playback.\nTry re-encoding the affected files to fix these issues.\n\nThe following files are affected and will be ignored by Tagger:"));
-        _dialog.SetIconName(iconName);
-        _dialog.AddResponse("ok", _("Continue"));
-        _dialog.SetDefaultResponse("ok");
-        var group = Adw.PreferencesGroup.New();
-        _dialog.SetExtraChild(group);
+        builder.Connect(this);
+        //Dialog Settings
+        SetIconName(iconName);
+        SetTransientFor(parent);
         foreach (var path in files)
         {
             var row = Adw.ActionRow.New();
             row.SetTitle(path);
             row.SetTitleLines(1);
-            var button = Gtk.Button.New();
+            row.SetTooltipText(path);
+            var button = new Gtk.Button();
             button.SetIconName("folder-symbolic");
             button.SetTooltipText("Open Folder");
             button.SetValign(Gtk.Align.Center);
@@ -47,12 +51,17 @@ public partial class CorruptedFilesDialog
             };
             row.AddSuffix(button);
             row.SetActivatableWidget(button);
-            group.Add(row);
+            _filesGroup.Add(row);
         }
     }
-    
+
     /// <summary>
-    /// Presents CorruptedFilesDialog
+    /// Constructs a CorruptedFilesDialog
     /// </summary>
-    public void Present() => _dialog.Present();
+    /// <param name="parent">Gtk.Window</param>
+    /// <param name="iconName">Icon name for the window</param>
+    /// <param name="files">List of corrupted files</param>
+    public CorruptedFilesDialog(Gtk.Window parent, string iconName, List<string> files) : this(Builder.FromFile("corrupted_files_dialog.ui"), parent, iconName, files)
+    {
+    }
 }
