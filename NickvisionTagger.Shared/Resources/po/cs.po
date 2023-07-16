@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 14:31+0300\n"
+"POT-Creation-Date: 2023-07-16 07:10+0300\n"
 "PO-Revision-Date: 2023-07-14 19:39+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -140,10 +140,6 @@ msgstr "komentář"
 msgid "composer"
 msgstr "skladatel"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
-msgid "Continue"
-msgstr "Pokračovat"
-
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:657
 #: NickvisionTagger.GNOME/Blueprints/window.blp:39
@@ -235,7 +231,7 @@ msgstr "Název souboru na značku"
 msgid "filename"
 msgstr "názevsouboru"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1237
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1238
 msgid "Fingerprint was copied to clipboard."
 msgstr "Otisk byl zkopírován do schránky."
 
@@ -421,22 +417,6 @@ msgstr "Označte svou hudbu"
 msgid "Tagger"
 msgstr "Označovač"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:26
-msgid ""
-"This music folder contains music files that have corrupted tags. This means "
-"that they could be encoded improperly or have structural issues affecting "
-"playback.\n"
-"Try re-encoding the affected files to fix these issues.\n"
-"\n"
-"The following files are affected and will be ignored by Tagger:"
-msgstr ""
-"Tato hudební složka obsahuje hudební soubory s poškozenými značkami. To "
-"znamená, že mohou být nesprávně zakódovány nebo mohou mít strukturální "
-"problémy ovlivňující přehrávání.\n"
-"Zkuste dotčené soubory znovu zakódovat a tyto problémy odstranit.\n"
-"\n"
-"Postiženy jsou následující soubory, které bude aplikace Označovač ignorovat:"
-
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "TiB"
@@ -471,6 +451,28 @@ msgstr "Nepodařilo se odeslat AcoustId. Zkontrolujte klíč API"
 #: ../../../Controllers/MainWindowController.cs:690
 msgid "year"
 msgstr "rok"
+
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:22
+#, fuzzy
+msgid "Corrupted Files Found"
+msgstr "Nenalezeny žádné hudební soubory"
+
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:27
+#, fuzzy
+msgid ""
+"This music folder contains music files that have corrupted tags. This means "
+"that they could be encoded improperly or have structural issues affecting "
+"playback.\n"
+"Try re-encoding the affected files to fix these issues.\n"
+"\n"
+"The following files are affected and will be ignored by Tagger."
+msgstr ""
+"Tato hudební složka obsahuje hudební soubory s poškozenými značkami. To "
+"znamená, že mohou být nesprávně zakódovány nebo mohou mít strukturální "
+"problémy ovlivňující přehrávání.\n"
+"Zkuste dotčené soubory znovu zakódovat a tyto problémy odstranit.\n"
+"\n"
+"Postiženy jsou následující soubory, které bude aplikace Označovač ignorovat:"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:114
@@ -865,13 +867,12 @@ msgstr "— Snadný převod názvů souborů na značky a značkek na názvy sou
 msgid "— Lookup file information using MusicBrainz"
 msgstr "— Vyhledávání informací o souborech pomocí MusicBrainz"
 
+#~ msgid "Continue"
+#~ msgstr "Pokračovat"
+
 #, fuzzy
 #~ msgid "Clear Tags"
 #~ msgstr "Odstranit značky"
-
-#, fuzzy
-#~ msgid "Corrupted Files Found"
-#~ msgstr "Nenalezeny žádné hudební soubory"
 
 #, fuzzy
 #~ msgid "Ignore Files"
