@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 14:31+0300\n"
+"POT-Creation-Date: 2023-07-16 07:10+0300\n"
 "PO-Revision-Date: 2023-07-11 07:01+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
 #: ../../../Controllers/MainWindowController.cs:229
@@ -144,10 +144,6 @@ msgstr "Комментарий"
 msgid "composer"
 msgstr "Композитор"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
-msgid "Continue"
-msgstr ""
-
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:657
 #: NickvisionTagger.GNOME/Blueprints/window.blp:39
@@ -244,7 +240,7 @@ msgstr "Имя файла в тег"
 msgid "filename"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1237
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1238
 msgid "Fingerprint was copied to clipboard."
 msgstr "Отпечаток был скопирован в буфер обмена."
 
@@ -434,16 +430,6 @@ msgstr "Редактируйте ваши музыкальные теги"
 msgid "Tagger"
 msgstr "Tagger"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:26
-msgid ""
-"This music folder contains music files that have corrupted tags. This means "
-"that they could be encoded improperly or have structural issues affecting "
-"playback.\n"
-"Try re-encoding the affected files to fix these issues.\n"
-"\n"
-"The following files are affected and will be ignored by Tagger:"
-msgstr ""
-
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "ТиБ"
@@ -479,6 +465,21 @@ msgstr "Невозможно отправить заявку на AcoustId. Пр
 #: ../../../Controllers/MainWindowController.cs:649
 #: ../../../Controllers/MainWindowController.cs:690
 msgid "year"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:22
+#, fuzzy
+msgid "Corrupted Files Found"
+msgstr "Не найдено музыкальных файлов"
+
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:27
+msgid ""
+"This music folder contains music files that have corrupted tags. This means "
+"that they could be encoded improperly or have structural issues affecting "
+"playback.\n"
+"Try re-encoding the affected files to fix these issues.\n"
+"\n"
+"The following files are affected and will be ignored by Tagger."
 msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
@@ -886,10 +887,6 @@ msgstr "— Поиск информации о файлах с помощью Mu
 #~ msgstr "Удалить теги"
 
 #, fuzzy
-#~ msgid "Corrupted Files Found"
-#~ msgstr "Не найдено музыкальных файлов"
-
-#, fuzzy
 #~ msgid "Ignore Files"
 #~ msgstr "Сортировать файлы по"
 
@@ -993,8 +990,8 @@ msgstr "— Поиск информации о файлах с помощью Mu
 #~ "\n"
 #~ "            !title=\"\";artist=\"bob\"\n"
 #~ "            Эта команда отфильтрует список таким образом, чтобы он "
-#~ "содержал только файлы с пустым тегом названия и с тегом исполнителя \"bob"
-#~ "\"\n"
+#~ "содержал только файлы с пустым тегом названия и с тегом исполнителя "
+#~ "\"bob\"\n"
 #~ "\n"
 #~ "            [Заметки]\n"
 #~ "            * Продвинутый поиск не чувствителен к регистру\n"

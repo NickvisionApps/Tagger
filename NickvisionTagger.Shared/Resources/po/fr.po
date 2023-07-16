@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-13 14:31+0300\n"
+"POT-Creation-Date: 2023-07-16 07:10+0300\n"
 "PO-Revision-Date: 2023-07-12 19:29+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -141,10 +141,6 @@ msgstr "commentaire"
 msgid "composer"
 msgstr "compositeur"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:28
-msgid "Continue"
-msgstr ""
-
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:657
 #: NickvisionTagger.GNOME/Blueprints/window.blp:39
@@ -237,7 +233,7 @@ msgstr "Nom de fichier vers balise"
 msgid "filename"
 msgstr "nom de fichier"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1237
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1238
 msgid "Fingerprint was copied to clipboard."
 msgstr "Empreinte copiée vers le presse-papiers."
 
@@ -424,16 +420,6 @@ msgstr "Associez des balises à vos musiques"
 msgid "Tagger"
 msgstr "Tagger"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:26
-msgid ""
-"This music folder contains music files that have corrupted tags. This means "
-"that they could be encoded improperly or have structural issues affecting "
-"playback.\n"
-"Try re-encoding the affected files to fix these issues.\n"
-"\n"
-"The following files are affected and will be ignored by Tagger:"
-msgstr ""
-
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "Tio"
@@ -468,6 +454,21 @@ msgstr "Impossible d’envoyer les métadonnées à AcoustId. Vérifiez la clé 
 #: ../../../Controllers/MainWindowController.cs:690
 msgid "year"
 msgstr "année"
+
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:22
+#, fuzzy
+msgid "Corrupted Files Found"
+msgstr "Aucune musique trouvée"
+
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:27
+msgid ""
+"This music folder contains music files that have corrupted tags. This means "
+"that they could be encoded improperly or have structural issues affecting "
+"playback.\n"
+"Try re-encoding the affected files to fix these issues.\n"
+"\n"
+"The following files are affected and will be ignored by Tagger."
+msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:114
@@ -875,10 +876,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Clear Tags"
 #~ msgstr "Supprimer les balises"
-
-#, fuzzy
-#~ msgid "Corrupted Files Found"
-#~ msgstr "Aucune musique trouvée"
 
 #, fuzzy
 #~ msgid "Ignore Files"
