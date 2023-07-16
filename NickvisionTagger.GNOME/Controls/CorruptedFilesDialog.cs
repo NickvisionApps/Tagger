@@ -38,7 +38,7 @@ public partial class CorruptedFilesDialog : Adw.Window
             row.SetTitle(path);
             row.SetTitleLines(1);
             row.SetTooltipText(path);
-            var button = new Gtk.Button();
+            var button = Gtk.Button.New();
             button.SetIconName("folder-symbolic");
             button.SetTooltipText("Open Folder");
             button.SetValign(Gtk.Align.Center);
