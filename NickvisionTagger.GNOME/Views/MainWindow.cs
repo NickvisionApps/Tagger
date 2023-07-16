@@ -1243,7 +1243,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private bool CorruptedFilesFound()
     {
-        var dialog = new CorruptedFilesDialog(this, _controller.AppInfo.ID, _controller.CorruptedFiles);
+        var dialog = new CorruptedFilesDialog(this, _controller.AppInfo.ID, _controller.MusicFolderPath, _controller.CorruptedFiles);
         dialog.Present();
         return false;
     }

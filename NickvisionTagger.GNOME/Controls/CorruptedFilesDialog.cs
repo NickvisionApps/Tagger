@@ -25,8 +25,9 @@ public partial class CorruptedFilesDialog : Adw.Window
     /// <param name="builder">Gtk.Builder</param>
     /// <param name="parent">Gtk.Window</param>
     /// <param name="iconName">Icon name for the window</param>
+    /// <param name="parentPath">Path of the parent directory of corrupted files</param>
     /// <param name="files">List of corrupted files</param>
-    private CorruptedFilesDialog(Gtk.Builder builder, Gtk.Window parent, string iconName, List<string> files) : base(builder.GetPointer("_root"), false)
+    private CorruptedFilesDialog(Gtk.Builder builder, Gtk.Window parent, string iconName, string parentPath, List<string> files) : base(builder.GetPointer("_root"), false)
     {
         builder.Connect(this);
         //Dialog Settings
@@ -35,7 +36,12 @@ public partial class CorruptedFilesDialog : Adw.Window
         foreach (var path in files)
         {
             var row = Adw.ActionRow.New();
-            row.SetTitle(path);
+            var p = path.Remove(0, parentPath.Length);
+            if(p[0] == '/')
+            {
+                p = p.Remove(0, 1);
+            }
+            row.SetTitle(p);
             row.SetTitleLines(1);
             row.SetTooltipText(path);
             var button = Gtk.Button.New();
@@ -60,8 +66,9 @@ public partial class CorruptedFilesDialog : Adw.Window
     /// </summary>
     /// <param name="parent">Gtk.Window</param>
     /// <param name="iconName">Icon name for the window</param>
+    /// <param name="parentPath">Path of the parent directory of corrupted files</param>
     /// <param name="files">List of corrupted files</param>
-    public CorruptedFilesDialog(Gtk.Window parent, string iconName, List<string> files) : this(Builder.FromFile("corrupted_files_dialog.ui"), parent, iconName, files)
+    public CorruptedFilesDialog(Gtk.Window parent, string iconName, string parentPath, List<string> files) : this(Builder.FromFile("corrupted_files_dialog.ui"), parent, iconName, parentPath, files)
     {
     }
 }
