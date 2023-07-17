@@ -228,7 +228,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         try
         {
             file = TagLib.File.Create(Path);
-            if(_dotExtension == ".mp3")
+            if(_dotExtension == ".mp3" || _dotExtension == ".wav")
             {
                 var id3 = (TagLib.Id3v2.Tag)file.GetTag(TagTypes.Id3v2, true);
                 tag = id3;
@@ -249,15 +249,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 }
                 */
             }
-            else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga")
-            {
-                var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
-                tag = xiph;
-                /*
-                custom = xiph.GetFirstField("tagger-custom");
-                */
-            }
-            else if(_dotExtension == ".flac")
+            else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga" || _dotExtension == ".flac")
             {
                 var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
                 tag = xiph;
@@ -272,15 +264,6 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 /*
                 custom = asf.GetDescriptorString("tagger-custom");
                 */
-            }
-            else if(_dotExtension == ".wav")
-            {
-                var id3 = (TagLib.Id3v2.Tag)file.GetTag(TagTypes.Id3v2, true);
-                tag = id3;
-                foreach (var frame in id3.GetFrames<TagLib.Id3v2.UserTextInformationFrame>())
-                {
-                    _customProperties.Add(frame.Description, frame.Text.Length > 0 ? frame.Text[0] ?? "" : "");
-                }
             }
         }
         catch (CorruptFileException)
@@ -458,7 +441,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         var file = TagLib.File.Create(Path);
         Tag? tag = null;
         //No need for try catch since if we were able to create MusicFile object this won't fail
-        if(_dotExtension == ".mp3")
+        if(_dotExtension == ".mp3" || _dotExtension == ".wav")
         {
             var id3 = (TagLib.Id3v2.Tag)file.GetTag(TagTypes.Id3v2, true);
             tag = id3;
@@ -483,15 +466,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             app.SetText(ByteVector.FromString("tagger-custom", StringType.UTF8), customPropertiesString);
             */
         }
-        else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga")
-        {
-            var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
-            tag = xiph;
-            /*
-            xiph.SetField("tagger-custom", customPropertiesString);
-            */
-        }
-        else if(_dotExtension == ".flac")
+        else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga" || _dotExtension == ".flac")
         {
             var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
             tag = xiph;
@@ -506,23 +481,6 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             /*
             asf.SetDescriptorString("tagger-custom", customPropertiesString);
             */
-        }
-        else if(_dotExtension == ".wav")
-        {
-            var id3 = (TagLib.Id3v2.Tag)file.GetTag(TagTypes.Id3v2, true);
-            tag = id3;
-            foreach (var frame in id3.GetFrames<TagLib.Id3v2.UserTextInformationFrame>().ToArray())
-            {
-                id3.RemoveFrame(frame);
-            }
-            foreach(var pair in _customProperties)
-            {
-                var frame = new TagLib.Id3v2.UserTextInformationFrame(pair.Key, StringType.UTF8)
-                {
-                    Text = new string[] { pair.Value }
-                };
-                id3.AddFrame(frame);
-            }
         }
         if(tag != null)
         {
