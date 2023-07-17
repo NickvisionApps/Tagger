@@ -7,12 +7,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-16 11:34+0200\n"
-"PO-Revision-Date: 2023-07-13 17:26+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
-"weblate.org>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/es/>\n"
+"POT-Creation-Date: 2023-07-16 07:10+0300\n"
+"PO-Revision-Date: 2023-07-17 07:19+0000\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
+".org>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +53,7 @@ msgid "<keep>"
 msgstr "<mantener>"
 
 #: ../../../Models/PropertyMap.cs:118
-#: NickvisionTagger.GNOME/Blueprints/window.blp:472
+#: NickvisionTagger.GNOME/Blueprints/window.blp:467
 msgid "0 MiB"
 msgstr "0 MiB"
 
@@ -91,7 +91,7 @@ msgstr "artistadelálbum"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:576
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:775
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:813
-#: NickvisionTagger.GNOME/Blueprints/window.blp:517
+#: NickvisionTagger.GNOME/Blueprints/window.blp:512
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -191,7 +191,7 @@ msgstr "Descargados correctamente los metadatos de los {0} archivos"
 msgid "Downloading MusicBrainz metadata..."
 msgstr "Descargando metadatos de MusicBrainz…"
 
-#: ../../../Models/MusicFile.cs:180 ../../../Models/MusicFile.cs:196
+#: ../../../Models/MusicFile.cs:174 ../../../Models/MusicFile.cs:190
 msgid "ERROR"
 msgstr "ERROR"
 
@@ -454,12 +454,10 @@ msgid "year"
 msgstr "año"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:22
-#, fuzzy
 msgid "Corrupted Files Found"
-msgstr "No se han encontrado archivos de música"
+msgstr "Se han encontrado archivos dañados"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:27
-#, fuzzy
 msgid ""
 "This music folder contains music files that have corrupted tags. This means "
 "that they could be encoded improperly or have structural issues affecting "
@@ -468,13 +466,12 @@ msgid ""
 "\n"
 "The following files are affected and will be ignored by Tagger."
 msgstr ""
-"Esta carpeta de música contiene archivos de música que tienen etiquetas "
-"dañadas. Esto significa que podrían estar codificados incorrectamente o "
-"tener problemas estructurales que afectan a la reproducción.\n"
-"Intente volver a codificar los archivos afectados para solucionar estos "
-"problemas.\n"
+"Esta carpeta de música contiene archivos que tienen etiquetas dañadas. Esto "
+"significa que podrían estar codificados incorrectamente o tener problemas "
+"estructurales que afectan a la reproducción.\n"
+"Intente recodificar los archivos afectados para solucionar estos problemas.\n"
 "\n"
-"Los siguientes archivos están afectados y serán ignorados por Tagger:"
+"Los siguientes archivos están afectados y serán ignorados por Tagger."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:114
@@ -810,48 +807,39 @@ msgstr "Editor"
 msgid "ISRC"
 msgstr "ISRC"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:416
-#, fuzzy
-msgid "Custom Properties"
-msgstr "Más propiedades"
-
 #: NickvisionTagger.GNOME/Blueprints/window.blp:417
-msgid "These properties can only be managed with Tagger"
-msgstr ""
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:422
 msgid "File Properties"
 msgstr "Propiedades del archivo"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:425
+#: NickvisionTagger.GNOME/Blueprints/window.blp:420
 msgid "Duration"
 msgstr "Duración"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:435
+#: NickvisionTagger.GNOME/Blueprints/window.blp:430
 msgid "Fingerprint"
 msgstr "Firma"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:454
+#: NickvisionTagger.GNOME/Blueprints/window.blp:449
 msgid "Copy Fingerprint To Clipboard"
 msgstr "Copiar firma al portapapeles"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:467
+#: NickvisionTagger.GNOME/Blueprints/window.blp:462
 msgid "File Size"
 msgstr "Tamaño del archivo"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:492
+#: NickvisionTagger.GNOME/Blueprints/window.blp:487
 msgid "Toggle Tags Pane"
 msgstr "Conmutar panel de etiquetas"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:498
+#: NickvisionTagger.GNOME/Blueprints/window.blp:493
 msgid "Reload Music Folder (F5)"
 msgstr "Recargar carpeta de música (F5)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:512
+#: NickvisionTagger.GNOME/Blueprints/window.blp:507
 msgid "Tag Actions"
 msgstr "Acciones de etiqueta"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:518
+#: NickvisionTagger.GNOME/Blueprints/window.blp:513
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Aplicar cambios a la etiqueta (Ctrl+S)"
 
