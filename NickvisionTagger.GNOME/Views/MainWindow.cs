@@ -1085,6 +1085,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 removeButton.SetIconName("user-trash-symbolic");
                 removeButton.AddCssClass("flat");
                 removeButton.OnClicked += (sender, e) => _controller.RemoveCustomProperty(pair.Key);
+                row.AddSuffix(removeButton);
                 row.OnNotify += (sender, e) =>
                 {
                     if(e.Pspec.GetName() == "text")
