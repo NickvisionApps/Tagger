@@ -1099,7 +1099,6 @@ public class MainWindowController
     public void UpdateSelectedMusicFiles(List<int> indexes)
     {
         SelectedMusicFiles.Clear();
-        SelectedPropertyMap.Clear();
         foreach(var index in indexes)
         {
             SelectedMusicFiles.Add(index, _musicFolder.MusicFiles[index]);
@@ -1112,6 +1111,7 @@ public class MainWindowController
     /// </summary>
     private void UpdateSelectedMusicFilesProperties()
     {
+        SelectedPropertyMap.Clear();
         if(SelectedMusicFiles.Count == 1)
         {
             var first = SelectedMusicFiles.First().Value;

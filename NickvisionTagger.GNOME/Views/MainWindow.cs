@@ -278,7 +278,11 @@ public partial class MainWindow : Adw.ApplicationWindow
                 TagPropertyChanged();
             }
         };
-        _newCustomPropertyRow.OnApply += (sender, e) => _controller.AddCustomProperty(_newCustomPropertyRow.GetText());
+        _newCustomPropertyRow.OnApply += (sender, e) =>
+        {
+            _controller.AddCustomProperty(_newCustomPropertyRow.GetText());
+            _newCustomPropertyRow.SetText("");
+        };
         _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
         _copyFingerprintButton.OnClicked += CopyFingerprintToClipboard;
         //Register Events

@@ -319,7 +319,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                     if(propVal[0] == '[' && propVal[1] == '[')
                     {
                         var i = propVal.IndexOf("]]");
-                        _customProperties.Add(propVal.Substring(2, i), propVal.Substring(i + 2));
+                        _customProperties.Add(propVal.Substring(2, i - 2), propVal.Substring(i + 2));
                     }
                 }
             }
@@ -579,7 +579,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>The value of the custom property. Null if no custom property exists with the provided name</returns>
     public string? GetCustomProperty(string name)
     {
-        if(!_customProperties.ContainsValue(name))
+        if(!_customProperties.ContainsKey(name))
         {
             return null;
         }
