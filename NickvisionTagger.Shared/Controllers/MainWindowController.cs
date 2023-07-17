@@ -602,7 +602,7 @@ public class MainWindowController
     /// <summary>
     /// Adds a custom property to the selected music files
     /// </summary>
-    /// <param name="The name of the property to add"></param>
+    /// <param name="name">The name of the property to add</param>
     public void AddCustomProperty(string name)
     {
         var added = false;
