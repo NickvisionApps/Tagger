@@ -277,13 +277,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 var id3 = (TagLib.Id3v2.Tag)file.GetTag(TagTypes.Id3v2, true);
                 tag = id3;
-                /*
-                var taggerCustom = TagLib.Id3v2.UserTextInformationFrame.Get(id3, "tagger-custom", StringType.UTF8, false, true);
-                if(taggerCustom?.Text.Length > 0)
+                foreach (var frame in id3.GetFrames<TagLib.Id3v2.UserTextInformationFrame>())
                 {
-                    custom = taggerCustom.Text[0];
+                    _customProperties.Add(frame.Description, frame.Text.Length > 0 ? frame.Text[0] ?? "" : "");
                 }
-                */
             }
         }
         catch (CorruptFileException)
@@ -514,10 +511,18 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             var id3 = (TagLib.Id3v2.Tag)file.GetTag(TagTypes.Id3v2, true);
             tag = id3;
-            /*
-            var taggerCustom = TagLib.Id3v2.UserTextInformationFrame.Get(id3, "tagger-custom", StringType.UTF8, true, true);
-            taggerCustom.Text = new string[] { customPropertiesString };
-            */
+            foreach (var frame in id3.GetFrames<TagLib.Id3v2.UserTextInformationFrame>().ToArray())
+            {
+                id3.RemoveFrame(frame);
+            }
+            foreach(var pair in _customProperties)
+            {
+                var frame = new TagLib.Id3v2.UserTextInformationFrame(pair.Key, StringType.UTF8)
+                {
+                    Text = new string[] { pair.Value }
+                };
+                id3.AddFrame(frame);
+            }
         }
         if(tag != null)
         {
