@@ -1074,20 +1074,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         _customPropertiesRow.SetVisible(_controller.SelectedMusicFiles.Count == 1);
         if(_controller.SelectedMusicFiles.Count == 1)
         {
-            if (_controller.SelectedPropertyMap.CustomProperties.Count == 0)
-            {
-                _customPropertiesRow.SetSensitive(false);
-                _customPropertiesRow.SetExpanded(false);
-            }
-            else
-            {
-                _customPropertiesRow.SetSensitive(true);
-            }
             foreach(var pair in _controller.SelectedPropertyMap.CustomProperties)
             {
                 var row = Adw.EntryRow.New();
                 row.SetTitle(pair.Key);
-                row.SetText(pair.Value ?? "");
+                row.SetText(pair.Value);
                 var removeButton = Gtk.Button.New();
                 removeButton.SetValign(Gtk.Align.Center);
                 removeButton.SetTooltipText(_("Remove Custom Property"));
