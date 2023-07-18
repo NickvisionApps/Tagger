@@ -130,7 +130,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         _modificationTimestamp = System.IO.File.GetLastWriteTime(Path);
         _fingerprint = "";
         _customProperties = new Dictionary<string, string>();
-        _nonCustomProperties = new string[] { "title", "artist", "album", "year", "track", "albumartist", "genre", "comment", "bpm", "composer", "publisher", "isrc" };
+        _nonCustomProperties = new string[] { "title", "artist", "album", "year", "track", "albumartist", "genre", "comment", "bpm", "composer", "publisher", "isrc", "datetagged" };
         Title = "";
         Artist = "";
         Album = "";
@@ -248,7 +248,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 {
                     foreach(var pair in format.Tags)
                     {
-                        if(!_nonCustomProperties.Contains(pair.Key))
+                        if(!_nonCustomProperties.Contains(pair.Key.ToLower()))
                         {
                             _customProperties.Add(pair.Key, pair.Value);
                         }
@@ -264,7 +264,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 {
                     foreach(var pair in format.Tags)
                     {
-                        if(!_nonCustomProperties.Contains(pair.Key))
+                        if(!_nonCustomProperties.Contains(pair.Key.ToLower()))
                         {
                             _customProperties.Add(pair.Key, pair.Value);
                         }
@@ -280,7 +280,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 {
                     foreach(var pair in format.Tags)
                     {
-                        if(!_nonCustomProperties.Contains(pair.Key))
+                        if(!_nonCustomProperties.Contains(pair.Key.ToLower()))
                         {
                             _customProperties.Add(pair.Key, pair.Value);
                         }
@@ -484,25 +484,61 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             var app = (TagLib.Mpeg4.AppleTag)file.GetTag(TagTypes.Apple, true);
             tag = app;
-            /*
-            app.SetText(ByteVector.FromString("tagger-custom", StringType.UTF8), customPropertiesString);
-            */
+            var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+            if(format != null)
+            {
+                foreach(var pair in format.Tags)
+                {
+                    if(!_nonCustomProperties.Contains(pair.Key.ToLower()))
+                    {
+                        app.ClearData(ByteVector.FromString(pair.Key, StringType.UTF8));
+                    }
+                }
+            }
+            foreach(var pair in _customProperties)
+            {
+                app.SetText(ByteVector.FromString(pair.Key, StringType.UTF8), pair.Value);
+            }
         }
         else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga" || _dotExtension == ".flac")
         {
             var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
             tag = xiph;
-            /*
-            xiph.SetField("tagger-custom", customPropertiesString);
-            */
+            var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+            if(format != null)
+            {
+                foreach(var pair in format.Tags)
+                {
+                    if(!_nonCustomProperties.Contains(pair.Key.ToLower()))
+                    {
+                        xiph.RemoveField(pair.Key);
+                    }
+                }
+            }
+            foreach(var pair in _customProperties)
+            {
+                xiph.SetField(pair.Key, pair.Value);
+            }
         }
         else if(_dotExtension == ".wma")
         {
             var asf = (TagLib.Asf.Tag)file.GetTag(TagTypes.Asf, true);
             tag = asf;
-            /*
-            asf.SetDescriptorString("tagger-custom", customPropertiesString);
-            */
+            var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+            if(format != null)
+            {
+                foreach(var pair in format.Tags)
+                {
+                    if(!_nonCustomProperties.Contains(pair.Key.ToLower()))
+                    {
+                        asf.RemoveDescriptors(pair.Key);
+                    }
+                }
+            }
+            foreach(var pair in _customProperties)
+            {
+                asf.SetDescriptorString(pair.Value, pair.Key);
+            }
         }
         if(tag != null)
         {
