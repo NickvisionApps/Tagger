@@ -19,6 +19,8 @@ public partial class CorruptedFilesDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindow;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _filesGroup;
 
+    private readonly Gtk.ShortcutController _shortcutController;
+
     /// <summary>
     /// Constructs a CorruptedFilesDialog
     /// </summary>
@@ -59,6 +61,11 @@ public partial class CorruptedFilesDialog : Adw.Window
             row.SetActivatableWidget(button);
             _filesGroup.Add(row);
         }
+        //Shortcut Controller
+        _shortcutController = Gtk.ShortcutController.New();
+        _shortcutController.SetScope(Gtk.ShortcutScope.Managed);
+        _shortcutController.AddShortcut(Gtk.Shortcut.New(Gtk.ShortcutTrigger.ParseString("Escape"), Gtk.CallbackAction.New(OnEscapeKey)));
+        AddController(_shortcutController);
     }
 
     /// <summary>
@@ -70,5 +77,16 @@ public partial class CorruptedFilesDialog : Adw.Window
     /// <param name="files">List of corrupted files</param>
     public CorruptedFilesDialog(Gtk.Window parent, string iconName, string parentPath, List<string> files) : this(Builder.FromFile("corrupted_files_dialog.ui"), parent, iconName, parentPath, files)
     {
+    }
+
+    /// <summary>
+    /// Occurs when the escape key is pressed on the window
+    /// </summary>
+    /// <param name="sender">Gtk.Widget</param>
+    /// <param name="e">GLib.Variant</param>
+    private bool OnEscapeKey(Gtk.Widget sender, GLib.Variant e)
+    {
+        Close();
+        return true;
     }
 }

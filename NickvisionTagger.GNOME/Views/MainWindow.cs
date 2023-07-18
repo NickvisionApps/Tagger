@@ -132,8 +132,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
     [Gtk.Connect] private readonly Adw.EntryRow _isrcRow;
-    [Gtk.Connect] private readonly Adw.ExpanderRow _customPropertiesRow;
-    [Gtk.Connect] private readonly Adw.EntryRow _newCustomPropertyRow;
+    [Gtk.Connect] private readonly Adw.PreferencesGroup _customPropertiesGroup;
     [Gtk.Connect] private readonly Gtk.Label _durationLabel;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
     [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
@@ -278,11 +277,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 TagPropertyChanged();
             }
         };
-        _newCustomPropertyRow.OnApply += (sender, e) =>
-        {
-            _controller.AddCustomProperty(_newCustomPropertyRow.GetText());
-            _newCustomPropertyRow.SetText("");
-        };
         _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
         _copyFingerprintButton.OnClicked += CopyFingerprintToClipboard;
         //Register Events
@@ -386,6 +380,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         actExportBackAlbumArt.OnActivate += (sender, e) => ExportAlbumArt(AlbumArtType.Back);
         AddAction(actExportBackAlbumArt);
         application.SetAccelsForAction("win.exportBackAlbumArt", new string[] { "<Ctrl><Shift>E" });
+        //Add Custom Property Action
+        var actAddCustomProperty = Gio.SimpleAction.New("addCustomProperty", null);
+        actAddCustomProperty.OnActivate += (sender, e) => AddCustomProperty();
+        AddAction(actAddCustomProperty);
         //Download MusicBrainz Metadata Action
         var actMusicBrainz = Gio.SimpleAction.New("downloadMusicBrainzMetadata", null);
         actMusicBrainz.OnActivate += DownloadMusicBrainzMetadata;
@@ -750,6 +748,23 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
+    /// Occurs when the add custom property action is triggered
+    /// </summary>
+    private void AddCustomProperty()
+    {
+        var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("New Custom Property"), "", _("Property Name"), _("Cancel"), _("Add"));
+        entryDialog.OnResponse += (sender, e) =>
+        {
+            if(!string.IsNullOrEmpty(entryDialog.Response))
+            {
+                _controller.AddCustomProperty(entryDialog.Response);
+            }
+            entryDialog.Destroy();
+        };
+        entryDialog.Present();
+    }
+
+    /// <summary>
     /// Occurs when the download musicbrainz metadata action is triggered
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
@@ -1072,10 +1087,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Update Custom Properties
         foreach(var row in _customPropertyRows)
         {
-            _customPropertiesRow.Remove(row);
+            _customPropertiesGroup.Remove(row);
         }
         _customPropertyRows.Clear();
-        _customPropertiesRow.SetVisible(_controller.SelectedMusicFiles.Count == 1);
+        _customPropertiesGroup.SetVisible(_controller.SelectedMusicFiles.Count == 1);
         if(_controller.SelectedMusicFiles.Count == 1)
         {
             foreach(var pair in _controller.SelectedPropertyMap.CustomProperties)
@@ -1098,7 +1113,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     }
                 };
                 _customPropertyRows.Add(row);
-                _customPropertiesRow.AddRow(row);
+                _customPropertiesGroup.Add(row);
             }
         }
         //Update Rows

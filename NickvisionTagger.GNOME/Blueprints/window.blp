@@ -407,15 +407,23 @@ Adw.ApplicationWindow _root {
                           Adw.EntryRow _isrcRow {
                             title: _("ISRC");
                           }
+                        }
 
-                          Adw.ExpanderRow _customPropertiesRow {
-                            title: _("Custom Properties");
+                        Adw.PreferencesGroup _customPropertiesGroup {
+                          title: _("Custom Properties");
 
-                            Adw.EntryRow _newCustomPropertyRow {
-                              title: _("Add New Property");
-                              show-apply-button: true;
+                          header-suffix: Gtk.Button _addNewPropertyButton {
+                            valign: center;
+                            tooltip-text: "Add New Property";
+                            action-name: "win.addCustomProperty";
+
+                            Adw.ButtonContent {
+                              label: _("Add");
+                              icon-name: "list-add-symbolic";
                             }
-                          }
+
+                            styles ["flat"]
+                          };
                         }
 
                         Adw.PreferencesGroup {
