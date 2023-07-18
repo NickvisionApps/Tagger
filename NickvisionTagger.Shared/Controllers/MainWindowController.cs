@@ -605,14 +605,12 @@ public class MainWindowController
     /// <param name="name">The name of the property to add</param>
     public void AddCustomProperty(string name)
     {
-        var added = false;
         foreach(var pair in SelectedMusicFiles)
         {
             pair.Value.SetCustomProperty(name, "");
             MusicFileSaveStates[pair.Key] = false;
-            added = true;
         }
-        if(added)
+        if(SelectedMusicFiles.Count > 0)
         {
             UpdateSelectedMusicFilesProperties();
         }
