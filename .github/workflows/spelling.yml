@@ -14,4 +14,4 @@ jobs:
         with:
           check_filenames: true
           skip: cargo-sources.json,.git,*.svg,*.html,*.js,*.po,*.pot,*.page
-          ignore_words_list: gir
+          ignore_words_list: gir, title, artist, album, year, track, albumartist, genre, comment, bpm, composer, description, publisher, isrc, coverart, datetagged, ©nam, ©art, ©alb, ©day, trkn, aart, ©gen, gnre, ©cmt, tempo, ©wrt, desc, covr, WM/AlbumTitle, WM/Year, WM/TrackNumber, WM/AlbumArtist, WM/Genre, WM/GenreID, WM/Text, WM/BeatsPerMinute, WM/Composer, WM/Picture
