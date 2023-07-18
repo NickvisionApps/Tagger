@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Advanced Search</title>
+<link rel="stylesheet" type="text/css" href="../C/C.css">
+<script type="text/javascript" src="../C/highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="../C/yelp.js"></script>
+</head>
+<body lang="he" dir="rtl"><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Tagger Help">Tagger Help</a>‏ » ‏</div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Advanced Search</span></h1></div>
+<div class="region">
+<div class="contents pagewide">
+<p class="p">This page explains how to use Advanced Search in <span class="app">Tagger</span>.</p>
+<p class="p">Advanced Search is a powerful feature provided by <span class="app">Tagger</span> that allows users to search files' tag contents for certain values, using a powerful tag-based syntax:</p>
+<p class="p"><span class="code">!prop1="value1";prop2="value2"</span></p>
+<p class="p">Where <span class="code">prop1</span>, <span class="code">prop2</span> are valid tag properties and <span class="code">value1</span>, <span class="code">value2</span> are the values to search wrapped in quotes. Each property is separated by a semicolon. Notice how the last property does not end with a semicolon.</p>
+</div>
+<section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Valid Properties</span></h2></div>
+<div class="region"><div class="contents pagewide">
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list"><p class="p"><span class="code">filename</span></p></li>
+<li class="list"><p class="p"><span class="code">title</span></p></li>
+<li class="list"><p class="p"><span class="code">artist</span></p></li>
+<li class="list"><p class="p"><span class="code">album</span></p></li>
+<li class="list"><p class="p"><span class="code">year</span></p></li>
+<li class="list"><p class="p"><span class="code">track</span></p></li>
+<li class="list"><p class="p"><span class="code">albumartist</span></p></li>
+<li class="list"><p class="p"><span class="code">genre</span></p></li>
+<li class="list"><p class="p"><span class="code">comment</span></p></li>
+<li class="list"><p class="p"><span class="code">bpm</span></p></li>
+<li class="list"><p class="p"><span class="code">composer</span></p></li>
+<li class="list"><p class="p"><span class="code">description</span></p></li>
+<li class="list"><p class="p"><span class="code">publisher</span></p></li>
+<li class="list"><p class="p"><span class="code">isrc</span></p></li>
+</ul></div></div></div>
+<p class="p">Properties are case-insensitive.</p>
+</div></div>
+</div></section><section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Syntax Checking</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p">If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search. If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox.</p></div></div>
+</div></section><section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Examples</span></h2></div>
+<div class="region"><div class="contents pagewide">
+<p class="p"><span class="code">!artist=""</span></p>
+<p class="p">This search string will filter the listbox to contain music files which artist is empty.</p>
+<p class="p"><span class="code">!genre="";year="2022"</span></p>
+<p class="p">This search string will filter the listbox to contain music files which genre is empty and which year is 2022 (Year and Track properties will validate if the value string is a number).</p>
+<p class="p"><span class="code">!title="";artist="bob"</span></p>
+<p class="p">This search string will filter the listbox to contain music files which title is empty and which artist is <span class="code">bob</span>.</p>
+</div></div>
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">מידע נוסף</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Tagger Help">Tagger Help</a></li></ul></div>
+</div></div></div>
+</div></section>
+</div>
+<div class="clear"></div></article><footer><div class="inner pagewide"><div class="about ui-expander" role="contentinfo">
+<div class="yelp-data yelp-data-ui-expander" data-yelp-expanded="false"></div>
+<div class="inner">
+<div class="hgroup"><h2><span class="title">על אודות</span></h2></div>
+<div class="region"><div class="contents">
+<div class="copyrights">
+<div class="copyright">© 2023 Nicholas Logozzo</div>
+<div class="copyright">© 2023 Nicholas Logozzo</div>
+</div>
+<div class="credits">
+<div class="credits-authors">
+<div class="title"><span class="title">נכתב על ידי</span></div>
+<ul class="credits"><li>Nicholas Logozzo</li></ul>
+</div>
+<div class="credits-publishers">
+<div class="title"><span class="title">פורסם ע״י</span></div>
+<ul class="credits"><li>Nicholas Logozzo</li></ul>
+</div>
+<div class="credits-blank"></div>
+<div class="credits-blank"></div>
+</div>
+<div class="license">
+<div class="title"><span class="title">Creative Commons</span></div>
+<div class="contents"><p class="p">Creative Commons Attribution 4.0 International License</p></div>
+</div>
+</div></div>
+</div>
+</div></div></footer>
+</div></main></body>
+</html>
