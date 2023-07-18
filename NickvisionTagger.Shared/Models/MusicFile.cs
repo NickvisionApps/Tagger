@@ -243,7 +243,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 var app = (TagLib.Mpeg4.AppleTag)file.GetTag(TagTypes.Apple, true);
                 tag = app;
-                var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+                var format = FFProbeHelpers.GetFormat(DependencyManager.FFProbePath, Path);
                 if(format != null)
                 {
                     foreach(var pair in format.Tags)
@@ -259,7 +259,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
                 tag = xiph;
-                var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+                var format = FFProbeHelpers.GetFormat(DependencyManager.FFProbePath, Path);
                 if(format != null)
                 {
                     foreach(var pair in format.Tags)
@@ -275,7 +275,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 var asf = (TagLib.Asf.Tag)file.GetTag(TagTypes.Asf, true);
                 tag = asf;
-                var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+                var format = FFProbeHelpers.GetFormat(DependencyManager.FFProbePath, Path);
                 if(format != null)
                 {
                     foreach(var pair in format.Tags)
@@ -484,7 +484,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             var app = (TagLib.Mpeg4.AppleTag)file.GetTag(TagTypes.Apple, true);
             tag = app;
-            var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+            var format = FFProbeHelpers.GetFormat(DependencyManager.FFProbePath, Path);
             if(format != null)
             {
                 foreach(var pair in format.Tags)
@@ -504,7 +504,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
             tag = xiph;
-            var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+            var format = FFProbeHelpers.GetFormat(DependencyManager.FFProbePath, Path);
             if(format != null)
             {
                 foreach(var pair in format.Tags)
@@ -524,7 +524,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             var asf = (TagLib.Asf.Tag)file.GetTag(TagTypes.Asf, true);
             tag = asf;
-            var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+            var format = FFProbeHelpers.GetFormat(DependencyManager.FFProbePath, Path);
             if(format != null)
             {
                 foreach(var pair in format.Tags)

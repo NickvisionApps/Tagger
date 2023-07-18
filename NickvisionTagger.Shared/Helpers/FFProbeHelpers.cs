@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.Json;
 
-public class FfprobeFormat
+public class FFProbeFormat
 {
     public string Filename { get; set; }
     public Dictionary<string, string> Tags { get; set; }
 
-    public FfprobeFormat()
+    public FFProbeFormat()
     {
         Filename = "";
         Tags = new Dictionary<string, string>();
@@ -26,9 +26,9 @@ public class FfprobeFormat
     }
 }
 
-public static class FfprobeHelpers
+public static class FFProbeHelpers
 {
-    public static FfprobeFormat? GetFormat(string ffprobePath, string filePath)
+    public static FFProbeFormat? GetFormat(string ffprobePath, string filePath)
     {
         using var process = new Process()
         {
@@ -54,6 +54,6 @@ public static class FfprobeHelpers
         };
         output = output.Remove(output.IndexOf("\"format\""), 11);
         output = output.Remove(output.Length - 2, 2);
-        return JsonSerializer.Deserialize<FfprobeFormat>(output, options);
+        return JsonSerializer.Deserialize<FFProbeFormat>(output, options);
     }
 }

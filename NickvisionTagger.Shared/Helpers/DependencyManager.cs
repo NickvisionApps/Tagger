@@ -47,7 +47,7 @@ internal static class DependencyManager
     /// <summary>
     /// The path for ffprove
     /// </summary>
-    public static string FfprobePath
+    public static string FFProbePath
     {
         get
         {
