@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-15 11:12+0200\n"
+"POT-Creation-Date: 2023-07-19 00:09+0200\n"
 "PO-Revision-Date: 2023-07-14 02:25+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
@@ -295,6 +295,65 @@ msgstr ""
 "Tagger/discussions\">diskusije</link> na Githubu ili <link href=\"https://"
 "bit.ly/3GrfEid\">se pridruži našem Matrix kanalu</link>."
 
+#. (itstool) path: list/title
+#: yelp/C/index.page:26
+msgid "Supported File Extensions"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/index.page:27
+#, fuzzy
+msgid "<code>.mp3</code>"
+msgstr "<code>bpm</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/index.page:28
+#, fuzzy
+msgid "<code>.m4a</code>"
+msgstr "<code>bpm</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/index.page:29
+#, fuzzy
+msgid "<code>.m4b</code>"
+msgstr "<code>bpm</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/index.page:30
+#, fuzzy
+msgid "<code>.ogg</code>"
+msgstr "<code>žanr</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/index.page:31
+#, fuzzy
+msgid "<code>.opus</code>"
+msgstr "<code>bpm</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/index.page:32
+#, fuzzy
+msgid "<code>.oga</code>"
+msgstr "<code>godina</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/index.page:33
+#, fuzzy
+msgid "<code>.flac</code>"
+msgstr "<code>Pjesma</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/index.page:34
+#, fuzzy
+msgid "<code>.wma</code>"
+msgstr "<code>bpm</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/index.page:35
+#, fuzzy
+msgid "<code>.wav</code>"
+msgstr "<code>godina</code>"
+
 #. (itstool) path: info/title
 #: yelp/C/search.page:8
 msgctxt "link"
@@ -413,18 +472,24 @@ msgstr "<code>izdavač</code>"
 msgid "<code>isrc</code>"
 msgstr "<code>isrc</code>"
 
+#. (itstool) path: item/p
+#: yelp/C/search.page:44
+#, fuzzy
+msgid "<code>custom</code>"
+msgstr "<code>komentar</code>"
+
 #. (itstool) path: section/p
-#: yelp/C/search.page:45
+#: yelp/C/search.page:46
 msgid "Properties are case-insensitive."
 msgstr "Svojstva ne razlikuju velika i mala slova."
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:47
+#: yelp/C/search.page:48
 msgid "Syntax Checking"
 msgstr "Provjera sintakse"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:48
+#: yelp/C/search.page:49
 msgid ""
 "If the syntax of your string is valid, the textbox will turn green and will "
 "filter the listbox with your search. If the syntax of your string is "
@@ -432,45 +497,58 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:50
+#: yelp/C/search.page:51
 msgid "Examples"
 msgstr "Primjeri"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:51
+#: yelp/C/search.page:52
 msgid "<code>!artist=\"\"</code>"
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:52
+#: yelp/C/search.page:53
 msgid ""
-"This search string will filter the listbox to contain music files which "
+"This search string will filter the listbox to contain music files whose "
 "artist is empty."
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:53
+#: yelp/C/search.page:54
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:54
+#: yelp/C/search.page:55
 msgid ""
-"This search string will filter the listbox to contain music files which "
-"genre is empty and which year is 2022 (Year and Track properties will "
+"This search string will filter the listbox to contain music files whose "
+"genre is empty and whose year is 2022 (Year and Track properties will "
 "validate if the value string is a number)."
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:55
+#: yelp/C/search.page:56
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:56
+#: yelp/C/search.page:57
 msgid ""
-"This search string will filter the listbox to contain music files which "
-"title is empty and which artist is <code>bob</code>."
+"This search string will filter the listbox to contain music files whose "
+"title is empty and whose artist is <code>bob</code>."
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/search.page:58
+#, fuzzy
+msgid "<code>!custom=\"mbrd\"</code>"
+msgstr "<code>komentar</code>"
+
+#. (itstool) path: section/p
+#: yelp/C/search.page:59
+msgid ""
+"This search string will filter the listbox to contain music files that "
+"contain a custom property with the name <code>mbrd</code>."
 msgstr ""
 
 #. (itstool) path: info/title
