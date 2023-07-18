@@ -130,7 +130,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         _modificationTimestamp = System.IO.File.GetLastWriteTime(Path);
         _fingerprint = "";
         _customProperties = new Dictionary<string, string>();
-        _nonCustomProperties = new string[] { "title", "artist", "album", "year", "track", "albumartist", "genre", "comment", "bpm", "composer", "publisher", "isrc", "datetagged" };
+        _nonCustomProperties = new string[] { "title", "artist", "album", "year", "track", "albumartist", "genre", "comment", "bpm", "composer", "publisher", "isrc", "datetagged", "©nam", "©art", "©alb", "©day", "trkn", "aart", "©gen", "gnre", "©cmt", "tempo", "©wrt", "desc", "dash", "----" };
         Title = "";
         Artist = "";
         Album = "";
