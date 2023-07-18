@@ -25,6 +25,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     private DateTime _modificationTimestamp;
     private string _fingerprint;
     private Dictionary<string, string> _customProperties;
+    private string[] _nonCustomProperties;
     
     /// <summary>
     /// What to sort files in a music folder by
@@ -129,6 +130,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         _modificationTimestamp = System.IO.File.GetLastWriteTime(Path);
         _fingerprint = "";
         _customProperties = new Dictionary<string, string>();
+        _nonCustomProperties = new string[] { "title", "artist", "album", "year", "track", "albumartist", "genre", "comment", "bpm", "composer", "publisher", "isrc" };
         Title = "";
         Artist = "";
         Album = "";
@@ -241,29 +243,49 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 var app = (TagLib.Mpeg4.AppleTag)file.GetTag(TagTypes.Apple, true);
                 tag = app;
-                /*
-                var taggerCustom = app.GetText(ByteVector.FromString("tagger-custom", StringType.UTF8));
-                if(taggerCustom?.Length > 0)
+                var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+                if(format != null)
                 {
-                    custom = taggerCustom[0];
+                    foreach(var pair in format.Tags)
+                    {
+                        if(!_nonCustomProperties.Contains(pair.Key))
+                        {
+                            _customProperties.Add(pair.Key, pair.Value);
+                        }
+                    }
                 }
-                */
             }
             else if(_dotExtension == ".ogg" || _dotExtension == ".opus" || _dotExtension == ".oga" || _dotExtension == ".flac")
             {
                 var xiph = (TagLib.Ogg.XiphComment)file.GetTag(TagTypes.Xiph, true);
                 tag = xiph;
-                /*
-                custom = xiph.GetFirstField("tagger-custom");
-                */
+                var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+                if(format != null)
+                {
+                    foreach(var pair in format.Tags)
+                    {
+                        if(!_nonCustomProperties.Contains(pair.Key))
+                        {
+                            _customProperties.Add(pair.Key, pair.Value);
+                        }
+                    }
+                }
             }
             else if(_dotExtension == ".wma")
             {
                 var asf = (TagLib.Asf.Tag)file.GetTag(TagTypes.Asf, true);
                 tag = asf;
-                /*
-                custom = asf.GetDescriptorString("tagger-custom");
-                */
+                var format = FfprobeHelpers.GetFormat(DependencyManager.FfprobePath, Path);
+                if(format != null)
+                {
+                    foreach(var pair in format.Tags)
+                    {
+                        if(!_nonCustomProperties.Contains(pair.Key))
+                        {
+                            _customProperties.Add(pair.Key, pair.Value);
+                        }
+                    }
+                }
             }
         }
         catch (CorruptFileException)
