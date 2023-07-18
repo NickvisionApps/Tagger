@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="corrupted" its:version="2.0" xml:lang="es">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Corrupted Files 🪲</title>
+	<title type="link">Archivos dañados 🪲</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -20,20 +20,20 @@
     </mal:credit>
   </info>
 
-<title>Corrupted Files</title>
-<p>This page explains music files with corrupted data.</p>
+<title>Archivos dañados</title>
+<p>En esta página se explican los archivos de música con datos dañados.</p>
 <terms>
     <item>
-        <title>Invalid Data</title>
-        <p>An invalid tag header or junk data in a file can cause issues when reading information about a file and even cause playback issues. Some websites add extra junk data in files which in turn causes corruption.</p>
-        <p><app>Tagger</app> ignores corrupted files, but displays a dialog listing corrupted file for you to manage and fix accordingly.</p>
+        <title>Datos incorrectos</title>
+        <p>Un encabezado de etiqueta no válido o datos basura en un archivo pueden causar problemas al leer la información sobre un archivo e incluso causar problemas de reproducción. Algunas páginas web añaden datos basura a los archivos, lo que a su vez provoca su corrupción.</p>
+        <p><app>Tagger</app> ignora los archivos dañados, pero muestra un diálogo con la lista de archivos dañados para que los gestione y corrija en consecuencia.</p>
         <note style="advanced">
-            <p>FFmpeg can be used to fix corruption issues. Run the following command to re-encode a file's tag and remove junk data:</p>
+            <p>FFmpeg puede usarse para arreglar problemas de corrupción. Ejecute el siguiente comando para recodificar la etiqueta de un archivo y eliminar los datos basura:</p>
             <code>ffmpeg -i in.mp3 out.mp3</code>
-            <p>where <code>in.mp3</code> is the file path of the corrupted file and <code>out.mp3</code> is the path to export the re-encoded file.</p>
+            <p>donde <code>in.mp3</code> es la ruta del archivo dañado y <code>out.mp3</code> es la ruta para exportar el archivo recodificado.</p>
         </note>
         <note style="advanced">
-             <p>You can also use <link href="https://www.freac.org">fre:ac</link> to re-encode files without convertion to another format.</p>
+             <p>También puede usar <link href="https://www.freac.org">fre:ac</link> para recodificar archivos sin convertirlos a otro formato.</p>
         </note>
     </item>
 </terms>
