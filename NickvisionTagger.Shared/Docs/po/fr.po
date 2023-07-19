@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-19 00:09+0200\n"
+"POT-Creation-Date: 2023-07-19 16:58+0200\n"
 "PO-Revision-Date: 2023-07-13 11:34+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -464,47 +464,37 @@ msgstr ""
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:39
-msgid "<code>bpm</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:40
 msgid "<code>composer</code>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/search.page:41
+#: yelp/C/search.page:40
 msgid "<code>description</code>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/search.page:42
+#: yelp/C/search.page:41
 msgid "<code>publisher</code>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/search.page:43
-msgid "<code>isrc</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:44
+#: yelp/C/search.page:42
 #, fuzzy
 msgid "<code>custom</code>"
 msgstr "<code>Album</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:46
+#: yelp/C/search.page:44
 msgid "Properties are case-insensitive."
 msgstr ""
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:48
+#: yelp/C/search.page:46
 msgid "Syntax Checking"
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:49
+#: yelp/C/search.page:47
 msgid ""
 "If the syntax of your string is valid, the textbox will turn green and will "
 "filter the listbox with your search. If the syntax of your string is "
@@ -512,29 +502,29 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:51
+#: yelp/C/search.page:49
 msgid "Examples"
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:52
+#: yelp/C/search.page:50
 msgid "<code>!artist=\"\"</code>"
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:53
+#: yelp/C/search.page:51
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "artist is empty."
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:54
+#: yelp/C/search.page:52
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:55
+#: yelp/C/search.page:53
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "genre is empty and whose year is 2022 (Year and Track properties will "
@@ -542,25 +532,25 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:56
+#: yelp/C/search.page:54
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:57
+#: yelp/C/search.page:55
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "title is empty and whose artist is <code>bob</code>."
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:58
+#: yelp/C/search.page:56
 #, fuzzy
 msgid "<code>!custom=\"mbrd\"</code>"
 msgstr "<code>Album</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:59
+#: yelp/C/search.page:57
 msgid ""
 "This search string will filter the listbox to contain music files that "
 "contain a custom property with the name <code>mbrd</code>."
