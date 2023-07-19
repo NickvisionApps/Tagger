@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using TagLib;
-using File = System.IO.File;
 
 namespace NickvisionTagger.Shared.Models;
 

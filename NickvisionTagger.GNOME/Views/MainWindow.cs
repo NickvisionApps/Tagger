@@ -127,11 +127,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _albumArtistRow;
     [Gtk.Connect] private readonly Adw.EntryRow _genreRow;
     [Gtk.Connect] private readonly Adw.EntryRow _commentRow;
-    [Gtk.Connect] private readonly Adw.EntryRow _bpmRow;
     [Gtk.Connect] private readonly Adw.EntryRow _composerRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
-    [Gtk.Connect] private readonly Adw.EntryRow _isrcRow;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _customPropertiesGroup;
     [Gtk.Connect] private readonly Gtk.Label _durationLabel;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
@@ -242,13 +240,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 TagPropertyChanged();
             }
         };
-        _bpmRow.OnNotify += (sender, e) =>
-        {
-            if(e.Pspec.GetName() == "text")
-            {
-                TagPropertyChanged();
-            }
-        };
         _composerRow.OnNotify += (sender, e) =>
         {
             if(e.Pspec.GetName() == "text")
@@ -264,13 +255,6 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         _publisherRow.OnNotify += (sender, e) =>
-        {
-            if(e.Pspec.GetName() == "text")
-            {
-                TagPropertyChanged();
-            }
-        };
-        _isrcRow.OnNotify += (sender, e) =>
         {
             if(e.Pspec.GetName() == "text")
             {
@@ -1046,11 +1030,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         _albumArtistRow.SetText(_controller.SelectedPropertyMap.AlbumArtist);
         _genreRow.SetText(_controller.SelectedPropertyMap.Genre);
         _commentRow.SetText(_controller.SelectedPropertyMap.Comment);
-        _bpmRow.SetText(_controller.SelectedPropertyMap.BPM);
         _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
         _descriptionRow.SetText(_controller.SelectedPropertyMap.Description);
         _publisherRow.SetText(_controller.SelectedPropertyMap.Publisher);
-        _isrcRow.SetText(_controller.SelectedPropertyMap.ISRC);
         _durationLabel.SetLabel(_controller.SelectedPropertyMap.Duration);
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
         _fileSizeLabel.SetLabel(_controller.SelectedPropertyMap.FileSize);
@@ -1059,13 +1041,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _artViewStack.SetVisibleChildName("Image");
             var art = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedMusicFiles.First().Value.FrontAlbumArt : _controller.SelectedMusicFiles.First().Value.BackAlbumArt;
-            if(art.IsEmpty)
+            if(art.Length == 0)
             {
                 gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
             }
             else
             {
-                var bytes = g_bytes_new(art.Data, (uint)art.Data.Length);
+                var bytes = g_bytes_new(art, (uint)art.Length);
                 var texture = gdk_texture_new_from_bytes(bytes, IntPtr.Zero);
                 gtk_picture_set_paintable(_albumArtImage.Handle, texture);
                 g_object_unref(texture);
@@ -1249,11 +1231,9 @@ public partial class MainWindow : Adw.ApplicationWindow
                 AlbumArtist = _albumArtistRow.GetText(),
                 Genre = _genreRow.GetText(),
                 Comment = _commentRow.GetText(),
-                BPM = _bpmRow.GetText(),
                 Composer = _composerRow.GetText(),
                 Description = _descriptionRow.GetText(),
-                Publisher = _publisherRow.GetText(),
-                ISRC = _isrcRow.GetText()
+                Publisher = _publisherRow.GetText()
             };
             if(_controller.SelectedMusicFiles.Count == 1)
             {

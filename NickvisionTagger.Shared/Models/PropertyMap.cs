@@ -45,10 +45,6 @@ public class PropertyMap
     /// </summary>
     public string Comment { get; set; }
     /// <summary>
-    /// The BPM of the file
-    /// </summary>
-    public string BPM { get; set; }
-    /// <summary>
     /// The composer of the file
     /// </summary>
     public string Composer { get; set; }
@@ -60,10 +56,6 @@ public class PropertyMap
     /// The publisher of the file
     /// </summary>
     public string Publisher { get; set; }
-    /// <summary>
-    /// The ISRC of the file
-    /// </summary>
-    public string ISRC { get; set; }
     /// <summary>
     /// The front album art of the file
     /// </summary>
@@ -112,11 +104,9 @@ public class PropertyMap
         AlbumArtist = "";
         Genre = "";
         Comment = "";
-        BPM = "";
         Composer = "";
         Description = "";
         Publisher = "";
-        ISRC = "";
         FrontAlbumArt = "";
         BackAlbumArt = "";
         CustomProperties.Clear();
@@ -141,11 +131,9 @@ public class PropertyMap
         s += $"AlbumArtist: {AlbumArtist}\n";
         s += $"Genre: {Genre}\n";
         s += $"Comment: {Comment}\n";
-        s += $"BPM: {BPM}\n";
         s += $"Composer: {Composer}\n";
         s += $"Description: {Description}\n";
         s += $"Publisher: {Publisher}\n";
-        s += $"ISRC: {ISRC}\n";
         s += $"FrontAlbumArt: {FrontAlbumArt}\n";
         s += $"BackAlbumArt: {BackAlbumArt}\n";
         s += $"CustomPropertiesCount: {CustomProperties.Count}\n";

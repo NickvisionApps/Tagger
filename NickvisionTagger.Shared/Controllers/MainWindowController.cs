@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using TagLib;
+using ATL;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Controllers;
@@ -254,7 +254,7 @@ public class MainWindowController
             {
                 try
                 {
-                    pair.Value.Year = uint.Parse(map.Year);
+                    pair.Value.Year = int.Parse(map.Year);
                     updated = true;
                 }
                 catch { }
@@ -263,7 +263,7 @@ public class MainWindowController
             {
                 try
                 {
-                    pair.Value.Track = uint.Parse(map.Track);
+                    pair.Value.Track = int.Parse(map.Track);
                     updated = true;
                 }
                 catch { }
@@ -283,15 +283,6 @@ public class MainWindowController
                 pair.Value.Comment = map.Comment;
                 updated = true;
             }
-            if(map.BPM != pair.Value.BPM.ToString() && map.BPM != _("<keep>"))
-            {
-                try
-                {
-                    pair.Value.BPM = uint.Parse(map.BPM);
-                    updated = true;
-                }
-                catch { }
-            }
             if(map.Composer != pair.Value.Composer && map.Composer != _("<keep>"))
             {
                 pair.Value.Composer = map.Composer;
@@ -305,11 +296,6 @@ public class MainWindowController
             if(map.Publisher != pair.Value.Publisher && map.Publisher != _("<keep>"))
             {
                 pair.Value.Publisher = map.Publisher;
-                updated = true;
-            }
-            if(map.ISRC != pair.Value.ISRC && map.ISRC != _("<keep>"))
-            {
-                pair.Value.ISRC = map.ISRC;
                 updated = true;
             }
             if(SelectedMusicFiles.Count == 1)
@@ -483,10 +469,10 @@ public class MainWindowController
     /// <param name="type">AlbumArtType</param>
     public void InsertSelectedAlbumArt(string path, AlbumArtType type)
     {
-        TagLib.ByteVector? byteVector = null;
+        byte[] pic = Array.Empty<byte>();
         try
         {
-            byteVector = TagLib.ByteVector.FromPath(path);
+            pic = File.ReadAllBytes(path);
         }
         catch
         {
@@ -498,18 +484,18 @@ public class MainWindowController
         {
             if(type == AlbumArtType.Front)
             {
-                if(pair.Value.FrontAlbumArt != byteVector!)
+                if(pair.Value.FrontAlbumArt != pic)
                 {
-                    pair.Value.FrontAlbumArt = byteVector;
+                    pair.Value.FrontAlbumArt = pic;
                     MusicFileSaveStates[pair.Key] = false;
                     inserted = true;
                 }
             }
             else if(type == AlbumArtType.Back)
             {
-                if(pair.Value.BackAlbumArt != byteVector)
+                if(pair.Value.BackAlbumArt != pic)
                 {
-                    pair.Value.BackAlbumArt = byteVector;
+                    pair.Value.BackAlbumArt = pic;
                     MusicFileSaveStates[pair.Key] = false;
                     inserted = true;
                 }
@@ -533,18 +519,18 @@ public class MainWindowController
         {
             if(type == AlbumArtType.Front)
             {
-                if(!pair.Value.FrontAlbumArt.IsEmpty)
+                if(pair.Value.FrontAlbumArt.Length > 0)
                 {
-                    pair.Value.FrontAlbumArt = new TagLib.ByteVector();
+                    pair.Value.FrontAlbumArt = Array.Empty<byte>();
                     MusicFileSaveStates[pair.Key] = false;
                     removed = true;
                 }
             }
             else if(type == AlbumArtType.Back)
             {
-                if(!pair.Value.BackAlbumArt.IsEmpty)
+                if(pair.Value.BackAlbumArt.Length > 0)
                 {
-                    pair.Value.BackAlbumArt = new TagLib.ByteVector();
+                    pair.Value.BackAlbumArt = Array.Empty<byte>();
                     MusicFileSaveStates[pair.Key] = false;
                     removed = true;
                 }
@@ -567,11 +553,11 @@ public class MainWindowController
         var musicFile = SelectedMusicFiles.First().Value;
         if(type == AlbumArtType.Front)
         {
-            if(!musicFile.FrontAlbumArt.IsEmpty)
+            if(musicFile.FrontAlbumArt.Length > 0)
             {
                 try
                 {
-                    System.IO.File.WriteAllBytes(path, musicFile.FrontAlbumArt.Data);
+                    File.WriteAllBytes(path, musicFile.FrontAlbumArt);
                     NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Exported front album art to file successfully"), NotificationSeverity.Success));
                 }
                 catch (Exception e)
@@ -583,11 +569,11 @@ public class MainWindowController
         }
         else if(type == AlbumArtType.Back)
         {
-            if(!musicFile.BackAlbumArt.IsEmpty)
+            if(musicFile.BackAlbumArt.Length > 0)
             {
                 try
                 {
-                    System.IO.File.WriteAllBytes(path, musicFile.BackAlbumArt.Data);
+                    File.WriteAllBytes(path, musicFile.BackAlbumArt);
                     NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Exported back album art to file successfully"), NotificationSeverity.Success));
                 }
                 catch (Exception e)
@@ -643,7 +629,23 @@ public class MainWindowController
     /// Gets MimeType of album art for the first selected file
     /// </summary>
     /// <param name="type">AlbumArtType</param>
-    public string GetFirstAlbumArtMimeType(AlbumArtType type) => new Picture(type == AlbumArtType.Front ? SelectedMusicFiles.First().Value.FrontAlbumArt : SelectedMusicFiles.First().Value.BackAlbumArt).MimeType;
+    public string GetFirstAlbumArtMimeType(AlbumArtType type)
+    {
+        if(type == AlbumArtType.Front)
+        {
+            var art = SelectedMusicFiles.First().Value.FrontAlbumArt;
+            return art.Length > 0 ? PictureInfo.fromBinaryData(art, PictureInfo.PIC_TYPE.Front).MimeType : "";
+        }
+        else if(type == AlbumArtType.Back)
+        {
+            var art = SelectedMusicFiles.First().Value.BackAlbumArt;
+            return art.Length > 0 ? PictureInfo.fromBinaryData(art, PictureInfo.PIC_TYPE.Back).MimeType : "";
+        }
+        else
+        {
+            return "";
+        }
+    }
 
     /// <summary>
     /// Downloads MusicBrainz metadata for the selected files
@@ -697,7 +699,7 @@ public class MainWindowController
                 return (false, null);
             }
             var propValPairs = search.Split(';');
-            var validProperties = new string[] { "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "isrc", _("isrc"), "custom", _("custom") };
+            var validProperties = new string[] { "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "custom", _("custom") };
             var propertyMap = new PropertyMap();
             var customPropName = "";
             foreach(var propVal in propValPairs)
@@ -781,21 +783,6 @@ public class MainWindowController
                 {
                     propertyMap.Comment = val;
                 }
-                else if(prop == "bpm" || prop == _("bpm"))
-                {
-                    if(val != "NULL")
-                    {
-                        try
-                        {
-                            uint.Parse(val);
-                        }
-                        catch
-                        {
-                            return (false, null);
-                        }
-                    }
-                    propertyMap.BPM = val;
-                }
                 else if(prop == "composer" || prop == _("composer"))
                 {
                     propertyMap.Composer = val;
@@ -807,10 +794,6 @@ public class MainWindowController
                 else if(prop == "publisher" || prop == _("publisher"))
                 {
                     propertyMap.Publisher = val;
-                }
-                else if(prop == "isrc" || prop == _("isrc"))
-                {
-                    propertyMap.ISRC = val;
                 }
                 else if(prop == "custom" || prop == _("custom"))
                 {
@@ -982,24 +965,6 @@ public class MainWindowController
                         }
                     }
                 }
-                if(!string.IsNullOrEmpty(propertyMap.BPM))
-                {
-                    var value = musicFile.BPM;
-                    if(propertyMap.BPM == "NULL")
-                    {
-                        if(value != 0)
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        if(value != uint.Parse(propertyMap.BPM))
-                        {
-                            continue;
-                        }
-                    }
-                }
                 if(!string.IsNullOrEmpty(propertyMap.Composer))
                 {
                     var value = musicFile.Composer.ToLower();
@@ -1049,24 +1014,6 @@ public class MainWindowController
                     else
                     {
                         if(value != propertyMap.Publisher)
-                        {
-                            continue;
-                        }
-                    }
-                }
-                if(!string.IsNullOrEmpty(propertyMap.ISRC))
-                {
-                    var value = musicFile.ISRC.ToLower();
-                    if(propertyMap.ISRC == "NULL")
-                    {
-                        if(!string.IsNullOrEmpty(value))
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        if(value != propertyMap.ISRC)
                         {
                             continue;
                         }
@@ -1122,11 +1069,9 @@ public class MainWindowController
             SelectedPropertyMap.AlbumArtist = first.AlbumArtist;
             SelectedPropertyMap.Genre = first.Genre;
             SelectedPropertyMap.Comment = first.Comment;
-            SelectedPropertyMap.BPM = first.BPM.ToString();
             SelectedPropertyMap.Composer = first.Composer;
             SelectedPropertyMap.Description = first.Description;
             SelectedPropertyMap.Publisher = first.Publisher;
-            SelectedPropertyMap.ISRC = first.ISRC;
             SelectedPropertyMap.Duration = first.Duration.ToDurationString();
             SelectedPropertyMap.Fingerprint = "";
             Task.Run(() =>
@@ -1139,8 +1084,8 @@ public class MainWindowController
                 }
             });
             SelectedPropertyMap.FileSize = first.FileSize.ToFileSizeString();
-            SelectedPropertyMap.FrontAlbumArt = first.FrontAlbumArt.IsEmpty ? "noArt" : "hasArt";
-            SelectedPropertyMap.BackAlbumArt = first.BackAlbumArt.IsEmpty ? "noArt" : "hasArt";
+            SelectedPropertyMap.FrontAlbumArt = first.FrontAlbumArt.Length == 0 ? "noArt" : "hasArt";
+            SelectedPropertyMap.BackAlbumArt = first.BackAlbumArt.Length == 0 ? "noArt" : "hasArt";
             foreach (var custom in first.CustomPropertyNames)
             {
                 SelectedPropertyMap.CustomProperties.Add(custom, first.GetCustomProperty(custom)!);
@@ -1157,11 +1102,9 @@ public class MainWindowController
             var haveSameAlbumArtist = true;
             var haveSameGenre = true;
             var haveSameComment = true;
-            var haveSameBPM = true;
             var haveSameComposer = true;
             var haveSameDescription = true;
             var haveSamePublisher = true;
-            var haveSameISRC = true;
             var haveSameFrontAlbumArt = true;
             var haveSameBackAlbumArt = true;
             var totalDuration = 0;
@@ -1200,10 +1143,6 @@ public class MainWindowController
                 {
                     haveSameComment = false;
                 }
-                if(first.BPM != pair.Value.BPM)
-                {
-                    haveSameBPM = false;
-                }
                 if(first.Composer != pair.Value.Composer)
                 {
                     haveSameComposer = false;
@@ -1215,10 +1154,6 @@ public class MainWindowController
                 if(first.Publisher != pair.Value.Publisher)
                 {
                     haveSamePublisher = false;
-                }
-                if(first.ISRC != pair.Value.ISRC)
-                {
-                    haveSameISRC = false;
                 }
                 if(first.FrontAlbumArt != pair.Value.FrontAlbumArt)
                 {
@@ -1240,13 +1175,11 @@ public class MainWindowController
             SelectedPropertyMap.AlbumArtist = haveSameAlbumArtist ? first.AlbumArtist : _("<keep>");
             SelectedPropertyMap.Genre = haveSameGenre ? first.Genre : _("<keep>");
             SelectedPropertyMap.Comment = haveSameComment ? first.Comment : _("<keep>");
-            SelectedPropertyMap.BPM = haveSameBPM ? first.BPM.ToString() : _("<keep>");
             SelectedPropertyMap.Composer = haveSameComposer ? first.Composer : _("<keep>");
             SelectedPropertyMap.Description = haveSameDescription ? first.Description : _("<keep>");
             SelectedPropertyMap.Publisher = haveSamePublisher ? first.Publisher : _("<keep>");
-            SelectedPropertyMap.ISRC = haveSameISRC ? first.ISRC : _("<keep>");
-            SelectedPropertyMap.FrontAlbumArt = haveSameFrontAlbumArt ? (first.FrontAlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
-            SelectedPropertyMap.BackAlbumArt = haveSameBackAlbumArt ? (first.BackAlbumArt.IsEmpty ? "noArt" : "hasArt") : "keepArt";
+            SelectedPropertyMap.FrontAlbumArt = haveSameFrontAlbumArt ? (first.FrontAlbumArt.Length == 0 ? "noArt" : "hasArt") : "keepArt";
+            SelectedPropertyMap.BackAlbumArt = haveSameBackAlbumArt ? (first.BackAlbumArt.Length == 0 ? "noArt" : "hasArt") : "keepArt";
             SelectedPropertyMap.Duration = totalDuration.ToDurationString();
             SelectedPropertyMap.Fingerprint = _("<keep>");
             SelectedPropertyMap.FileSize = totalFileSize.ToFileSizeString();
