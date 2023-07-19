@@ -418,16 +418,19 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             track.AdditionalFields.Add(pair.Key, pair.Value);
         }
-        track.Save();
-        if(preserveModificationTimestamp)
+        var res = track.Save();
+        if(res)
         {
-            File.SetLastWriteTime(Path, _modificationTimestamp);
+            if(preserveModificationTimestamp)
+            {
+                File.SetLastWriteTime(Path, _modificationTimestamp);
+            }
+            else
+            {
+                _modificationTimestamp = File.GetLastWriteTime(Path);
+            }
         }
-        else
-        {
-            _modificationTimestamp = File.GetLastWriteTime(Path);
-        }
-        return true;
+        return res;
     }
     
     /// <summary>
