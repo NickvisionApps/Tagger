@@ -248,6 +248,19 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             }
             foreach(var pair in track.AdditionalFields)
             {
+                // WAV workaround
+                if (pair.Key == "info.IPRD")
+                {
+                    track.AdditionalFields.TryGetValue(pair.Key, out var album);
+                    Album = album ?? Album;
+                    continue;
+                }
+                if (pair.Key == "info.IPRT")
+                {
+                    track.AdditionalFields.TryGetValue(pair.Key, out var trackNumber);
+                    Track = trackNumber == null ? Track : Int32.Parse(trackNumber);
+                    continue;
+                }
                 _customProperties.Add(pair.Key, pair.Value);
             }
             return true;
@@ -391,24 +404,19 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             File.Move(Path, newPath);
             Path = newPath;
         }
-        var track = new Track(Path)
-        {
-            Title = Title,
-            Artist = Artist,
-            Album = Album,
-            Year = Year,
-            TrackNumber = Track,
-            AlbumArtist = AlbumArtist,
-            Genre = Genre,
-            Comment = Comment,
-            Composer = Composer,
-            Description = Description,
-            Publisher = Publisher
-        };
-        foreach(var picture in track.EmbeddedPictures.ToArray())
-        {
-            track.EmbeddedPictures.Remove(picture);
-        }
+        var track = new Track(Path);
+        track.Remove();
+        track.Title = Title;
+        track.Artist = Artist;
+        track.Album = Album;
+        track.Year = Year;
+        track.TrackNumber = Track;
+        track.AlbumArtist = AlbumArtist;
+        track.Genre = Genre;
+        track.Comment = Comment;
+        track.Composer = Composer;
+        track.Description = Description;
+        track.Publisher = Publisher;
         if(FrontAlbumArt.Length > 0)
         {
             track.EmbeddedPictures.Add(PictureInfo.fromBinaryData(FrontAlbumArt, PictureInfo.PIC_TYPE.Front));
@@ -416,10 +424,6 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         if(BackAlbumArt.Length > 0)
         {
             track.EmbeddedPictures.Add(PictureInfo.fromBinaryData(BackAlbumArt, PictureInfo.PIC_TYPE.Front));
-        }
-        foreach(var key in track.AdditionalFields.Keys.ToArray())
-        {
-            track.AdditionalFields.Remove(key);
         }
         foreach(var pair in _customProperties)
         {
