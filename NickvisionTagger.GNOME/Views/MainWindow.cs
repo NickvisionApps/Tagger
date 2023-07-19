@@ -79,6 +79,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.DropTarget _dropTarget;
+    private readonly Gio.SimpleAction _insertAlbumArtAction;
     private readonly Gio.SimpleAction _removeAlbumArtAction;
     private readonly Gio.SimpleAction _exportAlbumArtAction;
     private List<Adw.ActionRow> _listMusicFilesRows;
@@ -320,9 +321,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.switchAlbumArt", new string[] { "<Ctrl><Shift>S" });
         _switchAlbumArtButton.SetDetailedActionName("win.switchAlbumArt");
         //Insert Album Art Action
-        var actInsertAlbumArt = Gio.SimpleAction.New("insertAlbumArt", null);
-        actInsertAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(_currentAlbumArtType);
-        AddAction(actInsertAlbumArt);
+        _insertAlbumArtAction = Gio.SimpleAction.New("insertAlbumArt", null);
+        _insertAlbumArtAction.OnActivate += (sender, e) => InsertAlbumArt(_currentAlbumArtType);
+        AddAction(_insertAlbumArtAction);
         _insertAlbumArtButton.SetDetailedActionName("win.insertAlbumArt");
         //Remove Album Art Action
         _removeAlbumArtAction = Gio.SimpleAction.New("removeAlbumArt", null);
@@ -945,8 +946,13 @@ public partial class MainWindow : Adw.ApplicationWindow
             _listMusicFilesRows.Clear();
             if(!string.IsNullOrEmpty(_controller.MusicFolderPath))
             {
+                var readOnlyFileDetected = false;
                 foreach(var musicFile in _controller.MusicFiles)
                 {
+                    if (musicFile.ReadOnly)
+                    {
+                        readOnlyFileDetected = true;
+                    }
                     var row = Adw.ActionRow.New();
                     if(!string.IsNullOrEmpty(musicFile.Title))
                     {
@@ -971,9 +977,13 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _folderFlap.SetRevealFlap(true);
                 _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
                 _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
-                if(sendToast)
+                if (sendToast)
                 {
                     _toastOverlay.AddToast(Adw.Toast.New(_n("Loaded {0} music file.", "Loaded {0} music files.", _controller.MusicFiles.Count, _controller.MusicFiles.Count)));
+                }
+                if (readOnlyFileDetected)
+                {
+                    _toastOverlay.AddToast(Adw.Toast.New(_("OGG files with embedded FLAC are opened read-only.")));
                 }
             }
             else
@@ -1037,6 +1047,18 @@ public partial class MainWindow : Adw.ApplicationWindow
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
         _fileSizeLabel.SetLabel(_controller.SelectedPropertyMap.FileSize);
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
+        _filenameRow.SetEditable(true);
+        _titleRow.SetEditable(true);
+        _artistRow.SetEditable(true);
+        _albumRow.SetEditable(true);
+        _yearRow.SetEditable(true);
+        _trackRow.SetEditable(true);
+        _albumArtistRow.SetEditable(true);
+        _genreRow.SetEditable(true);
+        _commentRow.SetEditable(true);
+        _composerRow.SetEditable(true);
+        _descriptionRow.SetEditable(true);
+        _publisherRow.SetEditable(true);
         if(albumArt == "hasArt")
         {
             _artViewStack.SetVisibleChildName("Image");
@@ -1064,8 +1086,26 @@ public partial class MainWindow : Adw.ApplicationWindow
             _artViewStack.SetVisibleChildName("NoImage");
             gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
         }
+        _insertAlbumArtAction.SetEnabled(true);
         _removeAlbumArtAction.SetEnabled(_artViewStack.GetVisibleChildName() != "NoImage");
         _exportAlbumArtAction.SetEnabled(albumArt == "hasArt");
+        if (_controller.SelectedMusicFiles.Count == 1 && _controller.SelectedMusicFiles.First().Value.ReadOnly)
+        {
+            _filenameRow.SetEditable(false);
+            _titleRow.SetEditable(false);
+            _artistRow.SetEditable(false);
+            _albumRow.SetEditable(false);
+            _yearRow.SetEditable(false);
+            _trackRow.SetEditable(false);
+            _albumArtistRow.SetEditable(false);
+            _genreRow.SetEditable(false);
+            _commentRow.SetEditable(false);
+            _composerRow.SetEditable(false);
+            _descriptionRow.SetEditable(false);
+            _publisherRow.SetEditable(false);
+            _insertAlbumArtAction.SetEnabled(false);
+            _removeAlbumArtAction.SetEnabled(false);
+        }
         //Update Custom Properties
         foreach(var row in _customPropertyRows)
         {
@@ -1094,6 +1134,10 @@ public partial class MainWindow : Adw.ApplicationWindow
                         TagPropertyChanged();
                     }
                 };
+                if (_controller.SelectedMusicFiles.First().Value.ReadOnly)
+                {
+                    row.SetEditable(false);
+                }
                 _customPropertyRows.Add(row);
                 _customPropertiesGroup.Add(row);
             }

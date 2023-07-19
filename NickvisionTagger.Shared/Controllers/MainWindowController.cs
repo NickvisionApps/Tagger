@@ -225,6 +225,10 @@ public class MainWindowController
     {
         foreach(var pair in SelectedMusicFiles)
         {
+            if (pair.Value.ReadOnly)
+            {
+                continue;
+            }
             var updated = false;
             if(map.Filename != pair.Value.Filename && map.Filename != _("<keep>"))
             {
