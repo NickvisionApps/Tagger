@@ -18,32 +18,32 @@ document.addEventListener('DOMContentLoaded', function() {
 <a class="trail" href="index.html" title="Pomoć za Tagger">Pomoć za Tagger</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Web usluge</span></h1></div>
 <div class="region">
 <div class="contents pagewide">
-<p class="p">This page describes the web services available in Tagger</p>
+<p class="p">Ova stranica opisuje dostupne web usluge u aplikaciji Tagger</p>
 <div class="terms"><div class="inner"><div class="region"><dl class="terms">
 <dt class="terms">Preuzmi MusicBrainz metapodatke</dt>
 <dd class="terms">
-<p class="p">Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
-<p class="p">This service utilizies the AcoustId fingerprint of the file (generated with <span class="code">fpcalc</span>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+<p class="p">Prepoznaje glazbenu datoteku putem MusicBrainza i preuzima njezine metapodatke u Tagger.</p>
+<p class="p">Ova usluga koristi AcousId-ev digitalni otisak datoteke (generiran pomoću <span class="code">fpcalc</span>) za određivanje ID oznaka snimanja i izdanja MusicBrainza. Ako se ID oznake pronađu, metapodaci kao što su naslov, izvođač, album i slika će se preuzeti i postaviti u Tagger.</p>
 <div class="note" title="Bilješka">
 <svg height="24" width="24" version="1.1">
  <g>
   <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
   <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
  </g>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Finding metadata through MusicBrainz isn't 100% realiable and may not be available for uncommom songs.</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Pronalaženje metapodataka putem MusicBrainza nije 100 % pouzdano i možda neće biti dostupno za nepoznate pjesme.</p></div></div></div>
 </div>
 </dd>
 <dt class="terms">Pošalji AcoustId-u</dt>
 <dd class="terms">
-<p class="p">Submits data about a music file (identified via its fingerprint) to AcoustId's database. There are two things that can be submitted about a music file:</p>
+<p class="p">Šalje podatke o glazbenoj datoteci (prepoznata putem digitalnog otiska) u bazu podataka AcousId-a. O glazbenoj datoteci se mogu poslati dva podatka:</p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
-<div class="title title-item"><h2><span class="title">MusicBrainz Recording ID</span></h2></div>
-<p class="p">A user can submit a MusicBrainz Recording ID to submit to AcoustId. This will pull all data from the associated recording id and use that for sending metadata to AcoustId.</p>
+<div class="title title-item"><h2><span class="title">MusicBrainz ID oznaka snimanja</span></h2></div>
+<p class="p">Korisnik može poslati MusicBrainz ID snimke na AcousId. To će povući sve podatke iz pridruženog ID-a snimanja i koristiti ih za slanje metapodataka na AcousId.</p>
 </li>
 <li class="list">
-<div class="title title-item"><h2><span class="title">User Metadata</span></h2></div>
-<p class="p">A user can submit their metadata from Tagger to AcoustId.</p>
+<div class="title title-item"><h2><span class="title">Metapodaci korisnika</span></h2></div>
+<p class="p">Korisnik može poslati svoje metapodatke iz Taggera u AcoustId.</p>
 </li>
 </ul></div></div></div>
 <div class="note" title="Bilješka">
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
   <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
  </g>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">A proper <span class="code">AcoustId User API Key</span> must be set in <span class="code">Preferences</span> for this service to work.</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Odgovarajući <span class="code">AcoustId korisnički API ključ</span> mora biti zadan u <span class="code">Postavkama</span> da bi ova usluga radila.</p></div></div></div>
 </div>
 </dd>
 </dl></div></div></div>

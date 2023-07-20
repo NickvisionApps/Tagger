@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="web-services" its:version="2.0" xml:lang="hr">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Web Services 🌐</title>
+	<title type="link">Web usluge 🌐</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -15,31 +15,31 @@
 </info>
 
 <title>Web usluge</title>
-<p>This page describes the web services available in Tagger</p>
+<p>Ova stranica opisuje dostupne web usluge u aplikaciji Tagger</p>
 <terms>
     <item>
 		<title>Preuzmi MusicBrainz metapodatke</title>
-		<p>Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
-        <p>This service utilizies the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+		<p>Prepoznaje glazbenu datoteku putem MusicBrainza i preuzima njezine metapodatke u Tagger.</p>
+        <p>Ova usluga koristi AcousId-ev digitalni otisak datoteke (generiran pomoću <code>fpcalc</code>) za određivanje ID oznaka snimanja i izdanja MusicBrainza. Ako se ID oznake pronađu, metapodaci kao što su naslov, izvođač, album i slika će se preuzeti i postaviti u Tagger.</p>
         <note>
-            <p>Finding metadata through MusicBrainz isn't 100% realiable and may not be available for uncommom songs.</p>
+            <p>Pronalaženje metapodataka putem MusicBrainza nije 100 % pouzdano i možda neće biti dostupno za nepoznate pjesme.</p>
         </note>
 	</item>
     <item>
 		<title>Pošalji AcoustId-u</title>
-		<p>Submits data about a music file (identified via its fingerprint) to AcoustId's database. There are two things that can be submitted about a music file:</p>
+		<p>Šalje podatke o glazbenoj datoteci (prepoznata putem digitalnog otiska) u bazu podataka AcousId-a. O glazbenoj datoteci se mogu poslati dva podatka:</p>
         <list>
             <item>
-        		<title>MusicBrainz Recording ID</title>
-        		<p>A user can submit a MusicBrainz Recording ID to submit to AcoustId. This will pull all data from the associated recording id and use that for sending metadata to AcoustId.</p>
+        		<title>MusicBrainz ID oznaka snimanja</title>
+        		<p>Korisnik može poslati MusicBrainz ID snimke na AcousId. To će povući sve podatke iz pridruženog ID-a snimanja i koristiti ih za slanje metapodataka na AcousId.</p>
         	</item>
             <item>
-        		<title>User Metadata</title>
-        		<p>A user can submit their metadata from Tagger to AcoustId.</p>
+        		<title>Metapodaci korisnika</title>
+        		<p>Korisnik može poslati svoje metapodatke iz Taggera u AcoustId.</p>
         	</item>
         </list>
 		<note>
-			<p>A proper <code>AcoustId User API Key</code> must be set in <code>Preferences</code> for this service to work.</p>
+			<p>Odgovarajući <code>AcoustId korisnički API ključ</code> mora biti zadan u <code>Postavkama</code> da bi ova usluga radila.</p>
 		</note>
 	</item>
 </terms>
