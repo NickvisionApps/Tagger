@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-21 01:18+0200\n"
+"POT-Creation-Date: 2023-07-21 01:22+0200\n"
 "PO-Revision-Date: 2023-07-20 21:58+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -33,19 +33,19 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:304
 #: ../../../Controllers/MainWindowController.cs:309
 #: ../../../Controllers/MainWindowController.cs:318
-#: ../../../Controllers/MainWindowController.cs:1193
-#: ../../../Controllers/MainWindowController.cs:1194
-#: ../../../Controllers/MainWindowController.cs:1195
-#: ../../../Controllers/MainWindowController.cs:1196
-#: ../../../Controllers/MainWindowController.cs:1197
-#: ../../../Controllers/MainWindowController.cs:1198
-#: ../../../Controllers/MainWindowController.cs:1199
-#: ../../../Controllers/MainWindowController.cs:1200
-#: ../../../Controllers/MainWindowController.cs:1201
-#: ../../../Controllers/MainWindowController.cs:1202
-#: ../../../Controllers/MainWindowController.cs:1203
 #: ../../../Controllers/MainWindowController.cs:1204
+#: ../../../Controllers/MainWindowController.cs:1205
+#: ../../../Controllers/MainWindowController.cs:1206
+#: ../../../Controllers/MainWindowController.cs:1207
 #: ../../../Controllers/MainWindowController.cs:1208
+#: ../../../Controllers/MainWindowController.cs:1209
+#: ../../../Controllers/MainWindowController.cs:1210
+#: ../../../Controllers/MainWindowController.cs:1211
+#: ../../../Controllers/MainWindowController.cs:1212
+#: ../../../Controllers/MainWindowController.cs:1213
+#: ../../../Controllers/MainWindowController.cs:1214
+#: ../../../Controllers/MainWindowController.cs:1215
+#: ../../../Controllers/MainWindowController.cs:1219
 msgid "<keep>"
 msgstr "<zadrži>"
 
@@ -78,13 +78,13 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:764
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:775
 msgid "album"
 msgstr "album"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:798
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:809
 msgid "albumartist"
 msgstr "izvođač albuma"
 
@@ -103,8 +103,8 @@ msgstr "Primijeni"
 msgid "Apply Changes?"
 msgstr "Primijeniti promjene?"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:760
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:771
 msgid "artist"
 msgstr "izvođač"
 
@@ -129,13 +129,13 @@ msgstr "Natrag"
 msgid "Cancel"
 msgstr "Odustani"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:806
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:817
 msgid "comment"
 msgstr "komentar"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:810
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:821
 msgid "composer"
 msgstr "skladatelj"
 
@@ -145,7 +145,7 @@ msgstr "skladatelj"
 msgid "Convert"
 msgstr "Konvertiraj"
 
-#: ../../../Controllers/MainWindowController.cs:461
+#: ../../../Controllers/MainWindowController.cs:472
 #, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
@@ -153,7 +153,7 @@ msgstr[0] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
 msgstr[1] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
 msgstr[2] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
 
-#: ../../../Controllers/MainWindowController.cs:484
+#: ../../../Controllers/MainWindowController.cs:495
 #, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
@@ -161,8 +161,8 @@ msgstr[0] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
 msgstr[1] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
 msgstr[2] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:822
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:833
 msgid "custom"
 msgstr ""
 
@@ -171,8 +171,8 @@ msgstr ""
 msgid "David Lapshin {0}"
 msgstr "David Lapshin {0}"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:814
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:825
 msgid "description"
 msgstr "opis"
 
@@ -187,7 +187,7 @@ msgstr "Odbaci"
 msgid "Discarding unapplied changes..."
 msgstr "Odbacivanje neprimjenjenih promjena …"
 
-#: ../../../Controllers/MainWindowController.cs:690
+#: ../../../Controllers/MainWindowController.cs:701
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Uspješno preuzeti metapodaci za {0} datoteke(a)"
 
@@ -209,19 +209,19 @@ msgstr "Izvezi stražnju sliku albuma"
 msgid "Export Front Album Art"
 msgstr "Izvezi prednju sliku albuma"
 
-#: ../../../Controllers/MainWindowController.cs:601
+#: ../../../Controllers/MainWindowController.cs:612
 msgid "Exported back album art to file successfully"
 msgstr "Stražnja slika albuma je uspješno izvezena u datoteku"
 
-#: ../../../Controllers/MainWindowController.cs:585
+#: ../../../Controllers/MainWindowController.cs:596
 msgid "Exported front album art to file successfully"
 msgstr "Prednja slika albuma je uspješno izvezena u datoteku"
 
-#: ../../../Controllers/MainWindowController.cs:606
+#: ../../../Controllers/MainWindowController.cs:617
 msgid "Failed to export back album art to a file"
 msgstr "Stražnja slika albuma nije uspješno izvezena u datoteku"
 
-#: ../../../Controllers/MainWindowController.cs:590
+#: ../../../Controllers/MainWindowController.cs:601
 msgid "Failed to export front album art to a file"
 msgstr "Prednja slika albuma nije uspješno izvezena u datoteku"
 
@@ -230,8 +230,8 @@ msgstr "Prednja slika albuma nije uspješno izvezena u datoteku"
 msgid "File Name to Tag"
 msgstr "Ime datoteke u oznaku"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:752
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:763
 msgid "filename"
 msgstr "ime datoteke"
 
@@ -250,8 +250,8 @@ msgstr "Znakovni niz formata"
 msgid "Front"
 msgstr "Prednja strana"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:802
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:813
 msgid "genre"
 msgstr "žanr"
 
@@ -297,7 +297,7 @@ msgstr[2] "Učitano je {0} glazbenih datoteka."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:562
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:588
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:597
-#: ../../../Controllers/MainWindowController.cs:1227
+#: ../../../Controllers/MainWindowController.cs:1238
 msgid "Loading music files from folder..."
 msgstr "Učitavanje glazbenih datoteka iz mape …"
 
@@ -364,8 +364,8 @@ msgstr "Odaberi jedan znakovni niz formata."
 msgid "Property Name"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:818
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:829
 msgid "publisher"
 msgstr "izdavač"
 
@@ -402,7 +402,7 @@ msgstr "Pošalji"
 msgid "Submit to AcoustId"
 msgstr "Pošalji AcoustId-u"
 
-#: ../../../Controllers/MainWindowController.cs:703
+#: ../../../Controllers/MainWindowController.cs:714
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "Metapodaci su uspješno poslani AcoustId-u"
 
@@ -445,8 +445,8 @@ msgstr ""
 msgid "TiB"
 msgstr "TiB"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:756
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:767
 msgid "title"
 msgstr "naslov"
 
@@ -454,8 +454,8 @@ msgstr "naslov"
 msgid "Too Many Files Selected"
 msgstr "Odabrano je previše datoteka"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:783
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:794
 msgid "track"
 msgstr "pjesma"
 
@@ -463,8 +463,13 @@ msgstr "pjesma"
 msgid "translator-credits"
 msgstr "Milo Ivir <mail@milotype.de>"
 
-#: ../../../Controllers/MainWindowController.cs:503
+#: ../../../Controllers/MainWindowController.cs:514
 msgid "Unable to load image file"
+msgstr "Neuspjelo učitavanje slikovne datoteke"
+
+#: ../../../Controllers/MainWindowController.cs:397
+#, fuzzy, csharp-format
+msgid "Unable to save {0}"
 msgstr "Neuspjelo učitavanje slikovne datoteke"
 
 #: ../../../Controllers/MainWindowController.cs:360
@@ -472,12 +477,12 @@ msgstr "Neuspjelo učitavanje slikovne datoteke"
 msgid "Unable to save {0}."
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:703
+#: ../../../Controllers/MainWindowController.cs:714
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "Neuspjelo slanje metapodatke AcoustId-u. Provjeri API ključ"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:768
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:779
 msgid "year"
 msgstr "godina"
 
@@ -488,9 +493,8 @@ msgstr "Pronađene su oštećene datoteke"
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
 #, fuzzy
 msgid ""
-"This music folder contains music files that have corrupted tags.\n"
-"\n"
-"The following files are affected and will be ignored by Tagger:"
+"This music folder contains music files that have corrupted tags. The "
+"following files are affected and will be ignored by Tagger:"
 msgstr ""
 "Neke glazbene datoteke još uvijek imaju promjene koje čekaju da se "
 "primijene. Želiš li primijeniti te promjene?"

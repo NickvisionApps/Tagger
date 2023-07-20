@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-21 01:18+0200\n"
+"POT-Creation-Date: 2023-07-21 01:22+0200\n"
 "PO-Revision-Date: 2023-07-12 19:29+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -32,19 +32,19 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:304
 #: ../../../Controllers/MainWindowController.cs:309
 #: ../../../Controllers/MainWindowController.cs:318
-#: ../../../Controllers/MainWindowController.cs:1193
-#: ../../../Controllers/MainWindowController.cs:1194
-#: ../../../Controllers/MainWindowController.cs:1195
-#: ../../../Controllers/MainWindowController.cs:1196
-#: ../../../Controllers/MainWindowController.cs:1197
-#: ../../../Controllers/MainWindowController.cs:1198
-#: ../../../Controllers/MainWindowController.cs:1199
-#: ../../../Controllers/MainWindowController.cs:1200
-#: ../../../Controllers/MainWindowController.cs:1201
-#: ../../../Controllers/MainWindowController.cs:1202
-#: ../../../Controllers/MainWindowController.cs:1203
 #: ../../../Controllers/MainWindowController.cs:1204
+#: ../../../Controllers/MainWindowController.cs:1205
+#: ../../../Controllers/MainWindowController.cs:1206
+#: ../../../Controllers/MainWindowController.cs:1207
 #: ../../../Controllers/MainWindowController.cs:1208
+#: ../../../Controllers/MainWindowController.cs:1209
+#: ../../../Controllers/MainWindowController.cs:1210
+#: ../../../Controllers/MainWindowController.cs:1211
+#: ../../../Controllers/MainWindowController.cs:1212
+#: ../../../Controllers/MainWindowController.cs:1213
+#: ../../../Controllers/MainWindowController.cs:1214
+#: ../../../Controllers/MainWindowController.cs:1215
+#: ../../../Controllers/MainWindowController.cs:1219
 msgid "<keep>"
 msgstr "<conserver>"
 
@@ -78,13 +78,13 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:764
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:775
 msgid "album"
 msgstr "album"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:798
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:809
 msgid "albumartist"
 msgstr "artiste de l’album"
 
@@ -103,8 +103,8 @@ msgstr "Appliquer"
 msgid "Apply Changes?"
 msgstr "Appliquer les changements ?"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:760
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:771
 msgid "artist"
 msgstr "artiste"
 
@@ -129,13 +129,13 @@ msgstr "Retour"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:806
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:817
 msgid "comment"
 msgstr "commentaire"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:810
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:821
 msgid "composer"
 msgstr "compositeur"
 
@@ -145,22 +145,22 @@ msgstr "compositeur"
 msgid "Convert"
 msgstr "Convertir"
 
-#: ../../../Controllers/MainWindowController.cs:461
+#: ../../../Controllers/MainWindowController.cs:472
 #, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
 msgstr[0] "{0} nom de fichier converti en balise avec succès"
 msgstr[1] "{0} noms de fichiers convertis en balises avec succès"
 
-#: ../../../Controllers/MainWindowController.cs:484
+#: ../../../Controllers/MainWindowController.cs:495
 #, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
 msgstr[0] "{0} balise convertie en nom de fichier avec succès"
 msgstr[1] "{0} balises converties en noms de fichiers avec succès"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:822
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:833
 msgid "custom"
 msgstr ""
 
@@ -169,8 +169,8 @@ msgstr ""
 msgid "David Lapshin {0}"
 msgstr "David Lapshin {0}"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:814
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:825
 msgid "description"
 msgstr "description"
 
@@ -185,7 +185,7 @@ msgstr "Abandonner"
 msgid "Discarding unapplied changes..."
 msgstr "Abandon des changements..."
 
-#: ../../../Controllers/MainWindowController.cs:690
+#: ../../../Controllers/MainWindowController.cs:701
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Métadonnées téléchargées pour {0} fichiers avec succès"
 
@@ -207,21 +207,21 @@ msgstr "Exporter le dos de la pochette d’album"
 msgid "Export Front Album Art"
 msgstr "Exporter la face de la pochette d’album"
 
-#: ../../../Controllers/MainWindowController.cs:601
+#: ../../../Controllers/MainWindowController.cs:612
 msgid "Exported back album art to file successfully"
 msgstr ""
 "Le dos de la pochette d’album a été exporté vers le fichier avec succès"
 
-#: ../../../Controllers/MainWindowController.cs:585
+#: ../../../Controllers/MainWindowController.cs:596
 msgid "Exported front album art to file successfully"
 msgstr ""
 "La face de la pochette d’album a été exportée vers le fichier avec succès"
 
-#: ../../../Controllers/MainWindowController.cs:606
+#: ../../../Controllers/MainWindowController.cs:617
 msgid "Failed to export back album art to a file"
 msgstr "Échec de l’exportation du dos de la pochette d’album vers le fichier"
 
-#: ../../../Controllers/MainWindowController.cs:590
+#: ../../../Controllers/MainWindowController.cs:601
 msgid "Failed to export front album art to a file"
 msgstr ""
 "Échec de l’exportation de la face de la pochette d’album vers le fichier"
@@ -231,8 +231,8 @@ msgstr ""
 msgid "File Name to Tag"
 msgstr "Nom de fichier vers balise"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:752
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:763
 msgid "filename"
 msgstr "nom de fichier"
 
@@ -251,8 +251,8 @@ msgstr "Format"
 msgid "Front"
 msgstr "Face"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:802
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:813
 msgid "genre"
 msgstr "genre"
 
@@ -297,7 +297,7 @@ msgstr[1] "{0} musiques chargées."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:562
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:588
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:597
-#: ../../../Controllers/MainWindowController.cs:1227
+#: ../../../Controllers/MainWindowController.cs:1238
 msgid "Loading music files from folder..."
 msgstr "Chargement des musiques depuis le dossier…"
 
@@ -365,8 +365,8 @@ msgstr "Sélectionnez un format."
 msgid "Property Name"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:818
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:829
 msgid "publisher"
 msgstr "maison de disques"
 
@@ -404,7 +404,7 @@ msgstr "Envoyer"
 msgid "Submit to AcoustId"
 msgstr "Envoyer à AcoustId"
 
-#: ../../../Controllers/MainWindowController.cs:703
+#: ../../../Controllers/MainWindowController.cs:714
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "Métadonnées envoyées à AcoustId avec succès"
 
@@ -447,8 +447,8 @@ msgstr ""
 msgid "TiB"
 msgstr "Tio"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:756
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:767
 msgid "title"
 msgstr "titre"
 
@@ -456,8 +456,8 @@ msgstr "titre"
 msgid "Too Many Files Selected"
 msgstr "Trop de fichiers sélectionnés"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:783
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:794
 msgid "track"
 msgstr "piste"
 
@@ -465,8 +465,13 @@ msgstr "piste"
 msgid "translator-credits"
 msgstr "Irénée Thirion"
 
-#: ../../../Controllers/MainWindowController.cs:503
+#: ../../../Controllers/MainWindowController.cs:514
 msgid "Unable to load image file"
+msgstr "Impossible de charger l’image"
+
+#: ../../../Controllers/MainWindowController.cs:397
+#, fuzzy, csharp-format
+msgid "Unable to save {0}"
 msgstr "Impossible de charger l’image"
 
 #: ../../../Controllers/MainWindowController.cs:360
@@ -474,12 +479,12 @@ msgstr "Impossible de charger l’image"
 msgid "Unable to save {0}."
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:703
+#: ../../../Controllers/MainWindowController.cs:714
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "Impossible d’envoyer les métadonnées à AcoustId. Vérifiez la clé API"
 
-#: ../../../Controllers/MainWindowController.cs:726
-#: ../../../Controllers/MainWindowController.cs:768
+#: ../../../Controllers/MainWindowController.cs:737
+#: ../../../Controllers/MainWindowController.cs:779
 msgid "year"
 msgstr "année"
 
@@ -491,9 +496,8 @@ msgstr "Aucune musique trouvée"
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
 #, fuzzy
 msgid ""
-"This music folder contains music files that have corrupted tags.\n"
-"\n"
-"The following files are affected and will be ignored by Tagger:"
+"This music folder contains music files that have corrupted tags. The "
+"following files are affected and will be ignored by Tagger:"
 msgstr ""
 "Des fichiers de musiques ont encore des modifications en attente d’être "
 "appliquées. Que souhaitez-vous faire ?"
