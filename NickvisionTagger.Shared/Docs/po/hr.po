@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-07-15 11:12+0200\n"
-"PO-Revision-Date: 2023-07-14 02:25+0000\n"
+"PO-Revision-Date: 2023-07-20 21:58+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/docs/hr/>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/docs/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
@@ -190,26 +190,24 @@ msgstr ""
 
 #. (itstool) path: info/title
 #: yelp/C/corrupted.page:8
-#, fuzzy
 msgctxt "link"
 msgid "Corrupted Files 🪲"
-msgstr "Redoslijed datoteka"
+msgstr "Oštećene datoteke 🪲"
 
 #. (itstool) path: page/title
 #: yelp/C/corrupted.page:20
-#, fuzzy
 msgid "Corrupted Files"
-msgstr "Redoslijed datoteka"
+msgstr "Oštećene datoteke"
 
 #. (itstool) path: page/p
 #: yelp/C/corrupted.page:21
 msgid "This page explains music files with corrupted data."
-msgstr ""
+msgstr "Ova stranica objašnjava glazbene datoteke s oštećenim podacima."
 
 #. (itstool) path: item/title
 #: yelp/C/corrupted.page:24
 msgid "Invalid Data"
-msgstr ""
+msgstr "Neispravni podaci"
 
 #. (itstool) path: item/p
 #: yelp/C/corrupted.page:25
@@ -218,6 +216,10 @@ msgid ""
 "information about a file and even cause playback issues. Some websites add "
 "extra junk data in files which in turn causes corruption."
 msgstr ""
+"Neispravno zaglavlje oznake ili nevaljani podaci u datoteci mogu prouzročiti "
+"probleme prilikom čitanja informacija o datoteci te probleme s "
+"reprodukcijom. Neke web stranice dodaju dodatne nevaljane podatke u datoteke "
+"što uzrokuje oštećenje."
 
 #. (itstool) path: item/p
 #: yelp/C/corrupted.page:26
@@ -225,6 +227,9 @@ msgid ""
 "<app>Tagger</app> ignores corrupted files, but displays a dialog listing "
 "corrupted file for you to manage and fix accordingly."
 msgstr ""
+"<app>Tagger</app> zanemaruje oštećene datoteke, ali prikazuje dijaloški "
+"okvir s popisom oštećenih datoteka za upravljanje i ispravljanje tih "
+"datoteka."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:28
@@ -232,12 +237,15 @@ msgid ""
 "FFmpeg can be used to fix corruption issues. Run the following command to re-"
 "encode a file's tag and remove junk data:"
 msgstr ""
+"FFmpeg se može koristiti za ispravljanje oštećene datoeke. Pokreni sljedeću "
+"naredbu za ponovno kodiranje oznake datoteke i uklanjanje nevaljanih "
+"podataka:"
 
 #. (itstool) path: note/code
 #: yelp/C/corrupted.page:29
 #, no-wrap
 msgid "ffmpeg -i in.mp3 out.mp3"
-msgstr ""
+msgstr "ffmpeg -i in.mp3 out.mp3"
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:30
@@ -245,6 +253,8 @@ msgid ""
 "where <code>in.mp3</code> is the file path of the corrupted file and "
 "<code>out.mp3</code> is the path to export the re-encoded file."
 msgstr ""
+"gdje je <code>in.mp3</code> staza oštećene datoteke, a <code>out.mp3</code> "
+"staza za izvoz ponovo kodirane datoteke."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:33
@@ -252,6 +262,8 @@ msgid ""
 "You can also use <link href=\"https://www.freac.org\">fre:ac</link> to re-"
 "encode files without convertion to another format."
 msgstr ""
+"Za ponovno kodiranje datoteka bez pretvaranja u jedan drugi format također "
+"možete koristiti <link href=\"https://www.freac.org\">fre:ac</link>."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
@@ -281,6 +293,8 @@ msgid ""
 "This documentation will help you understand how to configure <app>Tagger</"
 "app> to get the most of the application."
 msgstr ""
+"Dokumentacija će ti pomoći razumjeti kako konfigurirati i na najbolji način "
+"koristiti aplikaciju <app>Tagger</app>."
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:22
@@ -337,6 +351,10 @@ msgid ""
 "quotes. Each property is separated by a semicolon. Notice how the last "
 "property does not end with a semicolon."
 msgstr ""
+"Gdje su <code>prop1</code>, <code>prop2</code> važeća svojstva oznake, a "
+"<code>value1</code>, <code>value2</code> vrijednosti za pretraživanje pod "
+"navodnicima. Svako svojstvo je odvojeno točkom sa zarezom. Zadnje svojstvo "
+"ne završava točkom sa zarezom."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:28
@@ -376,7 +394,7 @@ msgstr "<code>pjesma</code>"
 #. (itstool) path: item/p
 #: yelp/C/search.page:36
 msgid "<code>albumartist</code>"
-msgstr ""
+msgstr "<code>izvođač albuma</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:37
@@ -430,6 +448,10 @@ msgid ""
 "filter the listbox with your search. If the syntax of your string is "
 "invalid, the textbox will turn red and will not filter the listbox."
 msgstr ""
+"Ako je sintaksa izraza ispravna, tekstualni okvir će se prikazati zelenom "
+"bojom i filtrirat će popis s tvojom pretragom. Ako sintaksa izraza nije "
+"ispravna, tekstualni okvir će se prikazati crvenom bojom i neće filtrirati "
+"popis."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:50
@@ -439,19 +461,19 @@ msgstr "Primjeri"
 #. (itstool) path: section/p
 #: yelp/C/search.page:51
 msgid "<code>!artist=\"\"</code>"
-msgstr ""
+msgstr "<code>!izvođač=\"\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:52
 msgid ""
 "This search string will filter the listbox to contain music files which "
 "artist is empty."
-msgstr ""
+msgstr "Ova izraz će pretražiti glazbene datoteke bez podatka o izvođaču."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:53
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
-msgstr ""
+msgstr "<code>!žanr=\"\";godina=\"2022\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:54
@@ -460,11 +482,13 @@ msgid ""
 "genre is empty and which year is 2022 (Year and Track properties will "
 "validate if the value string is a number)."
 msgstr ""
+"Ova izraz će pretražiti glazbene datoteke bez podatka o žanru ali s godinom "
+"2022. (Svojstva „godina” i „pjesma” će provjeriti je li se radi o broju)."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:55
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
-msgstr ""
+msgstr "<code>!naslov=\"\";izvođač=\"bob\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:56
@@ -472,12 +496,14 @@ msgid ""
 "This search string will filter the listbox to contain music files which "
 "title is empty and which artist is <code>bob</code>."
 msgstr ""
+"Ova izraz će pretražiti glazbene datoteke bez podatka o naslovu ali s "
+"izvođačem <code>bob</code>."
 
 #. (itstool) path: info/title
 #: yelp/C/web-services.page:8
 msgctxt "link"
 msgid "Web Services 🌐"
-msgstr ""
+msgstr "Web usluge 🌐"
 
 #. (itstool) path: page/title
 #: yelp/C/web-services.page:20
@@ -487,7 +513,7 @@ msgstr "Web usluge"
 #. (itstool) path: page/p
 #: yelp/C/web-services.page:21
 msgid "This page describes the web services available in Tagger"
-msgstr ""
+msgstr "Ova stranica opisuje dostupne web usluge u aplikaciji Tagger"
 
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:24
@@ -500,6 +526,8 @@ msgid ""
 "Identifies a music file through MusicBrainz and downloads its metadata to "
 "use in Tagger."
 msgstr ""
+"Prepoznaje glazbenu datoteku putem MusicBrainza i preuzima njezine "
+"metapodatke u Tagger."
 
 #. (itstool) path: item/p
 #: yelp/C/web-services.page:26
@@ -509,6 +537,10 @@ msgid ""
 "IDs are found, metadata such as title, artist, album, and art will be "
 "downloaded and set in Tagger."
 msgstr ""
+"Ova usluga koristi AcousId-ev digitalni otisak datoteke (generiran pomoću "
+"<code>fpcalc</code>) za određivanje ID oznaka snimanja i izdanja "
+"MusicBrainza. Ako se ID oznake pronađu, metapodaci kao što su naslov, "
+"izvođač, album i slika će se preuzeti i postaviti u Tagger."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:28
@@ -516,6 +548,8 @@ msgid ""
 "Finding metadata through MusicBrainz isn't 100% realiable and may not be "
 "available for uncommom songs."
 msgstr ""
+"Pronalaženje metapodataka putem MusicBrainza nije 100 % pouzdano i možda "
+"neće biti dostupno za nepoznate pjesme."
 
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:32
@@ -529,11 +563,13 @@ msgid ""
 "AcoustId's database. There are two things that can be submitted about a "
 "music file:"
 msgstr ""
+"Šalje podatke o glazbenoj datoteci (prepoznata putem digitalnog otiska) u "
+"bazu podataka AcousId-a. O glazbenoj datoteci se mogu poslati dva podatka:"
 
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:36
 msgid "MusicBrainz Recording ID"
-msgstr ""
+msgstr "MusicBrainz ID oznaka snimanja"
 
 #. (itstool) path: item/p
 #: yelp/C/web-services.page:37
@@ -542,16 +578,19 @@ msgid ""
 "will pull all data from the associated recording id and use that for sending "
 "metadata to AcoustId."
 msgstr ""
+"Korisnik može poslati MusicBrainz ID snimke na AcousId. To će povući sve "
+"podatke iz pridruženog ID-a snimanja i koristiti ih za slanje metapodataka "
+"na AcousId."
 
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:40
 msgid "User Metadata"
-msgstr ""
+msgstr "Metapodaci korisnika"
 
 #. (itstool) path: item/p
 #: yelp/C/web-services.page:41
 msgid "A user can submit their metadata from Tagger to AcoustId."
-msgstr ""
+msgstr "Korisnik može poslati svoje metapodatke iz Taggera u AcoustId."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:45
@@ -559,3 +598,5 @@ msgid ""
 "A proper <code>AcoustId User API Key</code> must be set in "
 "<code>Preferences</code> for this service to work."
 msgstr ""
+"Odgovarajući <code>AcoustId korisnički API ključ</code> mora biti zadan u "
+"<code>Postavkama</code> da bi ova usluga radila."
