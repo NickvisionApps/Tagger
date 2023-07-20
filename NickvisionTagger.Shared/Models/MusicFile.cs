@@ -418,7 +418,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             Path = newPath;
         }
         var track = new Track(Path);
-        track.Remove();
+        var res = track.Remove();
+        if(!res)
+        {
+            return res;
+        }
         track.Title = Title;
         track.Artist = Artist;
         track.Album = Album;
@@ -447,7 +451,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             }
             track.AdditionalFields.Add(pair.Key, pair.Value);
         }
-        var res = track.Save();
+        res = track.Save();
         if(res)
         {
             if(preserveModificationTimestamp)
