@@ -62,7 +62,10 @@ public class MusicFolder
         ContainsReadOnlyFiles = false;
         if(Directory.Exists(ParentPath))
         {
-            var supportedExtensions = new string[] { ".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav" };
+            var supportedExtensions = new string[] { ".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav",
+                ".aac", ".aax", ".aa", ".aif", ".aiff", ".aifc", ".dsd", ".dsf", ".ac3", ".gym", ".ape", ".mpv", ".mp+", ".ofr", ".ofs",
+                ".psf", ".psf1", ".psf2", ".minipsf", ".minipsf1", ".minipsf2", ".ssf", ".minissf", ".minidsf", ".gsf", ".minigsf", ".qsf",
+                ".miniqsf", ".spc", ".tak", ".tta", ".vqf", ".bwav", ".bwf", ".vgm", ".vgz", ".wv", ".asf" };
             await Task.Run(() =>
             {
                 foreach(var path in Directory.EnumerateFiles(ParentPath, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
