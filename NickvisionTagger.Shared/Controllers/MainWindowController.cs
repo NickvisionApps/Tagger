@@ -383,8 +383,19 @@ public class MainWindowController
                 {
                     if(!MusicFileSaveStates[pair.Key])
                     {
-                        pair.Value.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp);
-                        MusicFileSaveStates[pair.Key] = true;
+                        if(pair.Value.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp))
+                        {
+                            MusicFileSaveStates[pair.Key] = true;
+                        }
+                        else
+                        {
+                            var path = pair.Value.Path.Remove(0, _musicFolder.ParentPath.Length);
+                            if(path[0] == '/')
+                            {
+                                path = path.Remove(0, 1);
+                            }
+                            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to save {0}", path), NotificationSeverity.Warning, "unsupported"));
+                        }
                     }
                 }
             });
