@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="corrupted" its:version="2.0" xml:lang="hr">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Corrupted Files 🪲</title>
+	<title type="link">Oštećene datoteke 🪲</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -14,20 +14,20 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Corrupted Files</title>
-<p>This page explains music files with corrupted data.</p>
+<title>Oštećene datoteke</title>
+<p>Ova stranica objašnjava glazbene datoteke s oštećenim podacima.</p>
 <terms>
     <item>
-        <title>Invalid Data</title>
-        <p>An invalid tag header or junk data in a file can cause issues when reading information about a file and even cause playback issues. Some websites add extra junk data in files which in turn causes corruption.</p>
-        <p><app>Tagger</app> ignores corrupted files, but displays a dialog listing corrupted file for you to manage and fix accordingly.</p>
+        <title>Neispravni podaci</title>
+        <p>Neispravno zaglavlje oznake ili nevaljani podaci u datoteci mogu prouzročiti probleme prilikom čitanja informacija o datoteci te probleme s reprodukcijom. Neke web stranice dodaju dodatne nevaljane podatke u datoteke što uzrokuje oštećenje.</p>
+        <p>If <app>Tagger</app> is unable to read a file, it will be ignored and a dialog will be displayed listing corrupted files for you to manage and fix accordingly.</p>
         <note style="advanced">
-            <p>FFmpeg can be used to fix corruption issues. Run the following command to re-encode a file's tag and remove junk data:</p>
+            <p>FFmpeg se može koristiti za ispravljanje oštećene datoeke. Pokreni sljedeću naredbu za ponovno kodiranje oznake datoteke i uklanjanje nevaljanih podataka:</p>
             <code>ffmpeg -i in.mp3 out.mp3</code>
-            <p>where <code>in.mp3</code> is the file path of the corrupted file and <code>out.mp3</code> is the path to export the re-encoded file.</p>
+            <p>gdje je <code>in.mp3</code> staza oštećene datoteke, a <code>out.mp3</code> staza za izvoz ponovo kodirane datoteke.</p>
         </note>
         <note style="advanced">
-             <p>You can also use <link href="https://www.freac.org">fre:ac</link> to re-encode files without convertion to another format.</p>
+             <p>Za ponovno kodiranje datoteka bez pretvaranja u jedan drugi format također možete koristiti <link href="https://www.freac.org">fre:ac</link>.</p>
         </note>
     </item>
 </terms>

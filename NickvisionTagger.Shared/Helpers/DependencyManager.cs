@@ -7,12 +7,12 @@ namespace NickvisionTagger.Shared.Helpers;
 internal static class DependencyManager
 {
     private static string _fpcalcPath;
-    
+
     static DependencyManager()
     {
         _fpcalcPath = "";
     }
-    
+
     /// <summary>
     /// The path for fpcalc
     /// </summary>

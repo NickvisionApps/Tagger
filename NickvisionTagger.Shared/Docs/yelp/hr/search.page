@@ -19,7 +19,7 @@
 
 <p>Napredna pretraga je moćna značajka koju pruža <app>Tagger</app>, koja korisnicima omogućuje pretraživanje određenih vrijednosti u sadržaju oznaka datoteka koristeći moćnu sintaksu temeljenu na oznakama:</p>
 <p><code>!prop1="vrijednost1";prop2="vrijednost2"</code></p>
-<p>Where <code>prop1</code>, <code>prop2</code> are valid tag properties and <code>value1</code>, <code>value2</code> are the values to search wrapped in quotes. Each property is separated by a semicolon. Notice how the last property does not end with a semicolon.</p>
+<p>Gdje su <code>prop1</code>, <code>prop2</code> važeća svojstva oznake, a <code>value1</code>, <code>value2</code> vrijednosti za pretraživanje pod navodnicima. Svako svojstvo je odvojeno točkom sa zarezom. Zadnje svojstvo ne završava točkom sa zarezom.</p>
 
 <section>
 <title>Važeća svojstva</title>
@@ -30,25 +30,26 @@
 <item><p><code>album</code></p></item>
 <item><p><code>godina</code></p></item>
 <item><p><code>pjesma</code></p></item>
-<item><p><code>albumartist</code></p></item>
+<item><p><code>izvođač albuma</code></p></item>
 <item><p><code>žanr</code></p></item>
 <item><p><code>komentar</code></p></item>
-<item><p><code>bpm</code></p></item>
 <item><p><code>skladatelj</code></p></item>
 <item><p><code>opis</code></p></item>
 <item><p><code>izdavač</code></p></item>
-<item><p><code>isrc</code></p></item>
+<item><p><code>custom</code></p></item>
 </list>
 <p>Svojstva ne razlikuju velika i mala slova.</p></section>
 
 <section><title>Provjera sintakse</title>
-<p>If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search. If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox.</p></section>
+<p>Ako je sintaksa izraza ispravna, tekstualni okvir će se prikazati zelenom bojom i filtrirat će popis s tvojom pretragom. Ako sintaksa izraza nije ispravna, tekstualni okvir će se prikazati crvenom bojom i neće filtrirati popis.</p></section>
 
 <section><title>Primjeri</title>
-<p><code>!artist=""</code></p>
-<p>This search string will filter the listbox to contain music files which artist is empty.</p>
-<p><code>!genre="";year="2022"</code></p>
-<p>This search string will filter the listbox to contain music files which genre is empty and which year is 2022 (Year and Track properties will validate if the value string is a number).</p>
-<p><code>!title="";artist="bob"</code></p>
-<p>This search string will filter the listbox to contain music files which title is empty and which artist is <code>bob</code>.</p></section>
+<p><code>!izvođač=""</code></p>
+<p>This search string will filter the listbox to contain music files whose artist is empty.</p>
+<p><code>!žanr="";godina="2022"</code></p>
+<p>This search string will filter the listbox to contain music files whose genre is empty and whose year is 2022 (Year and Track properties will validate if the value string is a number).</p>
+<p><code>!naslov="";izvođač="bob"</code></p>
+<p>This search string will filter the listbox to contain music files whose title is empty and whose artist is <code>bob</code>.</p>
+<p><code>!custom="mbrd"</code></p>
+<p>This search string will filter the listbox to contain music files that contain a custom property with the name <code>mbrd</code>.</p></section>
 </page>

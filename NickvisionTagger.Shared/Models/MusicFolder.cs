@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using TagLib;
-using File = System.IO.File;
 
 namespace NickvisionTagger.Shared.Models;
 
@@ -33,6 +31,10 @@ public class MusicFolder
     /// The list of paths of corrupted music files
     /// </summary>
     public List<string> CorruptedFiles { get; init; }
+    /// <summary>
+    /// Whether or not the folder contains music files that are read-only
+    /// </summary>
+    public bool ContainsReadOnlyFiles { get; private set; }
     
     /// <summary>
     /// Constructs a MusicFolder
@@ -45,6 +47,7 @@ public class MusicFolder
         SortFilesBy = SortBy.Filename;
         MusicFiles = new List<MusicFile>();
         CorruptedFiles = new List<string>();
+        ContainsReadOnlyFiles = false;
     }
     
     /// <summary>
@@ -53,12 +56,16 @@ public class MusicFolder
     /// <returns>Whether or not there are corrupted files</returns>
     public async Task<bool> ReloadMusicFilesAsync()
     {
+        MusicFile.SortFilesBy = SortFilesBy;
         MusicFiles.Clear();
         CorruptedFiles.Clear();
-        MusicFile.SortFilesBy = SortFilesBy;
+        ContainsReadOnlyFiles = false;
         if(Directory.Exists(ParentPath))
         {
-            var supportedExtensions = new string[] { ".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav" };
+            var supportedExtensions = new string[] { ".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav",
+                ".aac", ".aax", ".aa", ".aif", ".aiff", ".aifc", ".dsd", ".dsf", ".ac3", ".gym", ".ape", ".mpv", ".mp+", ".ofr", ".ofs",
+                ".psf", ".psf1", ".psf2", ".minipsf", ".minipsf1", ".minipsf2", ".ssf", ".minissf", ".minidsf", ".gsf", ".minigsf", ".qsf",
+                ".miniqsf", ".spc", ".tak", ".tta", ".vqf", ".bwav", ".bwf", ".vgm", ".vgz", ".wv", ".asf" };
             await Task.Run(() =>
             {
                 foreach(var path in Directory.EnumerateFiles(ParentPath, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
@@ -67,7 +74,12 @@ public class MusicFolder
                     {
                         try
                         {
-                            MusicFiles.Add(new MusicFile(path));
+                            var musicFile = new MusicFile(path);
+                            MusicFiles.Add(musicFile);
+                            if(musicFile.IsReadOnly)
+                            {
+                                ContainsReadOnlyFiles = true;
+                            }
                         }
                         catch (FileLoadException e)
                         {

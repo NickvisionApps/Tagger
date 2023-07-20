@@ -20,7 +20,7 @@
     <item>
         <title>Invalid Data</title>
         <p>An invalid tag header or junk data in a file can cause issues when reading information about a file and even cause playback issues. Some websites add extra junk data in files which in turn causes corruption.</p>
-        <p><app>Tagger</app> ignores corrupted files, but displays a dialog listing corrupted file for you to manage and fix accordingly.</p>
+        <p>If <app>Tagger</app> is unable to read a file, it will be ignored and a dialog will be displayed listing corrupted files for you to manage and fix accordingly.</p>
         <note style="advanced">
             <p>FFmpeg can be used to fix corruption issues. Run the following command to re-encode a file's tag and remove junk data:</p>
             <code>ffmpeg -i in.mp3 out.mp3</code>

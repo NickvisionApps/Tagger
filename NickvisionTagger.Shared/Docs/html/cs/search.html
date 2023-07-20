@@ -36,11 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <li class="list"><p class="p"><span class="code">albumartist</span></p></li>
 <li class="list"><p class="p"><span class="code">genre</span></p></li>
 <li class="list"><p class="p"><span class="code">comment</span></p></li>
-<li class="list"><p class="p"><span class="code">bpm</span></p></li>
 <li class="list"><p class="p"><span class="code">composer</span></p></li>
 <li class="list"><p class="p"><span class="code">description</span></p></li>
 <li class="list"><p class="p"><span class="code">publisher</span></p></li>
-<li class="list"><p class="p"><span class="code">isrc</span></p></li>
+<li class="list"><p class="p"><span class="code">custom</span></p></li>
 </ul></div></div></div>
 <p class="p">Properties are case-insensitive.</p>
 </div></div>
@@ -51,11 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Examples</span></h2></div>
 <div class="region"><div class="contents pagewide">
 <p class="p"><span class="code">!artist=""</span></p>
-<p class="p">This search string will filter the listbox to contain music files which artist is empty.</p>
+<p class="p">This search string will filter the listbox to contain music files whose artist is empty.</p>
 <p class="p"><span class="code">!genre="";year="2022"</span></p>
-<p class="p">This search string will filter the listbox to contain music files which genre is empty and which year is 2022 (Year and Track properties will validate if the value string is a number).</p>
+<p class="p">This search string will filter the listbox to contain music files whose genre is empty and whose year is 2022 (Year and Track properties will validate if the value string is a number).</p>
 <p class="p"><span class="code">!title="";artist="bob"</span></p>
-<p class="p">This search string will filter the listbox to contain music files which title is empty and which artist is <span class="code">bob</span>.</p>
+<p class="p">This search string will filter the listbox to contain music files whose title is empty and whose artist is <span class="code">bob</span>.</p>
+<p class="p"><span class="code">!custom="mbrd"</span></p>
+<p class="p">This search string will filter the listbox to contain music files that contain a custom property with the name <span class="code">mbrd</span>.</p>
 </div></div>
 </div></section><section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>

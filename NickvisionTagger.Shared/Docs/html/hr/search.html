@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="p">Ova stranica objašnjava kako koristiti naprednu pretragu u aplikaciji <span class="app">Tagger</span>.</p>
 <p class="p">Napredna pretraga je moćna značajka koju pruža <span class="app">Tagger</span>, koja korisnicima omogućuje pretraživanje određenih vrijednosti u sadržaju oznaka datoteka koristeći moćnu sintaksu temeljenu na oznakama:</p>
 <p class="p"><span class="code">!prop1="vrijednost1";prop2="vrijednost2"</span></p>
-<p class="p">Where <span class="code">prop1</span>, <span class="code">prop2</span> are valid tag properties and <span class="code">value1</span>, <span class="code">value2</span> are the values to search wrapped in quotes. Each property is separated by a semicolon. Notice how the last property does not end with a semicolon.</p>
+<p class="p">Gdje su <span class="code">prop1</span>, <span class="code">prop2</span> važeća svojstva oznake, a <span class="code">value1</span>, <span class="code">value2</span> vrijednosti za pretraživanje pod navodnicima. Svako svojstvo je odvojeno točkom sa zarezom. Zadnje svojstvo ne završava točkom sa zarezom.</p>
 </div>
 <section id=""><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Važeća svojstva</span></h2></div>
@@ -33,29 +33,30 @@ document.addEventListener('DOMContentLoaded', function() {
 <li class="list"><p class="p"><span class="code">album</span></p></li>
 <li class="list"><p class="p"><span class="code">godina</span></p></li>
 <li class="list"><p class="p"><span class="code">pjesma</span></p></li>
-<li class="list"><p class="p"><span class="code">albumartist</span></p></li>
+<li class="list"><p class="p"><span class="code">izvođač albuma</span></p></li>
 <li class="list"><p class="p"><span class="code">žanr</span></p></li>
 <li class="list"><p class="p"><span class="code">komentar</span></p></li>
-<li class="list"><p class="p"><span class="code">bpm</span></p></li>
 <li class="list"><p class="p"><span class="code">skladatelj</span></p></li>
 <li class="list"><p class="p"><span class="code">opis</span></p></li>
 <li class="list"><p class="p"><span class="code">izdavač</span></p></li>
-<li class="list"><p class="p"><span class="code">isrc</span></p></li>
+<li class="list"><p class="p"><span class="code">custom</span></p></li>
 </ul></div></div></div>
 <p class="p">Svojstva ne razlikuju velika i mala slova.</p>
 </div></div>
 </div></section><section id=""><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Provjera sintakse</span></h2></div>
-<div class="region"><div class="contents pagewide"><p class="p">If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search. If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox.</p></div></div>
+<div class="region"><div class="contents pagewide"><p class="p">Ako je sintaksa izraza ispravna, tekstualni okvir će se prikazati zelenom bojom i filtrirat će popis s tvojom pretragom. Ako sintaksa izraza nije ispravna, tekstualni okvir će se prikazati crvenom bojom i neće filtrirati popis.</p></div></div>
 </div></section><section id=""><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Primjeri</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p"><span class="code">!artist=""</span></p>
-<p class="p">This search string will filter the listbox to contain music files which artist is empty.</p>
-<p class="p"><span class="code">!genre="";year="2022"</span></p>
-<p class="p">This search string will filter the listbox to contain music files which genre is empty and which year is 2022 (Year and Track properties will validate if the value string is a number).</p>
-<p class="p"><span class="code">!title="";artist="bob"</span></p>
-<p class="p">This search string will filter the listbox to contain music files which title is empty and which artist is <span class="code">bob</span>.</p>
+<p class="p"><span class="code">!izvođač=""</span></p>
+<p class="p">This search string will filter the listbox to contain music files whose artist is empty.</p>
+<p class="p"><span class="code">!žanr="";godina="2022"</span></p>
+<p class="p">This search string will filter the listbox to contain music files whose genre is empty and whose year is 2022 (Year and Track properties will validate if the value string is a number).</p>
+<p class="p"><span class="code">!naslov="";izvođač="bob"</span></p>
+<p class="p">This search string will filter the listbox to contain music files whose title is empty and whose artist is <span class="code">bob</span>.</p>
+<p class="p"><span class="code">!custom="mbrd"</span></p>
+<p class="p">This search string will filter the listbox to contain music files that contain a custom property with the name <span class="code">mbrd</span>.</p>
 </div></div>
 </div></section><section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>

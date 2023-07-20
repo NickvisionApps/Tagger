@@ -75,10 +75,15 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial void g_object_unref(nint obj);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_bytes_unref(nint gbytes);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_uri_launcher_new(string uri);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_uri_launcher_launch(nint uriLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.DropTarget _dropTarget;
+    private readonly Gio.SimpleAction _insertAlbumArtAction;
     private readonly Gio.SimpleAction _removeAlbumArtAction;
     private readonly Gio.SimpleAction _exportAlbumArtAction;
     private List<Adw.ActionRow> _listMusicFilesRows;
@@ -91,6 +96,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private GAsyncReadyCallback? _openCallback;
     private GAsyncReadyCallback? _saveCallback;
     private AlbumArtType _currentAlbumArtType;
+    private List<Adw.EntryRow> _customPropertyRows;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
@@ -126,11 +132,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _albumArtistRow;
     [Gtk.Connect] private readonly Adw.EntryRow _genreRow;
     [Gtk.Connect] private readonly Adw.EntryRow _commentRow;
-    [Gtk.Connect] private readonly Adw.EntryRow _bpmRow;
     [Gtk.Connect] private readonly Adw.EntryRow _composerRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
-    [Gtk.Connect] private readonly Adw.EntryRow _isrcRow;
+    [Gtk.Connect] private readonly Adw.PreferencesGroup _customPropertiesGroup;
     [Gtk.Connect] private readonly Gtk.Label _durationLabel;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
     [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
@@ -145,12 +150,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         _openCallback = null;
         _listMusicFilesRows = new List<Adw.ActionRow>();
         _isSelectionOccuring = false;
-        _musicFolderUpdatedFunc =  MusicFolderUpdated;
+        _musicFolderUpdatedFunc =  (x) => MusicFolderUpdated();
         _musicFileSaveStatesChangedFunc = (x) => MusicFileSaveStatesChanged();
         _selectedMusicFilesPropertiesChangedFunc = (x) => SelectedMusicFilesPropertiesChanged();
         _updateFingerprintFunc = (x) => UpdateFingerprint();
         _corruptedFilesFunc = (x) => CorruptedFilesFound();
         _currentAlbumArtType = AlbumArtType.Front;
+        _customPropertyRows = new List<Adw.EntryRow>();
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
         SetIconName(_controller.AppInfo.ID);
@@ -239,13 +245,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 TagPropertyChanged();
             }
         };
-        _bpmRow.OnNotify += (sender, e) =>
-        {
-            if(e.Pspec.GetName() == "text")
-            {
-                TagPropertyChanged();
-            }
-        };
         _composerRow.OnNotify += (sender, e) =>
         {
             if(e.Pspec.GetName() == "text")
@@ -267,13 +266,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 TagPropertyChanged();
             }
         };
-        _isrcRow.OnNotify += (sender, e) =>
-        {
-            if(e.Pspec.GetName() == "text")
-            {
-                TagPropertyChanged();
-            }
-        };
         _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
         _copyFingerprintButton.OnClicked += CopyFingerprintToClipboard;
         //Register Events
@@ -281,7 +273,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
         _controller.LoadingStateUpdated += (sender, e) => SetLoadingState(e);
-        _controller.MusicFolderUpdated += (sender, e) => g_main_context_invoke(0, _musicFolderUpdatedFunc, (IntPtr)GCHandle.Alloc(e));
+        _controller.MusicFolderUpdated += (sender, e) => g_main_context_invoke(0, _musicFolderUpdatedFunc, 0);
         _controller.MusicFileSaveStatesChanged += (sender, e) => g_main_context_invoke(0, _musicFileSaveStatesChangedFunc, 0);
         _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => g_main_context_invoke(0, _selectedMusicFilesPropertiesChangedFunc, 0);
         _controller.FingerprintCalculated += (sender, e) => g_main_context_invoke(0, _updateFingerprintFunc, 0);
@@ -333,9 +325,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.switchAlbumArt", new string[] { "<Ctrl><Shift>S" });
         _switchAlbumArtButton.SetDetailedActionName("win.switchAlbumArt");
         //Insert Album Art Action
-        var actInsertAlbumArt = Gio.SimpleAction.New("insertAlbumArt", null);
-        actInsertAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(_currentAlbumArtType);
-        AddAction(actInsertAlbumArt);
+        _insertAlbumArtAction = Gio.SimpleAction.New("insertAlbumArt", null);
+        _insertAlbumArtAction.OnActivate += (sender, e) => InsertAlbumArt(_currentAlbumArtType);
+        AddAction(_insertAlbumArtAction);
         _insertAlbumArtButton.SetDetailedActionName("win.insertAlbumArt");
         //Remove Album Art Action
         _removeAlbumArtAction = Gio.SimpleAction.New("removeAlbumArt", null);
@@ -377,6 +369,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         actExportBackAlbumArt.OnActivate += (sender, e) => ExportAlbumArt(AlbumArtType.Back);
         AddAction(actExportBackAlbumArt);
         application.SetAccelsForAction("win.exportBackAlbumArt", new string[] { "<Ctrl><Shift>E" });
+        //Add Custom Property Action
+        var actAddCustomProperty = Gio.SimpleAction.New("addCustomProperty", null);
+        actAddCustomProperty.OnActivate += (sender, e) => AddCustomProperty();
+        AddAction(actAddCustomProperty);
         //Download MusicBrainz Metadata Action
         var actMusicBrainz = Gio.SimpleAction.New("downloadMusicBrainzMetadata", null);
         actMusicBrainz.OnActivate += DownloadMusicBrainzMetadata;
@@ -445,6 +441,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void NotificationSent(object? sender, NotificationSentEventArgs e)
     {
         var toast = Adw.Toast.New(e.Message);
+        if (e.Action == "unsupported")
+        {
+            var uriLauncher = gtk_uri_launcher_new("help:tagger/unsupported");
+            toast.SetButtonLabel(_("Help"));
+            toast.OnButtonClicked += (sender, ex) => gtk_uri_launcher_launch(uriLauncher, 0, 0, (source, res, data) => { }, 0);
+        }
         _toastOverlay.AddToast(toast);
     }
 
@@ -741,6 +743,23 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
+    /// Occurs when the add custom property action is triggered
+    /// </summary>
+    private void AddCustomProperty()
+    {
+        var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("New Custom Property"), "", _("Property Name"), _("Cancel"), _("Add"));
+        entryDialog.OnResponse += (sender, e) =>
+        {
+            if(!string.IsNullOrEmpty(entryDialog.Response))
+            {
+                _controller.AddCustomProperty(entryDialog.Response);
+            }
+            entryDialog.Destroy();
+        };
+        entryDialog.Present();
+    }
+
+    /// <summary>
     /// Occurs when the download musicbrainz metadata action is triggered
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
@@ -921,62 +940,50 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the music folder is updated
     /// </summary>
-    /// <param name="data">bool on whether or not to send a toast of loaded files</param>
-    private bool MusicFolderUpdated(nint data)
+    private bool MusicFolderUpdated()
     {
-        var handle = GCHandle.FromIntPtr(data);
-        var target = (bool?)handle.Target;
-        if(target != null)
+        _listMusicFiles.UnselectAll();
+        foreach(var row in _listMusicFilesRows)
         {
-            var sendToast = target.Value;
-            _listMusicFiles.UnselectAll();
-            foreach(var row in _listMusicFilesRows)
-            {
-                _listMusicFiles.Remove(row);
-            }
-            _listMusicFilesRows.Clear();
-            if(!string.IsNullOrEmpty(_controller.MusicFolderPath))
-            {
-                foreach(var musicFile in _controller.MusicFiles)
-                {
-                    var row = Adw.ActionRow.New();
-                    if(!string.IsNullOrEmpty(musicFile.Title))
-                    {
-                        row.SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
-                        row.SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
-                    }
-                    else
-                    {
-                        row.SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
-                        row.SetSubtitle("");
-                    }
-                    _listMusicFiles.Append(row);
-                    _listMusicFilesRows.Add(row);
-                }
-                _headerBar.RemoveCssClass("flat");
-                _title.SetSubtitle(_controller.MusicFolderPath);
-                _openFolderButton.SetVisible(true);
-                _applyButton.SetSensitive(false);
-                _tagActionsButton.SetSensitive(false);
-                _viewStack.SetVisibleChildName("Folder");
-                _folderFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
-                _folderFlap.SetRevealFlap(true);
-                _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
-                _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
-                if(sendToast)
-                {
-                    _toastOverlay.AddToast(Adw.Toast.New(_n("Loaded {0} music file.", "Loaded {0} music files.", _controller.MusicFiles.Count, _controller.MusicFiles.Count)));
-                }
-            }
-            else
-            {
-                _headerBar.AddCssClass("flat");
-                _title.SetSubtitle("");
-                _viewStack.SetVisibleChildName("NoFolder");
-                _openFolderButton.SetVisible(false);
-            }
+            _listMusicFiles.Remove(row);
         }
-        handle.Free();
+        _listMusicFilesRows.Clear();
+        if(!string.IsNullOrEmpty(_controller.MusicFolderPath))
+        {
+            foreach(var musicFile in _controller.MusicFiles)
+            {
+                var row = Adw.ActionRow.New();
+                if(!string.IsNullOrEmpty(musicFile.Title))
+                {
+                    row.SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
+                    row.SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+                }
+                else
+                {
+                    row.SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+                    row.SetSubtitle("");
+                }
+                _listMusicFiles.Append(row);
+                _listMusicFilesRows.Add(row);
+            }
+            _headerBar.RemoveCssClass("flat");
+            _title.SetSubtitle(_controller.MusicFolderPath);
+            _openFolderButton.SetVisible(true);
+            _applyButton.SetSensitive(false);
+            _tagActionsButton.SetSensitive(false);
+            _viewStack.SetVisibleChildName("Folder");
+            _folderFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
+            _folderFlap.SetRevealFlap(true);
+            _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
+            _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
+        }
+        else
+        {
+            _headerBar.AddCssClass("flat");
+            _title.SetSubtitle("");
+            _viewStack.SetVisibleChildName("NoFolder");
+            _openFolderButton.SetVisible(false);
+        }
         return false;
     }
 
@@ -1022,26 +1029,36 @@ public partial class MainWindow : Adw.ApplicationWindow
         _albumArtistRow.SetText(_controller.SelectedPropertyMap.AlbumArtist);
         _genreRow.SetText(_controller.SelectedPropertyMap.Genre);
         _commentRow.SetText(_controller.SelectedPropertyMap.Comment);
-        _bpmRow.SetText(_controller.SelectedPropertyMap.BPM);
         _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
         _descriptionRow.SetText(_controller.SelectedPropertyMap.Description);
         _publisherRow.SetText(_controller.SelectedPropertyMap.Publisher);
-        _isrcRow.SetText(_controller.SelectedPropertyMap.ISRC);
         _durationLabel.SetLabel(_controller.SelectedPropertyMap.Duration);
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
         _fileSizeLabel.SetLabel(_controller.SelectedPropertyMap.FileSize);
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
+        _filenameRow.SetEditable(true);
+        _titleRow.SetEditable(true);
+        _artistRow.SetEditable(true);
+        _albumRow.SetEditable(true);
+        _yearRow.SetEditable(true);
+        _trackRow.SetEditable(true);
+        _albumArtistRow.SetEditable(true);
+        _genreRow.SetEditable(true);
+        _commentRow.SetEditable(true);
+        _composerRow.SetEditable(true);
+        _descriptionRow.SetEditable(true);
+        _publisherRow.SetEditable(true);
         if(albumArt == "hasArt")
         {
             _artViewStack.SetVisibleChildName("Image");
             var art = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedMusicFiles.First().Value.FrontAlbumArt : _controller.SelectedMusicFiles.First().Value.BackAlbumArt;
-            if(art.IsEmpty)
+            if(art.Length == 0)
             {
                 gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
             }
             else
             {
-                var bytes = g_bytes_new(art.Data, (uint)art.Data.Length);
+                var bytes = g_bytes_new(art, (uint)art.Length);
                 var texture = gdk_texture_new_from_bytes(bytes, IntPtr.Zero);
                 gtk_picture_set_paintable(_albumArtImage.Handle, texture);
                 g_object_unref(texture);
@@ -1058,8 +1075,62 @@ public partial class MainWindow : Adw.ApplicationWindow
             _artViewStack.SetVisibleChildName("NoImage");
             gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
         }
+        _insertAlbumArtAction.SetEnabled(true);
         _removeAlbumArtAction.SetEnabled(_artViewStack.GetVisibleChildName() != "NoImage");
         _exportAlbumArtAction.SetEnabled(albumArt == "hasArt");
+        if (_controller.SelectedMusicFiles.Count == 1 && _controller.SelectedMusicFiles.First().Value.IsReadOnly)
+        {
+            _filenameRow.SetEditable(false);
+            _titleRow.SetEditable(false);
+            _artistRow.SetEditable(false);
+            _albumRow.SetEditable(false);
+            _yearRow.SetEditable(false);
+            _trackRow.SetEditable(false);
+            _albumArtistRow.SetEditable(false);
+            _genreRow.SetEditable(false);
+            _commentRow.SetEditable(false);
+            _composerRow.SetEditable(false);
+            _descriptionRow.SetEditable(false);
+            _publisherRow.SetEditable(false);
+            _insertAlbumArtAction.SetEnabled(false);
+            _removeAlbumArtAction.SetEnabled(false);
+        }
+        //Update Custom Properties
+        foreach(var row in _customPropertyRows)
+        {
+            _customPropertiesGroup.Remove(row);
+        }
+        _customPropertyRows.Clear();
+        _customPropertiesGroup.SetVisible(_controller.SelectedMusicFiles.Count == 1);
+        if(_controller.SelectedMusicFiles.Count == 1)
+        {
+            foreach(var pair in _controller.SelectedPropertyMap.CustomProperties)
+            {
+                var row = Adw.EntryRow.New();
+                row.SetTitle(pair.Key);
+                row.SetText(pair.Value);
+                var removeButton = Gtk.Button.New();
+                removeButton.SetValign(Gtk.Align.Center);
+                removeButton.SetTooltipText(_("Remove Custom Property"));
+                removeButton.SetIconName("user-trash-symbolic");
+                removeButton.AddCssClass("flat");
+                removeButton.OnClicked += (sender, e) => _controller.RemoveCustomProperty(pair.Key);
+                row.AddSuffix(removeButton);
+                row.OnNotify += (sender, e) =>
+                {
+                    if(e.Pspec.GetName() == "text")
+                    {
+                        TagPropertyChanged();
+                    }
+                };
+                if (_controller.SelectedMusicFiles.First().Value.IsReadOnly)
+                {
+                    row.SetEditable(false);
+                }
+                _customPropertyRows.Add(row);
+                _customPropertiesGroup.Add(row);
+            }
+        }
         //Update Rows
         foreach(var pair in _controller.SelectedMusicFiles)
         {
@@ -1182,7 +1253,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         if(!_isSelectionOccuring && _controller.SelectedMusicFiles.Count > 0)
         {
             //Update Tags
-            _controller.UpdateTags(new PropertyMap()
+            var propMap = new PropertyMap()
             {
                 Filename = _filenameRow.GetText(),
                 Title = _titleRow.GetText(),
@@ -1193,12 +1264,18 @@ public partial class MainWindow : Adw.ApplicationWindow
                 AlbumArtist = _albumArtistRow.GetText(),
                 Genre = _genreRow.GetText(),
                 Comment = _commentRow.GetText(),
-                BPM = _bpmRow.GetText(),
                 Composer = _composerRow.GetText(),
                 Description = _descriptionRow.GetText(),
-                Publisher = _publisherRow.GetText(),
-                ISRC = _isrcRow.GetText()
-            }, false);
+                Publisher = _publisherRow.GetText()
+            };
+            if(_controller.SelectedMusicFiles.Count == 1)
+            {
+                foreach(var row in _customPropertyRows)
+                {
+                    propMap.CustomProperties.Add(row.GetTitle(), row.GetText());
+                }
+            }
+            _controller.UpdateTags(propMap, false);
             //Update Rows
             foreach(var pair in _controller.SelectedMusicFiles)
             {
@@ -1243,7 +1320,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private bool CorruptedFilesFound()
     {
-        var dialog = new CorruptedFilesDialog(this, _controller.AppInfo.ID, _controller.CorruptedFiles);
+        var dialog = new CorruptedFilesDialog(this, _controller.AppInfo.ID, _controller.MusicFolderPath, _controller.CorruptedFiles);
         dialog.Present();
         return false;
     }

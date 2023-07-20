@@ -11,6 +11,15 @@ Adw.Window _root {
 
     Adw.HeaderBar {
       title-widget: Gtk.Label { };
+
+      [start]
+      Gtk.Button _helpButton {
+        icon-name: "dialog-question-symbolic";
+        tooltip-text: _("Help");
+
+        styles ["flat"]
+      }
+
       styles ["flat"]
     }
 
@@ -24,7 +33,7 @@ Adw.Window _root {
         }
       
         Gtk.Label {
-          label: _("This music folder contains music files that have corrupted tags. This means that they could be encoded improperly or have structural issues affecting playback.\nTry re-encoding the affected files to fix these issues.\n\nThe following files are affected and will be ignored by Tagger.");
+          label: _("This music folder contains music files that have corrupted tags. The following files are affected and will be ignored by Tagger:");
           wrap: true;
           margin-top: 24;
           margin-start: 12;

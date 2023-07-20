@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Models;
@@ -44,10 +45,6 @@ public class PropertyMap
     /// </summary>
     public string Comment { get; set; }
     /// <summary>
-    /// The BPM of the file
-    /// </summary>
-    public string BPM { get; set; }
-    /// <summary>
     /// The composer of the file
     /// </summary>
     public string Composer { get; set; }
@@ -60,10 +57,6 @@ public class PropertyMap
     /// </summary>
     public string Publisher { get; set; }
     /// <summary>
-    /// The ISRC of the file
-    /// </summary>
-    public string ISRC { get; set; }
-    /// <summary>
     /// The front album art of the file
     /// </summary>
     public string FrontAlbumArt { get; set; }
@@ -71,6 +64,10 @@ public class PropertyMap
     /// The back album art of the file
     /// </summary>
     public string BackAlbumArt { get; set; }
+    /// <summary>
+    /// The custom properties of the file
+    /// </summary>
+    public Dictionary<string, string> CustomProperties { get; init; }
     /// <summary>
     /// The duration of the file
     /// </summary>
@@ -89,6 +86,7 @@ public class PropertyMap
     /// </summary>
     public PropertyMap()
     {
+        CustomProperties = new Dictionary<string, string>();
         Clear();
     }
     
@@ -106,13 +104,12 @@ public class PropertyMap
         AlbumArtist = "";
         Genre = "";
         Comment = "";
-        BPM = "";
         Composer = "";
         Description = "";
         Publisher = "";
-        ISRC = "";
         FrontAlbumArt = "";
         BackAlbumArt = "";
+        CustomProperties.Clear();
         Duration = "00:00:00";
         Fingerprint = "";
         FileSize = _("0 MiB");
@@ -134,13 +131,12 @@ public class PropertyMap
         s += $"AlbumArtist: {AlbumArtist}\n";
         s += $"Genre: {Genre}\n";
         s += $"Comment: {Comment}\n";
-        s += $"BPM: {BPM}\n";
         s += $"Composer: {Composer}\n";
         s += $"Description: {Description}\n";
         s += $"Publisher: {Publisher}\n";
-        s += $"ISRC: {ISRC}\n";
         s += $"FrontAlbumArt: {FrontAlbumArt}\n";
         s += $"BackAlbumArt: {BackAlbumArt}\n";
+        s += $"CustomPropertiesCount: {CustomProperties.Count}\n";
         s += $"Duration: {Duration}\n";
         s += $"Fingerprint: {Fingerprint}\n";
         s += $"FileSize: {FileSize}\n";

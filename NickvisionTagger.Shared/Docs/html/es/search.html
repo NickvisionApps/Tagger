@@ -36,11 +36,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <li class="list"><p class="p"><span class="code">artistadelálbum</span></p></li>
 <li class="list"><p class="p"><span class="code">género</span></p></li>
 <li class="list"><p class="p"><span class="code">comentario</span></p></li>
-<li class="list"><p class="p"><span class="code">ppm</span></p></li>
 <li class="list"><p class="p"><span class="code">compositor</span></p></li>
 <li class="list"><p class="p"><span class="code">descripción</span></p></li>
 <li class="list"><p class="p"><span class="code">editor</span></p></li>
-<li class="list"><p class="p"><span class="code">isrc</span></p></li>
+<li class="list"><p class="p"><span class="code">custom</span></p></li>
 </ul></div></div></div>
 <p class="p">Las propiedades distinguen entre mayúsculas y minúsculas.</p>
 </div></div>
@@ -51,11 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Ejemplos</span></h2></div>
 <div class="region"><div class="contents pagewide">
 <p class="p"><span class="code">!artista=""</span></p>
-<p class="p">Esta cadena de búsqueda filtrará el cuadro de lista para que contenga archivos de música cuyo artista esté vacío.</p>
+<p class="p">This search string will filter the listbox to contain music files whose artist is empty.</p>
 <p class="p"><span class="code">!género="";año="2022"</span></p>
-<p class="p">Esta cadena de búsqueda filtrará el cuadro de lista para que contenga archivos de música cuyo género esté vacío y cuyo año sea 2022 (las propiedades Año y Pista se validarán si la cadena de valores es un número).</p>
+<p class="p">This search string will filter the listbox to contain music files whose genre is empty and whose year is 2022 (Year and Track properties will validate if the value string is a number).</p>
 <p class="p"><span class="code">!título="";artista="bob"</span></p>
-<p class="p">Esta cadena de búsqueda filtrará el cuadro de lista para que contenga archivos de música cuyo título esté vacío y cuyo artista sea <span class="code">bob</span>.</p>
+<p class="p">This search string will filter the listbox to contain music files whose title is empty and whose artist is <span class="code">bob</span>.</p>
+<p class="p"><span class="code">!custom="mbrd"</span></p>
+<p class="p">This search string will filter the listbox to contain music files that contain a custom property with the name <span class="code">mbrd</span>.</p>
 </div></div>
 </div></section><section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>
