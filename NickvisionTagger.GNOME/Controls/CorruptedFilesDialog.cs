@@ -12,10 +12,15 @@ public partial class CorruptedFilesDialog : Adw.Window
     private delegate void GAsyncReadyCallback(nint source, nint res, nint userData);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_uri_launcher_new(string uri);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_uri_launcher_launch(nint uriLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_launcher_new(nint file);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_launcher_open_containing_folder(nint fileLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
 
+    [Gtk.Connect] private readonly Gtk.Button _helpButton;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindow;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _filesGroup;
 
@@ -35,6 +40,11 @@ public partial class CorruptedFilesDialog : Adw.Window
         //Dialog Settings
         SetIconName(iconName);
         SetTransientFor(parent);
+        _helpButton.OnClicked += (sender, e) =>
+        {
+            var uriLauncher = gtk_uri_launcher_new("help:tagger/corrupted");
+            gtk_uri_launcher_launch(uriLauncher, 0, 0, (source, res, data) => { }, 0);
+        };
         foreach (var path in files)
         {
             var row = Adw.ActionRow.New();
