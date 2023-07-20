@@ -20,7 +20,7 @@
     <item>
         <title>Neispravni podaci</title>
         <p>Neispravno zaglavlje oznake ili nevaljani podaci u datoteci mogu prouzročiti probleme prilikom čitanja informacija o datoteci te probleme s reprodukcijom. Neke web stranice dodaju dodatne nevaljane podatke u datoteke što uzrokuje oštećenje.</p>
-        <p><app>Tagger</app> zanemaruje oštećene datoteke, ali prikazuje dijaloški okvir s popisom oštećenih datoteka za upravljanje i ispravljanje tih datoteka.</p>
+        <p>If <app>Tagger</app> is unable to read a file, it will be ignored and a dialog will be displayed listing corrupted files for you to manage and fix accordingly.</p>
         <note style="advanced">
             <p>FFmpeg se može koristiti za ispravljanje oštećene datoeke. Pokreni sljedeću naredbu za ponovno kodiranje oznake datoteke i uklanjanje nevaljanih podataka:</p>
             <code>ffmpeg -i in.mp3 out.mp3</code>
