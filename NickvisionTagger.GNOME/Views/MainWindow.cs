@@ -75,6 +75,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial void g_object_unref(nint obj);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_bytes_unref(nint gbytes);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial nint gtk_uri_launcher_new(string uri);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_uri_launcher_launch(nint uriLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -146,7 +150,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _openCallback = null;
         _listMusicFilesRows = new List<Adw.ActionRow>();
         _isSelectionOccuring = false;
-        _musicFolderUpdatedFunc =  MusicFolderUpdated;
+        _musicFolderUpdatedFunc =  (x) => MusicFolderUpdated();
         _musicFileSaveStatesChangedFunc = (x) => MusicFileSaveStatesChanged();
         _selectedMusicFilesPropertiesChangedFunc = (x) => SelectedMusicFilesPropertiesChanged();
         _updateFingerprintFunc = (x) => UpdateFingerprint();
@@ -269,7 +273,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
         _controller.LoadingStateUpdated += (sender, e) => SetLoadingState(e);
-        _controller.MusicFolderUpdated += (sender, e) => g_main_context_invoke(0, _musicFolderUpdatedFunc, (IntPtr)GCHandle.Alloc(e));
+        _controller.MusicFolderUpdated += (sender, e) => g_main_context_invoke(0, _musicFolderUpdatedFunc, 0);
         _controller.MusicFileSaveStatesChanged += (sender, e) => g_main_context_invoke(0, _musicFileSaveStatesChangedFunc, 0);
         _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => g_main_context_invoke(0, _selectedMusicFilesPropertiesChangedFunc, 0);
         _controller.FingerprintCalculated += (sender, e) => g_main_context_invoke(0, _updateFingerprintFunc, 0);
@@ -437,6 +441,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void NotificationSent(object? sender, NotificationSentEventArgs e)
     {
         var toast = Adw.Toast.New(e.Message);
+        if (e.Action == "unsupported")
+        {
+            var uriLauncher = gtk_uri_launcher_new("help:tagger/unspported");
+            toast.SetButtonLabel(_("Help"));
+            toast.OnButtonClicked += (sender, ex) => gtk_uri_launcher_launch(uriLauncher, 0, 0, (source, res, data) => { }, 0);
+        }
         _toastOverlay.AddToast(toast);
     }
 
@@ -930,71 +940,50 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the music folder is updated
     /// </summary>
-    /// <param name="data">bool on whether or not to send a toast of loaded files</param>
-    private bool MusicFolderUpdated(nint data)
+    private bool MusicFolderUpdated()
     {
-        var handle = GCHandle.FromIntPtr(data);
-        var target = (bool?)handle.Target;
-        if(target != null)
+        _listMusicFiles.UnselectAll();
+        foreach(var row in _listMusicFilesRows)
         {
-            var sendToast = target.Value;
-            _listMusicFiles.UnselectAll();
-            foreach(var row in _listMusicFilesRows)
-            {
-                _listMusicFiles.Remove(row);
-            }
-            _listMusicFilesRows.Clear();
-            if(!string.IsNullOrEmpty(_controller.MusicFolderPath))
-            {
-                var readOnlyFileDetected = false;
-                foreach(var musicFile in _controller.MusicFiles)
-                {
-                    if (musicFile.ReadOnly)
-                    {
-                        readOnlyFileDetected = true;
-                    }
-                    var row = Adw.ActionRow.New();
-                    if(!string.IsNullOrEmpty(musicFile.Title))
-                    {
-                        row.SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
-                        row.SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
-                    }
-                    else
-                    {
-                        row.SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
-                        row.SetSubtitle("");
-                    }
-                    _listMusicFiles.Append(row);
-                    _listMusicFilesRows.Add(row);
-                }
-                _headerBar.RemoveCssClass("flat");
-                _title.SetSubtitle(_controller.MusicFolderPath);
-                _openFolderButton.SetVisible(true);
-                _applyButton.SetSensitive(false);
-                _tagActionsButton.SetSensitive(false);
-                _viewStack.SetVisibleChildName("Folder");
-                _folderFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
-                _folderFlap.SetRevealFlap(true);
-                _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
-                _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
-                if (sendToast)
-                {
-                    _toastOverlay.AddToast(Adw.Toast.New(_n("Loaded {0} music file.", "Loaded {0} music files.", _controller.MusicFiles.Count, _controller.MusicFiles.Count)));
-                }
-                if (readOnlyFileDetected)
-                {
-                    _toastOverlay.AddToast(Adw.Toast.New(_("OGG files with embedded FLAC are opened read-only.")));
-                }
-            }
-            else
-            {
-                _headerBar.AddCssClass("flat");
-                _title.SetSubtitle("");
-                _viewStack.SetVisibleChildName("NoFolder");
-                _openFolderButton.SetVisible(false);
-            }
+            _listMusicFiles.Remove(row);
         }
-        handle.Free();
+        _listMusicFilesRows.Clear();
+        if(!string.IsNullOrEmpty(_controller.MusicFolderPath))
+        {
+            foreach(var musicFile in _controller.MusicFiles)
+            {
+                var row = Adw.ActionRow.New();
+                if(!string.IsNullOrEmpty(musicFile.Title))
+                {
+                    row.SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
+                    row.SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+                }
+                else
+                {
+                    row.SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+                    row.SetSubtitle("");
+                }
+                _listMusicFiles.Append(row);
+                _listMusicFilesRows.Add(row);
+            }
+            _headerBar.RemoveCssClass("flat");
+            _title.SetSubtitle(_controller.MusicFolderPath);
+            _openFolderButton.SetVisible(true);
+            _applyButton.SetSensitive(false);
+            _tagActionsButton.SetSensitive(false);
+            _viewStack.SetVisibleChildName("Folder");
+            _folderFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
+            _folderFlap.SetRevealFlap(true);
+            _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
+            _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
+        }
+        else
+        {
+            _headerBar.AddCssClass("flat");
+            _title.SetSubtitle("");
+            _viewStack.SetVisibleChildName("NoFolder");
+            _openFolderButton.SetVisible(false);
+        }
         return false;
     }
 
@@ -1089,7 +1078,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _insertAlbumArtAction.SetEnabled(true);
         _removeAlbumArtAction.SetEnabled(_artViewStack.GetVisibleChildName() != "NoImage");
         _exportAlbumArtAction.SetEnabled(albumArt == "hasArt");
-        if (_controller.SelectedMusicFiles.Count == 1 && _controller.SelectedMusicFiles.First().Value.ReadOnly)
+        if (_controller.SelectedMusicFiles.Count == 1 && _controller.SelectedMusicFiles.First().Value.IsReadOnly)
         {
             _filenameRow.SetEditable(false);
             _titleRow.SetEditable(false);
@@ -1134,7 +1123,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                         TagPropertyChanged();
                     }
                 };
-                if (_controller.SelectedMusicFiles.First().Value.ReadOnly)
+                if (_controller.SelectedMusicFiles.First().Value.IsReadOnly)
                 {
                     row.SetEditable(false);
                 }

@@ -77,27 +77,27 @@ public class MainWindowController
     /// <summary>
     /// Occurs when the loading state is updated
     /// </summary>
-    public event EventHandler<string> LoadingStateUpdated;
+    public event EventHandler<string>? LoadingStateUpdated;
     /// <summary>
-    /// Occurs when the music folder is updated. The boolean arg represents whether or not to send a toast
+    /// Occurs when the music folder is updated
     /// </summary>
-    public event EventHandler<bool> MusicFolderUpdated;
+    public event EventHandler<EventArgs>? MusicFolderUpdated;
     /// <summary>
     /// Occurs when a music file's save state is changed
     /// </summary>
-    public event EventHandler<EventArgs> MusicFileSaveStatesChanged;
+    public event EventHandler<EventArgs>? MusicFileSaveStatesChanged;
     /// <summary>
     /// Occurs when the selected music files' properties are changed
     /// </summary>
-    public event EventHandler<EventArgs> SelectedMusicFilesPropertiesChanged;
+    public event EventHandler<EventArgs>? SelectedMusicFilesPropertiesChanged;
     /// <summary>
     /// Occurs when fingerprint calculating is done
     /// </summary>
-    public event EventHandler<EventArgs> FingerprintCalculated;
+    public event EventHandler<EventArgs>? FingerprintCalculated;
     /// <summary>
     /// Occurs when there are corrupted music files found in a music folder
     /// </summary>
-    public event EventHandler<EventArgs> CorruptedFilesFound;
+    public event EventHandler<EventArgs>? CorruptedFilesFound;
 
     /// <summary>
     /// Constructs a MainWindowController
@@ -151,7 +151,7 @@ public class MainWindowController
         }
         else
         {
-            MusicFolderUpdated?.Invoke(this, true);
+            MusicFolderUpdated?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -192,7 +192,7 @@ public class MainWindowController
             Configuration.Current.LastOpenedFolder = "";
             Configuration.Current.Save();
         }
-        MusicFolderUpdated?.Invoke(this, true);
+        MusicFolderUpdated?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
@@ -204,14 +204,23 @@ public class MainWindowController
         {
             MusicFileSaveStates.Clear();
             var corruptedFound = await _musicFolder.ReloadMusicFilesAsync();
-            for(var i = 0; i < _musicFolder.MusicFiles.Count; i++)
+            var count = _musicFolder.MusicFiles.Count;
+            for(var i = 0; i < count; i++)
             {
                 MusicFileSaveStates.Add(true);
             }
-            MusicFolderUpdated?.Invoke(this, true);
+            MusicFolderUpdated?.Invoke(this, EventArgs.Empty);
+            if(Directory.Exists(_musicFolder.ParentPath))
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Loaded {0} music file.", "Loaded {0} music files.", count, count), NotificationSeverity.Informational));
+            }
             if(corruptedFound)
             {
                 CorruptedFilesFound?.Invoke(this, EventArgs.Empty);
+            }
+            if(_musicFolder.ContainsReadOnlyFiles)
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Tagger has opened some files in read-only mode."), NotificationSeverity.Warning, "unsupported"));
             }
         }
     }
@@ -225,7 +234,7 @@ public class MainWindowController
     {
         foreach(var pair in SelectedMusicFiles)
         {
-            if (pair.Value.ReadOnly)
+            if (pair.Value.IsReadOnly)
             {
                 continue;
             }
@@ -337,8 +346,19 @@ public class MainWindowController
                 {
                     if(!MusicFileSaveStates[i])
                     {
-                        file.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp);
-                        MusicFileSaveStates[i] = true;
+                        if(file.SaveTagToDisk(Configuration.Current.PreserveModificationTimestamp))
+                        {
+                            MusicFileSaveStates[i] = true;
+                        }
+                        else
+                        {
+                            var path = file.Path.Remove(0, _musicFolder.ParentPath.Length);
+                            if(path[0] == '/')
+                            {
+                                path = path.Remove(0, 1);
+                            }
+                            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to save {0}.", path), NotificationSeverity.Warning, "unsupported"));
+                        }
                     }
                     i++;
                 }

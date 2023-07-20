@@ -94,7 +94,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <summary>
     /// Whether the file is read-only or not
     /// </summary>
-    public bool ReadOnly { get; private set; }
+    public bool IsReadOnly { get; private set; }
     
     /// <summary>
     /// The size of the music file
@@ -139,7 +139,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         FrontAlbumArt = Array.Empty<byte>();
         BackAlbumArt = Array.Empty<byte>();
         Duration = 0;
-        ReadOnly = false;
+        IsReadOnly = false;
         LoadTagFromDisk();
     }
     
@@ -270,7 +270,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             }
             if (track.AudioFormat.Name == "OGG (FLAC)")
             {
-                ReadOnly = true;
+                IsReadOnly = true;
             }
             return true;
         }
@@ -407,7 +407,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool SaveTagToDisk(bool preserveModificationTimestamp)
     {
-        if (ReadOnly)
+        if (IsReadOnly)
         {
             return false;
         }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="unsupported" its:version="2.0" xml:lang="hr">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Unsupported Files 🚫</title>
+	<credit type="author copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Unsupported File</title>
+<p>This page explains music files that are currently unsupported by <app>Tagger</app>.</p>
+<p>Tagger uses <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> for its backend to read and write metadata. However, there are some currently known file limitations.</p>
+<terms>
+    <item>
+        <title>OGG With FLAC Tag</title>
+        <p>OGG files that use an embedded FLAC tag will be opened in read-only mode.</p>
+        <note style="advanced">
+            <p><link href="https://github.com/Zeugma440/atldotnet/issues/206">Issue tracking writing support for ogg/flac</link></p>
+        </note>
+    </item>
+    <item>
+        <title>OPUS With Cover Art</title>
+        <p>Certain OPUS files that contain cover art are unable to be saved.</p>
+        <p>The file is readable however cover art will not be loaded and any modifications cannot be saved. Other OPUS files may work correctly without issue.</p>
+        <note style="advanced">
+            <p><link href="https://github.com/Zeugma440/atldotnet/issues/">Issue tracking opus fixes</link></p>
+        </note>
+    </item>
+</terms>
+</page>
