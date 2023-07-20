@@ -443,7 +443,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var toast = Adw.Toast.New(e.Message);
         if (e.Action == "unsupported")
         {
-            var uriLauncher = gtk_uri_launcher_new("help:tagger/unspported");
+            var uriLauncher = gtk_uri_launcher_new("help:tagger/unsupported");
             toast.SetButtonLabel(_("Help"));
             toast.OnButtonClicked += (sender, ex) => gtk_uri_launcher_launch(uriLauncher, 0, 0, (source, res, data) => { }, 0);
         }
