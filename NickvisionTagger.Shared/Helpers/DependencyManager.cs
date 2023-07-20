@@ -43,33 +43,4 @@ internal static class DependencyManager
             return _fpcalcPath;
         }
     }
-
-    /// <summary>
-    /// The path for ffprove
-    /// </summary>
-    public static string FFProbePath
-    {
-        get
-        {
-            if(!File.Exists(_ffprobePath))
-            {
-                var prefixes = new List<string>() {
-                    Directory.GetParent(Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName)!.FullName,
-                    Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName,
-                    "/usr"
-                };
-                foreach (var prefix in prefixes)
-                {
-                    var path = $"{prefix}/bin/ffprobe";
-                    if (File.Exists(path))
-                    {
-                        _ffprobePath = path;
-                        return _ffprobePath;
-                    }
-                }
-                _ffprobePath = "ffprobe";
-            }
-            return _ffprobePath;
-        }
-    }
 }
