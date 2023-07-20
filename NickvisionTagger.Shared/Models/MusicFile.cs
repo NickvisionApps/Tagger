@@ -16,7 +16,6 @@ namespace NickvisionTagger.Shared.Models;
 
 /// <summary>
 /// A model of a music file
-/// NOTE: Custom properties are stored in a tag under the "tagger-custom" field and is a string in the following format: [[prop]]value\n[[prop]]value
 /// </summary>
 public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
 {
