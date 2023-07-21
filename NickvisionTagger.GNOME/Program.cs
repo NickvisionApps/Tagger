@@ -85,10 +85,7 @@ public partial class Program
     {
         try
         {
-            var argv = new string[args.Length + 1];
-            argv[0] = $"{_mainWindowController.AppInfo.Name}.GNOME";
-            args.CopyTo(argv, 1);
-            return _application.Run(args.Length + 1, argv);
+            return _application.RunWithSynchronizationContext();
         }
         catch (Exception ex)
         {
