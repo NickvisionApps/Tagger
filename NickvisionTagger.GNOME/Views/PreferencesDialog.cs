@@ -15,8 +15,6 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_uri_launcher_new(string uri);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_uri_launcher_launch(nint uriLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
 
     private readonly PreferencesViewController _controller;
@@ -111,7 +109,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// <param name="e">EventArgs</param>
     private void LaunchNewAcoustIdPage(Gtk.Button sender, EventArgs e)
     {
-        var uriLauncher = gtk_uri_launcher_new(_controller.AcoustIdUserAPIKeyLink);
-        gtk_uri_launcher_launch(uriLauncher, 0, 0, (source, res, data) => { }, 0);
+        var uriLauncher = Gtk.UriLauncher.New(_controller.AcoustIdUserAPIKeyLink);
+        gtk_uri_launcher_launch(uriLauncher.Handle, 0, 0, (source, res, data) => { }, 0);
     }
 }

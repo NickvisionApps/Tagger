@@ -30,19 +30,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         public GLibList* prev;
     }
 
-    private delegate bool GSourceFunc(nint data);
     private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
 
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_main_context_invoke(nint context, GSourceFunc function, nint data);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial string g_file_get_path(nint file);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_new();
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_set_title(nint dialog, string title);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_set_filters(nint dialog, nint filters);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -56,27 +47,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial nint gtk_file_dialog_select_folder_finish(nint dialog, nint result, nint error);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_file_new_for_path(string path);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_file_icon_new(nint gfile);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void g_notification_set_icon(nint notification, nint icon);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static unsafe partial GLibList* gtk_list_box_get_selected_rows(nint box);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int gtk_list_box_row_get_index(nint row);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_picture_set_paintable(nint picture, nint paintable);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gdk_texture_new_from_bytes(nint gbytes, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint g_bytes_new(byte[] bytes, uint size);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_object_unref(nint obj);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_bytes_unref(nint gbytes);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_uri_launcher_new(string uri);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_uri_launcher_launch(nint uriLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
 
@@ -86,17 +61,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _insertAlbumArtAction;
     private readonly Gio.SimpleAction _removeAlbumArtAction;
     private readonly Gio.SimpleAction _exportAlbumArtAction;
+    private AlbumArtType _currentAlbumArtType;
     private List<Adw.ActionRow> _listMusicFilesRows;
+    private List<Adw.EntryRow> _customPropertyRows;
     private bool _isSelectionOccuring;
-    private readonly GSourceFunc _musicFolderUpdatedFunc;
-    private readonly GSourceFunc _musicFileSaveStatesChangedFunc;
-    private readonly GSourceFunc _selectedMusicFilesPropertiesChangedFunc;
-    private readonly GSourceFunc _updateFingerprintFunc;
-    private readonly GSourceFunc _corruptedFilesFunc;
     private GAsyncReadyCallback? _openCallback;
     private GAsyncReadyCallback? _saveCallback;
-    private AlbumArtType _currentAlbumArtType;
-    private List<Adw.EntryRow> _customPropertyRows;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
@@ -147,16 +117,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Window Settings
         _controller = controller;
         _application = application;
-        _openCallback = null;
-        _listMusicFilesRows = new List<Adw.ActionRow>();
-        _isSelectionOccuring = false;
-        _musicFolderUpdatedFunc =  (x) => MusicFolderUpdated();
-        _musicFileSaveStatesChangedFunc = (x) => MusicFileSaveStatesChanged();
-        _selectedMusicFilesPropertiesChangedFunc = (x) => SelectedMusicFilesPropertiesChanged();
-        _updateFingerprintFunc = (x) => UpdateFingerprint();
-        _corruptedFilesFunc = (x) => CorruptedFilesFound();
         _currentAlbumArtType = AlbumArtType.Front;
+        _listMusicFilesRows = new List<Adw.ActionRow>();
         _customPropertyRows = new List<Adw.EntryRow>();
+        _isSelectionOccuring = false;
+        _openCallback = null;
+        _saveCallback = null;
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
         SetIconName(_controller.AppInfo.ID);
@@ -273,11 +239,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
         _controller.LoadingStateUpdated += (sender, e) => SetLoadingState(e);
-        _controller.MusicFolderUpdated += (sender, e) => g_main_context_invoke(0, _musicFolderUpdatedFunc, 0);
-        _controller.MusicFileSaveStatesChanged += (sender, e) => g_main_context_invoke(0, _musicFileSaveStatesChangedFunc, 0);
-        _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => g_main_context_invoke(0, _selectedMusicFilesPropertiesChangedFunc, 0);
-        _controller.FingerprintCalculated += (sender, e) => g_main_context_invoke(0, _updateFingerprintFunc, 0);
-        _controller.CorruptedFilesFound += (sender, e) => g_main_context_invoke(0, _corruptedFilesFunc, 0);
+        _controller.MusicFolderUpdated += (sender, e) => GLib.Functions.IdleAdd(0, MusicFolderUpdated);
+        _controller.MusicFileSaveStatesChanged += (sender, e) => GLib.Functions.IdleAdd(0, MusicFileSaveStatesChanged);
+        _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => GLib.Functions.IdleAdd(0, SelectedMusicFilesPropertiesChanged);
+        _controller.FingerprintCalculated += (sender, e) => GLib.Functions.IdleAdd(0, UpdateFingerprint);
+        _controller.CorruptedFilesFound += (sender, e) => GLib.Functions.IdleAdd(0, CorruptedFilesFound);
         //Open Folder Action
         var actOpenFolder = Gio.SimpleAction.New("openFolder", null);
         actOpenFolder.OnActivate += OpenFolder;
@@ -443,9 +409,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         var toast = Adw.Toast.New(e.Message);
         if (e.Action == "unsupported")
         {
-            var uriLauncher = gtk_uri_launcher_new("help:tagger/unsupported");
+            var uriLauncher = Gtk.UriLauncher.New("help:tagger/unsupported");
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, ex) => gtk_uri_launcher_launch(uriLauncher, 0, 0, (source, res, data) => { }, 0);
+            toast.OnButtonClicked += (sender, ex) => gtk_uri_launcher_launch(uriLauncher.Handle, 0, 0, (source, res, data) => { }, 0);
         }
         _toastOverlay.AddToast(toast);
     }
@@ -472,8 +438,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
-            var iconHandle = g_file_icon_new(g_file_new_for_path($"{Environment.GetEnvironmentVariable("SNAP")}/usr/share/icons/hicolor/symbolic/apps/{_controller.AppInfo.ID}-symbolic.svg"));
-            g_notification_set_icon(notification.Handle, iconHandle);
+            var fileIcon = Gio.FileIcon.New(Gio.FileHelper.NewForPath($"{Environment.GetEnvironmentVariable("SNAP")}/usr/share/icons/hicolor/symbolic/apps/{_controller.AppInfo.ID}-symbolic.svg"));
+            g_notification_set_icon(notification.Handle, fileIcon.Handle);
         }
         _application.SendNotification(_controller.AppInfo.ID, notification);
     }
@@ -533,7 +499,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var obj = e.Value.GetObject();
         if (obj != null)
         {
-            var path = g_file_get_path(obj.Handle);
+            var path = ((Gio.File)obj).GetPath();
             if (Directory.Exists(path))
             {
                 SetLoadingState(_("Loading music files from folder..."));
@@ -551,11 +517,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void OpenFolder(Gio.SimpleAction sender, EventArgs e)
     {
-        var folderDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(folderDialog, _("Open Folder"));
+        var folderDialog = Gtk.FileDialog.New();
+        folderDialog.SetTitle(_("Open Folder"));
         _openCallback = async (source, res, data) =>
         {
-            var fileHandle = gtk_file_dialog_select_folder_finish(folderDialog, res, IntPtr.Zero);
+            var fileHandle = gtk_file_dialog_select_folder_finish(source, res, IntPtr.Zero);
             if (fileHandle != IntPtr.Zero)
             {
                 var path = g_file_get_path(fileHandle);
@@ -563,7 +529,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 await _controller.OpenFolderAsync(path);
             }
         };
-        gtk_file_dialog_select_folder(folderDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
+        gtk_file_dialog_select_folder(folderDialog.Handle, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
     }
 
     /// <summary>
@@ -687,23 +653,23 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="type">AlbumArtType</param>
     private void InsertAlbumArt(AlbumArtType type)
     {
+        var openFileDialog = Gtk.FileDialog.New();
+        openFileDialog.SetTitle(type == AlbumArtType.Front ? _("Insert Front Album Art") : _("Insert Back Album Art"));
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         var filterImages = Gtk.FileFilter.New();
         filterImages.AddMimeType("image/*");
-        var openFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(openFileDialog, type == AlbumArtType.Front ? _("Insert Front Album Art") : _("Insert Back Album Art"));
-        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filterImages);
-        gtk_file_dialog_set_filters(openFileDialog, filters.Handle);
+        openFileDialog.SetFilters(filters);
         _openCallback = (source, res, data) =>
         {
-            var fileHandle = gtk_file_dialog_open_finish(openFileDialog, res, IntPtr.Zero);
+            var fileHandle = gtk_file_dialog_open_finish(source, res, IntPtr.Zero);
             if (fileHandle != IntPtr.Zero)
             {
                 var path = g_file_get_path(fileHandle);
                 _controller.InsertSelectedAlbumArt(path, type);
             }
         };
-        gtk_file_dialog_open(openFileDialog, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
+        gtk_file_dialog_open(openFileDialog.Handle, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
     }
 
     /// <summary>
@@ -723,23 +689,23 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             return;
         }
+        var saveFileDialog = Gtk.FileDialog.New();
+        saveFileDialog.SetTitle(type == AlbumArtType.Front ? _("Export Front Album Art") : _("Export Back Album Art"));
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         var filter = Gtk.FileFilter.New();
         filter.AddMimeType(_controller.GetFirstAlbumArtMimeType(type));
-        var saveFileDialog = gtk_file_dialog_new();
-        gtk_file_dialog_set_title(saveFileDialog, type == AlbumArtType.Front ? _("Export Front Album Art") : _("Export Back Album Art"));
-        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         filters.Append(filter);
-        gtk_file_dialog_set_filters(saveFileDialog, filters.Handle);
+        saveFileDialog.SetFilters(filters);
         _saveCallback = (source, res, data) =>
         {
-            var fileHandle = gtk_file_dialog_save_finish(saveFileDialog, res, IntPtr.Zero);
+            var fileHandle = gtk_file_dialog_save_finish(source, res, IntPtr.Zero);
             if (fileHandle != IntPtr.Zero)
             {
                 var path = g_file_get_path(fileHandle);
                 _controller.ExportSelectedAlbumArt(path, type);
             }
         };
-        gtk_file_dialog_save(saveFileDialog, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+        gtk_file_dialog_save(saveFileDialog.Handle, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
     }
 
     /// <summary>
@@ -1054,26 +1020,24 @@ public partial class MainWindow : Adw.ApplicationWindow
             var art = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedMusicFiles.First().Value.FrontAlbumArt : _controller.SelectedMusicFiles.First().Value.BackAlbumArt;
             if(art.Length == 0)
             {
-                gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
+                _albumArtImage.SetPaintable(null);
             }
             else
             {
-                var bytes = g_bytes_new(art, (uint)art.Length);
-                var texture = gdk_texture_new_from_bytes(bytes, IntPtr.Zero);
-                gtk_picture_set_paintable(_albumArtImage.Handle, texture);
-                g_object_unref(texture);
-                g_bytes_unref(bytes);
+                using var bytes = GLib.Bytes.From(art.AsSpan());
+                using var texture = Gdk.Texture.NewFromBytes(bytes);
+                _albumArtImage.SetPaintable(texture);
             }
         }
         else if(albumArt == "keepArt")
         {
             _artViewStack.SetVisibleChildName("KeepImage");
-            gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
+            _albumArtImage.SetPaintable(null);
         }
         else
         {
             _artViewStack.SetVisibleChildName("NoImage");
-            gtk_picture_set_paintable(_albumArtImage.Handle, IntPtr.Zero);
+            _albumArtImage.SetPaintable(null);
         }
         _insertAlbumArtAction.SetEnabled(true);
         _removeAlbumArtAction.SetEnabled(_artViewStack.GetVisibleChildName() != "NoImage");
