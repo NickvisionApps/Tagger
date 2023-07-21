@@ -79,6 +79,10 @@ public class MainWindowController
     /// </summary>
     public event EventHandler<string>? LoadingStateUpdated;
     /// <summary>
+    /// Occurs when the loading progress is updated
+    /// </summary>
+    public event EventHandler<(int Value, int MaxValue, string Message)>? LoadingProgressUpdated;
+    /// <summary>
     /// Occurs when the music folder is updated
     /// </summary>
     public event EventHandler<EventArgs>? MusicFolderUpdated;
@@ -171,6 +175,7 @@ public class MainWindowController
             IncludeSubfolders = Configuration.Current.IncludeSubfolders,
             SortFilesBy = Configuration.Current.SortFilesBy
         };
+        _musicFolder.LoadingProgressUpdated += LoadingProgressUpdated;
         if(Configuration.Current.RememberLastOpenedFolder)
         {
             Configuration.Current.LastOpenedFolder = _musicFolder.ParentPath;
@@ -361,6 +366,7 @@ public class MainWindowController
                         }
                     }
                     i++;
+                    LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
                 }
             });
             if(triggerMusicFileSaveStatesChanged)
@@ -379,6 +385,7 @@ public class MainWindowController
         {
             await Task.Run(() =>
             {
+                var i = 0;
                 foreach(var pair in SelectedMusicFiles)
                 {
                     if(!MusicFileSaveStates[pair.Key])
@@ -397,6 +404,8 @@ public class MainWindowController
                             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to save {0}", path), NotificationSeverity.Warning, "unsupported"));
                         }
                     }
+                    i++;
+                    LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, _("Saved {0}/{1}", i, SelectedMusicFiles.Count)));
                 }
             });
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
@@ -411,6 +420,7 @@ public class MainWindowController
         var discarded = false;
         await Task.Run(() =>
         {
+            var i = 0;
             foreach(var pair in SelectedMusicFiles)
             {
                 if(!MusicFileSaveStates[pair.Key])
@@ -419,6 +429,8 @@ public class MainWindowController
                     MusicFileSaveStates[pair.Key] = true;
                     discarded = true;
                 }
+                i++;
+                LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
             }
         });
         if(discarded)
@@ -687,6 +699,7 @@ public class MainWindowController
     /// </summary>
     public async Task DownloadMusicBrainzMetadataAsync()
     {
+        var i = 0;
         var successful = 0;
         foreach(var pair in SelectedMusicFiles)
         {
@@ -695,6 +708,8 @@ public class MainWindowController
                 successful++;
                 MusicFileSaveStates[pair.Key] = false;
             }
+            i++;
+            LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
         }
         UpdateSelectedMusicFilesProperties();
         MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);

@@ -123,6 +123,15 @@ Adw.ApplicationWindow _root {
             Gtk.Label _loadingLabel {
               styles ["title-4"]
             }
+
+            Gtk.ProgressBar _loadingProgressBar {
+              halign: center;
+              width-request: 250;
+            }
+
+            Gtk.Label _loadingProgressLabel {
+              halign: center;
+            }
           };
         }
 

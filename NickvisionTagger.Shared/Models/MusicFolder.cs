@@ -37,6 +37,11 @@ public class MusicFolder
     public bool ContainsReadOnlyFiles { get; private set; }
     
     /// <summary>
+    /// Occurs when the loading progress is updated
+    /// </summary>
+    public event EventHandler<(int Value, int MaxValue, string Message)>? LoadingProgressUpdated;
+
+    /// <summary>
     /// Constructs a MusicFolder
     /// </summary>
     /// <param name="path">The path of the music folder</param>
@@ -68,25 +73,27 @@ public class MusicFolder
                 ".miniqsf", ".spc", ".tak", ".tta", ".vqf", ".bwav", ".bwf", ".vgm", ".vgz", ".wv", ".asf" };
             await Task.Run(() =>
             {
-                foreach(var path in Directory.EnumerateFiles(ParentPath, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+                var files = Directory.GetFiles(ParentPath, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                    .Where(x => supportedExtensions.Contains(Path.GetExtension(x).ToLower())).ToList();
+                var i = 0;
+                foreach(var path in files)
                 {
-                    if(supportedExtensions.Any(x => Path.GetExtension(path).ToLower() == x))
+                    try
                     {
-                        try
+                        var musicFile = new MusicFile(path);
+                        MusicFiles.Add(musicFile);
+                        if(musicFile.IsReadOnly)
                         {
-                            var musicFile = new MusicFile(path);
-                            MusicFiles.Add(musicFile);
-                            if(musicFile.IsReadOnly)
-                            {
-                                ContainsReadOnlyFiles = true;
-                            }
-                        }
-                        catch (FileLoadException e)
-                        {
-                            CorruptedFiles.Add(path);
-                            Console.WriteLine(e);
+                            ContainsReadOnlyFiles = true;
                         }
                     }
+                    catch (FileLoadException e)
+                    {
+                        CorruptedFiles.Add(path);
+                        Console.WriteLine(e);
+                    }
+                    i++;
+                    LoadingProgressUpdated?.Invoke(this, (i, files.Count, $"{i}/{files.Count}"));
                 }
                 MusicFiles.Sort();
             });

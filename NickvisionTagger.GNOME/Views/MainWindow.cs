@@ -77,6 +77,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
     [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Gtk.Label _loadingLabel;
+    [Gtk.Connect] private readonly Gtk.ProgressBar _loadingProgressBar;
+    [Gtk.Connect] private readonly Gtk.Label _loadingProgressLabel;
     [Gtk.Connect] private readonly Adw.Flap _folderFlap;
     [Gtk.Connect] private readonly Adw.ViewStack _filesViewStack;
     [Gtk.Connect] private readonly Gtk.SearchEntry _musicFilesSearch;
@@ -239,6 +241,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
         _controller.LoadingStateUpdated += (sender, e) => SetLoadingState(e);
+        _controller.LoadingProgressUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () =>
+        {
+            UpdateLoadingProgress(e);
+            return false;
+        });
         _controller.MusicFolderUpdated += (sender, e) => GLib.Functions.IdleAdd(0, MusicFolderUpdated);
         _controller.MusicFileSaveStatesChanged += (sender, e) => GLib.Functions.IdleAdd(0, MusicFileSaveStatesChanged);
         _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => GLib.Functions.IdleAdd(0, SelectedMusicFilesPropertiesChanged);
@@ -452,8 +459,22 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _viewStack.SetVisibleChildName("Loading");
         _loadingLabel.SetText(message);
+        _loadingProgressBar.SetVisible(false);
+        _loadingProgressLabel.SetVisible(false);
         _applyButton.SetSensitive(false);
         _tagActionsButton.SetSensitive(false);
+    }
+
+    /// <summary>
+    /// Updates the progress of the loading state
+    /// </summary>
+    /// <param name="e">(int Value, int MaxValue, string Message)</param>
+    private void UpdateLoadingProgress((int Value, int MaxValue, string Message) e)
+    {
+        _loadingProgressBar.SetVisible(true);
+        _loadingProgressLabel.SetVisible(true);
+        _loadingProgressBar.SetFraction((double)e.Value / (double)e.MaxValue);
+        _loadingProgressLabel.SetLabel(e.Message);
     }
 
     /// <summary>
