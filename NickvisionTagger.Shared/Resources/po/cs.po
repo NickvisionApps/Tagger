@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-21 01:22+0200\n"
-"PO-Revision-Date: 2023-07-14 19:39+0000\n"
+"PO-Revision-Date: 2023-07-21 20:34+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/cs/>\n"
@@ -75,7 +75,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:750
 #: NickvisionTagger.GNOME/Blueprints/window.blp:413
 msgid "Add"
-msgstr ""
+msgstr "Přidat"
 
 #: ../../../Controllers/MainWindowController.cs:737
 #: ../../../Controllers/MainWindowController.cs:775
@@ -163,7 +163,7 @@ msgstr[2] "Úspěšně převedeno {0} značek na názvy souborů"
 #: ../../../Controllers/MainWindowController.cs:737
 #: ../../../Controllers/MainWindowController.cs:833
 msgid "custom"
-msgstr ""
+msgstr "vlastní"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:934
 #, csharp-format
@@ -313,9 +313,8 @@ msgid "MusicBrainz Recording Id"
 msgstr "ID nahrávky MusicBrainz"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:750
-#, fuzzy
 msgid "New Custom Property"
-msgstr "Další vlastnosti"
+msgstr "Nová vlastní vlastnost"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:932
 #, csharp-format
@@ -362,7 +361,7 @@ msgstr "Vyberte prosím formátový řetězec."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:750
 msgid "Property Name"
-msgstr ""
+msgstr "Název vlastnosti"
 
 #: ../../../Controllers/MainWindowController.cs:737
 #: ../../../Controllers/MainWindowController.cs:829
@@ -370,9 +369,8 @@ msgid "publisher"
 msgstr "vydavatel"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1114
-#, fuzzy
 msgid "Remove Custom Property"
-msgstr "Další vlastnosti"
+msgstr "Odebrat vlastní vlastnost"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:508
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:583
@@ -438,7 +436,7 @@ msgstr "Označovač"
 
 #: ../../../Controllers/MainWindowController.cs:223
 msgid "Tagger has opened some files in read-only mode."
-msgstr ""
+msgstr "Označovač otevřel některé soubory v režimu čtení."
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -467,14 +465,14 @@ msgid "Unable to load image file"
 msgstr "Nepodařilo se načíst soubor s obrázkem"
 
 #: ../../../Controllers/MainWindowController.cs:397
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Unable to save {0}"
-msgstr "Nepodařilo se načíst soubor s obrázkem"
+msgstr "Nepodařilo se uložit soubor {0}"
 
 #: ../../../Controllers/MainWindowController.cs:360
 #, csharp-format
 msgid "Unable to save {0}."
-msgstr ""
+msgstr "Nepodařilo se uložit {0}."
 
 #: ../../../Controllers/MainWindowController.cs:714
 msgid "Unable to submit to AcoustId. Check API key"
@@ -486,16 +484,16 @@ msgid "year"
 msgstr "rok"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
-#, fuzzy
 msgid "Corrupted Files Found"
-msgstr "Nenalezeny žádné hudební soubory"
+msgstr "Nenalezeny poškozené soubory"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
-#, fuzzy
 msgid ""
 "This music folder contains music files that have corrupted tags. The "
 "following files are affected and will be ignored by Tagger:"
-msgstr "Některé hudební soubory mají stále čekající změny. Co chcete udělat?"
+msgstr ""
+"Tato hudební složka obsahuje hudební soubory, které mají poškozené značky. "
+"Týká se to následujících souborů, které budou ignorovány Ozmačovačem:"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:114
@@ -815,9 +813,8 @@ msgid "Publisher"
 msgstr "Vydavatel"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:405
-#, fuzzy
 msgid "Custom Properties"
-msgstr "Další vlastnosti"
+msgstr "Vlastní vlastnosti"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:422
 msgid "File Properties"
