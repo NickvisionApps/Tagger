@@ -460,6 +460,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _viewStack.SetVisibleChildName("Loading");
         _loadingLabel.SetText(message);
         _loadingProgressBar.SetVisible(false);
+        _loadingProgressLabel.SetVisible(false);
         _applyButton.SetSensitive(false);
         _tagActionsButton.SetSensitive(false);
     }
@@ -471,6 +472,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void UpdateLoadingProgress((int Value, int MaxValue, string Message) e)
     {
         _loadingProgressBar.SetVisible(true);
+        _loadingProgressLabel.SetVisible(true);
         _loadingProgressBar.SetFraction((double)e.Value / (double)e.MaxValue);
         _loadingProgressLabel.SetLabel(e.Message);
     }

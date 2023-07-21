@@ -124,18 +124,12 @@ Adw.ApplicationWindow _root {
               styles ["title-4"]
             }
 
-            Gtk.Box {
-              orientation: horizontal;
-              spacing: 6;
+            Gtk.ProgressBar _loadingProgressBar {
+              hexpand: true;
+            }
 
-              Gtk.ProgressBar _loadingProgressBar {
-                valign: center;
-                hexpand: true;
-              }
-
-              Gtk.Label _loadingProgressLabel {
-                halign: end;
-              }
+            Gtk.Label _loadingProgressLabel {
+              halign: center;
             }
           };
         }
