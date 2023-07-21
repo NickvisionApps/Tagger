@@ -1,6 +1,7 @@
 using NickvisionTagger.GNOME.Helpers;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using static NickvisionTagger.Shared.Helpers.Gettext;
 
 ﻿namespace NickvisionTagger.GNOME.Controls;
 
@@ -54,7 +55,7 @@ public partial class CorruptedFilesDialog : Adw.Window
             row.SetTooltipText(path);
             var button = Gtk.Button.New();
             button.SetIconName("folder-symbolic");
-            button.SetTooltipText("Open Folder");
+            button.SetTooltipText(_("Open Folder"));
             button.SetValign(Gtk.Align.Center);
             button.AddCssClass("flat");
             button.OnClicked += (sender, e) =>
