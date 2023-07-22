@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-22 12:52+0200\n"
+"POT-Creation-Date: 2023-07-23 00:17+0200\n"
 "PO-Revision-Date: 2023-07-21 07:07+0000\n"
 "Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
@@ -19,24 +19,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
-#: ../../../Controllers/MainWindowController.cs:247
-#: ../../../Controllers/MainWindowController.cs:256
+#: ../../../Controllers/MainWindowController.cs:117
+msgid "%artist%- %title%"
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:117
+#, fuzzy
+msgid "%title%"
+msgstr "titolo"
+
+#: ../../../Controllers/MainWindowController.cs:117
+msgid "%title%- %artist%"
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:117
+msgid "%track%- %title%"
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:252
 #: ../../../Controllers/MainWindowController.cs:261
 #: ../../../Controllers/MainWindowController.cs:266
 #: ../../../Controllers/MainWindowController.cs:271
-#: ../../../Controllers/MainWindowController.cs:280
-#: ../../../Controllers/MainWindowController.cs:289
+#: ../../../Controllers/MainWindowController.cs:276
+#: ../../../Controllers/MainWindowController.cs:285
 #: ../../../Controllers/MainWindowController.cs:294
 #: ../../../Controllers/MainWindowController.cs:299
 #: ../../../Controllers/MainWindowController.cs:304
 #: ../../../Controllers/MainWindowController.cs:309
 #: ../../../Controllers/MainWindowController.cs:314
-#: ../../../Controllers/MainWindowController.cs:323
-#: ../../../Controllers/MainWindowController.cs:1219
-#: ../../../Controllers/MainWindowController.cs:1220
-#: ../../../Controllers/MainWindowController.cs:1221
-#: ../../../Controllers/MainWindowController.cs:1222
-#: ../../../Controllers/MainWindowController.cs:1223
+#: ../../../Controllers/MainWindowController.cs:319
+#: ../../../Controllers/MainWindowController.cs:328
 #: ../../../Controllers/MainWindowController.cs:1224
 #: ../../../Controllers/MainWindowController.cs:1225
 #: ../../../Controllers/MainWindowController.cs:1226
@@ -44,7 +56,12 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:1228
 #: ../../../Controllers/MainWindowController.cs:1229
 #: ../../../Controllers/MainWindowController.cs:1230
+#: ../../../Controllers/MainWindowController.cs:1231
+#: ../../../Controllers/MainWindowController.cs:1232
+#: ../../../Controllers/MainWindowController.cs:1233
 #: ../../../Controllers/MainWindowController.cs:1234
+#: ../../../Controllers/MainWindowController.cs:1235
+#: ../../../Controllers/MainWindowController.cs:1239
 msgid "<keep>"
 msgstr "<tieni>"
 
@@ -53,7 +70,7 @@ msgstr "<tieni>"
 msgid "0 MiB"
 msgstr "0 MiB"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:774
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:772
 msgid ""
 "AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id "
 "for easy identification.\n"
@@ -73,38 +90,41 @@ msgstr ""
 "Se non viene fornito nessun identificativo, Tagger invierà i metadati "
 "associati alla firma di questo brano."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:737
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:735
 #: NickvisionTagger.GNOME/Blueprints/window.blp:422
 msgid "Add"
 msgstr "Aggiungi"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:790
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:795
+#: ../../../Models/MusicFile.cs:588 ../../../Models/MusicFile.cs:607
 msgid "album"
 msgstr "album"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:824
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:829
+#: ../../../Models/MusicFile.cs:588 ../../../Models/MusicFile.cs:619
 msgid "albumartist"
 msgstr "artistaalbum"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:490
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:565
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:781
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:819
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:779
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:817
 #: NickvisionTagger.GNOME/Blueprints/window.blp:526
 msgid "Apply"
 msgstr "Applica"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:490
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:565
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:781
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:819
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:779
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:817
 msgid "Apply Changes?"
 msgstr "Vuoi applicare le modifiche?"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:786
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:791
+#: ../../../Models/MusicFile.cs:588 ../../../Models/MusicFile.cs:603
 msgid "artist"
 msgstr "artista"
 
@@ -113,71 +133,79 @@ msgid "B"
 msgstr "B"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:152
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:665
 #: NickvisionTagger.GNOME/Blueprints/window.blp:30
 msgid "Back"
 msgstr "Indietro"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:490
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:565
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:646
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:737
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:774
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:781
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:819
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:625
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:644
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:735
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:772
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:779
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:817
 msgid "Cancel"
 msgstr "Annulla"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:832
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:837
+#: ../../../Models/MusicFile.cs:588 ../../../Models/MusicFile.cs:627
 msgid "comment"
 msgstr "commento"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:836
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:841
+#: ../../../Models/MusicFile.cs:588 ../../../Models/MusicFile.cs:631
 msgid "composer"
 msgstr "compositore"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:646
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:625
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:644
 #: NickvisionTagger.GNOME/Blueprints/window.blp:39
 msgid "Convert"
 msgstr "Converti"
 
-#: ../../../Controllers/MainWindowController.cs:484
+#: ../../../Controllers/MainWindowController.cs:489
 #, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
 msgstr[0] "{0} nome di file è stato convertito con successo"
 msgstr[1] "{0} nomi di file sono stati convertiti con successo"
 
-#: ../../../Controllers/MainWindowController.cs:507
+#: ../../../Controllers/MainWindowController.cs:512
 #, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
 msgstr[0] "{0} etichetta è stata convertita in nome di file con successo"
 msgstr[1] "{0} etichette sono state convertite in nomi di file con successo"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:848
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:853
 msgid "custom"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:921
+#: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:47
+#: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:59
+msgid "Custom"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:919
 #, csharp-format
 msgid "David Lapshin {0}"
 msgstr "David Lapshin {0}"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:840
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:845
+#: ../../../Models/MusicFile.cs:588 ../../../Models/MusicFile.cs:635
 msgid "description"
 msgstr "descrizione"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:490
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:565
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:781
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:819
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:779
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:817
 msgid "Discard"
 msgstr "Scarta"
 
@@ -185,45 +213,45 @@ msgstr "Scarta"
 msgid "Discarding unapplied changes..."
 msgstr "Annullamento modifiche non applicate..."
 
-#: ../../../Controllers/MainWindowController.cs:716
+#: ../../../Controllers/MainWindowController.cs:721
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "I metadati per {0} sono stati scaricati con successo"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:756
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:754
 msgid "Downloading MusicBrainz metadata..."
 msgstr "Download dei metadati da MusicBrainz in corso..."
 
-#: ../../../Models/MusicFile.cs:174 ../../../Models/MusicFile.cs:197
+#: ../../../Models/MusicFile.cs:175 ../../../Models/MusicFile.cs:198
 msgid "ERROR"
 msgstr "ERRORE"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:714
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:712
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
 #, fuzzy
 msgid "Export Back Album Art"
 msgstr "Inserisci copertina"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:714
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:712
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:71
 #, fuzzy
 msgid "Export Front Album Art"
 msgstr "Inserisci copertina"
 
-#: ../../../Controllers/MainWindowController.cs:624
+#: ../../../Controllers/MainWindowController.cs:629
 #, fuzzy
 msgid "Exported back album art to file successfully"
 msgstr "{0} etichetta è stata convertita in nome di file con successo"
 
-#: ../../../Controllers/MainWindowController.cs:608
+#: ../../../Controllers/MainWindowController.cs:613
 #, fuzzy
 msgid "Exported front album art to file successfully"
 msgstr "{0} etichetta è stata convertita in nome di file con successo"
 
-#: ../../../Controllers/MainWindowController.cs:629
+#: ../../../Controllers/MainWindowController.cs:634
 msgid "Failed to export back album art to a file"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:613
+#: ../../../Controllers/MainWindowController.cs:618
 msgid "Failed to export front album art to a file"
 msgstr ""
 
@@ -232,28 +260,29 @@ msgstr ""
 msgid "File Name to Tag"
 msgstr "Nome del file a etichetta"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:778
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:783
 msgid "filename"
 msgstr "nomefile"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1300
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1298
 msgid "Fingerprint was copied to clipboard."
 msgstr "La firma è stata copiata negli appunti."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:625
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:645
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:644
 msgid "Format String"
 msgstr "Formato"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:152
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:665
 #: NickvisionTagger.GNOME/Blueprints/window.blp:22
 msgid "Front"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:828
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:833
+#: ../../../Models/MusicFile.cs:588 ../../../Models/MusicFile.cs:623
 msgid "genre"
 msgstr "genere"
 
@@ -261,7 +290,7 @@ msgstr "genere"
 msgid "GiB"
 msgstr "GiB"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:917
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:915
 msgid "GitHub Repo"
 msgstr "Repository GitHub"
 
@@ -272,13 +301,13 @@ msgstr "Repository GitHub"
 msgid "Help"
 msgstr "Aiuto"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:678
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:676
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:81
 #, fuzzy
 msgid "Insert Back Album Art"
 msgstr "Inserisci copertina"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:678
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:676
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:61
 #, fuzzy
 msgid "Insert Front Album Art"
@@ -288,7 +317,7 @@ msgstr "Inserisci copertina"
 msgid "KiB"
 msgstr "KiB"
 
-#: ../../../Controllers/MainWindowController.cs:220
+#: ../../../Controllers/MainWindowController.cs:225
 #, csharp-format
 msgid "Loaded {0} music file."
 msgid_plural "Loaded {0} music files."
@@ -300,11 +329,11 @@ msgstr[1] "Brani {0} caricati."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:549
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:575
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:584
-#: ../../../Controllers/MainWindowController.cs:1253
+#: ../../../Controllers/MainWindowController.cs:1258
 msgid "Loading music files from folder..."
 msgstr "Caricamento dei brani dalla cartella..."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:918
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:916
 msgid "Matrix Chat"
 msgstr "Chat Matrix"
 
@@ -312,16 +341,16 @@ msgstr "Chat Matrix"
 msgid "MiB"
 msgstr "MiB"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:774
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:772
 msgid "MusicBrainz Recording Id"
 msgstr "MusicBrainz RecordingId"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:737
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:735
 #, fuzzy
 msgid "New Custom Property"
 msgstr "Proprietà nuova"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:919
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:917
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -330,7 +359,7 @@ msgstr ""
 "Nicholas Logozzo {0}\n"
 "Hanno collaborato su GitHub ❤️ {1}"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:920
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:918
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -341,11 +370,11 @@ msgstr ""
 "Fyodor Sobolev {1} \n"
 "DaPigGuy {2}"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:769
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:767
 msgid "OK"
 msgstr "Ok"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:769
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:767
 msgid ""
 "Only one file can be submitted to AcoustID at a time. Please select only one "
 "file and try again."
@@ -361,20 +390,21 @@ msgid "Open Folder"
 msgstr "Apri cartella"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:625
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:645
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:644
 msgid "Please select a format string."
 msgstr "Seleziona un formato."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:737
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:735
 msgid "Property Name"
 msgstr "Nome della proprietà"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:844
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:849
+#: ../../../Models/MusicFile.cs:588 ../../../Models/MusicFile.cs:639
 msgid "publisher"
 msgstr "etichetta"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1099
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1097
 #, fuzzy
 msgid "Remove Custom Property"
 msgstr "Proprietà del file"
@@ -382,50 +412,50 @@ msgstr "Proprietà del file"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:495
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:570
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:596
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:786
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:828
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:784
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:826
 msgid "Saving tags..."
 msgstr "Salvataggio delle etichette in corso..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:490
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:565
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:781
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:819
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:779
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:817
 msgid ""
 "Some music files still have changes waiting to be applied. What would you "
 "like to do?"
 msgstr ""
 "Sono presenti alcune modifiche in attesa di essere applicate. Cosa vuoi fare?"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:774
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:772
 msgid "Submit"
 msgstr "Invia"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:774
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:772
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:105
 #: NickvisionTagger.GNOME/Blueprints/window.blp:49
 msgid "Submit to AcoustId"
 msgstr "Invia ad AcoustId"
 
-#: ../../../Controllers/MainWindowController.cs:729
+#: ../../../Controllers/MainWindowController.cs:734
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "I metadati sono stati inviati con successo a AcoustId"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:791
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:800
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:789
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:798
 msgid "Submitting data to AcoustId..."
 msgstr "Invio dei dati ad AcoustId in corso..."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:666
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
 #: NickvisionTagger.GNOME/Blueprints/window.blp:294
 msgid "Switch to Back Cover"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:666
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
 msgid "Switch to Front Cover"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:645
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:644
 #: NickvisionTagger.GNOME/Blueprints/window.blp:42
 msgid "Tag to File Name"
 msgstr "Etichetta a nome di file"
@@ -442,7 +472,7 @@ msgstr "Associa un'etichetta ai tuoi brani"
 msgid "Tagger"
 msgstr "Tagger"
 
-#: ../../../Controllers/MainWindowController.cs:228
+#: ../../../Controllers/MainWindowController.cs:233
 msgid "Tagger has opened some files in read-only mode."
 msgstr ""
 
@@ -450,44 +480,47 @@ msgstr ""
 msgid "TiB"
 msgstr "TiB"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:782
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:787
+#: ../../../Models/MusicFile.cs:588 ../../../Models/MusicFile.cs:599
 msgid "title"
 msgstr "titolo"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:769
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:767
 msgid "Too Many Files Selected"
 msgstr "Sono stati selezionati troppi file"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:809
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:814
+#: ../../../Models/MusicFile.cs:588 ../../../Models/MusicFile.cs:615
 msgid "track"
 msgstr "traccia"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:922
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:920
 msgid "translator-credits"
 msgstr "Federico Marchetti"
 
-#: ../../../Controllers/MainWindowController.cs:526
+#: ../../../Controllers/MainWindowController.cs:531
 msgid "Unable to load image file"
 msgstr "Impossibile caricare l'immagine"
 
-#: ../../../Controllers/MainWindowController.cs:404
+#: ../../../Controllers/MainWindowController.cs:409
 #, fuzzy, csharp-format
 msgid "Unable to save {0}"
 msgstr "Impossibile caricare l'immagine"
 
-#: ../../../Controllers/MainWindowController.cs:365
+#: ../../../Controllers/MainWindowController.cs:370
 #, csharp-format
 msgid "Unable to save {0}."
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:729
+#: ../../../Controllers/MainWindowController.cs:734
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "Impossibile inviare dati ad AcoustId. Controlla la chiave dell'API"
 
-#: ../../../Controllers/MainWindowController.cs:752
-#: ../../../Controllers/MainWindowController.cs:794
+#: ../../../Controllers/MainWindowController.cs:757
+#: ../../../Controllers/MainWindowController.cs:799
+#: ../../../Models/MusicFile.cs:588 ../../../Models/MusicFile.cs:611
 msgid "year"
 msgstr "anno"
 
