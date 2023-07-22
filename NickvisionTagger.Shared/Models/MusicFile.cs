@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
@@ -584,70 +585,74 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool TagToFilename(string formatString)
     {
-        if (formatString == "%artist%- %title%")
+        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
+        var customProps = _customProperties.Keys.ToList();
+        var match = Regex.Match(formatString, @"%(\w+)%", RegexOptions.IgnoreCase);
+        while(match.Success)
         {
-            if(string.IsNullOrEmpty(Artist) || string.IsNullOrEmpty(Title))
+            string value = match.Value.Remove(0, 1); //remove first %
+            value = value.Remove(value.Length - 1, 1); //remove last %;
+            if(validProperties.Contains(value.ToLower()))
             {
-                return false;
+                value = value.ToLower();
+                var replace = "";
+                if(value == "title" || value == _("title"))
+                {
+                    replace = Title;
+                }
+                else if(value == "artist" || value == _("artist"))
+                {
+                    replace = Artist;
+                }
+                else if(value == "album" || value == _("album"))
+                {
+                    replace = Album;
+                }
+                else if(value == "year" || value == _("year"))
+                {
+                    replace = Year.ToString();
+                }
+                else if(value == "track" || value == _("track"))
+                {
+                    replace = Track.ToString();
+                }
+                else if(value == "albumartist" || value == _("albumartist"))
+                {
+                    replace = AlbumArtist;
+                }
+                else if(value == "genre" || value == _("genre"))
+                {
+                    replace = Genre;
+                }
+                else if(value == "comment" || value == _("comment"))
+                {
+                    replace = Comment;
+                }
+                else if(value == "composer" || value == _("composer"))
+                {
+                    replace = Composer;
+                }
+                else if(value == "description" || value == _("description"))
+                {
+                    replace = Description;
+                }
+                else if(value == "publisher" || value == _("publisher"))
+                {
+                    replace = Publisher;
+                }
+                formatString = formatString.Replace(match.Value, replace);
             }
-            try
+            else if(customProps.Contains(value))
             {
-                Filename = $"{Artist}- {Title}{_dotExtension}";
+                formatString = formatString.Replace(match.Value, _customProperties[value]);
             }
-            catch
+            else
             {
-                return false;
+                formatString = formatString.Replace(match.Value, "");
             }
+            match = Regex.Match(formatString, @"%(\w+)%", RegexOptions.IgnoreCase);
         }
-        else if (formatString == "%title%- %artist%")
-        {
-            if(string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(Artist))
-            {
-                return false;
-            }
-            try
-            {
-                Filename = $"{Title}- {Artist}{_dotExtension}";
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        else if (formatString == "%track%- %title%")
-        {
-            if(string.IsNullOrEmpty(Title))
-            {
-                return false;
-            }
-            try
-            {
-                Filename = $"{Track:D2}- {Title}{_dotExtension}";
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        else if (formatString == "%title%")
-        {
-            if(string.IsNullOrEmpty(Title))
-            {
-                return false;
-            }
-            try
-            {
-                Filename = $"{Title}{_dotExtension}";
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
+        Filename = formatString;
         return true;
     }
     
