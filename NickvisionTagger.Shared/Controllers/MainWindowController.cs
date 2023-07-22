@@ -29,6 +29,10 @@ public class MainWindowController
     private bool _forceAllowClose;
 
     /// <summary>
+    /// The list of predefined format strings
+    /// </summary>
+    public string[] FormatStrings { get; init; }
+    /// <summary>
     /// The list of music file save states
     /// </summary>
     public List<bool> MusicFileSaveStates { get; init; }
@@ -65,10 +69,6 @@ public class MainWindowController
     /// The list of paths to corrupted music files in the music folder
     /// </summary>
     public List<string> CorruptedFiles => _musicFolder?.CorruptedFiles ?? new List<string>();
-    /// <summary>
-    /// The list of predefined format strings
-    /// </summary>
-    public string[] FormatStrings => new string[] { _("%artist%- %title%"), _("%title%- %artist%"), _("%track%- %title%"), _("%title%") };
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -114,6 +114,7 @@ public class MainWindowController
     {
         _musicFolder = null;
         _forceAllowClose = false;
+        FormatStrings = new string[] { _("%artist%- %title%"), _("%title%- %artist%"), _("%track%- %title%"), _("%title%") };
         MusicFileSaveStates = new List<bool>();
         SelectedMusicFiles = new Dictionary<int, MusicFile>();
         SelectedPropertyMap = new PropertyMap();
