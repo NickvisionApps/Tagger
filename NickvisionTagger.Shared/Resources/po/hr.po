@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-22 12:52+0200\n"
-"PO-Revision-Date: 2023-07-21 16:21+0000\n"
+"PO-Revision-Date: 2023-07-22 12:46+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/hr/>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
 #: ../../../Controllers/MainWindowController.cs:247
@@ -143,23 +143,23 @@ msgstr "skladatelj"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:646
 #: NickvisionTagger.GNOME/Blueprints/window.blp:39
 msgid "Convert"
-msgstr "Konvertiraj"
+msgstr "Pretvori"
 
 #: ../../../Controllers/MainWindowController.cs:484
 #, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
-msgstr[0] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
-msgstr[1] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
-msgstr[2] "Broj uspješno pretvorenih imena datoteka u oznake: %d"
+msgstr[0] "{0} ime datoteke uspješno pretvoreno u oznaku"
+msgstr[1] "{0} imena datoteka uspješno pretvorena u oznaku"
+msgstr[2] "{0} imena datoteka uspješno pretvorena u oznaku"
 
 #: ../../../Controllers/MainWindowController.cs:507
 #, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
-msgstr[0] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
-msgstr[1] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
-msgstr[2] "Broj uspješno pretvorenih oznaka u imena datoteka: %d"
+msgstr[0] "{0} oznaka uspješno pretvorena u ime datoteke"
+msgstr[1] "{0} oznake uspješno pretvorene u imena datoteka"
+msgstr[2] "{0} oznaka uspješno pretvorena u imena datoteka"
 
 #: ../../../Controllers/MainWindowController.cs:752
 #: ../../../Controllers/MainWindowController.cs:848
@@ -315,7 +315,7 @@ msgstr "ID oznaka MusicBrainz snimke"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:737
 msgid "New Custom Property"
-msgstr ""
+msgstr "Novo prilagođeno svojstvo"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:919
 #, csharp-format
@@ -363,7 +363,7 @@ msgstr "Odaberi jedan znakovni niz formata."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:737
 msgid "Property Name"
-msgstr ""
+msgstr "Ime svojstva"
 
 #: ../../../Controllers/MainWindowController.cs:752
 #: ../../../Controllers/MainWindowController.cs:844
@@ -372,7 +372,7 @@ msgstr "izdavač"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1099
 msgid "Remove Custom Property"
-msgstr ""
+msgstr "Ukloni prilagođeno svojstvo"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:495
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:570
@@ -390,8 +390,8 @@ msgid ""
 "Some music files still have changes waiting to be applied. What would you "
 "like to do?"
 msgstr ""
-"Neke glazbene datoteke još uvijek imaju promjene koje čekaju da se "
-"primijene. Želiš li primijeniti te promjene?"
+"Neke glazbene datoteke još uvijek sadrže promjene koje još nisu "
+"primijenjene. Želiš li primijeniti te promjene?"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:774
 msgid "Submit"
@@ -440,7 +440,7 @@ msgstr "Tagger"
 
 #: ../../../Controllers/MainWindowController.cs:228
 msgid "Tagger has opened some files in read-only mode."
-msgstr ""
+msgstr "Tagger je otvorio neke datoteke u modusu „samo čitanje”."
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -469,18 +469,18 @@ msgid "Unable to load image file"
 msgstr "Neuspjelo učitavanje slikovne datoteke"
 
 #: ../../../Controllers/MainWindowController.cs:404
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Unable to save {0}"
-msgstr "Neuspjelo učitavanje slikovne datoteke"
+msgstr "Neuspjelo spremanje datoteke {0}"
 
 #: ../../../Controllers/MainWindowController.cs:365
 #, csharp-format
 msgid "Unable to save {0}."
-msgstr ""
+msgstr "Neuspjelo spremanje datoteke {0}."
 
 #: ../../../Controllers/MainWindowController.cs:729
 msgid "Unable to submit to AcoustId. Check API key"
-msgstr "Neuspjelo slanje metapodatke AcoustId-u. Provjeri API ključ"
+msgstr "Neuspjelo slanje AcoustId-u. Provjeri API ključ"
 
 #: ../../../Controllers/MainWindowController.cs:752
 #: ../../../Controllers/MainWindowController.cs:794
@@ -492,13 +492,12 @@ msgid "Corrupted Files Found"
 msgstr "Pronađene su oštećene datoteke"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
-#, fuzzy
 msgid ""
 "This music folder contains music files that have corrupted tags. The "
 "following files are affected and will be ignored by Tagger:"
 msgstr ""
-"Neke glazbene datoteke još uvijek imaju promjene koje čekaju da se "
-"primijene. Želiš li primijeniti te promjene?"
+"Ova mapa glazbenih datoteke sardži glazbene datoteke s oštećenim oznakama. "
+"Sljedeće datoteke su pogođene i Tagger će ih zanemariti:"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:114
@@ -817,9 +816,8 @@ msgid "Publisher"
 msgstr "Izdavač"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:414
-#, fuzzy
 msgid "Custom Properties"
-msgstr "Više svojsta"
+msgstr "Prilagođena svojstva"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:431
 msgid "File Properties"
