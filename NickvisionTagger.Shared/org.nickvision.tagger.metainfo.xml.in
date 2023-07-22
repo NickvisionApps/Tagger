@@ -38,9 +38,10 @@
   <releases>
     <release version="2023.7.1-beta3" date="2023-07-21">
       <description translatable="no">
-        <p>- Replaced taglib backend for tag metadata with atldotnet. This change added support for a lot more file types</p>
+        <p>- Replaced TagLib backend for tag metadata with ATL.NET. This change added support for a lot more file types</p>
         <p>- Added support for the following tag properties: Composer, Description, Publisher</p>
         <p>- Added support for custom, user-defined properties</p>
+        <p>- Added support for custom, user-defined format strings for conversion</p>
         <p>- Added help documentation with yelp-tools, accessible from the Help menu action</p>
         <p>- Added more file sorting options</p>
         <p>- Improved album art design and added support for managing back cover art and exporting album art</p>
