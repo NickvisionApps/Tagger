@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-22 00:58+0200\n"
+"POT-Creation-Date: 2023-07-22 12:52+0200\n"
 "PO-Revision-Date: 2023-07-22 10:49+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -348,7 +348,7 @@ msgstr ""
 "Do AcoustId lze najednou odeslat pouze jeden soubor. Vyberte prosím pouze "
 "jeden soubor a zkuste to znovu."
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:58
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:56
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:542
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
 #: NickvisionTagger.GNOME/Blueprints/window.blp:99
@@ -372,11 +372,6 @@ msgstr "vydavatel"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1099
 msgid "Remove Custom Property"
 msgstr "Odebrat vlastní vlastnost"
-
-#: ../../../Controllers/MainWindowController.cs:408
-#, csharp-format
-msgid "Saved {0}/{1}"
-msgstr "Uloženo {0}/{1}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:495
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:570
@@ -880,6 +875,10 @@ msgstr "— Snadný převod názvů souborů na značky a značkek na názvy sou
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Lookup file information using MusicBrainz"
 msgstr "— Vyhledávání informací o souborech pomocí MusicBrainz"
+
+#, csharp-format
+#~ msgid "Saved {0}/{1}"
+#~ msgstr "Uloženo {0}/{1}"
 
 #, fuzzy
 #~ msgid ""
