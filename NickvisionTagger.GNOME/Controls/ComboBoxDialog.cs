@@ -1,14 +1,20 @@
+using System;
+using System.Linq;
+using static NickvisionTagger.Shared.Helpers.Gettext;
+
 namespace NickvisionTagger.GNOME.Controls;
 
 /// <summary>
-/// A dialog for showing a message with choices
+/// A dialog for showing a message with choices and support for a custom entry
 /// </summary>
 public partial class ComboBoxDialog
 {
     private readonly string[] _choices;
+    private readonly bool _supportCustom;
     private readonly Adw.MessageDialog _dialog;
     private readonly Adw.PreferencesGroup _group;
     private readonly Adw.ComboRow _choicesRow;
+    private readonly Adw.EntryRow _customRow;
     
     /// <summary>
     /// The response of the dialog
@@ -31,10 +37,15 @@ public partial class ComboBoxDialog
     /// <param name="choices">The choices of the dialog</param>
     /// <param name="cancelText">The text of the cancel button</param>
     /// <param name="suggestedText">The text of the suggested button</param>
-    public ComboBoxDialog(Gtk.Window parentWindow, string iconName, string title, string message, string choicesTitle, string[] choices, string cancelText, string suggestedText)
+    public ComboBoxDialog(Gtk.Window parentWindow, string iconName, string title, string message, string choicesTitle, string[] choices, bool supportCustom, string cancelText, string suggestedText)
     {
         Response = "";
         _choices = choices;
+        _supportCustom = supportCustom;
+        if(_supportCustom)
+        {
+            _choices = _choices.Append(_("Custom")).ToArray();
+        }
         _dialog = Adw.MessageDialog.New(parentWindow, title, message);
         _dialog.SetHideOnClose(true);
         _dialog.SetIconName(iconName);
@@ -44,6 +55,20 @@ public partial class ComboBoxDialog
         _choicesRow.SetTitle(choicesTitle);
         _choicesRow.SetModel(Gtk.StringList.New(_choices));
         _group.Add(_choicesRow);
+        _customRow = Adw.EntryRow.New();
+        _customRow.SetTitle(_("Custom"));
+        _customRow.SetVisible(false);
+        if(_supportCustom)
+        {
+            _group.Add(_customRow);
+            _choicesRow.OnNotify += (sender, e) =>
+            {
+                if(e.Pspec.GetName() == "selected-item")
+                {
+                    _customRow.SetVisible((int)_choicesRow.GetSelected() == _choices.Length - 1);
+                }
+            };
+        }
         _dialog.SetExtraChild(_group);
         _dialog.AddResponse("cancel", cancelText);
         _dialog.AddResponse("suggested", suggestedText);
@@ -81,10 +106,17 @@ public partial class ComboBoxDialog
     /// <param name="response">The string response of the dialog</param>
     private void SetResponse(string response)
     {
-        Response = response switch
+        if(response == "suggested")
         {
-            "suggested" => _choices[(int)_choicesRow.GetSelected()],
-            _ => ""
-        };
+            if(_supportCustom && (int)_choicesRow.GetSelected() == _choices.Length - 1)
+            {
+                Response = _customRow.GetText();
+            }
+            Response = _choices[(int)_choicesRow.GetSelected()];
+        }
+        else
+        {
+            Response = "";
+        }
     }
 }
