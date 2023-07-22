@@ -24,9 +24,9 @@
 <p>En esta página se explican los archivos de música con datos dañados.</p>
 <terms>
     <item>
-        <title>Datos incorrectos</title>
+        <title>Datos no válidos</title>
         <p>Un encabezado de etiqueta no válido o datos basura en un archivo pueden causar problemas al leer la información sobre un archivo e incluso causar problemas de reproducción. Algunas páginas web añaden datos basura a los archivos, lo que a su vez provoca su corrupción.</p>
-        <p>If <app>Tagger</app> is unable to read a file, it will be ignored and a dialog will be displayed listing corrupted files for you to manage and fix accordingly.</p>
+        <p>Si <app>Tagger</app> no puede leer un archivo, se ignorará y se mostrará un diálogo con una lista de los archivos dañados para que los gestione y corrija en consecuencia.</p>
         <note style="advanced">
             <p>FFmpeg puede usarse para arreglar problemas de corrupción. Ejecute el siguiente comando para recodificar la etiqueta de un archivo y eliminar los datos basura:</p>
             <code>ffmpeg -i in.mp3 out.mp3</code>

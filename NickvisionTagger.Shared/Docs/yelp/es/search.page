@@ -42,7 +42,7 @@
 <item><p><code>compositor</code></p></item>
 <item><p><code>descripción</code></p></item>
 <item><p><code>editor</code></p></item>
-<item><p><code>custom</code></p></item>
+<item><p><code>personalizado</code></p></item>
 </list>
 <p>Las propiedades distinguen entre mayúsculas y minúsculas.</p></section>
 
@@ -51,11 +51,11 @@
 
 <section><title>Ejemplos</title>
 <p><code>!artista=""</code></p>
-<p>This search string will filter the listbox to contain music files whose artist is empty.</p>
+<p>Esta cadena de búsqueda filtrará el cuadro de lista para que contenga archivos de música cuyo artista esté vacío.</p>
 <p><code>!género="";año="2022"</code></p>
-<p>This search string will filter the listbox to contain music files whose genre is empty and whose year is 2022 (Year and Track properties will validate if the value string is a number).</p>
+<p>Esta cadena de búsqueda filtrará el cuadro de lista para que contenga archivos de música cuyo género esté vacío y cuyo año sea 2022 (las propiedades año y pista se validarán si la cadena de valores es un número).</p>
 <p><code>!título="";artista="bob"</code></p>
-<p>This search string will filter the listbox to contain music files whose title is empty and whose artist is <code>bob</code>.</p>
-<p><code>!custom="mbrd"</code></p>
-<p>This search string will filter the listbox to contain music files that contain a custom property with the name <code>mbrd</code>.</p></section>
+<p>Esta cadena de búsqueda filtrará el cuadro de lista para que contenga archivos de música cuyo título esté vacío y cuyo artista sea <code>bob</code>.</p>
+<p><code>!personalizado="mbrd"</code></p>
+<p>Esta cadena de búsqueda filtrará el cuadro de lista para que contenga archivos de música que contengan una propiedad personalizada con el nombre <code>mbrd</code>.</p></section>
 </page>

@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="unsupported" its:version="2.0" xml:lang="es">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Unsupported Files 🚫</title>
+	<title type="link">Archivos no compatibles 🚫</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -20,23 +20,23 @@
     </mal:credit>
   </info>
 
-<title>Unsupported Files</title>
-<p>This page explains music files that are currently unsupported by <app>Tagger</app>.</p>
-<p>Tagger uses <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> for its backend to read and write metadata. However, there are some currently known file limitations.</p>
+<title>Archivos no compatibles</title>
+<p>Esta página explica los archivos de música que actualmente no son compatibles con <app>Tagger</app>.</p>
+<p>Tagger usa <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> como base para leer y escribir metadatos. Sin embargo, existen algunas limitaciones de archivos conocidas actualmente.</p>
 <terms>
     <item>
-        <title>OGG With FLAC Codec</title>
-        <p>OGG files that use a FLAC codec will be opened in read-only mode.</p>
+        <title>OGG con códec FLAC</title>
+        <p>Los archivos OGG que usen un códec FLAC se abrirán en modo de solo lectura.</p>
         <note style="advanced">
-            <p><link href="https://github.com/Zeugma440/atldotnet/issues/206">Issue tracking writing support for ogg/flac</link></p>
+            <p><link href="https://github.com/Zeugma440/atldotnet/issues/206">Incidencia del seguimiento de la escritura en ogg/flac</link></p>
         </note>
     </item>
     <item>
-        <title>OPUS With Cover Art</title>
-        <p>Certain OPUS files that contain cover art are unable to be saved.</p>
-        <p>The file is readable however cover art will not be loaded and any modifications cannot be saved. Other OPUS files may work correctly without issue.</p>
+        <title>OPUS con portada</title>
+        <p>Algunos archivos OPUS que contienen portadas no se pueden guardar.</p>
+        <p>El archivo se puede leer, pero las portadas no se cargan y las modificaciones no se pueden guardar. Otros archivos OPUS pueden funcionar correctamente sin problemas.</p>
         <note style="advanced">
-            <p><link href="https://github.com/Zeugma440/atldotnet/issues/208">Issue tracking opus fixes</link></p>
+            <p><link href="https://github.com/Zeugma440/atldotnet/issues/208">Incidencia del seguimiento de las correcciones de opus</link></p>
         </note>
     </item>
 </terms>

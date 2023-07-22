@@ -36,7 +36,7 @@
 <item><p><code>skladatelj</code></p></item>
 <item><p><code>opis</code></p></item>
 <item><p><code>izdavač</code></p></item>
-<item><p><code>custom</code></p></item>
+<item><p><code>prilagođeno</code></p></item>
 </list>
 <p>Svojstva ne razlikuju velika i mala slova.</p></section>
 
@@ -45,11 +45,11 @@
 
 <section><title>Primjeri</title>
 <p><code>!izvođač=""</code></p>
-<p>This search string will filter the listbox to contain music files whose artist is empty.</p>
+<p>Ova će pretraga izdvojiti glazbene datoteke iz popisa koje ne sadrže podatke o izvođaču.</p>
 <p><code>!žanr="";godina="2022"</code></p>
-<p>This search string will filter the listbox to contain music files whose genre is empty and whose year is 2022 (Year and Track properties will validate if the value string is a number).</p>
+<p>Ova će pretraga izdvojiti glazbene datoteke iz popisa koje ne sadrže podatke o žanru ali s godinom 2022. (Svojstva „godina” i „pjesma” će provjeriti je li se radi o broju).</p>
 <p><code>!naslov="";izvođač="bob"</code></p>
-<p>This search string will filter the listbox to contain music files whose title is empty and whose artist is <code>bob</code>.</p>
-<p><code>!custom="mbrd"</code></p>
-<p>This search string will filter the listbox to contain music files that contain a custom property with the name <code>mbrd</code>.</p></section>
+<p>Ova će pretraga izdvojiti glazbene datoteke iz popisa koje ne sadrže podatke o naslovu ali s izvođačem <code>bob</code>.</p>
+<p><code>!prilagođeno=""</code></p>
+<p>Ova će pretraga izdvojiti glazbene datoteke iz popisa koje sadrže podatke s prilagođenim svojstvom <code>mbrd</code>.</p></section>
 </page>
