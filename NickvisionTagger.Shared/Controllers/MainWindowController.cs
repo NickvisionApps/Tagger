@@ -366,7 +366,7 @@ public class MainWindowController
                         }
                     }
                     i++;
-                    LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
+                    LoadingProgressUpdated?.Invoke(this, (i, _musicFolder.MusicFiles.Count, $"{i}/{_musicFolder.MusicFiles.Count}"));
                 }
             });
             if(triggerMusicFileSaveStatesChanged)
@@ -405,7 +405,7 @@ public class MainWindowController
                         }
                     }
                     i++;
-                    LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, _("Saved {0}/{1}", i, SelectedMusicFiles.Count)));
+                    LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
                 }
             });
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
