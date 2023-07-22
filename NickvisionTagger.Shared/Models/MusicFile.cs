@@ -110,6 +110,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     static MusicFile()
     {
+        ATL.Settings.UseFileNameWhenNoTitle = false;
         SortFilesBy = SortBy.Filename;
     }
 
@@ -528,6 +529,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool FilenameToTag(string formatString)
     {
+        if(string.IsNullOrEmpty(formatString))
+        {
+            return false;
+        }
         if (formatString == "%artist%- %title%")
         {
             var dashIndex = Filename.IndexOf("- ");
@@ -585,9 +590,17 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool TagToFilename(string formatString)
     {
+        if(string.IsNullOrEmpty(formatString))
+        {
+            return false;
+        }
         var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
         var customProps = _customProperties.Keys.ToList();
-        var match = Regex.Match(formatString, @"%(\w+)%", RegexOptions.IgnoreCase);
+        var match = Regex.Match(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
+        if(!match.Success)
+        {
+            return false;
+        }
         while(match.Success)
         {
             string value = match.Value.Remove(0, 1); //remove first %
