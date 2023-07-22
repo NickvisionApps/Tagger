@@ -65,6 +65,10 @@ public class MainWindowController
     /// The list of paths to corrupted music files in the music folder
     /// </summary>
     public List<string> CorruptedFiles => _musicFolder?.CorruptedFiles ?? new List<string>();
+    /// <summary>
+    /// The list of predefined format strings
+    /// </summary>
+    public string[] FormatStrings => new string[] { _("%artist%- %title%"), _("%title%- %artist%"), _("%track%- %title%"), _("%title%") };
 
     /// <summary>
     /// Occurs when a notification is sent
