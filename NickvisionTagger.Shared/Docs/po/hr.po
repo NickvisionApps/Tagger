@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-21 01:52+0200\n"
+"POT-Creation-Date: 2023-07-23 11:16+0200\n"
 "PO-Revision-Date: 2023-07-22 12:46+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/"
-"nickvision-tagger/docs/hr/>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
+"tagger/docs/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,10 +27,11 @@ msgstr "Konfiguracija 🔧"
 
 #. (itstool) path: credit/name
 #: yelp/C/configuration.page:10 yelp/C/configuration.page:14
-#: yelp/C/corrupted.page:10 yelp/C/corrupted.page:14 yelp/C/index.page:14
-#: yelp/C/search.page:10 yelp/C/search.page:14 yelp/C/unsupported.page:10
-#: yelp/C/unsupported.page:14 yelp/C/web-services.page:10
-#: yelp/C/web-services.page:14
+#: yelp/C/corrupted.page:10 yelp/C/corrupted.page:14
+#: yelp/C/format-strings.page:10 yelp/C/format-strings.page:14
+#: yelp/C/index.page:14 yelp/C/search.page:10 yelp/C/search.page:14
+#: yelp/C/unsupported.page:10 yelp/C/unsupported.page:14
+#: yelp/C/web-services.page:10 yelp/C/web-services.page:14
 msgid "Nicholas Logozzo"
 msgstr "Nicholas Logozzo"
 
@@ -266,6 +267,126 @@ msgid ""
 msgstr ""
 "Za ponovno kodiranje datoteka bez pretvaranja u jedan drugi format također "
 "možete koristiti <link href=\"https://www.freac.org\">fre:ac</link>."
+
+#. (itstool) path: info/title
+#: yelp/C/format-strings.page:8
+msgctxt "link"
+msgid "Format Strings ✍️"
+msgstr ""
+
+#. (itstool) path: page/title
+#: yelp/C/format-strings.page:20
+msgid "Format Strings"
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/format-strings.page:21
+msgid ""
+"This page explains the use of format strings for <code>File Name to Tag</"
+"code> and <code>Tag to File Name</code> conversions."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/format-strings.page:24
+msgid "Format"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:25
+msgid "Strings of any format with properties wrapped in percent signs (%)."
+msgstr ""
+
+#. (itstool) path: note/title
+#: yelp/C/format-strings.page:27
+#, fuzzy
+msgid "Example"
+msgstr "Primjeri"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:28
+msgid "Format String: <code>%artist%- %title%</code>"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:29
+msgid "Filename: <code>Artist1 - Song1.mp3</code>"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:30
+msgid ""
+"When running <code>File Name to Tag</code> conversion, this format string "
+"and this file name will create a tag with an artist of <code>Artist1</code> "
+"and a title of <code>Song1</code>"
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/format-strings.page:34
+#, fuzzy
+msgid "Supported Properties"
+msgstr "Važeća svojstva"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:36 yelp/C/search.page:31
+msgid "<code>title</code>"
+msgstr "<code>naslov</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:37 yelp/C/search.page:32
+msgid "<code>artist</code>"
+msgstr "<code>izvođač</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:38 yelp/C/search.page:33
+msgid "<code>album</code>"
+msgstr "<code>album</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:39 yelp/C/search.page:34
+msgid "<code>year</code>"
+msgstr "<code>godina</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:40 yelp/C/search.page:35
+msgid "<code>track</code>"
+msgstr "<code>pjesma</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:41 yelp/C/search.page:36
+msgid "<code>albumartist</code>"
+msgstr "<code>izvođač albuma</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:42 yelp/C/search.page:37
+msgid "<code>genre</code>"
+msgstr "<code>žanr</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:43 yelp/C/search.page:38
+msgid "<code>comment</code>"
+msgstr "<code>komentar</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:44 yelp/C/search.page:39
+msgid "<code>composer</code>"
+msgstr "<code>skladatelj</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:45 yelp/C/search.page:40
+msgid "<code>description</code>"
+msgstr "<code>opis</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:46 yelp/C/search.page:41
+msgid "<code>publisher</code>"
+msgstr "<code>izdavač</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:49
+msgid ""
+"When using <code>Tag to File Name</code> conversion, custom property names "
+"can also be used"
+msgstr ""
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
@@ -609,61 +730,6 @@ msgid "<code>filename</code>"
 msgstr "<code>ime datoteke</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/search.page:31
-msgid "<code>title</code>"
-msgstr "<code>naslov</code>"
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:32
-msgid "<code>artist</code>"
-msgstr "<code>izvođač</code>"
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:33
-msgid "<code>album</code>"
-msgstr "<code>album</code>"
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:34
-msgid "<code>year</code>"
-msgstr "<code>godina</code>"
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:35
-msgid "<code>track</code>"
-msgstr "<code>pjesma</code>"
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:36
-msgid "<code>albumartist</code>"
-msgstr "<code>izvođač albuma</code>"
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:37
-msgid "<code>genre</code>"
-msgstr "<code>žanr</code>"
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:38
-msgid "<code>comment</code>"
-msgstr "<code>komentar</code>"
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:39
-msgid "<code>composer</code>"
-msgstr "<code>skladatelj</code>"
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:40
-msgid "<code>description</code>"
-msgstr "<code>opis</code>"
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:41
-msgid "<code>publisher</code>"
-msgstr "<code>izdavač</code>"
-
-#. (itstool) path: item/p
 #: yelp/C/search.page:42
 msgid "<code>custom</code>"
 msgstr "<code>prilagođeno</code>"
@@ -780,9 +846,9 @@ msgid ""
 "link> for its backend to read and write metadata. However, there are some "
 "currently known file limitations."
 msgstr ""
-"Tagger koristi <link href=\"https://github.com/Zeugma440/atldotnet\""
-">atldotnet</link> kao pozadinu za čitanje i pisanje metapodataka. Trenutačno "
-"postoje još neka poznata ograničenja datoteka."
+"Tagger koristi <link href=\"https://github.com/Zeugma440/"
+"atldotnet\">atldotnet</link> kao pozadinu za čitanje i pisanje metapodataka. "
+"Trenutačno postoje još neka poznata ograničenja datoteka."
 
 #. (itstool) path: item/title
 #: yelp/C/unsupported.page:25
