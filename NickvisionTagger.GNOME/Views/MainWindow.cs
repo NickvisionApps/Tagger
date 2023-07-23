@@ -216,7 +216,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.CorruptedFilesFound += (sender, e) => GLib.Functions.IdleAdd(0, CorruptedFilesFound);
         //Open Folder Action
         var actOpenFolder = Gio.SimpleAction.New("openFolder", null);
-        actOpenFolder.OnActivate += (sender, e) => OpenFolder();
+        actOpenFolder.OnActivate += async (sender, e) => await OpenFolderAsync();
         AddAction(actOpenFolder);
         application.SetAccelsForAction("win.openFolder", new string[] { "<Ctrl>O" });
         //Close Folder Action
@@ -262,7 +262,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _switchAlbumArtButton.SetDetailedActionName("win.switchAlbumArt");
         //Insert Album Art Action
         _insertAlbumArtAction = Gio.SimpleAction.New("insertAlbumArt", null);
-        _insertAlbumArtAction.OnActivate += (sender, e) => InsertAlbumArt(_currentAlbumArtType);
+        _insertAlbumArtAction.OnActivate += async (sender, e) => await InsertAlbumArtAsync(_currentAlbumArtType);
         AddAction(_insertAlbumArtAction);
         _insertAlbumArtButton.SetDetailedActionName("win.insertAlbumArt");
         //Remove Album Art Action
@@ -272,12 +272,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         _removeAlbumArtButton.SetDetailedActionName("win.removeAlbumArt");
         //Export Album Art Action
         _exportAlbumArtAction = Gio.SimpleAction.New("exportAlbumArt", null);
-        _exportAlbumArtAction.OnActivate += (sender, e) => ExportAlbumArt(_currentAlbumArtType);
+        _exportAlbumArtAction.OnActivate += async (sender, e) => await ExportAlbumArtAsync(_currentAlbumArtType);
         AddAction(_exportAlbumArtAction);
         _exportAlbumArtButton.SetDetailedActionName("win.exportAlbumArt");
         //Insert Front Album Art Action
         var actInsertFrontAlbumArt = Gio.SimpleAction.New("insertFrontAlbumArt", null);
-        actInsertFrontAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(AlbumArtType.Front);
+        actInsertFrontAlbumArt.OnActivate += async (sender, e) => await InsertAlbumArtAsync(AlbumArtType.Front);
         AddAction(actInsertFrontAlbumArt);
         application.SetAccelsForAction("win.insertFrontAlbumArt", new string[] { "<Ctrl>I" });
         //Remove Front Album Art Action
@@ -287,12 +287,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.removeFrontAlbumArt", new string[] { "<Ctrl>Delete" });
         //Export Front Album Art Action
         var actExportFrontAlbumArt = Gio.SimpleAction.New("exportFrontAlbumArt", null);
-        actExportFrontAlbumArt.OnActivate += (sender, e) => ExportAlbumArt(AlbumArtType.Front);
+        actExportFrontAlbumArt.OnActivate += async (sender, e) => await ExportAlbumArtAsync(AlbumArtType.Front);
         AddAction(actExportFrontAlbumArt);
         application.SetAccelsForAction("win.exportFrontAlbumArt", new string[] { "<Ctrl>E" });
         //Insert Back Album Art Action
         var actInsertBackAlbumArt = Gio.SimpleAction.New("insertBackAlbumArt", null);
-        actInsertBackAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(AlbumArtType.Back);
+        actInsertBackAlbumArt.OnActivate += async (sender, e) => await InsertAlbumArtAsync(AlbumArtType.Back);
         AddAction(actInsertBackAlbumArt);
         application.SetAccelsForAction("win.insertBackAlbumArt", new string[] { "<Ctrl><Shift>I" });
         //Remove Back Album Art Action
@@ -302,7 +302,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.removeBackAlbumArt", new string[] { "<Ctrl><Shift>Delete" });
         //Export Front Album Art Action
         var actExportBackAlbumArt = Gio.SimpleAction.New("exportBackAlbumArt", null);
-        actExportBackAlbumArt.OnActivate += (sender, e) => ExportAlbumArt(AlbumArtType.Back);
+        actExportBackAlbumArt.OnActivate += async (sender, e) => await ExportAlbumArtAsync(AlbumArtType.Back);
         AddAction(actExportBackAlbumArt);
         application.SetAccelsForAction("win.exportBackAlbumArt", new string[] { "<Ctrl><Shift>E" });
         //Add Custom Property Action
@@ -504,7 +504,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the open folder action is triggered
     /// </summary>
-    private async Task OpenFolder()
+    private async Task OpenFolderAsync()
     {
         var folderDialog = Gtk.FileDialog.New();
         folderDialog.SetTitle(_("Open Folder"));
@@ -636,7 +636,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when the insert album art action is triggered
     /// </summary>
     /// <param name="type">AlbumArtType</param>
-    private async Task InsertAlbumArt(AlbumArtType type)
+    private async Task InsertAlbumArtAsync(AlbumArtType type)
     {
         var openFileDialog = Gtk.FileDialog.New();
         openFileDialog.SetTitle(type == AlbumArtType.Front ? _("Insert Front Album Art") : _("Insert Back Album Art"));
@@ -663,7 +663,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when the export album art action is triggered
     /// </summary>
     /// <param name="type">AlbumArtType</param>
-    private async Task ExportAlbumArt(AlbumArtType type)
+    private async Task ExportAlbumArtAsync(AlbumArtType type)
     {
         var albumArt = type == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
         if (albumArt != "hasArt")
