@@ -22,19 +22,17 @@
 
 <title>Archivos dañados</title>
 <p>En esta página se explican los archivos de música con datos dañados.</p>
-<terms>
-    <item>
-        <title>Datos no válidos</title>
-        <p>Un encabezado de etiqueta no válido o datos basura en un archivo pueden causar problemas al leer la información sobre un archivo e incluso causar problemas de reproducción. Algunas páginas web añaden datos basura a los archivos, lo que a su vez provoca su corrupción.</p>
-        <p>Si <app>Tagger</app> no puede leer un archivo, se ignorará y se mostrará un diálogo con una lista de los archivos dañados para que los gestione y corrija en consecuencia.</p>
-        <note style="advanced">
-            <p>FFmpeg puede usarse para arreglar problemas de corrupción. Ejecute el siguiente comando para recodificar la etiqueta de un archivo y eliminar los datos basura:</p>
-            <code>ffmpeg -i in.mp3 out.mp3</code>
-            <p>donde <code>in.mp3</code> es la ruta del archivo dañado y <code>out.mp3</code> es la ruta para exportar el archivo recodificado.</p>
-        </note>
-        <note style="advanced">
-             <p>También puede usar <link href="https://www.freac.org">fre:ac</link> para recodificar archivos sin convertirlos a otro formato.</p>
-        </note>
-    </item>
-</terms>
+<section>
+    <title>Datos no válidos</title>
+    <p>Un encabezado de etiqueta no válido o datos basura en un archivo pueden causar problemas al leer la información sobre un archivo e incluso causar problemas de reproducción. Algunas páginas web añaden datos basura a los archivos, lo que a su vez provoca su corrupción.</p>
+    <p>Si <app>Tagger</app> no puede leer un archivo, se ignorará y se mostrará un diálogo con una lista de los archivos dañados para que los gestione y corrija en consecuencia.</p>
+    <note style="advanced">
+        <p>FFmpeg puede usarse para arreglar problemas de corrupción. Ejecute el siguiente comando para recodificar la etiqueta de un archivo y eliminar los datos basura:</p>
+        <code>ffmpeg -i in.mp3 out.mp3</code>
+        <p>donde <code>in.mp3</code> es la ruta del archivo dañado y <code>out.mp3</code> es la ruta para exportar el archivo recodificado.</p>
+    </note>
+    <note style="advanced">
+         <p>También puede usar <link href="https://www.freac.org">fre:ac</link> para recodificar archivos sin convertirlos a otro formato.</p>
+    </note>
+</section>
 </page>

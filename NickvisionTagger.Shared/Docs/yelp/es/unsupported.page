@@ -23,21 +23,19 @@
 <title>Archivos no compatibles</title>
 <p>Esta página explica los archivos de música que actualmente no son compatibles con <app>Tagger</app>.</p>
 <p>Tagger usa <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> como base para leer y escribir metadatos. Sin embargo, existen algunas limitaciones de archivos conocidas actualmente.</p>
-<terms>
-    <item>
-        <title>OGG con códec FLAC</title>
-        <p>Los archivos OGG que usen un códec FLAC se abrirán en modo de solo lectura.</p>
-        <note style="advanced">
-            <p><link href="https://github.com/Zeugma440/atldotnet/issues/206">Incidencia del seguimiento de la escritura en ogg/flac</link></p>
-        </note>
-    </item>
-    <item>
-        <title>OPUS con portada</title>
-        <p>Algunos archivos OPUS que contienen portadas no se pueden guardar.</p>
-        <p>El archivo se puede leer, pero las portadas no se cargan y las modificaciones no se pueden guardar. Otros archivos OPUS pueden funcionar correctamente sin problemas.</p>
-        <note style="advanced">
-            <p><link href="https://github.com/Zeugma440/atldotnet/issues/208">Incidencia del seguimiento de las correcciones de opus</link></p>
-        </note>
-    </item>
-</terms>
+<section>
+    <title>OGG con códec FLAC</title>
+    <p>Los archivos OGG que usen un códec FLAC se abrirán en modo de solo lectura.</p>
+    <note style="advanced">
+        <p><link href="https://github.com/Zeugma440/atldotnet/issues/206">Incidencia del seguimiento de la escritura en ogg/flac</link></p>
+    </note>
+</section>
+<section>
+    <title>OPUS con portada</title>
+    <p>Algunos archivos OPUS que contienen portadas no se pueden guardar.</p>
+    <p>El archivo se puede leer, pero las portadas no se cargan y las modificaciones no se pueden guardar. Otros archivos OPUS pueden funcionar correctamente sin problemas.</p>
+    <note style="advanced">
+        <p><link href="https://github.com/Zeugma440/atldotnet/issues/208">Incidencia del seguimiento de las correcciones de opus</link></p>
+    </note>
+</section>
 </page>

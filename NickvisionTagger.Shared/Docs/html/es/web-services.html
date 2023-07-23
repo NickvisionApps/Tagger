@@ -17,11 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Ayuda de Tagger">Ayuda de Tagger</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Servicios web</span></h1></div>
 <div class="region">
-<div class="contents pagewide">
-<p class="p">Esta página describe los servicios web disponibles en Tagger</p>
-<div class="terms"><div class="inner"><div class="region"><dl class="terms">
-<dt class="terms">Descargar metadatos de MusicBrainz</dt>
-<dd class="terms">
+<div class="contents pagewide"><p class="p">Esta página describe los servicios web disponibles en Tagger</p></div>
+<section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Descargar metadatos de MusicBrainz</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">Identifica un archivo de música a través de MusicBrainz y descarga sus metadatos para usarlos en Tagger.</p>
 <p class="p">Este servicio usa la firma AcoustId del archivo (generada con <span class="code">fpcalc</span>) para determinar los ID de grabación y publicación de MusicBrainz. Si se encuentran los ID, los metadatos como título, artista, álbum y arte se descargarán y se establecerán en Tagger.</p>
 <div class="note" title="Nota">
@@ -32,17 +31,18 @@ document.addEventListener('DOMContentLoaded', function() {
  </g>
 </svg><div class="inner"><div class="region"><div class="contents"><p class="p">Encontrar metadatos a través de MusicBrainz no es 100% fiable y puede que no estén disponibles para canciones poco comunes.</p></div></div></div>
 </div>
-</dd>
-<dt class="terms">Enviar a AcoustId</dt>
-<dd class="terms">
+</div></div>
+</div></section><section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Enviar a AcoustId</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">Envía datos sobre un archivo de música (identificados mediante su firma) a la base de datos de AcoustId. Se pueden enviar dos datos sobre un archivo de música:</p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
-<div class="title title-item"><h2><span class="title">ID de grabación de MusicBrainz</span></h2></div>
+<div class="title title-item"><h3><span class="title">ID de grabación de MusicBrainz</span></h3></div>
 <p class="p">Un usuario puede enviar un ID de grabación de MusicBrainz para enviarlo a AcoustId. Esto extraerá todos los datos del identificador de grabación asociado y los usará para enviar metadatos a AcoustId.</p>
 </li>
 <li class="list">
-<div class="title title-item"><h2><span class="title">Metadatos de usuario</span></h2></div>
+<div class="title title-item"><h3><span class="title">Metadatos de usuario</span></h3></div>
 <p class="p">Un usuario puede enviar sus metadatos desde Tagger a AcoustId.</p>
 </li>
 </ul></div></div></div>
@@ -54,10 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
  </g>
 </svg><div class="inner"><div class="region"><div class="contents"><p class="p">Para que este servicio funcione, debe configurarse en <span class="code">Preferencias</span> una <span class="code">Clave API de usuario de AcoustId</span> adecuada.</p></div></div></div>
 </div>
-</dd>
-</dl></div></div></div>
-</div>
-<section class="links" role="navigation"><div class="inner">
+</div></div>
+</div></section><section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>
 <div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">Más información</span></h2></div>

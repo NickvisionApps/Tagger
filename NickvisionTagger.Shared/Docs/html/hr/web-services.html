@@ -17,11 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Pomoć za Tagger">Pomoć za Tagger</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Web usluge</span></h1></div>
 <div class="region">
-<div class="contents pagewide">
-<p class="p">Ova stranica opisuje dostupne web usluge u aplikaciji Tagger</p>
-<div class="terms"><div class="inner"><div class="region"><dl class="terms">
-<dt class="terms">Preuzmi MusicBrainz metapodatke</dt>
-<dd class="terms">
+<div class="contents pagewide"><p class="p">Ova stranica opisuje dostupne web usluge u aplikaciji Tagger</p></div>
+<section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Preuzmi MusicBrainz metapodatke</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">Prepoznaje glazbenu datoteku putem MusicBrainza i preuzima njezine metapodatke u Tagger.</p>
 <p class="p">Ova usluga koristi AcousId-ev digitalni otisak datoteke (generiran pomoću <span class="code">fpcalc</span>) za određivanje ID oznaka snimanja i izdanja MusicBrainza. Ako se ID oznake pronađu, metapodaci kao što su naslov, izvođač, album i slika će se preuzeti i postaviti u Tagger.</p>
 <div class="note" title="Bilješka">
@@ -32,17 +31,18 @@ document.addEventListener('DOMContentLoaded', function() {
  </g>
 </svg><div class="inner"><div class="region"><div class="contents"><p class="p">Pronalaženje metapodataka putem MusicBrainza nije 100 % pouzdano i možda neće biti dostupno za nepoznate pjesme.</p></div></div></div>
 </div>
-</dd>
-<dt class="terms">Pošalji AcoustId-u</dt>
-<dd class="terms">
+</div></div>
+</div></section><section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Pošalji AcoustId-u</span></h2></div>
+<div class="region"><div class="contents pagewide">
 <p class="p">Šalje podatke o glazbenoj datoteci (prepoznata putem digitalnog otiska) u bazu podataka AcousId-a. O glazbenoj datoteci se mogu poslati dva podatka:</p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
-<div class="title title-item"><h2><span class="title">MusicBrainz ID oznaka snimanja</span></h2></div>
+<div class="title title-item"><h3><span class="title">MusicBrainz ID oznaka snimanja</span></h3></div>
 <p class="p">Korisnik može poslati MusicBrainz ID snimke na AcousId. To će povući sve podatke iz pridruženog ID-a snimanja i koristiti ih za slanje metapodataka na AcousId.</p>
 </li>
 <li class="list">
-<div class="title title-item"><h2><span class="title">Metapodaci korisnika</span></h2></div>
+<div class="title title-item"><h3><span class="title">Metapodaci korisnika</span></h3></div>
 <p class="p">Korisnik može poslati svoje metapodatke iz Taggera u AcoustId.</p>
 </li>
 </ul></div></div></div>
@@ -54,10 +54,8 @@ document.addEventListener('DOMContentLoaded', function() {
  </g>
 </svg><div class="inner"><div class="region"><div class="contents"><p class="p">Odgovarajući <span class="code">AcoustId korisnički API ključ</span> mora biti zadan u <span class="code">Postavkama</span> da bi ova usluga radila.</p></div></div></div>
 </div>
-</dd>
-</dl></div></div></div>
-</div>
-<section class="links" role="navigation"><div class="inner">
+</div></div>
+</div></section><section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>
 <div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">Više informacija</span></h2></div>

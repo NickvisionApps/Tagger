@@ -22,18 +22,17 @@
 
 <title>Servicios web</title>
 <p>Esta página describe los servicios web disponibles en Tagger</p>
-<terms>
-    <item>
-		<title>Descargar metadatos de MusicBrainz</title>
-		<p>Identifica un archivo de música a través de MusicBrainz y descarga sus metadatos para usarlos en Tagger.</p>
-        <p>Este servicio usa la firma AcoustId del archivo (generada con <code>fpcalc</code>) para determinar los ID de grabación y publicación de MusicBrainz. Si se encuentran los ID, los metadatos como título, artista, álbum y arte se descargarán y se establecerán en Tagger.</p>
-        <note>
-            <p>Encontrar metadatos a través de MusicBrainz no es 100% fiable y puede que no estén disponibles para canciones poco comunes.</p>
-        </note>
-	</item>
-    <item>
-		<title>Enviar a AcoustId</title>
-		<p>Envía datos sobre un archivo de música (identificados mediante su firma) a la base de datos de AcoustId. Se pueden enviar dos datos sobre un archivo de música:</p>
+<section>
+    <title>Descargar metadatos de MusicBrainz</title>
+    <p>Identifica un archivo de música a través de MusicBrainz y descarga sus metadatos para usarlos en Tagger.</p>
+    <p>Este servicio usa la firma AcoustId del archivo (generada con <code>fpcalc</code>) para determinar los ID de grabación y publicación de MusicBrainz. Si se encuentran los ID, los metadatos como título, artista, álbum y arte se descargarán y se establecerán en Tagger.</p>
+    <note>
+        <p>Encontrar metadatos a través de MusicBrainz no es 100% fiable y puede que no estén disponibles para canciones poco comunes.</p>
+    </note>
+</section>
+<section>
+    <title>Enviar a AcoustId</title>
+    <p>Envía datos sobre un archivo de música (identificados mediante su firma) a la base de datos de AcoustId. Se pueden enviar dos datos sobre un archivo de música:</p>
         <list>
             <item>
         		<title>ID de grabación de MusicBrainz</title>
@@ -44,9 +43,8 @@
         		<p>Un usuario puede enviar sus metadatos desde Tagger a AcoustId.</p>
         	</item>
         </list>
-		<note>
-			<p>Para que este servicio funcione, debe configurarse en <code>Preferencias</code> una <code>Clave API de usuario de AcoustId</code> adecuada.</p>
-		</note>
-	</item>
-</terms>
+    <note>
+        <p>Para que este servicio funcione, debe configurarse en <code>Preferencias</code> una <code>Clave API de usuario de AcoustId</code> adecuada.</p>
+    </note>
+</section>
 </page>

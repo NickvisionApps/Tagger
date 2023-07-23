@@ -16,18 +16,17 @@
 
 <title>Web usluge</title>
 <p>Ova stranica opisuje dostupne web usluge u aplikaciji Tagger</p>
-<terms>
-    <item>
-		<title>Preuzmi MusicBrainz metapodatke</title>
-		<p>Prepoznaje glazbenu datoteku putem MusicBrainza i preuzima njezine metapodatke u Tagger.</p>
-        <p>Ova usluga koristi AcousId-ev digitalni otisak datoteke (generiran pomoću <code>fpcalc</code>) za određivanje ID oznaka snimanja i izdanja MusicBrainza. Ako se ID oznake pronađu, metapodaci kao što su naslov, izvođač, album i slika će se preuzeti i postaviti u Tagger.</p>
-        <note>
-            <p>Pronalaženje metapodataka putem MusicBrainza nije 100 % pouzdano i možda neće biti dostupno za nepoznate pjesme.</p>
-        </note>
-	</item>
-    <item>
-		<title>Pošalji AcoustId-u</title>
-		<p>Šalje podatke o glazbenoj datoteci (prepoznata putem digitalnog otiska) u bazu podataka AcousId-a. O glazbenoj datoteci se mogu poslati dva podatka:</p>
+<section>
+    <title>Preuzmi MusicBrainz metapodatke</title>
+    <p>Prepoznaje glazbenu datoteku putem MusicBrainza i preuzima njezine metapodatke u Tagger.</p>
+    <p>Ova usluga koristi AcousId-ev digitalni otisak datoteke (generiran pomoću <code>fpcalc</code>) za određivanje ID oznaka snimanja i izdanja MusicBrainza. Ako se ID oznake pronađu, metapodaci kao što su naslov, izvođač, album i slika će se preuzeti i postaviti u Tagger.</p>
+    <note>
+        <p>Pronalaženje metapodataka putem MusicBrainza nije 100 % pouzdano i možda neće biti dostupno za nepoznate pjesme.</p>
+    </note>
+</section>
+<section>
+    <title>Pošalji AcoustId-u</title>
+    <p>Šalje podatke o glazbenoj datoteci (prepoznata putem digitalnog otiska) u bazu podataka AcousId-a. O glazbenoj datoteci se mogu poslati dva podatka:</p>
         <list>
             <item>
         		<title>MusicBrainz ID oznaka snimanja</title>
@@ -38,9 +37,8 @@
         		<p>Korisnik može poslati svoje metapodatke iz Taggera u AcoustId.</p>
         	</item>
         </list>
-		<note>
-			<p>Odgovarajući <code>AcoustId korisnički API ključ</code> mora biti zadan u <code>Postavkama</code> da bi ova usluga radila.</p>
-		</note>
-	</item>
-</terms>
+    <note>
+        <p>Odgovarajući <code>AcoustId korisnički API ključ</code> mora biti zadan u <code>Postavkama</code> da bi ova usluga radila.</p>
+    </note>
+</section>
 </page>
