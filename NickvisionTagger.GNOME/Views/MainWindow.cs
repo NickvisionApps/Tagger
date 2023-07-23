@@ -394,7 +394,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             var uriLauncher = Gtk.UriLauncher.New("help:tagger/format-strings");
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, ex) => gtk_uri_launcher_launch(uriLauncher.Handle, 0, 0, (source, res, data) => { }, 0);
+            toast.OnButtonClicked += async (sender, ex) =>
+            {
+                try
+                {
+                    await uriLauncher.LaunchAsync(this);
+                }
+                catch  { }
+            }
         }
         _toastOverlay.AddToast(toast);
     }
