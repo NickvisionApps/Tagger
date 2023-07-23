@@ -596,12 +596,8 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
         var customProps = _customProperties.Keys.ToList();
-        var match = Regex.Match(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
-        if(!match.Success)
-        {
-            return false;
-        }
-        while(match.Success)
+        var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
+        foreach(Match match in matches)
         {
             string value = match.Value.Remove(0, 1); //remove first %
             value = value.Remove(value.Length - 1, 1); //remove last %;
@@ -663,7 +659,6 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 formatString = formatString.Replace(match.Value, "");
             }
-            match = Regex.Match(formatString, @"%(\w+)%", RegexOptions.IgnoreCase);
         }
         Filename = formatString;
         return true;
