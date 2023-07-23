@@ -401,7 +401,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     await uriLauncher.LaunchAsync(this);
                 }
                 catch  { }
-            }
+            };
         }
         _toastOverlay.AddToast(toast);
     }
