@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-22 12:52+0200\n"
-"PO-Revision-Date: 2023-07-22 18:17+0000\n"
+"PO-Revision-Date: 2023-07-23 06:46+0000\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/he/>\n"
@@ -115,7 +115,7 @@ msgstr "B"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
 #: NickvisionTagger.GNOME/Blueprints/window.blp:30
 msgid "Back"
-msgstr "חזרה"
+msgstr "אחורי"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:490
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:565
@@ -254,7 +254,7 @@ msgstr "קדמי"
 #: ../../../Controllers/MainWindowController.cs:752
 #: ../../../Controllers/MainWindowController.cs:828
 msgid "genre"
-msgstr "זוגה"
+msgstr "סוגה"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "GiB"
@@ -317,7 +317,7 @@ msgstr "מזהה ההקלטות MusicBrainz"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:737
 msgid "New Custom Property"
-msgstr ""
+msgstr "מאפיין מותאם חדש"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:919
 #, csharp-format
@@ -365,7 +365,7 @@ msgstr "יש לבחור תבנית למחרוזת."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:737
 msgid "Property Name"
-msgstr ""
+msgstr "שם מאפיין"
 
 #: ../../../Controllers/MainWindowController.cs:752
 #: ../../../Controllers/MainWindowController.cs:844
@@ -374,7 +374,7 @@ msgstr "מוציא לאור"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1099
 msgid "Remove Custom Property"
-msgstr ""
+msgstr "הסרת מאפיין מותאם"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:495
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:570
@@ -440,7 +440,7 @@ msgstr "המתייג"
 
 #: ../../../Controllers/MainWindowController.cs:228
 msgid "Tagger has opened some files in read-only mode."
-msgstr ""
+msgstr "המתייג פתח כמה קבצים במצב קריאה בלבד."
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -471,14 +471,14 @@ msgid "Unable to load image file"
 msgstr "לא ניתן לטעון את קובץ התמונה"
 
 #: ../../../Controllers/MainWindowController.cs:404
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Unable to save {0}"
-msgstr "לא ניתן לטעון את קובץ התמונה"
+msgstr "לא ניתן לשמור את {0}"
 
 #: ../../../Controllers/MainWindowController.cs:365
 #, csharp-format
 msgid "Unable to save {0}."
-msgstr ""
+msgstr "לא ניתן לשמור את {0}."
 
 #: ../../../Controllers/MainWindowController.cs:729
 msgid "Unable to submit to AcoustId. Check API key"
@@ -494,17 +494,12 @@ msgid "Corrupted Files Found"
 msgstr "נמצאו קבצים פגוים"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
-#, fuzzy
 msgid ""
 "This music folder contains music files that have corrupted tags. The "
 "following files are affected and will be ignored by Tagger:"
 msgstr ""
-"תיקיית מוזיקה זו מכילה קובצי מוזיקה עם תיוג פגום. המשמעות לכך היא שיתכן "
-"והקידוד לא התרחש כמו שצריך או שיש בעיה עם מבנה הקבצים עצמם, דבר המשפיע על "
-"הנגינה.\n"
-"יש לנסות לקודד מחדש את הקבצים המושפעים על מנת לתקן בעיה זו.\n"
-"\n"
-"הקבצים הבאים מושפעים מכך ומהם יתעלם המתייג."
+"תיקיית מוזיקה זו מכילה קובצי מוזיקה עם תיוג פגום. המתייג יתעלם מהקבצים הבאים "
+"שמושפעים מכך:"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:114
@@ -821,9 +816,8 @@ msgid "Publisher"
 msgstr "מוציא לאור"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:414
-#, fuzzy
 msgid "Custom Properties"
-msgstr "מאפיינים נוספים"
+msgstr "מאפיינים מותאמים"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:431
 msgid "File Properties"
