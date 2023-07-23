@@ -8,12 +8,12 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using NickvisionTagger.Shared.Models;
 using static NickvisionTagger.Shared.Helpers.Gettext;
+using static Nickvision.GirExt.GtkExt;
 
 namespace NickvisionTagger.GNOME.Views;
 
@@ -22,39 +22,6 @@ namespace NickvisionTagger.GNOME.Views;
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct GLibList
-    {
-        public nint data;
-        public GLibList* next;
-        public GLibList* prev;
-    }
-
-    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string g_file_get_path(nint file);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_open(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_open_finish(nint dialog, nint result, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_save(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_save_finish(nint dialog, nint result, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_file_dialog_select_folder(nint dialog, nint parent, nint cancellable, GAsyncReadyCallback callback, nint user_data);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial nint gtk_file_dialog_select_folder_finish(nint dialog, nint result, nint error);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void g_notification_set_icon(nint notification, nint icon);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static unsafe partial GLibList* gtk_list_box_get_selected_rows(nint box);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial int gtk_list_box_row_get_index(nint row);
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_uri_launcher_launch(nint uriLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
-
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.DropTarget _dropTarget;
@@ -65,8 +32,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private List<Adw.ActionRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
     private bool _isSelectionOccuring;
-    private GAsyncReadyCallback? _openCallback;
-    private GAsyncReadyCallback? _saveCallback;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
@@ -123,8 +88,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _listMusicFilesRows = new List<Adw.ActionRow>();
         _customPropertyRows = new List<Adw.EntryRow>();
         _isSelectionOccuring = false;
-        _openCallback = null;
-        _saveCallback = null;
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
         SetIconName(_controller.AppInfo.ID);
@@ -253,7 +216,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.CorruptedFilesFound += (sender, e) => GLib.Functions.IdleAdd(0, CorruptedFilesFound);
         //Open Folder Action
         var actOpenFolder = Gio.SimpleAction.New("openFolder", null);
-        actOpenFolder.OnActivate += OpenFolder;
+        actOpenFolder.OnActivate += async (sender, e) => await OpenFolderAsync();
         AddAction(actOpenFolder);
         application.SetAccelsForAction("win.openFolder", new string[] { "<Ctrl>O" });
         //Close Folder Action
@@ -299,7 +262,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _switchAlbumArtButton.SetDetailedActionName("win.switchAlbumArt");
         //Insert Album Art Action
         _insertAlbumArtAction = Gio.SimpleAction.New("insertAlbumArt", null);
-        _insertAlbumArtAction.OnActivate += (sender, e) => InsertAlbumArt(_currentAlbumArtType);
+        _insertAlbumArtAction.OnActivate += async (sender, e) => await InsertAlbumArtAsync(_currentAlbumArtType);
         AddAction(_insertAlbumArtAction);
         _insertAlbumArtButton.SetDetailedActionName("win.insertAlbumArt");
         //Remove Album Art Action
@@ -309,12 +272,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         _removeAlbumArtButton.SetDetailedActionName("win.removeAlbumArt");
         //Export Album Art Action
         _exportAlbumArtAction = Gio.SimpleAction.New("exportAlbumArt", null);
-        _exportAlbumArtAction.OnActivate += (sender, e) => ExportAlbumArt(_currentAlbumArtType);
+        _exportAlbumArtAction.OnActivate += async (sender, e) => await ExportAlbumArtAsync(_currentAlbumArtType);
         AddAction(_exportAlbumArtAction);
         _exportAlbumArtButton.SetDetailedActionName("win.exportAlbumArt");
         //Insert Front Album Art Action
         var actInsertFrontAlbumArt = Gio.SimpleAction.New("insertFrontAlbumArt", null);
-        actInsertFrontAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(AlbumArtType.Front);
+        actInsertFrontAlbumArt.OnActivate += async (sender, e) => await InsertAlbumArtAsync(AlbumArtType.Front);
         AddAction(actInsertFrontAlbumArt);
         application.SetAccelsForAction("win.insertFrontAlbumArt", new string[] { "<Ctrl>I" });
         //Remove Front Album Art Action
@@ -324,12 +287,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.removeFrontAlbumArt", new string[] { "<Ctrl>Delete" });
         //Export Front Album Art Action
         var actExportFrontAlbumArt = Gio.SimpleAction.New("exportFrontAlbumArt", null);
-        actExportFrontAlbumArt.OnActivate += (sender, e) => ExportAlbumArt(AlbumArtType.Front);
+        actExportFrontAlbumArt.OnActivate += async (sender, e) => await ExportAlbumArtAsync(AlbumArtType.Front);
         AddAction(actExportFrontAlbumArt);
         application.SetAccelsForAction("win.exportFrontAlbumArt", new string[] { "<Ctrl>E" });
         //Insert Back Album Art Action
         var actInsertBackAlbumArt = Gio.SimpleAction.New("insertBackAlbumArt", null);
-        actInsertBackAlbumArt.OnActivate += (sender, e) => InsertAlbumArt(AlbumArtType.Back);
+        actInsertBackAlbumArt.OnActivate += async (sender, e) => await InsertAlbumArtAsync(AlbumArtType.Back);
         AddAction(actInsertBackAlbumArt);
         application.SetAccelsForAction("win.insertBackAlbumArt", new string[] { "<Ctrl><Shift>I" });
         //Remove Back Album Art Action
@@ -339,7 +302,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.removeBackAlbumArt", new string[] { "<Ctrl><Shift>Delete" });
         //Export Front Album Art Action
         var actExportBackAlbumArt = Gio.SimpleAction.New("exportBackAlbumArt", null);
-        actExportBackAlbumArt.OnActivate += (sender, e) => ExportAlbumArt(AlbumArtType.Back);
+        actExportBackAlbumArt.OnActivate += async (sender, e) => await ExportAlbumArtAsync(AlbumArtType.Back);
         AddAction(actExportBackAlbumArt);
         application.SetAccelsForAction("win.exportBackAlbumArt", new string[] { "<Ctrl><Shift>E" });
         //Add Custom Property Action
@@ -418,7 +381,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             var uriLauncher = Gtk.UriLauncher.New("help:tagger/unsupported");
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, ex) => gtk_uri_launcher_launch(uriLauncher.Handle, 0, 0, (source, res, data) => { }, 0);
+            toast.OnButtonClicked += async (sender, e) =>
+            {
+                try
+                {
+                    await uriLauncher.LaunchAsync(this);
+                }
+                catch  { }
+            };
         }
         _toastOverlay.AddToast(toast);
     }
@@ -446,7 +416,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         else
         {
             var fileIcon = Gio.FileIcon.New(Gio.FileHelper.NewForPath($"{Environment.GetEnvironmentVariable("SNAP")}/usr/share/icons/hicolor/symbolic/apps/{_controller.AppInfo.ID}-symbolic.svg"));
-            g_notification_set_icon(notification.Handle, fileIcon.Handle);
+            notification.SetIcon(fileIcon);
         }
         _application.SendNotification(_controller.AppInfo.ID, notification);
     }
@@ -534,23 +504,17 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the open folder action is triggered
     /// </summary>
-    /// <param name="sender">Gio.SimpleAction</param>
-    /// <param name="e">EventArgs</param>
-    private void OpenFolder(Gio.SimpleAction sender, EventArgs e)
+    private async Task OpenFolderAsync()
     {
         var folderDialog = Gtk.FileDialog.New();
         folderDialog.SetTitle(_("Open Folder"));
-        _openCallback = async (source, res, data) =>
+        try
         {
-            var fileHandle = gtk_file_dialog_select_folder_finish(source, res, IntPtr.Zero);
-            if (fileHandle != IntPtr.Zero)
-            {
-                var path = g_file_get_path(fileHandle);
-                SetLoadingState(_("Loading music files from folder..."));
-                await _controller.OpenFolderAsync(path);
-            }
-        };
-        gtk_file_dialog_select_folder(folderDialog.Handle, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
+            var file = await folderDialog.SelectFolderAsync(this);
+            SetLoadingState(_("Loading music files from folder..."));
+            await _controller.OpenFolderAsync(file.GetPath());
+        }
+        catch { }
     }
 
     /// <summary>
@@ -672,7 +636,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when the insert album art action is triggered
     /// </summary>
     /// <param name="type">AlbumArtType</param>
-    private void InsertAlbumArt(AlbumArtType type)
+    private async Task InsertAlbumArtAsync(AlbumArtType type)
     {
         var openFileDialog = Gtk.FileDialog.New();
         openFileDialog.SetTitle(type == AlbumArtType.Front ? _("Insert Front Album Art") : _("Insert Back Album Art"));
@@ -681,16 +645,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         filterImages.AddMimeType("image/*");
         filters.Append(filterImages);
         openFileDialog.SetFilters(filters);
-        _openCallback = (source, res, data) =>
+        try
         {
-            var fileHandle = gtk_file_dialog_open_finish(source, res, IntPtr.Zero);
-            if (fileHandle != IntPtr.Zero)
-            {
-                var path = g_file_get_path(fileHandle);
-                _controller.InsertSelectedAlbumArt(path, type);
-            }
-        };
-        gtk_file_dialog_open(openFileDialog.Handle, Handle, IntPtr.Zero, _openCallback, IntPtr.Zero);
+            var file = await openFileDialog.OpenAsync(this);
+            _controller.InsertSelectedAlbumArt(file.GetPath(), type);
+        }
+        catch  { }
     }
 
     /// <summary>
@@ -703,7 +663,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when the export album art action is triggered
     /// </summary>
     /// <param name="type">AlbumArtType</param>
-    private void ExportAlbumArt(AlbumArtType type)
+    private async Task ExportAlbumArtAsync(AlbumArtType type)
     {
         var albumArt = type == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
         if (albumArt != "hasArt")
@@ -717,16 +677,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         filter.AddMimeType(_controller.GetFirstAlbumArtMimeType(type));
         filters.Append(filter);
         saveFileDialog.SetFilters(filters);
-        _saveCallback = (source, res, data) =>
+        try
         {
-            var fileHandle = gtk_file_dialog_save_finish(source, res, IntPtr.Zero);
-            if (fileHandle != IntPtr.Zero)
-            {
-                var path = g_file_get_path(fileHandle);
-                _controller.ExportSelectedAlbumArt(path, type);
-            }
-        };
-        gtk_file_dialog_save(saveFileDialog.Handle, Handle, IntPtr.Zero, _saveCallback, IntPtr.Zero);
+            var file = await saveFileDialog.SaveAsync(this);
+            _controller.ExportSelectedAlbumArt(file.GetPath(), type);
+        }
+        catch  { }
     }
 
     /// <summary>
@@ -1206,16 +1162,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gtk.ListBox</param>
     /// <param name="e">EventArgs</param>
-    private unsafe void ListMusicFiles_SelectionChanged(Gtk.ListBox sender, EventArgs e)
+    private void ListMusicFiles_SelectionChanged(Gtk.ListBox sender, EventArgs e)
     {
         _isSelectionOccuring = true;
-        var selectedIndexes = new List<int>();
-        var firstSelectedRowPtr = gtk_list_box_get_selected_rows(_listMusicFiles.Handle);
-        for(var ptr = firstSelectedRowPtr; ptr != null; ptr = ptr->next)
-        {
-            selectedIndexes.Add(gtk_list_box_row_get_index(ptr->data));
-        }
-        _selectedViewStack.SetVisibleChildName(selectedIndexes.Count > 0 ? "Selected" : "NoSelected");
+        var selectedIndexes = sender.GetSelectedRowsIndices();
+        _selectedViewStack.SetVisibleChildName(selectedIndexes.Any() ? "Selected" : "NoSelected");
         if(_currentAlbumArtType != AlbumArtType.Front)
         {
             SwitchAlbumArt(null, e);

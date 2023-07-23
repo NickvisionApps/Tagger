@@ -2,7 +2,8 @@ using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Controllers;
 using NickvisionTagger.Shared.Models;
 using System;
-using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using static Nickvision.GirExt.GtkExt;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.GNOME.Views;
@@ -12,11 +13,6 @@ namespace NickvisionTagger.GNOME.Views;
 /// </summary>
 public partial class PreferencesDialog : Adw.PreferencesWindow
 {
-    private delegate void GAsyncReadyCallback(nint source, nint res, nint user_data);
-
-    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial void gtk_uri_launcher_launch(nint uriLauncher, nint parent, nint cancellable, GAsyncReadyCallback callback, nint data);
-
     private readonly PreferencesViewController _controller;
     private readonly Adw.Application _application;
 
@@ -46,7 +42,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
                 OnThemeChanged();
             }
         };
-        _acoustIdButton.OnClicked += LaunchNewAcoustIdPage;
+        _acoustIdButton.OnClicked += async (sender, e) => await LaunchNewAcoustIdPage();
         OnHide += Hide;
         //Load Config
         _themeRow.SetSelected((uint)_controller.Theme);
@@ -105,11 +101,13 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// <summary>
     /// Occurs when the AcoustId Get New API Key button is clicked
     /// </summary>
-    /// <param name="sender">Gtk.Button</param>
-    /// <param name="e">EventArgs</param>
-    private void LaunchNewAcoustIdPage(Gtk.Button sender, EventArgs e)
+    private async Task LaunchNewAcoustIdPage()
     {
         var uriLauncher = Gtk.UriLauncher.New(_controller.AcoustIdUserAPIKeyLink);
-        gtk_uri_launcher_launch(uriLauncher.Handle, 0, 0, (source, res, data) => { }, 0);
+        try
+        {
+            await uriLauncher.LaunchAsync(this);
+        }
+        catch  { }
     }
 }
