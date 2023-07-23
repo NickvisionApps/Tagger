@@ -112,7 +112,10 @@ public partial class ComboBoxDialog
             {
                 Response = _customRow.GetText();
             }
-            Response = _choices[(int)_choicesRow.GetSelected()];
+            else
+            {
+                Response = _choices[(int)_choicesRow.GetSelected()];
+            }
         }
         else
         {
