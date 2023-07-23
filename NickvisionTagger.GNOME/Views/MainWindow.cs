@@ -420,6 +420,12 @@ public partial class MainWindow : Adw.ApplicationWindow
             toast.SetButtonLabel(_("Help"));
             toast.OnButtonClicked += (sender, ex) => gtk_uri_launcher_launch(uriLauncher.Handle, 0, 0, (source, res, data) => { }, 0);
         }
+        else if (e.Action == "format")
+        {
+            var uriLauncher = Gtk.UriLauncher.New("help:tagger/format-strings");
+            toast.SetButtonLabel(_("Help"));
+            toast.OnButtonClicked += (sender, ex) => gtk_uri_launcher_launch(uriLauncher.Handle, 0, 0, (source, res, data) => { }, 0);
+        }
         _toastOverlay.AddToast(toast);
     }
 
