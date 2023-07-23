@@ -23,7 +23,7 @@
         <title>Example</title>
         <p>Format String: <code>%artist%- %title%</code></p>
         <p>Filename: <code>Artist1 - Song1.mp3</code></p>
-        <p>When running <code>File Name to Tag</code> conversion, this format string and this file name will create a tag with an artist of <code>Artist1</code> and a title of <code>Song1</code></p>
+        <p>When running <code>File Name to Tag</code> conversion, this format string and this file name will create a tag with an artist of <code>Artist1</code> and a title of <code>Song1</code>.</p>
     </note>
 </section>
 <section>
@@ -42,7 +42,8 @@
         <item><p><code>publisher</code></p></item>
     </list>
     <note>
-        <p>When using <code>Tag to File Name</code> conversion, custom property names can also be used</p>
+        <p>When using <code>Tag to File Name</code> conversion, custom property names can also be used.</p>
+        <p>For example, a custom property who's name is <code>ENCODER</code> can be used as <code>%encoder%</code>.</p>
     </note>
 </section>
 </page>
