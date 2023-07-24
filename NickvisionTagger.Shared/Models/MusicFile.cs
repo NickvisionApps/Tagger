@@ -254,19 +254,6 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             }
             foreach(var pair in track.AdditionalFields)
             {
-                // WAV workaround
-                if (pair.Key == "info.IPRD")
-                {
-                    track.AdditionalFields.TryGetValue(pair.Key, out var album);
-                    Album = album ?? Album;
-                    continue;
-                }
-                if (pair.Key == "info.IPRT")
-                {
-                    track.AdditionalFields.TryGetValue(pair.Key, out var trackNumber);
-                    Track = trackNumber == null ? Track : Int32.Parse(trackNumber);
-                    continue;
-                }
                 _customProperties.Add(pair.Key, pair.Value);
             }
             return true;
