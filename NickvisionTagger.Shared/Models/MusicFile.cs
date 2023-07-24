@@ -529,56 +529,30 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool FilenameToTag(string formatString)
     {
+        /*
+         * %track%. %artist%- %title%
+         * 05. Arist1- Song1.mp3
+         */
         if(string.IsNullOrEmpty(formatString))
         {
             return false;
         }
-        if (formatString == "%artist%- %title%")
-        {
-            var dashIndex = Filename.IndexOf("- ");
-            if(dashIndex == -1)
-            {
-                return false;
-            }
-            Artist = Filename.Substring(0, dashIndex);
-            Title = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Artist.Length + 2));
-        }
-        else if (formatString == "%title%- %artist%")
-        {
-            var dashIndex = Filename.IndexOf("- ");
-            if(dashIndex == -1)
-            {
-                return false;
-            }
-            Title = Filename.Substring(0, dashIndex);
-            Artist = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Title.Length + 2));
-        }
-        else if (formatString == "%track%- %title%")
-        {
-            var dashIndex = Filename.IndexOf("- ");
-            if(dashIndex == -1)
-            {
-                return false;
-            }
-            try
-            {
-                var trackString = Filename.Substring(0, dashIndex);
-                Track = int.Parse(trackString);
-                Title = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (trackString.Length + 2));
-            }
-            catch
-            {
-                Track = 0;
-                Title = "";
-            }
-        }
-        else if (formatString == "%title%")
-        {
-            Title = Filename.Substring(0, Filename.IndexOf(System.IO.Path.GetExtension(Path)));
-        }
-        else
+        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
+        var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
+        if(matches.Count == 0)
         {
             return false;
+        }
+        foreach(var s in Regex.Split(formatString, @"%(\w+)%", RegexOptions.IgnoreCase))
+        {
+            if(!Filename.Contains(s))
+            {
+                return false;
+            }
+        }
+        foreach(Match match in matches)
+        {
+
         }
         return true;
     }
@@ -597,6 +571,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
         var customProps = _customProperties.Keys.ToList();
         var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
+        if(matches.Count == 0)
+        {
+            return false;
+        }
         foreach(Match match in matches)
         {
             string value = match.Value.Remove(0, 1); //remove first %
@@ -623,7 +601,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 }
                 else if(value == "track" || value == _("track"))
                 {
-                    replace = Track.ToString();
+                    replace = Track.ToString("D2");
                 }
                 else if(value == "albumartist" || value == _("albumartist"))
                 {
