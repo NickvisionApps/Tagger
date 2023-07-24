@@ -16,20 +16,9 @@
 
 <title>Nepodržane datoteke</title>
 <p>Ova stranica objašnjava glazbene datoteke koje <app>Tagger</app> trenutačno ne podržava.</p>
-<p>Tagger koristi <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> kao pozadinu za čitanje i pisanje metapodataka. Trenutačno postoje još neka poznata ograničenja datoteka.</p>
+<p>Tagger uses <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> for its backend to read and write metadata.</p>
 <section>
-    <title>OGG s FLAC kodekom</title>
-    <p>OGG datoteke koje koriste FLAC kodek otvorit će se u modusu „samo čitanje”.</p>
-    <note style="advanced">
-        <p><link href="https://github.com/Zeugma440/atldotnet/issues/206">Podrška za pisanje praćenja problema za ogg/flac</link></p>
-    </note>
-</section>
-<section>
-    <title>OPUS sa slikom omota</title>
-    <p>Određene OPUS datoteke koje sadrže sliku omota se ne mogu spremiti.</p>
-    <p>Datoteka je čitljiva, no slika omota se neće učitati i promjene se ne mogu spremiti. Druge OPUS datoteke mogu ispravno raditi bez problema.</p>
-    <note style="advanced">
-        <p><link href="https://github.com/Zeugma440/atldotnet/issues/208">Podrška za praćenja opus ispravaka</link></p>
-    </note>
+    <title>No Known Issues At This Time</title>
+    <p><link href="https://github.com/NickvisionApps/Tagger/issues">Report an issue</link> if you experience any.</p>
 </section>
 </page>
