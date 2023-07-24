@@ -529,7 +529,6 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return false;
         }
-        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
         var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
         if(matches.Count == 0)
         {
@@ -616,6 +615,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             else if(value == "publisher" || value == _("publisher"))
             {
                 Publisher = filename.Substring(0, len);
+            }
+            else
+            {
+                SetCustomProperty(value, filename.Substring(0, len));
             }
             filename = filename.Remove(0, len == filename.Length ? len : len + splits[i].Length);
             i++;
