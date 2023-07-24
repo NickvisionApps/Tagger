@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-23 11:16+0200\n"
+"POT-Creation-Date: 2023-07-25 00:05+0200\n"
 "PO-Revision-Date: 2023-07-23 06:46+0000\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -71,7 +71,7 @@ msgstr "<לשמור>"
 msgid "0 MiB"
 msgstr "0 מבי״ב"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:778
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:741
 msgid ""
 "AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id "
 "for easy identification.\n"
@@ -89,41 +89,44 @@ msgstr ""
 "\n"
 "אם אין ברשותך, המתייג ישלח את נתוני התגיות שלך יחד עם טביעת האצבע במקום."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:741
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:704
 #: NickvisionTagger.GNOME/Blueprints/window.blp:422
 msgid "Add"
 msgstr "הוספה"
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:795
-#: ../../../Models/MusicFile.cs:597 ../../../Models/MusicFile.cs:616
+#: ../../../Models/MusicFile.cs:575 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:663
 msgid "album"
 msgstr "אלבום"
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:829
-#: ../../../Models/MusicFile.cs:597 ../../../Models/MusicFile.cs:628
+#: ../../../Models/MusicFile.cs:595 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:675
 msgid "albumartist"
 msgstr "אמן האלבום"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:496
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:571
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:785
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:823
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:473
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:542
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:748
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:786
 #: NickvisionTagger.GNOME/Blueprints/window.blp:526
 msgid "Apply"
 msgstr "החלה"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:496
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:571
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:785
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:823
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:473
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:542
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:748
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:786
 msgid "Apply Changes?"
 msgstr "להחיל שינויים?"
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:791
-#: ../../../Models/MusicFile.cs:597 ../../../Models/MusicFile.cs:612
+#: ../../../Models/MusicFile.cs:571 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:659
 msgid "artist"
 msgstr "אמן"
 
@@ -131,37 +134,39 @@ msgstr "אמן"
 msgid "B"
 msgstr "B"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:152
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:671
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:115
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:642
 #: NickvisionTagger.GNOME/Blueprints/window.blp:30
 msgid "Back"
 msgstr "אחורי"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:496
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:571
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:631
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:650
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:473
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:542
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:621
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:704
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:741
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:778
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:785
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:823
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:748
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:786
 msgid "Cancel"
 msgstr "ביטול"
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:837
-#: ../../../Models/MusicFile.cs:597 ../../../Models/MusicFile.cs:636
+#: ../../../Models/MusicFile.cs:603 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:683
 msgid "comment"
 msgstr "הערכה"
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:841
-#: ../../../Models/MusicFile.cs:597 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:607 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:687
 msgid "composer"
 msgstr "מלחין"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:631
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:650
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:621
 #: NickvisionTagger.GNOME/Blueprints/window.blp:39
 msgid "Convert"
 msgstr "המרה"
@@ -195,25 +200,26 @@ msgstr "מותאם אישית"
 msgid "Custom"
 msgstr "מותאם אישית"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:925
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:888
 #, csharp-format
 msgid "David Lapshin {0}"
 msgstr "David Lapshin {0}"
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:845
-#: ../../../Models/MusicFile.cs:597 ../../../Models/MusicFile.cs:644
+#: ../../../Models/MusicFile.cs:611 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:691
 msgid "description"
 msgstr "תיאור"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:496
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:571
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:785
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:823
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:473
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:542
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:748
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:786
 msgid "Discard"
 msgstr "השלכה"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:613
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:584
 msgid "Discarding unapplied changes..."
 msgstr "השלכת שינויים שלא הוחלו…"
 
@@ -221,7 +227,7 @@ msgstr "השלכת שינויים שלא הוחלו…"
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "הורדו בהצלחה נתוני מידע על {0} קבצים"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:760
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:723
 msgid "Downloading MusicBrainz metadata..."
 msgstr "מוריד נתוני מידע מ־MusicBrainz…"
 
@@ -229,12 +235,12 @@ msgstr "מוריד נתוני מידע מ־MusicBrainz…"
 msgid "ERROR"
 msgstr "תקלה"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:718
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:685
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
 msgid "Export Back Album Art"
 msgstr "ייצוא עטיפת אלבום אחורית"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:718
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:685
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:71
 msgid "Export Front Album Art"
 msgstr "ייצוא עטיפת אלבום קדמית"
@@ -255,7 +261,7 @@ msgstr "ייצוא עטיפת אלבום אחורית לקובץ נכשל"
 msgid "Failed to export front album art to a file"
 msgstr "ייצוא עטיפת אלבום קדמית לקובץ נכשל"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:631
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
 #: NickvisionTagger.GNOME/Blueprints/window.blp:41
 msgid "File Name to Tag"
 msgstr "שם קובץ לתג"
@@ -265,24 +271,25 @@ msgstr "שם קובץ לתג"
 msgid "filename"
 msgstr "שם קובץ"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1304
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1262
 msgid "Fingerprint was copied to clipboard."
 msgstr "טביעת האצבע הועתקה ללוח הגזירים."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:631
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:650
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:621
 msgid "Format String"
 msgstr "תבנית מחרוזת"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:152
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:671
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:115
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:642
 #: NickvisionTagger.GNOME/Blueprints/window.blp:22
 msgid "Front"
 msgstr "קדמי"
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:833
-#: ../../../Models/MusicFile.cs:597 ../../../Models/MusicFile.cs:632
+#: ../../../Models/MusicFile.cs:599 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:679
 msgid "genre"
 msgstr "סוגה"
 
@@ -290,24 +297,24 @@ msgstr "סוגה"
 msgid "GiB"
 msgstr "גיב״ב"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:921
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:884
 msgid "GitHub Repo"
 msgstr "מאגר GitHub"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:420
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:426
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:383
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:396
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:18
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:124
 #: NickvisionTagger.GNOME/Blueprints/window.blp:7
 msgid "Help"
 msgstr "עזרה"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:682
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:653
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:81
 msgid "Insert Back Album Art"
 msgstr "הכנסת עטיפת אלבום אחורית"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:682
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:653
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:61
 msgid "Insert Front Album Art"
 msgstr "הכנסת עטיפת אלבום קדמית"
@@ -325,16 +332,16 @@ msgstr[1] "נטענו {0} קובצי מוזיקה."
 msgstr[2] "נטענו {0} קובצי מוזיקה."
 msgstr[3] "נטענו {0} קובצי מוזיקה."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:405
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:532
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:555
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:581
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:590
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:368
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:509
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:527
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:552
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:561
 #: ../../../Controllers/MainWindowController.cs:1258
 msgid "Loading music files from folder..."
 msgstr "מתבצעת טעינת קובצי מוזיקה מתיקייה…"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:922
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:885
 msgid "Matrix Chat"
 msgstr "צ׳אט במטריקס"
 
@@ -342,15 +349,15 @@ msgstr "צ׳אט במטריקס"
 msgid "MiB"
 msgstr "מבי״ב"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:778
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:741
 msgid "MusicBrainz Recording Id"
 msgstr "מזהה ההקלטות MusicBrainz"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:741
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:704
 msgid "New Custom Property"
 msgstr "מאפיין מותאם חדש"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:923
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:886
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -359,7 +366,7 @@ msgstr ""
 "Nicholas Logozzo {0}\n"
 "תורמים ב־GitHub ‏❤️ {1}"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:924
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:887
 #, csharp-format
 msgid ""
 "Nicholas Logozzo {0}\n"
@@ -370,11 +377,11 @@ msgstr ""
 "Fyodor Sobolev {1}\n"
 "DaPigGuy {2}"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:773
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:736
 msgid "OK"
 msgstr "אישור"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:773
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:736
 msgid ""
 "Only one file can be submitted to AcoustID at a time. Please select only one "
 "file and try again."
@@ -382,54 +389,55 @@ msgstr ""
 "ניתן לשלוח ל־AcoustID קובץ אחד בלבד בכל פעם. נא לבחור קובץ אחד בלבד ולנסות "
 "שוב."
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:56
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:548
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:53
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:523
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
 #: NickvisionTagger.GNOME/Blueprints/window.blp:99
 msgid "Open Folder"
 msgstr "פתיחת תיקייה"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:631
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:650
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:621
 msgid "Please select a format string."
 msgstr "יש לבחור תבנית למחרוזת."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:741
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:704
 msgid "Property Name"
 msgstr "שם מאפיין"
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:849
-#: ../../../Models/MusicFile.cs:597 ../../../Models/MusicFile.cs:648
+#: ../../../Models/MusicFile.cs:615 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:695
 msgid "publisher"
 msgstr "מוציא לאור"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1103
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1066
 msgid "Remove Custom Property"
 msgstr "הסרת מאפיין מותאם"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:501
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:576
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:790
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:832
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:478
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:547
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:573
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:753
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:795
 msgid "Saving tags..."
 msgstr "שומר תגיות…"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:496
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:571
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:785
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:823
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:473
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:542
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:748
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:786
 msgid ""
 "Some music files still have changes waiting to be applied. What would you "
 "like to do?"
 msgstr "כמה קובצי מוזיקה עוד ממתינים להחלה של שינויים עליהם. מה ברצונך לעשות?"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:778
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:741
 msgid "Submit"
 msgstr "שליחה"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:778
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:741
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:105
 #: NickvisionTagger.GNOME/Blueprints/window.blp:49
 msgid "Submit to AcoustId"
@@ -439,32 +447,32 @@ msgstr "שליחה ל־AcoustId"
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "נתוני המידע נשלחו בהצלחה ל־AcoustId"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:795
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:804
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:758
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:767
 msgid "Submitting data to AcoustId..."
 msgstr "שולח נתוני מידע ל־AcoustId…"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:670
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:641
 #: NickvisionTagger.GNOME/Blueprints/window.blp:294
 msgid "Switch to Back Cover"
 msgstr "החלפה לכיסוי אחורי"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:670
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:641
 msgid "Switch to Front Cover"
 msgstr "החלפה לכיסוי קדמי"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:650
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:621
 #: NickvisionTagger.GNOME/Blueprints/window.blp:42
 msgid "Tag to File Name"
 msgstr "תג לשם קובץ"
 
-#: ../../../../NickvisionTagger.GNOME/Program.cs:50
+#: ../../../../NickvisionTagger.GNOME/Program.cs:39
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:5
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:8
 msgid "Tag your music"
 msgstr "תיוג המוזיקה שלך"
 
-#: ../../../../NickvisionTagger.GNOME/Program.cs:49
+#: ../../../../NickvisionTagger.GNOME/Program.cs:38
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:4
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:6
 msgid "Tagger"
@@ -480,21 +488,23 @@ msgstr "טבי״ב"
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:787
-#: ../../../Models/MusicFile.cs:597 ../../../Models/MusicFile.cs:608
+#: ../../../Models/MusicFile.cs:567 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:655
 msgid "title"
 msgstr "כותרת"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:773
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:736
 msgid "Too Many Files Selected"
 msgstr "נבחרו יותר מדי קבצים"
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:814
-#: ../../../Models/MusicFile.cs:597 ../../../Models/MusicFile.cs:624
+#: ../../../Models/MusicFile.cs:587 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:671
 msgid "track"
 msgstr "רצועה"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:926
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:889
 msgid "translator-credits"
 msgstr ""
 "יוסף אור בוצ׳קו <yoseforb@gmail.com>\n"
@@ -520,7 +530,8 @@ msgstr "לא ניתן לשלוח ל־AcoustID. נא לבדוק את מפתח ה�
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:799
-#: ../../../Models/MusicFile.cs:597 ../../../Models/MusicFile.cs:620
+#: ../../../Models/MusicFile.cs:579 ../../../Models/MusicFile.cs:640
+#: ../../../Models/MusicFile.cs:667
 msgid "year"
 msgstr "שנה"
 
