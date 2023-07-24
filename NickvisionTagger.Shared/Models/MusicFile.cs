@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
@@ -109,6 +110,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     static MusicFile()
     {
+        ATL.Settings.UseFileNameWhenNoTitle = false;
         SortFilesBy = SortBy.Filename;
     }
 
@@ -252,24 +254,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             }
             foreach(var pair in track.AdditionalFields)
             {
-                // WAV workaround
-                if (pair.Key == "info.IPRD")
-                {
-                    track.AdditionalFields.TryGetValue(pair.Key, out var album);
-                    Album = album ?? Album;
-                    continue;
-                }
-                if (pair.Key == "info.IPRT")
-                {
-                    track.AdditionalFields.TryGetValue(pair.Key, out var trackNumber);
-                    Track = trackNumber == null ? Track : Int32.Parse(trackNumber);
-                    continue;
-                }
                 _customProperties.Add(pair.Key, pair.Value);
-            }
-            if (track.AudioFormat.Name == "OGG (FLAC)")
-            {
-                IsReadOnly = true;
             }
             return true;
         }
@@ -527,52 +512,103 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool FilenameToTag(string formatString)
     {
-        if (formatString == "%artist%- %title%")
+        if(string.IsNullOrEmpty(formatString))
         {
-            var dashIndex = Filename.IndexOf("- ");
-            if(dashIndex == -1)
-            {
-                return false;
-            }
-            Artist = Filename.Substring(0, dashIndex);
-            Title = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Artist.Length + 2));
+            return false;
         }
-        else if (formatString == "%title%- %artist%")
+        var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
+        if(matches.Count == 0)
         {
-            var dashIndex = Filename.IndexOf("- ");
-            if(dashIndex == -1)
-            {
-                return false;
-            }
-            Title = Filename.Substring(0, dashIndex);
-            Artist = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (Title.Length + 2));
+            return false;
         }
-        else if (formatString == "%track%- %title%")
+        var splits = Regex.Split(formatString, @"(\%\w+\%)", RegexOptions.IgnoreCase).Where(x =>
         {
-            var dashIndex = Filename.IndexOf("- ");
-            if(dashIndex == -1)
+            if(x.Length > 1)
+            {
+                return x[0] != '%' && x[x.Length - 1] != '%';
+            }
+            return x.Length != 0;
+        }).ToList();
+        foreach(var s in splits)
+        {
+            if(!Filename.Contains(s))
             {
                 return false;
             }
+        }
+        var filename = System.IO.Path.GetFileNameWithoutExtension(Filename);
+        var i = 0;
+        foreach(Match match in matches)
+        {
+            string value = match.Value.Remove(0, 1); //remove first %
+            value = value.Remove(value.Length - 1, 1).ToLower(); //remove last %;
+            var len = 0;
             try
             {
-                var trackString = Filename.Substring(0, dashIndex);
-                Track = int.Parse(trackString);
-                Title = Filename.Substring(dashIndex + 2, Filename.IndexOf(System.IO.Path.GetExtension(Path)) - (trackString.Length + 2));
+                len = filename.IndexOf(splits[i]);
             }
             catch
             {
-                Track = 0;
-                Title = "";
+                len = filename.Length;
             }
-        }
-        else if (formatString == "%title%")
-        {
-            Title = Filename.Substring(0, Filename.IndexOf(System.IO.Path.GetExtension(Path)));
-        }
-        else
-        {
-            return false;
+            if(value == "title" || value == _("title"))
+            {
+                Title = filename.Substring(0, len);
+            }
+            else if(value == "artist" || value == _("artist"))
+            {
+                Artist = filename.Substring(0, len);
+            }
+            else if(value == "album" || value == _("album"))
+            {
+                Album = filename.Substring(0, len);
+            }
+            else if(value == "year" || value == _("year"))
+            {
+                try
+                {
+                    Year = int.Parse(filename.Substring(0, len));
+                }
+                catch { }
+            }
+            else if(value == "track" || value == _("track"))
+            {
+                try
+                {
+                    Track = int.Parse(filename.Substring(0, len));
+                }
+                catch { }
+            }
+            else if(value == "albumartist" || value == _("albumartist"))
+            {
+                AlbumArtist = filename.Substring(0, len);
+            }
+            else if(value == "genre" || value == _("genre"))
+            {
+                Genre = filename.Substring(0, len);
+            }
+            else if(value == "comment" || value == _("comment"))
+            {
+                Comment = filename.Substring(0, len);
+            }
+            else if(value == "composer" || value == _("composer"))
+            {
+                Composer = filename.Substring(0, len);
+            }
+            else if(value == "description" || value == _("description"))
+            {
+                Description = filename.Substring(0, len);
+            }
+            else if(value == "publisher" || value == _("publisher"))
+            {
+                Publisher = filename.Substring(0, len);
+            }
+            else
+            {
+                SetCustomProperty(value, filename.Substring(0, len));
+            }
+            filename = filename.Remove(0, len == filename.Length ? len : len + splits[i].Length);
+            i++;
         }
         return true;
     }
@@ -584,70 +620,81 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool TagToFilename(string formatString)
     {
-        if (formatString == "%artist%- %title%")
-        {
-            if(string.IsNullOrEmpty(Artist) || string.IsNullOrEmpty(Title))
-            {
-                return false;
-            }
-            try
-            {
-                Filename = $"{Artist}- {Title}{_dotExtension}";
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        else if (formatString == "%title%- %artist%")
-        {
-            if(string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(Artist))
-            {
-                return false;
-            }
-            try
-            {
-                Filename = $"{Title}- {Artist}{_dotExtension}";
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        else if (formatString == "%track%- %title%")
-        {
-            if(string.IsNullOrEmpty(Title))
-            {
-                return false;
-            }
-            try
-            {
-                Filename = $"{Track:D2}- {Title}{_dotExtension}";
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        else if (formatString == "%title%")
-        {
-            if(string.IsNullOrEmpty(Title))
-            {
-                return false;
-            }
-            try
-            {
-                Filename = $"{Title}{_dotExtension}";
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        else
+        if(string.IsNullOrEmpty(formatString))
         {
             return false;
         }
+        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
+        var customProps = _customProperties.Keys.ToList();
+        var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
+        if(matches.Count == 0)
+        {
+            return false;
+        }
+        foreach(Match match in matches)
+        {
+            string value = match.Value.Remove(0, 1); //remove first %
+            value = value.Remove(value.Length - 1, 1); //remove last %;
+            if(validProperties.Contains(value.ToLower()))
+            {
+                value = value.ToLower();
+                var replace = "";
+                if(value == "title" || value == _("title"))
+                {
+                    replace = Title;
+                }
+                else if(value == "artist" || value == _("artist"))
+                {
+                    replace = Artist;
+                }
+                else if(value == "album" || value == _("album"))
+                {
+                    replace = Album;
+                }
+                else if(value == "year" || value == _("year"))
+                {
+                    replace = Year.ToString();
+                }
+                else if(value == "track" || value == _("track"))
+                {
+                    replace = Track.ToString("D2");
+                }
+                else if(value == "albumartist" || value == _("albumartist"))
+                {
+                    replace = AlbumArtist;
+                }
+                else if(value == "genre" || value == _("genre"))
+                {
+                    replace = Genre;
+                }
+                else if(value == "comment" || value == _("comment"))
+                {
+                    replace = Comment;
+                }
+                else if(value == "composer" || value == _("composer"))
+                {
+                    replace = Composer;
+                }
+                else if(value == "description" || value == _("description"))
+                {
+                    replace = Description;
+                }
+                else if(value == "publisher" || value == _("publisher"))
+                {
+                    replace = Publisher;
+                }
+                formatString = formatString.Replace(match.Value, replace);
+            }
+            else if(customProps.Contains(value))
+            {
+                formatString = formatString.Replace(match.Value, _customProperties[value]);
+            }
+            else
+            {
+                formatString = formatString.Replace(match.Value, "");
+            }
+        }
+        Filename = formatString;
         return true;
     }
     

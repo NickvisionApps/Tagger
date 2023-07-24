@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-21 01:52+0200\n"
+"POT-Creation-Date: 2023-07-25 00:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,8 @@ msgstr ""
 #: yelp/C/configuration.page:14
 #: yelp/C/corrupted.page:10
 #: yelp/C/corrupted.page:14
+#: yelp/C/format-strings.page:10
+#: yelp/C/format-strings.page:14
 #: yelp/C/index.page:14
 #: yelp/C/search.page:10
 #: yelp/C/search.page:14
@@ -176,41 +178,168 @@ msgstr ""
 msgid "This page explains music files with corrupted data."
 msgstr ""
 
-#. (itstool) path: item/title
-#: yelp/C/corrupted.page:24
+#. (itstool) path: section/title
+#: yelp/C/corrupted.page:23
 msgid "Invalid Data"
 msgstr ""
 
-#. (itstool) path: item/p
-#: yelp/C/corrupted.page:25
+#. (itstool) path: section/p
+#: yelp/C/corrupted.page:24
 msgid "An invalid tag header or junk data in a file can cause issues when reading information about a file and even cause playback issues. Some websites add extra junk data in files which in turn causes corruption."
 msgstr ""
 
-#. (itstool) path: item/p
-#: yelp/C/corrupted.page:26
+#. (itstool) path: section/p
+#: yelp/C/corrupted.page:25
 msgid "If <app>Tagger</app> is unable to read a file, it will be ignored and a dialog will be displayed listing corrupted files for you to manage and fix accordingly."
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/corrupted.page:28
+#: yelp/C/corrupted.page:27
 msgid "FFmpeg can be used to fix corruption issues. Run the following command to re-encode a file's tag and remove junk data:"
 msgstr ""
 
 #. (itstool) path: note/code
-#: yelp/C/corrupted.page:29
+#: yelp/C/corrupted.page:28
 #, no-wrap
 msgid ""
 "ffmpeg -i in.mp3 out.mp3"
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/corrupted.page:30
+#: yelp/C/corrupted.page:29
 msgid "where <code>in.mp3</code> is the file path of the corrupted file and <code>out.mp3</code> is the path to export the re-encoded file."
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/corrupted.page:33
+#: yelp/C/corrupted.page:32
 msgid "You can also use <link href=\"https://www.freac.org\">fre:ac</link> to re-encode files without convertion to another format."
+msgstr ""
+
+#. (itstool) path: info/title
+#: yelp/C/format-strings.page:8
+msgctxt "link"
+msgid "Format Strings ✍️"
+msgstr ""
+
+#. (itstool) path: page/title
+#: yelp/C/format-strings.page:20
+msgid "Format Strings"
+msgstr ""
+
+#. (itstool) path: page/p
+#: yelp/C/format-strings.page:21
+msgid "This page explains the use of format strings for <code>File Name to Tag</code> and <code>Tag to File Name</code> conversions."
+msgstr ""
+
+#. (itstool) path: section/title
+#: yelp/C/format-strings.page:23
+msgid "Format"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/format-strings.page:24
+msgid "Strings of any format with properties wrapped in percent signs (%)."
+msgstr ""
+
+#. (itstool) path: note/title
+#: yelp/C/format-strings.page:26
+msgid "Example"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:27
+msgid "Format String: <code>%artist%- %title%</code>"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:28
+msgid "Filename: <code>Artist1 - Song1.mp3</code>"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:29
+msgid "When running <code>File Name to Tag</code> conversion, this format string and this file name will create a tag with an artist of <code>Artist1</code> and a title of <code>Song1</code>."
+msgstr ""
+
+#. (itstool) path: section/title
+#: yelp/C/format-strings.page:33
+msgid "Supported Properties"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:35
+#: yelp/C/search.page:31
+msgid "<code>title</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:36
+#: yelp/C/search.page:32
+msgid "<code>artist</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:37
+#: yelp/C/search.page:33
+msgid "<code>album</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:38
+#: yelp/C/search.page:34
+msgid "<code>year</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:39
+#: yelp/C/search.page:35
+msgid "<code>track</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:40
+#: yelp/C/search.page:36
+msgid "<code>albumartist</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:41
+#: yelp/C/search.page:37
+msgid "<code>genre</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:42
+#: yelp/C/search.page:38
+msgid "<code>comment</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:43
+#: yelp/C/search.page:39
+msgid "<code>composer</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:44
+#: yelp/C/search.page:40
+msgid "<code>description</code>"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:45
+#: yelp/C/search.page:41
+msgid "<code>publisher</code>"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:48
+msgid "When using conversions, custom property names can also be used."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:49
+msgid "For example, a custom property who's name is <code>ENCODER</code> can be used as <code>%encoder%</code>."
 msgstr ""
 
 #. (itstool) path: info/title
@@ -527,61 +656,6 @@ msgid "<code>filename</code>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/search.page:31
-msgid "<code>title</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:32
-msgid "<code>artist</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:33
-msgid "<code>album</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:34
-msgid "<code>year</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:35
-msgid "<code>track</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:36
-msgid "<code>albumartist</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:37
-msgid "<code>genre</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:38
-msgid "<code>comment</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:39
-msgid "<code>composer</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:40
-msgid "<code>description</code>"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/search.page:41
-msgid "<code>publisher</code>"
-msgstr ""
-
-#. (itstool) path: item/p
 #: yelp/C/search.page:42
 msgid "<code>custom</code>"
 msgstr ""
@@ -664,42 +738,17 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: yelp/C/unsupported.page:22
-msgid "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</link> for its backend to read and write metadata. However, there are some currently known file limitations."
+msgid "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</link> for its backend to read and write metadata."
 msgstr ""
 
-#. (itstool) path: item/title
+#. (itstool) path: section/title
+#: yelp/C/unsupported.page:24
+msgid "No Known Issues At This Time"
+msgstr ""
+
+#. (itstool) path: section/p
 #: yelp/C/unsupported.page:25
-msgid "OGG With FLAC Codec"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/unsupported.page:26
-msgid "OGG files that use a FLAC codec will be opened in read-only mode."
-msgstr ""
-
-#. (itstool) path: note/p
-#: yelp/C/unsupported.page:28
-msgid "<link href=\"https://github.com/Zeugma440/atldotnet/issues/206\">Issue tracking writing support for ogg/flac</link>"
-msgstr ""
-
-#. (itstool) path: item/title
-#: yelp/C/unsupported.page:32
-msgid "OPUS With Cover Art"
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/unsupported.page:33
-msgid "Certain OPUS files that contain cover art are unable to be saved."
-msgstr ""
-
-#. (itstool) path: item/p
-#: yelp/C/unsupported.page:34
-msgid "The file is readable however cover art will not be loaded and any modifications cannot be saved. Other OPUS files may work correctly without issue."
-msgstr ""
-
-#. (itstool) path: note/p
-#: yelp/C/unsupported.page:36
-msgid "<link href=\"https://github.com/Zeugma440/atldotnet/issues/208\">Issue tracking opus fixes</link>"
+msgid "<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Report an issue</link> if you experience any."
 msgstr ""
 
 #. (itstool) path: info/title
@@ -718,58 +767,58 @@ msgstr ""
 msgid "This page describes the web services available in Tagger"
 msgstr ""
 
-#. (itstool) path: item/title
-#: yelp/C/web-services.page:24
+#. (itstool) path: section/title
+#: yelp/C/web-services.page:23
 msgid "Download MusicBrainz Metadata"
 msgstr ""
 
-#. (itstool) path: item/p
-#: yelp/C/web-services.page:25
+#. (itstool) path: section/p
+#: yelp/C/web-services.page:24
 msgid "Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger."
 msgstr ""
 
-#. (itstool) path: item/p
-#: yelp/C/web-services.page:26
+#. (itstool) path: section/p
+#: yelp/C/web-services.page:25
 msgid "This service utilizies the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger."
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/web-services.page:28
+#: yelp/C/web-services.page:27
 msgid "Finding metadata through MusicBrainz isn't 100% realiable and may not be available for uncommom songs."
 msgstr ""
 
-#. (itstool) path: item/title
-#: yelp/C/web-services.page:32
+#. (itstool) path: section/title
+#: yelp/C/web-services.page:31
 msgid "Submit to AcoustId"
 msgstr ""
 
-#. (itstool) path: item/p
-#: yelp/C/web-services.page:33
+#. (itstool) path: section/p
+#: yelp/C/web-services.page:32
 msgid "Submits data about a music file (identified via its fingerprint) to AcoustId's database. There are two things that can be submitted about a music file:"
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/web-services.page:36
+#: yelp/C/web-services.page:35
 msgid "MusicBrainz Recording ID"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/web-services.page:37
+#: yelp/C/web-services.page:36
 msgid "A user can submit a MusicBrainz Recording ID to submit to AcoustId. This will pull all data from the associated recording id and use that for sending metadata to AcoustId."
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/web-services.page:40
+#: yelp/C/web-services.page:39
 msgid "User Metadata"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/web-services.page:41
+#: yelp/C/web-services.page:40
 msgid "A user can submit their metadata from Tagger to AcoustId."
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/web-services.page:45
+#: yelp/C/web-services.page:44
 msgid "A proper <code>AcoustId User API Key</code> must be set in <code>Preferences</code> for this service to work."
 msgstr ""
 

@@ -390,6 +390,19 @@ public partial class MainWindow : Adw.ApplicationWindow
                 catch  { }
             };
         }
+        else if (e.Action == "format")
+        {
+            var uriLauncher = Gtk.UriLauncher.New("help:tagger/format-strings");
+            toast.SetButtonLabel(_("Help"));
+            toast.OnButtonClicked += async (sender, ex) =>
+            {
+                try
+                {
+                    await uriLauncher.LaunchAsync(this);
+                }
+                catch  { }
+            };
+        }
         _toastOverlay.AddToast(toast);
     }
 
@@ -586,8 +599,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void FilenameToTag(Gio.SimpleAction sender, EventArgs e)
     {
-        var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("File Name to Tag"), _("Please select a format string."), _("Format String"),
-            new string[] { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" }, _("Cancel"), _("Convert"));
+        var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("File Name to Tag"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
         dialog.OnResponse += (s, ex) =>
         {
             if(!string.IsNullOrEmpty(dialog.Response))
@@ -606,8 +618,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void TagToFilename(Gio.SimpleAction sender, EventArgs e)
     {
-        var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("Tag to File Name"), _("Please select a format string."), _("Format String"),
-            new string[] { "%artist%- %title%", "%title%- %artist%", "%track%- %title%", "%title%" }, _("Cancel"), _("Convert"));
+        var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("Tag to File Name"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
         dialog.OnResponse += (s, ex) =>
         {
             if(!string.IsNullOrEmpty(dialog.Response))

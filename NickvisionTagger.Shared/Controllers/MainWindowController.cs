@@ -29,6 +29,10 @@ public class MainWindowController
     private bool _forceAllowClose;
 
     /// <summary>
+    /// The list of predefined format strings
+    /// </summary>
+    public string[] FormatStrings { get; init; }
+    /// <summary>
     /// The list of music file save states
     /// </summary>
     public List<bool> MusicFileSaveStates { get; init; }
@@ -110,6 +114,7 @@ public class MainWindowController
     {
         _musicFolder = null;
         _forceAllowClose = false;
+        FormatStrings = new string[] { _("%artist%- %title%"), _("%title%- %artist%"), _("%track%- %title%"), _("%title%") };
         MusicFileSaveStates = new List<bool>();
         SelectedMusicFiles = new Dictionary<int, MusicFile>();
         SelectedPropertyMap = new PropertyMap();
@@ -481,7 +486,7 @@ public class MainWindowController
             }
             UpdateSelectedMusicFilesProperties();
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} file name to tag successfully", "Converted {0} file names to tags successfully", success, success), NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} file name to tag successfully", "Converted {0} file names to tags successfully", success, success), NotificationSeverity.Success, "format"));
         }
     }
 
@@ -504,7 +509,7 @@ public class MainWindowController
             }
             UpdateSelectedMusicFilesProperties();
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} tag to file name successfully", "Converted {0} tags to file names successfully", success, success), NotificationSeverity.Success));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} tag to file name successfully", "Converted {0} tags to file names successfully", success, success), NotificationSeverity.Success, "format"));
 
         }
     }
