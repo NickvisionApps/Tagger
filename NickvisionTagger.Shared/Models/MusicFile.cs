@@ -525,10 +525,6 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public bool FilenameToTag(string formatString)
     {
-        /*
-         * %track%. %artist%- %title%
-         * 05. Arist1- Song1.mp3
-         */
         if(string.IsNullOrEmpty(formatString))
         {
             return false;
@@ -539,16 +535,90 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return false;
         }
-        foreach(var s in Regex.Split(formatString, @"%(\w+)%", RegexOptions.IgnoreCase))
+        var splits = Regex.Split(formatString, @"(\%\w+\%)", RegexOptions.IgnoreCase).Where(x =>
+        {
+            if(x.Length > 1)
+            {
+                return x[0] != '%' && x[x.Length - 1] != '%';
+            }
+            return x.Length != 0;
+        }).ToList();
+        foreach(var s in splits)
         {
             if(!Filename.Contains(s))
             {
                 return false;
             }
         }
+        var filename = System.IO.Path.GetFileNameWithoutExtension(Filename);
+        var i = 0;
         foreach(Match match in matches)
         {
-
+            string value = match.Value.Remove(0, 1); //remove first %
+            value = value.Remove(value.Length - 1, 1).ToLower(); //remove last %;
+            var len = 0;
+            try
+            {
+                len = filename.IndexOf(splits[i]);
+            }
+            catch
+            {
+                len = filename.Length;
+            }
+            if(value == "title" || value == _("title"))
+            {
+                Title = filename.Substring(0, len);
+            }
+            else if(value == "artist" || value == _("artist"))
+            {
+                Artist = filename.Substring(0, len);
+            }
+            else if(value == "album" || value == _("album"))
+            {
+                Album = filename.Substring(0, len);
+            }
+            else if(value == "year" || value == _("year"))
+            {
+                try
+                {
+                    Year = int.Parse(filename.Substring(0, len));
+                }
+                catch { }
+            }
+            else if(value == "track" || value == _("track"))
+            {
+                try
+                {
+                    Track = int.Parse(filename.Substring(0, len));
+                }
+                catch { }
+            }
+            else if(value == "albumartist" || value == _("albumartist"))
+            {
+                AlbumArtist = filename.Substring(0, len);
+            }
+            else if(value == "genre" || value == _("genre"))
+            {
+                Genre = filename.Substring(0, len);
+            }
+            else if(value == "comment" || value == _("comment"))
+            {
+                Comment = filename.Substring(0, len);
+            }
+            else if(value == "composer" || value == _("composer"))
+            {
+                Composer = filename.Substring(0, len);
+            }
+            else if(value == "description" || value == _("description"))
+            {
+                Description = filename.Substring(0, len);
+            }
+            else if(value == "publisher" || value == _("publisher"))
+            {
+                Publisher = filename.Substring(0, len);
+            }
+            filename = filename.Remove(0, len == filename.Length ? len : len + splits[i].Length);
+            i++;
         }
         return true;
     }
