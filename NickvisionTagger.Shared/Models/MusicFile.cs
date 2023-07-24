@@ -269,10 +269,6 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 }
                 _customProperties.Add(pair.Key, pair.Value);
             }
-            if (track.AudioFormat.Name == "OGG (FLAC)")
-            {
-                IsReadOnly = true;
-            }
             return true;
         }
         catch(Exception e)
