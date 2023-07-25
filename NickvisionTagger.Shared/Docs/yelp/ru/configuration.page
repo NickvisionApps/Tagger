@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="ru">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Configuration 🔧</title>
+	<title type="link">Конфигурация 🔧</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -18,19 +18,19 @@
 <p>This page describes what you can change in the application configuration.</p>
 <terms>
     <item>
-		<title>Theme</title>
+		<title>Тема</title>
 		<p>Set light or dark theme, or make <app>Tagger</app> follow your system theme.</p>
 	</item>
     <item>
-		<title>Remember Last Opened Folder</title>
+		<title>Запоминать последнюю открытую папку</title>
 		<p>Whether or not to remember the previously used music folder and reopen it when Tagger starts the next time.</p>
 	</item>
     <item>
-		<title>Include Subfolders</title>
+		<title>Включать подпапки</title>
 		<p>Whether or not to scan for music files into subdirectories of a music folder.</p>
 	</item>
     <item>
-		<title>Sort Files By</title>
+		<title>Сортировать файлы по</title>
 		<p>The property to use when sorting and displaying music files. It can be one of the following options:</p>
         <list>
             <item><p><code>File Name</code></p></item>
@@ -42,19 +42,19 @@
         </list>
 	</item>
     <item>
-		<title>Preserve Modification Timestamp</title>
+		<title>Сохранение временной метки модификации</title>
 		<p>Whether or not to not update a file's write (modified) timestamp when its tag is saved.</p>
 	</item>
     <item>
-		<title>Overwrite Tag With MusicBrainz</title>
+		<title>Перезапись тегов с помощью MusicBrainz</title>
 		<p>Whether or not to overwrite existing tag metadata with data found from MusicBrainz. If disabled, only blank tag properties will be filled.</p>
 	</item>
     <item>
-		<title>Overwrite Album Art With MusicBrainz</title>
+		<title>Переписать обложку альбома с помощью MusicBrainz</title>
 		<p>Whether or not to overwrite overwrite existing album art with art found from MusicBrainz.</p>
 	</item>
     <item>
-		<title>AcoustId User API Key</title>
+		<title>Ключ API пользователя AcoustId</title>
 		<p>An AcoustId User API key to use when fingerprinting music files and looking up song information.</p>
 		<note>
 			<p>A key can be obtained <link href="https://acoustid.org/api-key">here</link></p>
