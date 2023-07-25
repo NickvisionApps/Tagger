@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="format-strings" its:version="2.0" xml:lang="es">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Format Strings ✍️</title>
+	<title type="link">Formato de las cadenas ✍️</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -20,20 +20,20 @@
     </mal:credit>
   </info>
 
-<title>Format Strings</title>
-<p>This page explains the use of format strings for <code>File Name to Tag</code> and <code>Tag to File Name</code> conversions.</p>
+<title>Formato de las cadenas</title>
+<p>Esta página explica el uso de cadenas de formato para las conversiones <code>Nombre del archivo para etiquetar</code> y <code>Etiqueta a nombre de archivo</code>.</p>
 <section>
-    <title>Format</title>
-    <p>Strings of any format with properties wrapped in percent signs (%).</p>
+    <title>Formato</title>
+    <p>Cadenas de cualquier formato con propiedades envueltas en signos de porcentaje (%).</p>
     <note>
-        <title>Example</title>
-        <p>Format String: <code>%artist%- %title%</code></p>
-        <p>Filename: <code>Artist1 - Song1.mp3</code></p>
-        <p>When running <code>File Name to Tag</code> conversion, this format string and this file name will create a tag with an artist of <code>Artist1</code> and a title of <code>Song1</code>.</p>
+        <title>Ejemplo</title>
+        <p>Formatode la cadena: <code>%artist%- %title%</code></p>
+        <p>Nombre del archivo: <code>Artist1 - Song1.mp3</code></p>
+        <p>Al ejecutar la conversión del <code>Nombre del archivo a etiqueta</code>, esta cadena de formato y este nombre de archivo crearán una etiqueta con un artista de <code>Artista1</code> y un título de <code>Canción1</code>.</p>
     </note>
 </section>
 <section>
-    <title>Supported Properties</title>
+    <title>Propiedades compatibles</title>
     <list>
         <item><p><code>título</code></p></item>
         <item><p><code>artista</code></p></item>
@@ -48,8 +48,8 @@
         <item><p><code>editor</code></p></item>
     </list>
     <note>
-        <p>When using conversions, custom property names can also be used.</p>
-        <p>For example, a custom property who's name is <code>ENCODER</code> can be used as <code>%encoder%</code>.</p>
+        <p>Cuando se utilizan las conversiones, también se pueden utilizar los nombres de las propiedades personalizadas.</p>
+        <p>Por ejemplo, una propiedad personalizada cuyo nombre es <code>ENCODER</code> se puede usar como <code>%encoder%</code>.</p>
     </note>
 </section>
 </page>
