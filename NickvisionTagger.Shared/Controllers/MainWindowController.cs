@@ -1,3 +1,4 @@
+using FuzzySharp;
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
 using NickvisionTagger.Shared.Models;
@@ -856,8 +857,10 @@ public class MainWindowController
                 }
             }
             var matches = new List<string>();
+            var ratios = new List<int>();
             foreach(var musicFile in _musicFolder.MusicFiles)
             {
+                var ratio = 0;
                 if(!string.IsNullOrEmpty(propertyMap.Filename))
                 {
                     var value = musicFile.Filename.ToLower();
@@ -870,7 +873,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        if(value != propertyMap.Filename)
+                        ratio = Fuzz.PartialRatio(value, propertyMap.Filename);
+                        if(ratio < 60)
                         {
                             continue;
                         }
@@ -888,7 +892,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        if(value != propertyMap.Title)
+                        ratio = Fuzz.PartialRatio(value, propertyMap.Title);
+                        if(ratio < 60)
                         {
                             continue;
                         }
@@ -906,7 +911,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        if(value != propertyMap.Artist)
+                        ratio = Fuzz.PartialRatio(value, propertyMap.Artist);
+                        if(ratio < 60)
                         {
                             continue;
                         }
@@ -924,7 +930,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        if(value != propertyMap.Album)
+                        ratio = Fuzz.PartialRatio(value, propertyMap.Album);
+                        if(ratio < 60)
                         {
                             continue;
                         }
@@ -942,6 +949,7 @@ public class MainWindowController
                     }
                     else
                     {
+                        ratio = 100;
                         if(value != uint.Parse(propertyMap.Year))
                         {
                             continue;
@@ -960,6 +968,7 @@ public class MainWindowController
                     }
                     else
                     {
+                        ratio = 100;
                         if(value != uint.Parse(propertyMap.Track))
                         {
                             continue;
@@ -978,7 +987,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        if(value != propertyMap.AlbumArtist)
+                        ratio = Fuzz.PartialRatio(value, propertyMap.AlbumArtist);
+                        if(ratio < 60)
                         {
                             continue;
                         }
@@ -996,7 +1006,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        if(value != propertyMap.Genre)
+                        ratio = Fuzz.PartialRatio(value, propertyMap.Genre);
+                        if(ratio < 60)
                         {
                             continue;
                         }
@@ -1014,7 +1025,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        if(value != propertyMap.Comment)
+                        ratio = Fuzz.PartialRatio(value, propertyMap.Comment);
+                        if(ratio < 60)
                         {
                             continue;
                         }
@@ -1032,7 +1044,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        if(value != propertyMap.Composer)
+                        ratio = Fuzz.PartialRatio(value, propertyMap.Composer);
+                        if(ratio < 60)
                         {
                             continue;
                         }
@@ -1050,7 +1063,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        if(value != propertyMap.Description)
+                        ratio = Fuzz.PartialRatio(value, propertyMap.Description);
+                        if(ratio < 60)
                         {
                             continue;
                         }
@@ -1068,7 +1082,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        if(value != propertyMap.Publisher)
+                        ratio = Fuzz.PartialRatio(value, propertyMap.Publisher);
+                        if(ratio < 60)
                         {
                             continue;
                         }
@@ -1080,13 +1095,16 @@ public class MainWindowController
                     {
                         continue;
                     }
+                    ratio = 100;
                     if(!musicFile.CustomPropertyNames.Select(x => x.ToLower()).Contains(customPropName))
                     {
                         continue;
                     }
                 }
                 matches.Add(musicFile.Filename.ToLower());
+                ratios.Add(ratio);
             }
+            matches.Sort((a, b) => ratios[matches.IndexOf(a)].CompareTo(ratios[matches.IndexOf(b)]));
             return (true, matches);
         }
         return (false, null);
