@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-25 00:05+0200\n"
-"PO-Revision-Date: 2023-07-21 07:07+0000\n"
-"Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/it/>\n"
+"PO-Revision-Date: 2023-07-25 20:21+0000\n"
+"Last-Translator: Federico Marchetti <marchetti.federico@protonmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,20 +21,19 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:117
 msgid "%artist%- %title%"
-msgstr ""
+msgstr "%artist%- %title%"
 
 #: ../../../Controllers/MainWindowController.cs:117
-#, fuzzy
 msgid "%title%"
-msgstr "titolo"
+msgstr "%title%"
 
 #: ../../../Controllers/MainWindowController.cs:117
 msgid "%title%- %artist%"
-msgstr ""
+msgstr "%title%- %artist%"
 
 #: ../../../Controllers/MainWindowController.cs:117
 msgid "%track%- %title%"
-msgstr ""
+msgstr "%track%- %title%"
 
 #: ../../../Controllers/MainWindowController.cs:252
 #: ../../../Controllers/MainWindowController.cs:261
@@ -189,12 +188,12 @@ msgstr[1] "{0} etichette sono state convertite in nomi di file con successo"
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:853
 msgid "custom"
-msgstr ""
+msgstr "personalizzato/a"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:47
 #: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:59
 msgid "Custom"
-msgstr ""
+msgstr "Personalizzato"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:888
 #, csharp-format
@@ -233,33 +232,29 @@ msgstr "ERRORE"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:685
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
-#, fuzzy
 msgid "Export Back Album Art"
-msgstr "Inserisci copertina"
+msgstr "Esporta copertina"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:685
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:71
-#, fuzzy
 msgid "Export Front Album Art"
-msgstr "Inserisci copertina"
+msgstr "Esporta copertina (fronte)"
 
 #: ../../../Controllers/MainWindowController.cs:629
-#, fuzzy
 msgid "Exported back album art to file successfully"
-msgstr "{0} etichetta è stata convertita in nome di file con successo"
+msgstr "La copertina posteriore è stata esportata correttamente"
 
 #: ../../../Controllers/MainWindowController.cs:613
-#, fuzzy
 msgid "Exported front album art to file successfully"
-msgstr "{0} etichetta è stata convertita in nome di file con successo"
+msgstr "La copertina anteriore è stata esportata correttamente"
 
 #: ../../../Controllers/MainWindowController.cs:634
 msgid "Failed to export back album art to a file"
-msgstr ""
+msgstr "È avvenuto un errore durante l'esportazione della copertina posteriore"
 
 #: ../../../Controllers/MainWindowController.cs:618
 msgid "Failed to export front album art to a file"
-msgstr ""
+msgstr "È avvenuto un errore durante l'esportazione della copertina anteriore"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
 #: NickvisionTagger.GNOME/Blueprints/window.blp:41
@@ -278,13 +273,13 @@ msgstr "La firma è stata copiata negli appunti."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:621
 msgid "Format String"
-msgstr "Formato"
+msgstr "Stringa di formato"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:115
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:642
 #: NickvisionTagger.GNOME/Blueprints/window.blp:22
 msgid "Front"
-msgstr ""
+msgstr "Fronte"
 
 #: ../../../Controllers/MainWindowController.cs:757
 #: ../../../Controllers/MainWindowController.cs:833
@@ -311,15 +306,13 @@ msgstr "Aiuto"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:653
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:81
-#, fuzzy
 msgid "Insert Back Album Art"
-msgstr "Inserisci copertina"
+msgstr "Inserisci copertina posteriore"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:653
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:61
-#, fuzzy
 msgid "Insert Front Album Art"
-msgstr "Inserisci copertina"
+msgstr "Inserisci copertina anteriore"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
@@ -354,9 +347,8 @@ msgid "MusicBrainz Recording Id"
 msgstr "MusicBrainz RecordingId"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:704
-#, fuzzy
 msgid "New Custom Property"
-msgstr "Proprietà nuova"
+msgstr "Nuova proprietà personalizzata"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:886
 #, csharp-format
@@ -414,9 +406,8 @@ msgid "publisher"
 msgstr "etichetta"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1066
-#, fuzzy
 msgid "Remove Custom Property"
-msgstr "Proprietà del file"
+msgstr "Rimuovi proprietà personalizzata"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:478
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:547
@@ -458,11 +449,11 @@ msgstr "Invio dei dati ad AcoustId in corso..."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:641
 #: NickvisionTagger.GNOME/Blueprints/window.blp:294
 msgid "Switch to Back Cover"
-msgstr ""
+msgstr "Scambia a copertina posteriore"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:641
 msgid "Switch to Front Cover"
-msgstr ""
+msgstr "Scambia a copertina anteriore"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:621
 #: NickvisionTagger.GNOME/Blueprints/window.blp:42
@@ -483,7 +474,7 @@ msgstr "Tagger"
 
 #: ../../../Controllers/MainWindowController.cs:233
 msgid "Tagger has opened some files in read-only mode."
-msgstr ""
+msgstr "Tagger ha aperto dei file in sola lettura."
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -516,14 +507,14 @@ msgid "Unable to load image file"
 msgstr "Impossibile caricare l'immagine"
 
 #: ../../../Controllers/MainWindowController.cs:409
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Unable to save {0}"
-msgstr "Impossibile caricare l'immagine"
+msgstr "Impossibile salvare {0}"
 
 #: ../../../Controllers/MainWindowController.cs:370
 #, csharp-format
 msgid "Unable to save {0}."
-msgstr ""
+msgstr "Impossibile salvare {0}."
 
 #: ../../../Controllers/MainWindowController.cs:734
 msgid "Unable to submit to AcoustId. Check API key"
@@ -537,17 +528,16 @@ msgid "year"
 msgstr "anno"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
-#, fuzzy
 msgid "Corrupted Files Found"
-msgstr "Nessun brano trovato"
+msgstr "Trovati file corrotti"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
-#, fuzzy
 msgid ""
 "This music folder contains music files that have corrupted tags. The "
 "following files are affected and will be ignored by Tagger:"
 msgstr ""
-"Sono presenti alcune modifiche in attesa di essere applicate. Cosa vuoi fare?"
+"La cartella contiene brani aventi tag corrotti. I seguenti file saranno "
+"ignorati da Tagger:"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:114
@@ -592,7 +582,7 @@ msgstr "Includi le sottocartelle"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:64
 msgid "Sort Files By"
-msgstr "Ordina i file per"
+msgstr "Ordina file per"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 msgctxt "Sort"
@@ -630,7 +620,7 @@ msgstr "Brano"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:80
 msgid "Preserve Modification Timestamp"
-msgstr "Preserva la data di modifica"
+msgstr "Mantieni l'istante temporale di modifica"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:96
 #: NickvisionTagger.GNOME/Blueprints/window.blp:46
@@ -639,7 +629,7 @@ msgstr "Servizi Web"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:99
 msgid "Overwrite Tag With MusicBrainz"
-msgstr "Sovrascrivi l'etichetta con MusicBrainz"
+msgstr "Sovrascrivi i tag con With MusicBrainz"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:100
 msgid ""
@@ -651,7 +641,7 @@ msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:115
 msgid "Overwrite Album Art With MusicBrainz"
-msgstr "Sovrascrivi la copertina con quella trovata in MusicBrainz"
+msgstr "Sovrascrivi la copertina con MusicBrainz"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:116
 msgid "Enable to overwrite existing album art with art found from MusicBrainz."
@@ -661,7 +651,7 @@ msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:131
 msgid "AcoustId User API Key"
-msgstr "API di AcoustId dell'utente"
+msgstr "Chiave delle API di AcoustId dell'utente"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:141
 msgid "Get New API Key"
@@ -708,18 +698,16 @@ msgid "Convert Tag to File Name"
 msgstr "Converti l'etichetta al nome del file"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:66
-#, fuzzy
 msgid "Remove Front Album Art"
-msgstr "Rimuovi la copertina"
+msgstr "Rimuovi la copertina anteriore"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:76
 msgid "Switch Album Art"
 msgstr "Cambia la copertina"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:86
-#, fuzzy
 msgid "Remove Back Album Art"
-msgstr "Rimuovi la copertina"
+msgstr "Rimuovi la copertina posteriore"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:97
 msgctxt "Shortcut"
@@ -769,7 +757,7 @@ msgstr "Rimuovi"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:34
 #: NickvisionTagger.GNOME/Blueprints/window.blp:285
 msgid "Export"
-msgstr ""
+msgstr "Esporta"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:66
 msgid "Open Music Folder (Ctrl+O)"
@@ -869,7 +857,7 @@ msgstr "Etichetta"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:414
 msgid "Custom Properties"
-msgstr "Proprietà del file"
+msgstr "Proprietà personalizzate del file"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:431
 msgid "File Properties"
