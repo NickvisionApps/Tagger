@@ -1,7 +1,7 @@
 diff -Naur a/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in b/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in
---- a/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in	2023-06-29 12:23:33.044779414 +0530
-+++ b/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in	2023-06-29 12:42:43.618784902 +0530
-@@ -3,10 +3,10 @@
+--- a/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in	2023-07-26 18:37:40.372473823 +0530
++++ b/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in	2023-07-26 18:40:02.271944842 +0530
+@@ -3,7 +3,7 @@
  Name=Tagger
  Comment=Tag your music
  Exec=@EXEC@
@@ -9,15 +9,10 @@ diff -Naur a/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in b/Nickvisi
 +Icon=snap.tagger.org.nickvision.tagger
  Terminal=false
  Type=Application
- Categories=AudioVideo;
- Keywords=Tag;Music;Editor;Library;
- X-GNOME-UsesNotifications=true
--StartupNotify=true
-\ No newline at end of file
-+StartupNotify=true
+ Categories=AudioVideo;Audio;
 diff -Naur a/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in b/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in
---- a/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in	2023-06-29 12:23:33.044779414 +0530
-+++ b/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in	2023-06-29 12:42:29.698989714 +0530
+--- a/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in	2023-07-26 18:37:40.372473823 +0530
++++ b/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in	2023-07-26 18:39:55.550646932 +0530
 @@ -1,6 +1,7 @@
  <?xml version="1.0" encoding="UTF-8"?>
  <component type="desktop-application">
