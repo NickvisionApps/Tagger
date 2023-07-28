@@ -247,15 +247,22 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             Description = track.Description ?? "";
             Publisher = track.Publisher ?? "";
             Duration = track.Duration;
-            foreach(var picture in track.EmbeddedPictures)
+            if(track.EmbeddedPictures.Count == 1 && track.EmbeddedPictures[0].PicType != PictureInfo.PIC_TYPE.Front && track.EmbeddedPictures[0].PicType != PictureInfo.PIC_TYPE.Back)
             {
-                if(picture.PicType == PictureInfo.PIC_TYPE.Front)
+                FrontAlbumArt = track.EmbeddedPictures[0].PictureData;
+            }
+            else
+            {
+                foreach(var picture in track.EmbeddedPictures)
                 {
-                    FrontAlbumArt = picture.PictureData;
-                }
-                if(picture.PicType == PictureInfo.PIC_TYPE.Back)
-                {
-                    BackAlbumArt = picture.PictureData;
+                    if(picture.PicType == PictureInfo.PIC_TYPE.Front)
+                    {
+                        FrontAlbumArt = picture.PictureData;
+                    }
+                    if(picture.PicType == PictureInfo.PIC_TYPE.Back)
+                    {
+                        BackAlbumArt = picture.PictureData;
+                    }
                 }
             }
             foreach(var pair in track.AdditionalFields)
