@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-28 14:19-0400\n"
+"POT-Creation-Date: 2023-07-28 15:09-0400\n"
 "PO-Revision-Date: 2023-07-14 19:39+0000\n"
 "Last-Translator: Jummit <jummit@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -70,7 +70,7 @@ msgid "<keep>"
 msgstr "<behalten>"
 
 #: ../../../Models/PropertyMap.cs:125
-#: NickvisionTagger.GNOME/Blueprints/window.blp:489
+#: NickvisionTagger.GNOME/Blueprints/window.blp:493
 msgid "0 MiB"
 msgstr "0 MiB"
 
@@ -95,7 +95,7 @@ msgstr ""
 "Verbindung mit dem Fingerabdruck übermitteln."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:720
-#: NickvisionTagger.GNOME/Blueprints/window.blp:430
+#: NickvisionTagger.GNOME/Blueprints/window.blp:434
 msgid "Add"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr "Album-Interpret"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:558
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:764
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:802
-#: NickvisionTagger.GNOME/Blueprints/window.blp:534
+#: NickvisionTagger.GNOME/Blueprints/window.blp:538
 msgid "Apply"
 msgstr "Anwenden"
 
@@ -846,7 +846,8 @@ msgid "File Name"
 msgstr "Dateiname"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:366
-msgid "Tag Properties"
+#, fuzzy
+msgid "Main Properties"
 msgstr "Tag-Eigenschaften"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:369
@@ -882,64 +883,69 @@ msgstr "Album-Interpret"
 msgid "Genre"
 msgstr "Genre"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:401
+#: NickvisionTagger.GNOME/Blueprints/window.blp:402
+#, fuzzy
+msgid "Additional Properties"
+msgstr "Dateieigenschaften"
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:405
 msgid "Comment"
 msgstr "Kommentar"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:405
+#: NickvisionTagger.GNOME/Blueprints/window.blp:409
 msgid "Beats Per Minute"
 msgstr "Schläge pro Minute"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:409
+#: NickvisionTagger.GNOME/Blueprints/window.blp:413
 msgid "Composer"
 msgstr "Komponist"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:413
+#: NickvisionTagger.GNOME/Blueprints/window.blp:417
 msgid "Description"
 msgstr "Beschreibung"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:417
+#: NickvisionTagger.GNOME/Blueprints/window.blp:421
 msgid "Publisher"
 msgstr "Verlag"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:422
+#: NickvisionTagger.GNOME/Blueprints/window.blp:426
 #, fuzzy
 msgid "Custom Properties"
 msgstr "Weitere Eigenschaften"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:439
+#: NickvisionTagger.GNOME/Blueprints/window.blp:443
 msgid "File Properties"
 msgstr "Dateieigenschaften"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:442
+#: NickvisionTagger.GNOME/Blueprints/window.blp:446
 msgid "Duration"
 msgstr "Länge"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:452
+#: NickvisionTagger.GNOME/Blueprints/window.blp:456
 msgid "Fingerprint"
 msgstr "Fingerabdruck"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:471
+#: NickvisionTagger.GNOME/Blueprints/window.blp:475
 msgid "Copy Fingerprint To Clipboard"
 msgstr "Fingerabdruck in die Zwischenablage kopieren"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:484
+#: NickvisionTagger.GNOME/Blueprints/window.blp:488
 msgid "File Size"
 msgstr "Dateigröße"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:509
+#: NickvisionTagger.GNOME/Blueprints/window.blp:513
 msgid "Toggle Tags Pane"
 msgstr "Tag-Bereich zeigen/verstecken"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:515
+#: NickvisionTagger.GNOME/Blueprints/window.blp:519
 msgid "Reload Music Folder (F5)"
 msgstr "Musikordner neu laden (F5)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:529
+#: NickvisionTagger.GNOME/Blueprints/window.blp:533
 msgid "Tag Actions"
 msgstr "Tag-Aktionen"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:535
+#: NickvisionTagger.GNOME/Blueprints/window.blp:539
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Änderungen auf Tag anwenden (Strg+S)"
 

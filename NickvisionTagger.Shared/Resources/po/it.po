@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-28 14:19-0400\n"
+"POT-Creation-Date: 2023-07-28 15:09-0400\n"
 "PO-Revision-Date: 2023-07-25 20:21+0000\n"
 "Last-Translator: Federico Marchetti <marchetti.federico@protonmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
@@ -69,7 +69,7 @@ msgid "<keep>"
 msgstr "<tieni>"
 
 #: ../../../Models/PropertyMap.cs:125
-#: NickvisionTagger.GNOME/Blueprints/window.blp:489
+#: NickvisionTagger.GNOME/Blueprints/window.blp:493
 msgid "0 MiB"
 msgstr "0 MiB"
 
@@ -94,7 +94,7 @@ msgstr ""
 "associati alla firma di questo brano."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:720
-#: NickvisionTagger.GNOME/Blueprints/window.blp:430
+#: NickvisionTagger.GNOME/Blueprints/window.blp:434
 msgid "Add"
 msgstr "Aggiungi"
 
@@ -116,7 +116,7 @@ msgstr "artistaalbum"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:558
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:764
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:802
-#: NickvisionTagger.GNOME/Blueprints/window.blp:534
+#: NickvisionTagger.GNOME/Blueprints/window.blp:538
 msgid "Apply"
 msgstr "Applica"
 
@@ -834,7 +834,8 @@ msgid "File Name"
 msgstr "Nome del file"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:366
-msgid "Tag Properties"
+#, fuzzy
+msgid "Main Properties"
 msgstr "Proprietà delle etichette"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:369
@@ -870,63 +871,68 @@ msgstr "Artista dell'album"
 msgid "Genre"
 msgstr "Genere"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:401
+#: NickvisionTagger.GNOME/Blueprints/window.blp:402
+#, fuzzy
+msgid "Additional Properties"
+msgstr "Proprietà del file"
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:405
 msgid "Comment"
 msgstr "Commento"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:405
+#: NickvisionTagger.GNOME/Blueprints/window.blp:409
 msgid "Beats Per Minute"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:409
+#: NickvisionTagger.GNOME/Blueprints/window.blp:413
 msgid "Composer"
 msgstr "Compositore"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:413
+#: NickvisionTagger.GNOME/Blueprints/window.blp:417
 msgid "Description"
 msgstr "Descrizione"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:417
+#: NickvisionTagger.GNOME/Blueprints/window.blp:421
 msgid "Publisher"
 msgstr "Etichetta"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:422
+#: NickvisionTagger.GNOME/Blueprints/window.blp:426
 msgid "Custom Properties"
 msgstr "Proprietà personalizzate del file"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:439
+#: NickvisionTagger.GNOME/Blueprints/window.blp:443
 msgid "File Properties"
 msgstr "Proprietà del file"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:442
+#: NickvisionTagger.GNOME/Blueprints/window.blp:446
 msgid "Duration"
 msgstr "Durata"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:452
+#: NickvisionTagger.GNOME/Blueprints/window.blp:456
 msgid "Fingerprint"
 msgstr "Firma"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:471
+#: NickvisionTagger.GNOME/Blueprints/window.blp:475
 msgid "Copy Fingerprint To Clipboard"
 msgstr "Copia l'impronta negli appunti"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:484
+#: NickvisionTagger.GNOME/Blueprints/window.blp:488
 msgid "File Size"
 msgstr "Dimensione"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:509
+#: NickvisionTagger.GNOME/Blueprints/window.blp:513
 msgid "Toggle Tags Pane"
 msgstr "Commuta i pannelli delle etichette"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:515
+#: NickvisionTagger.GNOME/Blueprints/window.blp:519
 msgid "Reload Music Folder (F5)"
 msgstr "Ricarica la cartella contenente i brani (F5)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:529
+#: NickvisionTagger.GNOME/Blueprints/window.blp:533
 msgid "Tag Actions"
 msgstr "Azioni sulle etichette"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:535
+#: NickvisionTagger.GNOME/Blueprints/window.blp:539
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Applica le modifiche alle etichette (Ctrl+S)"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-28 14:19-0400\n"
+"POT-Creation-Date: 2023-07-28 15:09-0400\n"
 "PO-Revision-Date: 2023-07-12 19:29+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -70,7 +70,7 @@ msgid "<keep>"
 msgstr "<conserver>"
 
 #: ../../../Models/PropertyMap.cs:125
-#: NickvisionTagger.GNOME/Blueprints/window.blp:489
+#: NickvisionTagger.GNOME/Blueprints/window.blp:493
 msgid "0 MiB"
 msgstr "0 MiB"
 
@@ -95,7 +95,7 @@ msgstr ""
 "associées à l’empreinte à la place."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:720
-#: NickvisionTagger.GNOME/Blueprints/window.blp:430
+#: NickvisionTagger.GNOME/Blueprints/window.blp:434
 msgid "Add"
 msgstr ""
 
@@ -117,7 +117,7 @@ msgstr "artiste de l’album"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:558
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:764
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:802
-#: NickvisionTagger.GNOME/Blueprints/window.blp:534
+#: NickvisionTagger.GNOME/Blueprints/window.blp:538
 msgid "Apply"
 msgstr "Appliquer"
 
@@ -849,7 +849,8 @@ msgid "File Name"
 msgstr "Nom du fichier"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:366
-msgid "Tag Properties"
+#, fuzzy
+msgid "Main Properties"
 msgstr "Propriétés de la balise"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:369
@@ -885,64 +886,69 @@ msgstr "Artiste de l'album"
 msgid "Genre"
 msgstr "Genre"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:401
+#: NickvisionTagger.GNOME/Blueprints/window.blp:402
+#, fuzzy
+msgid "Additional Properties"
+msgstr "Propriétés du fichier"
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:405
 msgid "Comment"
 msgstr "Commentaire"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:405
+#: NickvisionTagger.GNOME/Blueprints/window.blp:409
 msgid "Beats Per Minute"
 msgstr "Battements par minute"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:409
+#: NickvisionTagger.GNOME/Blueprints/window.blp:413
 msgid "Composer"
 msgstr "Compositeur"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:413
+#: NickvisionTagger.GNOME/Blueprints/window.blp:417
 msgid "Description"
 msgstr "Description"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:417
+#: NickvisionTagger.GNOME/Blueprints/window.blp:421
 msgid "Publisher"
 msgstr "Maison de disques"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:422
+#: NickvisionTagger.GNOME/Blueprints/window.blp:426
 #, fuzzy
 msgid "Custom Properties"
 msgstr "Propriétés supplémentaires"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:439
+#: NickvisionTagger.GNOME/Blueprints/window.blp:443
 msgid "File Properties"
 msgstr "Propriétés du fichier"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:442
+#: NickvisionTagger.GNOME/Blueprints/window.blp:446
 msgid "Duration"
 msgstr "Durée"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:452
+#: NickvisionTagger.GNOME/Blueprints/window.blp:456
 msgid "Fingerprint"
 msgstr "Empreinte"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:471
+#: NickvisionTagger.GNOME/Blueprints/window.blp:475
 msgid "Copy Fingerprint To Clipboard"
 msgstr "Copier l’empreinte vers le presse-papiers"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:484
+#: NickvisionTagger.GNOME/Blueprints/window.blp:488
 msgid "File Size"
 msgstr "Taille"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:509
+#: NickvisionTagger.GNOME/Blueprints/window.blp:513
 msgid "Toggle Tags Pane"
 msgstr "Basculer le volet des balises"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:515
+#: NickvisionTagger.GNOME/Blueprints/window.blp:519
 msgid "Reload Music Folder (F5)"
 msgstr "Recharger le dossier de musiques (F5)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:529
+#: NickvisionTagger.GNOME/Blueprints/window.blp:533
 msgid "Tag Actions"
 msgstr "Actions de balise"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:535
+#: NickvisionTagger.GNOME/Blueprints/window.blp:539
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Appliquer les changements à la balise (Ctrl+S)"
 

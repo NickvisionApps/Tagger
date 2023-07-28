@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-28 14:19-0400\n"
+"POT-Creation-Date: 2023-07-28 15:09-0400\n"
 "PO-Revision-Date: 2023-07-28 12:00+0000\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -70,7 +70,7 @@ msgid "<keep>"
 msgstr "<לשמור>"
 
 #: ../../../Models/PropertyMap.cs:125
-#: NickvisionTagger.GNOME/Blueprints/window.blp:489
+#: NickvisionTagger.GNOME/Blueprints/window.blp:493
 msgid "0 MiB"
 msgstr "0 מבי״ב"
 
@@ -93,7 +93,7 @@ msgstr ""
 "אם אין ברשותך, המתייג ישלח את נתוני התגיות שלך יחד עם טביעת האצבע במקום."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:720
-#: NickvisionTagger.GNOME/Blueprints/window.blp:430
+#: NickvisionTagger.GNOME/Blueprints/window.blp:434
 msgid "Add"
 msgstr "הוספה"
 
@@ -115,7 +115,7 @@ msgstr "אמן האלבום"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:558
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:764
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:802
-#: NickvisionTagger.GNOME/Blueprints/window.blp:534
+#: NickvisionTagger.GNOME/Blueprints/window.blp:538
 msgid "Apply"
 msgstr "החלה"
 
@@ -839,7 +839,8 @@ msgid "File Name"
 msgstr "שם קובץ"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:366
-msgid "Tag Properties"
+#, fuzzy
+msgid "Main Properties"
 msgstr "מאפייני תג"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:369
@@ -875,63 +876,68 @@ msgstr "אמן האלבום"
 msgid "Genre"
 msgstr "סוגה"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:401
+#: NickvisionTagger.GNOME/Blueprints/window.blp:402
+#, fuzzy
+msgid "Additional Properties"
+msgstr "מאפייני קובץ"
+
+#: NickvisionTagger.GNOME/Blueprints/window.blp:405
 msgid "Comment"
 msgstr "הערה"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:405
+#: NickvisionTagger.GNOME/Blueprints/window.blp:409
 msgid "Beats Per Minute"
 msgstr "פעימות לדקה"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:409
+#: NickvisionTagger.GNOME/Blueprints/window.blp:413
 msgid "Composer"
 msgstr "מלחין"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:413
+#: NickvisionTagger.GNOME/Blueprints/window.blp:417
 msgid "Description"
 msgstr "תיאור"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:417
+#: NickvisionTagger.GNOME/Blueprints/window.blp:421
 msgid "Publisher"
 msgstr "מוציא לאור"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:422
+#: NickvisionTagger.GNOME/Blueprints/window.blp:426
 msgid "Custom Properties"
 msgstr "מאפיינים מותאמים"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:439
+#: NickvisionTagger.GNOME/Blueprints/window.blp:443
 msgid "File Properties"
 msgstr "מאפייני קובץ"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:442
+#: NickvisionTagger.GNOME/Blueprints/window.blp:446
 msgid "Duration"
 msgstr "משך זמן"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:452
+#: NickvisionTagger.GNOME/Blueprints/window.blp:456
 msgid "Fingerprint"
 msgstr "טביעת אצבע"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:471
+#: NickvisionTagger.GNOME/Blueprints/window.blp:475
 msgid "Copy Fingerprint To Clipboard"
 msgstr "העתקת טביעת אצבע ללוח הגזירים"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:484
+#: NickvisionTagger.GNOME/Blueprints/window.blp:488
 msgid "File Size"
 msgstr "גודל קובץ"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:509
+#: NickvisionTagger.GNOME/Blueprints/window.blp:513
 msgid "Toggle Tags Pane"
 msgstr "הצגה/הסתרת סרגל התיוג"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:515
+#: NickvisionTagger.GNOME/Blueprints/window.blp:519
 msgid "Reload Music Folder (F5)"
 msgstr "טעינת תיקיית המוזיקה מחדש (F5)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:529
+#: NickvisionTagger.GNOME/Blueprints/window.blp:533
 msgid "Tag Actions"
 msgstr "פעולות תיוג"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:535
+#: NickvisionTagger.GNOME/Blueprints/window.blp:539
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "החלת שינויים לתג (Ctrl+S)"
 
