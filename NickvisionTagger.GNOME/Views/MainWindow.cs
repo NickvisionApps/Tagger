@@ -69,6 +69,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _albumArtistRow;
     [Gtk.Connect] private readonly Adw.EntryRow _genreRow;
     [Gtk.Connect] private readonly Adw.EntryRow _commentRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _bpmRow;
     [Gtk.Connect] private readonly Adw.EntryRow _composerRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
@@ -170,6 +171,13 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         _commentRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _bpmRow.OnNotify += (sender, e) =>
         {
             if(e.Pspec.GetName() == "text")
             {
@@ -983,6 +991,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _albumArtistRow.SetText(_controller.SelectedPropertyMap.AlbumArtist);
         _genreRow.SetText(_controller.SelectedPropertyMap.Genre);
         _commentRow.SetText(_controller.SelectedPropertyMap.Comment);
+        _bpmRow.SetText(_controller.SelectedPropertyMap.BeatsPerMinute);
         _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
         _descriptionRow.SetText(_controller.SelectedPropertyMap.Description);
         _publisherRow.SetText(_controller.SelectedPropertyMap.Publisher);
@@ -999,6 +1008,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _albumArtistRow.SetEditable(true);
         _genreRow.SetEditable(true);
         _commentRow.SetEditable(true);
+        _bpmRow.SetEditable(true);
         _composerRow.SetEditable(true);
         _descriptionRow.SetEditable(true);
         _publisherRow.SetEditable(true);
@@ -1041,6 +1051,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _albumArtistRow.SetEditable(false);
             _genreRow.SetEditable(false);
             _commentRow.SetEditable(false);
+            _bpmRow.SetEditable(false);
             _composerRow.SetEditable(false);
             _descriptionRow.SetEditable(false);
             _publisherRow.SetEditable(false);
@@ -1211,6 +1222,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 AlbumArtist = _albumArtistRow.GetText(),
                 Genre = _genreRow.GetText(),
                 Comment = _commentRow.GetText(),
+                BeatsPerMinute = _bpmRow.GetText(),
                 Composer = _composerRow.GetText(),
                 Description = _descriptionRow.GetText(),
                 Publisher = _publisherRow.GetText()
