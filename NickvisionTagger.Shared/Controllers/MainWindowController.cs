@@ -1180,12 +1180,12 @@ public class MainWindowController
             SelectedPropertyMap.Title = first.Title;
             SelectedPropertyMap.Artist = first.Artist;
             SelectedPropertyMap.Album = first.Album;
-            SelectedPropertyMap.Year = first.Year.ToString();
-            SelectedPropertyMap.Track = first.Track.ToString();
+            SelectedPropertyMap.Year = first.Year == 0 ? "" : first.Year.ToString();
+            SelectedPropertyMap.Track = first.Track == 0 ? "" : first.Track.ToString();
             SelectedPropertyMap.AlbumArtist = first.AlbumArtist;
             SelectedPropertyMap.Genre = first.Genre;
             SelectedPropertyMap.Comment = first.Comment;
-            SelectedPropertyMap.BeatsPerMinute = first.BeatsPerMinute.ToString();
+            SelectedPropertyMap.BeatsPerMinute = first.BeatsPerMinute == 0 ? "" : first.BeatsPerMinute.ToString();
             SelectedPropertyMap.Composer = first.Composer;
             SelectedPropertyMap.Description = first.Description;
             SelectedPropertyMap.Publisher = first.Publisher;
