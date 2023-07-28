@@ -279,18 +279,24 @@ public class MainWindowController
                 try
                 {
                     pair.Value.Year = int.Parse(map.Year);
-                    updated = true;
                 }
-                catch { }
+                catch
+                {
+                    pair.Value.Year = 0;
+                }
+                updated = true;
             }
             if(map.Track != pair.Value.Track.ToString() && map.Track != _("<keep>"))
             {
                 try
                 {
                     pair.Value.Track = int.Parse(map.Track);
-                    updated = true;
                 }
-                catch { }
+                catch
+                {
+                    pair.Value.Track = 0;
+                }
+                updated = true;
             }
             if(map.AlbumArtist != pair.Value.AlbumArtist && map.AlbumArtist != _("<keep>"))
             {
@@ -317,9 +323,12 @@ public class MainWindowController
                 try
                 {
                     pair.Value.BeatsPerMinute = int.Parse(map.BeatsPerMinute);
-                    updated = true;
                 }
-                catch { }
+                catch
+                {
+                    pair.Value.BeatsPerMinute = 0;
+                }
+                updated = true;
             }
             if(map.Description != pair.Value.Description && map.Description != _("<keep>"))
             {
