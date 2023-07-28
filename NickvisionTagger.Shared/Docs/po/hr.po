@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-28 07:51-0400\n"
+"POT-Creation-Date: 2023-07-28 14:21-0400\n"
 "PO-Revision-Date: 2023-07-22 12:46+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
@@ -353,47 +353,53 @@ msgstr "<code>pjesma</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:40 yelp/C/search.page:36
+#, fuzzy
+msgid "<code>tracktotal</code>"
+msgstr "<code>pjesma</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:41 yelp/C/search.page:37
 msgid "<code>albumartist</code>"
 msgstr "<code>izvođač albuma</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:41 yelp/C/search.page:37
+#: yelp/C/format-strings.page:42 yelp/C/search.page:38
 msgid "<code>genre</code>"
 msgstr "<code>žanr</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:42 yelp/C/search.page:38
+#: yelp/C/format-strings.page:43 yelp/C/search.page:39
 msgid "<code>comment</code>"
 msgstr "<code>komentar</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:43 yelp/C/search.page:39
+#: yelp/C/format-strings.page:44 yelp/C/search.page:40
 #, fuzzy
 msgid "<code>beatsperminute (bpm)</code>"
 msgstr "<code>naslov</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:44 yelp/C/search.page:40
+#: yelp/C/format-strings.page:45 yelp/C/search.page:41
 msgid "<code>composer</code>"
 msgstr "<code>skladatelj</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:45 yelp/C/search.page:41
+#: yelp/C/format-strings.page:46 yelp/C/search.page:42
 msgid "<code>description</code>"
 msgstr "<code>opis</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:46 yelp/C/search.page:42
+#: yelp/C/format-strings.page:47 yelp/C/search.page:43
 msgid "<code>publisher</code>"
 msgstr "<code>izdavač</code>"
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:49
+#: yelp/C/format-strings.page:50
 msgid "When using conversions, custom property names can also be used."
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:50
+#: yelp/C/format-strings.page:51
 msgid ""
 "For example, a custom property who's name is <code>ENCODER</code> can be "
 "used as <code>%encoder%</code>."
@@ -741,22 +747,22 @@ msgid "<code>filename</code>"
 msgstr "<code>ime datoteke</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/search.page:43
+#: yelp/C/search.page:44
 msgid "<code>custom</code>"
 msgstr "<code>prilagođeno</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:45
+#: yelp/C/search.page:46
 msgid "Properties are case-insensitive."
 msgstr "Svojstva ne razlikuju velika i mala slova."
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:47
+#: yelp/C/search.page:48
 msgid "Syntax Checking"
 msgstr "Provjera sintakse"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:48
+#: yelp/C/search.page:49
 msgid ""
 "If the syntax of your string is valid, the textbox will turn green and will "
 "filter the listbox with your search. If the syntax of your string is "
@@ -768,17 +774,17 @@ msgstr ""
 "popis."
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:50
+#: yelp/C/search.page:51
 msgid "Examples"
 msgstr "Primjeri"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:51
+#: yelp/C/search.page:52
 msgid "<code>!artist=\"\"</code>"
 msgstr "<code>!izvođač=\"\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:52
+#: yelp/C/search.page:53
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "artist is empty."
@@ -787,12 +793,12 @@ msgstr ""
 "o izvođaču."
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:53
+#: yelp/C/search.page:54
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
 msgstr "<code>!žanr=\"\";godina=\"2022\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:54
+#: yelp/C/search.page:55
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "genre is empty and whose year is 2022 (Year and Track properties will "
@@ -803,12 +809,12 @@ msgstr ""
 "li se radi o broju)."
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:55
+#: yelp/C/search.page:56
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
 msgstr "<code>!naslov=\"\";izvođač=\"bob\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:56
+#: yelp/C/search.page:57
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "title is empty and whose artist is <code>bob</code>."
@@ -817,12 +823,12 @@ msgstr ""
 "o naslovu ali s izvođačem <code>bob</code>."
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:57
+#: yelp/C/search.page:58
 msgid "<code>!custom=\"mbrd\"</code>"
 msgstr "<code>!prilagođeno=\"\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:58
+#: yelp/C/search.page:59
 msgid ""
 "This search string will filter the listbox to contain music files that "
 "contain a custom property with the name <code>mbrd</code>."
@@ -857,8 +863,8 @@ msgid ""
 "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</"
 "link> for its backend to read and write metadata."
 msgstr ""
-"Tagger koristi <link href=\"https://github.com/Zeugma440/atldotnet"
-"\">atldotnet</link> kao pozadinu za čitanje i pisanje metapodataka. "
+"Tagger koristi <link href=\"https://github.com/Zeugma440/"
+"atldotnet\">atldotnet</link> kao pozadinu za čitanje i pisanje metapodataka. "
 "Trenutačno postoje još neka poznata ograničenja datoteka."
 
 #. (itstool) path: section/title

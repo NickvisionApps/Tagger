@@ -56,6 +56,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     public int Track { get; set; }
     /// <summary>
+    /// The number of total tracks of the music file
+    /// </summary>
+    public int TrackTotal { get; set; }
+    /// <summary>
     /// The album of the music file
     /// </summary>
     public string AlbumArtist { get; set; }
@@ -135,6 +139,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         Album = "";
         Year = 0;
         Track = 0;
+        TrackTotal = 0;
         AlbumArtist = "";
         Genre = "";
         Comment = "";
@@ -239,6 +244,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             Album = track.Album ?? "";
             Year = track.Year ?? 0;
             Track = track.TrackNumber ?? 0;
+            TrackTotal = track.TrackTotal ?? 0;
             AlbumArtist = track.AlbumArtist ?? "";
             Genre = track.Genre ?? "";
             Comment = track.Comment ?? "";
@@ -425,6 +431,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         track.Album = Album;
         track.Year = Year == 0 ? null : Year;
         track.TrackNumber = Track == 0 ? null : Track;
+        track.TrackTotal = TrackTotal == 0 ? null : TrackTotal;
         track.AlbumArtist = AlbumArtist;
         track.Genre = Genre;
         track.Comment = Comment;
@@ -470,6 +477,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         Album = "";
         Year = 0;
         Track = 0;
+        TrackTotal = 0;
         AlbumArtist = "";
         Genre = "";
         Comment = "";
@@ -592,6 +600,14 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 }
                 catch { }
             }
+            else if(value == "tracktotal" || value == _("tracktotal"))
+            {
+                try
+                {
+                    TrackTotal = int.Parse(filename.Substring(0, len));
+                }
+                catch { }
+            }
             else if(value == "albumartist" || value == _("albumartist"))
             {
                 AlbumArtist = filename.Substring(0, len);
@@ -645,7 +661,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return false;
         }
-        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
+        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
         var customProps = _customProperties.Keys.ToList();
         var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
         if(matches.Count == 0)
@@ -679,6 +695,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 else if(value == "track" || value == _("track"))
                 {
                     replace = Track.ToString("D2");
+                }
+                else if(value == "tracktotal" || value == _("tracktotal"))
+                {
+                    replace = TrackTotal.ToString("D2");
                 }
                 else if(value == "albumartist" || value == _("albumartist"))
                 {
