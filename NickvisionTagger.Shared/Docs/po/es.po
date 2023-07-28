@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-28 07:51-0400\n"
+"POT-Creation-Date: 2023-07-28 14:21-0400\n"
 "PO-Revision-Date: 2023-07-27 04:38+0000\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
 "weblate.org>\n"
@@ -365,49 +365,55 @@ msgstr "<code>pista</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:40 yelp/C/search.page:36
+#, fuzzy
+msgid "<code>tracktotal</code>"
+msgstr "<code>pista</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:41 yelp/C/search.page:37
 msgid "<code>albumartist</code>"
 msgstr "<code>artistadelálbum</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:41 yelp/C/search.page:37
+#: yelp/C/format-strings.page:42 yelp/C/search.page:38
 msgid "<code>genre</code>"
 msgstr "<code>género</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:42 yelp/C/search.page:38
+#: yelp/C/format-strings.page:43 yelp/C/search.page:39
 msgid "<code>comment</code>"
 msgstr "<code>comentario</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:43 yelp/C/search.page:39
+#: yelp/C/format-strings.page:44 yelp/C/search.page:40
 #, fuzzy
 msgid "<code>beatsperminute (bpm)</code>"
 msgstr "<code>título</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:44 yelp/C/search.page:40
+#: yelp/C/format-strings.page:45 yelp/C/search.page:41
 msgid "<code>composer</code>"
 msgstr "<code>compositor</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:45 yelp/C/search.page:41
+#: yelp/C/format-strings.page:46 yelp/C/search.page:42
 msgid "<code>description</code>"
 msgstr "<code>descripción</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:46 yelp/C/search.page:42
+#: yelp/C/format-strings.page:47 yelp/C/search.page:43
 msgid "<code>publisher</code>"
 msgstr "<code>editor</code>"
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:49
+#: yelp/C/format-strings.page:50
 msgid "When using conversions, custom property names can also be used."
 msgstr ""
 "Cuando se usan las conversiones, también se pueden usar los nombres de las "
 "propiedades personalizadas."
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:50
+#: yelp/C/format-strings.page:51
 msgid ""
 "For example, a custom property who's name is <code>ENCODER</code> can be "
 "used as <code>%encoder%</code>."
@@ -456,8 +462,8 @@ msgid ""
 msgstr ""
 "Para obtener ayuda, use <link href=\"https://github.com/NickvisionApps/"
 "Tagger/issues\">incidencias</link> o <link href=\"https://github.com/"
-"NickvisionApps/Tagger/discussions\">debates</link> en Github, o <link href="
-"\"https://bit.ly/3GrfEid\">únase a nuestro canal Matrix</link>."
+"NickvisionApps/Tagger/discussions\">debates</link> en Github, o <link "
+"href=\"https://bit.ly/3GrfEid\">únase a nuestro canal Matrix</link>."
 
 #. (itstool) path: list/title
 #: yelp/C/index.page:26
@@ -758,22 +764,22 @@ msgid "<code>filename</code>"
 msgstr "<code>nombredearchivo</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/search.page:43
+#: yelp/C/search.page:44
 msgid "<code>custom</code>"
 msgstr "<code>personalizado</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:45
+#: yelp/C/search.page:46
 msgid "Properties are case-insensitive."
 msgstr "Las propiedades distinguen entre mayúsculas y minúsculas."
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:47
+#: yelp/C/search.page:48
 msgid "Syntax Checking"
 msgstr "Comprobación sintáctica"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:48
+#: yelp/C/search.page:49
 msgid ""
 "If the syntax of your string is valid, the textbox will turn green and will "
 "filter the listbox with your search. If the syntax of your string is "
@@ -784,17 +790,17 @@ msgstr ""
 "el cuadro de texto se volverá rojo y no filtrará la lista."
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:50
+#: yelp/C/search.page:51
 msgid "Examples"
 msgstr "Ejemplos"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:51
+#: yelp/C/search.page:52
 msgid "<code>!artist=\"\"</code>"
 msgstr "<code>!artista=\"\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:52
+#: yelp/C/search.page:53
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "artist is empty."
@@ -803,12 +809,12 @@ msgstr ""
 "archivos de música cuyo artista esté vacío."
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:53
+#: yelp/C/search.page:54
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
 msgstr "<code>!género=\"\";año=\"2022\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:54
+#: yelp/C/search.page:55
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "genre is empty and whose year is 2022 (Year and Track properties will "
@@ -819,12 +825,12 @@ msgstr ""
 "propiedades año y pista se validarán si la cadena de valores es un número)."
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:55
+#: yelp/C/search.page:56
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
 msgstr "<code>!título=\"\";artista=\"bob\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:56
+#: yelp/C/search.page:57
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "title is empty and whose artist is <code>bob</code>."
@@ -834,12 +840,12 @@ msgstr ""
 "code>."
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:57
+#: yelp/C/search.page:58
 msgid "<code>!custom=\"mbrd\"</code>"
 msgstr "<code>!personalizado=\"mbrd\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:58
+#: yelp/C/search.page:59
 msgid ""
 "This search string will filter the listbox to contain music files that "
 "contain a custom property with the name <code>mbrd</code>."
