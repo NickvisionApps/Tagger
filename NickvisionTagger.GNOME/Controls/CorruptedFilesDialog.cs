@@ -28,15 +28,7 @@ public partial class CorruptedFilesDialog : Adw.Window
         //Dialog Settings
         SetIconName(iconName);
         SetTransientFor(parent);
-        _helpButton.OnClicked += async (sender, e) =>
-        {
-            var uriLauncher = Gtk.UriLauncher.New("help:tagger/corrupted");
-            try
-            {
-                await uriLauncher.LaunchAsync(this);
-            }
-            catch  { }
-        };
+        _helpButton.OnClicked += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger/corrupted", 0);
         foreach (var path in files)
         {
             var row = Adw.ActionRow.New();

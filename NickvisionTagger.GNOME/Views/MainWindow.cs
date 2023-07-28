@@ -395,29 +395,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         var toast = Adw.Toast.New(e.Message);
         if (e.Action == "unsupported")
         {
-            var uriLauncher = Gtk.UriLauncher.New("help:tagger/unsupported");
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += async (sender, e) =>
-            {
-                try
-                {
-                    await uriLauncher.LaunchAsync(this);
-                }
-                catch  { }
-            };
+            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger/unsupported", 0);
         }
         else if (e.Action == "format")
         {
-            var uriLauncher = Gtk.UriLauncher.New("help:tagger/format-strings");
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += async (sender, ex) =>
-            {
-                try
-                {
-                    await uriLauncher.LaunchAsync(this);
-                }
-                catch  { }
-            };
+            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger/format-strings", 0);
         }
         _toastOverlay.AddToast(toast);
     }
