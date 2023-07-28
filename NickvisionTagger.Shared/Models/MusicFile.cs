@@ -442,12 +442,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         foreach(var pair in _customProperties)
         {
-            if (track.AdditionalFields.ContainsKey(pair.Key))
-            {
-                track.AdditionalFields[pair.Key] = pair.Value;
-                continue;
-            }
-            track.AdditionalFields.Add(pair.Key, pair.Value);
+            track.AdditionalFields[pair.Key] = pair.Value;
         }
         res = track.Save();
         if(res)
