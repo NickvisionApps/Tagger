@@ -38,6 +38,9 @@
   <releases>
     <release version="2023.8.0-next" date="2023-08-01">
       <description translatable="no">
+        <p>- Added support for the BPM field</p>
+        <p>- Fixed an issue where clearing a tag did not clear all feilds</p>
+        <p>- Empty Year, Track, and BPM fields will show an empty string instead of 0</p>
         <p>- Updated translations (Thanks everyone on Weblate!)</p>
       </description>
     </release>

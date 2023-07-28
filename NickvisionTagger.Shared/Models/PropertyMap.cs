@@ -45,6 +45,10 @@ public class PropertyMap
     /// </summary>
     public string Comment { get; set; }
     /// <summary>
+    /// The BPM of the file
+    /// </summary>
+    public string BeatsPerMinute { get; set; }
+    /// <summary>
     /// The composer of the file
     /// </summary>
     public string Composer { get; set; }
@@ -104,6 +108,7 @@ public class PropertyMap
         AlbumArtist = "";
         Genre = "";
         Comment = "";
+        BeatsPerMinute = "";
         Composer = "";
         Description = "";
         Publisher = "";
@@ -131,6 +136,7 @@ public class PropertyMap
         s += $"AlbumArtist: {AlbumArtist}\n";
         s += $"Genre: {Genre}\n";
         s += $"Comment: {Comment}\n";
+        s += $"BeatsPerMinute: {BeatsPerMinute}\n";
         s += $"Composer: {Composer}\n";
         s += $"Description: {Description}\n";
         s += $"Publisher: {Publisher}\n";
