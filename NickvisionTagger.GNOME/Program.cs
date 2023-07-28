@@ -38,7 +38,7 @@ public partial class Program
         _mainWindowController.AppInfo.ShortName = _("Tagger");
         _mainWindowController.AppInfo.Description = $"{_("Tag your music")}.";
         _mainWindowController.AppInfo.Version = "2023.8.0-next";
-        _mainWindowController.AppInfo.Changelog = "<ul><li>Updated translations (Thanks everyone on Weblate!)</li></ul>";
+        _mainWindowController.AppInfo.Changelog = "<ul><li>Added support for the BPM field</li><li>Fixed an issue where clearing a tag did not clear all feilds</li><li>Updated translations (Thanks everyone on Weblate!)</li></ul>";
         _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Tagger");
         _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");
         _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Tagger/discussions");
