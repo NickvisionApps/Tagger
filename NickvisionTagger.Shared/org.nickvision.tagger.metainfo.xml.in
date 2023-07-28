@@ -36,18 +36,8 @@
     <binary>org.nickvision.tagger</binary>
   </provides>
   <releases>
-    <release version="2023.7.1" date="2023-07-26">
+    <release version="2023.8.0-next" date="2023-08-01">
       <description translatable="no">
-        <p>- Replaced TagLib backend for tag metadata with ATL.NET. This change added support for a lot more file types</p>
-        <p>- Added support for the following tag properties: Composer, Description, Publisher</p>
-        <p>- Added support for custom, user-defined properties</p>
-        <p>- Added support for custom, user-defined format strings for conversion</p>
-        <p>- Added help documentation with yelp-tools, accessible from the Help menu action</p>
-        <p>- Added more file sorting options</p>
-        <p>- Improved album art design and added support for managing back cover art and exporting album art</p>
-        <p>- Improved advanced search algorithm to use fuzzy searching</p>
-        <p>- Fixed an issue where corrupted music files would crash the app. Tagger will now display a dialog to warn the user of corrupted files</p>
-        <p>- Improved UI</p>
         <p>- Updated translations (Thanks everyone on Weblate!)</p>
       </description>
     </release>
