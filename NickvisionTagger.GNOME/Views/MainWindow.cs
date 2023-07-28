@@ -66,6 +66,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _albumRow;
     [Gtk.Connect] private readonly Adw.EntryRow _yearRow;
     [Gtk.Connect] private readonly Adw.EntryRow _trackRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _trackTotalRow;
     [Gtk.Connect] private readonly Adw.EntryRow _albumArtistRow;
     [Gtk.Connect] private readonly Adw.EntryRow _genreRow;
     [Gtk.Connect] private readonly Adw.EntryRow _commentRow;
@@ -150,6 +151,13 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         _trackRow.OnNotify += (sender, e) =>
+        {
+            if(e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _trackTotalRow.OnNotify += (sender, e) =>
         {
             if(e.Pspec.GetName() == "text")
             {
@@ -988,6 +996,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _albumRow.SetText(_controller.SelectedPropertyMap.Album);
         _yearRow.SetText(_controller.SelectedPropertyMap.Year);
         _trackRow.SetText(_controller.SelectedPropertyMap.Track);
+        _trackTotalRow.SetText(_controller.SelectedPropertyMap.TrackTotal);
         _albumArtistRow.SetText(_controller.SelectedPropertyMap.AlbumArtist);
         _genreRow.SetText(_controller.SelectedPropertyMap.Genre);
         _commentRow.SetText(_controller.SelectedPropertyMap.Comment);
@@ -1005,6 +1014,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _albumRow.SetEditable(true);
         _yearRow.SetEditable(true);
         _trackRow.SetEditable(true);
+        _trackTotalRow.SetEditable(true);
         _albumArtistRow.SetEditable(true);
         _genreRow.SetEditable(true);
         _commentRow.SetEditable(true);
@@ -1048,6 +1058,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _albumRow.SetEditable(false);
             _yearRow.SetEditable(false);
             _trackRow.SetEditable(false);
+            _trackTotalRow.SetEditable(false);
             _albumArtistRow.SetEditable(false);
             _genreRow.SetEditable(false);
             _commentRow.SetEditable(false);
@@ -1219,6 +1230,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 Album = _albumRow.GetText(),
                 Year = _yearRow.GetText(),
                 Track = _trackRow.GetText(),
+                TrackTotal = _trackTotalRow.GetText(),
                 AlbumArtist = _albumArtistRow.GetText(),
                 Genre = _genreRow.GetText(),
                 Comment = _commentRow.GetText(),
