@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="search" its:version="2.0" xml:lang="fr">
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="search" its:version="2.0" xml:lang="fi">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Recherche avancée 🔍</title>
+	<title type="link">Advanced Search 🔍</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -12,25 +12,19 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
 
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Irénée Thirion</mal:name>
-      <mal:email>irenee.thirion@e.email</mal:email>
-      <mal:years>2023</mal:years>
-    </mal:credit>
-  </info>
+<title>Advanced Search</title>
+<p>This page explains how to use Advanced Search in <app>Tagger</app>.</p>
 
-<title>Recherche avancée</title>
-<p>Cette page explique comment utiliser la recherche avancée dans <app>Tagger</app>.</p>
-
-<p>La recherche avancée est une fonctionnalité puissante fournie par <app>Tagger</app> qui permet à l’utilisateur de rechercher le contenu des balises de fichiers, en utilisant une syntaxe intuitive basée sur les balises :</p>
-<p><code>!prop1="valeur1";prop2="valeur2"</code></p>
-<p>Où <code>prop1</code>, <code>prop2</code> sont des propriétés de balises valides et <code>valeur1</code>, <code>valeur2</code> sont les valeurs à rechercher entre guillemets. Chaque propriété est séparée par un point-virgule. Remarquez que la dernière propriété ne se termine pas par un point-virgule.</p>
+<p>Advanced Search is a powerful feature provided by <app>Tagger</app> that allows users to search files' tag contents for certain values, using a powerful tag-based syntax:</p>
+<p><code>!prop1="value1";prop2="value2"</code></p>
+<p>Where <code>prop1</code>, <code>prop2</code> are valid tag properties and <code>value1</code>, <code>value2</code> are the values to search wrapped in quotes. Each property is separated by a semicolon. Notice how the last property does not end with a semicolon.</p>
 
 <section>
-<title>Propriétés valides</title>
+<title>Valid Properties</title>
 <list>
-<item><p><code>filename</code> (nom du fichier)</p></item>
+<item><p><code>filename</code></p></item>
 <item><p><code>title</code></p></item>
 <item><p><code>artist</code></p></item>
 <item><p><code>album</code></p></item>
