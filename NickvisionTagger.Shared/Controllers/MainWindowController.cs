@@ -298,6 +298,18 @@ public class MainWindowController
                 }
                 updated = true;
             }
+            if(map.TrackTotal != pair.Value.TrackTotal.ToString() && map.TrackTotal != _("<keep>"))
+            {
+                try
+                {
+                    pair.Value.TrackTotal = int.Parse(map.TrackTotal);
+                }
+                catch
+                {
+                    pair.Value.TrackTotal = 0;
+                }
+                updated = true;
+            }
             if(map.AlbumArtist != pair.Value.AlbumArtist && map.AlbumArtist != _("<keep>"))
             {
                 pair.Value.AlbumArtist = map.AlbumArtist;
@@ -773,7 +785,7 @@ public class MainWindowController
                 return (false, null);
             }
             var propValPairs = search.Split(';');
-            var validProperties = new string[] { "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "custom", _("custom") };
+            var validProperties = new string[] { "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "custom", _("custom") };
             var propertyMap = new PropertyMap();
             var customPropName = "";
             foreach(var propVal in propValPairs)
@@ -821,7 +833,7 @@ public class MainWindowController
                     {
                         try
                         {
-                            uint.Parse(val);
+                            int.Parse(val);
                         }
                         catch
                         {
@@ -836,7 +848,7 @@ public class MainWindowController
                     {
                         try
                         {
-                            uint.Parse(val);
+                            int.Parse(val);
                         }
                         catch
                         {
@@ -844,6 +856,21 @@ public class MainWindowController
                         }
                     }
                     propertyMap.Track = val;
+                }
+                else if(prop == "tracktotal" || prop == _("tracktotal"))
+                {
+                    if(val != "NULL")
+                    {
+                        try
+                        {
+                            int.Parse(val);
+                        }
+                        catch
+                        {
+                            return (false, null);
+                        }
+                    }
+                    propertyMap.TrackTotal = val;
                 }
                 else if(prop == "albumartist" || prop == _("albumartist"))
                 {
@@ -863,7 +890,7 @@ public class MainWindowController
                     {
                         try
                         {
-                            uint.Parse(val);
+                            int.Parse(val);
                         }
                         catch
                         {
@@ -983,7 +1010,7 @@ public class MainWindowController
                     else
                     {
                         ratio = 100;
-                        if(value != uint.Parse(propertyMap.Year))
+                        if(value != int.Parse(propertyMap.Year))
                         {
                             continue;
                         }
@@ -1002,7 +1029,26 @@ public class MainWindowController
                     else
                     {
                         ratio = 100;
-                        if(value != uint.Parse(propertyMap.Track))
+                        if(value != int.Parse(propertyMap.Track))
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if(!string.IsNullOrEmpty(propertyMap.TrackTotal))
+                {
+                    var value = musicFile.TrackTotal;
+                    if(propertyMap.TrackTotal == "NULL")
+                    {
+                        if(value != 0)
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        ratio = 100;
+                        if(value != int.Parse(propertyMap.TrackTotal))
                         {
                             continue;
                         }
@@ -1078,7 +1124,7 @@ public class MainWindowController
                     else
                     {
                         ratio = 100;
-                        if(value != uint.Parse(propertyMap.BeatsPerMinute))
+                        if(value != int.Parse(propertyMap.BeatsPerMinute))
                         {
                             continue;
                         }
@@ -1191,6 +1237,7 @@ public class MainWindowController
             SelectedPropertyMap.Album = first.Album;
             SelectedPropertyMap.Year = first.Year == 0 ? "" : first.Year.ToString();
             SelectedPropertyMap.Track = first.Track == 0 ? "" : first.Track.ToString();
+            SelectedPropertyMap.TrackTotal = first.TrackTotal == 0 ? "" : first.TrackTotal.ToString();
             SelectedPropertyMap.AlbumArtist = first.AlbumArtist;
             SelectedPropertyMap.Genre = first.Genre;
             SelectedPropertyMap.Comment = first.Comment;
@@ -1225,6 +1272,7 @@ public class MainWindowController
             var haveSameAlbum = true;
             var haveSameYear = true;
             var haveSameTrack = true;
+            var haveSameTrackTotal = true;
             var haveSameAlbumArtist = true;
             var haveSameGenre = true;
             var haveSameComment = true;
@@ -1257,6 +1305,10 @@ public class MainWindowController
                 if(first.Track != pair.Value.Track)
                 {
                     haveSameTrack = false;
+                }
+                if(first.TrackTotal != pair.Value.TrackTotal)
+                {
+                    haveSameTrackTotal = false;
                 }
                 if(first.AlbumArtist != pair.Value.AlbumArtist)
                 {
@@ -1303,6 +1355,7 @@ public class MainWindowController
             SelectedPropertyMap.Album = haveSameAlbum ? first.Album : _("<keep>");
             SelectedPropertyMap.Year = haveSameYear ? (first.Year == 0 ? "" : first.Year.ToString()) : _("<keep>");
             SelectedPropertyMap.Track = haveSameTrack ? (first.Track == 0 ? "" : first.Track.ToString()) : _("<keep>");
+            SelectedPropertyMap.TrackTotal = haveSameTrackTotal ? (first.TrackTotal == 0 ? "" : first.TrackTotal.ToString()) : _("<keep>");
             SelectedPropertyMap.AlbumArtist = haveSameAlbumArtist ? first.AlbumArtist : _("<keep>");
             SelectedPropertyMap.Genre = haveSameGenre ? first.Genre : _("<keep>");
             SelectedPropertyMap.Comment = haveSameComment ? first.Comment : _("<keep>");

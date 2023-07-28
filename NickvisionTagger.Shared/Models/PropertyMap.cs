@@ -33,6 +33,10 @@ public class PropertyMap
     /// </summary>
     public string Track { get; set; }
     /// <summary>
+    /// The number of total tracks of the file
+    /// </summary>
+    public string TrackTotal { get; set; }
+    /// <summary>
     /// The album artist of the file
     /// </summary>
     public string AlbumArtist { get; set; }
@@ -105,6 +109,7 @@ public class PropertyMap
         Album = "";
         Year = "";
         Track = "";
+        TrackTotal = "";
         AlbumArtist = "";
         Genre = "";
         Comment = "";
@@ -132,7 +137,7 @@ public class PropertyMap
         s += $"Artist: {Artist}\n";
         s += $"Album: {Album}\n";
         s += $"Year: {Year}\n";
-        s += $"Track: {Track}\n";
+        s += $"Track: {Track} / {TrackTotal}\n";
         s += $"AlbumArtist: {AlbumArtist}\n";
         s += $"Genre: {Genre}\n";
         s += $"Comment: {Comment}\n";
