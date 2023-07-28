@@ -602,7 +602,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 Comment = filename.Substring(0, len);
             }
-            else if(value == "bpm" || value == _("bpm"))
+            else if(value == "beatsperminute" || value == _("beatsperminute") || value == "bpm" || value == _("bpm"))
             {
                 try
                 {
@@ -643,7 +643,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return false;
         }
-        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
+        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
         var customProps = _customProperties.Keys.ToList();
         var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
         if(matches.Count == 0)
@@ -690,7 +690,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 {
                     replace = Comment;
                 }
-                else if(value == "bpm" || value == _("bpm"))
+                else if(value == "beatsperminute" || value == _("beatsperminute") || value == "bpm" || value == _("bpm"))
                 {
                     replace = BeatsPerMinute.ToString();
                 }
