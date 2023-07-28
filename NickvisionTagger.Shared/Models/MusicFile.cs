@@ -68,6 +68,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     public string Comment { get; set; }
     /// <summary>
+    /// The BPM of the music file
+    /// </summary>
+    public int BeatsPerMinute { get; set; }
+    /// <summary>
     /// The composer of the music file
     /// </summary>
     public string Composer { get; set; }
@@ -134,6 +138,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         AlbumArtist = "";
         Genre = "";
         Comment = "";
+        BeatsPerMinute = 0;
         Composer = "";
         Description = "";
         Publisher = "";
@@ -237,6 +242,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             AlbumArtist = track.AlbumArtist ?? "";
             Genre = track.Genre ?? "";
             Comment = track.Comment ?? "";
+            BeatsPerMinute = track.BPM ?? 0;
             Composer = track.Composer ?? "";
             Description = track.Description ?? "";
             Publisher = track.Publisher ?? "";
@@ -410,11 +416,12 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         track.Title = Title;
         track.Artist = Artist;
         track.Album = Album;
-        track.Year = Year;
-        track.TrackNumber = Track;
+        track.Year = Year == 0 ? null : Year;
+        track.TrackNumber = Track == 0 ? null : Track;
         track.AlbumArtist = AlbumArtist;
         track.Genre = Genre;
         track.Comment = Comment;
+        track.BPM = BeatsPerMinute == 0 ? null : BeatsPerMinute;
         track.Composer = Composer;
         track.Description = Description;
         track.Publisher = Publisher;
@@ -464,6 +471,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         AlbumArtist = "";
         Genre = "";
         Comment = "";
+        BeatsPerMinute = 0;
+        Composer = "";
+        Description = "";
+        Publisher = "";
         FrontAlbumArt = Array.Empty<byte>();
         BackAlbumArt = Array.Empty<byte>();
         _customProperties.Clear();
@@ -591,6 +602,14 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 Comment = filename.Substring(0, len);
             }
+            else if(value == "bpm" || value == _("bpm"))
+            {
+                try
+                {
+                    BeatsPerMinute = int.Parse(filename.Substring(0, len));
+                }
+                catch { }
+            }
             else if(value == "composer" || value == _("composer"))
             {
                 Composer = filename.Substring(0, len);
@@ -624,7 +643,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return false;
         }
-        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
+        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
         var customProps = _customProperties.Keys.ToList();
         var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
         if(matches.Count == 0)
@@ -670,6 +689,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 else if(value == "comment" || value == _("comment"))
                 {
                     replace = Comment;
+                }
+                else if(value == "bpm" || value == _("bpm"))
+                {
+                    replace = BeatsPerMinute.ToString();
                 }
                 else if(value == "composer" || value == _("composer"))
                 {
