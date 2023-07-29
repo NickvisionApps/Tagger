@@ -6,8 +6,16 @@ using System.Reflection;
 
 namespace NickvisionTagger.GNOME.Helpers;
 
+/// <summary>
+/// Helper class for help docs
+/// </summary>
 public static class Help
 {
+    /// <summary>
+    /// Get URL for given help page
+    /// </summary>
+    /// <param name="pageName">Help page name</param>
+    /// <returns>URL to either yelp or web page</returns>
     public static string GetHelpURL(string pageName)
     {
         if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP")))
