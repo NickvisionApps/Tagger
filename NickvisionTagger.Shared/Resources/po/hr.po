@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-28 15:09-0400\n"
-"PO-Revision-Date: 2023-07-29 12:14+0000\n"
+"PO-Revision-Date: 2023-07-29 14:02+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/"
 "nickvision-tagger/app/hr/>\n"
@@ -22,19 +22,19 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:118
 msgid "%artist%- %title%"
-msgstr "%artist% – %title%"
+msgstr "%izvođač%- %naslov%"
 
 #: ../../../Controllers/MainWindowController.cs:118
 msgid "%title%"
-msgstr "%title%"
+msgstr "%naslov%"
 
 #: ../../../Controllers/MainWindowController.cs:118
 msgid "%title%- %artist%"
-msgstr "%title% – %artist%"
+msgstr "%naslov%- %izvođač%"
 
 #: ../../../Controllers/MainWindowController.cs:118
 msgid "%track%- %title%"
-msgstr "%track% – %title%"
+msgstr "%pjesma%- %naslov%"
 
 #: ../../../Controllers/MainWindowController.cs:253
 #: ../../../Controllers/MainWindowController.cs:262
@@ -148,9 +148,8 @@ msgstr "Natrag"
 #: ../../../Controllers/MainWindowController.cs:887
 #: ../../../Models/MusicFile.cs:623 ../../../Models/MusicFile.cs:664
 #: ../../../Models/MusicFile.cs:715
-#, fuzzy
 msgid "beatsperminute"
-msgstr "BPM"
+msgstr "broje otkucaja u minuti"
 
 #: ../../../Controllers/MainWindowController.cs:788
 #: ../../../Controllers/MainWindowController.cs:887
@@ -294,7 +293,7 @@ msgstr "Digitalni otisak je kopiran u međuspremnik."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:618
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 msgid "Format String"
-msgstr "Znakovni niz formata"
+msgstr "Format izraza"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:117
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:658
@@ -414,7 +413,7 @@ msgstr "Otvori mapu"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:618
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:637
 msgid "Please select a format string."
-msgstr "Odaberi jedan znakovni niz formata."
+msgstr "Odaberi jedan format izraza."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:720
 msgid "Property Name"
@@ -525,9 +524,8 @@ msgstr "pjesma"
 #: ../../../Controllers/MainWindowController.cs:860
 #: ../../../Models/MusicFile.cs:603 ../../../Models/MusicFile.cs:664
 #: ../../../Models/MusicFile.cs:699
-#, fuzzy
 msgid "tracktotal"
-msgstr "pjesma"
+msgstr "broj pjesama"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:905
 msgid "translator-credits"
