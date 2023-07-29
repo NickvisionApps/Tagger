@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-07-28 14:21-0400\n"
-"PO-Revision-Date: 2023-07-22 12:46+0000\n"
+"PO-Revision-Date: 2023-07-29 14:02+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/docs/hr/>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/docs/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
@@ -272,12 +272,12 @@ msgstr ""
 #: yelp/C/format-strings.page:8
 msgctxt "link"
 msgid "Format Strings ✍️"
-msgstr ""
+msgstr "Format izraza ✍️"
 
 #. (itstool) path: page/title
 #: yelp/C/format-strings.page:20
 msgid "Format Strings"
-msgstr ""
+msgstr "Format izraza"
 
 #. (itstool) path: page/p
 #: yelp/C/format-strings.page:21
@@ -285,32 +285,35 @@ msgid ""
 "This page explains the use of format strings for <code>File Name to Tag</"
 "code> and <code>Tag to File Name</code> conversions."
 msgstr ""
+"Ova stranica objašnjava upotrebu formata izraza za pretvaranja <code>Ime "
+"datoteke u oznaku</code> i <code>Oznaka u ime datoteke</code>."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:23
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #. (itstool) path: section/p
 #: yelp/C/format-strings.page:24
 msgid "Strings of any format with properties wrapped in percent signs (%)."
 msgstr ""
+"Izrazi bilo kojeg formata sa svojstvima koja su omeđena znakovima postotka "
+"(%)."
 
 #. (itstool) path: note/title
 #: yelp/C/format-strings.page:26
-#, fuzzy
 msgid "Example"
-msgstr "Primjeri"
+msgstr "Primjer"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:27
 msgid "Format String: <code>%artist%- %title%</code>"
-msgstr ""
+msgstr "Format izraza: <code>%izvođač%- %naslov%</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:28
 msgid "Filename: <code>Artist1 - Song1.mp3</code>"
-msgstr ""
+msgstr "Ime datoteke: <code>Izvođač1 - Pjesma1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:29
@@ -319,12 +322,14 @@ msgid ""
 "and this file name will create a tag with an artist of <code>Artist1</code> "
 "and a title of <code>Song1</code>."
 msgstr ""
+"Prilikom pokretanja pretvaranja <code>Ime datoteke u oznaku</code>, ovaj "
+"format izraza i ovo ime datoteke stvorit će oznaku s izvođačem "
+"<code>Izvođač1</code> i naslovom <code>Pjesma1</code> ."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:33
-#, fuzzy
 msgid "Supported Properties"
-msgstr "Važeća svojstva"
+msgstr "Podržana svojstva"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:35 yelp/C/search.page:31
@@ -353,9 +358,8 @@ msgstr "<code>pjesma</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:40 yelp/C/search.page:36
-#, fuzzy
 msgid "<code>tracktotal</code>"
-msgstr "<code>pjesma</code>"
+msgstr "<code>broj pjesama</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:41 yelp/C/search.page:37
@@ -374,9 +378,8 @@ msgstr "<code>komentar</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:44 yelp/C/search.page:40
-#, fuzzy
 msgid "<code>beatsperminute (bpm)</code>"
-msgstr "<code>naslov</code>"
+msgstr "<code>broje otkucaja u minuti (bmp)</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:45 yelp/C/search.page:41
@@ -397,6 +400,7 @@ msgstr "<code>izdavač</code>"
 #: yelp/C/format-strings.page:50
 msgid "When using conversions, custom property names can also be used."
 msgstr ""
+"Kada se koriste pretvaranja mogu se koristiti i imena prilagođenih svojstava."
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:51
@@ -404,6 +408,8 @@ msgid ""
 "For example, a custom property who's name is <code>ENCODER</code> can be "
 "used as <code>%encoder%</code>."
 msgstr ""
+"Na primjer, prilagođeno svojstvo čije je ime <code>ENCODER</code> može se "
+"koristiti kao <code>%encoder%</code>."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
@@ -858,19 +864,17 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: yelp/C/unsupported.page:22
-#, fuzzy
 msgid ""
 "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</"
 "link> for its backend to read and write metadata."
 msgstr ""
-"Tagger koristi <link href=\"https://github.com/Zeugma440/atldotnet"
-"\">atldotnet</link> kao pozadinu za čitanje i pisanje metapodataka. "
-"Trenutačno postoje još neka poznata ograničenja datoteka."
+"Tagger koristi <link href=\"https://github.com/Zeugma440/atldotnet\""
+">atldotnet</link> kao pozadinski sustav za čitanje i pisanje metapodataka."
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
 msgid "No Known Issues At This Time"
-msgstr ""
+msgstr "Trenutačno nema poznatih problema"
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:25
@@ -878,6 +882,8 @@ msgid ""
 "<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Report an "
 "issue</link> if you experience any."
 msgstr ""
+"Ako naiđeš na problem <link href=\"https://github.com/NickvisionApps/Tagger/"
+"issues\">prijavi ga</link>."
 
 #. (itstool) path: info/title
 #: yelp/C/web-services.page:8
