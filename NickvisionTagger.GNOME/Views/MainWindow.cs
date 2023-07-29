@@ -352,7 +352,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
-        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger", 0);
+        var Snap = Environment.GetEnvironmentVariable("SNAP");
+        if (string.IsNullOrEmpty(Snap))  {
+            actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger", 0);
+            }
+        else{
+           actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, "https://htmlpreview.github.io/?https://raw.githubusercontent.com/NickvisionApps/Tagger/main/NickvisionTagger.Shared/Docs/html/C/search.html", 0);
+        }
         AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action

@@ -1,4 +1,5 @@
 using NickvisionTagger.GNOME.Helpers;
+using System;
 using System.Collections.Generic;
 using static Nickvision.GirExt.GtkExt;
 using static NickvisionTagger.Shared.Helpers.Gettext;
@@ -28,7 +29,11 @@ public partial class CorruptedFilesDialog : Adw.Window
         //Dialog Settings
         SetIconName(iconName);
         SetTransientFor(parent);
-        _helpButton.OnClicked += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger/corrupted", 0);
+        var Snap = Environment.GetEnvironmentVariable("SNAP");
+        if (string.IsNullOrEmpty(Snap))  {_helpButton.OnClicked += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger/corrupted", 0);}
+        else{
+            _helpButton.OnClicked += (sender, e) => Gtk.Functions.ShowUri(this, "https://htmlpreview.github.io/?https://raw.githubusercontent.com/NickvisionApps/Tagger/main/NickvisionTagger.Shared/Docs/html/C/corrupted.html", 0);
+        }
         foreach (var path in files)
         {
             var row = Adw.ActionRow.New();
