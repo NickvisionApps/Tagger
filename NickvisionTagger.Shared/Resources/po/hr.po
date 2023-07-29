@@ -8,34 +8,33 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-28 15:09-0400\n"
-"PO-Revision-Date: 2023-07-22 12:46+0000\n"
+"PO-Revision-Date: 2023-07-29 12:14+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
-"Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/hr/>\n"
+"Language-Team: Croatian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
 #: ../../../Controllers/MainWindowController.cs:118
 msgid "%artist%- %title%"
-msgstr ""
+msgstr "%artist% – %title%"
 
 #: ../../../Controllers/MainWindowController.cs:118
-#, fuzzy
 msgid "%title%"
-msgstr "naslov"
+msgstr "%title%"
 
 #: ../../../Controllers/MainWindowController.cs:118
 msgid "%title%- %artist%"
-msgstr ""
+msgstr "%title% – %artist%"
 
 #: ../../../Controllers/MainWindowController.cs:118
 msgid "%track%- %title%"
-msgstr ""
+msgstr "%track% – %title%"
 
 #: ../../../Controllers/MainWindowController.cs:253
 #: ../../../Controllers/MainWindowController.cs:262
@@ -214,9 +213,8 @@ msgstr "prilagođeno"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:47
 #: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:59
-#, fuzzy
 msgid "Custom"
-msgstr "prilagođeno"
+msgstr "Prilagođeno"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:904
 #, csharp-format
@@ -841,9 +839,8 @@ msgid "File Name"
 msgstr "Ime datoteke"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:366
-#, fuzzy
 msgid "Main Properties"
-msgstr "Svojstva oznake"
+msgstr "Glavna svojstva"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:369
 msgid "Title"
@@ -866,9 +863,8 @@ msgid "Track"
 msgstr "Pjesma"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:389
-#, fuzzy
 msgid "Track Total"
-msgstr "Pjesma"
+msgstr "Broj pjesama"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:393
 msgid "Album Artist"
@@ -879,9 +875,8 @@ msgid "Genre"
 msgstr "Žanr"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:402
-#, fuzzy
 msgid "Additional Properties"
-msgstr "Svojstva datoteke"
+msgstr "Dodatna svojstva"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:405
 msgid "Comment"
@@ -944,9 +939,8 @@ msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Primijeni promjene na oznaku (Ctrl+S)"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:11
-#, fuzzy
 msgid "Tag;Music;Editor;Library;Nickvision;"
-msgstr "Oznaka;Glazba;Uređivač;Biblioteka;"
+msgstr "Oznaka;Glazba;Uređivač;Biblioteka;Fonoteka;Nickvision;"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:10
 msgid ""
