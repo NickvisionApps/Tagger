@@ -117,98 +117,98 @@ public partial class MainWindow : Adw.ApplicationWindow
         _artTypeLabel.SetLabel(_currentAlbumArtType == AlbumArtType.Front ? _("Front") : _("Back"));
         _filenameRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _titleRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _artistRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _albumRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _yearRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _trackRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _trackTotalRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _albumArtistRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _genreRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _commentRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _bpmRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _composerRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _descriptionRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
         };
         _publisherRow.OnNotify += (sender, e) =>
         {
-            if(e.Pspec.GetName() == "text")
+            if (e.Pspec.GetName() == "text")
             {
                 TagPropertyChanged();
             }
@@ -352,7 +352,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
-        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger", 0);
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("index"), 0);
         AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action
@@ -396,12 +396,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (e.Action == "unsupported")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger/unsupported", 0);
+            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("unsupported"), 0);
         }
         else if (e.Action == "format")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger/format-strings", 0);
+            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("format-string"), 0);
         }
         _toastOverlay.AddToast(toast);
     }
@@ -473,13 +473,13 @@ public partial class MainWindow : Adw.ApplicationWindow
             var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
             dialog.OnResponse += async (s, ex) =>
             {
-                if(dialog.Response == MessageDialogResponse.Suggested)
+                if (dialog.Response == MessageDialogResponse.Suggested)
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                     Close();
                 }
-                else if(dialog.Response == MessageDialogResponse.Destructive)
+                else if (dialog.Response == MessageDialogResponse.Destructive)
                 {
                     _controller.ForceAllowClose();
                     Close();
@@ -537,17 +537,17 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private async void ReloadFolder(Gio.SimpleAction sender, EventArgs e)
     {
-        if(!_controller.CanClose)
+        if (!_controller.CanClose)
         {
             var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
             dialog.OnResponse += async (s, ex) =>
             {
-                if(dialog.Response == MessageDialogResponse.Suggested)
+                if (dialog.Response == MessageDialogResponse.Suggested)
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                 }
-                if(dialog.Response != MessageDialogResponse.Cancel)
+                if (dialog.Response != MessageDialogResponse.Cancel)
                 {
                     SetLoadingState(_("Loading music files from folder..."));
                     await _controller.ReloadFolderAsync();
@@ -602,7 +602,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("File Name to Tag"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
         dialog.OnResponse += (s, ex) =>
         {
-            if(!string.IsNullOrEmpty(dialog.Response))
+            if (!string.IsNullOrEmpty(dialog.Response))
             {
                 _controller.FilenameToTag(dialog.Response);
             }
@@ -621,7 +621,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("Tag to File Name"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
         dialog.OnResponse += (s, ex) =>
         {
-            if(!string.IsNullOrEmpty(dialog.Response))
+            if (!string.IsNullOrEmpty(dialog.Response))
             {
                 _controller.TagToFilename(dialog.Response);
             }
@@ -661,7 +661,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             var file = await openFileDialog.OpenAsync(this);
             _controller.InsertSelectedAlbumArt(file.GetPath(), type);
         }
-        catch  { }
+        catch { }
     }
 
     /// <summary>
@@ -693,7 +693,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             var file = await saveFileDialog.SaveAsync(this);
             _controller.ExportSelectedAlbumArt(file.GetPath(), type);
         }
-        catch  { }
+        catch { }
     }
 
     /// <summary>
@@ -704,7 +704,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("New Custom Property"), "", _("Property Name"), _("Cancel"), _("Add"));
         entryDialog.OnResponse += (sender, e) =>
         {
-            if(!string.IsNullOrEmpty(entryDialog.Response))
+            if (!string.IsNullOrEmpty(entryDialog.Response))
             {
                 _controller.AddCustomProperty(entryDialog.Response);
             }
@@ -731,7 +731,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void SubmitToAcoustId(Gio.SimpleAction sender, EventArgs e)
     {
-        if(_controller.SelectedMusicFiles.Count > 1)
+        if (_controller.SelectedMusicFiles.Count > 1)
         {
             var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Too Many Files Selected"), _("Only one file can be submitted to AcoustID at a time. Please select only one file and try again."), _("OK"));
             dialog.OnResponse += (s, ex) => dialog.Destroy();
@@ -741,19 +741,19 @@ public partial class MainWindow : Adw.ApplicationWindow
         var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("Submit to AcoustId"), _("AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id for easy identification.\n\nIf you have a MusicBrainz Recording Id for this song, please provide it below.\n\nIf none is provided, Tagger will submit your tag's metadata in association with the fingerprint instead."), _("MusicBrainz Recording Id"), _("Cancel"), _("Submit"));
         entryDialog.OnResponse += async (s, ex) =>
         {
-            if(!string.IsNullOrEmpty(entryDialog.Response))
+            if (!string.IsNullOrEmpty(entryDialog.Response))
             {
-                if(!_controller.CanClose)
+                if (!_controller.CanClose)
                 {
                     var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
                     dialog.OnResponse += async (ss, exx) =>
                     {
-                        if(dialog.Response == MessageDialogResponse.Suggested)
+                        if (dialog.Response == MessageDialogResponse.Suggested)
                         {
                             SetLoadingState(_("Saving tags..."));
                             await _controller.SaveAllTagsAsync(false);
                         }
-                        if(dialog.Response != MessageDialogResponse.Cancel)
+                        if (dialog.Response != MessageDialogResponse.Cancel)
                         {
                             SetLoadingState(_("Submitting data to AcoustId..."));
                             await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
@@ -781,16 +781,16 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void Preferences(Gio.SimpleAction sender, EventArgs e)
     {
         var preferencesDialog = new PreferencesDialog(_controller.CreatePreferencesViewController(), _application, this);
-        if(!_controller.CanClose)
+        if (!_controller.CanClose)
         {
             var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
             dialog.OnResponse += async (ss, exx) =>
             {
-                if(dialog.Response != MessageDialogResponse.Cancel)
+                if (dialog.Response != MessageDialogResponse.Cancel)
                 {
                     preferencesDialog.Present();
                 }
-                if(dialog.Response == MessageDialogResponse.Suggested)
+                if (dialog.Response == MessageDialogResponse.Suggested)
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(true);
@@ -897,17 +897,17 @@ public partial class MainWindow : Adw.ApplicationWindow
     private bool MusicFolderUpdated()
     {
         _listMusicFiles.UnselectAll();
-        foreach(var row in _listMusicFilesRows)
+        foreach (var row in _listMusicFilesRows)
         {
             _listMusicFiles.Remove(row);
         }
         _listMusicFilesRows.Clear();
-        if(!string.IsNullOrEmpty(_controller.MusicFolderPath))
+        if (!string.IsNullOrEmpty(_controller.MusicFolderPath))
         {
-            foreach(var musicFile in _controller.MusicFiles)
+            foreach (var musicFile in _controller.MusicFiles)
             {
                 var row = Adw.ActionRow.New();
-                if(!string.IsNullOrEmpty(musicFile.Title))
+                if (!string.IsNullOrEmpty(musicFile.Title))
                 {
                     row.SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
                     row.SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
@@ -952,7 +952,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _applyButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         _tagActionsButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         var i = 0;
-        foreach(var saved in _controller.MusicFileSaveStates)
+        foreach (var saved in _controller.MusicFileSaveStates)
         {
             _listMusicFilesRows[i].SetIconName(!saved ? "document-modified-symbolic" : "");
             i++;
@@ -970,7 +970,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _applyButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         _tagActionsButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         _filenameRow.SetEditable(_controller.SelectedMusicFiles.Count < 2);
-        if(_controller.SelectedMusicFiles.Count == 0)
+        if (_controller.SelectedMusicFiles.Count == 0)
         {
             _musicFilesSearch.SetText("");
         }
@@ -1006,11 +1006,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         _composerRow.SetEditable(true);
         _descriptionRow.SetEditable(true);
         _publisherRow.SetEditable(true);
-        if(albumArt == "hasArt")
+        if (albumArt == "hasArt")
         {
             _artViewStack.SetVisibleChildName("Image");
             var art = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedMusicFiles.First().Value.FrontAlbumArt : _controller.SelectedMusicFiles.First().Value.BackAlbumArt;
-            if(art.Length == 0)
+            if (art.Length == 0)
             {
                 _albumArtImage.SetPaintable(null);
             }
@@ -1021,7 +1021,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _albumArtImage.SetPaintable(texture);
             }
         }
-        else if(albumArt == "keepArt")
+        else if (albumArt == "keepArt")
         {
             _artViewStack.SetVisibleChildName("KeepImage");
             _albumArtImage.SetPaintable(null);
@@ -1054,15 +1054,15 @@ public partial class MainWindow : Adw.ApplicationWindow
             _removeAlbumArtAction.SetEnabled(false);
         }
         //Update Custom Properties
-        foreach(var row in _customPropertyRows)
+        foreach (var row in _customPropertyRows)
         {
             _customPropertiesGroup.Remove(row);
         }
         _customPropertyRows.Clear();
         _customPropertiesGroup.SetVisible(_controller.SelectedMusicFiles.Count == 1);
-        if(_controller.SelectedMusicFiles.Count == 1)
+        if (_controller.SelectedMusicFiles.Count == 1)
         {
-            foreach(var pair in _controller.SelectedPropertyMap.CustomProperties)
+            foreach (var pair in _controller.SelectedPropertyMap.CustomProperties)
             {
                 var row = Adw.EntryRow.New();
                 row.SetTitle(pair.Key);
@@ -1076,7 +1076,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 row.AddSuffix(removeButton);
                 row.OnNotify += (sender, e) =>
                 {
-                    if(e.Pspec.GetName() == "text")
+                    if (e.Pspec.GetName() == "text")
                     {
                         TagPropertyChanged();
                     }
@@ -1090,9 +1090,9 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         }
         //Update Rows
-        foreach(var pair in _controller.SelectedMusicFiles)
+        foreach (var pair in _controller.SelectedMusicFiles)
         {
-            if(!string.IsNullOrEmpty(pair.Value.Title))
+            if (!string.IsNullOrEmpty(pair.Value.Title))
             {
                 _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
                 _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
@@ -1115,11 +1115,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void SearchChanged(Gtk.SearchEntry sender, EventArgs e)
     {
         var search = _musicFilesSearch.GetText().ToLower();
-        if(!string.IsNullOrEmpty(search) && search[0] == '!')
+        if (!string.IsNullOrEmpty(search) && search[0] == '!')
         {
             _advancedSearchInfoButton.SetVisible(true);
             var result = _controller.AdvancedSearch(search);
-            if(!result.Success)
+            if (!result.Success)
             {
                 _musicFilesSearch.RemoveCssClass("success");
                 _musicFilesSearch.AddCssClass("error");
@@ -1131,12 +1131,12 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _musicFilesSearch.AddCssClass("success");
                 _listMusicFiles.SetFilterFunc((row) =>
                 {
-                    if(result.LowerFilenames!.Count == 0)
+                    if (result.LowerFilenames!.Count == 0)
                     {
                         return false;
                     }
                     var rowFilename = (row as Adw.ActionRow)!.GetSubtitle() ?? "";
-                    if(string.IsNullOrEmpty(rowFilename))
+                    if (string.IsNullOrEmpty(rowFilename))
                     {
                         rowFilename = (row as Adw.ActionRow)!.GetTitle();
                     }
@@ -1153,12 +1153,12 @@ public partial class MainWindow : Adw.ApplicationWindow
             _listMusicFiles.SetFilterFunc((row) =>
             {
                 var rowFilename = (row as Adw.ActionRow)!.GetSubtitle() ?? "";
-                if(string.IsNullOrEmpty(rowFilename))
+                if (string.IsNullOrEmpty(rowFilename))
                 {
                     rowFilename = (row as Adw.ActionRow)!.GetTitle();
                 }
                 rowFilename = rowFilename.ToLower();
-                if(string.IsNullOrEmpty(search) || rowFilename.Contains(search))
+                if (string.IsNullOrEmpty(search) || rowFilename.Contains(search))
                 {
                     return true;
                 }
@@ -1172,7 +1172,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, "help:tagger/search", 0);
+    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("search"), 0);
+
 
     /// <summary>
     /// Occurs when the _listMusicFiles's selection is changed
@@ -1184,7 +1185,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _isSelectionOccuring = true;
         var selectedIndexes = sender.GetSelectedRowsIndices();
         _selectedViewStack.SetVisibleChildName(selectedIndexes.Any() ? "Selected" : "NoSelected");
-        if(_currentAlbumArtType != AlbumArtType.Front)
+        if (_currentAlbumArtType != AlbumArtType.Front)
         {
             SwitchAlbumArt(null, e);
         }
@@ -1203,7 +1204,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private void TagPropertyChanged()
     {
-        if(!_isSelectionOccuring && _controller.SelectedMusicFiles.Count > 0)
+        if (!_isSelectionOccuring && _controller.SelectedMusicFiles.Count > 0)
         {
             //Update Tags
             var propMap = new PropertyMap()
@@ -1223,18 +1224,18 @@ public partial class MainWindow : Adw.ApplicationWindow
                 Description = _descriptionRow.GetText(),
                 Publisher = _publisherRow.GetText()
             };
-            if(_controller.SelectedMusicFiles.Count == 1)
+            if (_controller.SelectedMusicFiles.Count == 1)
             {
-                foreach(var row in _customPropertyRows)
+                foreach (var row in _customPropertyRows)
                 {
                     propMap.CustomProperties.Add(row.GetTitle(), row.GetText());
                 }
             }
             _controller.UpdateTags(propMap, false);
             //Update Rows
-            foreach(var pair in _controller.SelectedMusicFiles)
+            foreach (var pair in _controller.SelectedMusicFiles)
             {
-                if(!string.IsNullOrEmpty(pair.Value.Title))
+                if (!string.IsNullOrEmpty(pair.Value.Title))
                 {
                     _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
                     _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
