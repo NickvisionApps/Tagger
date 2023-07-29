@@ -396,12 +396,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (e.Action == "unsupported")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger/unsupported", 0);
+            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP")) ? "help:tagger/unsupported" : "https://htmlpreview.github.io/?https://raw.githubusercontent.com/NickvisionApps/Tagger/main/NickvisionTagger.Shared/Docs/html/C/unsupported.html", 0);
         }
         else if (e.Action == "format")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, "help:tagger/format-strings", 0);
+            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP")) ? "help:tagger/format-strings" : "https://htmlpreview.github.io/?https://raw.githubusercontent.com/NickvisionApps/Tagger/main/NickvisionTagger.Shared/Docs/html/C/format-strings.html", 0);
         }
         _toastOverlay.AddToast(toast);
     }
@@ -1172,7 +1172,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, "help:tagger/search", 0);
+    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, string.IsNullOrEmpty(Environment.GetEnvironmentVariable("SNAP")) ? "help:tagger/search" : "https://htmlpreview.github.io/?https://raw.githubusercontent.com/NickvisionApps/Tagger/main/NickvisionTagger.Shared/Docs/html/C/search.html", 0);
+
 
     /// <summary>
     /// Occurs when the _listMusicFiles's selection is changed
