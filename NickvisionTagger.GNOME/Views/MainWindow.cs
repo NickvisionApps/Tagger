@@ -12,7 +12,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using NickvisionTagger.Shared.Models;
-using static NickvisionTagger.GNOME.Helpers.Help;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 using static Nickvision.GirExt.GtkExt;
 
@@ -353,7 +352,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
-        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, GetHelpURL("index"), 0);
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("index"), 0);
         AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action
@@ -397,12 +396,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (e.Action == "unsupported")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, GetHelpURL("unsupported"), 0);
+            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("unsupported"), 0);
         }
         else if (e.Action == "format")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, GetHelpURL("format-string"), 0);
+            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("format-string"), 0);
         }
         _toastOverlay.AddToast(toast);
     }
@@ -1173,7 +1172,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, GetHelpURL("search"), 0);
+    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("search"), 0);
 
 
     /// <summary>

@@ -22,22 +22,25 @@ public static class Help
         {
             return $"help:tagger/{pageName}";
         }
-        using var linguasStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionTagger.GNOME.LINGUAS");
-        using var reader = new StreamReader(linguasStream!);
-        var linguas = reader.ReadToEnd().Split(Environment.NewLine);
         var lang = "C";
-        if (linguas.Contains(CultureInfo.CurrentCulture.Name.Replace("-", "_")))
+        if (!CultureInfo.CurrentCulture.Equals(CultureInfo.InvariantCulture) && CultureInfo.CurrentCulture.Name != "en-US")
         {
-            lang = CultureInfo.CurrentCulture.Name.Replace("-", "_");
-        }
-        else
-        {
-            foreach (var l in linguas)
+            using var linguasStream = Assembly.GetCallingAssembly().GetManifestResourceStream("NickvisionTagger.GNOME.LINGUAS");
+            using var reader = new StreamReader(linguasStream!);
+            var linguas = reader.ReadToEnd().Split(Environment.NewLine);
+            if (linguas.Contains(CultureInfo.CurrentCulture.Name.Replace("-", "_")))
             {
-                if (l.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
+                lang = CultureInfo.CurrentCulture.Name.Replace("-", "_");
+            }
+            else
+            {
+                foreach (var l in linguas)
                 {
-                    lang = l;
-                    break;
+                    if (l.Contains(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
+                    {
+                        lang = l;
+                        break;
+                    }
                 }
             }
         }
