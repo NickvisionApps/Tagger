@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Format Strings</title>
+<title>Format izraza</title>
 <link rel="stylesheet" type="text/css" href="../C/C.css">
 <script type="text/javascript" src="../C/highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,13 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="hr" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Pomoć za Tagger">Pomoć za Tagger</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Format Strings</span></h1></div>
+<a class="trail" href="index.html" title="Pomoć za Tagger">Pomoć za Tagger</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Format izraza</span></h1></div>
 <div class="region">
-<div class="contents pagewide"><p class="p">This page explains the use of format strings for <span class="code">File Name to Tag</span> and <span class="code">Tag to File Name</span> conversions.</p></div>
+<div class="contents pagewide"><p class="p">Ova stranica objašnjava upotrebu formata izraza za pretvaranja <span class="code">Ime datoteke u oznaku</span> i <span class="code">Oznaka u ime datoteke</span>.</p></div>
 <section id=""><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Format</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p">Strings of any format with properties wrapped in percent signs (%).</p>
+<p class="p">Izrazi bilo kojeg formata sa svojstvima koja su omeđena znakovima postotka (%).</p>
 <div class="note" title="Bilješka">
 <svg height="24" width="24" version="1.1">
  <g>
@@ -29,17 +29,17 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
  </g>
 </svg><div class="inner">
-<div class="title title-note"><h3><span class="title">Example</span></h3></div>
+<div class="title title-note"><h3><span class="title">Primjer</span></h3></div>
 <div class="region"><div class="contents">
-<p class="p">Format String: <span class="code">%artist%- %title%</span></p>
-<p class="p">Filename: <span class="code">Artist1 - Song1.mp3</span></p>
-<p class="p">When running <span class="code">File Name to Tag</span> conversion, this format string and this file name will create a tag with an artist of <span class="code">Artist1</span> and a title of <span class="code">Song1</span>.</p>
+<p class="p">Format izraza: <span class="code">%izvođač%- %naslov%</span></p>
+<p class="p">Ime datoteke: <span class="code">Izvođač1 - Pjesma1.mp3</span></p>
+<p class="p">Prilikom pokretanja pretvaranja <span class="code">Ime datoteke u oznaku</span>, ovaj format izraza i ovo ime datoteke stvorit će oznaku s izvođačem <span class="code">Izvođač1</span> i naslovom <span class="code">Pjesma1</span> .</p>
 </div></div>
 </div>
 </div>
 </div></div>
 </div></section><section id=""><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">Supported Properties</span></h2></div>
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Podržana svojstva</span></h2></div>
 <div class="region"><div class="contents pagewide">
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list"><p class="p"><span class="code">naslov</span></p></li>
@@ -47,11 +47,11 @@ document.addEventListener('DOMContentLoaded', function() {
 <li class="list"><p class="p"><span class="code">album</span></p></li>
 <li class="list"><p class="p"><span class="code">godina</span></p></li>
 <li class="list"><p class="p"><span class="code">pjesma</span></p></li>
-<li class="list"><p class="p"><span class="code">tracktotal</span></p></li>
+<li class="list"><p class="p"><span class="code">broj pjesama</span></p></li>
 <li class="list"><p class="p"><span class="code">izvođač albuma</span></p></li>
 <li class="list"><p class="p"><span class="code">žanr</span></p></li>
 <li class="list"><p class="p"><span class="code">komentar</span></p></li>
-<li class="list"><p class="p"><span class="code">beatsperminute (bpm)</span></p></li>
+<li class="list"><p class="p"><span class="code">broje otkucaja u minuti (bmp)</span></p></li>
 <li class="list"><p class="p"><span class="code">skladatelj</span></p></li>
 <li class="list"><p class="p"><span class="code">opis</span></p></li>
 <li class="list"><p class="p"><span class="code">izdavač</span></p></li>
@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
  </g>
 </svg><div class="inner"><div class="region"><div class="contents">
-<p class="p">When using conversions, custom property names can also be used.</p>
-<p class="p">For example, a custom property who's name is <span class="code">ENCODER</span> can be used as <span class="code">%encoder%</span>.</p>
+<p class="p">Kada se koriste pretvaranja mogu se koristiti i imena prilagođenih svojstava.</p>
+<p class="p">Na primjer, prilagođeno svojstvo čije je ime <span class="code">ENCODER</span> može se koristiti kao <span class="code">%encoder%</span>.</p>
 </div></div></div>
 </div>
 </div></div>

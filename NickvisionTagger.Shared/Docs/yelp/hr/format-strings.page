@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="format-strings" its:version="2.0" xml:lang="hr">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Format Strings ✍️</title>
+	<title type="link">Format izraza ✍️</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -14,38 +14,38 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Format Strings</title>
-<p>This page explains the use of format strings for <code>File Name to Tag</code> and <code>Tag to File Name</code> conversions.</p>
+<title>Format izraza</title>
+<p>Ova stranica objašnjava upotrebu formata izraza za pretvaranja <code>Ime datoteke u oznaku</code> i <code>Oznaka u ime datoteke</code>.</p>
 <section>
     <title>Format</title>
-    <p>Strings of any format with properties wrapped in percent signs (%).</p>
+    <p>Izrazi bilo kojeg formata sa svojstvima koja su omeđena znakovima postotka (%).</p>
     <note>
-        <title>Example</title>
-        <p>Format String: <code>%artist%- %title%</code></p>
-        <p>Filename: <code>Artist1 - Song1.mp3</code></p>
-        <p>When running <code>File Name to Tag</code> conversion, this format string and this file name will create a tag with an artist of <code>Artist1</code> and a title of <code>Song1</code>.</p>
+        <title>Primjer</title>
+        <p>Format izraza: <code>%izvođač%- %naslov%</code></p>
+        <p>Ime datoteke: <code>Izvođač1 - Pjesma1.mp3</code></p>
+        <p>Prilikom pokretanja pretvaranja <code>Ime datoteke u oznaku</code>, ovaj format izraza i ovo ime datoteke stvorit će oznaku s izvođačem <code>Izvođač1</code> i naslovom <code>Pjesma1</code> .</p>
     </note>
 </section>
 <section>
-    <title>Supported Properties</title>
+    <title>Podržana svojstva</title>
     <list>
         <item><p><code>naslov</code></p></item>
         <item><p><code>izvođač</code></p></item>
         <item><p><code>album</code></p></item>
         <item><p><code>godina</code></p></item>
         <item><p><code>pjesma</code></p></item>
-        <item><p><code>tracktotal</code></p></item>
+        <item><p><code>broj pjesama</code></p></item>
         <item><p><code>izvođač albuma</code></p></item>
         <item><p><code>žanr</code></p></item>
         <item><p><code>komentar</code></p></item>
-        <item><p><code>beatsperminute (bpm)</code></p></item>
+        <item><p><code>broje otkucaja u minuti (bmp)</code></p></item>
         <item><p><code>skladatelj</code></p></item>
         <item><p><code>opis</code></p></item>
         <item><p><code>izdavač</code></p></item>
     </list>
     <note>
-        <p>When using conversions, custom property names can also be used.</p>
-        <p>For example, a custom property who's name is <code>ENCODER</code> can be used as <code>%encoder%</code>.</p>
+        <p>Kada se koriste pretvaranja mogu se koristiti i imena prilagođenih svojstava.</p>
+        <p>Na primjer, prilagođeno svojstvo čije je ime <code>ENCODER</code> može se koristiti kao <code>%encoder%</code>.</p>
     </note>
 </section>
 </page>
