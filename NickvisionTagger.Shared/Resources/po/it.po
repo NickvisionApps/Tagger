@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-29 22:08-0400\n"
-"PO-Revision-Date: 2023-07-25 20:21+0000\n"
-"Last-Translator: Federico Marchetti <marchetti.federico@protonmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/it/>\n"
+"PO-Revision-Date: 2023-07-31 15:12+0000\n"
+"Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -149,14 +149,14 @@ msgstr "Indietro"
 #: ../../../Models/MusicFile.cs:623 ../../../Models/MusicFile.cs:664
 #: ../../../Models/MusicFile.cs:715
 msgid "beatsperminute"
-msgstr ""
+msgstr "battitialminuto"
 
 #: ../../../Controllers/MainWindowController.cs:788
 #: ../../../Controllers/MainWindowController.cs:887
 #: ../../../Models/MusicFile.cs:623 ../../../Models/MusicFile.cs:664
 #: ../../../Models/MusicFile.cs:715
 msgid "bpm"
-msgstr ""
+msgstr "bpm"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:473
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:542
@@ -520,9 +520,8 @@ msgstr "traccia"
 #: ../../../Controllers/MainWindowController.cs:860
 #: ../../../Models/MusicFile.cs:603 ../../../Models/MusicFile.cs:664
 #: ../../../Models/MusicFile.cs:699
-#, fuzzy
 msgid "tracktotal"
-msgstr "traccia"
+msgstr "traccetotali"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:889
 msgid "translator-credits"
@@ -834,9 +833,8 @@ msgid "File Name"
 msgstr "Nome del file"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:366
-#, fuzzy
 msgid "Main Properties"
-msgstr "Proprietà delle etichette"
+msgstr "Proprietà principali"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:369
 msgid "Title"
@@ -859,9 +857,8 @@ msgid "Track"
 msgstr "Numero della traccia"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:389
-#, fuzzy
 msgid "Track Total"
-msgstr "Numero della traccia"
+msgstr "Numero delle tracce totali"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:393
 msgid "Album Artist"
@@ -872,9 +869,8 @@ msgid "Genre"
 msgstr "Genere"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:402
-#, fuzzy
 msgid "Additional Properties"
-msgstr "Proprietà del file"
+msgstr "Proprietà in più"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:405
 msgid "Comment"
@@ -882,7 +878,7 @@ msgstr "Commento"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:409
 msgid "Beats Per Minute"
-msgstr ""
+msgstr "Battiti al minuto"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:413
 msgid "Composer"
@@ -937,9 +933,9 @@ msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Applica le modifiche alle etichette (Ctrl+S)"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:11
-#, fuzzy
 msgid "Tag;Music;Editor;Library;Nickvision;"
-msgstr "Tag;Music;Editor;Library;Musica;Etichetta;Etichette;Libreria;"
+msgstr ""
+"Tag;Music;Editor;Library;Musica;Etichetta;Etichette;Libreria;Nickvision;"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:10
 msgid ""
