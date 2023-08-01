@@ -71,11 +71,7 @@ public class MainWindowController
     /// The list of paths to corrupted music files in the music folder
     /// </summary>
     public List<string> CorruptedFiles => _musicFolder?.CorruptedFiles ?? new List<string>();
-
-    /// <summary>
-    /// Occurs when another instance of the application tries to run
-    /// </summary>
-    public event EventHandler? RaiseCommandReceived;
+    
     /// <summary>
     /// Occurs when a notification is sent
     /// </summary>
@@ -132,8 +128,6 @@ public class MainWindowController
         AppInfo.Designers[_("DaPigGuy")] = new Uri("https://github.com/DaPigGuy");
         AppInfo.Artists[_("David Lapshin")] = new Uri("https://github.com/daudix-UFO");
         AppInfo.TranslatorCredits = _("translator-credits");
-        var ipc = Aura.Communicate(new string[]{});
-        ipc.CommandReceived += (sender, args) => RaiseCommandReceived?.Invoke(this, EventArgs.Empty);
         _musicFolder = null;
         _forceAllowClose = false;
         FormatStrings = new string[] { _("%artist%- %title%"), _("%title%- %artist%"), _("%track%- %title%"), _("%title%") };

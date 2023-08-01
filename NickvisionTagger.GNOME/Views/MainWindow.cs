@@ -99,7 +99,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         //Build UI
         builder.Connect(this);
-        _controller.RaiseCommandReceived += (sender, e) => Present();
         _title.SetTitle(_controller.AppInfo.ShortName);
         _musicFilesSearch.OnSearchChanged += SearchChanged;
         _advancedSearchInfoButton.OnClicked += AdvancedSearchInfo;
