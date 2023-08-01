@@ -3,6 +3,7 @@ using ATL;
 using MetaBrainz.MusicBrainz;
 using MetaBrainz.MusicBrainz.CoverArt;
 using MetaBrainz.MusicBrainz.Interfaces.Entities;
+using Nickvision.Aura;
 using NickvisionTagger.Shared.Helpers;
 using System;
 using System.Collections.Generic;

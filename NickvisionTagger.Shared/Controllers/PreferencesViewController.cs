@@ -1,4 +1,6 @@
+using Nickvision.Aura;
 using NickvisionTagger.Shared.Models;
+using System;
 
 namespace NickvisionTagger.Shared.Controllers;
 
@@ -10,11 +12,16 @@ public class PreferencesViewController
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
-    public AppInfo AppInfo => AppInfo.Current;
+    public AppInfo AppInfo => Aura.Active.AppInfo;
     /// <summary>
     /// The link to get a new AcoustId user API key
     /// </summary>
     public string AcoustIdUserAPIKeyLink => "https://acoustid.org/api-key";
+
+    /// <summary>
+    /// Occurs when the configuration is saved to disk
+    /// </summary>
+    public event EventHandler? Saved;
 
     /// <summary>
     /// Constructs a PreferencesViewController
@@ -107,5 +114,9 @@ public class PreferencesViewController
     /// <summary>
     /// Saves the configuration to disk
     /// </summary>
-    public void SaveConfiguration() => Configuration.Current.Save();
+    public void SaveConfiguration()
+    {
+        Aura.Active.SaveConfig("config");
+        Saved?.Invoke(this, EventArgs.Empty);
+    }
 }
