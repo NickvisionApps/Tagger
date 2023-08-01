@@ -33,15 +33,13 @@ public partial class Program
         _application = Adw.Application.New("org.nickvision.tagger", Gio.ApplicationFlags.FlagsNone);
         _mainWindow = null;
         _mainWindowController = new MainWindowController();
-        _mainWindowController.AppInfo.ID = "org.nickvision.tagger";
-        _mainWindowController.AppInfo.Name = "Nickvision Tagger";
-        _mainWindowController.AppInfo.ShortName = _("Tagger");
-        _mainWindowController.AppInfo.Description = $"{_("Tag your music")}.";
-        _mainWindowController.AppInfo.Version = "2023.8.0-rc1";
-        _mainWindowController.AppInfo.Changelog = "<ul><li>Added support for the TrackTotal and BeatsPerMinute tag property</li><li>Fixed an issue where clearing a tag did not clear all fields</li><li>Fixed an issue where single album art from other programs was not read by Tagger</li><li>Fixed an issue where docs were not available when running Tagger via snap</li><li>Empty Year, Track, and BPM fields will show an empty string instead of 0</li><li>Updated translations (Thanks everyone on Weblate!)</li></ul>";
-        _mainWindowController.AppInfo.GitHubRepo = new Uri("https://github.com/NickvisionApps/Tagger");
-        _mainWindowController.AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");
-        _mainWindowController.AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Tagger/discussions");
+        _mainWindowController.AppInfo.Changelog =
+            @"* Added support for the TrackTotal and BeatsPerMinute tag property
+              * Fixed an issue where clearing a tag did not clear all fields
+              * Fixed an issue where single album art from other programs was not read by Tagger
+              * Fixed an issue where docs were not available when running Tagger via snap
+              * Empty Year, Track, and BPM fields will show an empty string instead of 0
+              * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
         {

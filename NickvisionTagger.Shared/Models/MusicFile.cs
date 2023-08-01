@@ -288,11 +288,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// Loads tag metadata from MusicBrainz (discarding any unapplied metadata)
     /// </summary>
     /// <param name="acoustIdClientKey">The app's AcoustId Key</param>
-    /// <param name="appInfo">The AppInfo object for the app</param>
+    /// <param name="version">The version of the app</param>
     /// <param name="overwriteTagWithMusicBrainz">Whether or not to overwrite a tag's existing data with data from MusicBrainz</param>
     /// <param name="overwriteAlbumArtWithMusicBrainz">Whether or not to overwrite a tag's existing album art with album art from MusicBrainz</param>
     /// <returns>True if successful, else false</returns>
-    public async Task<bool> LoadTagFromMusicBrainzAsync(string acoustIdClientKey, AppInfo appInfo, bool overwriteTagWithMusicBrainz, bool overwriteAlbumArtWithMusicBrainz)
+    public async Task<bool> LoadTagFromMusicBrainzAsync(string acoustIdClientKey, string version, bool overwriteTagWithMusicBrainz, bool overwriteAlbumArtWithMusicBrainz)
     {
         //Use AcoustID to get MBID
         AcoustID.Configuration.ClientKey = acoustIdClientKey;
@@ -324,7 +324,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 }
             }
             //MusicBrainz
-            using var query = new Query(appInfo.Version, appInfo.Version, "mailto:nlogozzo225@gmail.com");
+            using var query = new Query(version, version, "mailto:nlogozzo225@gmail.com");
             IRecording? recording = null;
             IRelease? album = null;
             try
@@ -382,7 +382,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 if(album != null && album.CoverArtArchive != null && album.CoverArtArchive.Count > 0)
                 {
-                    using var caQuery = new CoverArt(appInfo.Version, appInfo.Version, "mailto:nlogozzo225@gmail.com");
+                    using var caQuery = new CoverArt(version, version, "mailto:nlogozzo225@gmail.com");
                     CoverArtImage? img = null;
                     try
                     {

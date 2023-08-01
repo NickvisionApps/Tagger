@@ -1,4 +1,5 @@
 using FuzzySharp;
+using Nickvision.Aura;
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
 using NickvisionTagger.Shared.Models;
@@ -47,13 +48,13 @@ public class MainWindowController
     public PropertyMap SelectedPropertyMap { get; init; }
 
     /// <summary>
+    /// Application's Aura
+    /// </summary>
+    public Aura Aura { get; init; }
+    /// <summary>
     /// Gets the AppInfo object
     /// </summary>
-    public AppInfo AppInfo => AppInfo.Current;
-    /// <summary>
-    /// Whether or not the version is a development version or not
-    /// </summary>
-    public bool IsDevVersion => AppInfo.Current.Version.IndexOf('-') != -1;
+    public AppInfo AppInfo => Aura.Active.AppInfo;
     /// <summary>
     /// The preferred theme of the application
     /// </summary>
@@ -70,7 +71,7 @@ public class MainWindowController
     /// The list of paths to corrupted music files in the music folder
     /// </summary>
     public List<string> CorruptedFiles => _musicFolder?.CorruptedFiles ?? new List<string>();
-
+    
     /// <summary>
     /// Occurs when a notification is sent
     /// </summary>
@@ -113,6 +114,20 @@ public class MainWindowController
     /// </summary>
     public MainWindowController()
     {
+        Aura = new Aura("org.nickvision.tagger", "Nickvision Tagger", _("Tagger"), _("Tag your music"));
+        Aura.Active.SetConfig<Configuration>("config");
+        AppInfo.Version = "2023.8.0-rc1";
+        AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
+        AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");
+        AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Tagger/discussions");
+        AppInfo.ExtraLinks[_("Matrix Chat")] = new Uri("https://matrix.to/#/#nickvision:matrix.org");
+        AppInfo.Developers[_("Nicholas Logozzo")] = new Uri("https://github.com/nlogozzo");
+        AppInfo.Developers[_("Contributors on GitHub ❤️")] = new Uri("https://github.com/NickvisionApps/Tagger/graphs/contributors");
+        AppInfo.Designers[_("Nicholas Logozzo")] = new Uri("https://github.com/nlogozzo");
+        AppInfo.Designers[_("Fyodor Sobolev")] = new Uri("https://github.com/fsobolev");
+        AppInfo.Designers[_("DaPigGuy")] = new Uri("https://github.com/DaPigGuy");
+        AppInfo.Artists[_("David Lapshin")] = new Uri("https://github.com/daudix-UFO");
+        AppInfo.TranslatorCredits = _("translator-credits");
         _musicFolder = null;
         _forceAllowClose = false;
         FormatStrings = new string[] { _("%artist%- %title%"), _("%title%- %artist%"), _("%track%- %title%"), _("%title%") };
@@ -147,14 +162,18 @@ public class MainWindowController
     /// Creates a new PreferencesViewController
     /// </summary>
     /// <returns>The PreferencesViewController</returns>
-    public PreferencesViewController CreatePreferencesViewController() => new PreferencesViewController();
+    public PreferencesViewController CreatePreferencesViewController()
+    {
+        var controller = new PreferencesViewController();
+        controller.Saved += ConfigurationSaved;
+        return controller;
+    }
 
     /// <summary>
     /// Starts the application
     /// </summary>
     public async Task StartupAsync()
     {
-        Configuration.Current.Saved += ConfigurationSaved;
         if(Configuration.Current.RememberLastOpenedFolder && Directory.Exists(Configuration.Current.LastOpenedFolder))
         {
             await OpenFolderAsync(Configuration.Current.LastOpenedFolder);
@@ -185,7 +204,7 @@ public class MainWindowController
         if(Configuration.Current.RememberLastOpenedFolder)
         {
             Configuration.Current.LastOpenedFolder = _musicFolder.ParentPath;
-            Configuration.Current.Save();
+            Aura.Active.SaveConfig("config");
         }
         await ReloadFolderAsync();
     }
@@ -201,7 +220,7 @@ public class MainWindowController
         if(Configuration.Current.RememberLastOpenedFolder)
         {
             Configuration.Current.LastOpenedFolder = "";
-            Configuration.Current.Save();
+            Aura.Active.SaveConfig("config");
         }
         MusicFolderUpdated?.Invoke(this, EventArgs.Empty);
     }
@@ -739,7 +758,7 @@ public class MainWindowController
         var successful = 0;
         foreach(var pair in SelectedMusicFiles)
         {
-            if(await pair.Value.LoadTagFromMusicBrainzAsync("b'Ch3cuJ0d", AppInfo.Current, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz))
+            if(await pair.Value.LoadTagFromMusicBrainzAsync("b'Ch3cuJ0d", AppInfo.Version, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz))
             {
                 successful++;
                 MusicFileSaveStates[pair.Key] = false;
