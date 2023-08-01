@@ -764,7 +764,7 @@ public class MainWindowController
         var successful = 0;
         foreach(var pair in SelectedMusicFiles)
         {
-            if(await pair.Value.LoadTagFromMusicBrainzAsync("b'Ch3cuJ0d", AppInfo, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz))
+            if(await pair.Value.LoadTagFromMusicBrainzAsync("b'Ch3cuJ0d", AppInfo.Version, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz))
             {
                 successful++;
                 MusicFileSaveStates[pair.Key] = false;
