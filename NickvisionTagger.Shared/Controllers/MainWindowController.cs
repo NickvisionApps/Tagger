@@ -115,7 +115,20 @@ public class MainWindowController
     public MainWindowController()
     {
         Aura = new Aura("org.nickvision.tagger", "Nickvision Tagger", _("Tagger"), _("Tag your music"));
+        if (Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
+        {
+            // Move or delete config files from older versions
+            try
+            {
+                Directory.Move($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", ConfigurationLoader.ConfigDir);
+            }
+            catch (IOException)
+            {
+                Directory.Delete($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", true);
+            }
+        }
         Aura.Active.SetConfig<Configuration>("config");
+        Configuration.Current.Saved += ConfigurationSaved;
         AppInfo.Version = "2023.8.0-rc1";
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
         AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");
@@ -162,12 +175,7 @@ public class MainWindowController
     /// Creates a new PreferencesViewController
     /// </summary>
     /// <returns>The PreferencesViewController</returns>
-    public PreferencesViewController CreatePreferencesViewController()
-    {
-        var controller = new PreferencesViewController();
-        controller.Saved += ConfigurationSaved;
-        return controller;
-    }
+    public PreferencesViewController CreatePreferencesViewController() => new PreferencesViewController();
 
     /// <summary>
     /// Starts the application
