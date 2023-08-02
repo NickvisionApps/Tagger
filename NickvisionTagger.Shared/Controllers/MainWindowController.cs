@@ -944,7 +944,7 @@ public class MainWindowController
                 }
             }
             var matches = new List<string>();
-            var ratios = new List<int>();
+            var ratios = new Dictionary<string, int>();
             foreach(var musicFile in _musicFolder.MusicFiles)
             {
                 var ratio = 0;
@@ -1227,9 +1227,24 @@ public class MainWindowController
                     }
                 }
                 matches.Add(musicFile.Filename.ToLower());
-                ratios.Add(ratio);
+                ratios.Add(musicFile.Filename.ToLower(), ratio);
             }
-            matches.Sort((a, b) => ratios[matches.IndexOf(a)].CompareTo(ratios[matches.IndexOf(b)]));
+            matches.Sort((a, b) =>
+            {
+                if (!ratios.ContainsKey(a) && ratios.ContainsKey(b))
+                {
+                    return -1;
+                }
+                if (ratios.ContainsKey(a) && !ratios.ContainsKey(b))
+                {
+                    return 1;
+                }
+                if (!ratios.ContainsKey(a) && !ratios.ContainsKey(b))
+                {
+                    return 0;
+                }
+                return ratios[a].CompareTo(ratios[b]);
+            });
             return (true, matches);
         }
         return (false, null);
