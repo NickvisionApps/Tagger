@@ -962,7 +962,7 @@ public class MainWindowController
                     else
                     {
                         ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Filename.Normalize(NormalizationForm.FormKD));
-                        if(ratio < 75)
+                        if(ratio < 65)
                         {
                             continue;
                         }
@@ -981,7 +981,7 @@ public class MainWindowController
                     else
                     {
                         ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Title.Normalize(NormalizationForm.FormKD));
-                        if(ratio < 75)
+                        if(ratio < 65)
                         {
                             continue;
                         }
@@ -1000,7 +1000,7 @@ public class MainWindowController
                     else
                     {
                         ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Artist.Normalize(NormalizationForm.FormKD));
-                        if(ratio < 75)
+                        if(ratio < 65)
                         {
                             continue;
                         }
@@ -1019,7 +1019,7 @@ public class MainWindowController
                     else
                     {
                         ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Album.Normalize(NormalizationForm.FormKD));
-                        if(ratio < 75)
+                        if(ratio < 65)
                         {
                             continue;
                         }
@@ -1095,7 +1095,7 @@ public class MainWindowController
                     else
                     {
                         ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.AlbumArtist.Normalize(NormalizationForm.FormKD));
-                        if(ratio < 75)
+                        if(ratio < 65)
                         {
                             continue;
                         }
@@ -1114,7 +1114,7 @@ public class MainWindowController
                     else
                     {
                         ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Genre.Normalize(NormalizationForm.FormKD));
-                        if(ratio < 75)
+                        if(ratio < 65)
                         {
                             continue;
                         }
@@ -1133,7 +1133,7 @@ public class MainWindowController
                     else
                     {
                         ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Comment.Normalize(NormalizationForm.FormKD));
-                        if(ratio < 75)
+                        if(ratio < 65)
                         {
                             continue;
                         }
@@ -1171,7 +1171,7 @@ public class MainWindowController
                     else
                     {
                         ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Composer.Normalize(NormalizationForm.FormKD));
-                        if(ratio < 75)
+                        if(ratio < 65)
                         {
                             continue;
                         }
@@ -1190,7 +1190,7 @@ public class MainWindowController
                     else
                     {
                         ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Description.Normalize(NormalizationForm.FormKD));
-                        if(ratio < 75)
+                        if(ratio < 65)
                         {
                             continue;
                         }
@@ -1209,7 +1209,7 @@ public class MainWindowController
                     else
                     {
                         ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Publisher.Normalize(NormalizationForm.FormKD));
-                        if(ratio < 75)
+                        if(ratio < 65)
                         {
                             continue;
                         }
