@@ -807,7 +807,7 @@ public class MainWindowController
             {
                 return (false, null);
             }
-            var search = s.Substring(1);
+            var search = s.Substring(1).ToLower();
             if(string.IsNullOrEmpty(search))
             {
                 return (false, null);
