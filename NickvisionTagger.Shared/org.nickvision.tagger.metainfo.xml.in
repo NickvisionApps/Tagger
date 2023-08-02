@@ -36,13 +36,8 @@
     <binary>org.nickvision.tagger</binary>
   </provides>
   <releases>
-    <release version="2023.8.0" date="2023-08-02">
+    <release version="2023.8.1-next" date="2023-08-02">
       <description translatable="no">
-        <p>- Added support for the TrackTotal and BeatsPerMinute tag property</p>
-        <p>- Fixed an issue where clearing a tag did not clear all fields</p>
-        <p>- Fixed an issue where single album art from other programs was not read by Tagger</p>
-        <p>- Fixed an issue where docs were not available when running Tagger via snap</p>
-        <p>- Empty Year, Track, and BPM fields will show an empty string instead of 0</p>
         <p>- Updated translations (Thanks everyone on Weblate!)</p>
       </description>
     </release>

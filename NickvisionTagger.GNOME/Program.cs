@@ -34,12 +34,7 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController();
         _mainWindowController.AppInfo.Changelog =
-            @"* Added support for the TrackTotal and BeatsPerMinute tag property
-              * Fixed an issue where clearing a tag did not clear all fields
-              * Fixed an issue where single album art from other programs was not read by Tagger
-              * Fixed an issue where docs were not available when running Tagger via snap
-              * Empty Year, Track, and BPM fields will show an empty string instead of 0
-              * Updated translations (Thanks everyone on Weblate!)";
+            @"* Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
         {
