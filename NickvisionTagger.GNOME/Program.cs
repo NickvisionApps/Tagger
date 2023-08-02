@@ -34,7 +34,8 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController();
         _mainWindowController.AppInfo.Changelog =
-            @"* Fixed an issue where advanced search may sometimes crash
+            @"* Improved the advanced search algorithm, supporting accented characters better
+              * Fixed an issue where advanced search may sometimes crash
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
