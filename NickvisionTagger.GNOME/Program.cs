@@ -36,6 +36,7 @@ public partial class Program
         _mainWindowController.AppInfo.Changelog =
             @"* Improved the advanced search algorithm, supporting accented characters better
               * Fixed an issue where advanced search may sometimes crash
+              * Fixed an issue where submitting to AcoustID would crash
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
