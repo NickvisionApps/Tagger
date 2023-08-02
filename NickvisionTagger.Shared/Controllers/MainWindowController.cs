@@ -129,7 +129,7 @@ public class MainWindowController
         }
         Aura.Active.SetConfig<Configuration>("config");
         Configuration.Current.Saved += ConfigurationSaved;
-        AppInfo.Version = "2023.8.0-rc1";
+        AppInfo.Version = "2023.8.0";
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
         AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");
         AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Tagger/discussions");
