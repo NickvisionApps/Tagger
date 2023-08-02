@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ATL;
+using System.Text;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Controllers;
@@ -960,8 +961,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Filename);
-                        if(ratio < 60)
+                        ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Filename.Normalize(NormalizationForm.FormKD));
+                        if(ratio < 75)
                         {
                             continue;
                         }
@@ -979,8 +980,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Title);
-                        if(ratio < 60)
+                        ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Title.Normalize(NormalizationForm.FormKD));
+                        if(ratio < 75)
                         {
                             continue;
                         }
@@ -998,8 +999,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Artist);
-                        if(ratio < 60)
+                        ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Artist.Normalize(NormalizationForm.FormKD));
+                        if(ratio < 75)
                         {
                             continue;
                         }
@@ -1017,8 +1018,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Album);
-                        if(ratio < 60)
+                        ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Album.Normalize(NormalizationForm.FormKD));
+                        if(ratio < 75)
                         {
                             continue;
                         }
@@ -1093,8 +1094,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.AlbumArtist);
-                        if(ratio < 60)
+                        ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.AlbumArtist.Normalize(NormalizationForm.FormKD));
+                        if(ratio < 75)
                         {
                             continue;
                         }
@@ -1112,8 +1113,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Genre);
-                        if(ratio < 60)
+                        ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Genre.Normalize(NormalizationForm.FormKD));
+                        if(ratio < 75)
                         {
                             continue;
                         }
@@ -1131,8 +1132,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Comment);
-                        if(ratio < 60)
+                        ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Comment.Normalize(NormalizationForm.FormKD));
+                        if(ratio < 75)
                         {
                             continue;
                         }
@@ -1169,8 +1170,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Composer);
-                        if(ratio < 60)
+                        ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Composer.Normalize(NormalizationForm.FormKD));
+                        if(ratio < 75)
                         {
                             continue;
                         }
@@ -1188,8 +1189,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Description);
-                        if(ratio < 60)
+                        ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Description.Normalize(NormalizationForm.FormKD));
+                        if(ratio < 75)
                         {
                             continue;
                         }
@@ -1207,8 +1208,8 @@ public class MainWindowController
                     }
                     else
                     {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Publisher);
-                        if(ratio < 60)
+                        ratio = Fuzz.PartialRatio(value.Normalize(NormalizationForm.FormKD), propertyMap.Publisher.Normalize(NormalizationForm.FormKD));
+                        if(ratio < 75)
                         {
                             continue;
                         }
@@ -1229,23 +1230,7 @@ public class MainWindowController
                 matches.Add(musicFile.Filename.ToLower());
                 ratios.Add(musicFile.Filename.ToLower(), ratio);
             }
-            matches.Sort((a, b) =>
-            {
-                if (!ratios.ContainsKey(a) && ratios.ContainsKey(b))
-                {
-                    return -1;
-                }
-                if (ratios.ContainsKey(a) && !ratios.ContainsKey(b))
-                {
-                    return 1;
-                }
-                if (!ratios.ContainsKey(a) && !ratios.ContainsKey(b))
-                {
-                    return 0;
-                }
-                return ratios[a].CompareTo(ratios[b]);
-            });
-            return (true, matches);
+            return (true, matches.Where(x => ratios.ContainsKey(x)).OrderByDescending(x => ratios[x]).ToList());
         }
         return (false, null);
     }
