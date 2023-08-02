@@ -19,11 +19,6 @@ public class PreferencesViewController
     public string AcoustIdUserAPIKeyLink => "https://acoustid.org/api-key";
 
     /// <summary>
-    /// Occurs when the configuration is saved to disk
-    /// </summary>
-    public event EventHandler? Saved;
-
-    /// <summary>
     /// Constructs a PreferencesViewController
     /// </summary>
     internal PreferencesViewController()
@@ -114,9 +109,5 @@ public class PreferencesViewController
     /// <summary>
     /// Saves the configuration to disk
     /// </summary>
-    public void SaveConfiguration()
-    {
-        Aura.Active.SaveConfig("config");
-        Saved?.Invoke(this, EventArgs.Empty);
-    }
+    public void SaveConfiguration() => Aura.Active.SaveConfig("config");
 }
