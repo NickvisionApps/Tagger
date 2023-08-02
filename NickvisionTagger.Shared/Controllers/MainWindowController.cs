@@ -788,7 +788,7 @@ public class MainWindowController
     {
         if(SelectedMusicFiles.Count == 1)
         {
-            var result = await SelectedMusicFiles[0].SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
+            var result = await SelectedMusicFiles.First().Value.SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(result ? _("Submitted metadata to AcoustId successfully") : _("Unable to submit to AcoustId. Check API key"), result ? NotificationSeverity.Success : NotificationSeverity.Error));
         }
