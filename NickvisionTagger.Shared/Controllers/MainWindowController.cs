@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ATL;
+using System.Text;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Controllers;
@@ -787,7 +788,7 @@ public class MainWindowController
     {
         if(SelectedMusicFiles.Count == 1)
         {
-            var result = await SelectedMusicFiles[0].SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
+            var result = await SelectedMusicFiles.First().Value.SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
             MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(result ? _("Submitted metadata to AcoustId successfully") : _("Unable to submit to AcoustId. Check API key"), result ? NotificationSeverity.Success : NotificationSeverity.Error));
         }
@@ -802,11 +803,12 @@ public class MainWindowController
     {
         if(_musicFolder != null)
         {
+            //Parse Search String
             if(string.IsNullOrEmpty(s) || s[0] != '!')
             {
                 return (false, null);
             }
-            var search = s.Substring(1);
+            var search = s.Substring(1).ToLower();
             if(string.IsNullOrEmpty(search))
             {
                 return (false, null);
@@ -945,275 +947,67 @@ public class MainWindowController
             }
             var matches = new List<string>();
             var ratios = new Dictionary<string, int>();
+            //Test Files
             foreach(var musicFile in _musicFolder.MusicFiles)
             {
                 var ratio = 0;
-                if(!string.IsNullOrEmpty(propertyMap.Filename))
+                if (TestAdvancedSearchShouldSkip(musicFile.Filename, propertyMap.Filename, ref ratio))
                 {
-                    var value = musicFile.Filename.ToLower();
-                    if(propertyMap.Filename == "NULL")
-                    {
-                        if(!string.IsNullOrEmpty(value))
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Filename);
-                        if(ratio < 60)
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.Title))
+                if (TestAdvancedSearchShouldSkip(musicFile.Title, propertyMap.Title, ref ratio))
                 {
-                    var value = musicFile.Title.ToLower();
-                    if(propertyMap.Title == "NULL")
-                    {
-                        if(!string.IsNullOrEmpty(value))
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Title);
-                        if(ratio < 60)
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.Artist))
+                if (TestAdvancedSearchShouldSkip(musicFile.Artist, propertyMap.Artist, ref ratio))
                 {
-                    var value = musicFile.Artist.ToLower();
-                    if(propertyMap.Artist == "NULL")
-                    {
-                        if(!string.IsNullOrEmpty(value))
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Artist);
-                        if(ratio < 60)
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.Album))
+                if (TestAdvancedSearchShouldSkip(musicFile.Album, propertyMap.Album, ref ratio))
                 {
-                    var value = musicFile.Album.ToLower();
-                    if(propertyMap.Album == "NULL")
-                    {
-                        if(!string.IsNullOrEmpty(value))
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Album);
-                        if(ratio < 60)
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.Year))
+                if (TestAdvancedSearchShouldSkip(musicFile.Year, propertyMap.Year, ref ratio))
                 {
-                    var value = musicFile.Year;
-                    if(propertyMap.Year == "NULL")
-                    {
-                        if(value != 0)
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = 100;
-                        if(value != int.Parse(propertyMap.Year))
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.Track))
+                if (TestAdvancedSearchShouldSkip(musicFile.Track, propertyMap.Track, ref ratio))
                 {
-                    var value = musicFile.Track;
-                    if(propertyMap.Track == "NULL")
-                    {
-                        if(value != 0)
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = 100;
-                        if(value != int.Parse(propertyMap.Track))
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.TrackTotal))
+                if (TestAdvancedSearchShouldSkip(musicFile.TrackTotal, propertyMap.TrackTotal, ref ratio))
                 {
-                    var value = musicFile.TrackTotal;
-                    if(propertyMap.TrackTotal == "NULL")
-                    {
-                        if(value != 0)
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = 100;
-                        if(value != int.Parse(propertyMap.TrackTotal))
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.AlbumArtist))
+                if (TestAdvancedSearchShouldSkip(musicFile.AlbumArtist, propertyMap.AlbumArtist, ref ratio))
                 {
-                    var value = musicFile.AlbumArtist.ToLower();
-                    if(propertyMap.AlbumArtist == "NULL")
-                    {
-                        if(!string.IsNullOrEmpty(value))
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.AlbumArtist);
-                        if(ratio < 60)
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.Genre))
+                if (TestAdvancedSearchShouldSkip(musicFile.Genre, propertyMap.Genre, ref ratio))
                 {
-                    var value = musicFile.Genre.ToLower();
-                    if(propertyMap.Genre == "NULL")
-                    {
-                        if(!string.IsNullOrEmpty(value))
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Genre);
-                        if(ratio < 60)
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.Comment))
+                if (TestAdvancedSearchShouldSkip(musicFile.Comment, propertyMap.Comment, ref ratio))
                 {
-                    var value = musicFile.Comment.ToLower();
-                    if(propertyMap.Comment == "NULL")
-                    {
-                        if(!string.IsNullOrEmpty(value))
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Comment);
-                        if(ratio < 60)
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.BeatsPerMinute))
+                if (TestAdvancedSearchShouldSkip(musicFile.BeatsPerMinute, propertyMap.BeatsPerMinute, ref ratio))
                 {
-                    var value = musicFile.BeatsPerMinute;
-                    if(propertyMap.BeatsPerMinute == "NULL")
-                    {
-                        if(value != 0)
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = 100;
-                        if(value != int.Parse(propertyMap.BeatsPerMinute))
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.Composer))
+                if (TestAdvancedSearchShouldSkip(musicFile.Composer, propertyMap.Composer, ref ratio))
                 {
-                    var value = musicFile.Composer.ToLower();
-                    if(propertyMap.Composer == "NULL")
-                    {
-                        if(!string.IsNullOrEmpty(value))
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Composer);
-                        if(ratio < 60)
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.Description))
+                if (TestAdvancedSearchShouldSkip(musicFile.Description, propertyMap.Description, ref ratio))
                 {
-                    var value = musicFile.Description.ToLower();
-                    if(propertyMap.Description == "NULL")
-                    {
-                        if(!string.IsNullOrEmpty(value))
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Description);
-                        if(ratio < 60)
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
-                if(!string.IsNullOrEmpty(propertyMap.Publisher))
+                if (TestAdvancedSearchShouldSkip(musicFile.Publisher, propertyMap.Publisher, ref ratio))
                 {
-                    var value = musicFile.Publisher.ToLower();
-                    if(propertyMap.Publisher == "NULL")
-                    {
-                        if(!string.IsNullOrEmpty(value))
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        ratio = Fuzz.PartialRatio(value, propertyMap.Publisher);
-                        if(ratio < 60)
-                        {
-                            continue;
-                        }
-                    }
+                    continue;
                 }
+                //Check for custom property
                 if(!string.IsNullOrEmpty(customPropName))
                 {
                     if(customPropName == "NULL")
@@ -1229,23 +1023,7 @@ public class MainWindowController
                 matches.Add(musicFile.Filename.ToLower());
                 ratios.Add(musicFile.Filename.ToLower(), ratio);
             }
-            matches.Sort((a, b) =>
-            {
-                if (!ratios.ContainsKey(a) && ratios.ContainsKey(b))
-                {
-                    return -1;
-                }
-                if (ratios.ContainsKey(a) && !ratios.ContainsKey(b))
-                {
-                    return 1;
-                }
-                if (!ratios.ContainsKey(a) && !ratios.ContainsKey(b))
-                {
-                    return 0;
-                }
-                return ratios[a].CompareTo(ratios[b]);
-            });
-            return (true, matches);
+            return (true, matches.Where(x => ratios.ContainsKey(x)).OrderByDescending(x => ratios[x]).ToList());
         }
         return (false, null);
     }
@@ -1262,6 +1040,27 @@ public class MainWindowController
             SelectedMusicFiles.Add(index, _musicFolder.MusicFiles[index]);
         }
         UpdateSelectedMusicFilesProperties();
+    }
+    
+    /// <summary>
+    /// Occurs when the configuration is saved
+    /// </summary>
+    /// <param name="sender">object?</param>
+    /// <param name="e">EventArgs</param>
+    private async void ConfigurationSaved(object? sender, EventArgs e)
+    {
+        if(_musicFolder != null)
+        {
+            var includeSubfoldersChanged = _musicFolder.IncludeSubfolders != Configuration.Current.IncludeSubfolders;
+            var sortingChanged = _musicFolder.SortFilesBy != Configuration.Current.SortFilesBy;
+            if(includeSubfoldersChanged || sortingChanged)
+            {
+                LoadingStateUpdated?.Invoke(this, _("Loading music files from folder..."));
+                _musicFolder.IncludeSubfolders = Configuration.Current.IncludeSubfolders;
+                _musicFolder.SortFilesBy = Configuration.Current.SortFilesBy;
+                await ReloadFolderAsync();
+            }
+        }
     }
 
     /// <summary>
@@ -1415,23 +1214,63 @@ public class MainWindowController
     }
 
     /// <summary>
-    /// Occurs when the configuration is saved
+    /// Tests the value of a music file with the value from a PropertyMap for advanced search
     /// </summary>
-    /// <param name="sender">object?</param>
-    /// <param name="e">EventArgs</param>
-    private async void ConfigurationSaved(object? sender, EventArgs e)
+    /// <param name="fileValue">The string value from the file</param>
+    /// <param name="propValue">The value from the PropertyMap</param>
+    /// <param name="ratio">A variable to store the similarity ratio</param>
+    /// <returns>True to skip the file as a match, else false</returns>
+    private bool TestAdvancedSearchShouldSkip(string fileValue, string propValue, ref int ratio)
     {
-        if(_musicFolder != null)
+        if (!string.IsNullOrEmpty(propValue))
         {
-            var includeSubfoldersChanged = _musicFolder.IncludeSubfolders != Configuration.Current.IncludeSubfolders;
-            var sortingChanged = _musicFolder.SortFilesBy != Configuration.Current.SortFilesBy;
-            if(includeSubfoldersChanged || sortingChanged)
+            fileValue = fileValue.ToLower();
+            if (propValue == "NULL")
             {
-                LoadingStateUpdated?.Invoke(this, _("Loading music files from folder..."));
-                _musicFolder.IncludeSubfolders = Configuration.Current.IncludeSubfolders;
-                _musicFolder.SortFilesBy = Configuration.Current.SortFilesBy;
-                await ReloadFolderAsync();
+                if (!string.IsNullOrEmpty(fileValue))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                ratio = Fuzz.PartialRatio(fileValue.Normalize(NormalizationForm.FormKD), propValue.Normalize(NormalizationForm.FormKD));
+                if (ratio < 65)
+                {
+                    return true;
+                }
             }
         }
+        return false;
+    }
+            
+    /// <summary>
+    /// Tests the value of a music file with the value from a PropertyMap for advanced search
+    /// </summary>
+    /// <param name="fileValue">The int value from the file</param>
+    /// <param name="propValue">The value from the PropertyMap</param>
+    /// <param name="ratio">A variable to store the similarity ratio</param>
+    /// <returns>True to skip the file as a match, else false</returns>
+    private bool TestAdvancedSearchShouldSkip(int fileValue, string propValue, ref int ratio)
+    {
+        if (!string.IsNullOrEmpty(propValue))
+        {
+            if (propValue == "NULL")
+            {
+                if (fileValue != 0)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                ratio = 100;
+                if (fileValue != int.Parse(propValue))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
