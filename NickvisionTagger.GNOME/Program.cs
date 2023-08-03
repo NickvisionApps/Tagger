@@ -34,7 +34,8 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController();
         _mainWindowController.AppInfo.Changelog =
-            @"* Improved the advanced search algorithm, supporting accented characters better
+            @"* Added more sorting options
+              * Improved the advanced search algorithm, supporting accented characters better
               * Fixed an issue where advanced search may sometimes crash
               * Fixed an issue where submitting to AcoustID would crash
               * Updated translations (Thanks everyone on Weblate!)";

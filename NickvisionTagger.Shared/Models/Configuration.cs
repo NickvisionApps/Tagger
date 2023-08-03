@@ -8,10 +8,12 @@ namespace NickvisionTagger.Shared.Models;
 public enum SortBy
 {
     Filename = 0,
-    Title,
-    Track,
     Path,
+    Title,
+    Artist,
     Album,
+    Year,
+    Track,
     Genre
 }
 

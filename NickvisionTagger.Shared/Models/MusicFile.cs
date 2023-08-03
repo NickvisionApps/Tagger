@@ -793,14 +793,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return -1;
         }
-        else if (this > other)
+        if (this > other)
         {
             return 1;
         }
-        else
-        {
-            return 0;
-        }
+        return 0;
     }
 
     /// <summary>
@@ -847,64 +844,46 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     public static bool operator !=(MusicFile? a, MusicFile? b) =>  a?.Path != b?.Path;
 
     /// <summary>
-    /// Compares two MusicFile objects by <
+    /// Compares two MusicFile objects by less than
     /// </summary>
     /// <param name="a">The first MusicFile object</param>
     /// <param name="b">The second MusicFile object</param>
-    /// <returns>True if a < b, else false</returns>
+    /// <returns>True if a is less than b, else false</returns>
     public static bool operator <(MusicFile? a, MusicFile? b)
     {
-        if(SortFilesBy == SortBy.Title)
+        return SortFilesBy switch
         {
-            return a?.Title.CompareTo(b?.Title) == -1;
-        }
-        else if(SortFilesBy == SortBy.Track)
-        {
-            return a?.Track.CompareTo(b?.Track) == -1 || a?.Track.CompareTo(b?.Track) == 0 && a?.Title.CompareTo(b?.Title) == -1;
-        }
-        else if(SortFilesBy == SortBy.Path)
-        {
-            return a?.Path.CompareTo(b?.Path) == -1;
-        }
-        else if(SortFilesBy == SortBy.Album)
-        {
-            return a?.Album.CompareTo(b?.Album) == -1 || a?.Album.CompareTo(b?.Album) == 0 && a?.Track.CompareTo(b?.Track) == -1;
-        }
-        else if(SortFilesBy == SortBy.Genre)
-        {
-            return a?.Genre.CompareTo(b?.Genre) == -1 || a?.Genre.CompareTo(b?.Genre) == 0 && a?.Path.CompareTo(b?.Path) == -1;
-        }
-        return a?.Filename.CompareTo(b?.Filename) == -1;
+            SortBy.Filename => a?.Filename.CompareTo(b?.Filename) == -1,
+            SortBy.Path => a?.Path.CompareTo(b?.Path) == -1,
+            SortBy.Title => a?.Title.CompareTo(b?.Title) == -1,
+            SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == -1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == -1 || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track < b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
+            SortBy.Album => a?.Album.CompareTo(b?.Album) == -1 || a?.Album == b?.Album && a?.Track < b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
+            SortBy.Year => a?.Year.CompareTo(b?.Year) == -1 || a?.Year == b?.Year && a?.Album.CompareTo(b?.Album) == -1 || a?.Year == b?.Year && a?.Album == b?.Album && a?.Track < b?.Track || a?.Year == b?.Year && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
+            SortBy.Track => a?.Track.CompareTo(b?.Track) == -1 || a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
+            SortBy.Genre => a?.Genre.CompareTo(b?.Genre) == -1 || a?.Genre == b?.Genre && a?.Album.CompareTo(b?.Album) == -1 || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.Track < b?.Track || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
+            _ => false
+        };
     }
 
     /// <summary>
-    /// Compares two MusicFile objects by >
+    /// Compares two MusicFile objects by greater than
     /// </summary>
     /// <param name="a">The first MusicFile object</param>
     /// <param name="b">The second MusicFile object</param>
-    /// <returns>True if a > b, else false</returns>
+    /// <returns>True if a is greater than b, else false</returns>
     public static bool operator >(MusicFile? a, MusicFile? b)
     {
-        if(SortFilesBy == SortBy.Title)
+        return SortFilesBy switch
         {
-            return a?.Title.CompareTo(b?.Title) == 1;
-        }
-        else if(SortFilesBy == SortBy.Track)
-        {
-            return a?.Track.CompareTo(b?.Track) == 1 || a?.Track.CompareTo(b?.Track) == 0 && a?.Title.CompareTo(b?.Title) == 1;
-        }
-        else if(SortFilesBy == SortBy.Path)
-        {
-            return a?.Path.CompareTo(b?.Path) == 1;
-        }
-        else if(SortFilesBy == SortBy.Album)
-        {
-            return a?.Album.CompareTo(b?.Album) == 1 || a?.Album.CompareTo(b?.Album) == 0 && a?.Track.CompareTo(b?.Track) == 1;
-        }
-        else if(SortFilesBy == SortBy.Genre)
-        {
-            return a?.Genre.CompareTo(b?.Genre) == 1 || a?.Genre.CompareTo(b?.Genre) == 0 && a?.Path.CompareTo(b?.Path) == 1;
-        }
-        return a?.Filename.CompareTo(b?.Filename) == 1;
+            SortBy.Filename => a?.Filename.CompareTo(b?.Filename) == 1,
+            SortBy.Path => a?.Path.CompareTo(b?.Path) == 1,
+            SortBy.Title => a?.Title.CompareTo(b?.Title) == 1,
+            SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == 1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == 1 || a?.Artist == b?.Artist &&a?.Album == b?.Album && a?.Track > b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
+            SortBy.Album => a?.Album.CompareTo(b?.Album) == 1 || a?.Album == b?.Album && a?.Track > b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
+            SortBy.Year => a?.Year.CompareTo(b?.Year) == 1 || a?.Year == b?.Year && a?.Album.CompareTo(b?.Album) == 1 || a?.Year == b?.Year && a?.Album == b?.Album && a?.Track > b?.Track || a?.Year == b?.Year && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
+            SortBy.Track => a?.Track.CompareTo(b?.Track) == 1 || a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
+            SortBy.Genre => a?.Genre.CompareTo(b?.Genre) == 1 || a?.Genre == b?.Genre && a?.Album.CompareTo(b?.Album) == 1 || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.Track > b?.Track || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
+            _ => false
+        };
     }
 }
