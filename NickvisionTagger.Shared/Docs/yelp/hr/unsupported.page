@@ -18,7 +18,13 @@
 <p>Ova stranica objašnjava glazbene datoteke koje <app>Tagger</app> trenutačno ne podržava.</p>
 <p>Tagger koristi <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> kao pozadinski sustav za čitanje i pisanje metapodataka.</p>
 <section>
-    <title>Trenutačno nema poznatih problema</title>
-    <p>Ako naiđeš na problem <link href="https://github.com/NickvisionApps/Tagger/issues">prijavi ga</link>.</p>
+    <title>Unable To Apply Changes - Permission Denied</title>
+    <p>There is a known issue of the flatpak version of the app running on Debian-based systems where you are unable to save files due to a "permission denied" error.</p>
+    <p>Please see this for the fix: <link href="https://github.com/NickvisionApps/Tagger/issues/174"/></p>
+    <note>
+        <p>Please confirm that you are receiving the "permission denied" error before trying this.</p>
+        <p>Run <app>Tagger</app> in the terminal via <code>flatpak run org.nickvision.tagger</code>, then try to apply changes again, and you will find an error message in the terminal.</p>
+        <p>If it is not a "permission denied" error, please <link href="https://github.com/NickvisionApps/Tagger/issues/174">report a new issue</link>.</p>
+    </note>
 </section>
 </page>
