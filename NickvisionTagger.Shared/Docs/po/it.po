@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-28 14:21-0400\n"
+"POT-Creation-Date: 2023-08-03 17:01-0400\n"
 "PO-Revision-Date: 2023-08-02 13:37+0000\n"
 "Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/"
-"nickvision-tagger/docs/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
+"tagger/docs/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -838,14 +838,44 @@ msgstr ""
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
-msgid "No Known Issues At This Time"
+msgid "Unable To Apply Changes - Permission Denied"
 msgstr ""
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:25
 msgid ""
-"<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Report an "
-"issue</link> if you experience any."
+"There is a known issue of the flatpak version of the app running on Debian-"
+"based systems where you are unable to save files due to a \"permission "
+"denied\" error."
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/unsupported.page:26
+msgid ""
+"Please see this for the fix: <link href=\"https://github.com/NickvisionApps/"
+"Tagger/issues/174\"/>"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/unsupported.page:28
+msgid ""
+"Please confirm that you are receiving the \"permission denied\" error before "
+"trying this."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/unsupported.page:29
+msgid ""
+"Run <app>Tagger</app> in the terminal via <code>flatpak run org.nickvision."
+"tagger</code>, then try to apply changes again, and you will find an error "
+"message in the terminal."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/unsupported.page:30
+msgid ""
+"If it is not a \"permission denied\" error, please <link href=\"https://"
+"github.com/NickvisionApps/Tagger/issues/174\">report a new issue</link>."
 msgstr ""
 
 #. (itstool) path: info/title
