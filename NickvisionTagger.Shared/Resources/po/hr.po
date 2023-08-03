@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-02 15:05-0400\n"
+"POT-Creation-Date: 2023-08-03 14:14-0400\n"
 "PO-Revision-Date: 2023-07-29 14:02+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -51,21 +51,21 @@ msgstr "%pjesma%- %naslov%"
 #: ../../../Controllers/MainWindowController.cs:372
 #: ../../../Controllers/MainWindowController.cs:377
 #: ../../../Controllers/MainWindowController.cs:386
-#: ../../../Controllers/MainWindowController.cs:1379
-#: ../../../Controllers/MainWindowController.cs:1380
-#: ../../../Controllers/MainWindowController.cs:1381
-#: ../../../Controllers/MainWindowController.cs:1382
-#: ../../../Controllers/MainWindowController.cs:1383
-#: ../../../Controllers/MainWindowController.cs:1384
-#: ../../../Controllers/MainWindowController.cs:1385
-#: ../../../Controllers/MainWindowController.cs:1386
-#: ../../../Controllers/MainWindowController.cs:1387
-#: ../../../Controllers/MainWindowController.cs:1388
-#: ../../../Controllers/MainWindowController.cs:1389
-#: ../../../Controllers/MainWindowController.cs:1390
-#: ../../../Controllers/MainWindowController.cs:1391
-#: ../../../Controllers/MainWindowController.cs:1392
+#: ../../../Controllers/MainWindowController.cs:1394
+#: ../../../Controllers/MainWindowController.cs:1395
 #: ../../../Controllers/MainWindowController.cs:1396
+#: ../../../Controllers/MainWindowController.cs:1397
+#: ../../../Controllers/MainWindowController.cs:1398
+#: ../../../Controllers/MainWindowController.cs:1399
+#: ../../../Controllers/MainWindowController.cs:1400
+#: ../../../Controllers/MainWindowController.cs:1401
+#: ../../../Controllers/MainWindowController.cs:1402
+#: ../../../Controllers/MainWindowController.cs:1403
+#: ../../../Controllers/MainWindowController.cs:1404
+#: ../../../Controllers/MainWindowController.cs:1405
+#: ../../../Controllers/MainWindowController.cs:1406
+#: ../../../Controllers/MainWindowController.cs:1407
+#: ../../../Controllers/MainWindowController.cs:1411
 msgid "<keep>"
 msgstr "<zadrži>"
 
@@ -366,7 +366,7 @@ msgstr[2] "Učitano je {0} glazbenih datoteka."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:527
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:552
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:561
-#: ../../../Controllers/MainWindowController.cs:1415
+#: ../../../Controllers/MainWindowController.cs:1430
 msgid "Loading music files from folder..."
 msgstr "Učitavanje glazbenih datoteka iz mape …"
 
@@ -614,44 +614,42 @@ msgid "Sort Files By"
 msgstr "Redoslijed datoteka"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:361
 msgid "File Name"
 msgstr "Ime datoteke"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#, fuzzy
 msgid "File Path"
 msgstr "Staza do datoteke"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:369
 msgid "Title"
 msgstr "Naslov"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:373
 msgid "Artist"
 msgstr "Izvođač"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:377
 msgid "Album"
 msgstr "Album"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:381
 msgid "Year"
 msgstr "Godina"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:385
 msgid "Track"
 msgstr "Pjesma"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:397
 msgid "Genre"
 msgstr "Žanr"
 
@@ -844,33 +842,9 @@ msgstr "Nijedna glazbena datoteka nije odabrana"
 msgid "Select some files"
 msgstr "Odaberi neke datoteke"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:361
-msgid "File Name"
-msgstr "Ime datoteke"
-
 #: NickvisionTagger.GNOME/Blueprints/window.blp:366
 msgid "Main Properties"
 msgstr "Glavna svojstva"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:369
-msgid "Title"
-msgstr "Naslov"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:373
-msgid "Artist"
-msgstr "Izvođač"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:377
-msgid "Album"
-msgstr "Album"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:381
-msgid "Year"
-msgstr "Godina"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:385
-msgid "Track"
-msgstr "Pjesma"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:389
 msgid "Track Total"
@@ -879,10 +853,6 @@ msgstr "Broj pjesama"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:393
 msgid "Album Artist"
 msgstr "Izvođač albuma"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:397
-msgid "Genre"
-msgstr "Žanr"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:402
 msgid "Additional Properties"
@@ -971,6 +941,36 @@ msgstr "– Pretvori imena datoteka u oznake i oznake u imena datoteka"
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Lookup file information using MusicBrainz"
 msgstr "– Pronađi informacije o datoteci koristeći MusicBrainz"
+
+#~ msgctxt "Sort"
+#~ msgid "File Name"
+#~ msgstr "Ime datoteke"
+
+#~ msgctxt "Sort"
+#~ msgid "Title"
+#~ msgstr "Naslov"
+
+#, fuzzy
+#~ msgctxt "Sort"
+#~ msgid "Artist"
+#~ msgstr "Izvođač"
+
+#~ msgctxt "Sort"
+#~ msgid "Album"
+#~ msgstr "Album"
+
+#, fuzzy
+#~ msgctxt "Sort"
+#~ msgid "Year"
+#~ msgstr "Godina"
+
+#~ msgctxt "Sort"
+#~ msgid "Track"
+#~ msgstr "Pjesma"
+
+#~ msgctxt "Sort"
+#~ msgid "Genre"
+#~ msgstr "Žanr"
 
 #, csharp-format
 #~ msgid ""

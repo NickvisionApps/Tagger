@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-02 15:05-0400\n"
+"POT-Creation-Date: 2023-08-03 14:14-0400\n"
 "PO-Revision-Date: 2023-07-30 22:38+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
@@ -51,21 +51,21 @@ msgstr "%трек%- %название%"
 #: ../../../Controllers/MainWindowController.cs:372
 #: ../../../Controllers/MainWindowController.cs:377
 #: ../../../Controllers/MainWindowController.cs:386
-#: ../../../Controllers/MainWindowController.cs:1379
-#: ../../../Controllers/MainWindowController.cs:1380
-#: ../../../Controllers/MainWindowController.cs:1381
-#: ../../../Controllers/MainWindowController.cs:1382
-#: ../../../Controllers/MainWindowController.cs:1383
-#: ../../../Controllers/MainWindowController.cs:1384
-#: ../../../Controllers/MainWindowController.cs:1385
-#: ../../../Controllers/MainWindowController.cs:1386
-#: ../../../Controllers/MainWindowController.cs:1387
-#: ../../../Controllers/MainWindowController.cs:1388
-#: ../../../Controllers/MainWindowController.cs:1389
-#: ../../../Controllers/MainWindowController.cs:1390
-#: ../../../Controllers/MainWindowController.cs:1391
-#: ../../../Controllers/MainWindowController.cs:1392
+#: ../../../Controllers/MainWindowController.cs:1394
+#: ../../../Controllers/MainWindowController.cs:1395
 #: ../../../Controllers/MainWindowController.cs:1396
+#: ../../../Controllers/MainWindowController.cs:1397
+#: ../../../Controllers/MainWindowController.cs:1398
+#: ../../../Controllers/MainWindowController.cs:1399
+#: ../../../Controllers/MainWindowController.cs:1400
+#: ../../../Controllers/MainWindowController.cs:1401
+#: ../../../Controllers/MainWindowController.cs:1402
+#: ../../../Controllers/MainWindowController.cs:1403
+#: ../../../Controllers/MainWindowController.cs:1404
+#: ../../../Controllers/MainWindowController.cs:1405
+#: ../../../Controllers/MainWindowController.cs:1406
+#: ../../../Controllers/MainWindowController.cs:1407
+#: ../../../Controllers/MainWindowController.cs:1411
 msgid "<keep>"
 msgstr "<keep>"
 
@@ -367,7 +367,7 @@ msgstr[2] "Загружено {0} музыкальных файлов."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:527
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:552
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:561
-#: ../../../Controllers/MainWindowController.cs:1415
+#: ../../../Controllers/MainWindowController.cs:1430
 msgid "Loading music files from folder..."
 msgstr "Загрузка музыкальных файлов из папки..."
 
@@ -615,44 +615,42 @@ msgid "Sort Files By"
 msgstr "Сортировать файлы по"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:361
 msgid "File Name"
 msgstr "Имя файла"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#, fuzzy
 msgid "File Path"
 msgstr "Путь к файлу"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:369
 msgid "Title"
 msgstr "Название"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:373
 msgid "Artist"
 msgstr "Исполнитель"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:377
 msgid "Album"
 msgstr "Альбом"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:381
 msgid "Year"
 msgstr "Год"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:385
 msgid "Track"
-msgstr "Трек"
+msgstr "Номер трека"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:397
 msgid "Genre"
 msgstr "Жанр"
 
@@ -845,33 +843,9 @@ msgstr "Нет выбранных музыкальных файлов"
 msgid "Select some files"
 msgstr "Выберите несколько файлов"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:361
-msgid "File Name"
-msgstr "Имя файла"
-
 #: NickvisionTagger.GNOME/Blueprints/window.blp:366
 msgid "Main Properties"
 msgstr "Основные свойства"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:369
-msgid "Title"
-msgstr "Название"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:373
-msgid "Artist"
-msgstr "Исполнитель"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:377
-msgid "Album"
-msgstr "Альбом"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:381
-msgid "Year"
-msgstr "Год"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:385
-msgid "Track"
-msgstr "Номер трека"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:389
 msgid "Track Total"
@@ -880,10 +854,6 @@ msgstr "Трек Всего"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:393
 msgid "Album Artist"
 msgstr "Исполнитель альбома"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:397
-msgid "Genre"
-msgstr "Жанр"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:402
 msgid "Additional Properties"
@@ -973,6 +943,36 @@ msgstr "— Легко конвертируйте имена файлов в т�
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Lookup file information using MusicBrainz"
 msgstr "— Поиск информации о файлах с помощью MusicBrainz"
+
+#~ msgctxt "Sort"
+#~ msgid "File Name"
+#~ msgstr "Имя файла"
+
+#~ msgctxt "Sort"
+#~ msgid "Title"
+#~ msgstr "Название"
+
+#, fuzzy
+#~ msgctxt "Sort"
+#~ msgid "Artist"
+#~ msgstr "Исполнитель"
+
+#~ msgctxt "Sort"
+#~ msgid "Album"
+#~ msgstr "Альбом"
+
+#, fuzzy
+#~ msgctxt "Sort"
+#~ msgid "Year"
+#~ msgstr "Год"
+
+#~ msgctxt "Sort"
+#~ msgid "Track"
+#~ msgstr "Трек"
+
+#~ msgctxt "Sort"
+#~ msgid "Genre"
+#~ msgstr "Жанр"
 
 #, csharp-format
 #~ msgid ""

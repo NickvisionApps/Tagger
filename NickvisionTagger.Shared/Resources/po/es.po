@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-02 15:05-0400\n"
+"POT-Creation-Date: 2023-08-03 14:14-0400\n"
 "PO-Revision-Date: 2023-08-02 13:37+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-"
@@ -50,21 +50,21 @@ msgstr "%track%- %title%"
 #: ../../../Controllers/MainWindowController.cs:372
 #: ../../../Controllers/MainWindowController.cs:377
 #: ../../../Controllers/MainWindowController.cs:386
-#: ../../../Controllers/MainWindowController.cs:1379
-#: ../../../Controllers/MainWindowController.cs:1380
-#: ../../../Controllers/MainWindowController.cs:1381
-#: ../../../Controllers/MainWindowController.cs:1382
-#: ../../../Controllers/MainWindowController.cs:1383
-#: ../../../Controllers/MainWindowController.cs:1384
-#: ../../../Controllers/MainWindowController.cs:1385
-#: ../../../Controllers/MainWindowController.cs:1386
-#: ../../../Controllers/MainWindowController.cs:1387
-#: ../../../Controllers/MainWindowController.cs:1388
-#: ../../../Controllers/MainWindowController.cs:1389
-#: ../../../Controllers/MainWindowController.cs:1390
-#: ../../../Controllers/MainWindowController.cs:1391
-#: ../../../Controllers/MainWindowController.cs:1392
+#: ../../../Controllers/MainWindowController.cs:1394
+#: ../../../Controllers/MainWindowController.cs:1395
 #: ../../../Controllers/MainWindowController.cs:1396
+#: ../../../Controllers/MainWindowController.cs:1397
+#: ../../../Controllers/MainWindowController.cs:1398
+#: ../../../Controllers/MainWindowController.cs:1399
+#: ../../../Controllers/MainWindowController.cs:1400
+#: ../../../Controllers/MainWindowController.cs:1401
+#: ../../../Controllers/MainWindowController.cs:1402
+#: ../../../Controllers/MainWindowController.cs:1403
+#: ../../../Controllers/MainWindowController.cs:1404
+#: ../../../Controllers/MainWindowController.cs:1405
+#: ../../../Controllers/MainWindowController.cs:1406
+#: ../../../Controllers/MainWindowController.cs:1407
+#: ../../../Controllers/MainWindowController.cs:1411
 msgid "<keep>"
 msgstr "<mantener>"
 
@@ -359,7 +359,7 @@ msgstr[1] "Cargados {0} archivos de música."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:527
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:552
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:561
-#: ../../../Controllers/MainWindowController.cs:1415
+#: ../../../Controllers/MainWindowController.cs:1430
 msgid "Loading music files from folder..."
 msgstr "Cargando archivos de música desde la carpeta…"
 
@@ -608,44 +608,42 @@ msgid "Sort Files By"
 msgstr "Ordenar archivos por"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:361
 msgid "File Name"
 msgstr "Nombre del archivo"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#, fuzzy
 msgid "File Path"
 msgstr "Ruta del archivo"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:369
 msgid "Title"
 msgstr "Título"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:373
 msgid "Artist"
 msgstr "Artista"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:377
 msgid "Album"
 msgstr "Álbum"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:381
 msgid "Year"
 msgstr "Año"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:385
 msgid "Track"
 msgstr "Pista"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgctxt "Sort"
+#: NickvisionTagger.GNOME/Blueprints/window.blp:397
 msgid "Genre"
 msgstr "Género"
 
@@ -839,33 +837,9 @@ msgstr "No hay archivos de música seleccionados"
 msgid "Select some files"
 msgstr "Seleccione algunos archivos"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:361
-msgid "File Name"
-msgstr "Nombre del archivo"
-
 #: NickvisionTagger.GNOME/Blueprints/window.blp:366
 msgid "Main Properties"
 msgstr "Propiedades principales"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:369
-msgid "Title"
-msgstr "Título"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:373
-msgid "Artist"
-msgstr "Artista"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:377
-msgid "Album"
-msgstr "Álbum"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:381
-msgid "Year"
-msgstr "Año"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:385
-msgid "Track"
-msgstr "Pista"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:389
 msgid "Track Total"
@@ -874,10 +848,6 @@ msgstr "Pista total"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:393
 msgid "Album Artist"
 msgstr "Artista del álbum"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:397
-msgid "Genre"
-msgstr "Género"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:402
 msgid "Additional Properties"
@@ -970,6 +940,36 @@ msgstr ""
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Lookup file information using MusicBrainz"
 msgstr "— Buscar información de archivos en MusicBrainz"
+
+#~ msgctxt "Sort"
+#~ msgid "File Name"
+#~ msgstr "Nombre del archivo"
+
+#~ msgctxt "Sort"
+#~ msgid "Title"
+#~ msgstr "Título"
+
+#, fuzzy
+#~ msgctxt "Sort"
+#~ msgid "Artist"
+#~ msgstr "Artista"
+
+#~ msgctxt "Sort"
+#~ msgid "Album"
+#~ msgstr "Álbum"
+
+#, fuzzy
+#~ msgctxt "Sort"
+#~ msgid "Year"
+#~ msgstr "Año"
+
+#~ msgctxt "Sort"
+#~ msgid "Track"
+#~ msgstr "Pista"
+
+#~ msgctxt "Sort"
+#~ msgid "Genre"
+#~ msgstr "Género"
 
 #, csharp-format
 #~ msgid ""
