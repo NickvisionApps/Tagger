@@ -36,6 +36,8 @@ public partial class Program
         _mainWindowController.AppInfo.Changelog =
             @"* Added more sorting options
               * Improved the advanced search algorithm, supporting accented characters better
+              * The apply button will now be shown only when a file has unsaved changes
+              * Web Services will now get enabled and disabled depending on the system's internet connection
               * Fixed an issue where advanced search may sometimes crash
               * Fixed an issue where submitting to AcoustID would crash
               * Updated translations (Thanks everyone on Weblate!)";

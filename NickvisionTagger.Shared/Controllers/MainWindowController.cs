@@ -1,5 +1,7 @@
+using ATL;
 using FuzzySharp;
 using Nickvision.Aura;
+using Nickvision.Aura.Network;
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
 using NickvisionTagger.Shared.Models;
@@ -7,9 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using ATL;
 using System.Text;
+using System.Threading.Tasks;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Controllers;
@@ -26,8 +27,9 @@ public enum AlbumArtType
 /// <summary>
 /// A controller for a MainWindow
 /// </summary>
-public class MainWindowController
+public class MainWindowController : IDisposable
 {
+    private bool _disposed;
     private MusicFolder? _musicFolder;
     private bool _forceAllowClose;
 
@@ -47,6 +49,10 @@ public class MainWindowController
     /// The property map for the selected music files
     /// </summary>
     public PropertyMap SelectedPropertyMap { get; init; }
+    /// <summary>
+    /// The NetworkMonitor
+    /// </summary>
+    public NetworkMonitor? NetworkMonitor { get; private set; }
 
     /// <summary>
     /// Application's Aura
@@ -96,7 +102,8 @@ public class MainWindowController
     /// <summary>
     /// Occurs when a music file's save state is changed
     /// </summary>
-    public event EventHandler<EventArgs>? MusicFileSaveStatesChanged;
+    /// <remarks>The boolean arg is whether or not there are unsaved changes</remarks>
+    public event EventHandler<bool>? MusicFileSaveStatesChanged;
     /// <summary>
     /// Occurs when the selected music files' properties are changed
     /// </summary>
@@ -115,6 +122,7 @@ public class MainWindowController
     /// </summary>
     public MainWindowController()
     {
+        _disposed = false;
         Aura = new Aura("org.nickvision.tagger", "Nickvision Tagger", _("Tagger"), _("Tag your music"));
         if (Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
         {
@@ -149,6 +157,11 @@ public class MainWindowController
         SelectedMusicFiles = new Dictionary<int, MusicFile>();
         SelectedPropertyMap = new PropertyMap();
     }
+    
+    /// <summary>
+    /// Finalizes the MainWindowController
+    /// </summary>
+    ~MainWindowController() => Dispose(false);
 
     /// <summary>
     /// Whether or not the window can close freely
@@ -173,6 +186,46 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Whether or not at least one file in the group of select files has unsaved changes
+    /// </summary>
+    public bool SelectedHasUnsavedChanges
+    {
+        get
+        {
+            foreach (var pair in SelectedMusicFiles)
+            {
+                if (!MusicFileSaveStates[pair.Key])
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Frees resources used by the MainWindowController object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the MainWindowController object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+        NetworkMonitor?.Dispose();
+        _disposed = true;
+    }
+
+    /// <summary>
     /// Creates a new PreferencesViewController
     /// </summary>
     /// <returns>The PreferencesViewController</returns>
@@ -183,6 +236,7 @@ public class MainWindowController
     /// </summary>
     public async Task StartupAsync()
     {
+        NetworkMonitor = await NetworkMonitor.NewAsync();
         if(Configuration.Current.RememberLastOpenedFolder && Directory.Exists(Configuration.Current.LastOpenedFolder))
         {
             await OpenFolderAsync(Configuration.Current.LastOpenedFolder);
@@ -397,7 +451,7 @@ public class MainWindowController
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, true);
     }
 
     /// <summary>
@@ -435,7 +489,7 @@ public class MainWindowController
             });
             if(triggerMusicFileSaveStatesChanged)
             {
-                MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+                MusicFileSaveStatesChanged?.Invoke(this, false);
             }
         }
     }
@@ -472,7 +526,7 @@ public class MainWindowController
                     LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
                 }
             });
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, false);
         }
     }
 
@@ -501,7 +555,7 @@ public class MainWindowController
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, discarded);
     }
 
     /// <summary>
@@ -522,7 +576,7 @@ public class MainWindowController
         if(deleted)
         {
             UpdateSelectedMusicFilesProperties();
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, deleted);
         }
     }
 
@@ -544,7 +598,7 @@ public class MainWindowController
                 }
             }
             UpdateSelectedMusicFilesProperties();
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, success > 0);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} file name to tag successfully", "Converted {0} file names to tags successfully", success, success), NotificationSeverity.Success, "format"));
         }
     }
@@ -567,7 +621,7 @@ public class MainWindowController
                 }
             }
             UpdateSelectedMusicFilesProperties();
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, success > 0);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} tag to file name successfully", "Converted {0} tags to file names successfully", success, success), NotificationSeverity.Success, "format"));
 
         }
@@ -616,7 +670,7 @@ public class MainWindowController
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, inserted);
     }
 
     /// <summary>
@@ -650,7 +704,7 @@ public class MainWindowController
         if(removed)
         {
             UpdateSelectedMusicFilesProperties();
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, removed);
         }
     }
 
@@ -711,7 +765,7 @@ public class MainWindowController
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, true);
     }
 
     /// <summary>
@@ -733,7 +787,7 @@ public class MainWindowController
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, true);
     }
 
     /// <summary>
@@ -776,7 +830,7 @@ public class MainWindowController
             LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
         }
         UpdateSelectedMusicFilesProperties();
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, successful > 0);
         NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Downloaded metadata for {0} files successfully"), successful), NotificationSeverity.Success));
     }
 
@@ -789,7 +843,7 @@ public class MainWindowController
         if(SelectedMusicFiles.Count == 1)
         {
             var result = await SelectedMusicFiles.First().Value.SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, result);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(result ? _("Submitted metadata to AcoustId successfully") : _("Unable to submit to AcoustId. Check API key"), result ? NotificationSeverity.Success : NotificationSeverity.Error));
         }
     }
