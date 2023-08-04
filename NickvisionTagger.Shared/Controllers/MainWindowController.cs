@@ -102,7 +102,8 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// Occurs when a music file's save state is changed
     /// </summary>
-    public event EventHandler<EventArgs>? MusicFileSaveStatesChanged;
+    /// <remarks>The boolean arg is whether or not there are unsaved changes</remarks>
+    public event EventHandler<bool>? MusicFileSaveStatesChanged;
     /// <summary>
     /// Occurs when the selected music files' properties are changed
     /// </summary>
@@ -181,6 +182,24 @@ public class MainWindowController : IDisposable
                 }
             }
             return true;
+        }
+    }
+
+    /// <summary>
+    /// Whether or not at least one file in the group of select files has unsaved changes
+    /// </summary>
+    public bool SelectedHasUnsavedChanges
+    {
+        get
+        {
+            foreach (var pair in SelectedMusicFiles)
+            {
+                if (!MusicFileSaveStates[pair.Key])
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
@@ -432,7 +451,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, true);
     }
 
     /// <summary>
@@ -470,7 +489,7 @@ public class MainWindowController : IDisposable
             });
             if(triggerMusicFileSaveStatesChanged)
             {
-                MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+                MusicFileSaveStatesChanged?.Invoke(this, false);
             }
         }
     }
@@ -507,7 +526,7 @@ public class MainWindowController : IDisposable
                     LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
                 }
             });
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, false);
         }
     }
 
@@ -536,7 +555,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, discarded);
     }
 
     /// <summary>
@@ -557,7 +576,7 @@ public class MainWindowController : IDisposable
         if(deleted)
         {
             UpdateSelectedMusicFilesProperties();
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, deleted);
         }
     }
 
@@ -579,7 +598,7 @@ public class MainWindowController : IDisposable
                 }
             }
             UpdateSelectedMusicFilesProperties();
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, success > 0);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} file name to tag successfully", "Converted {0} file names to tags successfully", success, success), NotificationSeverity.Success, "format"));
         }
     }
@@ -602,7 +621,7 @@ public class MainWindowController : IDisposable
                 }
             }
             UpdateSelectedMusicFilesProperties();
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, success > 0);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} tag to file name successfully", "Converted {0} tags to file names successfully", success, success), NotificationSeverity.Success, "format"));
 
         }
@@ -651,7 +670,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, inserted);
     }
 
     /// <summary>
@@ -685,7 +704,7 @@ public class MainWindowController : IDisposable
         if(removed)
         {
             UpdateSelectedMusicFilesProperties();
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, removed);
         }
     }
 
@@ -746,7 +765,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, true);
     }
 
     /// <summary>
@@ -768,7 +787,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, true);
     }
 
     /// <summary>
@@ -811,7 +830,7 @@ public class MainWindowController : IDisposable
             LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
         }
         UpdateSelectedMusicFilesProperties();
-        MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+        MusicFileSaveStatesChanged?.Invoke(this, successful > 0);
         NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Downloaded metadata for {0} files successfully"), successful), NotificationSeverity.Success));
     }
 
@@ -824,7 +843,7 @@ public class MainWindowController : IDisposable
         if(SelectedMusicFiles.Count == 1)
         {
             var result = await SelectedMusicFiles.First().Value.SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
-            MusicFileSaveStatesChanged?.Invoke(this, EventArgs.Empty);
+            MusicFileSaveStatesChanged?.Invoke(this, result);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(result ? _("Submitted metadata to AcoustId successfully") : _("Unable to submit to AcoustId. Check API key"), result ? NotificationSeverity.Success : NotificationSeverity.Error));
         }
     }

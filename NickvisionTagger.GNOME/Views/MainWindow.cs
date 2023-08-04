@@ -26,6 +26,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.DropTarget _dropTarget;
+    private readonly Gio.SimpleAction _applyAction;
     private readonly Gio.SimpleAction _insertAlbumArtAction;
     private readonly Gio.SimpleAction _removeAlbumArtAction;
     private readonly Gio.SimpleAction _exportAlbumArtAction;
@@ -229,7 +230,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             return false;
         });
         _controller.MusicFolderUpdated += (sender, e) => GLib.Functions.IdleAdd(0, MusicFolderUpdated);
-        _controller.MusicFileSaveStatesChanged += (sender, e) => GLib.Functions.IdleAdd(0, MusicFileSaveStatesChanged);
+        _controller.MusicFileSaveStatesChanged += (sender, e) => GLib.Functions.IdleAdd(0, () => MusicFileSaveStatesChanged(e));
         _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => GLib.Functions.IdleAdd(0, SelectedMusicFilesPropertiesChanged);
         _controller.FingerprintCalculated += (sender, e) => GLib.Functions.IdleAdd(0, UpdateFingerprint);
         _controller.CorruptedFilesFound += (sender, e) => GLib.Functions.IdleAdd(0, CorruptedFilesFound);
@@ -249,9 +250,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         AddAction(actReloadFolder);
         application.SetAccelsForAction("win.reloadFolder", new string[] { "F5" });
         //Apply Action
-        var actApply = Gio.SimpleAction.New("apply", null);
-        actApply.OnActivate += Apply;
-        AddAction(actApply);
+        _applyAction = Gio.SimpleAction.New("apply", null);
+        _applyAction.OnActivate += Apply;
+        AddAction(_applyAction);
         application.SetAccelsForAction("win.apply", new string[] { "<Ctrl>S" });
         //Discard Unapplied Changes Action
         var actDiscard = Gio.SimpleAction.New("discardUnappliedChanges", null);
@@ -452,7 +453,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _loadingLabel.SetText(message);
         _loadingProgressBar.SetVisible(false);
         _loadingProgressLabel.SetVisible(false);
-        _applyButton.SetSensitive(false);
+        _applyAction.SetEnabled(false);
         _tagActionsButton.SetSensitive(false);
     }
 
@@ -935,7 +936,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _headerBar.RemoveCssClass("flat");
             _title.SetSubtitle(_controller.MusicFolderPath);
             _openFolderButton.SetVisible(true);
-            _applyButton.SetSensitive(false);
+            _applyAction.SetEnabled(false);
             _tagActionsButton.SetSensitive(false);
             _viewStack.SetVisibleChildName("Folder");
             _folderFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
@@ -956,12 +957,13 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when a music file's save state is changed
     /// </summary>
-    private bool MusicFileSaveStatesChanged()
+    /// <param name="pending">Whether or not there are unsaved changes</param>
+    private bool MusicFileSaveStatesChanged(bool pending)
     {
         _viewStack.SetVisibleChildName("Folder");
         _openFolderButton.SetVisible(true);
         _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
-        _applyButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
+        _applyAction.SetEnabled(pending);
         _tagActionsButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         var i = 0;
         foreach (var saved in _controller.MusicFileSaveStates)
@@ -979,7 +981,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _isSelectionOccuring = true;
         //Update Properties
-        _applyButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
+        _applyAction.SetEnabled(_controller.SelectedMusicFiles.Count != 0 && _controller.SelectedHasUnsavedChanges);
         _tagActionsButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         _filenameRow.SetEditable(_controller.SelectedMusicFiles.Count < 2);
         if (_controller.SelectedMusicFiles.Count == 0)
