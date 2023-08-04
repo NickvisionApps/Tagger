@@ -1,3 +1,4 @@
+using Nickvision.Aura.Network;
 using NickvisionTagger.GNOME.Controls;
 using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Controllers;
@@ -28,6 +29,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _insertAlbumArtAction;
     private readonly Gio.SimpleAction _removeAlbumArtAction;
     private readonly Gio.SimpleAction _exportAlbumArtAction;
+    private readonly Gio.SimpleAction _musicBrainzAction;
+    private readonly Gio.SimpleAction _acoustIdAction;
     private AlbumArtType _currentAlbumArtType;
     private List<Adw.ActionRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
@@ -326,14 +329,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         actAddCustomProperty.OnActivate += (sender, e) => AddCustomProperty();
         AddAction(actAddCustomProperty);
         //Download MusicBrainz Metadata Action
-        var actMusicBrainz = Gio.SimpleAction.New("downloadMusicBrainzMetadata", null);
-        actMusicBrainz.OnActivate += DownloadMusicBrainzMetadata;
-        AddAction(actMusicBrainz);
+        _musicBrainzAction = Gio.SimpleAction.New("downloadMusicBrainzMetadata", null);
+        _musicBrainzAction.OnActivate += DownloadMusicBrainzMetadata;
+        AddAction(_musicBrainzAction);
         application.SetAccelsForAction("win.downloadMusicBrainzMetadata", new string[] { "<Ctrl>m" });
         //Submit to AcoustId Action
-        var actAcoustId = Gio.SimpleAction.New("submitToAcoustId", null);
-        actAcoustId.OnActivate += SubmitToAcoustId;
-        AddAction(actAcoustId);
+        _acoustIdAction = Gio.SimpleAction.New("submitToAcoustId", null);
+        _acoustIdAction.OnActivate += SubmitToAcoustId;
+        AddAction(_acoustIdAction);
         application.SetAccelsForAction("win.submitToAcoustId", new string[] { "<Ctrl>u" });
         //Preferences Action
         var actPreferences = Gio.SimpleAction.New("preferences", null);
@@ -383,6 +386,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         Present();
         SetLoadingState(_("Loading music files from folder..."));
         await _controller.StartupAsync();
+        _controller.NetworkMonitor!.StateChanged += (sender, state) =>
+        {
+            _musicBrainzAction.SetEnabled(state == NetworkState.ConnectedGlobal);
+            _acoustIdAction.SetEnabled(state == NetworkState.ConnectedGlobal);
+        };
     }
 
     /// <summary>
@@ -490,6 +498,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             return true;
         }
         _listMusicFiles.UnselectAll();
+        _controller.Dispose();
         return false;
     }
 

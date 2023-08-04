@@ -1,5 +1,7 @@
+using ATL;
 using FuzzySharp;
 using Nickvision.Aura;
+using Nickvision.Aura.Network;
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
 using NickvisionTagger.Shared.Models;
@@ -7,9 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using ATL;
 using System.Text;
+using System.Threading.Tasks;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Controllers;
@@ -26,8 +27,9 @@ public enum AlbumArtType
 /// <summary>
 /// A controller for a MainWindow
 /// </summary>
-public class MainWindowController
+public class MainWindowController : IDisposable
 {
+    private bool _disposed;
     private MusicFolder? _musicFolder;
     private bool _forceAllowClose;
 
@@ -47,6 +49,10 @@ public class MainWindowController
     /// The property map for the selected music files
     /// </summary>
     public PropertyMap SelectedPropertyMap { get; init; }
+    /// <summary>
+    /// The NetworkMonitor
+    /// </summary>
+    public NetworkMonitor? NetworkMonitor { get; private set; }
 
     /// <summary>
     /// Application's Aura
@@ -115,6 +121,7 @@ public class MainWindowController
     /// </summary>
     public MainWindowController()
     {
+        _disposed = false;
         Aura = new Aura("org.nickvision.tagger", "Nickvision Tagger", _("Tagger"), _("Tag your music"));
         if (Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
         {
@@ -149,6 +156,11 @@ public class MainWindowController
         SelectedMusicFiles = new Dictionary<int, MusicFile>();
         SelectedPropertyMap = new PropertyMap();
     }
+    
+    /// <summary>
+    /// Finalizes the MainWindowController
+    /// </summary>
+    ~MainWindowController() => Dispose(false);
 
     /// <summary>
     /// Whether or not the window can close freely
@@ -173,6 +185,28 @@ public class MainWindowController
     }
 
     /// <summary>
+    /// Frees resources used by the MainWindowController object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the MainWindowController object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+        NetworkMonitor?.Dispose();
+        _disposed = true;
+    }
+
+    /// <summary>
     /// Creates a new PreferencesViewController
     /// </summary>
     /// <returns>The PreferencesViewController</returns>
@@ -183,6 +217,7 @@ public class MainWindowController
     /// </summary>
     public async Task StartupAsync()
     {
+        NetworkMonitor = await NetworkMonitor.NewAsync();
         if(Configuration.Current.RememberLastOpenedFolder && Directory.Exists(Configuration.Current.LastOpenedFolder))
         {
             await OpenFolderAsync(Configuration.Current.LastOpenedFolder);

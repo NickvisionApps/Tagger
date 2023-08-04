@@ -17,7 +17,9 @@
         "--socket=wayland",
         "--device=dri",
         "--share=ipc",
-        "--share=network"
+        "--share=network",
+        "--system-talk-name=org.freedesktop.NetworkManager",
+        "--filesystem=xdg-music"
     ],
     "cleanup":[
         "/include",
