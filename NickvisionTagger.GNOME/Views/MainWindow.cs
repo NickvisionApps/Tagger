@@ -405,12 +405,22 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (e.Action == "unsupported")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("unsupported"), 0);
+            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("unsupported"), 0);
         }
         else if (e.Action == "format")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("format-string"), 0);
+            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("format-string"), 0);
+        }
+        else if (e.Action == "musicbrainz" && !string.IsNullOrWhiteSpace(e.ActionParam))
+        {
+            toast.SetButtonLabel(_("Info"));
+            toast.OnButtonClicked += (_, _) =>
+            {
+                var messageDialog = new MessageDialog(this, _controller.AppInfo.ID, "Failed MusicBrainz Lookups", e.ActionParam, _("OK"));
+                messageDialog.OnResponse += (_, _) => messageDialog.Destroy();
+                messageDialog.Present();
+            };
         }
         _toastOverlay.AddToast(toast);
     }

@@ -16,6 +16,17 @@ using static NickvisionTagger.Shared.Helpers.Gettext;
 namespace NickvisionTagger.Shared.Models;
 
 /// <summary>
+/// Statuses for MusicBrainz lookup
+/// </summary>
+public enum MusicBrainzLoadStatus
+{
+    Success = 0,
+    NoAcoustIdResult,
+    NoAcoustIdRecordingId,
+    InvalidMusicBrainzRecordingId
+}
+
+/// <summary>
 /// A model of a music file
 /// </summary>
 public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
@@ -291,8 +302,8 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <param name="version">The version of the app</param>
     /// <param name="overwriteTagWithMusicBrainz">Whether or not to overwrite a tag's existing data with data from MusicBrainz</param>
     /// <param name="overwriteAlbumArtWithMusicBrainz">Whether or not to overwrite a tag's existing album art with album art from MusicBrainz</param>
-    /// <returns>True if successful, else false</returns>
-    public async Task<bool> LoadTagFromMusicBrainzAsync(string acoustIdClientKey, string version, bool overwriteTagWithMusicBrainz, bool overwriteAlbumArtWithMusicBrainz)
+    /// <returns>MusicBrainzLoadStatus</returns>
+    public async Task<MusicBrainzLoadStatus> LoadTagFromMusicBrainzAsync(string acoustIdClientKey, string version, bool overwriteTagWithMusicBrainz, bool overwriteAlbumArtWithMusicBrainz)
     {
         //Use AcoustID to get MBID
         AcoustID.Configuration.ClientKey = acoustIdClientKey;
@@ -312,7 +323,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             //AcoustID Recordings
             if(bestResult.Recordings.Count < 1)
             {
-                return false;
+                return MusicBrainzLoadStatus.NoAcoustIdRecordingId;
             }
             var bestRecordingId = bestResult.Recordings[0].Id;
             foreach (var r in bestResult.Recordings)
@@ -333,7 +344,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             }
             catch
             {
-                return false;
+                return MusicBrainzLoadStatus.InvalidMusicBrainzRecordingId;
             }
             if(recording.Releases != null && recording.Releases.Count > 0)
             {
@@ -398,9 +409,9 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                     }
                 }
             }
-            return true;
+            return MusicBrainzLoadStatus.Success;
         }
-        return false;
+        return MusicBrainzLoadStatus.NoAcoustIdResult;
     }
     
     /// <summary>
