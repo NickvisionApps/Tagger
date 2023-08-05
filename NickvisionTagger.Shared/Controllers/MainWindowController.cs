@@ -857,7 +857,7 @@ public class MainWindowController : IDisposable
         {
             errorString = errorString.Remove(errorString.Length - 2);
         }
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(successful > 0 ? _("Downloaded metadata for {0} files successfully", successful) : _("No metadata was downloaded"), successful > 0 ? NotificationSeverity.Success : NotificationSeverity.Error, "musicbrainz", errorString));
+        NotificationSent?.Invoke(this, new NotificationSentEventArgs(successful > 0 ? _("Downloaded metadata for {0} files successfully", successful) : _("No metadata was downloaded"), successful > 0 ? NotificationSeverity.Success : NotificationSeverity.Error, "musicbrainz", errorString));
     }
 
     /// <summary>
