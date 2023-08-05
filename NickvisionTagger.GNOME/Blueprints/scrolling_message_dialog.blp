@@ -26,7 +26,7 @@ Adw.Window _root {
 
         Gtk.Separator {}
       
-        Gtk.ScrolledWindow _scrolledWindow {
+        Gtk.ScrolledWindow {
           propagate-natural-height: true;
           max-content-height: 300;
           hscrollbar-policy: never;
@@ -37,6 +37,7 @@ Adw.Window _root {
             margin-end: 12;
             margin-bottom: 12;
             wrap-mode: word_char;
+            wrap: true;
           };
           
           styles ["view"]

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-04 22:48-0400\n"
+"POT-Creation-Date: 2023-08-05 08:31+0300\n"
 "PO-Revision-Date: 2023-07-12 19:29+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -254,6 +254,7 @@ msgid "Discarding unapplied changes..."
 msgstr "Abandon des changements..."
 
 #: ../../../Controllers/MainWindowController.cs:860
+#, csharp-format
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Métadonnées téléchargées pour {0} fichiers avec succès"
 
@@ -412,6 +413,10 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:850
 msgid "No AcoustId entry found for the file's fingerprint"
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:860
+msgid "No metadata was downloaded"
 msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:851
