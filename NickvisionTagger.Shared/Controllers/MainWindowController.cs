@@ -853,6 +853,10 @@ public class MainWindowController : IDisposable
                 _ => _("Error")
             }}\n\n";
         }
+        if (!string.IsNullOrEmpty(errorString))
+        {
+            errorString = errorString.Remove(errorString.Length - 2);
+        }
         NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Downloaded metadata for {0} files successfully"), successful), NotificationSeverity.Success, "musicbrainz", errorString));
     }
 
