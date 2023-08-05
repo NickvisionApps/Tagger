@@ -2,11 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-03 17:01-0400\n"
-"PO-Revision-Date: 2023-07-30 02:09+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
-"weblate.org>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-"
-"tagger/docs/es/>\n"
+"PO-Revision-Date: 2023-08-05 02:08+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/"
+"nickvision-tagger/docs/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -884,7 +883,7 @@ msgstr ""
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
 msgid "Unable To Apply Changes - Permission Denied"
-msgstr ""
+msgstr "No se pueden aplicar los cambios - Permiso denegado"
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:25
@@ -893,16 +892,18 @@ msgid ""
 "based systems where you are unable to save files due to a \"permission denied"
 "\" error."
 msgstr ""
+"Existe un problema conocido de la versión flatpak de la aplicación que se "
+"ejecuta en sistemas basados en Debian en el que no se pueden guardar "
+"archivos debido a un error de \"permiso denegado\"."
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:26
-#, fuzzy
 msgid ""
 "Please see this for the fix: <link href=\"https://github.com/NickvisionApps/"
 "Tagger/issues/174\"/>"
 msgstr ""
-"<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Informar de "
-"un problema</link> si experimenta alguno."
+"Por favor, mira esto para corregirlo: <link href=\"https://github.com/"
+"NickvisionApps/Tagger/issues/174\"/>"
 
 #. (itstool) path: note/p
 #: yelp/C/unsupported.page:28
@@ -910,6 +911,8 @@ msgid ""
 "Please confirm that you are receiving the \"permission denied\" error before "
 "trying this."
 msgstr ""
+"Por favor, confirma que recibe el error \"permiso denegado\" antes de "
+"intentarlo."
 
 #. (itstool) path: note/p
 #: yelp/C/unsupported.page:29
@@ -918,16 +921,19 @@ msgid ""
 "tagger</code>, then try to apply changes again, and you will find an error "
 "message in the terminal."
 msgstr ""
+"Ejecuta <app>Tagger</app> en el terminal mediante <code>flatpak run org."
+"nickvision.tagger</code>, luego intenta aplicar los cambios de nuevo, y "
+"encontrarás un mensaje de error en el terminal."
 
 #. (itstool) path: note/p
 #: yelp/C/unsupported.page:30
-#, fuzzy
 msgid ""
 "If it is not a \"permission denied\" error, please <link href=\"https://"
 "github.com/NickvisionApps/Tagger/issues/174\">report a new issue</link>."
 msgstr ""
-"<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Informar de "
-"un problema</link> si experimenta alguno."
+"Si no es un error de \"permiso denegado\", por favor <link href=\"https"
+"://github.com/NickvisionApps/Tagger/issues/174\">reporta un nuevo "
+"problema</link>."
 
 #. (itstool) path: info/title
 #: yelp/C/web-services.page:8
