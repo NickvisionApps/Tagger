@@ -12,14 +12,6 @@ Adw.Window _root {
     Adw.HeaderBar {
       title-widget: Gtk.Label { };
 
-      [start]
-      Gtk.Button _helpButton {
-        icon-name: "dialog-question-symbolic";
-        tooltip-text: _("Help");
-
-        styles ["flat"]
-      }
-
       styles ["flat"]
     }
 
@@ -27,19 +19,9 @@ Adw.Window _root {
       Gtk.Box {
         orientation: vertical;
 
-        Gtk.Label {
-          label: _("Corrupted Files Found");
+        Gtk.Label _titleLabel {
           styles ["title-2"]
-        }
-      
-        Gtk.Label {
-          label: _("This music folder contains music files that have corrupted tags. The following files are affected and will be ignored by Tagger:");
-          wrap: true;
-          margin-top: 24;
-          margin-start: 12;
-          margin-end: 12;
           margin-bottom: 24;
-          justify: center;
         }
 
         Gtk.Separator {}
@@ -48,11 +30,12 @@ Adw.Window _root {
           propagate-natural-height: true;
           max-content-height: 300;
 
-          child: Adw.PreferencesGroup _filesGroup {
+          child: Gtk.Label _messageLabel {
             margin-top: 12;
             margin-start: 12;
             margin-end: 12;
             margin-bottom: 12;
+            wrap-mode: word;
           };
           
           styles ["view"]

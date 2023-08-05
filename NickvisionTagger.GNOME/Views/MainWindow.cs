@@ -417,8 +417,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             toast.SetButtonLabel(_("Info"));
             toast.OnButtonClicked += (_, _) =>
             {
-                var messageDialog = new MessageDialog(this, _controller.AppInfo.ID, _("Failed MusicBrainz Lookups"), e.ActionParam, _("OK"));
-                messageDialog.OnResponse += (_, _) => messageDialog.Destroy();
+                var messageDialog = new ScrollingMessageDialog(this, _controller.AppInfo.ID, _("Failed MusicBrainz Lookups"), e.ActionParam);
                 messageDialog.Present();
             };
         }
