@@ -29,13 +29,13 @@ Adw.Window _root {
         Gtk.ScrolledWindow _scrolledWindow {
           propagate-natural-height: true;
           max-content-height: 300;
+          hscrollbar-policy: never;
 
           child: Gtk.Label _messageLabel {
             margin-top: 12;
             margin-start: 12;
             margin-end: 12;
             margin-bottom: 12;
-            wrap-mode: word;
           };
           
           styles ["view"]
