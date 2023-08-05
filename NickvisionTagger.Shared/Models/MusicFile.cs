@@ -315,11 +315,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             var bestResult = response.Results[0];
             foreach (var r in response.Results)
             {
-                if (bestResult.Recordings.Count == 0 && r.Recordings.Count > 0)
-                {
-                    bestResult = r;
-                }
-                else if(r.Score > bestResult.Score && r.Recordings.Count > 0)
+                if (r.Recordings.Count > 0 && (r.Score > bestResult.Score || bestResult.Recordings.Count == 0))
                 {
                     bestResult = r;
                 }
