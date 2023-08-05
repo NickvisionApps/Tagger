@@ -24,13 +24,13 @@
 <p>Esta página explica los archivos de música que actualmente no son compatibles con <app>Tagger</app>.</p>
 <p>Tagger usa <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> como base para leer y escribir metadatos.</p>
 <section>
-    <title>Unable To Apply Changes - Permission Denied</title>
-    <p>There is a known issue of the flatpak version of the app running on Debian-based systems where you are unable to save files due to a "permission denied" error.</p>
-    <p>Please see this for the fix: <link href="https://github.com/NickvisionApps/Tagger/issues/174"/></p>
+    <title>No se pueden aplicar los cambios - Permiso denegado</title>
+    <p>Existe un problema conocido de la versión flatpak de la aplicación que se ejecuta en sistemas basados en Debian en el que no se pueden guardar archivos debido a un error de "permiso denegado".</p>
+    <p>Por favor, mira esto para corregirlo: <link href="https://github.com/NickvisionApps/Tagger/issues/174"/></p>
     <note>
-        <p>Please confirm that you are receiving the "permission denied" error before trying this.</p>
-        <p>Run <app>Tagger</app> in the terminal via <code>flatpak run org.nickvision.tagger</code>, then try to apply changes again, and you will find an error message in the terminal.</p>
-        <p>If it is not a "permission denied" error, please <link href="https://github.com/NickvisionApps/Tagger/issues/174">report a new issue</link>.</p>
+        <p>Por favor, confirma que recibe el error "permiso denegado" antes de intentarlo.</p>
+        <p>Ejecuta <app>Tagger</app> en el terminal mediante <code>flatpak run org.nickvision.tagger</code>, luego intenta aplicar los cambios de nuevo, y encontrarás un mensaje de error en el terminal.</p>
+        <p>Si no es un error de "permiso denegado", por favor <link href="https://github.com/NickvisionApps/Tagger/issues/174">reporta un nuevo problema</link>.</p>
     </note>
 </section>
 </page>
