@@ -29,7 +29,6 @@ public partial class CorruptedFilesDialog : Adw.Window
         SetIconName(iconName);
         SetTransientFor(parent);
         _helpButton.OnClicked += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("corrupted"), 0);
-        
         foreach (var path in files)
         {
             var row = Adw.ActionRow.New();

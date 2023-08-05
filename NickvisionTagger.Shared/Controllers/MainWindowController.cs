@@ -819,19 +819,45 @@ public class MainWindowController : IDisposable
     {
         var i = 0;
         var successful = 0;
+        var errors = new Dictionary<string, MusicBrainzLoadStatus>();
         foreach(var pair in SelectedMusicFiles)
         {
-            if(await pair.Value.LoadTagFromMusicBrainzAsync("b'Ch3cuJ0d", AppInfo.Version, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz))
+            var res = await pair.Value.LoadTagFromMusicBrainzAsync("b'Ch3cuJ0d", AppInfo.Version, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz);
+            if(res == MusicBrainzLoadStatus.Success)
             {
                 successful++;
                 MusicFileSaveStates[pair.Key] = false;
+            }
+            else
+            {
+                var p = pair.Value.Path.Remove(0, _musicFolder!.ParentPath.Length);
+                if(p[0] == '/')
+                {
+                    p = p.Remove(0, 1);
+                }
+                errors.Add(p, res);
             }
             i++;
             LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
         }
         UpdateSelectedMusicFilesProperties();
         MusicFileSaveStatesChanged?.Invoke(this, successful > 0);
-        NotificationSent?.Invoke(this, new NotificationSentEventArgs(string.Format(_("Downloaded metadata for {0} files successfully"), successful), NotificationSeverity.Success));
+        var errorString = "";
+        foreach (var pair in errors)
+        {
+            errorString += $"\"{pair.Key}\" - {pair.Value switch 
+            {
+                MusicBrainzLoadStatus.NoAcoustIdResult => _("No AcoustId entry found for the file's fingerprint"),
+                MusicBrainzLoadStatus.NoAcoustIdRecordingId => _("No MusicBrainz RecordingId was provided for the AcoustId entry"),
+                MusicBrainzLoadStatus.InvalidMusicBrainzRecordingId => _("An invalid RecordingId was provided to MusicBrainz"),
+                _ => _("Error")
+            }}\n\n";
+        }
+        if (!string.IsNullOrEmpty(errorString))
+        {
+            errorString = errorString.Remove(errorString.Length - 2);
+        }
+        NotificationSent?.Invoke(this, new NotificationSentEventArgs(successful > 0 ? _("Downloaded metadata for {0} files successfully", successful) : _("No metadata was downloaded"), successful > 0 ? NotificationSeverity.Success : NotificationSeverity.Error, "musicbrainz", errorString));
     }
 
     /// <summary>
