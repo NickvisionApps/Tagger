@@ -389,8 +389,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         await _controller.StartupAsync();
         _controller.NetworkMonitor!.StateChanged += (sender, state) =>
         {
-            _musicBrainzAction.SetEnabled(state == NetworkState.ConnectedGlobal);
-            _acoustIdAction.SetEnabled(state == NetworkState.ConnectedGlobal);
+            _musicBrainzAction.SetEnabled(state);
+            _acoustIdAction.SetEnabled(state);
         };
     }
 
