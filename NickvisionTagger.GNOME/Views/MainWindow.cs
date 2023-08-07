@@ -1,4 +1,3 @@
-using Nickvision.Aura.Network;
 using NickvisionTagger.GNOME.Controls;
 using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Controllers;
@@ -389,8 +388,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         await _controller.StartupAsync();
         _controller.NetworkMonitor!.StateChanged += (sender, state) =>
         {
-            _musicBrainzAction.SetEnabled(state == NetworkState.ConnectedGlobal);
-            _acoustIdAction.SetEnabled(state == NetworkState.ConnectedGlobal);
+            _musicBrainzAction.SetEnabled(state);
+            _acoustIdAction.SetEnabled(state);
         };
     }
 
@@ -488,16 +487,24 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         if (!_controller.CanClose)
         {
-            var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
+            var dialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("cancel", _("Cancel"));
+            dialog.SetDefaultResponse("cancel");
+            dialog.SetCloseResponse("cancel");
+            dialog.AddResponse("discard", _("Discard"));
+            dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
+            dialog.AddResponse("apply", _("Apply"));
+            dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
             dialog.OnResponse += async (s, ex) =>
             {
-                if (dialog.Response == MessageDialogResponse.Suggested)
+                if (ex.Response == "apply")
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                     Close();
                 }
-                else if (dialog.Response == MessageDialogResponse.Destructive)
+                else if (ex.Response == "discard")
                 {
                     _controller.ForceAllowClose();
                     Close();
@@ -558,15 +565,23 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         if (!_controller.CanClose)
         {
-            var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
+            var dialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("cancel", _("Cancel"));
+            dialog.SetDefaultResponse("cancel");
+            dialog.SetCloseResponse("cancel");
+            dialog.AddResponse("discard", _("Discard"));
+            dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
+            dialog.AddResponse("apply", _("Apply"));
+            dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
             dialog.OnResponse += async (s, ex) =>
             {
-                if (dialog.Response == MessageDialogResponse.Suggested)
+                if (ex.Response == "apply")
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                 }
-                if (dialog.Response != MessageDialogResponse.Cancel)
+                if (ex.Response != "cancel")
                 {
                     SetLoadingState(_("Loading music files from folder..."));
                     await _controller.ReloadFolderAsync();
@@ -752,7 +767,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         if (_controller.SelectedMusicFiles.Count > 1)
         {
-            var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Too Many Files Selected"), _("Only one file can be submitted to AcoustID at a time. Please select only one file and try again."), _("OK"));
+            var dialog = Adw.MessageDialog.New(this, _("Too Many Files Selected"), _("Only one file can be submitted to AcoustID at a time. Please select only one file and try again."));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("ok", _("OK"));
+            dialog.SetDefaultResponse("ok");
+            dialog.SetCloseResponse("ok");
             dialog.OnResponse += (s, ex) => dialog.Destroy();
             dialog.Present();
             return;
@@ -764,15 +783,23 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (!_controller.CanClose)
                 {
-                    var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
+                    var dialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
+                    dialog.SetIconName(_controller.AppInfo.ID);
+                    dialog.AddResponse("cancel", _("Cancel"));
+                    dialog.SetDefaultResponse("cancel");
+                    dialog.SetCloseResponse("cancel");
+                    dialog.AddResponse("discard", _("Discard"));
+                    dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
+                    dialog.AddResponse("apply", _("Apply"));
+                    dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
                     dialog.OnResponse += async (ss, exx) =>
                     {
-                        if (dialog.Response == MessageDialogResponse.Suggested)
+                        if (exx.Response == "apply")
                         {
                             SetLoadingState(_("Saving tags..."));
                             await _controller.SaveAllTagsAsync(false);
                         }
-                        if (dialog.Response != MessageDialogResponse.Cancel)
+                        if (exx.Response != "cancel")
                         {
                             SetLoadingState(_("Submitting data to AcoustId..."));
                             await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
@@ -802,14 +829,22 @@ public partial class MainWindow : Adw.ApplicationWindow
         var preferencesDialog = new PreferencesDialog(_controller.CreatePreferencesViewController(), _application, this);
         if (!_controller.CanClose)
         {
-            var dialog = new MessageDialog(this, _controller.AppInfo.ID, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"), _("Cancel"), _("Discard"), _("Apply"));
+            var dialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("cancel", _("Cancel"));
+            dialog.SetDefaultResponse("cancel");
+            dialog.SetCloseResponse("cancel");
+            dialog.AddResponse("discard", _("Discard"));
+            dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
+            dialog.AddResponse("apply", _("Apply"));
+            dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
             dialog.OnResponse += async (ss, exx) =>
             {
-                if (dialog.Response != MessageDialogResponse.Cancel)
+                if (exx.Response != "cancel")
                 {
                     preferencesDialog.Present();
                 }
-                if (dialog.Response == MessageDialogResponse.Suggested)
+                if (exx.Response == "apply")
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(true);
@@ -832,7 +867,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void KeyboardShortcuts(Gio.SimpleAction sender, EventArgs e)
     {
         var builder = Builder.FromFile("shortcuts_dialog.ui");
-        var shortcutsWindow = (Gtk.ShortcutsWindow)builder.GetObject("_shortcuts");
+        var shortcutsWindow = (Gtk.ShortcutsWindow)builder.GetObject("_shortcuts")!;
         shortcutsWindow.SetTransientFor(this);
         shortcutsWindow.SetIconName(_controller.AppInfo.ID);
         shortcutsWindow.Present();
