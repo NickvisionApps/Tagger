@@ -36,6 +36,7 @@ public partial class Program
         _mainWindowController.AppInfo.Changelog =
             @"* An Info button will appear when MusicBrainz lookup fails and will provide more information about why the process failed
               * Fixed an issue where Web Services were disabled even though network connection was available
+              * Fixed an issue where downloading MusicBrainz metadata would fail even if metadata was available
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))

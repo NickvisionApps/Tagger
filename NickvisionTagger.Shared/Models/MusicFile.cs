@@ -1,6 +1,4 @@
-using AcoustID.Web;
 using ATL;
-using MetaBrainz.MusicBrainz;
 using MetaBrainz.MusicBrainz.CoverArt;
 using MetaBrainz.MusicBrainz.Interfaces.Entities;
 using NickvisionTagger.Shared.Helpers;
@@ -307,8 +305,18 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     {
         //Use AcoustID to get MBID
         AcoustID.Configuration.ClientKey = acoustIdClientKey;
-        var service = new LookupService();
-        var response = await service.GetAsync(Fingerprint, Duration);
+        var service = new AcoustID.Web.LookupService();
+        AcoustID.Web.LookupResponse? response = null;
+        try
+        {
+            response = await service.GetAsync(Fingerprint, Duration, new string[] { "recordingids" });
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
+            return MusicBrainzLoadStatus.NoAcoustIdResult;
+        }
         if(response.Results.Count > 0)
         {
             //AcoustID Results
@@ -335,15 +343,18 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 }
             }
             //MusicBrainz
-            using var query = new Query(version, version, "mailto:nlogozzo225@gmail.com");
+            using var query = new MetaBrainz.MusicBrainz.Query("Tagger", version, "mailto:nlogozzo225@gmail.com");
             IRecording? recording = null;
             IRelease? album = null;
             try
             {
-                recording = await query.LookupRecordingAsync(Guid.Parse(bestRecordingId));
+                var include = MetaBrainz.MusicBrainz.Include.Releases | MetaBrainz.MusicBrainz.Include.ArtistCredits | MetaBrainz.MusicBrainz.Include.Genres;
+                recording = await query.LookupRecordingAsync(Guid.Parse(bestRecordingId), include, MetaBrainz.MusicBrainz.ReleaseType.Album, MetaBrainz.MusicBrainz.ReleaseStatus.Official);
             }
-            catch
+            catch(Exception e)
             {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
                 return MusicBrainzLoadStatus.InvalidMusicBrainzRecordingId;
             }
             if(recording.Releases != null && recording.Releases.Count > 0)
@@ -358,7 +369,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 if(recording.ArtistCredit != null && recording.ArtistCredit.Count > 0)
                 {
-                    Artist = recording.ArtistCredit[0].Name ?? "";
+                    Artist = recording.ArtistCredit[0].Artist!.Name ?? recording.ArtistCredit[0].Artist!.SortName ?? "";
                 }
             }
             if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Album))
@@ -379,7 +390,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 if(album != null && album.ArtistCredit != null && album.ArtistCredit.Count > 0)
                 {
-                    AlbumArtist = album.ArtistCredit[0].Name ?? "";
+                    AlbumArtist = album.ArtistCredit[0].Artist!.Name ?? album.ArtistCredit[0].Artist!.SortName ?? "";
                 }
             }
             if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Genre))
@@ -764,10 +775,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     public async Task<bool> SubmitToAcoustIdAsync(string acoustIdClientKey, string acoustIdUserKey, string? musicBrainzRecordingId)
     {
         AcoustID.Configuration.ClientKey = acoustIdClientKey;
-        var service = new SubmitService(acoustIdUserKey);
+        var service = new AcoustID.Web.SubmitService(acoustIdUserKey);
         if(!string.IsNullOrEmpty(musicBrainzRecordingId))
         {
-            var response = await service.SubmitAsync(new SubmitRequest(Fingerprint, Duration)
+            var response = await service.SubmitAsync(new AcoustID.Web.SubmitRequest(Fingerprint, Duration)
             {
                 MBID = musicBrainzRecordingId
             });
@@ -775,7 +786,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         else
         {
-            var response = await service.SubmitAsync(new SubmitRequest(Fingerprint, Duration)
+            var response = await service.SubmitAsync(new AcoustID.Web.SubmitRequest(Fingerprint, Duration)
             {
                 Title = Title,
                 Artist = Artist,
