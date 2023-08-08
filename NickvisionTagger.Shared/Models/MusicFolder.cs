@@ -35,6 +35,10 @@ public class MusicFolder
     /// Whether or not the folder contains music files that are read-only
     /// </summary>
     public bool ContainsReadOnlyFiles { get; private set; }
+    /// <summary>
+    /// A list of genres in the folder
+    /// </summary>
+    public List<string> Genres { get; init;  }
     
     /// <summary>
     /// Occurs when the loading progress is updated
@@ -53,6 +57,7 @@ public class MusicFolder
         MusicFiles = new List<MusicFile>();
         CorruptedFiles = new List<string>();
         ContainsReadOnlyFiles = false;
+        Genres = new List<string>();
     }
     
     /// <summary>
@@ -65,6 +70,7 @@ public class MusicFolder
         MusicFiles.Clear();
         CorruptedFiles.Clear();
         ContainsReadOnlyFiles = false;
+        Genres.Clear();
         if(Directory.Exists(ParentPath))
         {
             var supportedExtensions = new string[] { ".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav",
@@ -85,6 +91,10 @@ public class MusicFolder
                         if(musicFile.IsReadOnly)
                         {
                             ContainsReadOnlyFiles = true;
+                        }
+                        if (!Genres.Contains(musicFile.Genre))
+                        {
+                            Genres.Add(musicFile.Genre);
                         }
                     }
                     catch (FileLoadException e)

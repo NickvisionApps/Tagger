@@ -1146,10 +1146,14 @@ public class MainWindowController : IDisposable
     /// <returns>The list of suggestions</returns>
     public List<string> GetGenreSuggestions(string genre)
     {
-        return _genreSuggestions
-            .Where(x => Fuzz.PartialRatio(x.ToLower(), genre.ToLower()) > 75)
-            .OrderByDescending(x => Fuzz.PartialRatio(x.ToLower(), genre.ToLower()))
-            .Take(5).ToList();
+        if (_musicFolder != null)
+        {
+            return _genreSuggestions.Union(_musicFolder.Genres)
+                .Where(x => Fuzz.PartialRatio(x.ToLower(), genre.ToLower()) > 75)
+                .OrderByDescending(x => Fuzz.PartialRatio(x.ToLower(), genre.ToLower()))
+                .Take(5).ToList();
+        }
+        return new List<string>();
     }
     
     /// <summary>
