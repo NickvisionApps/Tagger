@@ -34,8 +34,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private AlbumArtType _currentAlbumArtType;
     private List<Adw.ActionRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
-    private AutocompleteBox _autocompleteBox; 
-    private bool _canHideAutobox;
+    private AutocompleteBox _autocompleteBox;
     private bool _isSelectionOccuring;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
@@ -95,7 +94,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _currentAlbumArtType = AlbumArtType.Front;
         _listMusicFilesRows = new List<Adw.ActionRow>();
         _customPropertyRows = new List<Adw.EntryRow>();
-        _canHideAutobox = true;
         _isSelectionOccuring = false;
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
@@ -179,7 +177,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         //Genre and Autocomplete
-        _autocompleteBox = new AutocompleteBox();
+        _autocompleteBox = new AutocompleteBox(_genreRow);
         _autocompleteBox.SetSizeRequest(327, -1);
         _autocompleteBox.SetMarginTop(486);
         _autocompleteBox.SuggestionAccepted += (sender, e) =>
@@ -202,41 +200,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 TagPropertyChanged();
             }
         };
-        _genreRow.OnStateFlagsChanged += (sender, e) =>
-        {
-            if(!_canHideAutobox)
-            {
-                _canHideAutobox = true;
-            }
-            else if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_genreRow.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
-            {
-                _autocompleteBox.SetVisible(false);
-            }
-        };
-        var genreKeyController = Gtk.EventControllerKey.New();
-        genreKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
-        genreKeyController.OnKeyPressed += (sender, e) =>
-        {
-            if(e.Keyval == 65293 || e.Keyval == 65421) //enter | keypad enter
-            {
-                if(_autocompleteBox.GetVisible())
-                {
-                    _autocompleteBox.AcceptSuggestion(0);
-                    return true;
-                }
-            }
-            if(e.Keyval == 65364) //down arrow
-            {
-                if(_autocompleteBox.GetVisible())
-                {
-                    _canHideAutobox = false;
-                    _autocompleteBox.GrabFocus();
-                    return true;
-                }
-            }
-            return false;
-        };
-        _genreRow.AddController(genreKeyController);
         _commentRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
