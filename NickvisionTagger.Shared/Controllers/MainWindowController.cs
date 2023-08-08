@@ -32,7 +32,8 @@ public class MainWindowController : IDisposable
     private bool _disposed;
     private MusicFolder? _musicFolder;
     private bool _forceAllowClose;
-
+    private string[] _genreSuggestions;
+    
     /// <summary>
     /// The list of predefined format strings
     /// </summary>
@@ -152,6 +153,19 @@ public class MainWindowController : IDisposable
         AppInfo.TranslatorCredits = _("translator-credits");
         _musicFolder = null;
         _forceAllowClose = false;
+        _genreSuggestions = new string[]
+        {
+            "Blues", "Classic rock", "Country", "Dance", "Disco", "Funk", "Grunge", "Hip-hop", "Jazz", "Metal",
+            "New age", "Oldies", "Other", "Pop", "Rhythm and blues", "Rap", "Reggae", "Rock", "Techno", "Industrial",
+            "Alternative", "Ska", "Death metal", "Pranks", "Soundtrack", "Euro-techno", "Ambient", "Trip-hop", "Vocal",
+            "Jazz & funk", "Fusion", "Trance", "Classical", "Instrumental", "Acid", "House", "Game", "Sound clip",
+            "Gospel", "Noise", "Alternative rock", "Bass", "Soul", "Punk", "Space", "Meditative", "Instrumental pop",
+            "Instrumental rock", "Ethnic", "Gothic", "Techno-industrial", "Electronic", "Pop-folk", "Eurodance",
+            "Dream", "Southern rock", "Comedy", "Gangsta", "Top 40", "Christian rap", "Pop/funk", "New wave", "Rave",
+            "Trailer", "Low-fi", "Tribal", "Polka", "Retro", "Musical", "Rock 'n' roll", "Hard rock", "Folk", "Swing",
+            "Latin", "Chorus", "Acoustic", "Opera", "Club", "Tango", "Samba", "Freestyle", "A cappella", "Dance hall",
+            "Indie", "Merengue", "Salsa", "Bachata", "Christmas", "EDM"
+        };
         FormatStrings = new string[] { _("%artist%- %title%"), _("%title%- %artist%"), _("%track%- %title%"), _("%title%") };
         MusicFileSaveStates = new List<bool>();
         SelectedMusicFiles = new Dictionary<int, MusicFile>();
@@ -1115,11 +1129,25 @@ public class MainWindowController : IDisposable
     public void UpdateSelectedMusicFiles(List<int> indexes)
     {
         SelectedMusicFiles.Clear();
-        foreach(var index in indexes)
+        if (_musicFolder != null)
         {
-            SelectedMusicFiles.Add(index, _musicFolder.MusicFiles[index]);
+            foreach(var index in indexes)
+            {
+                SelectedMusicFiles.Add(index, _musicFolder.MusicFiles[index]);
+            }
         }
         UpdateSelectedMusicFilesProperties();
+    }
+
+    /// <summary>
+    /// Gets a list of suggestions for the provided genre
+    /// </summary>
+    /// <param name="genre">The genre text to get suggestions for</param>
+    /// <returns>The list of suggestions</returns>
+    public List<string> GetGenreSuggestions(string genre)
+    {
+        var result = new List<string>();
+        return result;
     }
     
     /// <summary>
