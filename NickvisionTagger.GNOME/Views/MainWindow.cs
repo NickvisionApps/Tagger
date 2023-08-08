@@ -64,6 +64,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Button _switchAlbumArtButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _switchAlbumArtButtonContent;
     [Gtk.Connect] private readonly Gtk.Picture _albumArtImage;
+    [Gtk.Connect] private readonly Gtk.Label _durationFileSizeLabel;
     [Gtk.Connect] private readonly Adw.EntryRow _filenameRow;
     [Gtk.Connect] private readonly Gtk.Overlay _mainPropOverlay;
     [Gtk.Connect] private readonly Adw.EntryRow _titleRow;
@@ -80,11 +81,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _customPropertiesGroup;
-    [Gtk.Connect] private readonly Gtk.Label _durationLabel;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
     [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
     [Gtk.Connect] private readonly Gtk.Spinner _fingerprintSpinner;
-    [Gtk.Connect] private readonly Gtk.Label _fileSizeLabel;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
@@ -179,7 +178,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Genre and Autocomplete
         _autocompleteBox = new AutocompleteBox(_genreRow);
         _autocompleteBox.SetSizeRequest(327, -1);
-        _autocompleteBox.SetMarginTop(486);
+        _autocompleteBox.SetMarginTop(320);
         _autocompleteBox.SuggestionAccepted += (sender, e) =>
         {
             _genreRow.SetText(e);
@@ -1073,9 +1072,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
         _descriptionRow.SetText(_controller.SelectedPropertyMap.Description);
         _publisherRow.SetText(_controller.SelectedPropertyMap.Publisher);
-        _durationLabel.SetLabel(_controller.SelectedPropertyMap.Duration);
+        _durationFileSizeLabel.SetLabel($"{_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}");
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
-        _fileSizeLabel.SetLabel(_controller.SelectedPropertyMap.FileSize);
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
         _filenameRow.SetEditable(true);
         _titleRow.SetEditable(true);

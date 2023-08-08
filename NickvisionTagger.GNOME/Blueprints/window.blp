@@ -247,7 +247,7 @@ Adw.ApplicationWindow _root {
                           [overlay]
                           Adw.Bin {
                             margin-top: 12;
-                            margin-bottom: 12;
+                            margin-bottom: 6;
                             halign: center;
                             valign: center;
                             width-request: 260;
@@ -309,7 +309,7 @@ Adw.ApplicationWindow _root {
                             width-request: 260;
                             height-request: 260;
                             margin-top: 12;
-                            margin-bottom: 12;
+                            margin-bottom: 6;
 
                             [overlay]
                             Gtk.Label _artTypeLabel {
@@ -356,6 +356,13 @@ Adw.ApplicationWindow _root {
                           };
                         }
 
+                        Gtk.Label _durationFileSizeLabel {
+                          margin-bottom: 6;
+                          label: "00:00:00 • 0 MB";
+                        
+                          styles ["title-4", "dim-label"]
+                        }
+
                         Adw.PreferencesGroup {
                           Adw.EntryRow _filenameRow {
                             title: _("File Name");
@@ -365,7 +372,6 @@ Adw.ApplicationWindow _root {
                         Gtk.Overlay _mainPropOverlay {
                           Gtk.Box {
                             orientation: vertical;
-                            spacing: 12;
                           
                             Adw.PreferencesGroup {
                               title: _("Main Properties");
@@ -381,19 +387,7 @@ Adw.ApplicationWindow _root {
                               Adw.EntryRow _albumRow {
                                 title: _("Album");
                               }
-    
-                              Adw.EntryRow _yearRow {
-                                title: _("Year");
-                              }
-    
-                              Adw.EntryRow _trackRow {
-                                title: _("Track");
-                              }
-    
-                              Adw.EntryRow _trackTotalRow {
-                                title: _("Track Total");
-                              }
-    
+                              
                               Adw.EntryRow _albumArtistRow {
                                 title: _("Album Artist");
                               }
@@ -401,9 +395,46 @@ Adw.ApplicationWindow _root {
                               Adw.EntryRow _genreRow {
                                 title: _("Genre");
                               }
+    
+                              Adw.EntryRow _yearRow {
+                                title: _("Year");
+                              }
+                            }
+                            
+                            Gtk.Box {
+                              orientation: horizontal;
+                              margin-top: 6;
+                              
+                              Adw.PreferencesGroup {
+                                halign: start;
+                                hexpand: true;
+                                
+                                Adw.EntryRow _trackRow {
+                                  title: _("Track");
+                                }
+                              }
+                              
+                              Gtk.Label {
+                                margin-start: 12;
+                                margin-end: 12;
+                                halign: center;
+                                label: "/";
+                                
+                                styles ["title-4"]
+                              }
+                              
+                              Adw.PreferencesGroup {
+                                halign: end;
+                                hexpand: true;
+                                
+                                Adw.EntryRow _trackTotalRow {
+                                  title: _("Track Total");
+                                }
+                              }
                             }
                             
                             Adw.PreferencesGroup {
+                              margin-top: 12;
                               title: _("Additional Properties");
     
                               Adw.EntryRow _commentRow {
@@ -449,16 +480,6 @@ Adw.ApplicationWindow _root {
                         Adw.PreferencesGroup {
                           title: _("File Properties");
 
-                          Adw.ActionRow _durationRow {
-                            title: _("Duration");
-
-                            [suffix]
-                            Gtk.Label _durationLabel {
-                              valign: center;
-                              label: "00:00:00";
-                            }
-                          }
-
                           Adw.ActionRow {
                             title: _("Fingerprint");
                             title-lines: 1;
@@ -488,16 +509,6 @@ Adw.ApplicationWindow _root {
                             Gtk.Spinner _fingerprintSpinner {
                               valign: center;
                               spinning: true;
-                            }
-                          }
-
-                          Adw.ActionRow {
-                            title: _("File Size");
-
-                            [suffix]
-                            Gtk.Label _fileSizeLabel {
-                              valign: center;
-                              label: _("0 MiB");
                             }
                           }
                         }

@@ -39,6 +39,7 @@ public partial class Program
               * Fixed an issue where Web Services were disabled even though network connection was available
               * Fixed an issue where downloading MusicBrainz metadata would fail even if metadata was available
               * Fixed an issue where back album art was not saved correctly
+              * Improved tag panel design
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
