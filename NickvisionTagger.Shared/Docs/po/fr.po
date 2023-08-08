@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-03 17:01-0400\n"
-"PO-Revision-Date: 2023-07-27 17:43+0000\n"
-"Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
+"PO-Revision-Date: 2023-08-08 10:00+0000\n"
+"Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/fr/>\n"
 "Language: fr\n"
@@ -177,7 +177,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:60
 msgid "AcoustId User API Key"
-msgstr "Clé d’API AcoustId"
+msgstr "Clé utilisateur d’API AcoustId"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:61
@@ -198,26 +198,24 @@ msgstr ""
 
 #. (itstool) path: info/title
 #: yelp/C/corrupted.page:8
-#, fuzzy
 msgctxt "link"
 msgid "Corrupted Files 🪲"
-msgstr "Trier les fichiers par"
+msgstr "Fichiers corrompus 🪲"
 
 #. (itstool) path: page/title
 #: yelp/C/corrupted.page:20
-#, fuzzy
 msgid "Corrupted Files"
-msgstr "Trier les fichiers par"
+msgstr "Fichiers corrompus"
 
 #. (itstool) path: page/p
 #: yelp/C/corrupted.page:21
 msgid "This page explains music files with corrupted data."
-msgstr ""
+msgstr "Cette page explique les fichiers musicaux avec des données corrompues."
 
 #. (itstool) path: section/title
 #: yelp/C/corrupted.page:23
 msgid "Invalid Data"
-msgstr ""
+msgstr "Données invalides"
 
 #. (itstool) path: section/p
 #: yelp/C/corrupted.page:24
@@ -226,6 +224,10 @@ msgid ""
 "information about a file and even cause playback issues. Some websites add "
 "extra junk data in files which in turn causes corruption."
 msgstr ""
+"Un intitulé de balise invalide ou des données incorrectes peuvent créer des "
+"problèmes quant à la lecture des informations sur un fichier, et même des "
+"erreurs de lecture. Certains sites web ajoutent des données supplémentaires "
+"excessives dans les fichiers, pouvant les corrompre."
 
 #. (itstool) path: section/p
 #: yelp/C/corrupted.page:25
@@ -234,6 +236,9 @@ msgid ""
 "dialog will be displayed listing corrupted files for you to manage and fix "
 "accordingly."
 msgstr ""
+"Si <app>Tagger</app> est incapable de lire un fichier, il sera ignoré et une "
+"fenêtre de dialogue listera les fichiers corrompus pour que vous puissiez "
+"les traiter."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:27
@@ -241,12 +246,15 @@ msgid ""
 "FFmpeg can be used to fix corruption issues. Run the following command to re-"
 "encode a file's tag and remove junk data:"
 msgstr ""
+"FFmpeg peut être utilisé pour corriger les problèmes de corruption. Exécutez "
+"la commande suivante pour ré-encoder les balises d’un fichier et supprimer "
+"les données inutiles :"
 
 #. (itstool) path: note/code
 #: yelp/C/corrupted.page:28
 #, no-wrap
 msgid "ffmpeg -i in.mp3 out.mp3"
-msgstr ""
+msgstr "ffmpeg -i in.mp3 out.mp3"
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:29
@@ -254,6 +262,8 @@ msgid ""
 "where <code>in.mp3</code> is the file path of the corrupted file and "
 "<code>out.mp3</code> is the path to export the re-encoded file."
 msgstr ""
+"où <code>in.mp3</code> est le chemin d’accès du fichier corrompu et <code>out"
+".mp3</code> est le chemin pour exporter le fichier ré-encodé."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:32
@@ -261,17 +271,19 @@ msgid ""
 "You can also use <link href=\"https://www.freac.org\">fre:ac</link> to re-"
 "encode files without convertion to another format."
 msgstr ""
+"Vous pouvez aussi utiliser <link href=\"https://www.freac.org\">fre:ac</"
+"link> pour ré-encoder les fichiers sans conversion dans un autre format."
 
 #. (itstool) path: info/title
 #: yelp/C/format-strings.page:8
 msgctxt "link"
 msgid "Format Strings ✍️"
-msgstr ""
+msgstr "Chaînes de format ✍️"
 
 #. (itstool) path: page/title
 #: yelp/C/format-strings.page:20
 msgid "Format Strings"
-msgstr ""
+msgstr "Chaînes de format"
 
 #. (itstool) path: page/p
 #: yelp/C/format-strings.page:21
@@ -279,31 +291,36 @@ msgid ""
 "This page explains the use of format strings for <code>File Name to Tag</"
 "code> and <code>Tag to File Name</code> conversions."
 msgstr ""
+"Cette page explique l’utilisation des chaînes de format pour les conversions "
+"<code>Nom de fichier vers balise</code> et <code>Balise vers nom de "
+"fichier</code>."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:23
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #. (itstool) path: section/p
 #: yelp/C/format-strings.page:24
 msgid "Strings of any format with properties wrapped in percent signs (%)."
 msgstr ""
+"Chaînes de n’importe quel format avec les propriétés encadrées par des "
+"pourcentages (%)."
 
 #. (itstool) path: note/title
 #: yelp/C/format-strings.page:26
 msgid "Example"
-msgstr ""
+msgstr "Exemple"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:27
 msgid "Format String: <code>%artist%- %title%</code>"
-msgstr ""
+msgstr "Chaîne de format : <code>%artiste%- %titre%</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:28
 msgid "Filename: <code>Artist1 - Song1.mp3</code>"
-msgstr ""
+msgstr "Nom de fichier : <code>Artiste1 - Titre1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:29
@@ -312,84 +329,86 @@ msgid ""
 "and this file name will create a tag with an artist of <code>Artist1</code> "
 "and a title of <code>Song1</code>."
 msgstr ""
+"Lorsque la conversion <code>Nom de fichier vers balise</code> est lancée, "
+"cette chaîne de format et ce nom de fichier créeront une balise avec un "
+"artiste <code>Artiste1</code> et un titre <code>Titre1</code>."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:33
-#, fuzzy
 msgid "Supported Properties"
-msgstr "Propriétés valides"
+msgstr "Propriétés prises en charge"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:35 yelp/C/search.page:31
 msgid "<code>title</code>"
-msgstr ""
+msgstr "<code>titre</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:36 yelp/C/search.page:32
 msgid "<code>artist</code>"
-msgstr ""
+msgstr "<code>artiste</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:37 yelp/C/search.page:33
 msgid "<code>album</code>"
-msgstr ""
+msgstr "<code>album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:38 yelp/C/search.page:34
 msgid "<code>year</code>"
-msgstr ""
+msgstr "<code>année</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:39 yelp/C/search.page:35
 msgid "<code>track</code>"
-msgstr ""
+msgstr "<code>piste</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:40 yelp/C/search.page:36
-#, fuzzy
 msgid "<code>tracktotal</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>pistestotal</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:41 yelp/C/search.page:37
 msgid "<code>albumartist</code>"
-msgstr ""
+msgstr "<code>artistedel’album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:42 yelp/C/search.page:38
 msgid "<code>genre</code>"
-msgstr ""
+msgstr "<code>genre</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:43 yelp/C/search.page:39
 msgid "<code>comment</code>"
-msgstr ""
+msgstr "<code>commentaire</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:44 yelp/C/search.page:40
-#, fuzzy
 msgid "<code>beatsperminute (bpm)</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>battementsparminute (bpm)</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:45 yelp/C/search.page:41
 msgid "<code>composer</code>"
-msgstr ""
+msgstr "<code>compositeur</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:46 yelp/C/search.page:42
 msgid "<code>description</code>"
-msgstr ""
+msgstr "<code>description</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:47 yelp/C/search.page:43
 msgid "<code>publisher</code>"
-msgstr ""
+msgstr "<code>maisondedisques</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:50
 msgid "When using conversions, custom property names can also be used."
 msgstr ""
+"Lors de l’utilisation de la fonctionnalité conversions, des noms de "
+"propriété personnalisés peuvent aussi être utilisés."
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:51
@@ -397,6 +416,8 @@ msgid ""
 "For example, a custom property who's name is <code>ENCODER</code> can be "
 "used as <code>%encoder%</code>."
 msgstr ""
+"Par exemple, une propriété personnalisée dont le nom est <code>ENCODEUR</"
+"code> peut être utilisée par <code>%encodeur%</code>."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
@@ -446,289 +467,242 @@ msgstr ""
 #. (itstool) path: list/title
 #: yelp/C/index.page:26
 msgid "Supported File Extensions"
-msgstr ""
+msgstr "Extensions de fichier prises en charge"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:27
-#, fuzzy
 msgid "<code>.mp3</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.mp3</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:28
-#, fuzzy
 msgid "<code>.m4a</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.m4a</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:29
-#, fuzzy
 msgid "<code>.m4b</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.m4b</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:30
-#, fuzzy
 msgid "<code>.ogg</code>"
-msgstr "<code>Titre</code>"
+msgstr "<code>.ogg</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:31
-#, fuzzy
 msgid "<code>.opus</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.opus</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:32
-#, fuzzy
 msgid "<code>.oga</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.oga</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:33
-#, fuzzy
 msgid "<code>.flac</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.flac</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:34
-#, fuzzy
 msgid "<code>.wma</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.wma</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:35
-#, fuzzy
 msgid "<code>.wav</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.wav</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:36
-#, fuzzy
 msgid "<code>.aac</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.aac</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:37
-#, fuzzy
 msgid "<code>.aax</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.aax</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:38
-#, fuzzy
 msgid "<code>.aa</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.aa</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:39
-#, fuzzy
 msgid "<code>.aif</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.aif</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:40
-#, fuzzy
 msgid "<code>.aiff</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.aiff</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:41
-#, fuzzy
 msgid "<code>.aifc</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.aifc</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:42
-#, fuzzy
 msgid "<code>.dsd</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.dsd</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:43
-#, fuzzy
 msgid "<code>.dsf</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.dsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:44
-#, fuzzy
 msgid "<code>.ac3</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.ac3</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:45
-#, fuzzy
 msgid "<code>.gym</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.gym</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:46
-#, fuzzy
 msgid "<code>.ape</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.ape</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:47
-#, fuzzy
 msgid "<code>.mpv</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.mpv</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:48
-#, fuzzy
 msgid "<code>.mp+</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.mp+</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:49
-#, fuzzy
 msgid "<code>.ofr</code>"
-msgstr "<code>Titre</code>"
+msgstr "<code>.ofr</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:50
-#, fuzzy
 msgid "<code>.ofs</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.ofs</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:51
-#, fuzzy
 msgid "<code>.psf</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.psf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:52
-#, fuzzy
 msgid "<code>.psf1</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.psf1</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:53
-#, fuzzy
 msgid "<code>.psf2</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.psf2</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:54
-#, fuzzy
 msgid "<code>.minipsf</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.minipsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:55
-#, fuzzy
 msgid "<code>.minipsf1</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.minipsf1</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:56
-#, fuzzy
 msgid "<code>.minipsf2</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.minipsf2</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:57
-#, fuzzy
 msgid "<code>.ssf</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.ssf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:58
-#, fuzzy
 msgid "<code>.minissf</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.minissf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:59
-#, fuzzy
 msgid "<code>.minidsf</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.minidsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:60
-#, fuzzy
 msgid "<code>.gsf</code>"
-msgstr "<code>Titre</code>"
+msgstr "<code>.gsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:61
-#, fuzzy
 msgid "<code>.minigsf</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.minigsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:62
-#, fuzzy
 msgid "<code>.qsf</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.qsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:63
-#, fuzzy
 msgid "<code>.miniqsf</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.miniqsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:64
-#, fuzzy
 msgid "<code>.spc</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.spc</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:65
-#, fuzzy
 msgid "<code>.tak</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.tak</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:66
-#, fuzzy
 msgid "<code>.tta</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.tta</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:67
-#, fuzzy
 msgid "<code>.vqf</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.vqf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:68
-#, fuzzy
 msgid "<code>.bwav</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.bwav</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:69
-#, fuzzy
 msgid "<code>.bwf</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.bwf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:70
-#, fuzzy
 msgid "<code>.vgm</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>.vgm</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:71
-#, fuzzy
 msgid "<code>.vgz</code>"
-msgstr "<code>Titre</code>"
+msgstr "<code>.vgz</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:72
-#, fuzzy
 msgid "<code>.wv</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.wv</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:73
-#, fuzzy
 msgid "<code>.asf</code>"
-msgstr "<code>Piste</code>"
+msgstr "<code>.asf</code>"
 
 #. (itstool) path: info/title
 #: yelp/C/search.page:8
@@ -791,19 +765,18 @@ msgstr "<code>filename</code> (nom du fichier)"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:44
-#, fuzzy
 msgid "<code>custom</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>personnalisé</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:46
 msgid "Properties are case-insensitive."
-msgstr ""
+msgstr "Les propriétés sont insensibles à la casse."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:48
 msgid "Syntax Checking"
-msgstr ""
+msgstr "Vérification syntaxique"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:49
