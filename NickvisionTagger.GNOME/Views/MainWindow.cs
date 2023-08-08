@@ -34,6 +34,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private AlbumArtType _currentAlbumArtType;
     private List<Adw.ActionRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
+    private AutocompleteBox _autocompleteBox;
     private bool _isSelectionOccuring;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
@@ -63,7 +64,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Button _switchAlbumArtButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _switchAlbumArtButtonContent;
     [Gtk.Connect] private readonly Gtk.Picture _albumArtImage;
+    [Gtk.Connect] private readonly Gtk.Label _durationFileSizeLabel;
     [Gtk.Connect] private readonly Adw.EntryRow _filenameRow;
+    [Gtk.Connect] private readonly Gtk.Overlay _mainPropOverlay;
     [Gtk.Connect] private readonly Adw.EntryRow _titleRow;
     [Gtk.Connect] private readonly Adw.EntryRow _artistRow;
     [Gtk.Connect] private readonly Adw.EntryRow _albumRow;
@@ -78,11 +81,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _customPropertiesGroup;
-    [Gtk.Connect] private readonly Gtk.Label _durationLabel;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
     [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
     [Gtk.Connect] private readonly Gtk.Spinner _fingerprintSpinner;
-    [Gtk.Connect] private readonly Gtk.Label _fileSizeLabel;
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
@@ -174,10 +175,27 @@ public partial class MainWindow : Adw.ApplicationWindow
                 TagPropertyChanged();
             }
         };
+        //Genre and Autocomplete
+        _autocompleteBox = new AutocompleteBox(_genreRow);
+        _autocompleteBox.SetSizeRequest(327, -1);
+        _autocompleteBox.SetMarginTop(320);
+        _autocompleteBox.SuggestionAccepted += (sender, e) =>
+        {
+            _genreRow.SetText(e);
+            _genreRow.GrabFocus();
+            _genreRow.SetPosition(-1);
+        };
+        _mainPropOverlay.AddOverlay(_autocompleteBox);
         _genreRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
+                var matchingGenres = _controller.GetGenreSuggestions(_genreRow.GetText());
+                if (matchingGenres.Count > 0)
+                {
+                    _autocompleteBox.UpdateSuggestions(matchingGenres);
+                }
+                _autocompleteBox.SetVisible(matchingGenres.Count > 0);
                 TagPropertyChanged();
             }
         };
@@ -218,6 +236,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         };
         _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
         _copyFingerprintButton.OnClicked += CopyFingerprintToClipboard;
+        OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "default-width")
+            {
+                _autocompleteBox.SetSizeRequest(_genreRow.GetAllocatedWidth() - 24, -1);
+            }
+        };
         //Register Events
         OnCloseRequest += OnCloseRequested;
         _controller.NotificationSent += NotificationSent;
@@ -1041,14 +1066,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         _trackTotalRow.SetText(_controller.SelectedPropertyMap.TrackTotal);
         _albumArtistRow.SetText(_controller.SelectedPropertyMap.AlbumArtist);
         _genreRow.SetText(_controller.SelectedPropertyMap.Genre);
+        _autocompleteBox.SetVisible(false);
         _commentRow.SetText(_controller.SelectedPropertyMap.Comment);
         _bpmRow.SetText(_controller.SelectedPropertyMap.BeatsPerMinute);
         _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
         _descriptionRow.SetText(_controller.SelectedPropertyMap.Description);
         _publisherRow.SetText(_controller.SelectedPropertyMap.Publisher);
-        _durationLabel.SetLabel(_controller.SelectedPropertyMap.Duration);
+        _durationFileSizeLabel.SetLabel($"{_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}");
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
-        _fileSizeLabel.SetLabel(_controller.SelectedPropertyMap.FileSize);
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
         _filenameRow.SetEditable(true);
         _titleRow.SetEditable(true);
@@ -1231,8 +1256,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
     private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("search"), 0);
-
-
+    
     /// <summary>
     /// Occurs when the _listMusicFiles's selection is changed
     /// </summary>
