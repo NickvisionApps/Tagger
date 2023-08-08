@@ -467,7 +467,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         if(BackAlbumArt.Length > 0)
         {
-            track.EmbeddedPictures.Add(PictureInfo.fromBinaryData(BackAlbumArt, PictureInfo.PIC_TYPE.Front));
+            track.EmbeddedPictures.Add(PictureInfo.fromBinaryData(BackAlbumArt, PictureInfo.PIC_TYPE.Back));
         }
         foreach(var pair in _customProperties)
         {
