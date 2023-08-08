@@ -34,6 +34,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     private AlbumArtType _currentAlbumArtType;
     private List<Adw.ActionRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
+    private AutocompleteBox _autocompleteBox; 
+    private bool _canHideAutobox;
     private bool _isSelectionOccuring;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
@@ -64,6 +66,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.ButtonContent _switchAlbumArtButtonContent;
     [Gtk.Connect] private readonly Gtk.Picture _albumArtImage;
     [Gtk.Connect] private readonly Adw.EntryRow _filenameRow;
+    [Gtk.Connect] private readonly Gtk.Overlay _mainPropOverlay;
     [Gtk.Connect] private readonly Adw.EntryRow _titleRow;
     [Gtk.Connect] private readonly Adw.EntryRow _artistRow;
     [Gtk.Connect] private readonly Adw.EntryRow _albumRow;
@@ -92,6 +95,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _currentAlbumArtType = AlbumArtType.Front;
         _listMusicFilesRows = new List<Adw.ActionRow>();
         _customPropertyRows = new List<Adw.EntryRow>();
+        _canHideAutobox = true;
         _isSelectionOccuring = false;
         SetDefaultSize(800, 600);
         SetTitle(_controller.AppInfo.ShortName);
@@ -174,13 +178,65 @@ public partial class MainWindow : Adw.ApplicationWindow
                 TagPropertyChanged();
             }
         };
+        //Genre and Autocomplete
+        _autocompleteBox = new AutocompleteBox();
+        _autocompleteBox.SetSizeRequest(327, -1);
+        _autocompleteBox.SetMarginTop(486);
+        _autocompleteBox.SuggestionAccepted += (sender, e) =>
+        {
+            _genreRow.SetText(e);
+            _genreRow.GrabFocus();
+            _genreRow.SetPosition(-1);
+        };
+        _mainPropOverlay.AddOverlay(_autocompleteBox);
         _genreRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
+                var matchingGenres = _controller.GetGenreSuggestions(_genreRow.GetText());
+                if (matchingGenres.Count > 0)
+                {
+                    _autocompleteBox.UpdateSuggestions(matchingGenres);
+                }
+                _autocompleteBox.SetVisible(matchingGenres.Count > 0);
                 TagPropertyChanged();
             }
         };
+        _genreRow.OnStateFlagsChanged += (sender, e) =>
+        {
+            if(!_canHideAutobox)
+            {
+                _canHideAutobox = true;
+            }
+            else if(e.Flags.HasFlag(Gtk.StateFlags.FocusWithin) && !_genreRow.GetStateFlags().HasFlag(Gtk.StateFlags.FocusWithin))
+            {
+                _autocompleteBox.SetVisible(false);
+            }
+        };
+        var genreKeyController = Gtk.EventControllerKey.New();
+        genreKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        genreKeyController.OnKeyPressed += (sender, e) =>
+        {
+            if(e.Keyval == 65293 || e.Keyval == 65421) //enter | keypad enter
+            {
+                if(_autocompleteBox.GetVisible())
+                {
+                    _autocompleteBox.AcceptSuggestion(0);
+                    return true;
+                }
+            }
+            if(e.Keyval == 65364) //down arrow
+            {
+                if(_autocompleteBox.GetVisible())
+                {
+                    _canHideAutobox = false;
+                    _autocompleteBox.GrabFocus();
+                    return true;
+                }
+            }
+            return false;
+        };
+        _genreRow.AddController(genreKeyController);
         _commentRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
@@ -218,6 +274,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         };
         _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
         _copyFingerprintButton.OnClicked += CopyFingerprintToClipboard;
+        OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "default-width")
+            {
+                _autocompleteBox.SetSizeRequest(_genreRow.GetAllocatedWidth() - 24, -1);
+            }
+        };
         //Register Events
         OnCloseRequest += OnCloseRequested;
         _controller.NotificationSent += NotificationSent;
@@ -1041,6 +1104,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _trackTotalRow.SetText(_controller.SelectedPropertyMap.TrackTotal);
         _albumArtistRow.SetText(_controller.SelectedPropertyMap.AlbumArtist);
         _genreRow.SetText(_controller.SelectedPropertyMap.Genre);
+        _autocompleteBox.SetVisible(false);
         _commentRow.SetText(_controller.SelectedPropertyMap.Comment);
         _bpmRow.SetText(_controller.SelectedPropertyMap.BeatsPerMinute);
         _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
@@ -1231,8 +1295,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
     private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("search"), 0);
-
-
+    
     /// <summary>
     /// Occurs when the _listMusicFiles's selection is changed
     /// </summary>

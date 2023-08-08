@@ -362,63 +362,70 @@ Adw.ApplicationWindow _root {
                           }
                         }
 
-                        Adw.PreferencesGroup {
-                          title: _("Main Properties");
-
-                          Adw.EntryRow _titleRow {
-                            title: _("Title");
-                          }
-
-                          Adw.EntryRow _artistRow {
-                            title: _("Artist");
-                          }
-
-                          Adw.EntryRow _albumRow {
-                            title: _("Album");
-                          }
-
-                          Adw.EntryRow _yearRow {
-                            title: _("Year");
-                          }
-
-                          Adw.EntryRow _trackRow {
-                            title: _("Track");
-                          }
-
-                          Adw.EntryRow _trackTotalRow {
-                            title: _("Track Total");
-                          }
-
-                          Adw.EntryRow _albumArtistRow {
-                            title: _("Album Artist");
-                          }
-
-                          Adw.EntryRow _genreRow {
-                            title: _("Genre");
-                          }
-                        }
-
-                        Adw.PreferencesGroup {
-                          title: _("Additional Properties");
-
-                          Adw.EntryRow _commentRow {
-                            title: _("Comment");
-                          }
-
-                          Adw.EntryRow _bpmRow {
-                            title: _("Beats Per Minute");
-                          }
-
-                          Adw.EntryRow _composerRow {
-                            title: _("Composer");
-                          }
-
-                          Adw.EntryRow _descriptionRow {
-                            title: _("Description");
-                          }
-
-                          Adw.EntryRow _publisherRow {
-                            title: _("Publisher");
+                        Gtk.Overlay _mainPropOverlay {
+                          Gtk.Box {
+                            orientation: vertical;
+                            spacing: 12;
+                          
+                            Adw.PreferencesGroup {
+                              title: _("Main Properties");
+    
+                              Adw.EntryRow _titleRow {
+                                title: _("Title");
+                              }
+    
+                              Adw.EntryRow _artistRow {
+                                title: _("Artist");
+                              }
+    
+                              Adw.EntryRow _albumRow {
+                                title: _("Album");
+                              }
+    
+                              Adw.EntryRow _yearRow {
+                                title: _("Year");
+                              }
+    
+                              Adw.EntryRow _trackRow {
+                                title: _("Track");
+                              }
+    
+                              Adw.EntryRow _trackTotalRow {
+                                title: _("Track Total");
+                              }
+    
+                              Adw.EntryRow _albumArtistRow {
+                                title: _("Album Artist");
+                              }
+    
+                              Adw.EntryRow _genreRow {
+                                title: _("Genre");
+                              }
+                            }
+                            
+                            Adw.PreferencesGroup {
+                              title: _("Additional Properties");
+    
+                              Adw.EntryRow _commentRow {
+                                title: _("Comment");
+                              }
+    
+                              Adw.EntryRow _bpmRow {
+                                title: _("Beats Per Minute");
+                              }
+    
+                              Adw.EntryRow _composerRow {
+                                title: _("Composer");
+                              }
+    
+                              Adw.EntryRow _descriptionRow {
+                                title: _("Description");
+                              }
+    
+                              Adw.EntryRow _publisherRow {
+                                title: _("Publisher");
+                              }
+                            } 
                           }
                         }
 
