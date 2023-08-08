@@ -26,6 +26,7 @@ public class AutocompleteBox : Gtk.Box
     /// Constructs an AutocompleteDialog
     /// </summary>
     /// <param name="builder">Gtk.Builder</param>
+    /// <param name="parent">Adw.EntryRow</param>
     private AutocompleteBox(Gtk.Builder builder, Adw.EntryRow parent) : base(builder.GetPointer("_root"), false)
     {
         _parent = parent;
@@ -73,6 +74,7 @@ public class AutocompleteBox : Gtk.Box
     /// <summary>
     /// Constructs an AutocompleteDialog
     /// </summary>
+    /// <param name="parent">Adw.EntryRow</param>
     public AutocompleteBox(Adw.EntryRow parent) : this(Builder.FromFile("autocomplete_box.ui"), parent)
     {
     }
