@@ -1293,11 +1293,11 @@ public class MainWindowController : IDisposable
                 {
                     haveSamePublisher = false;
                 }
-                if(first.FrontAlbumArt != pair.Value.FrontAlbumArt)
+                if(!first.FrontAlbumArt.SequenceEqual(pair.Value.FrontAlbumArt))
                 {
                     haveSameFrontAlbumArt = false;
                 }
-                if(first.BackAlbumArt != pair.Value.BackAlbumArt)
+                if(!first.BackAlbumArt.SequenceEqual(pair.Value.BackAlbumArt))
                 {
                     haveSameBackAlbumArt = false;
                 }
