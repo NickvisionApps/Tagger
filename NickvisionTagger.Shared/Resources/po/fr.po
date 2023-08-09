@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-08 23:17-0400\n"
-"PO-Revision-Date: 2023-08-08 10:00+0000\n"
+"PO-Revision-Date: 2023-08-09 12:22+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/fr/>\n"
@@ -316,7 +316,7 @@ msgstr "Empreinte copiée vers le presse-papiers."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:686
 msgid "Format String"
-msgstr "Format"
+msgstr "Chaîne de format"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:122
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:707
@@ -403,7 +403,7 @@ msgstr "Nouvelle propriété personnalisée"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:114
 msgid "New Synchronized Lyric"
-msgstr ""
+msgstr "Nouvelles paroles synchronisées"
 
 #: ../../../Controllers/MainWindowController.cs:147
 #: ../../../Controllers/MainWindowController.cs:149
@@ -463,9 +463,8 @@ msgid "Remove Custom Property"
 msgstr "Supprimer la propriété personnalisée"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:148
-#, fuzzy
 msgid "Remove Lyric"
-msgstr "Supprimer"
+msgstr "Supprimer les paroles"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:534
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:612
@@ -541,7 +540,7 @@ msgstr "Tio"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:114
 msgid "Timestamp (hh:mm:ss)"
-msgstr ""
+msgstr "Horodatage (hh:mm:ss)"
 
 #: ../../../Controllers/MainWindowController.cs:963
 #: ../../../Controllers/MainWindowController.cs:993
@@ -599,7 +598,7 @@ msgstr "année"
 
 #: NickvisionTagger.GNOME/Blueprints/autocomplete_box.blp:15
 msgid "Suggestions"
-msgstr ""
+msgstr "Suggestions"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
 msgid "Corrupted Files Found"
@@ -617,21 +616,23 @@ msgstr ""
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:15
 #: NickvisionTagger.GNOME/Blueprints/window.blp:389
 msgid "Lyrics"
-msgstr ""
+msgstr "Paroles"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:36
 msgid "Configure"
-msgstr ""
+msgstr "Configurer"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:41
 msgid ""
 "Information about the provided lyrics. Applies to both unsynchronized and "
 "synchronized lyrics."
 msgstr ""
+"Informations sur les paroles fournies. S'appliquent aux paroles, "
+"synchronisées ou non."
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:44
 msgid "Language Code"
-msgstr ""
+msgstr "Code de langage"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:53
 #: NickvisionTagger.GNOME/Blueprints/window.blp:471
@@ -640,22 +641,26 @@ msgstr "Description"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:64
 msgid "Unsynchronized"
-msgstr ""
+msgstr "Non synchronisées"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:69
 msgid ""
 "Unsynchronized lyrics are stored as a single string with no time information."
 msgstr ""
+"Les paroles non synchronisées sont enregistrées comme une simple chaîne de "
+"caractères, sans informations temporelles."
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:84
 msgid "Synchronized"
-msgstr ""
+msgstr "Synchronisées"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:89
 msgid ""
 "Synchronized lyrics are stored as a dictionary of strings identified by "
 "their timestamp in milliseconds."
 msgstr ""
+"Les paroles synchronisées sont enregistrées comme un dictionnaire de chaînes "
+"de caractères identifiées par leur horodatage en millisecondes."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:119
@@ -841,7 +846,7 @@ msgstr "Retirer le dos de la pochette d’album"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
 #: NickvisionTagger.GNOME/Blueprints/window.blp:385
 msgid "Manage Lyrics"
-msgstr ""
+msgstr "Gérer les paroles"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:102
 msgctxt "Shortcut"
