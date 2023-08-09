@@ -473,13 +473,13 @@ public class MainWindowController : IDisposable
                     }
                 }
             }
-            MusicFileSaveStates[pair.Key] = !updated;
+            MusicFileSaveStates[pair.Key] = !updated && MusicFileSaveStates[pair.Key];
         }
         if(triggerSelectedMusicFilesPropertiesChanged)
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, true);
+        MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
     }
 
     /// <summary>
@@ -515,8 +515,8 @@ public class MainWindowController : IDisposable
                 first.Value.SynchronizedLyrics = sync;
                 updated = true;
             }
-            MusicFileSaveStates[first.Key] = !updated;
-            MusicFileSaveStatesChanged?.Invoke(this, updated);
+            MusicFileSaveStates[first.Key] = !updated && MusicFileSaveStates[first.Key];
+            MusicFileSaveStatesChanged?.Invoke(this, !MusicFileSaveStates[first.Key]);
         }
     }
 
