@@ -119,7 +119,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <summary>
     /// The set of synchronized lyrics
     /// </summary>
-    public Dictionary<int, string> SynchronizedLyrics { get; init; }
+    public Dictionary<int, string> SynchronizedLyrics { get; set; }
     /// <summary>
     /// The duration of the music file
     /// </summary>
@@ -304,7 +304,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             LyricsLanguageCode = track.Lyrics.LanguageCode;
             LyricsDescription = track.Lyrics.Description;
             UnsynchronizedLyrics = track.Lyrics.UnsynchronizedLyrics;
-            foreach (var phase in track.Lyrics.SynchronizedLyrics)
+            foreach (var phase in track.Lyrics.SynchronizedLyrics.OrderBy(x => x.TimestampMs))
             {
                 SynchronizedLyrics.Add(phase.TimestampMs, phase.Text);
             }
