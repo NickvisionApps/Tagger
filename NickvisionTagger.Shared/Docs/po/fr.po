@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-03 17:01-0400\n"
-"PO-Revision-Date: 2023-08-08 10:00+0000\n"
+"PO-Revision-Date: 2023-08-09 12:23+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/fr/>\n"
@@ -785,16 +785,19 @@ msgid ""
 "filter the listbox with your search. If the syntax of your string is "
 "invalid, the textbox will turn red and will not filter the listbox."
 msgstr ""
+"Si la syntaxe de votre chaîne est valide, la zone de texte deviendra verte "
+"et filtrera la liste avec votre recherche. Si la syntaxe de votre chaîne n’"
+"est pas valide, la zone de texte deviendra rouge et ne filtrera pas la liste."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:51
 msgid "Examples"
-msgstr ""
+msgstr "Exemples"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:52
 msgid "<code>!artist=\"\"</code>"
-msgstr ""
+msgstr "<code>!artiste=\"\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:53
@@ -802,11 +805,13 @@ msgid ""
 "This search string will filter the listbox to contain music files whose "
 "artist is empty."
 msgstr ""
+"Cette chaîne de caractères recherchée filtrera la liste pour révéler les "
+"fichiers musicaux dont l’artiste n’est pas renseigné."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:54
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
-msgstr ""
+msgstr "<code>!genre=\"\";année=\"2022\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:55
@@ -815,11 +820,15 @@ msgid ""
 "genre is empty and whose year is 2022 (Year and Track properties will "
 "validate if the value string is a number)."
 msgstr ""
+"Cette chaîne de caractères recherchée filtrera la liste pour révéler les "
+"fichiers musicaux dont le genre n’est pas renseigné et dont l’année de "
+"sortie est 2022 (les propriétés Année et Piste ne doivent contenir que des "
+"chiffres pour être valides)."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:56
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
-msgstr ""
+msgstr "<code>!titre=\"\";artiste=\"bob\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:57
@@ -827,12 +836,14 @@ msgid ""
 "This search string will filter the listbox to contain music files whose "
 "title is empty and whose artist is <code>bob</code>."
 msgstr ""
+"Cette chaîne de caractères recherchée filtrera la liste pour révéler les "
+"fichiers musicaux dont le titre n’est pas renseigné et dont l’artiste est "
+"<code>bob</code>."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:58
-#, fuzzy
 msgid "<code>!custom=\"mbrd\"</code>"
-msgstr "<code>Album</code>"
+msgstr "<code>!personnalisée=\"mbrd\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:59
@@ -840,29 +851,28 @@ msgid ""
 "This search string will filter the listbox to contain music files that "
 "contain a custom property with the name <code>mbrd</code>."
 msgstr ""
+"Cette chaîne de caractères recherchée filtrera la liste pour révéler les "
+"fichiers musicaux ayant une propriété personnalisée nommée <code>mbrd</code>."
 
 #. (itstool) path: info/title
 #: yelp/C/unsupported.page:8
-#, fuzzy
 msgctxt "link"
 msgid "Unsupported Files 🚫"
-msgstr "Trier les fichiers par"
+msgstr "Fichiers non pris en charge 🚫"
 
 #. (itstool) path: page/title
 #: yelp/C/unsupported.page:20
-#, fuzzy
 msgid "Unsupported Files"
-msgstr "Trier les fichiers par"
+msgstr "Fichiers non pris en charge"
 
 #. (itstool) path: page/p
 #: yelp/C/unsupported.page:21
-#, fuzzy
 msgid ""
 "This page explains music files that are currently unsupported by "
 "<app>Tagger</app>."
 msgstr ""
-"Cette page explique comment utiliser la recherche avancée dans <app>Tagger</"
-"app>."
+"Cette page traité des fichiers musicaux qui ne sont actuellement pas pris en "
+"charge par <app>Tagger</app>."
 
 #. (itstool) path: page/p
 #: yelp/C/unsupported.page:22
@@ -870,11 +880,13 @@ msgid ""
 "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</"
 "link> for its backend to read and write metadata."
 msgstr ""
+"Tagger utilise <link href=\"https://github.com/Zeugma440/atldotnet\""
+">atldotnet</link> comme backend pour lire et éditer les métadonnées."
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
 msgid "Unable To Apply Changes - Permission Denied"
-msgstr ""
+msgstr "Impossible d’appliquer les changements - Permission refusée"
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:25
@@ -883,6 +895,9 @@ msgid ""
 "based systems where you are unable to save files due to a \"permission denied"
 "\" error."
 msgstr ""
+"Il existe un problème connu de la version flatpak de l’application "
+"fonctionnant sur les systèmes basés sur Debian où il est impossible de "
+"sauvegarder des fichiers à cause d’une erreur « permission refusée »."
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:26
@@ -890,6 +905,8 @@ msgid ""
 "Please see this for the fix: <link href=\"https://github.com/NickvisionApps/"
 "Tagger/issues/174\"/>"
 msgstr ""
+"Consulter ce lien pour une solution : <link href=\"https://github.com/"
+"NickvisionApps/Tagger/issues/174\"/>"
 
 #. (itstool) path: note/p
 #: yelp/C/unsupported.page:28
@@ -897,6 +914,8 @@ msgid ""
 "Please confirm that you are receiving the \"permission denied\" error before "
 "trying this."
 msgstr ""
+"Veuillez confirmer que vous recevez une erreur « permission refusée » avant "
+"d’essayer cela."
 
 #. (itstool) path: note/p
 #: yelp/C/unsupported.page:29
