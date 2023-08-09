@@ -1,3 +1,5 @@
+using System;
+
 namespace NickvisionTagger.GNOME.Controls;
 
 /// <summary>
@@ -13,6 +15,11 @@ public partial class EntryDialog
     /// The response of the dialog
     /// </summary>
     public string Response { get; private set; }
+    
+    /// <summary>
+    /// A validator of the entry
+    /// </summary>
+    public Func<string, bool>? Validator { get; set; }
     
     /// <summary>
     /// Whether or not the dialog is visible
@@ -40,6 +47,13 @@ public partial class EntryDialog
         _entryRow.SetSizeRequest(300, -1);
         _entryRow.SetTitle(entryTitle);
         _entryRow.SetActivatesDefault(true);
+        _entryRow.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text" && Validator != null)
+            {
+                _dialog.SetResponseEnabled("suggested", Validator(_entryRow.GetText()));
+            }
+        };
         _group.Add(_entryRow);
         _dialog.SetExtraChild(_group);
         _dialog.AddResponse("cancel", cancelText);
