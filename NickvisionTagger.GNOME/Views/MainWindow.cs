@@ -357,7 +357,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.lyrics", new string[] { "<Ctrl>L" });
         //Add Custom Property Action
         var actAddCustomProperty = Gio.SimpleAction.New("addCustomProperty", null);
-        actAddCustomProperty.OnActivate += (sender, e) => AddCustomProperty();
+        actAddCustomProperty.OnActivate += AddCustomProperty;
         AddAction(actAddCustomProperty);
         //Download MusicBrainz Metadata Action
         _musicBrainzAction = Gio.SimpleAction.New("downloadMusicBrainzMetadata", null);
@@ -810,10 +810,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <summary>
     /// Occurs when the add custom property action is triggered
     /// </summary>
-    private void AddCustomProperty()
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void AddCustomProperty(Gio.SimpleAction sender, EventArgs e)
     {
         var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("New Custom Property"), "", _("Property Name"), _("Cancel"), _("Add"));
-        entryDialog.OnResponse += (sender, e) =>
+        entryDialog.OnResponse += (s, ex) =>
         {
             if (!string.IsNullOrEmpty(entryDialog.Response))
             {

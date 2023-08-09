@@ -254,7 +254,7 @@ public class MainWindowController : IDisposable
         if (SelectedMusicFiles.Count == 1)
         {
             var first = SelectedMusicFiles.First().Value;
-            return new LyricsDialogController(first.LyricsLanguageCode, first.LyricsDescription, first.UnsynchronizedLyrics, first.SynchronizedLyrics);
+            return new LyricsDialogController(first.LyricsLanguageCode, first.LyricsDescription, first.UnsynchronizedLyrics, first.SynchronizedLyrics.ToDictionary(x => x.Key, x => x.Value));
         }
         return new LyricsDialogController("", "", "", new Dictionary<int, string>());
     }

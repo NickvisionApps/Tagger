@@ -38,6 +38,7 @@ Adw.Window _root {
               margin-start: 24;
               margin-end: 24;
               title: _("Lyrics");
+              description: _("Information about the provided lyrics. Applies to both unsynchronized and synchronized lyrics.");
               
               Adw.EntryRow _languageRow {
                 title: _("Language Code");
@@ -66,6 +67,7 @@ Adw.Window _root {
               margin-start: 24;
               margin-end: 24;
               title: _("Lyrics");
+              description: _("Unsynchronized lyrics are stored as a single string with no time information.");
               
               Gtk.TextView _unsyncTextView {
                 vexpand: true;
@@ -82,10 +84,26 @@ Adw.Window _root {
           Adw.ViewStackPage {
             title: _("Synchronized");
             icon-name: "preferences-system-time-symbolic";
-            child: Adw.PreferencesGroup {
+            child: Adw.PreferencesGroup _syncGroup {
               margin-start: 24;
               margin-end: 24;
               title: _("Lyrics");
+              description: _("Synchronized lyrics are stored as a dictionary of strings identified by their timestamp in milliseconds.");
+              header-suffix: Gtk.Box {
+                orientation: horizontal;
+                spacing: 6;
+                
+                Gtk.Button _addSyncLyricButton {
+                  valign: center;
+                  
+                  Adw.ButtonContent {
+                    label: _("Add");
+                    icon-name: "list-add-symbolic";
+                  }
+                  
+                  styles ["flat"]
+                }
+              };
             };
           }
         }

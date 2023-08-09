@@ -39,6 +39,7 @@ public partial class EntryDialog
         _entryRow = Adw.EntryRow.New();
         _entryRow.SetSizeRequest(300, -1);
         _entryRow.SetTitle(entryTitle);
+        _entryRow.SetActivatesDefault(true);
         _group.Add(_entryRow);
         _dialog.SetExtraChild(_group);
         _dialog.AddResponse("cancel", cancelText);
