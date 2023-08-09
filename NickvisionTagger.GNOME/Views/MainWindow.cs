@@ -768,8 +768,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void Lyrics(Gio.SimpleAction sender, EventArgs e)
     {
-        
-        
+        var lyricsDialog = new LyricsDialog(this, _controller.AppInfo.ID);
+        lyricsDialog.OnHide += (sender, e) =>
+        {
+            lyricsDialog.Destroy();
+        };
+        lyricsDialog.Present();
     }
 
     /// <summary>
