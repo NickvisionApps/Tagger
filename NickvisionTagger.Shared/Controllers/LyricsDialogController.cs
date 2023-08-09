@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NickvisionTagger.Shared.Controllers;
 
@@ -36,6 +37,6 @@ public class LyricsDialogController
         LanguageCode = langCode;
         Description = description;
         UnsynchronizedLyrics = unsync;
-        SynchronizedLyrics = sync;
+        SynchronizedLyrics = sync.ToDictionary(x => x.Key, x => x.Value);
     }
 }
