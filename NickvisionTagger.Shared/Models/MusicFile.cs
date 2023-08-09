@@ -548,6 +548,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         Publisher = "";
         FrontAlbumArt = Array.Empty<byte>();
         BackAlbumArt = Array.Empty<byte>();
+        LyricsLanguageCode = "";
+        LyricsDescription = "";
+        UnsynchronizedLyrics = "";
+        SynchronizedLyrics.Clear();
         _customProperties.Clear();
     }
 
