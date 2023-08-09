@@ -251,7 +251,7 @@ public class MainWindowController : IDisposable
     /// <returns>The LyricsDialogController</returns>
     public LyricsDialogController CreateLyricsDialogController()
     {
-        if (SelectedMusicFiles.Count != 1)
+        if (SelectedMusicFiles.Count == 1)
         {
             var first = SelectedMusicFiles.First().Value;
             return new LyricsDialogController(first.LyricsLanguageCode, first.LyricsDescription, first.UnsynchronizedLyrics, first.SynchronizedLyrics);

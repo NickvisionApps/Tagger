@@ -775,7 +775,36 @@ public partial class MainWindow : Adw.ApplicationWindow
             _controller.UpdateLyrics(controller.LanguageCode, controller.Description, controller.UnsynchronizedLyrics, controller.SynchronizedLyrics);
             lyricsDialog.Destroy();
         };
-        lyricsDialog.Present();
+        if (!_controller.CanClose)
+        {
+            var dialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("cancel", _("Cancel"));
+            dialog.SetDefaultResponse("cancel");
+            dialog.SetCloseResponse("cancel");
+            dialog.AddResponse("discard", _("Discard"));
+            dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
+            dialog.AddResponse("apply", _("Apply"));
+            dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
+            dialog.OnResponse += async (ss, exx) =>
+            {
+                if (exx.Response != "cancel")
+                {
+                    lyricsDialog.Present();
+                }
+                if (exx.Response == "apply")
+                {
+                    SetLoadingState(_("Saving tags..."));
+                    await _controller.SaveAllTagsAsync(true);
+                }
+                dialog.Destroy();
+            };
+            dialog.Present();
+        }
+        else
+        {
+            lyricsDialog.Present();
+        }
     }
 
     /// <summary>
