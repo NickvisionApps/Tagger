@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="format-strings" its:version="2.0" xml:lang="fr">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Format Strings ✍️</title>
+	<title type="link">Chaînes de format ✍️</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -20,38 +20,38 @@
     </mal:credit>
   </info>
 
-<title>Format Strings</title>
-<p>This page explains the use of format strings for <code>File Name to Tag</code> and <code>Tag to File Name</code> conversions.</p>
+<title>Chaînes de format</title>
+<p>Cette page explique l’utilisation des chaînes de format pour les conversions <code>Nom de fichier vers balise</code> et <code>Balise vers nom de fichier</code>.</p>
 <section>
     <title>Format</title>
-    <p>Strings of any format with properties wrapped in percent signs (%).</p>
+    <p>Chaînes de n’importe quel format avec les propriétés encadrées par des pourcentages (%).</p>
     <note>
-        <title>Example</title>
-        <p>Format String: <code>%artist%- %title%</code></p>
-        <p>Filename: <code>Artist1 - Song1.mp3</code></p>
-        <p>When running <code>File Name to Tag</code> conversion, this format string and this file name will create a tag with an artist of <code>Artist1</code> and a title of <code>Song1</code>.</p>
+        <title>Exemple</title>
+        <p>Chaîne de format : <code>%artiste%- %titre%</code></p>
+        <p>Nom de fichier : <code>Artiste1 - Titre1.mp3</code></p>
+        <p>Lorsque la conversion <code>Nom de fichier vers balise</code> est lancée, cette chaîne de format et ce nom de fichier créeront une balise avec un artiste <code>Artiste1</code> et un titre <code>Titre1</code>.</p>
     </note>
 </section>
 <section>
-    <title>Supported Properties</title>
+    <title>Propriétés prises en charge</title>
     <list>
-        <item><p><code>title</code></p></item>
-        <item><p><code>artist</code></p></item>
+        <item><p><code>titre</code></p></item>
+        <item><p><code>artiste</code></p></item>
         <item><p><code>album</code></p></item>
-        <item><p><code>year</code></p></item>
-        <item><p><code>track</code></p></item>
-        <item><p><code>tracktotal</code></p></item>
-        <item><p><code>albumartist</code></p></item>
+        <item><p><code>année</code></p></item>
+        <item><p><code>piste</code></p></item>
+        <item><p><code>pistestotal</code></p></item>
+        <item><p><code>artistedel’album</code></p></item>
         <item><p><code>genre</code></p></item>
-        <item><p><code>comment</code></p></item>
-        <item><p><code>beatsperminute (bpm)</code></p></item>
-        <item><p><code>composer</code></p></item>
+        <item><p><code>commentaire</code></p></item>
+        <item><p><code>battementsparminute (bpm)</code></p></item>
+        <item><p><code>compositeur</code></p></item>
         <item><p><code>description</code></p></item>
-        <item><p><code>publisher</code></p></item>
+        <item><p><code>maisondedisques</code></p></item>
     </list>
     <note>
-        <p>When using conversions, custom property names can also be used.</p>
-        <p>For example, a custom property who's name is <code>ENCODER</code> can be used as <code>%encoder%</code>.</p>
+        <p>Lors de l’utilisation de la fonctionnalité conversions, des noms de propriété personnalisés peuvent aussi être utilisés.</p>
+        <p>Par exemple, une propriété personnalisée dont le nom est <code>ENCODEUR</code> peut être utilisée par <code>%encodeur%</code>.</p>
     </note>
 </section>
 </page>
