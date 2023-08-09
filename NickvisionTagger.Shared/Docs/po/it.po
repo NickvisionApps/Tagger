@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-03 17:01-0400\n"
-"PO-Revision-Date: 2023-08-02 13:37+0000\n"
-"Last-Translator: Nick Logozzo <nlogozzo225@gmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/docs/it/>\n"
+"PO-Revision-Date: 2023-08-09 12:23+0000\n"
+"Last-Translator: Federico Marchetti <marchetti.federico@protonmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/docs/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -300,21 +300,23 @@ msgstr "Formato"
 #: yelp/C/format-strings.page:24
 msgid "Strings of any format with properties wrapped in percent signs (%)."
 msgstr ""
+"Stringhe in ogni formato in cui le proprietà sono racchiuse tra caratteri "
+"percento (%)."
 
 #. (itstool) path: note/title
 #: yelp/C/format-strings.page:26
 msgid "Example"
-msgstr ""
+msgstr "Esempio"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:27
 msgid "Format String: <code>%artist%- %title%</code>"
-msgstr ""
+msgstr "Stringa di formato: <code>%artist%- %title%</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:28
 msgid "Filename: <code>Artist1 - Song1.mp3</code>"
-msgstr ""
+msgstr "Nome del file: <code>Artista1 - Brano1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:29
@@ -323,83 +325,86 @@ msgid ""
 "and this file name will create a tag with an artist of <code>Artist1</code> "
 "and a title of <code>Song1</code>."
 msgstr ""
+"Quando viene eseguita la conversione <code>da nome del file a tag</code> "
+"questa stringa di formato e questo nome di file creeranno un tag in cui "
+"l'artista sarà <code>Artista1</code> ed il titolo sarà <code>Brano1</code>."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:33
 msgid "Supported Properties"
-msgstr ""
+msgstr "Proprietà supportate"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:35 yelp/C/search.page:31
 msgid "<code>title</code>"
-msgstr ""
+msgstr "<code>titolo</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:36 yelp/C/search.page:32
 msgid "<code>artist</code>"
-msgstr ""
+msgstr "<code>artista</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:37 yelp/C/search.page:33
 msgid "<code>album</code>"
-msgstr ""
+msgstr "<code>album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:38 yelp/C/search.page:34
 msgid "<code>year</code>"
-msgstr ""
+msgstr "<code>anno</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:39 yelp/C/search.page:35
 msgid "<code>track</code>"
-msgstr ""
+msgstr "<code>traccia</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:40 yelp/C/search.page:36
-#, fuzzy
 msgid "<code>tracktotal</code>"
-msgstr "<code>Traccia</code>"
+msgstr "<code>Traccia totale</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:41 yelp/C/search.page:37
 msgid "<code>albumartist</code>"
-msgstr ""
+msgstr "<code>artista dell'album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:42 yelp/C/search.page:38
 msgid "<code>genre</code>"
-msgstr ""
+msgstr "<code>genere</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:43 yelp/C/search.page:39
 msgid "<code>comment</code>"
-msgstr ""
+msgstr "<code>commento</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:44 yelp/C/search.page:40
-#, fuzzy
 msgid "<code>beatsperminute (bpm)</code>"
-msgstr "<code>Titolo</code>"
+msgstr "<code>battiti al minuto</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:45 yelp/C/search.page:41
 msgid "<code>composer</code>"
-msgstr ""
+msgstr "<code>compositore</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:46 yelp/C/search.page:42
 msgid "<code>description</code>"
-msgstr ""
+msgstr "<code>descrizione</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:47 yelp/C/search.page:43
 msgid "<code>publisher</code>"
-msgstr ""
+msgstr "<code>editore</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:50
 msgid "When using conversions, custom property names can also be used."
 msgstr ""
+"Durante le conversioni è possibile usare nomi personalizzati per le "
+"proprietà."
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:51
@@ -407,18 +412,20 @@ msgid ""
 "For example, a custom property who's name is <code>ENCODER</code> can be "
 "used as <code>%encoder%</code>."
 msgstr ""
+"Per esempio, una proprietà personalizzata il cui nome è <code>Codifica</"
+"code> può essere usata come <code>%codifica%</code>."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
 msgctxt "link"
 msgid "Tagger Help"
-msgstr ""
+msgstr "Aiuto"
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:8
 msgctxt "text"
 msgid "Tagger Help"
-msgstr ""
+msgstr "Aiuto"
 
 #. (itstool) path: credit/name
 #: yelp/C/index.page:10
@@ -428,7 +435,7 @@ msgstr "Fyodor Sobolev"
 #. (itstool) path: page/title
 #: yelp/C/index.page:20
 msgid "<_:media-1/> Tagger Help"
-msgstr ""
+msgstr "<_:media-1/> Aiuto"
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:21
@@ -436,6 +443,8 @@ msgid ""
 "This documentation will help you understand how to configure <app>Tagger</"
 "app> to get the most of the application."
 msgstr ""
+"Questa documentazione ti aiuterà a capire come configurare <app>Tagger</app> "
+"per sfruttarle l'applicazione a fondo."
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:22
