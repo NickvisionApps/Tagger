@@ -10,6 +10,7 @@ menu mainMenu {
 
 menu tagActionsMenu {
   section {
+    item(_("Manage Lyrics"), "win.lyrics")
     item(_("Discard Unapplied Changes"), "win.discardUnappliedChanges")
     item(_("Delete Tags"), "win.deleteTags")
   }
@@ -374,6 +375,23 @@ Adw.ApplicationWindow _root {
                           
                             Adw.PreferencesGroup {
                               title: _("Main Properties");
+                              header-suffix: Gtk.Box {
+                                orientation: horizontal;
+                                spacing: 6;
+                                
+                                Gtk.Button {
+                                  valign: center;
+                                  tooltip-text: _("Manage Lyrics");
+                                  action-name: "win.lyrics";
+                                  
+                                  Adw.ButtonContent {
+                                    label: _("Lyrics");
+                                    icon-name: "quotation-symbolic";
+                                  }
+                                  
+                                  styles ["flat"]
+                                }
+                              };
     
                               Adw.EntryRow _titleRow {
                                 title: _("Title");

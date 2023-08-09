@@ -246,6 +246,20 @@ public class MainWindowController : IDisposable
     public PreferencesViewController CreatePreferencesViewController() => new PreferencesViewController();
 
     /// <summary>
+    /// Creates a new LyricsDialogController
+    /// </summary>
+    /// <returns>The LyricsDialogController</returns>
+    public LyricsDialogController CreateLyricsDialogController()
+    {
+        if (SelectedMusicFiles.Count == 1)
+        {
+            var first = SelectedMusicFiles.First().Value;
+            return new LyricsDialogController(first.LyricsLanguageCode, first.LyricsDescription, first.UnsynchronizedLyrics, first.SynchronizedLyrics);
+        }
+        return new LyricsDialogController("", "", "", new Dictionary<int, string>());
+    }
+
+    /// <summary>
     /// Starts the application
     /// </summary>
     public async Task StartupAsync()
@@ -459,13 +473,51 @@ public class MainWindowController : IDisposable
                     }
                 }
             }
-            MusicFileSaveStates[pair.Key] = !updated;
+            MusicFileSaveStates[pair.Key] = !updated && MusicFileSaveStates[pair.Key];
         }
         if(triggerSelectedMusicFilesPropertiesChanged)
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, true);
+        MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
+    }
+
+    /// <summary>
+    /// Updates the lyrics of the first selected muisc file
+    /// </summary>
+    /// <param name="langCode">The language code of the lyrics</param>
+    /// <param name="description">The description of the lyrics</param>
+    /// <param name="unsync">The unsynchronized lyrics</param>
+    /// <param name="sync">The set of synchronized lyrics</param>
+    public void UpdateLyrics(string langCode, string description, string unsync, Dictionary<int, string> sync)
+    {
+        if (SelectedMusicFiles.Count == 1)
+        {
+            var first = SelectedMusicFiles.First();
+            var updated = false;
+            if (langCode != first.Value.LyricsLanguageCode)
+            {
+                first.Value.LyricsLanguageCode = langCode;
+                updated = true;
+            }
+            if (description != first.Value.LyricsDescription)
+            {
+                first.Value.LyricsDescription = description;
+                updated = true;
+            }
+            if (unsync != first.Value.UnsynchronizedLyrics)
+            {
+                first.Value.UnsynchronizedLyrics = unsync;
+                updated = true;
+            }
+            if (!sync.SequenceEqual(first.Value.SynchronizedLyrics))
+            {
+                first.Value.SynchronizedLyrics = sync;
+                updated = true;
+            }
+            MusicFileSaveStates[first.Key] = !updated && MusicFileSaveStates[first.Key];
+            MusicFileSaveStatesChanged?.Invoke(this, !MusicFileSaveStates[first.Key]);
+        }
     }
 
     /// <summary>

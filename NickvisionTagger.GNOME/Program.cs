@@ -34,11 +34,12 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController();
         _mainWindowController.AppInfo.Changelog =
-            @"* An Info button will appear when MusicBrainz lookup fails and will provide more information about why the process failed
+            @"* Added support for managing a file's lyrics
               * Tagger will now provide suggestions while typing a genre  
-              * Fixed an issue where Web Services were disabled even though network connection was available
               * Fixed an issue where downloading MusicBrainz metadata would fail even if metadata was available
+              * Fixed an issue where Web Services were disabled even though network connection was available
               * Fixed an issue where back album art was not saved correctly
+              * An Info button will appear when MusicBrainz lookup fails and will provide more information about why the process failed
               * Improved tag panel design
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;

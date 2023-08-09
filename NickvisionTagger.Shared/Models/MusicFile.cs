@@ -105,6 +105,22 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     public byte[] BackAlbumArt { get; set; }
     /// <summary>
+    /// The language code of the lyrics of the music file
+    /// </summary>
+    public string LyricsLanguageCode { get; set; }
+    /// <summary>
+    /// The description of the lyrics of the music file
+    /// </summary>
+    public string LyricsDescription { get; set; }
+    /// <summary>
+    /// The unsynchronized lyrics of the music file
+    /// </summary>
+    public string UnsynchronizedLyrics { get; set; }
+    /// <summary>
+    /// The set of synchronized lyrics
+    /// </summary>
+    public Dictionary<int, string> SynchronizedLyrics { get; set; }
+    /// <summary>
     /// The duration of the music file
     /// </summary>
     public int Duration { get; private set; }
@@ -158,6 +174,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         Publisher = "";
         FrontAlbumArt = Array.Empty<byte>();
         BackAlbumArt = Array.Empty<byte>();
+        LyricsLanguageCode = "";
+        LyricsDescription = "";
+        UnsynchronizedLyrics = "";
+        SynchronizedLyrics = new Dictionary<int, string>();
         Duration = 0;
         IsReadOnly = false;
         LoadTagFromDisk();
@@ -245,6 +265,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     {
         _filename = System.IO.Path.GetFileName(Path);
         _customProperties.Clear();
+        SynchronizedLyrics.Clear();
         try
         {
             var track = new Track(Path);
@@ -279,6 +300,13 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                         BackAlbumArt = picture.PictureData;
                     }
                 }
+            }
+            LyricsLanguageCode = track.Lyrics.LanguageCode;
+            LyricsDescription = track.Lyrics.Description;
+            UnsynchronizedLyrics = track.Lyrics.UnsynchronizedLyrics;
+            foreach (var phase in track.Lyrics.SynchronizedLyrics.OrderBy(x => x.TimestampMs))
+            {
+                SynchronizedLyrics.Add(phase.TimestampMs, phase.Text);
             }
             foreach(var pair in track.AdditionalFields)
             {
@@ -469,6 +497,17 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             track.EmbeddedPictures.Add(PictureInfo.fromBinaryData(BackAlbumArt, PictureInfo.PIC_TYPE.Back));
         }
+        track.Lyrics = new LyricsInfo()
+        {
+            LanguageCode = LyricsLanguageCode,
+            Description = LyricsDescription,
+            UnsynchronizedLyrics = UnsynchronizedLyrics,
+            SynchronizedLyrics = new List<LyricsInfo.LyricsPhrase>()
+        };
+        foreach (var pair in SynchronizedLyrics)
+        {
+            track.Lyrics.SynchronizedLyrics.Add(new LyricsInfo.LyricsPhrase(pair.Key, pair.Value));
+        }
         foreach(var pair in _customProperties)
         {
             track.AdditionalFields[pair.Key] = pair.Value;
@@ -509,6 +548,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         Publisher = "";
         FrontAlbumArt = Array.Empty<byte>();
         BackAlbumArt = Array.Empty<byte>();
+        LyricsLanguageCode = "";
+        LyricsDescription = "";
+        UnsynchronizedLyrics = "";
+        SynchronizedLyrics.Clear();
         _customProperties.Clear();
     }
 

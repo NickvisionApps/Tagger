@@ -29,6 +29,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _insertAlbumArtAction;
     private readonly Gio.SimpleAction _removeAlbumArtAction;
     private readonly Gio.SimpleAction _exportAlbumArtAction;
+    private readonly Gio.SimpleAction _lyricsAction;
     private readonly Gio.SimpleAction _musicBrainzAction;
     private readonly Gio.SimpleAction _acoustIdAction;
     private AlbumArtType _currentAlbumArtType;
@@ -349,9 +350,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         actExportBackAlbumArt.OnActivate += async (sender, e) => await ExportAlbumArtAsync(AlbumArtType.Back);
         AddAction(actExportBackAlbumArt);
         application.SetAccelsForAction("win.exportBackAlbumArt", new string[] { "<Ctrl><Shift>E" });
+        //Lyrics Action
+        _lyricsAction = Gio.SimpleAction.New("lyrics", null);
+        _lyricsAction.OnActivate += Lyrics;
+        AddAction(_lyricsAction);
+        application.SetAccelsForAction("win.lyrics", new string[] { "<Ctrl>L" });
         //Add Custom Property Action
         var actAddCustomProperty = Gio.SimpleAction.New("addCustomProperty", null);
-        actAddCustomProperty.OnActivate += (sender, e) => AddCustomProperty();
+        actAddCustomProperty.OnActivate += AddCustomProperty;
         AddAction(actAddCustomProperty);
         //Download MusicBrainz Metadata Action
         _musicBrainzAction = Gio.SimpleAction.New("downloadMusicBrainzMetadata", null);
@@ -756,12 +762,31 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
+    /// Occurs when the lyrics action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void Lyrics(Gio.SimpleAction sender, EventArgs e)
+    {
+        var controller = _controller.CreateLyricsDialogController();
+        var lyricsDialog = new LyricsDialog(controller, this, _controller.AppInfo.ID);
+        lyricsDialog.OnHide += (sender, e) =>
+        {
+            _controller.UpdateLyrics(controller.LanguageCode, controller.Description, controller.UnsynchronizedLyrics, controller.SynchronizedLyrics);
+            lyricsDialog.Destroy();
+        };
+        lyricsDialog.Present();
+    }
+
+    /// <summary>
     /// Occurs when the add custom property action is triggered
     /// </summary>
-    private void AddCustomProperty()
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void AddCustomProperty(Gio.SimpleAction sender, EventArgs e)
     {
         var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("New Custom Property"), "", _("Property Name"), _("Cancel"), _("Add"));
-        entryDialog.OnResponse += (sender, e) =>
+        entryDialog.OnResponse += (s, ex) =>
         {
             if (!string.IsNullOrEmpty(entryDialog.Response))
             {
@@ -1266,11 +1291,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _isSelectionOccuring = true;
         var selectedIndexes = sender.GetSelectedRowsIndices();
-        _selectedViewStack.SetVisibleChildName(selectedIndexes.Any() ? "Selected" : "NoSelected");
+        _selectedViewStack.SetVisibleChildName(selectedIndexes.Count > 0 ? "Selected" : "NoSelected");
         if (_currentAlbumArtType != AlbumArtType.Front)
         {
             SwitchAlbumArt(null, e);
         }
+        _lyricsAction.SetEnabled(selectedIndexes.Count == 1);
         _controller.UpdateSelectedMusicFiles(selectedIndexes);
         if (string.IsNullOrEmpty(_fingerprintLabel.GetLabel()))
         {
