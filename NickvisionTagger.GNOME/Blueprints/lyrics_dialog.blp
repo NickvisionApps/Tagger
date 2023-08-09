@@ -12,6 +12,7 @@ Adw.Window _root {
 
     Adw.HeaderBar {
       title-widget: Adw.ViewSwitcherTitle _title {
+        title: _("Lyrics");
         stack: _viewStack;
       };
     }
@@ -37,7 +38,6 @@ Adw.Window _root {
             child: Adw.PreferencesGroup {
               margin-start: 24;
               margin-end: 24;
-              title: _("Lyrics");
               description: _("Information about the provided lyrics. Applies to both unsynchronized and synchronized lyrics.");
               
               Adw.EntryRow _languageRow {
@@ -66,7 +66,6 @@ Adw.Window _root {
             child: Adw.PreferencesGroup {
               margin-start: 24;
               margin-end: 24;
-              title: _("Lyrics");
               description: _("Unsynchronized lyrics are stored as a single string with no time information.");
               
               Gtk.TextView _unsyncTextView {
@@ -87,7 +86,6 @@ Adw.Window _root {
             child: Adw.PreferencesGroup _syncGroup {
               margin-start: 24;
               margin-end: 24;
-              title: _("Lyrics");
               description: _("Synchronized lyrics are stored as a dictionary of strings identified by their timestamp in milliseconds.");
               header-suffix: Gtk.Box {
                 orientation: horizontal;

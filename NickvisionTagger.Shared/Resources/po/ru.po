@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-08 22:38-0400\n"
+"POT-Creation-Date: 2023-08-08 22:46-0400\n"
 "PO-Revision-Date: 2023-07-30 22:38+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
@@ -95,7 +95,7 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:817
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:114
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:100
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:98
 #: NickvisionTagger.GNOME/Blueprints/window.blp:489
 msgid "Add"
 msgstr "Добавить"
@@ -470,7 +470,7 @@ msgstr "издатель"
 msgid "Remove Custom Property"
 msgstr "Удалить пользовательское свойство"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:147
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:146
 #, fuzzy
 msgid "Remove Lyric"
 msgstr "Удалить"
@@ -623,15 +623,13 @@ msgstr ""
 "Эта музыкальная папка содержит музыкальные файлы с поврежденными тегами. "
 "Следующие файлы затронуты и будут проигнорированы Tagger:"
 
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:35
-msgid "Configure"
-msgstr ""
-
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:40
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:69
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:90
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:15
 #: NickvisionTagger.GNOME/Blueprints/window.blp:388
 msgid "Lyrics"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:36
+msgid "Configure"
 msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:41
@@ -653,16 +651,16 @@ msgstr "Описание"
 msgid "Unsynchronized"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:70
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:69
 msgid ""
 "Unsynchronized lyrics are stored as a single string with no time information."
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:85
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:84
 msgid "Synchronized"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:91
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:89
 msgid ""
 "Synchronized lyrics are stored as a dictionary of strings identified by "
 "their timestamp in milliseconds."
