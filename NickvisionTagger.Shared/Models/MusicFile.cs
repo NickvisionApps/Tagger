@@ -265,6 +265,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     {
         _filename = System.IO.Path.GetFileName(Path);
         _customProperties.Clear();
+        SynchronizedLyrics.Clear();
         try
         {
             var track = new Track(Path);
