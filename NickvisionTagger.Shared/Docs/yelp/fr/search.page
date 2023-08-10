@@ -49,15 +49,15 @@
 <p>Les propriétés sont insensibles à la casse.</p></section>
 
 <section><title>Vérification syntaxique</title>
-<p>If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search. If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox.</p></section>
+<p>Si la syntaxe de votre chaîne est valide, la zone de texte deviendra verte et filtrera la liste avec votre recherche. Si la syntaxe de votre chaîne n’est pas valide, la zone de texte deviendra rouge et ne filtrera pas la liste.</p></section>
 
-<section><title>Examples</title>
-<p><code>!artist=""</code></p>
-<p>This search string will filter the listbox to contain music files whose artist is empty.</p>
-<p><code>!genre="";year="2022"</code></p>
-<p>This search string will filter the listbox to contain music files whose genre is empty and whose year is 2022 (Year and Track properties will validate if the value string is a number).</p>
-<p><code>!title="";artist="bob"</code></p>
-<p>This search string will filter the listbox to contain music files whose title is empty and whose artist is <code>bob</code>.</p>
-<p><code>!custom="mbrd"</code></p>
-<p>This search string will filter the listbox to contain music files that contain a custom property with the name <code>mbrd</code>.</p></section>
+<section><title>Exemples</title>
+<p><code>!artiste=""</code></p>
+<p>Cette chaîne de caractères recherchée filtrera la liste pour révéler les fichiers musicaux dont l’artiste n’est pas renseigné.</p>
+<p><code>!genre="";année="2022"</code></p>
+<p>Cette chaîne de caractères recherchée filtrera la liste pour révéler les fichiers musicaux dont le genre n’est pas renseigné et dont l’année de sortie est 2022 (les propriétés Année et Piste ne doivent contenir que des chiffres pour être valides).</p>
+<p><code>!titre="";artiste="bob"</code></p>
+<p>Cette chaîne de caractères recherchée filtrera la liste pour révéler les fichiers musicaux dont le titre n’est pas renseigné et dont l’artiste est <code>bob</code>.</p>
+<p><code>!personnalisée="mbrd"</code></p>
+<p>Cette chaîne de caractères recherchée filtrera la liste pour révéler les fichiers musicaux ayant une propriété personnalisée nommée <code>mbrd</code>.</p></section>
 </page>

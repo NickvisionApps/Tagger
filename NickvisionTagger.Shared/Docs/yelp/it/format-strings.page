@@ -18,34 +18,34 @@
 <p>Questa pagina spiega l'uso delle stringhe di formato per le conversioni <code>Nome a Tag</code> e <code>Tag a Nome</code>.</p>
 <section>
     <title>Formato</title>
-    <p>Strings of any format with properties wrapped in percent signs (%).</p>
+    <p>Stringhe in ogni formato in cui le proprietà sono racchiuse tra caratteri percento (%).</p>
     <note>
-        <title>Example</title>
-        <p>Format String: <code>%artist%- %title%</code></p>
-        <p>Filename: <code>Artist1 - Song1.mp3</code></p>
-        <p>When running <code>File Name to Tag</code> conversion, this format string and this file name will create a tag with an artist of <code>Artist1</code> and a title of <code>Song1</code>.</p>
+        <title>Esempio</title>
+        <p>Stringa di formato: <code>%artist%- %title%</code></p>
+        <p>Nome del file: <code>Artista1 - Brano1.mp3</code></p>
+        <p>Quando viene eseguita la conversione <code>da nome del file a tag</code> questa stringa di formato e questo nome di file creeranno un tag in cui l'artista sarà <code>Artista1</code> ed il titolo sarà <code>Brano1</code>.</p>
     </note>
 </section>
 <section>
-    <title>Supported Properties</title>
+    <title>Proprietà supportate</title>
     <list>
-        <item><p><code>title</code></p></item>
-        <item><p><code>artist</code></p></item>
+        <item><p><code>titolo</code></p></item>
+        <item><p><code>artista</code></p></item>
         <item><p><code>album</code></p></item>
-        <item><p><code>year</code></p></item>
-        <item><p><code>track</code></p></item>
-        <item><p><code>tracktotal</code></p></item>
-        <item><p><code>albumartist</code></p></item>
-        <item><p><code>genre</code></p></item>
-        <item><p><code>comment</code></p></item>
-        <item><p><code>beatsperminute (bpm)</code></p></item>
-        <item><p><code>composer</code></p></item>
-        <item><p><code>description</code></p></item>
-        <item><p><code>publisher</code></p></item>
+        <item><p><code>anno</code></p></item>
+        <item><p><code>traccia</code></p></item>
+        <item><p><code>Traccia totale</code></p></item>
+        <item><p><code>artista dell'album</code></p></item>
+        <item><p><code>genere</code></p></item>
+        <item><p><code>commento</code></p></item>
+        <item><p><code>battiti al minuto</code></p></item>
+        <item><p><code>compositore</code></p></item>
+        <item><p><code>descrizione</code></p></item>
+        <item><p><code>editore</code></p></item>
     </list>
     <note>
-        <p>When using conversions, custom property names can also be used.</p>
-        <p>For example, a custom property who's name is <code>ENCODER</code> can be used as <code>%encoder%</code>.</p>
+        <p>Durante le conversioni è possibile usare nomi personalizzati per le proprietà.</p>
+        <p>Per esempio, una proprietà personalizzata il cui nome è <code>Codifica</code> può essere usata come <code>%codifica%</code>.</p>
     </note>
 </section>
 </page>
