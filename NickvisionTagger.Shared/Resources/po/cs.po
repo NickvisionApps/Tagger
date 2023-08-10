@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-08 23:17-0400\n"
-"PO-Revision-Date: 2023-08-06 22:16+0000\n"
+"PO-Revision-Date: 2023-08-10 02:47+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/cs/>\n"
@@ -402,7 +402,7 @@ msgstr "Nová vlastní vlastnost"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:114
 msgid "New Synchronized Lyric"
-msgstr ""
+msgstr "Nový synchronizovaný řádek"
 
 #: ../../../Controllers/MainWindowController.cs:147
 #: ../../../Controllers/MainWindowController.cs:149
@@ -461,9 +461,8 @@ msgid "Remove Custom Property"
 msgstr "Odebrat vlastní vlastnost"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:148
-#, fuzzy
 msgid "Remove Lyric"
-msgstr "Odebrat"
+msgstr "Odebrat řádek"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:534
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:612
@@ -537,7 +536,7 @@ msgstr "TiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:114
 msgid "Timestamp (hh:mm:ss)"
-msgstr ""
+msgstr "Čas (hh:mm:ss)"
 
 #: ../../../Controllers/MainWindowController.cs:963
 #: ../../../Controllers/MainWindowController.cs:993
@@ -595,7 +594,7 @@ msgstr "rok"
 
 #: NickvisionTagger.GNOME/Blueprints/autocomplete_box.blp:15
 msgid "Suggestions"
-msgstr ""
+msgstr "Návrhy"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
 msgid "Corrupted Files Found"
@@ -612,21 +611,23 @@ msgstr ""
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:15
 #: NickvisionTagger.GNOME/Blueprints/window.blp:389
 msgid "Lyrics"
-msgstr ""
+msgstr "Texty"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:36
 msgid "Configure"
-msgstr ""
+msgstr "Nastavit"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:41
 msgid ""
 "Information about the provided lyrics. Applies to both unsynchronized and "
 "synchronized lyrics."
 msgstr ""
+"Informace o poskytnutých textech. Platí pro nesynchronizované i "
+"synchronizované texty."
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:44
 msgid "Language Code"
-msgstr ""
+msgstr "Kód jazyka"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:53
 #: NickvisionTagger.GNOME/Blueprints/window.blp:471
@@ -635,22 +636,26 @@ msgstr "Popis"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:64
 msgid "Unsynchronized"
-msgstr ""
+msgstr "Nesynchronizované"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:69
 msgid ""
 "Unsynchronized lyrics are stored as a single string with no time information."
 msgstr ""
+"Nesynchronizované texty jsou ukládány jako jeden řetězec bez informací o "
+"čase."
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:84
 msgid "Synchronized"
-msgstr ""
+msgstr "Synchronizované"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:89
 msgid ""
 "Synchronized lyrics are stored as a dictionary of strings identified by "
 "their timestamp in milliseconds."
 msgstr ""
+"Synchronizované texty jsou ukládány jako slovník řetězců identifikovatelných "
+"jejich časem v milisekundách."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:119
@@ -834,7 +839,7 @@ msgstr "Odebrat zadní obal alba"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
 #: NickvisionTagger.GNOME/Blueprints/window.blp:385
 msgid "Manage Lyrics"
-msgstr ""
+msgstr "Spravovat texty"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:102
 msgctxt "Shortcut"
