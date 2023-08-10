@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-03 17:01-0400\n"
-"PO-Revision-Date: 2023-08-09 12:23+0000\n"
+"PO-Revision-Date: 2023-08-10 15:59+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/fr/>\n"
@@ -924,6 +924,9 @@ msgid ""
 "tagger</code>, then try to apply changes again, and you will find an error "
 "message in the terminal."
 msgstr ""
+"Exécutez <app>Tagger</app> dans un terminal avec la commande <code>flatpak "
+"run org.nickvision.tagger</code>, puis essayez d’appliquer à nouveau les "
+"changements, vous trouverez le message d’erreur dans le terminal."
 
 #. (itstool) path: note/p
 #: yelp/C/unsupported.page:30
@@ -931,12 +934,15 @@ msgid ""
 "If it is not a \"permission denied\" error, please <link href=\"https://"
 "github.com/NickvisionApps/Tagger/issues/174\">report a new issue</link>."
 msgstr ""
+"S’il ne s’egit pas d’une erreur « permission refusée », merci de <link href="
+"\"https://github.com/NickvisionApps/Tagger/issues/174\">signaler un nouveau "
+"problème</link>."
 
 #. (itstool) path: info/title
 #: yelp/C/web-services.page:8
 msgctxt "link"
 msgid "Web Services 🌐"
-msgstr ""
+msgstr "Services Web 🌐"
 
 #. (itstool) path: page/title
 #: yelp/C/web-services.page:20
@@ -946,7 +952,7 @@ msgstr "Services Web"
 #. (itstool) path: page/p
 #: yelp/C/web-services.page:21
 msgid "This page describes the web services available in Tagger"
-msgstr ""
+msgstr "Cette page traite des services web disponibles dans Tagger"
 
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:23
@@ -959,6 +965,8 @@ msgid ""
 "Identifies a music file through MusicBrainz and downloads its metadata to "
 "use in Tagger."
 msgstr ""
+"Identifie un fichier musical via MusicBrainz et télécharge ses métadonnées "
+"pour les utiliser dans Tagger."
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:25
@@ -968,6 +976,11 @@ msgid ""
 "IDs are found, metadata such as title, artist, album, and art will be "
 "downloaded and set in Tagger."
 msgstr ""
+"Ce service utilise l’empreinte AcoustId du fichier (générée avec "
+"<code>fpcalc</code>) pour déterminer les identifiants d’enregistrement et de "
+"sortie MusicBrainz. Si les identifiants sont trouvés, les métadonnées telles "
+"que le titre, l’artiste, l’album et la pochette seront téléchargées et "
+"utilisées dans Tagger."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:27
@@ -975,6 +988,8 @@ msgid ""
 "Finding metadata through MusicBrainz isn't 100% realiable and may not be "
 "available for uncommom songs."
 msgstr ""
+"La recherche de métadonnées dans MusicBrainz n’est pas fiable à 100 % et "
+"peut ne pas être disponible pour des chansons peu connues."
 
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:31
@@ -988,11 +1003,14 @@ msgid ""
 "AcoustId's database. There are two things that can be submitted about a "
 "music file:"
 msgstr ""
+"Soumet des données sur un fichier musical (identifié par son empreinte "
+"digitale) à la base de données d’AcoustId. Deux choses peuvent être soumises "
+"à propos d’un fichier musical :"
 
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:35
 msgid "MusicBrainz Recording ID"
-msgstr ""
+msgstr "Identifiant d’enregistrement MusicBrainz"
 
 #. (itstool) path: item/p
 #: yelp/C/web-services.page:36
@@ -1001,16 +1019,20 @@ msgid ""
 "will pull all data from the associated recording id and use that for sending "
 "metadata to AcoustId."
 msgstr ""
+"Un utilisateur peut soumettre un identifiant d’enregistrement MusicBrainz à "
+"AcoustId. Cela permettra d’extraire toutes les données de l’identifiant d’"
+"enregistrement associé et de les utiliser pour envoyer des métadonnées à "
+"AcoustId."
 
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:39
 msgid "User Metadata"
-msgstr ""
+msgstr "Métadonnées utilisateur"
 
 #. (itstool) path: item/p
 #: yelp/C/web-services.page:40
 msgid "A user can submit their metadata from Tagger to AcoustId."
-msgstr ""
+msgstr "Un utilisateur peut soumettre ses métadonnées de Tagger à AcoustId."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:44
@@ -1018,3 +1040,5 @@ msgid ""
 "A proper <code>AcoustId User API Key</code> must be set in "
 "<code>Preferences</code> for this service to work."
 msgstr ""
+"Une <code>Clé d’API de l’utilisateur AcoustId</code> appropriée doit être "
+"définie dans les <code>Préférences</code> pour que ce service fonctionne."
