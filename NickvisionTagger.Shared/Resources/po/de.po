@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-08 23:17-0400\n"
-"PO-Revision-Date: 2023-08-12 08:51+0000\n"
+"PO-Revision-Date: 2023-08-12 17:20+0000\n"
 "Last-Translator: Jummit <jummit@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/de/>\n"
@@ -400,7 +400,7 @@ msgstr "Neue Andere Eigenschaft"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:114
 msgid "New Synchronized Lyric"
-msgstr "Neue Synchronisierter Text"
+msgstr "Neuer Synchronisierter Text"
 
 #: ../../../Controllers/MainWindowController.cs:147
 #: ../../../Controllers/MainWindowController.cs:149
@@ -409,15 +409,15 @@ msgstr "Nicholas Logozzo"
 
 #: ../../../Controllers/MainWindowController.cs:916
 msgid "No AcoustId entry found for the file's fingerprint"
-msgstr ""
+msgstr "Kein AccoustId-Eintrag für den Fingerabdruck der Datei gefunden"
 
 #: ../../../Controllers/MainWindowController.cs:926
 msgid "No metadata was downloaded"
-msgstr ""
+msgstr "Keine Metadaten heruntergeladen"
 
 #: ../../../Controllers/MainWindowController.cs:917
 msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
-msgstr ""
+msgstr "Für den AcoustId-Eintrag wurde keine MusicBrainz-RecordingId gefunden"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:822
 msgid "OK"
@@ -459,9 +459,8 @@ msgid "Remove Custom Property"
 msgstr "Entferne Andere Eigenschaft"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:148
-#, fuzzy
 msgid "Remove Lyric"
-msgstr "Entfernen"
+msgstr "Text Entfernen"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:534
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:612
@@ -536,7 +535,7 @@ msgstr "TiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:114
 msgid "Timestamp (hh:mm:ss)"
-msgstr ""
+msgstr "Zeitstempel (hh:mm:ss)"
 
 #: ../../../Controllers/MainWindowController.cs:963
 #: ../../../Controllers/MainWindowController.cs:993
@@ -594,7 +593,7 @@ msgstr "Jahr"
 
 #: NickvisionTagger.GNOME/Blueprints/autocomplete_box.blp:15
 msgid "Suggestions"
-msgstr ""
+msgstr "Vorschläge"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
 msgid "Corrupted Files Found"
@@ -611,21 +610,23 @@ msgstr ""
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:15
 #: NickvisionTagger.GNOME/Blueprints/window.blp:389
 msgid "Lyrics"
-msgstr ""
+msgstr "Songtext"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:36
 msgid "Configure"
-msgstr ""
+msgstr "Konfigurieren"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:41
 msgid ""
 "Information about the provided lyrics. Applies to both unsynchronized and "
 "synchronized lyrics."
 msgstr ""
+"Information über den bereitgestellten Songtext. Wird auf nicht "
+"synchronisierte und synchronisierte Songtexte angewandt."
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:44
 msgid "Language Code"
-msgstr ""
+msgstr "Sprachcode"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:53
 #: NickvisionTagger.GNOME/Blueprints/window.blp:471
@@ -634,22 +635,26 @@ msgstr "Beschreibung"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:64
 msgid "Unsynchronized"
-msgstr ""
+msgstr "Nicht Synchronisiert"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:69
 msgid ""
 "Unsynchronized lyrics are stored as a single string with no time information."
 msgstr ""
+"Nicht synchronisierte Songtexte werden als einzelne Zeichenkette ohne "
+"Zeitinformation gespeichert."
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:84
 msgid "Synchronized"
-msgstr ""
+msgstr "Synchronisiert"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:89
 msgid ""
 "Synchronized lyrics are stored as a dictionary of strings identified by "
 "their timestamp in milliseconds."
 msgstr ""
+"Synchronisierte Songtexte werden als Schlüssel-Wert-Liste von Zeichenketten "
+"identifiziert durch deren Zeitstempel in Millisekunden gespeichert."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:119
@@ -702,7 +707,6 @@ msgid "File Name"
 msgstr "Dateiname"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgid "File Path"
 msgstr "Dateipfad"
 
@@ -833,7 +837,7 @@ msgstr "Rücken-Albumcover entfernen"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
 #: NickvisionTagger.GNOME/Blueprints/window.blp:385
 msgid "Manage Lyrics"
-msgstr ""
+msgstr "Songtexte Verwalten"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:102
 msgctxt "Shortcut"
