@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-03 17:01-0400\n"
-"PO-Revision-Date: 2023-08-03 18:11+0000\n"
+"PO-Revision-Date: 2023-08-13 23:36+0000\n"
 "Last-Translator: Simon Hahne <simonhahne@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/de/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: yelp/C/configuration.page:8
 msgctxt "link"
 msgid "Configuration 🔧"
-msgstr ""
+msgstr "Konfiguration 🔧"
 
 #. (itstool) path: credit/name
 #: yelp/C/configuration.page:10 yelp/C/configuration.page:14
@@ -37,29 +37,32 @@ msgstr "Nicholas Logozzo"
 #. (itstool) path: page/title
 #: yelp/C/configuration.page:20
 msgid "Configuration"
-msgstr ""
+msgstr "Konfiguration"
 
 #. (itstool) path: page/p
 #: yelp/C/configuration.page:21
 msgid ""
 "This page describes what you can change in the application configuration."
 msgstr ""
+"Diese Seite beschreibt, was du in der Anwendungskonfiguration ändern kannst."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:24
 msgid "Theme"
-msgstr ""
+msgstr "Farbschema"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:25
 msgid ""
 "Set light or dark theme, or make <app>Tagger</app> follow your system theme."
 msgstr ""
+"Setzt ein helles oder dunkles Farbschema, oder lässt <app>Tagger</app> der "
+"Systemeinstellung folgen."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:28
 msgid "Remember Last Opened Folder"
-msgstr ""
+msgstr "Zuletzt geöffneten Ordner merken"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:29
@@ -67,22 +70,25 @@ msgid ""
 "Whether or not to remember the previously used music folder and reopen it "
 "when Tagger starts the next time."
 msgstr ""
+"Legt fest, ob der zuletzt geöffnete Musik-Ordner gemerkt und bei nächsten "
+"Öffnen von <app>Tagger</app> erneut geöffnet werden soll."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:32
 msgid "Include Subfolders"
-msgstr ""
+msgstr "Unterordner mit einbeziehen"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:33
 msgid ""
 "Whether or not to scan for music files into subdirectories of a music folder."
 msgstr ""
+"Legt fest, ob Unterordner auch nach Audiodateien durchsucht werden sollen."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:36
 msgid "Sort Files By"
-msgstr ""
+msgstr "Dateien sortieren nach"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:37
@@ -90,41 +96,43 @@ msgid ""
 "The property to use when sorting and displaying music files. It can be one "
 "of the following options:"
 msgstr ""
+"Legt fest welche Eigenschaft beim Sortieren und Anzeigen von Audiodateien "
+"verwendet werden soll. Die folgenden Optionen sind verfügbar:"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:39
 msgid "<code>File Name</code>"
-msgstr ""
+msgstr "<code>Dateiname</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:40
 msgid "<code>Title</code>"
-msgstr ""
+msgstr "<code>Titel</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:41
 msgid "<code>Track</code>"
-msgstr ""
+msgstr "<code>Track</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:42
 msgid "<code>File Path</code>"
-msgstr ""
+msgstr "<code>Dateipfad</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:43
 msgid "<code>Album</code>"
-msgstr ""
+msgstr "<code>Album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:44
 msgid "<code>Genre</code>"
-msgstr ""
+msgstr "<code>Genre</code>"
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:48
 msgid "Preserve Modification Timestamp"
-msgstr ""
+msgstr "Änderungs-Zeitstempel erhalten"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:49
@@ -132,11 +140,13 @@ msgid ""
 "Whether or not to not update a file's write (modified) timestamp when its "
 "tag is saved."
 msgstr ""
+"Legt fest, ob das Änderungsdatem der Datei aktualisiert werden soll wenn ein "
+"Tag gespeichert wird."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:52
 msgid "Overwrite Tag With MusicBrainz"
-msgstr ""
+msgstr "Tag mit MusicBrainz überschreiben"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:53
@@ -144,11 +154,14 @@ msgid ""
 "Whether or not to overwrite existing tag metadata with data found from "
 "MusicBrainz. If disabled, only blank tag properties will be filled."
 msgstr ""
+"Legt fest of existierende Metadaten mit Daten von MusicBrainz überschrieben "
+"werden sollen. Wenn die Option deaktiviert ist werden nur leere Tag-Felder "
+"gefüllt."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:56
 msgid "Overwrite Album Art With MusicBrainz"
-msgstr ""
+msgstr "Albumcover mit MusicBrainz überschreiben"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:57
@@ -156,11 +169,13 @@ msgid ""
 "Whether or not to overwrite overwrite existing album art with art found from "
 "MusicBrainz."
 msgstr ""
+"Legt fest, ob ein existierendes Albumcover mit Daten von MusicBrainz "
+"überschrieben werden soll."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:60
 msgid "AcoustId User API Key"
-msgstr ""
+msgstr "AcoustId Nutzer-API-Key"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:61
@@ -168,33 +183,37 @@ msgid ""
 "An AcoustId User API key to use when fingerprinting music files and looking "
 "up song information."
 msgstr ""
+"Ein AcoustId Nutzer-API-Key, der beim Fingerprinting von Audiodateien und "
+"bei der Suche nach Songinformationen verwendet wird."
 
 #. (itstool) path: note/p
 #: yelp/C/configuration.page:63
 msgid ""
 "A key can be obtained <link href=\"https://acoustid.org/api-key\">here</link>"
 msgstr ""
+"Ein API-Key kann man <link href=\"https://acoustid.org/api-key\">hier</link> "
+"erhalten."
 
 #. (itstool) path: info/title
 #: yelp/C/corrupted.page:8
 msgctxt "link"
 msgid "Corrupted Files 🪲"
-msgstr ""
+msgstr "Korrupte Dateien 🪲"
 
 #. (itstool) path: page/title
 #: yelp/C/corrupted.page:20
 msgid "Corrupted Files"
-msgstr ""
+msgstr "Korrupte Dateien"
 
 #. (itstool) path: page/p
 #: yelp/C/corrupted.page:21
 msgid "This page explains music files with corrupted data."
-msgstr ""
+msgstr "Diese Seite erklärt Audiodateien mit korrupten Daten."
 
 #. (itstool) path: section/title
 #: yelp/C/corrupted.page:23
 msgid "Invalid Data"
-msgstr ""
+msgstr "Ungültige Daten"
 
 #. (itstool) path: section/p
 #: yelp/C/corrupted.page:24
@@ -203,6 +222,10 @@ msgid ""
 "information about a file and even cause playback issues. Some websites add "
 "extra junk data in files which in turn causes corruption."
 msgstr ""
+"Ein ungültiger Tag-Header oder Junk-Daten in einer Datei können zu Problemen "
+"beim Lesen von Informationen über eine Datei und sogar zu "
+"Wiedergabeproblemen führen. Einige Websites fügen zusätzliche Junk-Daten in "
+"Dateien ein, die wiederum zu Beschädigungen führen."
 
 #. (itstool) path: section/p
 #: yelp/C/corrupted.page:25
@@ -211,6 +234,9 @@ msgid ""
 "dialog will be displayed listing corrupted files for you to manage and fix "
 "accordingly."
 msgstr ""
+"Wenn <app>Tagger</app> nicht in der Lage ist, eine Datei zu lesen, wird sie "
+"ignoriert. Die beschädigten Dateien werden in einem Dialogfeld aufgelistet, "
+"damit du sie entsprechend verwalten und reparieren kannst."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:27
@@ -218,12 +244,15 @@ msgid ""
 "FFmpeg can be used to fix corruption issues. Run the following command to re-"
 "encode a file's tag and remove junk data:"
 msgstr ""
+"FFmpeg kann genutzt werden um beschädigte Dateien zu reparieren. Führe dazu "
+"den folgenden Befehl aus um die Datei neu zu enkodieren und Junk-Daten zu "
+"entfernen:"
 
 #. (itstool) path: note/code
 #: yelp/C/corrupted.page:28
 #, no-wrap
 msgid "ffmpeg -i in.mp3 out.mp3"
-msgstr ""
+msgstr "ffmpeg -i in.mp3 out.mp3"
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:29
@@ -231,6 +260,9 @@ msgid ""
 "where <code>in.mp3</code> is the file path of the corrupted file and "
 "<code>out.mp3</code> is the path to export the re-encoded file."
 msgstr ""
+"wobei <code>in.mp3</code> der Dateipfad zur beschädigten Datei ist und "
+"<code>out.mp3</code> der Pfad an dem die reparierte Datei gespeichert werden "
+"soll."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:32
@@ -238,17 +270,20 @@ msgid ""
 "You can also use <link href=\"https://www.freac.org\">fre:ac</link> to re-"
 "encode files without convertion to another format."
 msgstr ""
+"Die kannst alternativ <link href=\"https://www.freac.org\">fre:ac</link> "
+"nutzen um Dateien neu zu enkodieren, ohne sie in ein anderes Format "
+"umzuwandeln."
 
 #. (itstool) path: info/title
 #: yelp/C/format-strings.page:8
 msgctxt "link"
 msgid "Format Strings ✍️"
-msgstr ""
+msgstr "Formatvorlagen ✍️"
 
 #. (itstool) path: page/title
 #: yelp/C/format-strings.page:20
 msgid "Format Strings"
-msgstr ""
+msgstr "Formatvorlagen"
 
 #. (itstool) path: page/p
 #: yelp/C/format-strings.page:21
@@ -256,11 +291,13 @@ msgid ""
 "This page explains the use of format strings for <code>File Name to Tag</"
 "code> and <code>Tag to File Name</code> conversions."
 msgstr ""
+"Diese Seite erklärt die Nutzung von Formatvorlagen für die Konvertierungen "
+"<code>Dateiname zu Tag</code> und <code>Tag zu Dateiname</code>."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:23
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #. (itstool) path: section/p
 #: yelp/C/format-strings.page:24
