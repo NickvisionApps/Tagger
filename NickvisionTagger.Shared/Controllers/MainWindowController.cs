@@ -822,6 +822,10 @@ public class MainWindowController : IDisposable
     /// <param name="name">The name of the property to add</param>
     public void AddCustomProperty(string name)
     {
+        if (name.ToLower() == "lyrics")
+        {
+            return;
+        }
         foreach(var pair in SelectedMusicFiles)
         {
             pair.Value.SetCustomProperty(name, "");
