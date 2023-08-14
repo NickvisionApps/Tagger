@@ -34,7 +34,8 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController();
         _mainWindowController.AppInfo.Changelog =
-            @"* Lyrics stored in LRC format will now be displayed correctly as synchronized lyrics
+            @"* Added offset field to synchronized lyrics page 
+              * Lyrics stored in LRC format will now be displayed correctly as synchronized lyrics
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
