@@ -822,20 +822,20 @@ public class MainWindowController : IDisposable
     /// <param name="name">The name of the property to add</param>
     public void AddCustomProperty(string name)
     {
-        if (name.ToLower() == "lyrics")
-        {
-            return;
-        }
+        var set = false;
         foreach(var pair in SelectedMusicFiles)
         {
-            pair.Value.SetCustomProperty(name, "");
-            MusicFileSaveStates[pair.Key] = false;
+            if (pair.Value.SetCustomProperty(name, ""))
+            {
+                MusicFileSaveStates[pair.Key] = false;
+                set = true;
+            }
         }
-        if(SelectedMusicFiles.Count > 0)
+        if(set)
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, true);
+        MusicFileSaveStatesChanged?.Invoke(this, set);
     }
 
     /// <summary>
@@ -857,7 +857,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, true);
+        MusicFileSaveStatesChanged?.Invoke(this, removed);
     }
 
     /// <summary>

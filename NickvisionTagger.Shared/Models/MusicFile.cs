@@ -29,6 +29,8 @@ public enum MusicBrainzLoadStatus
 /// </summary>
 public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
 {
+    private static string[] _validProperties;
+    
     private string _dotExtension;
     private string _filename;
     private DateTime _modificationTimestamp;
@@ -143,6 +145,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     static MusicFile()
     {
+        _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "lyrics", _("lyrics") };
         ATL.Settings.UseFileNameWhenNoTitle = false;
         SortFilesBy = SortBy.Filename;
     }
@@ -574,7 +577,16 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     /// <param name="name">The name of the custom property</param>
     /// <param name="value">The value of the custom property</param>
-    public void SetCustomProperty(string name, string value) => _customProperties[name] = value;
+    /// <returns>True if set, else false</returns>
+    public bool SetCustomProperty(string name, string value)
+    {
+        if (_validProperties.Contains(name))
+        {
+            return false;
+        }
+        _customProperties[name] = value;
+        return true;
+    }
 
     /// <summary>
     /// Removes a custom property
@@ -726,7 +738,6 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return false;
         }
-        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
         var customProps = _customProperties.Keys.ToList();
         var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
         if(matches.Count == 0)
@@ -737,7 +748,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             string value = match.Value.Remove(0, 1); //remove first %
             value = value.Remove(value.Length - 1, 1); //remove last %;
-            if(validProperties.Contains(value.ToLower()))
+            if(_validProperties.Contains(value.ToLower()))
             {
                 value = value.ToLower();
                 var replace = "";
