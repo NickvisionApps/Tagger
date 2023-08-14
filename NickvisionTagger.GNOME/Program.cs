@@ -35,6 +35,7 @@ public partial class Program
         _mainWindowController = new MainWindowController();
         _mainWindowController.AppInfo.Changelog =
             @"* Added offset field to synchronized lyrics page 
+              * Added the ability to import and export LRC files in the synchronized lyrics page
               * Lyrics stored in LRC format will now be displayed correctly as synchronized lyrics
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;

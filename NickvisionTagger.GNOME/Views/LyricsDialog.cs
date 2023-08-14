@@ -48,6 +48,9 @@ public partial class LyricsDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.TextView _unsyncTextView;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _syncGroup;
     [Gtk.Connect] private readonly Gtk.Button _addSyncLyricButton;
+    [Gtk.Connect] private readonly Gtk.Button _clearSyncButton;
+    [Gtk.Connect] private readonly Gtk.Button _importSyncButton;
+    [Gtk.Connect] private readonly Gtk.Button _exportSyncButton;
     [Gtk.Connect] private readonly Adw.EntryRow _syncOffsetRow;
     
     /// <summary>
@@ -68,6 +71,9 @@ public partial class LyricsDialog : Adw.Window
         SetTransientFor(parent);
         OnCloseRequest += OnClose;
         _addSyncLyricButton.OnClicked += AddSyncLyric;
+        _clearSyncButton.OnClicked += ClearSyncLyrics;
+        _importSyncButton.OnClicked += ImportSyncFromLRC;
+        _exportSyncButton.OnClicked += ExportSyncFromLRC;
         _syncOffsetRow.OnApply += (sender, e) =>
         {
             if (int.TryParse(_syncOffsetRow.GetText(), out var offset))
@@ -100,6 +106,36 @@ public partial class LyricsDialog : Adw.Window
     public LyricsDialog(LyricsDialogController controller, Gtk.Window parent, string iconName) : this(Builder.FromFile("lyrics_dialog.ui"), controller, parent, iconName)
     {
         
+    }
+    
+    /// <summary>
+    /// Adds a sync lyric row
+    /// </summary>
+    /// <param name="key">The time of the lyric in ms</param>
+    /// <param name="value">The string lyric</param>
+    private void AddSyncLyricRow(int key, string value)
+    {
+        var row = new Adw.EntryRow();
+        row.SetTitle(((int)TimeSpan.FromMilliseconds(key).TotalSeconds).ToDurationString());
+        row.SetText(value);
+        row.SetShowApplyButton(true);
+        var delete = new Gtk.Button();
+        delete.SetValign(Gtk.Align.Center);
+        delete.SetIconName("list-remove-symbolic");
+        delete.SetTooltipText(_("Remove Lyric"));
+        delete.AddCssClass("flat");
+        delete.OnClicked += (sender, e) =>
+        {
+            if (_controller.SynchronizedLyrics.Remove(key))
+            {
+                _syncGroup.Remove(row);
+                _syncRows.Remove(row);
+            }
+        };
+        row.AddSuffix(delete);
+        row.OnApply += (sender, e) => _controller.SynchronizedLyrics[key] = sender.GetText();
+        _syncGroup.Add(row);
+        _syncRows.Add(row);
     }
 
     /// <summary>
@@ -144,34 +180,39 @@ public partial class LyricsDialog : Adw.Window
         };
         entryDialog.Present();
     }
+    
+    /// <summary>
+    /// Occurs when the clear synchronized lyrics button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
+    private void ClearSyncLyrics(Gtk.Button sender, EventArgs e)
+    {
+        _controller.SynchronizedLyrics.Clear();
+        foreach (var row in _syncRows)
+        {
+            _syncGroup.Remove(row);
+        }
+        _syncRows.Clear();
+    }
 
     /// <summary>
-    /// Adds a sync lyric row
+    /// Occurs when the import synchronized lyrics button is clicked
     /// </summary>
-    /// <param name="key">The time of the lyric in ms</param>
-    /// <param name="value">The string lyric</param>
-    private void AddSyncLyricRow(int key, string value)
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
+    private void ImportSyncFromLRC(Gtk.Button sender, EventArgs e)
     {
-        var row = new Adw.EntryRow();
-        row.SetTitle(((int)TimeSpan.FromMilliseconds(key).TotalSeconds).ToDurationString());
-        row.SetText(value);
-        row.SetShowApplyButton(true);
-        var delete = new Gtk.Button();
-        delete.SetValign(Gtk.Align.Center);
-        delete.SetIconName("list-remove-symbolic");
-        delete.SetTooltipText(_("Remove Lyric"));
-        delete.AddCssClass("flat");
-        delete.OnClicked += (sender, e) =>
-        {
-            if (_controller.SynchronizedLyrics.Remove(key))
-            {
-                _syncGroup.Remove(row);
-                _syncRows.Remove(row);
-            }
-        };
-        row.AddSuffix(delete);
-        row.OnApply += (sender, e) => _controller.SynchronizedLyrics[key] = sender.GetText();
-        _syncGroup.Add(row);
-        _syncRows.Add(row);
+        
+    }
+    
+    /// <summary>
+    /// Occurs when the export synchronized lyrics button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
+    private void ExportSyncFromLRC(Gtk.Button sender, EventArgs e)
+    {
+        
     }
 }

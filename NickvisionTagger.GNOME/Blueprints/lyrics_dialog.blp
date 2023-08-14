@@ -108,15 +108,39 @@ Adw.Window _root {
                 header-suffix: Gtk.Box {
                   orientation: horizontal;
                   spacing: 6;
-
+                  
                   Gtk.Button _addSyncLyricButton {
                     valign: center;
-
+                    
                     Adw.ButtonContent {
                       label: _("Add");
                       icon-name: "list-add-symbolic";
                     }
-
+                    
+                    styles ["flat"]
+                  }
+                  
+                  Gtk.Button _clearSyncButton {
+                    valign: center;
+                    icon-name: "user-trash-symbolic";
+                    tooltip-text: _("Clear All Lyrics");
+                    
+                    styles ["flat"]
+                  }
+                  
+                  Gtk.Button _importSyncButton {
+                    valign: center;
+                    icon-name: "document-send-symbolic";
+                    tooltip-text: _("Import from LRC");
+                    
+                    styles ["flat"]
+                  }
+                                  
+                  Gtk.Button _exportSyncButton {
+                    valign: center;
+                    icon-name: "folder-download-symbolic";
+                    tooltip-text: _("Export to LRC");
+                    
                     styles ["flat"]
                   }
                 };
