@@ -511,13 +511,9 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             LanguageCode = LyricsLanguageCode,
             Description = LyricsDescription,
             UnsynchronizedLyrics = UnsynchronizedLyrics,
-            SynchronizedLyrics = new List<LyricsInfo.LyricsPhrase>(),
+            SynchronizedLyrics = SynchronizedLyrics.Select(x => new LyricsInfo.LyricsPhrase(x.Key, x.Value)).ToList(),
             Metadata = new Dictionary<string, string>()
         };
-        foreach (var pair in SynchronizedLyrics)
-        {
-            track.Lyrics.SynchronizedLyrics.Add(new LyricsInfo.LyricsPhrase(pair.Key, pair.Value));
-        }
         if (SynchronizedLyricsOffset != 0)
         {
             track.Lyrics.Metadata["offset"] = SynchronizedLyricsOffset.ToString();
