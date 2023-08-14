@@ -580,7 +580,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if set, else false</returns>
     public bool SetCustomProperty(string name, string value)
     {
-        if (_validProperties.Contains(name))
+        if (_validProperties.Contains(name.ToLower()))
         {
             return false;
         }
