@@ -25,8 +25,6 @@ Adw.Window _root {
       Adw.ViewStack _viewStack {
         hexpand: true;
         vexpand: true;
-        margin-top: 12;
-        margin-bottom: 12;
       
         Adw.ViewStackPage {
           title: _("Configure");
@@ -38,6 +36,8 @@ Adw.Window _root {
             Adw.PreferencesGroup {
               margin-start: 24;
               margin-end: 24;
+              margin-top: 12;
+              margin-bottom: 12;
               description: _("Information about the provided lyrics. Applies to both unsynchronized and synchronized lyrics.");
               
               Adw.EntryRow _languageRow {
@@ -71,6 +71,8 @@ Adw.Window _root {
             Adw.PreferencesGroup {
               margin-start: 24;
               margin-end: 24;
+              margin-top: 12;
+              margin-bottom: 12;
               description: _("Unsynchronized lyrics are stored as a single string with no time information.");
               
               Gtk.TextView _unsyncTextView {
@@ -98,6 +100,8 @@ Adw.Window _root {
               spacing: 12;
               margin-start: 24;
               margin-end: 24;
+              margin-top: 12;
+              margin-bottom: 12;
 
               Adw.PreferencesGroup {
                 description: _("Synchronized lyrics are stored as a dictionary of strings identified by their timestamp in milliseconds.");
