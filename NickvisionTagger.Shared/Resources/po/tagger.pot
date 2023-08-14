@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-08 23:17-0400\n"
+"POT-Creation-Date: 2023-08-14 14:43-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,10 +49,6 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:455
 #: ../../../Controllers/MainWindowController.cs:460
 #: ../../../Controllers/MainWindowController.cs:469
-#: ../../../Controllers/MainWindowController.cs:1359
-#: ../../../Controllers/MainWindowController.cs:1360
-#: ../../../Controllers/MainWindowController.cs:1361
-#: ../../../Controllers/MainWindowController.cs:1362
 #: ../../../Controllers/MainWindowController.cs:1363
 #: ../../../Controllers/MainWindowController.cs:1364
 #: ../../../Controllers/MainWindowController.cs:1365
@@ -63,7 +59,11 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:1370
 #: ../../../Controllers/MainWindowController.cs:1371
 #: ../../../Controllers/MainWindowController.cs:1372
+#: ../../../Controllers/MainWindowController.cs:1373
+#: ../../../Controllers/MainWindowController.cs:1374
+#: ../../../Controllers/MainWindowController.cs:1375
 #: ../../../Controllers/MainWindowController.cs:1376
+#: ../../../Controllers/MainWindowController.cs:1380
 msgid "<keep>"
 msgstr ""
 
@@ -85,26 +85,26 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:788
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:114
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:98
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:108
 #: NickvisionTagger.GNOME/Blueprints/window.blp:490
 msgid "Add"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1001
-#: ../../../Models/MusicFile.cs:648 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:752
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1005
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:660
+#: ../../../Models/MusicFile.cs:763
 msgid "album"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1050
-#: ../../../Models/MusicFile.cs:676 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:768
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1054
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:688
+#: ../../../Models/MusicFile.cs:779
 msgid "albumartist"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:918
+#: ../../../Controllers/MainWindowController.cs:922
 msgid "An invalid RecordingId was provided to MusicBrainz"
 msgstr ""
 
@@ -123,10 +123,10 @@ msgstr ""
 msgid "Apply Changes?"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:997
-#: ../../../Models/MusicFile.cs:644 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:748
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1001
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:656
+#: ../../../Models/MusicFile.cs:759
 msgid "artist"
 msgstr ""
 
@@ -140,17 +140,17 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1062
-#: ../../../Models/MusicFile.cs:688 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:780
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1066
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:700
+#: ../../../Models/MusicFile.cs:791
 msgid "beatsperminute"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1062
-#: ../../../Models/MusicFile.cs:688 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:780
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1066
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:700
+#: ../../../Models/MusicFile.cs:791
 msgid "bpm"
 msgstr ""
 
@@ -166,17 +166,17 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1058
-#: ../../../Models/MusicFile.cs:684 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:776
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1062
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:696
+#: ../../../Models/MusicFile.cs:787
 msgid "comment"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1077
-#: ../../../Models/MusicFile.cs:696 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:784
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1081
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:708
+#: ../../../Models/MusicFile.cs:795
 msgid "composer"
 msgstr ""
 
@@ -204,8 +204,8 @@ msgid_plural "Converted {0} tags to file names successfully"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1089
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1093
 msgid "custom"
 msgstr ""
 
@@ -222,10 +222,10 @@ msgstr ""
 msgid "David Lapshin"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1081
-#: ../../../Models/MusicFile.cs:700 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:788
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1085
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:712
+#: ../../../Models/MusicFile.cs:799
 msgid "description"
 msgstr ""
 
@@ -240,7 +240,7 @@ msgstr ""
 msgid "Discarding unapplied changes..."
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:926
+#: ../../../Controllers/MainWindowController.cs:930
 #, csharp-format
 msgid "Downloaded metadata for {0} files successfully"
 msgstr ""
@@ -249,11 +249,11 @@ msgstr ""
 msgid "Downloading MusicBrainz metadata..."
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:919
+#: ../../../Controllers/MainWindowController.cs:923
 msgid "Error"
 msgstr ""
 
-#: ../../../Models/MusicFile.cs:215 ../../../Models/MusicFile.cs:238
+#: ../../../Models/MusicFile.cs:218 ../../../Models/MusicFile.cs:241
 msgid "ERROR"
 msgstr ""
 
@@ -292,8 +292,8 @@ msgstr ""
 msgid "File Name to Tag"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:989
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:993
 msgid "filename"
 msgstr ""
 
@@ -316,10 +316,10 @@ msgstr ""
 msgid "Fyodor Sobolev"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1054
-#: ../../../Models/MusicFile.cs:680 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:772
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1058
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:692
+#: ../../../Models/MusicFile.cs:783
 msgid "genre"
 msgstr ""
 
@@ -369,8 +369,12 @@ msgstr[1] ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:584
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:617
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
-#: ../../../Controllers/MainWindowController.cs:1224
+#: ../../../Controllers/MainWindowController.cs:1228
 msgid "Loading music files from folder..."
+msgstr ""
+
+#: ../../../Models/MusicFile.cs:148
+msgid "lyrics"
 msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:146
@@ -398,15 +402,15 @@ msgstr ""
 msgid "Nicholas Logozzo"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:916
+#: ../../../Controllers/MainWindowController.cs:920
 msgid "No AcoustId entry found for the file's fingerprint"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:926
+#: ../../../Controllers/MainWindowController.cs:930
 msgid "No metadata was downloaded"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:917
+#: ../../../Controllers/MainWindowController.cs:921
 msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
 msgstr ""
 
@@ -436,10 +440,10 @@ msgstr ""
 msgid "Property Name"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1085
-#: ../../../Models/MusicFile.cs:704 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:792
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1089
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:716
+#: ../../../Models/MusicFile.cs:803
 msgid "publisher"
 msgstr ""
 
@@ -478,7 +482,7 @@ msgstr ""
 msgid "Submit to AcoustId"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:939
+#: ../../../Controllers/MainWindowController.cs:943
 msgid "Submitted metadata to AcoustId successfully"
 msgstr ""
 
@@ -525,10 +529,10 @@ msgstr ""
 msgid "Timestamp (hh:mm:ss)"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:993
-#: ../../../Models/MusicFile.cs:640 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:744
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:997
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:652
+#: ../../../Models/MusicFile.cs:755
 msgid "title"
 msgstr ""
 
@@ -536,17 +540,17 @@ msgstr ""
 msgid "Too Many Files Selected"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1020
-#: ../../../Models/MusicFile.cs:660 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:760
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1024
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:672
+#: ../../../Models/MusicFile.cs:771
 msgid "track"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1035
-#: ../../../Models/MusicFile.cs:668 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:764
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1039
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:680
+#: ../../../Models/MusicFile.cs:775
 msgid "tracktotal"
 msgstr ""
 
@@ -568,14 +572,14 @@ msgstr ""
 msgid "Unable to save {0}."
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:939
+#: ../../../Controllers/MainWindowController.cs:943
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:963
-#: ../../../Controllers/MainWindowController.cs:1005
-#: ../../../Models/MusicFile.cs:652 ../../../Models/MusicFile.cs:729
-#: ../../../Models/MusicFile.cs:756
+#: ../../../Controllers/MainWindowController.cs:967
+#: ../../../Controllers/MainWindowController.cs:1009
+#: ../../../Models/MusicFile.cs:148 ../../../Models/MusicFile.cs:664
+#: ../../../Models/MusicFile.cs:767
 msgid "year"
 msgstr ""
 
@@ -598,7 +602,7 @@ msgstr ""
 msgid "Lyrics"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:36
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:32
 msgid "Configure"
 msgstr ""
 
@@ -617,20 +621,20 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:64
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:65
 msgid "Unsynchronized"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:69
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:74
 msgid ""
 "Unsynchronized lyrics are stored as a single string with no time information."
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:84
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:90
 msgid "Synchronized"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:89
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:99
 msgid ""
 "Synchronized lyrics are stored as a dictionary of strings identified by "
 "their timestamp in milliseconds."
