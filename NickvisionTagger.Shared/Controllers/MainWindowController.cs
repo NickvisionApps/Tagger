@@ -254,9 +254,9 @@ public class MainWindowController : IDisposable
         if (SelectedMusicFiles.Count == 1)
         {
             var first = SelectedMusicFiles.First().Value;
-            return new LyricsDialogController(first.LyricsLanguageCode, first.LyricsDescription, first.UnsynchronizedLyrics, first.SynchronizedLyrics);
+            return new LyricsDialogController(first.LyricsLanguageCode, first.LyricsDescription, first.UnsynchronizedLyrics, first.SynchronizedLyrics, first.SynchronizedLyricsOffset);
         }
-        return new LyricsDialogController("", "", "", new Dictionary<int, string>());
+        return new LyricsDialogController("", "", "", new Dictionary<int, string>(), 0);
     }
 
     /// <summary>
@@ -489,7 +489,8 @@ public class MainWindowController : IDisposable
     /// <param name="description">The description of the lyrics</param>
     /// <param name="unsync">The unsynchronized lyrics</param>
     /// <param name="sync">The set of synchronized lyrics</param>
-    public void UpdateLyrics(string langCode, string description, string unsync, Dictionary<int, string> sync)
+    /// <param name="offset">The offset of synchronized lyrics (in milliseconds)</param>
+    public void UpdateLyrics(string langCode, string description, string unsync, Dictionary<int, string> sync, int offset)
     {
         if (SelectedMusicFiles.Count == 1)
         {
@@ -513,6 +514,11 @@ public class MainWindowController : IDisposable
             if (!sync.SequenceEqual(first.Value.SynchronizedLyrics))
             {
                 first.Value.SynchronizedLyrics = sync;
+                updated = true;
+            }
+            if (offset != first.Value.SynchronizedLyricsOffset)
+            {
+                first.Value.SynchronizedLyricsOffset = offset;
                 updated = true;
             }
             MusicFileSaveStates[first.Key] = !updated && MusicFileSaveStates[first.Key];

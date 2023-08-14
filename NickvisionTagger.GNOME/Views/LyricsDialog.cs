@@ -48,6 +48,7 @@ public partial class LyricsDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.TextView _unsyncTextView;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _syncGroup;
     [Gtk.Connect] private readonly Gtk.Button _addSyncLyricButton;
+    [Gtk.Connect] private readonly Adw.EntryRow _syncOffsetRow;
     
     /// <summary>
     /// Constructs a LyricsDialog
@@ -67,6 +68,18 @@ public partial class LyricsDialog : Adw.Window
         SetTransientFor(parent);
         OnCloseRequest += OnClose;
         _addSyncLyricButton.OnClicked += AddSyncLyric;
+        _syncOffsetRow.OnApply += (sender, e) =>
+        {
+            if (int.TryParse(_syncOffsetRow.GetText(), out var offset))
+            {
+                _controller.SynchronizedLyricsOffset = offset;
+            }
+            else
+            {
+                _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset.ToString());
+                _syncOffsetRow.SetPosition(-1);
+            }
+        };
         //Load
         _languageRow.SetText(_controller.LanguageCode);
         _descriptionRow.SetText(_controller.Description);
@@ -75,6 +88,7 @@ public partial class LyricsDialog : Adw.Window
         {
             AddSyncLyricRow(pair.Key, pair.Value);
         }
+        _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset.ToString());
     }
 
     /// <summary>

@@ -24,6 +24,10 @@ public class LyricsDialogController
     /// The set of synchronized lyrics
     /// </summary>
     public Dictionary<int, string> SynchronizedLyrics { get; init; }
+    /// <summary>
+    /// The offset for SynchronizedLyrics (in milliseconds)
+    /// </summary>
+    public int SynchronizedLyricsOffset { get; set; }
     
     /// <summary>
     /// Constructs a LyricsDialogController
@@ -32,11 +36,13 @@ public class LyricsDialogController
     /// <param name="description">The description of the lyrics</param>
     /// <param name="unsync">The unsynchronized lyrics</param>
     /// <param name="sync">The set of synchronized lyrics</param>
-    public LyricsDialogController(string langCode, string description, string unsync, Dictionary<int, string> sync)
+    /// <param name="offset">The offset of synchronized lyrics (in milliseconds)</param>
+    public LyricsDialogController(string langCode, string description, string unsync, Dictionary<int, string> sync, int offset)
     {
         LanguageCode = langCode;
         Description = description;
         UnsynchronizedLyrics = unsync;
         SynchronizedLyrics = sync.ToDictionary(x => x.Key, x => x.Value);
+        SynchronizedLyricsOffset = offset;
     }
 }

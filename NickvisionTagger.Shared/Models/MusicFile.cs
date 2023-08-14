@@ -123,6 +123,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     public Dictionary<int, string> SynchronizedLyrics { get; set; }
     /// <summary>
+    /// The offset for SynchronizedLyrics (in milliseconds)
+    /// </summary>
+    public int SynchronizedLyricsOffset { get; set; }
+    /// <summary>
     /// The duration of the music file
     /// </summary>
     public int Duration { get; private set; }
@@ -181,6 +185,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         LyricsDescription = "";
         UnsynchronizedLyrics = "";
         SynchronizedLyrics = new Dictionary<int, string>();
+        SynchronizedLyricsOffset = 0;
         Duration = 0;
         IsReadOnly = false;
         LoadTagFromDisk();
@@ -311,6 +316,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             {
                 SynchronizedLyrics.Add(phase.TimestampMs, phase.Text);
             }
+            SynchronizedLyricsOffset = track.Lyrics.Metadata.TryGetValue("offset", out var offset) ? (int.TryParse(offset, out var offsetInt) ? offsetInt : 0) : 0;
             foreach(var pair in track.AdditionalFields)
             {
                 _customProperties.Add(pair.Key, pair.Value);
@@ -505,11 +511,16 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             LanguageCode = LyricsLanguageCode,
             Description = LyricsDescription,
             UnsynchronizedLyrics = UnsynchronizedLyrics,
-            SynchronizedLyrics = new List<LyricsInfo.LyricsPhrase>()
+            SynchronizedLyrics = new List<LyricsInfo.LyricsPhrase>(),
+            Metadata = new Dictionary<string, string>()
         };
         foreach (var pair in SynchronizedLyrics)
         {
             track.Lyrics.SynchronizedLyrics.Add(new LyricsInfo.LyricsPhrase(pair.Key, pair.Value));
+        }
+        if (SynchronizedLyricsOffset != 0)
+        {
+            track.Lyrics.Metadata["offset"] = SynchronizedLyricsOffset.ToString();
         }
         foreach(var pair in _customProperties)
         {
