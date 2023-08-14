@@ -22,20 +22,20 @@ Adw.Window _root {
       vexpand: true;
       orientation: vertical;
 
-      Gtk.ScrolledWindow {        
-        min-content-width: 300;
-        min-content-height: 200;
-        
-        Adw.ViewStack _viewStack {
-          hexpand: true;
-          vexpand: true;
-          margin-top: 12;
-          margin-bottom: 12;
-        
-          Adw.ViewStackPage {
-            title: _("Configure");
-            icon-name: "wrench-wide-symbolic";
-            child: Adw.PreferencesGroup {
+      Adw.ViewStack _viewStack {
+        hexpand: true;
+        vexpand: true;
+        margin-top: 12;
+        margin-bottom: 12;
+      
+        Adw.ViewStackPage {
+          title: _("Configure");
+          icon-name: "wrench-wide-symbolic";
+          child: Gtk.ScrolledWindow {
+            min-content-width: 300;
+            min-content-height: 200;
+            
+            Adw.PreferencesGroup {
               margin-start: 24;
               margin-end: 24;
               description: _("Information about the provided lyrics. Applies to both unsynchronized and synchronized lyrics.");
@@ -57,13 +57,18 @@ Adw.Window _root {
                   icon-name: "note-symbolic";
                 }
               }
-            };
-          }
-        
-          Adw.ViewStackPage {
-            title: _("Unsynchronized");
-            icon-name: "notepad-symbolic";
-            child: Adw.PreferencesGroup {
+            }
+          };
+        }
+      
+        Adw.ViewStackPage {
+          title: _("Unsynchronized");
+          icon-name: "notepad-symbolic";
+          child: Gtk.ScrolledWindow {
+            min-content-width: 300;
+            min-content-height: 200;
+          
+            Adw.PreferencesGroup {
               margin-start: 24;
               margin-end: 24;
               description: _("Unsynchronized lyrics are stored as a single string with no time information.");
@@ -74,16 +79,21 @@ Adw.Window _root {
                 left-margin: 12;
                 right-margin: 12;
                 bottom-margin: 12;
-
+  
                 styles ["card"]
               }
-            };
-          }
-          
-          Adw.ViewStackPage {
-            title: _("Synchronized");
-            icon-name: "preferences-system-time-symbolic";
-            child: Adw.PreferencesGroup _syncGroup {
+            }
+          };
+        }
+        
+        Adw.ViewStackPage {
+          title: _("Synchronized");
+          icon-name: "preferences-system-time-symbolic";
+          child: Gtk.ScrolledWindow {
+            min-content-width: 300;
+            min-content-height: 200;
+            
+            Adw.PreferencesGroup _syncGroup {
               margin-start: 24;
               margin-end: 24;
               description: _("Synchronized lyrics are stored as a dictionary of strings identified by their timestamp in milliseconds.");
@@ -102,8 +112,8 @@ Adw.Window _root {
                   styles ["flat"]
                 }
               };
-            };
-          }
+            }
+          };
         }
       }
       
