@@ -93,30 +93,37 @@ Adw.Window _root {
             min-content-width: 300;
             min-content-height: 200;
             
-            Adw.PreferencesGroup _syncGroup {
+            Gtk.Box {
+              orientation: vertical;
+              spacing: 12;
               margin-start: 24;
               margin-end: 24;
-              description: _("Synchronized lyrics are stored as a dictionary of strings identified by their timestamp in milliseconds.");
-              header-suffix: Gtk.Box {
-                orientation: horizontal;
-                spacing: 6;
-                
-                Gtk.Button _addSyncLyricButton {
-                  valign: center;
-                  
-                  Adw.ButtonContent {
-                    label: _("Add");
-                    icon-name: "list-add-symbolic";
+
+              Adw.PreferencesGroup {
+                description: _("Synchronized lyrics are stored as a dictionary of strings identified by their timestamp in milliseconds.");
+                header-suffix: Gtk.Box {
+                  orientation: horizontal;
+                  spacing: 6;
+
+                  Gtk.Button _addSyncLyricButton {
+                    valign: center;
+
+                    Adw.ButtonContent {
+                      label: _("Add");
+                      icon-name: "list-add-symbolic";
+                    }
+
+                    styles ["flat"]
                   }
-                  
-                  styles ["flat"]
+                };
+
+                Adw.EntryRow _syncOffsetRow {
+                  title: _("Offset (in milliseconds)");
+                  show-apply-button: true;
                 }
-              };
-              
-              Adw.EntryRow _syncOffsetRow {
-                title: _("Offset (in milliseconds)");
-                show-apply-button: true;
               }
+
+              Adw.PreferencesGroup _syncGroup { }
             }
           };
         }
