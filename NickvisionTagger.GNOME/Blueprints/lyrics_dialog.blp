@@ -22,139 +22,141 @@ Adw.Window _root {
       vexpand: true;
       orientation: vertical;
 
-      Adw.ViewStack _viewStack {
+      Adw.ToastOverlay _toast {
         hexpand: true;
         vexpand: true;
-      
-        Adw.ViewStackPage {
-          title: _("Configure");
-          icon-name: "wrench-wide-symbolic";
-          child: Gtk.ScrolledWindow {
-            min-content-width: 300;
-            min-content-height: 200;
-            
-            Adw.PreferencesGroup {
-              margin-start: 24;
-              margin-end: 24;
-              margin-top: 12;
-              margin-bottom: 12;
-              description: _("Information about the provided lyrics. Applies to both unsynchronized and synchronized lyrics.");
-              
-              Adw.EntryRow _languageRow {
-                title: _("Language Code");
-                
-                [prefix]
-                Gtk.Image {
-                  icon-name: "language-symbolic";
-                }
-              }
-              
-              Adw.EntryRow _descriptionRow {
-                title: _("Description");
-                
-                [prefix]
-                Gtk.Image {
-                  icon-name: "note-symbolic";
-                }
-              }
-            }
-          };
-        }
-      
-        Adw.ViewStackPage {
-          title: _("Unsynchronized");
-          icon-name: "notepad-symbolic";
-          child: Gtk.ScrolledWindow {
-            min-content-width: 300;
-            min-content-height: 200;
-          
-            Adw.PreferencesGroup {
-              margin-start: 24;
-              margin-end: 24;
-              margin-top: 12;
-              margin-bottom: 12;
-              description: _("Unsynchronized lyrics are stored as a single string with no time information.");
-              
-              Gtk.TextView _unsyncTextView {
-                vexpand: true;
-                top-margin: 12;
-                left-margin: 12;
-                right-margin: 12;
-                bottom-margin: 12;
-  
-                styles ["card"]
-              }
-            }
-          };
-        }
         
-        Adw.ViewStackPage {
-          title: _("Synchronized");
-          icon-name: "preferences-system-time-symbolic";
-          child: Gtk.ScrolledWindow {
-            min-content-width: 300;
-            min-content-height: 200;
-            
-            Gtk.Box {
-              orientation: vertical;
-              spacing: 12;
-              margin-start: 24;
-              margin-end: 24;
-              margin-top: 12;
-              margin-bottom: 12;
-
+        Adw.ViewStack _viewStack {
+          Adw.ViewStackPage {
+            title: _("Configure");
+            icon-name: "wrench-wide-symbolic";
+            child: Gtk.ScrolledWindow {
+              min-content-width: 300;
+              min-content-height: 200;
+              
               Adw.PreferencesGroup {
-                description: _("Synchronized lyrics are stored as a dictionary of strings identified by their timestamp in milliseconds.");
-                header-suffix: Gtk.Box {
-                  orientation: horizontal;
-                  spacing: 6;
+                margin-start: 24;
+                margin-end: 24;
+                margin-top: 12;
+                margin-bottom: 12;
+                description: _("Information about the provided lyrics. Applies to both unsynchronized and synchronized lyrics.");
+                
+                Adw.EntryRow _languageRow {
+                  title: _("Language Code");
                   
-                  Gtk.Button _addSyncLyricButton {
-                    valign: center;
+                  [prefix]
+                  Gtk.Image {
+                    icon-name: "language-symbolic";
+                  }
+                }
+                
+                Adw.EntryRow _descriptionRow {
+                  title: _("Description");
+                  
+                  [prefix]
+                  Gtk.Image {
+                    icon-name: "note-symbolic";
+                  }
+                }
+              }
+            };
+          }
+        
+          Adw.ViewStackPage {
+            title: _("Unsynchronized");
+            icon-name: "notepad-symbolic";
+            child: Gtk.ScrolledWindow {
+              min-content-width: 300;
+              min-content-height: 200;
+            
+              Adw.PreferencesGroup {
+                margin-start: 24;
+                margin-end: 24;
+                margin-top: 12;
+                margin-bottom: 12;
+                description: _("Unsynchronized lyrics are stored as a single string with no time information.");
+                
+                Gtk.TextView _unsyncTextView {
+                  vexpand: true;
+                  top-margin: 12;
+                  left-margin: 12;
+                  right-margin: 12;
+                  bottom-margin: 12;
+    
+                  styles ["card"]
+                }
+              }
+            };
+          }
+          
+          Adw.ViewStackPage {
+            title: _("Synchronized");
+            icon-name: "preferences-system-time-symbolic";
+            child: Gtk.ScrolledWindow {
+              min-content-width: 300;
+              min-content-height: 200;
+              
+              Gtk.Box {
+                orientation: vertical;
+                spacing: 12;
+                margin-start: 24;
+                margin-end: 24;
+                margin-top: 12;
+                margin-bottom: 12;
+  
+                Adw.PreferencesGroup {
+                  description: _("Synchronized lyrics are stored as a dictionary of strings identified by their timestamp in milliseconds.");
+                  header-suffix: Gtk.Box {
+                    orientation: horizontal;
+                    spacing: 6;
                     
-                    Adw.ButtonContent {
-                      label: _("Add");
-                      icon-name: "list-add-symbolic";
+                    Gtk.Button _addSyncLyricButton {
+                      valign: center;
+                      
+                      Adw.ButtonContent {
+                        label: _("Add");
+                        icon-name: "list-add-symbolic";
+                      }
+                      
+                      styles ["flat"]
                     }
                     
-                    styles ["flat"]
-                  }
-                  
-                  Gtk.Button _clearSyncButton {
-                    valign: center;
-                    icon-name: "user-trash-symbolic";
-                    tooltip-text: _("Clear All Lyrics");
+                    Gtk.Button _clearSyncButton {
+                      valign: center;
+                      icon-name: "user-trash-symbolic";
+                      tooltip-text: _("Clear All Lyrics");
+                      
+                      styles ["flat"]
+                    }
                     
-                    styles ["flat"]
+                    Gtk.Button _importSyncButton {
+                      valign: center;
+                      icon-name: "document-send-symbolic";
+                      tooltip-text: _("Import from LRC");
+                      
+                      styles ["flat"]
+                    }
+                                    
+                    Gtk.Button _exportSyncButton {
+                      valign: center;
+                      icon-name: "folder-download-symbolic";
+                      tooltip-text: _("Export to LRC");
+                      
+                      styles ["flat"]
+                    }
+                  };
+  
+                  Adw.EntryRow _syncOffsetRow {
+                    title: _("Offset (in milliseconds)");
+                    show-apply-button: true;
                   }
-                  
-                  Gtk.Button _importSyncButton {
-                    valign: center;
-                    icon-name: "document-send-symbolic";
-                    tooltip-text: _("Import from LRC");
-                    
-                    styles ["flat"]
-                  }
-                                  
-                  Gtk.Button _exportSyncButton {
-                    valign: center;
-                    icon-name: "folder-download-symbolic";
-                    tooltip-text: _("Export to LRC");
-                    
-                    styles ["flat"]
-                  }
-                };
-
-                Adw.EntryRow _syncOffsetRow {
-                  title: _("Offset (in milliseconds)");
-                  show-apply-button: true;
                 }
+  
+                Adw.PreferencesGroup _syncGroup { }
               }
-
-              Adw.PreferencesGroup _syncGroup { }
-            }
-          };
-        }
+            };
+          }
+        } 
       }
       
       Adw.ViewSwitcherBar {

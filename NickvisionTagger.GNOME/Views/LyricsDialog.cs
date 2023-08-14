@@ -46,6 +46,7 @@ public partial class LyricsDialog : Adw.Window
     private readonly string _iconName;
     private readonly Dictionary<int, Adw.EntryRow> _syncRows;
 
+    [Gtk.Connect] private readonly Adw.ToastOverlay _toast;
     [Gtk.Connect] private readonly Adw.EntryRow _languageRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Gtk.TextView _unsyncTextView;
@@ -229,6 +230,11 @@ public partial class LyricsDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private async void ExportSyncFromLRC(Gtk.Button sender, EventArgs e)
     {
+        if (_controller.SynchronizedLyrics.Count == 0)
+        {
+            _toast.AddToast(Adw.Toast.New(_("Nothing to export.")));
+            return;
+        }
         var saveFileDialog = Gtk.FileDialog.New();
         saveFileDialog.SetTitle(_("Export to LRC"));
         var filterLRC = Gtk.FileFilter.New();
@@ -246,7 +252,14 @@ public partial class LyricsDialog : Adw.Window
             {
                 path += ".lrc";
             }
-            _controller.ExportToLRC(path);
+            if (_controller.ExportToLRC(path))
+            {
+                _toast.AddToast(Adw.Toast.New(string.Format(_("Exported successfully to: {0}"), path)));
+            }
+            else
+            {
+                _toast.AddToast(Adw.Toast.New(_("Unable to export to LRC.")));
+            }
         }
         catch { }
     }

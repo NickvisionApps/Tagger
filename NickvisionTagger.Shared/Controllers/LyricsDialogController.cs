@@ -1,7 +1,11 @@
+using ATL;
+using Microsoft.VisualBasic.CompilerServices;
 using NickvisionTagger.Shared.Events;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace NickvisionTagger.Shared.Controllers;
 
@@ -100,13 +104,36 @@ public class LyricsDialogController
         SynchronizedLyrics.Clear();
     }
 
-    public void ImportFromLRC(string path)
+    public bool ImportFromLRC(string path)
     {
+        if (string.IsNullOrEmpty(path) || Path.GetExtension(path).ToLower() != ".lrc")
+        {
+            return false;
+        }
         
+        return false;
     }
 
-    public void ExportToLRC(string path)
+    public bool ExportToLRC(string path)
     {
-        
+        if (string.IsNullOrEmpty(path) || SynchronizedLyrics.Count == 0)
+        {
+            return false;
+        }
+        if (Path.GetExtension(path).ToLower() != ".lrc")
+        {
+            path += ".lrc";
+        }
+        var lyricsInfo = new LyricsInfo()
+        {
+            SynchronizedLyrics = SynchronizedLyrics.Select(x => new LyricsInfo.LyricsPhrase(x.Key, x.Value)).ToList(),
+            Metadata = new Dictionary<string, string>()
+        };
+        if (SynchronizedLyricsOffset != 0)
+        {
+            lyricsInfo.Metadata["offset"] = SynchronizedLyricsOffset.ToString();
+        }
+        File.WriteAllText(path, lyricsInfo.FormatSynchToLRC());
+        return true;
     }
 }
