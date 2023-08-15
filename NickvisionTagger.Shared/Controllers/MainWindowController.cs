@@ -926,6 +926,7 @@ public class MainWindowController : IDisposable
                 MusicBrainzLoadStatus.NoAcoustIdResult => _("No AcoustId entry found for the file's fingerprint"),
                 MusicBrainzLoadStatus.NoAcoustIdRecordingId => _("No MusicBrainz RecordingId was provided for the AcoustId entry"),
                 MusicBrainzLoadStatus.InvalidMusicBrainzRecordingId => _("An invalid RecordingId was provided to MusicBrainz"),
+                MusicBrainzLoadStatus.InvalidFingerprint => _("This file does not have a valid fingerprint"),
                 _ => _("Error")
             }}\n\n";
         }

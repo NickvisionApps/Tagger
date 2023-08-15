@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 13:24-0400\n"
+"POT-Creation-Date: 2023-08-15 13:28-0400\n"
 "PO-Revision-Date: 2023-08-09 12:22+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -50,7 +50,6 @@ msgstr "%piste%- %titre%"
 #: ../../../Controllers/MainWindowController.cs:455
 #: ../../../Controllers/MainWindowController.cs:460
 #: ../../../Controllers/MainWindowController.cs:469
-#: ../../../Controllers/MainWindowController.cs:1369
 #: ../../../Controllers/MainWindowController.cs:1370
 #: ../../../Controllers/MainWindowController.cs:1371
 #: ../../../Controllers/MainWindowController.cs:1372
@@ -64,7 +63,8 @@ msgstr "%piste%- %titre%"
 #: ../../../Controllers/MainWindowController.cs:1380
 #: ../../../Controllers/MainWindowController.cs:1381
 #: ../../../Controllers/MainWindowController.cs:1382
-#: ../../../Controllers/MainWindowController.cs:1386
+#: ../../../Controllers/MainWindowController.cs:1383
+#: ../../../Controllers/MainWindowController.cs:1387
 msgid "<keep>"
 msgstr "<conserver>"
 
@@ -99,17 +99,17 @@ msgstr ""
 msgid "Add"
 msgstr "Ajouter"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1011
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:667
-#: ../../../Models/MusicFile.cs:770
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1012
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:672
+#: ../../../Models/MusicFile.cs:775
 msgid "album"
 msgstr "album"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1060
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:695
-#: ../../../Models/MusicFile.cs:786
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1061
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:700
+#: ../../../Models/MusicFile.cs:791
 msgid "albumartist"
 msgstr "artiste de l’album"
 
@@ -132,10 +132,10 @@ msgstr "Appliquer"
 msgid "Apply Changes?"
 msgstr "Appliquer les changements ?"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1007
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:663
-#: ../../../Models/MusicFile.cs:766
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1008
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:668
+#: ../../../Models/MusicFile.cs:771
 msgid "artist"
 msgstr "artiste"
 
@@ -149,17 +149,17 @@ msgstr "o"
 msgid "Back"
 msgstr "Dos"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1072
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:707
-#: ../../../Models/MusicFile.cs:798
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1073
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:712
+#: ../../../Models/MusicFile.cs:803
 msgid "beatsperminute"
 msgstr "battementsparminute"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1072
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:707
-#: ../../../Models/MusicFile.cs:798
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1073
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:712
+#: ../../../Models/MusicFile.cs:803
 msgid "bpm"
 msgstr "bpm"
 
@@ -175,17 +175,17 @@ msgstr "bpm"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1068
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:703
-#: ../../../Models/MusicFile.cs:794
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1069
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:708
+#: ../../../Models/MusicFile.cs:799
 msgid "comment"
 msgstr "commentaire"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1087
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:715
-#: ../../../Models/MusicFile.cs:802
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1088
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:720
+#: ../../../Models/MusicFile.cs:807
 msgid "composer"
 msgstr "compositeur"
 
@@ -213,8 +213,8 @@ msgid_plural "Converted {0} tags to file names successfully"
 msgstr[0] "{0} balise convertie en nom de fichier avec succès"
 msgstr[1] "{0} balises converties en noms de fichiers avec succès"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1099
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1100
 msgid "custom"
 msgstr "personnalisé"
 
@@ -231,10 +231,10 @@ msgstr "DaPigGuy"
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1091
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:719
-#: ../../../Models/MusicFile.cs:806
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1092
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:724
+#: ../../../Models/MusicFile.cs:811
 msgid "description"
 msgstr "description"
 
@@ -249,7 +249,7 @@ msgstr "Abandonner"
 msgid "Discarding unapplied changes..."
 msgstr "Abandon des changements..."
 
-#: ../../../Controllers/MainWindowController.cs:936
+#: ../../../Controllers/MainWindowController.cs:937
 #, csharp-format
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Métadonnées téléchargées pour {0} fichiers avec succès"
@@ -258,11 +258,12 @@ msgstr "Métadonnées téléchargées pour {0} fichiers avec succès"
 msgid "Downloading MusicBrainz metadata..."
 msgstr "Téléchargement des métadonnées depuis MusicBrainz…"
 
-#: ../../../Controllers/MainWindowController.cs:929
+#: ../../../Controllers/MainWindowController.cs:930
 msgid "Error"
 msgstr "Erreur"
 
-#: ../../../Models/MusicFile.cs:223 ../../../Models/MusicFile.cs:246
+#: ../../../Models/MusicFile.cs:224 ../../../Models/MusicFile.cs:247
+#: ../../../Models/MusicFile.cs:344 ../../../Models/MusicFile.cs:843
 msgid "ERROR"
 msgstr "ERREUR"
 
@@ -314,8 +315,8 @@ msgstr ""
 msgid "File Name to Tag"
 msgstr "Nom de fichier vers balise"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:999
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1000
 msgid "filename"
 msgstr "nom de fichier"
 
@@ -338,10 +339,10 @@ msgstr "Face"
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1064
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:699
-#: ../../../Models/MusicFile.cs:790
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1065
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:704
+#: ../../../Models/MusicFile.cs:795
 msgid "genre"
 msgstr "genre"
 
@@ -396,11 +397,11 @@ msgstr[1] "{0} musiques chargées."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:584
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:617
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
-#: ../../../Controllers/MainWindowController.cs:1234
+#: ../../../Controllers/MainWindowController.cs:1235
 msgid "Loading music files from folder..."
 msgstr "Chargement des musiques depuis le dossier…"
 
-#: ../../../Models/MusicFile.cs:152
+#: ../../../Models/MusicFile.cs:153
 #, fuzzy
 msgid "lyrics"
 msgstr "Paroles"
@@ -434,7 +435,7 @@ msgstr "Nicholas Logozzo"
 msgid "No AcoustId entry found for the file's fingerprint"
 msgstr "Pas d’entrée AcoustId trouvée pour l’empreinte du fichier"
 
-#: ../../../Controllers/MainWindowController.cs:936
+#: ../../../Controllers/MainWindowController.cs:937
 msgid "No metadata was downloaded"
 msgstr "Aucune métadonnée n’a été téléchargée"
 
@@ -475,10 +476,10 @@ msgstr "Sélectionnez un format."
 msgid "Property Name"
 msgstr "Nom de la propriété"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1095
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:723
-#: ../../../Models/MusicFile.cs:810
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1096
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:728
+#: ../../../Models/MusicFile.cs:815
 msgid "publisher"
 msgstr "maison de disques"
 
@@ -519,7 +520,7 @@ msgstr "Envoyer"
 msgid "Submit to AcoustId"
 msgstr "Envoyer à AcoustId"
 
-#: ../../../Controllers/MainWindowController.cs:949
+#: ../../../Controllers/MainWindowController.cs:950
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "Métadonnées envoyées à AcoustId avec succès"
 
@@ -558,6 +559,10 @@ msgstr "Tagger"
 msgid "Tagger has opened some files in read-only mode."
 msgstr "Tagger a ouvert des fichiers en mode lecture seule."
 
+#: ../../../Controllers/MainWindowController.cs:929
+msgid "This file does not have a valid fingerprint"
+msgstr ""
+
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "Tio"
@@ -566,10 +571,10 @@ msgstr "Tio"
 msgid "Timestamp (hh:mm:ss)"
 msgstr "Horodatage (hh:mm:ss)"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1003
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:659
-#: ../../../Models/MusicFile.cs:762
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1004
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:664
+#: ../../../Models/MusicFile.cs:767
 msgid "title"
 msgstr "titre"
 
@@ -577,17 +582,17 @@ msgstr "titre"
 msgid "Too Many Files Selected"
 msgstr "Trop de fichiers sélectionnés"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1030
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:679
-#: ../../../Models/MusicFile.cs:778
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1031
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:684
+#: ../../../Models/MusicFile.cs:783
 msgid "track"
 msgstr "piste"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1045
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:687
-#: ../../../Models/MusicFile.cs:782
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1046
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:692
+#: ../../../Models/MusicFile.cs:787
 msgid "tracktotal"
 msgstr "pistestotal"
 
@@ -614,14 +619,14 @@ msgstr "Impossible d’enregistrer {0}"
 msgid "Unable to save {0}."
 msgstr "Impossible d’enregistrer {0}."
 
-#: ../../../Controllers/MainWindowController.cs:949
+#: ../../../Controllers/MainWindowController.cs:950
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "Impossible d’envoyer les métadonnées à AcoustId. Vérifiez la clé API"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1015
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:671
-#: ../../../Models/MusicFile.cs:774
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1016
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:676
+#: ../../../Models/MusicFile.cs:779
 msgid "year"
 msgstr "année"
 

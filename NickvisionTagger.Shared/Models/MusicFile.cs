@@ -21,7 +21,8 @@ public enum MusicBrainzLoadStatus
     Success = 0,
     NoAcoustIdResult,
     NoAcoustIdRecordingId,
-    InvalidMusicBrainzRecordingId
+    InvalidMusicBrainzRecordingId,
+    InvalidFingerprint
 }
 
 /// <summary>
@@ -340,6 +341,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>MusicBrainzLoadStatus</returns>
     public async Task<MusicBrainzLoadStatus> LoadTagFromMusicBrainzAsync(string acoustIdClientKey, string version, bool overwriteTagWithMusicBrainz, bool overwriteAlbumArtWithMusicBrainz)
     {
+        if (Fingerprint == _("ERROR"))
+        {
+            return MusicBrainzLoadStatus.InvalidFingerprint;
+        }
         //Use AcoustID to get MBID
         AcoustID.Configuration.ClientKey = acoustIdClientKey;
         var service = new AcoustID.Web.LookupService();
@@ -835,6 +840,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public async Task<bool> SubmitToAcoustIdAsync(string acoustIdClientKey, string acoustIdUserKey, string? musicBrainzRecordingId)
     {
+        if (Fingerprint == _("ERROR"))
+        {
+            return false;
+        }
         AcoustID.Configuration.ClientKey = acoustIdClientKey;
         var service = new AcoustID.Web.SubmitService(acoustIdUserKey);
         if(!string.IsNullOrEmpty(musicBrainzRecordingId))

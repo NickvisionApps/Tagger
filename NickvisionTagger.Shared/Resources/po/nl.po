@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 13:24-0400\n"
+"POT-Creation-Date: 2023-08-15 13:28-0400\n"
 "PO-Revision-Date: 2023-08-13 09:57+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -49,7 +49,6 @@ msgstr "%track% - %title%"
 #: ../../../Controllers/MainWindowController.cs:455
 #: ../../../Controllers/MainWindowController.cs:460
 #: ../../../Controllers/MainWindowController.cs:469
-#: ../../../Controllers/MainWindowController.cs:1369
 #: ../../../Controllers/MainWindowController.cs:1370
 #: ../../../Controllers/MainWindowController.cs:1371
 #: ../../../Controllers/MainWindowController.cs:1372
@@ -63,7 +62,8 @@ msgstr "%track% - %title%"
 #: ../../../Controllers/MainWindowController.cs:1380
 #: ../../../Controllers/MainWindowController.cs:1381
 #: ../../../Controllers/MainWindowController.cs:1382
-#: ../../../Controllers/MainWindowController.cs:1386
+#: ../../../Controllers/MainWindowController.cs:1383
+#: ../../../Controllers/MainWindowController.cs:1387
 msgid "<keep>"
 msgstr "<behouden>"
 
@@ -99,17 +99,17 @@ msgstr ""
 msgid "Add"
 msgstr "Toevoegen"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1011
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:667
-#: ../../../Models/MusicFile.cs:770
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1012
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:672
+#: ../../../Models/MusicFile.cs:775
 msgid "album"
 msgstr "album"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1060
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:695
-#: ../../../Models/MusicFile.cs:786
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1061
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:700
+#: ../../../Models/MusicFile.cs:791
 msgid "albumartist"
 msgstr "albumartiest"
 
@@ -132,10 +132,10 @@ msgstr "Toepassen"
 msgid "Apply Changes?"
 msgstr "Wijzigingen toepassen?"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1007
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:663
-#: ../../../Models/MusicFile.cs:766
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1008
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:668
+#: ../../../Models/MusicFile.cs:771
 msgid "artist"
 msgstr "artiest"
 
@@ -149,17 +149,17 @@ msgstr "B"
 msgid "Back"
 msgstr "Achterkant"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1072
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:707
-#: ../../../Models/MusicFile.cs:798
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1073
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:712
+#: ../../../Models/MusicFile.cs:803
 msgid "beatsperminute"
 msgstr "bpm"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1072
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:707
-#: ../../../Models/MusicFile.cs:798
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1073
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:712
+#: ../../../Models/MusicFile.cs:803
 msgid "bpm"
 msgstr "bpm"
 
@@ -175,17 +175,17 @@ msgstr "bpm"
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1068
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:703
-#: ../../../Models/MusicFile.cs:794
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1069
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:708
+#: ../../../Models/MusicFile.cs:799
 msgid "comment"
 msgstr "opmerking"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1087
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:715
-#: ../../../Models/MusicFile.cs:802
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1088
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:720
+#: ../../../Models/MusicFile.cs:807
 msgid "composer"
 msgstr "componist"
 
@@ -213,8 +213,8 @@ msgid_plural "Converted {0} tags to file names successfully"
 msgstr[0] "Er zijn %d tags omgezet in bestandsnamen"
 msgstr[1] "Er zijn %d tags omgezet in bestandsnamen"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1099
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1100
 msgid "custom"
 msgstr "aangepast"
 
@@ -231,10 +231,10 @@ msgstr "DaPigGuy"
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1091
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:719
-#: ../../../Models/MusicFile.cs:806
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1092
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:724
+#: ../../../Models/MusicFile.cs:811
 msgid "description"
 msgstr "omschrijving"
 
@@ -249,7 +249,7 @@ msgstr "Verwerpen"
 msgid "Discarding unapplied changes..."
 msgstr "Bezig met verwerpen van wijzigingen…"
 
-#: ../../../Controllers/MainWindowController.cs:936
+#: ../../../Controllers/MainWindowController.cs:937
 #, fuzzy, csharp-format
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Er zijn metagegevens van %d bestanden opgehaald"
@@ -258,11 +258,12 @@ msgstr "Er zijn metagegevens van %d bestanden opgehaald"
 msgid "Downloading MusicBrainz metadata..."
 msgstr "MusicBrainz-metagegevens downloaden…"
 
-#: ../../../Controllers/MainWindowController.cs:929
+#: ../../../Controllers/MainWindowController.cs:930
 msgid "Error"
 msgstr "Fout"
 
-#: ../../../Models/MusicFile.cs:223 ../../../Models/MusicFile.cs:246
+#: ../../../Models/MusicFile.cs:224 ../../../Models/MusicFile.cs:247
+#: ../../../Models/MusicFile.cs:344 ../../../Models/MusicFile.cs:843
 msgid "ERROR"
 msgstr "FOUT"
 
@@ -316,8 +317,8 @@ msgstr ""
 msgid "File Name to Tag"
 msgstr "Bestandsnaam naar tag"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:999
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1000
 msgid "filename"
 msgstr "bestandsnaam"
 
@@ -340,10 +341,10 @@ msgstr "Voorkant"
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1064
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:699
-#: ../../../Models/MusicFile.cs:790
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1065
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:704
+#: ../../../Models/MusicFile.cs:795
 msgid "genre"
 msgstr "genre"
 
@@ -400,12 +401,12 @@ msgstr[1] "Er zijn %d muziekbestanden geladen."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:584
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:617
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
-#: ../../../Controllers/MainWindowController.cs:1234
+#: ../../../Controllers/MainWindowController.cs:1235
 #, fuzzy
 msgid "Loading music files from folder..."
 msgstr "Bezig met laden van muziekbestanden…"
 
-#: ../../../Models/MusicFile.cs:152
+#: ../../../Models/MusicFile.cs:153
 #, fuzzy
 msgid "lyrics"
 msgstr "Songtekst"
@@ -439,7 +440,7 @@ msgstr "Nicholas Logozzo"
 msgid "No AcoustId entry found for the file's fingerprint"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:936
+#: ../../../Controllers/MainWindowController.cs:937
 msgid "No metadata was downloaded"
 msgstr ""
 
@@ -480,10 +481,10 @@ msgstr "Kies een opmaakmethode."
 msgid "Property Name"
 msgstr "Eigenschaps­naam"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1095
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:723
-#: ../../../Models/MusicFile.cs:810
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1096
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:728
+#: ../../../Models/MusicFile.cs:815
 msgid "publisher"
 msgstr "uitgever"
 
@@ -525,7 +526,7 @@ msgstr "Inzenden"
 msgid "Submit to AcoustId"
 msgstr "Versturen naar AcoustId"
 
-#: ../../../Controllers/MainWindowController.cs:949
+#: ../../../Controllers/MainWindowController.cs:950
 #, fuzzy
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "De metagegevens zijn verstuurd naar AcoustId."
@@ -567,6 +568,10 @@ msgstr "Tagger"
 msgid "Tagger has opened some files in read-only mode."
 msgstr ""
 
+#: ../../../Controllers/MainWindowController.cs:929
+msgid "This file does not have a valid fingerprint"
+msgstr ""
+
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "TiB"
@@ -575,10 +580,10 @@ msgstr "TiB"
 msgid "Timestamp (hh:mm:ss)"
 msgstr "Tijdstempel (uu:mm:ss)"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1003
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:659
-#: ../../../Models/MusicFile.cs:762
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1004
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:664
+#: ../../../Models/MusicFile.cs:767
 msgid "title"
 msgstr "titel"
 
@@ -586,17 +591,17 @@ msgstr "titel"
 msgid "Too Many Files Selected"
 msgstr "Teveel bestanden geselecteerd"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1030
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:679
-#: ../../../Models/MusicFile.cs:778
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1031
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:684
+#: ../../../Models/MusicFile.cs:783
 msgid "track"
 msgstr "nummer"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1045
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:687
-#: ../../../Models/MusicFile.cs:782
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1046
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:692
+#: ../../../Models/MusicFile.cs:787
 msgid "tracktotal"
 msgstr "aantalnummers"
 
@@ -622,15 +627,15 @@ msgstr ""
 msgid "Unable to save {0}."
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:949
+#: ../../../Controllers/MainWindowController.cs:950
 #, fuzzy
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "De metagegevens kunnen niet worden verstuurd naar AcoustId."
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1015
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:671
-#: ../../../Models/MusicFile.cs:774
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1016
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:676
+#: ../../../Models/MusicFile.cs:779
 msgid "year"
 msgstr "jaar"
 

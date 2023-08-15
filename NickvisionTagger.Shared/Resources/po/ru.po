@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 13:24-0400\n"
+"POT-Creation-Date: 2023-08-15 13:28-0400\n"
 "PO-Revision-Date: 2023-07-30 22:38+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
@@ -51,7 +51,6 @@ msgstr "%трек%- %название%"
 #: ../../../Controllers/MainWindowController.cs:455
 #: ../../../Controllers/MainWindowController.cs:460
 #: ../../../Controllers/MainWindowController.cs:469
-#: ../../../Controllers/MainWindowController.cs:1369
 #: ../../../Controllers/MainWindowController.cs:1370
 #: ../../../Controllers/MainWindowController.cs:1371
 #: ../../../Controllers/MainWindowController.cs:1372
@@ -65,7 +64,8 @@ msgstr "%трек%- %название%"
 #: ../../../Controllers/MainWindowController.cs:1380
 #: ../../../Controllers/MainWindowController.cs:1381
 #: ../../../Controllers/MainWindowController.cs:1382
-#: ../../../Controllers/MainWindowController.cs:1386
+#: ../../../Controllers/MainWindowController.cs:1383
+#: ../../../Controllers/MainWindowController.cs:1387
 msgid "<keep>"
 msgstr "<keep>"
 
@@ -100,17 +100,17 @@ msgstr ""
 msgid "Add"
 msgstr "Добавить"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1011
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:667
-#: ../../../Models/MusicFile.cs:770
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1012
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:672
+#: ../../../Models/MusicFile.cs:775
 msgid "album"
 msgstr "альбом"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1060
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:695
-#: ../../../Models/MusicFile.cs:786
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1061
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:700
+#: ../../../Models/MusicFile.cs:791
 msgid "albumartist"
 msgstr "альбомартист"
 
@@ -133,10 +133,10 @@ msgstr "Применить"
 msgid "Apply Changes?"
 msgstr "Применить изменения?"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1007
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:663
-#: ../../../Models/MusicFile.cs:766
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1008
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:668
+#: ../../../Models/MusicFile.cs:771
 msgid "artist"
 msgstr "artist"
 
@@ -150,17 +150,17 @@ msgstr "Б"
 msgid "Back"
 msgstr "Задняя"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1072
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:707
-#: ../../../Models/MusicFile.cs:798
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1073
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:712
+#: ../../../Models/MusicFile.cs:803
 msgid "beatsperminute"
 msgstr "удароввминуту"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1072
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:707
-#: ../../../Models/MusicFile.cs:798
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1073
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:712
+#: ../../../Models/MusicFile.cs:803
 msgid "bpm"
 msgstr "bpm"
 
@@ -176,17 +176,17 @@ msgstr "bpm"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1068
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:703
-#: ../../../Models/MusicFile.cs:794
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1069
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:708
+#: ../../../Models/MusicFile.cs:799
 msgid "comment"
 msgstr "комментарий"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1087
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:715
-#: ../../../Models/MusicFile.cs:802
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1088
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:720
+#: ../../../Models/MusicFile.cs:807
 msgid "composer"
 msgstr "композитор"
 
@@ -219,8 +219,8 @@ msgstr[0] "Успешно преобразован {0} тег в имя файл
 msgstr[1] "Успешно преобразованы {0} тегов в имена файлов"
 msgstr[2] "Успешно преобразованы {0} тегов в имена файлов"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1099
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1100
 msgid "custom"
 msgstr "пользовательский"
 
@@ -238,10 +238,10 @@ msgstr ""
 msgid "David Lapshin"
 msgstr "Давид Лапшин {0}"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1091
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:719
-#: ../../../Models/MusicFile.cs:806
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1092
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:724
+#: ../../../Models/MusicFile.cs:811
 msgid "description"
 msgstr "описание"
 
@@ -256,7 +256,7 @@ msgstr "Отменить"
 msgid "Discarding unapplied changes..."
 msgstr "Отмена изменений..."
 
-#: ../../../Controllers/MainWindowController.cs:936
+#: ../../../Controllers/MainWindowController.cs:937
 #, csharp-format
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Метаданные для {0} файлов загружены успешно"
@@ -265,11 +265,12 @@ msgstr "Метаданные для {0} файлов загружены успе
 msgid "Downloading MusicBrainz metadata..."
 msgstr "Загрузка метаданных MusicBrainz..."
 
-#: ../../../Controllers/MainWindowController.cs:929
+#: ../../../Controllers/MainWindowController.cs:930
 msgid "Error"
 msgstr ""
 
-#: ../../../Models/MusicFile.cs:223 ../../../Models/MusicFile.cs:246
+#: ../../../Models/MusicFile.cs:224 ../../../Models/MusicFile.cs:247
+#: ../../../Models/MusicFile.cs:344 ../../../Models/MusicFile.cs:843
 msgid "ERROR"
 msgstr "ОШИБКА"
 
@@ -318,8 +319,8 @@ msgstr "Не удалось экспортировать обложки альб
 msgid "File Name to Tag"
 msgstr "Имя файла в тег"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:999
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1000
 msgid "filename"
 msgstr "имя файла"
 
@@ -342,10 +343,10 @@ msgstr "Передняя"
 msgid "Fyodor Sobolev"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1064
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:699
-#: ../../../Models/MusicFile.cs:790
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1065
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:704
+#: ../../../Models/MusicFile.cs:795
 msgid "genre"
 msgstr "жанр"
 
@@ -401,11 +402,11 @@ msgstr[2] "Загружено {0} музыкальных файлов."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:584
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:617
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
-#: ../../../Controllers/MainWindowController.cs:1234
+#: ../../../Controllers/MainWindowController.cs:1235
 msgid "Loading music files from folder..."
 msgstr "Загрузка музыкальных файлов из папки..."
 
-#: ../../../Models/MusicFile.cs:152
+#: ../../../Models/MusicFile.cs:153
 msgid "lyrics"
 msgstr ""
 
@@ -438,7 +439,7 @@ msgstr ""
 msgid "No AcoustId entry found for the file's fingerprint"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:936
+#: ../../../Controllers/MainWindowController.cs:937
 msgid "No metadata was downloaded"
 msgstr ""
 
@@ -478,10 +479,10 @@ msgstr "Выберите формат строки."
 msgid "Property Name"
 msgstr "Имя свойства"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1095
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:723
-#: ../../../Models/MusicFile.cs:810
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1096
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:728
+#: ../../../Models/MusicFile.cs:815
 msgid "publisher"
 msgstr "издатель"
 
@@ -523,7 +524,7 @@ msgstr "Отправить"
 msgid "Submit to AcoustId"
 msgstr "Отправить в AcoustId"
 
-#: ../../../Controllers/MainWindowController.cs:949
+#: ../../../Controllers/MainWindowController.cs:950
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "Метаданные для AcoustId предоставлены успешно"
 
@@ -562,6 +563,10 @@ msgstr "Tagger"
 msgid "Tagger has opened some files in read-only mode."
 msgstr "Tagger открыл некоторые файлы в режиме только для чтения."
 
+#: ../../../Controllers/MainWindowController.cs:929
+msgid "This file does not have a valid fingerprint"
+msgstr ""
+
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "ТиБ"
@@ -570,10 +575,10 @@ msgstr "ТиБ"
 msgid "Timestamp (hh:mm:ss)"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1003
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:659
-#: ../../../Models/MusicFile.cs:762
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1004
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:664
+#: ../../../Models/MusicFile.cs:767
 msgid "title"
 msgstr "название"
 
@@ -581,17 +586,17 @@ msgstr "название"
 msgid "Too Many Files Selected"
 msgstr "Выбрано слишком много файлов"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1030
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:679
-#: ../../../Models/MusicFile.cs:778
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1031
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:684
+#: ../../../Models/MusicFile.cs:783
 msgid "track"
 msgstr "трек"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1045
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:687
-#: ../../../Models/MusicFile.cs:782
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1046
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:692
+#: ../../../Models/MusicFile.cs:787
 msgid "tracktotal"
 msgstr "итогтрек"
 
@@ -618,14 +623,14 @@ msgstr "Невозможно сохранить {0}"
 msgid "Unable to save {0}."
 msgstr "Невозможно сохранить {0}."
 
-#: ../../../Controllers/MainWindowController.cs:949
+#: ../../../Controllers/MainWindowController.cs:950
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "Невозможно отправить заявку на AcoustId. Проверьте ключ API"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1015
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:671
-#: ../../../Models/MusicFile.cs:774
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1016
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:676
+#: ../../../Models/MusicFile.cs:779
 msgid "year"
 msgstr "год"
 

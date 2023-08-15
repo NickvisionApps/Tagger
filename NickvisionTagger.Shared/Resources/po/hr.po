@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 13:24-0400\n"
+"POT-Creation-Date: 2023-08-15 13:28-0400\n"
 "PO-Revision-Date: 2023-07-29 14:02+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -51,7 +51,6 @@ msgstr "%pjesma%- %naslov%"
 #: ../../../Controllers/MainWindowController.cs:455
 #: ../../../Controllers/MainWindowController.cs:460
 #: ../../../Controllers/MainWindowController.cs:469
-#: ../../../Controllers/MainWindowController.cs:1369
 #: ../../../Controllers/MainWindowController.cs:1370
 #: ../../../Controllers/MainWindowController.cs:1371
 #: ../../../Controllers/MainWindowController.cs:1372
@@ -65,7 +64,8 @@ msgstr "%pjesma%- %naslov%"
 #: ../../../Controllers/MainWindowController.cs:1380
 #: ../../../Controllers/MainWindowController.cs:1381
 #: ../../../Controllers/MainWindowController.cs:1382
-#: ../../../Controllers/MainWindowController.cs:1386
+#: ../../../Controllers/MainWindowController.cs:1383
+#: ../../../Controllers/MainWindowController.cs:1387
 msgid "<keep>"
 msgstr "<zadrži>"
 
@@ -99,17 +99,17 @@ msgstr ""
 msgid "Add"
 msgstr "Dodaj"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1011
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:667
-#: ../../../Models/MusicFile.cs:770
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1012
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:672
+#: ../../../Models/MusicFile.cs:775
 msgid "album"
 msgstr "album"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1060
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:695
-#: ../../../Models/MusicFile.cs:786
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1061
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:700
+#: ../../../Models/MusicFile.cs:791
 msgid "albumartist"
 msgstr "izvođač albuma"
 
@@ -132,10 +132,10 @@ msgstr "Primijeni"
 msgid "Apply Changes?"
 msgstr "Primijeniti promjene?"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1007
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:663
-#: ../../../Models/MusicFile.cs:766
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1008
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:668
+#: ../../../Models/MusicFile.cs:771
 msgid "artist"
 msgstr "izvođač"
 
@@ -149,17 +149,17 @@ msgstr "B"
 msgid "Back"
 msgstr "Natrag"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1072
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:707
-#: ../../../Models/MusicFile.cs:798
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1073
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:712
+#: ../../../Models/MusicFile.cs:803
 msgid "beatsperminute"
 msgstr "broje otkucaja u minuti"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1072
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:707
-#: ../../../Models/MusicFile.cs:798
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1073
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:712
+#: ../../../Models/MusicFile.cs:803
 msgid "bpm"
 msgstr "bpm"
 
@@ -175,17 +175,17 @@ msgstr "bpm"
 msgid "Cancel"
 msgstr "Odustani"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1068
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:703
-#: ../../../Models/MusicFile.cs:794
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1069
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:708
+#: ../../../Models/MusicFile.cs:799
 msgid "comment"
 msgstr "komentar"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1087
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:715
-#: ../../../Models/MusicFile.cs:802
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1088
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:720
+#: ../../../Models/MusicFile.cs:807
 msgid "composer"
 msgstr "skladatelj"
 
@@ -218,8 +218,8 @@ msgstr[0] "{0} oznaka uspješno pretvorena u ime datoteke"
 msgstr[1] "{0} oznake uspješno pretvorene u imena datoteka"
 msgstr[2] "{0} oznaka uspješno pretvorena u imena datoteka"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1099
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1100
 msgid "custom"
 msgstr "prilagođeno"
 
@@ -237,10 +237,10 @@ msgstr ""
 msgid "David Lapshin"
 msgstr "David Lapshin {0}"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1091
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:719
-#: ../../../Models/MusicFile.cs:806
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1092
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:724
+#: ../../../Models/MusicFile.cs:811
 msgid "description"
 msgstr "opis"
 
@@ -255,7 +255,7 @@ msgstr "Odbaci"
 msgid "Discarding unapplied changes..."
 msgstr "Odbacivanje neprimjenjenih promjena …"
 
-#: ../../../Controllers/MainWindowController.cs:936
+#: ../../../Controllers/MainWindowController.cs:937
 #, csharp-format
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Uspješno preuzeti metapodaci za {0} datoteke(a)"
@@ -264,11 +264,12 @@ msgstr "Uspješno preuzeti metapodaci za {0} datoteke(a)"
 msgid "Downloading MusicBrainz metadata..."
 msgstr "Preuzmi MusicBrainz metapodatke …"
 
-#: ../../../Controllers/MainWindowController.cs:929
+#: ../../../Controllers/MainWindowController.cs:930
 msgid "Error"
 msgstr ""
 
-#: ../../../Models/MusicFile.cs:223 ../../../Models/MusicFile.cs:246
+#: ../../../Models/MusicFile.cs:224 ../../../Models/MusicFile.cs:247
+#: ../../../Models/MusicFile.cs:344 ../../../Models/MusicFile.cs:843
 msgid "ERROR"
 msgstr "GREŠKA"
 
@@ -317,8 +318,8 @@ msgstr "Prednja slika albuma nije uspješno izvezena u datoteku"
 msgid "File Name to Tag"
 msgstr "Ime datoteke u oznaku"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:999
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1000
 msgid "filename"
 msgstr "ime datoteke"
 
@@ -341,10 +342,10 @@ msgstr "Prednja strana"
 msgid "Fyodor Sobolev"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1064
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:699
-#: ../../../Models/MusicFile.cs:790
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1065
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:704
+#: ../../../Models/MusicFile.cs:795
 msgid "genre"
 msgstr "žanr"
 
@@ -400,11 +401,11 @@ msgstr[2] "Učitano je {0} glazbenih datoteka."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:584
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:617
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
-#: ../../../Controllers/MainWindowController.cs:1234
+#: ../../../Controllers/MainWindowController.cs:1235
 msgid "Loading music files from folder..."
 msgstr "Učitavanje glazbenih datoteka iz mape …"
 
-#: ../../../Models/MusicFile.cs:152
+#: ../../../Models/MusicFile.cs:153
 msgid "lyrics"
 msgstr ""
 
@@ -437,7 +438,7 @@ msgstr ""
 msgid "No AcoustId entry found for the file's fingerprint"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:936
+#: ../../../Controllers/MainWindowController.cs:937
 msgid "No metadata was downloaded"
 msgstr ""
 
@@ -477,10 +478,10 @@ msgstr "Odaberi jedan format izraza."
 msgid "Property Name"
 msgstr "Ime svojstva"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1095
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:723
-#: ../../../Models/MusicFile.cs:810
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1096
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:728
+#: ../../../Models/MusicFile.cs:815
 msgid "publisher"
 msgstr "izdavač"
 
@@ -522,7 +523,7 @@ msgstr "Pošalji"
 msgid "Submit to AcoustId"
 msgstr "Pošalji AcoustId-u"
 
-#: ../../../Controllers/MainWindowController.cs:949
+#: ../../../Controllers/MainWindowController.cs:950
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "Metapodaci su uspješno poslani AcoustId-u"
 
@@ -561,6 +562,10 @@ msgstr "Tagger"
 msgid "Tagger has opened some files in read-only mode."
 msgstr "Tagger je otvorio neke datoteke u modusu „samo čitanje”."
 
+#: ../../../Controllers/MainWindowController.cs:929
+msgid "This file does not have a valid fingerprint"
+msgstr ""
+
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "TiB"
@@ -569,10 +574,10 @@ msgstr "TiB"
 msgid "Timestamp (hh:mm:ss)"
 msgstr ""
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1003
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:659
-#: ../../../Models/MusicFile.cs:762
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1004
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:664
+#: ../../../Models/MusicFile.cs:767
 msgid "title"
 msgstr "naslov"
 
@@ -580,17 +585,17 @@ msgstr "naslov"
 msgid "Too Many Files Selected"
 msgstr "Odabrano je previše datoteka"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1030
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:679
-#: ../../../Models/MusicFile.cs:778
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1031
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:684
+#: ../../../Models/MusicFile.cs:783
 msgid "track"
 msgstr "pjesma"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1045
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:687
-#: ../../../Models/MusicFile.cs:782
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1046
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:692
+#: ../../../Models/MusicFile.cs:787
 msgid "tracktotal"
 msgstr "broj pjesama"
 
@@ -617,14 +622,14 @@ msgstr "Neuspjelo spremanje datoteke {0}"
 msgid "Unable to save {0}."
 msgstr "Neuspjelo spremanje datoteke {0}."
 
-#: ../../../Controllers/MainWindowController.cs:949
+#: ../../../Controllers/MainWindowController.cs:950
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "Neuspjelo slanje AcoustId-u. Provjeri API ključ"
 
-#: ../../../Controllers/MainWindowController.cs:973
-#: ../../../Controllers/MainWindowController.cs:1015
-#: ../../../Models/MusicFile.cs:152 ../../../Models/MusicFile.cs:671
-#: ../../../Models/MusicFile.cs:774
+#: ../../../Controllers/MainWindowController.cs:974
+#: ../../../Controllers/MainWindowController.cs:1016
+#: ../../../Models/MusicFile.cs:153 ../../../Models/MusicFile.cs:676
+#: ../../../Models/MusicFile.cs:779
 msgid "year"
 msgstr "godina"
 
