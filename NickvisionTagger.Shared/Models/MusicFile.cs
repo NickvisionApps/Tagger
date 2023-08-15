@@ -516,8 +516,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             LanguageCode = LyricsLanguageCode,
             Description = LyricsDescription,
             UnsynchronizedLyrics = UnsynchronizedLyrics,
-            SynchronizedLyrics = SynchronizedLyrics.Select(x => new LyricsInfo.LyricsPhrase(x.Key, x.Value)).ToList(),
-            Metadata = new Dictionary<string, string>()
+            SynchronizedLyrics = SynchronizedLyrics.Select(x => new LyricsInfo.LyricsPhrase(x.Key, x.Value)).ToList()
         };
         if (SynchronizedLyricsOffset != 0)
         {

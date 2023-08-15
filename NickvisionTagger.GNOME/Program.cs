@@ -36,7 +36,7 @@ public partial class Program
         _mainWindowController.AppInfo.Changelog =
             @"* Added offset field to synchronized lyrics page 
               * Added the ability to import and export LRC files in the synchronized lyrics page
-              * Lyrics stored in LRC format will now be displayed correctly as synchronized lyrics
+              * Fixed an issue where synchronized lyrics stored in the LRC format were not displayed correctly
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))

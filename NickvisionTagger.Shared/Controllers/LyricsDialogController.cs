@@ -104,13 +104,34 @@ public class LyricsDialogController
         SynchronizedLyrics.Clear();
     }
 
-    public bool ImportFromLRC(string path)
+    public bool ImportFromLRC(string path, bool overwrite)
     {
         if (string.IsNullOrEmpty(path) || Path.GetExtension(path).ToLower() != ".lrc")
         {
             return false;
         }
-        
+        var lrc = File.ReadAllText(path);
+        var lyricsInfo = new LyricsInfo();
+        lyricsInfo.ParseLRC(lrc);
+        foreach (var phase in lyricsInfo.SynchronizedLyrics)
+        {
+            if (SynchronizedLyrics.ContainsKey(phase.TimestampMs) && overwrite)
+            {
+                SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(phase.TimestampMs, SynchronizedLyrics[phase.TimestampMs]));
+                SynchronizedLyrics[phase.TimestampMs] = phase.Text;
+                SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phase.TimestampMs, phase.Text));
+            }
+            else if (!SynchronizedLyrics.ContainsKey(phase.TimestampMs))
+            {
+                SynchronizedLyrics.Add(phase.TimestampMs, phase.Text);
+                SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phase.TimestampMs, phase.Text));
+            }
+        }
+        var offset = lyricsInfo.Metadata.TryGetValue("offset", out var o) ? (int.TryParse(o, out var offsetInt) ? offsetInt : 0) : 0;
+        if (offset != SynchronizedLyricsOffset && overwrite)
+        {
+            SynchronizedLyricsOffset = offset;
+        }
         return false;
     }
 
@@ -126,8 +147,7 @@ public class LyricsDialogController
         }
         var lyricsInfo = new LyricsInfo()
         {
-            SynchronizedLyrics = SynchronizedLyrics.Select(x => new LyricsInfo.LyricsPhrase(x.Key, x.Value)).ToList(),
-            Metadata = new Dictionary<string, string>()
+            SynchronizedLyrics = SynchronizedLyrics.Select(x => new LyricsInfo.LyricsPhrase(x.Key, x.Value)).ToList()
         };
         if (SynchronizedLyricsOffset != 0)
         {
