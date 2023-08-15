@@ -69,6 +69,21 @@
             ]
         },
         {
+            "name": "webp-pixbuf-loader",
+            "buildsystem": "meson",
+            "config-opts": [ "-Dgdk_pixbuf_moduledir=/app/lib/org.nickvision.tagger/gdk-pixbuf-2.0/2.10.0/loaders" ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/aruiz/webp-pixbuf-loader",
+                    "commit": "a35014104a226265e44fe30fcdb4df9305af3466"
+                }
+            ],
+            "post-install": [
+                "gdk-pixbuf-query-loaders /app/lib/org.nickvision.tagger/gdk-pixbuf-2.0/2.10.0/loaders/*.so > /app/lib/org.nickvision.tagger/gdk-pixbuf-2.0/2.10.0/loaders/loaders.cache"
+            ]
+        },
+        {
             "name": "blueprint-compiler",
             "buildsystem": "meson",
             "sources": [

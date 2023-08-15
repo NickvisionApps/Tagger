@@ -718,7 +718,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         openFileDialog.SetTitle(type == AlbumArtType.Front ? _("Insert Front Album Art") : _("Insert Back Album Art"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         var filterImages = Gtk.FileFilter.New();
-        filterImages.AddMimeType("image/*");
+        filterImages.AddMimeType("image/jpeg");
+        filterImages.AddMimeType("image/png");
+        filterImages.AddMimeType("image/bmp");
+        filterImages.AddMimeType("image/webp");
         filters.Append(filterImages);
         openFileDialog.SetFilters(filters);
         try
