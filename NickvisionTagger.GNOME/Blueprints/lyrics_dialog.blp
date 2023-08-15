@@ -104,48 +104,49 @@ Adw.Window _root {
                 margin-top: 12;
                 margin-bottom: 12;
   
-                Adw.PreferencesGroup {
-                  description: _("Synchronized lyrics are stored as a dictionary of strings identified by their timestamp in milliseconds.");
-                  header-suffix: Gtk.Box {
-                    orientation: horizontal;
-                    spacing: 6;
-                    
-                    Gtk.Button _addSyncLyricButton {
-                      valign: center;
-                      
-                      Adw.ButtonContent {
-                        label: _("Add");
-                        icon-name: "list-add-symbolic";
-                      }
-                      
-                      styles ["flat"]
+                Gtk.Box {
+                  orientation: horizontal;
+                  spacing: 6;
+                  hexpand: true;
+                  
+                  Gtk.Button _addSyncLyricButton {
+                    Adw.ButtonContent {
+                      label: _("Add");
+                      icon-name: "list-add-symbolic";
                     }
                     
-                    Gtk.Button _clearSyncButton {
-                      valign: center;
-                      icon-name: "user-trash-symbolic";
-                      tooltip-text: _("Clear All Lyrics");
-                      
-                      styles ["flat"]
-                    }
+                    styles ["flat"]
+                  }
+                  
+                  Gtk.Separator {
+                    hexpand: true;
                     
-                    Gtk.Button _importSyncButton {
-                      valign: center;
-                      icon-name: "document-send-symbolic";
-                      tooltip-text: _("Import from LRC");
-                      
-                      styles ["flat"]
-                    }
-                                    
-                    Gtk.Button _exportSyncButton {
-                      valign: center;
-                      icon-name: "folder-download-symbolic";
-                      tooltip-text: _("Export to LRC");
-                      
-                      styles ["flat"]
-                    }
-                  };
+                    styles ["spacer"]
+                  }
+                  
+                  Gtk.Button _clearSyncButton {
+                    icon-name: "user-trash-symbolic";
+                    tooltip-text: _("Clear All Lyrics");
+                    
+                    styles ["flat"]
+                  }
+                  
+                  Gtk.Button _importSyncButton {
+                    icon-name: "document-send-symbolic";
+                    tooltip-text: _("Import from LRC");
+                    
+                    styles ["flat"]
+                  }
+                                  
+                  Gtk.Button _exportSyncButton {
+                    icon-name: "folder-download-symbolic";
+                    tooltip-text: _("Export to LRC");
+                    
+                    styles ["flat"]
+                  }
+                }
   
+                Adw.PreferencesGroup {
                   Adw.EntryRow _syncOffsetRow {
                     title: _("Offset (in milliseconds)");
                     show-apply-button: true;
