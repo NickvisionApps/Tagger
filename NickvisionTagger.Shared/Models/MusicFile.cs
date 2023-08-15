@@ -313,7 +313,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             LyricsLanguageCode = track.Lyrics.LanguageCode;
             LyricsDescription = track.Lyrics.Description;
             UnsynchronizedLyrics = track.Lyrics.UnsynchronizedLyrics;
-            foreach (var phase in track.Lyrics.SynchronizedLyrics.OrderBy(x => x.TimestampMs))
+            foreach (var phase in track.Lyrics.SynchronizedLyrics)
             {
                 SynchronizedLyrics.Add(phase.TimestampMs, phase.Text);
             }
