@@ -50,7 +50,7 @@ public partial class LyricsDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.EntryRow _languageRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Gtk.TextView _unsyncTextView;
-    [Gtk.Connect] private readonly Adw.PreferencesGroup _syncGroup;
+    [Gtk.Connect] private readonly Gtk.ListBox _syncList;
     [Gtk.Connect] private readonly Gtk.Button _addSyncLyricButton;
     [Gtk.Connect] private readonly Gtk.Button _clearSyncButton;
     [Gtk.Connect] private readonly Gtk.Button _importSyncButton;
@@ -138,7 +138,7 @@ public partial class LyricsDialog : Adw.Window
             delete.OnClicked += (s, ex) => _controller.RemoveSynchronizedLyric(e.Timestamp);
             row.AddSuffix(delete);
             row.OnApply += (s, ex) => _controller.SetSynchronizedLyric(e.Timestamp, s.GetText());
-            _syncGroup.Add(row);
+            _syncList.Insert(row, e.Position);
             _syncRows.Add(e.Timestamp, row);
         }
     }
@@ -152,7 +152,7 @@ public partial class LyricsDialog : Adw.Window
     {
         if (_syncRows.ContainsKey(e.Timestamp))
         {
-            _syncGroup.Remove(_syncRows[e.Timestamp]);
+            _syncList.Remove(_syncRows[e.Timestamp]);
             _syncRows.Remove(e.Timestamp);
         }
     }

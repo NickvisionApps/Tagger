@@ -63,7 +63,7 @@ public class LyricsDialogController
 
     public void Startup()
     {
-        foreach (var pair in SynchronizedLyrics)
+        foreach (var pair in SynchronizedLyrics.OrderBy(x => x.Key))
         {
             SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(pair.Key, pair.Value));
         }
@@ -74,7 +74,8 @@ public class LyricsDialogController
         if (!SynchronizedLyrics.ContainsKey(timestamp))
         {
             SynchronizedLyrics[timestamp] = "";
-            SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(timestamp, ""));
+            var lyrics = SynchronizedLyrics.Keys.OrderBy(x => x).ToList();
+            SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(timestamp, "", lyrics.IndexOf(timestamp)));
         }
     }
 
@@ -119,12 +120,14 @@ public class LyricsDialogController
             {
                 SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(phase.TimestampMs, SynchronizedLyrics[phase.TimestampMs]));
                 SynchronizedLyrics[phase.TimestampMs] = phase.Text;
-                SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phase.TimestampMs, phase.Text));
+                var lyrics = SynchronizedLyrics.Keys.OrderBy(x => x).ToList();
+                SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phase.TimestampMs, phase.Text, lyrics.IndexOf(phase.TimestampMs)));
             }
             else if (!SynchronizedLyrics.ContainsKey(phase.TimestampMs))
             {
                 SynchronizedLyrics.Add(phase.TimestampMs, phase.Text);
-                SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phase.TimestampMs, phase.Text));
+                var lyrics = SynchronizedLyrics.Keys.OrderBy(x => x).ToList();
+                SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phase.TimestampMs, phase.Text, lyrics.IndexOf(phase.TimestampMs)));
             }
         }
         var offset = lyricsInfo.Metadata.TryGetValue("offset", out var o) ? (int.TryParse(o, out var offsetInt) ? offsetInt : 0) : 0;
@@ -132,7 +135,7 @@ public class LyricsDialogController
         {
             SynchronizedLyricsOffset = offset;
         }
-        return false;
+        return true;
     }
 
     public bool ExportToLRC(string path)
