@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-03 17:01-0400\n"
-"PO-Revision-Date: 2023-08-13 23:36+0000\n"
+"PO-Revision-Date: 2023-08-15 16:47+0000\n"
 "Last-Translator: Simon Hahne <simonhahne@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/de/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr ""
+msgstr "Simon Hahne <simon@nicewaffel.dev>"
 
 #. (itstool) path: info/title
 #: yelp/C/configuration.page:8
@@ -303,21 +303,23 @@ msgstr "Format"
 #: yelp/C/format-strings.page:24
 msgid "Strings of any format with properties wrapped in percent signs (%)."
 msgstr ""
+"Beliebig formatierte Strings, wobei Eigenschaften in Prozentzeichen (%) "
+"gehüllt sind."
 
 #. (itstool) path: note/title
 #: yelp/C/format-strings.page:26
 msgid "Example"
-msgstr ""
+msgstr "Beispiel"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:27
 msgid "Format String: <code>%artist%- %title%</code>"
-msgstr ""
+msgstr "Formatvorlage: <code>%artist%- %title%</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:28
 msgid "Filename: <code>Artist1 - Song1.mp3</code>"
-msgstr ""
+msgstr "Dateiname: <code>Interpret1 - Song1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:29
@@ -326,81 +328,84 @@ msgid ""
 "and this file name will create a tag with an artist of <code>Artist1</code> "
 "and a title of <code>Song1</code>."
 msgstr ""
+"Wird die <code>Dateiname zu Tag</code> Konvertierung ausgeführt, erstellt "
+"die Formatvorlage und der Dateiname einen Tag mit Interpret "
+"<code>Interpret1</code> und Titel <code>Song1</code>."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:33
 msgid "Supported Properties"
-msgstr ""
+msgstr "Unterstützte Eigenschaften"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:35 yelp/C/search.page:31
 msgid "<code>title</code>"
-msgstr ""
+msgstr "<code>title</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:36 yelp/C/search.page:32
 msgid "<code>artist</code>"
-msgstr ""
+msgstr "<code>artist</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:37 yelp/C/search.page:33
 msgid "<code>album</code>"
-msgstr ""
+msgstr "<code>album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:38 yelp/C/search.page:34
 msgid "<code>year</code>"
-msgstr ""
+msgstr "<code>year</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:39 yelp/C/search.page:35
 msgid "<code>track</code>"
-msgstr ""
+msgstr "<code>track</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:40 yelp/C/search.page:36
 msgid "<code>tracktotal</code>"
-msgstr ""
+msgstr "<code>tracktotal</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:41 yelp/C/search.page:37
 msgid "<code>albumartist</code>"
-msgstr ""
+msgstr "<code>albumartist</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:42 yelp/C/search.page:38
 msgid "<code>genre</code>"
-msgstr ""
+msgstr "<code>genre</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:43 yelp/C/search.page:39
 msgid "<code>comment</code>"
-msgstr ""
+msgstr "<code>comment</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:44 yelp/C/search.page:40
 msgid "<code>beatsperminute (bpm)</code>"
-msgstr ""
+msgstr "<code>beatsperminute (bpm)</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:45 yelp/C/search.page:41
 msgid "<code>composer</code>"
-msgstr ""
+msgstr "<code>composer</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:46 yelp/C/search.page:42
 msgid "<code>description</code>"
-msgstr ""
+msgstr "<code>description</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:47 yelp/C/search.page:43
 msgid "<code>publisher</code>"
-msgstr ""
+msgstr "<code>publisher</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:50
 msgid "When using conversions, custom property names can also be used."
-msgstr ""
+msgstr "Auch benutzerdefinierte Eigenschaftsnamen können genutzt werden."
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:51
@@ -408,18 +413,20 @@ msgid ""
 "For example, a custom property who's name is <code>ENCODER</code> can be "
 "used as <code>%encoder%</code>."
 msgstr ""
+"Beispielsweise kann eine benutzerdefinierte Eigenschaft mit dem Namen "
+"<code>ENCODER</code> als <code>%encoder%</code> verwendet werden."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
 msgctxt "link"
 msgid "Tagger Help"
-msgstr ""
+msgstr "Tagger Hilfe"
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:8
 msgctxt "text"
 msgid "Tagger Help"
-msgstr ""
+msgstr "Tagger Hilfe"
 
 #. (itstool) path: credit/name
 #: yelp/C/index.page:10
@@ -429,7 +436,7 @@ msgstr "Fyodor Sobolev"
 #. (itstool) path: page/title
 #: yelp/C/index.page:20
 msgid "<_:media-1/> Tagger Help"
-msgstr ""
+msgstr "<_:media-1/> Tagger Hilfe"
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:21
@@ -437,6 +444,8 @@ msgid ""
 "This documentation will help you understand how to configure <app>Tagger</"
 "app> to get the most of the application."
 msgstr ""
+"Diese Dokumentation hilft dir zu verstehen, wie du <app>Tagger</app> "
+"konfigurieren kannst um die Anwendung optimal zu nutzen."
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:22
@@ -446,262 +455,268 @@ msgid ""
 "Tagger/discussions\">discussions</link> on Github, or <link href=\"https://"
 "bit.ly/3GrfEid\">join our Matrix channel</link>."
 msgstr ""
+"Unterstützung erhältst du in GitHub <link href=\"https://github.com/"
+"NickvisionApps/Tagger/issues\">Issues</link> oder <link href=\"https://github"
+".com/NickvisionApps/Tagger/discussions\">Discussions</link>. Außerdem kannst "
+"du <link href=\"https://bit.ly/3GrfEid\">unserem Matrix-Channel "
+"beitreten</link>."
 
 #. (itstool) path: list/title
 #: yelp/C/index.page:26
 msgid "Supported File Extensions"
-msgstr ""
+msgstr "Unterstützte Dateiendungen"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:27
 msgid "<code>.mp3</code>"
-msgstr ""
+msgstr "<code>.mp3</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:28
 msgid "<code>.m4a</code>"
-msgstr ""
+msgstr "<code>.m4a</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:29
 msgid "<code>.m4b</code>"
-msgstr ""
+msgstr "<code>.m4b</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:30
 msgid "<code>.ogg</code>"
-msgstr ""
+msgstr "<code>.ogg</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:31
 msgid "<code>.opus</code>"
-msgstr ""
+msgstr "<code>.opus</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:32
 msgid "<code>.oga</code>"
-msgstr ""
+msgstr "<code>.oga</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:33
 msgid "<code>.flac</code>"
-msgstr ""
+msgstr "<code>.flac</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:34
 msgid "<code>.wma</code>"
-msgstr ""
+msgstr "<code>.wma</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:35
 msgid "<code>.wav</code>"
-msgstr ""
+msgstr "<code>.wav</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:36
 msgid "<code>.aac</code>"
-msgstr ""
+msgstr "<code>.aac</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:37
 msgid "<code>.aax</code>"
-msgstr ""
+msgstr "<code>.aax</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:38
 msgid "<code>.aa</code>"
-msgstr ""
+msgstr "<code>.aa</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:39
 msgid "<code>.aif</code>"
-msgstr ""
+msgstr "<code>.aif</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:40
 msgid "<code>.aiff</code>"
-msgstr ""
+msgstr "<code>.aiff</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:41
 msgid "<code>.aifc</code>"
-msgstr ""
+msgstr "<code>.aifc</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:42
 msgid "<code>.dsd</code>"
-msgstr ""
+msgstr "<code>.dsd</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:43
 msgid "<code>.dsf</code>"
-msgstr ""
+msgstr "<code>.dsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:44
 msgid "<code>.ac3</code>"
-msgstr ""
+msgstr "<code>.ac3</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:45
 msgid "<code>.gym</code>"
-msgstr ""
+msgstr "<code>.gym</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:46
 msgid "<code>.ape</code>"
-msgstr ""
+msgstr "<code>.ape</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:47
 msgid "<code>.mpv</code>"
-msgstr ""
+msgstr "<code>.mpv</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:48
 msgid "<code>.mp+</code>"
-msgstr ""
+msgstr "<code>.mp+</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:49
 msgid "<code>.ofr</code>"
-msgstr ""
+msgstr "<code>.ofr</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:50
 msgid "<code>.ofs</code>"
-msgstr ""
+msgstr "<code>.ofs</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:51
 msgid "<code>.psf</code>"
-msgstr ""
+msgstr "<code>.psf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:52
 msgid "<code>.psf1</code>"
-msgstr ""
+msgstr "<code>.psf1</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:53
 msgid "<code>.psf2</code>"
-msgstr ""
+msgstr "<code>.psf2</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:54
 msgid "<code>.minipsf</code>"
-msgstr ""
+msgstr "<code>.minipsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:55
 msgid "<code>.minipsf1</code>"
-msgstr ""
+msgstr "<code>.minipsf1</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:56
 msgid "<code>.minipsf2</code>"
-msgstr ""
+msgstr "<code>.minipsf2</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:57
 msgid "<code>.ssf</code>"
-msgstr ""
+msgstr "<code>.ssf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:58
 msgid "<code>.minissf</code>"
-msgstr ""
+msgstr "<code>.minissf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:59
 msgid "<code>.minidsf</code>"
-msgstr ""
+msgstr "<code>.minidsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:60
 msgid "<code>.gsf</code>"
-msgstr ""
+msgstr "<code>.gsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:61
 msgid "<code>.minigsf</code>"
-msgstr ""
+msgstr "<code>.minigsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:62
 msgid "<code>.qsf</code>"
-msgstr ""
+msgstr "<code>.qsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:63
 msgid "<code>.miniqsf</code>"
-msgstr ""
+msgstr "<code>.miniqsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:64
 msgid "<code>.spc</code>"
-msgstr ""
+msgstr "<code>.spc</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:65
 msgid "<code>.tak</code>"
-msgstr ""
+msgstr "<code>.tak</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:66
 msgid "<code>.tta</code>"
-msgstr ""
+msgstr "<code>.tta</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:67
 msgid "<code>.vqf</code>"
-msgstr ""
+msgstr "<code>.vqf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:68
 msgid "<code>.bwav</code>"
-msgstr ""
+msgstr "<code>.bwav</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:69
 msgid "<code>.bwf</code>"
-msgstr ""
+msgstr "<code>.bwf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:70
 msgid "<code>.vgm</code>"
-msgstr ""
+msgstr "<code>.vgm</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:71
 msgid "<code>.vgz</code>"
-msgstr ""
+msgstr "<code>.vgz</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:72
 msgid "<code>.wv</code>"
-msgstr ""
+msgstr "<code>.wv</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:73
 msgid "<code>.asf</code>"
-msgstr ""
+msgstr "<code>.asf</code>"
 
 #. (itstool) path: info/title
 #: yelp/C/search.page:8
 msgctxt "link"
 msgid "Advanced Search 🔍"
-msgstr ""
+msgstr "Erweiterte Suche 🔍"
 
 #. (itstool) path: page/title
 #: yelp/C/search.page:20
 msgid "Advanced Search"
-msgstr ""
+msgstr "Erweiterte Suche"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:21
 msgid "This page explains how to use Advanced Search in <app>Tagger</app>."
 msgstr ""
+"Diese Seite erklärt, wie du die erweiterte Suche in <app>Tagger</app> nutzt."
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:23
@@ -710,11 +725,14 @@ msgid ""
 "allows users to search files' tag contents for certain values, using a "
 "powerful tag-based syntax:"
 msgstr ""
+"Die erweiterte Suche ist ein mächtiges Feature in <app>Tagger</app>, das es "
+"Benutzern erlaubt den Inhalt der Tags von Dateien nach bestimmten Werten zu "
+"durchsuchen. Das geschieht mittels einer Tag-basierten Syntax:"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:24
 msgid "<code>!prop1=\"value1\";prop2=\"value2\"</code>"
-msgstr ""
+msgstr "<code>!prop1=\"wert1\";prop2=\"wert2\"</code>"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:25
@@ -724,31 +742,35 @@ msgid ""
 "quotes. Each property is separated by a semicolon. Notice how the last "
 "property does not end with a semicolon."
 msgstr ""
+"Wobei <code>prop1</code>, <code>prop2</code> valide Tag-Eigenschaften und "
+"<code>wert1</code>, <code>wert2</code> die in Anführungszeichen gesetzten "
+"Werte sind. Eigenschaften werden mit Semikolons (Strichpunkten) getrennt. "
+"Die letzte Eigenschaft endet nicht mit einem Semikolon."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:28
 msgid "Valid Properties"
-msgstr ""
+msgstr "Valide Eigenschaften"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:30
 msgid "<code>filename</code>"
-msgstr ""
+msgstr "<code>filename</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:44
 msgid "<code>custom</code>"
-msgstr ""
+msgstr "<code>custom</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:46
 msgid "Properties are case-insensitive."
-msgstr ""
+msgstr "Die Groß-/Kleinschreibung wird nicht beachtet."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:48
 msgid "Syntax Checking"
-msgstr ""
+msgstr "Syntaxprüfung"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:49
@@ -757,28 +779,31 @@ msgid ""
 "filter the listbox with your search. If the syntax of your string is "
 "invalid, the textbox will turn red and will not filter the listbox."
 msgstr ""
+"Wenn die Syntax deiner Suche gültig ist, wird das Texteingabefeld grün "
+"angezeigt und die Suche wird ausgeführt. Wenn die Syntax ungültig ist, wird "
+"das Suchfeld rot angezeigt und die Suche wird nicht angewendet."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:51
 msgid "Examples"
-msgstr ""
+msgstr "Beispiele"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:52
 msgid "<code>!artist=\"\"</code>"
-msgstr ""
+msgstr "<code>!artist=\"\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:53
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "artist is empty."
-msgstr ""
+msgstr "Diese Suche filtert die Liste nach Musik, deren Interpret leer ist."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:54
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
-msgstr ""
+msgstr "<code>!genre=\"\";year=\"2022\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:55
@@ -787,11 +812,14 @@ msgid ""
 "genre is empty and whose year is 2022 (Year and Track properties will "
 "validate if the value string is a number)."
 msgstr ""
+"Diese Suche filtert die Liste nach Musik, bei der das Genre leer und das "
+"Jahr auf 2022 gesetzt ist (Die Jahr- und Track-Eigenschaften sind nur gültig "
+"wenn eine Zahl angegeben wird)."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:56
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
-msgstr ""
+msgstr "<code>!title=\"\";artist=\"bob\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:57
@@ -799,11 +827,13 @@ msgid ""
 "This search string will filter the listbox to contain music files whose "
 "title is empty and whose artist is <code>bob</code>."
 msgstr ""
+"Diese Suche filtert die Liste nach Musik, deren Titel leer ist und deren "
+"Interpret <code>bob</code> ist."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:58
 msgid "<code>!custom=\"mbrd\"</code>"
-msgstr ""
+msgstr "<code>!custom=\"mbrd\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:59
@@ -811,17 +841,19 @@ msgid ""
 "This search string will filter the listbox to contain music files that "
 "contain a custom property with the name <code>mbrd</code>."
 msgstr ""
+"Diese Suche filtert die Liste nach Musik, die eine benutzerdefinierte "
+"Eigenschaft mit dem Namen <code>mbrd</code> hat."
 
 #. (itstool) path: info/title
 #: yelp/C/unsupported.page:8
 msgctxt "link"
 msgid "Unsupported Files 🚫"
-msgstr ""
+msgstr "Nicht unterstützte Dateien 🚫"
 
 #. (itstool) path: page/title
 #: yelp/C/unsupported.page:20
 msgid "Unsupported Files"
-msgstr ""
+msgstr "Nicht unterstützte Dateien"
 
 #. (itstool) path: page/p
 #: yelp/C/unsupported.page:21
@@ -829,6 +861,8 @@ msgid ""
 "This page explains music files that are currently unsupported by "
 "<app>Tagger</app>."
 msgstr ""
+"Diese Seite erklärt Audiodateien, die aktuell nicht von <app>Tagger</app> "
+"unterstützt werden."
 
 #. (itstool) path: page/p
 #: yelp/C/unsupported.page:22
@@ -836,11 +870,13 @@ msgid ""
 "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</"
 "link> for its backend to read and write metadata."
 msgstr ""
+"Tagger nutzt <link href=\"https://github.com/Zeugma440/atldotnet\""
+">atldotnet</link> um Metadaten zu lesen und zu schreiben."
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
 msgid "Unable To Apply Changes - Permission Denied"
-msgstr ""
+msgstr "Änderungen können nicht übernommen werden - Keine Berechtigung"
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:25
@@ -849,6 +885,9 @@ msgid ""
 "based systems where you are unable to save files due to a \"permission denied"
 "\" error."
 msgstr ""
+"Es gibt einen bekannten Fehler mit der flatpak-Version der App auf Debian-"
+"basierten Systemen, der dazu führt, dass das Speichern von Dateien mit dem "
+"Fehler \"permission denied\" fehlschlägt."
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:26
@@ -856,6 +895,8 @@ msgid ""
 "Please see this for the fix: <link href=\"https://github.com/NickvisionApps/"
 "Tagger/issues/174\"/>"
 msgstr ""
+"Eine Lösung für diesen Fehler findet sich hier: <link href=\"https://github."
+"com/NickvisionApps/Tagger/issues/174\"/>"
 
 #. (itstool) path: note/p
 #: yelp/C/unsupported.page:28
@@ -863,6 +904,8 @@ msgid ""
 "Please confirm that you are receiving the \"permission denied\" error before "
 "trying this."
 msgstr ""
+"Bitte stelle sicher, dass du tatsächlich den \"permission denied\" Fehler "
+"bekommst, bevor du diese Lösung ausprobierst."
 
 #. (itstool) path: note/p
 #: yelp/C/unsupported.page:29
@@ -871,6 +914,9 @@ msgid ""
 "tagger</code>, then try to apply changes again, and you will find an error "
 "message in the terminal."
 msgstr ""
+"Starte <app>Tagger</app> im Terminal mit dem Befehl <code>flatpak run org."
+"nickvision.tagger</code> und versuche anschließend erneut die Änderungen zu "
+"speichern. Die Fehlermeldung wird im Terminal angezeigt."
 
 #. (itstool) path: note/p
 #: yelp/C/unsupported.page:30
@@ -878,27 +924,30 @@ msgid ""
 "If it is not a \"permission denied\" error, please <link href=\"https://"
 "github.com/NickvisionApps/Tagger/issues/174\">report a new issue</link>."
 msgstr ""
+"Wenn die Fehlermeldung nicht \"permission denied\" ist, dann erstelle bitte "
+"<link href=\"https://github.com/NickvisionApps/Tagger/issues/174\">ein neues "
+"Issue</link>."
 
 #. (itstool) path: info/title
 #: yelp/C/web-services.page:8
 msgctxt "link"
 msgid "Web Services 🌐"
-msgstr ""
+msgstr "Web-Dienste 🌐"
 
 #. (itstool) path: page/title
 #: yelp/C/web-services.page:20
 msgid "Web Services"
-msgstr ""
+msgstr "Web-Dienste"
 
 #. (itstool) path: page/p
 #: yelp/C/web-services.page:21
 msgid "This page describes the web services available in Tagger"
-msgstr ""
+msgstr "Diese Seite beschreibt die in Tagger verfügbaren Web-Dienste."
 
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:23
 msgid "Download MusicBrainz Metadata"
-msgstr ""
+msgstr "Metadaten von MusicBrainz herunterladen"
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:24
@@ -906,6 +955,8 @@ msgid ""
 "Identifies a music file through MusicBrainz and downloads its metadata to "
 "use in Tagger."
 msgstr ""
+"Identifiziert eine Audiodatei mit MusicBrainz und lädt Metadaten für die "
+"Nutzung in Tagger herunter."
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:25
@@ -915,6 +966,10 @@ msgid ""
 "IDs are found, metadata such as title, artist, album, and art will be "
 "downloaded and set in Tagger."
 msgstr ""
+"Dieser Dienst nutzt den AcoustId-Fingerabdruck der Datei (generiert mit "
+"<code>fpcalc</code>) um die MusicBrainz Aufnahme- und Release-IDs zu "
+"bestimmen. Wenn IDs gefunden werden, werden Metadaten, wie Titel, Interpret, "
+"Album und Coverbild heruntergeladen und in Tagger gesetzt."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:27
@@ -922,6 +977,8 @@ msgid ""
 "Finding metadata through MusicBrainz isn't 100% realiable and may not be "
 "available for uncommom songs."
 msgstr ""
+"Metadaten aus MusicBrainz sind nicht zu 100% zuverlässig und sind ggf. für "
+"unbekannte Lieder nicht verfügbar."
 
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:31
@@ -935,11 +992,13 @@ msgid ""
 "AcoustId's database. There are two things that can be submitted about a "
 "music file:"
 msgstr ""
+"Lädt Daten über eine Audiodatei (identifiziert durch ihren Fingerabdruck) in "
+"die AcoustId-Datenbank hoch. Es können zwei Dinge hochgeladen werden:"
 
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:35
 msgid "MusicBrainz Recording ID"
-msgstr ""
+msgstr "MusicBrainz-Aufnahme-ID"
 
 #. (itstool) path: item/p
 #: yelp/C/web-services.page:36
@@ -948,16 +1007,20 @@ msgid ""
 "will pull all data from the associated recording id and use that for sending "
 "metadata to AcoustId."
 msgstr ""
+"Ein Benutzer kann eine MusicBrainz-Aufnahme-ID einreichen um Daten zu "
+"AcoustId hochzuladen. Dadurch werden alle Daten von der Aufnahme-ID gezogen "
+"um Metadaten and AcoustId zu senden."
 
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:39
 msgid "User Metadata"
-msgstr ""
+msgstr "Benutzermetadaten"
 
 #. (itstool) path: item/p
 #: yelp/C/web-services.page:40
 msgid "A user can submit their metadata from Tagger to AcoustId."
 msgstr ""
+"Ein Benutzer kann seine eigenen Metadaten aus Tagger bei AcoustId einreichen."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:44
@@ -965,3 +1028,5 @@ msgid ""
 "A proper <code>AcoustId User API Key</code> must be set in "
 "<code>Preferences</code> for this service to work."
 msgstr ""
+"Ein <code>AcoustId Benutzer-API-Key</code> muss in den <code>Einstellungen</"
+"code> gesetzt sein, damit dieser Dienst funktioniert."
