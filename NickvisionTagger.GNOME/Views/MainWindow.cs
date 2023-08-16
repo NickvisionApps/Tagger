@@ -560,12 +560,15 @@ public partial class MainWindow : Adw.ApplicationWindow
         var obj = e.Value.GetObject();
         if (obj != null)
         {
-            var path = ((Gio.File)obj).GetPath();
-            if (Directory.Exists(path))
+            if (obj is Gio.FileHelper file)
             {
-                SetLoadingState(_("Loading music files from folder..."));
-                _controller.OpenFolderAsync(path).Wait();
-                return true;
+                var path = file.GetPath() ?? "";
+                if (Directory.Exists(path))
+                {
+                    SetLoadingState(_("Loading music files from folder..."));
+                    _controller.OpenFolderAsync(path).Wait();
+                    return true;
+                }
             }
         }
         return false;
