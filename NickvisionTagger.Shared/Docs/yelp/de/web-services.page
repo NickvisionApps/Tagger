@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="web-services" its:version="2.0" xml:lang="de">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Web Services 🌐</title>
+	<title type="link">Web-Dienste 🌐</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -14,31 +14,31 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Web Services</title>
-<p>This page describes the web services available in Tagger</p>
+<title>Web-Dienste</title>
+<p>Diese Seite beschreibt die in Tagger verfügbaren Web-Dienste.</p>
 <section>
-    <title>Download MusicBrainz Metadata</title>
-    <p>Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
-    <p>This service utilizies the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+    <title>Metadaten von MusicBrainz herunterladen</title>
+    <p>Identifiziert eine Audiodatei mit MusicBrainz und lädt Metadaten für die Nutzung in Tagger herunter.</p>
+    <p>Dieser Dienst nutzt den AcoustId-Fingerabdruck der Datei (generiert mit <code>fpcalc</code>) um die MusicBrainz Aufnahme- und Release-IDs zu bestimmen. Wenn IDs gefunden werden, werden Metadaten, wie Titel, Interpret, Album und Coverbild heruntergeladen und in Tagger gesetzt.</p>
     <note>
-        <p>Finding metadata through MusicBrainz isn't 100% realiable and may not be available for uncommom songs.</p>
+        <p>Metadaten aus MusicBrainz sind nicht zu 100% zuverlässig und sind ggf. für unbekannte Lieder nicht verfügbar.</p>
     </note>
 </section>
 <section>
     <title>An AcoustId senden</title>
-    <p>Submits data about a music file (identified via its fingerprint) to AcoustId's database. There are two things that can be submitted about a music file:</p>
+    <p>Lädt Daten über eine Audiodatei (identifiziert durch ihren Fingerabdruck) in die AcoustId-Datenbank hoch. Es können zwei Dinge hochgeladen werden:</p>
         <list>
             <item>
-        		<title>MusicBrainz Recording ID</title>
-        		<p>A user can submit a MusicBrainz Recording ID to submit to AcoustId. This will pull all data from the associated recording id and use that for sending metadata to AcoustId.</p>
+        		<title>MusicBrainz-Aufnahme-ID</title>
+        		<p>Ein Benutzer kann eine MusicBrainz-Aufnahme-ID einreichen um Daten zu AcoustId hochzuladen. Dadurch werden alle Daten von der Aufnahme-ID gezogen um Metadaten and AcoustId zu senden.</p>
         	</item>
             <item>
-        		<title>User Metadata</title>
-        		<p>A user can submit their metadata from Tagger to AcoustId.</p>
+        		<title>Benutzermetadaten</title>
+        		<p>Ein Benutzer kann seine eigenen Metadaten aus Tagger bei AcoustId einreichen.</p>
         	</item>
         </list>
     <note>
-        <p>A proper <code>AcoustId User API Key</code> must be set in <code>Preferences</code> for this service to work.</p>
+        <p>Ein <code>AcoustId Benutzer-API-Key</code> muss in den <code>Einstellungen</code> gesetzt sein, damit dieser Dienst funktioniert.</p>
     </note>
 </section>
 </page>

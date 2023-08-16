@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-15 22:00-0400\n"
-"PO-Revision-Date: 2023-08-03 18:11+0000\n"
+"PO-Revision-Date: 2023-08-16 16:52+0000\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/he/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:169
 msgid "%artist%- %title%"
-msgstr "%אמן%- %כותרת%"
+msgstr "%אמן% - %כותרת%"
 
 #: ../../../Controllers/MainWindowController.cs:169
 msgid "%title%"
@@ -30,11 +30,11 @@ msgstr "%כותרת%"
 
 #: ../../../Controllers/MainWindowController.cs:169
 msgid "%title%- %artist%"
-msgstr "%כותרת%- %אמן%"
+msgstr "%כותרת% - %אמן%"
 
 #: ../../../Controllers/MainWindowController.cs:169
 msgid "%track%- %title%"
-msgstr "%רצועה%- %כותרת%"
+msgstr "%רצועה% - %כותרת%"
 
 #: ../../../Controllers/MainWindowController.cs:363
 #: ../../../Controllers/MainWindowController.cs:372
@@ -114,7 +114,7 @@ msgstr "אמן האלבום"
 
 #: ../../../Controllers/MainWindowController.cs:928
 msgid "An invalid RecordingId was provided to MusicBrainz"
-msgstr ""
+msgstr "מזהה ההקלטה שסופק ל־MusicBrainz אינו תקף"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:528
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:606
@@ -263,7 +263,7 @@ msgstr "מוריד נתוני מידע מ־MusicBrainz…"
 
 #: ../../../Controllers/MainWindowController.cs:930
 msgid "Error"
-msgstr ""
+msgstr "שגיאה"
 
 #: ../../../Models/MusicFile.cs:224 ../../../Models/MusicFile.cs:247
 #: ../../../Models/MusicFile.cs:344 ../../../Models/MusicFile.cs:842
@@ -272,7 +272,7 @@ msgstr "תקלה"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:221
 msgid "Existing Lyrics"
-msgstr ""
+msgstr "מילות שיר קיימות"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:750
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
@@ -286,9 +286,8 @@ msgstr "ייצוא עטיפת אלבום קדמית"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:257
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:143
-#, fuzzy
 msgid "Export to LRC"
-msgstr "ייצוא"
+msgstr "ייצוא ל־LRC"
 
 #: ../../../Controllers/MainWindowController.cs:814
 msgid "Exported back album art to file successfully"
@@ -300,7 +299,7 @@ msgstr "עטיפת אלבום קדמית יוצאה בהצלחה"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:275
 msgid "Exported successfully to: {0}"
-msgstr ""
+msgstr "הייצוא בוצע בהצלחה אל: {0}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:450
 msgid "Failed MusicBrainz Lookups"
@@ -369,11 +368,11 @@ msgstr "עזרה"
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:210
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:136
 msgid "Import from LRC"
-msgstr ""
+msgstr "ייבוא מ־LRC"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:447
 msgid "Info"
-msgstr ""
+msgstr "מידע"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:718
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:81
@@ -387,7 +386,7 @@ msgstr "הכנסת עטיפת אלבום קדמית"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:223
 msgid "Keep Tagger's lyrics"
-msgstr ""
+msgstr "לשמור מילות שיר מהמתייג"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
@@ -413,7 +412,7 @@ msgstr "מתבצעת טעינת קובצי מוזיקה מתיקייה…"
 
 #: ../../../Models/MusicFile.cs:153
 msgid "lyrics"
-msgstr ""
+msgstr "מילות שיר"
 
 #: ../../../Controllers/MainWindowController.cs:146
 msgid "Matrix Chat"
@@ -454,7 +453,7 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:253
 msgid "Nothing to export."
-msgstr ""
+msgstr "אין מה לייצא."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:822
 msgid "OK"
@@ -496,9 +495,8 @@ msgid "Remove Custom Property"
 msgstr "הסרת מאפיין מותאם"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:136
-#, fuzzy
 msgid "Remove Lyric"
-msgstr "הסרה"
+msgstr "הסרת מילות שיר"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:534
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:612
@@ -568,7 +566,7 @@ msgstr "המתייג פתח כמה קבצים במצב קריאה בלבד."
 
 #: ../../../Controllers/MainWindowController.cs:929
 msgid "This file does not have a valid fingerprint"
-msgstr ""
+msgstr "לקובץ זה אין טביעת אצבע תקפה"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -576,7 +574,7 @@ msgstr "טבי״ב"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:183
 msgid "Timestamp (hh:mm:ss)"
-msgstr ""
+msgstr "חותמת זמן (hh:mm:ss)"
 
 #: ../../../Controllers/MainWindowController.cs:974
 #: ../../../Controllers/MainWindowController.cs:1004
@@ -610,14 +608,12 @@ msgstr ""
 "מיזם תרגום GNOME לעברית https://l10n.gnome.org/teams/he/"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:279
-#, fuzzy
 msgid "Unable to export to LRC."
-msgstr "לא ניתן לשמור את {0}."
+msgstr "לא ניתן לייצא ל־LRC."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:236
-#, fuzzy
 msgid "Unable to import from LRC."
-msgstr "לא ניתן לשמור את {0}."
+msgstr "לא ניתן לייבא מ־LRC."
 
 #: ../../../Controllers/MainWindowController.cs:716
 msgid "Unable to load image file"
@@ -639,13 +635,15 @@ msgstr "לא ניתן לשלוח ל־AcoustID. נא לבדוק את מפתח ה�
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:226
 msgid "Use LRC's lyrics"
-msgstr ""
+msgstr "שימוש במילות שיר מ־LRC"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:221
 msgid ""
 "What would you like Tagger to do with lyrics found from the LRC file that "
 "conflict with existing lyrics of the same timestamp?"
 msgstr ""
+"מה ברצונך שהמתייג יעשה עם מילות שיר שנמצאו בקובץ LRC שמתנגשות עם מילות שיר "
+"קיימות עם אותה חותמת זמן?"
 
 #: ../../../Controllers/MainWindowController.cs:974
 #: ../../../Controllers/MainWindowController.cs:1016
@@ -656,7 +654,7 @@ msgstr "שנה"
 
 #: NickvisionTagger.GNOME/Blueprints/autocomplete_box.blp:15
 msgid "Suggestions"
-msgstr ""
+msgstr "הצעות"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
 msgid "Corrupted Files Found"
@@ -673,11 +671,11 @@ msgstr ""
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:15
 #: NickvisionTagger.GNOME/Blueprints/window.blp:389
 msgid "Lyrics"
-msgstr ""
+msgstr "מילות שיר"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:31
 msgid "Configure"
-msgstr ""
+msgstr "הגדרה"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:42
 msgid ""
@@ -687,7 +685,7 @@ msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:45
 msgid "Language Code"
-msgstr ""
+msgstr "שפת קוד"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:54
 #: NickvisionTagger.GNOME/Blueprints/window.blp:471
@@ -709,7 +707,7 @@ msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:129
 msgid "Clear All Lyrics"
-msgstr ""
+msgstr "ניקוי כל מילות השיר"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:151
 msgid "Offset (in milliseconds)"
@@ -766,7 +764,6 @@ msgid "File Name"
 msgstr "שם קובץ"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgid "File Path"
 msgstr "נתיב הקובץ"
 
@@ -897,7 +894,7 @@ msgstr "הסרת עטיפה אחורית לאלבום"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
 #: NickvisionTagger.GNOME/Blueprints/window.blp:385
 msgid "Manage Lyrics"
-msgstr ""
+msgstr "ניהול מילות שיר"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:102
 msgctxt "Shortcut"

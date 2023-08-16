@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="unsupported" its:version="2.0" xml:lang="de">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Unsupported Files 🚫</title>
+	<title type="link">Nicht unterstützte Dateien 🚫</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -14,17 +14,17 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Unsupported Files</title>
-<p>This page explains music files that are currently unsupported by <app>Tagger</app>.</p>
-<p>Tagger uses <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> for its backend to read and write metadata.</p>
+<title>Nicht unterstützte Dateien</title>
+<p>Diese Seite erklärt Audiodateien, die aktuell nicht von <app>Tagger</app> unterstützt werden.</p>
+<p>Tagger nutzt <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> um Metadaten zu lesen und zu schreiben.</p>
 <section>
-    <title>Unable To Apply Changes - Permission Denied</title>
-    <p>There is a known issue of the flatpak version of the app running on Debian-based systems where you are unable to save files due to a "permission denied" error.</p>
-    <p>Please see this for the fix: <link href="https://github.com/NickvisionApps/Tagger/issues/174"/></p>
+    <title>Änderungen können nicht übernommen werden - Keine Berechtigung</title>
+    <p>Es gibt einen bekannten Fehler mit der flatpak-Version der App auf Debian-basierten Systemen, der dazu führt, dass das Speichern von Dateien mit dem Fehler "permission denied" fehlschlägt.</p>
+    <p>Eine Lösung für diesen Fehler findet sich hier: <link href="https://github.com/NickvisionApps/Tagger/issues/174"/></p>
     <note>
-        <p>Please confirm that you are receiving the "permission denied" error before trying this.</p>
-        <p>Run <app>Tagger</app> in the terminal via <code>flatpak run org.nickvision.tagger</code>, then try to apply changes again, and you will find an error message in the terminal.</p>
-        <p>If it is not a "permission denied" error, please <link href="https://github.com/NickvisionApps/Tagger/issues/174">report a new issue</link>.</p>
+        <p>Bitte stelle sicher, dass du tatsächlich den "permission denied" Fehler bekommst, bevor du diese Lösung ausprobierst.</p>
+        <p>Starte <app>Tagger</app> im Terminal mit dem Befehl <code>flatpak run org.nickvision.tagger</code> und versuche anschließend erneut die Änderungen zu speichern. Die Fehlermeldung wird im Terminal angezeigt.</p>
+        <p>Wenn die Fehlermeldung nicht "permission denied" ist, dann erstelle bitte <link href="https://github.com/NickvisionApps/Tagger/issues/174">ein neues Issue</link>.</p>
     </note>
 </section>
 </page>

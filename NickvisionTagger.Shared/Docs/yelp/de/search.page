@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="search" its:version="2.0" xml:lang="de">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Advanced Search 🔍</title>
+	<title type="link">Erweiterte Suche 🔍</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -14,15 +14,15 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Advanced Search</title>
-<p>This page explains how to use Advanced Search in <app>Tagger</app>.</p>
+<title>Erweiterte Suche</title>
+<p>Diese Seite erklärt, wie du die erweiterte Suche in <app>Tagger</app> nutzt.</p>
 
-<p>Advanced Search is a powerful feature provided by <app>Tagger</app> that allows users to search files' tag contents for certain values, using a powerful tag-based syntax:</p>
-<p><code>!prop1="value1";prop2="value2"</code></p>
-<p>Where <code>prop1</code>, <code>prop2</code> are valid tag properties and <code>value1</code>, <code>value2</code> are the values to search wrapped in quotes. Each property is separated by a semicolon. Notice how the last property does not end with a semicolon.</p>
+<p>Die erweiterte Suche ist ein mächtiges Feature in <app>Tagger</app>, das es Benutzern erlaubt den Inhalt der Tags von Dateien nach bestimmten Werten zu durchsuchen. Das geschieht mittels einer Tag-basierten Syntax:</p>
+<p><code>!prop1="wert1";prop2="wert2"</code></p>
+<p>Wobei <code>prop1</code>, <code>prop2</code> valide Tag-Eigenschaften und <code>wert1</code>, <code>wert2</code> die in Anführungszeichen gesetzten Werte sind. Eigenschaften werden mit Semikolons (Strichpunkten) getrennt. Die letzte Eigenschaft endet nicht mit einem Semikolon.</p>
 
 <section>
-<title>Valid Properties</title>
+<title>Valide Eigenschaften</title>
 <list>
 <item><p><code>filename</code></p></item>
 <item><p><code>title</code></p></item>
@@ -40,18 +40,18 @@
 <item><p><code>publisher</code></p></item>
 <item><p><code>custom</code></p></item>
 </list>
-<p>Properties are case-insensitive.</p></section>
+<p>Die Groß-/Kleinschreibung wird nicht beachtet.</p></section>
 
-<section><title>Syntax Checking</title>
-<p>If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search. If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox.</p></section>
+<section><title>Syntaxprüfung</title>
+<p>Wenn die Syntax deiner Suche gültig ist, wird das Texteingabefeld grün angezeigt und die Suche wird ausgeführt. Wenn die Syntax ungültig ist, wird das Suchfeld rot angezeigt und die Suche wird nicht angewendet.</p></section>
 
-<section><title>Examples</title>
+<section><title>Beispiele</title>
 <p><code>!artist=""</code></p>
-<p>This search string will filter the listbox to contain music files whose artist is empty.</p>
+<p>Diese Suche filtert die Liste nach Musik, deren Interpret leer ist.</p>
 <p><code>!genre="";year="2022"</code></p>
-<p>This search string will filter the listbox to contain music files whose genre is empty and whose year is 2022 (Year and Track properties will validate if the value string is a number).</p>
+<p>Diese Suche filtert die Liste nach Musik, bei der das Genre leer und das Jahr auf 2022 gesetzt ist (Die Jahr- und Track-Eigenschaften sind nur gültig wenn eine Zahl angegeben wird).</p>
 <p><code>!title="";artist="bob"</code></p>
-<p>This search string will filter the listbox to contain music files whose title is empty and whose artist is <code>bob</code>.</p>
+<p>Diese Suche filtert die Liste nach Musik, deren Titel leer ist und deren Interpret <code>bob</code> ist.</p>
 <p><code>!custom="mbrd"</code></p>
-<p>This search string will filter the listbox to contain music files that contain a custom property with the name <code>mbrd</code>.</p></section>
+<p>Diese Suche filtert die Liste nach Musik, die eine benutzerdefinierte Eigenschaft mit dem Namen <code>mbrd</code> hat.</p></section>
 </page>
