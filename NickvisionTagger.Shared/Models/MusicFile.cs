@@ -21,7 +21,8 @@ public enum MusicBrainzLoadStatus
     Success = 0,
     NoAcoustIdResult,
     NoAcoustIdRecordingId,
-    InvalidMusicBrainzRecordingId
+    InvalidMusicBrainzRecordingId,
+    InvalidFingerprint
 }
 
 /// <summary>
@@ -29,6 +30,8 @@ public enum MusicBrainzLoadStatus
 /// </summary>
 public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
 {
+    private static string[] _validProperties;
+    
     private string _dotExtension;
     private string _filename;
     private DateTime _modificationTimestamp;
@@ -121,6 +124,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     public Dictionary<int, string> SynchronizedLyrics { get; set; }
     /// <summary>
+    /// The offset for SynchronizedLyrics (in milliseconds)
+    /// </summary>
+    public int SynchronizedLyricsOffset { get; set; }
+    /// <summary>
     /// The duration of the music file
     /// </summary>
     public int Duration { get; private set; }
@@ -143,6 +150,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     static MusicFile()
     {
+        _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "lyrics", _("lyrics") };
         ATL.Settings.UseFileNameWhenNoTitle = false;
         SortFilesBy = SortBy.Filename;
     }
@@ -178,6 +186,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         LyricsDescription = "";
         UnsynchronizedLyrics = "";
         SynchronizedLyrics = new Dictionary<int, string>();
+        SynchronizedLyricsOffset = 0;
         Duration = 0;
         IsReadOnly = false;
         LoadTagFromDisk();
@@ -304,10 +313,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             LyricsLanguageCode = track.Lyrics.LanguageCode;
             LyricsDescription = track.Lyrics.Description;
             UnsynchronizedLyrics = track.Lyrics.UnsynchronizedLyrics;
-            foreach (var phase in track.Lyrics.SynchronizedLyrics.OrderBy(x => x.TimestampMs))
+            foreach (var phase in track.Lyrics.SynchronizedLyrics)
             {
                 SynchronizedLyrics.Add(phase.TimestampMs, phase.Text);
             }
+            SynchronizedLyricsOffset = track.Lyrics.Metadata.TryGetValue("offset", out var offset) ? (int.TryParse(offset, out var offsetInt) ? offsetInt : 0) : 0;
             foreach(var pair in track.AdditionalFields)
             {
                 _customProperties.Add(pair.Key, pair.Value);
@@ -331,6 +341,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>MusicBrainzLoadStatus</returns>
     public async Task<MusicBrainzLoadStatus> LoadTagFromMusicBrainzAsync(string acoustIdClientKey, string version, bool overwriteTagWithMusicBrainz, bool overwriteAlbumArtWithMusicBrainz)
     {
+        if (Fingerprint == _("ERROR"))
+        {
+            return MusicBrainzLoadStatus.InvalidFingerprint;
+        }
         //Use AcoustID to get MBID
         AcoustID.Configuration.ClientKey = acoustIdClientKey;
         var service = new AcoustID.Web.LookupService();
@@ -502,11 +516,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             LanguageCode = LyricsLanguageCode,
             Description = LyricsDescription,
             UnsynchronizedLyrics = UnsynchronizedLyrics,
-            SynchronizedLyrics = new List<LyricsInfo.LyricsPhrase>()
+            SynchronizedLyrics = SynchronizedLyrics.Select(x => new LyricsInfo.LyricsPhrase(x.Key, x.Value)).ToList()
         };
-        foreach (var pair in SynchronizedLyrics)
+        if (SynchronizedLyricsOffset != 0)
         {
-            track.Lyrics.SynchronizedLyrics.Add(new LyricsInfo.LyricsPhrase(pair.Key, pair.Value));
+            track.Lyrics.Metadata["offset"] = SynchronizedLyricsOffset.ToString();
         }
         foreach(var pair in _customProperties)
         {
@@ -574,7 +588,16 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     /// <param name="name">The name of the custom property</param>
     /// <param name="value">The value of the custom property</param>
-    public void SetCustomProperty(string name, string value) => _customProperties[name] = value;
+    /// <returns>True if set, else false</returns>
+    public bool SetCustomProperty(string name, string value)
+    {
+        if (_validProperties.Contains(name.ToLower()))
+        {
+            return false;
+        }
+        _customProperties[name] = value;
+        return true;
+    }
 
     /// <summary>
     /// Removes a custom property
@@ -726,7 +749,6 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return false;
         }
-        var validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher") };
         var customProps = _customProperties.Keys.ToList();
         var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
         if(matches.Count == 0)
@@ -737,7 +759,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             string value = match.Value.Remove(0, 1); //remove first %
             value = value.Remove(value.Length - 1, 1); //remove last %;
-            if(validProperties.Contains(value.ToLower()))
+            if(_validProperties.Contains(value.ToLower()))
             {
                 value = value.ToLower();
                 var replace = "";
@@ -817,6 +839,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>True if successful, else false</returns>
     public async Task<bool> SubmitToAcoustIdAsync(string acoustIdClientKey, string acoustIdUserKey, string? musicBrainzRecordingId)
     {
+        if (Fingerprint == _("ERROR"))
+        {
+            return false;
+        }
         AcoustID.Configuration.ClientKey = acoustIdClientKey;
         var service = new AcoustID.Web.SubmitService(acoustIdUserKey);
         if(!string.IsNullOrEmpty(musicBrainzRecordingId))

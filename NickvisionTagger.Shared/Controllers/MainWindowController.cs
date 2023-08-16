@@ -139,7 +139,7 @@ public class MainWindowController : IDisposable
         }
         Aura.Active.SetConfig<Configuration>("config");
         Configuration.Current.Saved += ConfigurationSaved;
-        AppInfo.Version = "2023.8.2";
+        AppInfo.Version = "2023.8.3-next";
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
         AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");
         AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Tagger/discussions");
@@ -254,9 +254,9 @@ public class MainWindowController : IDisposable
         if (SelectedMusicFiles.Count == 1)
         {
             var first = SelectedMusicFiles.First().Value;
-            return new LyricsDialogController(first.LyricsLanguageCode, first.LyricsDescription, first.UnsynchronizedLyrics, first.SynchronizedLyrics);
+            return new LyricsDialogController(first.LyricsLanguageCode, first.LyricsDescription, first.UnsynchronizedLyrics, first.SynchronizedLyrics, first.SynchronizedLyricsOffset);
         }
-        return new LyricsDialogController("", "", "", new Dictionary<int, string>());
+        return new LyricsDialogController("", "", "", new Dictionary<int, string>(), 0);
     }
 
     /// <summary>
@@ -489,7 +489,8 @@ public class MainWindowController : IDisposable
     /// <param name="description">The description of the lyrics</param>
     /// <param name="unsync">The unsynchronized lyrics</param>
     /// <param name="sync">The set of synchronized lyrics</param>
-    public void UpdateLyrics(string langCode, string description, string unsync, Dictionary<int, string> sync)
+    /// <param name="offset">The offset of synchronized lyrics (in milliseconds)</param>
+    public void UpdateLyrics(string langCode, string description, string unsync, Dictionary<int, string> sync, int offset)
     {
         if (SelectedMusicFiles.Count == 1)
         {
@@ -513,6 +514,11 @@ public class MainWindowController : IDisposable
             if (!sync.SequenceEqual(first.Value.SynchronizedLyrics))
             {
                 first.Value.SynchronizedLyrics = sync;
+                updated = true;
+            }
+            if (offset != first.Value.SynchronizedLyricsOffset)
+            {
+                first.Value.SynchronizedLyricsOffset = offset;
                 updated = true;
             }
             MusicFileSaveStates[first.Key] = !updated && MusicFileSaveStates[first.Key];
@@ -822,16 +828,20 @@ public class MainWindowController : IDisposable
     /// <param name="name">The name of the property to add</param>
     public void AddCustomProperty(string name)
     {
+        var set = false;
         foreach(var pair in SelectedMusicFiles)
         {
-            pair.Value.SetCustomProperty(name, "");
-            MusicFileSaveStates[pair.Key] = false;
+            if (pair.Value.SetCustomProperty(name, ""))
+            {
+                MusicFileSaveStates[pair.Key] = false;
+                set = true;
+            }
         }
-        if(SelectedMusicFiles.Count > 0)
+        if(set)
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, true);
+        MusicFileSaveStatesChanged?.Invoke(this, set);
     }
 
     /// <summary>
@@ -853,7 +863,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, true);
+        MusicFileSaveStatesChanged?.Invoke(this, removed);
     }
 
     /// <summary>
@@ -916,6 +926,7 @@ public class MainWindowController : IDisposable
                 MusicBrainzLoadStatus.NoAcoustIdResult => _("No AcoustId entry found for the file's fingerprint"),
                 MusicBrainzLoadStatus.NoAcoustIdRecordingId => _("No MusicBrainz RecordingId was provided for the AcoustId entry"),
                 MusicBrainzLoadStatus.InvalidMusicBrainzRecordingId => _("An invalid RecordingId was provided to MusicBrainz"),
+                MusicBrainzLoadStatus.InvalidFingerprint => _("This file does not have a valid fingerprint"),
                 _ => _("Error")
             }}\n\n";
         }

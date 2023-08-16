@@ -34,13 +34,9 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController();
         _mainWindowController.AppInfo.Changelog =
-            @"* Added support for managing a file's lyrics
-              * Tagger will now provide suggestions while typing a genre  
-              * Fixed an issue where downloading MusicBrainz metadata would fail even if metadata was available
-              * Fixed an issue where Web Services were disabled even though network connection was available
-              * Fixed an issue where back album art was not saved correctly
-              * An Info button will appear when MusicBrainz lookup fails and will provide more information about why the process failed
-              * Improved tag panel design
+            @"* Added offset field to synchronized lyrics page 
+              * Added the ability to import and export LRC files in the synchronized lyrics page
+              * Fixed an issue where synchronized lyrics stored in the LRC format were not displayed correctly
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
