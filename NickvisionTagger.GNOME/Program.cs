@@ -37,18 +37,19 @@ public partial class Program
             @"* Added offset field to synchronized lyrics page 
               * Added the ability to import and export LRC files in the synchronized lyrics page
               * Fixed an issue where synchronized lyrics stored in the LRC format were not displayed correctly
+              * Fixed an issue where using WebP image for album art caused a crash
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
-        if (File.Exists(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
+        if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
         {
             //Load file from program directory, required for `dotnet run`
-            Gio.Functions.ResourcesRegister(Gio.Functions.ResourceLoad(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"));
+            Gio.Functions.ResourcesRegister(Gio.Functions.ResourceLoad(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"));
         }
         else
         {
             var prefixes = new List<string> {
-               Directory.GetParent(Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName,
-               Directory.GetParent(Path.GetFullPath(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName,
+               Directory.GetParent(Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName).FullName,
+               Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))).FullName,
                "/usr"
             };
             foreach (var prefix in prefixes)
@@ -59,6 +60,10 @@ public partial class Program
                     break;
                 }
             }
+        }
+        if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/gdk-pixbuf-2.0/2.10.0/loaders/loaders.cache"))
+        {
+            GdkPixbuf.Pixbuf.InitModules(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/gdk-pixbuf-2.0/2.10.0/loaders/");
         }
     }
 
