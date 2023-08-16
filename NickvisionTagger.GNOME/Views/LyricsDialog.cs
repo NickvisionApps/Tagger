@@ -220,10 +220,10 @@ public partial class LyricsDialog : Adw.Window
             var file = await openFileDialog.OpenAsync(_parentWindow);
             var messageDialog = Adw.MessageDialog.New(this, _("Existing Lyrics"), _("What would you like Tagger to do with lyrics found from the LRC file that conflict with existing lyrics of the same timestamp?"));
             messageDialog.SetIconName(_iconName);
-            messageDialog.AddResponse("keep", _("Keep Tagger's version"));
+            messageDialog.AddResponse("keep", _("Keep Tagger's lyrics"));
             messageDialog.SetDefaultResponse("keep");
             messageDialog.SetCloseResponse("keep");
-            messageDialog.AddResponse("overwrite", _("Use LRC's version"));
+            messageDialog.AddResponse("overwrite", _("Use LRC's lyrics"));
             messageDialog.SetResponseAppearance("overwrite", Adw.ResponseAppearance.Destructive);
             messageDialog.OnResponse += async (s, ex) =>
             {
