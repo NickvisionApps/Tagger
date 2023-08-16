@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-15 22:00-0400\n"
-"PO-Revision-Date: 2023-08-10 02:47+0000\n"
+"PO-Revision-Date: 2023-08-16 16:52+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/cs/>\n"
@@ -269,9 +269,8 @@ msgid "ERROR"
 msgstr "CHYBA"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:221
-#, fuzzy
 msgid "Existing Lyrics"
-msgstr "Spravovat texty"
+msgstr "Existující texty"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:750
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
@@ -285,9 +284,8 @@ msgstr "Exportovat přední obal alba"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:257
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:143
-#, fuzzy
 msgid "Export to LRC"
-msgstr "Exportovat"
+msgstr "Exportovat do LRC"
 
 #: ../../../Controllers/MainWindowController.cs:814
 msgid "Exported back album art to file successfully"
@@ -299,7 +297,7 @@ msgstr "Přední obal alba úspěšně exportován do souboru"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:275
 msgid "Exported successfully to: {0}"
-msgstr ""
+msgstr "Úspěšně exportováno do: {0}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:450
 msgid "Failed MusicBrainz Lookups"
@@ -368,7 +366,7 @@ msgstr "Nápověda"
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:210
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:136
 msgid "Import from LRC"
-msgstr ""
+msgstr "Importovat z LRC"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:447
 msgid "Info"
@@ -386,7 +384,7 @@ msgstr "Vložit přední obal alba"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:223
 msgid "Keep Tagger's lyrics"
-msgstr ""
+msgstr "Ponechat texty Označovače"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
@@ -410,9 +408,8 @@ msgid "Loading music files from folder..."
 msgstr "Načítání hudebních souborů ze složky..."
 
 #: ../../../Models/MusicFile.cs:153
-#, fuzzy
 msgid "lyrics"
-msgstr "Texty"
+msgstr "texty"
 
 #: ../../../Controllers/MainWindowController.cs:146
 msgid "Matrix Chat"
@@ -453,7 +450,7 @@ msgstr "Záznamu AcoustId nebylo poskytnuto žádné MusicBrainz RecordingId"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:253
 msgid "Nothing to export."
-msgstr ""
+msgstr "Nic k exportu."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:822
 msgid "OK"
@@ -566,7 +563,7 @@ msgstr "Označovač otevřel některé soubory v režimu čtení."
 
 #: ../../../Controllers/MainWindowController.cs:929
 msgid "This file does not have a valid fingerprint"
-msgstr ""
+msgstr "Tento soubor nemá platný otisk"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -606,14 +603,12 @@ msgid "translator-credits"
 msgstr "Jonáš Loskot <jonas.loskot@pm.me>, 2023"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:279
-#, fuzzy
 msgid "Unable to export to LRC."
-msgstr "Nepodařilo se uložit {0}."
+msgstr "Nepodařilo se exportovat do souboru LRC."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:236
-#, fuzzy
 msgid "Unable to import from LRC."
-msgstr "Nepodařilo se uložit {0}."
+msgstr "Nepodařilo se importovat soubor LRC."
 
 #: ../../../Controllers/MainWindowController.cs:716
 msgid "Unable to load image file"
@@ -635,13 +630,15 @@ msgstr "Nepodařilo se odeslat AcoustId. Zkontrolujte klíč API"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:226
 msgid "Use LRC's lyrics"
-msgstr ""
+msgstr "Použít texty LRC"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:221
 msgid ""
 "What would you like Tagger to do with lyrics found from the LRC file that "
 "conflict with existing lyrics of the same timestamp?"
 msgstr ""
+"Co chcete, aby Označovač udělal s texty nalezenými v souboru LRC, které jsou "
+"v konfliktu s existujícími texty ve stejném čase?"
 
 #: ../../../Controllers/MainWindowController.cs:974
 #: ../../../Controllers/MainWindowController.cs:1016
@@ -709,11 +706,11 @@ msgstr "Synchronizované"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:129
 msgid "Clear All Lyrics"
-msgstr ""
+msgstr "Vymazat všechny texty"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:151
 msgid "Offset (in milliseconds)"
-msgstr ""
+msgstr "Posun (v milisekundách)"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:119
