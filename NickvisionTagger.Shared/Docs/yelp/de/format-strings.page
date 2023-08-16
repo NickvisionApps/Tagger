@@ -18,16 +18,16 @@
 <p>Diese Seite erklärt die Nutzung von Formatvorlagen für die Konvertierungen <code>Dateiname zu Tag</code> und <code>Tag zu Dateiname</code>.</p>
 <section>
     <title>Format</title>
-    <p>Strings of any format with properties wrapped in percent signs (%).</p>
+    <p>Beliebig formatierte Strings, wobei Eigenschaften in Prozentzeichen (%) gehüllt sind.</p>
     <note>
-        <title>Example</title>
-        <p>Format String: <code>%artist%- %title%</code></p>
-        <p>Filename: <code>Artist1 - Song1.mp3</code></p>
-        <p>When running <code>File Name to Tag</code> conversion, this format string and this file name will create a tag with an artist of <code>Artist1</code> and a title of <code>Song1</code>.</p>
+        <title>Beispiel</title>
+        <p>Formatvorlage: <code>%artist%- %title%</code></p>
+        <p>Dateiname: <code>Interpret1 - Song1.mp3</code></p>
+        <p>Wird die <code>Dateiname zu Tag</code> Konvertierung ausgeführt, erstellt die Formatvorlage und der Dateiname einen Tag mit Interpret <code>Interpret1</code> und Titel <code>Song1</code>.</p>
     </note>
 </section>
 <section>
-    <title>Supported Properties</title>
+    <title>Unterstützte Eigenschaften</title>
     <list>
         <item><p><code>title</code></p></item>
         <item><p><code>artist</code></p></item>
@@ -44,8 +44,8 @@
         <item><p><code>publisher</code></p></item>
     </list>
     <note>
-        <p>When using conversions, custom property names can also be used.</p>
-        <p>For example, a custom property who's name is <code>ENCODER</code> can be used as <code>%encoder%</code>.</p>
+        <p>Auch benutzerdefinierte Eigenschaftsnamen können genutzt werden.</p>
+        <p>Beispielsweise kann eine benutzerdefinierte Eigenschaft mit dem Namen <code>ENCODER</code> als <code>%encoder%</code> verwendet werden.</p>
     </note>
 </section>
 </page>

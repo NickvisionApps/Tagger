@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Web Services</title>
+<title>Web-Dienste</title>
 <link rel="stylesheet" type="text/css" href="../C/C.css">
 <script type="text/javascript" src="../C/highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,35 +15,35 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="de" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Tagger Help">Tagger Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Web Services</span></h1></div>
+<a class="trail" href="index.html" title="Tagger Hilfe">Tagger Hilfe</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Web-Dienste</span></h1></div>
 <div class="region">
-<div class="contents pagewide"><p class="p">This page describes the web services available in Tagger</p></div>
+<div class="contents pagewide"><p class="p">Diese Seite beschreibt die in Tagger verfügbaren Web-Dienste.</p></div>
 <section id=""><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">Download MusicBrainz Metadata</span></h2></div>
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Metadaten von MusicBrainz herunterladen</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p">Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
-<p class="p">This service utilizies the AcoustId fingerprint of the file (generated with <span class="code">fpcalc</span>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+<p class="p">Identifiziert eine Audiodatei mit MusicBrainz und lädt Metadaten für die Nutzung in Tagger herunter.</p>
+<p class="p">Dieser Dienst nutzt den AcoustId-Fingerabdruck der Datei (generiert mit <span class="code">fpcalc</span>) um die MusicBrainz Aufnahme- und Release-IDs zu bestimmen. Wenn IDs gefunden werden, werden Metadaten, wie Titel, Interpret, Album und Coverbild heruntergeladen und in Tagger gesetzt.</p>
 <div class="note" title="Anmerkung">
 <svg height="24" width="24" version="1.1">
  <g>
   <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
   <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
  </g>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Finding metadata through MusicBrainz isn't 100% realiable and may not be available for uncommom songs.</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Metadaten aus MusicBrainz sind nicht zu 100% zuverlässig und sind ggf. für unbekannte Lieder nicht verfügbar.</p></div></div></div>
 </div>
 </div></div>
 </div></section><section id=""><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">An AcoustId senden</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p">Submits data about a music file (identified via its fingerprint) to AcoustId's database. There are two things that can be submitted about a music file:</p>
+<p class="p">Lädt Daten über eine Audiodatei (identifiziert durch ihren Fingerabdruck) in die AcoustId-Datenbank hoch. Es können zwei Dinge hochgeladen werden:</p>
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list">
-<div class="title title-item"><h3><span class="title">MusicBrainz Recording ID</span></h3></div>
-<p class="p">A user can submit a MusicBrainz Recording ID to submit to AcoustId. This will pull all data from the associated recording id and use that for sending metadata to AcoustId.</p>
+<div class="title title-item"><h3><span class="title">MusicBrainz-Aufnahme-ID</span></h3></div>
+<p class="p">Ein Benutzer kann eine MusicBrainz-Aufnahme-ID einreichen um Daten zu AcoustId hochzuladen. Dadurch werden alle Daten von der Aufnahme-ID gezogen um Metadaten and AcoustId zu senden.</p>
 </li>
 <li class="list">
-<div class="title title-item"><h3><span class="title">User Metadata</span></h3></div>
-<p class="p">A user can submit their metadata from Tagger to AcoustId.</p>
+<div class="title title-item"><h3><span class="title">Benutzermetadaten</span></h3></div>
+<p class="p">Ein Benutzer kann seine eigenen Metadaten aus Tagger bei AcoustId einreichen.</p>
 </li>
 </ul></div></div></div>
 <div class="note" title="Anmerkung">
@@ -52,14 +52,14 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
   <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
  </g>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">A proper <span class="code">AcoustId User API Key</span> must be set in <span class="code">Preferences</span> for this service to work.</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Ein <span class="code">AcoustId Benutzer-API-Key</span> muss in den <span class="code">Einstellungen</span> gesetzt sein, damit dieser Dienst funktioniert.</p></div></div></div>
 </div>
 </div></div>
 </div></section><section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>
 <div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">Weitere Informationen</span></h2></div>
-<div class="region"><ul><li class="links "><a href="index.html" title="Tagger Help">Tagger Help</a></li></ul></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Tagger Hilfe">Tagger Hilfe</a></li></ul></div>
 </div></div></div>
 </div></section>
 </div>
