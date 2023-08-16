@@ -235,8 +235,16 @@ public partial class LyricsDialog : Adw.Window
                 {
                     _toast.AddToast(Adw.Toast.New(_("Unable to import from LRC.")));
                 }
+                messageDialog.Destroy();
             };
-            messageDialog.Present();
+            if (_controller.SynchronizedLyrics.Count == 0)
+            {
+                messageDialog.Response("overwrite");
+            }
+            else
+            {
+                messageDialog.Present();
+            }
         }
         catch { }
     }
