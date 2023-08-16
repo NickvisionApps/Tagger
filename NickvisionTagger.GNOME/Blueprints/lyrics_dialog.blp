@@ -82,7 +82,7 @@ Adw.Window _root {
                   left-margin: 12;
                   right-margin: 12;
                   bottom-margin: 12;
-    
+                  
                   styles ["card"]
                 }
               }
@@ -99,11 +99,11 @@ Adw.Window _root {
               Gtk.Box {
                 orientation: vertical;
                 spacing: 12;
+                margin-top: 12;
                 margin-start: 24;
                 margin-end: 24;
-                margin-top: 12;
-                margin-bottom: 12;
-  
+                margin-bottom: 24;
+                
                 Gtk.Box {
                   orientation: horizontal;
                   spacing: 6;
@@ -137,7 +137,7 @@ Adw.Window _root {
                     
                     styles ["flat"]
                   }
-                                  
+
                   Gtk.Button _exportSyncButton {
                     icon-name: "folder-download-symbolic";
                     tooltip-text: _("Export to LRC");
@@ -145,16 +145,16 @@ Adw.Window _root {
                     styles ["flat"]
                   }
                 }
-  
+
                 Adw.PreferencesGroup {
                   Adw.EntryRow _syncOffsetRow {
                     title: _("Offset (in milliseconds)");
                     show-apply-button: true;
                   }
                 }
-  
+
                 Gtk.ListBox _syncList { 
-                   selection-mode: none;
+                  selection-mode: none;
                 
                   styles ["boxed-list"]
                 }

@@ -115,6 +115,7 @@ public partial class LyricsDialog : Adw.Window
         _descriptionRow.SetText(_controller.Description);
         _unsyncTextView.GetBuffer().SetText(_controller.UnsynchronizedLyrics, _controller.UnsynchronizedLyrics.Length);
         _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset.ToString());
+        _syncList.SetVisible(_controller.SynchronizedLyrics.Count > 0);
     }
     
     /// <summary>
@@ -138,6 +139,7 @@ public partial class LyricsDialog : Adw.Window
             delete.OnClicked += (s, ex) => _controller.RemoveSynchronizedLyric(e.Timestamp);
             row.AddSuffix(delete);
             row.OnApply += (s, ex) => _controller.SetSynchronizedLyric(e.Timestamp, s.GetText());
+            _syncList.SetVisible(true);
             _syncList.Insert(row, e.Position);
             _syncRows.Add(e.Timestamp, row);
         }
@@ -154,6 +156,7 @@ public partial class LyricsDialog : Adw.Window
         {
             _syncList.Remove(_syncRows[e.Timestamp]);
             _syncRows.Remove(e.Timestamp);
+            _syncList.SetVisible(_syncRows.Count > 0);
         }
     }
 
