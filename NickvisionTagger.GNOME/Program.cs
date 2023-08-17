@@ -39,6 +39,7 @@ public partial class Program
               * Fixed an issue where synchronized lyrics stored in the LRC format were not displayed correctly
               * Fixed an issue where using WebP image for album art caused a crash
               * Fixed an issue where drag and drop would cause a crash
+              * Improved speed of loading and saving files
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
