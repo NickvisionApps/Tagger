@@ -73,6 +73,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     {
         _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "lyrics", _("lyrics") };
         ATL.Settings.UseFileNameWhenNoTitle = false;
+        ATL.Settings.FileBufferSize = 1024;
         SortFilesBy = SortBy.Filename;
     }
 
