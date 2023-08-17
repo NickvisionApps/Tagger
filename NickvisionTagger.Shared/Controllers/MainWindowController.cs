@@ -254,9 +254,9 @@ public class MainWindowController : IDisposable
         if (SelectedMusicFiles.Count == 1)
         {
             var first = SelectedMusicFiles.First().Value;
-            return new LyricsDialogController(first.LyricsLanguageCode, first.LyricsDescription, first.UnsynchronizedLyrics, first.SynchronizedLyrics, first.SynchronizedLyricsOffset);
+            return new LyricsDialogController(first.Lyrics);
         }
-        return new LyricsDialogController("", "", "", new Dictionary<int, string>(), 0);
+        return new LyricsDialogController(null);
     }
 
     /// <summary>
@@ -485,42 +485,18 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// Updates the lyrics of the first selected muisc file
     /// </summary>
-    /// <param name="langCode">The language code of the lyrics</param>
-    /// <param name="description">The description of the lyrics</param>
-    /// <param name="unsync">The unsynchronized lyrics</param>
-    /// <param name="sync">The set of synchronized lyrics</param>
-    /// <param name="offset">The offset of synchronized lyrics (in milliseconds)</param>
-    public void UpdateLyrics(string langCode, string description, string unsync, Dictionary<int, string> sync, int offset)
+    /// <param name="lyrics">LyricsInfo</param>
+    public void UpdateLyrics(LyricsInfo lyrics)
     {
         if (SelectedMusicFiles.Count == 1)
         {
             var first = SelectedMusicFiles.First();
-            var updated = false;
-            if (langCode != first.Value.LyricsLanguageCode)
-            {
-                first.Value.LyricsLanguageCode = langCode;
-                updated = true;
-            }
-            if (description != first.Value.LyricsDescription)
-            {
-                first.Value.LyricsDescription = description;
-                updated = true;
-            }
-            if (unsync != first.Value.UnsynchronizedLyrics)
-            {
-                first.Value.UnsynchronizedLyrics = unsync;
-                updated = true;
-            }
-            if (!sync.SequenceEqual(first.Value.SynchronizedLyrics))
-            {
-                first.Value.SynchronizedLyrics = sync;
-                updated = true;
-            }
-            if (offset != first.Value.SynchronizedLyricsOffset)
-            {
-                first.Value.SynchronizedLyricsOffset = offset;
-                updated = true;
-            }
+            var updated = lyrics.LanguageCode != first.Value.Lyrics.LanguageCode ||
+                          lyrics.Description != first.Value.Lyrics.Description ||
+                          lyrics.UnsynchronizedLyrics != first.Value.Lyrics.UnsynchronizedLyrics ||
+                          !lyrics.SynchronizedLyrics.SequenceEqual(first.Value.Lyrics.SynchronizedLyrics) ||
+                          lyrics.Metadata["offset"] != first.Value.Lyrics.Metadata["offset"];
+            first.Value.Lyrics = lyrics;
             MusicFileSaveStates[first.Key] = !updated && MusicFileSaveStates[first.Key];
             MusicFileSaveStatesChanged?.Invoke(this, !MusicFileSaveStates[first.Key]);
         }
@@ -615,7 +591,7 @@ public class MainWindowController : IDisposable
             {
                 if(!MusicFileSaveStates[pair.Key])
                 {
-                    pair.Value.LoadTagFromDisk();
+                    pair.Value.ResetTag();
                     MusicFileSaveStates[pair.Key] = true;
                     discarded = true;
                 }

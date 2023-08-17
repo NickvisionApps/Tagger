@@ -32,11 +32,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
 {
     private static string[] _validProperties;
     
+    private Track _track;
     private string _dotExtension;
     private string _filename;
     private DateTime _modificationTimestamp;
     private string _fingerprint;
-    private Dictionary<string, string> _customProperties;
     
     /// <summary>
     /// What to sort files in a music folder by
@@ -48,94 +48,14 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// </summary>
     public string Path { get; private set; }
     /// <summary>
-    /// The title of the music file
-    /// </summary>
-    public string Title { get; set; }
-    /// <summary>
-    /// The artist of the music file
-    /// </summary>
-    public string Artist { get; set; }
-    /// <summary>
-    /// The album of the music file
-    /// </summary>
-    public string Album { get; set; }
-    /// <summary>
-    /// The year of the music file
-    /// </summary>
-    public int Year { get; set; }
-    /// <summary>
-    /// The track of the music file
-    /// </summary>
-    public int Track { get; set; }
-    /// <summary>
-    /// The number of total tracks of the music file
-    /// </summary>
-    public int TrackTotal { get; set; }
-    /// <summary>
-    /// The album of the music file
-    /// </summary>
-    public string AlbumArtist { get; set; }
-    /// <summary>
-    /// The genre of the music file
-    /// </summary>
-    public string Genre { get; set; }
-    /// <summary>
-    /// The comment of the music file
-    /// </summary>
-    public string Comment { get; set; }
-    /// <summary>
-    /// The BPM of the music file
-    /// </summary>
-    public int BeatsPerMinute { get; set; }
-    /// <summary>
-    /// The composer of the music file
-    /// </summary>
-    public string Composer { get; set; }
-    /// <summary>
-    /// The description of the music file
-    /// </summary>
-    public string Description { get; set; }
-    /// <summary>
-    /// The publisher of the music file
-    /// </summary>
-    public string Publisher { get; set; }
-    /// <summary>
-    /// The front album art of the music file
-    /// </summary>
-    public byte[] FrontAlbumArt { get; set; }
-    /// <summary>
-    /// The back album art of the music file
-    /// </summary>
-    public byte[] BackAlbumArt { get; set; }
-    /// <summary>
-    /// The language code of the lyrics of the music file
-    /// </summary>
-    public string LyricsLanguageCode { get; set; }
-    /// <summary>
-    /// The description of the lyrics of the music file
-    /// </summary>
-    public string LyricsDescription { get; set; }
-    /// <summary>
-    /// The unsynchronized lyrics of the music file
-    /// </summary>
-    public string UnsynchronizedLyrics { get; set; }
-    /// <summary>
-    /// The set of synchronized lyrics
-    /// </summary>
-    public Dictionary<int, string> SynchronizedLyrics { get; set; }
-    /// <summary>
-    /// The offset for SynchronizedLyrics (in milliseconds)
-    /// </summary>
-    public int SynchronizedLyricsOffset { get; set; }
-    /// <summary>
-    /// The duration of the music file
-    /// </summary>
-    public int Duration { get; private set; }
-    /// <summary>
     /// Whether the file is read-only or not
     /// </summary>
     public bool IsReadOnly { get; private set; }
     
+    /// <summary>
+    /// The duration of the music file
+    /// </summary>
+    public int Duration => _track.Duration;
     /// <summary>
     /// The size of the music file
     /// </summary>
@@ -143,7 +63,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <summary>
     /// Whether or not the tag is empty
     /// </summary>
-    public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && Composer == "" && Description == "" && Publisher == "" && FrontAlbumArt.Length == 0 && BackAlbumArt.Length == 0 && _customProperties.Count == 0;
+    public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && Composer == "" && Description == "" && Publisher == "" && FrontAlbumArt.Length == 0 && BackAlbumArt.Length == 0 && _track.AdditionalFields.Count == 0;
 
     /// <summary>
     /// Constructs a static MusicFile
@@ -162,34 +82,20 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     public MusicFile(string path)
     {
         Path = path;
+        try
+        {
+            _track = new Track(Path);
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message + "\n" + e.StackTrace);
+            throw new FileLoadException($"Unable to load music file: \"{Path}\". Tag could be corrupted.");
+        }
         _dotExtension = System.IO.Path.GetExtension(Path).ToLower();
         _filename = System.IO.Path.GetFileName(Path);
         _modificationTimestamp = File.GetLastWriteTime(Path);
         _fingerprint = "";
-        _customProperties = new Dictionary<string, string>();
-        Title = "";
-        Artist = "";
-        Album = "";
-        Year = 0;
-        Track = 0;
-        TrackTotal = 0;
-        AlbumArtist = "";
-        Genre = "";
-        Comment = "";
-        BeatsPerMinute = 0;
-        Composer = "";
-        Description = "";
-        Publisher = "";
-        FrontAlbumArt = Array.Empty<byte>();
-        BackAlbumArt = Array.Empty<byte>();
-        LyricsLanguageCode = "";
-        LyricsDescription = "";
-        UnsynchronizedLyrics = "";
-        SynchronizedLyrics = new Dictionary<int, string>();
-        SynchronizedLyricsOffset = 0;
-        Duration = 0;
         IsReadOnly = false;
-        LoadTagFromDisk();
     }
     
     /// <summary>
@@ -212,6 +118,215 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             }
             _filename = newFilename;
         }
+    }
+    
+    /// <summary>
+    /// The title of the music file
+    /// </summary>
+    public string Title
+    {
+        get => _track.Title ?? "";
+
+        set => _track.Title = value;
+    }
+    
+    /// <summary>
+    /// The artist of the music file
+    /// </summary>
+    public string Artist
+    {
+        get => _track.Artist ?? "";
+
+        set => _track.Artist = value;
+    }
+
+    /// <summary>
+    /// The album of the music file
+    /// </summary>
+    public string Album
+    {
+        get => _track.Album ?? "";
+
+        set => _track.Album = value;
+    }
+    
+    /// <summary>
+    /// The year of the music file
+    /// </summary>
+    public int Year
+    {
+        get => _track.Year ?? 0;
+
+        set => _track.Year = value;
+    }
+    
+    /// <summary>
+    /// The track of the music file
+    /// </summary>
+    public int Track
+    {
+        get => _track.TrackNumber ?? 0;
+
+        set => _track.TrackNumber = value;
+    }
+    
+    /// <summary>
+    /// The number of total tracks of the music file
+    /// </summary>
+    public int TrackTotal
+    {
+        get => _track.TrackTotal ?? 0;
+
+        set => _track.TrackTotal = value;
+    }
+    
+    /// <summary>
+    /// The album artist of the music file
+    /// </summary>
+    public string AlbumArtist 
+    {
+        get => _track.AlbumArtist ?? "";
+
+        set => _track.AlbumArtist = value;
+    }
+    
+    /// <summary>
+    /// The genre of the music file
+    /// </summary>
+    public string Genre 
+    {
+        get => _track.Genre ?? "";
+
+        set => _track.Genre = value;
+    }
+    
+    /// <summary>
+    /// The comment of the music file
+    /// </summary>
+    public string Comment
+    {
+        get => _track.Comment ?? "";
+
+        set => _track.Comment = value;
+    }
+    
+    /// <summary>
+    /// The BPM of the music file
+    /// </summary>
+    public int BeatsPerMinute 
+    {
+        get => _track.BPM ?? 0;
+
+        set => _track.BPM = value;
+    }
+    
+    /// <summary>
+    /// The composer of the music file
+    /// </summary>
+    public string Composer
+    {
+        get => _track.Composer ?? "";
+
+        set => _track.Composer = value;
+    }
+    
+    /// <summary>
+    /// The description of the music file
+    /// </summary>
+    public string Description
+    {
+        get => _track.Description ?? "";
+
+        set => _track.Description = value;
+    }
+    
+    /// <summary>
+    /// The publisher of the music file
+    /// </summary>
+    public string Publisher
+    {
+        get => _track.Publisher ?? "";
+
+        set => _track.Publisher = value;
+    }
+    
+    /// <summary>
+    /// The front album art of the music file
+    /// </summary>
+    public byte[] FrontAlbumArt
+    {
+        get 
+        {
+            var generic = Array.Empty<byte>();
+            foreach (var picture in _track.EmbeddedPictures)
+            {
+                if (picture.PicType == PictureInfo.PIC_TYPE.Front)
+                {
+                    return picture.PictureData;
+                }
+                if (picture.PicType == PictureInfo.PIC_TYPE.Generic)
+                {
+                    generic = picture.PictureData;
+                }
+            }
+            return generic;
+        }
+
+        set
+        {
+            var backAlbumArt = BackAlbumArt;
+            _track.EmbeddedPictures.Clear();
+            if (value.Length > 0)
+            {
+                var frontAlbumArt = PictureInfo.fromBinaryData(value, PictureInfo.PIC_TYPE.Front);
+                _track.EmbeddedPictures.Add(frontAlbumArt);
+            }
+            if (backAlbumArt.Length > 0)
+            {
+                _track.EmbeddedPictures.Add(PictureInfo.fromBinaryData(backAlbumArt, PictureInfo.PIC_TYPE.Back));
+            }
+        }
+    }
+
+    /// <summary>
+    /// The back album art of the music file
+    /// </summary>
+    public byte[] BackAlbumArt
+    {
+        get
+        {
+            var back = _track.EmbeddedPictures.FirstOrDefault(x => x.PicType == PictureInfo.PIC_TYPE.Back);
+            if (back == null)
+            {
+                return Array.Empty<byte>();
+            }
+            return back.PictureData;
+        }
+
+        set
+        {
+            var frontAlbumArt = FrontAlbumArt;
+            _track.EmbeddedPictures.Clear();
+            if (value.Length > 0)
+            {
+                var backAlbumArt = PictureInfo.fromBinaryData(value, PictureInfo.PIC_TYPE.Back);
+                _track.EmbeddedPictures.Add(backAlbumArt);
+            }
+            if (frontAlbumArt.Length > 0)
+            {
+                _track.EmbeddedPictures.Add(PictureInfo.fromBinaryData(frontAlbumArt, PictureInfo.PIC_TYPE.Front));
+            }
+        }
+    }
+
+    /// <summary>
+    /// The LyricsInfo object of the music file
+    /// </summary>
+    public LyricsInfo Lyrics
+    {
+        get => _track.Lyrics;
+
+        set => _track.Lyrics = value;
     }
     
     /// <summary>
@@ -258,76 +373,9 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     {
         get
         {
-            var names = _customProperties.Keys.ToList();
+            var names = _track.AdditionalFields.Keys.ToList();
             names.Sort();
             return names;
-        }
-    }
-
-    /// <summary>
-    /// Loads the tag metadata from the file on disk (discarding any unapplied metadata)
-    /// </summary>
-    /// <exception cref="FileLoadException">Thrown if unable to load MusicFile because of corrupted tag</exception>
-    /// <exception cref="ArgumentException">Thrown if the file path is invalid or if the file is not supported</exception>
-    /// <returns>True if successful, else false</returns>
-    public bool LoadTagFromDisk()
-    {
-        _filename = System.IO.Path.GetFileName(Path);
-        _customProperties.Clear();
-        SynchronizedLyrics.Clear();
-        try
-        {
-            var track = new Track(Path);
-            Title = track.Title ?? "";
-            Artist = track.Artist ?? "";
-            Album = track.Album ?? "";
-            Year = track.Year ?? 0;
-            Track = track.TrackNumber ?? 0;
-            TrackTotal = track.TrackTotal ?? 0;
-            AlbumArtist = track.AlbumArtist ?? "";
-            Genre = track.Genre ?? "";
-            Comment = track.Comment ?? "";
-            BeatsPerMinute = track.BPM ?? 0;
-            Composer = track.Composer ?? "";
-            Description = track.Description ?? "";
-            Publisher = track.Publisher ?? "";
-            Duration = track.Duration;
-            if(track.EmbeddedPictures.Count == 1 && track.EmbeddedPictures[0].PicType != PictureInfo.PIC_TYPE.Front && track.EmbeddedPictures[0].PicType != PictureInfo.PIC_TYPE.Back)
-            {
-                FrontAlbumArt = track.EmbeddedPictures[0].PictureData;
-            }
-            else
-            {
-                foreach(var picture in track.EmbeddedPictures)
-                {
-                    if(picture.PicType == PictureInfo.PIC_TYPE.Front)
-                    {
-                        FrontAlbumArt = picture.PictureData;
-                    }
-                    if(picture.PicType == PictureInfo.PIC_TYPE.Back)
-                    {
-                        BackAlbumArt = picture.PictureData;
-                    }
-                }
-            }
-            LyricsLanguageCode = track.Lyrics.LanguageCode;
-            LyricsDescription = track.Lyrics.Description;
-            UnsynchronizedLyrics = track.Lyrics.UnsynchronizedLyrics;
-            foreach (var phase in track.Lyrics.SynchronizedLyrics)
-            {
-                SynchronizedLyrics.Add(phase.TimestampMs, phase.Text);
-            }
-            SynchronizedLyricsOffset = track.Lyrics.Metadata.TryGetValue("offset", out var offset) ? (int.TryParse(offset, out var offsetInt) ? offsetInt : 0) : 0;
-            foreach(var pair in track.AdditionalFields)
-            {
-                _customProperties.Add(pair.Key, pair.Value);
-            }
-            return true;
-        }
-        catch(Exception e)
-        {
-            Console.WriteLine(e.Message + "\n" + e.StackTrace);
-            throw new FileLoadException($"Unable to load music file: \"{Path}\". Tag could be corrupted.");
         }
     }
     
@@ -478,57 +526,16 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return false;
         }
-        if(System.IO.Path.GetFileName(Path) != Filename)
-        {
-            var newPath = $"{System.IO.Path.GetDirectoryName(Path)}{System.IO.Path.DirectorySeparatorChar}{Filename}";
-            File.Move(Path, newPath);
-            Path = newPath;
-        }
-        var track = new Track(Path);
-        var res = track.Remove();
-        if(!res)
-        {
-            return res;
-        }
-        track.Title = Title;
-        track.Artist = Artist;
-        track.Album = Album;
-        track.Year = Year == 0 ? null : Year;
-        track.TrackNumber = Track == 0 ? null : Track;
-        track.TrackTotal = TrackTotal == 0 ? null : TrackTotal;
-        track.AlbumArtist = AlbumArtist;
-        track.Genre = Genre;
-        track.Comment = Comment;
-        track.BPM = BeatsPerMinute == 0 ? null : BeatsPerMinute;
-        track.Composer = Composer;
-        track.Description = Description;
-        track.Publisher = Publisher;
-        if(FrontAlbumArt.Length > 0)
-        {
-            track.EmbeddedPictures.Add(PictureInfo.fromBinaryData(FrontAlbumArt, PictureInfo.PIC_TYPE.Front));
-        }
-        if(BackAlbumArt.Length > 0)
-        {
-            track.EmbeddedPictures.Add(PictureInfo.fromBinaryData(BackAlbumArt, PictureInfo.PIC_TYPE.Back));
-        }
-        track.Lyrics = new LyricsInfo()
-        {
-            LanguageCode = LyricsLanguageCode,
-            Description = LyricsDescription,
-            UnsynchronizedLyrics = UnsynchronizedLyrics,
-            SynchronizedLyrics = SynchronizedLyrics.Select(x => new LyricsInfo.LyricsPhrase(x.Key, x.Value)).ToList()
-        };
-        if (SynchronizedLyricsOffset != 0)
-        {
-            track.Lyrics.Metadata["offset"] = SynchronizedLyricsOffset.ToString();
-        }
-        foreach(var pair in _customProperties)
-        {
-            track.AdditionalFields[pair.Key] = pair.Value;
-        }
-        res = track.Save();
+        var res = _track.Save();
         if(res)
         {
+            if(System.IO.Path.GetFileName(Path) != Filename)
+            {
+                var newPath = $"{System.IO.Path.GetDirectoryName(Path)}{System.IO.Path.DirectorySeparatorChar}{Filename}";
+                File.Move(Path, newPath);
+                Path = newPath;
+                _track = new Track(Path);
+            }
             if(preserveModificationTimestamp)
             {
                 File.SetLastWriteTime(Path, _modificationTimestamp);
@@ -540,6 +547,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         }
         return res;
     }
+
+    /// <summary>
+    /// Resets the file's tag back to what is stored on disk
+    /// </summary>
+    public void ResetTag() => _track = new Track(Path);
     
     /// <summary>
     /// Clears a file's tag (does not save to disk)
@@ -562,11 +574,8 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         Publisher = "";
         FrontAlbumArt = Array.Empty<byte>();
         BackAlbumArt = Array.Empty<byte>();
-        LyricsLanguageCode = "";
-        LyricsDescription = "";
-        UnsynchronizedLyrics = "";
-        SynchronizedLyrics.Clear();
-        _customProperties.Clear();
+        _track.AdditionalFields.Clear();
+        Lyrics = new LyricsInfo();
     }
 
     /// <summary>
@@ -576,11 +585,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>The value of the custom property. Null if no custom property exists with the provided name</returns>
     public string? GetCustomProperty(string name)
     {
-        if(!_customProperties.ContainsKey(name))
+        if(!_track.AdditionalFields.ContainsKey(name))
         {
             return null;
         }
-        return _customProperties[name];
+        return _track.AdditionalFields[name];
     }
 
     /// <summary>
@@ -595,7 +604,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return false;
         }
-        _customProperties[name] = value;
+        _track.AdditionalFields[name] = value;
         return true;
     }
 
@@ -606,11 +615,11 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <returns>Whether or not the property was removed. If no property exists with the provided name, false will be returned</returns>
     public bool RemoveCustomProperty(string name)
     {
-        if(!_customProperties.ContainsKey(name))
+        if(!_track.AdditionalFields.ContainsKey(name))
         {
             return false;
         }
-        _customProperties.Remove(name);
+        _track.AdditionalFields.Remove(name);
         return true;
     }
     
@@ -749,7 +758,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         {
             return false;
         }
-        var customProps = _customProperties.Keys.ToList();
+        var customProps = _track.AdditionalFields.Keys.ToList();
         var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
         if(matches.Count == 0)
         {
@@ -819,7 +828,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             }
             else if(customProps.Contains(value))
             {
-                formatString = formatString.Replace(match.Value, _customProperties[value]);
+                formatString = formatString.Replace(match.Value, _track.AdditionalFields[value]);
             }
             else
             {

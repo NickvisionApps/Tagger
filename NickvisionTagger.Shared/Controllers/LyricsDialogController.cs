@@ -15,25 +15,9 @@ namespace NickvisionTagger.Shared.Controllers;
 public class LyricsDialogController
 {
     /// <summary>
-    /// The language code of the lyrics
+    /// The LyricsInfo object for the lyrics
     /// </summary>
-    public string LanguageCode { get; set; }
-    /// <summary>
-    /// The description of the lyrics
-    /// </summary>
-    public string Description { get; set; }
-    /// <summary>
-    /// The unsynchronized lyrics
-    /// </summary>
-    public string UnsynchronizedLyrics { get; set; }
-    /// <summary>
-    /// The set of synchronized lyrics
-    /// </summary>
-    public Dictionary<int, string> SynchronizedLyrics { get; init; }
-    /// <summary>
-    /// The offset for SynchronizedLyrics (in milliseconds)
-    /// </summary>
-    public int SynchronizedLyricsOffset { get; set; }
+    public LyricsInfo Lyrics { get; init; }
     
     /// <summary>
     /// Occurs when a sync lyric is created
@@ -43,104 +27,144 @@ public class LyricsDialogController
     /// Occurs when a sync lyric is removed
     /// </summary>
     public event EventHandler<SynchronizedLyricsEventArgs>? SynchronizedLyricRemoved;
-    
+
     /// <summary>
     /// Constructs a LyricsDialogController
     /// </summary>
-    /// <param name="langCode">The language code of the lyrics</param>
-    /// <param name="description">The description of the lyrics</param>
-    /// <param name="unsync">The unsynchronized lyrics</param>
-    /// <param name="sync">The set of synchronized lyrics</param>
-    /// <param name="offset">The offset of synchronized lyrics (in milliseconds)</param>
-    public LyricsDialogController(string langCode, string description, string unsync, Dictionary<int, string> sync, int offset)
+    /// <param name="lyrics">LyricsInfo?</param>
+    public LyricsDialogController(LyricsInfo? lyrics)
     {
-        LanguageCode = langCode;
-        Description = description;
-        UnsynchronizedLyrics = unsync;
-        SynchronizedLyrics = sync.ToDictionary(x => x.Key, x => x.Value);
-        SynchronizedLyricsOffset = offset;
+        if (lyrics == null)
+        {
+            Lyrics = new LyricsInfo();
+        }
+        else
+        {
+            Lyrics = new LyricsInfo(lyrics);
+        }
     }
 
+    /// <summary>
+    /// The offset for SynchronizedLyrics (in milliseconds)
+    /// </summary>
+    public int SynchronizedLyricsOffset
+    {
+        get => Lyrics.Metadata.TryGetValue("offset", out var o) ? (int.TryParse(o, out var offsetInt) ? offsetInt : 0) : 0;
+
+        set => Lyrics.Metadata["offset"] = value.ToString();
+    }
+
+    /// <summary>
+    /// Starts the dialog
+    /// </summary>
     public void Startup()
     {
-        foreach (var pair in SynchronizedLyrics.OrderBy(x => x.Key))
+        foreach (var phrase in Lyrics.SynchronizedLyrics.OrderBy(x => x.TimestampMs))
         {
-            SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(pair.Key, pair.Value));
+            SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phrase.TimestampMs, phrase.Text));
         }
     }
     
+    /// <summary>
+    /// Adds a synchronized lyric
+    /// </summary>
+    /// <param name="timestamp">The timestamp of the lyric in milliseconds</param>
     public void AddSynchronizedLyric(int timestamp)
     {
-        if (!SynchronizedLyrics.ContainsKey(timestamp))
+        if (!Lyrics.SynchronizedLyrics.Any(x => x.TimestampMs == timestamp))
         {
-            SynchronizedLyrics[timestamp] = "";
-            var lyrics = SynchronizedLyrics.Keys.OrderBy(x => x).ToList();
-            SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(timestamp, "", lyrics.IndexOf(timestamp)));
+            var phrase = new LyricsInfo.LyricsPhrase(timestamp, "");
+            Lyrics.SynchronizedLyrics.Add(phrase);
+            SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(timestamp, "", Lyrics.SynchronizedLyrics.OrderBy(x => x.TimestampMs).ToList().IndexOf(phrase)));
         }
     }
 
+    /// <summary>
+    /// Sets a synchronized lyric
+    /// </summary>
+    /// <param name="timestamp">The timestamp of the lyric in milliseconds</param>
+    /// <param name="lyric">The string lyrics</param>
     public void SetSynchronizedLyric(int timestamp, string lyric)
     {
-        if (SynchronizedLyrics.ContainsKey(timestamp))
+        var phrase = Lyrics.SynchronizedLyrics.FirstOrDefault(x => x.TimestampMs == timestamp);
+        if (phrase != null)
         {
-            SynchronizedLyrics[timestamp] = lyric;
+            phrase.Text = lyric;
         }
     }
 
+    /// <summary>
+    /// Removes a synchronized lyric
+    /// </summary>
+    /// <param name="timestamp">The timestamp of the lyric in milliseconds</param>
     public void RemoveSynchronizedLyric(int timestamp)
     {
-        if (SynchronizedLyrics.ContainsKey(timestamp))
+        var phrase = Lyrics.SynchronizedLyrics.FirstOrDefault(x => x.TimestampMs == timestamp);
+        if (phrase != null)
         {
-            SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(timestamp, SynchronizedLyrics[timestamp]));
-            SynchronizedLyrics.Remove(timestamp);
+            SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(timestamp, phrase.Text));
+            Lyrics.SynchronizedLyrics.Remove(phrase);
         }
     }
     
+    /// <summary>
+    /// Clears all synchronized lyrics
+    /// </summary>
     public void ClearSynchronizedLyrics()
     {
-        foreach (var pair in SynchronizedLyrics)
+        foreach (var phrase in Lyrics.SynchronizedLyrics)
         {
-            SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(pair.Key, pair.Value));
+            SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(phrase.TimestampMs, phrase.Text));
         }
-        SynchronizedLyrics.Clear();
+        Lyrics.SynchronizedLyrics.Clear();
     }
 
+    /// <summary>
+    /// Imports synchronized lyric data from an LRC file
+    /// </summary>
+    /// <param name="path">The path of the LRC file</param>
+    /// <param name="overwrite">Whether or not to overwrite Tagger's data with LRC data</param>
+    /// <returns>True if successful, else false</returns>
     public bool ImportFromLRC(string path, bool overwrite)
     {
         if (string.IsNullOrEmpty(path) || Path.GetExtension(path).ToLower() != ".lrc")
         {
             return false;
         }
-        var lrc = File.ReadAllText(path);
-        var lyricsInfo = new LyricsInfo();
-        lyricsInfo.ParseLRC(lrc);
-        foreach (var phase in lyricsInfo.SynchronizedLyrics)
+        var lrc = new LyricsInfo();
+        lrc.ParseLRC(File.ReadAllText(path));
+        foreach (var p in lrc.SynchronizedLyrics)
         {
-            if (SynchronizedLyrics.ContainsKey(phase.TimestampMs) && overwrite)
+            var phrase = Lyrics.SynchronizedLyrics.FirstOrDefault(x => x.TimestampMs == p.TimestampMs);
+            if (phrase != null && overwrite)
             {
-                SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(phase.TimestampMs, SynchronizedLyrics[phase.TimestampMs]));
-                SynchronizedLyrics[phase.TimestampMs] = phase.Text;
-                var lyrics = SynchronizedLyrics.Keys.OrderBy(x => x).ToList();
-                SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phase.TimestampMs, phase.Text, lyrics.IndexOf(phase.TimestampMs)));
+                SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(phrase.TimestampMs, phrase.Text));
+                phrase.Text = p.Text;
+                SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phrase.TimestampMs, phrase.Text, Lyrics.SynchronizedLyrics.OrderBy(x => x.TimestampMs).ToList().IndexOf(phrase)));
             }
-            else if (!SynchronizedLyrics.ContainsKey(phase.TimestampMs))
+            else if (phrase == null)
             {
-                SynchronizedLyrics.Add(phase.TimestampMs, phase.Text);
-                var lyrics = SynchronizedLyrics.Keys.OrderBy(x => x).ToList();
-                SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phase.TimestampMs, phase.Text, lyrics.IndexOf(phase.TimestampMs)));
+                phrase = new LyricsInfo.LyricsPhrase(p.TimestampMs, p.Text);
+                Lyrics.SynchronizedLyrics.Add(phrase);
+                SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phrase.TimestampMs, phrase.Text, Lyrics.SynchronizedLyrics.OrderBy(x => x.TimestampMs).ToList().IndexOf(phrase)));
             }
         }
-        var offset = lyricsInfo.Metadata.TryGetValue("offset", out var o) ? (int.TryParse(o, out var offsetInt) ? offsetInt : 0) : 0;
-        if (offset != SynchronizedLyricsOffset && overwrite)
+        var lrcOffset = lrc.Metadata.TryGetValue("offset", out var o) ? (int.TryParse(o, out var offsetInt) ? offsetInt : 0) : 0;
+        if (lrcOffset != SynchronizedLyricsOffset && overwrite)
         {
-            SynchronizedLyricsOffset = offset;
+            SynchronizedLyricsOffset = lrcOffset;
         }
         return true;
     }
 
+    /// <summary>
+    /// Exports synchronized lyric data to an LRC file
+    /// </summary>
+    /// <param name="path">The path of the LRC file</param>
+    /// <returns>True if successful, else false</returns>
     public bool ExportToLRC(string path)
     {
-        if (string.IsNullOrEmpty(path) || SynchronizedLyrics.Count == 0)
+        if (string.IsNullOrEmpty(path) || Lyrics.SynchronizedLyrics.Count == 0)
         {
             return false;
         }
@@ -148,15 +172,7 @@ public class LyricsDialogController
         {
             path += ".lrc";
         }
-        var lyricsInfo = new LyricsInfo()
-        {
-            SynchronizedLyrics = SynchronizedLyrics.Select(x => new LyricsInfo.LyricsPhrase(x.Key, x.Value)).ToList()
-        };
-        if (SynchronizedLyricsOffset != 0)
-        {
-            lyricsInfo.Metadata["offset"] = SynchronizedLyricsOffset.ToString();
-        }
-        File.WriteAllText(path, lyricsInfo.FormatSynchToLRC());
+        File.WriteAllText(path, Lyrics.FormatSynchToLRC());
         return true;
     }
 }

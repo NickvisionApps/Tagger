@@ -775,7 +775,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var lyricsDialog = new LyricsDialog(controller, this, _controller.AppInfo.ID);
         lyricsDialog.OnHide += (s, ex) =>
         {
-            _controller.UpdateLyrics(controller.LanguageCode, controller.Description, controller.UnsynchronizedLyrics, controller.SynchronizedLyrics, controller.SynchronizedLyricsOffset);
+            _controller.UpdateLyrics(controller.Lyrics);
             lyricsDialog.Destroy();
         };
         lyricsDialog.Present();
