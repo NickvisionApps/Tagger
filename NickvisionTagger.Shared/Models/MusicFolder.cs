@@ -9,8 +9,10 @@ namespace NickvisionTagger.Shared.Models;
 /// <summary>
 /// A model of a music folder
 /// </summary>
-public class MusicFolder
+public class MusicFolder : IDisposable
 {
+    private bool _disposed;
+    
     /// <summary>
     /// The parent path of the music folder
     /// </summary>
@@ -51,6 +53,7 @@ public class MusicFolder
     /// <param name="path">The path of the music folder</param>
     public MusicFolder(string path)
     {
+        _disposed = false;
         ParentPath = path;
         IncludeSubfolders = true;
         SortFilesBy = SortBy.Filename;
@@ -61,12 +64,46 @@ public class MusicFolder
     }
     
     /// <summary>
+    /// Finalizes the MusicFolder
+    /// </summary>
+    ~MusicFolder() => Dispose(false);
+    
+    /// <summary>
+    /// Frees resources used by the MusicFolder object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the MusicFolder object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+        foreach (var file in MusicFiles)
+        {
+            file.Dispose();
+        }
+        _disposed = true;
+    }
+    
+    /// <summary>
     /// Scans the music folder for music files and populates the files list. If includeSubfolders is true, scans subfolders as well. If false, only the parent path
     /// </summary>
     /// <returns>Whether or not there are corrupted files</returns>
     public async Task<bool> ReloadMusicFilesAsync()
     {
         MusicFile.SortFilesBy = SortFilesBy;
+        foreach (var file in MusicFiles)
+        {
+            file.Dispose();
+        }
         MusicFiles.Clear();
         CorruptedFiles.Clear();
         ContainsReadOnlyFiles = false;

@@ -40,7 +40,7 @@ public partial class Program
               * Fixed an issue where using WebP image for album art caused a crash
               * Fixed an issue where drag and drop would cause a crash
               * Improved speed of loading and saving files
-              * Improved fingerprint calculation
+              * Improved fingerprint calculation and process management
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))

@@ -28,15 +28,16 @@ public enum MusicBrainzLoadStatus
 /// <summary>
 /// A model of a music file
 /// </summary>
-public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
+public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFile>
 {
     private static string[] _validProperties;
     
+    private bool _disposed;
     private Track _track;
     private string _dotExtension;
     private string _filename;
     private DateTime _modificationTimestamp;
-    private Process? _fingerprintProcess;
+    private Process? _fpcalc;
     private string _fingerprint;
     
     /// <summary>
@@ -83,6 +84,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     /// <param name="path">The path of the music file</param>
     public MusicFile(string path)
     {
+        _disposed = false;
         Path = path;
         try
         {
@@ -96,10 +98,15 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         _dotExtension = System.IO.Path.GetExtension(Path).ToLower();
         _filename = System.IO.Path.GetFileName(Path);
         _modificationTimestamp = File.GetLastWriteTime(Path);
-        _fingerprintProcess = null;
+        _fpcalc = null;
         _fingerprint = "";
         IsReadOnly = false;
     }
+    
+    /// <summary>
+    /// Finalizes the MusicFile
+    /// </summary>
+    ~MusicFile() => Dispose(false);
     
     /// <summary>
     /// The filename of the music file
@@ -339,9 +346,9 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     {
         get
         {
-            if(_fingerprintProcess == null && string.IsNullOrEmpty(_fingerprint))
+            if(_fpcalc == null && string.IsNullOrEmpty(_fingerprint))
             {
-                _fingerprintProcess = new Process()
+                _fpcalc = new Process()
                 {
                     StartInfo = new ProcessStartInfo()
                     {
@@ -352,10 +359,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                         CreateNoWindow = true
                     }
                 };
-                _fingerprintProcess.Start();
-                _fingerprint = _fingerprintProcess.StandardOutput.ReadToEnd();
-                _fingerprintProcess.WaitForExit();
-                if (_fingerprintProcess.ExitCode == 0)
+                _fpcalc.Start();
+                _fingerprint = _fpcalc.StandardOutput.ReadToEnd();
+                _fpcalc.WaitForExit();
+                if (_fpcalc.ExitCode == 0)
                 {
                     _fingerprint = _fingerprint.Substring(_fingerprint.IndexOf("FINGERPRINT=") + 12);
                     _fingerprint = _fingerprint.Remove(_fingerprint.Length - 1);
@@ -364,8 +371,8 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 {
                     _fingerprint = _("ERROR");
                 }
-                _fingerprintProcess.Dispose();
-                _fingerprintProcess = null;
+                _fpcalc.Dispose();
+                _fpcalc = null;
             }
             return _fingerprint;
         }
@@ -382,6 +389,29 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
             names.Sort();
             return names;
         }
+    }
+    
+    /// <summary>
+    /// Frees resources used by the MusicFile object
+    /// </summary>
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Frees resources used by the MusicFile object
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        if (_disposed)
+        {
+            return;
+        }
+        _fpcalc?.Kill(true);
+        _fpcalc?.Dispose();
+        _disposed = true;
     }
     
     /// <summary>

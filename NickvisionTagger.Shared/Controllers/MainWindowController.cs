@@ -235,6 +235,7 @@ public class MainWindowController : IDisposable
         {
             return;
         }
+        _musicFolder?.Dispose();
         NetworkMonitor?.Dispose();
         _disposed = true;
     }
