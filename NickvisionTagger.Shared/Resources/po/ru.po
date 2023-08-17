@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-15 22:00-0400\n"
-"PO-Revision-Date: 2023-07-30 22:38+0000\n"
+"PO-Revision-Date: 2023-08-17 05:59+0000\n"
 "Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
 #: ../../../Controllers/MainWindowController.cs:169
@@ -116,7 +116,7 @@ msgstr "альбомартист"
 
 #: ../../../Controllers/MainWindowController.cs:928
 msgid "An invalid RecordingId was provided to MusicBrainz"
-msgstr ""
+msgstr "В MusicBrainz был передан неверный RecordingId"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:528
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:606
@@ -191,11 +191,8 @@ msgid "composer"
 msgstr "композитор"
 
 #: ../../../Controllers/MainWindowController.cs:148
-#, fuzzy
 msgid "Contributors on GitHub ❤️"
-msgstr ""
-"Nicholas Logozzo {0}\n"
-"Участники на GitHub ❤️ {1}"
+msgstr "Участники на GitHub ❤️"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:686
@@ -231,12 +228,11 @@ msgstr "Пользовательский"
 
 #: ../../../Controllers/MainWindowController.cs:151
 msgid "DaPigGuy"
-msgstr ""
+msgstr "DaPigGuy"
 
 #: ../../../Controllers/MainWindowController.cs:152
-#, fuzzy
 msgid "David Lapshin"
-msgstr "Давид Лапшин {0}"
+msgstr "Давид Лапшин"
 
 #: ../../../Controllers/MainWindowController.cs:974
 #: ../../../Controllers/MainWindowController.cs:1092
@@ -267,7 +263,7 @@ msgstr "Загрузка метаданных MusicBrainz..."
 
 #: ../../../Controllers/MainWindowController.cs:930
 msgid "Error"
-msgstr ""
+msgstr "Ошибка"
 
 #: ../../../Models/MusicFile.cs:224 ../../../Models/MusicFile.cs:247
 #: ../../../Models/MusicFile.cs:344 ../../../Models/MusicFile.cs:842
@@ -276,7 +272,7 @@ msgstr "ОШИБКА"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:221
 msgid "Existing Lyrics"
-msgstr ""
+msgstr "Существующие лирики"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:750
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
@@ -290,9 +286,8 @@ msgstr "Экспортировать переднюю обложку альбо�
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:257
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:143
-#, fuzzy
 msgid "Export to LRC"
-msgstr "Экспортировать"
+msgstr "Экспорт в LRC"
 
 #: ../../../Controllers/MainWindowController.cs:814
 msgid "Exported back album art to file successfully"
@@ -304,11 +299,11 @@ msgstr "Успешно экспортированы в файл передние
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:275
 msgid "Exported successfully to: {0}"
-msgstr ""
+msgstr "Успешно экспортировано в: {0}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:450
 msgid "Failed MusicBrainz Lookups"
-msgstr ""
+msgstr "Неудачные поиски в MusicBrainz"
 
 #: ../../../Controllers/MainWindowController.cs:819
 msgid "Failed to export back album art to a file"
@@ -345,7 +340,7 @@ msgstr "Передняя"
 
 #: ../../../Controllers/MainWindowController.cs:150
 msgid "Fyodor Sobolev"
-msgstr ""
+msgstr "Фёдор Соболев"
 
 #: ../../../Controllers/MainWindowController.cs:974
 #: ../../../Controllers/MainWindowController.cs:1065
@@ -373,11 +368,11 @@ msgstr "Справка"
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:210
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:136
 msgid "Import from LRC"
-msgstr ""
+msgstr "Импорт из LRC"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:447
 msgid "Info"
-msgstr ""
+msgstr "Информация"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:718
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:81
@@ -391,7 +386,7 @@ msgstr "Вставить переднюю обложку альбома"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:223
 msgid "Keep Tagger's lyrics"
-msgstr ""
+msgstr "Оставить лирики Tagger"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
@@ -416,7 +411,7 @@ msgstr "Загрузка музыкальных файлов из папки..."
 
 #: ../../../Models/MusicFile.cs:153
 msgid "lyrics"
-msgstr ""
+msgstr "лирики"
 
 #: ../../../Controllers/MainWindowController.cs:146
 msgid "Matrix Chat"
@@ -436,28 +431,28 @@ msgstr "Новое пользовательское свойство"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:183
 msgid "New Synchronized Lyric"
-msgstr ""
+msgstr "Новая синхронизированная лирика"
 
 #: ../../../Controllers/MainWindowController.cs:147
 #: ../../../Controllers/MainWindowController.cs:149
 msgid "Nicholas Logozzo"
-msgstr ""
+msgstr "Nicholas Logozzo"
 
 #: ../../../Controllers/MainWindowController.cs:926
 msgid "No AcoustId entry found for the file's fingerprint"
-msgstr ""
+msgstr "Для отпечатка файла не найдено записи AcoustId"
 
 #: ../../../Controllers/MainWindowController.cs:937
 msgid "No metadata was downloaded"
-msgstr ""
+msgstr "Метаданные не были загружены"
 
 #: ../../../Controllers/MainWindowController.cs:927
 msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
-msgstr ""
+msgstr "Для записи AcoustId не был предоставлен MusicBrainz RecordingId"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:253
 msgid "Nothing to export."
-msgstr ""
+msgstr "Нечего экспортировать."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:822
 msgid "OK"
@@ -499,9 +494,8 @@ msgid "Remove Custom Property"
 msgstr "Удалить пользовательское свойство"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:136
-#, fuzzy
 msgid "Remove Lyric"
-msgstr "Удалить"
+msgstr "Удалить лирику"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:534
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:612
@@ -573,7 +567,7 @@ msgstr "Tagger открыл некоторые файлы в режиме тол
 
 #: ../../../Controllers/MainWindowController.cs:929
 msgid "This file does not have a valid fingerprint"
-msgstr ""
+msgstr "Этот файл не имеет действительного отпечатка"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -581,7 +575,7 @@ msgstr "ТиБ"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:183
 msgid "Timestamp (hh:mm:ss)"
-msgstr ""
+msgstr "Временная метка (чч:мм:сс)"
 
 #: ../../../Controllers/MainWindowController.cs:974
 #: ../../../Controllers/MainWindowController.cs:1004
@@ -613,14 +607,12 @@ msgid "translator-credits"
 msgstr "Давид Лапшин <ddaudix@gmail.com>, 2023"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:279
-#, fuzzy
 msgid "Unable to export to LRC."
-msgstr "Невозможно сохранить {0}."
+msgstr "Невозможно экспортировать в LRC."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:236
-#, fuzzy
 msgid "Unable to import from LRC."
-msgstr "Невозможно сохранить {0}."
+msgstr "Невозможно импортировать из LRC."
 
 #: ../../../Controllers/MainWindowController.cs:716
 msgid "Unable to load image file"
@@ -642,13 +634,15 @@ msgstr "Невозможно отправить заявку на AcoustId. Пр
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:226
 msgid "Use LRC's lyrics"
-msgstr ""
+msgstr "Использовать лирики LRC"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:221
 msgid ""
 "What would you like Tagger to do with lyrics found from the LRC file that "
 "conflict with existing lyrics of the same timestamp?"
 msgstr ""
+"Что вы хотите, чтобы Tagger делал с лириками, найденными в файле LRC, "
+"которые конфликтуют с существующими лириками с той же временной меткой?"
 
 #: ../../../Controllers/MainWindowController.cs:974
 #: ../../../Controllers/MainWindowController.cs:1016
@@ -659,7 +653,7 @@ msgstr "год"
 
 #: NickvisionTagger.GNOME/Blueprints/autocomplete_box.blp:15
 msgid "Suggestions"
-msgstr ""
+msgstr "Предложения"
 
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
 msgid "Corrupted Files Found"
@@ -676,21 +670,23 @@ msgstr ""
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:15
 #: NickvisionTagger.GNOME/Blueprints/window.blp:389
 msgid "Lyrics"
-msgstr ""
+msgstr "Лирика"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:31
 msgid "Configure"
-msgstr ""
+msgstr "Настроить"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:42
 msgid ""
 "Information about the provided lyrics. Applies to both unsynchronized and "
 "synchronized lyrics."
 msgstr ""
+"Информация о предоставленных лириках. Применяется как для "
+"несинхронизированных, так и для синхронизированных лирик."
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:45
 msgid "Language Code"
-msgstr ""
+msgstr "Языковой код"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:54
 #: NickvisionTagger.GNOME/Blueprints/window.blp:471
@@ -699,24 +695,26 @@ msgstr "Описание"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:66
 msgid "Unsynchronized"
-msgstr ""
+msgstr "Несинхронизированные"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:77
 msgid ""
 "Unsynchronized lyrics are stored as a single string with no time information."
 msgstr ""
+"Несинхронизированные лирики хранятся в виде одной строки без информации о "
+"времени."
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:93
 msgid "Synchronized"
-msgstr ""
+msgstr "Синхронизированные"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:129
 msgid "Clear All Lyrics"
-msgstr ""
+msgstr "Очистить все лирики"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:151
 msgid "Offset (in milliseconds)"
-msgstr ""
+msgstr "Смещение (в миллисекундах)"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:119
@@ -769,7 +767,6 @@ msgid "File Name"
 msgstr "Имя файла"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#, fuzzy
 msgid "File Path"
 msgstr "Путь к файлу"
 
@@ -902,7 +899,7 @@ msgstr "Удалить заднюю обложку альбома"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
 #: NickvisionTagger.GNOME/Blueprints/window.blp:385
 msgid "Manage Lyrics"
-msgstr ""
+msgstr "Управление лириками"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:102
 msgctxt "Shortcut"
