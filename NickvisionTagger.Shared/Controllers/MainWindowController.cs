@@ -1240,11 +1240,11 @@ public class MainWindowController : IDisposable
             SelectedPropertyMap.Description = first.Description;
             SelectedPropertyMap.Publisher = first.Publisher;
             SelectedPropertyMap.Duration = first.Duration.ToDurationString();
-            SelectedPropertyMap.Fingerprint = "";
+            SelectedPropertyMap.Fingerprint = _("Calculating...");
             Task.Run(() =>
             {
                 var fingerprint = first.Fingerprint;
-                if(first == SelectedMusicFiles.First().Value)
+                if(first == SelectedMusicFiles.First().Value) //make sure this file is still selected
                 {
                     SelectedPropertyMap.Fingerprint = fingerprint;
                     FingerprintCalculated?.Invoke(this, EventArgs.Empty);

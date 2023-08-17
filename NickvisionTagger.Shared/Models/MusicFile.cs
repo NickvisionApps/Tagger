@@ -36,6 +36,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     private string _dotExtension;
     private string _filename;
     private DateTime _modificationTimestamp;
+    private Process? _fingerprintProcess;
     private string _fingerprint;
     
     /// <summary>
@@ -94,6 +95,7 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
         _dotExtension = System.IO.Path.GetExtension(Path).ToLower();
         _filename = System.IO.Path.GetFileName(Path);
         _modificationTimestamp = File.GetLastWriteTime(Path);
+        _fingerprintProcess = null;
         _fingerprint = "";
         IsReadOnly = false;
     }
@@ -336,9 +338,9 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
     {
         get
         {
-            if(string.IsNullOrEmpty(_fingerprint) || _fingerprint == _("ERROR"))
+            if(_fingerprintProcess == null && string.IsNullOrEmpty(_fingerprint))
             {
-                using var process = new Process()
+                _fingerprintProcess = new Process()
                 {
                     StartInfo = new ProcessStartInfo()
                     {
@@ -349,10 +351,10 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                         CreateNoWindow = true
                     }
                 };
-                process.Start();
-                _fingerprint = process.StandardOutput.ReadToEnd();
-                process.WaitForExit();
-                if (process.ExitCode == 0)
+                _fingerprintProcess.Start();
+                _fingerprint = _fingerprintProcess.StandardOutput.ReadToEnd();
+                _fingerprintProcess.WaitForExit();
+                if (_fingerprintProcess.ExitCode == 0)
                 {
                     _fingerprint = _fingerprint.Substring(_fingerprint.IndexOf("FINGERPRINT=") + 12);
                     _fingerprint = _fingerprint.Remove(_fingerprint.Length - 1);
@@ -361,6 +363,8 @@ public class MusicFile : IComparable<MusicFile>, IEquatable<MusicFile>
                 {
                     _fingerprint = _("ERROR");
                 }
+                _fingerprintProcess.Dispose();
+                _fingerprintProcess = null;
             }
             return _fingerprint;
         }
