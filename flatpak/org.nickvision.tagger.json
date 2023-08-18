@@ -18,7 +18,8 @@
         "--device=dri",
         "--share=ipc",
         "--share=network",
-        "--system-talk-name=org.freedesktop.NetworkManager"
+        "--system-talk-name=org.freedesktop.NetworkManager",
+        "--filesystem=home"
     ],
     "cleanup":[
         "/include",
