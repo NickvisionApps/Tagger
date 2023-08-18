@@ -54,4 +54,14 @@
         <p>For example, a custom property who's name is <code>ENCODER</code> can be used as <code>%encoder%</code>.</p>
     </note>
 </section>
+<section>
+    <title>Ignoring in File Name</title>
+    <p>When running <code>File Name to Tag</code> conversion, an empty <code>%%</code> can be specified to ignore part of the file name when reading it.</p>
+    <note>
+        <title>Example</title>
+        <p>Format String: <code>%%- %title%</code></p>
+        <p>Filename: <code>Artist1 - Song1.mp3</code></p>
+        <p>This format string and this file name will create a tag with a title of <code>Song1</code> and ignore the <code>Artist1</code>.</p>
+    </note>
+</section>
 </page>
