@@ -36,7 +36,7 @@ public partial class Program
         _mainWindowController.AppInfo.Changelog =
             @"* Added offset field to synchronized lyrics page 
               * Added the ability to import and export LRC files in the synchronized lyrics page
-              * Added the ability to ignore a part of a file name in a format string by simply using `%%`
+              * Added the ability to ignore a part of a file name in a format string by specifying an empty `%%`
               * Fixed an issue where synchronized lyrics stored in the LRC format were not displayed correctly
               * Fixed an issue where using WebP image for album art caused a crash
               * Fixed an issue where drag and drop would cause a crash
