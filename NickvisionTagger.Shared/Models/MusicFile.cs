@@ -669,12 +669,12 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         {
             return false;
         }
-        var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
+        var matches = Regex.Matches(formatString, @"%(\w*)%", RegexOptions.IgnoreCase); //wrapped in %%
         if(matches.Count == 0)
         {
             return false;
         }
-        var splits = Regex.Split(formatString, @"(\%\w+\%)", RegexOptions.IgnoreCase).Where(x =>
+        var splits = Regex.Split(formatString, @"(\%\w*\%)", RegexOptions.IgnoreCase).Where(x =>
         {
             if(x.Length > 1)
             {

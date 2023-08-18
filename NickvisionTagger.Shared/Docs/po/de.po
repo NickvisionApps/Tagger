@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-03 17:01-0400\n"
+"POT-Creation-Date: 2023-08-17 22:08-0400\n"
 "PO-Revision-Date: 2023-08-15 16:47+0000\n"
 "Last-Translator: Simon Hahne <simonhahne@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -307,7 +307,7 @@ msgstr ""
 "gehüllt sind."
 
 #. (itstool) path: note/title
-#: yelp/C/format-strings.page:26
+#: yelp/C/format-strings.page:26 yelp/C/format-strings.page:58
 msgid "Example"
 msgstr "Beispiel"
 
@@ -416,6 +416,41 @@ msgstr ""
 "Beispielsweise kann eine benutzerdefinierte Eigenschaft mit dem Namen "
 "<code>ENCODER</code> als <code>%encoder%</code> verwendet werden."
 
+#. (itstool) path: section/title
+#: yelp/C/format-strings.page:55
+msgid "Ignoring in File Name to Tag Conversion"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/format-strings.page:56
+msgid ""
+"When running <code>File Name to Tag</code> conversion, an empty <code>%%</"
+"code> can be specified to ignore part of the file name when reading it."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:59
+#, fuzzy
+msgid "Format String: <code>%%- %track%. %%</code>"
+msgstr "Formatvorlage: <code>%artist%- %title%</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:60
+#, fuzzy
+msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
+msgstr "Dateiname: <code>Interpret1 - Song1.mp3</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:61
+#, fuzzy
+msgid ""
+"This format string and this file name will create a tag with a track of "
+"<code>05</code> and ignore the rest of the file name."
+msgstr ""
+"Wird die <code>Dateiname zu Tag</code> Konvertierung ausgeführt, erstellt "
+"die Formatvorlage und der Dateiname einen Tag mit Interpret "
+"<code>Interpret1</code> und Titel <code>Song1</code>."
+
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
 msgctxt "link"
@@ -456,9 +491,9 @@ msgid ""
 "bit.ly/3GrfEid\">join our Matrix channel</link>."
 msgstr ""
 "Unterstützung erhältst du in GitHub <link href=\"https://github.com/"
-"NickvisionApps/Tagger/issues\">Issues</link> oder <link href=\"https://github"
-".com/NickvisionApps/Tagger/discussions\">Discussions</link>. Außerdem kannst "
-"du <link href=\"https://bit.ly/3GrfEid\">unserem Matrix-Channel "
+"NickvisionApps/Tagger/issues\">Issues</link> oder <link href=\"https://"
+"github.com/NickvisionApps/Tagger/discussions\">Discussions</link>. Außerdem "
+"kannst du <link href=\"https://bit.ly/3GrfEid\">unserem Matrix-Channel "
 "beitreten</link>."
 
 #. (itstool) path: list/title
@@ -870,8 +905,8 @@ msgid ""
 "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</"
 "link> for its backend to read and write metadata."
 msgstr ""
-"Tagger nutzt <link href=\"https://github.com/Zeugma440/atldotnet\""
-">atldotnet</link> um Metadaten zu lesen und zu schreiben."
+"Tagger nutzt <link href=\"https://github.com/Zeugma440/"
+"atldotnet\">atldotnet</link> um Metadaten zu lesen und zu schreiben."
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
@@ -882,8 +917,8 @@ msgstr "Änderungen können nicht übernommen werden - Keine Berechtigung"
 #: yelp/C/unsupported.page:25
 msgid ""
 "There is a known issue of the flatpak version of the app running on Debian-"
-"based systems where you are unable to save files due to a \"permission denied"
-"\" error."
+"based systems where you are unable to save files due to a \"permission "
+"denied\" error."
 msgstr ""
 "Es gibt einen bekannten Fehler mit der flatpak-Version der App auf Debian-"
 "basierten Systemen, der dazu führt, dass das Speichern von Dateien mit dem "

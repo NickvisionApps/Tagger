@@ -54,4 +54,14 @@
         <p>Par exemple, une propriété personnalisée dont le nom est <code>ENCODEUR</code> peut être utilisée par <code>%encodeur%</code>.</p>
     </note>
 </section>
+<section>
+    <title>Ignoring in File Name to Tag Conversion</title>
+    <p>When running <code>File Name to Tag</code> conversion, an empty <code>%%</code> can be specified to ignore part of the file name when reading it.</p>
+    <note>
+        <title>Exemple</title>
+        <p>Format String: <code>%%- %track%. %%</code></p>
+        <p>Filename: <code>Artist1- 05. Song1.mp3</code></p>
+        <p>This format string and this file name will create a tag with a track of <code>05</code> and ignore the rest of the file name.</p>
+    </note>
+</section>
 </page>

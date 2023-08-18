@@ -1,12 +1,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-03 17:01-0400\n"
+"POT-Creation-Date: 2023-08-17 22:08-0400\n"
 "PO-Revision-Date: 2023-08-08 10:00+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
-".org>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/"
-"nickvision-tagger/docs/es/>\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
+"weblate.org>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-"
+"tagger/docs/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -308,7 +308,7 @@ msgstr ""
 "porcentaje (%)."
 
 #. (itstool) path: note/title
-#: yelp/C/format-strings.page:26
+#: yelp/C/format-strings.page:26 yelp/C/format-strings.page:58
 msgid "Example"
 msgstr "Ejemplo"
 
@@ -419,6 +419,41 @@ msgstr ""
 "Por ejemplo, una propiedad personalizada cuyo nombre es <code>ENCODER</code> "
 "se puede usar como <code>%encoder%</code>."
 
+#. (itstool) path: section/title
+#: yelp/C/format-strings.page:55
+msgid "Ignoring in File Name to Tag Conversion"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/format-strings.page:56
+msgid ""
+"When running <code>File Name to Tag</code> conversion, an empty <code>%%</"
+"code> can be specified to ignore part of the file name when reading it."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:59
+#, fuzzy
+msgid "Format String: <code>%%- %track%. %%</code>"
+msgstr "Formato de la cadena: <code>%artist%- %title%</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:60
+#, fuzzy
+msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
+msgstr "Nombre del archivo: <code>Artista1 - Canción1.mp3</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:61
+#, fuzzy
+msgid ""
+"This format string and this file name will create a tag with a track of "
+"<code>05</code> and ignore the rest of the file name."
+msgstr ""
+"Al ejecutar la conversión del <code>Nombre del archivo a etiqueta</code>, "
+"esta cadena de formato y este nombre de archivo crearán una etiqueta con un "
+"artista de <code>Artista1</code> y un título de <code>Canción1</code>."
+
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
 msgctxt "link"
@@ -460,8 +495,8 @@ msgid ""
 msgstr ""
 "Para obtener ayuda, use <link href=\"https://github.com/NickvisionApps/"
 "Tagger/issues\">incidencias</link> o <link href=\"https://github.com/"
-"NickvisionApps/Tagger/discussions\">debates</link> en Github, o <link href="
-"\"https://bit.ly/3GrfEid\">únase a nuestro canal Matrix</link>."
+"NickvisionApps/Tagger/discussions\">debates</link> en Github, o <link "
+"href=\"https://bit.ly/3GrfEid\">únase a nuestro canal Matrix</link>."
 
 #. (itstool) path: list/title
 #: yelp/C/index.page:26
@@ -890,8 +925,8 @@ msgstr "No se pueden aplicar los cambios - Permiso denegado"
 #: yelp/C/unsupported.page:25
 msgid ""
 "There is a known issue of the flatpak version of the app running on Debian-"
-"based systems where you are unable to save files due to a \"permission denied"
-"\" error."
+"based systems where you are unable to save files due to a \"permission "
+"denied\" error."
 msgstr ""
 "Existe un problema conocido de la versión flatpak de la aplicación que se "
 "ejecuta en sistemas basados en Debian en el que no se pueden guardar "
@@ -932,8 +967,8 @@ msgid ""
 "If it is not a \"permission denied\" error, please <link href=\"https://"
 "github.com/NickvisionApps/Tagger/issues/174\">report a new issue</link>."
 msgstr ""
-"Si no es un error de \"permiso denegado\", por favor <link href=\"https"
-"://github.com/NickvisionApps/Tagger/issues/174\" >informe de una incidencia "
+"Si no es un error de \"permiso denegado\", por favor <link href=\"https://"
+"github.com/NickvisionApps/Tagger/issues/174\" >informe de una incidencia "
 "nueva</link>."
 
 #. (itstool) path: info/title
