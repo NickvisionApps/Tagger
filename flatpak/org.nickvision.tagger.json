@@ -19,7 +19,8 @@
         "--share=ipc",
         "--share=network",
         "--system-talk-name=org.freedesktop.NetworkManager",
-        "--filesystem=home"
+        "--filesystem=xdg-download",
+        "--filesystem=xdg-music",
     ],
     "cleanup":[
         "/include",
