@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-17 21:34-0400\n"
+"POT-Creation-Date: 2023-08-17 22:08-0400\n"
 "PO-Revision-Date: 2023-08-10 02:47+0000\n"
 "Last-Translator: Federico Marchetti <marchetti.federico@protonmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
@@ -314,7 +314,7 @@ msgid "Format String: <code>%artist%- %title%</code>"
 msgstr "Stringa di formato: <code>%artist%- %title%</code>"
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:28 yelp/C/format-strings.page:60
+#: yelp/C/format-strings.page:28
 msgid "Filename: <code>Artist1 - Song1.mp3</code>"
 msgstr "Nome del file: <code>Artista1 - Brano1.mp3</code>"
 
@@ -417,7 +417,7 @@ msgstr ""
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:55
-msgid "Ignoring in File Name"
+msgid "Ignoring in File Name to Tag Conversion"
 msgstr ""
 
 #. (itstool) path: section/p
@@ -430,15 +430,21 @@ msgstr ""
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:59
 #, fuzzy
-msgid "Format String: <code>%%- %title%</code>"
+msgid "Format String: <code>%%- %track%. %%</code>"
 msgstr "Stringa di formato: <code>%artist%- %title%</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:60
+#, fuzzy
+msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
+msgstr "Nome del file: <code>Artista1 - Brano1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:61
 #, fuzzy
 msgid ""
-"This format string and this file name will create a tag with a title of "
-"<code>Song1</code> and ignore the <code>Artist1</code>."
+"This format string and this file name will create a tag with a track of "
+"<code>05</code> and ignore the rest of the file name."
 msgstr ""
 "Quando viene eseguita la conversione <code>da nome del file a tag</code> "
 "questa stringa di formato e questo nome di file creeranno un tag in cui "
