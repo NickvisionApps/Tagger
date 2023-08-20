@@ -607,8 +607,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         Composer = "";
         Description = "";
         Publisher = "";
-        FrontAlbumArt = Array.Empty<byte>();
-        BackAlbumArt = Array.Empty<byte>();
+        _track.EmbeddedPictures.Clear();
         _track.AdditionalFields.Clear();
         Lyrics = new LyricsInfo();
     }
