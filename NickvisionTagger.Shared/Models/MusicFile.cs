@@ -361,7 +361,10 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 };
                 _fpcalc.Start();
                 _fingerprint = _fpcalc.StandardOutput.ReadToEnd();
-                _fpcalc.WaitForExit();
+                if (!_fpcalc.WaitForExit(TimeSpan.FromSeconds(10)))
+                {
+                    _fpcalc.Kill();
+                }
                 if (_fpcalc.ExitCode == 0)
                 {
                     _fingerprint = _fingerprint.Substring(_fingerprint.IndexOf("FINGERPRINT=") + 12);
