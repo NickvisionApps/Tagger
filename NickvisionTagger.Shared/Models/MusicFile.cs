@@ -589,8 +589,12 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <summary>
     /// Resets the file's tag back to what is stored on disk
     /// </summary>
-    public void ResetTag() => _track = new Track(Path);
-    
+    public void ResetTag()
+    {
+        _track = new Track(Path);
+        _filename = System.IO.Path.GetFileName(Path);
+    }
+
     /// <summary>
     /// Clears a file's tag (does not save to disk)
     /// </summary>
