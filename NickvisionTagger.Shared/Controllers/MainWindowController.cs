@@ -30,6 +30,7 @@ public enum AlbumArtType
 public class MainWindowController : IDisposable
 {
     private bool _disposed;
+    private string? _folderToLaunch;
     private MusicFolder? _musicFolder;
     private bool _forceAllowClose;
     private string[] _genreSuggestions;
@@ -121,9 +122,14 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// Constructs a MainWindowController
     /// </summary>
-    public MainWindowController()
+    /// <param name="args">Command-line arguments</param>
+    public MainWindowController(string[] args)
     {
         _disposed = false;
+        if (args.Length > 0 && Directory.Exists(args[0]))
+        {
+            _folderToLaunch = args[0];
+        }
         Aura = new Aura("org.nickvision.tagger", "Nickvision Tagger", _("Tagger"), _("Tag your music"));
         if (Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
         {
@@ -266,7 +272,12 @@ public class MainWindowController : IDisposable
     public async Task StartupAsync()
     {
         NetworkMonitor = await NetworkMonitor.NewAsync();
-        if(Configuration.Current.RememberLastOpenedFolder && Directory.Exists(Configuration.Current.LastOpenedFolder))
+        if (_folderToLaunch != null)
+        {
+            await OpenFolderAsync(_folderToLaunch);
+            _folderToLaunch = null;
+        }
+        else if(Configuration.Current.RememberLastOpenedFolder && Directory.Exists(Configuration.Current.LastOpenedFolder))
         {
             await OpenFolderAsync(Configuration.Current.LastOpenedFolder);
         }

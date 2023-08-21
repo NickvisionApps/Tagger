@@ -23,16 +23,16 @@ public partial class Program
     /// </summary>
     /// <param name="args">string[]</param>
     /// <returns>Return code from Adw.Application.Run()</returns>
-    public static int Main(string[] args) => new Program().Run(args);
+    public static int Main(string[] args) => new Program(args).Run();
 
     /// <summary>
     /// Constructs a Program
     /// </summary>
-    public Program()
+    public Program(string[] args)
     {
         _application = Adw.Application.New("org.nickvision.tagger", Gio.ApplicationFlags.FlagsNone);
         _mainWindow = null;
-        _mainWindowController = new MainWindowController();
+        _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
             @"* Added offset field to synchronized lyrics page 
               * Added the ability to import and export LRC files in the synchronized lyrics page
@@ -75,7 +75,7 @@ public partial class Program
     /// Runs the program
     /// </summary>
     /// <returns>Return code from Adw.Application.Run()</returns>
-    public int Run(string[] args)
+    public int Run()
     {
         try
         {
@@ -92,9 +92,9 @@ public partial class Program
     /// <summary>
     /// Occurs when the application is activated
     /// </summary>
-    /// <param name="sedner">Gio.Application</param>
+    /// <param name="sender">Gio.Application</param>
     /// <param name="e">EventArgs</param>
-    private async void OnActivate(Gio.Application sedner, EventArgs e)
+    private async void OnActivate(Gio.Application sender, EventArgs e)
     {
         //Set Adw Theme
         _application.StyleManager!.ColorScheme = _mainWindowController.Theme switch
