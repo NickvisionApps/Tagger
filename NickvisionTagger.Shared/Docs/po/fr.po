@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-03 17:01-0400\n"
+"POT-Creation-Date: 2023-08-17 22:08-0400\n"
 "PO-Revision-Date: 2023-08-10 15:59+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -262,8 +262,8 @@ msgid ""
 "where <code>in.mp3</code> is the file path of the corrupted file and "
 "<code>out.mp3</code> is the path to export the re-encoded file."
 msgstr ""
-"où <code>in.mp3</code> est le chemin d’accès du fichier corrompu et <code>out"
-".mp3</code> est le chemin pour exporter le fichier ré-encodé."
+"où <code>in.mp3</code> est le chemin d’accès du fichier corrompu et "
+"<code>out.mp3</code> est le chemin pour exporter le fichier ré-encodé."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:32
@@ -292,8 +292,8 @@ msgid ""
 "code> and <code>Tag to File Name</code> conversions."
 msgstr ""
 "Cette page explique l’utilisation des chaînes de format pour les conversions "
-"<code>Nom de fichier vers balise</code> et <code>Balise vers nom de "
-"fichier</code>."
+"<code>Nom de fichier vers balise</code> et <code>Balise vers nom de fichier</"
+"code>."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:23
@@ -308,7 +308,7 @@ msgstr ""
 "pourcentages (%)."
 
 #. (itstool) path: note/title
-#: yelp/C/format-strings.page:26
+#: yelp/C/format-strings.page:26 yelp/C/format-strings.page:58
 msgid "Example"
 msgstr "Exemple"
 
@@ -419,6 +419,41 @@ msgstr ""
 "Par exemple, une propriété personnalisée dont le nom est <code>ENCODEUR</"
 "code> peut être utilisée par <code>%encodeur%</code>."
 
+#. (itstool) path: section/title
+#: yelp/C/format-strings.page:55
+msgid "Ignoring in File Name to Tag Conversion"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/format-strings.page:56
+msgid ""
+"When running <code>File Name to Tag</code> conversion, an empty <code>%%</"
+"code> can be specified to ignore part of the file name when reading it."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:59
+#, fuzzy
+msgid "Format String: <code>%%- %track%. %%</code>"
+msgstr "Chaîne de format : <code>%artiste%- %titre%</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:60
+#, fuzzy
+msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
+msgstr "Nom de fichier : <code>Artiste1 - Titre1.mp3</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:61
+#, fuzzy
+msgid ""
+"This format string and this file name will create a tag with a track of "
+"<code>05</code> and ignore the rest of the file name."
+msgstr ""
+"Lorsque la conversion <code>Nom de fichier vers balise</code> est lancée, "
+"cette chaîne de format et ce nom de fichier créeront une balise avec un "
+"artiste <code>Artiste1</code> et un titre <code>Titre1</code>."
+
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
 msgctxt "link"
@@ -459,10 +494,10 @@ msgid ""
 "bit.ly/3GrfEid\">join our Matrix channel</link>."
 msgstr ""
 "Pour obtenir de l’aide, utilisez les <link href=\"https://github.com/"
-"NickvisionApps/Tagger/issues\">signalements</link> ou les <link href="
-"\"https://github.com/NickvisionApps/Tagger/discussions\">discussions</link> "
-"sur Github, ou <link href=\"https://bit.ly/3GrfEid\">rejoignez notre salon "
-"de discussion Matrix</link>."
+"NickvisionApps/Tagger/issues\">signalements</link> ou les <link "
+"href=\"https://github.com/NickvisionApps/Tagger/discussions\">discussions</"
+"link> sur Github, ou <link href=\"https://bit.ly/3GrfEid\">rejoignez notre "
+"salon de discussion Matrix</link>."
 
 #. (itstool) path: list/title
 #: yelp/C/index.page:26
@@ -786,8 +821,9 @@ msgid ""
 "invalid, the textbox will turn red and will not filter the listbox."
 msgstr ""
 "Si la syntaxe de votre chaîne est valide, la zone de texte deviendra verte "
-"et filtrera la liste avec votre recherche. Si la syntaxe de votre chaîne n’"
-"est pas valide, la zone de texte deviendra rouge et ne filtrera pas la liste."
+"et filtrera la liste avec votre recherche. Si la syntaxe de votre chaîne "
+"n’est pas valide, la zone de texte deviendra rouge et ne filtrera pas la "
+"liste."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:51
@@ -880,8 +916,9 @@ msgid ""
 "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</"
 "link> for its backend to read and write metadata."
 msgstr ""
-"Tagger utilise <link href=\"https://github.com/Zeugma440/atldotnet\""
-">atldotnet</link> comme backend pour lire et éditer les métadonnées."
+"Tagger utilise <link href=\"https://github.com/Zeugma440/"
+"atldotnet\">atldotnet</link> comme backend pour lire et éditer les "
+"métadonnées."
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
@@ -892,8 +929,8 @@ msgstr "Impossible d’appliquer les changements - Permission refusée"
 #: yelp/C/unsupported.page:25
 msgid ""
 "There is a known issue of the flatpak version of the app running on Debian-"
-"based systems where you are unable to save files due to a \"permission denied"
-"\" error."
+"based systems where you are unable to save files due to a \"permission "
+"denied\" error."
 msgstr ""
 "Il existe un problème connu de la version flatpak de l’application "
 "fonctionnant sur les systèmes basés sur Debian où il est impossible de "
@@ -934,9 +971,9 @@ msgid ""
 "If it is not a \"permission denied\" error, please <link href=\"https://"
 "github.com/NickvisionApps/Tagger/issues/174\">report a new issue</link>."
 msgstr ""
-"S’il ne s’egit pas d’une erreur « permission refusée », merci de <link href="
-"\"https://github.com/NickvisionApps/Tagger/issues/174\">signaler un nouveau "
-"problème</link>."
+"S’il ne s’egit pas d’une erreur « permission refusée », merci de <link "
+"href=\"https://github.com/NickvisionApps/Tagger/issues/174\">signaler un "
+"nouveau problème</link>."
 
 #. (itstool) path: info/title
 #: yelp/C/web-services.page:8
@@ -1020,8 +1057,8 @@ msgid ""
 "metadata to AcoustId."
 msgstr ""
 "Un utilisateur peut soumettre un identifiant d’enregistrement MusicBrainz à "
-"AcoustId. Cela permettra d’extraire toutes les données de l’identifiant d’"
-"enregistrement associé et de les utiliser pour envoyer des métadonnées à "
+"AcoustId. Cela permettra d’extraire toutes les données de l’identifiant "
+"d’enregistrement associé et de les utiliser pour envoyer des métadonnées à "
 "AcoustId."
 
 #. (itstool) path: item/title

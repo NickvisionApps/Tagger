@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-03 17:01-0400\n"
+"POT-Creation-Date: 2023-08-17 22:08-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -243,6 +243,7 @@ msgstr ""
 
 #. (itstool) path: note/title
 #: yelp/C/format-strings.page:26
+#: yelp/C/format-strings.page:58
 msgid "Example"
 msgstr ""
 
@@ -352,6 +353,31 @@ msgstr ""
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:51
 msgid "For example, a custom property who's name is <code>ENCODER</code> can be used as <code>%encoder%</code>."
+msgstr ""
+
+#. (itstool) path: section/title
+#: yelp/C/format-strings.page:55
+msgid "Ignoring in File Name to Tag Conversion"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/format-strings.page:56
+msgid "When running <code>File Name to Tag</code> conversion, an empty <code>%%</code> can be specified to ignore part of the file name when reading it."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:59
+msgid "Format String: <code>%%- %track%. %%</code>"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:60
+msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:61
+msgid "This format string and this file name will create a tag with a track of <code>05</code> and ignore the rest of the file name."
 msgstr ""
 
 #. (itstool) path: info/title

@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-03 17:01-0400\n"
+"POT-Creation-Date: 2023-08-17 22:08-0400\n"
 "PO-Revision-Date: 2023-08-10 02:47+0000\n"
 "Last-Translator: Federico Marchetti <marchetti.federico@protonmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/"
-"nickvision-tagger/docs/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
+"tagger/docs/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -304,7 +304,7 @@ msgstr ""
 "percento (%)."
 
 #. (itstool) path: note/title
-#: yelp/C/format-strings.page:26
+#: yelp/C/format-strings.page:26 yelp/C/format-strings.page:58
 msgid "Example"
 msgstr "Esempio"
 
@@ -414,6 +414,41 @@ msgid ""
 msgstr ""
 "Per esempio, una proprietà personalizzata il cui nome è <code>Codifica</"
 "code> può essere usata come <code>%codifica%</code>."
+
+#. (itstool) path: section/title
+#: yelp/C/format-strings.page:55
+msgid "Ignoring in File Name to Tag Conversion"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/format-strings.page:56
+msgid ""
+"When running <code>File Name to Tag</code> conversion, an empty <code>%%</"
+"code> can be specified to ignore part of the file name when reading it."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:59
+#, fuzzy
+msgid "Format String: <code>%%- %track%. %%</code>"
+msgstr "Stringa di formato: <code>%artist%- %title%</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:60
+#, fuzzy
+msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
+msgstr "Nome del file: <code>Artista1 - Brano1.mp3</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:61
+#, fuzzy
+msgid ""
+"This format string and this file name will create a tag with a track of "
+"<code>05</code> and ignore the rest of the file name."
+msgstr ""
+"Quando viene eseguita la conversione <code>da nome del file a tag</code> "
+"questa stringa di formato e questo nome di file creeranno un tag in cui "
+"l'artista sarà <code>Artista1</code> ed il titolo sarà <code>Brano1</code>."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
@@ -858,8 +893,8 @@ msgstr ""
 #: yelp/C/unsupported.page:25
 msgid ""
 "There is a known issue of the flatpak version of the app running on Debian-"
-"based systems where you are unable to save files due to a \"permission denied"
-"\" error."
+"based systems where you are unable to save files due to a \"permission "
+"denied\" error."
 msgstr ""
 
 #. (itstool) path: section/p

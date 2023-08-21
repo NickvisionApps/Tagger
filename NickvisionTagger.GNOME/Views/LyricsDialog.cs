@@ -111,11 +111,11 @@ public partial class LyricsDialog : Adw.Window
     {
         base.Present();
         _controller.Startup();
-        _languageRow.SetText(_controller.LanguageCode);
-        _descriptionRow.SetText(_controller.Description);
-        _unsyncTextView.GetBuffer().SetText(_controller.UnsynchronizedLyrics, _controller.UnsynchronizedLyrics.Length);
+        _languageRow.SetText(_controller.Lyrics.LanguageCode);
+        _descriptionRow.SetText(_controller.Lyrics.Description);
+        _unsyncTextView.GetBuffer().SetText(_controller.Lyrics.UnsynchronizedLyrics, _controller.Lyrics.UnsynchronizedLyrics.Length);
         _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset.ToString());
-        _syncList.SetVisible(_controller.SynchronizedLyrics.Count > 0);
+        _syncList.SetVisible(_controller.Lyrics.SynchronizedLyrics.Count > 0);
     }
     
     /// <summary>
@@ -167,12 +167,12 @@ public partial class LyricsDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private bool OnClose(Gtk.Widget sender, EventArgs e)
     {
-        _controller.LanguageCode = _languageRow.GetText();
-        _controller.Description = _descriptionRow.GetText();
+        _controller.Lyrics.LanguageCode = _languageRow.GetText();
+        _controller.Lyrics.Description = _descriptionRow.GetText();
         var iterStart = new TextIter();
         var iterEnd = new TextIter();
         gtk_text_buffer_get_bounds(_unsyncTextView.GetBuffer().Handle, ref iterStart, ref iterEnd);
-        _controller.UnsynchronizedLyrics = gtk_text_buffer_get_text(_unsyncTextView.GetBuffer().Handle, ref iterStart, ref iterEnd, false);
+        _controller.Lyrics.UnsynchronizedLyrics = gtk_text_buffer_get_text(_unsyncTextView.GetBuffer().Handle, ref iterStart, ref iterEnd, false);
         return false;
     }
 
@@ -240,7 +240,7 @@ public partial class LyricsDialog : Adw.Window
                 }
                 messageDialog.Destroy();
             };
-            if (_controller.SynchronizedLyrics.Count == 0)
+            if (_controller.Lyrics.SynchronizedLyrics.Count == 0)
             {
                 messageDialog.Response("overwrite");
             }
@@ -259,7 +259,7 @@ public partial class LyricsDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private async void ExportSyncFromLRC(Gtk.Button sender, EventArgs e)
     {
-        if (_controller.SynchronizedLyrics.Count == 0)
+        if (_controller.Lyrics.SynchronizedLyrics.Count == 0)
         {
             _toast.AddToast(Adw.Toast.New(_("Nothing to export.")));
             return;

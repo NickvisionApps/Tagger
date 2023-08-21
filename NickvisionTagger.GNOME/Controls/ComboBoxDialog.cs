@@ -58,6 +58,7 @@ public partial class ComboBoxDialog
         _customRow = Adw.EntryRow.New();
         _customRow.SetTitle(_("Custom"));
         _customRow.SetVisible(false);
+        _customRow.SetActivatesDefault(true);
         if(_supportCustom)
         {
             _group.Add(_customRow);

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-03 17:01-0400\n"
+"POT-Creation-Date: 2023-08-17 22:08-0400\n"
 "PO-Revision-Date: 2023-07-29 14:02+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
@@ -301,7 +301,7 @@ msgstr ""
 "(%)."
 
 #. (itstool) path: note/title
-#: yelp/C/format-strings.page:26
+#: yelp/C/format-strings.page:26 yelp/C/format-strings.page:58
 msgid "Example"
 msgstr "Primjer"
 
@@ -410,6 +410,41 @@ msgid ""
 msgstr ""
 "Na primjer, prilagođeno svojstvo čije je ime <code>ENCODER</code> može se "
 "koristiti kao <code>%encoder%</code>."
+
+#. (itstool) path: section/title
+#: yelp/C/format-strings.page:55
+msgid "Ignoring in File Name to Tag Conversion"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/format-strings.page:56
+msgid ""
+"When running <code>File Name to Tag</code> conversion, an empty <code>%%</"
+"code> can be specified to ignore part of the file name when reading it."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:59
+#, fuzzy
+msgid "Format String: <code>%%- %track%. %%</code>"
+msgstr "Format izraza: <code>%izvođač%- %naslov%</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:60
+#, fuzzy
+msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
+msgstr "Ime datoteke: <code>Izvođač1 - Pjesma1.mp3</code>"
+
+#. (itstool) path: note/p
+#: yelp/C/format-strings.page:61
+#, fuzzy
+msgid ""
+"This format string and this file name will create a tag with a track of "
+"<code>05</code> and ignore the rest of the file name."
+msgstr ""
+"Prilikom pokretanja pretvaranja <code>Ime datoteke u oznaku</code>, ovaj "
+"format izraza i ovo ime datoteke stvorit će oznaku s izvođačem "
+"<code>Izvođač1</code> i naslovom <code>Pjesma1</code> ."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
@@ -868,8 +903,9 @@ msgid ""
 "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</"
 "link> for its backend to read and write metadata."
 msgstr ""
-"Tagger koristi <link href=\"https://github.com/Zeugma440/atldotnet"
-"\">atldotnet</link> kao pozadinski sustav za čitanje i pisanje metapodataka."
+"Tagger koristi <link href=\"https://github.com/Zeugma440/"
+"atldotnet\">atldotnet</link> kao pozadinski sustav za čitanje i pisanje "
+"metapodataka."
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
@@ -880,8 +916,8 @@ msgstr ""
 #: yelp/C/unsupported.page:25
 msgid ""
 "There is a known issue of the flatpak version of the app running on Debian-"
-"based systems where you are unable to save files due to a \"permission denied"
-"\" error."
+"based systems where you are unable to save files due to a \"permission "
+"denied\" error."
 msgstr ""
 
 #. (itstool) path: section/p
