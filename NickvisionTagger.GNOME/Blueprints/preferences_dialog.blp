@@ -90,6 +90,21 @@ Adw.PreferencesWindow _root {
           valign: center;
         }
       }
+      
+      Adw.ActionRow {
+        title: _("Format Album Art for Spotify");
+        activatable-widget: _formatArtForSpotifySwitch;
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "insert-image-symbolic";
+        }
+
+        [suffix]
+        Gtk.Switch _formatArtForSpotifySwitch {
+          valign: center;
+        }
+      }
     }
 
     Adw.PreferencesGroup {

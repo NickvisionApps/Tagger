@@ -21,6 +21,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Gtk.Switch _includeSubfoldersSwitch;
     [Gtk.Connect] private readonly Adw.ComboRow _sortFilesRow;
     [Gtk.Connect] private readonly Gtk.Switch _preserveModificationTimestampSwitch;
+    [Gtk.Connect] private readonly Gtk.Switch _formatArtForSpotifySwitch;
     [Gtk.Connect] private readonly Gtk.Switch _overwriteTagWithMusicBrainzSwitch;
     [Gtk.Connect] private readonly Gtk.Switch _overwriteAlbumArtWithMusicBrainzSwitch;
     [Gtk.Connect] private readonly Adw.EntryRow _acoustIdRow;
@@ -50,6 +51,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _includeSubfoldersSwitch.SetActive(_controller.IncludeSubfolders);
         _sortFilesRow.SetSelected((uint)_controller.SortFilesBy);
         _preserveModificationTimestampSwitch.SetActive(_controller.PreserveModificationTimestamp);
+        _formatArtForSpotifySwitch.SetActive(_controller.FormatAlbumArtForSpotify);
         _overwriteTagWithMusicBrainzSwitch.SetActive(_controller.OverwriteTagWithMusicBrainz);
         _overwriteAlbumArtWithMusicBrainzSwitch.SetActive(_controller.OverwriteAlbumArtWithMusicBrainz);
         _acoustIdRow.SetText(_controller.AcoustIdUserAPIKey);
@@ -76,6 +78,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _controller.IncludeSubfolders = _includeSubfoldersSwitch.GetActive();
         _controller.SortFilesBy = (SortBy)_sortFilesRow.GetSelected();
         _controller.PreserveModificationTimestamp = _preserveModificationTimestampSwitch.GetActive();
+        _controller.FormatAlbumArtForSpotify = _formatArtForSpotifySwitch.GetActive();
         _controller.OverwriteTagWithMusicBrainz = _overwriteTagWithMusicBrainzSwitch.GetActive();
         _controller.OverwriteAlbumArtWithMusicBrainz = _overwriteAlbumArtWithMusicBrainzSwitch.GetActive();
         _controller.AcoustIdUserAPIKey = _acoustIdRow.GetText();

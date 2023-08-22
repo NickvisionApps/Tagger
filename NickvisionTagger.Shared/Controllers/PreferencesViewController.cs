@@ -77,6 +77,16 @@ public class PreferencesViewController
     }
 
     /// <summary>
+    /// Whether or not to format a file's album art for use with Spotify
+    /// </summary>
+    public bool FormatAlbumArtForSpotify
+    {
+        get => Configuration.Current.FormatAlbumArtForSpotify;
+
+        set => Configuration.Current.FormatAlbumArtForSpotify = value;
+    }
+
+    /// <summary>
     /// Whether or not to overwrite a tag's existing data with data from MusicBrainz
     /// </summary>
     public bool OverwriteTagWithMusicBrainz

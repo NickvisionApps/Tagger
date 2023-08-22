@@ -47,6 +47,10 @@ public class Configuration : ConfigurationBase
     /// </summary>
     public bool PreserveModificationTimestamp { get; set; }
     /// <summary>
+    /// Whether or not to format a file's album art for use with Spotify
+    /// </summary>
+    public bool FormatAlbumArtForSpotify { get; set; }
+    /// <summary>
     /// Whether or not to overwrite a tag's existing data with data from MusicBrainz
     /// </summary>
     public bool OverwriteTagWithMusicBrainz { get; set; }
@@ -70,6 +74,7 @@ public class Configuration : ConfigurationBase
         SortFilesBy = SortBy.Filename;
         LastOpenedFolder = "";
         PreserveModificationTimestamp = false;
+        FormatAlbumArtForSpotify = false;
         OverwriteTagWithMusicBrainz = true;
         OverwriteAlbumArtWithMusicBrainz = true;
         AcoustIdUserAPIKey = "";
