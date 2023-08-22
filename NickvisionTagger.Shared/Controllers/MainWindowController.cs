@@ -18,7 +18,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static NickvisionTagger.Shared.Helpers.Gettext;
-using Configuration = NickvisionTagger.Shared.Models.Configuration;
 
 namespace NickvisionTagger.Shared.Controllers;
 
