@@ -1256,7 +1256,7 @@ public class MainWindowController : IDisposable
             Task.Run(() =>
             {
                 var fingerprint = first.Fingerprint;
-                if(first == SelectedMusicFiles.First().Value) //make sure this file is still selected
+                if(first == SelectedMusicFiles.First().Value && SelectedMusicFiles.Count == 1) //make sure this file is still selected
                 {
                     SelectedPropertyMap.Fingerprint = string.IsNullOrEmpty(fingerprint) ? _("Calculating...") : fingerprint;
                     FingerprintCalculated?.Invoke(this, EventArgs.Empty);
