@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-21 16:11-0400\n"
+"POT-Creation-Date: 2023-08-22 06:25-0400\n"
 "PO-Revision-Date: 2023-08-13 09:57+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -92,7 +92,7 @@ msgstr ""
 "Als u geen id opgeeft, zal Tagger de metagegevens op basis van de "
 "controlesom versturen."
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:186
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:206
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:791
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:114
 #: NickvisionTagger.GNOME/Blueprints/window.blp:490
@@ -101,15 +101,15 @@ msgstr "Toevoegen"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1000
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:721
-#: ../../../Models/MusicFile.cs:824
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:730
+#: ../../../Models/MusicFile.cs:833
 msgid "album"
 msgstr "album"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1049
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:749
-#: ../../../Models/MusicFile.cs:840
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:758
+#: ../../../Models/MusicFile.cs:849
 msgid "albumartist"
 msgstr "albumartiest"
 
@@ -134,8 +134,8 @@ msgstr "Wijzigingen toepassen?"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:996
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:717
-#: ../../../Models/MusicFile.cs:820
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:726
+#: ../../../Models/MusicFile.cs:829
 msgid "artist"
 msgstr "artiest"
 
@@ -151,23 +151,25 @@ msgstr "Achterkant"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1061
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:761
-#: ../../../Models/MusicFile.cs:852
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:770
+#: ../../../Models/MusicFile.cs:861
 msgid "beatsperminute"
 msgstr "bpm"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1061
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:761
-#: ../../../Models/MusicFile.cs:852
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:770
+#: ../../../Models/MusicFile.cs:861
 msgid "bpm"
 msgstr "bpm"
 
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1368
 #: ../../../Controllers/MainWindowController.cs:1255
+#: ../../../Controllers/MainWindowController.cs:1261
 msgid "Calculating..."
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:186
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:206
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:523
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:601
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
@@ -181,15 +183,15 @@ msgstr "Annuleren"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1057
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:757
-#: ../../../Models/MusicFile.cs:848
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:766
+#: ../../../Models/MusicFile.cs:857
 msgid "comment"
 msgstr "opmerking"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1076
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:769
-#: ../../../Models/MusicFile.cs:856
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:778
+#: ../../../Models/MusicFile.cs:865
 msgid "composer"
 msgstr "componist"
 
@@ -237,8 +239,8 @@ msgstr "David Lapshin"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1080
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:773
-#: ../../../Models/MusicFile.cs:860
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:782
+#: ../../../Models/MusicFile.cs:869
 msgid "description"
 msgstr "omschrijving"
 
@@ -266,12 +268,12 @@ msgstr "MusicBrainz-metagegevens downloaden…"
 msgid "Error"
 msgstr "Fout"
 
-#: ../../../Models/MusicFile.cs:375 ../../../Models/MusicFile.cs:430
-#: ../../../Models/MusicFile.cs:892
+#: ../../../Models/MusicFile.cs:384 ../../../Models/MusicFile.cs:439
+#: ../../../Models/MusicFile.cs:901
 msgid "ERROR"
 msgstr "FOUT"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:224
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:244
 #, fuzzy
 msgid "Existing Lyrics"
 msgstr "Songtekst beheren"
@@ -288,7 +290,7 @@ msgstr "Albumhoes toevoegen"
 msgid "Export Front Album Art"
 msgstr "Albumhoes toevoegen"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:268
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:288
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:143
 #, fuzzy
 msgid "Export to LRC"
@@ -304,7 +306,7 @@ msgstr "Er zijn %d tags omgezet in bestandsnamen"
 msgid "Exported front album art to file successfully"
 msgstr "Er zijn %d tags omgezet in bestandsnamen"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:286
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:306
 msgid "Exported successfully to: {0}"
 msgstr ""
 
@@ -331,7 +333,7 @@ msgstr "Bestandsnaam naar tag"
 msgid "filename"
 msgstr "bestandsnaam"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1382
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1385
 msgid "Fingerprint was copied to clipboard."
 msgstr ""
 
@@ -352,8 +354,8 @@ msgstr "Fyodor Sobolev"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1053
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:753
-#: ../../../Models/MusicFile.cs:844
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:762
+#: ../../../Models/MusicFile.cs:853
 msgid "genre"
 msgstr "genre"
 
@@ -373,7 +375,7 @@ msgstr "GitHub-repo"
 msgid "Help"
 msgstr "Hulp"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:213
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:233
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:136
 msgid "Import from LRC"
 msgstr ""
@@ -394,7 +396,7 @@ msgstr "Albumhoes toevoegen"
 msgid "Insert Front Album Art"
 msgstr "Albumhoes toevoegen"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:226
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:246
 msgid "Keep Tagger's lyrics"
 msgstr ""
 
@@ -440,7 +442,7 @@ msgstr "MusicBrainz-opname-id"
 msgid "New Custom Property"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:186
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:206
 msgid "New Synchronized Lyric"
 msgstr ""
 
@@ -461,7 +463,7 @@ msgstr ""
 msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:264
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:284
 msgid "Nothing to export."
 msgstr ""
 
@@ -496,8 +498,8 @@ msgstr "Eigenschaps­naam"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1084
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:777
-#: ../../../Models/MusicFile.cs:864
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:786
+#: ../../../Models/MusicFile.cs:873
 msgid "publisher"
 msgstr "uitgever"
 
@@ -505,7 +507,7 @@ msgstr "uitgever"
 msgid "Remove Custom Property"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:137
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:144
 msgid "Remove Lyric"
 msgstr "Songtekst verwijderen"
 
@@ -589,14 +591,14 @@ msgstr ""
 msgid "TiB"
 msgstr "TiB"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:186
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:206
 msgid "Timestamp (hh:mm:ss)"
 msgstr "Tijdstempel (uu:mm:ss)"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:992
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:713
-#: ../../../Models/MusicFile.cs:816
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:722
+#: ../../../Models/MusicFile.cs:825
 msgid "title"
 msgstr "titel"
 
@@ -606,15 +608,15 @@ msgstr "Teveel bestanden geselecteerd"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1019
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:733
-#: ../../../Models/MusicFile.cs:832
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:742
+#: ../../../Models/MusicFile.cs:841
 msgid "track"
 msgstr "nummer"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1034
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:741
-#: ../../../Models/MusicFile.cs:836
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:750
+#: ../../../Models/MusicFile.cs:845
 msgid "tracktotal"
 msgstr "aantalnummers"
 
@@ -622,11 +624,11 @@ msgstr "aantalnummers"
 msgid "translator-credits"
 msgstr "Philip Goto https://philipgoto.nl/"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:290
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:310
 msgid "Unable to export to LRC."
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:239
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:259
 msgid "Unable to import from LRC."
 msgstr ""
 
@@ -649,11 +651,11 @@ msgstr ""
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "De metagegevens kunnen niet worden verstuurd naar AcoustId."
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:229
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:249
 msgid "Use LRC's lyrics"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:224
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:244
 msgid ""
 "What would you like Tagger to do with lyrics found from the LRC file that "
 "conflict with existing lyrics of the same timestamp?"
@@ -661,8 +663,8 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1004
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:725
-#: ../../../Models/MusicFile.cs:828
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:734
+#: ../../../Models/MusicFile.cs:837
 msgid "year"
 msgstr "jaar"
 
