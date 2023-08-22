@@ -371,7 +371,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 _fingerprint = _fpcalc.StandardOutput.ReadToEnd();
                 try
                 {
-                    _fpcalc.Kill();
+                    _fpcalc.Kill(true);
                 }
                 catch { }
                 if (_fpcalc.ExitCode == 0)
