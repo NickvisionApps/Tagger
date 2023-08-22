@@ -5,6 +5,12 @@ using Nickvision.Aura.Network;
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
 using NickvisionTagger.Shared.Models;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.ColorSpaces.Conversion;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static NickvisionTagger.Shared.Helpers.Gettext;
+using Configuration = NickvisionTagger.Shared.Models.Configuration;
 
 namespace NickvisionTagger.Shared.Controllers;
 
@@ -703,6 +710,37 @@ public class MainWindowController : IDisposable
         {
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to load image file"), NotificationSeverity.Error));
             return;
+        }
+        if (Configuration.Current.FormatAlbumArtForSpotify)
+        {
+            using var image = Image.Load<Rgb24>(path);
+            //Requirement: At least 640x640
+            if (image.Width < 640 || image.Height < 640)
+            {
+                image.Mutate(x => x.Resize(640, 640));
+            }
+            //Requirement: 1:1 aspect ratio
+            if (image.Width != image.Height)
+            {
+                if (image.Width > image.Height)
+                {
+                    image.Mutate(x => x.Resize(image.Width, image.Width));
+                }
+                else
+                {
+                    image.Mutate(x => x.Resize(image.Height, image.Height));
+                }
+            }
+            //Requirement: sRGB
+            
+            //Requirement: JPEG
+            using var stream = new MemoryStream();
+            image.SaveAsJpeg(stream, new JpegEncoder()
+            {
+                ColorType = JpegEncodingColor.Rgb,
+                SkipMetadata = true
+            });
+            pic = stream.ToArray();
         }
         var inserted = false;
         foreach(var pair in SelectedMusicFiles)
