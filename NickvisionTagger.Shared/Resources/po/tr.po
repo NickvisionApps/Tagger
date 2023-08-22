@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-22 06:25-0400\n"
-"PO-Revision-Date: 2023-08-09 12:23+0000\n"
+"POT-Creation-Date: 2023-08-21 16:11-0400\n"
+"PO-Revision-Date: 2023-08-22 14:33+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,7 +91,7 @@ msgstr ""
 "Hiçbiri sağlanmazsa Tagger, bunun yerine etiketinizin üst verilerini parmak "
 "iziyle ilişkili olarak gönderir."
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:206
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:186
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:791
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:114
 #: NickvisionTagger.GNOME/Blueprints/window.blp:490
@@ -100,15 +100,15 @@ msgstr "Ekle"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1000
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:730
-#: ../../../Models/MusicFile.cs:833
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:721
+#: ../../../Models/MusicFile.cs:824
 msgid "album"
 msgstr "album"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1049
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:758
-#: ../../../Models/MusicFile.cs:849
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:749
+#: ../../../Models/MusicFile.cs:840
 msgid "albumartist"
 msgstr "albumartist"
 
@@ -133,8 +133,8 @@ msgstr "Değişiklikler Uygulansın Mı?"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:996
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:726
-#: ../../../Models/MusicFile.cs:829
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:717
+#: ../../../Models/MusicFile.cs:820
 msgid "artist"
 msgstr "sanatçı"
 
@@ -150,25 +150,23 @@ msgstr "Arka"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1061
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:770
-#: ../../../Models/MusicFile.cs:861
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:761
+#: ../../../Models/MusicFile.cs:852
 msgid "beatsperminute"
 msgstr "dakika başına vuruş"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1061
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:770
-#: ../../../Models/MusicFile.cs:861
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:761
+#: ../../../Models/MusicFile.cs:852
 msgid "bpm"
 msgstr "bpm"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1368
 #: ../../../Controllers/MainWindowController.cs:1255
-#: ../../../Controllers/MainWindowController.cs:1261
 msgid "Calculating..."
-msgstr ""
+msgstr "Hesaplanıyor..."
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:206
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:186
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:523
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:601
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
@@ -182,15 +180,15 @@ msgstr "İptal"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1057
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:766
-#: ../../../Models/MusicFile.cs:857
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:757
+#: ../../../Models/MusicFile.cs:848
 msgid "comment"
 msgstr "yorum"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1076
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:778
-#: ../../../Models/MusicFile.cs:865
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:769
+#: ../../../Models/MusicFile.cs:856
 msgid "composer"
 msgstr "besteci"
 
@@ -238,8 +236,8 @@ msgstr "David Lapshin"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1080
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:782
-#: ../../../Models/MusicFile.cs:869
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:773
+#: ../../../Models/MusicFile.cs:860
 msgid "description"
 msgstr "açıklama"
 
@@ -267,15 +265,14 @@ msgstr "MusicBrainz üst verileri indiriliyor..."
 msgid "Error"
 msgstr "Hata"
 
-#: ../../../Models/MusicFile.cs:384 ../../../Models/MusicFile.cs:439
-#: ../../../Models/MusicFile.cs:901
+#: ../../../Models/MusicFile.cs:375 ../../../Models/MusicFile.cs:430
+#: ../../../Models/MusicFile.cs:892
 msgid "ERROR"
 msgstr "HATA"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:244
-#, fuzzy
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:224
 msgid "Existing Lyrics"
-msgstr "Şarkı Sözlerini Yönet"
+msgstr "Var Olan Şarkı Sözleri"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:753
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
@@ -287,11 +284,10 @@ msgstr "Albüm Arka Kapağını Dışa Aktar"
 msgid "Export Front Album Art"
 msgstr "Albüm Ön Kapağını Dışa Aktar"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:288
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:268
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:143
-#, fuzzy
 msgid "Export to LRC"
-msgstr "Dışa Aktar"
+msgstr "LRC'ye Dışa Aktar"
 
 #: ../../../Controllers/MainWindowController.cs:802
 msgid "Exported back album art to file successfully"
@@ -301,9 +297,9 @@ msgstr "Albüm arka kapağı dosyaya dışa aktardı"
 msgid "Exported front album art to file successfully"
 msgstr "Albüm ön kapağı dosyaya dışa aktarıldı"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:306
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:286
 msgid "Exported successfully to: {0}"
-msgstr ""
+msgstr "Dışa aktarıldı: {0}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:450
 msgid "Failed MusicBrainz Lookups"
@@ -327,7 +323,7 @@ msgstr "Dosya Adından Etikete"
 msgid "filename"
 msgstr "dosya adı"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1385
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1382
 msgid "Fingerprint was copied to clipboard."
 msgstr "Parmak izi panoya kopyalandı."
 
@@ -348,8 +344,8 @@ msgstr "Fyodor Sobolev"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1053
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:762
-#: ../../../Models/MusicFile.cs:853
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:753
+#: ../../../Models/MusicFile.cs:844
 msgid "genre"
 msgstr "tür"
 
@@ -369,10 +365,10 @@ msgstr "GitHub Deposu"
 msgid "Help"
 msgstr "Yardım"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:233
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:213
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:136
 msgid "Import from LRC"
-msgstr ""
+msgstr "LRC'den İçe Aktar"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:447
 msgid "Info"
@@ -388,9 +384,9 @@ msgstr "Albüm Arka Kapağı Ekle"
 msgid "Insert Front Album Art"
 msgstr "Albüm Ön Kapağı Ekle"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:246
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:226
 msgid "Keep Tagger's lyrics"
-msgstr ""
+msgstr "Tagger Şarkı Sözlerini Tut"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
@@ -413,9 +409,8 @@ msgid "Loading music files from folder..."
 msgstr "Müzik dosyaları klasörden yükleniyor..."
 
 #: ../../../Models/MusicFile.cs:75
-#, fuzzy
 msgid "lyrics"
-msgstr "Şarkı Sözleri"
+msgstr "şarkı sözleri"
 
 #: ../../../Controllers/MainWindowController.cs:152
 msgid "Matrix Chat"
@@ -433,7 +428,7 @@ msgstr "MusicBrainz Kayıt Kimliği"
 msgid "New Custom Property"
 msgstr "Yeni Özel Özellik"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:206
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:186
 msgid "New Synchronized Lyric"
 msgstr "Yeni Eşitlenmiş Şarkı Sözleri"
 
@@ -454,9 +449,9 @@ msgstr "Hiçbir üst veri indirilmedi"
 msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
 msgstr "AcoustId girdisi için MusicBrainz kayıt kimliği sağlanmadı"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:284
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:264
 msgid "Nothing to export."
-msgstr ""
+msgstr "Dışa aktarılacak bir şey yok."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:825
 msgid "OK"
@@ -488,8 +483,8 @@ msgstr "Özellik Adı"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1084
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:786
-#: ../../../Models/MusicFile.cs:873
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:777
+#: ../../../Models/MusicFile.cs:864
 msgid "publisher"
 msgstr "yayımcı"
 
@@ -497,7 +492,7 @@ msgstr "yayımcı"
 msgid "Remove Custom Property"
 msgstr "Özel Özelliği Kaldır"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:144
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:137
 msgid "Remove Lyric"
 msgstr "Şarkı Sözünü Kaldır"
 
@@ -571,20 +566,20 @@ msgstr "Tagger kimi dosyaları salt okunur kipte açdı."
 
 #: ../../../Controllers/MainWindowController.cs:917
 msgid "This file does not have a valid fingerprint"
-msgstr ""
+msgstr "Bu dosyanın geçerli bir parmak izi yok"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
 msgstr "TiB"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:206
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:186
 msgid "Timestamp (hh:mm:ss)"
 msgstr "Zaman damgası (hh:mm:ss)"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:992
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:722
-#: ../../../Models/MusicFile.cs:825
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:713
+#: ../../../Models/MusicFile.cs:816
 msgid "title"
 msgstr "başlık"
 
@@ -594,15 +589,15 @@ msgstr "Çok Fazla Dosya Seçildi"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1019
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:742
-#: ../../../Models/MusicFile.cs:841
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:733
+#: ../../../Models/MusicFile.cs:832
 msgid "track"
 msgstr "parça"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1034
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:750
-#: ../../../Models/MusicFile.cs:845
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:741
+#: ../../../Models/MusicFile.cs:836
 msgid "tracktotal"
 msgstr "toplam parça"
 
@@ -610,15 +605,13 @@ msgstr "toplam parça"
 msgid "translator-credits"
 msgstr "Sabri Ünal <libreajans@gmail.com>"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:310
-#, fuzzy
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:290
 msgid "Unable to export to LRC."
-msgstr "{0} kaydedilemedi."
+msgstr "LRC'ye dışa aktarılamıyor."
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:259
-#, fuzzy
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:239
 msgid "Unable to import from LRC."
-msgstr "{0} kaydedilemedi."
+msgstr "LRC'den içe aktarılamıyor."
 
 #: ../../../Controllers/MainWindowController.cs:704
 msgid "Unable to load image file"
@@ -638,20 +631,22 @@ msgstr "{0} kaydedilemedi."
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "AcoustIdʼye gönderilemiyor. API anahtarını denetleyin"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:249
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:229
 msgid "Use LRC's lyrics"
-msgstr ""
+msgstr "LRC şarkı sözlerini kullan"
 
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:244
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:224
 msgid ""
 "What would you like Tagger to do with lyrics found from the LRC file that "
 "conflict with existing lyrics of the same timestamp?"
 msgstr ""
+"Tagger'ın, LRC dosyasında bulunan ve aynı zaman damgasına sahip mevcut şarkı "
+"sözleriyle çelişen şarkı sözleriyle ne yapmasını istersiniz?"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1004
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:734
-#: ../../../Models/MusicFile.cs:837
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:725
+#: ../../../Models/MusicFile.cs:828
 msgid "year"
 msgstr "yıl"
 
@@ -713,11 +708,11 @@ msgstr "Eşitlenmiş"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:129
 msgid "Clear All Lyrics"
-msgstr ""
+msgstr "Tüm Şarkı Sözlerini Temizle"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:151
 msgid "Offset (in milliseconds)"
-msgstr ""
+msgstr "Ofset (milisaniye cinsinden)"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:119
