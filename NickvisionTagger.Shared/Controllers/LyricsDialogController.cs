@@ -37,6 +37,7 @@ public class LyricsDialogController
         if (lyrics == null)
         {
             Lyrics = new LyricsInfo();
+            Lyrics.Metadata["offset"] = "0";
         }
         else
         {
