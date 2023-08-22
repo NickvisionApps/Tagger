@@ -334,7 +334,14 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// </summary>
     public LyricsInfo Lyrics
     {
-        get => _track.Lyrics;
+        get
+        {
+            if (!_track.Lyrics.Metadata.ContainsKey("offset"))
+            {
+                _track.Lyrics.Metadata["offset"] = "0";
+            }
+            return _track.Lyrics;
+        }
 
         set => _track.Lyrics = value;
     }
