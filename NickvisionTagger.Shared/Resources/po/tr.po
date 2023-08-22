@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-21 16:11-0400\n"
-"PO-Revision-Date: 2023-08-09 12:23+0000\n"
+"PO-Revision-Date: 2023-08-22 14:33+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -164,7 +164,7 @@ msgstr "bpm"
 
 #: ../../../Controllers/MainWindowController.cs:1255
 msgid "Calculating..."
-msgstr ""
+msgstr "Hesaplanıyor..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:186
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:523
@@ -271,9 +271,8 @@ msgid "ERROR"
 msgstr "HATA"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:224
-#, fuzzy
 msgid "Existing Lyrics"
-msgstr "Şarkı Sözlerini Yönet"
+msgstr "Var Olan Şarkı Sözleri"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:753
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
@@ -287,9 +286,8 @@ msgstr "Albüm Ön Kapağını Dışa Aktar"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:268
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:143
-#, fuzzy
 msgid "Export to LRC"
-msgstr "Dışa Aktar"
+msgstr "LRC'ye Dışa Aktar"
 
 #: ../../../Controllers/MainWindowController.cs:802
 msgid "Exported back album art to file successfully"
@@ -301,7 +299,7 @@ msgstr "Albüm ön kapağı dosyaya dışa aktarıldı"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:286
 msgid "Exported successfully to: {0}"
-msgstr ""
+msgstr "Dışa aktarıldı: {0}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:450
 msgid "Failed MusicBrainz Lookups"
@@ -370,7 +368,7 @@ msgstr "Yardım"
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:213
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:136
 msgid "Import from LRC"
-msgstr ""
+msgstr "LRC'den İçe Aktar"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:447
 msgid "Info"
@@ -388,7 +386,7 @@ msgstr "Albüm Ön Kapağı Ekle"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:226
 msgid "Keep Tagger's lyrics"
-msgstr ""
+msgstr "Tagger Şarkı Sözlerini Tut"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
@@ -411,9 +409,8 @@ msgid "Loading music files from folder..."
 msgstr "Müzik dosyaları klasörden yükleniyor..."
 
 #: ../../../Models/MusicFile.cs:75
-#, fuzzy
 msgid "lyrics"
-msgstr "Şarkı Sözleri"
+msgstr "şarkı sözleri"
 
 #: ../../../Controllers/MainWindowController.cs:152
 msgid "Matrix Chat"
@@ -454,7 +451,7 @@ msgstr "AcoustId girdisi için MusicBrainz kayıt kimliği sağlanmadı"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:264
 msgid "Nothing to export."
-msgstr ""
+msgstr "Dışa aktarılacak bir şey yok."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:825
 msgid "OK"
@@ -569,7 +566,7 @@ msgstr "Tagger kimi dosyaları salt okunur kipte açdı."
 
 #: ../../../Controllers/MainWindowController.cs:917
 msgid "This file does not have a valid fingerprint"
-msgstr ""
+msgstr "Bu dosyanın geçerli bir parmak izi yok"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -609,14 +606,12 @@ msgid "translator-credits"
 msgstr "Sabri Ünal <libreajans@gmail.com>"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:290
-#, fuzzy
 msgid "Unable to export to LRC."
-msgstr "{0} kaydedilemedi."
+msgstr "LRC'ye dışa aktarılamıyor."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:239
-#, fuzzy
 msgid "Unable to import from LRC."
-msgstr "{0} kaydedilemedi."
+msgstr "LRC'den içe aktarılamıyor."
 
 #: ../../../Controllers/MainWindowController.cs:704
 msgid "Unable to load image file"
@@ -638,13 +633,15 @@ msgstr "AcoustIdʼye gönderilemiyor. API anahtarını denetleyin"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:229
 msgid "Use LRC's lyrics"
-msgstr ""
+msgstr "LRC şarkı sözlerini kullan"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:224
 msgid ""
 "What would you like Tagger to do with lyrics found from the LRC file that "
 "conflict with existing lyrics of the same timestamp?"
 msgstr ""
+"Tagger'ın, LRC dosyasında bulunan ve aynı zaman damgasına sahip mevcut şarkı "
+"sözleriyle çelişen şarkı sözleriyle ne yapmasını istersiniz?"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1004
@@ -711,11 +708,11 @@ msgstr "Eşitlenmiş"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:129
 msgid "Clear All Lyrics"
-msgstr ""
+msgstr "Tüm Şarkı Sözlerini Temizle"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:151
 msgid "Offset (in milliseconds)"
-msgstr ""
+msgstr "Ofset (milisaniye cinsinden)"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:119
