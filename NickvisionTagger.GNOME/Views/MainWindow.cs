@@ -1365,9 +1365,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     private bool UpdateFingerprint()
     {
-        _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
-        _fingerprintSpinner.SetVisible(false);
-        _copyFingerprintButton.SetVisible(true);
+        if (!string.IsNullOrEmpty(_controller.SelectedPropertyMap.Fingerprint) && _controller.SelectedPropertyMap.Fingerprint != _("Calculating..."))
+        {
+            _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
+            _fingerprintSpinner.SetVisible(false);
+            _copyFingerprintButton.SetVisible(true);
+        }
         return false;
     }
 
