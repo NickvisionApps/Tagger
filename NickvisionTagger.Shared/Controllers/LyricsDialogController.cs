@@ -103,8 +103,8 @@ public class LyricsDialogController
         var phrase = Lyrics.SynchronizedLyrics.FirstOrDefault(x => x.TimestampMs == timestamp);
         if (phrase != null)
         {
-            SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(timestamp, phrase.Text));
             Lyrics.SynchronizedLyrics.Remove(phrase);
+            SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(timestamp, phrase.Text));
         }
     }
     
