@@ -1258,7 +1258,7 @@ public class MainWindowController : IDisposable
                 var fingerprint = first.Fingerprint;
                 if(first == SelectedMusicFiles.First().Value) //make sure this file is still selected
                 {
-                    SelectedPropertyMap.Fingerprint = fingerprint;
+                    SelectedPropertyMap.Fingerprint = string.IsNullOrEmpty(fingerprint) ? _("Calculating...") : fingerprint;
                     FingerprintCalculated?.Invoke(this, EventArgs.Empty);
                 }
             });
