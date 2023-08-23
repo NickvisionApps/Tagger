@@ -5,12 +5,7 @@ using Nickvision.Aura.Network;
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
 using NickvisionTagger.Shared.Models;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.ColorSpaces.Conversion;
-using SixLabors.ImageSharp.Formats.Jpeg;
-using SixLabors.ImageSharp.Formats.Png;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -712,34 +707,17 @@ public class MainWindowController : IDisposable
         }
         if (Configuration.Current.FormatAlbumArtForSpotify)
         {
-            using var image = Image.Load<Rgb24>(path);
-            //Requirement: At least 640x640
-            if (image.Width < 640 || image.Height < 640)
-            {
-                image.Mutate(x => x.Resize(640, 640));
-            }
-            //Requirement: 1:1 aspect ratio
-            if (image.Width != image.Height)
-            {
-                if (image.Width > image.Height)
-                {
-                    image.Mutate(x => x.Resize(image.Width, image.Width));
-                }
-                else
-                {
-                    image.Mutate(x => x.Resize(image.Height, image.Height));
-                }
-            }
-            //Requirement: sRGB
-            
-            //Requirement: JPEG
-            using var stream = new MemoryStream();
-            image.SaveAsJpeg(stream, new JpegEncoder()
-            {
-                ColorType = JpegEncodingColor.Rgb,
-                SkipMetadata = true
-            });
-            pic = stream.ToArray();
+            var source = SKBitmap.Decode(pic);
+            using var target = new SKBitmap(source.Width, source.Height, SKImageInfo.PlatformColorType, SKAlphaType.Premul, SKColorSpace.CreateSrgb());
+            source.CopyTo(target);
+            var width = Math.Max(640, source.Width);
+            var height = Math.Max(640, source.Height);
+            using var resized = target.Resize(new SKImageInfo(Math.Max(width, height), Math.Max(width, height)), SKFilterQuality.High);
+            using var memoryStream = new MemoryStream();
+            using var image = SKImage.FromBitmap(resized);
+            using var imageStream = image.Encode(SKEncodedImageFormat.Jpeg, 100).AsStream();
+            imageStream.CopyTo(memoryStream);
+            pic = memoryStream.ToArray();
         }
         var inserted = false;
         foreach(var pair in SelectedMusicFiles)
