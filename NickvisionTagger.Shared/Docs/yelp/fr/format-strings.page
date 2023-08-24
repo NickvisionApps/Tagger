@@ -55,13 +55,13 @@
     </note>
 </section>
 <section>
-    <title>Ignoring in File Name to Tag Conversion</title>
-    <p>When running <code>File Name to Tag</code> conversion, an empty <code>%%</code> can be specified to ignore part of the file name when reading it.</p>
+    <title>Ignorer des éléments dans la conversion 'Nom de fichier vers balise'</title>
+    <p>Lors de l’exécution d’une conversion <code>Nom de fichier vers balise</code>, un<code>%%</code> vide peut être saisi pour ignorer des parties du nom du fichier lors de sa lecture.</p>
     <note>
         <title>Exemple</title>
-        <p>Format String: <code>%%- %track%. %%</code></p>
-        <p>Filename: <code>Artist1- 05. Song1.mp3</code></p>
-        <p>This format string and this file name will create a tag with a track of <code>05</code> and ignore the rest of the file name.</p>
+        <p>Chaîne de format : <code>%%- %piste%. %%</code></p>
+        <p>Nom de fichier : <code>Artiste1- 05 Titre1.mp3</code></p>
+        <p>Cette chaîne de format et ce nom de fichier créeront une balise avec une piste <code>05</code> et ignoreront le reste du nom du fichier.</p>
     </note>
 </section>
 </page>

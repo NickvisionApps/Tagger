@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-21 16:11-0400\n"
-"PO-Revision-Date: 2023-08-09 12:22+0000\n"
+"PO-Revision-Date: 2023-08-24 10:19+0000\n"
 "Last-Translator: Federico Marchetti <marchetti.federico@protonmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -165,7 +165,7 @@ msgstr "bpm"
 
 #: ../../../Controllers/MainWindowController.cs:1255
 msgid "Calculating..."
-msgstr ""
+msgstr "Elaborazione in corso..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:186
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:523
@@ -272,9 +272,8 @@ msgid "ERROR"
 msgstr "ERRORE"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:224
-#, fuzzy
 msgid "Existing Lyrics"
-msgstr "Gestisci testo"
+msgstr "Testo esistente"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:753
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
@@ -288,9 +287,8 @@ msgstr "Esporta copertina (fronte)"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:268
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:143
-#, fuzzy
 msgid "Export to LRC"
-msgstr "Esporta"
+msgstr "Esporta in LRC"
 
 #: ../../../Controllers/MainWindowController.cs:802
 msgid "Exported back album art to file successfully"
@@ -302,7 +300,7 @@ msgstr "La copertina anteriore è stata esportata correttamente"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:286
 msgid "Exported successfully to: {0}"
-msgstr ""
+msgstr "Esportazione completata con successo su: {0}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:450
 msgid "Failed MusicBrainz Lookups"
@@ -371,7 +369,7 @@ msgstr "Aiuto"
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:213
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:136
 msgid "Import from LRC"
-msgstr ""
+msgstr "Importa da LRC"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:447
 msgid "Info"
@@ -389,7 +387,7 @@ msgstr "Inserisci copertina anteriore"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:226
 msgid "Keep Tagger's lyrics"
-msgstr ""
+msgstr "Mantieni il testo da Tagger"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "KiB"
@@ -412,9 +410,8 @@ msgid "Loading music files from folder..."
 msgstr "Caricamento dei brani dalla cartella..."
 
 #: ../../../Models/MusicFile.cs:75
-#, fuzzy
 msgid "lyrics"
-msgstr "Testo"
+msgstr "testo"
 
 #: ../../../Controllers/MainWindowController.cs:152
 msgid "Matrix Chat"
@@ -456,7 +453,7 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:264
 msgid "Nothing to export."
-msgstr ""
+msgstr "Nulla da esportare."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:825
 msgid "OK"
@@ -570,7 +567,7 @@ msgstr "Tagger ha aperto dei file in sola lettura."
 
 #: ../../../Controllers/MainWindowController.cs:917
 msgid "This file does not have a valid fingerprint"
-msgstr ""
+msgstr "Questo file non ha una firma valida"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -610,14 +607,12 @@ msgid "translator-credits"
 msgstr "Federico Marchetti"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:290
-#, fuzzy
 msgid "Unable to export to LRC."
-msgstr "Impossibile salvare {0}."
+msgstr "Impossibile salvare su LRC."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:239
-#, fuzzy
 msgid "Unable to import from LRC."
-msgstr "Impossibile salvare {0}."
+msgstr "Impossibile importare da LRC."
 
 #: ../../../Controllers/MainWindowController.cs:704
 msgid "Unable to load image file"
@@ -639,13 +634,15 @@ msgstr "Impossibile inviare dati ad AcoustId. Controlla la chiave dell'API"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:229
 msgid "Use LRC's lyrics"
-msgstr ""
+msgstr "Usa il testo da LRC"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:224
 msgid ""
 "What would you like Tagger to do with lyrics found from the LRC file that "
 "conflict with existing lyrics of the same timestamp?"
 msgstr ""
+"Cosa deve fare Tagger con il testo trovato nel file LRC che va in conflitto "
+"con il testo già esistente per lo stesso istante temporale?"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:1004
@@ -713,11 +710,11 @@ msgstr "Sincronizzato"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:129
 msgid "Clear All Lyrics"
-msgstr ""
+msgstr "Cancella tutto il testo"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:151
 msgid "Offset (in milliseconds)"
-msgstr ""
+msgstr "Offset (in millisecondi)"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:119

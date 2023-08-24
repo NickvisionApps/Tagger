@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="search" its:version="2.0" xml:lang="it">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Advanced Search 🔍</title>
+	<title type="link">Ricerca avanzata 🔍</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -14,17 +14,17 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Advanced Search</title>
-<p>This page explains how to use Advanced Search in <app>Tagger</app>.</p>
+<title>Ricerca avanzata</title>
+<p>Questa pagina spiega come usare la ricerca avanzata su <app>Tagger</app>.</p>
 
-<p>Advanced Search is a powerful feature provided by <app>Tagger</app> that allows users to search files' tag contents for certain values, using a powerful tag-based syntax:</p>
-<p><code>!prop1="value1";prop2="value2"</code></p>
-<p>Where <code>prop1</code>, <code>prop2</code> are valid tag properties and <code>value1</code>, <code>value2</code> are the values to search wrapped in quotes. Each property is separated by a semicolon. Notice how the last property does not end with a semicolon.</p>
+<p>La ricerca avanzata è una potente caratteristica di <app>Tagger</app> che consente di cercare all'interno dei tag specifici valori, utilizzando una sintassi basata su tag:</p>
+<p><code>!prop1="valore1";prop2="valore2"</code></p>
+<p>Dove <code>prop1</code>, <code>prop2</code> sono proprietà valide e <code>valore1</code>, <code>valore2</code> sono i valori da cercare (racchiusi tra virgolette). Ogni proprietà è separata da punto e virgola. Si noti che l'ultima proprietà non termina con un punto e virgola.</p>
 
 <section>
-<title>Valid Properties</title>
+<title>Proprietà valide</title>
 <list>
-<item><p><code>filename</code></p></item>
+<item><p><code>nome del file</code></p></item>
 <item><p><code>titolo</code></p></item>
 <item><p><code>artista</code></p></item>
 <item><p><code>album</code></p></item>
@@ -38,20 +38,20 @@
 <item><p><code>compositore</code></p></item>
 <item><p><code>descrizione</code></p></item>
 <item><p><code>editore</code></p></item>
-<item><p><code>custom</code></p></item>
+<item><p><code>personalizzato</code></p></item>
 </list>
-<p>Properties are case-insensitive.</p></section>
+<p>Per le proprietà non viene fatta distinzione tra maiuscole e minuscole.</p></section>
 
-<section><title>Syntax Checking</title>
-<p>If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search. If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox.</p></section>
+<section><title>Controllo della sintassi</title>
+<p>Se la sintassi della stringa è valida, la casella di testo diventerà verde e filtrerà la casella di riepilogo con la ricerca. Se la sintassi della stringa non è valida, la casella di testo diventerà rossa e non filtrerà la casella di riepilogo.</p></section>
 
-<section><title>Examples</title>
+<section><title>Esempi</title>
 <p><code>!artist=""</code></p>
-<p>This search string will filter the listbox to contain music files whose artist is empty.</p>
+<p>Questa stringa di ricerca filtrerà la casella di riepilogo in modo che contenga i file musicali il cui artista è vuoto.</p>
 <p><code>!genre="";year="2022"</code></p>
-<p>This search string will filter the listbox to contain music files whose genre is empty and whose year is 2022 (Year and Track properties will validate if the value string is a number).</p>
+<p>Questa stringa di ricerca filtrerà la casella di riepilogo in modo da contenere i file musicali il cui genere è vuoto e il cui anno è il 2022 (le proprietà Anno e traccia saranno considerate valide se il valore indicato è un numero).</p>
 <p><code>!title="";artist="bob"</code></p>
-<p>This search string will filter the listbox to contain music files whose title is empty and whose artist is <code>bob</code>.</p>
+<p>Questa stringa di ricerca filtrerà la casella di riepilogo in modo che contenga i file musicali il cui titolo è vuoto e il cui artista è <code>bob</code>.</p>
 <p><code>!custom="mbrd"</code></p>
-<p>This search string will filter the listbox to contain music files that contain a custom property with the name <code>mbrd</code>.</p></section>
+<p>Questa stringa di ricerca filtrerà la casella di riepilogo in modo che contenga file musicali contenenti una proprietà personalizzata con il nome <code>mbrd</code>.</p></section>
 </page>
