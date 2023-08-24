@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-17 22:08-0400\n"
-"PO-Revision-Date: 2023-08-10 02:47+0000\n"
+"PO-Revision-Date: 2023-08-24 10:19+0000\n"
 "Last-Translator: Federico Marchetti <marchetti.federico@protonmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/docs/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/docs/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -426,29 +426,28 @@ msgid ""
 "When running <code>File Name to Tag</code> conversion, an empty <code>%%</"
 "code> can be specified to ignore part of the file name when reading it."
 msgstr ""
+"Quando viene usata la conversione <code>da file a tag</code>, è possibile "
+"specificare un segnaposto vuoto( <code>%%</code>) per ignorare parte del "
+"nome del file durante la lettura."
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:59
-#, fuzzy
 msgid "Format String: <code>%%- %track%. %%</code>"
-msgstr "Stringa di formato: <code>%artist%- %title%</code>"
+msgstr "Stringa di formato: <code>%%- %track%. %%</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:60
-#, fuzzy
 msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
-msgstr "Nome del file: <code>Artista1 - Brano1.mp3</code>"
+msgstr "Nome del file: <code>Artista1 -05. Brano1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:61
-#, fuzzy
 msgid ""
 "This format string and this file name will create a tag with a track of "
 "<code>05</code> and ignore the rest of the file name."
 msgstr ""
-"Quando viene eseguita la conversione <code>da nome del file a tag</code> "
-"questa stringa di formato e questo nome di file creeranno un tag in cui "
-"l'artista sarà <code>Artista1</code> ed il titolo sarà <code>Brano1</code>."
+"Questa stringa di formato e questo nome di file creeranno un tag avente "
+"numero di traccia <code>05</code> . Il resto del nome del file sarà ignorato."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
@@ -617,138 +616,139 @@ msgstr "<code>.ofr</code>"
 #. (itstool) path: item/p
 #: yelp/C/index.page:50
 msgid "<code>.ofs</code>"
-msgstr ""
+msgstr "<code>.ofs</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:51
 msgid "<code>.psf</code>"
-msgstr ""
+msgstr "<code>.psf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:52
 msgid "<code>.psf1</code>"
-msgstr ""
+msgstr "<code>.psf1</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:53
 msgid "<code>.psf2</code>"
-msgstr ""
+msgstr "<code>.psf2</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:54
 msgid "<code>.minipsf</code>"
-msgstr ""
+msgstr "<code>.minipsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:55
 msgid "<code>.minipsf1</code>"
-msgstr ""
+msgstr "<code>.minipsf1</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:56
 msgid "<code>.minipsf2</code>"
-msgstr ""
+msgstr "<code>.minipsf2</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:57
 msgid "<code>.ssf</code>"
-msgstr ""
+msgstr "<code>.ssf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:58
 msgid "<code>.minissf</code>"
-msgstr ""
+msgstr "<code>.minissf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:59
 msgid "<code>.minidsf</code>"
-msgstr ""
+msgstr "<code>.minidsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:60
 msgid "<code>.gsf</code>"
-msgstr ""
+msgstr "<code>.gsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:61
 msgid "<code>.minigsf</code>"
-msgstr ""
+msgstr "<code>.minigsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:62
 msgid "<code>.qsf</code>"
-msgstr ""
+msgstr "<code>.qsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:63
 msgid "<code>.miniqsf</code>"
-msgstr ""
+msgstr "<code>.miniqsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:64
 msgid "<code>.spc</code>"
-msgstr ""
+msgstr "<code>.spc</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:65
 msgid "<code>.tak</code>"
-msgstr ""
+msgstr "<code>.tak</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:66
 msgid "<code>.tta</code>"
-msgstr ""
+msgstr "<code>.tta</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:67
 msgid "<code>.vqf</code>"
-msgstr ""
+msgstr "<code>.vqf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:68
 msgid "<code>.bwav</code>"
-msgstr ""
+msgstr "<code>.bwav</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:69
 msgid "<code>.bwf</code>"
-msgstr ""
+msgstr "<code>.bwf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:70
 msgid "<code>.vgm</code>"
-msgstr ""
+msgstr "<code>.vgm</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:71
 msgid "<code>.vgz</code>"
-msgstr ""
+msgstr "<code>.vgz</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:72
 msgid "<code>.wv</code>"
-msgstr ""
+msgstr "<code>.wv</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:73
 msgid "<code>.asf</code>"
-msgstr ""
+msgstr "<code>.asf</code>"
 
 #. (itstool) path: info/title
 #: yelp/C/search.page:8
 msgctxt "link"
 msgid "Advanced Search 🔍"
-msgstr ""
+msgstr "Ricerca avanzata 🔍"
 
 #. (itstool) path: page/title
 #: yelp/C/search.page:20
 msgid "Advanced Search"
-msgstr ""
+msgstr "Ricerca avanzata"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:21
 msgid "This page explains how to use Advanced Search in <app>Tagger</app>."
 msgstr ""
+"Questa pagina spiega come usare la ricerca avanzata su <app>Tagger</app>."
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:23
@@ -757,11 +757,14 @@ msgid ""
 "allows users to search files' tag contents for certain values, using a "
 "powerful tag-based syntax:"
 msgstr ""
+"La ricerca avanzata è una potente caratteristica di <app>Tagger</app> che "
+"consente di cercare all'interno dei tag specifici valori, utilizzando una "
+"sintassi basata su tag:"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:24
 msgid "<code>!prop1=\"value1\";prop2=\"value2\"</code>"
-msgstr ""
+msgstr "<code>!prop1=\"valore1\";prop2=\"valore2\"</code>"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:25
@@ -771,31 +774,35 @@ msgid ""
 "quotes. Each property is separated by a semicolon. Notice how the last "
 "property does not end with a semicolon."
 msgstr ""
+"Dove <code>prop1</code>, <code>prop2</code> sono proprietà valide e "
+"<code>valore1</code>, <code>valore2</code> sono i valori da cercare ("
+"racchiusi tra virgolette). Ogni proprietà è separata da punto e virgola. Si "
+"noti che l'ultima proprietà non termina con un punto e virgola."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:28
 msgid "Valid Properties"
-msgstr ""
+msgstr "Proprietà valide"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:30
 msgid "<code>filename</code>"
-msgstr ""
+msgstr "<code>nome del file</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:44
 msgid "<code>custom</code>"
-msgstr ""
+msgstr "<code>personalizzato</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:46
 msgid "Properties are case-insensitive."
-msgstr ""
+msgstr "Per le proprietà non viene fatta distinzione tra maiuscole e minuscole."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:48
 msgid "Syntax Checking"
-msgstr ""
+msgstr "Controllo della sintassi"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:49
@@ -804,16 +811,20 @@ msgid ""
 "filter the listbox with your search. If the syntax of your string is "
 "invalid, the textbox will turn red and will not filter the listbox."
 msgstr ""
+"Se la sintassi della stringa è valida, la casella di testo diventerà verde e "
+"filtrerà la casella di riepilogo con la ricerca. Se la sintassi della "
+"stringa non è valida, la casella di testo diventerà rossa e non filtrerà la "
+"casella di riepilogo."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:51
 msgid "Examples"
-msgstr ""
+msgstr "Esempi"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:52
 msgid "<code>!artist=\"\"</code>"
-msgstr ""
+msgstr "<code>!artist=\"\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:53
@@ -821,11 +832,13 @@ msgid ""
 "This search string will filter the listbox to contain music files whose "
 "artist is empty."
 msgstr ""
+"Questa stringa di ricerca filtrerà la casella di riepilogo in modo che "
+"contenga i file musicali il cui artista è vuoto."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:54
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
-msgstr ""
+msgstr "<code>!genre=\"\";year=\"2022\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:55
@@ -834,11 +847,15 @@ msgid ""
 "genre is empty and whose year is 2022 (Year and Track properties will "
 "validate if the value string is a number)."
 msgstr ""
+"Questa stringa di ricerca filtrerà la casella di riepilogo in modo da "
+"contenere i file musicali il cui genere è vuoto e il cui anno è il 2022 (le "
+"proprietà Anno e traccia saranno considerate valide se il valore indicato è "
+"un numero)."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:56
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
-msgstr ""
+msgstr "<code>!title=\"\";artist=\"bob\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:57
@@ -846,11 +863,14 @@ msgid ""
 "This search string will filter the listbox to contain music files whose "
 "title is empty and whose artist is <code>bob</code>."
 msgstr ""
+"Questa stringa di ricerca filtrerà la casella di riepilogo in modo che "
+"contenga i file musicali il cui titolo è vuoto e il cui artista è "
+"<code>bob</code>."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:58
 msgid "<code>!custom=\"mbrd\"</code>"
-msgstr ""
+msgstr "<code>!custom=\"mbrd\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:59
@@ -858,12 +878,15 @@ msgid ""
 "This search string will filter the listbox to contain music files that "
 "contain a custom property with the name <code>mbrd</code>."
 msgstr ""
+"Questa stringa di ricerca filtrerà la casella di riepilogo in modo che "
+"contenga file musicali contenenti una proprietà personalizzata con il nome "
+"<code>mbrd</code>."
 
 #. (itstool) path: info/title
 #: yelp/C/unsupported.page:8
 msgctxt "link"
 msgid "Unsupported Files 🚫"
-msgstr ""
+msgstr "File non supportati 🚫"
 
 #. (itstool) path: page/title
 #: yelp/C/unsupported.page:20
