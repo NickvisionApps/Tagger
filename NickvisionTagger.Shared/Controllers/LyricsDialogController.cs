@@ -1,11 +1,8 @@
 using ATL;
-using Microsoft.VisualBasic.CompilerServices;
 using NickvisionTagger.Shared.Events;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace NickvisionTagger.Shared.Controllers;
 

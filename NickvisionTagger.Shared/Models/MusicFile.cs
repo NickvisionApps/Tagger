@@ -361,7 +361,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                     StartInfo = new ProcessStartInfo()
                     {
                         FileName = DependencyManager.FpcalcPath,
-                        Arguments = $"\"{Path}\"",
+                        Arguments = $"\"{Path}\" -length 120",
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
                         CreateNoWindow = true
