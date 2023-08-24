@@ -39,6 +39,7 @@ public partial class Program
               * Added the ability to ignore a part of a file name in a format string by specifying an empty `%%`
               * Fixed an issue where synchronized lyrics stored in the LRC format were not displayed correctly
               * Fixed an issue where using WebP image for album art caused a crash
+              * Fixed an issue where album art would not show in Spotify
               * Fixed an issue where drag and drop would cause a crash
               * Improved speed of loading and saving files
               * Improved fingerprint calculation and process management

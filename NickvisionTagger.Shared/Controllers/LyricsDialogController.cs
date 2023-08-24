@@ -90,7 +90,7 @@ public class LyricsDialogController
         var phrase = Lyrics.SynchronizedLyrics.FirstOrDefault(x => x.TimestampMs == timestamp);
         if (phrase != null)
         {
-            phrase.Text = lyric;
+            Lyrics.SynchronizedLyrics[Lyrics.SynchronizedLyrics.IndexOf(phrase)] = new LyricsInfo.LyricsPhrase(phrase.TimestampMs, lyric);
         }
     }
 
@@ -140,7 +140,7 @@ public class LyricsDialogController
             if (phrase != null && overwrite)
             {
                 SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(phrase.TimestampMs, phrase.Text));
-                phrase.Text = p.Text;
+                Lyrics.SynchronizedLyrics[Lyrics.SynchronizedLyrics.IndexOf(phrase)] = new LyricsInfo.LyricsPhrase(phrase.TimestampMs, p.Text);
                 SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phrase.TimestampMs, phrase.Text, Lyrics.SynchronizedLyrics.OrderBy(x => x.TimestampMs).ToList().IndexOf(phrase)));
             }
             else if (phrase == null)
