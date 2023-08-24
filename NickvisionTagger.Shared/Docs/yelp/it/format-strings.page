@@ -50,12 +50,12 @@
 </section>
 <section>
     <title>Ignoring in File Name to Tag Conversion</title>
-    <p>When running <code>File Name to Tag</code> conversion, an empty <code>%%</code> can be specified to ignore part of the file name when reading it.</p>
+    <p>Quando viene usata la conversione <code>da file a tag</code>, è possibile specificare un segnaposto vuoto( <code>%%</code>) per ignorare parte del nome del file durante la lettura.</p>
     <note>
         <title>Esempio</title>
-        <p>Format String: <code>%%- %track%. %%</code></p>
-        <p>Filename: <code>Artist1- 05. Song1.mp3</code></p>
-        <p>This format string and this file name will create a tag with a track of <code>05</code> and ignore the rest of the file name.</p>
+        <p>Stringa di formato: <code>%%- %track%. %%</code></p>
+        <p>Nome del file: <code>Artista1 -05. Brano1.mp3</code></p>
+        <p>Questa stringa di formato e questo nome di file creeranno un tag avente numero di traccia <code>05</code> . Il resto del nome del file sarà ignorato.</p>
     </note>
 </section>
 </page>
