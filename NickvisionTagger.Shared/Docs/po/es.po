@@ -2,17 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-17 22:08-0400\n"
-"PO-Revision-Date: 2023-08-08 10:00+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
-"weblate.org>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-"
-"tagger/docs/es/>\n"
+"PO-Revision-Date: 2023-08-24 20:09+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/"
+"nickvision-tagger/docs/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -430,29 +429,28 @@ msgid ""
 "When running <code>File Name to Tag</code> conversion, an empty <code>%%</"
 "code> can be specified to ignore part of the file name when reading it."
 msgstr ""
+"Al ejecutar la conversión de <code>Nombre de archivo a etiqueta</code>, se "
+"puede especificar un <code>%%</code> vacío para ignorar parte del nombre del "
+"archivo al leerlo."
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:59
-#, fuzzy
 msgid "Format String: <code>%%- %track%. %%</code>"
-msgstr "Formato de la cadena: <code>%artist%- %title%</code>"
+msgstr "Cadena de formato: <code>%%- %track%. %%</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:60
-#, fuzzy
 msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
-msgstr "Nombre del archivo: <code>Artista1 - Canción1.mp3</code>"
+msgstr "Nombre del archivo: <code>Artist1- 05. Song1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:61
-#, fuzzy
 msgid ""
 "This format string and this file name will create a tag with a track of "
 "<code>05</code> and ignore the rest of the file name."
 msgstr ""
-"Al ejecutar la conversión del <code>Nombre del archivo a etiqueta</code>, "
-"esta cadena de formato y este nombre de archivo crearán una etiqueta con un "
-"artista de <code>Artista1</code> y un título de <code>Canción1</code>."
+"Esta cadena de formato y este nombre del archivo crearán una etiqueta con "
+"una pista de <code>05</code> e ignorarán el resto del nombre del archivo."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
