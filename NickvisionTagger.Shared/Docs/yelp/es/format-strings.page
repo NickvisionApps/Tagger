@@ -56,12 +56,12 @@
 </section>
 <section>
     <title>Ignoring in File Name to Tag Conversion</title>
-    <p>When running <code>File Name to Tag</code> conversion, an empty <code>%%</code> can be specified to ignore part of the file name when reading it.</p>
+    <p>Al ejecutar la conversión de <code>Nombre de archivo a etiqueta</code>, se puede especificar un <code>%%</code> vacío para ignorar parte del nombre del archivo al leerlo.</p>
     <note>
         <title>Ejemplo</title>
-        <p>Format String: <code>%%- %track%. %%</code></p>
-        <p>Filename: <code>Artist1- 05. Song1.mp3</code></p>
-        <p>This format string and this file name will create a tag with a track of <code>05</code> and ignore the rest of the file name.</p>
+        <p>Cadena de formato: <code>%%- %track%. %%</code></p>
+        <p>Nombre del archivo: <code>Artist1- 05. Song1.mp3</code></p>
+        <p>Esta cadena de formato y este nombre del archivo crearán una etiqueta con una pista de <code>05</code> e ignorarán el resto del nombre del archivo.</p>
     </note>
 </section>
 </page>

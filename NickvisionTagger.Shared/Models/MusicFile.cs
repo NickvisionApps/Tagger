@@ -75,6 +75,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "lyrics", _("lyrics") };
         ATL.Settings.UseFileNameWhenNoTitle = false;
         ATL.Settings.FileBufferSize = 1024;
+        ATL.Settings.ID3v2_writePictureDataLengthIndicator = false;
         SortFilesBy = SortBy.Filename;
     }
 
@@ -334,7 +335,14 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// </summary>
     public LyricsInfo Lyrics
     {
-        get => _track.Lyrics;
+        get
+        {
+            if (!_track.Lyrics.Metadata.ContainsKey("offset"))
+            {
+                _track.Lyrics.Metadata["offset"] = "0";
+            }
+            return _track.Lyrics;
+        }
 
         set => _track.Lyrics = value;
     }
@@ -353,18 +361,20 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                     StartInfo = new ProcessStartInfo()
                     {
                         FileName = DependencyManager.FpcalcPath,
-                        Arguments = $"\"{Path}\"",
+                        Arguments = $"\"{Path}\" -length 120",
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
                         CreateNoWindow = true
                     }
                 };
                 _fpcalc.Start();
+                _fpcalc.WaitForExit(TimeSpan.FromSeconds(8));
                 _fingerprint = _fpcalc.StandardOutput.ReadToEnd();
-                if (!_fpcalc.WaitForExit(TimeSpan.FromSeconds(10)))
+                try
                 {
-                    _fpcalc.Kill();
+                    _fpcalc.Kill(true);
                 }
+                catch { }
                 if (_fpcalc.ExitCode == 0)
                 {
                     _fingerprint = _fingerprint.Substring(_fingerprint.IndexOf("FINGERPRINT=") + 12);

@@ -75,6 +75,11 @@ public partial class LyricsDialog : Adw.Window
         SetIconName(iconName);
         SetTransientFor(parent);
         OnCloseRequest += OnClose;
+        _unsyncTextView.GetBuffer().OnChanged += (sender, e) =>
+        {
+            _languageRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
+            _descriptionRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
+        };
         _addSyncLyricButton.OnClicked += AddSyncLyric;
         _clearSyncButton.OnClicked += (sender, e) => _controller.ClearSynchronizedLyrics();;
         _importSyncButton.OnClicked += ImportSyncFromLRC;
@@ -113,6 +118,8 @@ public partial class LyricsDialog : Adw.Window
         _controller.Startup();
         _languageRow.SetText(_controller.Lyrics.LanguageCode);
         _descriptionRow.SetText(_controller.Lyrics.Description);
+        _languageRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
+        _descriptionRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
         _unsyncTextView.GetBuffer().SetText(_controller.Lyrics.UnsynchronizedLyrics, _controller.Lyrics.UnsynchronizedLyrics.Length);
         _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset.ToString());
         _syncList.SetVisible(_controller.Lyrics.SynchronizedLyrics.Count > 0);
@@ -142,6 +149,8 @@ public partial class LyricsDialog : Adw.Window
             _syncList.SetVisible(true);
             _syncList.Insert(row, e.Position);
             _syncRows.Add(e.Timestamp, row);
+            _languageRow.SetSensitive(true);
+            _descriptionRow.SetSensitive(true);
         }
     }
 
@@ -157,7 +166,21 @@ public partial class LyricsDialog : Adw.Window
             _syncList.Remove(_syncRows[e.Timestamp]);
             _syncRows.Remove(e.Timestamp);
             _syncList.SetVisible(_syncRows.Count > 0);
+            _languageRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
+            _descriptionRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
         }
+    }
+
+    /// <summary>
+    /// Gets the text of the unsync text view
+    /// </summary>
+    /// <returns>The unsynchronized lyrics text</returns>
+    private string GetUnsyncText()
+    {
+        var iterStart = new TextIter();
+        var iterEnd = new TextIter();
+        gtk_text_buffer_get_bounds(_unsyncTextView.GetBuffer().Handle, ref iterStart, ref iterEnd);
+        return gtk_text_buffer_get_text(_unsyncTextView.GetBuffer().Handle, ref iterStart, ref iterEnd, false);
     }
 
     /// <summary>
@@ -169,10 +192,7 @@ public partial class LyricsDialog : Adw.Window
     {
         _controller.Lyrics.LanguageCode = _languageRow.GetText();
         _controller.Lyrics.Description = _descriptionRow.GetText();
-        var iterStart = new TextIter();
-        var iterEnd = new TextIter();
-        gtk_text_buffer_get_bounds(_unsyncTextView.GetBuffer().Handle, ref iterStart, ref iterEnd);
-        _controller.Lyrics.UnsynchronizedLyrics = gtk_text_buffer_get_text(_unsyncTextView.GetBuffer().Handle, ref iterStart, ref iterEnd, false);
+        _controller.Lyrics.UnsynchronizedLyrics = GetUnsyncText();
         return false;
     }
 

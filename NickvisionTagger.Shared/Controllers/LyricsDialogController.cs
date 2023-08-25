@@ -1,11 +1,8 @@
 using ATL;
-using Microsoft.VisualBasic.CompilerServices;
 using NickvisionTagger.Shared.Events;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace NickvisionTagger.Shared.Controllers;
 
@@ -37,6 +34,7 @@ public class LyricsDialogController
         if (lyrics == null)
         {
             Lyrics = new LyricsInfo();
+            Lyrics.Metadata["offset"] = "0";
         }
         else
         {
@@ -89,7 +87,7 @@ public class LyricsDialogController
         var phrase = Lyrics.SynchronizedLyrics.FirstOrDefault(x => x.TimestampMs == timestamp);
         if (phrase != null)
         {
-            phrase.Text = lyric;
+            Lyrics.SynchronizedLyrics[Lyrics.SynchronizedLyrics.IndexOf(phrase)] = new LyricsInfo.LyricsPhrase(phrase.TimestampMs, lyric);
         }
     }
 
@@ -102,8 +100,8 @@ public class LyricsDialogController
         var phrase = Lyrics.SynchronizedLyrics.FirstOrDefault(x => x.TimestampMs == timestamp);
         if (phrase != null)
         {
-            SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(timestamp, phrase.Text));
             Lyrics.SynchronizedLyrics.Remove(phrase);
+            SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(timestamp, phrase.Text));
         }
     }
     
@@ -139,7 +137,7 @@ public class LyricsDialogController
             if (phrase != null && overwrite)
             {
                 SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(phrase.TimestampMs, phrase.Text));
-                phrase.Text = p.Text;
+                Lyrics.SynchronizedLyrics[Lyrics.SynchronizedLyrics.IndexOf(phrase)] = new LyricsInfo.LyricsPhrase(phrase.TimestampMs, p.Text);
                 SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phrase.TimestampMs, phrase.Text, Lyrics.SynchronizedLyrics.OrderBy(x => x.TimestampMs).ToList().IndexOf(phrase)));
             }
             else if (phrase == null)
