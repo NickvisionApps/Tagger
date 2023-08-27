@@ -891,13 +891,18 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     }
 
     /// <summary>
-    /// Downloads lryics for the music file
+    /// Downloads lyrics for the music file
     /// </summary>
     /// <returns>True if successful, else false</returns>
     public async Task<bool> DownloadLyricsAsync()
     {
-        using var lyrics = new LyricService();
-        return false;
+        var lyrics = await LyricService.GetAsync(Title, Artist);
+        if (lyrics == null)
+        {
+            return false;
+        }
+        Lyrics = lyrics;
+        return true;
     }
     
     /// <summary>
