@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-24 06:25-0400\n"
-"PO-Revision-Date: 2023-08-26 05:53+0000\n"
+"PO-Revision-Date: 2023-08-27 01:16+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/"
 "nickvision-tagger/app/fi/>\n"
@@ -313,7 +313,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
 #: NickvisionTagger.GNOME/Blueprints/window.blp:43
 msgid "File Name to Tag"
-msgstr ""
+msgstr "Tiedostonimi tunnisteeksi"
 
 #: ../../../Controllers/MainWindowController.cs:962
 #: ../../../Controllers/MainWindowController.cs:988
@@ -365,7 +365,7 @@ msgstr "Ohje"
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:233
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:136
 msgid "Import from LRC"
-msgstr ""
+msgstr "Tuo LRC:stä"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:447
 msgid "Info"
@@ -441,7 +441,7 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:925
 msgid "No metadata was downloaded"
-msgstr ""
+msgstr "Metatietoja ei ladattu"
 
 #: ../../../Controllers/MainWindowController.cs:915
 msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
@@ -449,7 +449,7 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:284
 msgid "Nothing to export."
-msgstr ""
+msgstr "Ei mitään vietävää."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:825
 msgid "OK"
@@ -560,7 +560,7 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:917
 msgid "This file does not have a valid fingerprint"
-msgstr ""
+msgstr "Tällä tiedostolla ei ole kelvollista sormenjälkeä"
 
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "TiB"
@@ -606,9 +606,8 @@ msgid "Unable to export to LRC."
 msgstr "Ei voi tallentaa {0}."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:259
-#, fuzzy
 msgid "Unable to import from LRC."
-msgstr "Ei voi tallentaa {0}."
+msgstr "Tuonti LRC:stä ei onnistu."
 
 #: ../../../Controllers/MainWindowController.cs:704
 msgid "Unable to load image file"
@@ -630,7 +629,7 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:249
 msgid "Use LRC's lyrics"
-msgstr ""
+msgstr "Käytä LRC:n sanoituksia"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:244
 msgid ""
@@ -698,11 +697,11 @@ msgstr "Synkronoitu"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:129
 msgid "Clear All Lyrics"
-msgstr ""
+msgstr "Tyhjennä kaikki sanoitukset"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:151
 msgid "Offset (in milliseconds)"
-msgstr ""
+msgstr "Siirtymä (millisekunneissa)"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:119
@@ -861,11 +860,11 @@ msgstr "Poista tagit"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:51
 msgid "Convert File Name to Tag"
-msgstr ""
+msgstr "Muunna tiedostonimi tunnisteeksi"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:56
 msgid "Convert Tag to File Name"
-msgstr ""
+msgstr "Muunna tunniste tiedostonimeksi"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:66
 msgid "Remove Front Album Art"
@@ -873,7 +872,7 @@ msgstr "Poista albumin etukannen kuvitus"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:76
 msgid "Switch Album Art"
-msgstr ""
+msgstr "Vaihda albumin kuvitus"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:86
 msgid "Remove Back Album Art"
@@ -980,9 +979,8 @@ msgid "Select some files"
 msgstr "Valitse joitain tiedostoja"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:378
-#, fuzzy
 msgid "Main Properties"
-msgstr "Tagin ominaisuudet"
+msgstr "Keskeisimmät ominaisuudet"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:410
 msgid "Album Artist"
@@ -994,9 +992,8 @@ msgid "Track Total"
 msgstr "Kappale"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:456
-#, fuzzy
 msgid "Additional Properties"
-msgstr "Tiedoston ominaisuudet"
+msgstr "Lisäominaisuudet"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:459
 msgid "Comment"
@@ -1044,29 +1041,32 @@ msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:575
 msgid "Apply Changes To Tag (Ctrl+S)"
-msgstr ""
+msgstr "Toteuta muutokset tunnisteeseen (Ctrl+S)"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:11
 msgid "Tag;Music;Editor;Library;Nickvision;"
 msgstr ""
+"Tag;Music;Editor;Library;Nickvision;tägi;tunniste;muokkain;kirjasto;musiikki;"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:10
 msgid ""
 "— Edit tags and album art of multiple files, even across subfolders, all at "
 "once"
 msgstr ""
+"— Muokkaa useiden eri alikansioissa olevien tiedostojen tunnisteita ja "
+"albumikuvituksia kerralla"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:11
 msgid "— Support for multiple music file types (mp3, ogg, flac, wma, and wav)"
-msgstr ""
+msgstr "— Tuki useille musiikkitiedostotyypeille (mp3, ogg, flac, wma ja wav)"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:12
 msgid "— Convert filenames to tags and tags to filenames with ease"
-msgstr ""
+msgstr "— Muunna vaivatta tiedostonimet tunnisteiksi ja päinvastoin"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Lookup file information using MusicBrainz"
-msgstr ""
+msgstr "— Etsi tiedostojen tietoja MusicBrainzista"
 
 #~ msgid "Duration"
 #~ msgstr "Kesto"
