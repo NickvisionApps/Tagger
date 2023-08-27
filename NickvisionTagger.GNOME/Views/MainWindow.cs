@@ -31,6 +31,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _exportAlbumArtAction;
     private readonly Gio.SimpleAction _lyricsAction;
     private readonly Gio.SimpleAction _musicBrainzAction;
+    private readonly Gio.SimpleAction _downloadLyricsAction;
     private readonly Gio.SimpleAction _acoustIdAction;
     private AlbumArtType _currentAlbumArtType;
     private List<Adw.ActionRow> _listMusicFilesRows;
@@ -364,6 +365,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         _musicBrainzAction.OnActivate += DownloadMusicBrainzMetadata;
         AddAction(_musicBrainzAction);
         application.SetAccelsForAction("win.downloadMusicBrainzMetadata", new string[] { "<Ctrl>m" });
+        //Download Lyrics Action
+        _downloadLyricsAction = Gio.SimpleAction.New("downloadLyrics", null);
+        _downloadLyricsAction.OnActivate += DownloadLyrics;
+        AddAction(_downloadLyricsAction);
+        application.SetAccelsForAction("win.downloadLyrics", new string[] { "<Ctrl><Shift>l" });
         //Submit to AcoustId Action
         _acoustIdAction = Gio.SimpleAction.New("submitToAcoustId", null);
         _acoustIdAction.OnActivate += SubmitToAcoustId;
@@ -420,6 +426,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.NetworkMonitor!.StateChanged += (sender, state) =>
         {
             _musicBrainzAction.SetEnabled(state);
+            _downloadLyricsAction.SetEnabled(state);
             _acoustIdAction.SetEnabled(state);
         };
     }

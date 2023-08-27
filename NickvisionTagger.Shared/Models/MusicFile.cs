@@ -754,7 +754,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         return true;
     }
     
-        /// <summary>
+    /// <summary>
     /// Downloads tag metadata from MusicBrainz (discarding any unapplied metadata)
     /// </summary>
     /// <param name="acoustIdClientKey">The app's AcoustId Key</param>
@@ -888,6 +888,16 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             return MusicBrainzLoadStatus.Success;
         }
         return MusicBrainzLoadStatus.NoAcoustIdResult;
+    }
+
+    /// <summary>
+    /// Downloads lryics for the music file
+    /// </summary>
+    /// <returns>True if successful, else false</returns>
+    public async Task<bool> DownloadLyricsAsync()
+    {
+        using var lyrics = new LyricService();
+        return false;
     }
     
     /// <summary>
