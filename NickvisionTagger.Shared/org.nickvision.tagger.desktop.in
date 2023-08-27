@@ -2,12 +2,13 @@
 Version=1.0
 Name=Tagger
 Comment=Tag your music
-Exec=@EXEC@
+Exec=@EXEC@ %U
 Icon=org.nickvision.tagger
 Terminal=false
 Type=Application
 Categories=AudioVideo;Audio;
 Keywords=Tag;Music;Editor;Library;Nickvision;
+MimeType=inode/directory;
 X-GNOME-UsesNotifications=true
 StartupNotify=true
 # Translators: Do NOT translate or transliterate this text (these are enum types)!
