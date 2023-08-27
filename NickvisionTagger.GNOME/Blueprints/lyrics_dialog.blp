@@ -26,42 +26,7 @@ Adw.Window _root {
         hexpand: true;
         vexpand: true;
         
-        Adw.ViewStack _viewStack {
-          Adw.ViewStackPage {
-            title: _("Configure");
-            icon-name: "wrench-wide-symbolic";
-            child: Gtk.ScrolledWindow {
-              min-content-width: 300;
-              min-content-height: 200;
-              
-              Adw.PreferencesGroup {
-                margin-start: 24;
-                margin-end: 24;
-                margin-top: 12;
-                margin-bottom: 12;
-                description: _("Information about the provided lyrics. Applies to both unsynchronized and synchronized lyrics.");
-                
-                Adw.EntryRow _languageRow {
-                  title: _("Language Code");
-                  
-                  [prefix]
-                  Gtk.Image {
-                    icon-name: "language-symbolic";
-                  }
-                }
-                
-                Adw.EntryRow _descriptionRow {
-                  title: _("Description");
-                  
-                  [prefix]
-                  Gtk.Image {
-                    icon-name: "note-symbolic";
-                  }
-                }
-              }
-            };
-          }
-        
+        Adw.ViewStack _viewStack {        
           Adw.ViewStackPage {
             title: _("Unsynchronized");
             icon-name: "notepad-symbolic";
@@ -157,6 +122,41 @@ Adw.Window _root {
                   selection-mode: none;
                 
                   styles ["boxed-list"]
+                }
+              }
+            };
+          }
+          
+          Adw.ViewStackPage {
+            title: _("Configure");
+            icon-name: "wrench-wide-symbolic";
+            child: Gtk.ScrolledWindow {
+              min-content-width: 300;
+              min-content-height: 200;
+              
+              Adw.PreferencesGroup {
+                margin-start: 24;
+                margin-end: 24;
+                margin-top: 12;
+                margin-bottom: 12;
+                description: _("Information about the provided lyrics. Either unsynchronized and/or synchronized lyrics need to be provided first before editing these settings.");
+                
+                Adw.EntryRow _languageRow {
+                  title: _("Language Code");
+                  
+                  [prefix]
+                  Gtk.Image {
+                    icon-name: "language-symbolic";
+                  }
+                }
+                
+                Adw.EntryRow _descriptionRow {
+                  title: _("Description");
+                  
+                  [prefix]
+                  Gtk.Image {
+                    icon-name: "note-symbolic";
+                  }
                 }
               }
             };
