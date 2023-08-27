@@ -1,8 +1,7 @@
 using ATL;
 using System;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace NickvisionTagger.Shared.Models;
@@ -11,13 +10,12 @@ public enum LyricProviders
 {
     Music163,
     LetrasMus,
-    LyricsWikia,
-    ApiSeeds
 }
 
 /// <summary>
 /// A service for looking up and downloading lyrics for a music file
 /// </summary>
+/// <remarks>Service based off that of GiveMeLyrics: https://github.com/muriloventuroso/givemelyrics/blob/master/src/Services/LyricsFetcher.vala</remarks>
 public static class LyricService
 {
     private static readonly HttpClient _http;
@@ -28,6 +26,7 @@ public static class LyricService
     static LyricService()
     {
         _http = new HttpClient();
+        _http.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0");
     }
 
     /// <summary>
@@ -42,8 +41,11 @@ public static class LyricService
         {
             return null;
         }
-        title = title.Normalize(NormalizationForm.FormKD);
-        artist = artist.Normalize(NormalizationForm.FormKD);
+
+        title = title.ToLower().Replace("ê", "e").Replace("á", "á").Replace("à", "à").Replace("ã", "a").Replace("ó", "o")
+            .Replace("ç", "c").Replace("í", "i").Replace("ú", "u").Replace("å", "a").Replace("ö", "o");
+        artist = artist.ToLower().Replace("ê", "e").Replace("á", "á").Replace("à", "à").Replace("ã", "a").Replace("ó", "o")
+            .Replace("ç", "c").Replace("í", "i").Replace("ú", "u").Replace("å", "a").Replace("ö", "o");
         LyricsInfo? res = null;
         foreach (var provider in Enum.GetValues<LyricProviders>())
         {
@@ -51,8 +53,6 @@ public static class LyricService
             {
                 LyricProviders.Music163 => await GetFromMusic163Async(title, artist),
                 LyricProviders.LetrasMus => await GetFromLetrasMusAsync(title, artist),
-                LyricProviders.LyricsWikia => await GetFromLyricsWikiaAsync(title, artist),
-                LyricProviders.ApiSeeds => await GetFromApiSeedsAsync(title, artist),
                 _ => null
             };
             if (res != null)
@@ -71,6 +71,34 @@ public static class LyricService
     /// <returns>The LyricInfo object if successful, else null</returns>
     private static async Task<LyricsInfo?> GetFromMusic163Async(string title, string artist)
     {
+        var url = $"http://music.163.com/api/search/pc?offset=0&limit=1&type=1&s={title.Replace(" ", "")},{artist.Replace(" ", "")}";
+        try
+        {
+            var searchResult = (await _http.GetStringAsync(url)).ToLower();
+            using var searchJson = JsonDocument.Parse(searchResult);
+            if (searchJson.RootElement.GetProperty("code").GetInt32() == 200)
+            {
+                if (searchJson.RootElement.GetProperty("result").GetProperty("songs").GetArrayLength() > 0)
+                {
+                    var first = searchJson.RootElement.GetProperty("result").GetProperty("songs").EnumerateArray().Current;
+                    var lyricUrl = $"https://music.163.com/api/song/lyric?os=pc&lv=-1&kv=-1&tv=-1&id={first.GetProperty("id").GetInt32()}";
+                    var lyricResult = (await _http.GetStringAsync(lyricUrl)).ToLower();
+                    using var lyricJson = JsonDocument.Parse(lyricResult);
+                    if (lyricJson.RootElement.GetProperty("code").GetInt32() == 200)
+                    {
+                        var lrc = lyricJson.RootElement.GetProperty("lrc").GetProperty("lyric").GetString() ?? "";
+                        var lyricsInfo = new LyricsInfo();
+                        lyricsInfo.ParseLRC(lrc);
+                        return lyricsInfo;
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
+        }
         return null;
     }
     
@@ -82,28 +110,18 @@ public static class LyricService
     /// <returns>The LyricInfo object if successful, else null</returns>
     private static async Task<LyricsInfo?> GetFromLetrasMusAsync(string title, string artist)
     {
-        return null;
-    }
-    
-    /// <summary>
-    /// Gets lyrics from LyricsWikia
-    /// </summary>
-    /// <param name="title">The title of the song</param>
-    /// <param name="artist">The artist of the song</param>
-    /// <returns>The LyricInfo object if successful, else null</returns>
-    private static async Task<LyricsInfo?> GetFromLyricsWikiaAsync(string title, string artist)
-    {
-        return null;
-    }
-    
-    /// <summary>
-    /// Gets lyrics from ApiSeeds
-    /// </summary>
-    /// <param name="title">The title of the song</param>
-    /// <param name="artist">The artist of the song</param>
-    /// <returns>The LyricInfo object if successful, else null</returns>
-    private static async Task<LyricsInfo?> GetFromApiSeedsAsync(string title, string artist)
-    {
+        var url = $"https://m.letras.mus.br/{artist.Replace(" ", "-").Replace("&apos;", "-").Replace("&amp;", "e")}/{title.Replace(" ", "-").Split("(")[0]}";
+        try
+        {
+            var searchResult = (await _http.GetStringAsync(url)).ToLower();
+            Console.WriteLine(url);
+            Console.WriteLine(searchResult);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
+        }
         return null;
     }
 }
