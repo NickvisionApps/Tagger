@@ -893,8 +893,9 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <summary>
     /// Downloads lyrics for the music file
     /// </summary>
+    /// <param name="overwrite">Whether or not to overwrite a tag's existing lyric data with data from LyricService</param>
     /// <returns>True if successful, else false</returns>
-    public async Task<bool> DownloadLyricsAsync()
+    public async Task<bool> DownloadLyricsAsync(bool overwrite)
     {
         var lyrics = await LyricService.GetAsync(Title, Artist);
         if (lyrics == null)

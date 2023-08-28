@@ -934,7 +934,7 @@ public class MainWindowController : IDisposable
         var successful = 0;
         foreach(var pair in SelectedMusicFiles)
         {
-            var res = await pair.Value.DownloadLyricsAsync();
+            var res = await pair.Value.DownloadLyricsAsync(Configuration.Current.OverwriteLyricsWithWebService);
             if(res)
             {
                 successful++;

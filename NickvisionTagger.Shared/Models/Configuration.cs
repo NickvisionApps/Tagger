@@ -55,6 +55,10 @@ public class Configuration : ConfigurationBase
     /// </summary>
     public bool OverwriteAlbumArtWithMusicBrainz { get; set; }
     /// <summary>
+    /// Whether or not to overwrite a tag's existing lyric data with data from the web
+    /// </summary>
+    public bool OverwriteLyricsWithWebService { get; set; }
+    /// <summary>
     /// The user's AcoustId API Key
     /// </summary>
     public string AcoustIdUserAPIKey { get; set; }
@@ -72,6 +76,7 @@ public class Configuration : ConfigurationBase
         PreserveModificationTimestamp = false;
         OverwriteTagWithMusicBrainz = true;
         OverwriteAlbumArtWithMusicBrainz = true;
+        OverwriteLyricsWithWebService = true;
         AcoustIdUserAPIKey = "";
     }
 
