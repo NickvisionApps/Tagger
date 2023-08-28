@@ -615,7 +615,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, discarded);
+        MusicFileSaveStatesChanged?.Invoke(this, false);
     }
 
     /// <summary>
