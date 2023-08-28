@@ -539,15 +539,15 @@ public partial class MainWindow : Adw.ApplicationWindow
             dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
             dialog.AddResponse("apply", _("Apply"));
             dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
-            dialog.OnResponse += async (s, ex) =>
+            dialog.OnResponse += async (s, ea) =>
             {
-                if (ex.Response == "apply")
+                if (ea.Response == "apply")
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                     Close();
                 }
-                else if (ex.Response == "discard")
+                else if (ea.Response == "discard")
                 {
                     _controller.ForceAllowClose();
                     Close();
@@ -617,14 +617,14 @@ public partial class MainWindow : Adw.ApplicationWindow
             dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
             dialog.AddResponse("apply", _("Apply"));
             dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
-            dialog.OnResponse += async (s, ex) =>
+            dialog.OnResponse += async (s, ea) =>
             {
-                if (ex.Response == "apply")
+                if (ea.Response == "apply")
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                 }
-                if (ex.Response != "cancel")
+                if (ea.Response != "cancel")
                 {
                     SetLoadingState(_("Loading music files from folder..."));
                     await _controller.ReloadFolderAsync();
@@ -677,7 +677,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void FilenameToTag(Gio.SimpleAction sender, EventArgs e)
     {
         var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("File Name to Tag"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
-        dialog.OnResponse += (s, ex) =>
+        dialog.OnResponse += (s, ea) =>
         {
             if (!string.IsNullOrEmpty(dialog.Response))
             {
@@ -696,7 +696,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void TagToFilename(Gio.SimpleAction sender, EventArgs e)
     {
         var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("Tag to File Name"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
-        dialog.OnResponse += (s, ex) =>
+        dialog.OnResponse += (s, ea) =>
         {
             if (!string.IsNullOrEmpty(dialog.Response))
             {
@@ -785,7 +785,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         var controller = _controller.CreateLyricsDialogController();
         var lyricsDialog = new LyricsDialog(controller, this, _controller.AppInfo.ID);
-        lyricsDialog.OnHide += (s, ex) =>
+        lyricsDialog.OnHide += (s, ea) =>
         {
             _controller.UpdateLyrics(controller.Lyrics);
             lyricsDialog.Destroy();
@@ -801,7 +801,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void AddCustomProperty(Gio.SimpleAction sender, EventArgs e)
     {
         var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("New Custom Property"), "", _("Property Name"), _("Cancel"), _("Add"));
-        entryDialog.OnResponse += (s, ex) =>
+        entryDialog.OnResponse += (s, ea) =>
         {
             if (!string.IsNullOrEmpty(entryDialog.Response))
             {
@@ -836,19 +836,19 @@ public partial class MainWindow : Adw.ApplicationWindow
             dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
             dialog.AddResponse("apply", _("Apply"));
             dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
-            dialog.OnResponse += async (s, ex) =>
+            dialog.OnResponse += async (s, ea) =>
             {
-                if (ex.Response == "apply")
+                if (ea.Response == "apply")
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(true);
                 }
-                else if (ex.Response == "discard")
+                else if (ea.Response == "discard")
                 {
                     SetLoadingState(_("Discarding tags..."));
                     await _controller.DiscardSelectedUnappliedChangesAsync();
                 }
-                if (ex.Response != "cancel")
+                if (ea.Response != "cancel")
                 {
                     SetLoadingState(_("Downloading lyrics..."));
                     await _controller.DownloadLyricsAsync();
@@ -878,12 +878,12 @@ public partial class MainWindow : Adw.ApplicationWindow
             dialog.AddResponse("ok", _("OK"));
             dialog.SetDefaultResponse("ok");
             dialog.SetCloseResponse("ok");
-            dialog.OnResponse += (s, ex) => dialog.Destroy();
+            dialog.OnResponse += (s, ea) => dialog.Destroy();
             dialog.Present();
             return;
         }
         var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("Submit to AcoustId"), _("AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id for easy identification.\n\nIf you have a MusicBrainz Recording Id for this song, please provide it below.\n\nIf none is provided, Tagger will submit your tag's metadata in association with the fingerprint instead."), _("MusicBrainz Recording Id"), _("Cancel"), _("Submit"));
-        entryDialog.OnResponse += async (s, ex) =>
+        entryDialog.OnResponse += async (_, _) =>
         {
             if (!string.IsNullOrEmpty(entryDialog.Response))
             {
@@ -898,19 +898,19 @@ public partial class MainWindow : Adw.ApplicationWindow
                     dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
                     dialog.AddResponse("apply", _("Apply"));
                     dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
-                    dialog.OnResponse += async (ss, exx) =>
+                    dialog.OnResponse += async (s, ea) =>
                     {
-                        if (exx.Response == "apply")
+                        if (ea.Response == "apply")
                         {
                             SetLoadingState(_("Saving tags..."));
                             await _controller.SaveAllTagsAsync(false);
                         }
-                        if (exx.Response == "discard")
+                        if (ea.Response == "discard")
                         {
                             SetLoadingState(_("Discarding tags..."));
                             await _controller.DiscardSelectedUnappliedChangesAsync();
                         }
-                        if (exx.Response != "cancel")
+                        if (ea.Response != "cancel")
                         {
                             SetLoadingState(_("Submitting data to AcoustId..."));
                             await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
@@ -949,19 +949,19 @@ public partial class MainWindow : Adw.ApplicationWindow
             dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
             dialog.AddResponse("apply", _("Apply"));
             dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
-            dialog.OnResponse += async (ss, exx) =>
+            dialog.OnResponse += async (s, ea) =>
             {
-                if (exx.Response == "apply")
+                if (ea.Response == "apply")
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(true);
                 }
-                else if (exx.Response == "discard")
+                else if (ea.Response == "discard")
                 {
                     SetLoadingState(_("Discarding tags..."));
                     await _controller.DiscardSelectedUnappliedChangesAsync();
                 }
-                if (exx.Response != "cancel")
+                if (ea.Response != "cancel")
                 {
                     preferencesDialog.Present();
                 }
