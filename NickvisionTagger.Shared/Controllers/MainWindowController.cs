@@ -126,9 +126,17 @@ public class MainWindowController : IDisposable
     public MainWindowController(string[] args)
     {
         _disposed = false;
-        if (args.Length > 0 && Directory.Exists(args[0]))
+        if (args.Length > 0)
         {
-            _folderToLaunch = args[0];
+            var dir = args[0];
+            if (dir.StartsWith("file://"))
+            {
+                dir = dir.Remove(0, "file://".Length);
+            }
+            if (Directory.Exists(dir))
+            {
+                _folderToLaunch = dir;
+            }
         }
         Aura = new Aura("org.nickvision.tagger", "Nickvision Tagger", _("Tagger"), _("Tag your music"));
         if (Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
