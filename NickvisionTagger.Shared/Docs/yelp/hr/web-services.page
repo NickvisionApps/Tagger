@@ -19,10 +19,16 @@
 <section>
     <title>Preuzmi MusicBrainz metapodatke</title>
     <p>Prepoznaje glazbenu datoteku putem MusicBrainza i preuzima njezine metapodatke u Tagger.</p>
-    <p>Ova usluga koristi AcousId-ev digitalni otisak datoteke (generiran pomoću <code>fpcalc</code>) za određivanje ID oznaka snimanja i izdanja MusicBrainza. Ako se ID oznake pronađu, metapodaci kao što su naslov, izvođač, album i slika će se preuzeti i postaviti u Tagger.</p>
+    <p>This service utilizes the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
     <note>
-        <p>Pronalaženje metapodataka putem MusicBrainza nije 100 % pouzdano i možda neće biti dostupno za nepoznate pjesme.</p>
+        <p>Finding metadata through MusicBrainz isn't 100% reliable and may not be available for uncommon songs.</p>
     </note>
+</section>
+<section>
+    <title>Download Lyrics</title>
+    <p>Uses the tag's title and artist information to search for lyrics of the song.</p>
+    <p>This service utilizes NetEase's Music163 service for obtaining synchronized lyrics.</p>
+    <p>If no synchronized lyrics are found/available, Tagger will use Letras for obtaining unsynchronized lyrics</p>
 </section>
 <section>
     <title>Pošalji AcoustId-u</title>

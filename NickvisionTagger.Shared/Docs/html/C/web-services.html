@@ -22,15 +22,22 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Download MusicBrainz Metadata</span></h2></div>
 <div class="region"><div class="contents pagewide">
 <p class="p">Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
-<p class="p">This service utilizies the AcoustId fingerprint of the file (generated with <span class="code">fpcalc</span>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+<p class="p">This service utilizes the AcoustId fingerprint of the file (generated with <span class="code">fpcalc</span>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
 <div class="note" title="Note">
 <svg height="24" width="24" version="1.1">
  <g>
   <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
   <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
  </g>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Finding metadata through MusicBrainz isn't 100% realiable and may not be available for uncommom songs.</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">Finding metadata through MusicBrainz isn't 100% reliable and may not be available for uncommon songs.</p></div></div></div>
 </div>
+</div></div>
+</div></section><section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Download Lyrics</span></h2></div>
+<div class="region"><div class="contents pagewide">
+<p class="p">Uses the tag's title and artist information to search for lyrics of the song.</p>
+<p class="p">This service utilizes NetEase's Music163 service for obtaining synchronized lyrics.</p>
+<p class="p">If no synchronized lyrics are found/available, Tagger will use Letras for obtaining unsynchronized lyrics</p>
 </div></div>
 </div></section><section id=""><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Submit to AcoustId</span></h2></div>
