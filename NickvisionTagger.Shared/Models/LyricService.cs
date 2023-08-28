@@ -9,8 +9,8 @@ namespace NickvisionTagger.Shared.Models;
 
 public enum LyricProviders
 {
-    Letras,
-    Music163,
+    Music163 = 0, //sync lyric provider
+    Letras, //unsync lyric provider
 }
 
 /// <summary>
@@ -52,8 +52,8 @@ public static class LyricService
         {
             res = provider switch
             {
-                LyricProviders.Letras => await GetFromLetrasAsync(title, artist),
                 LyricProviders.Music163 => await GetFromMusic163Async(title, artist),
+                LyricProviders.Letras => await GetFromLetrasAsync(title, artist),
                 _ => null
             };
             if (res != null)
@@ -64,34 +64,6 @@ public static class LyricService
         return res;
     }
     
-    /// <summary>
-    /// Gets lyrics from Letras
-    /// </summary>
-    /// <param name="title">The title of the song</param>
-    /// <param name="artist">The artist of the song</param>
-    /// <returns>The LyricInfo object if successful, else null</returns>
-    private static async Task<LyricsInfo?> GetFromLetrasAsync(string title, string artist)
-    {
-        var url = $"https://letras.mus.br/winamp.php?t={artist.Replace(" ", "-").Replace("&apos;", "-").Replace("&amp;", "e")}-{title.Replace(" ", "-")}/";
-        try
-        {
-            var searchResult = (await _http.GetStringAsync(url)).ToLower();
-            var html = new HtmlDocument();
-            html.LoadHtml(searchResult);
-            var lyricsHtml = html.GetElementbyId("letra-cnt");
-            return new LyricsInfo()
-            {
-                UnsynchronizedLyrics = lyricsHtml.InnerHtml.Replace("<p>", "").Replace("<br>", "\n").Replace("</p>", "\n").Trim()
-            };
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-            Console.WriteLine(e.StackTrace);
-        }
-        return null;
-    }
-
     /// <summary>
     /// Gets lyrics from Music163
     /// </summary>
@@ -122,6 +94,34 @@ public static class LyricService
                     }
                 }
             }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
+        }
+        return null;
+    }
+    
+    /// <summary>
+    /// Gets lyrics from Letras
+    /// </summary>
+    /// <param name="title">The title of the song</param>
+    /// <param name="artist">The artist of the song</param>
+    /// <returns>The LyricInfo object if successful, else null</returns>
+    private static async Task<LyricsInfo?> GetFromLetrasAsync(string title, string artist)
+    {
+        var url = $"https://letras.mus.br/winamp.php?t={artist.Replace(" ", "-").Replace("&apos;", "-").Replace("&amp;", "e")}-{title.Replace(" ", "-")}/";
+        try
+        {
+            var searchResult = (await _http.GetStringAsync(url)).ToLower();
+            var html = new HtmlDocument();
+            html.LoadHtml(searchResult);
+            var lyricsHtml = html.GetElementbyId("letra-cnt");
+            return new LyricsInfo()
+            {
+                UnsynchronizedLyrics = lyricsHtml.InnerHtml.Replace("<p>", "").Replace("<br>", "\n").Replace("</p>", "\n").Trim()
+            };
         }
         catch (Exception e)
         {
