@@ -902,7 +902,14 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         {
             return false;
         }
-        Lyrics = lyrics;
+        if (overwrite || string.IsNullOrEmpty(Lyrics.UnsynchronizedLyrics))
+        {
+            Lyrics.UnsynchronizedLyrics = lyrics.UnsynchronizedLyrics;
+        }
+        if (overwrite || Lyrics.SynchronizedLyrics.Count == 0)
+        {
+            Lyrics.SynchronizedLyrics = lyrics.SynchronizedLyrics.Select(x => new LyricsInfo.LyricsPhrase(x)).ToList();
+        }
         return true;
     }
     
