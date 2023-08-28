@@ -496,6 +496,15 @@ Adw.ApplicationWindow _root {
                           };
                         }
 
+                        Gtk.Label {
+                          label: _("Custom properties can only be edited for individual files.");
+                          visible: bind _customPropertiesGroup.visible inverted;
+                          justify: center;
+                          wrap: true;
+
+                          styles ["dim-label"]
+                        }
+
                         Adw.PreferencesGroup {
                           title: _("File Properties");
 
