@@ -449,6 +449,11 @@ public partial class MainWindow : Adw.ApplicationWindow
             toast.SetButtonLabel(_("Help"));
             toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("format-string"), 0);
         }
+        else if (e.Action == "web")
+        {
+            toast.SetButtonLabel(_("Help"));
+            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("web-services"), 0);
+        }
         else if (e.Action == "musicbrainz" && !string.IsNullOrWhiteSpace(e.ActionParam))
         {
             toast.SetButtonLabel(_("Info"));

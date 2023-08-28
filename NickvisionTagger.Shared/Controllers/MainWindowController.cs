@@ -944,7 +944,7 @@ public class MainWindowController : IDisposable
             LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
         }
         MusicFileSaveStatesChanged?.Invoke(this, successful > 0);
-        NotificationSent?.Invoke(this, new NotificationSentEventArgs(successful > 0 ? _("Downloaded lyrics for {0} files successfully", successful) : _("No lyrics were downloaded"), successful > 0 ? NotificationSeverity.Success : NotificationSeverity.Error));
+        NotificationSent?.Invoke(this, new NotificationSentEventArgs(successful > 0 ? _("Downloaded lyrics for {0} files successfully", successful) : _("No lyrics were downloaded"), successful > 0 ? NotificationSeverity.Success : NotificationSeverity.Error, "web"));
     }
 
     /// <summary>
@@ -956,7 +956,7 @@ public class MainWindowController : IDisposable
         if(SelectedMusicFiles.Count == 1)
         {
             var result = await SelectedMusicFiles.First().Value.SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(result ? _("Submitted metadata to AcoustId successfully") : _("Unable to submit to AcoustId. Check API key"), result ? NotificationSeverity.Success : NotificationSeverity.Error));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(result ? _("Submitted metadata to AcoustId successfully") : _("Unable to submit to AcoustId. Check API key"), result ? NotificationSeverity.Success : NotificationSeverity.Error, "web"));
         }
     }
 
