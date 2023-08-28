@@ -2,6 +2,7 @@ using ATL;
 using HtmlAgilityPack;
 using System;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -28,6 +29,7 @@ public static class LyricService
     {
         _http = new HttpClient();
         _http.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/116.0");
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
     }
 
     /// <summary>
@@ -42,11 +44,9 @@ public static class LyricService
         {
             return null;
         }
-
-        title = title.ToLower().Replace("ê", "e").Replace("á", "á").Replace("à", "à").Replace("ã", "a").Replace("ó", "o")
-            .Replace("ç", "c").Replace("í", "i").Replace("ú", "u").Replace("å", "a").Replace("ö", "o");
-        artist = artist.ToLower().Replace("ê", "e").Replace("á", "á").Replace("à", "à").Replace("ã", "a").Replace("ó", "o")
-            .Replace("ç", "c").Replace("í", "i").Replace("ú", "u").Replace("å", "a").Replace("ö", "o");
+        //Remove accents. From: https://stackoverflow.com/a/2086575
+        title = Encoding.UTF8.GetString(Encoding.GetEncoding("ISO-8859-8").GetBytes(title));
+        artist = Encoding.UTF8.GetString(Encoding.GetEncoding("ISO-8859-8").GetBytes(artist));
         LyricsInfo? res = null;
         foreach (var provider in Enum.GetValues<LyricProviders>())
         {
