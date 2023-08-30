@@ -165,7 +165,7 @@ Adw.ApplicationWindow _root {
 
                     Gtk.Box {
                       orientation: horizontal;
-                      spacing: 12;
+                      spacing: 6;
                       margin-start: 12;
                       margin-top: 6;
                       margin-end: 12;
@@ -180,6 +180,11 @@ Adw.ApplicationWindow _root {
                         icon-name: "help-faq-symbolic";
                         tooltip-text: _("Advanced Search Info");
                         visible: false;
+                      }
+                      
+                      Gtk.Button _selectAllButton {
+                        icon-name: "edit-select-all-symbolic";
+                        tooltip-text: _("Select All Files");
                       }
                     }
 

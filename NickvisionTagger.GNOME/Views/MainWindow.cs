@@ -54,6 +54,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.ViewStack _filesViewStack;
     [Gtk.Connect] private readonly Gtk.SearchEntry _musicFilesSearch;
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
+    [Gtk.Connect] private readonly Gtk.Button _selectAllButton;
     [Gtk.Connect] private readonly Gtk.Separator _searchSeparator;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindowMusicFiles;
     [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
@@ -108,6 +109,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _title.SetTitle(_controller.AppInfo.ShortName);
         _musicFilesSearch.OnSearchChanged += SearchChanged;
         _advancedSearchInfoButton.OnClicked += AdvancedSearchInfo;
+        _selectAllButton.OnClicked += (sender, e) => _listMusicFiles.SelectAll();
         var musicFilesVadjustment = _scrolledWindowMusicFiles.GetVadjustment();
         musicFilesVadjustment.OnNotify += (sender, e) =>
         {
@@ -1163,7 +1165,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
         _descriptionRow.SetText(_controller.SelectedPropertyMap.Description);
         _publisherRow.SetText(_controller.SelectedPropertyMap.Publisher);
-        _durationFileSizeLabel.SetLabel($"{_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}");
+        _durationFileSizeLabel.SetLabel($"{_controller.SelectedMusicFiles.Count}/{_controller.MusicFiles.Count} {_("Selected")} • {_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}");
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
         _filenameRow.SetEditable(true);
