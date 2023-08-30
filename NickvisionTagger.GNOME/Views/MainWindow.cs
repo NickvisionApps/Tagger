@@ -43,6 +43,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Button _openFolderButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
+    [Gtk.Connect] private readonly Gtk.Label _selectionLabel;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
     [Gtk.Connect] private readonly Gtk.MenuButton _tagActionsButton;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
@@ -1113,6 +1114,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _viewStack.SetVisibleChildName("NoFolder");
             _openFolderButton.SetVisible(false);
         }
+        _selectionLabel.SetLabel(_("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count));
         return false;
     }
 
@@ -1143,6 +1145,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _isSelectionOccuring = true;
         //Update Properties
+        _selectionLabel.SetLabel(_("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count));
         _applyAction.SetEnabled(_controller.SelectedMusicFiles.Count != 0 && _controller.SelectedHasUnsavedChanges);
         _tagActionsButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         _filenameRow.SetEditable(_controller.SelectedMusicFiles.Count < 2);
@@ -1165,7 +1168,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
         _descriptionRow.SetText(_controller.SelectedPropertyMap.Description);
         _publisherRow.SetText(_controller.SelectedPropertyMap.Publisher);
-        _durationFileSizeLabel.SetLabel($"{_controller.SelectedMusicFiles.Count}/{_controller.MusicFiles.Count} {_("Selected")} • {_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}");
+        _durationFileSizeLabel.SetLabel($"{_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}");
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
         _filenameRow.SetEditable(true);

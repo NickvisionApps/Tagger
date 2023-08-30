@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 10:58-0400\n"
+"POT-Creation-Date: 2023-08-30 18:50+0300\n"
 "PO-Revision-Date: 2023-08-22 10:23+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -18,6 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1117
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1148
+#, csharp-format
+msgid "{0} of {1} selected"
+msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:183
 msgid "%artist%- %title%"
@@ -72,7 +78,7 @@ msgstr "<ponechat>"
 msgid "0 MiB"
 msgstr "0 MiB"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:887
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:888
 msgid ""
 "AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id "
 "for easy identification.\n"
@@ -92,7 +98,7 @@ msgstr ""
 "s otiskem."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:206
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:805
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:806
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:79
 #: NickvisionTagger.GNOME/Blueprints/window.blp:496
 msgid "Add"
@@ -100,15 +106,15 @@ msgstr "Přidat"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1029
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:595
-#: ../../../Models/MusicFile.cs:698
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:602
+#: ../../../Models/MusicFile.cs:705
 msgid "album"
 msgstr "album"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1078
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:623
-#: ../../../Models/MusicFile.cs:714
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:630
+#: ../../../Models/MusicFile.cs:721
 msgid "albumartist"
 msgstr "umělecalba"
 
@@ -116,27 +122,27 @@ msgstr "umělecalba"
 msgid "An invalid RecordingId was provided to MusicBrainz"
 msgstr "Službě MusicBrainz bylo poskytnuto neplatné RecordingId"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:542
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:620
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:839
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:901
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:952
-#: NickvisionTagger.GNOME/Blueprints/window.blp:589
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:543
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:621
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:840
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:902
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:953
+#: NickvisionTagger.GNOME/Blueprints/window.blp:598
 msgid "Apply"
 msgstr "Použít"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:535
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:613
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:832
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:894
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:945
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:536
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:614
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:833
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:895
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:946
 msgid "Apply Changes?"
 msgstr "Použít změny?"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1025
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:591
-#: ../../../Models/MusicFile.cs:694
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:598
+#: ../../../Models/MusicFile.cs:701
 msgid "artist"
 msgstr "umělec"
 
@@ -144,56 +150,56 @@ msgstr "umělec"
 msgid "B"
 msgstr "B"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:125
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:721
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:126
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:722
 #: NickvisionTagger.GNOME/Blueprints/window.blp:32
 msgid "Back"
 msgstr "Zadní"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1090
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:635
-#: ../../../Models/MusicFile.cs:726
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:642
+#: ../../../Models/MusicFile.cs:733
 msgid "beatsperminute"
 msgstr "úderyzaminutu"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1090
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:635
-#: ../../../Models/MusicFile.cs:726
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:642
+#: ../../../Models/MusicFile.cs:733
 msgid "bpm"
 msgstr "bpm"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1433
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1436
 #: ../../../Controllers/MainWindowController.cs:1284
 #: ../../../Controllers/MainWindowController.cs:1290
 msgid "Calculating..."
 msgstr "Vypočítávání..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:206
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:537
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:615
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:681
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:700
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:805
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:834
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:887
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:896
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:947
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:538
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:616
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:682
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:701
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:806
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:835
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:888
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:897
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:948
 msgid "Cancel"
 msgstr "Zrušit"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1086
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:631
-#: ../../../Models/MusicFile.cs:722
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:638
+#: ../../../Models/MusicFile.cs:729
 msgid "comment"
 msgstr "komentář"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1105
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:643
-#: ../../../Models/MusicFile.cs:730
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:650
+#: ../../../Models/MusicFile.cs:737
 msgid "composer"
 msgstr "skladatel"
 
@@ -201,8 +207,8 @@ msgstr "skladatel"
 msgid "Contributors on GitHub ❤️"
 msgstr "Přispěvatelé na GitHubu ❤️"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:681
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:700
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:682
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:701
 #: NickvisionTagger.GNOME/Blueprints/window.blp:41
 msgid "Convert"
 msgstr "Převést"
@@ -243,27 +249,27 @@ msgstr "David Lapshin"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1109
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:647
-#: ../../../Models/MusicFile.cs:734
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:654
+#: ../../../Models/MusicFile.cs:741
 msgid "description"
 msgstr "popis"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:540
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:618
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:837
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:899
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:950
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:541
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:619
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:838
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:900
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:951
 msgid "Discard"
 msgstr "Zrušit"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:850
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:912
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:963
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:851
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:913
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:964
 #, fuzzy
 msgid "Discarding tags..."
 msgstr "Ukládání značek..."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:663
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
 msgid "Discarding unapplied changes..."
 msgstr "Rušení nepoužitých změn..."
 
@@ -277,13 +283,13 @@ msgstr "Metadata pro {0} souborů úspěšně stažena"
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Metadata pro {0} souborů úspěšně stažena"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:855
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:864
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:856
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:865
 #, fuzzy
 msgid "Downloading lyrics..."
 msgstr "Stahování metadat z MusicBrainz..."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:824
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:825
 msgid "Downloading MusicBrainz metadata..."
 msgstr "Stahování metadat z MusicBrainz..."
 
@@ -291,8 +297,8 @@ msgstr "Stahování metadat z MusicBrainz..."
 msgid "Error"
 msgstr "Chyba"
 
-#: ../../../Models/MusicFile.cs:385 ../../../Models/MusicFile.cs:767
-#: ../../../Models/MusicFile.cs:925
+#: ../../../Models/MusicFile.cs:392 ../../../Models/MusicFile.cs:774
+#: ../../../Models/MusicFile.cs:932
 msgid "ERROR"
 msgstr "CHYBA"
 
@@ -300,12 +306,12 @@ msgstr "CHYBA"
 msgid "Existing Lyrics"
 msgstr "Existující texty"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:767
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:768
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:91
 msgid "Export Back Album Art"
 msgstr "Exportovat zadní obal alba"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:767
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:768
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:71
 msgid "Export Front Album Art"
 msgstr "Exportovat přední obal alba"
@@ -327,7 +333,7 @@ msgstr "Přední obal alba úspěšně exportován do souboru"
 msgid "Exported successfully to: {0}"
 msgstr "Úspěšně exportováno do: {0}"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:464
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:465
 msgid "Failed MusicBrainz Lookups"
 msgstr "Neúspěšné vyhledávání ve službě MusicBrainz"
 
@@ -339,7 +345,7 @@ msgstr "Nepodařilo se exportovat zadní obal alba do souboru"
 msgid "Failed to export front album art to a file"
 msgstr "Nepodařilo se exportovat přední obal alba do souboru"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:681
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:682
 #: NickvisionTagger.GNOME/Blueprints/window.blp:43
 msgid "File Name to Tag"
 msgstr "Název souboru na značku"
@@ -349,17 +355,17 @@ msgstr "Název souboru na značku"
 msgid "filename"
 msgstr "názevsouboru"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1450
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1453
 msgid "Fingerprint was copied to clipboard."
 msgstr "Otisk byl zkopírován do schránky."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:681
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:700
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:682
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:701
 msgid "Format String"
 msgstr "Formátový řetězec"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:125
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:721
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:126
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:722
 #: NickvisionTagger.GNOME/Blueprints/window.blp:24
 msgid "Front"
 msgstr "Přední"
@@ -370,8 +376,8 @@ msgstr "Fyodor Sobolev"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1082
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:627
-#: ../../../Models/MusicFile.cs:718
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:634
+#: ../../../Models/MusicFile.cs:725
 msgid "genre"
 msgstr "žánr"
 
@@ -379,13 +385,13 @@ msgstr "žánr"
 msgid "GiB"
 msgstr "GiB"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1056
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1057
 msgid "GitHub Repo"
 msgstr "GitHub repozitář"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:446
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:451
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:456
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:447
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:452
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:457
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:18
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:134
 #: NickvisionTagger.GNOME/Blueprints/window.blp:7
@@ -397,16 +403,16 @@ msgstr "Nápověda"
 msgid "Import from LRC"
 msgstr "Importovat z LRC"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:461
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:462
 msgid "Info"
 msgstr "Informace"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:732
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:733
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:81
 msgid "Insert Back Album Art"
 msgstr "Vložit zadní obal alba"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:732
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:733
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:61
 msgid "Insert Front Album Art"
 msgstr "Vložit přední obal alba"
@@ -427,11 +433,11 @@ msgstr[0] "Načten {0} hudební soubor."
 msgstr[1] "Načteny {0} hudební soubory."
 msgstr[2] "Načteno {0} hudebních souborů."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:426
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:580
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:598
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:631
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:640
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:427
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:581
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:599
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:632
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:641
 #: ../../../Controllers/MainWindowController.cs:1252
 msgid "Loading music files from folder..."
 msgstr "Načítání hudebních souborů ze složky..."
@@ -453,11 +459,11 @@ msgstr "Matrix Chat"
 msgid "MiB"
 msgstr "MiB"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:887
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:888
 msgid "MusicBrainz Recording Id"
 msgstr "ID nahrávky MusicBrainz"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:805
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:806
 msgid "New Custom Property"
 msgstr "Nová vlastní vlastnost"
 
@@ -491,11 +497,11 @@ msgstr "Záznamu AcoustId nebylo poskytnuto žádné MusicBrainz RecordingId"
 msgid "Nothing to export."
 msgstr "Nic k exportu."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:880
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:881
 msgid "OK"
 msgstr "OK"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:878
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:879
 msgid ""
 "Only one file can be submitted to AcoustID at a time. Please select only one "
 "file and try again."
@@ -504,29 +510,29 @@ msgstr ""
 "jeden soubor a zkuste to znovu."
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:45
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:594
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:595
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:17
 #: NickvisionTagger.GNOME/Blueprints/window.blp:102
 msgid "Open Folder"
 msgstr "Otevřít složku"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:681
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:700
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:682
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:701
 msgid "Please select a format string."
 msgstr "Vyberte prosím formátový řetězec."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:805
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:806
 msgid "Property Name"
 msgstr "Název vlastnosti"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1113
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:651
-#: ../../../Models/MusicFile.cs:738
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:658
+#: ../../../Models/MusicFile.cs:745
 msgid "publisher"
 msgstr "vydavatel"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1248
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1251
 msgid "Remove Custom Property"
 msgstr "Odebrat vlastní vlastnost"
 
@@ -534,34 +540,30 @@ msgstr "Odebrat vlastní vlastnost"
 msgid "Remove Lyric"
 msgstr "Odebrat řádek"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:548
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:652
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:845
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:907
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:958
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:549
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:627
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:653
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:846
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:908
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:959
 msgid "Saving tags..."
 msgstr "Ukládání značek..."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1168
-msgid "Selected"
-msgstr ""
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:535
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:613
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:832
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:894
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:945
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:536
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:614
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:833
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:895
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:946
 msgid ""
 "Some music files still have changes waiting to be applied. What would you "
 "like to do?"
 msgstr "Některé hudební soubory mají stále čekající změny. Co chcete udělat?"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:887
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:888
 msgid "Submit"
 msgstr "Potvrdit"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:887
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:888
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:115
 #: NickvisionTagger.GNOME/Blueprints/window.blp:52
 msgid "Submit to AcoustId"
@@ -571,21 +573,21 @@ msgstr "Odeslat do AcoustId"
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "Metadata úspěšně odeslána do AcoustId"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:917
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:926
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:918
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:927
 msgid "Submitting data to AcoustId..."
 msgstr "Odesílání dat do AcoustId..."
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:720
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:721
 #: NickvisionTagger.GNOME/Blueprints/window.blp:302
 msgid "Switch to Back Cover"
 msgstr "Přepnout na zadní obal"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:720
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:721
 msgid "Switch to Front Cover"
 msgstr "Přepnout na přední obal"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:700
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:701
 #: NickvisionTagger.GNOME/Blueprints/window.blp:44
 msgid "Tag to File Name"
 msgstr "Značka na název souboru"
@@ -620,26 +622,26 @@ msgstr "Čas (hh:mm:ss)"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1021
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:587
-#: ../../../Models/MusicFile.cs:690
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:594
+#: ../../../Models/MusicFile.cs:697
 msgid "title"
 msgstr "název"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:878
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:879
 msgid "Too Many Files Selected"
 msgstr "Vybráno příliš mnoho souborů"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1048
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:607
-#: ../../../Models/MusicFile.cs:706
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:614
+#: ../../../Models/MusicFile.cs:713
 msgid "track"
 msgstr "stopa"
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1063
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:615
-#: ../../../Models/MusicFile.cs:710
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:622
+#: ../../../Models/MusicFile.cs:717
 msgid "tracktotal"
 msgstr "celkemstop"
 
@@ -687,8 +689,8 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:991
 #: ../../../Controllers/MainWindowController.cs:1033
-#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:599
-#: ../../../Models/MusicFile.cs:702
+#: ../../../Models/MusicFile.cs:75 ../../../Models/MusicFile.cs:606
+#: ../../../Models/MusicFile.cs:709
 msgid "year"
 msgstr "rok"
 
@@ -1122,11 +1124,11 @@ msgstr "Přepnout panel značek"
 msgid "Reload Music Folder (F5)"
 msgstr "Znovu načíst složku s hudbou (F5)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:584
+#: NickvisionTagger.GNOME/Blueprints/window.blp:593
 msgid "Tag Actions"
 msgstr "Akce značky"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:590
+#: NickvisionTagger.GNOME/Blueprints/window.blp:599
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Použít změny u značky (Ctrl+S)"
 
