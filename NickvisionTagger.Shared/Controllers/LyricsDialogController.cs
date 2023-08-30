@@ -39,6 +39,10 @@ public class LyricsDialogController
         else
         {
             Lyrics = new LyricsInfo(lyrics);
+            if (!Lyrics.Metadata.ContainsKey("offset"))
+            {
+                Lyrics.Metadata["offset"] = "0";
+            }
         }
     }
 
@@ -47,7 +51,7 @@ public class LyricsDialogController
     /// </summary>
     public int SynchronizedLyricsOffset
     {
-        get => Lyrics.Metadata.TryGetValue("offset", out var o) ? (int.TryParse(o, out var offsetInt) ? offsetInt : 0) : 0;
+        get => int.TryParse(Lyrics.Metadata["offset"], out var offsetInt) ? offsetInt : 0;
 
         set => Lyrics.Metadata["offset"] = value.ToString();
     }
