@@ -48,6 +48,7 @@ menu tagActionsMenu {
       label: _("Web Services");
 
       item(_("Download MusicBrainz Metadata"), "win.downloadMusicBrainzMetadata")
+      item(_("Download Lyrics"), "win.downloadLyrics")
       item(_("Submit to AcoustId"), "win.submitToAcoustId")
     }
   }
@@ -164,7 +165,7 @@ Adw.ApplicationWindow _root {
 
                     Gtk.Box {
                       orientation: horizontal;
-                      spacing: 12;
+                      spacing: 6;
                       margin-start: 12;
                       margin-top: 6;
                       margin-end: 12;
@@ -179,6 +180,11 @@ Adw.ApplicationWindow _root {
                         icon-name: "help-faq-symbolic";
                         tooltip-text: _("Advanced Search Info");
                         visible: false;
+                      }
+                      
+                      Gtk.Button _selectAllButton {
+                        icon-name: "edit-select-all-symbolic";
+                        tooltip-text: _("Select All Files");
                       }
                     }
 
@@ -495,6 +501,15 @@ Adw.ApplicationWindow _root {
                           };
                         }
 
+                        Gtk.Label {
+                          label: _("Custom properties can only be edited for individual files.");
+                          visible: bind _customPropertiesGroup.visible inverted;
+                          justify: center;
+                          wrap: true;
+
+                          styles ["dim-label"]
+                        }
+
                         Adw.PreferencesGroup {
                           title: _("File Properties");
 
@@ -557,6 +572,15 @@ Adw.ApplicationWindow _root {
                   icon-name: "view-refresh-symbolic";
                   action-name: "win.reloadFolder";
                 }
+              }
+
+              [center]
+              Gtk.Label _selectionLabel {
+                hexpand: true;
+                justify: center;
+                wrap: true;
+                
+                styles ["dim-label"]
               }
 
               [end]

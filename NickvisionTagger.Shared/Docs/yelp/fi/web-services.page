@@ -19,10 +19,16 @@
 <section>
     <title>Lataa MusicBrainz-metatiedot</title>
     <p>Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
-    <p>This service utilizies the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+    <p>This service utilizes the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
     <note>
-        <p>Finding metadata through MusicBrainz isn't 100% realiable and may not be available for uncommom songs.</p>
+        <p>Finding metadata through MusicBrainz isn't 100% reliable and may not be available for uncommon songs.</p>
     </note>
+</section>
+<section>
+    <title>Download Lyrics</title>
+    <p>Uses the tag's title and artist information to search for lyrics of the song.</p>
+    <p>This service utilizes NetEase's Music163 service for obtaining synchronized lyrics.</p>
+    <p>If no synchronized lyrics are found/available, Tagger will use Letras for obtaining unsynchronized lyrics</p>
 </section>
 <section>
     <title>Lähetä AcoustId:hen</title>

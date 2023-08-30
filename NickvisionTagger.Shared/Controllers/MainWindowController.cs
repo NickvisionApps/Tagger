@@ -623,7 +623,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, discarded);
+        MusicFileSaveStatesChanged?.Invoke(this, false);
     }
 
     /// <summary>
@@ -894,7 +894,7 @@ public class MainWindowController : IDisposable
         var errors = new Dictionary<string, MusicBrainzLoadStatus>();
         foreach(var pair in SelectedMusicFiles)
         {
-            var res = await pair.Value.LoadTagFromMusicBrainzAsync("b'Ch3cuJ0d", AppInfo.Version, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz);
+            var res = await pair.Value.DownloadFromMusicBrainzAsync("b'Ch3cuJ0d", AppInfo.Version, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz);
             if(res == MusicBrainzLoadStatus.Success)
             {
                 successful++;
@@ -934,6 +934,28 @@ public class MainWindowController : IDisposable
     }
 
     /// <summary>
+    /// Downloads lyrics for the music file
+    /// </summary>
+    public async Task DownloadLyricsAsync()
+    {
+        var i = 0;
+        var successful = 0;
+        foreach(var pair in SelectedMusicFiles)
+        {
+            var res = await pair.Value.DownloadLyricsAsync(Configuration.Current.OverwriteLyricsWithWebService);
+            if(res)
+            {
+                successful++;
+                MusicFileSaveStates[pair.Key] = false;
+            }
+            i++;
+            LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
+        }
+        MusicFileSaveStatesChanged?.Invoke(this, successful > 0);
+        NotificationSent?.Invoke(this, new NotificationSentEventArgs(successful > 0 ? _("Downloaded lyrics for {0} files successfully", successful) : _("No lyrics were downloaded"), successful > 0 ? NotificationSeverity.Success : NotificationSeverity.Error, "web"));
+    }
+
+    /// <summary>
     /// Submits tag information to AcoustId for the selected file
     /// </summary>
     /// <param name="recordingID">The MusicBrainz Recording Id to associate, if available</param>
@@ -942,8 +964,7 @@ public class MainWindowController : IDisposable
         if(SelectedMusicFiles.Count == 1)
         {
             var result = await SelectedMusicFiles.First().Value.SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
-            MusicFileSaveStatesChanged?.Invoke(this, result);
-            NotificationSent?.Invoke(this, new NotificationSentEventArgs(result ? _("Submitted metadata to AcoustId successfully") : _("Unable to submit to AcoustId. Check API key"), result ? NotificationSeverity.Success : NotificationSeverity.Error));
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(result ? _("Submitted metadata to AcoustId successfully") : _("Unable to submit to AcoustId. Check API key"), result ? NotificationSeverity.Success : NotificationSeverity.Error, "web"));
         }
     }
 

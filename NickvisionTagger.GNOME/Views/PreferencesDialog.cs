@@ -23,6 +23,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     [Gtk.Connect] private readonly Gtk.Switch _preserveModificationTimestampSwitch;
     [Gtk.Connect] private readonly Gtk.Switch _overwriteTagWithMusicBrainzSwitch;
     [Gtk.Connect] private readonly Gtk.Switch _overwriteAlbumArtWithMusicBrainzSwitch;
+    [Gtk.Connect] private readonly Gtk.Switch _overwriteLyricsWithWebSwitch;
     [Gtk.Connect] private readonly Adw.EntryRow _acoustIdRow;
     [Gtk.Connect] private readonly Gtk.Button _acoustIdButton;
 
@@ -52,6 +53,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _preserveModificationTimestampSwitch.SetActive(_controller.PreserveModificationTimestamp);
         _overwriteTagWithMusicBrainzSwitch.SetActive(_controller.OverwriteTagWithMusicBrainz);
         _overwriteAlbumArtWithMusicBrainzSwitch.SetActive(_controller.OverwriteAlbumArtWithMusicBrainz);
+        _overwriteLyricsWithWebSwitch.SetActive(_controller.OverwriteLyricsWithWebService);
         _acoustIdRow.SetText(_controller.AcoustIdUserAPIKey);
     }
 
@@ -78,6 +80,7 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         _controller.PreserveModificationTimestamp = _preserveModificationTimestampSwitch.GetActive();
         _controller.OverwriteTagWithMusicBrainz = _overwriteTagWithMusicBrainzSwitch.GetActive();
         _controller.OverwriteAlbumArtWithMusicBrainz = _overwriteAlbumArtWithMusicBrainzSwitch.GetActive();
+        _controller.OverwriteLyricsWithWebService = _overwriteLyricsWithWebSwitch.GetActive();
         _controller.AcoustIdUserAPIKey = _acoustIdRow.GetText();
         _controller.SaveConfiguration();
         Destroy();

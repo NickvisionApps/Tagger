@@ -126,6 +126,22 @@ Adw.PreferencesWindow _root {
           valign: center;
         }
       }
+      
+      Adw.ActionRow {
+        title: _("Overwrite Lyrics From Web Service");
+        subtitle: _("Enable to overwrite existing lyrics with that found from downloading lyrics from the web. If disabled, only blank lyrics will be filled.");
+        activatable-widget: _overwriteLyricsWithWebSwitch;
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "quotation-symbolic";
+        }
+
+        [suffix]
+        Gtk.Switch _overwriteLyricsWithWebSwitch {
+          valign: center;
+        }
+      }
 
       Adw.EntryRow _acoustIdRow {
         title: _("AcoustId User API Key");

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-17 22:08-0400\n"
+"POT-Creation-Date: 2023-08-27 20:46-0400\n"
 "PO-Revision-Date: 2023-08-05 15:50+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -159,18 +159,30 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:60
-msgid "AcoustId User API Key"
+msgid "Overwrite Lyrics With Web Service"
 msgstr ""
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:61
+msgid ""
+"Whether or not to overwrite a tag's existing lyric data with data from the "
+"web."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/configuration.page:64
+msgid "AcoustId User API Key"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:65
 msgid ""
 "An AcoustId User API key to use when fingerprinting music files and looking "
 "up song information."
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/configuration.page:63
+#: yelp/C/configuration.page:67
 msgid ""
 "A key can be obtained <link href=\"https://acoustid.org/api-key\">here</link>"
 msgstr ""
@@ -838,8 +850,8 @@ msgstr ""
 #: yelp/C/unsupported.page:25
 msgid ""
 "There is a known issue of the flatpak version of the app running on Debian-"
-"based systems where you are unable to save files due to a \"permission denied"
-"\" error."
+"based systems where you are unable to save files due to a \"permission "
+"denied\" error."
 msgstr ""
 
 #. (itstool) path: section/p
@@ -902,7 +914,7 @@ msgstr ""
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:25
 msgid ""
-"This service utilizies the AcoustId fingerprint of the file (generated with "
+"This service utilizes the AcoustId fingerprint of the file (generated with "
 "<code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If "
 "IDs are found, metadata such as title, artist, album, and art will be "
 "downloaded and set in Tagger."
@@ -911,17 +923,42 @@ msgstr ""
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:27
 msgid ""
-"Finding metadata through MusicBrainz isn't 100% realiable and may not be "
-"available for uncommom songs."
+"Finding metadata through MusicBrainz isn't 100% reliable and may not be "
+"available for uncommon songs."
 msgstr ""
 
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:31
-msgid "Submit to AcoustId"
+msgid "Download Lyrics"
 msgstr ""
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:32
+msgid ""
+"Uses the tag's title and artist information to search for lyrics of the song."
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/web-services.page:33
+msgid ""
+"This service utilizes NetEase's Music163 service for obtaining synchronized "
+"lyrics."
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/web-services.page:34
+msgid ""
+"If no synchronized lyrics are found/available, Tagger will use Letras for "
+"obtaining unsynchronized lyrics"
+msgstr ""
+
+#. (itstool) path: section/title
+#: yelp/C/web-services.page:37
+msgid "Submit to AcoustId"
+msgstr ""
+
+#. (itstool) path: section/p
+#: yelp/C/web-services.page:38
 msgid ""
 "Submits data about a music file (identified via its fingerprint) to "
 "AcoustId's database. There are two things that can be submitted about a "
@@ -929,12 +966,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/web-services.page:35
+#: yelp/C/web-services.page:41
 msgid "MusicBrainz Recording ID"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/web-services.page:36
+#: yelp/C/web-services.page:42
 msgid ""
 "A user can submit a MusicBrainz Recording ID to submit to AcoustId. This "
 "will pull all data from the associated recording id and use that for sending "
@@ -942,17 +979,17 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/web-services.page:39
+#: yelp/C/web-services.page:45
 msgid "User Metadata"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/web-services.page:40
+#: yelp/C/web-services.page:46
 msgid "A user can submit their metadata from Tagger to AcoustId."
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/web-services.page:44
+#: yelp/C/web-services.page:50
 msgid ""
 "A proper <code>AcoustId User API Key</code> must be set in "
 "<code>Preferences</code> for this service to work."

@@ -95,6 +95,16 @@ public class PreferencesViewController
 
         set => Configuration.Current.OverwriteAlbumArtWithMusicBrainz = value;
     }
+    
+    /// <summary>
+    /// Whether or not to overwrite a tag's existing lyric data with data from the web
+    /// </summary>
+    public bool OverwriteLyricsWithWebService
+    {
+        get => Configuration.Current.OverwriteLyricsWithWebService;
+
+        set => Configuration.Current.OverwriteLyricsWithWebService = value;
+    }
 
     /// <summary>
     /// The user's AcoustId API Key

@@ -31,6 +31,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _exportAlbumArtAction;
     private readonly Gio.SimpleAction _lyricsAction;
     private readonly Gio.SimpleAction _musicBrainzAction;
+    private readonly Gio.SimpleAction _downloadLyricsAction;
     private readonly Gio.SimpleAction _acoustIdAction;
     private AlbumArtType _currentAlbumArtType;
     private List<Adw.ActionRow> _listMusicFilesRows;
@@ -42,6 +43,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Button _openFolderButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
+    [Gtk.Connect] private readonly Gtk.Label _selectionLabel;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
     [Gtk.Connect] private readonly Gtk.MenuButton _tagActionsButton;
     [Gtk.Connect] private readonly Adw.ToastOverlay _toastOverlay;
@@ -53,6 +55,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.ViewStack _filesViewStack;
     [Gtk.Connect] private readonly Gtk.SearchEntry _musicFilesSearch;
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
+    [Gtk.Connect] private readonly Gtk.Button _selectAllButton;
     [Gtk.Connect] private readonly Gtk.Separator _searchSeparator;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindowMusicFiles;
     [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
@@ -107,6 +110,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _title.SetTitle(_controller.AppInfo.ShortName);
         _musicFilesSearch.OnSearchChanged += SearchChanged;
         _advancedSearchInfoButton.OnClicked += AdvancedSearchInfo;
+        _selectAllButton.OnClicked += (sender, e) => _listMusicFiles.SelectAll();
         var musicFilesVadjustment = _scrolledWindowMusicFiles.GetVadjustment();
         musicFilesVadjustment.OnNotify += (sender, e) =>
         {
@@ -364,6 +368,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         _musicBrainzAction.OnActivate += DownloadMusicBrainzMetadata;
         AddAction(_musicBrainzAction);
         application.SetAccelsForAction("win.downloadMusicBrainzMetadata", new string[] { "<Ctrl>m" });
+        //Download Lyrics Action
+        _downloadLyricsAction = Gio.SimpleAction.New("downloadLyrics", null);
+        _downloadLyricsAction.OnActivate += DownloadLyrics;
+        AddAction(_downloadLyricsAction);
+        application.SetAccelsForAction("win.downloadLyrics", new string[] { "<Ctrl><Shift>l" });
         //Submit to AcoustId Action
         _acoustIdAction = Gio.SimpleAction.New("submitToAcoustId", null);
         _acoustIdAction.OnActivate += SubmitToAcoustId;
@@ -420,6 +429,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.NetworkMonitor!.StateChanged += (sender, state) =>
         {
             _musicBrainzAction.SetEnabled(state);
+            _downloadLyricsAction.SetEnabled(state);
             _acoustIdAction.SetEnabled(state);
         };
     }
@@ -441,6 +451,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             toast.SetButtonLabel(_("Help"));
             toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("format-string"), 0);
+        }
+        else if (e.Action == "web")
+        {
+            toast.SetButtonLabel(_("Help"));
+            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("web-services"), 0);
         }
         else if (e.Action == "musicbrainz" && !string.IsNullOrWhiteSpace(e.ActionParam))
         {
@@ -527,15 +542,15 @@ public partial class MainWindow : Adw.ApplicationWindow
             dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
             dialog.AddResponse("apply", _("Apply"));
             dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
-            dialog.OnResponse += async (s, ex) =>
+            dialog.OnResponse += async (s, ea) =>
             {
-                if (ex.Response == "apply")
+                if (ea.Response == "apply")
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                     Close();
                 }
-                else if (ex.Response == "discard")
+                else if (ea.Response == "discard")
                 {
                     _controller.ForceAllowClose();
                     Close();
@@ -605,14 +620,14 @@ public partial class MainWindow : Adw.ApplicationWindow
             dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
             dialog.AddResponse("apply", _("Apply"));
             dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
-            dialog.OnResponse += async (s, ex) =>
+            dialog.OnResponse += async (s, ea) =>
             {
-                if (ex.Response == "apply")
+                if (ea.Response == "apply")
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                 }
-                if (ex.Response != "cancel")
+                if (ea.Response != "cancel")
                 {
                     SetLoadingState(_("Loading music files from folder..."));
                     await _controller.ReloadFolderAsync();
@@ -665,7 +680,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void FilenameToTag(Gio.SimpleAction sender, EventArgs e)
     {
         var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("File Name to Tag"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
-        dialog.OnResponse += (s, ex) =>
+        dialog.OnResponse += (s, ea) =>
         {
             if (!string.IsNullOrEmpty(dialog.Response))
             {
@@ -684,7 +699,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void TagToFilename(Gio.SimpleAction sender, EventArgs e)
     {
         var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("Tag to File Name"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
-        dialog.OnResponse += (s, ex) =>
+        dialog.OnResponse += (s, ea) =>
         {
             if (!string.IsNullOrEmpty(dialog.Response))
             {
@@ -773,7 +788,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         var controller = _controller.CreateLyricsDialogController();
         var lyricsDialog = new LyricsDialog(controller, this, _controller.AppInfo.ID);
-        lyricsDialog.OnHide += (s, ex) =>
+        lyricsDialog.OnHide += (s, ea) =>
         {
             _controller.UpdateLyrics(controller.Lyrics);
             lyricsDialog.Destroy();
@@ -789,7 +804,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void AddCustomProperty(Gio.SimpleAction sender, EventArgs e)
     {
         var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("New Custom Property"), "", _("Property Name"), _("Cancel"), _("Add"));
-        entryDialog.OnResponse += (s, ex) =>
+        entryDialog.OnResponse += (s, ea) =>
         {
             if (!string.IsNullOrEmpty(entryDialog.Response))
             {
@@ -811,6 +826,47 @@ public partial class MainWindow : Adw.ApplicationWindow
         await _controller.DownloadMusicBrainzMetadataAsync();
     }
 
+    private async void DownloadLyrics(Gio.SimpleAction sender, EventArgs e)
+    {
+        if (!_controller.CanClose)
+        {
+            var dialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("cancel", _("Cancel"));
+            dialog.SetDefaultResponse("cancel");
+            dialog.SetCloseResponse("cancel");
+            dialog.AddResponse("discard", _("Discard"));
+            dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
+            dialog.AddResponse("apply", _("Apply"));
+            dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
+            dialog.OnResponse += async (s, ea) =>
+            {
+                if (ea.Response == "apply")
+                {
+                    SetLoadingState(_("Saving tags..."));
+                    await _controller.SaveAllTagsAsync(false);
+                }
+                else if (ea.Response == "discard")
+                {
+                    SetLoadingState(_("Discarding tags..."));
+                    await _controller.DiscardSelectedUnappliedChangesAsync();
+                }
+                if (ea.Response != "cancel")
+                {
+                    SetLoadingState(_("Downloading lyrics..."));
+                    await _controller.DownloadLyricsAsync();
+                }
+                dialog.Destroy();
+            };
+            dialog.Present();
+        }
+        else
+        {
+            SetLoadingState(_("Downloading lyrics..."));
+            await _controller.DownloadLyricsAsync();
+        }
+    }
+
     /// <summary>
     /// Occurs when the submit to acoustid action is triggered
     /// </summary>
@@ -825,12 +881,12 @@ public partial class MainWindow : Adw.ApplicationWindow
             dialog.AddResponse("ok", _("OK"));
             dialog.SetDefaultResponse("ok");
             dialog.SetCloseResponse("ok");
-            dialog.OnResponse += (s, ex) => dialog.Destroy();
+            dialog.OnResponse += (s, ea) => dialog.Destroy();
             dialog.Present();
             return;
         }
         var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("Submit to AcoustId"), _("AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id for easy identification.\n\nIf you have a MusicBrainz Recording Id for this song, please provide it below.\n\nIf none is provided, Tagger will submit your tag's metadata in association with the fingerprint instead."), _("MusicBrainz Recording Id"), _("Cancel"), _("Submit"));
-        entryDialog.OnResponse += async (s, ex) =>
+        entryDialog.OnResponse += async (_, _) =>
         {
             if (!string.IsNullOrEmpty(entryDialog.Response))
             {
@@ -845,14 +901,19 @@ public partial class MainWindow : Adw.ApplicationWindow
                     dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
                     dialog.AddResponse("apply", _("Apply"));
                     dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
-                    dialog.OnResponse += async (ss, exx) =>
+                    dialog.OnResponse += async (s, ea) =>
                     {
-                        if (exx.Response == "apply")
+                        if (ea.Response == "apply")
                         {
                             SetLoadingState(_("Saving tags..."));
                             await _controller.SaveAllTagsAsync(false);
                         }
-                        if (exx.Response != "cancel")
+                        if (ea.Response == "discard")
+                        {
+                            SetLoadingState(_("Discarding tags..."));
+                            await _controller.DiscardSelectedUnappliedChangesAsync();
+                        }
+                        if (ea.Response != "cancel")
                         {
                             SetLoadingState(_("Submitting data to AcoustId..."));
                             await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
@@ -891,16 +952,21 @@ public partial class MainWindow : Adw.ApplicationWindow
             dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
             dialog.AddResponse("apply", _("Apply"));
             dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
-            dialog.OnResponse += async (ss, exx) =>
+            dialog.OnResponse += async (s, ea) =>
             {
-                if (exx.Response != "cancel")
-                {
-                    preferencesDialog.Present();
-                }
-                if (exx.Response == "apply")
+                if (ea.Response == "apply")
                 {
                     SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(true);
+                }
+                else if (ea.Response == "discard")
+                {
+                    SetLoadingState(_("Discarding tags..."));
+                    await _controller.DiscardSelectedUnappliedChangesAsync();
+                }
+                if (ea.Response != "cancel")
+                {
+                    preferencesDialog.Present();
                 }
                 dialog.Destroy();
             };
@@ -1048,6 +1114,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _viewStack.SetVisibleChildName("NoFolder");
             _openFolderButton.SetVisible(false);
         }
+        _selectionLabel.SetLabel(_("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count));
         return false;
     }
 
@@ -1078,6 +1145,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _isSelectionOccuring = true;
         //Update Properties
+        _selectionLabel.SetLabel(_("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count));
         _applyAction.SetEnabled(_controller.SelectedMusicFiles.Count != 0 && _controller.SelectedHasUnsavedChanges);
         _tagActionsButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         _filenameRow.SetEditable(_controller.SelectedMusicFiles.Count < 2);

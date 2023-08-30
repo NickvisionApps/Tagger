@@ -34,7 +34,9 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
-            @"* Added support for opening a folder with Tagger from the file manager
+            @"* Added a new web service to download lyrics for a song
+              * Added support for opening a folder with Tagger from the file manager
+              * Added a ""Select All Files"" button next to the search bar
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))

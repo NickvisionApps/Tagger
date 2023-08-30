@@ -344,7 +344,14 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             return _track.Lyrics;
         }
 
-        set => _track.Lyrics = value;
+        set
+        {
+            _track.Lyrics = value;
+            if (!_track.Lyrics.Metadata.ContainsKey("offset"))
+            {
+                _track.Lyrics.Metadata["offset"] = "0";
+            }
+        }
     }
     
     /// <summary>
@@ -425,142 +432,6 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         _fpcalc?.Kill(true);
         _fpcalc?.Dispose();
         _disposed = true;
-    }
-    
-    /// <summary>
-    /// Loads tag metadata from MusicBrainz (discarding any unapplied metadata)
-    /// </summary>
-    /// <param name="acoustIdClientKey">The app's AcoustId Key</param>
-    /// <param name="version">The version of the app</param>
-    /// <param name="overwriteTagWithMusicBrainz">Whether or not to overwrite a tag's existing data with data from MusicBrainz</param>
-    /// <param name="overwriteAlbumArtWithMusicBrainz">Whether or not to overwrite a tag's existing album art with album art from MusicBrainz</param>
-    /// <returns>MusicBrainzLoadStatus</returns>
-    public async Task<MusicBrainzLoadStatus> LoadTagFromMusicBrainzAsync(string acoustIdClientKey, string version, bool overwriteTagWithMusicBrainz, bool overwriteAlbumArtWithMusicBrainz)
-    {
-        if (Fingerprint == _("ERROR"))
-        {
-            return MusicBrainzLoadStatus.InvalidFingerprint;
-        }
-        //Use AcoustID to get MBID
-        AcoustID.Configuration.ClientKey = acoustIdClientKey;
-        var service = new AcoustID.Web.LookupService();
-        AcoustID.Web.LookupResponse? response = null;
-        try
-        {
-            response = await service.GetAsync(Fingerprint, Duration, new string[] { "recordingids" });
-        }
-        catch(Exception e)
-        {
-            Console.WriteLine(e.Message);
-            Console.WriteLine(e.StackTrace);
-            return MusicBrainzLoadStatus.NoAcoustIdResult;
-        }
-        if(response.Results.Count > 0)
-        {
-            //AcoustID Results
-            var bestResult = response.Results[0];
-            foreach (var r in response.Results)
-            {
-                if (r.Recordings.Count > 0 && (r.Score > bestResult.Score || bestResult.Recordings.Count == 0))
-                {
-                    bestResult = r;
-                }
-            }
-            //AcoustID Recordings
-            if(bestResult.Recordings.Count < 1)
-            {
-                return MusicBrainzLoadStatus.NoAcoustIdRecordingId;
-            }
-            var bestRecordingId = bestResult.Recordings[0].Id;
-            foreach (var r in bestResult.Recordings)
-            {
-                if(r.Title != "")
-                {
-                    bestRecordingId = r.Id;
-                    break;
-                }
-            }
-            //MusicBrainz
-            using var query = new MetaBrainz.MusicBrainz.Query("Tagger", version, "mailto:nlogozzo225@gmail.com");
-            IRecording? recording = null;
-            IRelease? album = null;
-            try
-            {
-                var include = MetaBrainz.MusicBrainz.Include.Releases | MetaBrainz.MusicBrainz.Include.ArtistCredits | MetaBrainz.MusicBrainz.Include.Genres;
-                recording = await query.LookupRecordingAsync(Guid.Parse(bestRecordingId), include, MetaBrainz.MusicBrainz.ReleaseType.Album, MetaBrainz.MusicBrainz.ReleaseStatus.Official);
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-                return MusicBrainzLoadStatus.InvalidMusicBrainzRecordingId;
-            }
-            if(recording.Releases != null && recording.Releases.Count > 0)
-            {
-                album = recording.Releases[0];
-            }
-            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Title))
-            {
-                Title = recording.Title ?? "";
-            }
-            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Artist))
-            {
-                if(recording.ArtistCredit != null && recording.ArtistCredit.Count > 0)
-                {
-                    Artist = recording.ArtistCredit[0].Artist!.Name ?? recording.ArtistCredit[0].Artist!.SortName ?? "";
-                }
-            }
-            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Album))
-            {
-                if(album != null)
-                {
-                    Album = album.Title ?? "";
-                }
-            }
-            if(overwriteTagWithMusicBrainz || Year == 0)
-            {
-                if(recording.FirstReleaseDate != null)
-                {
-                    Year = recording.FirstReleaseDate.Year ?? 0;
-                }
-            }
-            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(AlbumArtist))
-            {
-                if(album != null && album.ArtistCredit != null && album.ArtistCredit.Count > 0)
-                {
-                    AlbumArtist = album.ArtistCredit[0].Artist!.Name ?? album.ArtistCredit[0].Artist!.SortName ?? "";
-                }
-            }
-            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Genre))
-            {
-                if(recording.Genres != null && recording.Genres.Count > 0)
-                {
-                    Genre = recording.Genres[0].Name ?? "";
-                }
-            }
-            if(overwriteAlbumArtWithMusicBrainz || FrontAlbumArt.Length == 0)
-            {
-                if(album != null && album.CoverArtArchive != null && album.CoverArtArchive.Count > 0)
-                {
-                    using var caQuery = new CoverArt(version, version, "mailto:nlogozzo225@gmail.com");
-                    CoverArtImage? img = null;
-                    try
-                    {
-                        img = await caQuery.FetchFrontAsync(Guid.Parse(bestRecordingId));
-                    }
-                    catch { }
-                    if(img != null)
-                    {
-                        var reader = new BinaryReader(img.Data);
-                        FrontAlbumArt = reader.ReadBytes((int)img.Data.Length);
-                        reader.Dispose();
-                        img.Dispose();
-                    }
-                }
-            }
-            return MusicBrainzLoadStatus.Success;
-        }
-        return MusicBrainzLoadStatus.NoAcoustIdResult;
     }
     
     /// <summary>
@@ -891,6 +762,165 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     }
     
     /// <summary>
+    /// Downloads tag metadata from MusicBrainz (discarding any unapplied metadata)
+    /// </summary>
+    /// <param name="acoustIdClientKey">The app's AcoustId Key</param>
+    /// <param name="version">The version of the app</param>
+    /// <param name="overwriteTagWithMusicBrainz">Whether or not to overwrite a tag's existing data with data from MusicBrainz</param>
+    /// <param name="overwriteAlbumArtWithMusicBrainz">Whether or not to overwrite a tag's existing album art with album art from MusicBrainz</param>
+    /// <returns>MusicBrainzLoadStatus</returns>
+    public async Task<MusicBrainzLoadStatus> DownloadFromMusicBrainzAsync(string acoustIdClientKey, string version, bool overwriteTagWithMusicBrainz, bool overwriteAlbumArtWithMusicBrainz)
+    {
+        if (Fingerprint == _("ERROR"))
+        {
+            return MusicBrainzLoadStatus.InvalidFingerprint;
+        }
+        //Use AcoustID to get MBID
+        AcoustID.Configuration.ClientKey = acoustIdClientKey;
+        var service = new AcoustID.Web.LookupService();
+        AcoustID.Web.LookupResponse? response = null;
+        try
+        {
+            response = await service.GetAsync(Fingerprint, Duration, new string[] { "recordingids" });
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
+            return MusicBrainzLoadStatus.NoAcoustIdResult;
+        }
+        if(response.Results.Count > 0)
+        {
+            //AcoustID Results
+            var bestResult = response.Results[0];
+            foreach (var r in response.Results)
+            {
+                if (r.Recordings.Count > 0 && (r.Score > bestResult.Score || bestResult.Recordings.Count == 0))
+                {
+                    bestResult = r;
+                }
+            }
+            //AcoustID Recordings
+            if(bestResult.Recordings.Count < 1)
+            {
+                return MusicBrainzLoadStatus.NoAcoustIdRecordingId;
+            }
+            var bestRecordingId = bestResult.Recordings[0].Id;
+            foreach (var r in bestResult.Recordings)
+            {
+                if(r.Title != "")
+                {
+                    bestRecordingId = r.Id;
+                    break;
+                }
+            }
+            //MusicBrainz
+            using var query = new MetaBrainz.MusicBrainz.Query("Tagger", version, "mailto:nlogozzo225@gmail.com");
+            IRecording? recording = null;
+            IRelease? album = null;
+            try
+            {
+                var include = MetaBrainz.MusicBrainz.Include.Releases | MetaBrainz.MusicBrainz.Include.ArtistCredits | MetaBrainz.MusicBrainz.Include.Genres;
+                recording = await query.LookupRecordingAsync(Guid.Parse(bestRecordingId), include, MetaBrainz.MusicBrainz.ReleaseType.Album, MetaBrainz.MusicBrainz.ReleaseStatus.Official);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+                return MusicBrainzLoadStatus.InvalidMusicBrainzRecordingId;
+            }
+            if(recording.Releases != null && recording.Releases.Count > 0)
+            {
+                album = recording.Releases[0];
+            }
+            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Title))
+            {
+                Title = recording.Title ?? "";
+            }
+            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Artist))
+            {
+                if(recording.ArtistCredit != null && recording.ArtistCredit.Count > 0)
+                {
+                    Artist = recording.ArtistCredit[0].Artist!.Name ?? recording.ArtistCredit[0].Artist!.SortName ?? "";
+                }
+            }
+            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Album))
+            {
+                if(album != null)
+                {
+                    Album = album.Title ?? "";
+                }
+            }
+            if(overwriteTagWithMusicBrainz || Year == 0)
+            {
+                if(recording.FirstReleaseDate != null)
+                {
+                    Year = recording.FirstReleaseDate.Year ?? 0;
+                }
+            }
+            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(AlbumArtist))
+            {
+                if(album != null && album.ArtistCredit != null && album.ArtistCredit.Count > 0)
+                {
+                    AlbumArtist = album.ArtistCredit[0].Artist!.Name ?? album.ArtistCredit[0].Artist!.SortName ?? "";
+                }
+            }
+            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Genre))
+            {
+                if(recording.Genres != null && recording.Genres.Count > 0)
+                {
+                    Genre = recording.Genres[0].Name ?? "";
+                }
+            }
+            if(overwriteAlbumArtWithMusicBrainz || FrontAlbumArt.Length == 0)
+            {
+                if(album != null && album.CoverArtArchive != null && album.CoverArtArchive.Count > 0)
+                {
+                    using var caQuery = new CoverArt(version, version, "mailto:nlogozzo225@gmail.com");
+                    CoverArtImage? img = null;
+                    try
+                    {
+                        img = await caQuery.FetchFrontAsync(Guid.Parse(bestRecordingId));
+                    }
+                    catch { }
+                    if(img != null)
+                    {
+                        var reader = new BinaryReader(img.Data);
+                        FrontAlbumArt = reader.ReadBytes((int)img.Data.Length);
+                        reader.Dispose();
+                        img.Dispose();
+                    }
+                }
+            }
+            return MusicBrainzLoadStatus.Success;
+        }
+        return MusicBrainzLoadStatus.NoAcoustIdResult;
+    }
+
+    /// <summary>
+    /// Downloads lyrics for the music file
+    /// </summary>
+    /// <param name="overwrite">Whether or not to overwrite a tag's existing lyric data with data from LyricService</param>
+    /// <returns>True if successful, else false</returns>
+    public async Task<bool> DownloadLyricsAsync(bool overwrite)
+    {
+        var lyrics = await LyricService.GetAsync(Title, Artist);
+        if (lyrics == null)
+        {
+            return false;
+        }
+        if (overwrite || string.IsNullOrEmpty(Lyrics.UnsynchronizedLyrics))
+        {
+            Lyrics.UnsynchronizedLyrics = lyrics.UnsynchronizedLyrics;
+        }
+        if (overwrite || Lyrics.SynchronizedLyrics.Count == 0)
+        {
+            Lyrics.SynchronizedLyrics = lyrics.SynchronizedLyrics.Select(x => new LyricsInfo.LyricsPhrase(x)).ToList();
+        }
+        return true;
+    }
+    
+    /// <summary>
     /// Loads tag metadata from MusicBrainz (discarding any unapplied metadata)
     /// </summary>
     /// <param name="acoustIdClientKey">The app's AcoustId Key</param>
@@ -921,8 +951,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 Artist = Artist,
                 Album = Album,
                 AlbumArtist = AlbumArtist,
-                Year = (int)Year,
-                TrackNumber = (int)Track
+                Year = Year,
+                TrackNumber = Track
             });
             return string.IsNullOrEmpty(response.ErrorMessage);
         }
