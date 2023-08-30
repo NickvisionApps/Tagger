@@ -844,7 +844,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 if (ea.Response == "apply")
                 {
                     SetLoadingState(_("Saving tags..."));
-                    await _controller.SaveAllTagsAsync(true);
+                    await _controller.SaveAllTagsAsync(false);
                 }
                 else if (ea.Response == "discard")
                 {
