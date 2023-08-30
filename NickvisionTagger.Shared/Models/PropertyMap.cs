@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.Shared.Models;
@@ -6,7 +8,7 @@ namespace NickvisionTagger.Shared.Models;
 /// <summary>
 /// A model of all properties of a music file
 /// </summary>
-public class PropertyMap
+public class PropertyMap : IEquatable<PropertyMap>
 {
     /// <summary>
     /// The filename of the file
@@ -154,4 +156,52 @@ public class PropertyMap
         s += "=========";
         return s;
     }
+
+    /// <summary>
+    /// Check equlity of this PropertyMap with another one
+    /// </summary>
+    /// <param name="obj">PropertyMap to compare to as object</param>
+    /// <returns>True if PropertyMaps are equal, else false</returns>
+    public override bool Equals(object obj) => Equals(obj as PropertyMap);
+
+    /// <summary>
+    /// Check equlity of this PropertyMap with another one
+    /// </summary>
+    /// <param name="obj">PropertyMap to compare to</param>
+    /// <returns>True if PropertyMaps are equal, else false</returns>
+    public bool Equals(PropertyMap obj)
+    {
+        return obj.Filename == Filename &&
+            obj.Title == Title &&
+            obj.Artist == Artist &&
+            obj.Album == Album &&
+            obj.Year == Year &&
+            obj.Track == Track &&
+            obj.TrackTotal == TrackTotal &&
+            obj.AlbumArtist == AlbumArtist &&
+            obj.Genre == Genre &&
+            obj.Comment == Comment &&
+            obj.BeatsPerMinute == BeatsPerMinute &&
+            obj.Composer == Composer &&
+            obj.Description == Description &&
+            obj.Publisher == Publisher &&
+            obj.CustomProperties.Count == CustomProperties.Count && !obj.CustomProperties.Except(CustomProperties).Any();
+    }
+
+    public override int GetHashCode() => ToString().GetHashCode();
+
+    public static bool operator ==(PropertyMap obj1, PropertyMap obj2)
+    {
+        if (obj1 is null)
+        {
+            if (obj2 is null)
+            {
+                return true;
+            }
+            return false;
+        }
+        return obj1.Equals(obj2);
+    }
+
+    public static bool operator !=(PropertyMap obj1, PropertyMap obj2) => !(obj1 == obj2);
 }
