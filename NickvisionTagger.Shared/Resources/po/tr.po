@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-30 18:50+0300\n"
-"PO-Revision-Date: 2023-08-22 14:33+0000\n"
+"PO-Revision-Date: 2023-08-30 18:54+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1117
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1148
 #, csharp-format
 msgid "{0} of {1} selected"
-msgstr ""
+msgstr "{0} / {1} seçildi"
 
 #: ../../../Controllers/MainWindowController.cs:183
 msgid "%artist%- %title%"
@@ -263,18 +263,17 @@ msgstr "Gözden Çıkar"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:851
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:913
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:964
-#, fuzzy
 msgid "Discarding tags..."
-msgstr "Etiketler kaydediliyor..."
+msgstr "Etiketler siliniyor..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
 msgid "Discarding unapplied changes..."
 msgstr "Uygulanmayan değişiklikler gözden çıkartılıyor..."
 
 #: ../../../Controllers/MainWindowController.cs:955
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Downloaded lyrics for {0} files successfully"
-msgstr "{0} dosya için üst veri indirildi"
+msgstr "{0} dosya için şarkı sözleri indirildi"
 
 #: ../../../Controllers/MainWindowController.cs:933
 #, csharp-format
@@ -283,9 +282,8 @@ msgstr "{0} dosya için üst veri indirildi"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:856
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:865
-#, fuzzy
 msgid "Downloading lyrics..."
-msgstr "MusicBrainz üst verileri indiriliyor..."
+msgstr "Şarkı sözleri indiriliyor..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:825
 msgid "Downloading MusicBrainz metadata..."
@@ -440,9 +438,9 @@ msgid "Loading music files from folder..."
 msgstr "Müzik dosyaları klasörden yükleniyor..."
 
 #: ../../../Models/LyricService.cs:90
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "lrc"
-msgstr "şarkı sözleri"
+msgstr "Şsz"
 
 #: ../../../Models/MusicFile.cs:75
 msgid "lyrics"
@@ -478,9 +476,8 @@ msgid "No AcoustId entry found for the file's fingerprint"
 msgstr "Dosyanın parmak izi için AcoustId girdisi bulunamadı"
 
 #: ../../../Controllers/MainWindowController.cs:955
-#, fuzzy
 msgid "No lyrics were downloaded"
-msgstr "Hiçbir üst veri indirilmedi"
+msgstr "Hiçbir şarkı sözü indirilmedi"
 
 #: ../../../Controllers/MainWindowController.cs:933
 msgid "No metadata was downloaded"
@@ -741,13 +738,12 @@ msgid "Configure"
 msgstr "Yapılandır"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:142
-#, fuzzy
 msgid ""
 "Information about the provided lyrics. Either unsynchronized and/or "
 "synchronized lyrics need to be provided first before editing these settings."
 msgstr ""
-"Sağlanan şarkı sözleri hakkında bilgi. Hem eşitlenmemiş hem de eşitlenmiş "
-"şarkı sözleri için geçerlidir."
+"Sağlanan şarkı sözleri hakkında bilgi. Bu ayarları düzenlemeden önce "
+"eşzamanlanmamış ve/veya eşzamanlanmış şarkı sözlerinin sağlanması gerekir."
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:145
 msgid "Language Code"
@@ -880,17 +876,16 @@ msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:131
 msgid "Overwrite Lyrics From Web Service"
-msgstr ""
+msgstr "Web Hizmetinden Şarkı Sözlerinin Üzerine Yaz"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:132
-#, fuzzy
 msgid ""
 "Enable to overwrite existing lyrics with that found from downloading lyrics "
 "from the web. If disabled, only blank lyrics will be filled."
 msgstr ""
-"MusicBrainzʼden bulunan verilerle mevcut etiket üst verilerinin üzerine "
-"yazmak için etkinleştirin. Devre dışı bırakılırsa, yalnızca boş etiket "
-"özellikleri doldurulur."
+"Mevcut şarkı sözlerinin üzerine internetten şarkı sözleri indirerek üzerine "
+"yazılmasını etkinleştir. Devre dışı bırakılırsa, yalnızca boş şarkı sözleri "
+"doldurulur."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:147
 msgid "AcoustId User API Key"
@@ -970,9 +965,8 @@ msgstr "MusicBrainz Üst Verilerini İndir"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:110
 #: NickvisionTagger.GNOME/Blueprints/window.blp:51
-#, fuzzy
 msgid "Download Lyrics"
-msgstr "Şarkı Sözlerini Yönet"
+msgstr "Şarkı Sözlerini İndir"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:121
 msgctxt "Shortcut"
@@ -1051,9 +1045,8 @@ msgid "Advanced Search Info"
 msgstr "Gelişmiş Arama Bilgisi"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:187
-#, fuzzy
 msgid "Select All Files"
-msgstr "Bazı dosyaları seçin"
+msgstr "Tüm Dosyaları Seç"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:233
 msgid "No Selected Music Files"
@@ -1101,7 +1094,7 @@ msgstr "Özel Özellikler"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:505
 msgid "Custom properties can only be edited for individual files."
-msgstr ""
+msgstr "Özel özellikler yalnızca bağımsız dosyalar için düzenlenebilir."
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:514
 msgid "File Properties"
