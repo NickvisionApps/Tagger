@@ -158,20 +158,27 @@ public class PropertyMap : IEquatable<PropertyMap>
     }
 
     /// <summary>
-    /// Check equlity of this PropertyMap with another one
+    /// Check equality of this PropertyMap with another one
     /// </summary>
-    /// <param name="obj">PropertyMap to compare to as object</param>
+    /// <param name="obj">object? to compare</param>
     /// <returns>True if PropertyMaps are equal, else false</returns>
-    public override bool Equals(object obj) => Equals(obj as PropertyMap);
+    public override bool Equals(object? obj)
+    {
+        if(obj is PropertyMap map)
+        {
+            return Equals(map);
+        }
+        return false;
+    }
 
     /// <summary>
-    /// Check equlity of this PropertyMap with another one
+    /// Check equality of this PropertyMap with another one
     /// </summary>
-    /// <param name="obj">PropertyMap to compare to</param>
+    /// <param name="obj">PropertyMap to compare</param>
     /// <returns>True if PropertyMaps are equal, else false</returns>
-    public bool Equals(PropertyMap obj)
+    public bool Equals(PropertyMap? obj)
     {
-        return obj.Filename == Filename &&
+        return obj != null && obj.Filename == Filename &&
             obj.Title == Title &&
             obj.Artist == Artist &&
             obj.Album == Album &&
@@ -188,20 +195,32 @@ public class PropertyMap : IEquatable<PropertyMap>
             obj.CustomProperties.Count == CustomProperties.Count && !obj.CustomProperties.Except(CustomProperties).Any();
     }
 
+    /// <summary>
+    /// Gets the hash code for the object
+    /// </summary>
+    /// <returns>The object's hash code</returns>
     public override int GetHashCode() => ToString().GetHashCode();
 
-    public static bool operator ==(PropertyMap obj1, PropertyMap obj2)
+    /// <summary>
+    /// Compares two PropertyMap via ==
+    /// </summary>
+    /// <param name="obj1">PropertyMap</param>
+    /// <param name="obj2">PropertyMap</param>
+    /// <returns>True if obj1 == obj2, else false</returns>
+    public static bool operator ==(PropertyMap? obj1, PropertyMap? obj2)
     {
-        if (obj1 is null)
+        if(obj1 is null || obj2 is null)
         {
-            if (obj2 is null)
-            {
-                return true;
-            }
-            return false;
+            return obj1 is null && obj2 is null;
         }
         return obj1.Equals(obj2);
     }
 
-    public static bool operator !=(PropertyMap obj1, PropertyMap obj2) => !(obj1 == obj2);
+    /// <summary>
+    /// Compares two PropertyMap via !=
+    /// </summary>
+    /// <param name="obj1">PropertyMap</param>
+    /// <param name="obj2">PropertyMap</param>
+    /// <returns>True if obj1 != obj2, else false</returns>
+    public static bool operator !=(PropertyMap? obj1, PropertyMap? obj2) => !(obj1 == obj2);
 }
