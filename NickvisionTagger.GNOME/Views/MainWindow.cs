@@ -10,8 +10,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Timers;
 using System.Threading.Tasks;
+using System.Timers;
 using NickvisionTagger.Shared.Models;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 using static Nickvision.GirExt.GtkExt;
@@ -24,7 +24,6 @@ namespace NickvisionTagger.GNOME.Views;
 public partial class MainWindow : Adw.ApplicationWindow
 {
     private readonly MainWindowController _controller;
-    private readonly Timer _tagChangedTimer;
     private readonly Adw.Application _application;
     private readonly Gtk.DropTarget _dropTarget;
     private readonly Gio.SimpleAction _applyAction;
@@ -35,6 +34,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _musicBrainzAction;
     private readonly Gio.SimpleAction _downloadLyricsAction;
     private readonly Gio.SimpleAction _acoustIdAction;
+    private readonly Timer _tagChangedTimer;
     private AlbumArtType _currentAlbumArtType;
     private List<Adw.ActionRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
@@ -94,7 +94,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
         _controller = controller;
-        _tagChangedTimer = new Timer(1500);
+        _tagChangedTimer = new Timer(600);
         _tagChangedTimer.AutoReset = false;
         _tagChangedTimer.Elapsed += (_, _) =>
         {
