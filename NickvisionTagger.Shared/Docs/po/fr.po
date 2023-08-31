@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-08-27 20:46-0400\n"
-"PO-Revision-Date: 2023-08-24 10:19+0000\n"
+"PO-Revision-Date: 2023-08-31 13:49+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/fr/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -177,17 +177,16 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:60
 msgid "Overwrite Lyrics With Web Service"
-msgstr ""
+msgstr "Remplacer les paroles avec le service web"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:61
-#, fuzzy
 msgid ""
 "Whether or not to overwrite a tag's existing lyric data with data from the "
 "web."
 msgstr ""
-"Indique s’il faut ou non remplacer la couverture de l’album existante avec "
-"celle récupérée depuis MusicBrainz."
+"Indique s’il faut ou non remplacer les paroles existantes d’une balise de "
+"données avec des données récupérées depuis le web."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:64
@@ -1020,7 +1019,6 @@ msgstr ""
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:25
-#, fuzzy
 msgid ""
 "This service utilizes the AcoustId fingerprint of the file (generated with "
 "<code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If "
@@ -1035,7 +1033,6 @@ msgstr ""
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:27
-#, fuzzy
 msgid ""
 "Finding metadata through MusicBrainz isn't 100% reliable and may not be "
 "available for uncommon songs."
@@ -1046,13 +1043,15 @@ msgstr ""
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:31
 msgid "Download Lyrics"
-msgstr ""
+msgstr "Télécharger les paroles"
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:32
 msgid ""
 "Uses the tag's title and artist information to search for lyrics of the song."
 msgstr ""
+"Utilise les balises du titres et des informations sur l’artiste pour "
+"rechercher les paroles de la chanson."
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:33
@@ -1060,6 +1059,8 @@ msgid ""
 "This service utilizes NetEase's Music163 service for obtaining synchronized "
 "lyrics."
 msgstr ""
+"Ce service utilise le service Music163 de NetEase pour obtenir des paroles "
+"synchronisées."
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:34
@@ -1067,6 +1068,8 @@ msgid ""
 "If no synchronized lyrics are found/available, Tagger will use Letras for "
 "obtaining unsynchronized lyrics"
 msgstr ""
+"S’il n’y a pas de paroles synchronisées trouvées ou disponibles, Tagger "
+"utilisera Letras pour obtenir des paroles non synchronisées"
 
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:37
