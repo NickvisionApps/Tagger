@@ -25,16 +25,16 @@
 <section>
     <title>Descargar metadatos de MusicBrainz</title>
     <p>Identifica un archivo de música a través de MusicBrainz y descarga sus metadatos para usarlos en Tagger.</p>
-    <p>This service utilizes the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+    <p>Este servicio utiliza la huella digital de AcoustId para el archivo (generada con <code>fpcalc</code>) para determinar los ID de grabación y publicación de MusicBrainz. Si te encuentras los ID, los metadatos como título, el artista, el álbum y la caratula se descargarán y establecerán para Tagger.</p>
     <note>
-        <p>Finding metadata through MusicBrainz isn't 100% reliable and may not be available for uncommon songs.</p>
+        <p>Encontrar los metadatos a través de MusicBrainz no es 100% fiable y puede que no estén disponibles para las canciones poco comunes.</p>
     </note>
 </section>
 <section>
-    <title>Download Lyrics</title>
-    <p>Uses the tag's title and artist information to search for lyrics of the song.</p>
-    <p>This service utilizes NetEase's Music163 service for obtaining synchronized lyrics.</p>
-    <p>If no synchronized lyrics are found/available, Tagger will use Letras for obtaining unsynchronized lyrics</p>
+    <title>Descargar las letras</title>
+    <p>Utiliza el título de la etiqueta y la información del artista para buscar la letra de la canción.</p>
+    <p>Este servicio utiliza el servicio Music163 de NetEase para conseguir sincronizar las letras.</p>
+    <p>Si no se encuentran o no está disponible sincronizado de las letras, Tagger utilizará Letras para conseguir las letras no sincronizadas</p>
 </section>
 <section>
     <title>Enviar a AcoustId</title>
