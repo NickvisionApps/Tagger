@@ -385,6 +385,7 @@ public class MainWindowController : IDisposable
                 try
                 {
                     pair.Value.Filename = map.Filename;
+                    map.Filename = pair.Value.Filename;
                     updated = true;
                 }
                 catch { }
