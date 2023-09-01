@@ -123,6 +123,13 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 newFilename += _dotExtension;
             }
+            foreach (var invalidChar in System.IO.Path.GetInvalidPathChars().Union(System.IO.Path.GetInvalidFileNameChars()))
+            {
+                if (newFilename.Contains(invalidChar))
+                {
+                    newFilename = newFilename.Replace(invalidChar, '_');
+                }
+            }
             if(File.Exists(newFilename))
             {
                 throw new ArgumentException($"A file already exists with this filename: {newFilename}");
