@@ -125,10 +125,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             }
             foreach (var invalidChar in System.IO.Path.GetInvalidPathChars().Union(System.IO.Path.GetInvalidFileNameChars()))
             {
-                if (newFilename.Contains(invalidChar))
-                {
-                    newFilename = newFilename.Replace(invalidChar, '_');
-                }
+                newFilename = newFilename.Replace(invalidChar, '_');
             }
             if(File.Exists(newFilename))
             {
