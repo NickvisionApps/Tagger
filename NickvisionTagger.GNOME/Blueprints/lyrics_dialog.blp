@@ -5,168 +5,153 @@ Adw.Window _root {
   default-width: 600;
   default-height: 500;
   modal: true;
-  hide-on-close: true;
+  resizable: false;
 
   content: Gtk.Box {
     orientation: vertical;
 
     Adw.HeaderBar {
-      title-widget: Adw.ViewSwitcherTitle _title {
-        title: _("Lyrics");
-        stack: _viewStack;
-      };
-    }
-    
-    Gtk.Box {
-      hexpand: true;
-      vexpand: true;
-      orientation: vertical;
+      title-widget: Gtk.Label { };
 
+      styles ["flat"]
+    }
+
+    Gtk.WindowHandle {
       Adw.ToastOverlay _toast {
         hexpand: true;
         vexpand: true;
         
-        Adw.ViewStack _viewStack {        
-          Adw.ViewStackPage {
-            title: _("Unsynchronized");
-            icon-name: "notepad-symbolic";
-            child: Gtk.ScrolledWindow {
-              min-content-width: 300;
-              min-content-height: 200;
-            
-              Adw.PreferencesGroup {
-                margin-start: 24;
-                margin-end: 24;
-                margin-top: 12;
-                margin-bottom: 12;
-                description: _("Unsynchronized lyrics are stored as a single string with no time information.");
-                
-                Gtk.TextView _unsyncTextView {
-                  vexpand: true;
-                  top-margin: 12;
-                  left-margin: 12;
-                  right-margin: 12;
-                  bottom-margin: 12;
-                  
-                  styles ["card"]
-                }
-              }
-            };
+        Gtk.Box {
+          orientation: vertical;
+    
+          Gtk.Label {
+            label: _("Lyrics");
+            styles ["title-2"]
           }
           
-          Adw.ViewStackPage {
-            title: _("Synchronized");
-            icon-name: "preferences-system-time-symbolic";
-            child: Gtk.ScrolledWindow {
-              min-content-width: 300;
-              min-content-height: 200;
-              
-              Gtk.Box {
-                orientation: vertical;
-                spacing: 12;
-                margin-top: 12;
-                margin-start: 24;
-                margin-end: 24;
-                margin-bottom: 24;
-                
-                Gtk.Box {
-                  orientation: horizontal;
-                  spacing: 6;
-                  hexpand: true;
-                  
-                  Gtk.Button _addSyncLyricButton {
-                    Adw.ButtonContent {
-                      label: _("Add");
-                      icon-name: "list-add-symbolic";
-                    }
-                    
-                    styles ["flat"]
-                  }
-                  
-                  Gtk.Separator {
-                    hexpand: true;
-                    
-                    styles ["spacer"]
-                  }
-                  
-                  Gtk.Button _clearSyncButton {
-                    icon-name: "user-trash-symbolic";
-                    tooltip-text: _("Clear All Lyrics");
-                    
-                    styles ["flat"]
-                  }
-                  
-                  Gtk.Button _importSyncButton {
-                    icon-name: "document-send-symbolic";
-                    tooltip-text: _("Import from LRC");
-                    
-                    styles ["flat"]
-                  }
-
-                  Gtk.Button _exportSyncButton {
-                    icon-name: "folder-download-symbolic";
-                    tooltip-text: _("Export to LRC");
-                    
-                    styles ["flat"]
-                  }
-                }
-
-                Adw.PreferencesGroup {
-                  Adw.EntryRow _syncOffsetRow {
-                    title: _("Offset (in milliseconds)");
-                    show-apply-button: true;
-                  }
-                }
-
-                Gtk.ListBox _syncList { 
-                  selection-mode: none;
-                
-                  styles ["boxed-list"]
-                }
-              }
-            };
+          Gtk.Label {
+            label: _("Configure unsynchronized or synchronized lyrics for a music file.");
+            wrap: true;
+            margin-top: 24;
+            margin-start: 12;
+            margin-end: 12;
+            margin-bottom: 24;
+            justify: center;
           }
+  
+          Gtk.Separator {}
           
-          Adw.ViewStackPage {
-            title: _("Configure");
-            icon-name: "wrench-wide-symbolic";
-            child: Gtk.ScrolledWindow {
-              min-content-width: 300;
-              min-content-height: 200;
+          Gtk.ScrolledWindow {
+            propagate-natural-height: true;
+          
+            child: Gtk.Box {
+              orientation: vertical;
+              spacing: 6;
+              margin-start: 24;
+              margin-end: 24;
+              margin-top: 12;
+              margin-bottom: 12;
               
               Adw.PreferencesGroup {
-                margin-start: 24;
-                margin-end: 24;
-                margin-top: 12;
-                margin-bottom: 12;
-                description: _("Information about the provided lyrics. Either unsynchronized and/or synchronized lyrics need to be provided first before editing these settings.");
-                
+                title: _("Configure");
+                description: _("Information about the provided lyrics. Lyrics need to be provided first before editing these settings.");
+               
                 Adw.EntryRow _languageRow {
                   title: _("Language Code");
-                  
+                 
                   [prefix]
                   Gtk.Image {
                     icon-name: "language-symbolic";
                   }
                 }
-                
+               
                 Adw.EntryRow _descriptionRow {
                   title: _("Description");
-                  
+                 
                   [prefix]
                   Gtk.Image {
                     icon-name: "note-symbolic";
                   }
                 }
               }
-            };
+              
+              Adw.PreferencesGroup {
+                title: _("Unsyncrhonized");
+               
+                Gtk.TextView _unsyncTextView {
+                  vexpand: true;
+                  top-margin: 12;
+                  left-margin: 12;
+                  right-margin: 12;
+                  bottom-margin: 12;
+                 
+                  styles ["card"]
+                }
+              }
+              
+              Adw.PreferencesGroup {
+                title: _("Synchronized");
+               
+                Gtk.Box {
+                  orientation: horizontal;
+                  spacing: 6;
+                  hexpand: true;
+                 
+                  Gtk.Button _addSyncLyricButton {
+                    Adw.ButtonContent {
+                      label: _("Add");
+                      icon-name: "list-add-symbolic";
+                    }
+                   
+                    styles ["flat"]
+                  }
+                 
+                  Gtk.Separator {
+                    hexpand: true;
+                   
+                    styles ["spacer"]
+                  }
+                 
+                  Gtk.Button _clearSyncButton {
+                    icon-name: "user-trash-symbolic";
+                    tooltip-text: _("Clear All Lyrics");
+                   
+                    styles ["flat"]
+                  }
+                 
+                  Gtk.Button _importSyncButton {
+                    icon-name: "document-send-symbolic";
+                    tooltip-text: _("Import from LRC");
+                   
+                    styles ["flat"]
+                  }
+              
+                  Gtk.Button _exportSyncButton {
+                    icon-name: "folder-download-symbolic";
+                    tooltip-text: _("Export to LRC");
+                   
+                    styles ["flat"]
+                  }
+                }
+              }
+              
+              Adw.PreferencesGroup {
+                Adw.EntryRow _syncOffsetRow {
+                  title: _("Offset (in milliseconds)");
+                  show-apply-button: true;
+                }
+              }
+                           
+              Gtk.ListBox _syncList { 
+                selection-mode: none;
+              
+                styles ["boxed-list"]
+              }
+            }; 
+            
+            styles ["view"]
           }
-        } 
-      }
-      
-      Adw.ViewSwitcherBar {
-        stack: _viewStack;
-        reveal: bind _title.title-visible;
+        }
       }
     }
   };
