@@ -47,15 +47,17 @@ public partial class LyricsDialog : Adw.Window
     private readonly Dictionary<int, Adw.EntryRow> _syncRows;
 
     [Gtk.Connect] private readonly Adw.ToastOverlay _toast;
+    [Gtk.Connect] private readonly Adw.ComboRow _typeRow;
     [Gtk.Connect] private readonly Adw.EntryRow _languageRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _syncOffsetRow;
+    [Gtk.Connect] private readonly Adw.ViewStack _viewStack;
     [Gtk.Connect] private readonly Gtk.TextView _unsyncTextView;
-    [Gtk.Connect] private readonly Gtk.ListBox _syncList;
     [Gtk.Connect] private readonly Gtk.Button _addSyncLyricButton;
     [Gtk.Connect] private readonly Gtk.Button _clearSyncButton;
     [Gtk.Connect] private readonly Gtk.Button _importSyncButton;
     [Gtk.Connect] private readonly Gtk.Button _exportSyncButton;
-    [Gtk.Connect] private readonly Adw.EntryRow _syncOffsetRow;
+    [Gtk.Connect] private readonly Gtk.ListBox _syncList;
     
     /// <summary>
     /// Constructs a LyricsDialog
@@ -75,15 +77,14 @@ public partial class LyricsDialog : Adw.Window
         SetIconName(iconName);
         SetTransientFor(parent);
         OnCloseRequest += OnClose;
-        _unsyncTextView.GetBuffer().OnChanged += (sender, e) =>
+        _typeRow.OnNotify += (sender, e) =>
         {
-            _languageRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
-            _descriptionRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
+            if (e.Pspec.GetName() == "selected-item")
+            {
+                _viewStack.SetVisibleChildName(_typeRow.GetSelected() == 0 ? "unsync" : "sync");
+                _syncOffsetRow.SetVisible(_typeRow.GetSelected() == 1);
+            }
         };
-        _addSyncLyricButton.OnClicked += AddSyncLyric;
-        _clearSyncButton.OnClicked += (sender, e) => _controller.ClearSynchronizedLyrics();;
-        _importSyncButton.OnClicked += ImportSyncFromLRC;
-        _exportSyncButton.OnClicked += ExportSyncFromLRC;
         _syncOffsetRow.OnApply += (sender, e) =>
         {
             if (int.TryParse(_syncOffsetRow.GetText(), out var offset))
@@ -96,6 +97,10 @@ public partial class LyricsDialog : Adw.Window
                 _syncOffsetRow.SetPosition(-1);
             }
         };
+        _addSyncLyricButton.OnClicked += AddSyncLyric;
+        _clearSyncButton.OnClicked += (sender, e) => _controller.ClearSynchronizedLyrics();;
+        _importSyncButton.OnClicked += ImportSyncFromLRC;
+        _exportSyncButton.OnClicked += ExportSyncFromLRC;
         //Events
         _controller.SynchronizedLyricCreated += CreateSyncRow;
         _controller.SynchronizedLyricRemoved += RemoveSyncRow;
@@ -118,8 +123,6 @@ public partial class LyricsDialog : Adw.Window
         _controller.Startup();
         _languageRow.SetText(_controller.Lyrics.LanguageCode);
         _descriptionRow.SetText(_controller.Lyrics.Description);
-        _languageRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
-        _descriptionRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
         _unsyncTextView.GetBuffer().SetText(_controller.Lyrics.UnsynchronizedLyrics, _controller.Lyrics.UnsynchronizedLyrics.Length);
         _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset.ToString());
         _syncList.SetVisible(_controller.Lyrics.SynchronizedLyrics.Count > 0);
@@ -149,8 +152,6 @@ public partial class LyricsDialog : Adw.Window
             _syncList.SetVisible(true);
             _syncList.Insert(row, e.Position);
             _syncRows.Add(e.Timestamp, row);
-            _languageRow.SetSensitive(true);
-            _descriptionRow.SetSensitive(true);
         }
     }
 
@@ -166,8 +167,6 @@ public partial class LyricsDialog : Adw.Window
             _syncList.Remove(_syncRows[e.Timestamp]);
             _syncRows.Remove(e.Timestamp);
             _syncList.SetVisible(_syncRows.Count > 0);
-            _languageRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
-            _descriptionRow.SetSensitive(!string.IsNullOrEmpty(GetUnsyncText()) || _syncRows.Count > 0);
         }
     }
 
