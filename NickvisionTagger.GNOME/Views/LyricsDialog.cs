@@ -81,8 +81,7 @@ public partial class LyricsDialog : Adw.Window
         {
             if (e.Pspec.GetName() == "selected-item")
             {
-                _viewStack.SetVisibleChildName(_typeRow.GetSelected() == 0 ? "unsync" : "sync");
-                _syncOffsetRow.SetVisible(_typeRow.GetSelected() == 1);
+                ChangeLyricsType();
             }
         };
         _syncOffsetRow.OnApply += (sender, e) =>
@@ -121,11 +120,48 @@ public partial class LyricsDialog : Adw.Window
     {
         base.Present();
         _controller.Startup();
-        _languageRow.SetText(_controller.Lyrics.LanguageCode);
-        _descriptionRow.SetText(_controller.Lyrics.Description);
-        _unsyncTextView.GetBuffer().SetText(_controller.Lyrics.UnsynchronizedLyrics, _controller.Lyrics.UnsynchronizedLyrics.Length);
-        _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset.ToString());
-        _syncList.SetVisible(_controller.Lyrics.SynchronizedLyrics.Count > 0);
+        _typeRow.SetSelected((uint)_controller.LyricsType);
+        _languageRow.SetText(_controller.LanguageCode);
+        _descriptionRow.SetText(_controller.Description);
+        if (_controller.LyricsType == LyricsType.Unsynchronized)
+        {
+            _viewStack.SetVisibleChildName("unsync");
+            _unsyncTextView.GetBuffer().SetText(_controller.UnsynchronizedLyrics!, _controller.UnsynchronizedLyrics!.Length);
+        }
+        else
+        {
+            _syncOffsetRow.SetVisible(true);
+            _viewStack.SetVisibleChildName("sync");
+            _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset!.Value.ToString());
+        }
+    }
+
+    public void ChangeLyricsType()
+    {
+        var newType = (LyricsType)_typeRow.GetSelected();
+        if (_controller.LyricsType != newType)
+        {
+            _controller.LyricsType = newType;
+            foreach (var row in _syncRows)
+            {
+                _syncList.Remove(row.Value);
+            }
+            _syncRows.Clear();
+            _languageRow.SetText(_controller.LanguageCode);
+            _descriptionRow.SetText(_controller.Description);
+            if (_controller.LyricsType == LyricsType.Unsynchronized)
+            {
+                _syncOffsetRow.SetVisible(false);
+                _viewStack.SetVisibleChildName("unsync");
+                _unsyncTextView.GetBuffer().SetText(_controller.UnsynchronizedLyrics!, _controller.UnsynchronizedLyrics!.Length);
+            }
+            else
+            {
+                _syncOffsetRow.SetVisible(true);
+                _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset!.Value.ToString());
+                _viewStack.SetVisibleChildName("sync");
+            }
+        }
     }
     
     /// <summary>
@@ -189,9 +225,9 @@ public partial class LyricsDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private bool OnClose(Gtk.Widget sender, EventArgs e)
     {
-        _controller.Lyrics.LanguageCode = _languageRow.GetText();
-        _controller.Lyrics.Description = _descriptionRow.GetText();
-        _controller.Lyrics.UnsynchronizedLyrics = GetUnsyncText();
+        _controller.LanguageCode = _languageRow.GetText();
+        _controller.Description = _descriptionRow.GetText();
+        _controller.UnsynchronizedLyrics = GetUnsyncText();
         return false;
     }
 
@@ -259,7 +295,7 @@ public partial class LyricsDialog : Adw.Window
                 }
                 messageDialog.Destroy();
             };
-            if (_controller.Lyrics.SynchronizedLyrics.Count == 0)
+            if (_controller.SynchronizedLyricsCount!.Value == 0)
             {
                 messageDialog.Response("overwrite");
             }
@@ -278,7 +314,7 @@ public partial class LyricsDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private async void ExportSyncFromLRC(Gtk.Button sender, EventArgs e)
     {
-        if (_controller.Lyrics.SynchronizedLyrics.Count == 0)
+        if (_controller.SynchronizedLyricsCount!.Value == 0)
         {
             _toast.AddToast(Adw.Toast.New(_("Nothing to export.")));
             return;
