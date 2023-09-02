@@ -516,7 +516,7 @@ public class MainWindowController : IDisposable
                           lyrics.Description != first.Value.Lyrics.Description ||
                           lyrics.UnsynchronizedLyrics != first.Value.Lyrics.UnsynchronizedLyrics ||
                           !lyrics.SynchronizedLyrics.SequenceEqual(first.Value.Lyrics.SynchronizedLyrics) ||
-                          lyrics.Metadata["offset"] != first.Value.Lyrics.Metadata["offset"];
+                          (lyrics.Metadata.TryGetValue("offset", out var offset) && offset != first.Value.Lyrics.Metadata["offset"]);
             first.Value.Lyrics = lyrics;
             MusicFileSaveStates[first.Key] = !updated && MusicFileSaveStates[first.Key];
             MusicFileSaveStatesChanged?.Invoke(this, !MusicFileSaveStates[first.Key]);

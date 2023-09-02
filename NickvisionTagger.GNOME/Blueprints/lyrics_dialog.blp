@@ -4,8 +4,9 @@ using Adw 1;
 Adw.Window _root {
   default-width: 600;
   default-height: 500;
+  width-request: 320;
   modal: true;
-  resizable: false;
+  hide-on-close: true;
 
   content: Gtk.Box {
     orientation: vertical;
