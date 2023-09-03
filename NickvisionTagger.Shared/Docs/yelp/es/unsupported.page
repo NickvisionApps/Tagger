@@ -24,13 +24,7 @@
 <p>Esta página explica los archivos de música que actualmente no son compatibles con <app>Tagger</app>.</p>
 <p>Tagger usa <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> como base para leer y escribir metadatos.</p>
 <section>
-    <title>No se pueden aplicar los cambios - Permiso denegado</title>
-    <p>Existe un problema conocido de la versión flatpak de la aplicación que se ejecuta en sistemas basados en Debian en el que no se pueden guardar archivos debido a un error de "permiso denegado".</p>
-    <p>Por favor, vea esto para corregirlo: <link href="https://github.com/NickvisionApps/Tagger/issues/174"/></p>
-    <note>
-        <p>Por favor, confirme que está recibiendo el error "permiso denegado" antes de intentarlo.</p>
-        <p>Ejecute <app>Tagger</app> en el terminal mediante <code>flatpak run org.nickvision.tagger</code>, luego intente aplicar los cambios de nuevo, y encontrará un mensaje de error en el terminal.</p>
-        <p>Si no es un error de "permiso denegado", por favor <link href="https://github.com/NickvisionApps/Tagger/issues/174">informe de una incidencia nueva</link>.</p>
-    </note>
+    <title>No hay problemas conocidos en este momento</title>
+    <p><link href="https://github.com/NickvisionApps/Tagger/issues">Report an issue</link> if you experience any.</p>
 </section>
 </page>

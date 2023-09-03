@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-27 20:46-0400\n"
+"POT-Creation-Date: 2023-09-02 23:08-0400\n"
 "PO-Revision-Date: 2023-08-10 15:59+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-"
@@ -843,44 +843,14 @@ msgstr ""
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
-msgid "Unable To Apply Changes - Permission Denied"
+msgid "No Known Issues At This Time"
 msgstr ""
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:25
 msgid ""
-"There is a known issue of the flatpak version of the app running on Debian-"
-"based systems where you are unable to save files due to a \"permission denied"
-"\" error."
-msgstr ""
-
-#. (itstool) path: section/p
-#: yelp/C/unsupported.page:26
-msgid ""
-"Please see this for the fix: <link href=\"https://github.com/NickvisionApps/"
-"Tagger/issues/174\"/>"
-msgstr ""
-
-#. (itstool) path: note/p
-#: yelp/C/unsupported.page:28
-msgid ""
-"Please confirm that you are receiving the \"permission denied\" error before "
-"trying this."
-msgstr ""
-
-#. (itstool) path: note/p
-#: yelp/C/unsupported.page:29
-msgid ""
-"Run <app>Tagger</app> in the terminal via <code>flatpak run org.nickvision."
-"tagger</code>, then try to apply changes again, and you will find an error "
-"message in the terminal."
-msgstr ""
-
-#. (itstool) path: note/p
-#: yelp/C/unsupported.page:30
-msgid ""
-"If it is not a \"permission denied\" error, please <link href=\"https://"
-"github.com/NickvisionApps/Tagger/issues/174\">report a new issue</link>."
+"<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Report an "
+"issue</link> if you experience any."
 msgstr ""
 
 #. (itstool) path: info/title
@@ -949,16 +919,23 @@ msgstr ""
 #: yelp/C/web-services.page:34
 msgid ""
 "If no synchronized lyrics are found/available, Tagger will use Letras for "
-"obtaining unsynchronized lyrics"
+"obtaining unsynchronized lyrics."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/web-services.page:36
+msgid ""
+"Finding lyrics through these services isn't 100% reliable and may not be "
+"available for uncommon songs."
 msgstr ""
 
 #. (itstool) path: section/title
-#: yelp/C/web-services.page:37
+#: yelp/C/web-services.page:40
 msgid "Submit to AcoustId"
 msgstr "Lähetä AcoustId:hen"
 
 #. (itstool) path: section/p
-#: yelp/C/web-services.page:38
+#: yelp/C/web-services.page:41
 msgid ""
 "Submits data about a music file (identified via its fingerprint) to "
 "AcoustId's database. There are two things that can be submitted about a "
@@ -966,12 +943,12 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/web-services.page:41
+#: yelp/C/web-services.page:44
 msgid "MusicBrainz Recording ID"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/web-services.page:42
+#: yelp/C/web-services.page:45
 msgid ""
 "A user can submit a MusicBrainz Recording ID to submit to AcoustId. This "
 "will pull all data from the associated recording id and use that for sending "
@@ -979,17 +956,17 @@ msgid ""
 msgstr ""
 
 #. (itstool) path: item/title
-#: yelp/C/web-services.page:45
+#: yelp/C/web-services.page:48
 msgid "User Metadata"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/web-services.page:46
+#: yelp/C/web-services.page:49
 msgid "A user can submit their metadata from Tagger to AcoustId."
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/web-services.page:50
+#: yelp/C/web-services.page:53
 msgid ""
 "A proper <code>AcoustId User API Key</code> must be set in "
 "<code>Preferences</code> for this service to work."
