@@ -40,6 +40,7 @@ public partial class Program
               * Redesigned the Lyrics dialog in which only unsynchronized or synchronized lyrics can be used for a file and not both
               * Fixed an issue where some album art for some OPUS files were not read
               * Fixed an issue where Tagger would crash on Tag to Filename if the tag contained an invalid file name character
+              * Fixed an issue where Tagger would marked files as unsaved even if there were no changes
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
