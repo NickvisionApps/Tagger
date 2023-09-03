@@ -11,7 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Timers;
 using NickvisionTagger.Shared.Models;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 using static Nickvision.GirExt.GtkExt;
@@ -34,7 +33,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _musicBrainzAction;
     private readonly Gio.SimpleAction _downloadLyricsAction;
     private readonly Gio.SimpleAction _acoustIdAction;
-    private readonly Timer _tagChangedTimer;
     private AlbumArtType _currentAlbumArtType;
     private List<Adw.ActionRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
@@ -93,15 +91,8 @@ public partial class MainWindow : Adw.ApplicationWindow
 
     private MainWindow(Gtk.Builder builder, MainWindowController controller, Adw.Application application) : base(builder.GetPointer("_root"), false)
     {
-        _controller = controller;
-        _tagChangedTimer = new Timer(600);
-        _tagChangedTimer.AutoReset = false;
-        _tagChangedTimer.Elapsed += (_, _) =>
-        {
-            TagPropertyChanged();
-            _isSelectionOccuring = false;
-        };
         //Window Settings
+        _controller = controller;
         _application = application;
         _currentAlbumArtType = AlbumArtType.Front;
         _listMusicFilesRows = new List<Adw.ActionRow>();
@@ -137,64 +128,56 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _titleRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _artistRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _albumRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _yearRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _trackRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _trackTotalRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _albumArtistRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         //Genre and Autocomplete
@@ -218,48 +201,42 @@ public partial class MainWindow : Adw.ApplicationWindow
                     _autocompleteBox.UpdateSuggestions(matchingGenres);
                 }
                 _autocompleteBox.SetVisible(matchingGenres.Count > 0);
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _commentRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _bpmRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _composerRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _descriptionRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _publisherRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
-                _tagChangedTimer.Stop();
-                _tagChangedTimer.Start();
+                TagPropertyChanged();
             }
         };
         _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
@@ -685,9 +662,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private async void DiscardUnappliedChanges(Gio.SimpleAction sender, EventArgs e)
     {
         SetLoadingState(_("Discarding unapplied changes..."));
-        var focusedWidget = GetFocus();
         await _controller.DiscardSelectedUnappliedChangesAsync();
-        focusedWidget?.GrabFocus();
     }
 
     /// <summary>
@@ -1170,6 +1145,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _isSelectionOccuring = true;
         //Update Properties
+        _selectionLabel.SetLabel(_("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count));
         _applyAction.SetEnabled(_controller.SelectedMusicFiles.Count != 0 && _controller.SelectedHasUnsavedChanges);
         _tagActionsButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         _filenameRow.SetEditable(_controller.SelectedMusicFiles.Count < 2);
@@ -1281,8 +1257,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 {
                     if (e.Pspec.GetName() == "text")
                     {
-                        _tagChangedTimer.Stop();
-                        _tagChangedTimer.Start();
+                        TagPropertyChanged();
                     }
                 };
                 if (_controller.SelectedMusicFiles.First().Value.IsReadOnly)
@@ -1307,6 +1282,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _listMusicFilesRows[pair.Key].SetSubtitle("");
             }
         }
+        _isSelectionOccuring = false;
         return false;
     }
 
@@ -1384,11 +1360,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void ListMusicFiles_SelectionChanged(Gtk.ListBox sender, EventArgs e)
     {
-        if (_tagChangedTimer.Enabled)
-        {
-            _tagChangedTimer.Stop();
-            TagPropertyChanged();
-        }
         _isSelectionOccuring = true;
         var selectedIndexes = sender.GetSelectedRowsIndices();
         _selectedViewStack.SetVisibleChildName(selectedIndexes.Count > 0 ? "Selected" : "NoSelected");
@@ -1404,7 +1375,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _fingerprintSpinner.SetSpinning(true);
             _copyFingerprintButton.SetVisible(false);
         }
-        _selectionLabel.SetLabel(_("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count));
+        _isSelectionOccuring = false;
     }
 
     /// <summary>
@@ -1438,10 +1409,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 {
                     propMap.CustomProperties.Add(row.GetTitle(), row.GetText());
                 }
-            }
-            if (_controller.SelectedPropertyMap == propMap && !_controller.SelectedHasUnsavedChanges)
-            {
-                return;
             }
             _controller.UpdateTags(propMap, false);
             //Update Rows
