@@ -18,13 +18,7 @@
 <p>Diese Seite erklärt Audiodateien, die aktuell nicht von <app>Tagger</app> unterstützt werden.</p>
 <p>Tagger nutzt <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> um Metadaten zu lesen und zu schreiben.</p>
 <section>
-    <title>Änderungen können nicht übernommen werden - Keine Berechtigung</title>
-    <p>Es gibt einen bekannten Fehler mit der flatpak-Version der App auf Debian-basierten Systemen, der dazu führt, dass das Speichern von Dateien mit dem Fehler "permission denied" fehlschlägt.</p>
-    <p>Eine Lösung für diesen Fehler findet sich hier: <link href="https://github.com/NickvisionApps/Tagger/issues/174"/></p>
-    <note>
-        <p>Bitte stelle sicher, dass du tatsächlich den "permission denied" Fehler bekommst, bevor du diese Lösung ausprobierst.</p>
-        <p>Starte <app>Tagger</app> im Terminal mit dem Befehl <code>flatpak run org.nickvision.tagger</code> und versuche anschließend erneut die Änderungen zu speichern. Die Fehlermeldung wird im Terminal angezeigt.</p>
-        <p>Wenn die Fehlermeldung nicht "permission denied" ist, dann erstelle bitte <link href="https://github.com/NickvisionApps/Tagger/issues/174">ein neues Issue</link>.</p>
-    </note>
+    <title>No Known Issues At This Time</title>
+    <p><link href="https://github.com/NickvisionApps/Tagger/issues">Report an issue</link> if you experience any.</p>
 </section>
 </page>
