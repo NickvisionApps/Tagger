@@ -33,8 +33,13 @@ public class MainWindowController : IDisposable
     private string? _folderToLaunch;
     private MusicFolder? _musicFolder;
     private bool _forceAllowClose;
-    private string[] _genreSuggestions;
+    private readonly string[] _genreSuggestions;
+    private readonly Dictionary<int, MusicFile> _filesBeingEditedOriginals;
     
+    /// <summary>
+    /// Application's Aura
+    /// </summary>
+    public Aura Aura { get; init; }
     /// <summary>
     /// The list of predefined format strings
     /// </summary>
@@ -42,6 +47,7 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// The list of music file save states
     /// </summary>
+    /// <remarks>A true value means that the file is saved whereas a false value means the file has unsaved changed</remarks>
     public List<bool> MusicFileSaveStates { get; init; }
     /// <summary>
     /// The list of selected music files
@@ -55,11 +61,7 @@ public class MainWindowController : IDisposable
     /// The NetworkMonitor
     /// </summary>
     public NetworkMonitor? NetworkMonitor { get; private set; }
-
-    /// <summary>
-    /// Application's Aura
-    /// </summary>
-    public Aura Aura { get; init; }
+    
     /// <summary>
     /// Gets the AppInfo object
     /// </summary>
@@ -180,6 +182,7 @@ public class MainWindowController : IDisposable
             "Latin", "Chorus", "Acoustic", "Opera", "Club", "Tango", "Samba", "Freestyle", "A cappella", "Dance hall",
             "Indie", "Merengue", "Salsa", "Bachata", "Christmas", "EDM"
         };
+        _filesBeingEditedOriginals = new Dictionary<int, MusicFile>();
         FormatStrings = new string[] { _("%artist%- %title%"), _("%title%- %artist%"), _("%track%- %title%"), _("%title%") };
         MusicFileSaveStates = new List<bool>();
         SelectedMusicFiles = new Dictionary<int, MusicFile>();
@@ -326,6 +329,7 @@ public class MainWindowController : IDisposable
     public void CloseFolder()
     {
         _musicFolder = null;
+        _filesBeingEditedOriginals.Clear();
         MusicFileSaveStates.Clear();
         SelectedMusicFiles.Clear();
         if(Configuration.Current.RememberLastOpenedFolder)
@@ -343,6 +347,7 @@ public class MainWindowController : IDisposable
     {
         if(_musicFolder != null)
         {
+            _filesBeingEditedOriginals.Clear();
             MusicFileSaveStates.Clear();
             var corruptedFound = await _musicFolder.ReloadMusicFilesAsync();
             var count = _musicFolder.MusicFiles.Count;
@@ -379,8 +384,12 @@ public class MainWindowController : IDisposable
             {
                 continue;
             }
+            if (!_filesBeingEditedOriginals.ContainsKey(pair.Key))
+            {
+                _filesBeingEditedOriginals.Add(pair.Key, new MusicFile(pair.Value.Path));
+            }
             var updated = false;
-            if(map.Filename != pair.Value.Filename && map.Filename != _("<keep>"))
+            if(map.Filename != _filesBeingEditedOriginals[pair.Key].Filename && map.Filename != _("<keep>"))
             {
                 try
                 {
@@ -390,22 +399,22 @@ public class MainWindowController : IDisposable
                 }
                 catch { }
             }
-            if(map.Title != pair.Value.Title && map.Title != _("<keep>"))
+            if(map.Title != _filesBeingEditedOriginals[pair.Key].Title && map.Title != _("<keep>"))
             {
                 pair.Value.Title = map.Title;
                 updated = true;
             }
-            if(map.Artist != pair.Value.Artist && map.Artist != _("<keep>"))
+            if(map.Artist != _filesBeingEditedOriginals[pair.Key].Artist && map.Artist != _("<keep>"))
             {
                 pair.Value.Artist = map.Artist;
                 updated = true;
             }
-            if(map.Album != pair.Value.Album && map.Album != _("<keep>"))
+            if(map.Album != _filesBeingEditedOriginals[pair.Key].Album && map.Album != _("<keep>"))
             {
                 pair.Value.Album = map.Album;
                 updated = true;
             }
-            if(map.Year != pair.Value.Year.ToString() && map.Year != _("<keep>"))
+            if(map.Year != _filesBeingEditedOriginals[pair.Key].Year.ToString() && map.Year != _("<keep>"))
             {
                 try
                 {
@@ -417,7 +426,7 @@ public class MainWindowController : IDisposable
                 }
                 updated = true;
             }
-            if(map.Track != pair.Value.Track.ToString() && map.Track != _("<keep>"))
+            if(map.Track != _filesBeingEditedOriginals[pair.Key].Track.ToString() && map.Track != _("<keep>"))
             {
                 try
                 {
@@ -429,7 +438,7 @@ public class MainWindowController : IDisposable
                 }
                 updated = true;
             }
-            if(map.TrackTotal != pair.Value.TrackTotal.ToString() && map.TrackTotal != _("<keep>"))
+            if(map.TrackTotal != _filesBeingEditedOriginals[pair.Key].TrackTotal.ToString() && map.TrackTotal != _("<keep>"))
             {
                 try
                 {
@@ -441,27 +450,27 @@ public class MainWindowController : IDisposable
                 }
                 updated = true;
             }
-            if(map.AlbumArtist != pair.Value.AlbumArtist && map.AlbumArtist != _("<keep>"))
+            if(map.AlbumArtist != _filesBeingEditedOriginals[pair.Key].AlbumArtist && map.AlbumArtist != _("<keep>"))
             {
                 pair.Value.AlbumArtist = map.AlbumArtist;
                 updated = true;
             }
-            if(map.Genre != pair.Value.Genre && map.Genre != _("<keep>"))
+            if(map.Genre != _filesBeingEditedOriginals[pair.Key].Genre && map.Genre != _("<keep>"))
             {
                 pair.Value.Genre = map.Genre;
                 updated = true;
             }
-            if(map.Comment != pair.Value.Comment && map.Comment != _("<keep>"))
+            if(map.Comment != _filesBeingEditedOriginals[pair.Key].Comment && map.Comment != _("<keep>"))
             {
                 pair.Value.Comment = map.Comment;
                 updated = true;
             }
-            if(map.Composer != pair.Value.Composer && map.Composer != _("<keep>"))
+            if(map.Composer != _filesBeingEditedOriginals[pair.Key].Composer && map.Composer != _("<keep>"))
             {
                 pair.Value.Composer = map.Composer;
                 updated = true;
             }
-            if(map.BeatsPerMinute != pair.Value.BeatsPerMinute.ToString() && map.BeatsPerMinute != _("<keep>"))
+            if(map.BeatsPerMinute != _filesBeingEditedOriginals[pair.Key].BeatsPerMinute.ToString() && map.BeatsPerMinute != _("<keep>"))
             {
                 try
                 {
@@ -473,12 +482,12 @@ public class MainWindowController : IDisposable
                 }
                 updated = true;
             }
-            if(map.Description != pair.Value.Description && map.Description != _("<keep>"))
+            if(map.Description != _filesBeingEditedOriginals[pair.Key].Description && map.Description != _("<keep>"))
             {
                 pair.Value.Description = map.Description;
                 updated = true;
             }
-            if(map.Publisher != pair.Value.Publisher && map.Publisher != _("<keep>"))
+            if(map.Publisher != _filesBeingEditedOriginals[pair.Key].Publisher && map.Publisher != _("<keep>"))
             {
                 pair.Value.Publisher = map.Publisher;
                 updated = true;
@@ -487,7 +496,7 @@ public class MainWindowController : IDisposable
             {
                 foreach(var p in map.CustomProperties)
                 {
-                    if(p.Value != pair.Value.GetCustomProperty(p.Key) && p.Value != _("<keep>"))
+                    if(p.Value != _filesBeingEditedOriginals[pair.Key].GetCustomProperty(p.Key) && p.Value != _("<keep>"))
                     {
                         pair.Value.SetCustomProperty(p.Key, p.Value);
                         updated = true;
@@ -556,6 +565,7 @@ public class MainWindowController : IDisposable
                     LoadingProgressUpdated?.Invoke(this, (i, _musicFolder.MusicFiles.Count, $"{i}/{_musicFolder.MusicFiles.Count}"));
                 }
             });
+            _filesBeingEditedOriginals.Clear();
             if(triggerMusicFileSaveStatesChanged)
             {
                 MusicFileSaveStatesChanged?.Invoke(this, false);
@@ -595,6 +605,7 @@ public class MainWindowController : IDisposable
                     LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
                 }
             });
+            _filesBeingEditedOriginals.Clear();
             MusicFileSaveStatesChanged?.Invoke(this, false);
         }
     }
@@ -620,6 +631,7 @@ public class MainWindowController : IDisposable
                 LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
             }
         });
+        _filesBeingEditedOriginals.Clear();
         if(discarded)
         {
             UpdateSelectedMusicFilesProperties();
