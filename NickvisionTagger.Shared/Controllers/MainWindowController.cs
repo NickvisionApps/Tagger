@@ -38,10 +38,6 @@ public class MainWindowController : IDisposable
     private readonly Dictionary<int, MusicFile> _filesBeingEditedOriginals;
     
     /// <summary>
-    /// Application's Aura
-    /// </summary>
-    public Aura Aura { get; init; }
-    /// <summary>
     /// The list of predefined format strings
     /// </summary>
     public string[] FormatStrings { get; init; }
@@ -141,18 +137,19 @@ public class MainWindowController : IDisposable
                 _folderToLaunch = dir;
             }
         }
-        Aura = new Aura("org.nickvision.tagger", "Nickvision Tagger", _("Tagger"), _("Tag your music"));
-        if (Directory.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
+        Aura.Init("org.nickvision.tagger", "Nickvision Tagger", _("Tagger"), _("Tag your music"));
+        if (Directory.Exists($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
         {
-            // Move or delete config files from older versions
+            // Move config files from older versions and delete old directory
             try
             {
-                Directory.Move($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", ConfigurationLoader.ConfigDir);
+                foreach (var file in Directory.GetFiles($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
+                {
+                    File.Move(file, $"{UserDirectories.ApplicationConfig}{Path.DirectorySeparatorChar}{Path.GetFileName(file)}");
+                }
             }
-            catch (IOException)
-            {
-                Directory.Delete($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", true);
-            }
+            catch (IOException) { }
+            Directory.Delete($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", true);
         }
         Aura.Active.SetConfig<Configuration>("config");
         Configuration.Current.Saved += ConfigurationSaved;
