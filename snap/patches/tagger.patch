@@ -1,18 +1,18 @@
 diff -Naur a/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in b/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in
---- a/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in	2023-07-26 18:37:40.372473823 +0530
-+++ b/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in	2023-07-26 18:40:02.271944842 +0530
+--- a/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in	2023-08-31 19:54:31.875957934 +0530
++++ b/NickvisionTagger.Shared/org.nickvision.tagger.desktop.in	2023-08-31 19:57:23.820717117 +0530
 @@ -3,7 +3,7 @@
  Name=Tagger
  Comment=Tag your music
- Exec=@EXEC@
+ Exec=@EXEC@ %u
 -Icon=org.nickvision.tagger
 +Icon=snap.tagger.org.nickvision.tagger
  Terminal=false
  Type=Application
  Categories=AudioVideo;Audio;
 diff -Naur a/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in b/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in
---- a/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in	2023-07-26 18:37:40.372473823 +0530
-+++ b/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in	2023-07-26 18:39:55.550646932 +0530
+--- a/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in	2023-08-31 19:54:31.875957934 +0530
++++ b/NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in	2023-08-31 19:57:42.663046973 +0530
 @@ -1,6 +1,7 @@
  <?xml version="1.0" encoding="UTF-8"?>
  <component type="desktop-application">

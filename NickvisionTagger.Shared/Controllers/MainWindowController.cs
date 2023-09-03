@@ -153,7 +153,7 @@ public class MainWindowController : IDisposable
         }
         Aura.Active.SetConfig<Configuration>("config");
         Configuration.Current.Saved += ConfigurationSaved;
-        AppInfo.Version = "2023.9.0-next";
+        AppInfo.Version = "2023.9.0-beta1";
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
         AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");
         AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Tagger/discussions");
@@ -385,6 +385,7 @@ public class MainWindowController : IDisposable
                 try
                 {
                     pair.Value.Filename = map.Filename;
+                    map.Filename = pair.Value.Filename;
                     updated = true;
                 }
                 catch { }
@@ -515,7 +516,7 @@ public class MainWindowController : IDisposable
                           lyrics.Description != first.Value.Lyrics.Description ||
                           lyrics.UnsynchronizedLyrics != first.Value.Lyrics.UnsynchronizedLyrics ||
                           !lyrics.SynchronizedLyrics.SequenceEqual(first.Value.Lyrics.SynchronizedLyrics) ||
-                          lyrics.Metadata["offset"] != first.Value.Lyrics.Metadata["offset"];
+                          (lyrics.Metadata.TryGetValue("offset", out var offset) && offset != first.Value.Lyrics.Metadata["offset"]);
             first.Value.Lyrics = lyrics;
             MusicFileSaveStates[first.Key] = !updated && MusicFileSaveStates[first.Key];
             MusicFileSaveStatesChanged?.Invoke(this, !MusicFileSaveStates[first.Key]);

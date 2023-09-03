@@ -24,13 +24,7 @@
 <p>Cette page traité des fichiers musicaux qui ne sont actuellement pas pris en charge par <app>Tagger</app>.</p>
 <p>Tagger utilise <link href="https://github.com/Zeugma440/atldotnet">atldotnet</link> comme backend pour lire et éditer les métadonnées.</p>
 <section>
-    <title>Impossible d’appliquer les changements - Permission refusée</title>
-    <p>Il existe un problème connu de la version flatpak de l’application fonctionnant sur les systèmes basés sur Debian où il est impossible de sauvegarder des fichiers à cause d’une erreur « permission refusée ».</p>
-    <p>Consulter ce lien pour une solution : <link href="https://github.com/NickvisionApps/Tagger/issues/174"/></p>
-    <note>
-        <p>Veuillez confirmer que vous recevez une erreur « permission refusée » avant d’essayer cela.</p>
-        <p>Exécutez <app>Tagger</app> dans un terminal avec la commande <code>flatpak run org.nickvision.tagger</code>, puis essayez d’appliquer à nouveau les changements, vous trouverez le message d’erreur dans le terminal.</p>
-        <p>S’il ne s’egit pas d’une erreur « permission refusée », merci de <link href="https://github.com/NickvisionApps/Tagger/issues/174">signaler un nouveau problème</link>.</p>
-    </note>
+    <title>No Known Issues At This Time</title>
+    <p><link href="https://github.com/NickvisionApps/Tagger/issues">Report an issue</link> if you experience any.</p>
 </section>
 </page>

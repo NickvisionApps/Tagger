@@ -36,11 +36,14 @@
     <binary>org.nickvision.tagger</binary>
   </provides>
   <releases>
-    <release version="2023.9.0-next" date="2023-08-25">
+    <release version="2023.9.0-beta1" date="2023-09-02">
       <description translatable="no">
         <p>- Added a new web service to download lyrics for a song</p>
         <p>- Added support for opening a folder with Tagger from the file manager</p>
         <p>- Added a "Select All Files" button next to the search bar</p>
+        <p>- Redesigned the Lyrics dialog in which only unsynchronized or synchronized lyrics can be used for a file and not both</p>
+        <p>- Fixed an issue where some album art for some OPUS files were not read</p>
+        <p>- Fixed an issue where Tagger would crash on Tag to Filename if the tag contained an invalid file name character</p>
         <p>- Updated translations (Thanks everyone on Weblate!)</p>
       </description>
     </release>

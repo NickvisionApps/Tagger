@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-08-27 20:46-0400\n"
-"PO-Revision-Date: 2023-08-15 16:47+0000\n"
+"POT-Creation-Date: 2023-09-02 23:08-0400\n"
+"PO-Revision-Date: 2023-08-31 18:11+0000\n"
 "Last-Translator: Simon Hahne <simonhahne@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/de/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -925,54 +925,15 @@ msgstr ""
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
-msgid "Unable To Apply Changes - Permission Denied"
-msgstr "Änderungen können nicht übernommen werden - Keine Berechtigung"
+msgid "No Known Issues At This Time"
+msgstr ""
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:25
+#, fuzzy
 msgid ""
-"There is a known issue of the flatpak version of the app running on Debian-"
-"based systems where you are unable to save files due to a \"permission denied"
-"\" error."
-msgstr ""
-"Es gibt einen bekannten Fehler mit der flatpak-Version der App auf Debian-"
-"basierten Systemen, der dazu führt, dass das Speichern von Dateien mit dem "
-"Fehler \"permission denied\" fehlschlägt."
-
-#. (itstool) path: section/p
-#: yelp/C/unsupported.page:26
-msgid ""
-"Please see this for the fix: <link href=\"https://github.com/NickvisionApps/"
-"Tagger/issues/174\"/>"
-msgstr ""
-"Eine Lösung für diesen Fehler findet sich hier: <link href=\"https://github."
-"com/NickvisionApps/Tagger/issues/174\"/>"
-
-#. (itstool) path: note/p
-#: yelp/C/unsupported.page:28
-msgid ""
-"Please confirm that you are receiving the \"permission denied\" error before "
-"trying this."
-msgstr ""
-"Bitte stelle sicher, dass du tatsächlich den \"permission denied\" Fehler "
-"bekommst, bevor du diese Lösung ausprobierst."
-
-#. (itstool) path: note/p
-#: yelp/C/unsupported.page:29
-msgid ""
-"Run <app>Tagger</app> in the terminal via <code>flatpak run org.nickvision."
-"tagger</code>, then try to apply changes again, and you will find an error "
-"message in the terminal."
-msgstr ""
-"Starte <app>Tagger</app> im Terminal mit dem Befehl <code>flatpak run org."
-"nickvision.tagger</code> und versuche anschließend erneut die Änderungen zu "
-"speichern. Die Fehlermeldung wird im Terminal angezeigt."
-
-#. (itstool) path: note/p
-#: yelp/C/unsupported.page:30
-msgid ""
-"If it is not a \"permission denied\" error, please <link href=\"https://"
-"github.com/NickvisionApps/Tagger/issues/174\">report a new issue</link>."
+"<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Report an "
+"issue</link> if you experience any."
 msgstr ""
 "Wenn die Fehlermeldung nicht \"permission denied\" ist, dann erstelle bitte "
 "<link href=\"https://github.com/NickvisionApps/Tagger/issues/174\">ein neues "
@@ -1035,7 +996,7 @@ msgstr ""
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:31
 msgid "Download Lyrics"
-msgstr ""
+msgstr "Songtexte herunterladen"
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:32
@@ -1054,16 +1015,26 @@ msgstr ""
 #: yelp/C/web-services.page:34
 msgid ""
 "If no synchronized lyrics are found/available, Tagger will use Letras for "
-"obtaining unsynchronized lyrics"
+"obtaining unsynchronized lyrics."
 msgstr ""
 
+#. (itstool) path: note/p
+#: yelp/C/web-services.page:36
+#, fuzzy
+msgid ""
+"Finding lyrics through these services isn't 100% reliable and may not be "
+"available for uncommon songs."
+msgstr ""
+"Metadaten aus MusicBrainz sind nicht zu 100% zuverlässig und sind ggf. für "
+"unbekannte Lieder nicht verfügbar."
+
 #. (itstool) path: section/title
-#: yelp/C/web-services.page:37
+#: yelp/C/web-services.page:40
 msgid "Submit to AcoustId"
 msgstr "An AcoustId senden"
 
 #. (itstool) path: section/p
-#: yelp/C/web-services.page:38
+#: yelp/C/web-services.page:41
 msgid ""
 "Submits data about a music file (identified via its fingerprint) to "
 "AcoustId's database. There are two things that can be submitted about a "
@@ -1073,12 +1044,12 @@ msgstr ""
 "die AcoustId-Datenbank hoch. Es können zwei Dinge hochgeladen werden:"
 
 #. (itstool) path: item/title
-#: yelp/C/web-services.page:41
+#: yelp/C/web-services.page:44
 msgid "MusicBrainz Recording ID"
 msgstr "MusicBrainz-Aufnahme-ID"
 
 #. (itstool) path: item/p
-#: yelp/C/web-services.page:42
+#: yelp/C/web-services.page:45
 msgid ""
 "A user can submit a MusicBrainz Recording ID to submit to AcoustId. This "
 "will pull all data from the associated recording id and use that for sending "
@@ -1089,21 +1060,56 @@ msgstr ""
 "um Metadaten and AcoustId zu senden."
 
 #. (itstool) path: item/title
-#: yelp/C/web-services.page:45
+#: yelp/C/web-services.page:48
 msgid "User Metadata"
 msgstr "Benutzermetadaten"
 
 #. (itstool) path: item/p
-#: yelp/C/web-services.page:46
+#: yelp/C/web-services.page:49
 msgid "A user can submit their metadata from Tagger to AcoustId."
 msgstr ""
 "Ein Benutzer kann seine eigenen Metadaten aus Tagger bei AcoustId einreichen."
 
 #. (itstool) path: note/p
-#: yelp/C/web-services.page:50
+#: yelp/C/web-services.page:53
 msgid ""
 "A proper <code>AcoustId User API Key</code> must be set in "
 "<code>Preferences</code> for this service to work."
 msgstr ""
 "Ein <code>AcoustId Benutzer-API-Key</code> muss in den <code>Einstellungen</"
 "code> gesetzt sein, damit dieser Dienst funktioniert."
+
+#~ msgid "Unable To Apply Changes - Permission Denied"
+#~ msgstr "Änderungen können nicht übernommen werden - Keine Berechtigung"
+
+#~ msgid ""
+#~ "There is a known issue of the flatpak version of the app running on "
+#~ "Debian-based systems where you are unable to save files due to a "
+#~ "\"permission denied\" error."
+#~ msgstr ""
+#~ "Es gibt einen bekannten Fehler mit der flatpak-Version der App auf Debian-"
+#~ "basierten Systemen, der dazu führt, dass das Speichern von Dateien mit "
+#~ "dem Fehler \"permission denied\" fehlschlägt."
+
+#~ msgid ""
+#~ "Please see this for the fix: <link href=\"https://github.com/"
+#~ "NickvisionApps/Tagger/issues/174\"/>"
+#~ msgstr ""
+#~ "Eine Lösung für diesen Fehler findet sich hier: <link href=\"https://"
+#~ "github.com/NickvisionApps/Tagger/issues/174\"/>"
+
+#~ msgid ""
+#~ "Please confirm that you are receiving the \"permission denied\" error "
+#~ "before trying this."
+#~ msgstr ""
+#~ "Bitte stelle sicher, dass du tatsächlich den \"permission denied\" Fehler "
+#~ "bekommst, bevor du diese Lösung ausprobierst."
+
+#~ msgid ""
+#~ "Run <app>Tagger</app> in the terminal via <code>flatpak run org."
+#~ "nickvision.tagger</code>, then try to apply changes again, and you will "
+#~ "find an error message in the terminal."
+#~ msgstr ""
+#~ "Starte <app>Tagger</app> im Terminal mit dem Befehl <code>flatpak run org."
+#~ "nickvision.tagger</code> und versuche anschließend erneut die Änderungen "
+#~ "zu speichern. Die Fehlermeldung wird im Terminal angezeigt."
