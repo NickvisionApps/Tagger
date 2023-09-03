@@ -929,7 +929,7 @@ public class MainWindowController : IDisposable
         var errors = new Dictionary<string, MusicBrainzLoadStatus>();
         foreach(var pair in SelectedMusicFiles)
         {
-            var res = await pair.Value.DownloadFromMusicBrainzAsync("b'Ch3cuJ0d", AppInfo.Version, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz);
+            var res = await pair.Value.DownloadFromMusicBrainzAsync("b'ISSq9E4n", AppInfo.Version, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz);
             if(res == MusicBrainzLoadStatus.Success)
             {
                 successful++;
