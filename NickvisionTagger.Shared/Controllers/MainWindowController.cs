@@ -501,7 +501,7 @@ public class MainWindowController : IDisposable
                     if(p.Value != pair.Value.GetCustomProperty(p.Key) && p.Value != _("<keep>"))
                     {
                         pair.Value.SetCustomProperty(p.Key, p.Value);
-                        updated = p.Value != _filesBeingEditedOriginals[pair.Key].CustomProperties[p.Key];
+                        updated = !_filesBeingEditedOriginals[pair.Key].CustomProperties.ContainsKey(p.Key) || p.Value != _filesBeingEditedOriginals[pair.Key].CustomProperties[p.Key];
                     }
                 }
             }
