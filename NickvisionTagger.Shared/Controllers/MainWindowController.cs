@@ -35,7 +35,7 @@ public class MainWindowController : IDisposable
     private bool _forceAllowClose;
     private readonly string[] _genreSuggestions;
     private readonly List<bool> _musicFileChangedFromUpdate;
-    private readonly Dictionary<int, MusicFile> _filesBeingEditedOriginals;
+    private readonly Dictionary<int, PropertyMap> _filesBeingEditedOriginals;
     
     /// <summary>
     /// The list of predefined format strings
@@ -181,7 +181,7 @@ public class MainWindowController : IDisposable
             "Indie", "Merengue", "Salsa", "Bachata", "Christmas", "EDM"
         };
         _musicFileChangedFromUpdate = new List<bool>();
-        _filesBeingEditedOriginals = new Dictionary<int, MusicFile>();
+        _filesBeingEditedOriginals = new Dictionary<int, PropertyMap>();
         FormatStrings = new string[] { _("%artist%- %title%"), _("%title%- %artist%"), _("%track%- %title%"), _("%title%") };
         MusicFileSaveStates = new List<bool>();
         SelectedMusicFiles = new Dictionary<int, MusicFile>();
@@ -388,7 +388,7 @@ public class MainWindowController : IDisposable
             }
             if (!_filesBeingEditedOriginals.ContainsKey(pair.Key))
             {
-                _filesBeingEditedOriginals.Add(pair.Key, new MusicFile(pair.Value.Path));
+                _filesBeingEditedOriginals.Add(pair.Key, pair.Value.PropertyMap);
             }
             var updated = false;
             if(map.Filename != pair.Value.Filename && map.Filename != _("<keep>"))
@@ -501,7 +501,7 @@ public class MainWindowController : IDisposable
                     if(p.Value != pair.Value.GetCustomProperty(p.Key) && p.Value != _("<keep>"))
                     {
                         pair.Value.SetCustomProperty(p.Key, p.Value);
-                        updated = p.Value != _filesBeingEditedOriginals[pair.Key].GetCustomProperty(p.Key);
+                        updated = !_filesBeingEditedOriginals[pair.Key].CustomProperties.ContainsKey(p.Key) || p.Value != _filesBeingEditedOriginals[pair.Key].CustomProperties[p.Key];
                     }
                 }
             }

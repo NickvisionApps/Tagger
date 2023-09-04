@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static NickvisionTagger.Shared.Helpers.Gettext;
@@ -412,6 +413,39 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             var names = _track.AdditionalFields.Keys.ToList();
             names.Sort();
             return names;
+        }
+    }
+
+    /// <summary>
+    /// The PropertyMap of the MusicFile
+    /// </summary>
+    public PropertyMap PropertyMap
+    {
+        get
+        {
+            return new PropertyMap()
+            {
+                Filename = Filename,
+                Title = Title,
+                Artist = Artist,
+                Album = Album,
+                Year = Year == 0 ? "" : Year.ToString(),
+                Track = Track == 0 ? "" : Track.ToString(),
+                TrackTotal = TrackTotal == 0 ? "" : TrackTotal.ToString(),
+                AlbumArtist = AlbumArtist,
+                Genre = Genre,
+                Comment = Comment,
+                BeatsPerMinute = BeatsPerMinute == 0 ? "" : BeatsPerMinute.ToString(),
+                Composer = Composer,
+                Description = Description,
+                Publisher = Publisher,
+                FrontAlbumArt = Encoding.UTF8.GetString(FrontAlbumArt),
+                BackAlbumArt = Encoding.UTF8.GetString(BackAlbumArt),
+                CustomProperties = _track.AdditionalFields.ToDictionary(x => x.Key, x => x.Value),
+                Duration = Duration.ToDurationString(),
+                Fingerprint = _fingerprint,
+                FileSize = FileSize.ToFileSizeString()
+            };
         }
     }
     
