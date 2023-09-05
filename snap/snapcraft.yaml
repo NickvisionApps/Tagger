@@ -86,3 +86,5 @@ apps:
       LD_LIBRARY_PATH: $SNAP/ffmpeg-platform/usr/lib/$CRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
     plugs:
       - home
+      - network
+      - network-status
