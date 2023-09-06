@@ -25,49 +25,49 @@
 <terms>
     <item>
 		<title>Motiv</title>
-		<p>Set light or dark theme, or make <app>Tagger</app> follow your system theme.</p>
+		<p>Nastavte si světlý nebo tmavý režim nebo nechte aplikaci <app>Označovač</app> následovat motiv vašeho systému.</p>
 	</item>
     <item>
-		<title>Remember Last Opened Folder</title>
-		<p>Whether or not to remember the previously used music folder and reopen it when Tagger starts the next time.</p>
+		<title>Zapamatovat naposledy otevřenou složku</title>
+		<p>Zda si zapamatovat naposledy použitou hudební složku a znovu jí otevřít při dalším spuštění aplikace.</p>
 	</item>
     <item>
-		<title>Include Subfolders</title>
-		<p>Whether or not to scan for music files into subdirectories of a music folder.</p>
+		<title>Zahrnout podsložky</title>
+		<p>Zda vyhledávat hudební soubory i v podsložkách hudební složky.</p>
 	</item>
     <item>
-		<title>Sort Files By</title>
-		<p>The property to use when sorting and displaying music files. It can be one of the following options:</p>
+		<title>Řadit soubory podle</title>
+		<p>Vlastnost, která se použije při třídění a zobrazování hudebních souborů. Může to být jedna z následujících možností:</p>
         <list>
-            <item><p><code>File Name</code></p></item>
-            <item><p><code>Title</code></p></item>
-            <item><p><code>Track</code></p></item>
-            <item><p><code>File Path</code></p></item>
+            <item><p><code>Název souboru</code></p></item>
+            <item><p><code>Nadpis</code></p></item>
+            <item><p><code>Stopa</code></p></item>
+            <item><p><code>Cesta k souboru</code></p></item>
             <item><p><code>Album</code></p></item>
-            <item><p><code>Genre</code></p></item>
+            <item><p><code>Žánr</code></p></item>
         </list>
 	</item>
     <item>
-		<title>Preserve Modification Timestamp</title>
-		<p>Whether or not to not update a file's write (modified) timestamp when its tag is saved.</p>
+		<title>Zachovat časové razítko změny</title>
+		<p>Zda aktualizovat časové razítko úpravy souboru při uložení značky.</p>
 	</item>
     <item>
-		<title>Overwrite Tag With MusicBrainz</title>
-		<p>Whether or not to overwrite existing tag metadata with data found from MusicBrainz. If disabled, only blank tag properties will be filled.</p>
+		<title>Přepsat značku s MusicBrainz</title>
+		<p>Zda přepsat existující metadata značek daty nalezenými na MusicBrainz. Při zakázání budou vyplněny pouze prázdné vlastnosti značek.</p>
 	</item>
     <item>
-		<title>Overwrite Album Art With MusicBrainz</title>
-		<p>Whether or not to overwrite overwrite existing album art with art found from MusicBrainz.</p>
+		<title>Přepsat obal alba s MusicBrainz</title>
+		<p>Zda přepsat existující obal alba obalem nalezeným na MusicBrainz.</p>
 	</item>
 	<item>
-        <title>Overwrite Lyrics With Web Service</title>
-        <p>Whether or not to overwrite a tag's existing lyric data with data from the web.</p>
+        <title>Přepsat texty s webovou službou</title>
+        <p>Zda přepsat existující texty značky daty textů z webu.</p>
     </item>
     <item>
-		<title>AcoustId User API Key</title>
-		<p>An AcoustId User API key to use when fingerprinting music files and looking up song information.</p>
+		<title>Klíč API uživatele AcoustId</title>
+		<p>Klíč API uživatele AcoustId pro použití při přiřazování otisku k hudebním souborům a při vyhledávání informací o skladbách.</p>
 		<note>
-			<p>A key can be obtained <link href="https://acoustid.org/api-key">here</link></p>
+			<p>Klíč lze získat <link href="https://acoustid.org/api-key">zde</link></p>
 		</note>
 	</item>
 </terms>
