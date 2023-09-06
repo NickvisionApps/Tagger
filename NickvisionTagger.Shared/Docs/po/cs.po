@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-09-02 23:08-0400\n"
-"PO-Revision-Date: 2023-09-01 15:11+0000\n"
+"PO-Revision-Date: 2023-09-06 22:11+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/cs/>\n"
@@ -55,11 +55,13 @@ msgstr "Motiv"
 msgid ""
 "Set light or dark theme, or make <app>Tagger</app> follow your system theme."
 msgstr ""
+"Nastavte si světlý nebo tmavý režim nebo nechte aplikaci <app>Označovač</"
+"app> následovat motiv vašeho systému."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:28
 msgid "Remember Last Opened Folder"
-msgstr ""
+msgstr "Zapamatovat naposledy otevřenou složku"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:29
@@ -67,22 +69,24 @@ msgid ""
 "Whether or not to remember the previously used music folder and reopen it "
 "when Tagger starts the next time."
 msgstr ""
+"Zda si zapamatovat naposledy použitou hudební složku a znovu jí otevřít při "
+"dalším spuštění aplikace."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:32
 msgid "Include Subfolders"
-msgstr ""
+msgstr "Zahrnout podsložky"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:33
 msgid ""
 "Whether or not to scan for music files into subdirectories of a music folder."
-msgstr ""
+msgstr "Zda vyhledávat hudební soubory i v podsložkách hudební složky."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:36
 msgid "Sort Files By"
-msgstr ""
+msgstr "Řadit soubory podle"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:37
@@ -90,53 +94,55 @@ msgid ""
 "The property to use when sorting and displaying music files. It can be one "
 "of the following options:"
 msgstr ""
+"Vlastnost, která se použije při třídění a zobrazování hudebních souborů. "
+"Může to být jedna z následujících možností:"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:39
 msgid "<code>File Name</code>"
-msgstr ""
+msgstr "<code>Název souboru</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:40
 msgid "<code>Title</code>"
-msgstr ""
+msgstr "<code>Nadpis</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:41
 msgid "<code>Track</code>"
-msgstr ""
+msgstr "<code>Stopa</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:42
 msgid "<code>File Path</code>"
-msgstr ""
+msgstr "<code>Cesta k souboru</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:43
 msgid "<code>Album</code>"
-msgstr ""
+msgstr "<code>Album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:44
 msgid "<code>Genre</code>"
-msgstr ""
+msgstr "<code>Žánr</code>"
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:48
 msgid "Preserve Modification Timestamp"
-msgstr ""
+msgstr "Zachovat časové razítko změny"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:49
 msgid ""
 "Whether or not to not update a file's write (modified) timestamp when its "
 "tag is saved."
-msgstr ""
+msgstr "Zda aktualizovat časové razítko úpravy souboru při uložení značky."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:52
 msgid "Overwrite Tag With MusicBrainz"
-msgstr ""
+msgstr "Přepsat značku s MusicBrainz"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:53
@@ -144,35 +150,37 @@ msgid ""
 "Whether or not to overwrite existing tag metadata with data found from "
 "MusicBrainz. If disabled, only blank tag properties will be filled."
 msgstr ""
+"Zda přepsat existující metadata značek daty nalezenými na MusicBrainz. Při "
+"zakázání budou vyplněny pouze prázdné vlastnosti značek."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:56
 msgid "Overwrite Album Art With MusicBrainz"
-msgstr ""
+msgstr "Přepsat obal alba s MusicBrainz"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:57
 msgid ""
 "Whether or not to overwrite overwrite existing album art with art found from "
 "MusicBrainz."
-msgstr ""
+msgstr "Zda přepsat existující obal alba obalem nalezeným na MusicBrainz."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:60
 msgid "Overwrite Lyrics With Web Service"
-msgstr ""
+msgstr "Přepsat texty s webovou službou"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:61
 msgid ""
 "Whether or not to overwrite a tag's existing lyric data with data from the "
 "web."
-msgstr ""
+msgstr "Zda přepsat existující texty značky daty textů z webu."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:64
 msgid "AcoustId User API Key"
-msgstr ""
+msgstr "Klíč API uživatele AcoustId"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:65
@@ -180,33 +188,35 @@ msgid ""
 "An AcoustId User API key to use when fingerprinting music files and looking "
 "up song information."
 msgstr ""
+"Klíč API uživatele AcoustId pro použití při přiřazování otisku k hudebním "
+"souborům a při vyhledávání informací o skladbách."
 
 #. (itstool) path: note/p
 #: yelp/C/configuration.page:67
 msgid ""
 "A key can be obtained <link href=\"https://acoustid.org/api-key\">here</link>"
-msgstr ""
+msgstr "Klíč lze získat <link href=\"https://acoustid.org/api-key\">zde</link>"
 
 #. (itstool) path: info/title
 #: yelp/C/corrupted.page:8
 msgctxt "link"
 msgid "Corrupted Files 🪲"
-msgstr ""
+msgstr "Poškozené soubory 🪲"
 
 #. (itstool) path: page/title
 #: yelp/C/corrupted.page:20
 msgid "Corrupted Files"
-msgstr ""
+msgstr "Poškozené soubory"
 
 #. (itstool) path: page/p
 #: yelp/C/corrupted.page:21
 msgid "This page explains music files with corrupted data."
-msgstr ""
+msgstr "Tato stránka vysvětluje hudební soubory s poškozenými daty."
 
 #. (itstool) path: section/title
 #: yelp/C/corrupted.page:23
 msgid "Invalid Data"
-msgstr ""
+msgstr "Neplatná data"
 
 #. (itstool) path: section/p
 #: yelp/C/corrupted.page:24
@@ -215,6 +225,10 @@ msgid ""
 "information about a file and even cause playback issues. Some websites add "
 "extra junk data in files which in turn causes corruption."
 msgstr ""
+"Neplatná hlavička značky nebo nevyžádaná data v souboru mohou způsobit "
+"problémy při čtení informací o souboru a dokonce i problémy s přehráváním. "
+"Některé webové stránky přidávají do souborů další nevyžádaná data, která "
+"následně způsobují poškození."
 
 #. (itstool) path: section/p
 #: yelp/C/corrupted.page:25
@@ -223,6 +237,9 @@ msgid ""
 "dialog will be displayed listing corrupted files for you to manage and fix "
 "accordingly."
 msgstr ""
+"Pokud <app>Označovač</app> nedokáže přečíst soubor, bude ignorován a bude "
+"zobrazen dialog se seznamem poškozených souborů, které následně můžete "
+"spravovat a opravit."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:27
@@ -230,12 +247,14 @@ msgid ""
 "FFmpeg can be used to fix corruption issues. Run the following command to re-"
 "encode a file's tag and remove junk data:"
 msgstr ""
+"Pro opravení problémů s poškozením lze použít FFmpeg. Spusťte následující "
+"příkaz pro opětovné zakódování značky souboru a odebrání nevyžádaných dat:"
 
 #. (itstool) path: note/code
 #: yelp/C/corrupted.page:28
 #, no-wrap
 msgid "ffmpeg -i in.mp3 out.mp3"
-msgstr ""
+msgstr "ffmpeg -i vstup.mp3 výstup.mp3"
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:29
@@ -243,6 +262,8 @@ msgid ""
 "where <code>in.mp3</code> is the file path of the corrupted file and "
 "<code>out.mp3</code> is the path to export the re-encoded file."
 msgstr ""
+"kde je <code>vstup.mp3</code> cesta k poškozenému souboru a <code>výstup."
+"mp3</code> cesta k exportovanému opětovně kódovanému souboru."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:32
@@ -250,6 +271,8 @@ msgid ""
 "You can also use <link href=\"https://www.freac.org\">fre:ac</link> to re-"
 "encode files without convertion to another format."
 msgstr ""
+"Pro opětovné kódování souborů bez převodu na jiný formát můžete použít také "
+"službu <link href=\"https://www.freac.org\">fre:ac</link>."
 
 #. (itstool) path: info/title
 #: yelp/C/format-strings.page:8
