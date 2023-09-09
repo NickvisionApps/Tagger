@@ -1160,6 +1160,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
             if (_listMusicFilesRows.Any())
             {
+                if (!_listMusicFilesRows[0].HasCssClass("start-row"))
+                {
+                    _listMusicFilesRows[0].AddCssClass("start-row");
+                }
                 if (_listMusicFilesRows[^1].HasCssClass("start-row"))
                 {
                     _listMusicFilesRows[^1].RemoveCssClass("start-row");
