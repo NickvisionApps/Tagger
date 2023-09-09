@@ -68,6 +68,10 @@ public class MainWindowController : IDisposable
     /// </summary>
     public Theme Theme => Configuration.Current.Theme;
     /// <summary>
+    /// What to sort files in a music folder by
+    /// </summary>
+    public SortBy SortFilesBy => Configuration.Current.SortFilesBy;
+    /// <summary>
     /// The path of the music folder
     /// </summary>
     public string MusicFolderPath => _musicFolder?.ParentPath ?? "";
