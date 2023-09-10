@@ -71,7 +71,7 @@ public class Configuration : ConfigurationBase
         Theme = Theme.System;
         RememberLastOpenedFolder = true;
         IncludeSubfolders = true;
-        SortFilesBy = SortBy.Artist;
+        SortFilesBy = SortBy.Path;
         LastOpenedFolder = "";
         PreserveModificationTimestamp = false;
         OverwriteTagWithMusicBrainz = true;

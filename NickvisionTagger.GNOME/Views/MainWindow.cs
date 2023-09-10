@@ -1135,7 +1135,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 };
                 if (compareTo == string.Empty)
                 {
-                    compareTo = _("Unknown");
+                    compareTo = _controller.SortFilesBy != SortBy.Path ? _("Unknown") : "/";
                 }
                 if (comparable != compareTo)
                 {
