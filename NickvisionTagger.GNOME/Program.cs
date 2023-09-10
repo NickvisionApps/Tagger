@@ -34,14 +34,7 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
-            @"* Added a new web service to download lyrics for a song
-              * Added support for opening a folder with Tagger from the file manager
-              * Added a ""Select All Files"" button next to the search bar
-              * Redesigned the Lyrics dialog in which only unsynchronized or synchronized lyrics can be used for a file and not both
-              * Fixed an issue where some album art for some OPUS files were not read
-              * Fixed an issue where Tagger would crash on Tag to Filename if the tag contained an invalid file name character
-              * Fixed an issue where Tagger would marked files as unsaved even if there were no changes
-              * Updated translations (Thanks everyone on Weblate!)";
+            @"* Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
         {
