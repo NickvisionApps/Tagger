@@ -1070,12 +1070,10 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>True if a is less than b, else false</returns>
     public static bool operator <(MusicFile? a, MusicFile? b)
     {
-        var aPath = PadNumberInPathIfFirst(a?.Path);
-        var bPath = PadNumberInPathIfFirst(b?.Path);
         return SortFilesBy switch
         {
-            SortBy.Filename => System.IO.Path.GetFileName(aPath).CompareTo(System.IO.Path.GetFileName(bPath)) == -1,
-            SortBy.Path => aPath.CompareTo(bPath) == -1,
+            SortBy.Filename => CompareFilename(a?.Filename, b?.Filename) == -1,
+            SortBy.Path => ComparePath(a?.Path, b?.Path) == -1,
             SortBy.Title => a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == -1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == -1 || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track < b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == -1 || a?.Album == b?.Album && a?.Track < b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
@@ -1094,12 +1092,10 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>True if a is greater than b, else false</returns>
     public static bool operator >(MusicFile? a, MusicFile? b)
     {
-        var aPath = PadNumberInPathIfFirst(a?.Path ?? "");
-        var bPath = PadNumberInPathIfFirst(b?.Path ?? "");
         return SortFilesBy switch
         {
-            SortBy.Filename => System.IO.Path.GetFileName(aPath).CompareTo(System.IO.Path.GetFileName(bPath)) == 1,
-            SortBy.Path => aPath.CompareTo(bPath) == 1,
+            SortBy.Filename => CompareFilename(a?.Filename, b?.Filename) == 1,
+            SortBy.Path => ComparePath(a?.Path, b?.Path) == 1,
             SortBy.Title => a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == 1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == 1 || a?.Artist == b?.Artist &&a?.Album == b?.Album && a?.Track > b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == 1 || a?.Album == b?.Album && a?.Track > b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
@@ -1111,22 +1107,32 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     }
 
     /// <summary>
-    /// Pads a number in a file path if said number is at the beginning of the filename
-    /// (i.e. "2 - Test.mp3" becomes "02 - Test.mp3" whereas "How 2 make.mp3" remains unchanged)
+    /// Compares two filenames
     /// </summary>
-    /// <param name="path">The file path</param>
-    /// <returns>The padded path</returns>
-    private static string PadNumberInPathIfFirst(string? path)
+    /// <param name="a">First filename</param>
+    /// <param name="b">Second filename</param>
+    /// <returns>-1 if a &lt; b, 1 if a &gt; b, else 0</returns>
+    private static int CompareFilename(string? a, string? b)
     {
-        if (!string.IsNullOrEmpty(path))
+        var padA = Regex.Replace(a ?? "", @"\d+", match => match.Value.PadLeft(4, '0'));
+        var padB = Regex.Replace(b ?? "", @"\d+", match => match.Value.PadLeft(4, '0'));
+        return padA.CompareTo(padB);
+    }
+
+    /// <summary>
+    /// Compares two paths
+    /// </summary>
+    /// <param name="a">First path</param>
+    /// <param name="b">Second path</param>
+    /// <returns>-1 if a &lt; b, 1 if a &gt; b, else 0</returns>
+    private static int ComparePath(string? a, string? b)
+    {
+        var parentA = System.IO.Path.GetDirectoryName(a) ?? "";
+        var parentB = System.IO.Path.GetDirectoryName(b) ?? "";
+        if (parentA != parentB)
         {
-            var filename = System.IO.Path.GetFileName(path);
-            var x = filename.Substring(0, filename.IndexOf(' ')); //first part of filename
-            if (int.TryParse(x, out var n))
-            {
-                return path.Replace(x, n.ToString("D2"));
-            }
+            return ComparePath(parentA, parentB);
         }
-        return path ?? "";
+        return CompareFilename(System.IO.Path.GetFileName(a), System.IO.Path.GetFileName(b));
     }
 }
