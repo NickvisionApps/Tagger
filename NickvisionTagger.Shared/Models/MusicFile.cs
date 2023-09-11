@@ -77,7 +77,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         ATL.Settings.UseFileNameWhenNoTitle = false;
         ATL.Settings.FileBufferSize = 1024;
         ATL.Settings.ID3v2_writePictureDataLengthIndicator = false;
-        SortFilesBy = SortBy.Filename;
+        SortFilesBy = SortBy.Path;
     }
 
     /// <summary>
@@ -1072,8 +1072,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     {
         return SortFilesBy switch
         {
-            SortBy.Filename => a?.Filename.CompareTo(b?.Filename) == -1,
-            SortBy.Path => a?.Path.CompareTo(b?.Path) == -1,
+            SortBy.Filename => CompareFilename(a?.Filename, b?.Filename) == -1,
+            SortBy.Path => ComparePath(a?.Path, b?.Path) == -1,
             SortBy.Title => a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == -1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == -1 || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track < b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == -1 || a?.Album == b?.Album && a?.Track < b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
@@ -1094,8 +1094,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     {
         return SortFilesBy switch
         {
-            SortBy.Filename => a?.Filename.CompareTo(b?.Filename) == 1,
-            SortBy.Path => a?.Path.CompareTo(b?.Path) == 1,
+            SortBy.Filename => CompareFilename(a?.Filename, b?.Filename) == 1,
+            SortBy.Path => ComparePath(a?.Path, b?.Path) == 1,
             SortBy.Title => a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == 1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == 1 || a?.Artist == b?.Artist &&a?.Album == b?.Album && a?.Track > b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == 1 || a?.Album == b?.Album && a?.Track > b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
@@ -1104,5 +1104,35 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             SortBy.Genre => a?.Genre.CompareTo(b?.Genre) == 1 || a?.Genre == b?.Genre && a?.Album.CompareTo(b?.Album) == 1 || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.Track > b?.Track || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             _ => false
         };
+    }
+
+    /// <summary>
+    /// Compares two filenames
+    /// </summary>
+    /// <param name="a">First filename</param>
+    /// <param name="b">Second filename</param>
+    /// <returns>-1 if a &lt; b, 1 if a &gt; b, else 0</returns>
+    private static int CompareFilename(string? a, string? b)
+    {
+        var padA = Regex.Replace(a ?? "", @"\d+", match => match.Value.PadLeft(4, '0'));
+        var padB = Regex.Replace(b ?? "", @"\d+", match => match.Value.PadLeft(4, '0'));
+        return padA.CompareTo(padB);
+    }
+
+    /// <summary>
+    /// Compares two paths
+    /// </summary>
+    /// <param name="a">First path</param>
+    /// <param name="b">Second path</param>
+    /// <returns>-1 if a &lt; b, 1 if a &gt; b, else 0</returns>
+    private static int ComparePath(string? a, string? b)
+    {
+        var parentA = System.IO.Path.GetDirectoryName(a) ?? "";
+        var parentB = System.IO.Path.GetDirectoryName(b) ?? "";
+        if (parentA != parentB)
+        {
+            return ComparePath(parentA, parentB);
+        }
+        return CompareFilename(System.IO.Path.GetFileName(a), System.IO.Path.GetFileName(b));
     }
 }

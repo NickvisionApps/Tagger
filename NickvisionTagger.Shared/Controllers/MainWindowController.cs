@@ -68,6 +68,10 @@ public class MainWindowController : IDisposable
     /// </summary>
     public Theme Theme => Configuration.Current.Theme;
     /// <summary>
+    /// What to sort files in a music folder by
+    /// </summary>
+    public SortBy SortFilesBy => Configuration.Current.SortFilesBy;
+    /// <summary>
     /// The path of the music folder
     /// </summary>
     public string MusicFolderPath => _musicFolder?.ParentPath ?? "";
@@ -137,7 +141,7 @@ public class MainWindowController : IDisposable
                 _folderToLaunch = dir;
             }
         }
-        Aura.Init("org.nickvision.tagger", "Nickvision Tagger", _("Tagger"), _("Tag your music"));
+        Aura.Init("org.nickvision.tagger", "Nickvision Tagger");
         if (Directory.Exists($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
         {
             // Move config files from older versions and delete old directory
@@ -154,6 +158,8 @@ public class MainWindowController : IDisposable
         Aura.Active.SetConfig<Configuration>("config");
         Configuration.Current.Saved += ConfigurationSaved;
         AppInfo.Version = "2023.9.1-next";
+        AppInfo.ShortName = _("Tagger");
+        AppInfo.Description = _("Tag your music");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
         AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");
         AppInfo.SupportUrl = new Uri("https://github.com/NickvisionApps/Tagger/discussions");

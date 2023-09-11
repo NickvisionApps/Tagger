@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/org/nickvision/tagger">
     <file alias="style.css">org.nickvision.tagger.css</file>
+    <file alias="style-dark.css">org.nickvision.tagger-dark.css</file>
   </gresource>
   <gresource prefix="/org/nickvision/tagger/icons/scalable/status/">
     <file preprocess="xml-stripblanks">dark-mode-symbolic.svg</file>
@@ -16,7 +17,7 @@
     <file preprocess="xml-stripblanks">notepad-symbolic.svg</file>
     <file preprocess="xml-stripblanks">quotation-symbolic.svg</file>
     <file preprocess="xml-stripblanks">tag-outline-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">user-trash-symbolic.svg</file>    
+    <file preprocess="xml-stripblanks">user-trash-symbolic.svg</file>
     <file preprocess="xml-stripblanks">web-browser-symbolic.svg</file>
     <file preprocess="xml-stripblanks">wrench-wide-symbolic.svg</file>
   </gresource>

@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -22,6 +23,14 @@ namespace NickvisionTagger.GNOME.Views;
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
+    private delegate void GtkListBoxUpdateHeaderFunc(nint row, nint before, nint data);
+
+    [LibraryImport("libadwaita-1.so.0")]
+    private static partial void gtk_list_box_set_header_func(nint box, GtkListBoxUpdateHeaderFunc updateHeader, nint data, nint destroy);
+    [LibraryImport("libadwaita-1.so.0")]
+    private static partial void gtk_list_box_row_set_header(nint row, nint header);
+
+
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.DropTarget _dropTarget;
@@ -33,7 +42,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _musicBrainzAction;
     private readonly Gio.SimpleAction _downloadLyricsAction;
     private readonly Gio.SimpleAction _acoustIdAction;
+    private readonly GtkListBoxUpdateHeaderFunc _updateHeaderFunc;
     private AlbumArtType _currentAlbumArtType;
+    private string _listHeader;
     private List<Adw.ActionRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
     private AutocompleteBox _autocompleteBox;
@@ -119,6 +130,24 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _searchSeparator.SetVisible(musicFilesVadjustment.GetValue() > 0);
             }
         };
+        _updateHeaderFunc = (rowPtr, _, _) =>
+        {
+            if (!string.IsNullOrEmpty(_listHeader))
+            {
+                var label = Gtk.Label.New(_listHeader);
+                label.AddCssClass("dim-label");
+                label.AddCssClass("title-4");
+                label.SetMarginTop(6);
+                label.SetMarginStart(6);
+                label.SetMarginEnd(6);
+                label.SetMarginBottom(6);
+                label.SetHalign(Gtk.Align.Start);
+                label.SetEllipsize(Pango.EllipsizeMode.End);
+                gtk_list_box_row_set_header(rowPtr, label.Handle);
+                _listHeader = string.Empty;
+            }
+        };
+        gtk_list_box_set_header_func(_listMusicFiles.Handle, _updateHeaderFunc, IntPtr.Zero, IntPtr.Zero);
         _listMusicFiles.OnSelectedRowsChanged += ListMusicFiles_SelectionChanged;
         var switchAlbumArtLabel = (Gtk.Label)_switchAlbumArtButtonContent.GetLastChild();
         switchAlbumArtLabel.SetWrap(true);
@@ -1080,6 +1109,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _listMusicFilesRows.Clear();
         if (!string.IsNullOrEmpty(_controller.MusicFolderPath))
         {
+            string? comparable = null;
             foreach (var musicFile in _controller.MusicFiles)
             {
                 var row = Adw.ActionRow.New();
@@ -1093,8 +1123,56 @@ public partial class MainWindow : Adw.ApplicationWindow
                     row.SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
                     row.SetSubtitle("");
                 }
+                row.AddCssClass("card");
+                var compareTo = _controller.SortFilesBy switch
+                {
+                    SortBy.Album => musicFile.Album,
+                    SortBy.Artist => musicFile.Artist,
+                    SortBy.Genre => musicFile.Genre,
+                    SortBy.Path => Path.GetDirectoryName(musicFile.Path)!.Replace(_controller.MusicFolderPath, ""),
+                    SortBy.Year => musicFile.Year.ToString(),
+                    _ => null
+                };
+                if (compareTo == string.Empty)
+                {
+                    compareTo = _controller.SortFilesBy != SortBy.Path ? _("Unknown") : "/";
+                }
+                if (comparable != compareTo)
+                {
+                    comparable = compareTo;
+                    _listHeader = compareTo!;
+                    if (_listMusicFilesRows.Any())
+                    {
+                        if (_listMusicFilesRows[^1].HasCssClass("start-row"))
+                        {
+                            _listMusicFilesRows[^1].RemoveCssClass("start-row");
+                            _listMusicFilesRows[^1].AddCssClass("single-row");
+                        }
+                        else
+                        {
+                            _listMusicFilesRows[^1].AddCssClass("end-row");
+                        }
+                    }
+                    row.AddCssClass("start-row");
+                }
                 _listMusicFiles.Append(row);
                 _listMusicFilesRows.Add(row);
+            }
+            if (_listMusicFilesRows.Any())
+            {
+                if (!_listMusicFilesRows[0].HasCssClass("start-row"))
+                {
+                    _listMusicFilesRows[0].AddCssClass("start-row");
+                }
+                if (_listMusicFilesRows[^1].HasCssClass("start-row"))
+                {
+                    _listMusicFilesRows[^1].RemoveCssClass("start-row");
+                    _listMusicFilesRows[^1].AddCssClass("single-row");
+                }
+                else
+                {
+                    _listMusicFilesRows[^1].AddCssClass("end-row");
+                }
             }
             _headerBar.RemoveCssClass("flat");
             _title.SetSubtitle(_controller.MusicFolderPath);

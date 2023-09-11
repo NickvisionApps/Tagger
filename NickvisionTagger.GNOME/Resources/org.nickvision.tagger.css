@@ -18,3 +18,28 @@
   border-color: @borders;
   border-radius: 8px;
 }
+
+.music-list > row:not(.start-row):not(.end-row):not(.single-row) {
+  border-radius: 0px;
+}
+
+.start-row {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.end-row {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.single-row {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}

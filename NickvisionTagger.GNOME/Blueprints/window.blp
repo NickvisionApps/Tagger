@@ -35,6 +35,8 @@ menu tagActionsMenu {
         item(_("Remove"), "win.removeBackAlbumArt")
         item(_("Export"), "win.exportBackAlbumArt")
       }
+
+      item(_("Switch Album Art"), "win.switchAlbumArt")
     }
 
     submenu {
@@ -206,7 +208,7 @@ Adw.ApplicationWindow _root {
                         selection-mode: multiple;
                         activate-on-single-click: false;
 
-                        styles ["card", "boxed-list"]
+                        styles ["background", "music-list"]
                       };
                     }
                   };
