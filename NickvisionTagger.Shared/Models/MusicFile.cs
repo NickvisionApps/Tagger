@@ -1070,16 +1070,26 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>True if a is less than b, else false</returns>
     public static bool operator <(MusicFile? a, MusicFile? b)
     {
+        //Pad first number part of filename with 0 (i.e. "2- Test" becomes "02- Test")
         var aPath = a?.Path;
         var bPath = b?.Path;
-        if (aPath != null && a!.Track != 0)
+        if (aPath != null)
         {
-            aPath = aPath.Replace(a.Track.ToString(), a.Track.ToString("D2"));
+            var x = a!.Filename.Substring(0, a.Filename.IndexOf(' ')); //first part of filename
+            if (int.TryParse(x, out var n))
+            {
+                aPath = aPath.Replace(x, n.ToString("D2"));
+            }
         }
         if (bPath != null && b!.Track != 0)
         {
-            bPath = bPath.Replace(b.Track.ToString(), b.Track.ToString("D2"));
+            var x = b!.Filename.Substring(0, b.Filename.IndexOf(' ')); //first part of filename
+            if (int.TryParse(x, out var n))
+            {
+                bPath = bPath.Replace(x, n.ToString("D2"));
+            }
         }
+        //Compare
         return SortFilesBy switch
         {
             SortBy.Filename => System.IO.Path.GetFileName(aPath).CompareTo(System.IO.Path.GetFileName(bPath)) == -1,
@@ -1102,16 +1112,26 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>True if a is greater than b, else false</returns>
     public static bool operator >(MusicFile? a, MusicFile? b)
     {
+        //Pad first number part of filename with 0 (i.e. "2- Test" becomes "02- Test")
         var aPath = a?.Path;
         var bPath = b?.Path;
-        if (aPath != null && a!.Track != 0)
+        if (aPath != null)
         {
-            aPath = aPath.Replace(a.Track.ToString(), a.Track.ToString("D2"));
+            var x = a!.Filename.Substring(0, a.Filename.IndexOf(' ')); //first part of filename
+            if (int.TryParse(x, out var n))
+            {
+                aPath = aPath.Replace(x, n.ToString("D2"));
+            }
         }
         if (bPath != null && b!.Track != 0)
         {
-            bPath = bPath.Replace(b.Track.ToString(), b.Track.ToString("D2"));
+            var x = b!.Filename.Substring(0, b.Filename.IndexOf(' ')); //first part of filename
+            if (int.TryParse(x, out var n))
+            {
+                bPath = bPath.Replace(x, n.ToString("D2"));
+            }
         }
+        //Compare
         return SortFilesBy switch
         {
             SortBy.Filename => System.IO.Path.GetFileName(aPath).CompareTo(System.IO.Path.GetFileName(bPath)) == 1,
