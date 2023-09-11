@@ -77,7 +77,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         ATL.Settings.UseFileNameWhenNoTitle = false;
         ATL.Settings.FileBufferSize = 1024;
         ATL.Settings.ID3v2_writePictureDataLengthIndicator = false;
-        SortFilesBy = SortBy.Filename;
+        SortFilesBy = SortBy.Path;
     }
 
     /// <summary>
@@ -1072,8 +1072,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     {
         return SortFilesBy switch
         {
-            SortBy.Filename => a?.Filename.CompareTo(b?.Filename) == -1,
-            SortBy.Path => a?.Path.CompareTo(b?.Path) == -1,
+            SortBy.Filename => a?.Track.CompareTo(b?.Track) == -1 || a?.Track == b?.Track && a?.Filename.CompareTo(b?.Filename) == -1,
+            SortBy.Path => a?.Track.CompareTo(b?.Track) == -1 || a?.Track == b?.Track && a?.Path.CompareTo(b?.Path) == -1,
             SortBy.Title => a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == -1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == -1 || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track < b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == -1 || a?.Album == b?.Album && a?.Track < b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
@@ -1094,8 +1094,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     {
         return SortFilesBy switch
         {
-            SortBy.Filename => a?.Filename.CompareTo(b?.Filename) == 1,
-            SortBy.Path => a?.Path.CompareTo(b?.Path) == 1,
+            SortBy.Filename => a?.Track.CompareTo(b?.Track) == 1 || a?.Track == b?.Track && a?.Filename.CompareTo(b?.Filename) == 1,
+            SortBy.Path => a?.Track.CompareTo(b?.Track) == 1 || a?.Track == b?.Track && a?.Path.CompareTo(b?.Path) == 1,
             SortBy.Title => a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == 1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == 1 || a?.Artist == b?.Artist &&a?.Album == b?.Album && a?.Track > b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == 1 || a?.Album == b?.Album && a?.Track > b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
