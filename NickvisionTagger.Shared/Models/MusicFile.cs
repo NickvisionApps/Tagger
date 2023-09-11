@@ -1131,7 +1131,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         var parentB = System.IO.Path.GetDirectoryName(b) ?? "";
         if (parentA != parentB)
         {
-            return ComparePath(parentA, parentB);
+            return CompareFilename(parentA, parentB);
         }
         return CompareFilename(System.IO.Path.GetFileName(a), System.IO.Path.GetFileName(b));
     }
