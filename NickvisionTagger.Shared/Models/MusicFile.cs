@@ -199,7 +199,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <summary>
     /// The album artist of the music file
     /// </summary>
-    public string AlbumArtist 
+    public string AlbumArtist
     {
         get => _track.AlbumArtist ?? "";
 
@@ -209,7 +209,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <summary>
     /// The genre of the music file
     /// </summary>
-    public string Genre 
+    public string Genre
     {
         get => _track.Genre ?? "";
 
@@ -229,7 +229,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <summary>
     /// The BPM of the music file
     /// </summary>
-    public int BeatsPerMinute 
+    public int BeatsPerMinute
     {
         get => _track.BPM ?? 0;
 
@@ -271,7 +271,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// </summary>
     public byte[] FrontAlbumArt
     {
-        get 
+        get
         {
             var generic = Array.Empty<byte>();
             foreach (var picture in _track.EmbeddedPictures)
@@ -1072,8 +1072,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     {
         return SortFilesBy switch
         {
-            SortBy.Filename => CompareFilename(a?.Filename, b?.Filename) == -1,
-            SortBy.Path => ComparePath(a?.Path, b?.Path) == -1,
+            SortBy.Filename => CompareFilenameOrPath(a?.Filename, b?.Filename) == -1,
+            SortBy.Path => CompareFilenameOrPath(System.IO.Path.GetDirectoryName(a?.Path), System.IO.Path.GetDirectoryName(b?.Path)) == -1,
             SortBy.Title => a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == -1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == -1 || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track < b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == -1 || a?.Album == b?.Album && a?.Track < b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
@@ -1094,8 +1094,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     {
         return SortFilesBy switch
         {
-            SortBy.Filename => CompareFilename(a?.Filename, b?.Filename) == 1,
-            SortBy.Path => ComparePath(a?.Path, b?.Path) == 1,
+            SortBy.Filename => CompareFilenameOrPath(a?.Filename, b?.Filename) == 1,
+            SortBy.Path => CompareFilenameOrPath(System.IO.Path.GetDirectoryName(a?.Path), System.IO.Path.GetDirectoryName(b?.Path)) == 1,
             SortBy.Title => a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == 1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == 1 || a?.Artist == b?.Artist &&a?.Album == b?.Album && a?.Track > b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == 1 || a?.Album == b?.Album && a?.Track > b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
@@ -1107,32 +1107,15 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     }
 
     /// <summary>
-    /// Compares two filenames
+    /// Compares two filenames or paths
     /// </summary>
-    /// <param name="a">First filename</param>
-    /// <param name="b">Second filename</param>
+    /// <param name="a">First filename or path</param>
+    /// <param name="b">Second filename or path</param>
     /// <returns>-1 if a &lt; b, 1 if a &gt; b, else 0</returns>
-    private static int CompareFilename(string? a, string? b)
+    private static int CompareFilenameOrPath(string? a, string? b)
     {
         var padA = Regex.Replace(a ?? "", @"\d+", match => match.Value.PadLeft(4, '0'));
         var padB = Regex.Replace(b ?? "", @"\d+", match => match.Value.PadLeft(4, '0'));
         return padA.CompareTo(padB);
-    }
-
-    /// <summary>
-    /// Compares two paths
-    /// </summary>
-    /// <param name="a">First path</param>
-    /// <param name="b">Second path</param>
-    /// <returns>-1 if a &lt; b, 1 if a &gt; b, else 0</returns>
-    private static int ComparePath(string? a, string? b)
-    {
-        var parentA = System.IO.Path.GetDirectoryName(a) ?? "";
-        var parentB = System.IO.Path.GetDirectoryName(b) ?? "";
-        if (parentA != parentB)
-        {
-            return ComparePath(parentA, parentB);
-        }
-        return CompareFilename(System.IO.Path.GetFileName(a), System.IO.Path.GetFileName(b));
     }
 }
