@@ -1070,10 +1070,20 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>True if a is less than b, else false</returns>
     public static bool operator <(MusicFile? a, MusicFile? b)
     {
+        var aPath = a?.Path;
+        var bPath = b?.Path;
+        if (aPath != null && a!.Track != 0)
+        {
+            aPath = aPath.Replace(a.Track.ToString(), a.Track.ToString("D2"));
+        }
+        if (bPath != null && b!.Track != 0)
+        {
+            bPath = bPath.Replace(b.Track.ToString(), b.Track.ToString("D2"));
+        }
         return SortFilesBy switch
         {
-            SortBy.Filename => a?.Track.CompareTo(b?.Track) == -1 || a?.Track == b?.Track && a?.Filename.CompareTo(b?.Filename) == -1,
-            SortBy.Path => a?.Track.CompareTo(b?.Track) == -1 || a?.Track == b?.Track && a?.Path.CompareTo(b?.Path) == -1,
+            SortBy.Filename => System.IO.Path.GetFileName(aPath).CompareTo(System.IO.Path.GetFileName(bPath)) == -1,
+            SortBy.Path => aPath.CompareTo(bPath) == -1,
             SortBy.Title => a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == -1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == -1 || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track < b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == -1 || a?.Album == b?.Album && a?.Track < b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
@@ -1092,10 +1102,20 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>True if a is greater than b, else false</returns>
     public static bool operator >(MusicFile? a, MusicFile? b)
     {
+        var aPath = a?.Path;
+        var bPath = b?.Path;
+        if (aPath != null && a!.Track != 0)
+        {
+            aPath = aPath.Replace(a.Track.ToString(), a.Track.ToString("D2"));
+        }
+        if (bPath != null && b!.Track != 0)
+        {
+            bPath = bPath.Replace(b.Track.ToString(), b.Track.ToString("D2"));
+        }
         return SortFilesBy switch
         {
-            SortBy.Filename => a?.Track.CompareTo(b?.Track) == 1 || a?.Track == b?.Track && a?.Filename.CompareTo(b?.Filename) == 1,
-            SortBy.Path => a?.Track.CompareTo(b?.Track) == 1 || a?.Track == b?.Track && a?.Path.CompareTo(b?.Path) == 1,
+            SortBy.Filename => System.IO.Path.GetFileName(aPath).CompareTo(System.IO.Path.GetFileName(bPath)) == 1,
+            SortBy.Path => aPath.CompareTo(bPath) == 1,
             SortBy.Title => a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == 1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == 1 || a?.Artist == b?.Artist &&a?.Album == b?.Album && a?.Track > b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == 1 || a?.Album == b?.Album && a?.Track > b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
