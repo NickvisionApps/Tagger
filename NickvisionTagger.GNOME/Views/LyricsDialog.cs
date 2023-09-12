@@ -174,7 +174,7 @@ public partial class LyricsDialog : Adw.Window
         if (!_syncRows.ContainsKey(e.Timestamp))
         {
             var row = new Adw.EntryRow();
-            row.SetTitle(((int)TimeSpan.FromMilliseconds(e.Timestamp).TotalSeconds).ToDurationString());
+            row.SetTitle(e.Timestamp.MillisecondsToTimecode());
             row.SetText(e.Lyric);
             row.SetShowApplyButton(true);
             var delete = new Gtk.Button();
@@ -238,7 +238,7 @@ public partial class LyricsDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void AddSyncLyric(Gtk.Button sender, EventArgs e)
     {
-        var entryDialog = new EntryDialog(this, _iconName, _("New Synchronized Lyric"), "", _("Timestamp (hh:mm:ss)"), _("Cancel"), _("Add"))
+        var entryDialog = new EntryDialog(this, _iconName, _("New Synchronized Lyric"), "", _("Timestamp (hh:mm:ss, mm:ss.xx)"), _("Cancel"), _("Add"))
         {
             Validator = x => TimeSpan.TryParse(x, out var _)
         };
@@ -246,10 +246,10 @@ public partial class LyricsDialog : Adw.Window
         {
             if (!string.IsNullOrEmpty(entryDialog.Response))
             {
-                var res = TimeSpan.TryParse(entryDialog.Response, out var span);
-                if (res)
+                var res = entryDialog.Response.TimecodeToMs();
+                if (res != -1)
                 {
-                    _controller.AddSynchronizedLyric((int)span.TotalMilliseconds);
+                    _controller.AddSynchronizedLyric(res);
                 }
             }
             entryDialog.Destroy();
