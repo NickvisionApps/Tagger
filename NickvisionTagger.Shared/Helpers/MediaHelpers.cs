@@ -91,34 +91,42 @@ public static class MediaHelpers
             if (timeCode.Contains(':'))
             {
                 valid = true;
-                string[] parts = timeCode.Split(':');
-                if (parts[^1].Contains('.'))
+                try
                 {
-                    string[] subPart = parts[^1].Split('.');
-                    parts[^1] = subPart[0];
-                    milliseconds = int.Parse(subPart[1]);
-                }
-                seconds = int.Parse(parts[^1]);
-                minutes = int.Parse(parts[^2]);
-                if (parts.Length >= 3)
-                {
-                    string[] subPart = parts[^3].Split('d');
-                    if (subPart.Length > 1)
+                    string[] parts = timeCode.Split(':');
+                    if (parts[^1].Contains('.'))
                     {
-                        days = int.Parse(subPart[0].Trim());
-                        hours = int.Parse(subPart[1].Trim());
+                        string[] subPart = parts[^1].Split('.');
+                        parts[^1] = subPart[0];
+                        milliseconds = int.Parse(subPart[1]);
                     }
-                    else
-                    {
-                        hours = int.Parse(subPart[0]);
-                    }
-                }
 
-                result = milliseconds;
-                result += seconds * 1000;
-                result += minutes * 60 * 1000;
-                result += hours * 60 * 60 * 1000;
-                result += days * 24 * 60 * 60 * 1000;
+                    seconds = int.Parse(parts[^1]);
+                    minutes = int.Parse(parts[^2]);
+                    if (parts.Length >= 3)
+                    {
+                        string[] subPart = parts[^3].Split('d');
+                        if (subPart.Length > 1)
+                        {
+                            days = int.Parse(subPart[0].Trim());
+                            hours = int.Parse(subPart[1].Trim());
+                        }
+                        else
+                        {
+                            hours = int.Parse(subPart[0]);
+                        }
+                    }
+
+                    result = milliseconds;
+                    result += seconds * 1000;
+                    result += minutes * 60 * 1000;
+                    result += hours * 60 * 60 * 1000;
+                    result += days * 24 * 60 * 60 * 1000;
+                }
+                catch
+                {
+                    valid = false;
+                }
             }
         }
         if (!valid) result = -1;

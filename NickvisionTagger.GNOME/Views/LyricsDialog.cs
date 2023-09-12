@@ -240,7 +240,7 @@ public partial class LyricsDialog : Adw.Window
     {
         var entryDialog = new EntryDialog(this, _iconName, _("New Synchronized Lyric"), "", _("Timestamp (hh:mm:ss, mm:ss.xx)"), _("Cancel"), _("Add"))
         {
-            Validator = x => TimeSpan.TryParse(x, out var _)
+            Validator = x => x.TimecodeToMs() != -1
         };
         entryDialog.OnResponse += (s, ex) =>
         {
