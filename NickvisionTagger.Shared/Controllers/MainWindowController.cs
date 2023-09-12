@@ -387,6 +387,10 @@ public class MainWindowController : IDisposable
     {
         if (_musicFolder != null)
         {
+            if (string.IsNullOrEmpty(options.Name))
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Playlist name can not be empty."), NotificationSeverity.Error));
+            }
             if (options.IncludeOnlySelectedFiles && SelectedMusicFiles.Count == 0)
             {
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("No music files are selected."), NotificationSeverity.Error));
@@ -394,6 +398,14 @@ public class MainWindowController : IDisposable
             else if (_musicFolder.MusicFiles.Count == 0)
             {
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("No music files in folder."), NotificationSeverity.Error));
+            }
+            else if(_musicFolder.CreatePlaylist(options, options.IncludeOnlySelectedFiles ? SelectedMusicFiles.Keys.ToList() : null))
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Playlist file created successfully."), NotificationSeverity.Success));
+            }
+            else
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to create playlist."), NotificationSeverity.Error));
             }
         }
     }

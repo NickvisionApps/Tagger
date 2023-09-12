@@ -1,3 +1,4 @@
+using ATL.Playlist;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -146,5 +147,41 @@ public class MusicFolder : IDisposable
             });
         }
         return CorruptedFiles.Count > 0;
+    }
+
+    /// <summary>
+    /// Creates a playlist for the music folder
+    /// </summary>
+    /// <param name="options">PlaylistOptions</param>
+    /// <param name="selectedFiles">A list of indexes of selected files, if available</param>
+    /// <returns>True if successful, else false</returns>
+    public bool CreatePlaylist(PlaylistOptions options, List<int>? selectedFiles)
+    {
+        if (string.IsNullOrEmpty(options.Name))
+        {
+            return false;
+        }
+
+        var path = $"{ParentPath}{Path.DirectorySeparatorChar}{options.Name}{options.Format.GetDotExtension()}";
+        var playlist = PlaylistIOFactory.GetInstance().GetPlaylistIO(path, ATL.Playlist.PlaylistFormat.LocationFormatting.FilePath, ATL.Playlist.PlaylistFormat.FileEncoding.UTF8_NO_BOM);
+        var paths = new List<string>();
+        if (options.IncludeOnlySelectedFiles)
+        {
+            if (selectedFiles == null || selectedFiles.Count == 0)
+            {
+                return false;
+            }
+            paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => x.Path));
+        }
+        else
+        {
+            if (MusicFiles.Count == 0)
+            {
+                return false;
+            }
+            paths.AddRange(MusicFiles.Select(x => x.Path));
+        }
+        playlist.FilePaths = paths;
+        return true;
     }
 }

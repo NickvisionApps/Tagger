@@ -5,7 +5,22 @@ namespace NickvisionTagger.Shared.Models;
 /// </summary>
 public enum PlaylistFormat
 {
-    M3U
+    M3U,
+    PLS,
+    FPL,
+    XSPF,
+    SMIL,
+    ASX,
+    B4S,
+    DPL
+}
+
+/// <summary>
+/// Extension methods for PlaylistFormat
+/// </summary>
+public static class PlaylistFormatExtensions
+{
+    public static string GetDotExtension(this PlaylistFormat format) => $".{format.ToString().ToLower()}";
 }
 
 /// <summary>
