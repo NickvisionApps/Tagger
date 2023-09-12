@@ -140,46 +140,46 @@ public class MusicLibrary : IDisposable
     public async Task<bool> ReloadMusicFilesAsync()
     {
         MusicFile.SortFilesBy = SortFilesBy;
-        foreach (var file in MusicFiles)
+        await Task.Run(() =>
         {
-            file.Dispose();
-        }
+            foreach (var file in MusicFiles)
+            {
+                file.Dispose();
+            }
+        });
         MusicFiles.Clear();
         CorruptedFiles.Clear();
         Genres.Clear();
-        if(Type == MusicLibraryType.Folder)
+        await Task.Run(() =>
         {
-            await Task.Run(() =>
+            var files = Type switch
             {
-                var files = Directory.GetFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
-                    .Where(x => _supportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList();
-                var i = 0;
-                foreach(var path in files)
+                MusicLibraryType.Folder => Directory.GetFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Where(x => _supportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
+                MusicLibraryType.Playlist => PlaylistIOFactory.GetInstance().GetPlaylistIO(Path).FilePaths.Where(x => File.Exists(x) && _supportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
+                _ => new List<string>()
+            };
+            var i = 0;
+            foreach(var path in files)
+            {
+                try
                 {
-                    try
+                    var musicFile = new MusicFile(path);
+                    MusicFiles.Add(musicFile);
+                    if (!Genres.Contains(musicFile.Genre) && string.IsNullOrEmpty(musicFile.Genre))
                     {
-                        var musicFile = new MusicFile(path);
-                        MusicFiles.Add(musicFile);
-                        if (!Genres.Contains(musicFile.Genre))
-                        {
-                            Genres.Add(musicFile.Genre);
-                        }
+                        Genres.Add(musicFile.Genre);
                     }
-                    catch (FileLoadException e)
-                    {
-                        CorruptedFiles.Add(path);
-                        Console.WriteLine(e);
-                    }
-                    i++;
-                    LoadingProgressUpdated?.Invoke(this, (i, files.Count, $"{i}/{files.Count}"));
                 }
-                MusicFiles.Sort();
-            });
-        }
-        else if (Type == MusicLibraryType.Playlist)
-        {
-            
-        }
+                catch (FileLoadException e)
+                {
+                    CorruptedFiles.Add(path);
+                    Console.WriteLine(e);
+                }
+                i++;
+                LoadingProgressUpdated?.Invoke(this, (i, files.Count, $"{i}/{files.Count}"));
+            }
+            MusicFiles.Sort();
+        });
         return CorruptedFiles.Count > 0;
     }
 
