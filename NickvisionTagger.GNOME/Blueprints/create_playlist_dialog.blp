@@ -3,8 +3,9 @@ using Adw 1;
 
 Adw.Window _root {
   default-width: 400;
+  width-request: 320;
   modal: true;
-  resizable: false;
+  resizable: true;
   default-widget: _createButton;
 
   content: Gtk.Box {
@@ -25,6 +26,14 @@ Adw.Window _root {
           label: _("Playlist");
           
           styles ["title-2"]
+        }
+        
+        Gtk.Label {
+          wrap: true;
+          margin-start: 12;
+          margin-end: 12;
+          justify: center;
+          label: _("Tagger will store files to the playlist via their full path on disk.");
         }
       
         Adw.PreferencesGroup {
