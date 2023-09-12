@@ -380,6 +380,25 @@ public class MainWindowController : IDisposable
     }
 
     /// <summary>
+    /// Creates a playlist for the currency music folder
+    /// </summary>
+    /// <param name="options">PlaylistOptions</param>
+    public void CreatePlaylist(PlaylistOptions options)
+    {
+        if (_musicFolder != null)
+        {
+            if (options.IncludeOnlySelectedFiles && SelectedMusicFiles.Count == 0)
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("No music files are selected."), NotificationSeverity.Error));
+            }
+            else if (_musicFolder.MusicFiles.Count == 0)
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("No music files in folder."), NotificationSeverity.Error));
+            }
+        }
+    }
+
+    /// <summary>
     /// Updates the tags with values from the property map
     /// </summary>
     /// <param name="map">The PropertyMap with values</param>

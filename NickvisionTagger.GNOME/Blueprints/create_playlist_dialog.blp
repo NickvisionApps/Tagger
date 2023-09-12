@@ -22,7 +22,7 @@ Adw.Window _root {
         spacing: 24;
 
         Gtk.Label {
-          label: _("Create Playlist");
+          label: _("Playlist");
           
           styles ["title-2"]
         }
@@ -64,6 +64,7 @@ Adw.Window _root {
           Gtk.Button _createButton {
             valign: center;
             label: _("Create");
+            sensitive: false;
 
             styles ["pill", "suggested-action"]
           }
