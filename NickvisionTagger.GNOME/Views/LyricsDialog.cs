@@ -238,7 +238,7 @@ public partial class LyricsDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void AddSyncLyric(Gtk.Button sender, EventArgs e)
     {
-        var entryDialog = new EntryDialog(this, _iconName, _("New Synchronized Lyric"), "", _("Timestamp (hh:mm:ss, mm:ss.xx)"), _("Cancel"), _("Add"))
+        var entryDialog = new EntryDialog(this, _iconName, _("New Synchronized Lyric"), "", _("Timestamp (hh:mm:ss or mm:ss.xx)"), _("Cancel"), _("Add"))
         {
             Validator = x => x.TimecodeToMs() != -1
         };
