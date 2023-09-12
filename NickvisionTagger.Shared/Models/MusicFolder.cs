@@ -161,7 +161,6 @@ public class MusicFolder : IDisposable
         {
             return false;
         }
-
         var path = $"{ParentPath}{Path.DirectorySeparatorChar}{options.Name}{options.Format.GetDotExtension()}";
         var playlist = PlaylistIOFactory.GetInstance().GetPlaylistIO(path, ATL.Playlist.PlaylistFormat.LocationFormatting.FilePath, ATL.Playlist.PlaylistFormat.FileEncoding.UTF8_NO_BOM);
         var paths = new List<string>();
