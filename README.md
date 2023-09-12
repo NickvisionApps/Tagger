@@ -3,10 +3,13 @@
  [![Translation status](https://hosted.weblate.org/widgets/nickvision-tagger/-/app/svg-badge.svg)](https://hosted.weblate.org/engage/nickvision-tagger/) ✨Powered by [Weblate](https://weblate.org/en/)✨
 
 # Features
+- Support for many music file types (mp3, ogg, flac, wma, wav, and more)
 - Edit tags and album art of multiple files, even across subfolders, all at once
-- Support for multiple music file types (mp3, ogg, flac, wma, and wav)
+- Edit unsynchronized and synchronized lyrics for a file (with LRC import and export support)
 - Convert filenames to tags and tags to filenames with ease
 - Lookup file information using MusicBrainz
+- Lookup lyric information using Music163 and Letras
+- Create playlists for folders in many formats (m3u, pls, xspf, and more)
 
 # Installation
 
