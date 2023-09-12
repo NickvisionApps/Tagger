@@ -307,6 +307,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         actReloadFolder.OnActivate += ReloadFolder;
         AddAction(actReloadFolder);
         application.SetAccelsForAction("win.reloadFolder", new string[] { "F5" });
+        //Create Playlist Action
+        var actCreatePlaylist = Gio.SimpleAction.New("createPlaylist", null);
+        actCreatePlaylist.OnActivate += CreatePlaylist;
+        AddAction(actCreatePlaylist);
         //Apply Action
         _applyAction = Gio.SimpleAction.New("apply", null);
         _applyAction.OnActivate += Apply;
@@ -670,6 +674,16 @@ public partial class MainWindow : Adw.ApplicationWindow
             SetLoadingState(_("Loading music files from folder..."));
             await _controller.ReloadFolderAsync();
         }
+    }
+
+    /// <summary>
+    /// Occurs when the create playlist action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void CreatePlaylist(Gio.SimpleAction sender, EventArgs e)
+    {
+        
     }
 
     /// <summary>

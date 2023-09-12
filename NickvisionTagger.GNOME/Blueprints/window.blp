@@ -570,9 +570,14 @@ Adw.ApplicationWindow _root {
 
                 Gtk.Button {
                   tooltip-text: _("Reload Music Folder (F5)");
-                  sensitive: false;
                   icon-name: "view-refresh-symbolic";
                   action-name: "win.reloadFolder";
+                }
+                
+                Gtk.Button {
+                  tooltip-text: _("Create Playlist");
+                  icon-name: "playlist-symbolic";
+                  action-name: "win.createPlaylist";
                 }
               }
 
