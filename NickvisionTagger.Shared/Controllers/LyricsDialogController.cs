@@ -298,13 +298,13 @@ public class LyricsDialogController
         foreach (var p in lrc.SynchronizedLyrics)
         {
             var phrase = _lyrics.SynchronizedLyrics.FirstOrDefault(x => x.TimestampMs == p.TimestampMs);
-            if (phrase != null && overwrite)
+            if (phrase is not null && overwrite)
             {
                 SynchronizedLyricRemoved?.Invoke(this, new SynchronizedLyricsEventArgs(phrase.TimestampMs, phrase.Text));
                 _lyrics.SynchronizedLyrics[_lyrics.SynchronizedLyrics.IndexOf(phrase)] = new LyricsInfo.LyricsPhrase(phrase.TimestampMs, p.Text);
                 SynchronizedLyricCreated?.Invoke(this, new SynchronizedLyricsEventArgs(phrase.TimestampMs, phrase.Text, _lyrics.SynchronizedLyrics.OrderBy(x => x.TimestampMs).ToList().IndexOf(phrase)));
             }
-            else if (phrase == null)
+            else if (phrase is null)
             {
                 phrase = new LyricsInfo.LyricsPhrase(p.TimestampMs, p.Text);
                 _lyrics.SynchronizedLyrics.Add(phrase);
