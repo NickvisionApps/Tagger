@@ -50,10 +50,6 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// The path of the music file
     /// </summary>
     public string Path { get; private set; }
-    /// <summary>
-    /// Whether the file is read-only or not
-    /// </summary>
-    public bool IsReadOnly { get; private set; }
     
     /// <summary>
     /// The duration of the music file
@@ -102,7 +98,6 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         _modificationTimestamp = File.GetLastWriteTime(Path);
         _fpcalc = null;
         _fingerprint = "";
-        IsReadOnly = false;
     }
     
     /// <summary>
@@ -479,10 +474,6 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>True if successful, else false</returns>
     public bool SaveTagToDisk(bool preserveModificationTimestamp)
     {
-        if (IsReadOnly)
-        {
-            return false;
-        }
         var res = _track.Save();
         if(res)
         {

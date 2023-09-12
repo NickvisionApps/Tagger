@@ -372,10 +372,6 @@ public class MainWindowController : IDisposable
             {
                 CorruptedFilesFound?.Invoke(this, EventArgs.Empty);
             }
-            if(_musicLibrary.ContainsReadOnlyFiles)
-            {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Tagger has opened some files in read-only mode."), NotificationSeverity.Warning, "unsupported"));
-            }
         }
     }
 
@@ -419,10 +415,6 @@ public class MainWindowController : IDisposable
     {
         foreach(var pair in SelectedMusicFiles)
         {
-            if (pair.Value.IsReadOnly)
-            {
-                continue;
-            }
             if (!_filesBeingEditedOriginals.ContainsKey(pair.Key))
             {
                 _filesBeingEditedOriginals.Add(pair.Key, pair.Value.PropertyMap);

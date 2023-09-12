@@ -1307,7 +1307,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _insertAlbumArtAction.SetEnabled(true);
         _removeAlbumArtAction.SetEnabled(_artViewStack.GetVisibleChildName() != "NoImage");
         _exportAlbumArtAction.SetEnabled(albumArt == "hasArt");
-        if (_controller.SelectedMusicFiles.Count == 1 && _controller.SelectedMusicFiles.First().Value.IsReadOnly)
+        if (_controller.SelectedMusicFiles.Count == 1)
         {
             _filenameRow.SetEditable(false);
             _titleRow.SetEditable(false);
@@ -1354,10 +1354,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                         TagPropertyChanged();
                     }
                 };
-                if (_controller.SelectedMusicFiles.First().Value.IsReadOnly)
-                {
-                    row.SetEditable(false);
-                }
                 _customPropertyRows.Add(row);
                 _customPropertiesGroup.Add(row);
             }

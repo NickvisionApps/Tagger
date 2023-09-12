@@ -50,10 +50,6 @@ public class MusicLibrary : IDisposable
     /// </summary>
     public List<string> CorruptedFiles { get; init; }
     /// <summary>
-    /// Whether or not the library contains music files that are read-only
-    /// </summary>
-    public bool ContainsReadOnlyFiles { get; private set; }
-    /// <summary>
     /// A list of genres in the library
     /// </summary>
     public List<string> Genres { get; init;  }
@@ -92,7 +88,6 @@ public class MusicLibrary : IDisposable
         SortFilesBy = SortBy.Filename;
         MusicFiles = new List<MusicFile>();
         CorruptedFiles = new List<string>();
-        ContainsReadOnlyFiles = false;
         Genres = new List<string>();
         if (Directory.Exists(Path))
         {
@@ -151,7 +146,6 @@ public class MusicLibrary : IDisposable
         }
         MusicFiles.Clear();
         CorruptedFiles.Clear();
-        ContainsReadOnlyFiles = false;
         Genres.Clear();
         if(Type == MusicLibraryType.Folder)
         {
@@ -166,10 +160,6 @@ public class MusicLibrary : IDisposable
                     {
                         var musicFile = new MusicFile(path);
                         MusicFiles.Add(musicFile);
-                        if(musicFile.IsReadOnly)
-                        {
-                            ContainsReadOnlyFiles = true;
-                        }
                         if (!Genres.Contains(musicFile.Genre))
                         {
                             Genres.Add(musicFile.Genre);
