@@ -385,7 +385,7 @@ public class MainWindowController : IDisposable
     /// <param name="options">PlaylistOptions</param>
     public void CreatePlaylist(PlaylistOptions options)
     {
-        if (_musicLibrary != null)
+        if (_musicLibrary != null && _musicLibrary.Type == MusicLibraryType.Folder)
         {
             if (string.IsNullOrEmpty(options.Name))
             {
@@ -407,6 +407,18 @@ public class MainWindowController : IDisposable
             {
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to create playlist."), NotificationSeverity.Error));
             }
+        }
+    }
+
+    /// <summary>
+    /// Removes the selected files from the playlist
+    /// </summary>
+    public async Task RemoveSelectedFilesFromPlaylistAsync()
+    {
+        if (_musicLibrary != null && _musicLibrary.Type == MusicLibraryType.Playlist && SelectedMusicFiles.Count > 0)
+        {
+            _musicLibrary.RemoveFilesFromPlaylist(SelectedMusicFiles.Select(x => x.Key).ToList());
+            await ReloadLibraryAsync();
         }
     }
 

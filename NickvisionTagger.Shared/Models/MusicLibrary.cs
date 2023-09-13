@@ -24,6 +24,7 @@ public class MusicLibrary : IDisposable
     private static readonly string[] _supportedExtensions;
     
     private bool _disposed;
+    private IPlaylistIO? _playlist;
     
     /// <summary>
     /// The type of the music library
@@ -102,6 +103,7 @@ public class MusicLibrary : IDisposable
         else if (File.Exists(Path) && Enum.GetValues<PlaylistFormat>().Select(x => x.GetDotExtension()).Contains(System.IO.Path.GetExtension(Path)))
         {
             Type = MusicLibraryType.Playlist;
+            _playlist = PlaylistIOFactory.GetInstance().GetPlaylistIO(Path, ATL.Playlist.PlaylistFormat.LocationFormatting.FilePath, ATL.Playlist.PlaylistFormat.FileEncoding.UTF8_NO_BOM);
         }
         else
         {
@@ -161,7 +163,7 @@ public class MusicLibrary : IDisposable
             var files = Type switch
             {
                 MusicLibraryType.Folder => Directory.GetFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Where(x => _supportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
-                MusicLibraryType.Playlist => PlaylistIOFactory.GetInstance().GetPlaylistIO(Path).FilePaths.Where(x => File.Exists(x) && _supportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
+                MusicLibraryType.Playlist => _playlist!.FilePaths.Where(x => File.Exists(x) && _supportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
                 _ => new List<string>()
             };
             var i = 0;
@@ -190,14 +192,14 @@ public class MusicLibrary : IDisposable
     }
 
     /// <summary>
-    /// Creates a playlist for the music library
+    /// Creates a playlist for the music library folder
     /// </summary>
     /// <param name="options">PlaylistOptions</param>
     /// <param name="selectedFiles">A list of indexes of selected files, if available</param>
     /// <returns>True if successful, else false</returns>
     public bool CreatePlaylist(PlaylistOptions options, List<int>? selectedFiles)
     {
-        if (string.IsNullOrEmpty(options.Name))
+        if (Type != MusicLibraryType.Folder || string.IsNullOrEmpty(options.Name))
         {
             return false;
         }
@@ -221,6 +223,30 @@ public class MusicLibrary : IDisposable
             paths.AddRange(MusicFiles.Select(x => x.Path));
         }
         playlist.FilePaths = paths;
+        return true;
+    }
+
+    /// <summary>
+    /// Removes files from the playlist
+    /// </summary>
+    /// <param name="indexes">The indexes of the files to remove</param>
+    /// <returns>True if success, else false</returns>
+    public bool RemoveFilesFromPlaylist(List<int> indexes)
+    {
+        if (Type != MusicLibraryType.Playlist || MusicFiles.Count == 0 || indexes.Count == 0)
+        {
+            return false;
+        }
+        var paths = _playlist!.FilePaths;
+        foreach (var index in indexes)
+        {
+            try
+            {
+                paths.Remove(MusicFiles[index].Path);
+            }
+            catch { }
+        }
+        _playlist.FilePaths = paths;
         return true;
     }
 }

@@ -629,7 +629,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (obj is Gio.FileHelper file)
         {
             var path = file.GetPath() ?? "";
-            if (Directory.Exists(path))
+            if (Directory.Exists(path) || (File.Exists(path) && Enum.GetValues<PlaylistFormat>().Select(x => x.GetDotExtension()).Contains(Path.GetExtension(path))))
             {
                 SetLoadingState(_("Loading music files from library..."));
                 _controller.OpenLibraryAsync(path).Wait();
@@ -757,7 +757,65 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void RemoveFromPlaylist(Gio.SimpleAction sender, EventArgs e)
     {
-        
+        if (_controller.SelectedMusicFiles.Count == 0)
+        {
+            NotificationSent(this, new NotificationSentEventArgs(_("No files selected for removal."), NotificationSeverity.Error));
+        }
+        else
+        {
+            var dialog = Adw.MessageDialog.New(this, _("Remove Files?"), _("The selected files will not be deleted from disk but will be removed from this playlist."));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("no", _("No"));
+            dialog.SetDefaultResponse("no");
+            dialog.SetCloseResponse("no");
+            dialog.AddResponse("yes", _("Yes"));
+            dialog.SetResponseAppearance("yes", Adw.ResponseAppearance.Destructive);
+            dialog.OnResponse += async (s, ea) =>
+            {
+                if (ea.Response == "yes")
+                {
+                    if (!_controller.CanClose)
+                    {
+                        var applyDialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
+                        applyDialog.SetIconName(_controller.AppInfo.ID);
+                        applyDialog.AddResponse("cancel", _("Cancel"));
+                        applyDialog.SetDefaultResponse("cancel");
+                        applyDialog.SetCloseResponse("cancel");
+                        applyDialog.AddResponse("discard", _("Discard"));
+                        applyDialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
+                        applyDialog.AddResponse("apply", _("Apply"));
+                        applyDialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
+                        applyDialog.OnResponse += async (ss, eaa) =>
+                        {
+                            if (eaa.Response == "apply")
+                            {
+                                SetLoadingState(_("Saving tags..."));
+                                await _controller.SaveAllTagsAsync(false);
+                            }
+                            if (eaa.Response == "discard")
+                            {
+                                SetLoadingState(_("Discarding tags..."));
+                                await _controller.DiscardSelectedUnappliedChangesAsync();
+                            }
+                            if (eaa.Response != "cancel")
+                            {
+                                SetLoadingState(_("Removing files from playlist..."));
+                                await _controller.RemoveSelectedFilesFromPlaylistAsync();
+                            }
+                            applyDialog.Destroy();
+                        };
+                        applyDialog.Present();
+                    }
+                    else
+                    {
+                        SetLoadingState(_("Removing files from playlist..."));
+                        await _controller.RemoveSelectedFilesFromPlaylistAsync();
+                    }
+                }
+                dialog.Destroy();
+            };
+            dialog.Present();
+        }
     }
 
     /// <summary>
