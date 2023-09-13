@@ -9,7 +9,7 @@
 - Convert filenames to tags and tags to filenames with ease
 - Lookup file information using MusicBrainz
 - Lookup lyric information using Music163 and Letras
-- Create playlists for folders in many formats (m3u, pls, xspf, and more)
+- Open, manage, and create playlists in many formats (m3u, pls, xspf, and more)
 
 # Installation
 
