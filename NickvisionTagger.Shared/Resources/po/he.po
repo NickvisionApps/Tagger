@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 22:13-0400\n"
+"POT-Creation-Date: 2023-09-13 06:12+0300\n"
 "PO-Revision-Date: 2023-08-16 16:52+0000\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gnome.org>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -135,7 +135,7 @@ msgstr "מזהה ההקלטה שסופק ל־MusicBrainz אינו תקף"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1073
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1135
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1186
-#: NickvisionTagger.GNOME/Blueprints/window.blp:638
+#: NickvisionTagger.GNOME/Blueprints/window.blp:636
 msgid "Apply"
 msgstr "החלה"
 
@@ -476,11 +476,6 @@ msgstr "מתבצעת טעינת קובצי מוזיקה מתיקייה…"
 msgid "Loading music files from playlist..."
 msgstr "מתבצעת טעינת קובצי מוזיקה מתיקייה…"
 
-#: ../../../Models/LyricService.cs:90
-#, fuzzy, csharp-format
-msgid "lrc"
-msgstr "מילות שיר"
-
 #: ../../../Models/MusicFile.cs:72
 msgid "lyrics"
 msgstr "מילות שיר"
@@ -497,14 +492,18 @@ msgstr "מבי״ב"
 msgid "MusicBrainz Recording Id"
 msgstr "מזהה ההקלטות MusicBrainz"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:76
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:77
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:44
 #, fuzzy
 msgid "Name"
 msgstr "שם קובץ"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:80
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:82
 msgid "Name (Empty)"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:88
+msgid "Name (Invalid)"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1039
@@ -1288,11 +1287,11 @@ msgstr "העתקת טביעת אצבע ללוח הגזירים"
 msgid "Toggle Tags Pane"
 msgstr "הצגה/הסתרת סרגל התיוג"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:633
+#: NickvisionTagger.GNOME/Blueprints/window.blp:631
 msgid "Tag Actions"
 msgstr "פעולות תיוג"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:639
+#: NickvisionTagger.GNOME/Blueprints/window.blp:637
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "החלת שינויים לתג (Ctrl+S)"
 
@@ -1336,8 +1335,13 @@ msgstr "- קבלת מידע על קבצים באמצעות MusicBrainz"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:16
 msgid ""
-"— Create playlists for folders in many formats (m3u, pls, xspf, and more)"
+"— Open, manage, and create playlists in many formats (m3u, pls, xspf, and "
+"more)"
 msgstr ""
+
+#, fuzzy, csharp-format
+#~ msgid "lrc"
+#~ msgstr "מילות שיר"
 
 #~ msgid "Tagger has opened some files in read-only mode."
 #~ msgstr "המתייג פתח כמה קבצים במצב קריאה בלבד."

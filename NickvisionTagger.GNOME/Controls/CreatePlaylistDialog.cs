@@ -1,6 +1,8 @@
 using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Models;
 using System;
+using System.IO;
+using System.Linq;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.GNOME.Controls;
@@ -71,15 +73,21 @@ public partial class CreatePlaylistDialog : Adw.Window
     /// </summary>
     private void Validate()
     {
-        var valid = !string.IsNullOrEmpty(_nameRow.GetText());
         _nameRow.RemoveCssClass("error");
         _nameRow.SetTitle(_("Name"));
-        if (!valid)
+        var empty = string.IsNullOrEmpty(_nameRow.GetText());
+        if (empty)
         {
             _nameRow.AddCssClass("error");
             _nameRow.SetTitle(_("Name (Empty)"));
         }
-        _createButton.SetSensitive(valid);
+        var valid = !_nameRow.GetText().Intersect(Path.GetInvalidPathChars().Union(Path.GetInvalidFileNameChars())).Any();
+        if (!valid)
+        {
+            _nameRow.AddCssClass("error");
+            _nameRow.SetTitle(_("Name (Invalid)"));
+        }
+        _createButton.SetSensitive(valid && !empty);
     }
 
     /// <summary>

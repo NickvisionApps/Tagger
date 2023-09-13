@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 22:13-0400\n"
+"POT-Creation-Date: 2023-09-13 06:12+0300\n"
 "PO-Revision-Date: 2023-08-13 09:57+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -136,7 +136,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1073
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1135
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1186
-#: NickvisionTagger.GNOME/Blueprints/window.blp:638
+#: NickvisionTagger.GNOME/Blueprints/window.blp:636
 msgid "Apply"
 msgstr "Toepassen"
 
@@ -481,11 +481,6 @@ msgstr "Bezig met laden van muziekbestanden…"
 msgid "Loading music files from playlist..."
 msgstr "Bezig met laden van muziekbestanden…"
 
-#: ../../../Models/LyricService.cs:90
-#, fuzzy, csharp-format
-msgid "lrc"
-msgstr "Songtekst"
-
 #: ../../../Models/MusicFile.cs:72
 #, fuzzy
 msgid "lyrics"
@@ -503,14 +498,18 @@ msgstr "MiB"
 msgid "MusicBrainz Recording Id"
 msgstr "MusicBrainz-opname-id"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:76
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:77
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:44
 #, fuzzy
 msgid "Name"
 msgstr "Bestandsnaam"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:80
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:82
 msgid "Name (Empty)"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:88
+msgid "Name (Invalid)"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1039
@@ -1304,11 +1303,11 @@ msgstr ""
 msgid "Toggle Tags Pane"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:633
+#: NickvisionTagger.GNOME/Blueprints/window.blp:631
 msgid "Tag Actions"
 msgstr "Tagacties"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:639
+#: NickvisionTagger.GNOME/Blueprints/window.blp:637
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Tagwijzigingen opslaan (Ctrl+S)"
 
@@ -1348,8 +1347,13 @@ msgstr ""
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:16
 msgid ""
-"— Create playlists for folders in many formats (m3u, pls, xspf, and more)"
+"— Open, manage, and create playlists in many formats (m3u, pls, xspf, and "
+"more)"
 msgstr ""
+
+#, fuzzy, csharp-format
+#~ msgid "lrc"
+#~ msgstr "Songtekst"
 
 #~ msgid "Music Folder"
 #~ msgstr "Muziekmap"

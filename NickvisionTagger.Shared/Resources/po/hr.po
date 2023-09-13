@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 22:13-0400\n"
+"POT-Creation-Date: 2023-09-13 06:12+0300\n"
 "PO-Revision-Date: 2023-07-29 14:02+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -136,7 +136,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1073
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1135
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1186
-#: NickvisionTagger.GNOME/Blueprints/window.blp:638
+#: NickvisionTagger.GNOME/Blueprints/window.blp:636
 msgid "Apply"
 msgstr "Primijeni"
 
@@ -479,11 +479,6 @@ msgstr "Učitavanje glazbenih datoteka iz mape …"
 msgid "Loading music files from playlist..."
 msgstr "Učitavanje glazbenih datoteka iz mape …"
 
-#: ../../../Models/LyricService.cs:90
-#, csharp-format
-msgid "lrc"
-msgstr ""
-
 #: ../../../Models/MusicFile.cs:72
 msgid "lyrics"
 msgstr ""
@@ -500,14 +495,18 @@ msgstr "MiB"
 msgid "MusicBrainz Recording Id"
 msgstr "ID oznaka MusicBrainz snimke"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:76
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:77
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:44
 #, fuzzy
 msgid "Name"
 msgstr "Ime datoteke"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:80
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:82
 msgid "Name (Empty)"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:88
+msgid "Name (Invalid)"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1039
@@ -1294,11 +1293,11 @@ msgstr "Kopiraj digitalni otisak u međuspremnik"
 msgid "Toggle Tags Pane"
 msgstr "Uklj./Isklj. ploču oznaka"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:633
+#: NickvisionTagger.GNOME/Blueprints/window.blp:631
 msgid "Tag Actions"
 msgstr "Radnje oznaka"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:639
+#: NickvisionTagger.GNOME/Blueprints/window.blp:637
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Primijeni promjene na oznaku (Ctrl+S)"
 
@@ -1341,7 +1340,8 @@ msgstr "– Pronađi informacije o datoteci koristeći MusicBrainz"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:16
 msgid ""
-"— Create playlists for folders in many formats (m3u, pls, xspf, and more)"
+"— Open, manage, and create playlists in many formats (m3u, pls, xspf, and "
+"more)"
 msgstr ""
 
 #~ msgid "Tagger has opened some files in read-only mode."

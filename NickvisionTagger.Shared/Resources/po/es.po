@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 22:13-0400\n"
+"POT-Creation-Date: 2023-09-13 06:12+0300\n"
 "PO-Revision-Date: 2023-09-12 10:22+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-"
@@ -136,7 +136,7 @@ msgstr "Se ha proporcionado un RecordingId no válido a MusicBrainz"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1073
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1135
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1186
-#: NickvisionTagger.GNOME/Blueprints/window.blp:638
+#: NickvisionTagger.GNOME/Blueprints/window.blp:636
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -469,11 +469,6 @@ msgstr "Cargando archivos de música desde la carpeta…"
 msgid "Loading music files from playlist..."
 msgstr "Cargando archivos de música desde la carpeta…"
 
-#: ../../../Models/LyricService.cs:90
-#, csharp-format
-msgid "lrc"
-msgstr "lrc"
-
 #: ../../../Models/MusicFile.cs:72
 msgid "lyrics"
 msgstr "letras"
@@ -490,14 +485,18 @@ msgstr "MiB"
 msgid "MusicBrainz Recording Id"
 msgstr "Id de grabación MusicBrainz"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:76
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:77
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:44
 #, fuzzy
 msgid "Name"
 msgstr "Nombre del archivo"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:80
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:82
 msgid "Name (Empty)"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:88
+msgid "Name (Invalid)"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1039
@@ -1287,11 +1286,11 @@ msgstr "Copiar firma al portapapeles"
 msgid "Toggle Tags Pane"
 msgstr "Conmutar panel de etiquetas"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:633
+#: NickvisionTagger.GNOME/Blueprints/window.blp:631
 msgid "Tag Actions"
 msgstr "Acciones de etiqueta"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:639
+#: NickvisionTagger.GNOME/Blueprints/window.blp:637
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Aplicar cambios a la etiqueta (Ctrl+S)"
 
@@ -1338,8 +1337,13 @@ msgstr "— Buscar información de archivos en MusicBrainz"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:16
 msgid ""
-"— Create playlists for folders in many formats (m3u, pls, xspf, and more)"
+"— Open, manage, and create playlists in many formats (m3u, pls, xspf, and "
+"more)"
 msgstr ""
+
+#, csharp-format
+#~ msgid "lrc"
+#~ msgstr "lrc"
 
 #~ msgid "Tagger has opened some files in read-only mode."
 #~ msgstr "Tagger ha abierto algunos archivos en modo de solo lectura."
