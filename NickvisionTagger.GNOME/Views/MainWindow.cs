@@ -1,3 +1,4 @@
+using Nickvision.Aura;
 using NickvisionTagger.GNOME.Controls;
 using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Controllers;
@@ -1182,7 +1183,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     SortBy.Album => musicFile.Album,
                     SortBy.Artist => musicFile.Artist,
                     SortBy.Genre => musicFile.Genre,
-                    SortBy.Path => Path.GetDirectoryName(musicFile.Path)!.Replace(_controller.MusicLibraryName, ""),
+                    SortBy.Path => Path.GetDirectoryName(musicFile.Path)!.Replace(_controller.MusicLibraryType == MusicLibraryType.Folder ? _controller.MusicLibraryName : UserDirectories.Home, ""),
                     SortBy.Year => musicFile.Year.ToString(),
                     _ => null
                 };

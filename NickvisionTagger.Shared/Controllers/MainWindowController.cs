@@ -72,6 +72,10 @@ public class MainWindowController : IDisposable
     /// </summary>
     public SortBy SortFilesBy => Configuration.Current.SortFilesBy;
     /// <summary>
+    /// The type of the music library
+    /// </summary>
+    public MusicLibraryType MusicLibraryType => _musicLibrary?.Type ?? MusicLibraryType.Folder;
+    /// <summary>
     /// The name of the music library
     /// </summary>
     public string MusicLibraryName => _musicLibrary?.Name ?? "";
