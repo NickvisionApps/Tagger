@@ -30,7 +30,7 @@ public enum AlbumArtType
 public class MainWindowController : IDisposable
 {
     private bool _disposed;
-    private string? _folderToLaunch;
+    private string? _libraryToLaunch;
     private MusicLibrary? _musicLibrary;
     private bool _forceAllowClose;
     private readonly string[] _genreSuggestions;
@@ -68,19 +68,19 @@ public class MainWindowController : IDisposable
     /// </summary>
     public Theme Theme => Configuration.Current.Theme;
     /// <summary>
-    /// What to sort files in a music folder by
+    /// What to sort files in a music library by
     /// </summary>
     public SortBy SortFilesBy => Configuration.Current.SortFilesBy;
     /// <summary>
-    /// The path of the music folder
+    /// The name of the music library
     /// </summary>
-    public string MusicFolderPath => _musicLibrary?.Path ?? "";
+    public string MusicLibraryName => _musicLibrary?.Name ?? "";
     /// <summary>
-    /// The list of all music files in the music folder
+    /// The list of all music files in the music library
     /// </summary>
     public List<MusicFile> MusicFiles => _musicLibrary?.MusicFiles ?? new List<MusicFile>();
     /// <summary>
-    /// The list of paths to corrupted music files in the music folder
+    /// The list of paths to corrupted music files in the music library
     /// </summary>
     public List<string> CorruptedFiles => _musicLibrary?.CorruptedFiles ?? new List<string>();
     
@@ -101,9 +101,9 @@ public class MainWindowController : IDisposable
     /// </summary>
     public event EventHandler<(int Value, int MaxValue, string Message)>? LoadingProgressUpdated;
     /// <summary>
-    /// Occurs when the music folder is updated
+    /// Occurs when the music library is updated
     /// </summary>
-    public event EventHandler<EventArgs>? MusicFolderUpdated;
+    public event EventHandler<EventArgs>? MusicLibraryUpdated;
     /// <summary>
     /// Occurs when a music file's save state is changed
     /// </summary>
@@ -118,7 +118,7 @@ public class MainWindowController : IDisposable
     /// </summary>
     public event EventHandler<EventArgs>? FingerprintCalculated;
     /// <summary>
-    /// Occurs when there are corrupted music files found in a music folder
+    /// Occurs when there are corrupted music files found in a music library
     /// </summary>
     public event EventHandler<EventArgs>? CorruptedFilesFound;
 
@@ -131,14 +131,14 @@ public class MainWindowController : IDisposable
         _disposed = false;
         if (args.Length > 0)
         {
-            var dir = args[0];
-            if (dir.StartsWith("file://"))
+            var path = args[0];
+            if (path.StartsWith("file://"))
             {
-                dir = dir.Remove(0, "file://".Length);
+                path = path.Remove(0, "file://".Length);
             }
-            if (Directory.Exists(dir))
+            if (Directory.Exists(path) || (File.Exists(path) && Enum.GetValues<PlaylistFormat>().Select(x => x.GetDotExtension()).Contains(Path.GetExtension(path))))
             {
-                _folderToLaunch = dir;
+                _libraryToLaunch = path;
             }
         }
         Aura.Init("org.nickvision.tagger", "Nickvision Tagger");
@@ -288,18 +288,18 @@ public class MainWindowController : IDisposable
     public async Task StartupAsync()
     {
         NetworkMonitor = await NetworkMonitor.NewAsync();
-        if (_folderToLaunch != null)
+        if (_libraryToLaunch != null)
         {
-            await OpenFolderAsync(_folderToLaunch);
-            _folderToLaunch = null;
+            await OpenLibraryAsync(_libraryToLaunch);
+            _libraryToLaunch = null;
         }
-        else if(Configuration.Current.RememberLastOpenedFolder && Directory.Exists(Configuration.Current.LastOpenedFolder))
+        else if(Configuration.Current.RememberLastOpenedFolder && Path.Exists(Configuration.Current.LastOpenedFolder))
         {
-            await OpenFolderAsync(Configuration.Current.LastOpenedFolder);
+            await OpenLibraryAsync(Configuration.Current.LastOpenedFolder);
         }
         else
         {
-            MusicFolderUpdated?.Invoke(this, EventArgs.Empty);
+            MusicLibraryUpdated?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -309,10 +309,10 @@ public class MainWindowController : IDisposable
     public void ForceAllowClose() => _forceAllowClose = true;
 
     /// <summary>
-    /// Opens a music folder
+    /// Opens a music library
     /// </summary>
-    /// <param name="path">The path to the music folder</param>
-    public async Task OpenFolderAsync(string path)
+    /// <param name="path">The path to the music library</param>
+    public async Task OpenLibraryAsync(string path)
     {
         _musicLibrary = new MusicLibrary(path)
         {
@@ -325,13 +325,13 @@ public class MainWindowController : IDisposable
             Configuration.Current.LastOpenedFolder = _musicLibrary.Path;
             Aura.Active.SaveConfig("config");
         }
-        await ReloadFolderAsync();
+        await ReloadLibraryAsync();
     }
 
     /// <summary>
-    /// Closes a music folder
+    /// Closes a music library
     /// </summary>
-    public void CloseFolder()
+    public void CloseLibrary()
     {
         _musicLibrary = null;
         _musicFileChangedFromUpdate.Clear();
@@ -343,13 +343,13 @@ public class MainWindowController : IDisposable
             Configuration.Current.LastOpenedFolder = "";
             Aura.Active.SaveConfig("config");
         }
-        MusicFolderUpdated?.Invoke(this, EventArgs.Empty);
+        MusicLibraryUpdated?.Invoke(this, EventArgs.Empty);
     }
 
     /// <summary>
-    /// Reloads the music folder
+    /// Reloads the music library
     /// </summary>
-    public async Task ReloadFolderAsync()
+    public async Task ReloadLibraryAsync()
     {
         if(_musicLibrary != null)
         {
@@ -363,8 +363,8 @@ public class MainWindowController : IDisposable
                 _musicFileChangedFromUpdate.Add(false);
                 MusicFileSaveStates.Add(true);
             }
-            MusicFolderUpdated?.Invoke(this, EventArgs.Empty);
-            if(Directory.Exists(_musicLibrary.Path))
+            MusicLibraryUpdated?.Invoke(this, EventArgs.Empty);
+            if(Path.Exists(_musicLibrary.Path))
             {
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Loaded {0} music file.", "Loaded {0} music files.", count, count), NotificationSeverity.Informational));
             }
@@ -376,7 +376,7 @@ public class MainWindowController : IDisposable
     }
 
     /// <summary>
-    /// Creates a playlist for the currency music folder
+    /// Creates a playlist for the current music library
     /// </summary>
     /// <param name="options">PlaylistOptions</param>
     public void CreatePlaylist(PlaylistOptions options)
@@ -393,7 +393,7 @@ public class MainWindowController : IDisposable
             }
             else if (_musicLibrary.MusicFiles.Count == 0)
             {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("No music files in folder."), NotificationSeverity.Error));
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("No music files in library."), NotificationSeverity.Error));
             }
             else if(_musicLibrary.CreatePlaylist(options, options.IncludeOnlySelectedFiles ? SelectedMusicFiles.Keys.ToList() : null))
             {
@@ -1315,10 +1315,10 @@ public class MainWindowController : IDisposable
             var sortingChanged = _musicLibrary.SortFilesBy != Configuration.Current.SortFilesBy;
             if(includeSubfoldersChanged || sortingChanged)
             {
-                LoadingStateUpdated?.Invoke(this, _("Loading music files from folder..."));
+                LoadingStateUpdated?.Invoke(this, _("Loading music files from library..."));
                 _musicLibrary.IncludeSubfolders = Configuration.Current.IncludeSubfolders;
                 _musicLibrary.SortFilesBy = Configuration.Current.SortFilesBy;
-                await ReloadFolderAsync();
+                await ReloadLibraryAsync();
             }
         }
     }

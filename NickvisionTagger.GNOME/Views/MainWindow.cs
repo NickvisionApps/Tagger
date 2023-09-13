@@ -52,7 +52,7 @@ public partial class MainWindow : Adw.ApplicationWindow
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
-    [Gtk.Connect] private readonly Gtk.Button _openFolderButton;
+    [Gtk.Connect] private readonly Gtk.Button _libraryButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
     [Gtk.Connect] private readonly Gtk.Label _selectionLabel;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
@@ -62,7 +62,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Label _loadingLabel;
     [Gtk.Connect] private readonly Gtk.ProgressBar _loadingProgressBar;
     [Gtk.Connect] private readonly Gtk.Label _loadingProgressLabel;
-    [Gtk.Connect] private readonly Adw.Flap _folderFlap;
+    [Gtk.Connect] private readonly Adw.Flap _libraryFlap;
     [Gtk.Connect] private readonly Adw.ViewStack _filesViewStack;
     [Gtk.Connect] private readonly Gtk.SearchEntry _musicFilesSearch;
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
@@ -287,7 +287,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             UpdateLoadingProgress(e);
             return false;
         });
-        _controller.MusicFolderUpdated += (sender, e) => GLib.Functions.IdleAdd(0, MusicFolderUpdated);
+        _controller.MusicLibraryUpdated += (sender, e) => GLib.Functions.IdleAdd(0, MusicLibraryUpdated);
         _controller.MusicFileSaveStatesChanged += (sender, e) => GLib.Functions.IdleAdd(0, () => MusicFileSaveStatesChanged(e));
         _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => GLib.Functions.IdleAdd(0, SelectedMusicFilesPropertiesChanged);
         _controller.FingerprintCalculated += (sender, e) => GLib.Functions.IdleAdd(0, UpdateFingerprint);
@@ -297,16 +297,21 @@ public partial class MainWindow : Adw.ApplicationWindow
         actOpenFolder.OnActivate += async (sender, e) => await OpenFolderAsync();
         AddAction(actOpenFolder);
         application.SetAccelsForAction("win.openFolder", new string[] { "<Ctrl>O" });
-        //Close Folder Action
-        var actCloseFolder = Gio.SimpleAction.New("closeFolder", null);
-        actCloseFolder.OnActivate += (sender, e) => _controller.CloseFolder();
-        AddAction(actCloseFolder);
-        application.SetAccelsForAction("win.closeFolder", new string[] { "<Ctrl>W" });
-        //Reload Folder Action
-        var actReloadFolder = Gio.SimpleAction.New("reloadFolder", null);
-        actReloadFolder.OnActivate += ReloadFolder;
-        AddAction(actReloadFolder);
-        application.SetAccelsForAction("win.reloadFolder", new string[] { "F5" });
+        //Open Playlist Action
+        var actOpenPlaylist = Gio.SimpleAction.New("openPlaylist", null);
+        actOpenPlaylist.OnActivate += async (sender, e) => await OpenPlaylistAsync();
+        AddAction(actOpenPlaylist);
+        application.SetAccelsForAction("win.openPlaylist", new string[] { "<Shift><Ctrl>O" });
+        //Close Library Action
+        var actCloseLibrary = Gio.SimpleAction.New("closeLibrary", null);
+        actCloseLibrary.OnActivate += (sender, e) => _controller.CloseLibrary();
+        AddAction(actCloseLibrary);
+        application.SetAccelsForAction("win.actCloseLibrary", new string[] { "<Ctrl>W" });
+        //Reload Library Action
+        var actReloadLibrary = Gio.SimpleAction.New("reloadLibrary", null);
+        actReloadLibrary.OnActivate += ReloadLibrary;
+        AddAction(actReloadLibrary);
+        application.SetAccelsForAction("win.reloadLibrary", new string[] { "F5" });
         //Create Playlist Action
         var actCreatePlaylist = Gio.SimpleAction.New("createPlaylist", null);
         actCreatePlaylist.OnActivate += CreatePlaylist;
@@ -457,7 +462,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _application.AddWindow(this);
         Present();
-        SetLoadingState(_("Loading music files from folder..."));
+        SetLoadingState(_("Loading music files from library..."));
         await _controller.StartupAsync();
         _controller.NetworkMonitor!.StateChanged += (sender, state) =>
         {
@@ -611,8 +616,8 @@ public partial class MainWindow : Adw.ApplicationWindow
             var path = file.GetPath() ?? "";
             if (Directory.Exists(path))
             {
-                SetLoadingState(_("Loading music files from folder..."));
-                _controller.OpenFolderAsync(path).Wait();
+                SetLoadingState(_("Loading music files from library..."));
+                _controller.OpenLibraryAsync(path).Wait();
                 return true;
             }
         }
@@ -630,17 +635,49 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             var file = await folderDialog.SelectFolderAsync(this);
             SetLoadingState(_("Loading music files from folder..."));
-            await _controller.OpenFolderAsync(file.GetPath());
+            await _controller.OpenLibraryAsync(file.GetPath());
+        }
+        catch { }
+    }
+    
+    /// <summary>
+    /// Occurs when the open playlist action is triggered
+    /// </summary>
+    private async Task OpenPlaylistAsync()
+    {
+        var fileDialog = Gtk.FileDialog.New();
+        fileDialog.SetTitle(_("Open Playlist"));
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        var filterAll = Gtk.FileFilter.New();
+        filterAll.SetName(_("All Files"));
+        foreach (var format in Enum.GetValues<PlaylistFormat>())
+        {
+            var filter = Gtk.FileFilter.New();
+            var extension = format.GetDotExtension();
+            filter.SetName($"{format.ToString()} (*{extension})");
+            filter.AddPattern($"*{extension}");
+            filter.AddPattern($"*{extension.ToUpper()}");
+            filterAll.AddPattern($"*{extension}");
+            filterAll.AddPattern($"*{extension.ToUpper()}");
+            filters.Append(filter);
+        }
+        filters.Insert(0, filterAll);
+        fileDialog.SetFilters(filters);
+        try
+        {
+            var file = await fileDialog.OpenAsync(this);
+            SetLoadingState(_("Loading music files from playlist..."));
+            await _controller.OpenLibraryAsync(file.GetPath());
         }
         catch { }
     }
 
     /// <summary>
-    /// Occurs when the reload folder action is triggered
+    /// Occurs when the reload library action is triggered
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void ReloadFolder(Gio.SimpleAction sender, EventArgs e)
+    private async void ReloadLibrary(Gio.SimpleAction sender, EventArgs e)
     {
         if (!_controller.CanClose)
         {
@@ -662,8 +699,8 @@ public partial class MainWindow : Adw.ApplicationWindow
                 }
                 if (ea.Response != "cancel")
                 {
-                    SetLoadingState(_("Loading music files from folder..."));
-                    await _controller.ReloadFolderAsync();
+                    SetLoadingState(_("Loading music files from library..."));
+                    await _controller.ReloadLibraryAsync();
                 }
                 dialog.Destroy();
             };
@@ -671,8 +708,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
-            SetLoadingState(_("Loading music files from folder..."));
-            await _controller.ReloadFolderAsync();
+            SetLoadingState(_("Loading music files from library..."));
+            await _controller.ReloadLibraryAsync();
         }
     }
 
@@ -683,7 +720,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void CreatePlaylist(Gio.SimpleAction sender, EventArgs e)
     {
-        var createPlaylistDialog = new CreatePlaylistDialog(this, _controller.AppInfo.ID, Path.GetFileName(_controller.MusicFolderPath));
+        var createPlaylistDialog = new CreatePlaylistDialog(this, _controller.AppInfo.ID, Path.GetFileName(_controller.MusicLibraryName));
         createPlaylistDialog.OnCreate += (s, po) => _controller.CreatePlaylist(po);
         createPlaylistDialog.Present();
     }
@@ -1113,9 +1150,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
-    /// Occurs when the music folder is updated
+    /// Occurs when the music library is updated
     /// </summary>
-    private bool MusicFolderUpdated()
+    private bool MusicLibraryUpdated()
     {
         _listMusicFiles.UnselectAll();
         foreach (var row in _listMusicFilesRows)
@@ -1123,7 +1160,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _listMusicFiles.Remove(row);
         }
         _listMusicFilesRows.Clear();
-        if (!string.IsNullOrEmpty(_controller.MusicFolderPath))
+        if (!string.IsNullOrEmpty(_controller.MusicLibraryName))
         {
             string? comparable = null;
             foreach (var musicFile in _controller.MusicFiles)
@@ -1145,7 +1182,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     SortBy.Album => musicFile.Album,
                     SortBy.Artist => musicFile.Artist,
                     SortBy.Genre => musicFile.Genre,
-                    SortBy.Path => Path.GetDirectoryName(musicFile.Path)!.Replace(_controller.MusicFolderPath, ""),
+                    SortBy.Path => Path.GetDirectoryName(musicFile.Path)!.Replace(_controller.MusicLibraryName, ""),
                     SortBy.Year => musicFile.Year.ToString(),
                     _ => null
                 };
@@ -1191,13 +1228,13 @@ public partial class MainWindow : Adw.ApplicationWindow
                 }
             }
             _headerBar.RemoveCssClass("flat");
-            _title.SetSubtitle(_controller.MusicFolderPath);
-            _openFolderButton.SetVisible(true);
+            _title.SetSubtitle(_controller.MusicLibraryName);
+            _libraryButton.SetVisible(true);
             _applyAction.SetEnabled(false);
             _tagActionsButton.SetSensitive(false);
-            _viewStack.SetVisibleChildName("Folder");
-            _folderFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
-            _folderFlap.SetRevealFlap(true);
+            _viewStack.SetVisibleChildName("Library");
+            _libraryFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
+            _libraryFlap.SetRevealFlap(true);
             _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
             _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
         }
@@ -1205,8 +1242,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _headerBar.AddCssClass("flat");
             _title.SetSubtitle("");
-            _viewStack.SetVisibleChildName("NoFolder");
-            _openFolderButton.SetVisible(false);
+            _viewStack.SetVisibleChildName("NoLibrary");
+            _libraryButton.SetVisible(false);
         }
         _selectionLabel.SetLabel(_("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count));
         return false;
@@ -1218,8 +1255,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="pending">Whether or not there are unsaved changes</param>
     private bool MusicFileSaveStatesChanged(bool pending)
     {
-        _viewStack.SetVisibleChildName("Folder");
-        _openFolderButton.SetVisible(true);
+        _viewStack.SetVisibleChildName("Library");
+        _libraryButton.SetVisible(true);
         _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
         _applyAction.SetEnabled(pending);
         _tagActionsButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
@@ -1544,11 +1581,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
-    /// Occurs when there are corrupted music files found in a music folder
+    /// Occurs when there are corrupted music files found in a music library
     /// </summary>
     private bool CorruptedFilesFound()
     {
-        var dialog = new CorruptedFilesDialog(this, _controller.AppInfo.ID, _controller.MusicFolderPath, _controller.CorruptedFiles);
+        var dialog = new CorruptedFilesDialog(this, _controller.AppInfo.ID, _controller.MusicLibraryName, _controller.CorruptedFiles);
         dialog.Present();
         return false;
     }

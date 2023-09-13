@@ -8,6 +8,21 @@ menu mainMenu {
   item(_("About Tagger"), "win.about")
 }
 
+menu libraryMenu {
+   section {
+     item(_("Open Folder"), "win.openFolder")
+     item(_("Open Playlist"), "win.openPlaylist")
+   }
+   
+   section {
+     item(_("Reload Library"), "win.reloadLibrary")
+   }
+   
+   section {
+      item(_("Create Playlist"), "win.createPlaylist")
+    }
+}
+
 menu tagActionsMenu {
   section {
     item(_("Discard Unapplied Changes"), "win.discardUnappliedChanges")
@@ -67,14 +82,14 @@ Adw.ApplicationWindow _root {
       title-widget: Adw.WindowTitle _title {};
       
       [start]
-      Gtk.Button _openFolderButton {
-        tooltip-text: _("Open Music Folder (Ctrl+O)");
+      Gtk.MenuButton _libraryButton {
+        tooltip-text: _("Library Menu");
         visible: false;
-        action-name: "win.openFolder";
+        menu-model: libraryMenu;
 
         Adw.ButtonContent {
-          label: _("Open");
-          icon-name: "folder-open-symbolic";
+          label: _("Library");
+          icon-name: "library-music-symbolic";
         }
       }
       
@@ -95,16 +110,44 @@ Adw.ApplicationWindow _root {
       
       Adw.ViewStack _viewStack {
         Adw.ViewStackPage {
-          name: "NoFolder";
+          name: "NoLibrary";
           child: Adw.StatusPage {
             icon-name: "org.nickvision.tagger";
             title: _("Tag Your Music");
-            description: _("Open a folder with music to get started");
-            child: Gtk.Button {
-              label: _("Open Folder");
+            description: _("Open a library with music to get started");
+            child: Gtk.FlowBox {
+              column-spacing: 4;
+              row-spacing: 4;
+              max-children-per-line: 2;
+              homogeneous: true;
               halign: center;
-              action-name: "win.openFolder";
-              styles ["pill", "suggested-action"]
+              selection-mode: none;
+              
+              Gtk.FlowBoxChild {
+                focusable: false;
+                
+                Gtk.Button {
+                  label: _("Open Folder");
+                  tooltip-text: _("Open Folder (Ctrl+O)");
+                  action-name: "win.openFolder";
+                  halign: center;
+                  
+                  styles ["pill", "suggested-action"]
+                }
+              }
+              
+              Gtk.FlowBoxChild {
+                focusable: false;
+                
+                Gtk.Button {
+                  label: _("Open Playlist");
+                  tooltip-text: _("Open Playlist (Ctrl+Shift+O)");
+                  action-name: "win.openPlaylist";
+                  halign: center;
+                  
+                  styles ["pill"]
+                }
+              }
             };
             
             styles ["icon-dropshadow"]
@@ -141,10 +184,10 @@ Adw.ApplicationWindow _root {
         }
 
         Adw.ViewStackPage {
-          name: "Folder";
+          name: "Library";
           child: Gtk.Box {
             orientation: vertical;
-            Adw.Flap _folderFlap {
+            Adw.Flap _libraryFlap {
               flap-position: start;
 
               [flap]
@@ -156,7 +199,7 @@ Adw.ApplicationWindow _root {
                   child: Adw.StatusPage {
                     icon-name: "library-music-symbolic";
                     title: _("No Music Files Found");
-                    description: _("Try a different folder");
+                    description: _("Try a different library");
                   };
                 }
 
@@ -564,20 +607,8 @@ Adw.ApplicationWindow _root {
                 Gtk.ToggleButton _flapToggleButton {
                   icon-name: "sidebar-show-symbolic";
                   tooltip-text: _("Toggle Tags Pane");
-                  active: bind _folderFlap.reveal-flap bidirectional;
+                  active: bind _libraryFlap.reveal-flap bidirectional;
                   sensitive: false;
-                }
-
-                Gtk.Button {
-                  tooltip-text: _("Reload Music Folder (F5)");
-                  icon-name: "view-refresh-symbolic";
-                  action-name: "win.reloadFolder";
-                }
-                
-                Gtk.Button {
-                  tooltip-text: _("Create Playlist");
-                  icon-name: "playlist-symbolic";
-                  action-name: "win.createPlaylist";
                 }
               }
 

@@ -53,6 +53,12 @@ public class MusicLibrary : IDisposable
     /// A list of genres in the library
     /// </summary>
     public List<string> Genres { get; init;  }
+
+    /// <summary>
+    /// The name of the library
+    /// </summary>
+    /// <remarks>Path for folder, file name for playlist</remarks>
+    public string Name => Type == MusicLibraryType.Folder ? Path : System.IO.Path.GetFileNameWithoutExtension(Path);
     
     /// <summary>
     /// Occurs when the loading progress is updated
