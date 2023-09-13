@@ -1344,25 +1344,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _insertAlbumArtAction.SetEnabled(true);
         _removeAlbumArtAction.SetEnabled(_artViewStack.GetVisibleChildName() != "NoImage");
         _exportAlbumArtAction.SetEnabled(albumArt == "hasArt");
-        if (_controller.SelectedMusicFiles.Count == 1)
-        {
-            _filenameRow.SetEditable(false);
-            _titleRow.SetEditable(false);
-            _artistRow.SetEditable(false);
-            _albumRow.SetEditable(false);
-            _yearRow.SetEditable(false);
-            _trackRow.SetEditable(false);
-            _trackTotalRow.SetEditable(false);
-            _albumArtistRow.SetEditable(false);
-            _genreRow.SetEditable(false);
-            _commentRow.SetEditable(false);
-            _bpmRow.SetEditable(false);
-            _composerRow.SetEditable(false);
-            _descriptionRow.SetEditable(false);
-            _publisherRow.SetEditable(false);
-            _insertAlbumArtAction.SetEnabled(false);
-            _removeAlbumArtAction.SetEnabled(false);
-        }
         //Update Custom Properties
         foreach (var row in _customPropertyRows)
         {
