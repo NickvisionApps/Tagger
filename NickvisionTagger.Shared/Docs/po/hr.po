@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-02 23:08-0400\n"
+"POT-Creation-Date: 2023-09-12 22:13-0400\n"
 "PO-Revision-Date: 2023-07-29 14:02+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
@@ -61,13 +61,15 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:28
-msgid "Remember Last Opened Folder"
+#, fuzzy
+msgid "Remember Last Opened Library"
 msgstr "Zapamti zadnju otvorenu mapu"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:29
+#, fuzzy
 msgid ""
-"Whether or not to remember the previously used music folder and reopen it "
+"Whether or not to remember the previously used music library and reopen it "
 "when Tagger starts the next time."
 msgstr ""
 "Da li zapamtiti prethodno korištenu mapu s glazbom i ponovo je otvoriti kada "
@@ -917,8 +919,9 @@ msgid ""
 "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</"
 "link> for its backend to read and write metadata."
 msgstr ""
-"Tagger koristi <link href=\"https://github.com/Zeugma440/atldotnet"
-"\">atldotnet</link> kao pozadinski sustav za čitanje i pisanje metapodataka."
+"Tagger koristi <link href=\"https://github.com/Zeugma440/"
+"atldotnet\">atldotnet</link> kao pozadinski sustav za čitanje i pisanje "
+"metapodataka."
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
