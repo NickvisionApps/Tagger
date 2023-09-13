@@ -612,15 +612,13 @@ Adw.ApplicationWindow _root {
                   active: bind _libraryFlap.reveal-flap bidirectional;
                   sensitive: false;
                 }
-              }
 
-              [center]
-              Gtk.Label _selectionLabel {
-                hexpand: true;
-                justify: center;
-                wrap: true;
-                
-                styles ["dim-label"]
+                Gtk.Label _selectionLabel {
+                  margin-start: 2;
+                  wrap: true;
+
+                  styles ["dim-label"]
+                }
               }
 
               [end]
