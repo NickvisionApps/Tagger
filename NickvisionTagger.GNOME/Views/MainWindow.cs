@@ -1337,9 +1337,13 @@ public partial class MainWindow : Adw.ApplicationWindow
                     SortBy.Year => musicFile.Year.ToString(),
                     _ => null
                 };
+                if (!string.IsNullOrEmpty(compareTo) && compareTo[0] == Path.DirectorySeparatorChar)
+                {
+                    compareTo = compareTo.Remove(0, 1);
+                }
                 if (compareTo == string.Empty)
                 {
-                    compareTo = _controller.SortFilesBy != SortBy.Path ? _("Unknown") : "/";
+                    compareTo = _controller.SortFilesBy != SortBy.Path ? _("Unknown") : "";
                 }
                 if (comparable != compareTo)
                 {
