@@ -409,6 +409,25 @@ public class MainWindowController : IDisposable
             }
         }
     }
+    
+    /// <summary>
+    /// Adds a music file to the playlist
+    /// </summary>
+    public async Task AddFileToPlaylist(string path)
+    {
+        if (_musicLibrary != null && _musicLibrary.Type == MusicLibraryType.Playlist && File.Exists(path) && MusicLibrary.SupportedExtensions.Contains(Path.GetExtension(path).ToLower()))
+        {
+            if (_musicLibrary.AddFileToPlaylist(path))
+            {
+                await ReloadLibraryAsync();
+            }
+            else
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to add file to playlist. File may already exist in playlist."), NotificationSeverity.Error));
+                MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
+            }
+        }
+    }
 
     /// <summary>
     /// Removes the selected files from the playlist

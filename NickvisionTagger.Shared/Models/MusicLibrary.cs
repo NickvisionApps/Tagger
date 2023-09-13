@@ -21,10 +21,13 @@ public enum MusicLibraryType
 /// </summary>
 public class MusicLibrary : IDisposable
 {
-    private static readonly string[] _supportedExtensions;
-    
     private bool _disposed;
     private IPlaylistIO? _playlist;
+    
+    /// <summary>
+    /// An array of supported extensions by Tagger
+    /// </summary>
+    public static string[] SupportedExtensions { get; }
     
     /// <summary>
     /// The type of the music library
@@ -71,7 +74,7 @@ public class MusicLibrary : IDisposable
     /// </summary>
     static MusicLibrary()
     {
-        _supportedExtensions = new string[]
+        SupportedExtensions = new string[]
         {
             ".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav",
             ".aac", ".aax", ".aa", ".aif", ".aiff", ".aifc", ".dsd", ".dsf", ".ac3", 
@@ -162,8 +165,8 @@ public class MusicLibrary : IDisposable
         {
             var files = Type switch
             {
-                MusicLibraryType.Folder => Directory.GetFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Where(x => _supportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
-                MusicLibraryType.Playlist => _playlist!.FilePaths.Where(x => File.Exists(x) && _supportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
+                MusicLibraryType.Folder => Directory.GetFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Where(x => SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
+                MusicLibraryType.Playlist => _playlist!.FilePaths.Where(x => File.Exists(x) && SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
                 _ => new List<string>()
             };
             var i = 0;
@@ -223,6 +226,27 @@ public class MusicLibrary : IDisposable
             paths.AddRange(MusicFiles.Select(x => x.Path));
         }
         playlist.FilePaths = paths;
+        return true;
+    }
+    
+    /// <summary>
+    /// Adds a file to the playlist
+    /// </summary>
+    /// <param name="path">The path to the music folder</param>
+    /// <returns>True if success, else false</returns>
+    public bool AddFileToPlaylist(string path)
+    {
+        if (Type != MusicLibraryType.Playlist || !File.Exists(path) || !SupportedExtensions.Contains(System.IO.Path.GetExtension(path).ToLower()))
+        {
+            return false;
+        }
+        var paths = _playlist!.FilePaths;
+        if (paths.Contains(path))
+        {
+            return false;
+        }
+        paths.Add(path);
+        _playlist.FilePaths = paths;
         return true;
     }
 

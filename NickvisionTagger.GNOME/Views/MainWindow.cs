@@ -745,9 +745,67 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private void AddToPlaylist(Gio.SimpleAction sender, EventArgs e)
+    private async void AddToPlaylist(Gio.SimpleAction sender, EventArgs e)
     {
-        
+        var fileDialog = Gtk.FileDialog.New();
+        fileDialog.SetTitle(_("Open Music File"));
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        var filterAll = Gtk.FileFilter.New();
+        filterAll.SetName(_("All Files"));
+        foreach (var ext in MusicLibrary.SupportedExtensions)
+        {
+            var filter = Gtk.FileFilter.New();
+            filter.SetName($"{ext.Replace(".", "").ToUpper()} (*{ext})");
+            filter.AddPattern($"*{ext}");
+            filter.AddPattern($"*{ext.ToUpper()}");
+            filterAll.AddPattern($"*{ext}");
+            filterAll.AddPattern($"*{ext.ToUpper()}");
+            filters.Append(filter);
+        }
+        filters.Insert(0, filterAll);
+        fileDialog.SetFilters(filters);
+        try
+        {
+            var file = await fileDialog.OpenAsync(this);
+            if (!_controller.CanClose)
+            {
+                var applyDialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
+                applyDialog.SetIconName(_controller.AppInfo.ID);
+                applyDialog.AddResponse("cancel", _("Cancel"));
+                applyDialog.SetDefaultResponse("cancel");
+                applyDialog.SetCloseResponse("cancel");
+                applyDialog.AddResponse("discard", _("Discard"));
+                applyDialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
+                applyDialog.AddResponse("apply", _("Apply"));
+                applyDialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
+                applyDialog.OnResponse += async (ss, eaa) =>
+                {
+                    if (eaa.Response == "apply")
+                    {
+                        SetLoadingState(_("Saving tags..."));
+                        await _controller.SaveAllTagsAsync(false);
+                    }
+                    if (eaa.Response == "discard")
+                    {
+                        SetLoadingState(_("Discarding tags..."));
+                        await _controller.DiscardSelectedUnappliedChangesAsync();
+                    }
+                    if (eaa.Response != "cancel")
+                    {
+                        SetLoadingState(_("Loading music file..."));
+                        await _controller.AddFileToPlaylist(file.GetPath());
+                    }
+                    applyDialog.Destroy();
+                };
+                applyDialog.Present();
+            }
+            else
+            {
+                SetLoadingState(_("Loading music file..."));
+                await _controller.AddFileToPlaylist(file.GetPath());
+            }
+        }
+        catch { }
     }
     
     /// <summary>
