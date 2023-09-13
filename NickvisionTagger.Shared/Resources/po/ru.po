@@ -8,23 +8,23 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-13 06:12+0300\n"
-"PO-Revision-Date: 2023-08-17 05:59+0000\n"
-"Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/ru/>\n"
+"PO-Revision-Date: 2023-09-13 11:10+0000\n"
+"Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1406
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1437
 #, csharp-format
 msgid "{0} of {1} selected"
-msgstr ""
+msgstr "Выбрано {0} из {1}"
 
 #: ../../../Controllers/MainWindowController.cs:195
 msgid "%artist%- %title%"
@@ -122,9 +122,8 @@ msgstr "альбомартист"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:754
-#, fuzzy
 msgid "All Files"
-msgstr "Выберите несколько файлов"
+msgstr "Все файлы"
 
 #: ../../../Controllers/MainWindowController.cs:1027
 msgid "An invalid RecordingId was provided to MusicBrainz"
@@ -499,11 +498,11 @@ msgstr "Имя файла"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:82
 msgid "Name (Empty)"
-msgstr ""
+msgstr "Имя (пусто)"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:88
 msgid "Name (Invalid)"
-msgstr ""
+msgstr "Имя (неправильное)"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1039
 msgid "New Custom Property"
@@ -520,7 +519,7 @@ msgstr "Nicholas Logozzo"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:826
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 #: ../../../Controllers/MainWindowController.cs:1025
 msgid "No AcoustId entry found for the file's fingerprint"
@@ -588,7 +587,7 @@ msgstr "Файлы"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:14
 #: NickvisionTagger.GNOME/Blueprints/window.blp:145
 msgid "Open Playlist"
-msgstr ""
+msgstr "Открыть плейлист"
 
 #: ../../../Controllers/MainWindowController.cs:404
 #, fuzzy
@@ -597,7 +596,7 @@ msgstr "Теги успешно сохранены."
 
 #: ../../../Controllers/MainWindowController.cs:392
 msgid "Playlist name can not be empty."
-msgstr ""
+msgstr "Имя плейлиста не должно быть пустым."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:915
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:934
@@ -620,9 +619,8 @@ msgid "Remove Custom Property"
 msgstr "Удалить пользовательское свойство"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:824
-#, fuzzy
 msgid "Remove Files?"
-msgstr "Удалить лирику"
+msgstr "Удалить файлы?"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:183
 msgid "Remove Lyric"
@@ -709,6 +707,8 @@ msgid ""
 "The selected files will not be deleted from disk but will be removed from "
 "this playlist."
 msgstr ""
+"Выбранные файлы будут удалены только из этого плейлиста, но останутся на "
+"диске."
 
 #: ../../../Controllers/MainWindowController.cs:1028
 msgid "This file does not have a valid fingerprint"
@@ -754,12 +754,11 @@ msgstr "Давид Лапшин <ddaudix@gmail.com>, 2023"
 
 #: ../../../Controllers/MainWindowController.cs:426
 msgid "Unable to add file to playlist. File may already exist in playlist."
-msgstr ""
+msgstr "Не удалось добавить файл в плейлист. Возможно, он уже добавлен."
 
 #: ../../../Controllers/MainWindowController.cs:408
-#, fuzzy
 msgid "Unable to create playlist."
-msgstr "Невозможно сохранить {0}."
+msgstr "Не удалось создать плейлист."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:345
 msgid "Unable to export to LRC."
@@ -774,9 +773,8 @@ msgid "Unable to load image file"
 msgstr "Не удалось загрузить файл изображения"
 
 #: ../../../Controllers/MainWindowController.cs:441
-#, fuzzy
 msgid "Unable to remove some files from playlist."
-msgstr "Невозможно сохранить {0}."
+msgstr "Не удалось удалить некоторые файлы из плейлиста."
 
 #: ../../../Controllers/MainWindowController.cs:680
 #, csharp-format
@@ -794,7 +792,7 @@ msgstr "Невозможно отправить заявку на AcoustId. Пр
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1346
 msgid "Unknown"
-msgstr ""
+msgstr "Неизвестен"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:284
 msgid "Use LRC's lyrics"
@@ -817,7 +815,7 @@ msgstr "год"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:829
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: NickvisionTagger.GNOME/Blueprints/autocomplete_box.blp:15
 msgid "Suggestions"
@@ -837,11 +835,12 @@ msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:26
 msgid "Playlist"
-msgstr ""
+msgstr "Плейлист"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:36
+#, fuzzy
 msgid "Tagger will store files to the playlist via their full path on disk."
-msgstr ""
+msgstr "Tagger будет хранить файлы в плейлисте по их полному пути на диске."
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:48
 #, fuzzy
@@ -855,7 +854,7 @@ msgstr "Нет выбранных музыкальных файлов"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:75
 msgid "Create"
-msgstr ""
+msgstr "Создать"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:32
 #: NickvisionTagger.GNOME/Blueprints/window.blp:442
@@ -868,7 +867,7 @@ msgstr "Настроить"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:42
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:50
 msgid "Unsynchronized"
@@ -894,7 +893,7 @@ msgstr "Смещение (в миллисекундах)"
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:88
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:116
 msgid "Edit"
-msgstr ""
+msgstr "Редактировать"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:137
 msgid "Clear All Lyrics"
@@ -1022,8 +1021,9 @@ msgstr ""
 "найденными из MusicBrainz."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:131
+#, fuzzy
 msgid "Overwrite Lyrics From Web Service"
-msgstr ""
+msgstr "Перезаписать текст из веб-службы"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:132
 #, fuzzy
@@ -1050,27 +1050,27 @@ msgstr "Файлы"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:26
 msgid "Close Library"
-msgstr ""
+msgstr "Закрыть библиотеку"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:31
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
 msgid "Reload Library"
-msgstr ""
+msgstr "Перезагрузить библиотеку"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:36
 #: NickvisionTagger.GNOME/Blueprints/window.blp:22
 msgid "Create Playlist"
-msgstr ""
+msgstr "Создать плейлист"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:41
 #: NickvisionTagger.GNOME/Blueprints/window.blp:23
 msgid "Add to Playlist"
-msgstr ""
+msgstr "Добавить в плейлист"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:46
 #: NickvisionTagger.GNOME/Blueprints/window.blp:24
 msgid "Remove from Playlist"
-msgstr ""
+msgstr "Удалить из плейлиста"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:52
 msgctxt "Shortcut"
@@ -1176,11 +1176,11 @@ msgstr "Экспортировать"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:88
 msgid "Library Menu"
-msgstr ""
+msgstr "Меню библиотеки"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:93
 msgid "Library"
-msgstr ""
+msgstr "Библиотека"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:102
 msgid "Main Menu"
@@ -1202,7 +1202,7 @@ msgstr "Открыть папку с музыкой (Ctrl+O)"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:146
 msgid "Open Playlist (Ctrl+Shift+O)"
-msgstr ""
+msgstr "Открыть плейлист (Ctrl+Shift+O)"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:203
 msgid "No Music Files Found"
