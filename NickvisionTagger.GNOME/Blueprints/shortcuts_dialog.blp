@@ -7,25 +7,44 @@ Gtk.ShortcutsWindow _shortcuts {
   modal: true;
   resizable: true;
   destroy-with-parent: false;
-  hide-on-close: true;
 
   Gtk.ShortcutsSection {
     Gtk.ShortcutsGroup {
-      title: C_("Shortcut", "Music Folder");
+      title: C_("Shortcut", "Music Library");
 
       Gtk.ShortcutsShortcut {
         title: _("Open Folder");
         accelerator: "<Control>o";
       }
+      
+      Gtk.ShortcutsShortcut {
+        title: _("Open Playlist");
+        accelerator: "<Shift><Control>o";
+      }
 
       Gtk.ShortcutsShortcut {
-        title: _("Close Folder");
+        title: _("Close Library");
         accelerator: "<Control>w";
       }
 
       Gtk.ShortcutsShortcut {
-        title: _("Reload Folder");
+        title: _("Reload Library");
         accelerator: "F5";
+      }
+      
+      Gtk.ShortcutsShortcut {
+        title: _("Create Playlist");
+        accelerator: "<Ctrl>p";
+      }
+            
+      Gtk.ShortcutsShortcut {
+        title: _("Add to Playlist");
+        accelerator: "<Alt>o";
+      }
+                  
+      Gtk.ShortcutsShortcut {
+        title: _("Remove from Playlist");
+        accelerator: "<Alt>Delete";
       }
     }
 

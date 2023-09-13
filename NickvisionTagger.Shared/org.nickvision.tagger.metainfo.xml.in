@@ -7,10 +7,13 @@
   <developer_name>Nickvision</developer_name>
   <summary>Tag your music</summary>
   <description>
+    <p>— Support for many music file types (mp3, ogg, flac, wma, wav, and more)</p>
     <p>— Edit tags and album art of multiple files, even across subfolders, all at once</p>
-    <p>— Support for multiple music file types (mp3, ogg, flac, wma, and wav)</p>
+    <p>— Edit unsynchronized and synchronized lyrics for a file (with LRC import and export support)</p>
     <p>— Convert filenames to tags and tags to filenames with ease</p>
     <p>— Lookup file information using MusicBrainz</p>
+    <p>— Lookup lyric information using Music163 and Letras</p>
+    <p>— Open, manage, and create playlists in many formats (m3u, pls, xspf, and more)</p>
   </description>
   <launchable type="desktop-id">org.nickvision.tagger.desktop</launchable>
   <screenshots>
@@ -38,7 +41,10 @@
   <releases>
     <release version="2023.9.1-next" date="2023-09-06">
       <description translatable="no">
+        <p>- Added the ability to open, manage, and create playlists within Tagger. As a result, the ""Music Folder"" has now become the ""Music Library"" that can be opened from a folder or a supported playlist file</p>
+        <p>- Synchronized lyric timestamps will now be shown in the mm:ss.xx format as per the LRC specification. When creating a new lryic, both hh:mm:ss and mm:ss.xx can be specified and Tagger will convert them appropriately</p>
         <p>- Tagger will display headers in the list of music files when sorting to provide a more organized view of files</p>
+        <p>- Fixes an issue where lrc files were not importing correctly</p>
         <p>- Updated translations (Thanks everyone on Weblate!)</p>
       </description>
     </release>

@@ -34,7 +34,10 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
-            @"* Tagger will display headers in the list of music files when sorting to provide a more organized view of files
+            @"* Added the ability to open, manage, and create playlists within Tagger. As a result, the ""Music Folder"" has now become the ""Music Library"" that can be opened from a folder or a supported playlist file
+              * Synchronized lyric timestamps will now be shown in the mm:ss.xx format as per the LRC specification. When creating a new lryic, both hh:mm:ss and mm:ss.xx can be specified and Tagger will convert them appropriately
+              * Tagger will display headers in the list of music files when sorting to provide a more organized view of files
+              * Fixes an issue where lrc files were not importing correctly
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))

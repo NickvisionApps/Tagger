@@ -1,0 +1,91 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.Window _root {
+  default-width: 400;
+  width-request: 320;
+  modal: true;
+  resizable: true;
+  default-widget: _createButton;
+
+  content: Gtk.Box {
+    orientation: vertical;
+
+    Adw.HeaderBar {
+      title-widget: Gtk.Label { };
+
+      styles ["flat"]
+    }
+
+    Gtk.WindowHandle {
+      Gtk.Box {
+        orientation: vertical;
+        spacing: 24;
+
+        Gtk.Label {
+          label: _("Playlist");
+          
+          styles ["title-2"]
+        }
+        
+        Gtk.Label {
+          wrap: true;
+          margin-start: 12;
+          margin-end: 12;
+          justify: center;
+          label: _("Tagger will store files to the playlist via their full path on disk.");
+        }
+      
+        Adw.PreferencesGroup {
+          margin-start: 24;
+          margin-end: 24;
+          
+          Adw.EntryRow _nameRow {
+            title: _("Name");
+          }
+          
+          Adw.ComboRow _formatRow {
+            title: _("Format");
+            model: Gtk.StringList {
+              strings ["M3U", "PLS", "FPL", "XSPF", "SMIL", "ASX", "B4S", "DPL"]
+            };
+          }
+          
+          Adw.ActionRow {
+            title: _("Include Only Selected Files");
+            activatable-widget: _selectedFilesOnlySwitch;
+            
+            [suffix]
+            Gtk.Switch _selectedFilesOnlySwitch {
+              valign: center;
+            }
+          }
+        }
+        
+        Gtk.Box {
+          orientation: horizontal;
+          spacing: 24;
+          halign: center;
+          homogeneous: true;
+          margin-top: 24;
+          margin-bottom: 24;
+
+          Gtk.Button _createButton {
+            valign: center;
+            label: _("Create");
+            sensitive: false;
+
+            styles ["pill", "suggested-action"]
+          }
+        }
+      }
+    }
+  };
+
+  Gtk.ShortcutController {
+    Gtk.Shortcut {
+      trigger: "Escape";
+      action: "action(window.close)";
+    }
+  }
+}
