@@ -417,7 +417,10 @@ public class MainWindowController : IDisposable
     {
         if (_musicLibrary != null && _musicLibrary.Type == MusicLibraryType.Playlist && SelectedMusicFiles.Count > 0)
         {
-            _musicLibrary.RemoveFilesFromPlaylist(SelectedMusicFiles.Select(x => x.Key).ToList());
+            if (!_musicLibrary.RemoveFilesFromPlaylist(SelectedMusicFiles.Select(x => x.Key).ToList()))
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to remove some files from playlist."), NotificationSeverity.Warning));
+            }
             await ReloadLibraryAsync();
         }
     }
