@@ -1333,7 +1333,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     SortBy.Album => musicFile.Album,
                     SortBy.Artist => musicFile.Artist,
                     SortBy.Genre => musicFile.Genre,
-                    SortBy.Path => Path.GetDirectoryName(musicFile.Path)!.Replace(_controller.MusicLibraryType == MusicLibraryType.Folder ? _controller.MusicLibraryName : UserDirectories.Home, ""),
+                    SortBy.Path => Path.GetDirectoryName(musicFile.Path)!.Replace(_controller.MusicLibraryType == MusicLibraryType.Folder ? _controller.MusicLibraryName : UserDirectories.Home, _controller.MusicLibraryType == MusicLibraryType.Folder ? "" : "~"),
                     SortBy.Year => musicFile.Year.ToString(),
                     _ => null
                 };
