@@ -35,6 +35,9 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.DropTarget _dropTarget;
+    private readonly Gio.SimpleAction _createPlaylistAction;
+    private readonly Gio.SimpleAction _addToPlaylistAction;
+    private readonly Gio.SimpleAction _removeFromPlaylistAction;
     private readonly Gio.SimpleAction _applyAction;
     private readonly Gio.SimpleAction _insertAlbumArtAction;
     private readonly Gio.SimpleAction _removeAlbumArtAction;
@@ -314,9 +317,20 @@ public partial class MainWindow : Adw.ApplicationWindow
         AddAction(actReloadLibrary);
         application.SetAccelsForAction("win.reloadLibrary", new string[] { "F5" });
         //Create Playlist Action
-        var actCreatePlaylist = Gio.SimpleAction.New("createPlaylist", null);
-        actCreatePlaylist.OnActivate += CreatePlaylist;
-        AddAction(actCreatePlaylist);
+        _createPlaylistAction = Gio.SimpleAction.New("createPlaylist", null);
+        _createPlaylistAction.OnActivate += CreatePlaylist;
+        AddAction(_createPlaylistAction);
+        application.SetAccelsForAction("win.createPlaylist", new string[] { "<Ctrl>P" });
+        //Add To Playlist Action
+        _addToPlaylistAction = Gio.SimpleAction.New("addToPlaylist", null);
+        _addToPlaylistAction.OnActivate += AddToPlaylist;
+        AddAction(_addToPlaylistAction);
+        application.SetAccelsForAction("win.addToPlaylist", new string[] { "<Alt>O" });
+        //Remove From Playlist Action
+        _removeFromPlaylistAction = Gio.SimpleAction.New("removeFromPlaylist", null);
+        _removeFromPlaylistAction.OnActivate += RemoveFromPlaylist;
+        application.SetAccelsForAction("win.removeFromPlaylist", new string[] { "<Alt>Delete" });
+        AddAction(_removeFromPlaylistAction);
         //Apply Action
         _applyAction = Gio.SimpleAction.New("apply", null);
         _applyAction.OnActivate += Apply;
@@ -715,7 +729,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
-    /// Occurs when the create playlist action is triggered
+    /// Occurs when the remove to playlist action is triggered
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
@@ -724,6 +738,26 @@ public partial class MainWindow : Adw.ApplicationWindow
         var createPlaylistDialog = new CreatePlaylistDialog(this, _controller.AppInfo.ID, Path.GetFileName(_controller.MusicLibraryName));
         createPlaylistDialog.OnCreate += (s, po) => _controller.CreatePlaylist(po);
         createPlaylistDialog.Present();
+    }
+    
+    /// <summary>
+    /// Occurs when the create playlist action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void AddToPlaylist(Gio.SimpleAction sender, EventArgs e)
+    {
+        
+    }
+    
+    /// <summary>
+    /// Occurs when the add to playlist action is triggered
+    /// </summary>
+    /// <param name="sender">Gio.SimpleAction</param>
+    /// <param name="e">EventArgs</param>
+    private void RemoveFromPlaylist(Gio.SimpleAction sender, EventArgs e)
+    {
+        
     }
 
     /// <summary>
@@ -1231,6 +1265,9 @@ public partial class MainWindow : Adw.ApplicationWindow
             _headerBar.RemoveCssClass("flat");
             _title.SetSubtitle(_controller.MusicLibraryName);
             _libraryButton.SetVisible(true);
+            _createPlaylistAction.SetEnabled(_controller.MusicLibraryType == MusicLibraryType.Folder);
+            _addToPlaylistAction.SetEnabled(_controller.MusicLibraryType == MusicLibraryType.Playlist);
+            _removeFromPlaylistAction.SetEnabled(_controller.MusicLibraryType == MusicLibraryType.Playlist);
             _applyAction.SetEnabled(false);
             _tagActionsButton.SetSensitive(false);
             _viewStack.SetVisibleChildName("Library");
