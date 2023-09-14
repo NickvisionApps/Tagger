@@ -1241,12 +1241,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void Quit(Gio.SimpleAction sender, EventArgs e)
     {
-        GetDefaultSize(out var width, out var height);
-        _controller.WindowWidth = width;
-        _controller.WindowHeight = height;
-        _controller.WindowMaximized = IsMaximized();
-        Aura.Active.SaveConfig("config");
-        _application.Quit();
+        if(!OnCloseRequested(this, e))
+        {
+            _application.Quit();
+        }
     }
 
     /// <summary>
