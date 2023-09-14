@@ -31,6 +31,10 @@ public class Configuration : ConfigurationBase
     /// </summary>
     public int WindowHeight { get; set; }
     /// <summary>
+    /// Whether or not the main window is maximized
+    /// </summary>
+    public bool WindowMaximized { get; set; }
+    /// <summary>
     /// The preferred theme for the application
     /// </summary>
     public Theme Theme { get; set; }
@@ -78,6 +82,7 @@ public class Configuration : ConfigurationBase
     {
         WindowWidth = 800;
         WindowHeight = 600;
+        WindowMaximized = false;
         Theme = Theme.System;
         RememberLastOpenedFolder = true;
         IncludeSubfolders = true;

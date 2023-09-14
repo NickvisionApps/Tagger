@@ -114,6 +114,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         _customPropertyRows = new List<Adw.EntryRow>();
         _isSelectionOccuring = false;
         SetDefaultSize(_controller.WindowWidth, _controller.WindowHeight);
+        if (_controller.WindowMaximized)
+        {
+            Maximize();
+        }
         SetTitle(_controller.AppInfo.ShortName);
         SetIconName(_controller.AppInfo.ID);
         if (_controller.AppInfo.IsDevVersion)
@@ -587,6 +591,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         GetDefaultSize(out var width, out var height);
         _controller.WindowWidth = width;
         _controller.WindowHeight = height;
+        _controller.WindowMaximized = IsMaximized();
         Aura.Active.SaveConfig("config");
         if (!_controller.CanClose)
         {
@@ -1239,6 +1244,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         GetDefaultSize(out var width, out var height);
         _controller.WindowWidth = width;
         _controller.WindowHeight = height;
+        _controller.WindowMaximized = IsMaximized();
         Aura.Active.SaveConfig("config");
         _application.Quit();
     }

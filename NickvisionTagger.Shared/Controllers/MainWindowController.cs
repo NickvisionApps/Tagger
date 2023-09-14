@@ -82,6 +82,15 @@ public class MainWindowController : IDisposable
         set => Configuration.Current.WindowHeight = value;
     }
     /// <summary>
+    /// Whether or not the main window is maximized
+    /// </summary>
+    public bool WindowMaximized
+    {
+        get => Configuration.Current.WindowMaximized;
+
+        set => Configuration.Current.WindowMaximized = value;
+    }
+    /// <summary>
     /// The preferred theme of the application
     /// </summary>
     public Theme Theme => Configuration.Current.Theme;
