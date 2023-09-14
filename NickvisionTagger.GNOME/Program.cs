@@ -38,6 +38,7 @@ public partial class Program
               * Synchronized lyric timestamps will now be shown in the mm:ss.xx format as per the LRC specification. When creating a new lryic, both hh:mm:ss and mm:ss.xx can be specified and Tagger will convert them appropriately
               * Tagger will display headers in the list of music files when sorting to provide a more organized view of files
               * Fixes an issue where lrc files were not importing correctly
+              * Application's main window size will be remembered and restored on application restart
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
