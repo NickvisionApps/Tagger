@@ -523,6 +523,19 @@ public partial class MainWindow : Adw.ApplicationWindow
                 messageDialog.Present();
             };
         }
+        else if (e.Action == "open-playlist-folder" && File.Exists(e.ActionParam))
+        {
+            toast.SetButtonLabel(_("Open"));
+            toast.OnButtonClicked += async (_, _) =>
+            {
+                var fileLauncher = Gtk.FileLauncher.New(Gio.FileHelper.NewForPath(e.ActionParam));
+                try
+                {
+                    await fileLauncher.OpenContainingFolderAsync(this);
+                }
+                catch { }
+            };
+        }
         _toastOverlay.AddToast(toast);
     }
 

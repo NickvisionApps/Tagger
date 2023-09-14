@@ -426,9 +426,10 @@ public class MainWindowController : IDisposable
             {
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("No music files in library."), NotificationSeverity.Error));
             }
-            else if(_musicLibrary.CreatePlaylist(options, options.IncludeOnlySelectedFiles ? SelectedMusicFiles.Keys.ToList() : null))
+            var path = _musicLibrary.CreatePlaylist(options, options.IncludeOnlySelectedFiles ? SelectedMusicFiles.Keys.ToList() : null);
+            if(!string.IsNullOrEmpty(path))
             {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Playlist file created successfully."), NotificationSeverity.Success));
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Playlist file created successfully."), NotificationSeverity.Success, "open-playlist-folder", path));
             }
             else
             {
