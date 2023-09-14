@@ -64,6 +64,33 @@ public class MainWindowController : IDisposable
     /// </summary>
     public AppInfo AppInfo => Aura.Active.AppInfo;
     /// <summary>
+    /// Main window width
+    /// </summary>
+    public int WindowWidth
+    {
+        get => Configuration.Current.WindowWidth;
+
+        set => Configuration.Current.WindowWidth = value;
+    }
+    /// <summary>
+    /// Main window height
+    /// </summary>
+    public int WindowHeight
+    {
+        get => Configuration.Current.WindowHeight;
+
+        set => Configuration.Current.WindowHeight = value;
+    }
+    /// <summary>
+    /// Whether or not the main window is maximized
+    /// </summary>
+    public bool WindowMaximized
+    {
+        get => Configuration.Current.WindowMaximized;
+
+        set => Configuration.Current.WindowMaximized = value;
+    }
+    /// <summary>
     /// The preferred theme of the application
     /// </summary>
     public Theme Theme => Configuration.Current.Theme;

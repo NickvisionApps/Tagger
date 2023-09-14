@@ -113,7 +113,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         _listMusicFilesRows = new List<Adw.ActionRow>();
         _customPropertyRows = new List<Adw.EntryRow>();
         _isSelectionOccuring = false;
-        SetDefaultSize(800, 600);
+        SetDefaultSize(_controller.WindowWidth, _controller.WindowHeight);
+        if (_controller.WindowMaximized)
+        {
+            Maximize();
+        }
         SetTitle(_controller.AppInfo.ShortName);
         SetIconName(_controller.AppInfo.ID);
         if (_controller.AppInfo.IsDevVersion)
@@ -584,6 +588,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <returns>True to stop close, else false</returns>
     private bool OnCloseRequested(Gtk.Window sender, EventArgs e)
     {
+        GetDefaultSize(out var width, out var height);
+        _controller.WindowWidth = width;
+        _controller.WindowHeight = height;
+        _controller.WindowMaximized = IsMaximized();
+        Aura.Active.SaveConfig("config");
         if (!_controller.CanClose)
         {
             var dialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
@@ -1230,7 +1239,13 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private void Quit(Gio.SimpleAction sender, EventArgs e) => _application.Quit();
+    private void Quit(Gio.SimpleAction sender, EventArgs e)
+    {
+        if(!OnCloseRequested(this, e))
+        {
+            _application.Quit();
+        }
+    }
 
     /// <summary>
     /// Occurs when the about action is triggered
