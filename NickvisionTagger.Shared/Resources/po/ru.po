@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-13 06:12+0300\n"
-"PO-Revision-Date: 2023-09-13 11:10+0000\n"
-"Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2023-09-14 13:06+0000\n"
+"Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/"
 "nickvision-tagger/app/ru/>\n"
 "Language: ru\n"
@@ -185,7 +185,7 @@ msgstr "bpm"
 #: ../../../Controllers/MainWindowController.cs:1388
 #: ../../../Controllers/MainWindowController.cs:1394
 msgid "Calculating..."
-msgstr ""
+msgstr "Вычисление..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:591
@@ -282,18 +282,17 @@ msgstr "Отменить"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1084
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1146
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1197
-#, fuzzy
 msgid "Discarding tags..."
-msgstr "Сохранение тегов..."
+msgstr "Отбраковка тегов..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:897
 msgid "Discarding unapplied changes..."
 msgstr "Отмена изменений..."
 
 #: ../../../Controllers/MainWindowController.cs:1059
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "Downloaded lyrics for {0} files successfully"
-msgstr "Метаданные для {0} файлов загружены успешно"
+msgstr "Успешно загружены тексты песен для {0} файлов"
 
 #: ../../../Controllers/MainWindowController.cs:1036
 #, csharp-format
@@ -302,9 +301,8 @@ msgstr "Метаданные для {0} файлов загружены успе
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1089
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1098
-#, fuzzy
 msgid "Downloading lyrics..."
-msgstr "Загрузка метаданных MusicBrainz..."
+msgstr "Загрузка лирики..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1058
 msgid "Downloading MusicBrainz metadata..."
@@ -452,9 +450,8 @@ msgstr[2] "Загружено {0} музыкальных файлов."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:795
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:804
-#, fuzzy
 msgid "Loading music file..."
-msgstr "Загрузка музыкальных файлов из папки..."
+msgstr "Загрузка музыкального файла..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:652
 msgid "Loading music files from folder..."
@@ -465,14 +462,12 @@ msgstr "Загрузка музыкальных файлов из папки..."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:717
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:726
 #: ../../../Controllers/MainWindowController.cs:1356
-#, fuzzy
 msgid "Loading music files from library..."
-msgstr "Загрузка музыкальных файлов из папки..."
+msgstr "Загрузка музыкальных файлов из библиотеки..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:684
-#, fuzzy
 msgid "Loading music files from playlist..."
-msgstr "Загрузка музыкальных файлов из папки..."
+msgstr "Загрузка музыкальных файлов из плейлиста..."
 
 #: ../../../Models/MusicFile.cs:72
 msgid "lyrics"
@@ -492,9 +487,8 @@ msgstr "ID записи MusicBrainz"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:77
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:44
-#, fuzzy
 msgid "Name"
-msgstr "Имя файла"
+msgstr "Имя"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:82
 msgid "Name (Empty)"
@@ -526,28 +520,24 @@ msgid "No AcoustId entry found for the file's fingerprint"
 msgstr "Для отпечатка файла не найдено записи AcoustId"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:820
-#, fuzzy
 msgid "No files selected for removal."
-msgstr "Загрузка музыкальных файлов из папки..."
+msgstr "Не выбраны файлы для удаления."
 
 #: ../../../Controllers/MainWindowController.cs:1059
-#, fuzzy
 msgid "No lyrics were downloaded"
-msgstr "Метаданные не были загружены"
+msgstr "Лирики не были загружены"
 
 #: ../../../Controllers/MainWindowController.cs:1036
 msgid "No metadata was downloaded"
 msgstr "Метаданные не были загружены"
 
 #: ../../../Controllers/MainWindowController.cs:396
-#, fuzzy
 msgid "No music files are selected."
-msgstr "Загрузка музыкальных файлов из папки..."
+msgstr "Не выбрано ни одного музыкального файла."
 
 #: ../../../Controllers/MainWindowController.cs:400
-#, fuzzy
 msgid "No music files in library."
-msgstr "Загрузка музыкальных файлов из папки..."
+msgstr "В библиотеке нет музыкальных файлов."
 
 #: ../../../Controllers/MainWindowController.cs:1026
 msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
@@ -578,9 +568,8 @@ msgid "Open Folder"
 msgstr "Открыть папку"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:751
-#, fuzzy
 msgid "Open Music File"
-msgstr "Файлы"
+msgstr "Открыть музыкальный файл"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:21
@@ -590,9 +579,8 @@ msgid "Open Playlist"
 msgstr "Открыть плейлист"
 
 #: ../../../Controllers/MainWindowController.cs:404
-#, fuzzy
 msgid "Playlist file created successfully."
-msgstr "Теги успешно сохранены."
+msgstr "Файл плейлиста создан успешно."
 
 #: ../../../Controllers/MainWindowController.cs:392
 msgid "Playlist name can not be empty."
@@ -628,9 +616,8 @@ msgstr "Удалить лирику"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:860
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:869
-#, fuzzy
 msgid "Removing files from playlist..."
-msgstr "Удаление обложки альбома..."
+msgstr "Удаление файлов из плейлиста..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:712
@@ -719,9 +706,8 @@ msgid "TiB"
 msgstr "ТиБ"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
-#, fuzzy
 msgid "Timestamp (hh:mm:ss or mm:ss.xx)"
-msgstr "Временная метка (чч:мм:сс)"
+msgstr "Временная метка (hh:mm:ss или mm:ss.xx)"
 
 #: ../../../Controllers/MainWindowController.cs:1095
 #: ../../../Controllers/MainWindowController.cs:1125
@@ -838,19 +824,16 @@ msgid "Playlist"
 msgstr "Плейлист"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:36
-#, fuzzy
 msgid "Tagger will store files to the playlist via their full path on disk."
 msgstr "Tagger будет хранить файлы в плейлисте по их полному пути на диске."
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:48
-#, fuzzy
 msgid "Format"
-msgstr "Формат строки"
+msgstr "Формат"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:55
-#, fuzzy
 msgid "Include Only Selected Files"
-msgstr "Нет выбранных музыкальных файлов"
+msgstr "Включать только выбранные файлы"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:75
 msgid "Create"
@@ -929,14 +912,12 @@ msgid "System"
 msgstr "Системная"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:30
-#, fuzzy
 msgid "Remember Last Opened Library"
-msgstr "Запоминать последнюю открытую папку"
+msgstr "Запомнить последнюю открытую библиотеку"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:46
-#, fuzzy
 msgid "Music Library"
-msgstr "Файлы"
+msgstr "Музыкальная библиотека"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:49
 msgid "Include Subfolders"
@@ -1021,18 +1002,17 @@ msgstr ""
 "найденными из MusicBrainz."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:131
-#, fuzzy
 msgid "Overwrite Lyrics From Web Service"
-msgstr "Перезаписать текст из веб-службы"
+msgstr "Перезапись лирик из веб-сервиса"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:132
-#, fuzzy
 msgid ""
 "Enable to overwrite existing lyrics with that found from downloading lyrics "
 "from the web. If disabled, only blank lyrics will be filled."
 msgstr ""
-"Включает перезапись существующих метаданных тега данными, найденными из "
-"MusicBrainz. Если отключить, будут заполнены только пустые свойства тегов."
+"Включить возможность перезаписи существующих лирик лириками, найденными при "
+"загрузке лирик из Интернета. Если эта функция отключена, то будут "
+"заполняться только пустые лирики."
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:147
 msgid "AcoustId User API Key"
@@ -1043,10 +1023,9 @@ msgid "Get New API Key"
 msgstr "Получить новый ключ API"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:13
-#, fuzzy
 msgctxt "Shortcut"
 msgid "Music Library"
-msgstr "Файлы"
+msgstr "Музыкальная библиотека"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:26
 msgid "Close Library"
@@ -1130,9 +1109,8 @@ msgstr "Скачать метаданные MusicBrainz"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:129
 #: NickvisionTagger.GNOME/Blueprints/window.blp:70
-#, fuzzy
 msgid "Download Lyrics"
-msgstr "Управление лириками"
+msgstr "Загрузить лирики"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:140
 msgctxt "Shortcut"
@@ -1191,14 +1169,12 @@ msgid "Tag Your Music"
 msgstr "Редактируйте ваши музыкальные теги"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:119
-#, fuzzy
 msgid "Open a library with music to get started"
-msgstr "Откройте папку с музыкой, чтобы начать"
+msgstr "Откройте библиотеку с музыкой, чтобы начать"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:133
-#, fuzzy
 msgid "Open Folder (Ctrl+O)"
-msgstr "Открыть папку с музыкой (Ctrl+O)"
+msgstr "Открыть папку (Ctrl+O)"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:146
 msgid "Open Playlist (Ctrl+Shift+O)"
@@ -1209,9 +1185,8 @@ msgid "No Music Files Found"
 msgstr "Не найдено музыкальных файлов"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:204
-#, fuzzy
 msgid "Try a different library"
-msgstr "Попробуйте другую папку"
+msgstr "Попробовать другую библиотеку"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:223
 msgid "Search for filename (type ! for advanced search)..."
@@ -1222,9 +1197,8 @@ msgid "Advanced Search Info"
 msgstr "Информация по продвинутому поиску"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:234
-#, fuzzy
 msgid "Select All Files"
-msgstr "Выберите несколько файлов"
+msgstr "Выбрать все файлы"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:280
 msgid "No Selected Music Files"
@@ -1273,6 +1247,7 @@ msgstr "Пользовательские свойства"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:552
 msgid "Custom properties can only be edited for individual files."
 msgstr ""
+"Пользовательские свойства можно редактировать только для отдельных файлов."
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:561
 msgid "File Properties"
@@ -1303,11 +1278,10 @@ msgid "Tag;Music;Editor;Library;Nickvision;"
 msgstr "Тег;Музыка;Редактор;Библиотека;Nickvision;"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:10
-#, fuzzy
 msgid ""
 "— Support for many music file types (mp3, ogg, flac, wma, wav, and more)"
 msgstr ""
-"— Поддержка нескольких типов музыкальных файлов (mp3, ogg, flac, wma, и wav)"
+"— Поддержка многих типов музыкальных файлов (mp3, ogg, flac, wma, wav и др.)"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:11
 msgid ""
@@ -1322,6 +1296,8 @@ msgid ""
 "— Edit unsynchronized and synchronized lyrics for a file (with LRC import "
 "and export support)"
 msgstr ""
+"— Редактирование несинхронизированных и синхронизированных лирик для файла ("
+"с поддержкой импорта и экспорта LRC)"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Convert filenames to tags and tags to filenames with ease"
@@ -1332,15 +1308,16 @@ msgid "— Lookup file information using MusicBrainz"
 msgstr "— Поиск информации о файлах с помощью MusicBrainz"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:15
-#, fuzzy
 msgid "— Lookup lyric information using Music163 and Letras"
-msgstr "— Поиск информации о файлах с помощью MusicBrainz"
+msgstr "— Поиск информации о лириках с помощью Music163 и Letras"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:16
 msgid ""
 "— Open, manage, and create playlists in many formats (m3u, pls, xspf, and "
 "more)"
 msgstr ""
+"— Открытие, управление и создание плейлистов в различных форматах (m3u, pls, "
+"xspf и др.)"
 
 #, fuzzy, csharp-format
 #~ msgid "lrc"

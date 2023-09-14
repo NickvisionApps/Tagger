@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-13 06:12+0300\n"
-"PO-Revision-Date: 2023-09-13 02:13+0000\n"
+"PO-Revision-Date: 2023-09-14 13:06+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/cs/>\n"
@@ -120,9 +120,8 @@ msgstr "umělecalba"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:754
-#, fuzzy
 msgid "All Files"
-msgstr "Vybrat všechny soubory"
+msgstr "Všechny soubory"
 
 #: ../../../Controllers/MainWindowController.cs:1027
 msgid "An invalid RecordingId was provided to MusicBrainz"
@@ -449,9 +448,8 @@ msgstr[2] "Načteno {0} hudebních souborů."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:795
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:804
-#, fuzzy
 msgid "Loading music file..."
-msgstr "Načítání hudebních souborů ze složky..."
+msgstr "Načítání hudebních souborů..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:652
 msgid "Loading music files from folder..."
@@ -462,14 +460,12 @@ msgstr "Načítání hudebních souborů ze složky..."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:717
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:726
 #: ../../../Controllers/MainWindowController.cs:1356
-#, fuzzy
 msgid "Loading music files from library..."
-msgstr "Načítání hudebních souborů ze složky..."
+msgstr "Načítání hudebních souborů z knihovny..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:684
-#, fuzzy
 msgid "Loading music files from playlist..."
-msgstr "Načítání hudebních souborů ze složky..."
+msgstr "Načítání hudebních souborů z playlistu..."
 
 #: ../../../Models/MusicFile.cs:72
 msgid "lyrics"
@@ -489,17 +485,16 @@ msgstr "ID nahrávky MusicBrainz"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:77
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:44
-#, fuzzy
 msgid "Name"
-msgstr "Název souboru"
+msgstr "Název"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:82
 msgid "Name (Empty)"
-msgstr ""
+msgstr "Název (prázdný)"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:88
 msgid "Name (Invalid)"
-msgstr ""
+msgstr "Název (neplatný)"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1039
 msgid "New Custom Property"
@@ -516,7 +511,7 @@ msgstr "Nicholas Logozzo"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:826
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #: ../../../Controllers/MainWindowController.cs:1025
 msgid "No AcoustId entry found for the file's fingerprint"
@@ -524,7 +519,7 @@ msgstr "Pro otisk souboru nebylo nalezeno žádné AcoustId"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:820
 msgid "No files selected for removal."
-msgstr ""
+msgstr "Nebyly vybrány žádné soubory k odstranění."
 
 #: ../../../Controllers/MainWindowController.cs:1059
 msgid "No lyrics were downloaded"
@@ -535,14 +530,12 @@ msgid "No metadata was downloaded"
 msgstr "Nebyla stažena žádná metadata"
 
 #: ../../../Controllers/MainWindowController.cs:396
-#, fuzzy
 msgid "No music files are selected."
-msgstr "Načítání hudebních souborů ze složky..."
+msgstr "Nejsou vybrány žádné hudební soubory."
 
 #: ../../../Controllers/MainWindowController.cs:400
-#, fuzzy
 msgid "No music files in library."
-msgstr "Nenalezeny žádné hudební soubory"
+msgstr "Žádné hudební soubory v knihovně."
 
 #: ../../../Controllers/MainWindowController.cs:1026
 msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
@@ -573,24 +566,23 @@ msgid "Open Folder"
 msgstr "Otevřít složku"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:751
-#, fuzzy
 msgid "Open Music File"
-msgstr "Hudební soubor"
+msgstr "Otevřít hudební soubor"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:21
 #: NickvisionTagger.GNOME/Blueprints/window.blp:14
 #: NickvisionTagger.GNOME/Blueprints/window.blp:145
 msgid "Open Playlist"
-msgstr ""
+msgstr "Otevřít playlist"
 
 #: ../../../Controllers/MainWindowController.cs:404
 msgid "Playlist file created successfully."
-msgstr ""
+msgstr "Soubor playlistu úspěšně vytvořen."
 
 #: ../../../Controllers/MainWindowController.cs:392
 msgid "Playlist name can not be empty."
-msgstr ""
+msgstr "Název playlistu nemůže být prázdný."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:915
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:934
@@ -613,9 +605,8 @@ msgid "Remove Custom Property"
 msgstr "Odebrat vlastní vlastnost"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:824
-#, fuzzy
 msgid "Remove Files?"
-msgstr "Odebrat řádek"
+msgstr "Odstranit soubory?"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:183
 msgid "Remove Lyric"
@@ -623,9 +614,8 @@ msgstr "Odebrat řádek"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:860
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:869
-#, fuzzy
 msgid "Removing files from playlist..."
-msgstr "Načítání hudebních souborů ze složky..."
+msgstr "Odstraňování souborů z playlistu..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:712
@@ -700,6 +690,8 @@ msgid ""
 "The selected files will not be deleted from disk but will be removed from "
 "this playlist."
 msgstr ""
+"Vybrané soubory nebudou odstraněny z disku, budou ale odstraněny z tohoto "
+"playlistu."
 
 #: ../../../Controllers/MainWindowController.cs:1028
 msgid "This file does not have a valid fingerprint"
@@ -710,9 +702,8 @@ msgid "TiB"
 msgstr "TiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
-#, fuzzy
 msgid "Timestamp (hh:mm:ss or mm:ss.xx)"
-msgstr "Čas (hh:mm:ss)"
+msgstr "Čas (hh:mm:ss nebo mm:ss.xx)"
 
 #: ../../../Controllers/MainWindowController.cs:1095
 #: ../../../Controllers/MainWindowController.cs:1125
@@ -745,12 +736,11 @@ msgstr "Jonáš Loskot <jonas.loskot@pm.me>, 2023"
 
 #: ../../../Controllers/MainWindowController.cs:426
 msgid "Unable to add file to playlist. File may already exist in playlist."
-msgstr ""
+msgstr "Nepodařilo se přidat soubor do playlistu. Možná v něm již existuje."
 
 #: ../../../Controllers/MainWindowController.cs:408
-#, fuzzy
 msgid "Unable to create playlist."
-msgstr "Nepodařilo se uložit {0}."
+msgstr "Nepodařilo se vytvořit playlist."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:345
 msgid "Unable to export to LRC."
@@ -766,7 +756,7 @@ msgstr "Nepodařilo se načíst soubor s obrázkem"
 
 #: ../../../Controllers/MainWindowController.cs:441
 msgid "Unable to remove some files from playlist."
-msgstr ""
+msgstr "Nepodařilo se odstranit některé soubory z playlistu."
 
 #: ../../../Controllers/MainWindowController.cs:680
 #, csharp-format
@@ -807,7 +797,7 @@ msgstr "rok"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:829
 msgid "Yes"
-msgstr ""
+msgstr "Ano"
 
 #: NickvisionTagger.GNOME/Blueprints/autocomplete_box.blp:15
 msgid "Suggestions"
@@ -827,25 +817,24 @@ msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:26
 msgid "Playlist"
-msgstr ""
+msgstr "Playlist"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:36
 msgid "Tagger will store files to the playlist via their full path on disk."
 msgstr ""
+"Označovač bude do playlistu ukládat soubory podle jejich celé cesty na disku."
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:48
-#, fuzzy
 msgid "Format"
-msgstr "Formátový řetězec"
+msgstr "Formát"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:55
-#, fuzzy
 msgid "Include Only Selected Files"
-msgstr "Žádné vybrané hudební soubory"
+msgstr "Zahrnout pouze vybrané soubory"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:75
 msgid "Create"
-msgstr ""
+msgstr "Vytvořit"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:32
 #: NickvisionTagger.GNOME/Blueprints/window.blp:442
@@ -920,14 +909,12 @@ msgid "System"
 msgstr "Podle systému"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:30
-#, fuzzy
 msgid "Remember Last Opened Library"
-msgstr "Zapamatovat naposledy otevřenou složku"
+msgstr "Zapamatovat naposledy otevřenou knihovnu"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:46
-#, fuzzy
 msgid "Music Library"
-msgstr "Hudební soubor"
+msgstr "Hudební knihovna"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:49
 msgid "Include Subfolders"
@@ -1031,34 +1018,33 @@ msgid "Get New API Key"
 msgstr "Získat nový klíč API"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:13
-#, fuzzy
 msgctxt "Shortcut"
 msgid "Music Library"
-msgstr "Hudební soubor"
+msgstr "Hudební knihovna"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:26
 msgid "Close Library"
-msgstr ""
+msgstr "Zavřít knihovnu"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:31
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
 msgid "Reload Library"
-msgstr ""
+msgstr "Znovu načíst knihovnu"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:36
 #: NickvisionTagger.GNOME/Blueprints/window.blp:22
 msgid "Create Playlist"
-msgstr ""
+msgstr "Vytvořit playlist"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:41
 #: NickvisionTagger.GNOME/Blueprints/window.blp:23
 msgid "Add to Playlist"
-msgstr ""
+msgstr "Přidat do playlistu"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:46
 #: NickvisionTagger.GNOME/Blueprints/window.blp:24
 msgid "Remove from Playlist"
-msgstr ""
+msgstr "Odebrat z playlistu"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:52
 msgctxt "Shortcut"
@@ -1163,11 +1149,11 @@ msgstr "Exportovat"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:88
 msgid "Library Menu"
-msgstr ""
+msgstr "Nabídka knihovny"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:93
 msgid "Library"
-msgstr ""
+msgstr "Knihovna"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:102
 msgid "Main Menu"
@@ -1178,27 +1164,24 @@ msgid "Tag Your Music"
 msgstr "Označte svou hudbu"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:119
-#, fuzzy
 msgid "Open a library with music to get started"
-msgstr "Začněte otevřením složky s hudbou"
+msgstr "Začněte otevřením hudební knihovny"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:133
-#, fuzzy
 msgid "Open Folder (Ctrl+O)"
-msgstr "Otevřít složku s hudbou (Ctrl+O)"
+msgstr "Otevřít složku (Ctrl+O)"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:146
 msgid "Open Playlist (Ctrl+Shift+O)"
-msgstr ""
+msgstr "Otevřít playlist (Ctrl+Shift+O)"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:203
 msgid "No Music Files Found"
 msgstr "Nenalezeny žádné hudební soubory"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:204
-#, fuzzy
 msgid "Try a different library"
-msgstr "Zkuste jinou složku"
+msgstr "Zkuste jinou knihovnu"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:223
 msgid "Search for filename (type ! for advanced search)..."
@@ -1291,10 +1274,10 @@ msgid "Tag;Music;Editor;Library;Nickvision;"
 msgstr "Značka;Hudba;Editor;Knihovna;Nickvision;"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:10
-#, fuzzy
 msgid ""
 "— Support for many music file types (mp3, ogg, flac, wma, wav, and more)"
-msgstr "— Podpora několika typů hudebních souborů (mp3, ogg, flac, wma, a wav)"
+msgstr ""
+"— Podpora několika typů hudebních souborů (mp3, ogg, flac, wma, wav a další)"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:11
 msgid ""
@@ -1308,6 +1291,8 @@ msgid ""
 "— Edit unsynchronized and synchronized lyrics for a file (with LRC import "
 "and export support)"
 msgstr ""
+"— Úprava nesynchronizovaných a synchronizovaných textů u souboru (s podporou "
+"importu a exportu LRC)"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Convert filenames to tags and tags to filenames with ease"
@@ -1318,15 +1303,16 @@ msgid "— Lookup file information using MusicBrainz"
 msgstr "— Vyhledávání informací o souborech pomocí MusicBrainz"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:15
-#, fuzzy
 msgid "— Lookup lyric information using Music163 and Letras"
-msgstr "— Vyhledávání informací o souborech pomocí MusicBrainz"
+msgstr "— Vyhledávání informací o textech pomocí Music163 a Letras"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:16
 msgid ""
 "— Open, manage, and create playlists in many formats (m3u, pls, xspf, and "
 "more)"
 msgstr ""
+"— Otevírání, správa a vytváření playlistů v několika formátech (m3u, pls, "
+"xspf a další)"
 
 #, csharp-format
 #~ msgid "lrc"
