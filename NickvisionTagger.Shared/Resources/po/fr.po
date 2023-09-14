@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-13 06:12+0300\n"
-"PO-Revision-Date: 2023-09-09 03:21+0000\n"
+"PO-Revision-Date: 2023-09-14 22:10+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/fr/>\n"
@@ -121,9 +121,8 @@ msgstr "artiste de l’album"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:754
-#, fuzzy
 msgid "All Files"
-msgstr "Sélectionner tous les fichiers"
+msgstr "Tous les fichiers"
 
 #: ../../../Controllers/MainWindowController.cs:1027
 msgid "An invalid RecordingId was provided to MusicBrainz"
@@ -450,9 +449,8 @@ msgstr[1] "{0} musiques chargées."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:795
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:804
-#, fuzzy
 msgid "Loading music file..."
-msgstr "Chargement des musiques depuis le dossier…"
+msgstr "Chargement du fichier de musique…"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:652
 msgid "Loading music files from folder..."
@@ -463,14 +461,12 @@ msgstr "Chargement des musiques depuis le dossier…"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:717
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:726
 #: ../../../Controllers/MainWindowController.cs:1356
-#, fuzzy
 msgid "Loading music files from library..."
-msgstr "Chargement des musiques depuis le dossier…"
+msgstr "Chargement des fichiers de musiques depuis la bibliothèque…"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:684
-#, fuzzy
 msgid "Loading music files from playlist..."
-msgstr "Chargement des musiques depuis le dossier…"
+msgstr "Chargement des fichiers de musiques depuis la liste de lecture…"
 
 #: ../../../Models/MusicFile.cs:72
 msgid "lyrics"
@@ -490,17 +486,16 @@ msgstr "Identifiant MusicBrainz"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:77
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:44
-#, fuzzy
 msgid "Name"
-msgstr "Nom du fichier"
+msgstr "Nom"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:82
 msgid "Name (Empty)"
-msgstr ""
+msgstr "Nom (vide)"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:88
 msgid "Name (Invalid)"
-msgstr ""
+msgstr "Nom (invalide)"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1039
 msgid "New Custom Property"
@@ -517,16 +512,15 @@ msgstr "Nicholas Logozzo"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:826
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: ../../../Controllers/MainWindowController.cs:1025
 msgid "No AcoustId entry found for the file's fingerprint"
 msgstr "Pas d’entrée AcoustId trouvée pour l’empreinte du fichier"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:820
-#, fuzzy
 msgid "No files selected for removal."
-msgstr "Chargement des musiques depuis le dossier…"
+msgstr "Aucun fichier sélectionné pour la suppression."
 
 #: ../../../Controllers/MainWindowController.cs:1059
 msgid "No lyrics were downloaded"
@@ -537,14 +531,12 @@ msgid "No metadata was downloaded"
 msgstr "Aucune métadonnée n’a été téléchargée"
 
 #: ../../../Controllers/MainWindowController.cs:396
-#, fuzzy
 msgid "No music files are selected."
-msgstr "Chargement des musiques depuis le dossier…"
+msgstr "Aucun fichier de musique sélectionné."
 
 #: ../../../Controllers/MainWindowController.cs:400
-#, fuzzy
 msgid "No music files in library."
-msgstr "Chargement des musiques depuis le dossier…"
+msgstr "Aucun fichier de musique dans la bibliothèque."
 
 #: ../../../Controllers/MainWindowController.cs:1026
 msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
@@ -576,25 +568,23 @@ msgid "Open Folder"
 msgstr "Ouvrir un dossier"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:751
-#, fuzzy
 msgid "Open Music File"
-msgstr "Musique"
+msgstr "Ouvrir le fichier de musique"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:664
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:21
 #: NickvisionTagger.GNOME/Blueprints/window.blp:14
 #: NickvisionTagger.GNOME/Blueprints/window.blp:145
 msgid "Open Playlist"
-msgstr ""
+msgstr "Ouvrir la liste de lecture"
 
 #: ../../../Controllers/MainWindowController.cs:404
-#, fuzzy
 msgid "Playlist file created successfully."
-msgstr "Étiquettes sauvegardées avec succès."
+msgstr "Fichier de liste de lecture créé avec succès."
 
 #: ../../../Controllers/MainWindowController.cs:392
 msgid "Playlist name can not be empty."
-msgstr ""
+msgstr "Le nom de la liste de lecture ne peut être laissé vide."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:915
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:934
@@ -617,9 +607,8 @@ msgid "Remove Custom Property"
 msgstr "Supprimer la propriété personnalisée"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:824
-#, fuzzy
 msgid "Remove Files?"
-msgstr "Supprimer les paroles"
+msgstr "Supprimer les fichiers ?"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:183
 msgid "Remove Lyric"
@@ -627,9 +616,8 @@ msgstr "Supprimer les paroles"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:860
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:869
-#, fuzzy
 msgid "Removing files from playlist..."
-msgstr "Suppression de la pochette d'album..."
+msgstr "Suppression des fichiers de la liste de lecture…"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:712
@@ -706,6 +694,8 @@ msgid ""
 "The selected files will not be deleted from disk but will be removed from "
 "this playlist."
 msgstr ""
+"Les fichiers sélectionnés ne seront pas supprimés du disque mais simplement "
+"retirés de cette liste de lecture."
 
 #: ../../../Controllers/MainWindowController.cs:1028
 msgid "This file does not have a valid fingerprint"
@@ -716,9 +706,8 @@ msgid "TiB"
 msgstr "Tio"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
-#, fuzzy
 msgid "Timestamp (hh:mm:ss or mm:ss.xx)"
-msgstr "Horodatage (hh:mm:ss)"
+msgstr "Horodatage (hh:mm:ss ou mm:ss.xx)"
 
 #: ../../../Controllers/MainWindowController.cs:1095
 #: ../../../Controllers/MainWindowController.cs:1125
@@ -752,11 +741,12 @@ msgstr "Irénée Thirion"
 #: ../../../Controllers/MainWindowController.cs:426
 msgid "Unable to add file to playlist. File may already exist in playlist."
 msgstr ""
+"Impossible d’ajouter le fichier à la liste de lecture. Le fichier existe "
+"peut-être déjà dedans."
 
 #: ../../../Controllers/MainWindowController.cs:408
-#, fuzzy
 msgid "Unable to create playlist."
-msgstr "Impossible d’enregistrer {0}."
+msgstr "Impossible de créer la liste de lecture."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:345
 msgid "Unable to export to LRC."
@@ -771,9 +761,8 @@ msgid "Unable to load image file"
 msgstr "Impossible de charger l’image"
 
 #: ../../../Controllers/MainWindowController.cs:441
-#, fuzzy
 msgid "Unable to remove some files from playlist."
-msgstr "Impossible d’enregistrer {0}."
+msgstr "Impossible de supprimer certains fichiers de la liste de lecture."
 
 #: ../../../Controllers/MainWindowController.cs:680
 #, csharp-format
@@ -791,7 +780,7 @@ msgstr "Impossible d’envoyer les métadonnées à AcoustId. Vérifiez la clé 
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1346
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:284
 msgid "Use LRC's lyrics"
@@ -814,7 +803,7 @@ msgstr "année"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:829
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: NickvisionTagger.GNOME/Blueprints/autocomplete_box.blp:15
 msgid "Suggestions"
@@ -835,25 +824,23 @@ msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:26
 msgid "Playlist"
-msgstr ""
+msgstr "Liste de lecture"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:36
 msgid "Tagger will store files to the playlist via their full path on disk."
 msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:48
-#, fuzzy
 msgid "Format"
-msgstr "Chaîne de format"
+msgstr "Format"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:55
-#, fuzzy
 msgid "Include Only Selected Files"
-msgstr "Aucun fichier de musique sélectionné"
+msgstr "Inclure uniquement les fichiers sélectionnés"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:75
 msgid "Create"
-msgstr ""
+msgstr "Créer"
 
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:32
 #: NickvisionTagger.GNOME/Blueprints/window.blp:442
@@ -928,14 +915,12 @@ msgid "System"
 msgstr "Système"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:30
-#, fuzzy
 msgid "Remember Last Opened Library"
-msgstr "Mémoriser le dernier dossier ouvert"
+msgstr "Mémoriser la dernière bibliothèque ouverte"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:46
-#, fuzzy
 msgid "Music Library"
-msgstr "Musique"
+msgstr "Bibliothèque musicale"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:49
 msgid "Include Subfolders"
@@ -1042,34 +1027,33 @@ msgid "Get New API Key"
 msgstr "Obtenir une nouvelle clé d'API"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:13
-#, fuzzy
 msgctxt "Shortcut"
 msgid "Music Library"
-msgstr "Musique"
+msgstr "Bibliothèque musicale"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:26
 msgid "Close Library"
-msgstr ""
+msgstr "Fermer la bibliothèque"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:31
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
 msgid "Reload Library"
-msgstr ""
+msgstr "Recharger la bibliothèque"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:36
 #: NickvisionTagger.GNOME/Blueprints/window.blp:22
 msgid "Create Playlist"
-msgstr ""
+msgstr "Créer une liste de lecture"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:41
 #: NickvisionTagger.GNOME/Blueprints/window.blp:23
 msgid "Add to Playlist"
-msgstr ""
+msgstr "Ajouter à la liste de lecture"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:46
 #: NickvisionTagger.GNOME/Blueprints/window.blp:24
 msgid "Remove from Playlist"
-msgstr ""
+msgstr "Supprimer de la liste de lecture"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:52
 msgctxt "Shortcut"
@@ -1174,11 +1158,11 @@ msgstr "Exporter"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:88
 msgid "Library Menu"
-msgstr ""
+msgstr "Menu de la bibliothèque"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:93
 msgid "Library"
-msgstr ""
+msgstr "Bibliothèque"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:102
 msgid "Main Menu"
@@ -1189,27 +1173,24 @@ msgid "Tag Your Music"
 msgstr "Étiquetez vos musiques"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:119
-#, fuzzy
 msgid "Open a library with music to get started"
-msgstr "Ouvrez un dossier contenant des musiques pour commencer"
+msgstr "Ouvrez une bibliothèque contenant des musiques pour commencer"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:133
-#, fuzzy
 msgid "Open Folder (Ctrl+O)"
-msgstr "Ouvrir un dossier de musiques (Ctrl+O)"
+msgstr "Ouvrir un dossier (Ctrl+O)"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:146
 msgid "Open Playlist (Ctrl+Shift+O)"
-msgstr ""
+msgstr "Ouvrir une liste de lecture (Ctrl+Maj+O)"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:203
 msgid "No Music Files Found"
 msgstr "Aucune musique trouvée"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:204
-#, fuzzy
 msgid "Try a different library"
-msgstr "Essayez un autre dossier"
+msgstr "Essayez une autre bibliothèque"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:223
 msgid "Search for filename (type ! for advanced search)..."
@@ -1303,12 +1284,11 @@ msgid "Tag;Music;Editor;Library;Nickvision;"
 msgstr "Tag;Musique;Éditeur;Bibliothèque;Balise;Étiquette; Nickvision;"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:10
-#, fuzzy
 msgid ""
 "— Support for many music file types (mp3, ogg, flac, wma, wav, and more)"
 msgstr ""
 "— Prise en charge de nombreux types de fichiers de musiques (mp3, ogg, flac, "
-"wma, et wav)"
+"wma, wav et plus)"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:11
 msgid ""
@@ -1323,6 +1303,8 @@ msgid ""
 "— Edit unsynchronized and synchronized lyrics for a file (with LRC import "
 "and export support)"
 msgstr ""
+"— Modifiez les paroles synchronisées ou non d’un fichier (avec prise en "
+"charge de l’importation et exportation LRC)"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:13
 msgid "— Convert filenames to tags and tags to filenames with ease"
@@ -1336,16 +1318,17 @@ msgstr ""
 "— Recherchez des informations sur les fichiers, à l’aide de MusicBrainz"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:15
-#, fuzzy
 msgid "— Lookup lyric information using Music163 and Letras"
 msgstr ""
-"— Recherchez des informations sur les fichiers, à l’aide de MusicBrainz"
+"— Recherchez des informations sur les paroles à l’aide de Music163 et Letras"
 
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:16
 msgid ""
 "— Open, manage, and create playlists in many formats (m3u, pls, xspf, and "
 "more)"
 msgstr ""
+"— Ouvrez, gérez et créez des listes de lecture dans de nombreux formats ("
+"m3u, pls, xspf, et plus)"
 
 #, csharp-format
 #~ msgid "lrc"
