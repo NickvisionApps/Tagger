@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="web-services" its:version="2.0" xml:lang="it">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Web Services 🌐</title>
+	<title type="link">Servizi in rete 🌐</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -15,27 +15,27 @@
 </info>
 
 <title>Servizi Web</title>
-<p>This page describes the web services available in Tagger</p>
+<p>Questa pagina tratta i servizi in rete disponibili in Tagger</p>
 <section>
     <title>Scarica i metadati da MusicBrainz</title>
-    <p>Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
-    <p>This service utilizes the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+    <p>Identifica un brano con MusicBrainz e scarica i suoi metadati per usarli in Tagger.</p>
+    <p>Questo servizio usa l'impronta AcoustId del file (generata con <code>fpcalc</code>) per determinare gli identificativi MusicBrainz di registrazione e di pubblicazione. Se ne vengono trovati, metadati come il titolo, l'artista, l'album e la copertina saranno scaricati e quindi impostati in Tagger.</p>
     <note>
-        <p>Finding metadata through MusicBrainz isn't 100% reliable and may not be available for uncommon songs.</p>
+        <p>La ricerca dei metadati con MusicBrainz non è affidabile al 100% e potrebbe non essere disponibile per brani poco noti.</p>
     </note>
 </section>
 <section>
     <title>Scarica testo</title>
-    <p>Uses the tag's title and artist information to search for lyrics of the song.</p>
-    <p>This service utilizes NetEase's Music163 service for obtaining synchronized lyrics.</p>
-    <p>If no synchronized lyrics are found/available, Tagger will use Letras for obtaining unsynchronized lyrics.</p>
+    <p>Usare le etichette titolo e artista per cercare il testo della canzone.</p>
+    <p>Questo servizio usa Music163 di NetEase per ottenere un testo sincronizzato.</p>
+    <p>Se un testo sincronizzato non viene trovato, Tagger userà Letras per ottenere un testo non sincronizzato.</p>
     <note>
-        <p>Finding lyrics through these services isn't 100% reliable and may not be available for uncommon songs.</p>
+        <p>La ricerca di testi tramite questi servizi non è affidabile al 100% e potrebbe non essere disponibile per brani poco noti.</p>
     </note>
 </section>
 <section>
     <title>Invia ad AcoustId</title>
-    <p>Submits data about a music file (identified via its fingerprint) to AcoustId's database. There are two things that can be submitted about a music file:</p>
+    <p>Carica i dati di un brano (identificato tramite la sua impronta) nel database di AcoustId. Due cose di un brano possono essere caricate:</p>
         <list>
             <item>
         		<title>MusicBrainz Recording ID</title>
