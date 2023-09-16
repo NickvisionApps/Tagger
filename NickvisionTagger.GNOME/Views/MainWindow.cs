@@ -1480,20 +1480,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _durationFileSizeLabel.SetLabel($"{_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}");
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
-        _filenameRow.SetEditable(true);
-        _titleRow.SetEditable(true);
-        _artistRow.SetEditable(true);
-        _albumRow.SetEditable(true);
-        _yearRow.SetEditable(true);
-        _trackRow.SetEditable(true);
-        _trackTotalRow.SetEditable(true);
-        _albumArtistRow.SetEditable(true);
-        _genreRow.SetEditable(true);
-        _commentRow.SetEditable(true);
-        _bpmRow.SetEditable(true);
-        _composerRow.SetEditable(true);
-        _descriptionRow.SetEditable(true);
-        _publisherRow.SetEditable(true);
         if (albumArt == "hasArt")
         {
             _artViewStack.SetVisibleChildName("Image");
