@@ -58,6 +58,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Button _libraryButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
+    [Gtk.Connect] private readonly Gtk.Image _imageLibraryMode;
     [Gtk.Connect] private readonly Gtk.Label _selectionLabel;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
     [Gtk.Connect] private readonly Gtk.MenuButton _tagActionsButton;
@@ -1448,6 +1449,8 @@ public partial class MainWindow : Adw.ApplicationWindow
             _headerBar.RemoveCssClass("flat");
             _title.SetSubtitle(_controller.MusicLibraryName);
             _libraryButton.SetVisible(true);
+            _imageLibraryMode.SetFromIconName(_controller.MusicLibraryType == MusicLibraryType.Folder ? "folder-visiting-symbolic" : "playlist-symbolic");
+            _imageLibraryMode.SetTooltipText(_controller.MusicLibraryType == MusicLibraryType.Folder ? _("Folder Mode") : _("Playlist Mode"));
             _createPlaylistAction.SetEnabled(_controller.MusicLibraryType == MusicLibraryType.Folder);
             _addToPlaylistAction.SetEnabled(_controller.MusicLibraryType == MusicLibraryType.Playlist);
             _removeFromPlaylistAction.SetEnabled(_controller.MusicLibraryType == MusicLibraryType.Playlist);
@@ -1463,8 +1466,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _headerBar.AddCssClass("flat");
             _title.SetSubtitle("");
-            _viewStack.SetVisibleChildName("NoLibrary");
             _libraryButton.SetVisible(false);
+            _imageLibraryMode.SetFromIconName("");
+            _imageLibraryMode.SetTooltipText("");
+            _viewStack.SetVisibleChildName("NoLibrary");
         }
         _selectionLabel.SetLabel(_("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count));
         return false;
