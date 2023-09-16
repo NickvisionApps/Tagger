@@ -499,7 +499,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void NotificationSent(object? sender, NotificationSentEventArgs e)
     {
         var toast = Adw.Toast.New(e.Message);
-        if (e.Action == "unsupported")
+        if (e.Action == "reload")
+        {
+            toast.SetButtonLabel(_("Reload"));
+            toast.OnButtonClicked += (_, _) => ReloadLibrary(_applyAction, e);
+        }
+        else if (e.Action == "unsupported")
         {
             toast.SetButtonLabel(_("Help"));
             toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("unsupported"), 0);

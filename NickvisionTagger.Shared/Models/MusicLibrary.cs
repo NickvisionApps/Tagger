@@ -22,6 +22,8 @@ public enum MusicLibraryType
 public class MusicLibrary : IDisposable
 {
     private bool _disposed;
+    private bool _includeSubfolders;
+    private FileSystemWatcher? _watcher;
     private IPlaylistIO? _playlist;
     
     /// <summary>
@@ -37,10 +39,6 @@ public class MusicLibrary : IDisposable
     /// The path of the music library
     /// </summary>
     public string Path { get; init; }
-    /// <summary>
-    /// Whether or not to include subfolders in scanning for music
-    /// </summary>
-    public bool IncludeSubfolders { get; set; }
     /// <summary>
     /// What to sort files in a music library by
     /// </summary>
@@ -63,7 +61,11 @@ public class MusicLibrary : IDisposable
     /// </summary>
     /// <remarks>Path for folder, file name for playlist</remarks>
     public string Name => Type == MusicLibraryType.Folder ? Path : System.IO.Path.GetFileNameWithoutExtension(Path);
-    
+
+    /// <summary>
+    /// Occurs when the library is changed on disk and not by Tagger (the UI should prompt for a library reload)
+    /// </summary>
+    public event EventHandler<EventArgs> LibraryChangedOnDisk;
     /// <summary>
     /// Occurs when the loading progress is updated
     /// </summary>
@@ -102,6 +104,19 @@ public class MusicLibrary : IDisposable
         if (Directory.Exists(Path))
         {
             Type = MusicLibraryType.Folder;
+            _watcher = new FileSystemWatcher(Path)
+            {
+                NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.CreationTime,
+                EnableRaisingEvents = true
+            };
+            foreach (var extension in SupportedExtensions)
+            {
+                _watcher.Filters.Add($"*{extension}");
+            }
+            _watcher.Created += (sender, e) => LibraryChangedOnDisk?.Invoke(this, EventArgs.Empty);
+            _watcher.Deleted += (sender, e) => LibraryChangedOnDisk?.Invoke(this, EventArgs.Empty);
+            _watcher.Changed += (sender, e) => LibraryChangedOnDisk?.Invoke(this, EventArgs.Empty);
+            _watcher.Renamed += (sender, e) => LibraryChangedOnDisk?.Invoke(this, EventArgs.Empty);
         }
         else if (File.Exists(Path) && Enum.GetValues<PlaylistFormat>().Select(x => x.GetDotExtension()).Contains(System.IO.Path.GetExtension(Path)))
         {
@@ -118,6 +133,23 @@ public class MusicLibrary : IDisposable
     /// Finalizes the MusicLibrary
     /// </summary>
     ~MusicLibrary() => Dispose(false);
+
+    /// <summary>
+    /// Whether or not to include subfolders in scanning for music
+    /// </summary>
+    public bool IncludeSubfolders
+    {
+        get => _includeSubfolders;
+
+        set
+        {
+            _includeSubfolders = value;
+            if (_watcher != null)
+            {
+                _watcher.IncludeSubdirectories = _includeSubfolders;
+            }
+        }
+    }
     
     /// <summary>
     /// Frees resources used by the MusicLibrary object
@@ -141,6 +173,7 @@ public class MusicLibrary : IDisposable
         {
             file.Dispose();
         }
+        _watcher?.Dispose();
         _disposed = true;
     }
     
