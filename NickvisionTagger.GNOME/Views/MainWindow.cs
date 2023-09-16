@@ -528,6 +528,15 @@ public partial class MainWindow : Adw.ApplicationWindow
                 messageDialog.Present();
             };
         }
+        else if (e.Action == "open-playlist" && File.Exists(e.ActionParam))
+        {
+            toast.SetButtonLabel(_("Open"));
+            toast.OnButtonClicked += async (_, _) =>
+            {
+                SetLoadingState(_("Loading music files from playlist..."));
+                await _controller.OpenLibraryAsync(e.ActionParam);
+            };
+        }
         _toastOverlay.AddToast(toast);
     }
 
@@ -751,7 +760,41 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         var createPlaylistDialog = new CreatePlaylistDialog(this, _controller.AppInfo.ID);
         createPlaylistDialog.OnCreate += (s, po) => _controller.CreatePlaylist(po);
-        createPlaylistDialog.Present();
+        if (!_controller.CanClose)
+        {
+            var dialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("cancel", _("Cancel"));
+            dialog.SetDefaultResponse("cancel");
+            dialog.SetCloseResponse("cancel");
+            dialog.AddResponse("discard", _("Discard"));
+            dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
+            dialog.AddResponse("apply", _("Apply"));
+            dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
+            dialog.OnResponse += async (s, ea) =>
+            {
+                if (ea.Response == "apply")
+                {
+                    SetLoadingState(_("Saving tags..."));
+                    await _controller.SaveAllTagsAsync(true);
+                }
+                else if (ea.Response == "discard")
+                {
+                    SetLoadingState(_("Discarding tags..."));
+                    await _controller.DiscardSelectedUnappliedChangesAsync();
+                }
+                if (ea.Response != "cancel")
+                {
+                    createPlaylistDialog.Present();
+                }
+                dialog.Destroy();
+            };
+            dialog.Present();
+        }
+        else
+        {
+            createPlaylistDialog.Present();
+        }
     }
     
     /// <summary>

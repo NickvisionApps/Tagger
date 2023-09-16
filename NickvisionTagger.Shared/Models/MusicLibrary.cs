@@ -238,12 +238,12 @@ public class MusicLibrary : IDisposable
     /// </summary>
     /// <param name="options">PlaylistOptions</param>
     /// <param name="selectedFiles">A list of indexes of selected files, if available</param>
-    /// <returns>True if successful, else false</returns>
-    public bool CreatePlaylist(PlaylistOptions options, List<int>? selectedFiles)
+    /// <returns>The path of the created playlist, null if not created</returns>
+    public string? CreatePlaylist(PlaylistOptions options, List<int>? selectedFiles)
     {
         if (Type != MusicLibraryType.Folder || string.IsNullOrEmpty(options.Path))
         {
-            return false;
+            return null;
         }
         var path = $"{options.Path}{(System.IO.Path.GetExtension(options.Path) != options.Format.GetDotExtension() ? options.Format.GetDotExtension() : "")}";
         var playlist = PlaylistIOFactory.GetInstance().GetPlaylistIO(path, ATL.Playlist.PlaylistFormat.LocationFormatting.FilePath, ATL.Playlist.PlaylistFormat.FileEncoding.UTF8_NO_BOM);
@@ -252,7 +252,7 @@ public class MusicLibrary : IDisposable
         {
             if (selectedFiles == null || selectedFiles.Count == 0)
             {
-                return false;
+                return null;
             }
             paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Path, x.Path) : x.Path));
         }
@@ -260,12 +260,12 @@ public class MusicLibrary : IDisposable
         {
             if (MusicFiles.Count == 0)
             {
-                return false;
+                return null;
             }
             paths.AddRange(MusicFiles.Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Path, x.Path) : x.Path));
         }
         playlist.FilePaths = paths;
-        return true;
+        return path;
     }
     
     /// <summary>
