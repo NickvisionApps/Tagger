@@ -198,8 +198,14 @@ public class MusicLibrary : IDisposable
         {
             var files = Type switch
             {
-                MusicLibraryType.Folder => Directory.GetFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Where(x => SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
-                MusicLibraryType.Playlist => _playlist!.FilePaths.Where(x => File.Exists(x) && SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
+                MusicLibraryType.Folder => Directory
+                    .GetFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                    .Where(x => SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower()))
+                    .ToList(),
+                MusicLibraryType.Playlist => _playlist!.FilePaths
+                    .Where(x => (File.Exists(x) || File.Exists(System.IO.Path.GetFullPath(x, System.IO.Path.GetDirectoryName(Path) ?? ""))) && SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower()))
+                    .Select(x => File.Exists(x) ? x : System.IO.Path.GetFullPath(x, System.IO.Path.GetDirectoryName(Path) ?? ""))
+                    .ToList(),
                 _ => new List<string>()
             };
             var i = 0;
@@ -235,11 +241,11 @@ public class MusicLibrary : IDisposable
     /// <returns>True if successful, else false</returns>
     public bool CreatePlaylist(PlaylistOptions options, List<int>? selectedFiles)
     {
-        if (Type != MusicLibraryType.Folder || string.IsNullOrEmpty(options.Name))
+        if (Type != MusicLibraryType.Folder || string.IsNullOrEmpty(options.Path))
         {
             return false;
         }
-        var path = $"{Path}{System.IO.Path.DirectorySeparatorChar}{options.Name}{options.Format.GetDotExtension()}";
+        var path = $"{options.Path}{(System.IO.Path.GetExtension(options.Path) != options.Format.GetDotExtension() ? options.Format.GetDotExtension() : "")}";
         var playlist = PlaylistIOFactory.GetInstance().GetPlaylistIO(path, ATL.Playlist.PlaylistFormat.LocationFormatting.FilePath, ATL.Playlist.PlaylistFormat.FileEncoding.UTF8_NO_BOM);
         var paths = new List<string>();
         if (options.IncludeOnlySelectedFiles)
@@ -248,7 +254,7 @@ public class MusicLibrary : IDisposable
             {
                 return false;
             }
-            paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => x.Path));
+            paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Path, x.Path) : x.Path));
         }
         else
         {
@@ -256,7 +262,7 @@ public class MusicLibrary : IDisposable
             {
                 return false;
             }
-            paths.AddRange(MusicFiles.Select(x => x.Path));
+            paths.AddRange(MusicFiles.Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Path, x.Path) : x.Path));
         }
         playlist.FilePaths = paths;
         return true;

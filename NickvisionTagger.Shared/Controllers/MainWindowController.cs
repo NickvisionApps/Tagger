@@ -424,9 +424,9 @@ public class MainWindowController : IDisposable
     {
         if (_musicLibrary != null && _musicLibrary.Type == MusicLibraryType.Folder)
         {
-            if (string.IsNullOrEmpty(options.Name))
+            if (string.IsNullOrEmpty(options.Path))
             {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Playlist name can not be empty."), NotificationSeverity.Error));
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Playlist path can not be empty."), NotificationSeverity.Error));
             }
             if (options.IncludeOnlySelectedFiles && SelectedMusicFiles.Count == 0)
             {

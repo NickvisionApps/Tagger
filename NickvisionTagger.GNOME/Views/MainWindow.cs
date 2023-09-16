@@ -749,7 +749,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void CreatePlaylist(Gio.SimpleAction sender, EventArgs e)
     {
-        var createPlaylistDialog = new CreatePlaylistDialog(this, _controller.AppInfo.ID, Path.GetFileName(_controller.MusicLibraryName));
+        var createPlaylistDialog = new CreatePlaylistDialog(this, _controller.AppInfo.ID);
         createPlaylistDialog.OnCreate += (s, po) => _controller.CreatePlaylist(po);
         createPlaylistDialog.Present();
     }

@@ -27,21 +27,23 @@ Adw.Window _root {
           
           styles ["title-2"]
         }
-        
-        Gtk.Label {
-          wrap: true;
-          margin-start: 12;
-          margin-end: 12;
-          justify: center;
-          label: _("Tagger will store files to the playlist via their full path on disk.");
-        }
       
         Adw.PreferencesGroup {
           margin-start: 24;
           margin-end: 24;
           
-          Adw.EntryRow _nameRow {
-            title: _("Name");
+          Adw.EntryRow _pathRow {
+            title: _("Path");
+            editable: false;
+            
+            [suffix]
+            Gtk.Button _selectSaveLocationButton {
+              valign: center;
+              icon-name: "document-open-symbolic";
+              tooltip-text: _("Select Save Location");
+              
+              styles ["flat"]
+            }
           }
           
           Adw.ComboRow _formatRow {
@@ -49,6 +51,16 @@ Adw.Window _root {
             model: Gtk.StringList {
               strings ["M3U", "PLS", "FPL", "XSPF", "SMIL", "ASX", "B4S", "DPL"]
             };
+          }
+          
+          Adw.ActionRow {
+            title: _("Use Relative Paths");
+            activatable-widget: _relativePathsSwitch;
+            
+            [suffix]
+            Gtk.Switch _relativePathsSwitch {
+              valign: center;
+            }
           }
           
           Adw.ActionRow {

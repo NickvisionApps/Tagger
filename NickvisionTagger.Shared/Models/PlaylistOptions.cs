@@ -29,13 +29,17 @@ public static class PlaylistFormatExtensions
 public class PlaylistOptions
 {
     /// <summary>
-    /// The name of the playlist
+    /// The path of the playlist
     /// </summary>
-    public string Name { get; init; }
+    public string Path { get; init; }
     /// <summary>
     /// The format of the playlist
     /// </summary>
     public PlaylistFormat Format { get; init; }
+    /// <summary>
+    /// Whether or not to save files using relative paths instead of full paths
+    /// </summary>
+    public bool UseRelativePaths { get; init; }
     /// <summary>
     /// Whether or not to include only selected files in the playlist
     /// </summary>
@@ -44,13 +48,15 @@ public class PlaylistOptions
     /// <summary>
     /// Constructs a PlaylistOptions
     /// </summary>
-    /// <param name="name">The name of the playlist</param>
+    /// <param name="path">The path of the playlist</param>
     /// <param name="format">The format of the playlist</param>
+    /// <param name="useRelativePaths">Whether or not to save files using relative paths instead of full paths</param>
     /// <param name="includeOnlySelectedFiles">Whether or not to include only selected files in the playlist</param>
-    public PlaylistOptions(string name, PlaylistFormat format, bool includeOnlySelectedFiles)
+    public PlaylistOptions(string path, PlaylistFormat format, bool useRelativePaths, bool includeOnlySelectedFiles)
     {
-        Name = name;
+        Path = path;
         Format = format;
+        UseRelativePaths = useRelativePaths;
         IncludeOnlySelectedFiles = includeOnlySelectedFiles;
     }
 }

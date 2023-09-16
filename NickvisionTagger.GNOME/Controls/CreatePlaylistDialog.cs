@@ -1,3 +1,4 @@
+using Nickvision.GirExt;
 using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Models;
 using System;
@@ -13,9 +14,12 @@ namespace NickvisionTagger.GNOME.Controls;
 public partial class CreatePlaylistDialog : Adw.Window
 {
     private bool _constructing;
+    private string _path;
     
-    [Gtk.Connect] private readonly Adw.EntryRow _nameRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _pathRow;
+    [Gtk.Connect] private readonly Gtk.Button _selectSaveLocationButton;
     [Gtk.Connect] private readonly Adw.ComboRow _formatRow;
+    [Gtk.Connect] private readonly Gtk.Switch _relativePathsSwitch;
     [Gtk.Connect] private readonly Gtk.Switch _selectedFilesOnlySwitch;
     [Gtk.Connect] private readonly Gtk.Button _createButton;
     
@@ -31,18 +35,15 @@ public partial class CreatePlaylistDialog : Adw.Window
     /// <param name="parent">Gtk.Window</param>
     /// <param name="iconName">Icon name for the window</param>
     /// <param name="folderName">The name of the folder, if available</param>
-    private CreatePlaylistDialog(Gtk.Builder builder, Gtk.Window parent, string iconName, string? folderName) : base(builder.GetPointer("_root"), false)
+    private CreatePlaylistDialog(Gtk.Builder builder, Gtk.Window parent, string iconName) : base(builder.GetPointer("_root"), false)
     {
         _constructing = true;
+        _path = "";
         builder.Connect(this);
         //Dialog Settings
         SetIconName(iconName);
         SetTransientFor(parent);
-        if (!string.IsNullOrEmpty(folderName))
-        {
-            _nameRow.SetText(folderName);
-        }
-        _nameRow.OnNotify += (sender, e) =>
+        _pathRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
@@ -52,6 +53,7 @@ public partial class CreatePlaylistDialog : Adw.Window
                 }
             }
         };
+        _selectSaveLocationButton.OnClicked += SelectSaveLocation;
         _createButton.OnClicked += Create;
         Validate();
         _constructing = false;
@@ -62,8 +64,7 @@ public partial class CreatePlaylistDialog : Adw.Window
     /// </summary>
     /// <param name="parent">Gtk.Window</param>
     /// <param name="iconName">Icon name for the window</param>
-    /// <param name="folderName">The name of the folder, if available</param>
-    public CreatePlaylistDialog(Gtk.Window parent, string iconName, string? folderName) : this(Builder.FromFile("create_playlist_dialog.ui"), parent, iconName, folderName)
+    public CreatePlaylistDialog(Gtk.Window parent, string iconName) : this(Builder.FromFile("create_playlist_dialog.ui"), parent, iconName)
     {
         
     }
@@ -73,21 +74,44 @@ public partial class CreatePlaylistDialog : Adw.Window
     /// </summary>
     private void Validate()
     {
-        _nameRow.RemoveCssClass("error");
-        _nameRow.SetTitle(_("Name"));
-        var empty = string.IsNullOrEmpty(_nameRow.GetText());
+        _pathRow.RemoveCssClass("error");
+        _pathRow.SetTitle(_("Path"));
+        var empty = string.IsNullOrEmpty(_pathRow.GetText());
         if (empty)
         {
-            _nameRow.AddCssClass("error");
-            _nameRow.SetTitle(_("Name (Empty)"));
+            _pathRow.AddCssClass("error");
+            _pathRow.SetTitle(_("Path (Empty)"));
         }
-        var valid = !_nameRow.GetText().Intersect(Path.GetInvalidPathChars().Union(Path.GetInvalidFileNameChars())).Any();
-        if (!valid)
+        _createButton.SetSensitive(!empty);
+    }
+    
+    /// <summary>
+    /// Occurs when the select save location button is clicked
+    /// </summary>
+    /// <param name="sender">Gtk.Button</param>
+    /// <param name="e">EventArgs</param>
+    private async void SelectSaveLocation(Gtk.Button sender, EventArgs e)
+    {
+        var fileDialog = Gtk.FileDialog.New();
+        fileDialog.SetTitle(_("Save Playlist"));
+        var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
+        var filterAll = Gtk.FileFilter.New();
+        filterAll.SetName(_("All Files"));
+        foreach (var format in Enum.GetValues<PlaylistFormat>())
         {
-            _nameRow.AddCssClass("error");
-            _nameRow.SetTitle(_("Name (Invalid)"));
+            var extension = format.GetDotExtension();
+            filterAll.AddPattern($"*{extension}");
+            filterAll.AddPattern($"*{extension.ToUpper()}");
         }
-        _createButton.SetSensitive(valid && !empty);
+        filters.Append(filterAll);
+        fileDialog.SetFilters(filters);
+        try
+        {
+            var file = await fileDialog.SaveAsync(this);
+            _path = file.GetPath();
+            _pathRow.SetText(Path.GetFileName(_path));
+        }
+        catch { }
     }
 
     /// <summary>
@@ -97,7 +121,7 @@ public partial class CreatePlaylistDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void Create(Gtk.Button sender, EventArgs e)
     {
-        OnCreate?.Invoke(this, new PlaylistOptions(_nameRow.GetText(), (PlaylistFormat)_formatRow.GetSelected(), _selectedFilesOnlySwitch.GetActive()));
+        OnCreate?.Invoke(this, new PlaylistOptions(_path, (PlaylistFormat)_formatRow.GetSelected(), _relativePathsSwitch.GetActive(), _selectedFilesOnlySwitch.GetActive()));
         Destroy();
     }
 }
