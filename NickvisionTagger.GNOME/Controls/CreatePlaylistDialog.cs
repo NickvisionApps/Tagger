@@ -118,7 +118,7 @@ public partial class CreatePlaylistDialog : Adw.Window
             var extIndex = playlistExtensions.IndexOf((Path.GetExtension(_path) ?? "").ToLower());
             if (extIndex != -1)
             {
-                _formatRow.SetSelected((uint)extIndex);                
+                _formatRow.SetSelected((uint)extIndex);
             }
             _pathRow.SetText(Path.GetFileNameWithoutExtension(_path) ?? "");
         }

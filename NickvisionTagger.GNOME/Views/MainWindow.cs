@@ -688,7 +688,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         fileDialog.SetTitle(_("Open Playlist"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         var filterAll = Gtk.FileFilter.New();
-        filterAll.SetName(_("All Files"));
+        filterAll.SetName(_("All Supported Files"));
         foreach (var format in Enum.GetValues<PlaylistFormat>())
         {
             var filter = Gtk.FileFilter.New();
@@ -809,7 +809,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         fileDialog.SetTitle(_("Open Music File"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         var filterAll = Gtk.FileFilter.New();
-        filterAll.SetName(_("All Files"));
+        filterAll.SetName(_("All Supported Files"));
         foreach (var ext in MusicLibrary.SupportedExtensions)
         {
             var filter = Gtk.FileFilter.New();
