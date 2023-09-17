@@ -101,7 +101,7 @@ public partial class CreatePlaylistDialog : Adw.Window
         foreach (var ext in playlistExtensions)
         {
             var filter = Gtk.FileFilter.New();
-            filter.SetName($"{ext.Replace(".", "").ToUpper()} (*{ext})");
+            filter.SetName(_("{0} Playlist (*{1})", ext.Replace(".", "").ToUpper(), ext));
             filter.AddPattern($"*{ext}");
             filter.AddPattern($"*{ext.ToUpper()}");
             filterAll.AddPattern($"*{ext}");

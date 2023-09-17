@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-15 23:36-0400\n"
+"POT-Creation-Date: 2023-09-16 23:15-0400\n"
 "PO-Revision-Date: 2023-09-14 13:06+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-"
@@ -24,6 +24,11 @@ msgstr ""
 #, csharp-format
 msgid "{0} of {1} selected"
 msgstr "{0}/{1} valittu"
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:104
+#, csharp-format
+msgid "{0} Playlist (*{1})"
+msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:224
 msgid "%artist%- %title%"
@@ -111,7 +116,7 @@ msgstr "albumi"
 msgid "albumartist"
 msgstr ""
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:99
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:100
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:691
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:812
 #, fuzzy
@@ -130,7 +135,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1131
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1193
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1244
-#: NickvisionTagger.GNOME/Blueprints/window.blp:637
+#: NickvisionTagger.GNOME/Blueprints/window.blp:641
 msgid "Apply"
 msgstr "Toteuta"
 
@@ -647,7 +652,7 @@ msgstr "Poista sanoitus"
 msgid "Removing files from playlist..."
 msgstr "Ladataan musiikkitiedostoja kansiosta..."
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:96
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:97
 #, fuzzy
 msgid "Save Playlist"
 msgstr "Luo soittolista"
@@ -1296,11 +1301,11 @@ msgstr "Kopioi sormenjälki leikepöydälle"
 msgid "Toggle Tags Pane"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:632
+#: NickvisionTagger.GNOME/Blueprints/window.blp:636
 msgid "Tag Actions"
 msgstr ""
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:638
+#: NickvisionTagger.GNOME/Blueprints/window.blp:642
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Toteuta muutokset tunnisteeseen (Ctrl+S)"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-15 23:36-0400\n"
+"POT-Creation-Date: 2023-09-16 23:15-0400\n"
 "PO-Revision-Date: 2023-09-12 10:22+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-"
@@ -24,6 +24,11 @@ msgstr ""
 #, csharp-format
 msgid "{0} of {1} selected"
 msgstr "{0} de {1} seleccionados"
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:104
+#, csharp-format
+msgid "{0} Playlist (*{1})"
+msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:224
 msgid "%artist%- %title%"
@@ -119,7 +124,7 @@ msgstr "álbum"
 msgid "albumartist"
 msgstr "artistadelálbum"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:99
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:100
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:691
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:812
 #, fuzzy
@@ -138,7 +143,7 @@ msgstr "Se ha proporcionado un RecordingId no válido a MusicBrainz"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1131
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1193
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1244
-#: NickvisionTagger.GNOME/Blueprints/window.blp:637
+#: NickvisionTagger.GNOME/Blueprints/window.blp:641
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -657,7 +662,7 @@ msgstr "Eliminar letra"
 msgid "Removing files from playlist..."
 msgstr "Cargando archivos de música desde la carpeta…"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:96
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:97
 msgid "Save Playlist"
 msgstr ""
 
@@ -1325,11 +1330,11 @@ msgstr "Copiar firma al portapapeles"
 msgid "Toggle Tags Pane"
 msgstr "Conmutar panel de etiquetas"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:632
+#: NickvisionTagger.GNOME/Blueprints/window.blp:636
 msgid "Tag Actions"
 msgstr "Acciones de etiqueta"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:638
+#: NickvisionTagger.GNOME/Blueprints/window.blp:642
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Aplicar cambios a la etiqueta (Ctrl+S)"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-15 23:36-0400\n"
+"POT-Creation-Date: 2023-09-16 23:15-0400\n"
 "PO-Revision-Date: 2023-09-14 22:10+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -24,6 +24,11 @@ msgstr ""
 #, csharp-format
 msgid "{0} of {1} selected"
 msgstr "{0} sur {1} sélectionné(s)"
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:104
+#, csharp-format
+msgid "{0} Playlist (*{1})"
+msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:224
 msgid "%artist%- %title%"
@@ -119,7 +124,7 @@ msgstr "album"
 msgid "albumartist"
 msgstr "artiste de l’album"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:99
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:100
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:691
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:812
 msgid "All Files"
@@ -137,7 +142,7 @@ msgstr "Un RecordingId invalide a été fourni à MusicBrainz"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1131
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1193
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1244
-#: NickvisionTagger.GNOME/Blueprints/window.blp:637
+#: NickvisionTagger.GNOME/Blueprints/window.blp:641
 msgid "Apply"
 msgstr "Appliquer"
 
@@ -652,7 +657,7 @@ msgstr "Supprimer les paroles"
 msgid "Removing files from playlist..."
 msgstr "Suppression des fichiers de la liste de lecture…"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:96
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:97
 #, fuzzy
 msgid "Save Playlist"
 msgstr "Créer une liste de lecture"
@@ -1315,11 +1320,11 @@ msgstr "Copier l’empreinte vers le presse-papiers"
 msgid "Toggle Tags Pane"
 msgstr "Basculer le volet des balises"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:632
+#: NickvisionTagger.GNOME/Blueprints/window.blp:636
 msgid "Tag Actions"
 msgstr "Actions relatives aux balises"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:638
+#: NickvisionTagger.GNOME/Blueprints/window.blp:642
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Appliquer les changements à la balise (Ctrl+S)"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-15 23:36-0400\n"
+"POT-Creation-Date: 2023-09-16 23:15-0400\n"
 "PO-Revision-Date: 2023-09-14 13:06+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -24,6 +24,11 @@ msgstr ""
 #, csharp-format
 msgid "{0} of {1} selected"
 msgstr "Vybráno {0} z {1}"
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:104
+#, csharp-format
+msgid "{0} Playlist (*{1})"
+msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:224
 msgid "%artist%- %title%"
@@ -118,7 +123,7 @@ msgstr "album"
 msgid "albumartist"
 msgstr "umělecalba"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:99
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:100
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:691
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:812
 msgid "All Files"
@@ -136,7 +141,7 @@ msgstr "Službě MusicBrainz bylo poskytnuto neplatné RecordingId"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1131
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1193
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1244
-#: NickvisionTagger.GNOME/Blueprints/window.blp:637
+#: NickvisionTagger.GNOME/Blueprints/window.blp:641
 msgid "Apply"
 msgstr "Použít"
 
@@ -650,7 +655,7 @@ msgstr "Odebrat řádek"
 msgid "Removing files from playlist..."
 msgstr "Odstraňování souborů z playlistu..."
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:96
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:97
 #, fuzzy
 msgid "Save Playlist"
 msgstr "Vytvořit playlist"
@@ -1304,11 +1309,11 @@ msgstr "Zkopírovat otisk do schránky"
 msgid "Toggle Tags Pane"
 msgstr "Přepnout panel značek"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:632
+#: NickvisionTagger.GNOME/Blueprints/window.blp:636
 msgid "Tag Actions"
 msgstr "Akce značky"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:638
+#: NickvisionTagger.GNOME/Blueprints/window.blp:642
 msgid "Apply Changes To Tag (Ctrl+S)"
 msgstr "Použít změny u značky (Ctrl+S)"
 
