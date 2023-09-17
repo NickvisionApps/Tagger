@@ -7,7 +7,6 @@ public enum PlaylistFormat
 {
     M3U,
     PLS,
-    FPL,
     XSPF,
     SMIL,
     ASX,
