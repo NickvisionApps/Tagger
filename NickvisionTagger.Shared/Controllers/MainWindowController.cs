@@ -33,6 +33,7 @@ public class MainWindowController : IDisposable
     private string? _libraryToLaunch;
     private MusicLibrary? _musicLibrary;
     private bool _forceAllowClose;
+    private bool _hadUserFilenameChange;
     private readonly string[] _genreSuggestions;
     private readonly List<bool> _musicFileChangedFromUpdate;
     private readonly Dictionary<int, PropertyMap> _filesBeingEditedOriginals;
@@ -204,6 +205,7 @@ public class MainWindowController : IDisposable
         AppInfo.TranslatorCredits = _("translator-credits");
         _musicLibrary = null;
         _forceAllowClose = false;
+        _hadUserFilenameChange = false;
         _genreSuggestions = new string[]
         {
             "Blues", "Classic rock", "Country", "Dance", "Disco", "Funk", "Grunge", "Hip-hop", "Jazz", "Metal",
@@ -350,6 +352,14 @@ public class MainWindowController : IDisposable
             IncludeSubfolders = Configuration.Current.IncludeSubfolders,
             SortFilesBy = Configuration.Current.SortFilesBy
         };
+        _musicLibrary.LibraryChangedOnDisk += (sender, e) =>
+        {
+            if (!_hadUserFilenameChange)
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Library was changed on disk."), NotificationSeverity.Informational, "reload"));
+            }
+            _hadUserFilenameChange = false;
+        };
         _musicLibrary.LoadingProgressUpdated += LoadingProgressUpdated;
         if(Configuration.Current.RememberLastOpenedFolder)
         {
@@ -414,9 +424,9 @@ public class MainWindowController : IDisposable
     {
         if (_musicLibrary != null && _musicLibrary.Type == MusicLibraryType.Folder)
         {
-            if (string.IsNullOrEmpty(options.Name))
+            if (string.IsNullOrEmpty(options.Path))
             {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Playlist name can not be empty."), NotificationSeverity.Error));
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Playlist path can not be empty."), NotificationSeverity.Error));
             }
             if (options.IncludeOnlySelectedFiles && SelectedMusicFiles.Count == 0)
             {
@@ -426,9 +436,10 @@ public class MainWindowController : IDisposable
             {
                 NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("No music files in library."), NotificationSeverity.Error));
             }
-            else if(_musicLibrary.CreatePlaylist(options, options.IncludeOnlySelectedFiles ? SelectedMusicFiles.Keys.ToList() : null))
+            var path = _musicLibrary.CreatePlaylist(options, options.IncludeOnlySelectedFiles ? SelectedMusicFiles.Keys.ToList() : null);
+            if(!string.IsNullOrEmpty(path))
             {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Playlist file created successfully."), NotificationSeverity.Success));
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Playlist file created successfully."), NotificationSeverity.Success, "open-playlist", path));
             }
             else
             {
@@ -495,6 +506,7 @@ public class MainWindowController : IDisposable
                 }
                 catch { }
             }
+            _hadUserFilenameChange = updated;
             if(map.Title != pair.Value.Title && map.Title != _("<keep>"))
             {
                 pair.Value.Title = map.Title;

@@ -58,6 +58,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Button _libraryButton;
     [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
+    [Gtk.Connect] private readonly Gtk.Image _imageLibraryMode;
     [Gtk.Connect] private readonly Gtk.Label _selectionLabel;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
     [Gtk.Connect] private readonly Gtk.MenuButton _tagActionsButton;
@@ -499,7 +500,12 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void NotificationSent(object? sender, NotificationSentEventArgs e)
     {
         var toast = Adw.Toast.New(e.Message);
-        if (e.Action == "unsupported")
+        if (e.Action == "reload")
+        {
+            toast.SetButtonLabel(_("Reload"));
+            toast.OnButtonClicked += (_, _) => ReloadLibrary(_applyAction, e);
+        }
+        else if (e.Action == "unsupported")
         {
             toast.SetButtonLabel(_("Help"));
             toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("unsupported"), 0);
@@ -521,6 +527,15 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 var messageDialog = new ScrollingMessageDialog(this, _controller.AppInfo.ID, _("Failed MusicBrainz Lookups"), e.ActionParam);
                 messageDialog.Present();
+            };
+        }
+        else if (e.Action == "open-playlist" && File.Exists(e.ActionParam))
+        {
+            toast.SetButtonLabel(_("Open"));
+            toast.OnButtonClicked += async (_, _) =>
+            {
+                SetLoadingState(_("Loading music files from playlist..."));
+                await _controller.OpenLibraryAsync(e.ActionParam);
             };
         }
         _toastOverlay.AddToast(toast);
@@ -673,7 +688,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         fileDialog.SetTitle(_("Open Playlist"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         var filterAll = Gtk.FileFilter.New();
-        filterAll.SetName(_("All Files"));
+        filterAll.SetName(_("All Supported Files"));
         foreach (var format in Enum.GetValues<PlaylistFormat>())
         {
             var filter = Gtk.FileFilter.New();
@@ -744,9 +759,43 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void CreatePlaylist(Gio.SimpleAction sender, EventArgs e)
     {
-        var createPlaylistDialog = new CreatePlaylistDialog(this, _controller.AppInfo.ID, Path.GetFileName(_controller.MusicLibraryName));
+        var createPlaylistDialog = new CreatePlaylistDialog(this, _controller.AppInfo.ID);
         createPlaylistDialog.OnCreate += (s, po) => _controller.CreatePlaylist(po);
-        createPlaylistDialog.Present();
+        if (!_controller.CanClose)
+        {
+            var dialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
+            dialog.SetIconName(_controller.AppInfo.ID);
+            dialog.AddResponse("cancel", _("Cancel"));
+            dialog.SetDefaultResponse("cancel");
+            dialog.SetCloseResponse("cancel");
+            dialog.AddResponse("discard", _("Discard"));
+            dialog.SetResponseAppearance("discard", Adw.ResponseAppearance.Destructive);
+            dialog.AddResponse("apply", _("Apply"));
+            dialog.SetResponseAppearance("apply", Adw.ResponseAppearance.Suggested);
+            dialog.OnResponse += async (s, ea) =>
+            {
+                if (ea.Response == "apply")
+                {
+                    SetLoadingState(_("Saving tags..."));
+                    await _controller.SaveAllTagsAsync(true);
+                }
+                else if (ea.Response == "discard")
+                {
+                    SetLoadingState(_("Discarding tags..."));
+                    await _controller.DiscardSelectedUnappliedChangesAsync();
+                }
+                if (ea.Response != "cancel")
+                {
+                    createPlaylistDialog.Present();
+                }
+                dialog.Destroy();
+            };
+            dialog.Present();
+        }
+        else
+        {
+            createPlaylistDialog.Present();
+        }
     }
     
     /// <summary>
@@ -760,7 +809,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         fileDialog.SetTitle(_("Open Music File"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         var filterAll = Gtk.FileFilter.New();
-        filterAll.SetName(_("All Files"));
+        filterAll.SetName(_("All Supported Files"));
         foreach (var ext in MusicLibrary.SupportedExtensions)
         {
             var filter = Gtk.FileFilter.New();
@@ -1400,6 +1449,8 @@ public partial class MainWindow : Adw.ApplicationWindow
             _headerBar.RemoveCssClass("flat");
             _title.SetSubtitle(_controller.MusicLibraryName);
             _libraryButton.SetVisible(true);
+            _imageLibraryMode.SetFromIconName(_controller.MusicLibraryType == MusicLibraryType.Folder ? "folder-visiting-symbolic" : "playlist-symbolic");
+            _imageLibraryMode.SetTooltipText(_controller.MusicLibraryType == MusicLibraryType.Folder ? _("Folder Mode") : _("Playlist Mode"));
             _createPlaylistAction.SetEnabled(_controller.MusicLibraryType == MusicLibraryType.Folder);
             _addToPlaylistAction.SetEnabled(_controller.MusicLibraryType == MusicLibraryType.Playlist);
             _removeFromPlaylistAction.SetEnabled(_controller.MusicLibraryType == MusicLibraryType.Playlist);
@@ -1415,8 +1466,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _headerBar.AddCssClass("flat");
             _title.SetSubtitle("");
-            _viewStack.SetVisibleChildName("NoLibrary");
             _libraryButton.SetVisible(false);
+            _imageLibraryMode.SetFromIconName("");
+            _imageLibraryMode.SetTooltipText("");
+            _viewStack.SetVisibleChildName("NoLibrary");
         }
         _selectionLabel.SetLabel(_("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count));
         return false;
@@ -1475,20 +1528,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _durationFileSizeLabel.SetLabel($"{_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}");
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
-        _filenameRow.SetEditable(true);
-        _titleRow.SetEditable(true);
-        _artistRow.SetEditable(true);
-        _albumRow.SetEditable(true);
-        _yearRow.SetEditable(true);
-        _trackRow.SetEditable(true);
-        _trackTotalRow.SetEditable(true);
-        _albumArtistRow.SetEditable(true);
-        _genreRow.SetEditable(true);
-        _commentRow.SetEditable(true);
-        _bpmRow.SetEditable(true);
-        _composerRow.SetEditable(true);
-        _descriptionRow.SetEditable(true);
-        _publisherRow.SetEditable(true);
         if (albumArt == "hasArt")
         {
             _artViewStack.SetVisibleChildName("Image");

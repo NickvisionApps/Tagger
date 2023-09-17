@@ -22,6 +22,8 @@ public enum MusicLibraryType
 public class MusicLibrary : IDisposable
 {
     private bool _disposed;
+    private bool _includeSubfolders;
+    private FileSystemWatcher? _watcher;
     private IPlaylistIO? _playlist;
     
     /// <summary>
@@ -37,10 +39,6 @@ public class MusicLibrary : IDisposable
     /// The path of the music library
     /// </summary>
     public string Path { get; init; }
-    /// <summary>
-    /// Whether or not to include subfolders in scanning for music
-    /// </summary>
-    public bool IncludeSubfolders { get; set; }
     /// <summary>
     /// What to sort files in a music library by
     /// </summary>
@@ -63,7 +61,11 @@ public class MusicLibrary : IDisposable
     /// </summary>
     /// <remarks>Path for folder, file name for playlist</remarks>
     public string Name => Type == MusicLibraryType.Folder ? Path : System.IO.Path.GetFileNameWithoutExtension(Path);
-    
+
+    /// <summary>
+    /// Occurs when the library is changed on disk and not by Tagger (the UI should prompt for a library reload)
+    /// </summary>
+    public event EventHandler<EventArgs> LibraryChangedOnDisk;
     /// <summary>
     /// Occurs when the loading progress is updated
     /// </summary>
@@ -102,6 +104,19 @@ public class MusicLibrary : IDisposable
         if (Directory.Exists(Path))
         {
             Type = MusicLibraryType.Folder;
+            _watcher = new FileSystemWatcher(Path)
+            {
+                NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.FileName | NotifyFilters.CreationTime,
+                EnableRaisingEvents = true
+            };
+            foreach (var extension in SupportedExtensions)
+            {
+                _watcher.Filters.Add($"*{extension}");
+            }
+            _watcher.Created += (sender, e) => LibraryChangedOnDisk?.Invoke(this, EventArgs.Empty);
+            _watcher.Deleted += (sender, e) => LibraryChangedOnDisk?.Invoke(this, EventArgs.Empty);
+            _watcher.Changed += (sender, e) => LibraryChangedOnDisk?.Invoke(this, EventArgs.Empty);
+            _watcher.Renamed += (sender, e) => LibraryChangedOnDisk?.Invoke(this, EventArgs.Empty);
         }
         else if (File.Exists(Path) && Enum.GetValues<PlaylistFormat>().Select(x => x.GetDotExtension()).Contains(System.IO.Path.GetExtension(Path)))
         {
@@ -118,6 +133,23 @@ public class MusicLibrary : IDisposable
     /// Finalizes the MusicLibrary
     /// </summary>
     ~MusicLibrary() => Dispose(false);
+
+    /// <summary>
+    /// Whether or not to include subfolders in scanning for music
+    /// </summary>
+    public bool IncludeSubfolders
+    {
+        get => _includeSubfolders;
+
+        set
+        {
+            _includeSubfolders = value;
+            if (_watcher != null)
+            {
+                _watcher.IncludeSubdirectories = _includeSubfolders;
+            }
+        }
+    }
     
     /// <summary>
     /// Frees resources used by the MusicLibrary object
@@ -141,6 +173,7 @@ public class MusicLibrary : IDisposable
         {
             file.Dispose();
         }
+        _watcher?.Dispose();
         _disposed = true;
     }
     
@@ -165,8 +198,14 @@ public class MusicLibrary : IDisposable
         {
             var files = Type switch
             {
-                MusicLibraryType.Folder => Directory.GetFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly).Where(x => SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
-                MusicLibraryType.Playlist => _playlist!.FilePaths.Where(x => File.Exists(x) && SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())).ToList(),
+                MusicLibraryType.Folder => Directory
+                    .GetFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                    .Where(x => SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower()))
+                    .ToList(),
+                MusicLibraryType.Playlist => _playlist!.FilePaths
+                    .Where(x => (File.Exists(x) || File.Exists(System.IO.Path.GetFullPath(x, System.IO.Path.GetDirectoryName(Path) ?? ""))) && SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower()))
+                    .Select(x => File.Exists(x) ? x : System.IO.Path.GetFullPath(x, System.IO.Path.GetDirectoryName(Path) ?? ""))
+                    .ToList(),
                 _ => new List<string>()
             };
             var i = 0;
@@ -199,34 +238,34 @@ public class MusicLibrary : IDisposable
     /// </summary>
     /// <param name="options">PlaylistOptions</param>
     /// <param name="selectedFiles">A list of indexes of selected files, if available</param>
-    /// <returns>True if successful, else false</returns>
-    public bool CreatePlaylist(PlaylistOptions options, List<int>? selectedFiles)
+    /// <returns>The path of the created playlist, null if not created</returns>
+    public string? CreatePlaylist(PlaylistOptions options, List<int>? selectedFiles)
     {
-        if (Type != MusicLibraryType.Folder || string.IsNullOrEmpty(options.Name))
+        if (Type != MusicLibraryType.Folder || string.IsNullOrEmpty(options.Path))
         {
-            return false;
+            return null;
         }
-        var path = $"{Path}{System.IO.Path.DirectorySeparatorChar}{options.Name}{options.Format.GetDotExtension()}";
+        var path = $"{options.Path}{(System.IO.Path.GetExtension(options.Path).ToLower() != options.Format.GetDotExtension() ? options.Format.GetDotExtension() : "")}";
         var playlist = PlaylistIOFactory.GetInstance().GetPlaylistIO(path, ATL.Playlist.PlaylistFormat.LocationFormatting.FilePath, ATL.Playlist.PlaylistFormat.FileEncoding.UTF8_NO_BOM);
         var paths = new List<string>();
         if (options.IncludeOnlySelectedFiles)
         {
             if (selectedFiles == null || selectedFiles.Count == 0)
             {
-                return false;
+                return null;
             }
-            paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => x.Path));
+            paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Path, x.Path) : x.Path));
         }
         else
         {
             if (MusicFiles.Count == 0)
             {
-                return false;
+                return null;
             }
-            paths.AddRange(MusicFiles.Select(x => x.Path));
+            paths.AddRange(MusicFiles.Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Path, x.Path) : x.Path));
         }
         playlist.FilePaths = paths;
-        return true;
+        return path;
     }
     
     /// <summary>

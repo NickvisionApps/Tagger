@@ -601,7 +601,7 @@ Adw.ApplicationWindow _root {
             Gtk.CenterBox {
               [start]
               Gtk.Box {
-                spacing: 6;
+                spacing: 12;
 
                 Gtk.ToggleButton _flapToggleButton {
                   icon-name: "sidebar-show-symbolic";
@@ -609,13 +609,21 @@ Adw.ApplicationWindow _root {
                   active: bind _libraryFlap.reveal-flap bidirectional;
                   sensitive: false;
                 }
+                
+                Gtk.Separator { }
+
+                Gtk.Image _imageLibraryMode {
+                  styles ["dim-label"]
+                }
 
                 Gtk.Label _selectionLabel {
-                  margin-start: 2;
+                  margin-start: 6;
                   wrap: true;
 
                   styles ["dim-label"]
                 }
+
+                Gtk.Separator { }
               }
 
               [end]
