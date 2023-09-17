@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-16 23:35-0400\n"
-"PO-Revision-Date: 2023-09-14 13:06+0000\n"
+"PO-Revision-Date: 2023-09-17 13:37+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/tr/>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.0.2\n"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1474
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1505
@@ -28,7 +28,7 @@ msgstr "{0} / {1} seçildi"
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:103
 #, csharp-format
 msgid "{0} Playlist (*{1})"
-msgstr ""
+msgstr "{0} Çalma Listesi (*{1})"
 
 #: ../../../Controllers/MainWindowController.cs:224
 msgid "%artist%- %title%"
@@ -125,9 +125,8 @@ msgstr "albumartist"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:691
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:812
-#, fuzzy
 msgid "All Supported Files"
-msgstr "Tüm Dosyalar"
+msgstr "Tüm Desteklenen Dosyalar"
 
 #: ../../../Controllers/MainWindowController.cs:1066
 msgid "An invalid RecordingId was provided to MusicBrainz"
@@ -383,7 +382,7 @@ msgstr "Parmak izi panoya kopyalandı."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1453
 msgid "Folder Mode"
-msgstr ""
+msgstr "Klasör Kipi"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:973
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:992
@@ -453,7 +452,7 @@ msgstr "KiB"
 
 #: ../../../Controllers/MainWindowController.cs:359
 msgid "Library was changed on disk."
-msgstr ""
+msgstr "Kitaplık diskte değiştirildi."
 
 #: ../../../Controllers/MainWindowController.cs:410
 #, csharp-format
@@ -591,28 +590,24 @@ msgstr "Çalma Listesi Aç"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:78
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:36
-#, fuzzy
 msgid "Path"
-msgstr "Dosya Yolu"
+msgstr "Yol"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:83
-#, fuzzy
 msgid "Path (Empty)"
-msgstr "Ad (Boş)"
+msgstr "Yol (Boş)"
 
 #: ../../../Controllers/MainWindowController.cs:442
 msgid "Playlist file created successfully."
 msgstr "Çalma listesi oluşturuldu."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1453
-#, fuzzy
 msgid "Playlist Mode"
-msgstr "Çalma Listesi"
+msgstr "Çalma Listesi Kipi"
 
 #: ../../../Controllers/MainWindowController.cs:429
-#, fuzzy
 msgid "Playlist path can not be empty."
-msgstr "Çalma listesi adı boş olamaz."
+msgstr "Çalma listesi yolu boş olamaz."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:973
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:992
@@ -631,9 +626,8 @@ msgid "publisher"
 msgstr "yayımcı"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:505
-#, fuzzy
 msgid "Reload"
-msgstr "Klasörü Yeniden Yükle"
+msgstr "Yeniden Yükle"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1575
 msgid "Remove Custom Property"
@@ -653,9 +647,8 @@ msgid "Removing files from playlist..."
 msgstr "Müzik dosyaları kitaplıktan kaldırılıyor..."
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:97
-#, fuzzy
 msgid "Save Playlist"
-msgstr "Çalma Listesi Oluştur"
+msgstr "Çalma Listesini Kaydet"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:736
@@ -865,7 +858,7 @@ msgstr "Çalma Listesi"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:43
 msgid "Select Save Location"
-msgstr ""
+msgstr "Kayıt Konumu Seç"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:50
 msgid "Format"
@@ -873,7 +866,7 @@ msgstr "Biçim"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:57
 msgid "Use Relative Paths"
-msgstr ""
+msgstr "Göreli Yolları Kullan"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:67
 msgid "Include Only Selected Files"
