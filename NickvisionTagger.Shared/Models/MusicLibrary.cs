@@ -245,7 +245,7 @@ public class MusicLibrary : IDisposable
         {
             return null;
         }
-        var path = $"{options.Path}{(System.IO.Path.GetExtension(options.Path) != options.Format.GetDotExtension() ? options.Format.GetDotExtension() : "")}";
+        var path = $"{options.Path}{(System.IO.Path.GetExtension(options.Path).ToLower() != options.Format.GetDotExtension() ? options.Format.GetDotExtension() : "")}";
         var playlist = PlaylistIOFactory.GetInstance().GetPlaylistIO(path, ATL.Playlist.PlaylistFormat.LocationFormatting.FilePath, ATL.Playlist.PlaylistFormat.FileEncoding.UTF8_NO_BOM);
         var paths = new List<string>();
         if (options.IncludeOnlySelectedFiles)

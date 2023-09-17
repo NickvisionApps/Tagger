@@ -92,24 +92,34 @@ public partial class CreatePlaylistDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private async void SelectSaveLocation(Gtk.Button sender, EventArgs e)
     {
+        var playlistExtensions = Enum.GetValues<PlaylistFormat>().Select(x => x.GetDotExtension()).ToList();
         var fileDialog = Gtk.FileDialog.New();
         fileDialog.SetTitle(_("Save Playlist"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         var filterAll = Gtk.FileFilter.New();
         filterAll.SetName(_("All Files"));
-        foreach (var format in Enum.GetValues<PlaylistFormat>())
+        foreach (var ext in playlistExtensions)
         {
-            var extension = format.GetDotExtension();
-            filterAll.AddPattern($"*{extension}");
-            filterAll.AddPattern($"*{extension.ToUpper()}");
+            var filter = Gtk.FileFilter.New();
+            filter.SetName($"{ext.Replace(".", "").ToUpper()} (*{ext})");
+            filter.AddPattern($"*{ext}");
+            filter.AddPattern($"*{ext.ToUpper()}");
+            filterAll.AddPattern($"*{ext}");
+            filterAll.AddPattern($"*{ext.ToUpper()}");
+            filters.Append(filter);
         }
-        filters.Append(filterAll);
+        filters.Insert(0, filterAll);
         fileDialog.SetFilters(filters);
         try
         {
             var file = await fileDialog.SaveAsync(this);
             _path = file.GetPath();
-            _pathRow.SetText(Path.GetFileName(_path));
+            var extIndex = playlistExtensions.IndexOf((Path.GetExtension(_path) ?? "").ToLower());
+            if (extIndex != -1)
+            {
+                _formatRow.SetSelected((uint)extIndex);                
+            }
+            _pathRow.SetText(Path.GetFileNameWithoutExtension(_path) ?? "");
         }
         catch { }
     }
