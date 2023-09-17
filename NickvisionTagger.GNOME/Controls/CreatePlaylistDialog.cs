@@ -96,20 +96,21 @@ public partial class CreatePlaylistDialog : Adw.Window
         var fileDialog = Gtk.FileDialog.New();
         fileDialog.SetTitle(_("Save Playlist"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
-        var filterAll = Gtk.FileFilter.New();
-        filterAll.SetName(_("All Files"));
+        Gtk.FileFilter? defaultFilter = null;
         foreach (var ext in playlistExtensions)
         {
             var filter = Gtk.FileFilter.New();
             filter.SetName(_("{0} Playlist (*{1})", ext.Replace(".", "").ToUpper(), ext));
             filter.AddPattern($"*{ext}");
             filter.AddPattern($"*{ext.ToUpper()}");
-            filterAll.AddPattern($"*{ext}");
-            filterAll.AddPattern($"*{ext.ToUpper()}");
             filters.Append(filter);
+            if (ext == playlistExtensions[(int)_formatRow.GetSelected()])
+            {
+                defaultFilter = filter;
+            }
         }
-        filters.Insert(0, filterAll);
         fileDialog.SetFilters(filters);
+        fileDialog.SetDefaultFilter(defaultFilter);
         try
         {
             var file = await fileDialog.SaveAsync(this);
