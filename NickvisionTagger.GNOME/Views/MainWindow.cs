@@ -825,6 +825,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         try
         {
             var file = await fileDialog.OpenAsync(this);
+            var relativeDialog = Adw.MessageDialog.New(this, _("Use Relative Paths?"), _("Would you like to save the added file to the playlist using it's relative path?\nIf not, the full path will be used instead."));
+            relativeDialog.SetIconName(_controller.AppInfo.ID);
+            relativeDialog.AddResponse("no", _("No"));
+            relativeDialog.SetDefaultResponse("no");
+            relativeDialog.SetCloseResponse("no");
+            relativeDialog.AddResponse("yes", _("Yes"));
             if (!_controller.CanClose)
             {
                 var applyDialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
@@ -850,8 +856,14 @@ public partial class MainWindow : Adw.ApplicationWindow
                     }
                     if (eaa.Response != "cancel")
                     {
+                        relativeDialog.OnResponse += async (ss, eaa) =>
+                        {
+                            await _controller.AddFileToPlaylistAsync(file.GetPath(), eaa.Response == "yes");
+                            relativeDialog.Destroy();
+                        };
+                        relativeDialog.Present();
                         SetLoadingState(_("Loading music file..."));
-                        await _controller.AddFileToPlaylist(file.GetPath());
+                        
                     }
                     applyDialog.Destroy();
                 };
@@ -859,8 +871,13 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
             else
             {
+                relativeDialog.OnResponse += async (ss, eaa) =>
+                {
+                    await _controller.AddFileToPlaylistAsync(file.GetPath(), eaa.Response == "yes");
+                    relativeDialog.Destroy();
+                };
+                relativeDialog.Present();
                 SetLoadingState(_("Loading music file..."));
-                await _controller.AddFileToPlaylist(file.GetPath());
             }
         }
         catch { }

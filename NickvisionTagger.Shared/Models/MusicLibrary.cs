@@ -267,17 +267,22 @@ public class MusicLibrary : IDisposable
         playlist.FilePaths = paths;
         return path;
     }
-    
+
     /// <summary>
     /// Adds a file to the playlist
     /// </summary>
     /// <param name="path">The path to the music folder</param>
+    /// <param name="useRelativePath">Whether or not to use the file's relative path instead of full</param>
     /// <returns>True if success, else false</returns>
-    public bool AddFileToPlaylist(string path)
+    public bool AddFileToPlaylist(string path, bool useRelativePath)
     {
         if (Type != MusicLibraryType.Playlist || !File.Exists(path) || !SupportedExtensions.Contains(System.IO.Path.GetExtension(path).ToLower()))
         {
             return false;
+        }
+        if (useRelativePath)
+        {
+            path = System.IO.Path.GetRelativePath(Path, path);
         }
         var paths = _playlist!.FilePaths;
         if (paths.Contains(path))

@@ -451,11 +451,13 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// Adds a music file to the playlist
     /// </summary>
-    public async Task AddFileToPlaylist(string path)
+    /// <param name="path">The full path to the file</param>
+    /// <param name="useRelativePath">Whether or not to use the file's relative path instead of full</param>
+    public async Task AddFileToPlaylistAsync(string path, bool useRelativePath)
     {
         if (_musicLibrary != null && _musicLibrary.Type == MusicLibraryType.Playlist && File.Exists(path) && MusicLibrary.SupportedExtensions.Contains(Path.GetExtension(path).ToLower()))
         {
-            if (_musicLibrary.AddFileToPlaylist(path))
+            if (_musicLibrary.AddFileToPlaylist(path, useRelativePath))
             {
                 await ReloadLibraryAsync();
             }
