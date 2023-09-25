@@ -254,7 +254,7 @@ public class MusicLibrary : IDisposable
             {
                 return null;
             }
-            paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Path, x.Path) : x.Path));
+            paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Type == MusicLibraryType.Folder ? Path : System.IO.Path.GetDirectoryName(Path)!, x.Path) : x.Path));
         }
         else
         {
@@ -262,7 +262,7 @@ public class MusicLibrary : IDisposable
             {
                 return null;
             }
-            paths.AddRange(MusicFiles.Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Path, x.Path) : x.Path));
+            paths.AddRange(MusicFiles.Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Type == MusicLibraryType.Folder ? Path : System.IO.Path.GetDirectoryName(Path)!, x.Path) : x.Path));
         }
         playlist.FilePaths = paths;
         return path;
@@ -282,7 +282,7 @@ public class MusicLibrary : IDisposable
         }
         if (useRelativePath)
         {
-            path = System.IO.Path.GetRelativePath(Path, path);
+            path = System.IO.Path.GetRelativePath(Type == MusicLibraryType.Folder ? Path : System.IO.Path.GetDirectoryName(Path)!, path);
         }
         var paths = _playlist!.FilePaths;
         if (paths.Contains(path))
