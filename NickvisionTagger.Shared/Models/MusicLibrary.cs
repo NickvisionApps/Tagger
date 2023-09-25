@@ -203,8 +203,7 @@ public class MusicLibrary : IDisposable
                     .Where(x => SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower()))
                     .ToList(),
                 MusicLibraryType.Playlist => _playlist!.FilePaths
-                    .Where(x => (File.Exists(x) || File.Exists(System.IO.Path.GetFullPath(x, System.IO.Path.GetDirectoryName(Path) ?? ""))) && SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower()))
-                    .Select(x => File.Exists(x) ? x : System.IO.Path.GetFullPath(x, System.IO.Path.GetDirectoryName(Path) ?? ""))
+                    .Where(x => File.Exists(x) && SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower()))
                     .ToList(),
                 _ => new List<string>()
             };
@@ -305,16 +304,14 @@ public class MusicLibrary : IDisposable
         {
             return false;
         }
-        var paths = _playlist!.FilePaths;
         foreach (var index in indexes)
         {
             try
             {
-                paths.Remove(MusicFiles[index].Path);
+                _playlist!.FilePaths.Remove(MusicFiles[index].Path);
             }
             catch { }
         }
-        _playlist.FilePaths = paths;
         return true;
     }
 }
