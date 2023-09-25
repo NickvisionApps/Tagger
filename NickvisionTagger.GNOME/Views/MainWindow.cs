@@ -1430,6 +1430,10 @@ public partial class MainWindow : Adw.ApplicationWindow
                 {
                     comparable = compareTo;
                     _listHeader = compareTo!;
+                    if (_listHeader.Contains($"{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}"))
+                    {
+                        _listHeader = _listHeader.Substring(_listHeader.LastIndexOf($"{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}") + 1);
+                    }
                     if (_listMusicFilesRows.Any())
                     {
                         if (_listMusicFilesRows[^1].HasCssClass("start-row"))
