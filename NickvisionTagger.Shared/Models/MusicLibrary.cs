@@ -304,14 +304,16 @@ public class MusicLibrary : IDisposable
         {
             return false;
         }
+        var paths = _playlist!.FilePaths;
         foreach (var index in indexes)
         {
             try
             {
-                _playlist!.FilePaths.Remove(MusicFiles[index].Path);
+                paths.Remove(MusicFiles[index].Path);
             }
             catch { }
         }
+         _playlist.FilePaths = paths;
         return true;
     }
 }
