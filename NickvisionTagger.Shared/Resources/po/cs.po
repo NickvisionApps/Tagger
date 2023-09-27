@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-16 23:35-0400\n"
-"PO-Revision-Date: 2023-09-24 09:00+0000\n"
+"PO-Revision-Date: 2023-09-27 01:32+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/cs/>\n"
@@ -384,7 +384,7 @@ msgstr "Otisk byl zkopírován do schránky."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1453
 msgid "Folder Mode"
-msgstr ""
+msgstr "Režim složek"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:973
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:992
@@ -454,7 +454,7 @@ msgstr "KiB"
 
 #: ../../../Controllers/MainWindowController.cs:359
 msgid "Library was changed on disk."
-msgstr ""
+msgstr "Knihovna byla změněna na disku."
 
 #: ../../../Controllers/MainWindowController.cs:410
 #, csharp-format
@@ -593,28 +593,24 @@ msgstr "Otevřít playlist"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:78
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:36
-#, fuzzy
 msgid "Path"
-msgstr "Cesta k souboru"
+msgstr "Cesta"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:83
-#, fuzzy
 msgid "Path (Empty)"
-msgstr "Název (prázdný)"
+msgstr "Cesta (prázdná)"
 
 #: ../../../Controllers/MainWindowController.cs:442
 msgid "Playlist file created successfully."
 msgstr "Soubor playlistu úspěšně vytvořen."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1453
-#, fuzzy
 msgid "Playlist Mode"
-msgstr "Playlist"
+msgstr "Režim playlistů"
 
 #: ../../../Controllers/MainWindowController.cs:429
-#, fuzzy
 msgid "Playlist path can not be empty."
-msgstr "Název playlistu nemůže být prázdný."
+msgstr "Cesta playlistu nemůže být prázdná."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:973
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:992
@@ -633,9 +629,8 @@ msgid "publisher"
 msgstr "vydavatel"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:505
-#, fuzzy
 msgid "Reload"
-msgstr "Znovu načíst složku"
+msgstr "Znovu načíst"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1575
 msgid "Remove Custom Property"
@@ -655,9 +650,8 @@ msgid "Removing files from playlist..."
 msgstr "Odstraňování souborů z playlistu..."
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:97
-#, fuzzy
 msgid "Save Playlist"
-msgstr "Vytvořit playlist"
+msgstr "Uložit playlist"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:736
@@ -865,7 +859,7 @@ msgstr "Playlist"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:43
 msgid "Select Save Location"
-msgstr ""
+msgstr "Vyberte místo uložení"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:50
 msgid "Format"
@@ -873,7 +867,7 @@ msgstr "Formát"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:57
 msgid "Use Relative Paths"
-msgstr ""
+msgstr "Použít relativní cesty"
 
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:67
 msgid "Include Only Selected Files"
