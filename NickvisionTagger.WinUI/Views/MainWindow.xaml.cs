@@ -18,7 +18,6 @@ using Windows.Storage.Pickers;
 using Windows.System;
 using WinRT.Interop;
 using static NickvisionTagger.Shared.Helpers.Gettext;
-using static Vanara.PInvoke.LANGID;
 
 namespace NickvisionTagger.WinUI.Views;
 
@@ -76,9 +75,37 @@ public sealed partial class MainWindow : Window
         };
         //Localize Strings
         MenuFile.Title = _("File");
+        MenuOpenFolder.Text = _("Open Folder");
+        MenuOpenPlaylist.Text = _("Open Playlist");
+        MenuReloadLibrary.Text = _("Reload Library");
         MenuExit.Text = _("Exit");
         MenuEdit.Title = _("Edit");
         MenuSettings.Text = _("Settings");
+        MenuPlaylist.Title = _("Playlist");
+        MenuCreatePlaylist.Text = _("Create Playlist");
+        MenuAddToPlaylist.Text = _("Add to Playlist");
+        MenuRemoveFromPlaylist.Text = _("Remove from Playlist");
+        MenuTag.Title = _("Tag");
+        MenuSaveTag.Text = _("Save Tag");
+        MenuDiscardChanges.Text = _("Discard Unapplied Changed");
+        MenuDeleteTag.Text = _("Delete Tag");
+        MenuManageLyrics.Text = _("Manage Lyrics");
+        MenuAlbumArt.Text = _("Album Art");
+        MenuAlbumArtFront.Text = _("Front");
+        MenuAlbumArtFrontInsert.Text = _("Insert");
+        MenuAlbumArtFrontRemove.Text = _("Remove");
+        MenuAlbumArtFrontExport.Text = _("Export");
+        MenuAlbumArtBack.Text = _("Back");
+        MenuAlbumArtBackInsert.Text = _("Insert");
+        MenuAlbumArtBackRemove.Text = _("Remove");
+        MenuAlbumArtBackExport.Text = _("Export");
+        MenuConvert.Text = _("Convert");
+        MenuFilenameToTag.Text = _("File Name to Tag");
+        MenuTagToFilename.Text = _("Tag to File Name");
+        MenuWebServices.Text = _("Web Services");
+        MenuDownloadMusicBrainz.Text = _("Download MusicBrainz Metadata");
+        MenuDownloadLyrics.Text = _("Download Lyrics");
+        MenuSubmitToAcoustId.Text = _("Submit to AcoustId");
         MenuHelp.Title = _("Help");
         MenuCheckForUpdates.Text = _("Check for Updates");
         MenuDocumentation.Text = _("Documentation");
