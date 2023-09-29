@@ -37,6 +37,16 @@ public class PreferencesViewController
     }
 
     /// <summary>
+    /// Whether or not to automatically check for updates
+    /// </summary>
+    public bool AutomaticallyCheckForUpdates
+    {
+        get => Configuration.Current.AutomaticallyCheckForUpdates;
+
+        set => Configuration.Current.AutomaticallyCheckForUpdates = value;
+    }
+
+    /// <summary>
     /// Whether or not to remember the last opened folder
     /// </summary>
     public bool RememberLastOpenedFolder

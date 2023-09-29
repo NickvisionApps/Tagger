@@ -2,6 +2,8 @@ using ATL;
 using FuzzySharp;
 using Nickvision.Aura;
 using Nickvision.Aura.Network;
+using Nickvision.Aura.Taskbar;
+using Nickvision.Aura.Update;
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
 using NickvisionTagger.Shared.Models;
@@ -9,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static NickvisionTagger.Shared.Helpers.Gettext;
@@ -30,6 +33,8 @@ public enum AlbumArtType
 public class MainWindowController : IDisposable
 {
     private bool _disposed;
+    private TaskbarItem? _taskbarItem;
+    private Updater? _updater;
     private string? _libraryToLaunch;
     private MusicLibrary? _musicLibrary;
     private bool _forceAllowClose;
@@ -64,33 +69,6 @@ public class MainWindowController : IDisposable
     /// Gets the AppInfo object
     /// </summary>
     public AppInfo AppInfo => Aura.Active.AppInfo;
-    /// <summary>
-    /// Main window width
-    /// </summary>
-    public int WindowWidth
-    {
-        get => Configuration.Current.WindowWidth;
-
-        set => Configuration.Current.WindowWidth = value;
-    }
-    /// <summary>
-    /// Main window height
-    /// </summary>
-    public int WindowHeight
-    {
-        get => Configuration.Current.WindowHeight;
-
-        set => Configuration.Current.WindowHeight = value;
-    }
-    /// <summary>
-    /// Whether or not the main window is maximized
-    /// </summary>
-    public bool WindowMaximized
-    {
-        get => Configuration.Current.WindowMaximized;
-
-        set => Configuration.Current.WindowMaximized = value;
-    }
     /// <summary>
     /// The preferred theme of the application
     /// </summary>
@@ -189,7 +167,7 @@ public class MainWindowController : IDisposable
         }
         Aura.Active.SetConfig<Configuration>("config");
         Configuration.Current.Saved += ConfigurationSaved;
-        AppInfo.Version = "2023.9.2-beta1";
+        AppInfo.Version = "2023.10.0-next";
         AppInfo.ShortName = _("Tagger");
         AppInfo.Description = _("Tag your music");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
@@ -231,6 +209,67 @@ public class MainWindowController : IDisposable
     /// Finalizes the MainWindowController
     /// </summary>
     ~MainWindowController() => Dispose(false);
+
+    /// <summary>
+    /// Main window width
+    /// </summary>
+    public int WindowWidth
+    {
+        get => Configuration.Current.WindowWidth;
+
+        set => Configuration.Current.WindowWidth = value;
+    }
+    /// <summary>
+    /// Main window height
+    /// </summary>
+    public int WindowHeight
+    {
+        get => Configuration.Current.WindowHeight;
+
+        set => Configuration.Current.WindowHeight = value;
+    }
+    /// <summary>
+    /// Whether or not the main window is maximized
+    /// </summary>
+    public bool WindowMaximized
+    {
+        get => Configuration.Current.WindowMaximized;
+
+        set => Configuration.Current.WindowMaximized = value;
+    }
+
+    /// <summary>
+    /// The TaskbarItem
+    /// </summary>
+    public TaskbarItem? TaskbarItem
+    {
+        set
+        {
+            if (value == null)
+            {
+                return;
+            }
+            _taskbarItem = value;
+        }
+    }
+
+    /// <summary>
+    /// The string for greeting on the home page
+    /// </summary>
+    public string Greeting
+    {
+        get
+        {
+            return DateTime.Now.Hour switch
+            {
+                >= 0 and < 6 => _p("Night", "Good Morning!"),
+                < 12 => _p("Morning", "Good Morning!"),
+                < 18 => _("Good Afternoon!"),
+                < 24 => _("Good Evening!"),
+                _ => _("Good Day!")
+            };
+        }
+    }
 
     /// <summary>
     /// Whether or not the window can close freely
@@ -290,6 +329,7 @@ public class MainWindowController : IDisposable
         {
             return;
         }
+        _taskbarItem?.Dispose();
         _musicLibrary?.Dispose();
         NetworkMonitor?.Dispose();
         _disposed = true;
@@ -320,6 +360,10 @@ public class MainWindowController : IDisposable
     /// </summary>
     public async Task StartupAsync()
     {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && Configuration.Current.AutomaticallyCheckForUpdates)
+        {
+            await CheckForUpdatesAsync();
+        }
         NetworkMonitor = await NetworkMonitor.NewAsync();
         if (_libraryToLaunch != null)
         {
@@ -340,6 +384,44 @@ public class MainWindowController : IDisposable
     /// Forces CanClose to be true
     /// </summary>
     public void ForceAllowClose() => _forceAllowClose = true;
+
+    /// <summary>
+    /// Checks for an application update and notifies the user if one is available
+    /// </summary>
+    public async Task CheckForUpdatesAsync()
+    {
+        if (!AppInfo.IsDevVersion)
+        {
+            if (_updater == null)
+            {
+                _updater = await Updater.NewAsync();
+            }
+            var version = await _updater!.GetCurrentStableVersionAsync();
+            if (version != null && version > new System.Version(AppInfo.Version))
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("New update available."), NotificationSeverity.Success, "update"));
+            }
+        }
+    }
+
+    /// <summary>
+    /// Downloads and installs the latest application update for Windows systems
+    /// </summary>
+    /// <returns>True if successful, else false</returns>
+    /// <remarks>CheckForUpdatesAsync must be called before this method</remarks>
+    public async Task<bool> WindowsUpdateAsync()
+    {
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && _updater != null)
+        {
+            var res = await _updater.WindowsUpdateAsync(VersionType.Stable);
+            if (!res)
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Unable to download and install update."), NotificationSeverity.Error));
+            }
+            return res;
+        }
+        return false;
+    }
 
     /// <summary>
     /// Opens a music library
