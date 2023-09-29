@@ -30,6 +30,84 @@
 
                 <ToggleSwitch x:Name="TglAutomaticallyCheckForUpdates"/>
             </wct:SettingsCard>
+
+            <wct:SettingsCard x:Name="CardRememberLastOpenedLibrary">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE93C;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <ToggleSwitch x:Name="TglRememberLastOpenedLibrary"/>
+            </wct:SettingsCard>
+
+            <TextBlock x:Name="LblMusicLibrary" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
+
+            <wct:SettingsCard x:Name="CardIncludeSubfolders">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED41;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <ToggleSwitch x:Name="TglIncludeSubfolders"/>
+            </wct:SettingsCard>
+
+            <wct:SettingsCard x:Name="CardSortFiles">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE174;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <ComboBox x:Name="CmbSortFiles"/>
+            </wct:SettingsCard>
+
+            <TextBlock x:Name="LblMusicFile" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
+
+            <wct:SettingsCard x:Name="CardPreserveModificationTimestamp">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE104;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <ToggleSwitch x:Name="TglPreserveModificationTimestamp"/>
+            </wct:SettingsCard>
+
+            <TextBlock x:Name="LblWebServices" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
+
+            <wct:SettingsCard x:Name="CardOverwriteTagMusicBrainz">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE1CB;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <ToggleSwitch x:Name="TglOverwriteTagMusicBrainz"/>
+            </wct:SettingsCard>
+
+            <wct:SettingsCard x:Name="CardOverwriteAlbumArtMusicBrainz">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8B9;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <ToggleSwitch x:Name="TglOverwriteAlbumArtMusicBrainz"/>
+            </wct:SettingsCard>
+
+            <wct:SettingsCard x:Name="CardOverwriteLyricsFromWebService">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE7BC;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <ToggleSwitch x:Name="TglOverwriteLyricsFromWebService"/>
+            </wct:SettingsCard>
+
+            <wct:SettingsCard x:Name="CardAcoustIdKey">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE928;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <TextBox x:Name="TxtAcoustIdKey" MinWidth="200"/>
+
+                    <Button x:Name="BtnAcoustIdKey" Click="NewAcoustIdKey">
+                        <Button.Content>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF6FA;"/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </wct:SettingsCard>
         </StackPanel>
     </ScrollViewer>
 </ContentDialog>

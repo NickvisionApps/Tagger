@@ -5,6 +5,7 @@ using NickvisionTagger.Shared.Controllers;
 using NickvisionTagger.Shared.Models;
 using System;
 using System.Threading.Tasks;
+using Windows.System;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.WinUI.Views;
@@ -37,9 +38,53 @@ public sealed partial class SettingsDialog : ContentDialog
         CardAutomaticallyCheckForUpdates.Header = _("Automatically Check for Updates");
         TglAutomaticallyCheckForUpdates.OnContent = _("On");
         TglAutomaticallyCheckForUpdates.OffContent = _("Off");
+        CardRememberLastOpenedLibrary.Header = ("Remember Last Opened Library");
+        TglRememberLastOpenedLibrary.OnContent = _("On");
+        TglRememberLastOpenedLibrary.OffContent = _("Off");
+        LblMusicLibrary.Text = _("Music Library");
+        CardIncludeSubfolders.Header = ("Include Subfolders");
+        TglIncludeSubfolders.OnContent = _("On");
+        TglIncludeSubfolders.OffContent = _("Off");
+        CardSortFiles.Header = _("Sort Files By");
+        CmbSortFiles.Items.Add(_("File Name"));
+        CmbSortFiles.Items.Add(_("File Path"));
+        CmbSortFiles.Items.Add(_("Title"));
+        CmbSortFiles.Items.Add(_("Artist"));
+        CmbSortFiles.Items.Add(_("Album"));
+        CmbSortFiles.Items.Add(_("Year"));
+        CmbSortFiles.Items.Add(_("Track"));
+        CmbSortFiles.Items.Add(_("Genre"));
+        LblMusicFile.Text = _("Music File");
+        CardPreserveModificationTimestamp.Header = _("Preserve Modification Timestamp");
+        TglPreserveModificationTimestamp.OnContent = _("On");
+        TglPreserveModificationTimestamp.OffContent = _("Off");
+        LblWebServices.Text = _("Web Services");
+        CardOverwriteTagMusicBrainz.Header = _("Overwrite Tag With MusicBrainz");
+        CardOverwriteTagMusicBrainz.Description = _("Enable to overwrite existing tag metadata with data found from MusicBrainz. If disabled, only blank tag properties will be filled.");
+        TglOverwriteTagMusicBrainz.OnContent = _("On");
+        TglOverwriteTagMusicBrainz.OffContent = _("Off");
+        CardOverwriteAlbumArtMusicBrainz.Header = _("Overwrite Album Art With MusicBrainz");
+        CardOverwriteAlbumArtMusicBrainz.Description = _("Enable to overwrite existing album art with art found from MusicBrainz.");
+        TglOverwriteAlbumArtMusicBrainz.OnContent = _("On");
+        TglOverwriteAlbumArtMusicBrainz.OffContent = _("Off");
+        CardOverwriteLyricsFromWebService.Header = _("Overwrite Lyrics From Web Service");
+        CardOverwriteLyricsFromWebService.Description = _("Enable to overwrite existing lyrics with that found from downloading lyrics from the web. If disabled, only blank lyrics will be filled.");
+        TglOverwriteLyricsFromWebService.OnContent = _("On");
+        TglOverwriteLyricsFromWebService.OffContent = _("Off");
+        CardAcoustIdKey.Header = _("AcoustId User API Key");
+        TxtAcoustIdKey.PlaceholderText = _("Enter key here");
+        ToolTipService.SetToolTip(BtnAcoustIdKey, _("Get New API Key"));
         //Load Config
         CmbTheme.SelectedIndex = (int)_controller.Theme;
         TglAutomaticallyCheckForUpdates.IsOn = _controller.AutomaticallyCheckForUpdates;
+        TglRememberLastOpenedLibrary.IsOn = _controller.RememberLastOpenedFolder;
+        TglIncludeSubfolders.IsOn = _controller.IncludeSubfolders;
+        CmbSortFiles.SelectedIndex = (int)_controller.SortFilesBy;
+        TglPreserveModificationTimestamp.IsOn = _controller.PreserveModificationTimestamp;
+        TglOverwriteTagMusicBrainz.IsOn = _controller.OverwriteTagWithMusicBrainz;
+        TglOverwriteAlbumArtMusicBrainz.IsOn = _controller.OverwriteAlbumArtWithMusicBrainz;
+        TglOverwriteLyricsFromWebService.IsOn = _controller.OverwriteLyricsWithWebService;
+        TxtAcoustIdKey.Text = _controller.AcoustIdUserAPIKey;
     }
 
     /// <summary>
@@ -58,6 +103,14 @@ public sealed partial class SettingsDialog : ContentDialog
                 needsRestart = true;
             }
             _controller.AutomaticallyCheckForUpdates = TglAutomaticallyCheckForUpdates.IsOn;
+            _controller.RememberLastOpenedFolder = TglRememberLastOpenedLibrary.IsOn;
+            _controller.IncludeSubfolders = TglIncludeSubfolders.IsOn;
+            _controller.SortFilesBy = (SortBy)CmbSortFiles.SelectedIndex;
+            _controller.PreserveModificationTimestamp = TglPreserveModificationTimestamp.IsOn;
+            _controller.OverwriteTagWithMusicBrainz = TglOverwriteTagMusicBrainz.IsOn;
+            _controller.OverwriteAlbumArtWithMusicBrainz = TglOverwriteAlbumArtMusicBrainz.IsOn;
+            _controller.OverwriteLyricsWithWebService = TglOverwriteLyricsFromWebService.IsOn;
+            _controller.AcoustIdUserAPIKey = TxtAcoustIdKey.Text;
             _controller.SaveConfiguration();
             if (needsRestart)
             {
@@ -86,4 +139,11 @@ public sealed partial class SettingsDialog : ContentDialog
     /// <param name="sender">object</param>
     /// <param name="e">SizeChangedEventArgs</param>
     private void ScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e) => StackPanel.Margin = new Thickness(0, 0, ScrollViewer.ComputedVerticalScrollBarVisibility == Visibility.Visible ? 14 : 0, 0);
+
+    /// <summary>
+    /// Occurs when the new acoust id key button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void NewAcoustIdKey(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri(_controller.AcoustIdUserAPIKeyLink));
 }
