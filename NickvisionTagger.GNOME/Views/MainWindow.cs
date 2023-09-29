@@ -293,12 +293,20 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.ShellNotificationSent += ShellNotificationSent;
         _controller.LoadingStateUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () =>
         {
-            SetLoadingState(e);
+            _viewStack.SetVisibleChildName("Loading");
+            _loadingLabel.SetText(e);
+            _loadingProgressBar.SetVisible(false);
+            _loadingProgressLabel.SetVisible(false);
+            _applyAction.SetEnabled(false);
+            _tagActionsButton.SetSensitive(false);
             return false;
         });
         _controller.LoadingProgressUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () =>
         {
-            UpdateLoadingProgress(e);
+            _loadingProgressBar.SetVisible(true);
+            _loadingProgressLabel.SetVisible(true);
+            _loadingProgressBar.SetFraction((double)e.Value / (double)e.MaxValue);
+            _loadingProgressLabel.SetLabel(e.Message);
             return false;
         });
         _controller.MusicLibraryUpdated += (sender, e) => GLib.Functions.IdleAdd(0, MusicLibraryUpdated);
@@ -570,32 +578,6 @@ public partial class MainWindow : Adw.ApplicationWindow
             notification.SetIcon(fileIcon);
         }
         _application.SendNotification(_controller.AppInfo.ID, notification);
-    }
-
-    /// <summary>
-    /// Sets the app into a loading state
-    /// </summary>
-    /// <param name="message">The message to show on the loading screen</param>
-    private void SetLoadingState(string message)
-    {
-        _viewStack.SetVisibleChildName("Loading");
-        _loadingLabel.SetText(message);
-        _loadingProgressBar.SetVisible(false);
-        _loadingProgressLabel.SetVisible(false);
-        _applyAction.SetEnabled(false);
-        _tagActionsButton.SetSensitive(false);
-    }
-
-    /// <summary>
-    /// Updates the progress of the loading state
-    /// </summary>
-    /// <param name="e">(int Value, int MaxValue, string Message)</param>
-    private void UpdateLoadingProgress((int Value, int MaxValue, string Message) e)
-    {
-        _loadingProgressBar.SetVisible(true);
-        _loadingProgressLabel.SetVisible(true);
-        _loadingProgressBar.SetFraction((double)e.Value / (double)e.MaxValue);
-        _loadingProgressLabel.SetLabel(e.Message);
     }
 
     /// <summary>

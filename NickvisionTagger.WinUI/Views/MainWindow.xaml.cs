@@ -56,8 +56,23 @@ public sealed partial class MainWindow : Window
         AppWindow.Closing += Window_Closing;
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
-        _controller.LoadingStateUpdated += (sender, e) => DispatcherQueue.TryEnqueue(() => SetLoadingState(e));
-        _controller.LoadingProgressUpdated += (sender, e) => DispatcherQueue.TryEnqueue(() => UpdateLoadingProgress(e));
+        _controller.LoadingStateUpdated += (sender, e) => DispatcherQueue.TryEnqueue(() =>
+        {
+            ViewStack.CurrentPageName = "Loading";
+            LblLoading.Text = e;
+            ProgLoading.Visibility = Visibility.Collapsed;
+            LblLoadingProgress.Visibility = Visibility.Collapsed;
+            MainMenu.IsEnabled = false;
+        });
+        _controller.LoadingProgressUpdated += (sender, e) => DispatcherQueue.TryEnqueue(() =>
+        {
+            ProgLoading.Visibility = Visibility.Visible;
+            LblLoadingProgress.Visibility = Visibility.Visible;
+            ProgLoading.Minimum = 0;
+            ProgLoading.Maximum = e.MaxValue;
+            ProgLoading.Value = e.Value;
+            LblLoadingProgress.Text = e.Message;
+        });
         //Set TitleBar
         TitleBarTitle.Text = _controller.AppInfo.ShortName;
         AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
@@ -326,7 +341,6 @@ public sealed partial class MainWindow : Window
         var folder = await folderPicker.PickSingleFolderAsync();
         if (folder != null)
         {
-            SetLoadingState(_("Loading music files from folder..."));
             await _controller.OpenLibraryAsync(folder.Path);
         }
     }
@@ -415,32 +429,5 @@ public sealed partial class MainWindow : Window
             XamlRoot = MainGrid.XamlRoot
         };
         await aboutDialog.ShowAsync();
-    }
-
-    /// <summary>
-    /// Sets the app into a loading state
-    /// </summary>
-    /// <param name="message">The message to show on the loading screen</param>
-    private void SetLoadingState(string message)
-    {
-        ViewStack.CurrentPageName = "Loading";
-        LblLoading.Text = message;
-        ProgLoading.Visibility = Visibility.Collapsed;
-        LblLoadingProgress.Visibility = Visibility.Collapsed;
-        MainMenu.IsEnabled = false;
-    }
-
-    /// <summary>
-    /// Updates the progress of the loading state
-    /// </summary>
-    /// <param name="e">(int Value, int MaxValue, string Message)</param>
-    private void UpdateLoadingProgress((int Value, int MaxValue, string Message) e)
-    {
-        ProgLoading.Visibility = Visibility.Visible;
-        LblLoadingProgress.Visibility = Visibility.Visible;
-        ProgLoading.Minimum = 0;
-        ProgLoading.Maximum = e.MaxValue;
-        ProgLoading.Value = e.Value;
-        LblLoadingProgress.Text = e.Message;
     }
 }
