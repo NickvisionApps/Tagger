@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Nickvision.Aura.Taskbar;
 using NickvisionTagger.Shared.Controllers;
 using NickvisionTagger.Shared.Events;
+using NickvisionTagger.Shared.Helpers;
 using NickvisionTagger.WinUI.Controls;
 using System;
 using System.Linq;
@@ -18,7 +19,6 @@ using Windows.Storage.Pickers;
 using Windows.System;
 using WinRT.Interop;
 using static NickvisionTagger.Shared.Helpers.Gettext;
-using NickvisionTagger.Shared.Helpers;
 
 namespace NickvisionTagger.WinUI.Views;
 
