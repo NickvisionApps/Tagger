@@ -15,8 +15,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using NickvisionTagger.Shared.Models;
-using static NickvisionTagger.Shared.Helpers.Gettext;
 using static Nickvision.GirExt.GtkExt;
+using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.GNOME.Views;
 
@@ -291,7 +291,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         OnCloseRequest += OnCloseRequested;
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
-        _controller.LoadingStateUpdated += (sender, e) => SetLoadingState(e);
+        _controller.LoadingStateUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () =>
+        {
+            SetLoadingState(e);
+            return false;
+        });
         _controller.LoadingProgressUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () =>
         {
             UpdateLoadingProgress(e);
@@ -483,7 +487,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _application.AddWindow(this);
         Present();
-        SetLoadingState(_("Loading music files from library..."));
         await _controller.StartupAsync();
         _controller.NetworkMonitor!.StateChanged += (sender, state) =>
         {
@@ -509,17 +512,17 @@ public partial class MainWindow : Adw.ApplicationWindow
         else if (e.Action == "unsupported")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("unsupported"), 0);
+            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("unsupported"), 0);
         }
         else if (e.Action == "format")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("format-string"), 0);
+            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("format-string"), 0);
         }
         else if (e.Action == "web")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("web-services"), 0);
+            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("web-services"), 0);
         }
         else if (e.Action == "musicbrainz" && !string.IsNullOrWhiteSpace(e.ActionParam))
         {
@@ -535,7 +538,6 @@ public partial class MainWindow : Adw.ApplicationWindow
             toast.SetButtonLabel(_("Open"));
             toast.OnButtonClicked += async (_, _) =>
             {
-                SetLoadingState(_("Loading music files from playlist..."));
                 await _controller.OpenLibraryAsync(e.ActionParam);
             };
         }
@@ -624,7 +626,6 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (ea.Response == "apply")
                 {
-                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                     Close();
                 }
@@ -654,9 +655,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (obj is Gio.FileHelper file)
         {
             var path = file.GetPath() ?? "";
-            if (Directory.Exists(path) || (File.Exists(path) && Enum.GetValues<PlaylistFormat>().Select(x => x.GetDotExtension()).Contains(Path.GetExtension(path))))
+            if (MusicLibrary.GetIsValidLibraryPath(path))
             {
-                SetLoadingState(_("Loading music files from library..."));
                 _controller.OpenLibraryAsync(path).Wait();
                 return true;
             }
@@ -674,7 +674,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         try
         {
             var file = await folderDialog.SelectFolderAsync(this);
-            SetLoadingState(_("Loading music files from folder..."));
             await _controller.OpenLibraryAsync(file.GetPath());
         }
         catch { }
@@ -706,7 +705,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         try
         {
             var file = await fileDialog.OpenAsync(this);
-            SetLoadingState(_("Loading music files from playlist..."));
             await _controller.OpenLibraryAsync(file.GetPath());
         }
         catch { }
@@ -734,12 +732,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (ea.Response == "apply")
                 {
-                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                 }
                 if (ea.Response != "cancel")
                 {
-                    SetLoadingState(_("Loading music files from library..."));
                     await _controller.ReloadLibraryAsync();
                 }
                 dialog.Destroy();
@@ -748,7 +744,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
-            SetLoadingState(_("Loading music files from library..."));
             await _controller.ReloadLibraryAsync();
         }
     }
@@ -777,12 +772,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (ea.Response == "apply")
                 {
-                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(true);
                 }
                 else if (ea.Response == "discard")
                 {
-                    SetLoadingState(_("Discarding tags..."));
                     await _controller.DiscardSelectedUnappliedChangesAsync();
                 }
                 if (ea.Response != "cancel")
@@ -847,12 +840,10 @@ public partial class MainWindow : Adw.ApplicationWindow
                 {
                     if (eaa.Response == "apply")
                     {
-                        SetLoadingState(_("Saving tags..."));
                         await _controller.SaveAllTagsAsync(false);
                     }
                     if (eaa.Response == "discard")
                     {
-                        SetLoadingState(_("Discarding tags..."));
                         await _controller.DiscardSelectedUnappliedChangesAsync();
                     }
                     if (eaa.Response != "cancel")
@@ -863,7 +854,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                             relativeDialog.Destroy();
                         };
                         relativeDialog.Present();
-                        SetLoadingState(_("Loading music file..."));
                         
                     }
                     applyDialog.Destroy();
@@ -878,7 +868,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                     relativeDialog.Destroy();
                 };
                 relativeDialog.Present();
-                SetLoadingState(_("Loading music file..."));
             }
         }
         catch { }
@@ -923,17 +912,14 @@ public partial class MainWindow : Adw.ApplicationWindow
                         {
                             if (eaa.Response == "apply")
                             {
-                                SetLoadingState(_("Saving tags..."));
                                 await _controller.SaveAllTagsAsync(false);
                             }
                             if (eaa.Response == "discard")
                             {
-                                SetLoadingState(_("Discarding tags..."));
                                 await _controller.DiscardSelectedUnappliedChangesAsync();
                             }
                             if (eaa.Response != "cancel")
                             {
-                                SetLoadingState(_("Removing files from playlist..."));
                                 await _controller.RemoveSelectedFilesFromPlaylistAsync();
                             }
                             applyDialog.Destroy();
@@ -942,7 +928,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                     }
                     else
                     {
-                        SetLoadingState(_("Removing files from playlist..."));
                         await _controller.RemoveSelectedFilesFromPlaylistAsync();
                     }
                 }
@@ -957,22 +942,14 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void Apply(Gio.SimpleAction sender, EventArgs e)
-    {
-        SetLoadingState(_("Saving tags..."));
-        await _controller.SaveSelectedTagsAsync();
-    }
+    private async void Apply(Gio.SimpleAction sender, EventArgs e) => await _controller.SaveSelectedTagsAsync();
 
     /// <summary>
     /// Occurs when the discard unapplied changes action is triggered
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void DiscardUnappliedChanges(Gio.SimpleAction sender, EventArgs e)
-    {
-        SetLoadingState(_("Discarding unapplied changes..."));
-        await _controller.DiscardSelectedUnappliedChangesAsync();
-    }
+    private async void DiscardUnappliedChanges(Gio.SimpleAction sender, EventArgs e) => await _controller.DiscardSelectedUnappliedChangesAsync();
 
     /// <summary>
     /// Occurs when the delete tags action is triggered
@@ -1129,11 +1106,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void DownloadMusicBrainzMetadata(Gio.SimpleAction sender, EventArgs e)
-    {
-        SetLoadingState(_("Downloading MusicBrainz metadata..."));
-        await _controller.DownloadMusicBrainzMetadataAsync();
-    }
+    private async void DownloadMusicBrainzMetadata(Gio.SimpleAction sender, EventArgs e) => await _controller.DownloadMusicBrainzMetadataAsync();
 
     private async void DownloadLyrics(Gio.SimpleAction sender, EventArgs e)
     {
@@ -1152,17 +1125,14 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (ea.Response == "apply")
                 {
-                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                 }
                 else if (ea.Response == "discard")
                 {
-                    SetLoadingState(_("Discarding tags..."));
                     await _controller.DiscardSelectedUnappliedChangesAsync();
                 }
                 if (ea.Response != "cancel")
                 {
-                    SetLoadingState(_("Downloading lyrics..."));
                     await _controller.DownloadLyricsAsync();
                 }
                 dialog.Destroy();
@@ -1171,7 +1141,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
-            SetLoadingState(_("Downloading lyrics..."));
             await _controller.DownloadLyricsAsync();
         }
     }
@@ -1214,17 +1183,14 @@ public partial class MainWindow : Adw.ApplicationWindow
                     {
                         if (ea.Response == "apply")
                         {
-                            SetLoadingState(_("Saving tags..."));
                             await _controller.SaveAllTagsAsync(false);
                         }
                         if (ea.Response == "discard")
                         {
-                            SetLoadingState(_("Discarding tags..."));
                             await _controller.DiscardSelectedUnappliedChangesAsync();
                         }
                         if (ea.Response != "cancel")
                         {
-                            SetLoadingState(_("Submitting data to AcoustId..."));
                             await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
                         }
                         dialog.Destroy();
@@ -1233,7 +1199,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 }
                 else
                 {
-                    SetLoadingState(_("Submitting data to AcoustId..."));
                     await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
                 }
             }
@@ -1265,12 +1230,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (ea.Response == "apply")
                 {
-                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(true);
                 }
                 else if (ea.Response == "discard")
                 {
-                    SetLoadingState(_("Discarding tags..."));
                     await _controller.DiscardSelectedUnappliedChangesAsync();
                 }
                 if (ea.Response != "cancel")
@@ -1693,7 +1656,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("search"), 0);
+    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("search"), 0);
     
     /// <summary>
     /// Occurs when the _listMusicFiles's selection is changed

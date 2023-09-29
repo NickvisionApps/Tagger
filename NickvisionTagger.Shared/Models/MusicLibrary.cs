@@ -150,7 +150,14 @@ public class MusicLibrary : IDisposable
             }
         }
     }
-    
+
+    /// <summary>
+    /// Gets whether or not a path is a valid library path
+    /// </summary>
+    /// <param name="path">The path to a library</param>
+    /// <returns>True if valid, else false</returns>
+    public static bool GetIsValidLibraryPath(string path) => Directory.Exists(path) || (File.Exists(path) && Enum.GetValues<PlaylistFormat>().Select(x => x.GetDotExtension()).Contains(System.IO.Path.GetExtension(path)));
+
     /// <summary>
     /// Frees resources used by the MusicLibrary object
     /// </summary>

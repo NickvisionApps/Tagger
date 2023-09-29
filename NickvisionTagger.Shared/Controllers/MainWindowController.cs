@@ -429,6 +429,10 @@ public class MainWindowController : IDisposable
     /// <param name="path">The path to the music library</param>
     public async Task OpenLibraryAsync(string path)
     {
+        if(!MusicLibrary.GetIsValidLibraryPath(path))
+        {
+            return;
+        }
         _musicLibrary = new MusicLibrary(path)
         {
             IncludeSubfolders = Configuration.Current.IncludeSubfolders,
@@ -476,6 +480,7 @@ public class MainWindowController : IDisposable
     {
         if(_musicLibrary != null)
         {
+            LoadingStateUpdated?.Invoke(this, _("Loading music files from library..."));
             _musicFileChangedFromUpdate.Clear();
             _filesBeingEditedOriginals.Clear();
             MusicFileSaveStates.Clear();
@@ -740,6 +745,7 @@ public class MainWindowController : IDisposable
     {
         if(_musicLibrary != null)
         {
+            LoadingStateUpdated?.Invoke(this, _("Saving tags..."));
             await Task.Run(() =>
             {
                 var i = 0;
@@ -781,6 +787,7 @@ public class MainWindowController : IDisposable
     {
         if(_musicLibrary != null)
         {
+            LoadingStateUpdated?.Invoke(this, _("Saving tags..."));
             await Task.Run(() =>
             {
                 var i = 0;
@@ -818,6 +825,7 @@ public class MainWindowController : IDisposable
     public async Task DiscardSelectedUnappliedChangesAsync()
     {
         var discarded = false;
+        LoadingStateUpdated?.Invoke(this, _("Discarding tags..."));
         await Task.Run(() =>
         {
             var i = 0;
@@ -848,7 +856,8 @@ public class MainWindowController : IDisposable
     public void DeleteSelectedTags()
     {
         var deleted = false;
-        foreach(var pair in SelectedMusicFiles)
+        LoadingStateUpdated?.Invoke(this, _("Deleting tags..."));
+        foreach (var pair in SelectedMusicFiles)
         {
             if(!pair.Value.IsTagEmpty)
             {
@@ -1117,7 +1126,8 @@ public class MainWindowController : IDisposable
         var i = 0;
         var successful = 0;
         var errors = new Dictionary<string, MusicBrainzLoadStatus>();
-        foreach(var pair in SelectedMusicFiles)
+        LoadingStateUpdated?.Invoke(this, _("Downloading MusicBrainz metadata..."));
+        foreach (var pair in SelectedMusicFiles)
         {
             var res = await pair.Value.DownloadFromMusicBrainzAsync("b'ISSq9E4n", AppInfo.Version, Configuration.Current.OverwriteTagWithMusicBrainz, Configuration.Current.OverwriteAlbumArtWithMusicBrainz);
             if(res == MusicBrainzLoadStatus.Success)
@@ -1166,7 +1176,8 @@ public class MainWindowController : IDisposable
     {
         var i = 0;
         var successful = 0;
-        foreach(var pair in SelectedMusicFiles)
+        LoadingStateUpdated?.Invoke(this, _("Downloading lyrics..."));
+        foreach (var pair in SelectedMusicFiles)
         {
             var res = await pair.Value.DownloadLyricsAsync(Configuration.Current.OverwriteLyricsWithWebService);
             if(res)
@@ -1190,6 +1201,7 @@ public class MainWindowController : IDisposable
     {
         if(SelectedMusicFiles.Count == 1)
         {
+            LoadingStateUpdated?.Invoke(this, _("Submitting data to AcoustId..."));
             var result = await SelectedMusicFiles.First().Value.SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(result ? _("Submitted metadata to AcoustId successfully") : _("Unable to submit to AcoustId. Check API key"), result ? NotificationSeverity.Success : NotificationSeverity.Error, "web"));
         }

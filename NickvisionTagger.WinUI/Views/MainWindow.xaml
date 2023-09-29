@@ -39,7 +39,7 @@
             <StackPanel Grid.Column="4" Margin="4,0,4,0" Orientation="Horizontal" Spacing="4">
                 <MenuBar x:Name="MainMenu" IsEnabled="False">
                     <MenuBarItem x:Name="MenuFile">
-                        <MenuFlyoutItem x:Name="MenuOpenFolder">
+                        <MenuFlyoutItem x:Name="MenuOpenFolder" Click="OpenFolder">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE838;"/>
                             </MenuFlyoutItem.Icon>
@@ -421,7 +421,7 @@
                                         <TextBlock x:Name="HomeGettingStartedDescription" TextWrapping="WrapWholeWords"/>
 
                                         <StackPanel Orientation="Horizontal" Spacing="6">
-                                            <Button Height="40" Style="{ThemeResource AccentButtonStyle}">
+                                            <Button Height="40" Style="{ThemeResource AccentButtonStyle}" Click="OpenFolder">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE838;"/>

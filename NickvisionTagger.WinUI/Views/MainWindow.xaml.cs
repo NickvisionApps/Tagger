@@ -8,6 +8,7 @@ using Nickvision.Aura.Taskbar;
 using NickvisionTagger.Shared.Controllers;
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
+using NickvisionTagger.Shared.Models;
 using NickvisionTagger.WinUI.Controls;
 using System;
 using System.Linq;
@@ -55,7 +56,7 @@ public sealed partial class MainWindow : Window
         AppWindow.Closing += Window_Closing;
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
-        _controller.LoadingStateUpdated += (sender, e) => SetLoadingState(e);
+        _controller.LoadingStateUpdated += (sender, e) => DispatcherQueue.TryEnqueue(() => SetLoadingState(e));
         _controller.LoadingProgressUpdated += (sender, e) => DispatcherQueue.TryEnqueue(() => UpdateLoadingProgress(e));
         //Set TitleBar
         TitleBarTitle.Text = _controller.AppInfo.ShortName;
@@ -162,6 +163,12 @@ public sealed partial class MainWindow : Window
             var accent = (SolidColorBrush)Application.Current.Resources["AccentFillColorDefaultBrush"];
             _controller.TaskbarItem = TaskbarItem.ConnectWindows(_hwnd, new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(accent.Color.A, accent.Color.R, accent.Color.G, accent.Color.B)), MainGrid.ActualTheme == ElementTheme.Dark ? System.Drawing.Brushes.Black : System.Drawing.Brushes.White);
             await _controller.StartupAsync();
+            _controller.NetworkMonitor!.StateChanged += (sender, state) =>
+            {
+                MenuDownloadMusicBrainz.IsEnabled = state;
+                MenuDownloadLyrics.IsEnabled = state;
+                MenuSubmitToAcoustId.IsEnabled = state;
+            };
             MainMenu.IsEnabled = true;
             ViewStack.CurrentPageName = "Home";
             _isOpened = true;
@@ -247,9 +254,9 @@ public sealed partial class MainWindow : Window
         if(e.DataView.Contains(StandardDataFormats.StorageItems))
         {
             var first = (await e.DataView.GetStorageItemsAsync()).FirstOrDefault();
-            if(first != null)
+            if(first != null && MusicLibrary.GetIsValidLibraryPath(first.Path))
             {
-                
+                await _controller.OpenLibraryAsync(first.Path);
             }
         }
     }
@@ -262,7 +269,7 @@ public sealed partial class MainWindow : Window
     private void OnDragOver(object sender, DragEventArgs e)
     {
         e.AcceptedOperation = DataPackageOperation.Copy | DataPackageOperation.Link;
-        e.DragUIOverride.Caption = _("Drop here to open folder");
+        e.DragUIOverride.Caption = _("Drop here to open library");
         e.DragUIOverride.IsGlyphVisible = true;
         e.DragUIOverride.IsContentVisible = true;
         e.DragUIOverride.IsCaptionVisible = true;
@@ -305,6 +312,24 @@ public sealed partial class MainWindow : Window
     /// <param name="sender">object?</param>
     /// <param name="e">ShellNotificationSentEventArgs</param>
     private void ShellNotificationSent(object? sender, ShellNotificationSentEventArgs e) => new ToastContentBuilder().AddText(e.Title).AddText(e.Message).Show();
+
+    /// <summary>
+    /// Occurs when the open folder menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void OpenFolder(object sender, RoutedEventArgs e)
+    {
+        var folderPicker = new FolderPicker();
+        InitializeWithWindow(folderPicker);
+        folderPicker.FileTypeFilter.Add("*");
+        var folder = await folderPicker.PickSingleFolderAsync();
+        if (folder != null)
+        {
+            SetLoadingState(_("Loading music files from folder..."));
+            await _controller.OpenLibraryAsync(folder.Path);
+        }
+    }
 
     /// <summary>
     /// Occurs when the exit menu item is clicked
