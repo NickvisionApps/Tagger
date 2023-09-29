@@ -121,6 +121,9 @@ public sealed partial class MainWindow : Window
         HomeGettingStartedDescription.Text = _("Open a library with music to get started.");
         HomeOpenFolderButtonLabel.Text = _("Open Folder");
         HomeOpenPlaylistButtonLabel.Text = _("Open Playlist");
+        HomeGettingHelpTitle.Text = _("Getting Help");
+        HomeGettingHelpDescription.Text = _("Tagger includes online documentation to guide users through its more complicated features.");
+        HomeDocumentationButtonLabel.Text = _("Documentation");
     }
 
     /// <summary>

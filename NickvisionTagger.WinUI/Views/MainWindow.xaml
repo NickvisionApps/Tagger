@@ -382,6 +382,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="200"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
                                 <Border x:Name="HomeBanner" Grid.Row="0" HorizontalAlignment="Stretch" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
@@ -428,6 +429,24 @@
                                                 </Button.Content>
                                             </Button>
                                         </StackPanel>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Grid.Row="2" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
+                                    <StackPanel Margin="12,12,12,12" Orientation="Vertical" Spacing="12">
+                                        <TextBlock x:Name="HomeGettingHelpTitle" TextWrapping="WrapWholeWords" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                        <TextBlock x:Name="HomeGettingHelpDescription" TextWrapping="WrapWholeWords"/>
+
+                                        <Button Height="40" Click="Documentation">
+                                            <Button.Content>
+                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE11B;"/>
+
+                                                    <TextBlock x:Name="HomeDocumentationButtonLabel" TextWrapping="WrapWholeWords"/>
+                                                </StackPanel>
+                                            </Button.Content>
+                                        </Button>
                                     </StackPanel>
                                 </Border>
                             </Grid>
