@@ -376,6 +376,18 @@
                         </StackPanel>
                     </nickvision:ViewStackPage>
 
+                    <nickvision:ViewStackPage PageName="Loading">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical" Spacing="24">
+                            <ProgressRing />
+
+                            <TextBlock x:Name="LblLoading" HorizontalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                            <ProgressBar x:Name="ProgLoading" MinWidth="300"/>
+
+                            <TextBlock x:Name="LblLoadingProgress" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </nickvision:ViewStackPage>
+
                     <nickvision:ViewStackPage PageName="Home">
                         <ScrollViewer>
                             <Grid Margin="12,0,12,0" RowSpacing="12">
@@ -438,15 +450,37 @@
 
                                         <TextBlock x:Name="HomeGettingHelpDescription" TextWrapping="WrapWholeWords"/>
 
-                                        <Button Height="40" Click="Documentation">
-                                            <Button.Content>
-                                                <StackPanel Orientation="Horizontal" Spacing="6">
-                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE11B;"/>
+                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                            <Button Height="40" Click="Documentation">
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE11B;"/>
 
-                                                    <TextBlock x:Name="HomeDocumentationButtonLabel" TextWrapping="WrapWholeWords"/>
-                                                </StackPanel>
-                                            </Button.Content>
-                                        </Button>
+                                                        <TextBlock x:Name="HomeDocumentationButtonLabel" TextWrapping="WrapWholeWords"/>
+                                                    </StackPanel>
+                                                </Button.Content>
+                                            </Button>
+
+                                            <Button Height="40" Click="ReportABug">
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xEBE8;"/>
+
+                                                        <TextBlock x:Name="HomeReportABugButtonLabel" TextWrapping="WrapWholeWords"/>
+                                                    </StackPanel>
+                                                </Button.Content>
+                                            </Button>
+
+                                            <Button Height="40" Click="Discussions">
+                                                <Button.Content>
+                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8F2;"/>
+
+                                                        <TextBlock x:Name="HomeDiscussionsButtonLabel" TextWrapping="WrapWholeWords"/>
+                                                    </StackPanel>
+                                                </Button.Content>
+                                            </Button>
+                                        </StackPanel>
                                     </StackPanel>
                                 </Border>
                             </Grid>

@@ -55,6 +55,8 @@ public sealed partial class MainWindow : Window
         AppWindow.Closing += Window_Closing;
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
+        _controller.LoadingStateUpdated += (sender, e) => SetLoadingState(e);
+        _controller.LoadingProgressUpdated += (sender, e) => DispatcherQueue.TryEnqueue(() => UpdateLoadingProgress(e));
         //Set TitleBar
         TitleBarTitle.Text = _controller.AppInfo.ShortName;
         AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
@@ -124,6 +126,8 @@ public sealed partial class MainWindow : Window
         HomeGettingHelpTitle.Text = _("Getting Help");
         HomeGettingHelpDescription.Text = _("Tagger includes online documentation to guide users through its more complicated features.");
         HomeDocumentationButtonLabel.Text = _("Documentation");
+        HomeReportABugButtonLabel.Text = _("Report a Bug");
+        HomeDiscussionsButtonLabel.Text = _("Discussions");
     }
 
     /// <summary>
@@ -155,9 +159,9 @@ public sealed partial class MainWindow : Window
         if(!_isOpened)
         {
             ViewStack.CurrentPageName = "Startup";
-            await _controller.StartupAsync();
             var accent = (SolidColorBrush)Application.Current.Resources["AccentFillColorDefaultBrush"];
             _controller.TaskbarItem = TaskbarItem.ConnectWindows(_hwnd, new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(accent.Color.A, accent.Color.R, accent.Color.G, accent.Color.B)), MainGrid.ActualTheme == ElementTheme.Dark ? System.Drawing.Brushes.Black : System.Drawing.Brushes.White);
+            await _controller.StartupAsync();
             MainMenu.IsEnabled = true;
             ViewStack.CurrentPageName = "Home";
             _isOpened = true;
@@ -386,5 +390,32 @@ public sealed partial class MainWindow : Window
             XamlRoot = MainGrid.XamlRoot
         };
         await aboutDialog.ShowAsync();
+    }
+
+    /// <summary>
+    /// Sets the app into a loading state
+    /// </summary>
+    /// <param name="message">The message to show on the loading screen</param>
+    private void SetLoadingState(string message)
+    {
+        ViewStack.CurrentPageName = "Loading";
+        LblLoading.Text = message;
+        ProgLoading.Visibility = Visibility.Collapsed;
+        LblLoadingProgress.Visibility = Visibility.Collapsed;
+        MainMenu.IsEnabled = false;
+    }
+
+    /// <summary>
+    /// Updates the progress of the loading state
+    /// </summary>
+    /// <param name="e">(int Value, int MaxValue, string Message)</param>
+    private void UpdateLoadingProgress((int Value, int MaxValue, string Message) e)
+    {
+        ProgLoading.Visibility = Visibility.Visible;
+        LblLoadingProgress.Visibility = Visibility.Visible;
+        ProgLoading.Minimum = 0;
+        ProgLoading.Maximum = e.MaxValue;
+        ProgLoading.Value = e.Value;
+        LblLoadingProgress.Text = e.Message;
     }
 }

@@ -442,8 +442,8 @@ public class MainWindowController : IDisposable
             }
             _hadUserFilenameChange = false;
         };
-        _musicLibrary.LoadingProgressUpdated += LoadingProgressUpdated;
-        if(Configuration.Current.RememberLastOpenedFolder)
+        _musicLibrary.LoadingProgressUpdated += (sender, e) => UpdateLoadingProgress(e);
+        if (Configuration.Current.RememberLastOpenedFolder)
         {
             Configuration.Current.LastOpenedFolder = _musicLibrary.Path;
             Aura.Active.SaveConfig("config");
@@ -763,7 +763,7 @@ public class MainWindowController : IDisposable
                         }
                     }
                     i++;
-                    LoadingProgressUpdated?.Invoke(this, (i, _musicLibrary.MusicFiles.Count, $"{i}/{_musicLibrary.MusicFiles.Count}"));
+                    UpdateLoadingProgress((i, _musicLibrary.MusicFiles.Count, $"{i}/{_musicLibrary.MusicFiles.Count}"));
                 }
             });
             _filesBeingEditedOriginals.Clear();
@@ -804,7 +804,7 @@ public class MainWindowController : IDisposable
                         }
                     }
                     i++;
-                    LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
+                    UpdateLoadingProgress((i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
                 }
             });
             _filesBeingEditedOriginals.Clear();
@@ -831,7 +831,7 @@ public class MainWindowController : IDisposable
                     discarded = true;
                 }
                 i++;
-                LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
+                UpdateLoadingProgress((i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
             }
         });
         _filesBeingEditedOriginals.Clear();
@@ -1136,7 +1136,7 @@ public class MainWindowController : IDisposable
                 errors.Add(p, res);
             }
             i++;
-            LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
+            UpdateLoadingProgress((i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
         }
         UpdateSelectedMusicFilesProperties();
         MusicFileSaveStatesChanged?.Invoke(this, successful > 0);
@@ -1176,7 +1176,7 @@ public class MainWindowController : IDisposable
                 MusicFileSaveStates[pair.Key] = false;
             }
             i++;
-            LoadingProgressUpdated?.Invoke(this, (i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
+            UpdateLoadingProgress((i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
         }
         MusicFileSaveStatesChanged?.Invoke(this, successful > 0);
         NotificationSent?.Invoke(this, new NotificationSentEventArgs(successful > 0 ? _("Downloaded lyrics for {0} files successfully", successful) : _("No lyrics were downloaded"), successful > 0 ? NotificationSeverity.Success : NotificationSeverity.Error, "web"));
@@ -1482,6 +1482,20 @@ public class MainWindowController : IDisposable
                 await ReloadLibraryAsync();
             }
         }
+    }
+
+    /// <summary>
+    /// Triggers the loading progress updated event while updating taskbar icon
+    /// </summary>
+    /// <param name="e">(int Value, int MaxValue, string Message)</param>
+    private void UpdateLoadingProgress((int Value, int MaxValue, string Message) e)
+    {
+        if (_taskbarItem != null)
+        {
+            _taskbarItem.Progress = (double)e.Value / (double)e.MaxValue;
+            _taskbarItem.ProgressState = e.Value == e.MaxValue ? ProgressFlags.NoProgress : ProgressFlags.Normal;
+        }
+        LoadingProgressUpdated?.Invoke(this, e);
     }
 
     /// <summary>
