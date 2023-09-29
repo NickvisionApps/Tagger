@@ -21,10 +21,6 @@
     <None Remove="..\NickvisionTagger.Shared\Docs\po\LINGUAS" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include="..\NickvisionTagger.Shared\Docs\po\LINGUAS" />
-  </ItemGroup>
-
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="echo Compiling extra resources..." />
     <Exec Command="blueprint-compiler batch-compile ./Blueprints ./Blueprints ./Blueprints/*.blp" />

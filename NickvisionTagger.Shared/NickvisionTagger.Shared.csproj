@@ -6,10 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Docs\po\LINGUAS" />
     <None Remove="Resources\org.nickvision.tagger-devel.svg" />
     <None Remove="Resources\org.nickvision.tagger-symbolic.svg" />
     <None Remove="Resources\org.nickvision.tagger.png" />
     <None Remove="Resources\org.nickvision.tagger.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Docs\po\LINGUAS" />
   </ItemGroup>
 
   <ItemGroup>

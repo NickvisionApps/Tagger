@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using NickvisionTagger.Shared.Models;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 using static Nickvision.GirExt.GtkExt;
+using NickvisionTagger.Shared.Helpers;
 
 namespace NickvisionTagger.GNOME.Views;
 
@@ -453,7 +454,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
-        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("index"), 0);
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("index"), 0);
         AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action

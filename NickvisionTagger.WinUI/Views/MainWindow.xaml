@@ -130,7 +130,7 @@
                         </MenuFlyoutItem>
                     </MenuBarItem>
 
-                    <MenuBarItem x:Name="MenuTag">
+                    <MenuBarItem x:Name="MenuTag" IsEnabled="False">
                         <MenuFlyoutItem x:Name="MenuSaveTag">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE105;"/>

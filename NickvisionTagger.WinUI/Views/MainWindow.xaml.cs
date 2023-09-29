@@ -18,6 +18,7 @@ using Windows.Storage.Pickers;
 using Windows.System;
 using WinRT.Interop;
 using static NickvisionTagger.Shared.Helpers.Gettext;
+using NickvisionTagger.Shared.Helpers;
 
 namespace NickvisionTagger.WinUI.Views;
 
@@ -347,7 +348,7 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private async void Documentation(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri("https://htmlpreview.github.io/?https://raw.githubusercontent.com/NickvisionApps/Tagger/main/NickvisionTagger.Shared/Docs/html/C/index.html"));
+    private async void Documentation(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri(DocumentationHelpers.GetHelpURL("index")));
 
     /// <summary>
     /// Occurs when the github repo menu item is clicked
