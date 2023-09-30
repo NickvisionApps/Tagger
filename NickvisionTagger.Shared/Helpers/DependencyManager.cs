@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace NickvisionTagger.Shared.Helpers;
 
@@ -10,7 +11,7 @@ internal static class DependencyManager
 
     static DependencyManager()
     {
-        _fpcalcPath = "";
+        _fpcalcPath = "fpcalc";
     }
 
     /// <summary>
@@ -22,21 +23,24 @@ internal static class DependencyManager
         {
             if(!File.Exists(_fpcalcPath))
             {
-                var prefixes = new List<string>() {
-                    Directory.GetParent(Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName)!.FullName,
-                    Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName,
-                    "/usr"
-                };
-                foreach (var prefix in prefixes)
+                if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
-                    var path = $"{prefix}/bin/fpcalc";
-                    if (File.Exists(path))
+                    var prefixes = new List<string>() 
                     {
-                        _fpcalcPath = path;
-                        return _fpcalcPath;
+                        Directory.GetParent(Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName)!.FullName,
+                        Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName,
+                        "/usr"
+                    };
+                    foreach (var prefix in prefixes)
+                    {
+                        var path = $"{prefix}/bin/fpcalc";
+                        if (File.Exists(path))
+                        {
+                            _fpcalcPath = path;
+                            return _fpcalcPath;
+                        }
                     }
                 }
-                _fpcalcPath = "fpcalc";
             }
             return _fpcalcPath;
         }
