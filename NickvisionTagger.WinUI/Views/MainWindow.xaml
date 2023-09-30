@@ -648,23 +648,23 @@
 
                                                                 <TextBlock x:Name="LblDurationFileSize" HorizontalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="16" Foreground="Gray"/>
 
-                                                                <TextBox x:Name="TxtFilename" Margin="0,24,0,0"/>
+                                                                <TextBox x:Name="TxtFilename" Margin="0,24,0,0" TextChanged="TagPropertyChanged"/>
 
                                                                 <MenuFlyoutSeparator/>
 
                                                                 <TextBlock x:Name="LblMainProperties" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                                                                <TextBox x:Name="TxtTitle"/>
+                                                                <TextBox x:Name="TxtTitle" TextChanged="TagPropertyChanged"/>
 
-                                                                <TextBox x:Name="TxtArtist"/>
+                                                                <TextBox x:Name="TxtArtist" TextChanged="TagPropertyChanged"/>
 
-                                                                <TextBox x:Name="TxtAlbum"/>
+                                                                <TextBox x:Name="TxtAlbum" TextChanged="TagPropertyChanged"/>
 
-                                                                <TextBox x:Name="TxtAlbumArtist"/>
+                                                                <TextBox x:Name="TxtAlbumArtist" TextChanged="TagPropertyChanged"/>
 
-                                                                <TextBox x:Name="TxtGenre"/>
+                                                                <TextBox x:Name="TxtGenre" TextChanged="TagPropertyChanged"/>
 
-                                                                <TextBox x:Name="TxtYear"/>
+                                                                <TextBox x:Name="TxtYear" TextChanged="TagPropertyChanged"/>
 
                                                                 <Grid ColumnSpacing="12">
                                                                     <Grid.ColumnDefinitions>
@@ -672,27 +672,27 @@
                                                                         <ColumnDefinition Width="Auto"/>
                                                                         <ColumnDefinition Width="*"/>
                                                                     </Grid.ColumnDefinitions>
-                                                                    
-                                                                    <TextBox x:Name="TxtTrack" Grid.Column="0"/>
+
+                                                                    <TextBox x:Name="TxtTrack" Grid.Column="0" TextChanged="TagPropertyChanged"/>
 
                                                                     <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="/"/>
 
-                                                                    <TextBox x:Name="TxtTrackTotal" Grid.Column="2"/>
+                                                                    <TextBox x:Name="TxtTrackTotal" Grid.Column="2" TextChanged="TagPropertyChanged"/>
                                                                 </Grid>
 
                                                                 <MenuFlyoutSeparator/>
 
                                                                 <TextBlock x:Name="LblAdditionProperties" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                                                                <TextBox x:Name="TxtComment"/>
-                                                                
-                                                                <TextBox x:Name="TxtBPM"/>
+                                                                <TextBox x:Name="TxtComment" TextChanged="TagPropertyChanged"/>
 
-                                                                <TextBox x:Name="TxtComposer"/>
+                                                                <TextBox x:Name="TxtBPM" TextChanged="TagPropertyChanged"/>
 
-                                                                <TextBox x:Name="TxtDescription"/>
+                                                                <TextBox x:Name="TxtComposer" TextChanged="TagPropertyChanged"/>
 
-                                                                <TextBox x:Name="TxtPublisher"/>
+                                                                <TextBox x:Name="TxtDescription" TextChanged="TagPropertyChanged"/>
+
+                                                                <TextBox x:Name="TxtPublisher" TextChanged="TagPropertyChanged"/>
 
                                                                 <MenuFlyoutSeparator/>
 

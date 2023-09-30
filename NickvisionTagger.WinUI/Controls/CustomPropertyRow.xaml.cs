@@ -17,9 +17,29 @@ public sealed partial class CustomPropertyRow : UserControl
     public CustomPropertyRow(KeyValuePair<string, string> custom)
     {
         InitializeComponent();
-        TxtProp.Header = custom.Key;
-        TxtProp.Text = custom.Value;
+        Key = custom.Key;
+        Value = custom.Value;
         ToolTipService.SetToolTip(BtnRemove, _("Remove Custom Property"));
+    }
+
+    /// <summary>
+    /// The key of the property
+    /// </summary>
+    public string Key
+    {
+        get => (string)TxtProp.Header;
+
+        set => TxtProp.Header = value;
+    }
+
+    /// <summary>
+    /// The value of the property
+    /// </summary>
+    public string Value
+    {
+        get => TxtProp.Text;
+
+        set => TxtProp.Text = value;
     }
 
     /// <summary>

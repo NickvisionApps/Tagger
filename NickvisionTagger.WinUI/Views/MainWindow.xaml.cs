@@ -810,7 +810,49 @@ public sealed partial class MainWindow : Window
     /// </summary>
     private void TagPropertyChanged(object sender, TextChangedEventArgs e)
     {
-
+        if(!_isSelectionOccuring && _controller.SelectedMusicFiles.Count > 0)
+        {
+            //Update Tags
+            var propMap = new PropertyMap()
+            {
+                Filename = TxtFilename.Text,
+                Title = TxtTitle.Text,
+                Artist = TxtArtist.Text,
+                Album = TxtAlbum.Text,
+                Year = TxtYear.Text,
+                Track = TxtTrack.Text,
+                TrackTotal = TxtTrackTotal.Text,
+                AlbumArtist = TxtAlbumArtist.Text,
+                Genre = TxtGenre.Text,
+                Comment = TxtComment.Text,
+                BeatsPerMinute = TxtBPM.Text,
+                Composer = TxtComposer.Text,
+                Description = TxtDescription.Text,
+                Publisher = TxtPublisher.Text,
+            };
+            if (_controller.SelectedMusicFiles.Count == 1)
+            {
+                foreach (var row in ListCustomProperties.Children.Select(x => (CustomPropertyRow)x))
+                {
+                    propMap.CustomProperties.Add(row.Key, row.Value);
+                }
+            }
+            _controller.UpdateTags(propMap, false);
+            //Update Rows
+            foreach (var pair in _controller.SelectedMusicFiles)
+            {
+                if (!string.IsNullOrEmpty(pair.Value.Title))
+                {
+                    _musicFileRows[pair.Key].Title = $"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{pair.Value.Title}";
+                    _musicFileRows[pair.Key].Subtitle = pair.Value.Filename;
+                }
+                else
+                {
+                    _musicFileRows[pair.Key].Title = pair.Value.Filename;
+                    _musicFileRows[pair.Key].Subtitle = "";
+                }
+            }
+        }
     }
 
     /// <summary>
