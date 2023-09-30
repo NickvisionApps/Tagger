@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+using Nickvision.Aura;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -7,13 +8,6 @@ namespace NickvisionTagger.Shared.Helpers;
 
 internal static class DependencyManager
 {
-    private static string _fpcalcPath;
-
-    static DependencyManager()
-    {
-        _fpcalcPath = "fpcalc";
-    }
-
     /// <summary>
     /// The path for fpcalc
     /// </summary>
@@ -21,28 +15,20 @@ internal static class DependencyManager
     {
         get
         {
-            if(!File.Exists(_fpcalcPath))
+            var fpcalc = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "fpcalc.exe" : "fpcalc";
+            var assemblyPath = Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!);
+            if (File.Exists($"{assemblyPath}{Path.DirectorySeparatorChar}{fpcalc}"))
             {
-                if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                return $"{assemblyPath}{Path.DirectorySeparatorChar}{fpcalc}";
+            }
+            foreach (var dir in SystemDirectories.Path)
+            {
+                if (File.Exists($"{dir}{Path.DirectorySeparatorChar}{fpcalc}"))
                 {
-                    var prefixes = new List<string>() 
-                    {
-                        Directory.GetParent(Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName)!.FullName,
-                        Directory.GetParent(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!))!.FullName,
-                        "/usr"
-                    };
-                    foreach (var prefix in prefixes)
-                    {
-                        var path = $"{prefix}/bin/fpcalc";
-                        if (File.Exists(path))
-                        {
-                            _fpcalcPath = path;
-                            return _fpcalcPath;
-                        }
-                    }
+                    return $"{dir}{Path.DirectorySeparatorChar}{fpcalc}";
                 }
             }
-            return _fpcalcPath;
+            throw new Exception("fpcalc not found");
         }
     }
 }
