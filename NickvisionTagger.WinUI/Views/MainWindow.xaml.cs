@@ -4,6 +4,7 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
 using Nickvision.Aura;
 using Nickvision.Aura.Taskbar;
 using NickvisionTagger.Shared.Controllers;
@@ -12,14 +13,15 @@ using NickvisionTagger.Shared.Helpers;
 using NickvisionTagger.Shared.Models;
 using NickvisionTagger.WinUI.Controls;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Vanara.Extensions.Reflection;
 using Vanara.PInvoke;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
 using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.System;
 using Windows.UI;
 using WinRT.Interop;
@@ -139,7 +141,10 @@ public sealed partial class MainWindow : Window
         MenuAlbumArtBackInsert.Text = _("Insert");
         MenuAlbumArtBackRemove.Text = _("Remove");
         MenuAlbumArtBackExport.Text = _("Export");
-        MenuSwitchAlbumArt.Text = _("Switch View");
+        MenuSwitchAlbumArt.Text = _("Switch to Back Cover");
+        MenuCustomProperties.Text = _("Custom Properties");
+        MenuCustomPropertiesAdd.Text = _("Add");
+        MenuCustomPropertiesRemoveAll.Text = _("Remove All");
         MenuConvert.Text = _("Convert");
         MenuFilenameToTag.Text = _("File Name to Tag");
         MenuTagToFilename.Text = _("Tag to File Name");
@@ -197,7 +202,7 @@ public sealed partial class MainWindow : Window
         LblAdditionProperties.Text = _("Additional Properties");
         TxtComment.Header = _("Comment");
         TxtComment.PlaceholderText = _("Enter comment here");
-        TxtBPM.Header = _("Beats per Minute");
+        TxtBPM.Header = _("Beats Per Minute");
         TxtBPM.PlaceholderText = _("Enter beats per minute here");
         TxtComposer.Header = _("Composer");
         TxtComposer.PlaceholderText = _("Enter composer here");
@@ -205,6 +210,14 @@ public sealed partial class MainWindow : Window
         TxtDescription.PlaceholderText = _("Enter description here");
         TxtPublisher.Header = _("Publisher");
         TxtPublisher.PlaceholderText = _("Enter publisher here");
+        LblCustomProperties.Text = _("Custom Properties");
+        LblBtnAddCustomProperty.Text = _("Add");
+        ToolTipService.SetToolTip(BtnAddCustomProperty, _("Add New Property"));
+        LblCustomPropertiesWarning.Text = _("Custom properties can only be edited for individual files.");
+        LblFileProperties.Text = _("File Properties");
+        TxtFingerprint.Header = _("Fingerprint");
+        TxtFingerprint.PlaceholderText = _("Calculating...");
+        ToolTipService.SetToolTip(BtnCopyFingerprint, _("Copy Fingerprint To Clipboard"));
     }
 
     /// <summary>
@@ -551,6 +564,19 @@ public sealed partial class MainWindow : Window
     }
 
     /// <summary>
+    /// Occurs when the switch album art menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void SwitchAlbumArt(object sender, RoutedEventArgs e)
+    {
+        _currentAlbumArtType = _currentAlbumArtType == AlbumArtType.Front ? AlbumArtType.Back : AlbumArtType.Front;
+        MenuSwitchAlbumArt.Text = _currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover");
+        MenuAlbumArtFlySwitch.Text = _currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover");
+        SelectedMusicFilesPropertiesChanged();
+    }
+
+    /// <summary>
     /// Occurs when the check for updates menu item is clicked
     /// </summary>
     /// <param name="sender">object</param>
@@ -685,13 +711,104 @@ public sealed partial class MainWindow : Window
     /// </summary>
     private void SelectedMusicFilesPropertiesChanged()
     {
-
+        _isSelectionOccuring = true;
+        //Update Properties
+        SelectedViewStack.CurrentPageName = _controller.SelectedMusicFiles.Count > 0 ? "Selected" : "NoSelected";
+        MenuTag.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
+        MenuManageLyrics.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
+        MenuCustomProperties.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
+        CustomPropertiesHeader.Visibility = _controller.SelectedMusicFiles.Count == 1 ? Visibility.Visible : Visibility.Collapsed;
+        ListCustomProperties.Visibility = _controller.SelectedMusicFiles.Count == 1 ? Visibility.Visible : Visibility.Collapsed;
+        LblCustomPropertiesWarning.Visibility = _controller.SelectedMusicFiles.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
+        StatusLabelRight.Text = _controller.MusicFiles.Count > 0 ? _("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count) : "";
+        TxtFilename.IsReadOnly = _controller.SelectedMusicFiles.Count > 1;
+        if(_controller.SelectedMusicFiles.Count == 0)
+        {
+            SearchMusicFiles.Text = "";
+        }
+        TxtFilename.Text = _controller.SelectedPropertyMap.Filename;
+        TxtTitle.Text = _controller.SelectedPropertyMap.Title;
+        TxtArtist.Text = _controller.SelectedPropertyMap.Artist;
+        TxtAlbum.Text = _controller.SelectedPropertyMap.Album;
+        TxtYear.Text = _controller.SelectedPropertyMap.Year;
+        TxtTrack.Text = _controller.SelectedPropertyMap.Track;
+        TxtTrackTotal.Text = _controller.SelectedPropertyMap.TrackTotal;
+        TxtAlbumArtist.Text = _controller.SelectedPropertyMap.AlbumArtist;
+        TxtGenre.Text = _controller.SelectedPropertyMap.Genre;
+        TxtComment.Text = _controller.SelectedPropertyMap.Comment;
+        TxtBPM.Text = _controller.SelectedPropertyMap.BeatsPerMinute;
+        TxtComposer.Text = _controller.SelectedPropertyMap.Composer;
+        TxtDescription.Text = _controller.SelectedPropertyMap.Description;
+        TxtPublisher.Text = _controller.SelectedPropertyMap.Publisher;
+        LblDurationFileSize.Text = $"{_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}";
+        TxtFingerprint.Text = _controller.SelectedPropertyMap.Fingerprint;
+        var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
+        if (albumArt == "hasArt")
+        {
+            ArtViewStack.CurrentPageName = "Image";
+            var art = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedMusicFiles.First().Value.FrontAlbumArt : _controller.SelectedMusicFiles.First().Value.BackAlbumArt;
+            if (art.Length == 0)
+            {
+                ImgAlbumArt.Source = null;
+            }
+            else
+            {
+                using var ms = new InMemoryRandomAccessStream();
+                using var writter = new DataWriter(ms.GetOutputStreamAt(0));
+                writter.WriteBytes(art);
+                writter.StoreAsync().GetResults();
+                var image = new BitmapImage();
+                image.SetSource(ms);
+                ImgAlbumArt.Source = image;
+            }
+        }
+        else if (albumArt == "keepArt")
+        {
+            ArtViewStack.CurrentPageName = "KeepImage";
+        }
+        else
+        {
+            ArtViewStack.CurrentPageName = "NoImage";
+        }
+        MenuAlbumArtFrontRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
+        MenuAlbumArtBackRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
+        MenuAlbumArtFlyRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
+        MenuAlbumArtFrontExport.IsEnabled = ArtViewStack.CurrentPageName == "Image";
+        MenuAlbumArtBackExport.IsEnabled = ArtViewStack.CurrentPageName == "Image";
+        MenuAlbumArtFlyExport.IsEnabled = ArtViewStack.CurrentPageName == "Image";
+        //Update Custom Properties
+        ListCustomProperties.Children.Clear();
+        if(_controller.SelectedMusicFiles.Count == 1)
+        {
+            foreach(var pair in _controller.SelectedPropertyMap.CustomProperties)
+            {
+                var row = new CustomPropertyRow(pair);
+                row.TextChanged += TagPropertyChanged;
+                row.RemoveClicked += (sender, e) => _controller.RemoveCustomProperty(pair.Key);
+                ListCustomProperties.Children.Add(row);
+            }
+        }
+        //Update Rows
+        foreach(var pair in _controller.SelectedMusicFiles)
+        {
+            if(!string.IsNullOrEmpty(pair.Value.Title))
+            {
+                _musicFileRows[pair.Key].Title = $"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{pair.Value.Title}";
+                _musicFileRows[pair.Key].Subtitle = pair.Value.Filename;
+            }
+            else
+            {
+                _musicFileRows[pair.Key].Title = pair.Value.Filename;
+                _musicFileRows[pair.Key].Subtitle = "";
+            }
+        }
+        _isSelectionOccuring = false;
     }
 
     /// <summary>
     /// Occurs when a tag property's row text is changed
     /// </summary>
-    private void TagPropertyChanged()
+    private void TagPropertyChanged(object sender, TextChangedEventArgs e)
     {
 
     }
@@ -701,7 +818,11 @@ public sealed partial class MainWindow : Window
     /// </summary>
     private void UpdateFingerprint()
     {
-
+        if (!string.IsNullOrEmpty(_controller.SelectedPropertyMap.Fingerprint) && _controller.SelectedPropertyMap.Fingerprint != _("Calculating..."))
+        {
+            TxtFingerprint.Text = _controller.SelectedPropertyMap.Fingerprint;
+            BtnCopyFingerprint.IsEnabled = true;
+        }
     }
 
     /// <summary>
@@ -721,22 +842,17 @@ public sealed partial class MainWindow : Window
     {
         _isSelectionOccuring = true;
         var selectedIndexes = ListMusicFiles.SelectedItems.Select(x => _musicFileRows.IndexOf((MusicFileRow)x)).ToList();
-        SelectedViewStack.CurrentPageName = selectedIndexes.Count > 0 ? "Selected" : "NoSelected";
         if (_currentAlbumArtType != AlbumArtType.Front)
         {
-            //SwitchAlbumArt(null, EventArgs.Empty);
+            _currentAlbumArtType = _currentAlbumArtType == AlbumArtType.Front ? AlbumArtType.Back : AlbumArtType.Front;
+            MenuSwitchAlbumArt.Text = _currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover");
+            MenuAlbumArtFlySwitch.Text = _currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover");
         }
-        MenuTag.IsEnabled = selectedIndexes.Count > 0;
-        MenuManageLyrics.IsEnabled =selectedIndexes.Count == 1;
         _controller.UpdateSelectedMusicFiles(selectedIndexes);
-        /*
-        if (string.IsNullOrEmpty(_fingerprintLabel.GetLabel()))
+        if (string.IsNullOrEmpty(TxtFingerprint.Text))
         {
-            _fingerprintSpinner.SetVisible(true);
-            _fingerprintSpinner.SetSpinning(true);
-            _copyFingerprintButton.SetVisible(false);
+            BtnCopyFingerprint.IsEnabled = false;
         }
-        */
         _isSelectionOccuring = false;
     }
 
@@ -803,6 +919,9 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private void CopyFingerprintToClipboard(object sender, RoutedEventArgs e)
     {
-        
+        var package = new DataPackage();
+        package.SetText(TxtFingerprint.Text);
+        Clipboard.SetContent(package);
+        NotificationSent(sender, new NotificationSentEventArgs(_("Fingerprint was copied to clipboard."), NotificationSeverity.Success));
     }
 }

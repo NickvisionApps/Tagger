@@ -260,7 +260,7 @@
                                 </MenuFlyoutItem>
                             </MenuFlyoutSubItem>
 
-                            <MenuFlyoutItem x:Name="MenuSwitchAlbumArt">
+                            <MenuFlyoutItem x:Name="MenuSwitchAlbumArt" Click="SwitchAlbumArt">
                                 <MenuFlyoutItem.Icon>
                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE13C;"/>
                                 </MenuFlyoutItem.Icon>
@@ -268,6 +268,24 @@
                                 <MenuFlyoutItem.KeyboardAccelerators>
                                     <KeyboardAccelerator Modifiers="Control,Shift" Key="S"/>
                                 </MenuFlyoutItem.KeyboardAccelerators>
+                            </MenuFlyoutItem>
+                        </MenuFlyoutSubItem>
+
+                        <MenuFlyoutSubItem x:Name="MenuCustomProperties">
+                            <MenuFlyoutSubItem.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE771;"/>
+                            </MenuFlyoutSubItem.Icon>
+
+                            <MenuFlyoutItem x:Name="MenuCustomPropertiesAdd">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
+
+                            <MenuFlyoutItem x:Name="MenuCustomPropertiesRemoveAll">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE107;"/>
+                                </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
                         </MenuFlyoutSubItem>
 
@@ -551,9 +569,9 @@
                                                         <ColumnDefinition Width="Auto"/>
                                                     </Grid.ColumnDefinitions>
                                                     
-                                                    <AutoSuggestBox x:Name="SearchMusicFiles" Grid.Column="0" VerticalAlignment="Center" QueryIcon="Find" TextChanged="SearchMusicFiles_TextChanged"/>
+                                                    <AutoSuggestBox x:Name="SearchMusicFiles" Grid.Column="0" QueryIcon="Find" TextChanged="SearchMusicFiles_TextChanged"/>
 
-                                                    <Button x:Name="BtnAdvancedSearchInfo" Grid.Column="1" Visibility="Collapsed" Click="AdvancedSearchInfo">
+                                                    <Button x:Name="BtnAdvancedSearchInfo" Grid.Column="1" VerticalAlignment="Center" Visibility="Collapsed" Click="AdvancedSearchInfo">
                                                         <Button.Content>
                                                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE11B;"/>
                                                         </Button.Content>
@@ -575,10 +593,10 @@
 
                                                     <nickvision:ViewStackPage PageName="Selected">
                                                         <ScrollViewer>
-                                                            <StackPanel HorizontalAlignment="Center" MinWidth="400" Orientation="Vertical" Spacing="6">
+                                                            <StackPanel HorizontalAlignment="Center" Width="400" Orientation="Vertical" Spacing="6">
                                                                 <Button HorizontalAlignment="Center" Width="260" Height="260" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                                                                     <Button.Content>
-                                                                        <nickvision:ViewStack x:Name="ArtViewStack">
+                                                                        <nickvision:ViewStack x:Name="ArtViewStack" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                                                             <nickvision:ViewStack.Pages>
                                                                                 <nickvision:ViewStackPage PageName="NoImage">
                                                                                     <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="62" Glyph="&#xE158;"/>
@@ -615,7 +633,7 @@
                                                                                 </MenuFlyoutItem.Icon>
                                                                             </MenuFlyoutItem>
 
-                                                                            <MenuFlyoutItem x:Name="MenuAlbumArtFlySwitch">
+                                                                            <MenuFlyoutItem x:Name="MenuAlbumArtFlySwitch" Click="SwitchAlbumArt">
                                                                                 <MenuFlyoutItem.Icon>
                                                                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE13C;"/>
                                                                                 </MenuFlyoutItem.Icon>
@@ -675,6 +693,50 @@
                                                                 <TextBox x:Name="TxtDescription"/>
 
                                                                 <TextBox x:Name="TxtPublisher"/>
+
+                                                                <MenuFlyoutSeparator/>
+
+                                                                <Grid x:Name="CustomPropertiesHeader">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="Auto"/>
+                                                                    </Grid.ColumnDefinitions>
+
+                                                                    <TextBlock x:Name="LblCustomProperties" Grid.Column="0" VerticalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                                                    <Button x:Name="BtnAddCustomProperty" Grid.Column="1">
+                                                                        <Button.Content>
+                                                                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>
+
+                                                                                <TextBlock x:Name="LblBtnAddCustomProperty" TextWrapping="WrapWholeWords"/>
+                                                                            </StackPanel>
+                                                                        </Button.Content>
+                                                                    </Button>
+                                                                </Grid>
+
+                                                                <StackPanel x:Name="ListCustomProperties" Orientation="Vertical" Spacing="6"/>
+
+                                                                <TextBlock x:Name="LblCustomPropertiesWarning" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+
+                                                                <MenuFlyoutSeparator/>
+
+                                                                <TextBlock x:Name="LblFileProperties" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                                                <Grid ColumnSpacing="6">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="Auto"/>
+                                                                    </Grid.ColumnDefinitions>
+
+                                                                    <TextBox x:Name="TxtFingerprint" Grid.Column="0" IsReadOnly="True"/>
+
+                                                                    <Button x:Name="BtnCopyFingerprint" Grid.Column="1" VerticalAlignment="Center" Margin="0,26,0,0" Click="CopyFingerprintToClipboard">
+                                                                        <Button.Content>
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE16F;"/>
+                                                                        </Button.Content>
+                                                                    </Button>
+                                                                </Grid>
                                                             </StackPanel>
                                                         </ScrollViewer>
                                                     </nickvision:ViewStackPage>
