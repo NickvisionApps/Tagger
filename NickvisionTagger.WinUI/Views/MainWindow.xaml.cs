@@ -14,6 +14,7 @@ using NickvisionTagger.Shared.Models;
 using NickvisionTagger.WinUI.Controls;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Vanara.Extensions.Reflection;
@@ -144,7 +145,6 @@ public sealed partial class MainWindow : Window
         MenuSwitchAlbumArt.Text = _("Switch to Back Cover");
         MenuCustomProperties.Text = _("Custom Properties");
         MenuCustomPropertiesAdd.Text = _("Add");
-        MenuCustomPropertiesRemoveAll.Text = _("Remove All");
         MenuConvert.Text = _("Convert");
         MenuFilenameToTag.Text = _("File Name to Tag");
         MenuTagToFilename.Text = _("Tag to File Name");
@@ -422,6 +422,71 @@ public sealed partial class MainWindow : Window
             BtnInfoBar.Content = _("Update");
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }
+        else if (e.Action == "reload")
+        {
+            _notificationButtonClickEvent = ReloadLibrary;
+            BtnInfoBar.Content = _("Reload");
+            BtnInfoBar.Click += _notificationButtonClickEvent;
+        }
+        else if (e.Action == "unsupported")
+        {
+            _notificationButtonClickEvent = async (_, _) =>
+            {
+                InfoBar.IsOpen = false;
+                await Launcher.LaunchUriAsync(new Uri(DocumentationHelpers.GetHelpURL("unsupported")));
+            };
+            BtnInfoBar.Content = _("Help");
+            BtnInfoBar.Click += _notificationButtonClickEvent;
+        }
+        else if (e.Action == "format")
+        {
+            _notificationButtonClickEvent = async (_, _) =>
+            {
+                InfoBar.IsOpen = false;
+                await Launcher.LaunchUriAsync(new Uri(DocumentationHelpers.GetHelpURL("format-string")));
+            };
+            BtnInfoBar.Content = _("Help");
+            BtnInfoBar.Click += _notificationButtonClickEvent;
+        }
+        else if (e.Action == "web")
+        {
+            _notificationButtonClickEvent = async (_, _) =>
+            {
+                InfoBar.IsOpen = false;
+                await Launcher.LaunchUriAsync(new Uri(DocumentationHelpers.GetHelpURL("web-services")));
+            };
+            BtnInfoBar.Content = _("Help");
+            BtnInfoBar.Click += _notificationButtonClickEvent;
+        }
+        else if (e.Action == "musicbrainz" && !string.IsNullOrEmpty(e.ActionParam))
+        {
+            _notificationButtonClickEvent = async (_, _) =>
+            {
+                InfoBar.IsOpen = false;
+                var dialog = new ContentDialog()
+                {
+                    Title = _("Failed MusicBrainz Lookup"),
+                    Content = new ScrollViewer()
+                    {
+                        Content = e.ActionParam
+                    },
+                    XamlRoot = MainGrid.XamlRoot
+                };
+                await dialog.ShowAsync();
+            };
+            BtnInfoBar.Content = _("Info");
+            BtnInfoBar.Click += _notificationButtonClickEvent;
+        }
+        else if (e.Action == "open-playlist" && File.Exists(e.ActionParam))
+        {
+            _notificationButtonClickEvent = async (_, _) =>
+            {
+                InfoBar.IsOpen = false;
+                await _controller.OpenLibraryAsync(e.ActionParam);
+            };
+            BtnInfoBar.Content = _("Open");
+            BtnInfoBar.Click += _notificationButtonClickEvent;
+        }
         BtnInfoBar.Visibility = !string.IsNullOrEmpty(e.Action) ? Visibility.Visible : Visibility.Collapsed;
         InfoBar.IsOpen = true;
     }
@@ -479,6 +544,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void ReloadLibrary(object sender, RoutedEventArgs e)
     {
+        InfoBar.IsOpen = false;
         if (!_controller.CanClose)
         {
             var dialog = new ContentDialog()
@@ -561,6 +627,166 @@ public sealed partial class MainWindow : Window
             XamlRoot = MainGrid.XamlRoot
         };
         await settingsDialog.ShowAsync();
+    }
+
+    /// <summary>
+    /// Occurs when the create playlist menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void CreatePlaylist(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the add to playlist menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void AddToPlaylist(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the remove to playlist menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void RemoveFromPlaylist(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the save tag menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void SaveTag(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the discard unapplied changes menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void DiscardUnappliedChanges(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the delete tag menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void DeleteTag(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the manage lyrics menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ManageLyrics(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the insert album art menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void InsertAlbumArt(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the remove album art menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void RemoveAlbumArt(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the export album art menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ExportAlbumArt(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the add custom property menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void AddCustomProperty(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the filename to tag menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void FilenameToTag(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the tag to filename menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void TagToFilename(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the download musicbrainz metadata menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void DownloadMusicBrainzMetadata(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the download lyrics menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void DownloadLyrics(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the submit to acoust id menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void SubmitToAcoustId(object sender, RoutedEventArgs e)
+    {
+
     }
 
     /// <summary>
@@ -770,6 +996,7 @@ public sealed partial class MainWindow : Window
         {
             ArtViewStack.CurrentPageName = "NoImage";
         }
+        ToolTipService.SetToolTip(ArtViewStack, _currentAlbumArtType == AlbumArtType.Front ? _("Front") : _("Back"));
         MenuAlbumArtFrontRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
         MenuAlbumArtBackRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
         MenuAlbumArtFlyRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
