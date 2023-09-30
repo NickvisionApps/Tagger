@@ -18,13 +18,13 @@ public sealed partial class MusicFileRow : UserControl
         InitializeComponent();
         if (!string.IsNullOrEmpty(musicFile.Title))
         {
-            Title.Text = $"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{musicFile.Title}";
-            Subtitle.Text = musicFile.Filename;
+            Title = $"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{musicFile.Title}";
+            Subtitle = musicFile.Filename;
         }
         else
         {
-            Title.Text = musicFile.Filename;
-            Subtitle.Text = "";
+            Title = musicFile.Filename;
+            Subtitle = "";
         }
         ShowUnsaveIcon = false;
     }
@@ -39,4 +39,23 @@ public sealed partial class MusicFileRow : UserControl
         set => UnsaveIcon.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
     }
 
+    /// <summary>
+    /// The title of the row
+    /// </summary>
+    public string Title
+    {
+        get => TxtTitle.Text;
+
+        set => TxtTitle.Text = value;
+    }
+
+    /// <summary>
+    /// The subtitle of the row
+    /// </summary>
+    public string Subtitle
+    {
+        get => TxtSubtitle.Text;
+
+        set => TxtSubtitle.Text = value;
+    }
 }

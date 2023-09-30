@@ -22,6 +22,8 @@ using Windows.Storage.Pickers;
 using Windows.System;
 using WinRT.Interop;
 using static NickvisionTagger.Shared.Helpers.Gettext;
+using Windows.UI;
+using Vanara.Extensions.Reflection;
 
 namespace NickvisionTagger.WinUI.Views;
 
@@ -36,6 +38,7 @@ public sealed partial class MainWindow : Window
     private bool _isActived;
     private RoutedEventHandler? _notificationButtonClickEvent;
     private List<MusicFileRow> _musicFileRows;
+    private bool _isSelectionOccuring;
 
     private enum Monitor_DPI_Type : int
     {
@@ -56,6 +59,7 @@ public sealed partial class MainWindow : Window
         _isOpened = false;
         _isActived = true;
         _musicFileRows = new List<MusicFileRow>();
+        _isSelectionOccuring = false;
         //Register Events
         AppWindow.Closing += Window_Closing;
         _controller.NotificationSent += NotificationSent;
@@ -79,6 +83,9 @@ public sealed partial class MainWindow : Window
         });
         _controller.MusicLibraryUpdated += (sender, e) => DispatcherQueue.TryEnqueue(MusicLibraryUpdated);
         _controller.MusicFileSaveStatesChanged += (sender, e) => DispatcherQueue.TryEnqueue(() => MusicFileSaveStatesChanged(e));
+        _controller.SelectedMusicFilesPropertiesChanged += (sender, e) => DispatcherQueue.TryEnqueue(SelectedMusicFilesPropertiesChanged);
+        _controller.FingerprintCalculated += (sender, e) => DispatcherQueue.TryEnqueue(UpdateFingerprint);
+        _controller.CorruptedFilesFound += (sender, e) => DispatcherQueue.TryEnqueue(CorruptedFilesFound);
         //Set TitleBar
         TitleBarTitle.Text = _controller.AppInfo.ShortName;
         AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
@@ -157,6 +164,8 @@ public sealed partial class MainWindow : Window
         HomeDiscussionsButtonLabel.Text = _("Discussions");
         StatusPageNoFiles.Title = _("No Music Files Found");
         StatusPageNoFiles.Description = _("Try a different library");
+        SearchMusicFiles.PlaceholderText = _("Search for filename (type ! for advanced search)...");
+        ToolTipService.SetToolTip(BtnAdvancedSearchInfo, _("Advanced Search Info"));
     }
 
     /// <summary>
@@ -568,6 +577,13 @@ public sealed partial class MainWindow : Window
     }
 
     /// <summary>
+    /// Occurs when the advanced search info button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void AdvancedSearchInfo(object sender, RoutedEventArgs e) => await Launcher.LaunchUriAsync(new Uri(DocumentationHelpers.GetHelpURL("search")));
+
+    /// <summary>
     /// Occurs when the music library is updated
     /// </summary>
     private void MusicLibraryUpdated()
@@ -622,5 +638,113 @@ public sealed partial class MainWindow : Window
             _musicFileRows[i].ShowUnsaveIcon = !saved;
             i++;
         }
+    }
+
+    /// <summary>
+    /// Occurs when the selected music files' properties are changed
+    /// </summary>
+    private void SelectedMusicFilesPropertiesChanged()
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when a tag property's row text is changed
+    /// </summary>
+    private void TagPropertyChanged()
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when fingerprint is ready to be shown
+    /// </summary>
+    private void UpdateFingerprint()
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when there are corrupted music files found in a music library
+    /// </summary>
+    private void CorruptedFilesFound()
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the ListMusicFiles's selection is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SelectionChangedEventArgs</param>
+    private void ListMusicFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Occurs when the SearchMusicFiles's text is changed
+    /// </summary>
+    /// <param name="sender">AutoSuggestBox</param>
+    /// <param name="args">AutoSuggestBoxTextChangedEventArgs</param>
+    private void SearchMusicFiles_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        var search = SearchMusicFiles.Text.ToLower();
+        if (!string.IsNullOrEmpty(search) && search[0] == '!')
+        {
+            BtnAdvancedSearchInfo.Visibility = Visibility.Visible;
+            var result = _controller.AdvancedSearch(search);
+            if(!result.Success)
+            {
+                SearchMusicFiles.Background = new SolidColorBrush(MainGrid.ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 224, 27, 36) : Color.FromArgb(255, 192, 28, 40));
+                foreach(var row in _musicFileRows)
+                {
+                    ListMusicFiles.ContainerFromItem(row).SetPropertyValue("Visibility", Visibility.Visible);
+                }
+            }
+            else
+            {
+                SearchMusicFiles.Background = new SolidColorBrush(MainGrid.ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 46, 194, 126) : Color.FromArgb(255, 38, 162, 105));
+                foreach(var row in _musicFileRows)
+                {
+                    if(result.LowerFilenames!.Count == 0)
+                    {
+                        ListMusicFiles.ContainerFromItem(row).SetPropertyValue("Visibility", Visibility.Collapsed);
+                    }
+                    var rowFilename = row.Subtitle;
+                    if(string.IsNullOrEmpty(rowFilename))
+                    {
+                        rowFilename = row.Title;
+                    }
+                    rowFilename = rowFilename.ToLower();
+                    ListMusicFiles.ContainerFromItem(row).SetPropertyValue("Visibility", result.LowerFilenames.Contains(rowFilename) ? Visibility.Visible : Visibility.Collapsed);
+                }
+            }
+        }
+        else
+        {
+            BtnAdvancedSearchInfo.Visibility = Visibility.Collapsed;
+            SearchMusicFiles.Background = new SolidColorBrush(Colors.Transparent);
+            foreach (var row in _musicFileRows)
+            {
+                var rowFilename = row.Subtitle;
+                if (string.IsNullOrEmpty(rowFilename))
+                {
+                    rowFilename = row.Title;
+                }
+                rowFilename = rowFilename.ToLower();
+                ListMusicFiles.ContainerFromItem(row).SetPropertyValue("Visibility", string.IsNullOrEmpty(search) || rowFilename.Contains(search) ? Visibility.Visible : Visibility.Collapsed);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the CopyFingerprintButton is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void CopyFingerprintToClipboard(object sender, RoutedEventArgs e)
+    {
+        
     }
 }

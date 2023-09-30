@@ -498,7 +498,7 @@
                     </nickvision:ViewStackPage>
 
                     <nickvision:ViewStackPage PageName="Library">
-                        <nickvision:ViewStack x:Name="FilesViewStack">
+                        <nickvision:ViewStack x:Name="FilesViewStack" Margin="6,0,6,0">
                             <nickvision:ViewStack.Pages>
                                 <nickvision:ViewStackPage PageName="NoFiles">
                                     <nickvision:StatusPage x:Name="StatusPageNoFiles" HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="&#xE93C;"/>
@@ -513,7 +513,7 @@
 
                                         <Border Grid.Row="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
                                             <wct:DockPanel LastChildFill="False">
-                                                <CommandBar wct:DockPanel.Dock="Left" DefaultLabelPosition="Right">
+                                                <CommandBar wct:DockPanel.Dock="Left" DefaultLabelPosition="Right" VerticalContentAlignment="Stretch">
 
                                                 </CommandBar>
 
@@ -529,11 +529,33 @@
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <Border Grid.Column="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
-                                                <ScrollViewer>
-                                                    <ListView x:Name="ListMusicFiles" SelectionMode="Extended"/>
-                                                </ScrollViewer>
-                                            </Border>
+                                            <Grid Grid.Column="0" RowSpacing="6">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                
+                                                <Grid Grid.Row="0" ColumnSpacing="6">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    
+                                                    <AutoSuggestBox x:Name="SearchMusicFiles" Grid.Column="0" VerticalAlignment="Center" QueryIcon="Find" TextChanged="SearchMusicFiles_TextChanged"/>
+
+                                                    <Button x:Name="BtnAdvancedSearchInfo" Grid.Column="1" Visibility="Collapsed" Click="AdvancedSearchInfo">
+                                                        <Button.Content>
+                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE11B;"/>
+                                                        </Button.Content>
+                                                    </Button>
+                                                </Grid>
+
+                                                <Border Grid.Row="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
+                                                    <ScrollViewer>
+                                                        <ListView x:Name="ListMusicFiles" SelectionMode="Extended" SelectionChanged="ListMusicFiles_SelectionChanged"/>
+                                                    </ScrollViewer>
+                                                </Border>
+                                            </Grid>
                                         </Grid>
                                     </Grid>
                                 </nickvision:ViewStackPage>

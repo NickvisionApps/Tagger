@@ -19,9 +19,9 @@
             <FontIcon x:Name="UnsaveIcon" Grid.Column="0" Margin="-12,-12,0,0" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xF83F;"/>
 
             <StackPanel Grid.Column="1" Orientation="Vertical" Spacing="6">
-                <TextBlock x:Name="Title"/>
+                <TextBlock x:Name="TxtTitle"/>
 
-                <TextBlock x:Name="Subtitle" Foreground="Gray"/>
+                <TextBlock x:Name="TxtSubtitle" Foreground="Gray"/>
             </StackPanel>
         </Grid>
 
