@@ -85,8 +85,8 @@ public class Configuration : ConfigurationBase
     /// </summary>
     public Configuration()
     {
-        WindowWidth = 800;
-        WindowHeight = 600;
+        WindowWidth = 900;
+        WindowHeight = 700;
         WindowMaximized = false;
         Theme = Theme.System;
         AutomaticallyCheckForUpdates = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);

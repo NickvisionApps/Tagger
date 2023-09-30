@@ -4,6 +4,7 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Nickvision.Aura;
 using Nickvision.Aura.Taskbar;
 using NickvisionTagger.Shared.Controllers;
 using NickvisionTagger.Shared.Events;
@@ -14,6 +15,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Vanara.PInvoke;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
 using Windows.Storage.Pickers;
@@ -73,6 +75,7 @@ public sealed partial class MainWindow : Window
             ProgLoading.Value = e.Value;
             LblLoadingProgress.Text = e.Message;
         });
+        _controller.MusicLibraryUpdated += (sender, e) => DispatcherQueue.TryEnqueue(MusicLibraryUpdated);
         //Set TitleBar
         TitleBarTitle.Text = _controller.AppInfo.ShortName;
         AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
@@ -85,7 +88,12 @@ public sealed partial class MainWindow : Window
         TitleBar.Loaded += (sender, e) => SetDragRegionForCustomTitleBar();
         TitleBar.SizeChanged += (sender, e) => SetDragRegionForCustomTitleBar();
         //Window Sizing
-        AppWindow.Resize(new SizeInt32(900, 700));
+        AppWindow.Resize(new SizeInt32(_controller.WindowWidth, _controller.WindowHeight));
+        if(_controller.WindowMaximized)
+        {
+            AppWindow.Resize(new SizeInt32(900, 700));
+            User32.ShowWindow(_hwnd, ShowWindowCommand.SW_SHOWMAXIMIZED);
+        }
         //Home
         HomeBanner.Background = new AcrylicBrush()
         {
@@ -195,8 +203,39 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">AppWindow</param>
     /// <param name="e">AppWindowClosingEventArgs</param>
-    private void Window_Closing(AppWindow sender, AppWindowClosingEventArgs e)
+    private async void Window_Closing(AppWindow sender, AppWindowClosingEventArgs e)
     {
+        _controller.WindowWidth = AppWindow.Size.Width;
+        _controller.WindowHeight = AppWindow.Size.Height;
+        var placement = new User32.WINDOWPLACEMENT();
+        var fetched = User32.GetWindowPlacement(_hwnd, ref placement);
+        _controller.WindowMaximized = fetched && placement.showCmd == ShowWindowCommand.SW_MAXIMIZE;
+        Aura.Active.SaveConfig("config");
+        if(!_controller.CanClose)
+        {
+            e.Cancel = true;
+            var dialog = new ContentDialog()
+            {
+                Title = _("Apply Changes"),
+                Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
+                PrimaryButtonText = _("Apply"),
+                SecondaryButtonText = _("Discard"),
+                CloseButtonText = _("Cancel"),
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = MainGrid.XamlRoot
+            };
+            var res = await dialog.ShowAsync();
+            if(res == ContentDialogResult.Primary)
+            {
+                await _controller.SaveAllTagsAsync(false);
+                Close();
+            }
+            else if(res == ContentDialogResult.Secondary)
+            {
+                _controller.ForceAllowClose();
+                Close();
+            }
+        }
         _controller.Dispose();
     }
 
@@ -337,11 +376,33 @@ public sealed partial class MainWindow : Window
     {
         var folderPicker = new FolderPicker();
         InitializeWithWindow(folderPicker);
+        folderPicker.SuggestedStartLocation = PickerLocationId.MusicLibrary;
         folderPicker.FileTypeFilter.Add("*");
         var folder = await folderPicker.PickSingleFolderAsync();
         if (folder != null)
         {
             await _controller.OpenLibraryAsync(folder.Path);
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the open playlist menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void OpenPlaylist(object sender, RoutedEventArgs e)
+    {
+        var filePicker = new FileOpenPicker();
+        InitializeWithWindow(filePicker);
+        filePicker.SuggestedStartLocation = PickerLocationId.MusicLibrary;
+        foreach (var format in Enum.GetValues<PlaylistFormat>())
+        {
+            filePicker.FileTypeFilter.Add(format.GetDotExtension());
+        }
+        var file = await filePicker.PickSingleFileAsync();
+        if (file != null)
+        {
+            await _controller.OpenLibraryAsync(file.Path);
         }
     }
 
@@ -429,5 +490,13 @@ public sealed partial class MainWindow : Window
             XamlRoot = MainGrid.XamlRoot
         };
         await aboutDialog.ShowAsync();
+    }
+
+    /// <summary>
+    /// Occurs when the music library is updated
+    /// </summary>
+    private void MusicLibraryUpdated()
+    {
+
     }
 }

@@ -49,7 +49,7 @@
                             </MenuFlyoutItem.KeyboardAccelerators>
                         </MenuFlyoutItem>
 
-                        <MenuFlyoutItem x:Name="MenuOpenPlaylist">
+                        <MenuFlyoutItem x:Name="MenuOpenPlaylist" Click="OpenPlaylist">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE142;"/>
                             </MenuFlyoutItem.Icon>
@@ -431,7 +431,7 @@
                                                 </Button.Content>
                                             </Button>
 
-                                            <Button Height="40">
+                                            <Button Height="40" Click="OpenPlaylist">
                                                 <Button.Content>
                                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE142;"/>
