@@ -105,6 +105,7 @@ public sealed partial class MainWindow : Window
         MenuOpenFolder.Text = _("Open Folder");
         MenuOpenPlaylist.Text = _("Open Playlist");
         MenuReloadLibrary.Text = _("Reload Library");
+        MenuCloseLibrary.Text = _("Close Library");
         MenuExit.Text = _("Exit");
         MenuEdit.Title = _("Edit");
         MenuSettings.Text = _("Settings");
@@ -140,7 +141,6 @@ public sealed partial class MainWindow : Window
         MenuReportABug.Text = _("Report a Bug");
         MenuDiscussions.Text = _("Discussions");
         MenuAbout.Text = _("About {0}", _controller.AppInfo.ShortName);
-        StatusLabel.Text = _("Ready");
         HomeBannerTitle.Text = _controller.Greeting;
         HomeBannerDescription.Text = _controller.AppInfo.Description;
         HomeGettingStartedTitle.Text = _("Getting Started");
@@ -407,6 +407,76 @@ public sealed partial class MainWindow : Window
     }
 
     /// <summary>
+    /// Occurs when the reload library menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void ReloadLibrary(object sender, RoutedEventArgs e)
+    {
+        if (!_controller.CanClose)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = _("Apply Changes"),
+                Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
+                PrimaryButtonText = _("Apply"),
+                SecondaryButtonText = _("Discard"),
+                CloseButtonText = _("Cancel"),
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = MainGrid.XamlRoot
+            };
+            var res = await dialog.ShowAsync();
+            if (res == ContentDialogResult.Primary)
+            {
+                await _controller.SaveAllTagsAsync(false);
+            }
+            else if (res != ContentDialogResult.None)
+            {
+                await _controller.ReloadLibraryAsync();
+            }
+        }
+        else
+        {
+            await _controller.ReloadLibraryAsync();
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the close library menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void CloseLibrary(object sender, RoutedEventArgs e)
+    {
+        if (!_controller.CanClose)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = _("Apply Changes"),
+                Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
+                PrimaryButtonText = _("Apply"),
+                SecondaryButtonText = _("Discard"),
+                CloseButtonText = _("Cancel"),
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = MainGrid.XamlRoot
+            };
+            var res = await dialog.ShowAsync();
+            if (res == ContentDialogResult.Primary)
+            {
+                await _controller.SaveAllTagsAsync(false);
+            }
+            else if (res != ContentDialogResult.None)
+            {
+                _controller.CloseLibrary();
+            }
+        }
+        else
+        {
+            _controller.CloseLibrary();
+        }
+    }
+
+    /// <summary>
     /// Occurs when the exit menu item is clicked
     /// </summary>
     /// <param name="sender">object</param>
@@ -497,6 +567,32 @@ public sealed partial class MainWindow : Window
     /// </summary>
     private void MusicLibraryUpdated()
     {
-
+        //Clear List
+        MainMenu.IsEnabled = true;
+        if(!string.IsNullOrEmpty(_controller.MusicLibraryName))
+        {
+            MenuReloadLibrary.IsEnabled = true;
+            MenuCloseLibrary.IsEnabled = true;
+            MenuCreatePlaylist.IsEnabled = _controller.MusicLibraryType == MusicLibraryType.Folder;
+            MenuAddToPlaylist.IsEnabled = _controller.MusicLibraryType == MusicLibraryType.Playlist;
+            MenuRemoveFromPlaylist.IsEnabled = _controller.MusicLibraryType == MusicLibraryType.Playlist;
+            ViewStack.CurrentPageName = "Library";
+            StatusBar.Visibility = Visibility.Visible;
+            StatusIcon.Glyph = _controller.MusicLibraryType == MusicLibraryType.Folder ? "\uE8B7" : "\uE142";
+            ToolTipService.SetToolTip(StatusIcon, _controller.MusicLibraryType == MusicLibraryType.Folder ? _("Folder Mode") : _("Playlist Mode"));
+            StatusLabelLeft.Text = _controller.MusicLibraryName;
+            StatusLabelRight.Text = _controller.MusicFiles.Count > 0 ? _("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count) : "";
+        }
+        else
+        {
+            MenuReloadLibrary.IsEnabled = false;
+            MenuCloseLibrary.IsEnabled = false;
+            MenuCreatePlaylist.IsEnabled = false;
+            MenuAddToPlaylist.IsEnabled = false;
+            MenuRemoveFromPlaylist.IsEnabled = false;
+            MenuTag.IsEnabled = false;
+            ViewStack.CurrentPageName = "Home";
+            StatusBar.Visibility = Visibility.Collapsed;
+        }
     }
 }

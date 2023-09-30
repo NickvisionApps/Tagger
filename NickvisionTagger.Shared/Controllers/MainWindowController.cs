@@ -460,6 +460,7 @@ public class MainWindowController : IDisposable
     /// </summary>
     public void CloseLibrary()
     {
+        _musicLibrary?.Dispose();
         _musicLibrary = null;
         _musicFileChangedFromUpdate.Clear();
         _filesBeingEditedOriginals.Clear();

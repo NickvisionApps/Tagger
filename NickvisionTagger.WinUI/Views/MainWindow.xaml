@@ -61,13 +61,23 @@
 
                         <MenuFlyoutSeparator/>
 
-                        <MenuFlyoutItem x:Name="MenuReloadLibrary" IsEnabled="False">
+                        <MenuFlyoutItem x:Name="MenuReloadLibrary" IsEnabled="False" Click="ReloadLibrary">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE149;"/>
                             </MenuFlyoutItem.Icon>
 
                             <MenuFlyoutItem.KeyboardAccelerators>
                                 <KeyboardAccelerator Modifiers="None" Key="F5"/>
+                            </MenuFlyoutItem.KeyboardAccelerators>
+                        </MenuFlyoutItem>
+
+                        <MenuFlyoutItem x:Name="MenuCloseLibrary" IsEnabled="False" Click="CloseLibrary">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8F6;"/>
+                            </MenuFlyoutItem.Icon>
+
+                            <MenuFlyoutItem.KeyboardAccelerators>
+                                <KeyboardAccelerator Modifiers="Control" Key="W"/>
                             </MenuFlyoutItem.KeyboardAccelerators>
                         </MenuFlyoutItem>
 
@@ -486,6 +496,12 @@
                             </Grid>
                         </ScrollViewer>
                     </nickvision:ViewStackPage>
+
+                    <nickvision:ViewStackPage PageName="Library">
+                        <Grid>
+                            
+                        </Grid>
+                    </nickvision:ViewStackPage>
                 </nickvision:ViewStack.Pages>
             </nickvision:ViewStack>
 
@@ -500,7 +516,9 @@
             <wct:DockPanel LastChildFill="False">
                 <FontIcon x:Name="StatusIcon" wct:DockPanel.Dock="Left" VerticalAlignment="Center" Margin="6,0,10,0" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE73E;"/>
 
-                <TextBlock x:Name="StatusLabel" wct:DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="StatusLabelLeft" wct:DockPanel.Dock="Left" VerticalAlignment="Center"/>
+
+                <TextBlock x:Name="StatusLabelRight" wct:DockPanel.Dock="Right" VerticalAlignment="Center" Margin="0,0,6,0"/>
             </wct:DockPanel>
         </Border>
     </Grid>
