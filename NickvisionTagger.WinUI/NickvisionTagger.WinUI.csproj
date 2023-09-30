@@ -38,10 +38,12 @@
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(GITHUB_ACTIONS)' == ''">
     <Exec Command="for /F &quot;tokens=*&quot; %%l in (..\NickvisionTagger.Shared\Resources\po\LINGUAS) do @mkdir $(OutDir)\%%l &amp; msgfmt ..\NickvisionTagger.Shared\Resources\po\%%l.po -o $(OutDir)\%%l\application.mo" />
+    <Exec Command="copy Dependencies\fpcalc.exe $(OutDir)" />
   </Target>
   
   <Target Name="PostPublishWindows" AfterTargets="Publish" Condition="$([MSBuild]::IsOSPlatform('Windows'))">
     <Exec Command="for /F &quot;tokens=*&quot; %%l in (..\NickvisionTagger.Shared\Resources\po\LINGUAS) do @xcopy $(OutDir)\%%l $(PublishDir)\%%l\ /Y" />
+    <Exec Command="copy Dependencies\fpcalc.exe $(PublishDir)" />
   </Target>
 
   <ItemGroup>
