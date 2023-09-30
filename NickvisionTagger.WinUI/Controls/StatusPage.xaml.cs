@@ -33,7 +33,7 @@ public sealed partial class StatusPage : UserControl, INotifyPropertyChanged
         set
         {
             SetValue(GlyphProperty, value);
-            if(string.IsNullOrEmpty(value))
+            if(!string.IsNullOrEmpty(value))
             {
                 GlyphIcon.Visibility = Visibility.Visible;
                 AppIcon.Visibility = Visibility.Collapsed;

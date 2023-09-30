@@ -35,6 +35,7 @@ public sealed partial class MainWindow : Window
     private bool _isOpened;
     private bool _isActived;
     private RoutedEventHandler? _notificationButtonClickEvent;
+    private List<MusicFileRow> _musicFileRows;
 
     private enum Monitor_DPI_Type : int
     {
@@ -54,6 +55,7 @@ public sealed partial class MainWindow : Window
         _hwnd = WindowNative.GetWindowHandle(this);
         _isOpened = false;
         _isActived = true;
+        _musicFileRows = new List<MusicFileRow>();
         //Register Events
         AppWindow.Closing += Window_Closing;
         _controller.NotificationSent += NotificationSent;
@@ -76,6 +78,7 @@ public sealed partial class MainWindow : Window
             LblLoadingProgress.Text = e.Message;
         });
         _controller.MusicLibraryUpdated += (sender, e) => DispatcherQueue.TryEnqueue(MusicLibraryUpdated);
+        _controller.MusicFileSaveStatesChanged += (sender, e) => DispatcherQueue.TryEnqueue(() => MusicFileSaveStatesChanged(e));
         //Set TitleBar
         TitleBarTitle.Text = _controller.AppInfo.ShortName;
         AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
@@ -152,6 +155,8 @@ public sealed partial class MainWindow : Window
         HomeDocumentationButtonLabel.Text = _("Documentation");
         HomeReportABugButtonLabel.Text = _("Report a Bug");
         HomeDiscussionsButtonLabel.Text = _("Discussions");
+        StatusPageNoFiles.Title = _("No Music Files Found");
+        StatusPageNoFiles.Description = _("Try a different library");
     }
 
     /// <summary>
@@ -567,16 +572,24 @@ public sealed partial class MainWindow : Window
     /// </summary>
     private void MusicLibraryUpdated()
     {
-        //Clear List
+        ListMusicFiles.Items.Clear();
+        _musicFileRows.Clear();
         MainMenu.IsEnabled = true;
         if(!string.IsNullOrEmpty(_controller.MusicLibraryName))
         {
+            foreach(var musicFile in _controller.MusicFiles)
+            {
+                var row = new MusicFileRow(musicFile);
+                ListMusicFiles.Items.Add(row);
+                _musicFileRows.Add(row);
+            }
             MenuReloadLibrary.IsEnabled = true;
             MenuCloseLibrary.IsEnabled = true;
             MenuCreatePlaylist.IsEnabled = _controller.MusicLibraryType == MusicLibraryType.Folder;
             MenuAddToPlaylist.IsEnabled = _controller.MusicLibraryType == MusicLibraryType.Playlist;
             MenuRemoveFromPlaylist.IsEnabled = _controller.MusicLibraryType == MusicLibraryType.Playlist;
             ViewStack.CurrentPageName = "Library";
+            FilesViewStack.CurrentPageName = _controller.MusicFiles.Count > 0 ? "Files" : "NoFiles";
             StatusBar.Visibility = Visibility.Visible;
             StatusIcon.Glyph = _controller.MusicLibraryType == MusicLibraryType.Folder ? "\uE8B7" : "\uE142";
             ToolTipService.SetToolTip(StatusIcon, _controller.MusicLibraryType == MusicLibraryType.Folder ? _("Folder Mode") : _("Playlist Mode"));
@@ -593,6 +606,21 @@ public sealed partial class MainWindow : Window
             MenuTag.IsEnabled = false;
             ViewStack.CurrentPageName = "Home";
             StatusBar.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    /// <summary>
+    /// Occurs when a music file's save state is changed
+    /// </summary>
+    /// <param name="pending">Whether or not there are unsaved changes</param>
+    private void MusicFileSaveStatesChanged(bool pending)
+    {
+        ViewStack.CurrentPageName = "Library";
+        var i = 0;
+        foreach(var saved in _controller.MusicFileSaveStates)
+        {
+            _musicFileRows[i].ShowUnsaveIcon = !saved;
+            i++;
         }
     }
 }

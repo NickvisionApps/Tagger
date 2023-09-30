@@ -498,9 +498,47 @@
                     </nickvision:ViewStackPage>
 
                     <nickvision:ViewStackPage PageName="Library">
-                        <Grid>
-                            
-                        </Grid>
+                        <nickvision:ViewStack x:Name="FilesViewStack">
+                            <nickvision:ViewStack.Pages>
+                                <nickvision:ViewStackPage PageName="NoFiles">
+                                    <nickvision:StatusPage x:Name="StatusPageNoFiles" HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="&#xE93C;"/>
+                                </nickvision:ViewStackPage>
+
+                                <nickvision:ViewStackPage PageName="Files">
+                                    <Grid RowSpacing="6">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Border Grid.Row="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
+                                            <wct:DockPanel LastChildFill="False">
+                                                <CommandBar wct:DockPanel.Dock="Left" DefaultLabelPosition="Right">
+
+                                                </CommandBar>
+
+                                                <CommandBar wct:DockPanel.Dock="Right" DefaultLabelPosition="Right">
+
+                                                </CommandBar>
+                                            </wct:DockPanel>
+                                        </Border>
+
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition MinWidth="300" MaxWidth="400"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Grid.Column="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
+                                                <ScrollViewer>
+                                                    <ListView x:Name="ListMusicFiles" SelectionMode="Extended"/>
+                                                </ScrollViewer>
+                                            </Border>
+                                        </Grid>
+                                    </Grid>
+                                </nickvision:ViewStackPage>
+                            </nickvision:ViewStack.Pages>
+                        </nickvision:ViewStack>
                     </nickvision:ViewStackPage>
                 </nickvision:ViewStack.Pages>
             </nickvision:ViewStack>
