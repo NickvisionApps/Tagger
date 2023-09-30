@@ -15,15 +15,15 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Vanara.Extensions.Reflection;
 using Vanara.PInvoke;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
 using Windows.Storage.Pickers;
 using Windows.System;
+using Windows.UI;
 using WinRT.Interop;
 using static NickvisionTagger.Shared.Helpers.Gettext;
-using Windows.UI;
-using Vanara.Extensions.Reflection;
 
 namespace NickvisionTagger.WinUI.Views;
 
@@ -39,6 +39,7 @@ public sealed partial class MainWindow : Window
     private RoutedEventHandler? _notificationButtonClickEvent;
     private List<MusicFileRow> _musicFileRows;
     private bool _isSelectionOccuring;
+    private AlbumArtType _currentAlbumArtType;
 
     private enum Monitor_DPI_Type : int
     {
@@ -60,6 +61,7 @@ public sealed partial class MainWindow : Window
         _isActived = true;
         _musicFileRows = new List<MusicFileRow>();
         _isSelectionOccuring = false;
+        _currentAlbumArtType = AlbumArtType.Front;
         //Register Events
         AppWindow.Closing += Window_Closing;
         _controller.NotificationSent += NotificationSent;
@@ -137,6 +139,7 @@ public sealed partial class MainWindow : Window
         MenuAlbumArtBackInsert.Text = _("Insert");
         MenuAlbumArtBackRemove.Text = _("Remove");
         MenuAlbumArtBackExport.Text = _("Export");
+        MenuSwitchAlbumArt.Text = _("Switch View");
         MenuConvert.Text = _("Convert");
         MenuFilenameToTag.Text = _("File Name to Tag");
         MenuTagToFilename.Text = _("Tag to File Name");
@@ -166,6 +169,42 @@ public sealed partial class MainWindow : Window
         StatusPageNoFiles.Description = _("Try a different library");
         SearchMusicFiles.PlaceholderText = _("Search for filename (type ! for advanced search)...");
         ToolTipService.SetToolTip(BtnAdvancedSearchInfo, _("Advanced Search Info"));
+        StatusPageNoSelected.Title = _("No Selected Music Files");
+        StatusPageNoSelected.Description = _("Select some files");
+        MenuAlbumArtFlyInsert.Text = _("Insert");
+        MenuAlbumArtFlyRemove.Text = _("Remove");
+        MenuAlbumArtFlyExport.Text = _("Export");
+        MenuAlbumArtFlySwitch.Text = _("Switch to Back Cover");
+        TxtFilename.Header = _("File Name");
+        TxtFilename.PlaceholderText = _("Enter file name here");
+        LblMainProperties.Text = _("Main Properties");
+        TxtTitle.Header = _("Title");
+        TxtTitle.PlaceholderText = _("Enter title here");
+        TxtArtist.Header = _("Artist");
+        TxtArtist.PlaceholderText = _("Enter artist here");
+        TxtAlbum.Header = _("Album");
+        TxtAlbum.PlaceholderText = _("Enter album here");
+        TxtAlbumArtist.Header = _("Album Artist");
+        TxtAlbumArtist.PlaceholderText = _("Enter album artist here");
+        TxtGenre.Header = _("Genre");
+        TxtGenre.PlaceholderText = _("Enter genre here");
+        TxtYear.Header = _("Year");
+        TxtYear.PlaceholderText = _("Enter year here");
+        TxtTrack.Header = _("Track");
+        TxtTrack.PlaceholderText = _("Enter track here");
+        TxtTrackTotal.Header = _("Track Total");
+        TxtTrackTotal.PlaceholderText = _("Enter track total here");
+        LblAdditionProperties.Text = _("Additional Properties");
+        TxtComment.Header = _("Comment");
+        TxtComment.PlaceholderText = _("Enter comment here");
+        TxtBPM.Header = _("Beats per Minute");
+        TxtBPM.PlaceholderText = _("Enter beats per minute here");
+        TxtComposer.Header = _("Composer");
+        TxtComposer.PlaceholderText = _("Enter composer here");
+        TxtDescription.Header = _("Description");
+        TxtDescription.PlaceholderText = _("Enter description here");
+        TxtPublisher.Header = _("Publisher");
+        TxtPublisher.PlaceholderText = _("Enter publisher here");
     }
 
     /// <summary>
@@ -606,6 +645,7 @@ public sealed partial class MainWindow : Window
             MenuRemoveFromPlaylist.IsEnabled = _controller.MusicLibraryType == MusicLibraryType.Playlist;
             ViewStack.CurrentPageName = "Library";
             FilesViewStack.CurrentPageName = _controller.MusicFiles.Count > 0 ? "Files" : "NoFiles";
+            SelectedViewStack.CurrentPageName = "NoSelected";
             StatusBar.Visibility = Visibility.Visible;
             StatusIcon.Glyph = _controller.MusicLibraryType == MusicLibraryType.Folder ? "\uE8B7" : "\uE142";
             ToolTipService.SetToolTip(StatusIcon, _controller.MusicLibraryType == MusicLibraryType.Folder ? _("Folder Mode") : _("Playlist Mode"));
@@ -679,7 +719,25 @@ public sealed partial class MainWindow : Window
     /// <param name="e">SelectionChangedEventArgs</param>
     private void ListMusicFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-
+        _isSelectionOccuring = true;
+        var selectedIndexes = ListMusicFiles.SelectedItems.Select(x => _musicFileRows.IndexOf((MusicFileRow)x)).ToList();
+        SelectedViewStack.CurrentPageName = selectedIndexes.Count > 0 ? "Selected" : "NoSelected";
+        if (_currentAlbumArtType != AlbumArtType.Front)
+        {
+            //SwitchAlbumArt(null, EventArgs.Empty);
+        }
+        MenuTag.IsEnabled = selectedIndexes.Count > 0;
+        MenuManageLyrics.IsEnabled =selectedIndexes.Count == 1;
+        _controller.UpdateSelectedMusicFiles(selectedIndexes);
+        /*
+        if (string.IsNullOrEmpty(_fingerprintLabel.GetLabel()))
+        {
+            _fingerprintSpinner.SetVisible(true);
+            _fingerprintSpinner.SetSpinning(true);
+            _copyFingerprintButton.SetVisible(false);
+        }
+        */
+        _isSelectionOccuring = false;
     }
 
     /// <summary>
