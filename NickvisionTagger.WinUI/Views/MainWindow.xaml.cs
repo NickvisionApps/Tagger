@@ -172,10 +172,6 @@ public sealed partial class MainWindow : Window
         HomeDiscussionsButtonLabel.Text = _("Discussions");
         StatusPageNoFiles.Title = _("No Music Files Found");
         StatusPageNoFiles.Description = _("Try a different library");
-        CmdReloadLibrary.Label = _("Reload Library");
-        CmdSaveTag.Label = _("Save Tag");
-        CmdDeleteTag.Label = _("Delete Tag");
-        CmdDownloadMusicBrainz.Label = _("Download MusicBrainz Metadata");
         SearchMusicFiles.PlaceholderText = _("Search for filename (type ! for advanced search)...");
         ToolTipService.SetToolTip(BtnAdvancedSearchInfo, _("Advanced Search Info"));
         StatusPageNoSelected.Title = _("No Selected Music Files");
@@ -908,7 +904,6 @@ public sealed partial class MainWindow : Window
             MenuAddToPlaylist.IsEnabled = false;
             MenuRemoveFromPlaylist.IsEnabled = false;
             MenuTag.IsEnabled = false;
-            CmdTag.Visibility = Visibility.Collapsed;
             ViewStack.CurrentPageName = "Home";
             StatusBar.Visibility = Visibility.Collapsed;
         }
@@ -938,7 +933,6 @@ public sealed partial class MainWindow : Window
         //Update Properties
         SelectedViewStack.CurrentPageName = _controller.SelectedMusicFiles.Count > 0 ? "Selected" : "NoSelected";
         MenuTag.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
-        CmdTag.Visibility = _controller.SelectedMusicFiles.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
         MenuManageLyrics.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
         BtnManageLyrics.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
         MenuCustomProperties.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
