@@ -442,7 +442,7 @@ public class MainWindowController : IDisposable
         {
             if (!_hadUserFilenameChange)
             {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Library was changed on disk."), NotificationSeverity.Informational, "reload"));
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("Library was changed on disk."), NotificationSeverity.Warning, "reload"));
             }
             _hadUserFilenameChange = false;
         };
@@ -495,7 +495,7 @@ public class MainWindowController : IDisposable
             MusicLibraryUpdated?.Invoke(this, EventArgs.Empty);
             if(Path.Exists(_musicLibrary.Path))
             {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Loaded {0} music file.", "Loaded {0} music files.", count, count), NotificationSeverity.Informational));
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Loaded {0} music file.", "Loaded {0} music files.", count, count), NotificationSeverity.Success));
             }
             if(corruptedFound)
             {
