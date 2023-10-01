@@ -535,12 +535,22 @@
 
                                         <Border Grid.Row="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
                                             <wct:DockPanel LastChildFill="False">
-                                                <CommandBar wct:DockPanel.Dock="Left" DefaultLabelPosition="Right" VerticalContentAlignment="Stretch">
-
+                                                <CommandBar wct:DockPanel.Dock="Left" DefaultLabelPosition="Right">
+                                                    <AppBarButton x:Name="CmdReloadLibrary" Icon="Refresh" Click="ReloadLibrary"/>
                                                 </CommandBar>
 
-                                                <CommandBar wct:DockPanel.Dock="Right" DefaultLabelPosition="Right">
+                                                <CommandBar x:Name="CmdTag" wct:DockPanel.Dock="Right" Visibility="Collapsed" DefaultLabelPosition="Right">
+                                                    <AppBarButton x:Name="CmdSaveTag" Icon="Save" Click="SaveTag"/>
 
+                                                    <AppBarButton x:Name="CmdDeleteTag" Icon="Delete" Click="DeleteTag"/>
+
+                                                    <AppBarSeparator/>
+
+                                                    <AppBarButton x:Name="CmdDownloadMusicBrainz" Click="DownloadMusicBrainzMetadata">
+                                                        <AppBarButton.Icon>
+                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEBD3;"/>
+                                                        </AppBarButton.Icon>
+                                                    </AppBarButton>
                                                 </CommandBar>
                                             </wct:DockPanel>
                                         </Border>
@@ -646,7 +656,24 @@
 
                                                                 <MenuFlyoutSeparator/>
 
-                                                                <TextBlock x:Name="LblMainProperties" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="Auto"/>
+                                                                    </Grid.ColumnDefinitions>
+
+                                                                    <TextBlock x:Name="LblMainProperties" VerticalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                                                    <Button x:Name="BtnManageLyrics" Grid.Column="1" Click="ManageLyrics">
+                                                                        <Button.Content>
+                                                                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE7BC;"/>
+
+                                                                                <TextBlock x:Name="LblBtnManageLyrics" TextWrapping="WrapWholeWords"/>
+                                                                            </StackPanel>
+                                                                        </Button.Content>
+                                                                    </Button>
+                                                                </Grid>
 
                                                                 <TextBox x:Name="TxtTitle" TextChanged="TagPropertyChanged"/>
 
