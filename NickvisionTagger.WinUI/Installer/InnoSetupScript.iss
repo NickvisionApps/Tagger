@@ -61,7 +61,6 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "..\..\..\dotnet-runtime-7.0.11-win-x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupDotnet  
 Source: "..\..\..\WindowsAppRuntimeInstall-x64.exe"; DestDir: "{app}\deps"; AfterInstall: SetupWinAppSDK  
-Source: "..\..\fpcalc.exe"; DestDir: "{app}";
 Source: "..\bin\x64\Debug\net7.0-windows10.0.19041.0\win10-x64\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "..\bin\x64\Debug\net7.0-windows10.0.19041.0\win10-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
