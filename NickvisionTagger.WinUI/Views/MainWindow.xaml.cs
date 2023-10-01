@@ -5,7 +5,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
-using Nickvision.Aura;
 using Nickvision.Aura.Taskbar;
 using NickvisionTagger.Shared.Controllers;
 using NickvisionTagger.Shared.Events;
@@ -103,12 +102,8 @@ public sealed partial class MainWindow : Window
         TitleBar.Loaded += (sender, e) => SetDragRegionForCustomTitleBar();
         TitleBar.SizeChanged += (sender, e) => SetDragRegionForCustomTitleBar();
         //Window Sizing
-        AppWindow.Resize(new SizeInt32(_controller.WindowWidth, _controller.WindowHeight));
-        if(_controller.WindowMaximized)
-        {
-            AppWindow.Resize(new SizeInt32(900, 700));
-            User32.ShowWindow(_hwnd, ShowWindowCommand.SW_SHOWMAXIMIZED);
-        }
+        AppWindow.Resize(new SizeInt32(900, 700));
+        User32.ShowWindow(_hwnd, ShowWindowCommand.SW_SHOWMAXIMIZED);
         //Home
         HomeBanner.Background = new AcrylicBrush()
         {
@@ -272,12 +267,6 @@ public sealed partial class MainWindow : Window
     /// <param name="e">AppWindowClosingEventArgs</param>
     private async void Window_Closing(AppWindow sender, AppWindowClosingEventArgs e)
     {
-        _controller.WindowWidth = AppWindow.Size.Width;
-        _controller.WindowHeight = AppWindow.Size.Height;
-        var placement = new User32.WINDOWPLACEMENT();
-        var fetched = User32.GetWindowPlacement(_hwnd, ref placement);
-        _controller.WindowMaximized = fetched && placement.showCmd == ShowWindowCommand.SW_MAXIMIZE;
-        Aura.Active.SaveConfig("config");
         if(!_controller.CanClose)
         {
             e.Cancel = true;
