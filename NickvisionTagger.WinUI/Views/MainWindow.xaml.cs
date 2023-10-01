@@ -669,30 +669,21 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void SaveTag(object sender, RoutedEventArgs e)
-    {
-
-    }
+    private async void SaveTag(object sender, RoutedEventArgs e) => await _controller.SaveSelectedTagsAsync();
 
     /// <summary>
     /// Occurs when the discard unapplied changes menu item is clicked
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void DiscardUnappliedChanges(object sender, RoutedEventArgs e)
-    {
-
-    }
+    private async void DiscardUnappliedChanges(object sender, RoutedEventArgs e) => await _controller.DiscardSelectedUnappliedChangesAsync();
 
     /// <summary>
     /// Occurs when the delete tag menu item is clicked
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void DeleteTag(object sender, RoutedEventArgs e)
-    {
-
-    }
+    private void DeleteTag(object sender, RoutedEventArgs e) => _controller.DeleteSelectedTags();
 
     /// <summary>
     /// Occurs when the manage lyrics menu item is clicked
