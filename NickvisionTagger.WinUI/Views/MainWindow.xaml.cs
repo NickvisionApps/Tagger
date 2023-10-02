@@ -171,14 +171,9 @@ public sealed partial class MainWindow : Window
         ToolTipService.SetToolTip(BtnAdvancedSearchInfo, _("Advanced Search Info"));
         StatusPageNoSelected.Title = _("No Selected Music Files");
         StatusPageNoSelected.Description = _("Select some files");
-        MenuAlbumArtFlyInsert.Text = _("Insert");
-        MenuAlbumArtFlyRemove.Text = _("Remove");
-        MenuAlbumArtFlyExport.Text = _("Export");
-        MenuAlbumArtFlySwitch.Text = _("Switch to Back Cover");
         TxtFilename.Header = _("File Name");
         TxtFilename.PlaceholderText = _("Enter file name here");
         LblMainProperties.Text = _("Main Properties");
-        LblBtnManageLyrics.Text = _("Manage Lyrics");
         TxtTitle.Header = _("Title");
         TxtTitle.PlaceholderText = _("Enter title here");
         TxtArtist.Header = _("Artist");
@@ -214,6 +209,11 @@ public sealed partial class MainWindow : Window
         TxtFingerprint.Header = _("Fingerprint");
         TxtFingerprint.PlaceholderText = _("Calculating...");
         ToolTipService.SetToolTip(BtnCopyFingerprint, _("Copy Fingerprint To Clipboard"));
+        LblBtnAlbumArtInsert.Text = _("Insert");
+        LblBtnAlbumArtRemove.Text = _("Remove");
+        LblBtnAlbumArtExport.Text = _("Export");
+        LblBtnAlbumArtSwitch.Text = _("Switch to Back Cover");
+        LblBtnManageLyrics.Text = _("Manage Lyrics");
     }
 
     /// <summary>
@@ -779,7 +779,7 @@ public sealed partial class MainWindow : Window
     {
         _currentAlbumArtType = _currentAlbumArtType == AlbumArtType.Front ? AlbumArtType.Back : AlbumArtType.Front;
         MenuSwitchAlbumArt.Text = _currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover");
-        MenuAlbumArtFlySwitch.Text = _currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover");
+        LblBtnAlbumArtSwitch.Text = _currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover");
         SelectedMusicFilesPropertiesChanged();
     }
 
@@ -981,10 +981,10 @@ public sealed partial class MainWindow : Window
         ToolTipService.SetToolTip(ArtViewStack, _currentAlbumArtType == AlbumArtType.Front ? _("Front") : _("Back"));
         MenuAlbumArtFrontRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
         MenuAlbumArtBackRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
-        MenuAlbumArtFlyRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
+        BtnAlbumArtRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
         MenuAlbumArtFrontExport.IsEnabled = ArtViewStack.CurrentPageName == "Image";
         MenuAlbumArtBackExport.IsEnabled = ArtViewStack.CurrentPageName == "Image";
-        MenuAlbumArtFlyExport.IsEnabled = ArtViewStack.CurrentPageName == "Image";
+        BtnAlbumArtExport.IsEnabled = ArtViewStack.CurrentPageName == "Image";
         //Update Custom Properties
         ListCustomProperties.Children.Clear();
         if(_controller.SelectedMusicFiles.Count == 1)
@@ -1097,7 +1097,7 @@ public sealed partial class MainWindow : Window
         {
             _currentAlbumArtType = _currentAlbumArtType == AlbumArtType.Front ? AlbumArtType.Back : AlbumArtType.Front;
             MenuSwitchAlbumArt.Text = _currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover");
-            MenuAlbumArtFlySwitch.Text = _currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover");
+            LblBtnAlbumArtSwitch.Text = _currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover");
         }
         _controller.UpdateSelectedMusicFiles(selectedIndexes);
         if (string.IsNullOrEmpty(TxtFingerprint.Text))

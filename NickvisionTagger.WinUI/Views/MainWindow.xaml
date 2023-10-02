@@ -570,7 +570,7 @@
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="*"/>
                                                             <ColumnDefinition Width="Auto"/>
-                                                            <ColumnDefinition Width="300"/>
+                                                            <ColumnDefinition Width="320"/>
                                                         </Grid.ColumnDefinitions>
 
                                                         <ScrollView Grid.Column="0">
@@ -579,24 +579,7 @@
 
                                                                 <MenuFlyoutSeparator/>
 
-                                                                <Grid>
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                        <ColumnDefinition Width="Auto"/>
-                                                                    </Grid.ColumnDefinitions>
-
-                                                                    <TextBlock x:Name="LblMainProperties" VerticalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
-
-                                                                    <Button x:Name="BtnManageLyrics" Grid.Column="1" Click="ManageLyrics">
-                                                                        <Button.Content>
-                                                                            <StackPanel Orientation="Horizontal" Spacing="6">
-                                                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE7BC;"/>
-
-                                                                                <TextBlock x:Name="LblBtnManageLyrics" TextWrapping="WrapWholeWords"/>
-                                                                            </StackPanel>
-                                                                        </Button.Content>
-                                                                    </Button>
-                                                                </Grid>
+                                                                <TextBlock x:Name="LblMainProperties" VerticalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                                                                 <TextBox x:Name="TxtTitle" TextChanged="TagPropertyChanged"/>
 
@@ -687,60 +670,78 @@
                                                         <AppBarSeparator Grid.Column="1"/>
 
                                                         <ScrollView Grid.Column="2">
-                                                            <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical" Spacing="6">
-                                                                <Button HorizontalAlignment="Center" Width="260" Height="260" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
-                                                                    <Button.Content>
-                                                                        <nickvision:ViewStack x:Name="ArtViewStack" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                                                            <nickvision:ViewStack.Pages>
-                                                                                <nickvision:ViewStackPage PageName="NoImage">
-                                                                                    <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="62" Glyph="&#xE158;"/>
-                                                                                </nickvision:ViewStackPage>
+                                                            <StackPanel HorizontalAlignment="Stretch" Margin="6,0,6,0" Orientation="Vertical" Spacing="6">
+                                                                <Border HorizontalAlignment="Center" Width="260" Height="260" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
+                                                                    <nickvision:ViewStack x:Name="ArtViewStack" >
+                                                                        <nickvision:ViewStack.Pages>
+                                                                            <nickvision:ViewStackPage PageName="NoImage">
+                                                                                <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="62" Glyph="&#xE158;"/>
+                                                                            </nickvision:ViewStackPage>
 
-                                                                                <nickvision:ViewStackPage PageName="Image">
-                                                                                    <Image x:Name="ImgAlbumArt"/>
-                                                                                </nickvision:ViewStackPage>
+                                                                            <nickvision:ViewStackPage PageName="Image">
+                                                                                <Image x:Name="ImgAlbumArt"/>
+                                                                            </nickvision:ViewStackPage>
 
-                                                                                <nickvision:ViewStackPage PageName="KeepImage">
-                                                                                    <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="62" Glyph="&#xE93C;"/>
-                                                                                </nickvision:ViewStackPage>
-                                                                            </nickvision:ViewStack.Pages>
-                                                                        </nickvision:ViewStack>
-                                                                    </Button.Content>
-
-                                                                    <Button.Flyout>
-                                                                        <MenuFlyout>
-                                                                            <MenuFlyoutItem x:Name="MenuAlbumArtFlyInsert" Click="InsertAlbumArt">
-                                                                                <MenuFlyoutItem.Icon>
-                                                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE710;"/>
-                                                                                </MenuFlyoutItem.Icon>
-                                                                            </MenuFlyoutItem>
-
-                                                                            <MenuFlyoutItem x:Name="MenuAlbumArtFlyRemove" Click="RemoveAlbumArt">
-                                                                                <MenuFlyoutItem.Icon>
-                                                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE108;"/>
-                                                                                </MenuFlyoutItem.Icon>
-                                                                            </MenuFlyoutItem>
-
-                                                                            <MenuFlyoutItem x:Name="MenuAlbumArtFlyExport" Click="ExportAlbumArt">
-                                                                                <MenuFlyoutItem.Icon>
-                                                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE118;"/>
-                                                                                </MenuFlyoutItem.Icon>
-                                                                            </MenuFlyoutItem>
-
-                                                                            <MenuFlyoutItem x:Name="MenuAlbumArtFlySwitch" Click="SwitchAlbumArt">
-                                                                                <MenuFlyoutItem.Icon>
-                                                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE13C;"/>
-                                                                                </MenuFlyoutItem.Icon>
-
-                                                                                <MenuFlyoutItem.KeyboardAccelerators>
-                                                                                    <KeyboardAccelerator Modifiers="Control,Shift" Key="S"/>
-                                                                                </MenuFlyoutItem.KeyboardAccelerators>
-                                                                            </MenuFlyoutItem>
-                                                                        </MenuFlyout>
-                                                                    </Button.Flyout>
-                                                                </Button>
+                                                                            <nickvision:ViewStackPage PageName="KeepImage">
+                                                                                <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="62" Glyph="&#xE93C;"/>
+                                                                            </nickvision:ViewStackPage>
+                                                                        </nickvision:ViewStack.Pages>
+                                                                    </nickvision:ViewStack>
+                                                                </Border>
 
                                                                 <TextBlock x:Name="LblDurationFileSize" HorizontalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="16" Foreground="Gray"/>
+
+                                                                <Button x:Name="BtnAlbumArtSwitch" HorizontalAlignment="Stretch" Margin="0,12,0,0" Style="{ThemeResource AccentButtonStyle}" Click="SwitchAlbumArt">
+                                                                    <Button.Content>
+                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE13C;"/>
+
+                                                                            <TextBlock x:Name="LblBtnAlbumArtSwitch"/>
+                                                                        </StackPanel>
+                                                                    </Button.Content>
+                                                                </Button>
+
+                                                                <Button x:Name="BtnAlbumArtInsert" HorizontalAlignment="Stretch" Click="InsertAlbumArt">
+                                                                    <Button.Content>
+                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>
+
+                                                                            <TextBlock x:Name="LblBtnAlbumArtInsert"/>
+                                                                        </StackPanel>
+                                                                    </Button.Content>
+                                                                </Button>
+
+                                                                <Button x:Name="BtnAlbumArtRemove" HorizontalAlignment="Stretch" Click="RemoveAlbumArt">
+                                                                    <Button.Content>
+                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE108;"/>
+
+                                                                            <TextBlock x:Name="LblBtnAlbumArtRemove"/>
+                                                                        </StackPanel>
+                                                                    </Button.Content>
+                                                                </Button>
+
+                                                                <Button x:Name="BtnAlbumArtExport" HorizontalAlignment="Stretch" Click="ExportAlbumArt">
+                                                                    <Button.Content>
+                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE118;"/>
+
+                                                                            <TextBlock x:Name="LblBtnAlbumArtExport"/>
+                                                                        </StackPanel>
+                                                                    </Button.Content>
+                                                                </Button>
+
+                                                                <MenuFlyoutSeparator />
+
+                                                                <Button x:Name="BtnManageLyrics" HorizontalAlignment="Stretch" Click="ManageLyrics">
+                                                                    <Button.Content>
+                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE7BC;"/>
+
+                                                                            <TextBlock x:Name="LblBtnManageLyrics"/>
+                                                                        </StackPanel>
+                                                                    </Button.Content>
+                                                                </Button>
                                                             </StackPanel>
                                                         </ScrollView>
                                                     </Grid>
