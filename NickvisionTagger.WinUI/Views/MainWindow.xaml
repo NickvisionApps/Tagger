@@ -734,7 +734,7 @@
 
                                                                 <TextBlock x:Name="LblDurationFileSize" HorizontalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="16" Foreground="Gray"/>
 
-                                                                <Button x:Name="BtnAlbumArtSwitch" HorizontalAlignment="Stretch" Margin="0,12,0,0" Style="{ThemeResource AccentButtonStyle}" Click="SwitchAlbumArt">
+                                                                <Button x:Name="BtnAlbumArtSwitch" HorizontalAlignment="Stretch" Margin="0,12,0,0" Click="SwitchAlbumArt">
                                                                     <Button.Content>
                                                                         <StackPanel Orientation="Horizontal" Spacing="6">
                                                                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE13C;"/>

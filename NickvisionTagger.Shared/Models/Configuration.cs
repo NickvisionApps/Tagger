@@ -79,6 +79,11 @@ public class Configuration : ConfigurationBase
     /// The user's AcoustId API Key
     /// </summary>
     public string AcoustIdUserAPIKey { get; set; }
+    /// <summary>
+    /// Whether or not to show the Details Pane
+    /// </summary>
+    /// <remarks>Used on WinUI only</remarks>
+    public bool DetailsPane { get; set; }
 
     /// <summary>
     /// Constructs a Configuration
@@ -99,6 +104,7 @@ public class Configuration : ConfigurationBase
         OverwriteAlbumArtWithMusicBrainz = true;
         OverwriteLyricsWithWebService = true;
         AcoustIdUserAPIKey = "";
+        DetailsPane = true;
     }
 
     /// <summary>

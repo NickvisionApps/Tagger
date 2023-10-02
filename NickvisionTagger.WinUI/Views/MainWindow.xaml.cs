@@ -217,6 +217,11 @@ public sealed partial class MainWindow : Window
         LblBtnAlbumArtExport.Text = _("Export");
         LblBtnAlbumArtSwitch.Text = _("Switch to Back Cover");
         LblBtnManageLyrics.Text = _("Manage Lyrics");
+        //Details Pane
+        if(!_controller.DetailsPane)
+        {
+            DetailsPaneToggle(this, new RoutedEventArgs());
+        }
     }
 
     /// <summary>
@@ -635,6 +640,7 @@ public sealed partial class MainWindow : Window
             DetailsPane.Visibility = Visibility.Collapsed;
             MenuDetailsPane.Text = _("Show Details Pane");
             MenuDetailsPaneIcon.Glyph = "\uE126";
+            _controller.DetailsPane = false;
         }
         else
         {
@@ -642,7 +648,9 @@ public sealed partial class MainWindow : Window
             DetailsPane.Visibility = Visibility.Visible;
             MenuDetailsPane.Text = _("Hide Details Pane");
             MenuDetailsPaneIcon.Glyph = "\uE127";
+            _controller.DetailsPane = true;
         }
+        _controller.SaveConfig();
     }
 
     /// <summary>

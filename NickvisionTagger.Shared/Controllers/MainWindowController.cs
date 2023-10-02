@@ -219,6 +219,7 @@ public class MainWindowController : IDisposable
 
         set => Configuration.Current.WindowWidth = value;
     }
+
     /// <summary>
     /// Main window height
     /// </summary>
@@ -228,6 +229,7 @@ public class MainWindowController : IDisposable
 
         set => Configuration.Current.WindowHeight = value;
     }
+
     /// <summary>
     /// Whether or not the main window is maximized
     /// </summary>
@@ -236,6 +238,16 @@ public class MainWindowController : IDisposable
         get => Configuration.Current.WindowMaximized;
 
         set => Configuration.Current.WindowMaximized = value;
+    }
+
+    /// <summary>
+    /// Whether or not to show the Details Pane
+    /// </summary>
+    public bool DetailsPane
+    {
+        get => Configuration.Current.DetailsPane;
+
+        set => Configuration.Current.DetailsPane = value;
     }
 
     /// <summary>
@@ -384,6 +396,11 @@ public class MainWindowController : IDisposable
     /// Forces CanClose to be true
     /// </summary>
     public void ForceAllowClose() => _forceAllowClose = true;
+
+    /// <summary>
+    /// Saves the app's configuration file to disk
+    /// </summary>
+    public void SaveConfig() => Aura.Active.SaveConfig("config");
 
     /// <summary>
     /// Checks for an application update and notifies the user if one is available
