@@ -625,23 +625,15 @@
                                                                     <TextBox x:Name="TxtYear" MinWidth="300" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
-                                                                <Grid ColumnSpacing="12">
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                        <ColumnDefinition Width="Auto"/>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                    </Grid.ColumnDefinitions>
+                                                                <wct:SettingsCard x:Name="CardTrack">
+                                                                    <StackPanel Orientation="Horizontal" Spacing="12">
+                                                                        <TextBox x:Name="TxtTrack" MinWidth="150" TextChanged="TagPropertyChanged"/>
 
-                                                                    <wct:SettingsCard x:Name="CardTrack" Grid.Column="0">
-                                                                        <TextBox x:Name="TxtTrack" MinWidth="300" TextChanged="TagPropertyChanged"/>
-                                                                    </wct:SettingsCard>
+                                                                        <TextBlock VerticalAlignment="Center" Text="/"/>
 
-                                                                    <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="/"/>
-
-                                                                    <wct:SettingsCard x:Name="CardTrackTotal" Grid.Column="2">
-                                                                        <TextBox x:Name="TxtTrackTotal" MinWidth="300" TextChanged="TagPropertyChanged"/>
-                                                                    </wct:SettingsCard>
-                                                                </Grid>
+                                                                        <TextBox x:Name="TxtTrackTotal" MinWidth="150" TextChanged="TagPropertyChanged"/>
+                                                                    </StackPanel>
+                                                                </wct:SettingsCard>
 
                                                                 <MenuFlyoutSeparator/>
 

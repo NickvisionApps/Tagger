@@ -191,7 +191,6 @@ public sealed partial class MainWindow : Window
         TxtYear.PlaceholderText = _("Enter year here");
         CardTrack.Header = _("Track");
         TxtTrack.PlaceholderText = _("Enter track here");
-        CardTrackTotal.Header = _("Track Total");
         TxtTrackTotal.PlaceholderText = _("Enter track total here");
         LblAdditionProperties.Text = _("Additional Properties");
         CardComment.Header = _("Comment");
