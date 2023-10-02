@@ -241,13 +241,13 @@ public class MainWindowController : IDisposable
     }
 
     /// <summary>
-    /// Whether or not to show the Details Pane
+    /// Whether or not to show the Extras Pane
     /// </summary>
-    public bool DetailsPane
+    public bool ExtrasPane
     {
-        get => Configuration.Current.DetailsPane;
+        get => Configuration.Current.ExtrasPane;
 
-        set => Configuration.Current.DetailsPane = value;
+        set => Configuration.Current.ExtrasPane = value;
     }
 
     /// <summary>

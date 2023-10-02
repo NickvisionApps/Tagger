@@ -107,9 +107,9 @@
                     </MenuBarItem>
 
                     <MenuBarItem x:Name="MenuView">
-                        <MenuFlyoutItem x:Name="MenuDetailsPane" IsEnabled="False" Click="DetailsPaneToggle">
+                        <MenuFlyoutItem x:Name="MenuExtrasPane" IsEnabled="False" Click="ExtrasPaneToggle">
                             <MenuFlyoutItem.Icon>
-                                <FontIcon x:Name="MenuDetailsPaneIcon" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE127;"/>
+                                <FontIcon x:Name="MenuExtrasPaneIcon" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE127;"/>
                             </MenuFlyoutItem.Icon>
                         </MenuFlyoutItem>
                     </MenuBarItem>
@@ -583,15 +583,27 @@
 
                                                         <ScrollView Grid.Column="0">
                                                             <StackPanel HorizontalAlignment="Center" Margin="24,0,24,0" Orientation="Vertical" Spacing="6">
-                                                                <Button x:Name="BtnSaveTag" HorizontalAlignment="Right" Style="{ThemeResource AccentButtonStyle}" IsEnabled="False" Click="SaveTag">
-                                                                    <Button.Content>
-                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
-                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE105;"/>
+                                                                <wct:DockPanel LastChildFill="False">
+                                                                    <Button x:Name="BtnSaveTag" wct:DockPanel.Dock="Left" Style="{ThemeResource AccentButtonStyle}" IsEnabled="False" Click="SaveTag">
+                                                                        <Button.Content>
+                                                                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE105;"/>
 
-                                                                            <TextBlock x:Name="LblBtnSaveTag" TextWrapping="WrapWholeWords"/>
-                                                                        </StackPanel>
-                                                                    </Button.Content>
-                                                                </Button>
+                                                                                <TextBlock x:Name="LblBtnSaveTag" TextWrapping="WrapWholeWords"/>
+                                                                            </StackPanel>
+                                                                        </Button.Content>
+                                                                    </Button>
+
+                                                                    <Button x:Name="BtnExtrasPane" wct:DockPanel.Dock="Right" IsEnabled="False" Click="ExtrasPaneToggle">
+                                                                        <Button.Content>
+                                                                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                                <FontIcon x:Name="IconBtnExtrasPane" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE127;"/>
+
+                                                                                <TextBlock x:Name="LblBtnExtrasPane" TextWrapping="WrapWholeWords"/>
+                                                                            </StackPanel>
+                                                                        </Button.Content>
+                                                                    </Button>
+                                                                </wct:DockPanel>
                                                                 
                                                                 <wct:SettingsCard x:Name="CardFilename">
                                                                     <TextBox x:Name="TxtFilename" MinWidth="300" TextChanged="TagPropertyChanged"/>
@@ -704,7 +716,7 @@
 
                                                         <AppBarSeparator x:Name="DetailsSeparator" Grid.Column="1"/>
 
-                                                        <ScrollView x:Name="DetailsPane" Grid.Column="2" Width="340">
+                                                        <ScrollView x:Name="ExtrasPane" Grid.Column="2" Width="340">
                                                             <StackPanel HorizontalAlignment="Stretch" Margin="6,0,6,0" Orientation="Vertical" Spacing="6">
                                                                 <Border HorizontalAlignment="Center" Width="260" Height="260" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
                                                                     <nickvision:ViewStack x:Name="ArtViewStack" >

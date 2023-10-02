@@ -119,7 +119,7 @@ public sealed partial class MainWindow : Window
         MenuEdit.Title = _("Edit");
         MenuSettings.Text = _("Settings");
         MenuView.Title = _("View");
-        MenuDetailsPane.Text = _("Hide Details Pane");
+        MenuExtrasPane.Text = _("Hide Extras Pane");
         MenuPlaylist.Title = _("Playlist");
         MenuCreatePlaylist.Text = _("Create Playlist");
         MenuAddToPlaylist.Text = _("Add to Playlist");
@@ -174,6 +174,7 @@ public sealed partial class MainWindow : Window
         StatusPageNoSelected.Description = _("Select some files");
         ToolTipService.SetToolTip(BtnSaveTag, _("Save Tag (Ctrl+S)"));
         LblBtnSaveTag.Text = _("Save Tag");
+        LblBtnExtrasPane.Text = _("Hide Extras Pane");
         CardFilename.Header = _("File Name");
         TxtFilename.PlaceholderText = _("Enter file name here");
         LblMainProperties.Text = _("Main Properties");
@@ -216,10 +217,10 @@ public sealed partial class MainWindow : Window
         LblBtnAlbumArtExport.Text = _("Export");
         LblBtnAlbumArtSwitch.Text = _("Switch to Back Cover");
         LblBtnManageLyrics.Text = _("Manage Lyrics");
-        //Details Pane
-        if(!_controller.DetailsPane)
+        //Extras Pane
+        if(!_controller.ExtrasPane)
         {
-            DetailsPaneToggle(this, new RoutedEventArgs());
+            ExtrasPaneToggle(this, new RoutedEventArgs());
         }
     }
 
@@ -627,27 +628,31 @@ public sealed partial class MainWindow : Window
     }
 
     /// <summary>
-    /// Occurs when the details pane toggle menu item is clicked
+    /// Occurs when the Extras Pane toggle menu item is clicked
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void DetailsPaneToggle(object sender, RoutedEventArgs e)
+    private void ExtrasPaneToggle(object sender, RoutedEventArgs e)
     {
-        if(DetailsPane.Visibility == Visibility.Visible)
+        if(ExtrasPane.Visibility == Visibility.Visible)
         {
             DetailsSeparator.Visibility = Visibility.Collapsed;
-            DetailsPane.Visibility = Visibility.Collapsed;
-            MenuDetailsPane.Text = _("Show Details Pane");
-            MenuDetailsPaneIcon.Glyph = "\uE126";
-            _controller.DetailsPane = false;
+            ExtrasPane.Visibility = Visibility.Collapsed;
+            MenuExtrasPane.Text = _("Show Extras Pane");
+            MenuExtrasPaneIcon.Glyph = "\uE126";
+            LblBtnExtrasPane.Text = _("Show Extras Pane");
+            IconBtnExtrasPane.Glyph = "\uE126";
+            _controller.ExtrasPane = false;
         }
         else
         {
             DetailsSeparator.Visibility = Visibility.Visible;
-            DetailsPane.Visibility = Visibility.Visible;
-            MenuDetailsPane.Text = _("Hide Details Pane");
-            MenuDetailsPaneIcon.Glyph = "\uE127";
-            _controller.DetailsPane = true;
+            ExtrasPane.Visibility = Visibility.Visible;
+            MenuExtrasPane.Text = _("Hide Extras Pane");
+            MenuExtrasPaneIcon.Glyph = "\uE127";
+            LblBtnExtrasPane.Text = _("Hide Extras Pane");
+            IconBtnExtrasPane.Glyph = "\uE127";
+            _controller.ExtrasPane = true;
         }
         _controller.SaveConfig();
     }
@@ -956,7 +961,8 @@ public sealed partial class MainWindow : Window
         _isSelectionOccuring = true;
         //Update Properties
         SelectedViewStack.CurrentPageName = _controller.SelectedMusicFiles.Count > 0 ? "Selected" : "NoSelected";
-        MenuDetailsPane.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
+        MenuExtrasPane.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
+        BtnExtrasPane.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
         MenuTag.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
         MenuManageLyrics.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
         BtnManageLyrics.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
