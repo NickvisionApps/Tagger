@@ -582,7 +582,7 @@
                                                         </Grid.ColumnDefinitions>
 
                                                         <ScrollView Grid.Column="0">
-                                                            <StackPanel HorizontalAlignment="Center" Margin="24,0,24,0" Orientation="Vertical" Spacing="6">
+                                                            <StackPanel HorizontalAlignment="Stretch" Margin="100,0,100,0" Orientation="Vertical" Spacing="6">
                                                                 <wct:DockPanel LastChildFill="False">
                                                                     <Button x:Name="BtnSaveTag" wct:DockPanel.Dock="Left" Style="{ThemeResource AccentButtonStyle}" IsEnabled="False" Click="SaveTag">
                                                                         <Button.Content>
@@ -606,7 +606,7 @@
                                                                 </wct:DockPanel>
                                                                 
                                                                 <wct:SettingsCard x:Name="CardFilename">
-                                                                    <TextBox x:Name="TxtFilename" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtFilename" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <MenuFlyoutSeparator/>
@@ -614,27 +614,27 @@
                                                                 <TextBlock x:Name="LblMainProperties" VerticalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                                                                 <wct:SettingsCard x:Name="CardTitle">
-                                                                    <TextBox x:Name="TxtTitle" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtTitle" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <wct:SettingsCard x:Name="CardArtist">
-                                                                    <TextBox x:Name="TxtArtist" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtArtist" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <wct:SettingsCard x:Name="CardAlbum">
-                                                                    <TextBox x:Name="TxtAlbum" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtAlbum" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <wct:SettingsCard x:Name="CardAlbumArtist">
-                                                                    <TextBox x:Name="TxtAlbumArtist" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtAlbumArtist" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <wct:SettingsCard x:Name="CardGenre">
-                                                                    <TextBox x:Name="TxtGenre" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtGenre" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <wct:SettingsCard x:Name="CardYear">
-                                                                    <TextBox x:Name="TxtYear" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtYear" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <wct:SettingsCard x:Name="CardTrack">
@@ -652,23 +652,23 @@
                                                                 <TextBlock x:Name="LblAdditionProperties" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
                                                                 <wct:SettingsCard x:Name="CardComment">
-                                                                    <TextBox x:Name="TxtComment" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtComment" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <wct:SettingsCard x:Name="CardBPM">
-                                                                    <TextBox x:Name="TxtBPM" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtBPM" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <wct:SettingsCard x:Name="CardComposer">
-                                                                    <TextBox x:Name="TxtComposer" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtComposer" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <wct:SettingsCard x:Name="CardDescription">
-                                                                    <TextBox x:Name="TxtDescription" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtDescription" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <wct:SettingsCard x:Name="CardPublisher">
-                                                                    <TextBox x:Name="TxtPublisher" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    <TextBox x:Name="TxtPublisher" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                 </wct:SettingsCard>
 
                                                                 <MenuFlyoutSeparator/>

@@ -11,7 +11,7 @@
 
     <wct:SettingsCard x:Name="Card">
         <StackPanel Orientation="Horizontal" Spacing="6">
-            <TextBox x:Name="TxtProp" MinWidth="300"/>
+            <TextBox x:Name="TxtProp" MinWidth="300" MaxWidth="400"/>
 
             <Button x:Name="BtnRemove" VerticalAlignment="Center" Margin="6,0,0,0">
                 <Button.Content>
