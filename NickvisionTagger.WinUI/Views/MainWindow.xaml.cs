@@ -118,6 +118,8 @@ public sealed partial class MainWindow : Window
         MenuExit.Text = _("Exit");
         MenuEdit.Title = _("Edit");
         MenuSettings.Text = _("Settings");
+        MenuView.Title = _("View");
+        MenuDetailsPane.Text = _("Hide Details Pane");
         MenuPlaylist.Title = _("Playlist");
         MenuCreatePlaylist.Text = _("Create Playlist");
         MenuAddToPlaylist.Text = _("Add to Playlist");
@@ -170,6 +172,7 @@ public sealed partial class MainWindow : Window
         ToolTipService.SetToolTip(BtnAdvancedSearchInfo, _("Advanced Search Info"));
         StatusPageNoSelected.Title = _("No Selected Music Files");
         StatusPageNoSelected.Description = _("Select some files");
+        ToolTipService.SetToolTip(BtnSaveTag, _("Save Tag (Ctrl+S)"));
         LblBtnSaveTag.Text = _("Save Tag");
         CardFilename.Header = _("File Name");
         TxtFilename.PlaceholderText = _("Enter file name here");
@@ -620,6 +623,29 @@ public sealed partial class MainWindow : Window
     }
 
     /// <summary>
+    /// Occurs when the details pane toggle menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void DetailsPaneToggle(object sender, RoutedEventArgs e)
+    {
+        if(DetailsPane.Visibility == Visibility.Visible)
+        {
+            DetailsSeparator.Visibility = Visibility.Collapsed;
+            DetailsPane.Visibility = Visibility.Collapsed;
+            MenuDetailsPane.Text = _("Show Details Pane");
+            MenuDetailsPaneIcon.Glyph = "\uE126";
+        }
+        else
+        {
+            DetailsSeparator.Visibility = Visibility.Visible;
+            DetailsPane.Visibility = Visibility.Visible;
+            MenuDetailsPane.Text = _("Hide Details Pane");
+            MenuDetailsPaneIcon.Glyph = "\uE127";
+        }
+    }
+
+    /// <summary>
     /// Occurs when the create playlist menu item is clicked
     /// </summary>
     /// <param name="sender">object</param>
@@ -923,6 +949,7 @@ public sealed partial class MainWindow : Window
         _isSelectionOccuring = true;
         //Update Properties
         SelectedViewStack.CurrentPageName = _controller.SelectedMusicFiles.Count > 0 ? "Selected" : "NoSelected";
+        MenuDetailsPane.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
         MenuTag.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
         MenuManageLyrics.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
         BtnManageLyrics.IsEnabled = _controller.SelectedMusicFiles.Count == 1;

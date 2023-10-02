@@ -106,6 +106,14 @@
                         </MenuFlyoutItem>
                     </MenuBarItem>
 
+                    <MenuBarItem x:Name="MenuView">
+                        <MenuFlyoutItem x:Name="MenuDetailsPane" IsEnabled="False" Click="DetailsPaneToggle">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon x:Name="MenuDetailsPaneIcon" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE127;"/>
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                    </MenuBarItem>
+
                     <MenuBarItem x:Name="MenuPlaylist">
                         <MenuFlyoutItem x:Name="MenuCreatePlaylist" IsEnabled="False" Click="CreatePlaylist">
                             <MenuFlyoutItem.Icon>
@@ -570,7 +578,7 @@
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="*"/>
                                                             <ColumnDefinition Width="Auto"/>
-                                                            <ColumnDefinition Width="340"/>
+                                                            <ColumnDefinition Width="Auto"/>
                                                         </Grid.ColumnDefinitions>
 
                                                         <ScrollView Grid.Column="0">
@@ -702,9 +710,9 @@
                                                             </StackPanel>
                                                         </ScrollView>
 
-                                                        <AppBarSeparator Grid.Column="1"/>
+                                                        <AppBarSeparator x:Name="DetailsSeparator" Grid.Column="1"/>
 
-                                                        <ScrollView Grid.Column="2">
+                                                        <ScrollView x:Name="DetailsPane" Grid.Column="2" Width="340">
                                                             <StackPanel HorizontalAlignment="Stretch" Margin="6,0,6,0" Orientation="Vertical" Spacing="6">
                                                                 <Border HorizontalAlignment="Center" Width="260" Height="260" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
                                                                     <nickvision:ViewStack x:Name="ArtViewStack" >
