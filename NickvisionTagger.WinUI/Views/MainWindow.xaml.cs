@@ -102,7 +102,6 @@ public sealed partial class MainWindow : Window
         TitleBar.Loaded += (sender, e) => SetDragRegionForCustomTitleBar();
         TitleBar.SizeChanged += (sender, e) => SetDragRegionForCustomTitleBar();
         //Window Sizing
-        AppWindow.Resize(new SizeInt32(900, 700));
         User32.ShowWindow(_hwnd, ShowWindowCommand.SW_SHOWMAXIMIZED);
         //Home
         HomeBanner.Background = new AcrylicBrush()
@@ -171,43 +170,44 @@ public sealed partial class MainWindow : Window
         ToolTipService.SetToolTip(BtnAdvancedSearchInfo, _("Advanced Search Info"));
         StatusPageNoSelected.Title = _("No Selected Music Files");
         StatusPageNoSelected.Description = _("Select some files");
-        TxtFilename.Header = _("File Name");
+        LblBtnSaveTag.Text = _("Save Tag");
+        CardFilename.Header = _("File Name");
         TxtFilename.PlaceholderText = _("Enter file name here");
         LblMainProperties.Text = _("Main Properties");
-        TxtTitle.Header = _("Title");
+        CardTitle.Header = _("Title");
         TxtTitle.PlaceholderText = _("Enter title here");
-        TxtArtist.Header = _("Artist");
+        CardArtist.Header = _("Artist");
         TxtArtist.PlaceholderText = _("Enter artist here");
-        TxtAlbum.Header = _("Album");
+        CardAlbum.Header = _("Album");
         TxtAlbum.PlaceholderText = _("Enter album here");
-        TxtAlbumArtist.Header = _("Album Artist");
+        CardAlbumArtist.Header = _("Album Artist");
         TxtAlbumArtist.PlaceholderText = _("Enter album artist here");
-        TxtGenre.Header = _("Genre");
+        CardGenre.Header = _("Genre");
         TxtGenre.PlaceholderText = _("Enter genre here");
-        TxtYear.Header = _("Year");
+        CardYear.Header = _("Year");
         TxtYear.PlaceholderText = _("Enter year here");
-        TxtTrack.Header = _("Track");
+        CardTrack.Header = _("Track");
         TxtTrack.PlaceholderText = _("Enter track here");
-        TxtTrackTotal.Header = _("Track Total");
+        CardTrackTotal.Header = _("Track Total");
         TxtTrackTotal.PlaceholderText = _("Enter track total here");
         LblAdditionProperties.Text = _("Additional Properties");
-        TxtComment.Header = _("Comment");
+        CardComment.Header = _("Comment");
         TxtComment.PlaceholderText = _("Enter comment here");
-        TxtBPM.Header = _("Beats Per Minute");
+        CardBPM.Header = _("Beats Per Minute");
         TxtBPM.PlaceholderText = _("Enter beats per minute here");
-        TxtComposer.Header = _("Composer");
+        CardComposer.Header = _("Composer");
         TxtComposer.PlaceholderText = _("Enter composer here");
-        TxtDescription.Header = _("Description");
+        CardDescription.Header = _("Description");
         TxtDescription.PlaceholderText = _("Enter description here");
-        TxtPublisher.Header = _("Publisher");
+        CardPublisher.Header = _("Publisher");
         TxtPublisher.PlaceholderText = _("Enter publisher here");
         LblCustomProperties.Text = _("Custom Properties");
         LblBtnAddCustomProperty.Text = _("Add");
         ToolTipService.SetToolTip(BtnAddCustomProperty, _("Add New Property"));
         LblCustomPropertiesWarning.Text = _("Custom properties can only be edited for individual files.");
         LblFileProperties.Text = _("File Properties");
-        TxtFingerprint.Header = _("Fingerprint");
-        TxtFingerprint.PlaceholderText = _("Calculating...");
+        CardFingerprint.Header = _("Fingerprint");
+        LblFingerprint.Text = _("Calculating...");
         ToolTipService.SetToolTip(BtnCopyFingerprint, _("Copy Fingerprint To Clipboard"));
         LblBtnAlbumArtInsert.Text = _("Insert");
         LblBtnAlbumArtRemove.Text = _("Remove");
@@ -911,6 +911,8 @@ public sealed partial class MainWindow : Window
             _musicFileRows[i].ShowUnsaveIcon = !saved;
             i++;
         }
+        MenuSaveTag.IsEnabled = pending;
+        BtnSaveTag.IsEnabled = pending;
     }
 
     /// <summary>
@@ -949,7 +951,7 @@ public sealed partial class MainWindow : Window
         TxtDescription.Text = _controller.SelectedPropertyMap.Description;
         TxtPublisher.Text = _controller.SelectedPropertyMap.Publisher;
         LblDurationFileSize.Text = $"{_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}";
-        TxtFingerprint.Text = _controller.SelectedPropertyMap.Fingerprint;
+        LblFingerprint.Text = _controller.SelectedPropertyMap.Fingerprint;
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
         if (albumArt == "hasArt")
         {
@@ -1071,7 +1073,7 @@ public sealed partial class MainWindow : Window
     {
         if (!string.IsNullOrEmpty(_controller.SelectedPropertyMap.Fingerprint) && _controller.SelectedPropertyMap.Fingerprint != _("Calculating..."))
         {
-            TxtFingerprint.Text = _controller.SelectedPropertyMap.Fingerprint;
+            LblFingerprint.Text = _controller.SelectedPropertyMap.Fingerprint;
             BtnCopyFingerprint.IsEnabled = true;
         }
     }
@@ -1100,7 +1102,7 @@ public sealed partial class MainWindow : Window
             LblBtnAlbumArtSwitch.Text = _currentAlbumArtType == AlbumArtType.Front ? _("Switch to Back Cover") : _("Switch to Front Cover");
         }
         _controller.UpdateSelectedMusicFiles(selectedIndexes);
-        if (string.IsNullOrEmpty(TxtFingerprint.Text))
+        if (string.IsNullOrEmpty(LblFingerprint.Text))
         {
             BtnCopyFingerprint.IsEnabled = false;
         }
@@ -1171,7 +1173,7 @@ public sealed partial class MainWindow : Window
     private void CopyFingerprintToClipboard(object sender, RoutedEventArgs e)
     {
         var package = new DataPackage();
-        package.SetText(TxtFingerprint.Text);
+        package.SetText(LblFingerprint.Text);
         Clipboard.SetContent(package);
         NotificationSent(sender, new NotificationSentEventArgs(_("Fingerprint was copied to clipboard."), NotificationSeverity.Success));
     }

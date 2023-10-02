@@ -9,19 +9,15 @@
     xmlns:wct="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d">
 
-    <Grid ColumnSpacing="6">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    <wct:SettingsCard x:Name="Card">
+        <StackPanel Orientation="Horizontal" Spacing="6">
+            <TextBox x:Name="TxtProp" MinWidth="300"/>
 
-        <TextBox x:Name="TxtProp" Grid.Column="0"/>
-
-        <Button x:Name="BtnRemove" Grid.Column="1" VerticalAlignment="Center" Margin="0,26,0,0">
-            <Button.Content>
-                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE108;"/>
-            </Button.Content>
-        </Button>
-    </Grid>
+            <Button x:Name="BtnRemove" VerticalAlignment="Center" Margin="6,0,0,0">
+                <Button.Content>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE108;"/>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </wct:SettingsCard>
 </UserControl>

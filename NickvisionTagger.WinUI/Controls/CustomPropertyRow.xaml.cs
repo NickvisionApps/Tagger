@@ -27,9 +27,9 @@ public sealed partial class CustomPropertyRow : UserControl
     /// </summary>
     public string Key
     {
-        get => (string)TxtProp.Header;
+        get => (string)Card.Header;
 
-        set => TxtProp.Header = value;
+        set => Card.Header = value;
     }
 
     /// <summary>

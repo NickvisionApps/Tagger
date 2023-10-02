@@ -141,7 +141,7 @@
                     </MenuBarItem>
 
                     <MenuBarItem x:Name="MenuTag" IsEnabled="False">
-                        <MenuFlyoutItem x:Name="MenuSaveTag" Click="SaveTag">
+                        <MenuFlyoutItem x:Name="MenuSaveTag" IsEnabled="False" Click="SaveTag">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE105;"/>
                             </MenuFlyoutItem.Icon>
@@ -570,28 +570,52 @@
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition Width="*"/>
                                                             <ColumnDefinition Width="Auto"/>
-                                                            <ColumnDefinition Width="320"/>
+                                                            <ColumnDefinition Width="340"/>
                                                         </Grid.ColumnDefinitions>
 
                                                         <ScrollView Grid.Column="0">
-                                                            <StackPanel HorizontalAlignment="Center" Width="400" Orientation="Vertical" Spacing="6">
-                                                                <TextBox x:Name="TxtFilename" TextChanged="TagPropertyChanged"/>
+                                                            <StackPanel HorizontalAlignment="Center" Margin="24,0,24,0" Orientation="Vertical" Spacing="6">
+                                                                <Button x:Name="BtnSaveTag" HorizontalAlignment="Right" Style="{ThemeResource AccentButtonStyle}" IsEnabled="False" Click="SaveTag">
+                                                                    <Button.Content>
+                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE105;"/>
+
+                                                                            <TextBlock x:Name="LblBtnSaveTag" TextWrapping="WrapWholeWords"/>
+                                                                        </StackPanel>
+                                                                    </Button.Content>
+                                                                </Button>
+                                                                
+                                                                <wct:SettingsCard x:Name="CardFilename">
+                                                                    <TextBox x:Name="TxtFilename" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
                                                                 <MenuFlyoutSeparator/>
 
                                                                 <TextBlock x:Name="LblMainProperties" VerticalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                                                                <TextBox x:Name="TxtTitle" TextChanged="TagPropertyChanged"/>
+                                                                <wct:SettingsCard x:Name="CardTitle">
+                                                                    <TextBox x:Name="TxtTitle" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
-                                                                <TextBox x:Name="TxtArtist" TextChanged="TagPropertyChanged"/>
+                                                                <wct:SettingsCard x:Name="CardArtist">
+                                                                    <TextBox x:Name="TxtArtist" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
-                                                                <TextBox x:Name="TxtAlbum" TextChanged="TagPropertyChanged"/>
+                                                                <wct:SettingsCard x:Name="CardAlbum">
+                                                                    <TextBox x:Name="TxtAlbum" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
-                                                                <TextBox x:Name="TxtAlbumArtist" TextChanged="TagPropertyChanged"/>
+                                                                <wct:SettingsCard x:Name="CardAlbumArtist">
+                                                                    <TextBox x:Name="TxtAlbumArtist" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
-                                                                <TextBox x:Name="TxtGenre" TextChanged="TagPropertyChanged"/>
+                                                                <wct:SettingsCard x:Name="CardGenre">
+                                                                    <TextBox x:Name="TxtGenre" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
-                                                                <TextBox x:Name="TxtYear" TextChanged="TagPropertyChanged"/>
+                                                                <wct:SettingsCard x:Name="CardYear">
+                                                                    <TextBox x:Name="TxtYear" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
                                                                 <Grid ColumnSpacing="12">
                                                                     <Grid.ColumnDefinitions>
@@ -600,26 +624,40 @@
                                                                         <ColumnDefinition Width="*"/>
                                                                     </Grid.ColumnDefinitions>
 
-                                                                    <TextBox x:Name="TxtTrack" Grid.Column="0" TextChanged="TagPropertyChanged"/>
+                                                                    <wct:SettingsCard x:Name="CardTrack" Grid.Column="0">
+                                                                        <TextBox x:Name="TxtTrack" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    </wct:SettingsCard>
 
                                                                     <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="/"/>
 
-                                                                    <TextBox x:Name="TxtTrackTotal" Grid.Column="2" TextChanged="TagPropertyChanged"/>
+                                                                    <wct:SettingsCard x:Name="CardTrackTotal" Grid.Column="2">
+                                                                        <TextBox x:Name="TxtTrackTotal" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                    </wct:SettingsCard>
                                                                 </Grid>
 
                                                                 <MenuFlyoutSeparator/>
 
                                                                 <TextBlock x:Name="LblAdditionProperties" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                                                                <TextBox x:Name="TxtComment" TextChanged="TagPropertyChanged"/>
+                                                                <wct:SettingsCard x:Name="CardComment">
+                                                                    <TextBox x:Name="TxtComment" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
-                                                                <TextBox x:Name="TxtBPM" TextChanged="TagPropertyChanged"/>
+                                                                <wct:SettingsCard x:Name="CardBPM">
+                                                                    <TextBox x:Name="TxtBPM" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
-                                                                <TextBox x:Name="TxtComposer" TextChanged="TagPropertyChanged"/>
+                                                                <wct:SettingsCard x:Name="CardComposer">
+                                                                    <TextBox x:Name="TxtComposer" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
-                                                                <TextBox x:Name="TxtDescription" TextChanged="TagPropertyChanged"/>
+                                                                <wct:SettingsCard x:Name="CardDescription">
+                                                                    <TextBox x:Name="TxtDescription" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
-                                                                <TextBox x:Name="TxtPublisher" TextChanged="TagPropertyChanged"/>
+                                                                <wct:SettingsCard x:Name="CardPublisher">
+                                                                    <TextBox x:Name="TxtPublisher" MinWidth="300" TextChanged="TagPropertyChanged"/>
+                                                                </wct:SettingsCard>
 
                                                                 <MenuFlyoutSeparator/>
 
@@ -650,20 +688,17 @@
 
                                                                 <TextBlock x:Name="LblFileProperties" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                                                                <Grid ColumnSpacing="6">
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                        <ColumnDefinition Width="Auto"/>
-                                                                    </Grid.ColumnDefinitions>
+                                                                <wct:SettingsCard x:Name="CardFingerprint">
+                                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                        <TextBlock x:Name="LblFingerprint" VerticalAlignment="Center" Width="300" MaxLines="1"/>
 
-                                                                    <TextBox x:Name="TxtFingerprint" Grid.Column="0" IsReadOnly="True"/>
-
-                                                                    <Button x:Name="BtnCopyFingerprint" Grid.Column="1" VerticalAlignment="Center" Margin="0,26,0,0" Click="CopyFingerprintToClipboard">
-                                                                        <Button.Content>
-                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE16F;"/>
-                                                                        </Button.Content>
-                                                                    </Button>
-                                                                </Grid>
+                                                                        <Button x:Name="BtnCopyFingerprint" VerticalAlignment="Center" Margin="6,0,0,0" Click="CopyFingerprintToClipboard">
+                                                                            <Button.Content>
+                                                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE16F;"/>
+                                                                            </Button.Content>
+                                                                        </Button>
+                                                                    </StackPanel>
+                                                                </wct:SettingsCard>
                                                             </StackPanel>
                                                         </ScrollView>
 
