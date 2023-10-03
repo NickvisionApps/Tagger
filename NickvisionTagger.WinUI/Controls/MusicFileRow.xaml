@@ -9,22 +9,26 @@
     xmlns:wct="using:CommunityToolkit.WinUI.Controls"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Vertical">
-        <Grid Margin="4,6,0,6" ColumnSpacing="12">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <Grid Margin="0,6,0,6" ColumnSpacing="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
 
-            <FontIcon x:Name="UnsaveIcon" Grid.Column="0" Margin="-12,-12,0,0" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xF83F;"/>
+        <FontIcon Grid.Column="0" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xEC4F;"/>
+        
+        <Grid Grid.Column="1" RowSpacing="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="1" Orientation="Vertical" Spacing="6">
-                <TextBlock x:Name="TxtTitle"/>
+            <TextBlock x:Name="TxtTitle" Grid.Row="0"/>
 
-                <TextBlock x:Name="TxtSubtitle" Foreground="Gray"/>
-            </StackPanel>
+            <TextBlock x:Name="TxtSubtitle" Grid.Row="1" Foreground="Gray"/>
         </Grid>
 
-        <MenuFlyoutSeparator HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
-    </StackPanel>
+        <FontIcon x:Name="UnsaveIcon" Grid.Column="2" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xF83F;"/>
+    </Grid>
 </UserControl>

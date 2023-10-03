@@ -25,6 +25,7 @@ public sealed partial class MusicFileRow : UserControl
         {
             Title = musicFile.Filename;
             Subtitle = "";
+            TxtSubtitle.Visibility = Visibility.Collapsed;
         }
         ShowUnsaveIcon = false;
     }
@@ -56,6 +57,10 @@ public sealed partial class MusicFileRow : UserControl
     {
         get => TxtSubtitle.Text;
 
-        set => TxtSubtitle.Text = value;
+        set
+        {
+            TxtSubtitle.Text = value;
+            TxtSubtitle.Visibility = string.IsNullOrEmpty(value) ? Visibility.Collapsed : Visibility.Visible;
+        }
     }
 }

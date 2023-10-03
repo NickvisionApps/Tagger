@@ -105,15 +105,7 @@
                             </MenuFlyoutItem.KeyboardAccelerators>
                         </MenuFlyoutItem>
                     </MenuBarItem>
-
-                    <MenuBarItem x:Name="MenuView">
-                        <MenuFlyoutItem x:Name="MenuExtrasPane" IsEnabled="False" Click="ExtrasPaneToggle">
-                            <MenuFlyoutItem.Icon>
-                                <FontIcon x:Name="MenuExtrasPaneIcon" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE127;"/>
-                            </MenuFlyoutItem.Icon>
-                        </MenuFlyoutItem>
-                    </MenuBarItem>
-
+                    
                     <MenuBarItem x:Name="MenuPlaylist">
                         <MenuFlyoutItem x:Name="MenuCreatePlaylist" IsEnabled="False" Click="CreatePlaylist">
                             <MenuFlyoutItem.Icon>
@@ -537,7 +529,7 @@
                                 <nickvision:ViewStackPage PageName="Files">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition MinWidth="300" MaxWidth="400"/>
+                                            <ColumnDefinition Width="360"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
@@ -562,239 +554,261 @@
                                                 </Button>
                                             </Grid>
 
-                                            <Border Grid.Row="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
-                                                <ListView x:Name="ListMusicFiles" SelectionMode="Extended" SelectionChanged="ListMusicFiles_SelectionChanged"/>
-                                            </Border>
+                                            <ListView x:Name="ListMusicFiles" Grid.Row="1"  SelectionMode="Extended" SelectionChanged="ListMusicFiles_SelectionChanged"/>
                                         </Grid>
 
-                                        <nickvision:ViewStack x:Name="SelectedViewStack" Grid.Column="1">
-                                            <nickvision:ViewStack.Pages>
-                                                <nickvision:ViewStackPage PageName="NoSelected">
-                                                    <nickvision:StatusPage x:Name="StatusPageNoSelected" HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="&#xE14E;"/>
-                                                </nickvision:ViewStackPage>
+                                        <Border Grid.Column="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
+                                            <nickvision:ViewStack x:Name="SelectedViewStack" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                <nickvision:ViewStack.Pages>
+                                                    <nickvision:ViewStackPage PageName="NoSelected">
+                                                        <nickvision:StatusPage x:Name="StatusPageNoSelected" HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="&#xE14E;"/>
+                                                    </nickvision:ViewStackPage>
 
-                                                <nickvision:ViewStackPage PageName="Selected">
-                                                    <Grid>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="Auto"/>
-                                                            <ColumnDefinition Width="Auto"/>
-                                                        </Grid.ColumnDefinitions>
+                                                    <nickvision:ViewStackPage PageName="Selected">
+                                                        <Grid>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="*"/>
+                                                            </Grid.RowDefinitions>
+                                                            
+                                                            <wct:DockPanel Grid.Row="0" LastChildFill="False">
+                                                                <CommandBar wct:DockPanel.Dock="Left" DefaultLabelPosition="Right">
+                                                                    <AppBarButton x:Name="CmdBtnSaveTag" Click="SaveTag">
+                                                                        <AppBarButton.Icon>
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE105;"/>
+                                                                        </AppBarButton.Icon>
+                                                                    </AppBarButton>
 
-                                                        <ScrollView Grid.Column="0">
-                                                            <StackPanel HorizontalAlignment="Stretch" Margin="100,0,100,0" Orientation="Vertical" Spacing="6">
-                                                                <wct:DockPanel LastChildFill="False">
-                                                                    <Button x:Name="BtnSaveTag" wct:DockPanel.Dock="Left" Style="{ThemeResource AccentButtonStyle}" IsEnabled="False" Click="SaveTag">
-                                                                        <Button.Content>
-                                                                            <StackPanel Orientation="Horizontal" Spacing="6">
-                                                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE105;"/>
+                                                                    <AppBarButton x:Name="CmdBtnDeleteTag" Click="DeleteTag">
+                                                                        <AppBarButton.Icon>
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE107;"/>
+                                                                        </AppBarButton.Icon>
+                                                                    </AppBarButton>
 
-                                                                                <TextBlock x:Name="LblBtnSaveTag" TextWrapping="WrapWholeWords"/>
+                                                                    <AppBarSeparator/>
+
+                                                                    <AppBarButton x:Name="CmdBtnManageLyrics" Click="ManageLyrics">
+                                                                        <AppBarButton.Icon>
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE7BC;"/>
+                                                                        </AppBarButton.Icon>
+                                                                    </AppBarButton>
+
+                                                                    <AppBarButton x:Name="CmdBtnFilenameToTag" Click="FilenameToTag">
+                                                                        <AppBarButton.Icon>
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE13E;"/>
+                                                                        </AppBarButton.Icon>
+                                                                    </AppBarButton>
+
+                                                                    <AppBarButton x:Name="CmdBtnTagToFilename" Click="TagToFilename">
+                                                                        <AppBarButton.Icon>
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE1CB;"/>
+                                                                        </AppBarButton.Icon>
+                                                                    </AppBarButton>
+
+                                                                    <AppBarButton x:Name="CmdBtnDownloadMusicBrainz" Click="DownloadMusicBrainzMetadata">
+                                                                        <AppBarButton.Icon>
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xEBD3;"/>
+                                                                        </AppBarButton.Icon>
+                                                                    </AppBarButton>
+                                                                </CommandBar>
+
+                                                                <CommandBar wct:DockPanel.Dock="Right" DefaultLabelPosition="Right">
+                                                                    <AppBarButton x:Name="CmdBtnExtrasPane" Icon="ClosePane" Click="ExtrasPaneToggle"/>
+                                                                </CommandBar>
+                                                            </wct:DockPanel>
+
+                                                            <MenuFlyoutSeparator Grid.Row="1"/>
+
+                                                            <Grid Grid.Row="2" Margin="12,6,12,0" ColumnSpacing="6">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <ScrollView x:Name="PropertiesPane" Grid.Column="0" SizeChanged="PropertiesPane_SizeChanged">
+                                                                    <StackPanel Orientation="Vertical" Spacing="6">
+                                                                        <wct:SettingsCard x:Name="CardFilename">
+                                                                            <TextBox x:Name="TxtFilename" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <MenuFlyoutSeparator/>
+
+                                                                        <TextBlock x:Name="LblMainProperties" VerticalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                                                        <wct:SettingsCard x:Name="CardTitle">
+                                                                            <TextBox x:Name="TxtTitle" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <wct:SettingsCard x:Name="CardArtist">
+                                                                            <TextBox x:Name="TxtArtist" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <wct:SettingsCard x:Name="CardAlbum">
+                                                                            <TextBox x:Name="TxtAlbum" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <wct:SettingsCard x:Name="CardAlbumArtist">
+                                                                            <TextBox x:Name="TxtAlbumArtist" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <wct:SettingsCard x:Name="CardGenre">
+                                                                            <TextBox x:Name="TxtGenre" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <wct:SettingsCard x:Name="CardYear">
+                                                                            <TextBox x:Name="TxtYear" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <wct:SettingsCard x:Name="CardTrack">
+                                                                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                                                                <TextBox x:Name="TxtTrack" MinWidth="150" TextChanged="TagPropertyChanged"/>
+
+                                                                                <TextBlock VerticalAlignment="Center" Text="/"/>
+
+                                                                                <TextBox x:Name="TxtTrackTotal" MinWidth="150" TextChanged="TagPropertyChanged"/>
                                                                             </StackPanel>
-                                                                        </Button.Content>
-                                                                    </Button>
+                                                                        </wct:SettingsCard>
 
-                                                                    <Button x:Name="BtnExtrasPane" wct:DockPanel.Dock="Right" IsEnabled="False" Click="ExtrasPaneToggle">
-                                                                        <Button.Content>
+                                                                        <MenuFlyoutSeparator/>
+
+                                                                        <TextBlock x:Name="LblAdditionProperties" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                                                        <wct:SettingsCard x:Name="CardComment">
+                                                                            <TextBox x:Name="TxtComment" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <wct:SettingsCard x:Name="CardBPM">
+                                                                            <TextBox x:Name="TxtBPM" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <wct:SettingsCard x:Name="CardComposer">
+                                                                            <TextBox x:Name="TxtComposer" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <wct:SettingsCard x:Name="CardDescription">
+                                                                            <TextBox x:Name="TxtDescription" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <wct:SettingsCard x:Name="CardPublisher">
+                                                                            <TextBox x:Name="TxtPublisher" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
+
+                                                                        <MenuFlyoutSeparator/>
+
+                                                                        <Grid x:Name="CustomPropertiesHeader">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="*"/>
+                                                                                <ColumnDefinition Width="Auto"/>
+                                                                            </Grid.ColumnDefinitions>
+
+                                                                            <TextBlock x:Name="LblCustomProperties" Grid.Column="0" VerticalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                                                            <Button x:Name="BtnAddCustomProperty" Grid.Column="1">
+                                                                                <Button.Content>
+                                                                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>
+
+                                                                                        <TextBlock x:Name="LblBtnAddCustomProperty" TextWrapping="WrapWholeWords"/>
+                                                                                    </StackPanel>
+                                                                                </Button.Content>
+                                                                            </Button>
+                                                                        </Grid>
+
+                                                                        <StackPanel x:Name="ListCustomProperties" Orientation="Vertical" Spacing="6"/>
+
+                                                                        <TextBlock x:Name="LblCustomPropertiesWarning" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+
+                                                                        <MenuFlyoutSeparator/>
+
+                                                                        <TextBlock x:Name="LblFileProperties" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+
+                                                                        <wct:SettingsCard x:Name="CardFingerprint">
                                                                             <StackPanel Orientation="Horizontal" Spacing="6">
-                                                                                <FontIcon x:Name="IconBtnExtrasPane" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE127;"/>
+                                                                                <TextBlock x:Name="LblFingerprint" VerticalAlignment="Center" Width="300" MaxLines="1"/>
 
-                                                                                <TextBlock x:Name="LblBtnExtrasPane" TextWrapping="WrapWholeWords"/>
+                                                                                <Button x:Name="BtnCopyFingerprint" VerticalAlignment="Center" Margin="6,0,0,0" Click="CopyFingerprintToClipboard">
+                                                                                    <Button.Content>
+                                                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE16F;"/>
+                                                                                    </Button.Content>
+                                                                                </Button>
                                                                             </StackPanel>
-                                                                        </Button.Content>
-                                                                    </Button>
-                                                                </wct:DockPanel>
-                                                                
-                                                                <wct:SettingsCard x:Name="CardFilename">
-                                                                    <TextBox x:Name="TxtFilename" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
-
-                                                                <MenuFlyoutSeparator/>
-
-                                                                <TextBlock x:Name="LblMainProperties" VerticalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
-
-                                                                <wct:SettingsCard x:Name="CardTitle">
-                                                                    <TextBox x:Name="TxtTitle" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
-
-                                                                <wct:SettingsCard x:Name="CardArtist">
-                                                                    <TextBox x:Name="TxtArtist" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
-
-                                                                <wct:SettingsCard x:Name="CardAlbum">
-                                                                    <TextBox x:Name="TxtAlbum" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
-
-                                                                <wct:SettingsCard x:Name="CardAlbumArtist">
-                                                                    <TextBox x:Name="TxtAlbumArtist" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
-
-                                                                <wct:SettingsCard x:Name="CardGenre">
-                                                                    <TextBox x:Name="TxtGenre" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
-
-                                                                <wct:SettingsCard x:Name="CardYear">
-                                                                    <TextBox x:Name="TxtYear" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
-
-                                                                <wct:SettingsCard x:Name="CardTrack">
-                                                                    <StackPanel Orientation="Horizontal" Spacing="12">
-                                                                        <TextBox x:Name="TxtTrack" MinWidth="150" TextChanged="TagPropertyChanged"/>
-
-                                                                        <TextBlock VerticalAlignment="Center" Text="/"/>
-
-                                                                        <TextBox x:Name="TxtTrackTotal" MinWidth="150" TextChanged="TagPropertyChanged"/>
+                                                                        </wct:SettingsCard>
                                                                     </StackPanel>
-                                                                </wct:SettingsCard>
+                                                                </ScrollView>
 
-                                                                <MenuFlyoutSeparator/>
+                                                                <AppBarSeparator x:Name="DetailsSeparator" Grid.Column="1"/>
 
-                                                                <TextBlock x:Name="LblAdditionProperties" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                                                                <ScrollView x:Name="ExtrasPane" Grid.Column="2" Width="340">
+                                                                    <StackPanel Orientation="Vertical" Spacing="6">
+                                                                        <Border HorizontalAlignment="Center" Width="260" Height="260" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
+                                                                            <nickvision:ViewStack x:Name="ArtViewStack" >
+                                                                                <nickvision:ViewStack.Pages>
+                                                                                    <nickvision:ViewStackPage PageName="NoImage">
+                                                                                        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="62" Glyph="&#xE158;"/>
+                                                                                    </nickvision:ViewStackPage>
 
-                                                                <wct:SettingsCard x:Name="CardComment">
-                                                                    <TextBox x:Name="TxtComment" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
+                                                                                    <nickvision:ViewStackPage PageName="Image">
+                                                                                        <Image x:Name="ImgAlbumArt"/>
+                                                                                    </nickvision:ViewStackPage>
 
-                                                                <wct:SettingsCard x:Name="CardBPM">
-                                                                    <TextBox x:Name="TxtBPM" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
+                                                                                    <nickvision:ViewStackPage PageName="KeepImage">
+                                                                                        <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="62" Glyph="&#xE93C;"/>
+                                                                                    </nickvision:ViewStackPage>
+                                                                                </nickvision:ViewStack.Pages>
+                                                                            </nickvision:ViewStack>
+                                                                        </Border>
 
-                                                                <wct:SettingsCard x:Name="CardComposer">
-                                                                    <TextBox x:Name="TxtComposer" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
+                                                                        <TextBlock x:Name="LblDurationFileSize" HorizontalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="16" Foreground="Gray"/>
 
-                                                                <wct:SettingsCard x:Name="CardDescription">
-                                                                    <TextBox x:Name="TxtDescription" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
-
-                                                                <wct:SettingsCard x:Name="CardPublisher">
-                                                                    <TextBox x:Name="TxtPublisher" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
-                                                                </wct:SettingsCard>
-
-                                                                <MenuFlyoutSeparator/>
-
-                                                                <Grid x:Name="CustomPropertiesHeader">
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="*"/>
-                                                                        <ColumnDefinition Width="Auto"/>
-                                                                    </Grid.ColumnDefinitions>
-
-                                                                    <TextBlock x:Name="LblCustomProperties" Grid.Column="0" VerticalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
-
-                                                                    <Button x:Name="BtnAddCustomProperty" Grid.Column="1">
-                                                                        <Button.Content>
-                                                                            <StackPanel Orientation="Horizontal" Spacing="6">
-                                                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>
-
-                                                                                <TextBlock x:Name="LblBtnAddCustomProperty" TextWrapping="WrapWholeWords"/>
-                                                                            </StackPanel>
-                                                                        </Button.Content>
-                                                                    </Button>
-                                                                </Grid>
-
-                                                                <StackPanel x:Name="ListCustomProperties" Orientation="Vertical" Spacing="6"/>
-
-                                                                <TextBlock x:Name="LblCustomPropertiesWarning" Foreground="Gray" TextWrapping="WrapWholeWords"/>
-
-                                                                <MenuFlyoutSeparator/>
-
-                                                                <TextBlock x:Name="LblFileProperties" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
-
-                                                                <wct:SettingsCard x:Name="CardFingerprint">
-                                                                    <StackPanel Orientation="Horizontal" Spacing="6">
-                                                                        <TextBlock x:Name="LblFingerprint" VerticalAlignment="Center" Width="300" MaxLines="1"/>
-
-                                                                        <Button x:Name="BtnCopyFingerprint" VerticalAlignment="Center" Margin="6,0,0,0" Click="CopyFingerprintToClipboard">
+                                                                        <Button x:Name="BtnAlbumArtSwitch" HorizontalAlignment="Stretch" Margin="0,12,0,0" Click="SwitchAlbumArt">
                                                                             <Button.Content>
-                                                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE16F;"/>
+                                                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE13C;"/>
+
+                                                                                    <TextBlock x:Name="LblBtnAlbumArtSwitch"/>
+                                                                                </StackPanel>
+                                                                            </Button.Content>
+                                                                        </Button>
+
+                                                                        <Button x:Name="BtnAlbumArtInsert" HorizontalAlignment="Stretch" Click="InsertAlbumArt">
+                                                                            <Button.Content>
+                                                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>
+
+                                                                                    <TextBlock x:Name="LblBtnAlbumArtInsert"/>
+                                                                                </StackPanel>
+                                                                            </Button.Content>
+                                                                        </Button>
+
+                                                                        <Button x:Name="BtnAlbumArtRemove" HorizontalAlignment="Stretch" Click="RemoveAlbumArt">
+                                                                            <Button.Content>
+                                                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE108;"/>
+
+                                                                                    <TextBlock x:Name="LblBtnAlbumArtRemove"/>
+                                                                                </StackPanel>
+                                                                            </Button.Content>
+                                                                        </Button>
+
+                                                                        <Button x:Name="BtnAlbumArtExport" HorizontalAlignment="Stretch" Click="ExportAlbumArt">
+                                                                            <Button.Content>
+                                                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE118;"/>
+
+                                                                                    <TextBlock x:Name="LblBtnAlbumArtExport"/>
+                                                                                </StackPanel>
                                                                             </Button.Content>
                                                                         </Button>
                                                                     </StackPanel>
-                                                                </wct:SettingsCard>
-                                                            </StackPanel>
-                                                        </ScrollView>
-
-                                                        <AppBarSeparator x:Name="DetailsSeparator" Grid.Column="1"/>
-
-                                                        <ScrollView x:Name="ExtrasPane" Grid.Column="2" Width="340">
-                                                            <StackPanel HorizontalAlignment="Stretch" Margin="6,0,6,0" Orientation="Vertical" Spacing="6">
-                                                                <Border HorizontalAlignment="Center" Width="260" Height="260" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
-                                                                    <nickvision:ViewStack x:Name="ArtViewStack" >
-                                                                        <nickvision:ViewStack.Pages>
-                                                                            <nickvision:ViewStackPage PageName="NoImage">
-                                                                                <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="62" Glyph="&#xE158;"/>
-                                                                            </nickvision:ViewStackPage>
-
-                                                                            <nickvision:ViewStackPage PageName="Image">
-                                                                                <Image x:Name="ImgAlbumArt"/>
-                                                                            </nickvision:ViewStackPage>
-
-                                                                            <nickvision:ViewStackPage PageName="KeepImage">
-                                                                                <FontIcon HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="62" Glyph="&#xE93C;"/>
-                                                                            </nickvision:ViewStackPage>
-                                                                        </nickvision:ViewStack.Pages>
-                                                                    </nickvision:ViewStack>
-                                                                </Border>
-
-                                                                <TextBlock x:Name="LblDurationFileSize" HorizontalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="16" Foreground="Gray"/>
-
-                                                                <Button x:Name="BtnAlbumArtSwitch" HorizontalAlignment="Stretch" Margin="0,12,0,0" Click="SwitchAlbumArt">
-                                                                    <Button.Content>
-                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
-                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE13C;"/>
-
-                                                                            <TextBlock x:Name="LblBtnAlbumArtSwitch"/>
-                                                                        </StackPanel>
-                                                                    </Button.Content>
-                                                                </Button>
-
-                                                                <Button x:Name="BtnAlbumArtInsert" HorizontalAlignment="Stretch" Click="InsertAlbumArt">
-                                                                    <Button.Content>
-                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
-                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>
-
-                                                                            <TextBlock x:Name="LblBtnAlbumArtInsert"/>
-                                                                        </StackPanel>
-                                                                    </Button.Content>
-                                                                </Button>
-
-                                                                <Button x:Name="BtnAlbumArtRemove" HorizontalAlignment="Stretch" Click="RemoveAlbumArt">
-                                                                    <Button.Content>
-                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
-                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE108;"/>
-
-                                                                            <TextBlock x:Name="LblBtnAlbumArtRemove"/>
-                                                                        </StackPanel>
-                                                                    </Button.Content>
-                                                                </Button>
-
-                                                                <Button x:Name="BtnAlbumArtExport" HorizontalAlignment="Stretch" Click="ExportAlbumArt">
-                                                                    <Button.Content>
-                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
-                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE118;"/>
-
-                                                                            <TextBlock x:Name="LblBtnAlbumArtExport"/>
-                                                                        </StackPanel>
-                                                                    </Button.Content>
-                                                                </Button>
-
-                                                                <MenuFlyoutSeparator />
-
-                                                                <Button x:Name="BtnManageLyrics" HorizontalAlignment="Stretch" Click="ManageLyrics">
-                                                                    <Button.Content>
-                                                                        <StackPanel Orientation="Horizontal" Spacing="6">
-                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE7BC;"/>
-
-                                                                            <TextBlock x:Name="LblBtnManageLyrics"/>
-                                                                        </StackPanel>
-                                                                    </Button.Content>
-                                                                </Button>
-                                                            </StackPanel>
-                                                        </ScrollView>
-                                                    </Grid>
-                                                </nickvision:ViewStackPage>
-                                            </nickvision:ViewStack.Pages>
-                                        </nickvision:ViewStack>
+                                                                </ScrollView>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </nickvision:ViewStackPage>
+                                                </nickvision:ViewStack.Pages>
+                                            </nickvision:ViewStack>
+                                        </Border>
                                     </Grid>
                                 </nickvision:ViewStackPage>
                             </nickvision:ViewStack.Pages>

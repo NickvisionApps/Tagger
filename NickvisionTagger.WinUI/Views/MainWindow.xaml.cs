@@ -118,8 +118,6 @@ public sealed partial class MainWindow : Window
         MenuExit.Text = _("Exit");
         MenuEdit.Title = _("Edit");
         MenuSettings.Text = _("Settings");
-        MenuView.Title = _("View");
-        MenuExtrasPane.Text = _("Hide Extras Pane");
         MenuPlaylist.Title = _("Playlist");
         MenuCreatePlaylist.Text = _("Create Playlist");
         MenuAddToPlaylist.Text = _("Add to Playlist");
@@ -172,9 +170,14 @@ public sealed partial class MainWindow : Window
         ToolTipService.SetToolTip(BtnAdvancedSearchInfo, _("Advanced Search Info"));
         StatusPageNoSelected.Title = _("No Selected Music Files");
         StatusPageNoSelected.Description = _("Select some files");
-        ToolTipService.SetToolTip(BtnSaveTag, _("Save Tag (Ctrl+S)"));
-        LblBtnSaveTag.Text = _("Save Tag");
-        LblBtnExtrasPane.Text = _("Hide Extras Pane");
+        CmdBtnSaveTag.Label = _("Save Tag");
+        ToolTipService.SetToolTip(CmdBtnSaveTag, _("Save Tag (Ctrl+S)"));
+        ToolTipService.SetToolTip(CmdBtnDeleteTag, _("Delete Tag (Shift+Delete)"));
+        ToolTipService.SetToolTip(CmdBtnManageLyrics, _("Manage Lyrics (Ctrl+L)"));
+        ToolTipService.SetToolTip(CmdBtnFilenameToTag, _("File Name to Tag (Ctrl+F)"));
+        ToolTipService.SetToolTip(CmdBtnTagToFilename, _("Tag to File Name (Ctrl+T)"));
+        ToolTipService.SetToolTip(CmdBtnDownloadMusicBrainz, _("Download MusicBrainz Metadata (Ctrl+M)"));
+        CmdBtnExtrasPane.Label = _("Hide Extras Pane");
         CardFilename.Header = _("File Name");
         TxtFilename.PlaceholderText = _("Enter file name here");
         LblMainProperties.Text = _("Main Properties");
@@ -216,7 +219,6 @@ public sealed partial class MainWindow : Window
         LblBtnAlbumArtRemove.Text = _("Remove");
         LblBtnAlbumArtExport.Text = _("Export");
         LblBtnAlbumArtSwitch.Text = _("Switch to Back Cover");
-        LblBtnManageLyrics.Text = _("Manage Lyrics");
         //Extras Pane
         if(!_controller.ExtrasPane)
         {
@@ -638,20 +640,16 @@ public sealed partial class MainWindow : Window
         {
             DetailsSeparator.Visibility = Visibility.Collapsed;
             ExtrasPane.Visibility = Visibility.Collapsed;
-            MenuExtrasPane.Text = _("Show Extras Pane");
-            MenuExtrasPaneIcon.Glyph = "\uE126";
-            LblBtnExtrasPane.Text = _("Show Extras Pane");
-            IconBtnExtrasPane.Glyph = "\uE126";
+            CmdBtnExtrasPane.Label = _("Show Extras Pane");
+            CmdBtnExtrasPane.Icon = new SymbolIcon(Symbol.OpenPane);
             _controller.ExtrasPane = false;
         }
         else
         {
             DetailsSeparator.Visibility = Visibility.Visible;
             ExtrasPane.Visibility = Visibility.Visible;
-            MenuExtrasPane.Text = _("Hide Extras Pane");
-            MenuExtrasPaneIcon.Glyph = "\uE127";
-            LblBtnExtrasPane.Text = _("Hide Extras Pane");
-            IconBtnExtrasPane.Glyph = "\uE127";
+            CmdBtnExtrasPane.Label = _("Hide Extras Pane");
+            CmdBtnExtrasPane.Icon = new SymbolIcon(Symbol.ClosePane);
             _controller.ExtrasPane = true;
         }
         _controller.SaveConfig();
@@ -942,15 +940,17 @@ public sealed partial class MainWindow : Window
     /// <param name="pending">Whether or not there are unsaved changes</param>
     private void MusicFileSaveStatesChanged(bool pending)
     {
+        MainMenu.IsEnabled = true;
         ViewStack.CurrentPageName = "Library";
+        MenuSaveTag.IsEnabled = pending;
+        CmdBtnSaveTag.IsEnabled = pending;
         var i = 0;
         foreach(var saved in _controller.MusicFileSaveStates)
         {
             _musicFileRows[i].ShowUnsaveIcon = !saved;
             i++;
         }
-        MenuSaveTag.IsEnabled = pending;
-        BtnSaveTag.IsEnabled = pending;
+
     }
 
     /// <summary>
@@ -961,11 +961,10 @@ public sealed partial class MainWindow : Window
         _isSelectionOccuring = true;
         //Update Properties
         SelectedViewStack.CurrentPageName = _controller.SelectedMusicFiles.Count > 0 ? "Selected" : "NoSelected";
-        MenuExtrasPane.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
-        BtnExtrasPane.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
+        CmdBtnSaveTag.IsEnabled = _controller.SelectedMusicFiles.Count > 0 && _controller.SelectedHasUnsavedChanges;
         MenuTag.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
         MenuManageLyrics.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
-        BtnManageLyrics.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
+        CmdBtnManageLyrics.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
         MenuCustomProperties.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
         CustomPropertiesHeader.Visibility = _controller.SelectedMusicFiles.Count == 1 ? Visibility.Visible : Visibility.Collapsed;
         ListCustomProperties.Visibility = _controller.SelectedMusicFiles.Count == 1 ? Visibility.Visible : Visibility.Collapsed;
@@ -1163,7 +1162,11 @@ public sealed partial class MainWindow : Window
             var result = _controller.AdvancedSearch(search);
             if(!result.Success)
             {
-                SearchMusicFiles.Background = new SolidColorBrush(MainGrid.ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 224, 27, 36) : Color.FromArgb(255, 192, 28, 40));
+                SearchMusicFiles.Background = new AcrylicBrush()
+                {
+                    TintOpacity = 0.5,
+                    TintColor = MainGrid.ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 224, 27, 36) : Color.FromArgb(255, 192, 28, 40)
+                };
                 foreach(var row in _musicFileRows)
                 {
                     ListMusicFiles.ContainerFromItem(row).SetPropertyValue("Visibility", Visibility.Visible);
@@ -1171,8 +1174,12 @@ public sealed partial class MainWindow : Window
             }
             else
             {
-                SearchMusicFiles.Background = new SolidColorBrush(MainGrid.ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 46, 194, 126) : Color.FromArgb(255, 38, 162, 105));
-                foreach(var row in _musicFileRows)
+                SearchMusicFiles.Background = new AcrylicBrush()
+                {
+                    TintOpacity = 0.5,
+                    TintColor = MainGrid.ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 46, 194, 126) : Color.FromArgb(255, 38, 162, 105)
+                };
+                foreach (var row in _musicFileRows)
                 {
                     if(result.LowerFilenames!.Count == 0)
                     {
@@ -1204,6 +1211,13 @@ public sealed partial class MainWindow : Window
             }
         }
     }
+
+    /// <summary>
+    /// Occurs when the PropertiesPane's size changes
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">SizeChangedEventArgs</param>
+    private void PropertiesPane_SizeChanged(object sender, SizeChangedEventArgs e) => (PropertiesPane.Content as StackPanel).Margin = new Thickness(0, 0, PropertiesPane.ComputedVerticalScrollBarVisibility == Visibility.Visible ? 14 : 0, 0);
 
     /// <summary>
     /// Occurs when the CopyFingerprintButton is clicked
