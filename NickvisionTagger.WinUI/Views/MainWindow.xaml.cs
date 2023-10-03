@@ -173,6 +173,7 @@ public sealed partial class MainWindow : Window
         CmdBtnSaveTag.Label = _("Save Tag");
         ToolTipService.SetToolTip(CmdBtnSaveTag, _("Save Tag (Ctrl+S)"));
         ToolTipService.SetToolTip(CmdBtnDeleteTag, _("Delete Tag (Shift+Delete)"));
+        ToolTipService.SetToolTip(CmdBtnDiscardChanges, _("Discard Unapplied Changed (Ctrl+Z)"));
         ToolTipService.SetToolTip(CmdBtnManageLyrics, _("Manage Lyrics (Ctrl+L)"));
         ToolTipService.SetToolTip(CmdBtnFilenameToTag, _("File Name to Tag (Ctrl+F)"));
         ToolTipService.SetToolTip(CmdBtnTagToFilename, _("Tag to File Name (Ctrl+T)"));
@@ -704,7 +705,7 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void DeleteTag(object sender, RoutedEventArgs e) => _controller.DeleteSelectedTags();
+    private async void DeleteTag(object sender, RoutedEventArgs e) => await _controller.DeleteSelectedTagsAsync();
 
     /// <summary>
     /// Occurs when the manage lyrics menu item is clicked

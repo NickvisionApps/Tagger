@@ -387,7 +387,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _insertAlbumArtButton.SetDetailedActionName("win.insertAlbumArt");
         //Remove Album Art Action
         _removeAlbumArtAction = Gio.SimpleAction.New("removeAlbumArt", null);
-        _removeAlbumArtAction.OnActivate += (sender, e) => RemoveAlbumArt(_currentAlbumArtType);
+        _removeAlbumArtAction.OnActivate += async (sender, e) => await RemoveAlbumArtAsync(_currentAlbumArtType);
         AddAction(_removeAlbumArtAction);
         _removeAlbumArtButton.SetDetailedActionName("win.removeAlbumArt");
         //Export Album Art Action
@@ -402,7 +402,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.insertFrontAlbumArt", new string[] { "<Ctrl>I" });
         //Remove Front Album Art Action
         var actRemoveFrontAlbumArt = Gio.SimpleAction.New("removeFrontAlbumArt", null);
-        actRemoveFrontAlbumArt.OnActivate += (sender, e) => RemoveAlbumArt(AlbumArtType.Front);
+        actRemoveFrontAlbumArt.OnActivate += async (sender, e) => await RemoveAlbumArtAsync(AlbumArtType.Front);
         AddAction(actRemoveFrontAlbumArt);
         application.SetAccelsForAction("win.removeFrontAlbumArt", new string[] { "<Ctrl>Delete" });
         //Export Front Album Art Action
@@ -417,7 +417,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.insertBackAlbumArt", new string[] { "<Ctrl><Shift>I" });
         //Remove Back Album Art Action
         var actRemoveBackAlbumArt = Gio.SimpleAction.New("removeBackAlbumArt", null);
-        actRemoveBackAlbumArt.OnActivate += (sender, e) => RemoveAlbumArt(AlbumArtType.Back);
+        actRemoveBackAlbumArt.OnActivate += async (sender, e) => await RemoveAlbumArtAsync(AlbumArtType.Back);
         AddAction(actRemoveBackAlbumArt);
         application.SetAccelsForAction("win.removeBackAlbumArt", new string[] { "<Ctrl><Shift>Delete" });
         //Export Front Album Art Action
@@ -938,7 +938,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private void DeleteTags(Gio.SimpleAction sender, EventArgs e) => _controller.DeleteSelectedTags();
+    private async void DeleteTags(Gio.SimpleAction sender, EventArgs e) => await _controller.DeleteSelectedTagsAsync();
 
     /// <summary>
     /// Occurs when the filename to tag action is triggered
@@ -948,11 +948,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void FilenameToTag(Gio.SimpleAction sender, EventArgs e)
     {
         var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("File Name to Tag"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
-        dialog.OnResponse += (s, ea) =>
+        dialog.OnResponse += async (s, ea) =>
         {
             if (!string.IsNullOrEmpty(dialog.Response))
             {
-                _controller.FilenameToTag(dialog.Response);
+                await _controller.FilenameToTagAsync(dialog.Response);
             }
             dialog.Destroy();
         };
@@ -967,11 +967,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void TagToFilename(Gio.SimpleAction sender, EventArgs e)
     {
         var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("Tag to File Name"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
-        dialog.OnResponse += (s, ea) =>
+        dialog.OnResponse += async (s, ea) =>
         {
             if (!string.IsNullOrEmpty(dialog.Response))
             {
-                _controller.TagToFilename(dialog.Response);
+                await _controller.TagToFilenameAsync(dialog.Response);
             }
             dialog.Destroy();
         };
@@ -1010,7 +1010,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         try
         {
             var file = await openFileDialog.OpenAsync(this);
-            _controller.InsertSelectedAlbumArt(file.GetPath(), type);
+            await _controller.InsertSelectedAlbumArtAsync(file.GetPath(), type);
         }
         catch { }
     }
@@ -1019,7 +1019,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when the remove album art action is triggered
     /// </summary>
     /// <param name="type">AlbumArtType</param>
-    private void RemoveAlbumArt(AlbumArtType type) => _controller.RemoveSelectedAlbumArt(type);
+    private async Task RemoveAlbumArtAsync(AlbumArtType type) => await _controller.RemoveSelectedAlbumArtAsync(type);
 
     /// <summary>
     /// Occurs when the export album art action is triggered

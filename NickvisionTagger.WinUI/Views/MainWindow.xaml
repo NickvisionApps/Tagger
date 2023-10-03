@@ -586,6 +586,12 @@
                                                                         </AppBarButton.Icon>
                                                                     </AppBarButton>
 
+                                                                    <AppBarButton x:Name="CmdBtnDiscardChanges" Click="DiscardUnappliedChanges">
+                                                                        <AppBarButton.Icon>
+                                                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE10E;"/>
+                                                                        </AppBarButton.Icon>
+                                                                    </AppBarButton>
+
                                                                     <AppBarSeparator/>
 
                                                                     <AppBarButton x:Name="CmdBtnManageLyrics" Click="ManageLyrics">
