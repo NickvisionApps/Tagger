@@ -159,11 +159,12 @@ public sealed partial class MainWindow : Window
         HomeGettingStartedDescription.Text = _("Open a library with music to get started.");
         HomeOpenFolderButtonLabel.Text = _("Open Folder");
         HomeOpenPlaylistButtonLabel.Text = _("Open Playlist");
-        HomeGettingHelpTitle.Text = _("Getting Help");
-        HomeGettingHelpDescription.Text = _("Tagger includes online documentation to guide users through its more complicated features.");
-        HomeDocumentationButtonLabel.Text = _("Documentation");
-        HomeReportABugButtonLabel.Text = _("Report a Bug");
-        HomeDiscussionsButtonLabel.Text = _("Discussions");
+        HomeDocumentationTitle.Text = _("Documentation");
+        HomeDocumentationDescription.Text = _("Read more about Tagger's inner workings.");
+        HomeReportABugTitle.Text = _("Report a Bug");
+        HomeReportABugDescription.Text = _("Let us fix whatever issue you are having.");
+        HomeDiscussionsTitle.Text = _("Discussions");
+        HomeDiscussionsDescription.Text = _("Start a conversation with us.");
         StatusPageNoFiles.Title = _("No Music Files Found");
         StatusPageNoFiles.Description = _("Try a different library");
         SearchMusicFiles.PlaceholderText = _("Search for filename (type ! for advanced search)...");

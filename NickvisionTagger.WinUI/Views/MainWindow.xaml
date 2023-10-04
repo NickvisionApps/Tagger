@@ -476,45 +476,73 @@
                                     </StackPanel>
                                 </Border>
 
-                                <Border Grid.Row="2" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
-                                    <StackPanel Margin="12,12,12,12" Orientation="Vertical" Spacing="12">
-                                        <TextBlock x:Name="HomeGettingHelpTitle" TextWrapping="WrapWholeWords" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="12">
+                                    <Button Width="200" Height="220" Click="Documentation" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                        <Button.Content>
+                                            <Grid Margin="12,12,6,12" RowSpacing="24">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
 
-                                        <TextBlock x:Name="HomeGettingHelpDescription" TextWrapping="WrapWholeWords"/>
+                                                <FontIcon Grid.Row="0" HorizontalAlignment="Left" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="24" Glyph="&#xE11B;"/>
 
-                                        <StackPanel Orientation="Horizontal" Spacing="6">
-                                            <Button Height="40" Click="Documentation">
-                                                <Button.Content>
-                                                    <StackPanel Orientation="Horizontal" Spacing="6">
-                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE11B;"/>
+                                                <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="6">
+                                                    <TextBlock x:Name="HomeDocumentationTitle" FontSize="18" TextWrapping="WrapWholeWords"/>
 
-                                                        <TextBlock x:Name="HomeDocumentationButtonLabel" TextWrapping="WrapWholeWords"/>
-                                                    </StackPanel>
-                                                </Button.Content>
-                                            </Button>
+                                                    <TextBlock x:Name="HomeDocumentationDescription" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+                                                </StackPanel>
 
-                                            <Button Height="40" Click="ReportABug">
-                                                <Button.Content>
-                                                    <StackPanel Orientation="Horizontal" Spacing="6">
-                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xEBE8;"/>
+                                                <FontIcon Grid.Row="2" HorizontalAlignment="Right" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8A7;"/>
+                                            </Grid>
+                                        </Button.Content>
+                                    </Button>
 
-                                                        <TextBlock x:Name="HomeReportABugButtonLabel" TextWrapping="WrapWholeWords"/>
-                                                    </StackPanel>
-                                                </Button.Content>
-                                            </Button>
+                                    <Button Width="200" Height="220" Click="ReportABug" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                        <Button.Content>
+                                            <Grid Margin="12,12,6,12" RowSpacing="24">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
 
-                                            <Button Height="40" Click="Discussions">
-                                                <Button.Content>
-                                                    <StackPanel Orientation="Horizontal" Spacing="6">
-                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8F2;"/>
+                                                <FontIcon Grid.Row="0" HorizontalAlignment="Left" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="24" Glyph="&#xEBE8;"/>
 
-                                                        <TextBlock x:Name="HomeDiscussionsButtonLabel" TextWrapping="WrapWholeWords"/>
-                                                    </StackPanel>
-                                                </Button.Content>
-                                            </Button>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
+                                                <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="6">
+                                                    <TextBlock x:Name="HomeReportABugTitle" FontSize="18" TextWrapping="WrapWholeWords"/>
+
+                                                    <TextBlock x:Name="HomeReportABugDescription" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+                                                </StackPanel>
+
+                                                <FontIcon Grid.Row="2" HorizontalAlignment="Right" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8A7;"/>
+                                            </Grid>
+                                        </Button.Content>
+                                    </Button>
+
+                                    <Button Width="200" Height="220" Click="Discussions" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                        <Button.Content>
+                                            <Grid Margin="12,12,6,12" RowSpacing="24">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+
+                                                <FontIcon Grid.Row="0" HorizontalAlignment="Left" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="24" Glyph="&#xE8F2;"/>
+
+                                                <StackPanel Grid.Row="1" Orientation="Vertical" Spacing="6">
+                                                    <TextBlock x:Name="HomeDiscussionsTitle" FontSize="18" TextWrapping="WrapWholeWords"/>
+
+                                                    <TextBlock x:Name="HomeDiscussionsDescription" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+                                                </StackPanel>
+
+                                                <FontIcon Grid.Row="2" HorizontalAlignment="Right" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8A7;"/>
+                                            </Grid>
+                                        </Button.Content>
+                                    </Button>
+                                </StackPanel>
                             </Grid>
                         </ScrollView>
                     </nickvision:ViewStackPage>
