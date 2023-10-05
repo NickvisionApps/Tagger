@@ -47,11 +47,10 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _downloadLyricsAction;
     private readonly Gio.SimpleAction _acoustIdAction;
     private readonly GtkListBoxUpdateHeaderFunc _updateHeaderFunc;
+    private readonly Gtk.Image _unsavedImage;
     private AlbumArtType _currentAlbumArtType;
     private string _listHeader;
     private List<Adw.ActionRow> _listMusicFilesRows;
-    private List<Gtk.Image> _listMusicFilesArtImages;
-    private List<Gtk.Image> _listMusicFilesUnsavedImages;
     private List<Adw.EntryRow> _customPropertyRows;
     private AutocompleteBox _autocompleteBox;
     private bool _isSelectionOccuring;
@@ -113,9 +112,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller = controller;
         _application = application;
         _currentAlbumArtType = AlbumArtType.Front;
+        _unsavedImage = Gtk.Image.NewFromIconName("document-modified-symbolic");
         _listMusicFilesRows = new List<Adw.ActionRow>();
-        _listMusicFilesArtImages = new List<Gtk.Image>();
-        _listMusicFilesUnsavedImages = new List<Gtk.Image>();
         _customPropertyRows = new List<Adw.EntryRow>();
         _isSelectionOccuring = false;
         SetDefaultSize(_controller.WindowWidth, _controller.WindowHeight);
@@ -135,6 +133,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _musicFilesSearch.OnSearchChanged += SearchChanged;
         _advancedSearchInfoButton.OnClicked += AdvancedSearchInfo;
         _selectAllButton.OnClicked += (sender, e) => _listMusicFiles.SelectAll();
+        _unsavedImage.SetValign(Gtk.Align.Center);
         var musicFilesVadjustment = _scrolledWindowMusicFiles.GetVadjustment();
         musicFilesVadjustment.OnNotify += (sender, e) =>
         {
@@ -1038,14 +1037,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             var file = await openFileDialog.OpenAsync(this);
             _controller.InsertSelectedAlbumArt(file.GetPath(), type);
-            if (type == AlbumArtType.Front)
-            {
-                foreach (var i in _listMusicFiles.GetSelectedRowsIndices())
-                {
-                    _listMusicFilesArtImages[i].AddCssClass("list-icon");
-                    _listMusicFilesArtImages[i].SetFromFile(file.GetPath());
-                }
-            }
         }
         catch { }
     }
@@ -1054,18 +1045,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when the remove album art action is triggered
     /// </summary>
     /// <param name="type">AlbumArtType</param>
-    private void RemoveAlbumArt(AlbumArtType type)
-    {
-        _controller.RemoveSelectedAlbumArt(type);
-        if (type == AlbumArtType.Front)
-        {
-            foreach (var i in _listMusicFiles.GetSelectedRowsIndices())
-            {
-                _listMusicFilesArtImages[i].RemoveCssClass("list-icon");
-                _listMusicFilesArtImages[i].SetFromIconName("audio-x-generic-symbolic");
-            }
-        }
-    }
+    private void RemoveAlbumArt(AlbumArtType type) => _controller.RemoveSelectedAlbumArt(type);
 
     /// <summary>
     /// Occurs when the export album art action is triggered
@@ -1397,8 +1377,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _listMusicFiles.Remove(row);
         }
-        _listMusicFilesArtImages.Clear();
-        _listMusicFilesUnsavedImages.Clear();
         _listMusicFilesRows.Clear();
         if (!string.IsNullOrEmpty(_controller.MusicLibraryName))
         {
@@ -1433,9 +1411,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                     art.SetFromIconName("audio-x-generic-symbolic");
                 }
                 row.AddPrefix(art);
-                var unsaved = Gtk.Image.NewFromIconName("document-modified-symbolic");
-                unsaved.SetVisible(false);
-                row.AddSuffix(unsaved);
                 var compareTo = _controller.SortFilesBy switch
                 {
                     SortBy.Album => musicFile.Album,
@@ -1473,8 +1448,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 }
                 _listMusicFiles.Append(row);
                 _listMusicFilesRows.Add(row);
-                _listMusicFilesArtImages.Add(art);
-                _listMusicFilesUnsavedImages.Add(unsaved);
             }
             if (_listMusicFilesRows.Any())
             {
@@ -1535,7 +1508,14 @@ public partial class MainWindow : Adw.ApplicationWindow
         var i = 0;
         foreach (var saved in _controller.MusicFileSaveStates)
         {
-            _listMusicFilesUnsavedImages[i].SetVisible(!saved);
+            if(saved)
+            {
+                _listMusicFilesRow[i].AddSuffix(_unsavedImage);
+            }
+            else
+            {
+                _listMusicFilesRow[i].Remove(_unsavedImage);
+            }
             i++;
         }
         return false;
