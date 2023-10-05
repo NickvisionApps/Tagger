@@ -5,6 +5,7 @@
     <file alias="style-dark.css">org.nickvision.tagger-dark.css</file>
   </gresource>
   <gresource prefix="/org/nickvision/tagger/icons/scalable/status/">
+    <file preprocess="xml-stripblanks">audio-x-generic-symbolic.svg</file>
     <file preprocess="xml-stripblanks">dark-mode-symbolic.svg</file>
     <file preprocess="xml-stripblanks">document-modified-symbolic.svg</file>
     <file preprocess="xml-stripblanks">editor-symbolic.svg</file>
