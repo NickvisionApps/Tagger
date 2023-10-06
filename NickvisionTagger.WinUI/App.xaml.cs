@@ -23,12 +23,13 @@ public partial class App : Application
         InitializeComponent();
         _controller = new MainWindowController(Array.Empty<string>());
         _controller.AppInfo.Changelog =
-            @"* Tagger is now available for Windows using Windows App SDK and WinUI 3
-* Added the option to use relative paths when creating a playlist. This means that Tagger also now supports opening playlists with relative paths
-* Tagger will now watch a music folder library for changes on disk and prompt the user to reload if necessary
-* Tagger will now display front album art within a music file row itself if available
-* Improved create playlist dialog ux
-* Updated translations (Thanks everyone on Weblate!)";
+            @"- Tagger is now available for Windows using Windows App SDK and WinUI 3
+- Added the option to use relative paths when creating a playlist. This means that Tagger also now supports opening playlists with relative paths
+- Tagger will now watch a music folder library for changes on disk and prompt the user to reload if necessary
+- Tagger will now display front album art within a music file row itself if available
+- Fixed an issue where downloaded lyrics would sometimes contain html encoded characters
+- Improved create playlist dialog ux
+- Updated translations (Thanks everyone on Weblate!)";
         if (_controller.Theme != Theme.System)
         {
             RequestedTheme = _controller.Theme switch

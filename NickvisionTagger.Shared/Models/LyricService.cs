@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace NickvisionTagger.Shared.Models;
 
@@ -120,7 +121,7 @@ public static class LyricService
             var lyricsHtml = html.GetElementbyId("letra-cnt");
             return new LyricsInfo()
             {
-                UnsynchronizedLyrics = lyricsHtml.InnerHtml.Replace("<p>", "").Replace("<br>", "\n").Replace("</p>", "\n").Trim()
+                UnsynchronizedLyrics = HttpUtility.HtmlDecode(lyricsHtml.InnerHtml.Replace("<p>", "").Replace("<br>", "\n").Replace("</p>", "\n")).Trim()
             };
         }
         catch (Exception e)
