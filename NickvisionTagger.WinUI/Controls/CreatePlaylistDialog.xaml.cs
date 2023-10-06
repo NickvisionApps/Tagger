@@ -11,11 +11,18 @@ using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.WinUI.Controls;
 
+/// <summary>
+/// A dialog showing the options in creating a playlist
+/// </summary>
 public sealed partial class CreatePlaylistDialog : ContentDialog
 {
     private readonly Action<object> _initalizeWithWindow;
     private string _path;
 
+    /// <summary>
+    /// Constructs a CreatePlaylistDialog
+    /// </summary>
+    /// <param name="initalizeWithWindow">Action</param>
     public CreatePlaylistDialog(Action<object> initalizeWithWindow)
     {
         InitializeComponent();

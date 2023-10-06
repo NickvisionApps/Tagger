@@ -524,7 +524,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         else if (e.Action == "format")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("format-string"), 0);
+            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("format-strings"), 0);
         }
         else if (e.Action == "web")
         {

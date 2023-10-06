@@ -445,7 +445,7 @@ public sealed partial class MainWindow : Window
             _notificationButtonClickEvent = async (_, _) =>
             {
                 InfoBar.IsOpen = false;
-                await Launcher.LaunchUriAsync(new Uri(DocumentationHelpers.GetHelpURL("format-string")));
+                await Launcher.LaunchUriAsync(new Uri(DocumentationHelpers.GetHelpURL("format-strings")));
             };
             BtnInfoBar.Content = _("Help");
             BtnInfoBar.Click += _notificationButtonClickEvent;
@@ -935,9 +935,17 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void FilenameToTag(object sender, RoutedEventArgs e)
+    private async void FilenameToTag(object sender, RoutedEventArgs e)
     {
-
+        var dialog = new ComboBoxDialog(_("File Name to Tag"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"))
+        {
+            XamlRoot = MainGrid.XamlRoot
+        };
+        var res = await dialog.ShowAsync();
+        if (!string.IsNullOrEmpty(res))
+        {
+            await _controller.FilenameToTagAsync(res);
+        }
     }
 
     /// <summary>
@@ -945,9 +953,17 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void TagToFilename(object sender, RoutedEventArgs e)
+    private async void TagToFilename(object sender, RoutedEventArgs e)
     {
-
+        var dialog = new ComboBoxDialog(_("Tag to File Name"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"))
+        {
+            XamlRoot = MainGrid.XamlRoot
+        };
+        var res = await dialog.ShowAsync();
+        if (!string.IsNullOrEmpty(res))
+        {
+            await _controller.TagToFilenameAsync(res);
+        }
     }
 
     /// <summary>
