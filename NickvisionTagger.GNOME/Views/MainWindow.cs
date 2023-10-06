@@ -49,7 +49,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly GtkListBoxUpdateHeaderFunc _updateHeaderFunc;
     private AlbumArtType _currentAlbumArtType;
     private string _listHeader;
-    private List<MusicRow> _listMusicFilesRows;
+    private List<MusicFileRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
     private AutocompleteBox _autocompleteBox;
     private bool _isSelectionOccuring;
@@ -111,7 +111,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller = controller;
         _application = application;
         _currentAlbumArtType = AlbumArtType.Front;
-        _listMusicFilesRows = new List<MusicRow>();
+        _listMusicFilesRows = new List<MusicFileRow>();
         _customPropertyRows = new List<Adw.EntryRow>();
         _isSelectionOccuring = false;
         SetDefaultSize(_controller.WindowWidth, _controller.WindowHeight);
@@ -1034,13 +1034,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             var file = await openFileDialog.OpenAsync(this);
             _controller.InsertSelectedAlbumArt(file.GetPath(), type);
-            if (type == AlbumArtType.Front)
-            {
-                foreach (var i in _listMusicFiles.GetSelectedRowsIndices())
-                {
-                    _listMusicFilesRows[i].SetArtFromFile(file.GetPath());
-                }
-            }
         }
         catch { }
     }
@@ -1049,17 +1042,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when the remove album art action is triggered
     /// </summary>
     /// <param name="type">AlbumArtType</param>
-    private void RemoveAlbumArt(AlbumArtType type)
-    {
-        _controller.RemoveSelectedAlbumArt(type);
-        if (type == AlbumArtType.Front)
-        {
-            foreach (var i in _listMusicFiles.GetSelectedRowsIndices())
-            {
-                _listMusicFilesRows[i].SetArtFromBytes(Array.Empty<byte>());
-            }
-        }
-    }
+    private void RemoveAlbumArt(AlbumArtType type) => _controller.RemoveSelectedAlbumArt(type);
 
     /// <summary>
     /// Occurs when the export album art action is triggered
@@ -1398,17 +1381,6 @@ public partial class MainWindow : Adw.ApplicationWindow
             foreach (var musicFile in _controller.MusicFiles)
             {
                 var row = new MusicRow();
-                if (!string.IsNullOrEmpty(musicFile.Title))
-                {
-                    row.SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
-                    row.SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
-                }
-                else
-                {
-                    row.SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
-                    row.SetSubtitle("");
-                }
-                row.SetArtFromBytes(musicFile.FrontAlbumArt);
                 var compareTo = _controller.SortFilesBy switch
                 {
                     SortBy.Album => musicFile.Album,
@@ -1618,6 +1590,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _listMusicFilesRows[pair.Key].SetTitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
                 _listMusicFilesRows[pair.Key].SetSubtitle("");
             }
+            _listMusicFilesRows[pair.Key].SetArtFromBytes(pair.Value.FrontAlbumArt);
         }
         _isSelectionOccuring = false;
         return false;

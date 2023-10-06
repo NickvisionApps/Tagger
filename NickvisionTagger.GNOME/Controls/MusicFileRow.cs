@@ -1,25 +1,43 @@
 using NickvisionTagger.GNOME.Helpers;
 using System;
+using System.Text.RegularExpressions;
 
 namespace NickvisionTagger.GNOME.Controls;
 
 /// <summary>
 /// Music File Row
 /// </summary>
-public class MusicRow: Adw.ActionRow
+public class MusicFileRow : Adw.ActionRow
 {
     [Gtk.Connect] private readonly Gtk.Image _artImage;
     [Gtk.Connect] private readonly Gtk.Image _unsavedImage;
     
-    private MusicRow(Gtk.Builder builder) : base(builder.GetPointer("_root"), false)
+    /// <summary>
+    /// Constructs MusicFileRow
+    /// </summary>
+    /// <param name="builder">Gtk.Builder</param>
+    /// <param name="musicFile">MusicFile</param>
+    private MusicFileRow(Gtk.Builder builder, MusicFile musicFile) : base(builder.GetPointer("_root"), false)
     {
         builder.Connect(this);
+        if (!string.IsNullOrEmpty(musicFile.Title))
+        {
+            SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
+            SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+        }
+        else
+        {
+            SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+            SetSubtitle("");
+        }
+        SetArtFromBytes(musicFile.FrontAlbumArt);
     }
     
     /// <summary>
-    /// Constructs MusicRow
+    /// Constructs MusicFileRow
     /// </summary>
-    public MusicRow() : this(Builder.FromFile("music_row.ui"))
+    /// <param name="musicFile">MusicFile</param>
+    public MusicFileRow(MusicFile musicFile) : this(Builder.FromFile("music__file_row.ui"), musicFile)
     {
     }
     
@@ -42,12 +60,6 @@ public class MusicRow: Adw.ActionRow
             _artImage.SetFromIconName("audio-x-generic-symbolic");
         }
     }
-
-    /// <summary>
-    /// Sets art icon from file
-    /// </summary>
-    /// <param name="path">File path</param>
-    public void SetArtFromFile(string path) => _artImage.SetFromFile(path);
     
     /// <summary>
     /// Sets unsaved icon visibility
