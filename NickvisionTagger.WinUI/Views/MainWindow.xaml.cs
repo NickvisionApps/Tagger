@@ -40,7 +40,6 @@ public sealed partial class MainWindow : Window
     private bool _isActived;
     private RoutedEventHandler? _notificationButtonClickEvent;
     private List<MusicFileRow> _musicFileRows;
-    private bool _isSelectionOccuring;
     private AlbumArtType _currentAlbumArtType;
 
     private enum Monitor_DPI_Type : int
@@ -62,7 +61,6 @@ public sealed partial class MainWindow : Window
         _isOpened = false;
         _isActived = true;
         _musicFileRows = new List<MusicFileRow>();
-        _isSelectionOccuring = false;
         _currentAlbumArtType = AlbumArtType.Front;
         //Register Events
         AppWindow.Closing += Window_Closing;
@@ -785,7 +783,6 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void CreatePlaylist(object sender, RoutedEventArgs e)
     {
-        //TODO: Fix not opening on some devices
         var createPlaylistDialog = new CreatePlaylistDialog(InitializeWithWindow)
         {
             XamlRoot = MainGrid.XamlRoot
@@ -1398,9 +1395,9 @@ public sealed partial class MainWindow : Window
     /// </summary>
     private void SelectedMusicFilesPropertiesChanged()
     {
-        _isSelectionOccuring = true;
         //Update Properties
         SelectedViewStack.CurrentPageName = _controller.SelectedMusicFiles.Count > 0 ? "Selected" : "NoSelected";
+        MenuSaveTag.IsEnabled = _controller.SelectedMusicFiles.Count > 0 && _controller.SelectedHasUnsavedChanges;
         CmdBtnSaveTag.IsEnabled = _controller.SelectedMusicFiles.Count > 0 && _controller.SelectedHasUnsavedChanges;
         MenuTag.IsEnabled = _controller.SelectedMusicFiles.Count > 0;
         MenuManageLyrics.IsEnabled = _controller.SelectedMusicFiles.Count == 1;
@@ -1483,7 +1480,6 @@ public sealed partial class MainWindow : Window
         {
             _musicFileRows[pair.Key].Update(pair.Value);
         }
-        _isSelectionOccuring = false;
     }
 
     /// <summary>
@@ -1491,7 +1487,7 @@ public sealed partial class MainWindow : Window
     /// </summary>
     private void TagPropertyChanged(object sender, TextChangedEventArgs e)
     {
-        if (!_isSelectionOccuring && _controller.SelectedMusicFiles.Count > 0)
+        if (_controller.SelectedMusicFiles.Count > 0 && sender is TextBox box && (box.FocusState == FocusState.Keyboard || box.FocusState == FocusState.Pointer))
         {
             //Update Tags
             var propMap = new PropertyMap()
@@ -1554,8 +1550,6 @@ public sealed partial class MainWindow : Window
     /// <param name="e">SelectionChangedEventArgs</param>
     private void ListMusicFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        //TODO: Fix issue where if a row has unsaved dot and then is clicked on the dot disappears
-        _isSelectionOccuring = true;
         var selectedIndexes = ListMusicFiles.SelectedItems.Select(x => _musicFileRows.IndexOf((MusicFileRow)x)).ToList();
         if (_currentAlbumArtType != AlbumArtType.Front)
         {
@@ -1568,7 +1562,6 @@ public sealed partial class MainWindow : Window
         {
             BtnCopyFingerprint.IsEnabled = false;
         }
-        _isSelectionOccuring = false;
     }
 
     /// <summary>

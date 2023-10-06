@@ -757,7 +757,7 @@ public class MainWindowController : IDisposable
                 _musicFileChangedFromUpdate[first.Key] = false;
             }
             MusicFileSaveStates[first.Key] = !updated && (MusicFileSaveStates[first.Key] || _musicFileChangedFromUpdate[first.Key]);
-            MusicFileSaveStatesChanged?.Invoke(this, !MusicFileSaveStates[first.Key]);
+            MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
         }
     }
 
@@ -907,7 +907,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, deleted);
+        MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
     }
 
     /// <summary>
@@ -939,7 +939,7 @@ public class MainWindowController : IDisposable
             {
                 UpdateSelectedMusicFilesProperties();
             }
-            MusicFileSaveStatesChanged?.Invoke(this, success > 0);
+            MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} file name to tag successfully", "Converted {0} file names to tags successfully", success, success), NotificationSeverity.Success, "format"));
         }
     }
@@ -973,7 +973,7 @@ public class MainWindowController : IDisposable
             {
                 UpdateSelectedMusicFilesProperties();
             }
-            MusicFileSaveStatesChanged?.Invoke(this, success > 0);
+            MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} tag to file name successfully", "Converted {0} tags to file names successfully", success, success), NotificationSeverity.Success, "format"));
         }
     }
@@ -1030,7 +1030,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, inserted);
+        MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
     }
 
     /// <summary>
@@ -1074,7 +1074,7 @@ public class MainWindowController : IDisposable
         {
             UpdateSelectedMusicFilesProperties();
         }
-        MusicFileSaveStatesChanged?.Invoke(this, removed);
+        MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
     }
 
     /// <summary>
@@ -1204,7 +1204,7 @@ public class MainWindowController : IDisposable
             UpdateLoadingProgress((i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
         }
         UpdateSelectedMusicFilesProperties();
-        MusicFileSaveStatesChanged?.Invoke(this, successful > 0);
+        MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
         var errorString = "";
         foreach (var pair in errors)
         {
@@ -1244,7 +1244,7 @@ public class MainWindowController : IDisposable
             i++;
             UpdateLoadingProgress((i, SelectedMusicFiles.Count, $"{i}/{SelectedMusicFiles.Count}"));
         }
-        MusicFileSaveStatesChanged?.Invoke(this, successful > 0);
+        MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
         NotificationSent?.Invoke(this, new NotificationSentEventArgs(successful > 0 ? _("Downloaded lyrics for {0} files successfully", successful) : _("No lyrics were downloaded"), successful > 0 ? NotificationSeverity.Success : NotificationSeverity.Error, "web"));
     }
 
@@ -1263,7 +1263,7 @@ public class MainWindowController : IDisposable
             }
             LoadingStateUpdated?.Invoke(this, _("Submitting data to AcoustId..."));
             var result = await SelectedMusicFiles.First().Value.SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
-            MusicFileSaveStatesChanged?.Invoke(this, false);
+            MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(result ? _("Submitted metadata to AcoustId successfully") : _("Unable to submit to AcoustId. Check API key"), result ? NotificationSeverity.Success : NotificationSeverity.Error, "web"));
         }
     }

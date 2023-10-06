@@ -24,6 +24,7 @@ public sealed partial class MusicFileRow : UserControl
         InitializeComponent();
         _art = Array.Empty<byte>();
         ArtViewStack.CurrentPageName = "NoArt";
+        ShowUnsaveIcon = false;
         Update(musicFile);
     }
 
@@ -111,7 +112,6 @@ public sealed partial class MusicFileRow : UserControl
             Subtitle = "";
             TxtSubtitle.Visibility = Visibility.Collapsed;
         }
-        ShowUnsaveIcon = false;
         Art = musicFile.FrontAlbumArt;
     }
 }
