@@ -95,6 +95,30 @@
                     </MenuBarItem>
 
                     <MenuBarItem x:Name="MenuEdit">
+                        <MenuFlyoutSubItem x:Name="MenuSortFilesBy">
+                            <MenuFlyoutSubItem.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE174;"/>
+                            </MenuFlyoutSubItem.Icon>
+
+                            <ToggleMenuFlyoutItem x:Name="MenuSortFilesFileName" Click="SortFilesBy"/>
+
+                            <ToggleMenuFlyoutItem x:Name="MenuSortFilesFilePath" Click="SortFilesBy"/>
+
+                            <ToggleMenuFlyoutItem x:Name="MenuSortFilesTitle" Click="SortFilesBy"/>
+
+                            <ToggleMenuFlyoutItem x:Name="MenuSortFilesArtist" Click="SortFilesBy"/>
+
+                            <ToggleMenuFlyoutItem x:Name="MenuSortFilesAlbum" Click="SortFilesBy"/>
+
+                            <ToggleMenuFlyoutItem x:Name="MenuSortFilesYear" Click="SortFilesBy"/>
+
+                            <ToggleMenuFlyoutItem x:Name="MenuSortFilesTrack" Click="SortFilesBy"/>
+
+                            <ToggleMenuFlyoutItem x:Name="MenuSortFilesGenre" Click="SortFilesBy"/>
+                        </MenuFlyoutSubItem>
+                        
+                        <MenuFlyoutSeparator/>
+
                         <MenuFlyoutItem x:Name="MenuSettings" Click="Settings">
                             <MenuFlyoutItem.Icon>
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE713;"/>

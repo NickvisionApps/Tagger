@@ -117,6 +117,15 @@ public sealed partial class MainWindow : Window
         MenuCloseLibrary.Text = _("Close Library");
         MenuExit.Text = _("Exit");
         MenuEdit.Title = _("Edit");
+        MenuSortFilesBy.Text = _("Sort Files By");
+        MenuSortFilesFileName.Text = _("File Name");
+        MenuSortFilesFilePath.Text = _("File Path");
+        MenuSortFilesTitle.Text = _("Title");
+        MenuSortFilesArtist.Text = _("Artist");
+        MenuSortFilesAlbum.Text = _("Album");
+        MenuSortFilesYear.Text = _("Year");
+        MenuSortFilesTrack.Text = _("Track");
+        MenuSortFilesGenre.Text = _("Genre");
         MenuSettings.Text = _("Settings");
         MenuPlaylist.Title = _("Playlist");
         MenuCreatePlaylist.Text = _("Create Playlist");
@@ -222,11 +231,6 @@ public sealed partial class MainWindow : Window
         LblBtnAlbumArtRemove.Text = _("Remove");
         LblBtnAlbumArtExport.Text = _("Export");
         LblBtnAlbumArtSwitch.Text = _("Switch to Back Cover");
-        //Extras Pane
-        if (!_controller.ExtrasPane)
-        {
-            ExtrasPaneToggle(this, new RoutedEventArgs());
-        }
     }
 
     /// <summary>
@@ -268,7 +272,20 @@ public sealed partial class MainWindow : Window
                 MenuSubmitToAcoustId.IsEnabled = state;
             };
             MainMenu.IsEnabled = true;
+            //Update sort file by menu
+            MenuSortFilesFileName.IsChecked = _controller.SortFilesBy == SortBy.Filename;
+            MenuSortFilesFilePath.IsChecked = _controller.SortFilesBy == SortBy.Path;
+            MenuSortFilesTitle.IsChecked = _controller.SortFilesBy == SortBy.Title;
+            MenuSortFilesArtist.IsChecked = _controller.SortFilesBy == SortBy.Artist;
+            MenuSortFilesAlbum.IsChecked = _controller.SortFilesBy == SortBy.Album;
+            MenuSortFilesYear.IsChecked = _controller.SortFilesBy == SortBy.Year;
+            MenuSortFilesTrack.IsChecked = _controller.SortFilesBy == SortBy.Track;
+            MenuSortFilesGenre.IsChecked = _controller.SortFilesBy == SortBy.Genre;
             ViewStack.CurrentPageName = "Home";
+            if (!_controller.ExtrasPane)
+            {
+                ExtrasPaneToggle(this, new RoutedEventArgs());
+            }
             _isOpened = true;
         }
     }
@@ -631,13 +648,65 @@ public sealed partial class MainWindow : Window
     private void Exit(object sender, RoutedEventArgs e) => Close();
 
     /// <summary>
+    /// Occurs when a sort files by menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void SortFilesBy(object sender, RoutedEventArgs e)
+    {
+        var sortBy = SortBy.Filename;
+        if(ReferenceEquals(sender, MenuSortFilesFileName))
+        {
+            sortBy = SortBy.Filename;
+        }
+        else if(ReferenceEquals(sender, MenuSortFilesFilePath))
+        {
+            sortBy = SortBy.Path;
+        }
+        else if (ReferenceEquals(sender, MenuSortFilesTitle))
+        {
+            sortBy = SortBy.Title;
+        }
+        else if (ReferenceEquals(sender, MenuSortFilesArtist))
+        {
+            sortBy = SortBy.Artist;
+        }
+        else if (ReferenceEquals(sender, MenuSortFilesAlbum))
+        {
+            sortBy = SortBy.Album;
+        }
+        else if (ReferenceEquals(sender, MenuSortFilesYear))
+        {
+            sortBy = SortBy.Year;
+        }
+        else if (ReferenceEquals(sender, MenuSortFilesTrack))
+        {
+            sortBy = SortBy.Track;
+        }
+        else if (ReferenceEquals(sender, MenuSortFilesGenre))
+        {
+            sortBy = SortBy.Genre;
+        }
+        _controller.SortFilesBy = sortBy;
+        _controller.SaveConfig();
+        //Update sort file by menu
+        MenuSortFilesFileName.IsChecked = _controller.SortFilesBy == SortBy.Filename;
+        MenuSortFilesFilePath.IsChecked = _controller.SortFilesBy == SortBy.Path;
+        MenuSortFilesTitle.IsChecked = _controller.SortFilesBy == SortBy.Title;
+        MenuSortFilesArtist.IsChecked = _controller.SortFilesBy == SortBy.Artist;
+        MenuSortFilesAlbum.IsChecked = _controller.SortFilesBy == SortBy.Album;
+        MenuSortFilesYear.IsChecked = _controller.SortFilesBy == SortBy.Year;
+        MenuSortFilesTrack.IsChecked = _controller.SortFilesBy == SortBy.Track;
+        MenuSortFilesGenre.IsChecked = _controller.SortFilesBy == SortBy.Genre;
+    }
+
+    /// <summary>
     /// Occurs when the settings menu item is clicked
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
     private async void Settings(object sender, RoutedEventArgs e)
     {
-        //TODO: Move Sort By into Edit menu
         var settingsDialog = new SettingsDialog(_controller.CreatePreferencesViewController())
         {
             XamlRoot = MainGrid.XamlRoot
@@ -672,6 +741,15 @@ public sealed partial class MainWindow : Window
         {
             await settingsDialog.ShowAsync();
         }
+        //Update sort file by menu
+        MenuSortFilesFileName.IsChecked = _controller.SortFilesBy == SortBy.Filename;
+        MenuSortFilesFilePath.IsChecked = _controller.SortFilesBy == SortBy.Path;
+        MenuSortFilesTitle.IsChecked = _controller.SortFilesBy == SortBy.Title;
+        MenuSortFilesArtist.IsChecked = _controller.SortFilesBy == SortBy.Artist;
+        MenuSortFilesAlbum.IsChecked = _controller.SortFilesBy == SortBy.Album;
+        MenuSortFilesYear.IsChecked = _controller.SortFilesBy == SortBy.Year;
+        MenuSortFilesTrack.IsChecked = _controller.SortFilesBy == SortBy.Track;
+        MenuSortFilesGenre.IsChecked = _controller.SortFilesBy == SortBy.Genre;
     }
 
     /// <summary>
@@ -900,6 +978,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void ManageLyrics(object sender, RoutedEventArgs e)
     {
+        //TODO: Show badge on button when lyrics have changes
         var controller = _controller.CreateLyricsDialogController();
         var lyricsDialog = new LyricsDialog(controller, InitializeWithWindow)
         {

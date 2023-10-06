@@ -74,10 +74,6 @@ public class MainWindowController : IDisposable
     /// </summary>
     public Theme Theme => Configuration.Current.Theme;
     /// <summary>
-    /// What to sort files in a music library by
-    /// </summary>
-    public SortBy SortFilesBy => Configuration.Current.SortFilesBy;
-    /// <summary>
     /// The type of the music library
     /// </summary>
     public MusicLibraryType MusicLibraryType => _musicLibrary?.Type ?? MusicLibraryType.Folder;
@@ -248,6 +244,16 @@ public class MainWindowController : IDisposable
         get => Configuration.Current.ExtrasPane;
 
         set => Configuration.Current.ExtrasPane = value;
+    }
+
+    /// <summary>
+    /// What to sort files in a music library by
+    /// </summary>
+    public SortBy SortFilesBy
+    {
+        get => Configuration.Current.SortFilesBy;
+
+        set => Configuration.Current.SortFilesBy = value;
     }
 
     /// <summary>
