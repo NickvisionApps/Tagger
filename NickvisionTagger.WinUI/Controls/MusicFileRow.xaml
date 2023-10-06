@@ -19,7 +19,7 @@
         <local:ViewStack x:Name="ArtViewStack" Grid.Column="0">
             <local:ViewStack.Pages>
                 <local:ViewStackPage PageName="NoArt">
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xEC4F;"/>
+                    <FontIcon Width="32" Height="32" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC4F;"/>
                 </local:ViewStackPage>
 
                 <local:ViewStackPage PageName="Art">
@@ -28,7 +28,7 @@
             </local:ViewStack.Pages>
         </local:ViewStack>
 
-        <Grid Grid.Column="1" RowSpacing="6">
+        <Grid Grid.Column="1" VerticalAlignment="Center" RowSpacing="6">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

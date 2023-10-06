@@ -796,7 +796,7 @@
 
                                                                         <TextBlock x:Name="LblDurationFileSize" HorizontalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}" FontSize="16" Foreground="Gray"/>
 
-                                                                        <Button x:Name="BtnAlbumArtSwitch" HorizontalAlignment="Stretch" Margin="0,12,0,0" Click="SwitchAlbumArt">
+                                                                        <Button x:Name="BtnAlbumArtSwitch" HorizontalAlignment="Stretch" Margin="0,12,0,0" Height="40" Click="SwitchAlbumArt">
                                                                             <Button.Content>
                                                                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                                                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE13C;"/>
@@ -806,7 +806,7 @@
                                                                             </Button.Content>
                                                                         </Button>
 
-                                                                        <Button x:Name="BtnAlbumArtInsert" HorizontalAlignment="Stretch" Click="InsertAlbumArt">
+                                                                        <Button x:Name="BtnAlbumArtInsert" HorizontalAlignment="Stretch" Height="40" Click="InsertAlbumArt">
                                                                             <Button.Content>
                                                                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                                                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>
@@ -816,7 +816,7 @@
                                                                             </Button.Content>
                                                                         </Button>
 
-                                                                        <Button x:Name="BtnAlbumArtRemove" HorizontalAlignment="Stretch" Click="RemoveAlbumArt">
+                                                                        <Button x:Name="BtnAlbumArtRemove" HorizontalAlignment="Stretch" Height="40" Click="RemoveAlbumArt">
                                                                             <Button.Content>
                                                                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                                                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE108;"/>
@@ -826,7 +826,7 @@
                                                                             </Button.Content>
                                                                         </Button>
 
-                                                                        <Button x:Name="BtnAlbumArtExport" HorizontalAlignment="Stretch" Click="ExportAlbumArt">
+                                                                        <Button x:Name="BtnAlbumArtExport" HorizontalAlignment="Stretch" Height="40" Click="ExportAlbumArt">
                                                                             <Button.Content>
                                                                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                                                                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE118;"/>

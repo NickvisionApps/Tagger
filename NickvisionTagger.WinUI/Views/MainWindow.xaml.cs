@@ -422,12 +422,14 @@ public sealed partial class MainWindow : Window
         {
             _notificationButtonClickEvent = WindowsUpdate;
             BtnInfoBar.Content = _("Update");
+            BtnInfoBar.Visibility = Visibility.Visible;
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }
         else if (e.Action == "reload")
         {
             _notificationButtonClickEvent = ReloadLibrary;
             BtnInfoBar.Content = _("Reload");
+            BtnInfoBar.Visibility = Visibility.Visible;
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }
         else if (e.Action == "unsupported")
@@ -438,6 +440,7 @@ public sealed partial class MainWindow : Window
                 await Launcher.LaunchUriAsync(new Uri(DocumentationHelpers.GetHelpURL("unsupported")));
             };
             BtnInfoBar.Content = _("Help");
+            BtnInfoBar.Visibility = Visibility.Visible;
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }
         else if (e.Action == "format")
@@ -448,6 +451,7 @@ public sealed partial class MainWindow : Window
                 await Launcher.LaunchUriAsync(new Uri(DocumentationHelpers.GetHelpURL("format-strings")));
             };
             BtnInfoBar.Content = _("Help");
+            BtnInfoBar.Visibility = Visibility.Visible;
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }
         else if (e.Action == "web")
@@ -458,6 +462,7 @@ public sealed partial class MainWindow : Window
                 await Launcher.LaunchUriAsync(new Uri(DocumentationHelpers.GetHelpURL("web-services")));
             };
             BtnInfoBar.Content = _("Help");
+            BtnInfoBar.Visibility = Visibility.Visible;
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }
         else if (e.Action == "musicbrainz" && !string.IsNullOrEmpty(e.ActionParam))
@@ -479,6 +484,7 @@ public sealed partial class MainWindow : Window
                 await dialog.ShowAsync();
             };
             BtnInfoBar.Content = _("Info");
+            BtnInfoBar.Visibility = Visibility.Visible;
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }
         else if (e.Action == "open-playlist" && File.Exists(e.ActionParam))
@@ -489,9 +495,13 @@ public sealed partial class MainWindow : Window
                 await _controller.OpenLibraryAsync(e.ActionParam);
             };
             BtnInfoBar.Content = _("Open");
+            BtnInfoBar.Visibility = Visibility.Visible;
             BtnInfoBar.Click += _notificationButtonClickEvent;
         }
-        BtnInfoBar.Visibility = !string.IsNullOrEmpty(e.Action) ? Visibility.Visible : Visibility.Collapsed;
+        else
+        {
+            BtnInfoBar.Visibility = Visibility.Collapsed;
+        }
         InfoBar.IsOpen = true;
     }
 
@@ -1244,6 +1254,7 @@ public sealed partial class MainWindow : Window
                 var row = new MusicFileRow(musicFile);
                 ListMusicFiles.Items.Add(row);
                 _musicFileRows.Add(row);
+                //TODO: Headers
             }
             MenuReloadLibrary.IsEnabled = true;
             MenuCloseLibrary.IsEnabled = true;
