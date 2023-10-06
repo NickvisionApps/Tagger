@@ -925,9 +925,17 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void AddCustomProperty(object sender, RoutedEventArgs e)
+    private async void AddCustomProperty(object sender, RoutedEventArgs e)
     {
-
+        var entryDialog = new EntryDialog(_("New Custom Property"), "", _("Property Name"), _("Cancel"), _("Add"))
+        {
+            XamlRoot = MainGrid.XamlRoot
+        };
+        var res = await entryDialog.ShowAsync();
+        if (!string.IsNullOrEmpty(res) && res != "NULL")
+        {
+            _controller.AddCustomProperty(res);
+        }
     }
 
     /// <summary>

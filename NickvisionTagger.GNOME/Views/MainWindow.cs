@@ -1073,7 +1073,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("New Custom Property"), "", _("Property Name"), _("Cancel"), _("Add"));
         entryDialog.OnResponse += (s, ea) =>
         {
-            if (!string.IsNullOrEmpty(entryDialog.Response))
+            if (!string.IsNullOrEmpty(entryDialog.Response) && entryDialog.Response != "NULL")
             {
                 _controller.AddCustomProperty(entryDialog.Response);
             }

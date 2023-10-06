@@ -739,7 +739,7 @@
 
                                                                             <TextBlock x:Name="LblCustomProperties" Grid.Column="0" VerticalAlignment="Center" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
 
-                                                                            <Button x:Name="BtnAddCustomProperty" Grid.Column="1">
+                                                                            <Button x:Name="BtnAddCustomProperty" Grid.Column="1" Click="AddCustomProperty">
                                                                                 <Button.Content>
                                                                                     <StackPanel Orientation="Horizontal" Spacing="6">
                                                                                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>

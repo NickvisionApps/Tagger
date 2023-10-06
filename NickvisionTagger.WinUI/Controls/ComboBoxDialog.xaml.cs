@@ -18,6 +18,13 @@ public sealed partial class ComboBoxDialog : ContentDialog
     /// <summary>
     /// Constructs a ComboBoxDialog
     /// </summary>
+    /// <param name="title">The title of the dialog</param>
+    /// <param name="message">The message of the dialog</param>
+    /// <param name="choicesTitle">The title of the choices of the dialog</param>
+    /// <param name="choices">The choices of the dialog</param>
+    /// <param name="supportCustom">Whether or not a custom entry is supported</param>
+    /// <param name="closeText">The text of the close button</param>
+    /// <param name="primaryText">The text of the primary button</param>
     public ComboBoxDialog(string title, string message, string choicesTitle, string[] choices, bool supportCustom, string closeText, string primaryText)
     {
         InitializeComponent();
@@ -31,7 +38,14 @@ public sealed partial class ComboBoxDialog : ContentDialog
         Title = title;
         PrimaryButtonText = primaryText;
         CloseButtonText = closeText;
-        LblMessage.Text = message;
+        if (string.IsNullOrEmpty(message))
+        {
+            LblMessage.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            LblMessage.Text = message;
+        }
         CardChoices.Header = choicesTitle;
         CmbChoices.ItemsSource = _choices;
         CardCustom.Header = _("Custom");

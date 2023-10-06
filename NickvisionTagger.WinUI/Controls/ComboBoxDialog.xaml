@@ -18,7 +18,7 @@
                 <ComboBox x:Name="CmbChoices" MinWidth="300" SelectionChanged="CmbChoices_SelectionChanged"/>
             </wct:SettingsCard>
 
-            <wct:SettingsCard x:Name="CardCustom" Visibility="Visible">
+            <wct:SettingsCard x:Name="CardCustom" Visibility="Collapsed">
                 <TextBox x:Name="TxtCustom" MinWidth="300"/>
             </wct:SettingsCard>
         </StackPanel>
