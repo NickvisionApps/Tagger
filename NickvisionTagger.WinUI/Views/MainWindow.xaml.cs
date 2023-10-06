@@ -653,11 +653,11 @@ public sealed partial class MainWindow : Window
     private void SortFilesBy(object sender, RoutedEventArgs e)
     {
         var sortBy = SortBy.Filename;
-        if(ReferenceEquals(sender, MenuSortFilesFileName))
+        if (ReferenceEquals(sender, MenuSortFilesFileName))
         {
             sortBy = SortBy.Filename;
         }
-        else if(ReferenceEquals(sender, MenuSortFilesFilePath))
+        else if (ReferenceEquals(sender, MenuSortFilesFilePath))
         {
             sortBy = SortBy.Path;
         }
@@ -975,7 +975,6 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void ManageLyrics(object sender, RoutedEventArgs e)
     {
-        //TODO: Show badge on button when lyrics have changes
         var controller = _controller.CreateLyricsDialogController();
         var lyricsDialog = new LyricsDialog(controller, InitializeWithWindow)
         {
@@ -1538,9 +1537,13 @@ public sealed partial class MainWindow : Window
     /// <summary>
     /// Occurs when there are corrupted music files found in a music library
     /// </summary>
-    private void CorruptedFilesFound()
+    private async void CorruptedFilesFound()
     {
-        //TODO
+        var dialog = new CorruptedFilesDialog(_controller.MusicLibraryName, _controller.CorruptedFiles)
+        {
+            XamlRoot = MainGrid.XamlRoot
+        };
+        await dialog.ShowAsync();
     }
 
     /// <summary>
