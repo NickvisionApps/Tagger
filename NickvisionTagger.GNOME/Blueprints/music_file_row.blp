@@ -1,0 +1,23 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.ActionRow _root {
+  title-lines: 1;
+  subtitle-lines: 1;
+  
+  [prefix]
+  Gtk.Image _artImage {
+    icon-name: "audio-x-generic-symbolic";
+    icon-size: large;
+    valign: center;
+    overflow: hidden;
+  }
+  
+  [suffix]
+  Gtk.Image _unsavedImage {
+    icon-name: "document-modified-symbolic";
+    visible: false;
+  }
+
+  styles ["card"]
+}

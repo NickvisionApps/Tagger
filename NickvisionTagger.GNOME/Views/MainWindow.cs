@@ -50,9 +50,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly GtkListBoxUpdateHeaderFunc _updateHeaderFunc;
     private AlbumArtType _currentAlbumArtType;
     private string _listHeader;
-    private List<Adw.ActionRow> _listMusicFilesRows;
-    private List<Gtk.Image> _listMusicFilesArtImages;
-    private List<Gtk.Image> _listMusicFilesUnsavedImages;
+    private List<MusicFileRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
     private AutocompleteBox _autocompleteBox;
     private bool _isSelectionOccuring;
@@ -114,9 +112,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller = controller;
         _application = application;
         _currentAlbumArtType = AlbumArtType.Front;
-        _listMusicFilesRows = new List<Adw.ActionRow>();
-        _listMusicFilesArtImages = new List<Gtk.Image>();
-        _listMusicFilesUnsavedImages = new List<Gtk.Image>();
+        _listMusicFilesRows = new List<MusicFileRow>();
         _customPropertyRows = new List<Adw.EntryRow>();
         _isSelectionOccuring = false;
         SetDefaultSize(_controller.WindowWidth, _controller.WindowHeight);
@@ -1015,14 +1011,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             var file = await openFileDialog.OpenAsync(this);
             await _controller.InsertSelectedAlbumArtAsync(file.GetPath(), type);
-            if (type == AlbumArtType.Front)
-            {
-                foreach (var i in _listMusicFiles.GetSelectedRowsIndices())
-                {
-                    _listMusicFilesArtImages[i].AddCssClass("list-icon");
-                    _listMusicFilesArtImages[i].SetFromFile(file.GetPath());
-                }
-            }
         }
         catch { }
     }
@@ -1031,18 +1019,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when the remove album art action is triggered
     /// </summary>
     /// <param name="type">AlbumArtType</param>
-    private async Task RemoveAlbumArtAsync(AlbumArtType type)
-    {
-        await _controller.RemoveSelectedAlbumArtAsync(type);
-        if (type == AlbumArtType.Front)
-        {
-            foreach (var i in _listMusicFiles.GetSelectedRowsIndices())
-            {
-                _listMusicFilesArtImages[i].RemoveCssClass("list-icon");
-                _listMusicFilesArtImages[i].SetFromIconName("audio-x-generic-symbolic");
-            }
-        }
-    }
+    private async Task RemoveAlbumArtAsync(AlbumArtType type) => await _controller.RemoveSelectedAlbumArtAsync(type);
 
     /// <summary>
     /// Occurs when the export album art action is triggered
@@ -1360,45 +1337,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _listMusicFiles.Remove(row);
         }
-        _listMusicFilesArtImages.Clear();
-        _listMusicFilesUnsavedImages.Clear();
         _listMusicFilesRows.Clear();
         if (!string.IsNullOrEmpty(_controller.MusicLibraryName))
         {
             string? comparable = null;
             foreach (var musicFile in _controller.MusicFiles)
             {
-                var row = Adw.ActionRow.New();
-                if (!string.IsNullOrEmpty(musicFile.Title))
-                {
-                    row.SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
-                    row.SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
-                }
-                else
-                {
-                    row.SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
-                    row.SetSubtitle("");
-                }
-                row.AddCssClass("card");
-                var art = Gtk.Image.New();
-                art.SetValign(Gtk.Align.Center);
-                art.SetIconSize(Gtk.IconSize.Large);
-                art.SetOverflow(Gtk.Overflow.Hidden);
-                if (musicFile.FrontAlbumArt.Length > 0)
-                {
-                    art.AddCssClass("list-icon");
-                    using var bytes = GLib.Bytes.From(musicFile.FrontAlbumArt.AsSpan());
-                    using var texture = Gdk.Texture.NewFromBytes(bytes);
-                    art.SetFromPaintable(texture);
-                }
-                else
-                {
-                    art.SetFromIconName("audio-x-generic-symbolic");
-                }
-                row.AddPrefix(art);
-                var unsaved = Gtk.Image.NewFromIconName("document-modified-symbolic");
-                unsaved.SetVisible(false);
-                row.AddSuffix(unsaved);
+                var row = new MusicFileRow(musicFile);
                 var compareTo = _controller.SortFilesBy switch
                 {
                     SortBy.Album => musicFile.Album,
@@ -1440,8 +1385,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 }
                 _listMusicFiles.Append(row);
                 _listMusicFilesRows.Add(row);
-                _listMusicFilesArtImages.Add(art);
-                _listMusicFilesUnsavedImages.Add(unsaved);
             }
             if (_listMusicFilesRows.Any())
             {
@@ -1502,7 +1445,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var i = 0;
         foreach (var saved in _controller.MusicFileSaveStates)
         {
-            _listMusicFilesUnsavedImages[i].SetVisible(!saved);
+            _listMusicFilesRows[i].SetUnsaved(!saved);
             i++;
         }
         return false;
@@ -1604,16 +1547,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Update Rows
         foreach (var pair in _controller.SelectedMusicFiles)
         {
-            if (!string.IsNullOrEmpty(pair.Value.Title))
-            {
-                _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
-                _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
-            }
-            else
-            {
-                _listMusicFilesRows[pair.Key].SetTitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
-                _listMusicFilesRows[pair.Key].SetSubtitle("");
-            }
+            _listMusicFilesRows[pair.Key].Update(pair.Value);
         }
         _isSelectionOccuring = false;
         return false;
@@ -1747,16 +1681,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             //Update Rows
             foreach (var pair in _controller.SelectedMusicFiles)
             {
-                if (!string.IsNullOrEmpty(pair.Value.Title))
-                {
-                    _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
-                    _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
-                }
-                else
-                {
-                    _listMusicFilesRows[pair.Key].SetTitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
-                    _listMusicFilesRows[pair.Key].SetSubtitle("");
-                }
+                _listMusicFilesRows[pair.Key].Update(pair.Value);
             }
         }
     }
