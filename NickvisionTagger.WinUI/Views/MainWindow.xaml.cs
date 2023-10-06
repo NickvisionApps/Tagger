@@ -887,7 +887,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private void ManageLyrics(object sender, RoutedEventArgs e)
     {
-
+        //TODO
     }
 
     /// <summary>
@@ -895,9 +895,30 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void InsertAlbumArt(object sender, RoutedEventArgs e)
+    private async void InsertAlbumArt(object sender, RoutedEventArgs e)
     {
-
+        var type = _currentAlbumArtType;
+        if (ReferenceEquals(sender, MenuAlbumArtFrontInsert))
+        {
+            type = AlbumArtType.Front;
+        }
+        if (ReferenceEquals(sender, MenuAlbumArtBackInsert))
+        {
+            type = AlbumArtType.Back;
+        }
+        var filePicker = new FileOpenPicker();
+        InitializeWithWindow(filePicker);
+        filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+        filePicker.FileTypeFilter.Add(".jpg");
+        filePicker.FileTypeFilter.Add(".jpeg");
+        filePicker.FileTypeFilter.Add(".png");
+        filePicker.FileTypeFilter.Add(".bmp");
+        filePicker.FileTypeFilter.Add(".webp");
+        var file = await filePicker.PickSingleFileAsync();
+        if (file != null)
+        {
+            await _controller.InsertSelectedAlbumArtAsync(file.Path, type);
+        }
     }
 
     /// <summary>
@@ -905,9 +926,18 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void RemoveAlbumArt(object sender, RoutedEventArgs e)
+    private async void RemoveAlbumArt(object sender, RoutedEventArgs e)
     {
-
+        var type = _currentAlbumArtType;
+        if (ReferenceEquals(sender, MenuAlbumArtFrontInsert))
+        {
+            type = AlbumArtType.Front;
+        }
+        if (ReferenceEquals(sender, MenuAlbumArtBackInsert))
+        {
+            type = AlbumArtType.Back;
+        }
+        await _controller.RemoveSelectedAlbumArtAsync(type);
     }
 
     /// <summary>
@@ -915,9 +945,43 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ExportAlbumArt(object sender, RoutedEventArgs e)
+    private async void ExportAlbumArt(object sender, RoutedEventArgs e)
     {
-
+        var type = _currentAlbumArtType;
+        if (ReferenceEquals(sender, MenuAlbumArtFrontInsert))
+        {
+            type = AlbumArtType.Front;
+        }
+        if (ReferenceEquals(sender, MenuAlbumArtBackInsert))
+        {
+            type = AlbumArtType.Back;
+        }
+        var albumArt = type == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
+        if (albumArt != "hasArt")
+        {
+            return;
+        }
+        var ext = _controller.GetFirstAlbumArtMimeType(type) switch
+        {
+            "image/jpeg" => ".jpg",
+            "image/png" => ".png",
+            "image/bmp" => ".bmp",
+            "image/webp" => ".webp",
+            "image/gif" => ".gif",
+            "image/tiff" => ".tiff",
+            "image/tiff-fx" => ".tiff",
+            _ => ".jpg"
+        };
+        var filePicker = new FileSavePicker();
+        InitializeWithWindow(filePicker);
+        filePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+        filePicker.FileTypeChoices.Add(_("All files"), new List<string>() { ext, ext.ToUpper() });
+        filePicker.DefaultFileExtension = ext;
+        var file = await filePicker.PickSaveFileAsync();
+        if (file != null)
+        {
+            _controller.ExportSelectedAlbumArt(file.Path, type);
+        }
     }
 
     /// <summary>
@@ -1027,7 +1091,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void SubmitToAcoustId(object sender, RoutedEventArgs e)
     {
-        if(_controller.SelectedMusicFiles.Count > 1)
+        if (_controller.SelectedMusicFiles.Count > 1)
         {
             var dialog = new ContentDialog()
             {
@@ -1045,9 +1109,9 @@ public sealed partial class MainWindow : Window
             XamlRoot = MainGrid.XamlRoot
         };
         var mbid = await entryDialog.ShowAsync();
-        if(!string.IsNullOrEmpty(mbid))
+        if (!string.IsNullOrEmpty(mbid))
         {
-            if(!_controller.CanClose)
+            if (!_controller.CanClose)
             {
                 var dialog = new ContentDialog()
                 {
@@ -1378,7 +1442,7 @@ public sealed partial class MainWindow : Window
     /// </summary>
     private void CorruptedFilesFound()
     {
-
+        //TODO
     }
 
     /// <summary>
