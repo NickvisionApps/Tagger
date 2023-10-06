@@ -1043,16 +1043,7 @@ public sealed partial class MainWindow : Window
         //Update Rows
         foreach(var pair in _controller.SelectedMusicFiles)
         {
-            if(!string.IsNullOrEmpty(pair.Value.Title))
-            {
-                _musicFileRows[pair.Key].Title = $"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{pair.Value.Title}";
-                _musicFileRows[pair.Key].Subtitle = pair.Value.Filename;
-            }
-            else
-            {
-                _musicFileRows[pair.Key].Title = pair.Value.Filename;
-                _musicFileRows[pair.Key].Subtitle = "";
-            }
+            _musicFileRows[pair.Key].Update(pair.Value);
         }
         _isSelectionOccuring = false;
     }
