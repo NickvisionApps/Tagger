@@ -284,7 +284,7 @@ public sealed partial class MainWindow : Window
             e.Cancel = true;
             var dialog = new ContentDialog()
             {
-                Title = _("Apply Changes"),
+                Title = _("Apply Changes?"),
                 Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
                 PrimaryButtonText = _("Apply"),
                 SecondaryButtonText = _("Discard"),
@@ -298,7 +298,7 @@ public sealed partial class MainWindow : Window
                 await _controller.SaveAllTagsAsync(false);
                 Close();
             }
-            else if(res == ContentDialogResult.Secondary)
+            if(res == ContentDialogResult.Secondary)
             {
                 _controller.ForceAllowClose();
                 Close();
@@ -472,6 +472,8 @@ public sealed partial class MainWindow : Window
                     {
                         Content = e.ActionParam
                     },
+                    CloseButtonText = _("OK"),
+                    DefaultButton = ContentDialogButton.Close,
                     XamlRoot = MainGrid.XamlRoot
                 };
                 await dialog.ShowAsync();
@@ -551,7 +553,7 @@ public sealed partial class MainWindow : Window
         {
             var dialog = new ContentDialog()
             {
-                Title = _("Apply Changes"),
+                Title = _("Apply Changes?"),
                 Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
                 PrimaryButtonText = _("Apply"),
                 SecondaryButtonText = _("Discard"),
@@ -564,7 +566,7 @@ public sealed partial class MainWindow : Window
             {
                 await _controller.SaveAllTagsAsync(false);
             }
-            else if (res != ContentDialogResult.None)
+            if (res != ContentDialogResult.None)
             {
                 await _controller.ReloadLibraryAsync();
             }
@@ -586,7 +588,7 @@ public sealed partial class MainWindow : Window
         {
             var dialog = new ContentDialog()
             {
-                Title = _("Apply Changes"),
+                Title = _("Apply Changes?"),
                 Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
                 PrimaryButtonText = _("Apply"),
                 SecondaryButtonText = _("Discard"),
@@ -599,7 +601,7 @@ public sealed partial class MainWindow : Window
             {
                 await _controller.SaveAllTagsAsync(false);
             }
-            else if (res != ContentDialogResult.None)
+            if (res != ContentDialogResult.None)
             {
                 _controller.CloseLibrary();
             }
@@ -628,7 +630,36 @@ public sealed partial class MainWindow : Window
         {
             XamlRoot = MainGrid.XamlRoot
         };
-        await settingsDialog.ShowAsync();
+        if (!_controller.CanClose)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = _("Apply Changes?"),
+                Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
+                PrimaryButtonText = _("Apply"),
+                SecondaryButtonText = _("Discard"),
+                CloseButtonText = _("Cancel"),
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = MainGrid.XamlRoot
+            };
+            var res = await dialog.ShowAsync();
+            if (res == ContentDialogResult.Primary)
+            {
+                await _controller.SaveAllTagsAsync(true);
+            }
+            if (res == ContentDialogResult.Secondary)
+            {
+                await _controller.DiscardSelectedUnappliedChangesAsync();
+            }
+            if (res != ContentDialogResult.None)
+            {
+                await settingsDialog.ShowAsync();
+            }
+        }
+        else
+        {
+            await settingsDialog.ShowAsync();
+        }
     }
 
     /// <summary>
@@ -662,9 +693,50 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void CreatePlaylist(object sender, RoutedEventArgs e)
+    private async void CreatePlaylist(object sender, RoutedEventArgs e)
     {
-
+        var createPlaylistDialog = new CreatePlaylistDialog(InitializeWithWindow)
+        {
+            XamlRoot = MainGrid.XamlRoot
+        };
+        if(!_controller.CanClose)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = _("Apply Changes?"),
+                Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
+                PrimaryButtonText = _("Apply"),
+                SecondaryButtonText = _("Discard"),
+                CloseButtonText = _("Cancel"),
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = MainGrid.XamlRoot
+            };
+            var res = await dialog.ShowAsync();
+            if (res == ContentDialogResult.Primary)
+            {
+                await _controller.SaveAllTagsAsync(true);
+            }
+            if (res == ContentDialogResult.Secondary)
+            {
+                await _controller.DiscardSelectedUnappliedChangesAsync();
+            }
+            if (res != ContentDialogResult.None)
+            {
+                var po = await createPlaylistDialog.ShowAsync();
+                if (po != null)
+                {
+                    _controller.CreatePlaylist(po);
+                }
+            }
+        }
+        else
+        {
+            var po = await createPlaylistDialog.ShowAsync();
+            if(po != null)
+            {
+                _controller.CreatePlaylist(po);
+            }
+        }
     }
 
     /// <summary>
@@ -672,9 +744,60 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void AddToPlaylist(object sender, RoutedEventArgs e)
+    private async void AddToPlaylist(object sender, RoutedEventArgs e)
     {
-
+        var filePicker = new FileOpenPicker();
+        InitializeWithWindow(filePicker);
+        filePicker.SuggestedStartLocation = PickerLocationId.MusicLibrary;
+        foreach (var ext in MusicLibrary.SupportedExtensions)
+        {
+            filePicker.FileTypeFilter.Add(ext);
+        }
+        var file = await filePicker.PickSingleFileAsync();
+        if (file != null)
+        {
+            var relativeDialog = new ContentDialog()
+            {
+                Title = _("Use Relative Paths?"),
+                Content = _("Would you like to save the added file to the playlist using it's relative path?\nIf not, the full path will be used instead."),
+                PrimaryButtonText = _("Yes"),
+                CloseButtonText = _("No"),
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = MainGrid.XamlRoot
+            };
+            if(!_controller.CanClose)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = _("Apply Changes?"),
+                    Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
+                    PrimaryButtonText = _("Apply"),
+                    SecondaryButtonText = _("Discard"),
+                    CloseButtonText = _("Cancel"),
+                    DefaultButton = ContentDialogButton.Primary,
+                    XamlRoot = MainGrid.XamlRoot
+                };
+                var res = await dialog.ShowAsync();
+                if (res == ContentDialogResult.Primary)
+                {
+                    await _controller.SaveAllTagsAsync(false);
+                }
+                if (res == ContentDialogResult.Secondary)
+                {
+                    await _controller.DiscardSelectedUnappliedChangesAsync();
+                }
+                if (res != ContentDialogResult.None)
+                {
+                    res = await relativeDialog.ShowAsync();
+                    await _controller.AddFileToPlaylistAsync(file.Path, res == ContentDialogResult.Primary);
+                }
+            }
+            else
+            {
+                var res = await relativeDialog.ShowAsync();
+                await _controller.AddFileToPlaylistAsync(file.Path, res == ContentDialogResult.Primary);
+            }
+        }
     }
 
     /// <summary>
@@ -682,9 +805,58 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void RemoveFromPlaylist(object sender, RoutedEventArgs e)
+    private async void RemoveFromPlaylist(object sender, RoutedEventArgs e)
     {
-
+        if(_controller.SelectedMusicFiles.Count == 0)
+        {
+            NotificationSent(sender, new NotificationSentEventArgs(_("No files selected for removal."), NotificationSeverity.Error));
+        }
+        else
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = _("Remove Files?"),
+                Content = _("The selected files will not be deleted from disk but will be removed from this playlist."),
+                PrimaryButtonText = _("Yes"),
+                CloseButtonText = _("No"),
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = MainGrid.XamlRoot
+            };
+            var res = await dialog.ShowAsync();
+            if(res == ContentDialogResult.Primary)
+            {
+                if(!_controller.CanClose)
+                {
+                    dialog = new ContentDialog()
+                    {
+                        Title = _("Apply Changes?"),
+                        Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
+                        PrimaryButtonText = _("Apply"),
+                        SecondaryButtonText = _("Discard"),
+                        CloseButtonText = _("Cancel"),
+                        DefaultButton = ContentDialogButton.Primary,
+                        XamlRoot = MainGrid.XamlRoot
+                    };
+                    res = await dialog.ShowAsync();
+                    if (res == ContentDialogResult.Primary)
+                    {
+                        await _controller.SaveAllTagsAsync(false);
+                    }
+                    if (res == ContentDialogResult.Secondary)
+                    {
+                        await _controller.DiscardSelectedUnappliedChangesAsync();
+                    }
+                    if (res != ContentDialogResult.None)
+                    {
+                        await _controller.RemoveSelectedFilesFromPlaylistAsync();
+                    }
+                }
+                else
+                {
+                    await _controller.RemoveSelectedFilesFromPlaylistAsync();
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -1084,16 +1256,7 @@ public sealed partial class MainWindow : Window
             //Update Rows
             foreach (var pair in _controller.SelectedMusicFiles)
             {
-                if (!string.IsNullOrEmpty(pair.Value.Title))
-                {
-                    _musicFileRows[pair.Key].Title = $"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{pair.Value.Title}";
-                    _musicFileRows[pair.Key].Subtitle = pair.Value.Filename;
-                }
-                else
-                {
-                    _musicFileRows[pair.Key].Title = pair.Value.Filename;
-                    _musicFileRows[pair.Key].Subtitle = "";
-                }
+                _musicFileRows[pair.Key].Update(pair.Value);
             }
         }
     }

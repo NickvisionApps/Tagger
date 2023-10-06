@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="NickvisionTagger.WinUI.Controls.CreatePlaylistDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NickvisionTagger.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wct="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
+    DefaultButton="Primary">
+
+    <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto" MinWidth="500" SizeChanged="ScrollViewer_SizeChanged">
+        <StackPanel x:Name="StackPanel" Orientation="Vertical" Spacing="6">
+            <wct:SettingsCard x:Name="CardPath">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE130;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                    <TextBlock x:Name="LblPath" VerticalAlignment="Center"/>
+
+                    <Button x:Name="BtnSelectSaveLocation" Click="SelectSaveLocation">
+                        <Button.Content>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8E5;"/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </wct:SettingsCard>
+
+            <wct:SettingsCard x:Name="CardFormat">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE15E;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <ComboBox x:Name="CmbFormat" SelectedIndex="0">
+                    <ComboBox.Items>
+                        <x:String>M3U</x:String>
+                        <x:String>PLS</x:String>
+                        <x:String>XSPF</x:String>
+                        <x:String>SMIL</x:String>
+                        <x:String>ASX</x:String>
+                        <x:String>B4S</x:String>
+                        <x:String>DPL</x:String>
+                    </ComboBox.Items>
+                </ComboBox>
+            </wct:SettingsCard>
+
+            <wct:SettingsCard x:Name="CardRelative">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE13E;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <ToggleSwitch x:Name="TglRelative"/>
+            </wct:SettingsCard>
+
+            <wct:SettingsCard x:Name="CardSelected">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE762;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <ToggleSwitch x:Name="TglSelected"/>
+            </wct:SettingsCard>
+        </StackPanel>
+    </ScrollViewer>
+</ContentDialog>

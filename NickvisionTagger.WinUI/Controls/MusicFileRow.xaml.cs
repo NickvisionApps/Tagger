@@ -24,19 +24,7 @@ public sealed partial class MusicFileRow : UserControl
         InitializeComponent();
         _art = Array.Empty<byte>();
         ArtViewStack.CurrentPageName = "NoArt";
-        if (!string.IsNullOrEmpty(musicFile.Title))
-        {
-            Title = $"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{musicFile.Title}";
-            Subtitle = musicFile.Filename;
-        }
-        else
-        {
-            Title = musicFile.Filename;
-            Subtitle = "";
-            TxtSubtitle.Visibility = Visibility.Collapsed;
-        }
-        ShowUnsaveIcon = false;
-        Art = musicFile.FrontAlbumArt;
+        Update(musicFile);
     }
 
     /// <summary>
