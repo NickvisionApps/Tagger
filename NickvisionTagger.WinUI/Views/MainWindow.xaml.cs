@@ -1025,9 +1025,59 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void SubmitToAcoustId(object sender, RoutedEventArgs e)
+    private async void SubmitToAcoustId(object sender, RoutedEventArgs e)
     {
-
+        if(_controller.SelectedMusicFiles.Count > 1)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = _("Too Many Files Selected"),
+                Content = _("Only one file can be submitted to AcoustID at a time. Please select only one file and try again."),
+                CloseButtonText = _("OK"),
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = MainGrid.XamlRoot
+            };
+            await dialog.ShowAsync();
+            return;
+        }
+        var entryDialog = new EntryDialog(_("Submit to AcoustId"), _("AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id for easy identification.\n\nIf you have a MusicBrainz Recording Id for this song, please provide it below.\n\nIf none is provided, Tagger will submit your tag's metadata in association with the fingerprint instead."), _("MusicBrainz Recording Id"), _("Cancel"), _("Submit"))
+        {
+            XamlRoot = MainGrid.XamlRoot
+        };
+        var mbid = await entryDialog.ShowAsync();
+        if(!string.IsNullOrEmpty(mbid))
+        {
+            if(!_controller.CanClose)
+            {
+                var dialog = new ContentDialog()
+                {
+                    Title = _("Apply Changes?"),
+                    Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
+                    PrimaryButtonText = _("Apply"),
+                    SecondaryButtonText = _("Discard"),
+                    CloseButtonText = _("Cancel"),
+                    DefaultButton = ContentDialogButton.Primary,
+                    XamlRoot = MainGrid.XamlRoot
+                };
+                var res = await dialog.ShowAsync();
+                if (res == ContentDialogResult.Primary)
+                {
+                    await _controller.SaveAllTagsAsync(false);
+                }
+                if (res == ContentDialogResult.Secondary)
+                {
+                    await _controller.DiscardSelectedUnappliedChangesAsync();
+                }
+                if (res != ContentDialogResult.None)
+                {
+                    await _controller.SubmitToAcoustIdAsync(mbid == "NULL" ? null : mbid);
+                }
+            }
+            else
+            {
+                await _controller.SubmitToAcoustIdAsync(mbid == "NULL" ? null : mbid);
+            }
+        }
     }
 
     /// <summary>

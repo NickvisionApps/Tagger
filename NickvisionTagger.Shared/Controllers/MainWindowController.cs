@@ -1250,6 +1250,11 @@ public class MainWindowController : IDisposable
     {
         if (SelectedMusicFiles.Count == 1)
         {
+            if(string.IsNullOrEmpty(Configuration.Current.AcoustIdUserAPIKey))
+            {
+                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("No user api key configured."), NotificationSeverity.Error));
+                return;
+            }
             LoadingStateUpdated?.Invoke(this, _("Submitting data to AcoustId..."));
             var result = await SelectedMusicFiles.First().Value.SubmitToAcoustIdAsync("b'Ch3cuJ0d", Configuration.Current.AcoustIdUserAPIKey, recordingID);
             MusicFileSaveStatesChanged?.Invoke(this, false);
