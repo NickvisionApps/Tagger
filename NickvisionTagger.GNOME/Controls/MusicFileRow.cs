@@ -25,17 +25,7 @@ public class MusicFileRow : Adw.ActionRow
     {
         _art = Array.Empty<byte>();
         builder.Connect(this);
-        if (!string.IsNullOrEmpty(musicFile.Title))
-        {
-            SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
-            SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
-        }
-        else
-        {
-            SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
-            SetSubtitle("");
-        }
-        SetArtFromBytes(musicFile.FrontAlbumArt);
+        Update(musicFile);
     }
     
     /// <summary>
