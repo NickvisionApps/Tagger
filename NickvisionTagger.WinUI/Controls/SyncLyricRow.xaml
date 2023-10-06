@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="NickvisionTagger.WinUI.Controls.SyncLyricRow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NickvisionTagger.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wct="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d">
+
+    <wct:SettingsCard x:Name="Card">
+        <StackPanel Orientation="Horizontal" Spacing="6">
+            <TextBox x:Name="TxtLyric" Width="274" IsSpellCheckEnabled="True" TextChanged="TxtLyric_TextChanged"/>
+
+            <Button x:Name="BtnApply" Height="32" VerticalAlignment="Center" IsEnabled="False" Click="Apply">
+                <Button.Content>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE73E;"/>
+                </Button.Content>
+            </Button>
+
+            <Button x:Name="BtnRemove" Height="32" VerticalAlignment="Center" Click="Remove">
+                <Button.Content>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE108;"/>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </wct:SettingsCard>
+</UserControl>

@@ -167,7 +167,7 @@ public sealed partial class MainWindow : Window
         HomeDiscussionsDescription.Text = _("Start a conversation with us.");
         StatusPageNoFiles.Title = _("No Music Files Found");
         StatusPageNoFiles.Description = _("Try a different library");
-        SearchMusicFiles.PlaceholderText = _("Search for filename (type ! for advanced search)...");
+        SearchMusicFiles.PlaceholderText = _("Type ! for advanced search");
         ToolTipService.SetToolTip(BtnAdvancedSearchInfo, _("Advanced Search Info"));
         StatusPageNoSelected.Title = _("No Selected Music Files");
         StatusPageNoSelected.Description = _("Select some files");
@@ -175,6 +175,7 @@ public sealed partial class MainWindow : Window
         ToolTipService.SetToolTip(CmdBtnSaveTag, _("Save Tag (Ctrl+S)"));
         ToolTipService.SetToolTip(CmdBtnDeleteTag, _("Delete Tag (Shift+Delete)"));
         ToolTipService.SetToolTip(CmdBtnDiscardChanges, _("Discard Unapplied Changed (Ctrl+Z)"));
+        CmdBtnManageLyrics.Label = _("Lyrics");
         ToolTipService.SetToolTip(CmdBtnManageLyrics, _("Manage Lyrics (Ctrl+L)"));
         ToolTipService.SetToolTip(CmdBtnFilenameToTag, _("File Name to Tag (Ctrl+F)"));
         ToolTipService.SetToolTip(CmdBtnTagToFilename, _("Tag to File Name (Ctrl+T)"));
@@ -636,6 +637,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void Settings(object sender, RoutedEventArgs e)
     {
+        //TODO: Move Sort By into Edit menu
         var settingsDialog = new SettingsDialog(_controller.CreatePreferencesViewController())
         {
             XamlRoot = MainGrid.XamlRoot
@@ -705,6 +707,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void CreatePlaylist(object sender, RoutedEventArgs e)
     {
+        //TODO: Fix not opening on some devices
         var createPlaylistDialog = new CreatePlaylistDialog(InitializeWithWindow)
         {
             XamlRoot = MainGrid.XamlRoot
@@ -895,9 +898,18 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void ManageLyrics(object sender, RoutedEventArgs e)
+    private async void ManageLyrics(object sender, RoutedEventArgs e)
     {
-        //TODO
+        var controller = _controller.CreateLyricsDialogController();
+        var lyricsDialog = new LyricsDialog(controller, InitializeWithWindow)
+        {
+            XamlRoot = MainGrid.XamlRoot
+        };
+        var res = await lyricsDialog.ShowAsync();
+        if (res == ContentDialogResult.Primary)
+        {
+            _controller.UpdateLyrics(controller.Lyrics);
+        }
     }
 
     /// <summary>
@@ -1463,6 +1475,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">SelectionChangedEventArgs</param>
     private void ListMusicFiles_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
+        //TODO: Fix issue where if a row has unsaved dot and then is clicked on the dot disappears
         _isSelectionOccuring = true;
         var selectedIndexes = ListMusicFiles.SelectedItems.Select(x => _musicFileRows.IndexOf((MusicFileRow)x)).ToList();
         if (_currentAlbumArtType != AlbumArtType.Front)

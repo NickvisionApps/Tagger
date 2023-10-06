@@ -92,14 +92,14 @@ public partial class LyricsDialog : Adw.Window
             }
             else
             {
-                _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset.ToString());
+                _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset!.Value.ToString());
                 _syncOffsetRow.SetPosition(-1);
             }
         };
         _addSyncLyricButton.OnClicked += AddSyncLyric;
         _clearSyncButton.OnClicked += (sender, e) => _controller.ClearSynchronizedLyrics(); ;
         _importSyncButton.OnClicked += ImportSyncFromLRC;
-        _exportSyncButton.OnClicked += ExportSyncFromLRC;
+        _exportSyncButton.OnClicked += ExportSyncToLRC;
         //Events
         _controller.SynchronizedLyricCreated += CreateSyncRow;
         _controller.SynchronizedLyricRemoved += RemoveSyncRow;
@@ -244,7 +244,7 @@ public partial class LyricsDialog : Adw.Window
         };
         entryDialog.OnResponse += (s, ex) =>
         {
-            if (!string.IsNullOrEmpty(entryDialog.Response))
+            if (!string.IsNullOrEmpty(entryDialog.Response) && entryDialog.Response != "NULL")
             {
                 var res = entryDialog.Response.TimecodeToMs();
                 if (res != -1)
@@ -287,7 +287,7 @@ public partial class LyricsDialog : Adw.Window
             {
                 if (_controller.ImportFromLRC(file!.GetPath()!, ex.Response == "overwrite"))
                 {
-                    _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset.ToString());
+                    _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset!.Value.ToString());
                 }
                 else
                 {
@@ -312,7 +312,7 @@ public partial class LyricsDialog : Adw.Window
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private async void ExportSyncFromLRC(Gtk.Button sender, EventArgs e)
+    private async void ExportSyncToLRC(Gtk.Button sender, EventArgs e)
     {
         if (_controller.SynchronizedLyricsCount!.Value == 0)
         {
