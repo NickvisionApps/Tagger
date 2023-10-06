@@ -63,7 +63,7 @@ public static class LyricService
         }
         return res;
     }
-    
+
     /// <summary>
     /// Gets lyrics from Music163
     /// </summary>
@@ -102,7 +102,7 @@ public static class LyricService
         }
         return null;
     }
-    
+
     /// <summary>
     /// Gets lyrics from Letras
     /// </summary>

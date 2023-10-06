@@ -22,7 +22,7 @@ public static class MediaHelpers
         var hours = duration / 60;
         return $"{hours:D2}:{minutes:D2}:{seconds:D2}";
     }
-    
+
     /// <summary>
     /// Converts a file size in bytes to a string (~ MB)
     /// </summary>
@@ -40,7 +40,7 @@ public static class MediaHelpers
         }
         return $"{Math.Ceiling(size * 100.0) / 100.0} {sizes[index]}";
     }
-    
+
     /// <summary>
     /// Format the given duration using the following format
     ///     DDdHH:MM:SS.UUUU
@@ -60,7 +60,7 @@ public static class MediaHelpers
         long seconds = Convert.ToInt64(Math.Floor((long)milliseconds / 1000.00));
         return SecondsToTimecode(seconds) + "." + (milliseconds - seconds * 1000);
     }
-    
+
     /// <summary>
     /// Convert the duration of the given timecode to milliseconds
     /// Supported formats : hh:mm, hh:mm:ss.ddd, mm:ss, hh:mm:ss and mm:ss.ddd
@@ -132,7 +132,7 @@ public static class MediaHelpers
         if (!valid) result = -1;
         return result;
     }
-    
+
     /// <summary>
     /// Format the given duration using the following format
     ///     DDdHH:MM:SS

@@ -194,7 +194,7 @@ public class LyricsDialogController
             }
         }
     }
-    
+
     /// <summary>
     /// Adds a synchronized lyric
     /// </summary>
@@ -260,7 +260,7 @@ public class LyricsDialogController
         }
         return false;
     }
-    
+
     /// <summary>
     /// Clears all synchronized lyrics
     /// </summary>

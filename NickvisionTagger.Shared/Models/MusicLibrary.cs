@@ -25,12 +25,12 @@ public class MusicLibrary : IDisposable
     private bool _includeSubfolders;
     private FileSystemWatcher? _watcher;
     private IPlaylistIO? _playlist;
-    
+
     /// <summary>
     /// An array of supported extensions by Tagger
     /// </summary>
     public static string[] SupportedExtensions { get; }
-    
+
     /// <summary>
     /// The type of the music library
     /// </summary>
@@ -54,7 +54,7 @@ public class MusicLibrary : IDisposable
     /// <summary>
     /// A list of genres in the library
     /// </summary>
-    public List<string> Genres { get; init;  }
+    public List<string> Genres { get; init; }
 
     /// <summary>
     /// The name of the library
@@ -79,14 +79,14 @@ public class MusicLibrary : IDisposable
         SupportedExtensions = new string[]
         {
             ".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav",
-            ".aac", ".aax", ".aa", ".aif", ".aiff", ".aifc", ".dsd", ".dsf", ".ac3", 
-            ".gym", ".ape", ".mpv", ".mp+", ".ofr", ".ofs", ".psf", ".psf1", ".psf2", 
-            ".minipsf", ".minipsf1", ".minipsf2", ".ssf", ".minissf", ".minidsf", 
-            ".gsf", ".minigsf", ".qsf", ".miniqsf", ".spc", ".tak", ".tta", ".vqf", 
+            ".aac", ".aax", ".aa", ".aif", ".aiff", ".aifc", ".dsd", ".dsf", ".ac3",
+            ".gym", ".ape", ".mpv", ".mp+", ".ofr", ".ofs", ".psf", ".psf1", ".psf2",
+            ".minipsf", ".minipsf1", ".minipsf2", ".ssf", ".minissf", ".minidsf",
+            ".gsf", ".minigsf", ".qsf", ".miniqsf", ".spc", ".tak", ".tta", ".vqf",
             ".bwav", ".bwf", ".vgm", ".vgz", ".wv", ".asf"
         };
     }
-    
+
     /// <summary>
     /// Constructs a MusicLibrary
     /// </summary>
@@ -128,7 +128,7 @@ public class MusicLibrary : IDisposable
             throw new ArgumentException("Invalid library path");
         }
     }
-    
+
     /// <summary>
     /// Finalizes the MusicLibrary
     /// </summary>
@@ -183,7 +183,7 @@ public class MusicLibrary : IDisposable
         _watcher?.Dispose();
         _disposed = true;
     }
-    
+
     /// <summary>
     /// Scans the music library for music files and populates the files list. If includeSubfolders is true, scans subfolders as well. If false, only the parent path
     /// </summary>
@@ -215,7 +215,7 @@ public class MusicLibrary : IDisposable
                 _ => new List<string>()
             };
             var i = 0;
-            foreach(var path in files)
+            foreach (var path in files)
             {
                 try
                 {
@@ -320,7 +320,7 @@ public class MusicLibrary : IDisposable
             }
             catch { }
         }
-         _playlist.FilePaths = paths;
+        _playlist.FilePaths = paths;
         return true;
     }
 }

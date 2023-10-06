@@ -1,6 +1,6 @@
 using CommunityToolkit.WinUI.Notifications;
-using Microsoft.UI.Windowing;
 using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -222,7 +222,7 @@ public sealed partial class MainWindow : Window
         LblBtnAlbumArtExport.Text = _("Export");
         LblBtnAlbumArtSwitch.Text = _("Switch to Back Cover");
         //Extras Pane
-        if(!_controller.ExtrasPane)
+        if (!_controller.ExtrasPane)
         {
             ExtrasPaneToggle(this, new RoutedEventArgs());
         }
@@ -254,7 +254,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void Window_Loaded(object sender, RoutedEventArgs e)
     {
-        if(!_isOpened)
+        if (!_isOpened)
         {
             ViewStack.CurrentPageName = "Startup";
             var accent = (SolidColorBrush)Application.Current.Resources["AccentFillColorDefaultBrush"];
@@ -279,7 +279,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">AppWindowClosingEventArgs</param>
     private async void Window_Closing(AppWindow sender, AppWindowClosingEventArgs e)
     {
-        if(!_controller.CanClose)
+        if (!_controller.CanClose)
         {
             e.Cancel = true;
             var dialog = new ContentDialog()
@@ -293,12 +293,12 @@ public sealed partial class MainWindow : Window
                 XamlRoot = MainGrid.XamlRoot
             };
             var res = await dialog.ShowAsync();
-            if(res == ContentDialogResult.Primary)
+            if (res == ContentDialogResult.Primary)
             {
                 await _controller.SaveAllTagsAsync(false);
                 Close();
             }
-            if(res == ContentDialogResult.Secondary)
+            if (res == ContentDialogResult.Secondary)
             {
                 _controller.ForceAllowClose();
                 Close();
@@ -373,10 +373,10 @@ public sealed partial class MainWindow : Window
     /// <param name="e">DragEventArgs</param>
     private async void OnDrop(object sender, DragEventArgs e)
     {
-        if(e.DataView.Contains(StandardDataFormats.StorageItems))
+        if (e.DataView.Contains(StandardDataFormats.StorageItems))
         {
             var first = (await e.DataView.GetStorageItemsAsync()).FirstOrDefault();
-            if(first != null && MusicLibrary.GetIsValidLibraryPath(first.Path))
+            if (first != null && MusicLibrary.GetIsValidLibraryPath(first.Path))
             {
                 await _controller.OpenLibraryAsync(first.Path);
             }
@@ -418,7 +418,7 @@ public sealed partial class MainWindow : Window
         {
             BtnInfoBar.Click -= _notificationButtonClickEvent;
         }
-        if(e.Action == "update")
+        if (e.Action == "update")
         {
             _notificationButtonClickEvent = WindowsUpdate;
             BtnInfoBar.Content = _("Update");
@@ -669,7 +669,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private void ExtrasPaneToggle(object sender, RoutedEventArgs e)
     {
-        if(ExtrasPane.Visibility == Visibility.Visible)
+        if (ExtrasPane.Visibility == Visibility.Visible)
         {
             DetailsSeparator.Visibility = Visibility.Collapsed;
             ExtrasPane.Visibility = Visibility.Collapsed;
@@ -699,7 +699,7 @@ public sealed partial class MainWindow : Window
         {
             XamlRoot = MainGrid.XamlRoot
         };
-        if(!_controller.CanClose)
+        if (!_controller.CanClose)
         {
             var dialog = new ContentDialog()
             {
@@ -732,7 +732,7 @@ public sealed partial class MainWindow : Window
         else
         {
             var po = await createPlaylistDialog.ShowAsync();
-            if(po != null)
+            if (po != null)
             {
                 _controller.CreatePlaylist(po);
             }
@@ -765,7 +765,7 @@ public sealed partial class MainWindow : Window
                 DefaultButton = ContentDialogButton.Primary,
                 XamlRoot = MainGrid.XamlRoot
             };
-            if(!_controller.CanClose)
+            if (!_controller.CanClose)
             {
                 var dialog = new ContentDialog()
                 {
@@ -807,7 +807,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void RemoveFromPlaylist(object sender, RoutedEventArgs e)
     {
-        if(_controller.SelectedMusicFiles.Count == 0)
+        if (_controller.SelectedMusicFiles.Count == 0)
         {
             NotificationSent(sender, new NotificationSentEventArgs(_("No files selected for removal."), NotificationSeverity.Error));
         }
@@ -823,9 +823,9 @@ public sealed partial class MainWindow : Window
                 XamlRoot = MainGrid.XamlRoot
             };
             var res = await dialog.ShowAsync();
-            if(res == ContentDialogResult.Primary)
+            if (res == ContentDialogResult.Primary)
             {
-                if(!_controller.CanClose)
+                if (!_controller.CanClose)
                 {
                     dialog = new ContentDialog()
                     {
@@ -955,19 +955,45 @@ public sealed partial class MainWindow : Window
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void DownloadMusicBrainzMetadata(object sender, RoutedEventArgs e)
-    {
-
-    }
+    private async void DownloadMusicBrainzMetadata(object sender, RoutedEventArgs e) => await _controller.DownloadMusicBrainzMetadataAsync();
 
     /// <summary>
     /// Occurs when the download lyrics menu item is clicked
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private void DownloadLyrics(object sender, RoutedEventArgs e)
+    private async void DownloadLyrics(object sender, RoutedEventArgs e)
     {
-
+        if (!_controller.CanClose)
+        {
+            var dialog = new ContentDialog()
+            {
+                Title = _("Apply Changes?"),
+                Content = _("Some music files still have changes waiting to be applied. What would you like to do?"),
+                PrimaryButtonText = _("Apply"),
+                SecondaryButtonText = _("Discard"),
+                CloseButtonText = _("Cancel"),
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = MainGrid.XamlRoot
+            };
+            var res = await dialog.ShowAsync();
+            if (res == ContentDialogResult.Primary)
+            {
+                await _controller.SaveAllTagsAsync(false);
+            }
+            if (res == ContentDialogResult.Secondary)
+            {
+                await _controller.DiscardSelectedUnappliedChangesAsync();
+            }
+            if (res != ContentDialogResult.None)
+            {
+                await _controller.DownloadLyricsAsync();
+            }
+        }
+        else
+        {
+            await _controller.DownloadLyricsAsync();
+        }
     }
 
     /// <summary>
@@ -1010,7 +1036,7 @@ public sealed partial class MainWindow : Window
         InfoBar.IsOpen = false;
         var page = ViewStack.CurrentPageName;
         ViewStack.CurrentPageName = "Startup";
-        if(!(await _controller.WindowsUpdateAsync()))
+        if (!(await _controller.WindowsUpdateAsync()))
         {
             ViewStack.CurrentPageName = page;
         }
@@ -1073,9 +1099,9 @@ public sealed partial class MainWindow : Window
         ListMusicFiles.Items.Clear();
         _musicFileRows.Clear();
         MainMenu.IsEnabled = true;
-        if(!string.IsNullOrEmpty(_controller.MusicLibraryName))
+        if (!string.IsNullOrEmpty(_controller.MusicLibraryName))
         {
-            foreach(var musicFile in _controller.MusicFiles)
+            foreach (var musicFile in _controller.MusicFiles)
             {
                 var row = new MusicFileRow(musicFile);
                 ListMusicFiles.Items.Add(row);
@@ -1119,7 +1145,7 @@ public sealed partial class MainWindow : Window
         MenuSaveTag.IsEnabled = pending;
         CmdBtnSaveTag.IsEnabled = pending;
         var i = 0;
-        foreach(var saved in _controller.MusicFileSaveStates)
+        foreach (var saved in _controller.MusicFileSaveStates)
         {
             _musicFileRows[i].ShowUnsaveIcon = !saved;
             i++;
@@ -1145,7 +1171,7 @@ public sealed partial class MainWindow : Window
         LblCustomPropertiesWarning.Visibility = _controller.SelectedMusicFiles.Count > 1 ? Visibility.Visible : Visibility.Collapsed;
         StatusLabelRight.Text = _controller.MusicFiles.Count > 0 ? _("{0} of {1} selected", _controller.SelectedMusicFiles.Count, _controller.MusicFiles.Count) : "";
         TxtFilename.IsReadOnly = _controller.SelectedMusicFiles.Count > 1;
-        if(_controller.SelectedMusicFiles.Count == 0)
+        if (_controller.SelectedMusicFiles.Count == 0)
         {
             SearchMusicFiles.Text = "";
         }
@@ -1202,9 +1228,9 @@ public sealed partial class MainWindow : Window
         BtnAlbumArtExport.IsEnabled = ArtViewStack.CurrentPageName == "Image";
         //Update Custom Properties
         ListCustomProperties.Children.Clear();
-        if(_controller.SelectedMusicFiles.Count == 1)
+        if (_controller.SelectedMusicFiles.Count == 1)
         {
-            foreach(var pair in _controller.SelectedPropertyMap.CustomProperties)
+            foreach (var pair in _controller.SelectedPropertyMap.CustomProperties)
             {
                 var row = new CustomPropertyRow(pair);
                 row.TextChanged += TagPropertyChanged;
@@ -1213,7 +1239,7 @@ public sealed partial class MainWindow : Window
             }
         }
         //Update Rows
-        foreach(var pair in _controller.SelectedMusicFiles)
+        foreach (var pair in _controller.SelectedMusicFiles)
         {
             _musicFileRows[pair.Key].Update(pair.Value);
         }
@@ -1225,7 +1251,7 @@ public sealed partial class MainWindow : Window
     /// </summary>
     private void TagPropertyChanged(object sender, TextChangedEventArgs e)
     {
-        if(!_isSelectionOccuring && _controller.SelectedMusicFiles.Count > 0)
+        if (!_isSelectionOccuring && _controller.SelectedMusicFiles.Count > 0)
         {
             //Update Tags
             var propMap = new PropertyMap()
@@ -1316,14 +1342,14 @@ public sealed partial class MainWindow : Window
         {
             BtnAdvancedSearchInfo.Visibility = Visibility.Visible;
             var result = _controller.AdvancedSearch(search);
-            if(!result.Success)
+            if (!result.Success)
             {
                 SearchMusicFiles.Background = new AcrylicBrush()
                 {
                     TintOpacity = 0.5,
                     TintColor = MainGrid.ActualTheme == ElementTheme.Light ? Color.FromArgb(255, 224, 27, 36) : Color.FromArgb(255, 192, 28, 40)
                 };
-                foreach(var row in _musicFileRows)
+                foreach (var row in _musicFileRows)
                 {
                     ListMusicFiles.ContainerFromItem(row).SetPropertyValue("Visibility", Visibility.Visible);
                 }
@@ -1337,12 +1363,12 @@ public sealed partial class MainWindow : Window
                 };
                 foreach (var row in _musicFileRows)
                 {
-                    if(result.LowerFilenames!.Count == 0)
+                    if (result.LowerFilenames!.Count == 0)
                     {
                         ListMusicFiles.ContainerFromItem(row).SetPropertyValue("Visibility", Visibility.Collapsed);
                     }
                     var rowFilename = row.Subtitle;
-                    if(string.IsNullOrEmpty(rowFilename))
+                    if (string.IsNullOrEmpty(rowFilename))
                     {
                         rowFilename = row.Title;
                     }

@@ -10,22 +10,22 @@ public partial class EntryDialog
     private readonly Adw.MessageDialog _dialog;
     private readonly Adw.PreferencesGroup _group;
     private readonly Adw.EntryRow _entryRow;
-    
+
     /// <summary>
     /// The response of the dialog
     /// </summary>
     public string Response { get; private set; }
-    
+
     /// <summary>
     /// A validator of the entry
     /// </summary>
     public Func<string, bool>? Validator { get; set; }
-    
+
     /// <summary>
     /// Whether or not the dialog is visible
     /// </summary>
     public bool Visible => _dialog.GetVisible();
-    
+
     /// <summary>
     /// Constructs a EntryDialog
     /// </summary>
@@ -63,7 +63,7 @@ public partial class EntryDialog
         _dialog.SetCloseResponse("cancel");
         _dialog.OnResponse += (sender, e) => SetResponse(e.Response);
     }
-    
+
     public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
     {
         add
@@ -85,7 +85,7 @@ public partial class EntryDialog
     /// Destroys the dialog
     /// </summary>
     public void Destroy() => _dialog.Destroy();
-    
+
     /// <summary>
     /// Sets the response of the dialog as a MessageDialogResponse
     /// </summary>

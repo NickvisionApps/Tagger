@@ -69,13 +69,13 @@ public sealed partial class MusicFileRow : UserControl
         get => _art;
 
         set
-        { 
-            if(_art.SequenceEqual(value))
+        {
+            if (_art.SequenceEqual(value))
             {
                 return;
             }
             _art = value;
-            if(_art.Length > 0)
+            if (_art.Length > 0)
             {
                 using var ms = new InMemoryRandomAccessStream();
                 using var writter = new DataWriter(ms.GetOutputStreamAt(0));

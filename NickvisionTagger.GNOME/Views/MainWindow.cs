@@ -4,6 +4,7 @@ using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Controllers;
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
+using NickvisionTagger.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,7 +14,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using NickvisionTagger.Shared.Models;
 using static Nickvision.GirExt.GtkExt;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
@@ -659,7 +659,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         catch { }
     }
-    
+
     /// <summary>
     /// Occurs when the open playlist action is triggered
     /// </summary>
@@ -772,7 +772,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             createPlaylistDialog.Present();
         }
     }
-    
+
     /// <summary>
     /// Occurs when the create playlist action is triggered
     /// </summary>
@@ -835,7 +835,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                             relativeDialog.Destroy();
                         };
                         relativeDialog.Present();
-                        
+
                     }
                     applyDialog.Destroy();
                 };
@@ -853,7 +853,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         catch { }
     }
-    
+
     /// <summary>
     /// Occurs when the add to playlist action is triggered
     /// </summary>
@@ -1252,7 +1252,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void Quit(Gio.SimpleAction sender, EventArgs e)
     {
-        if(!OnCloseRequested(this, e))
+        if (!OnCloseRequested(this, e))
         {
             _application.Quit();
         }
@@ -1618,7 +1618,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
     private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("search"), 0);
-    
+
     /// <summary>
     /// Occurs when the _listMusicFiles's selection is changed
     /// </summary>

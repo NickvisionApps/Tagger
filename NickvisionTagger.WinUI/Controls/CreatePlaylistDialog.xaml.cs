@@ -44,7 +44,7 @@ public sealed partial class CreatePlaylistDialog : ContentDialog
     public new async Task<PlaylistOptions?> ShowAsync()
     {
         var result = await base.ShowAsync();
-        if(result == ContentDialogResult.Primary)
+        if (result == ContentDialogResult.Primary)
         {
             return new PlaylistOptions(_path, (PlaylistFormat)CmbFormat.SelectedIndex, TglRelative.IsOn, TglSelected.IsOn);
         }
@@ -56,7 +56,7 @@ public sealed partial class CreatePlaylistDialog : ContentDialog
     /// </summary>
     private void Validate()
     {
-        if(string.IsNullOrEmpty(_path))
+        if (string.IsNullOrEmpty(_path))
         {
             LblPath.Text = _("No file selected");
         }

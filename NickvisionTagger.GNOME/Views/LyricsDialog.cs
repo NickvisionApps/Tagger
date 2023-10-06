@@ -18,7 +18,7 @@ namespace NickvisionTagger.GNOME.Views;
 public partial class LyricsDialog : Adw.Window
 {
     [StructLayout(LayoutKind.Sequential)]
-    public struct TextIter 
+    public struct TextIter
     {
         public nint dummy1;
         public nint dummy2;
@@ -35,12 +35,12 @@ public partial class LyricsDialog : Adw.Window
         public int dummy13;
         public nint dummy14;
     }
-    
+
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_text_buffer_get_bounds(nint buffer, ref TextIter startIter, ref TextIter endIter);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string gtk_text_buffer_get_text(nint buffer, ref TextIter startIter, ref TextIter endIter, [MarshalAs(UnmanagedType.I1)]bool include_hidden_chars);
-    
+    private static partial string gtk_text_buffer_get_text(nint buffer, ref TextIter startIter, ref TextIter endIter, [MarshalAs(UnmanagedType.I1)] bool include_hidden_chars);
+
     private readonly LyricsDialogController _controller;
     private readonly Gtk.Window _parentWindow;
     private readonly string _iconName;
@@ -58,7 +58,7 @@ public partial class LyricsDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Button _importSyncButton;
     [Gtk.Connect] private readonly Gtk.Button _exportSyncButton;
     [Gtk.Connect] private readonly Gtk.ListBox _syncList;
-    
+
     /// <summary>
     /// Constructs a LyricsDialog
     /// </summary>
@@ -97,7 +97,7 @@ public partial class LyricsDialog : Adw.Window
             }
         };
         _addSyncLyricButton.OnClicked += AddSyncLyric;
-        _clearSyncButton.OnClicked += (sender, e) => _controller.ClearSynchronizedLyrics();;
+        _clearSyncButton.OnClicked += (sender, e) => _controller.ClearSynchronizedLyrics(); ;
         _importSyncButton.OnClicked += ImportSyncFromLRC;
         _exportSyncButton.OnClicked += ExportSyncFromLRC;
         //Events
@@ -113,7 +113,7 @@ public partial class LyricsDialog : Adw.Window
     /// <param name="iconName">Icon name for the window</param>
     public LyricsDialog(LyricsDialogController controller, Gtk.Window parent, string iconName) : this(Builder.FromFile("lyrics_dialog.ui"), controller, parent, iconName)
     {
-        
+
     }
 
     public new void Present()
@@ -163,7 +163,7 @@ public partial class LyricsDialog : Adw.Window
             }
         }
     }
-    
+
     /// <summary>
     /// Occurs when a sync lyric is created
     /// </summary>
@@ -306,7 +306,7 @@ public partial class LyricsDialog : Adw.Window
         }
         catch { }
     }
-    
+
     /// <summary>
     /// Occurs when the export synchronized lyrics button is clicked
     /// </summary>

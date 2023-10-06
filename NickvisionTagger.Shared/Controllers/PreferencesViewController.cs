@@ -1,6 +1,5 @@
 using Nickvision.Aura;
 using NickvisionTagger.Shared.Models;
-using System;
 
 namespace NickvisionTagger.Shared.Controllers;
 
@@ -105,7 +104,7 @@ public class PreferencesViewController
 
         set => Configuration.Current.OverwriteAlbumArtWithMusicBrainz = value;
     }
-    
+
     /// <summary>
     /// Whether or not to overwrite a tag's existing lyric data with data from the web
     /// </summary>

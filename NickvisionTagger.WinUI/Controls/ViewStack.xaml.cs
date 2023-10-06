@@ -47,7 +47,7 @@ public sealed partial class ViewStack : Frame
                     break;
                 }
             }
-            if(changed)
+            if (changed)
             {
                 _currentPageName = value;
             }

@@ -32,7 +32,7 @@ public enum MusicBrainzLoadStatus
 public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFile>
 {
     private static string[] _validProperties;
-    
+
     private bool _disposed;
     private Track _track;
     private string _dotExtension;
@@ -40,7 +40,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     private DateTime _modificationTimestamp;
     private Process? _fpcalc;
     private string _fingerprint;
-    
+
     /// <summary>
     /// What to sort files in a music folder by
     /// </summary>
@@ -50,7 +50,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// The path of the music file
     /// </summary>
     public string Path { get; private set; }
-    
+
     /// <summary>
     /// The duration of the music file
     /// </summary>
@@ -88,7 +88,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         {
             _track = new Track(Path);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e.Message + "\n" + e.StackTrace);
             throw new FileLoadException($"Unable to load music file: \"{Path}\". Tag could be corrupted.");
@@ -99,23 +99,23 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         _fpcalc = null;
         _fingerprint = "";
     }
-    
+
     /// <summary>
     /// Finalizes the MusicFile
     /// </summary>
     ~MusicFile() => Dispose(false);
-    
+
     /// <summary>
     /// The filename of the music file
     /// </summary>
     public string Filename
     {
         get => _filename;
-        
+
         set
         {
             var newFilename = value;
-            if(System.IO.Path.GetExtension(newFilename).ToLower() != _dotExtension)
+            if (System.IO.Path.GetExtension(newFilename).ToLower() != _dotExtension)
             {
                 newFilename += _dotExtension;
             }
@@ -123,14 +123,14 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 newFilename = newFilename.Replace(invalidChar, '_');
             }
-            if(File.Exists(newFilename))
+            if (File.Exists(newFilename))
             {
                 throw new ArgumentException($"A file already exists with this filename: {newFilename}");
             }
             _filename = newFilename;
         }
     }
-    
+
     /// <summary>
     /// The title of the music file
     /// </summary>
@@ -140,7 +140,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
 
         set => _track.Title = value;
     }
-    
+
     /// <summary>
     /// The artist of the music file
     /// </summary>
@@ -160,7 +160,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
 
         set => _track.Album = value;
     }
-    
+
     /// <summary>
     /// The year of the music file
     /// </summary>
@@ -170,7 +170,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
 
         set => _track.Year = value;
     }
-    
+
     /// <summary>
     /// The track of the music file
     /// </summary>
@@ -180,7 +180,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
 
         set => _track.TrackNumber = value;
     }
-    
+
     /// <summary>
     /// The number of total tracks of the music file
     /// </summary>
@@ -190,27 +190,27 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
 
         set => _track.TrackTotal = value;
     }
-    
+
     /// <summary>
     /// The album artist of the music file
     /// </summary>
-    public string AlbumArtist 
+    public string AlbumArtist
     {
         get => _track.AlbumArtist ?? "";
 
         set => _track.AlbumArtist = value;
     }
-    
+
     /// <summary>
     /// The genre of the music file
     /// </summary>
-    public string Genre 
+    public string Genre
     {
         get => _track.Genre ?? "";
 
         set => _track.Genre = value;
     }
-    
+
     /// <summary>
     /// The comment of the music file
     /// </summary>
@@ -220,17 +220,17 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
 
         set => _track.Comment = value;
     }
-    
+
     /// <summary>
     /// The BPM of the music file
     /// </summary>
-    public int BeatsPerMinute 
+    public int BeatsPerMinute
     {
         get => _track.BPM ?? 0;
 
         set => _track.BPM = value;
     }
-    
+
     /// <summary>
     /// The composer of the music file
     /// </summary>
@@ -240,7 +240,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
 
         set => _track.Composer = value;
     }
-    
+
     /// <summary>
     /// The description of the music file
     /// </summary>
@@ -250,7 +250,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
 
         set => _track.Description = value;
     }
-    
+
     /// <summary>
     /// The publisher of the music file
     /// </summary>
@@ -260,13 +260,13 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
 
         set => _track.Publisher = value;
     }
-    
+
     /// <summary>
     /// The front album art of the music file
     /// </summary>
     public byte[] FrontAlbumArt
     {
-        get 
+        get
         {
             var generic = Array.Empty<byte>();
             foreach (var picture in _track.EmbeddedPictures)
@@ -353,7 +353,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             }
         }
     }
-    
+
     /// <summary>
     /// The fingerprint of the music file
     /// </summary>
@@ -361,7 +361,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     {
         get
         {
-            if(_fpcalc == null && string.IsNullOrEmpty(_fingerprint))
+            if (_fpcalc == null && string.IsNullOrEmpty(_fingerprint))
             {
                 _fpcalc = new Process()
                 {
@@ -443,7 +443,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             };
         }
     }
-    
+
     /// <summary>
     /// Frees resources used by the MusicFile object
     /// </summary>
@@ -466,7 +466,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         _fpcalc?.Dispose();
         _disposed = true;
     }
-    
+
     /// <summary>
     /// Saves the tag of the music file to disk
     /// </summary>
@@ -475,16 +475,16 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     public bool SaveTagToDisk(bool preserveModificationTimestamp)
     {
         var res = _track.Save();
-        if(res)
+        if (res)
         {
-            if(System.IO.Path.GetFileName(Path) != Filename)
+            if (System.IO.Path.GetFileName(Path) != Filename)
             {
                 var newPath = $"{System.IO.Path.GetDirectoryName(Path)}{System.IO.Path.DirectorySeparatorChar}{Filename}";
                 File.Move(Path, newPath);
                 Path = newPath;
                 _track = new Track(Path);
             }
-            if(preserveModificationTimestamp)
+            if (preserveModificationTimestamp)
             {
                 File.SetLastWriteTime(Path, _modificationTimestamp);
             }
@@ -536,7 +536,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>The value of the custom property. Null if no custom property exists with the provided name</returns>
     public string? GetCustomProperty(string name)
     {
-        if(!_track.AdditionalFields.ContainsKey(name))
+        if (!_track.AdditionalFields.ContainsKey(name))
         {
             return null;
         }
@@ -566,14 +566,14 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>Whether or not the property was removed. If no property exists with the provided name, false will be returned</returns>
     public bool RemoveCustomProperty(string name)
     {
-        if(!_track.AdditionalFields.ContainsKey(name))
+        if (!_track.AdditionalFields.ContainsKey(name))
         {
             return false;
         }
         _track.AdditionalFields.Remove(name);
         return true;
     }
-    
+
     /// <summary>
     /// Uses the music file's filename to fill in tag information based on the format string
     /// </summary>
@@ -581,33 +581,33 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>True if successful, else false</returns>
     public bool FilenameToTag(string formatString)
     {
-        if(string.IsNullOrEmpty(formatString))
+        if (string.IsNullOrEmpty(formatString))
         {
             return false;
         }
         var matches = Regex.Matches(formatString, @"%(\w*)%", RegexOptions.IgnoreCase); //wrapped in %%
-        if(matches.Count == 0)
+        if (matches.Count == 0)
         {
             return false;
         }
         var splits = Regex.Split(formatString, @"(\%\w*\%)", RegexOptions.IgnoreCase).Where(x =>
         {
-            if(x.Length > 1)
+            if (x.Length > 1)
             {
                 return x[0] != '%' && x[x.Length - 1] != '%';
             }
             return x.Length != 0;
         }).ToList();
-        foreach(var s in splits)
+        foreach (var s in splits)
         {
-            if(!Filename.Contains(s))
+            if (!Filename.Contains(s))
             {
                 return false;
             }
         }
         var filename = System.IO.Path.GetFileNameWithoutExtension(Filename);
         var i = 0;
-        foreach(Match match in matches)
+        foreach (Match match in matches)
         {
             string value = match.Value.Remove(0, 1); //remove first %
             value = value.Remove(value.Length - 1, 1).ToLower(); //remove last %;
@@ -620,19 +620,19 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 len = filename.Length;
             }
-            if(value == "title" || value == _("title"))
+            if (value == "title" || value == _("title"))
             {
                 Title = filename.Substring(0, len);
             }
-            else if(value == "artist" || value == _("artist"))
+            else if (value == "artist" || value == _("artist"))
             {
                 Artist = filename.Substring(0, len);
             }
-            else if(value == "album" || value == _("album"))
+            else if (value == "album" || value == _("album"))
             {
                 Album = filename.Substring(0, len);
             }
-            else if(value == "year" || value == _("year"))
+            else if (value == "year" || value == _("year"))
             {
                 try
                 {
@@ -640,7 +640,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 }
                 catch { }
             }
-            else if(value == "track" || value == _("track"))
+            else if (value == "track" || value == _("track"))
             {
                 try
                 {
@@ -648,7 +648,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 }
                 catch { }
             }
-            else if(value == "tracktotal" || value == _("tracktotal"))
+            else if (value == "tracktotal" || value == _("tracktotal"))
             {
                 try
                 {
@@ -656,19 +656,19 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 }
                 catch { }
             }
-            else if(value == "albumartist" || value == _("albumartist"))
+            else if (value == "albumartist" || value == _("albumartist"))
             {
                 AlbumArtist = filename.Substring(0, len);
             }
-            else if(value == "genre" || value == _("genre"))
+            else if (value == "genre" || value == _("genre"))
             {
                 Genre = filename.Substring(0, len);
             }
-            else if(value == "comment" || value == _("comment"))
+            else if (value == "comment" || value == _("comment"))
             {
                 Comment = filename.Substring(0, len);
             }
-            else if(value == "beatsperminute" || value == _("beatsperminute") || value == "bpm" || value == _("bpm"))
+            else if (value == "beatsperminute" || value == _("beatsperminute") || value == "bpm" || value == _("bpm"))
             {
                 try
                 {
@@ -676,15 +676,15 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 }
                 catch { }
             }
-            else if(value == "composer" || value == _("composer"))
+            else if (value == "composer" || value == _("composer"))
             {
                 Composer = filename.Substring(0, len);
             }
-            else if(value == "description" || value == _("description"))
+            else if (value == "description" || value == _("description"))
             {
                 Description = filename.Substring(0, len);
             }
-            else if(value == "publisher" || value == _("publisher"))
+            else if (value == "publisher" || value == _("publisher"))
             {
                 Publisher = filename.Substring(0, len);
             }
@@ -697,7 +697,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         }
         return true;
     }
-    
+
     /// <summary>
     /// Uses the music file's tag to set the file's filename in the format of the format string
     /// </summary>
@@ -705,79 +705,79 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>True if successful, else false</returns>
     public bool TagToFilename(string formatString)
     {
-        if(string.IsNullOrEmpty(formatString))
+        if (string.IsNullOrEmpty(formatString))
         {
             return false;
         }
         var customProps = _track.AdditionalFields.Keys.ToList();
         var matches = Regex.Matches(formatString, @"%(\w+)%", RegexOptions.IgnoreCase); //wrapped in %%
-        if(matches.Count == 0)
+        if (matches.Count == 0)
         {
             return false;
         }
-        foreach(Match match in matches)
+        foreach (Match match in matches)
         {
             string value = match.Value.Remove(0, 1); //remove first %
             value = value.Remove(value.Length - 1, 1); //remove last %;
-            if(_validProperties.Contains(value.ToLower()))
+            if (_validProperties.Contains(value.ToLower()))
             {
                 value = value.ToLower();
                 var replace = "";
-                if(value == "title" || value == _("title"))
+                if (value == "title" || value == _("title"))
                 {
                     replace = Title;
                 }
-                else if(value == "artist" || value == _("artist"))
+                else if (value == "artist" || value == _("artist"))
                 {
                     replace = Artist;
                 }
-                else if(value == "album" || value == _("album"))
+                else if (value == "album" || value == _("album"))
                 {
                     replace = Album;
                 }
-                else if(value == "year" || value == _("year"))
+                else if (value == "year" || value == _("year"))
                 {
                     replace = Year.ToString();
                 }
-                else if(value == "track" || value == _("track"))
+                else if (value == "track" || value == _("track"))
                 {
                     replace = Track.ToString("D2");
                 }
-                else if(value == "tracktotal" || value == _("tracktotal"))
+                else if (value == "tracktotal" || value == _("tracktotal"))
                 {
                     replace = TrackTotal.ToString("D2");
                 }
-                else if(value == "albumartist" || value == _("albumartist"))
+                else if (value == "albumartist" || value == _("albumartist"))
                 {
                     replace = AlbumArtist;
                 }
-                else if(value == "genre" || value == _("genre"))
+                else if (value == "genre" || value == _("genre"))
                 {
                     replace = Genre;
                 }
-                else if(value == "comment" || value == _("comment"))
+                else if (value == "comment" || value == _("comment"))
                 {
                     replace = Comment;
                 }
-                else if(value == "beatsperminute" || value == _("beatsperminute") || value == "bpm" || value == _("bpm"))
+                else if (value == "beatsperminute" || value == _("beatsperminute") || value == "bpm" || value == _("bpm"))
                 {
                     replace = BeatsPerMinute.ToString();
                 }
-                else if(value == "composer" || value == _("composer"))
+                else if (value == "composer" || value == _("composer"))
                 {
                     replace = Composer;
                 }
-                else if(value == "description" || value == _("description"))
+                else if (value == "description" || value == _("description"))
                 {
                     replace = Description;
                 }
-                else if(value == "publisher" || value == _("publisher"))
+                else if (value == "publisher" || value == _("publisher"))
                 {
                     replace = Publisher;
                 }
                 formatString = formatString.Replace(match.Value, replace);
             }
-            else if(customProps.Contains(value))
+            else if (customProps.Contains(value))
             {
                 formatString = formatString.Replace(match.Value, _track.AdditionalFields[value]);
             }
@@ -789,7 +789,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         Filename = formatString;
         return true;
     }
-    
+
     /// <summary>
     /// Downloads tag metadata from MusicBrainz (discarding any unapplied metadata)
     /// </summary>
@@ -812,13 +812,13 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         {
             response = await service.GetAsync(Fingerprint, Duration, new string[] { "recordingids" });
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e.Message);
             Console.WriteLine(e.StackTrace);
             return MusicBrainzLoadStatus.NoAcoustIdResult;
         }
-        if(response.Results.Count > 0)
+        if (response.Results.Count > 0)
         {
             //AcoustID Results
             var bestResult = response.Results[0];
@@ -830,14 +830,14 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 }
             }
             //AcoustID Recordings
-            if(bestResult.Recordings.Count < 1)
+            if (bestResult.Recordings.Count < 1)
             {
                 return MusicBrainzLoadStatus.NoAcoustIdRecordingId;
             }
             var bestRecordingId = bestResult.Recordings[0].Id;
             foreach (var r in bestResult.Recordings)
             {
-                if(r.Title != "")
+                if (r.Title != "")
                 {
                     bestRecordingId = r.Id;
                     break;
@@ -852,58 +852,58 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 var include = MetaBrainz.MusicBrainz.Include.Releases | MetaBrainz.MusicBrainz.Include.ArtistCredits | MetaBrainz.MusicBrainz.Include.Genres;
                 recording = await query.LookupRecordingAsync(Guid.Parse(bestRecordingId), include, MetaBrainz.MusicBrainz.ReleaseType.Album, MetaBrainz.MusicBrainz.ReleaseStatus.Official);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
                 return MusicBrainzLoadStatus.InvalidMusicBrainzRecordingId;
             }
-            if(recording.Releases != null && recording.Releases.Count > 0)
+            if (recording.Releases != null && recording.Releases.Count > 0)
             {
                 album = recording.Releases[0];
             }
-            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Title))
+            if (overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Title))
             {
                 Title = recording.Title ?? "";
             }
-            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Artist))
+            if (overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Artist))
             {
-                if(recording.ArtistCredit != null && recording.ArtistCredit.Count > 0)
+                if (recording.ArtistCredit != null && recording.ArtistCredit.Count > 0)
                 {
                     Artist = recording.ArtistCredit[0].Artist!.Name ?? recording.ArtistCredit[0].Artist!.SortName ?? "";
                 }
             }
-            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Album))
+            if (overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Album))
             {
-                if(album != null)
+                if (album != null)
                 {
                     Album = album.Title ?? "";
                 }
             }
-            if(overwriteTagWithMusicBrainz || Year == 0)
+            if (overwriteTagWithMusicBrainz || Year == 0)
             {
-                if(recording.FirstReleaseDate != null)
+                if (recording.FirstReleaseDate != null)
                 {
                     Year = recording.FirstReleaseDate.Year ?? 0;
                 }
             }
-            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(AlbumArtist))
+            if (overwriteTagWithMusicBrainz || string.IsNullOrEmpty(AlbumArtist))
             {
-                if(album != null && album.ArtistCredit != null && album.ArtistCredit.Count > 0)
+                if (album != null && album.ArtistCredit != null && album.ArtistCredit.Count > 0)
                 {
                     AlbumArtist = album.ArtistCredit[0].Artist!.Name ?? album.ArtistCredit[0].Artist!.SortName ?? "";
                 }
             }
-            if(overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Genre))
+            if (overwriteTagWithMusicBrainz || string.IsNullOrEmpty(Genre))
             {
-                if(recording.Genres != null && recording.Genres.Count > 0)
+                if (recording.Genres != null && recording.Genres.Count > 0)
                 {
                     Genre = recording.Genres[0].Name ?? "";
                 }
             }
-            if(overwriteAlbumArtWithMusicBrainz || FrontAlbumArt.Length == 0)
+            if (overwriteAlbumArtWithMusicBrainz || FrontAlbumArt.Length == 0)
             {
-                if(album != null && album.CoverArtArchive != null && album.CoverArtArchive.Count > 0)
+                if (album != null && album.CoverArtArchive != null && album.CoverArtArchive.Count > 0)
                 {
                     using var caQuery = new CoverArt(version, version, "mailto:nlogozzo225@gmail.com");
                     CoverArtImage? img = null;
@@ -912,7 +912,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                         img = await caQuery.FetchFrontAsync(Guid.Parse(bestRecordingId));
                     }
                     catch { }
-                    if(img != null)
+                    if (img != null)
                     {
                         var reader = new BinaryReader(img.Data);
                         FrontAlbumArt = reader.ReadBytes((int)img.Data.Length);
@@ -948,7 +948,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         }
         return true;
     }
-    
+
     /// <summary>
     /// Loads tag metadata from MusicBrainz (discarding any unapplied metadata)
     /// </summary>
@@ -964,7 +964,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         }
         AcoustID.Configuration.ClientKey = acoustIdClientKey;
         var service = new AcoustID.Web.SubmitService(acoustIdUserKey);
-        if(!string.IsNullOrEmpty(musicBrainzRecordingId))
+        if (!string.IsNullOrEmpty(musicBrainzRecordingId))
         {
             var response = await service.SubmitAsync(new AcoustID.Web.SubmitRequest(Fingerprint, Duration)
             {
@@ -986,7 +986,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             return string.IsNullOrEmpty(response.ErrorMessage);
         }
     }
-    
+
     /// <summary>
     /// Compares this with other
     /// </summary>
@@ -1051,7 +1051,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <param name="a">The first MusicFile object</param>
     /// <param name="b">The second MusicFile object</param>
     /// <returns>True if a != b, else false</returns>
-    public static bool operator !=(MusicFile? a, MusicFile? b) =>  a?.Path != b?.Path;
+    public static bool operator !=(MusicFile? a, MusicFile? b) => a?.Path != b?.Path;
 
     /// <summary>
     /// Compares two MusicFile objects by less than
@@ -1088,7 +1088,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             SortBy.Filename => CompareFilename(a?.Filename, b?.Filename) == 1,
             SortBy.Path => ComparePath(a?.Path, b?.Path) == 1,
             SortBy.Title => a?.Title.CompareTo(b?.Title) == 1,
-            SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == 1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == 1 || a?.Artist == b?.Artist &&a?.Album == b?.Album && a?.Track > b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
+            SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == 1 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == 1 || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track > b?.Track || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == 1 || a?.Album == b?.Album && a?.Track > b?.Track || a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Year => a?.Year.CompareTo(b?.Year) == 1 || a?.Year == b?.Year && a?.Album.CompareTo(b?.Album) == 1 || a?.Year == b?.Year && a?.Album == b?.Album && a?.Track > b?.Track || a?.Year == b?.Year && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Track => a?.Track.CompareTo(b?.Track) == 1 || a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,

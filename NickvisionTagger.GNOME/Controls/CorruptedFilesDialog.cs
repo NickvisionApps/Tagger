@@ -34,7 +34,7 @@ public partial class CorruptedFilesDialog : Adw.Window
         {
             var row = Adw.ActionRow.New();
             var p = path.Remove(0, parentPath.Length);
-            if(p[0] == '/')
+            if (p[0] == '/')
             {
                 p = p.Remove(0, 1);
             }
@@ -54,7 +54,7 @@ public partial class CorruptedFilesDialog : Adw.Window
                 {
                     await fileLauncher.OpenContainingFolderAsync(this);
                 }
-                catch  { }
+                catch { }
             };
             row.AddSuffix(button);
             row.SetActivatableWidget(button);

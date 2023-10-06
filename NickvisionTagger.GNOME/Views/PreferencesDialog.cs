@@ -4,7 +4,6 @@ using NickvisionTagger.Shared.Models;
 using System;
 using System.Threading.Tasks;
 using static Nickvision.GirExt.GtkExt;
-using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.GNOME.Views;
 
@@ -111,6 +110,6 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         {
             await uriLauncher.LaunchAsync(this);
         }
-        catch  { }
+        catch { }
     }
 }
