@@ -32,7 +32,7 @@ public class MusicFileRow : Adw.ActionRow
     /// Constructs MusicFileRow
     /// </summary>
     /// <param name="musicFile">MusicFile</param>
-    public MusicFileRow(MusicFile musicFile) : this(Builder.FromFile("music__file_row.ui"), musicFile)
+    public MusicFileRow(MusicFile musicFile) : this(Builder.FromFile("music_file_row.ui"), musicFile)
     {
     }
     

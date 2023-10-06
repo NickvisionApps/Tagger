@@ -1380,7 +1380,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             string? comparable = null;
             foreach (var musicFile in _controller.MusicFiles)
             {
-                var row = new MusicRow(musicFile);
+                var row = new MusicFileRow(musicFile);
                 var compareTo = _controller.SortFilesBy switch
                 {
                     SortBy.Album => musicFile.Album,
