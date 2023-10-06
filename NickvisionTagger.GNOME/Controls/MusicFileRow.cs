@@ -76,4 +76,23 @@ public class MusicFileRow : Adw.ActionRow
     /// </summary>
     /// <param name="unsaved">Icon visibility</param>
     public void SetUnsaved(bool unsaved) => _unsavedImage.SetVisible(unsaved);
+
+    /// <summary>
+    /// Updates the MusicFileRow
+    /// </summary>
+    /// <param name="musicFile">MusicFile</param>
+    public void Update(MusicFile musicFile)
+    {
+        if (!string.IsNullOrEmpty(musicFile.Title))
+        {
+            SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
+            SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+        }
+        else
+        {
+            SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+            SetSubtitle("");
+        }
+        SetArtFromBytes(musicFile.FrontAlbumArt);
+    }
 }

@@ -1580,17 +1580,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Update Rows
         foreach (var pair in _controller.SelectedMusicFiles)
         {
-            if (!string.IsNullOrEmpty(pair.Value.Title))
-            {
-                _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
-                _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
-            }
-            else
-            {
-                _listMusicFilesRows[pair.Key].SetTitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
-                _listMusicFilesRows[pair.Key].SetSubtitle("");
-            }
-            _listMusicFilesRows[pair.Key].SetArtFromBytes(pair.Value.FrontAlbumArt);
+            _listMusicFilesRows[pair.Key].Update(pair.Value);
         }
         _isSelectionOccuring = false;
         return false;
@@ -1724,16 +1714,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             //Update Rows
             foreach (var pair in _controller.SelectedMusicFiles)
             {
-                if (!string.IsNullOrEmpty(pair.Value.Title))
-                {
-                    _listMusicFilesRows[pair.Key].SetTitle($"{(pair.Value.Track != 0 ? $"{pair.Value.Track:D2} - " : "")}{Regex.Replace(pair.Value.Title, "\\&", "&amp;")}");
-                    _listMusicFilesRows[pair.Key].SetSubtitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
-                }
-                else
-                {
-                    _listMusicFilesRows[pair.Key].SetTitle(Regex.Replace(pair.Value.Filename, "\\&", "&amp;"));
-                    _listMusicFilesRows[pair.Key].SetSubtitle("");
-                }
+                _listMusicFilesRows[pair.Key].Update(pair.Value);
             }
         }
     }
