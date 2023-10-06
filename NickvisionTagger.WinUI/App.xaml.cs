@@ -26,6 +26,7 @@ public partial class App : Application
             @"* Tagger is now available for Windows using Windows App SDK and WinUI 3
 * Added the option to use relative paths when creating a playlist. This means that Tagger also now supports opening playlists with relative paths
 * Tagger will now watch a music folder library for changes on disk and prompt the user to reload if necessary
+* Tagger will now display front album art within a music file row itself if available
 * Improved create playlist dialog ux
 * Updated translations (Thanks everyone on Weblate!)";
         if (_controller.Theme != Theme.System)
