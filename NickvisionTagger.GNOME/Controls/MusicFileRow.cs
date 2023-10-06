@@ -1,5 +1,7 @@
+using NickvisionTagger.Shared.Models;
 using NickvisionTagger.GNOME.Helpers;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace NickvisionTagger.GNOME.Controls;
@@ -9,6 +11,8 @@ namespace NickvisionTagger.GNOME.Controls;
 /// </summary>
 public class MusicFileRow : Adw.ActionRow
 {
+    private byte[] _art;
+
     [Gtk.Connect] private readonly Gtk.Image _artImage;
     [Gtk.Connect] private readonly Gtk.Image _unsavedImage;
     
@@ -19,6 +23,7 @@ public class MusicFileRow : Adw.ActionRow
     /// <param name="musicFile">MusicFile</param>
     private MusicFileRow(Gtk.Builder builder, MusicFile musicFile) : base(builder.GetPointer("_root"), false)
     {
+        _art = Array.Empty<byte>();
         builder.Connect(this);
         if (!string.IsNullOrEmpty(musicFile.Title))
         {
@@ -47,10 +52,15 @@ public class MusicFileRow : Adw.ActionRow
     /// <param name="art">Art as byte array</param>
     public void SetArtFromBytes(byte[] art)
     {
-        if (art.Length > 0)
+        if(_art.SequenceEqual(art))
+        {
+            return;
+        }
+        _art = art;
+        if (_art.Length > 0)
         {
             _artImage.AddCssClass("list-icon");
-            using var bytes = GLib.Bytes.From(art.AsSpan());
+            using var bytes = GLib.Bytes.From(_art.AsSpan());
             using var texture = Gdk.Texture.NewFromBytes(bytes);
             _artImage.SetFromPaintable(texture);
         }
