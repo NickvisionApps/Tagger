@@ -254,13 +254,14 @@ public class MusicLibrary : IDisposable
         var path = $"{options.Path}{(System.IO.Path.GetExtension(options.Path).ToLower() != options.Format.GetDotExtension() ? options.Format.GetDotExtension() : "")}";
         var playlist = PlaylistIOFactory.GetInstance().GetPlaylistIO(path, ATL.Playlist.PlaylistFormat.LocationFormatting.FilePath, ATL.Playlist.PlaylistFormat.FileEncoding.UTF8_NO_BOM);
         var paths = new List<string>();
+        ATL.Settings.PlaylistWriteAbsolutePath = !options.UseRelativePaths;
         if (options.IncludeOnlySelectedFiles)
         {
             if (selectedFiles == null || selectedFiles.Count == 0)
             {
                 return null;
             }
-            paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Type == MusicLibraryType.Folder ? Path : System.IO.Path.GetDirectoryName(Path)!, x.Path) : x.Path));
+            paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => x.Path));
         }
         else
         {
@@ -268,9 +269,10 @@ public class MusicLibrary : IDisposable
             {
                 return null;
             }
-            paths.AddRange(MusicFiles.Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Type == MusicLibraryType.Folder ? Path : System.IO.Path.GetDirectoryName(Path)!, x.Path) : x.Path));
+            paths.AddRange(MusicFiles.Select(x => x.Path));
         }
         playlist.FilePaths = paths;
+        playlist.Save();
         return path;
     }
 
@@ -282,21 +284,17 @@ public class MusicLibrary : IDisposable
     /// <returns>True if success, else false</returns>
     public bool AddFileToPlaylist(string path, bool useRelativePath)
     {
-        if (Type != MusicLibraryType.Playlist || !File.Exists(path) || !SupportedExtensions.Contains(System.IO.Path.GetExtension(path).ToLower()))
+        if (Type != MusicLibraryType.Playlist || _playlist == null || !File.Exists(path) || !SupportedExtensions.Contains(System.IO.Path.GetExtension(path).ToLower()))
         {
             return false;
         }
-        if (useRelativePath)
-        {
-            path = System.IO.Path.GetRelativePath(Type == MusicLibraryType.Folder ? Path : System.IO.Path.GetDirectoryName(Path)!, path);
-        }
-        var paths = _playlist!.FilePaths;
-        if (paths.Contains(path))
+        if (_playlist.FilePaths.Contains(path))
         {
             return false;
         }
-        paths.Add(path);
-        _playlist.FilePaths = paths;
+        ATL.Settings.PlaylistWriteAbsolutePath = !useRelativePath;
+        _playlist.FilePaths.Add(path);
+        _playlist.Save();
         return true;
     }
 
@@ -307,20 +305,19 @@ public class MusicLibrary : IDisposable
     /// <returns>True if success, else false</returns>
     public bool RemoveFilesFromPlaylist(List<int> indexes)
     {
-        if (Type != MusicLibraryType.Playlist || MusicFiles.Count == 0 || indexes.Count == 0)
+        if (Type != MusicLibraryType.Playlist || MusicFiles.Count == 0 || indexes.Count == 0 || _playlist == null)
         {
             return false;
         }
-        var paths = _playlist!.FilePaths;
         foreach (var index in indexes)
         {
             try
             {
-                paths.Remove(MusicFiles[index].Path);
+                _playlist.FilePaths.Remove(MusicFiles[index].Path);
             }
             catch { }
         }
-        _playlist.FilePaths = paths;
+        _playlist.Save();
         return true;
     }
 }
