@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-09-12 22:14-0400\n"
-"PO-Revision-Date: 2023-09-14 13:06+0000\n"
-"Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
+"PO-Revision-Date: 2023-10-07 06:12+0000\n"
+"Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/"
 "nickvision-tagger/docs/ru/>\n"
 "Language: ru\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -53,9 +53,12 @@ msgstr "Тема"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:25
+#, fuzzy
 msgid ""
 "Set light or dark theme, or make <app>Tagger</app> follow your system theme."
 msgstr ""
+"Выберите светлую или тёмную тему, либо позвольте <app>Tagger</app> "
+"соответствовать системной."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:28
@@ -64,10 +67,11 @@ msgstr "Запомнить последнюю открытую библиоте�
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:29
+#, fuzzy
 msgid ""
 "Whether or not to remember the previously used music library and reopen it "
 "when Tagger starts the next time."
-msgstr ""
+msgstr "Запоминать ли открытую библиотеку между запусками Tagger."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:32
@@ -76,9 +80,10 @@ msgstr "Включать подпапки"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:33
+#, fuzzy
 msgid ""
 "Whether or not to scan for music files into subdirectories of a music folder."
-msgstr ""
+msgstr "Искать ли музыкальные файлы в подпапках выбранных папок с музыкой."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:36
@@ -87,40 +92,46 @@ msgstr "Сортировать файлы по"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:37
+#, fuzzy
 msgid ""
 "The property to use when sorting and displaying music files. It can be one "
 "of the following options:"
 msgstr ""
+"Свойство, используемое при сортировке и отображении музыки. Может быть одним "
+"из следующих:"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:39
 msgid "<code>File Name</code>"
-msgstr ""
+msgstr "<code>Имя файла</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:40
+#, fuzzy
 msgid "<code>Title</code>"
-msgstr ""
+msgstr "<code>Название</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:41
+#, fuzzy
 msgid "<code>Track</code>"
-msgstr ""
+msgstr "<code>Дорожка</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:42
+#, fuzzy
 msgid "<code>File Path</code>"
-msgstr ""
+msgstr "<code>Путь к файлу</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:43
 msgid "<code>Album</code>"
-msgstr ""
+msgstr "<code>Альбом</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:44
 msgid "<code>Genre</code>"
-msgstr ""
+msgstr "<code>Жанр</code>"
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:48
@@ -129,10 +140,11 @@ msgstr "Сохранение временной метки модификаци�
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:49
+#, fuzzy
 msgid ""
 "Whether or not to not update a file's write (modified) timestamp when its "
 "tag is saved."
-msgstr ""
+msgstr "Обновлять ли дату изменения файла при сохранении тегов."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:52
@@ -141,10 +153,13 @@ msgstr "Перезапись тегов с помощью MusicBrainz"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:53
+#, fuzzy
 msgid ""
 "Whether or not to overwrite existing tag metadata with data found from "
 "MusicBrainz. If disabled, only blank tag properties will be filled."
 msgstr ""
+"Перезаписывать ли имеющиеся метаданные тегов метаданными из MusicBrainz. "
+"Если выключено, заполнены будут только пустые поля."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:56
@@ -153,10 +168,11 @@ msgstr "Переписать обложку альбома с помощью Mus
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:57
+#, fuzzy
 msgid ""
 "Whether or not to overwrite overwrite existing album art with art found from "
 "MusicBrainz."
-msgstr ""
+msgstr "Перезаписывать ли текущую обложку альбома найденной на MusicBrainz."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:60
@@ -445,67 +461,74 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:22
+#, fuzzy
 msgid ""
 "To get support, use <link href=\"https://github.com/NickvisionApps/Tagger/"
 "issues\">issues</link> or <link href=\"https://github.com/NickvisionApps/"
 "Tagger/discussions\">discussions</link> on Github, or <link href=\"https://"
 "bit.ly/3GrfEid\">join our Matrix channel</link>."
 msgstr ""
+"Обратиться за помощью можно на GitHub через <link href=\"https://github.com/"
+"NickvisionApps/Tagger/issues\">issues</link> или <link href=\"https://github."
+"com/NickvisionApps/Tagger/discussions\">обсуждения</link>, либо "
+"присоединившись к нашему <link href=\"https://bit.ly/3GrfEid\">каналу в "
+"Matrix</link>."
 
 #. (itstool) path: list/title
 #: yelp/C/index.page:26
+#, fuzzy
 msgid "Supported File Extensions"
-msgstr ""
+msgstr "Поддерживаемые типы/расширения файлов"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:27
 msgid "<code>.mp3</code>"
-msgstr ""
+msgstr "<code>.mp3</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:28
 msgid "<code>.m4a</code>"
-msgstr ""
+msgstr "<code>.m4a</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:29
 msgid "<code>.m4b</code>"
-msgstr ""
+msgstr "<code>.m4b</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:30
 msgid "<code>.ogg</code>"
-msgstr ""
+msgstr "<code>.ogg</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:31
 msgid "<code>.opus</code>"
-msgstr ""
+msgstr "<code>.opus</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:32
 msgid "<code>.oga</code>"
-msgstr ""
+msgstr "<code>.oga</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:33
 msgid "<code>.flac</code>"
-msgstr ""
+msgstr "<code>.flac</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:34
 msgid "<code>.wma</code>"
-msgstr ""
+msgstr "<code>.wma</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:35
 msgid "<code>.wav</code>"
-msgstr ""
+msgstr "<code>.wav</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:36
 msgid "<code>.aac</code>"
-msgstr ""
+msgstr "<code>.aac</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:37
@@ -696,25 +719,31 @@ msgstr ""
 #: yelp/C/search.page:8
 msgctxt "link"
 msgid "Advanced Search 🔍"
-msgstr ""
+msgstr "Расширенный поиск 🔍"
 
 #. (itstool) path: page/title
 #: yelp/C/search.page:20
 msgid "Advanced Search"
-msgstr ""
+msgstr "Расширенный поиск"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:21
+#, fuzzy
 msgid "This page explains how to use Advanced Search in <app>Tagger</app>."
 msgstr ""
+"Эта страница объяснит, как использовать Расширенный поиск в "
+"<app>Tagger</app>."
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:23
+#, fuzzy
 msgid ""
 "Advanced Search is a powerful feature provided by <app>Tagger</app> that "
 "allows users to search files' tag contents for certain values, using a "
 "powerful tag-based syntax:"
 msgstr ""
+"Расширенный поиск - мощный инструмент <app>Tagger</app>. Он позволяет искать "
+"определённые значения по тегам файлов при помощи мощного синтаксиса:"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:24
