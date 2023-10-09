@@ -39,6 +39,16 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
  ![AdvancedSearch](NickvisionTagger.GNOME/Screenshots/AdvancedSearch.png)
 </details>
 
+<details>
+ <summary>WinUI</summary>
+
+ ![Start](NickvisionTagger.WinUI/Screenshots/Start.png)
+ ![Folder](NickvisionTagger.WinUI/Screenshots/Folder.png)
+ ![Editing](NickvisionTagger.WinUI/Screenshots/Editing.png)
+ ![Dark](NickvisionTagger.WinUI/Screenshots/Dark.png)
+ ![AdvancedSearch](NickvisionTagger.WinUI/Screenshots/AdvancedSearch.png)
+</details>
+
 # Dependencies
 - [.NET 7](https://dotnet.microsoft.com/en-us/)
 - [chromaprint](https://acoustid.org/chromaprint)
