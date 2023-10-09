@@ -206,15 +206,14 @@ public class MusicLibrary : IDisposable
             var files = Type switch
             {
                 MusicLibraryType.Folder => Directory
-                    .GetFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
-                    .Where(x => SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower()))
-                    .ToList(),
+                    .EnumerateFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                    .Where(x => SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())),
                 MusicLibraryType.Playlist => _playlist!.FilePaths
-                    .Where(x => File.Exists(x) && SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower()))
-                    .ToList(),
+                    .Where(x => File.Exists(x) && SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())),
                 _ => new List<string>()
             };
             var i = 0;
+            var filesCount = files.Count();
             foreach (var path in files)
             {
                 try
@@ -232,7 +231,7 @@ public class MusicLibrary : IDisposable
                     Console.WriteLine(e);
                 }
                 i++;
-                LoadingProgressUpdated?.Invoke(this, (i, files.Count, $"{i}/{files.Count}"));
+                LoadingProgressUpdated?.Invoke(this, (i, filesCount, $"{i}/{filesCount}"));
             }
             MusicFiles.Sort();
         });
