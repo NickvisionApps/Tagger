@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-09-12 22:14-0400\n"
-"PO-Revision-Date: 2023-10-07 06:12+0000\n"
+"PO-Revision-Date: 2023-10-09 18:03+0000\n"
 "Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/"
 "nickvision-tagger/docs/ru/>\n"
@@ -203,22 +203,26 @@ msgstr ""
 msgid ""
 "A key can be obtained <link href=\"https://acoustid.org/api-key\">here</link>"
 msgstr ""
+"Получить ключ можно <link href=\"https://acoustid.org/api-key\">здесь</link>"
 
 #. (itstool) path: info/title
 #: yelp/C/corrupted.page:8
+#, fuzzy
 msgctxt "link"
 msgid "Corrupted Files 🪲"
-msgstr ""
+msgstr "Повреждённые файлы 🪲"
 
 #. (itstool) path: page/title
 #: yelp/C/corrupted.page:20
+#, fuzzy
 msgid "Corrupted Files"
-msgstr ""
+msgstr "Повреждённые файлы"
 
 #. (itstool) path: page/p
 #: yelp/C/corrupted.page:21
+#, fuzzy
 msgid "This page explains music files with corrupted data."
-msgstr ""
+msgstr "Эта страница расскажет про файлы с повреждёнными данными."
 
 #. (itstool) path: section/title
 #: yelp/C/corrupted.page:23
@@ -235,38 +239,51 @@ msgstr ""
 
 #. (itstool) path: section/p
 #: yelp/C/corrupted.page:25
+#, fuzzy
 msgid ""
 "If <app>Tagger</app> is unable to read a file, it will be ignored and a "
 "dialog will be displayed listing corrupted files for you to manage and fix "
 "accordingly."
 msgstr ""
+"Если <app>Tagger</app> не может считать файл, он будет проигнорирован. Чтобы "
+"дать возможность разобраться с повреждёнными файлами, будет отображён их "
+"список."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:27
+#, fuzzy
 msgid ""
 "FFmpeg can be used to fix corruption issues. Run the following command to re-"
 "encode a file's tag and remove junk data:"
 msgstr ""
+"Вы можете использовать FFmpeg для исправления повреждённых файлов. Выполните "
+"следующую команду для перекодирования тэга файла и удаления мусорных данных:"
 
 #. (itstool) path: note/code
 #: yelp/C/corrupted.page:28
-#, no-wrap
+#, fuzzy, no-wrap
 msgid "ffmpeg -i in.mp3 out.mp3"
-msgstr ""
+msgstr "ffmpeg -i исходный.mp3 новый.mp3"
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:29
+#, fuzzy
 msgid ""
 "where <code>in.mp3</code> is the file path of the corrupted file and "
 "<code>out.mp3</code> is the path to export the re-encoded file."
 msgstr ""
+"где <code>исходный.mp3</code> - путь к повреждённому файлу и <code>новый."
+"mp3</code> - путь, по которому будет сохранён перекодированный."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:32
+#, fuzzy
 msgid ""
 "You can also use <link href=\"https://www.freac.org\">fre:ac</link> to re-"
 "encode files without convertion to another format."
 msgstr ""
+"Также для перекодирования файлов без преобразования в другой формат можно "
+"использовать <link href=\"https://www.freac.org\">fre:ac</link>."
 
 #. (itstool) path: info/title
 #: yelp/C/format-strings.page:8
@@ -299,17 +316,19 @@ msgstr ""
 #. (itstool) path: note/title
 #: yelp/C/format-strings.page:26 yelp/C/format-strings.page:58
 msgid "Example"
-msgstr ""
+msgstr "Пример"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:27
+#, fuzzy
 msgid "Format String: <code>%artist%- %title%</code>"
-msgstr ""
+msgstr "Строка формата: <code>%исполнитель%- %название%</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:28
+#, fuzzy
 msgid "Filename: <code>Artist1 - Song1.mp3</code>"
-msgstr ""
+msgstr "Имя файла: <code>Исполнитель1 - Мелодия1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:29
@@ -322,37 +341,41 @@ msgstr ""
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:33
 msgid "Supported Properties"
-msgstr ""
+msgstr "Поддерживаемые свойства"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:35 yelp/C/search.page:31
+#, fuzzy
 msgid "<code>title</code>"
-msgstr ""
+msgstr "<code>название</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:36 yelp/C/search.page:32
+#, fuzzy
 msgid "<code>artist</code>"
-msgstr ""
+msgstr "<code>исполнитель</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:37 yelp/C/search.page:33
 msgid "<code>album</code>"
-msgstr ""
+msgstr "<code>альбом</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:38 yelp/C/search.page:34
 msgid "<code>year</code>"
-msgstr ""
+msgstr "<code>год</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:39 yelp/C/search.page:35
+#, fuzzy
 msgid "<code>track</code>"
-msgstr ""
+msgstr "<code>дорожка</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:40 yelp/C/search.page:36
+#, fuzzy
 msgid "<code>tracktotal</code>"
-msgstr ""
+msgstr "<code>количество дорожек</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:41 yelp/C/search.page:37
@@ -362,37 +385,43 @@ msgstr ""
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:42 yelp/C/search.page:38
 msgid "<code>genre</code>"
-msgstr ""
+msgstr "<code>жанр</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:43 yelp/C/search.page:39
+#, fuzzy
 msgid "<code>comment</code>"
-msgstr ""
+msgstr "<code>комментарий</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:44 yelp/C/search.page:40
+#, fuzzy
 msgid "<code>beatsperminute (bpm)</code>"
-msgstr ""
+msgstr "<code>ударов в минуту (bpm)</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:45 yelp/C/search.page:41
+#, fuzzy
 msgid "<code>composer</code>"
-msgstr ""
+msgstr "<code>композитор</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:46 yelp/C/search.page:42
 msgid "<code>description</code>"
-msgstr ""
+msgstr "<code>описание</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:47 yelp/C/search.page:43
 msgid "<code>publisher</code>"
-msgstr ""
+msgstr "<code>издатель</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:50
+#, fuzzy
 msgid "When using conversions, custom property names can also be used."
 msgstr ""
+"При использовании преобразований можно также использовать свои названия "
+"свойств."
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:51
@@ -400,6 +429,8 @@ msgid ""
 "For example, a custom property who's name is <code>ENCODER</code> can be "
 "used as <code>%encoder%</code>."
 msgstr ""
+"Например, свойство с названием <code>ENCODER</code> можно использовать как "
+"<code>%encoder%</code>."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:55
@@ -420,8 +451,9 @@ msgstr ""
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:60
+#, fuzzy
 msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
-msgstr ""
+msgstr "Имя файла: <code>Исполнитель1- 05. Мелодия1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:61
@@ -434,13 +466,13 @@ msgstr ""
 #: yelp/C/index.page:7
 msgctxt "link"
 msgid "Tagger Help"
-msgstr ""
+msgstr "Помощь Tagger"
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:8
 msgctxt "text"
 msgid "Tagger Help"
-msgstr ""
+msgstr "Помощь Tagger"
 
 #. (itstool) path: credit/name
 #: yelp/C/index.page:10
@@ -454,10 +486,13 @@ msgstr ""
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:21
+#, fuzzy
 msgid ""
 "This documentation will help you understand how to configure <app>Tagger</"
 "app> to get the most of the application."
 msgstr ""
+"С этой документацией вы сможете разобраться, как настраивать <app>Tagger</"
+"app>, чтобы получить от него максимум возможностей."
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:22
@@ -795,7 +830,7 @@ msgstr ""
 #. (itstool) path: section/title
 #: yelp/C/search.page:51
 msgid "Examples"
-msgstr ""
+msgstr "Примеры"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:52
@@ -850,54 +885,65 @@ msgstr ""
 #: yelp/C/unsupported.page:8
 msgctxt "link"
 msgid "Unsupported Files 🚫"
-msgstr ""
+msgstr "Неподдерживаемые файлы 🚫"
 
 #. (itstool) path: page/title
 #: yelp/C/unsupported.page:20
 msgid "Unsupported Files"
-msgstr ""
+msgstr "Неподдерживаемые файлы"
 
 #. (itstool) path: page/p
 #: yelp/C/unsupported.page:21
+#, fuzzy
 msgid ""
 "This page explains music files that are currently unsupported by "
 "<app>Tagger</app>."
 msgstr ""
+"Эта страница расскажет о файлах, которые сейчас не поддерживаются в "
+"<app>Tagger</app>."
 
 #. (itstool) path: page/p
 #: yelp/C/unsupported.page:22
+#, fuzzy
 msgid ""
 "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</"
 "link> for its backend to read and write metadata."
 msgstr ""
+"Tagger использует <link href=\"https://github.com/Zeugma440/atldotnet\""
+">atldotnet</link> для функционала считывания и записи метаданных."
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
 msgid "No Known Issues At This Time"
-msgstr ""
+msgstr "Сейчас ни о каких проблемах неизвестно"
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:25
+#, fuzzy
 msgid ""
 "<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Report an "
 "issue</link> if you experience any."
 msgstr ""
+"<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Сообщите о "
+"проблемах</link>, если начнёте их испытывать."
 
 #. (itstool) path: info/title
 #: yelp/C/web-services.page:8
+#, fuzzy
 msgctxt "link"
 msgid "Web Services 🌐"
-msgstr ""
+msgstr "Веб-службы 🌐"
 
 #. (itstool) path: page/title
 #: yelp/C/web-services.page:20
+#, fuzzy
 msgid "Web Services"
-msgstr "Веб-сервисы"
+msgstr "Веб-службы"
 
 #. (itstool) path: page/p
 #: yelp/C/web-services.page:21
 msgid "This page describes the web services available in Tagger"
-msgstr ""
+msgstr "Эта страница описывает веб-службы, поддерживаемые Tagger"
 
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:23
