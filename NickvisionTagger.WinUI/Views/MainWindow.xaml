@@ -734,7 +734,7 @@
                                                                         </wct:SettingsCard>
 
                                                                         <wct:SettingsCard x:Name="CardGenre">
-                                                                            <TextBox x:Name="TxtGenre" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
+                                                                            <AutoSuggestBox x:Name="TxtGenre" MinWidth="300" MaxWidth="400" TextChanged="TxtGenre_TextChanged"/>
                                                                         </wct:SettingsCard>
 
                                                                         <wct:SettingsCard x:Name="CardYear">

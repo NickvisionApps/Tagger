@@ -1493,7 +1493,12 @@ public sealed partial class MainWindow : Window
     /// </summary>
     private void TagPropertyChanged(object sender, TextChangedEventArgs e)
     {
-        if (_controller.SelectedMusicFiles.Count > 0 && sender is TextBox box && (box.FocusState == FocusState.Keyboard || box.FocusState == FocusState.Pointer))
+        UIElement? box = null;
+        if (sender is TextBox || sender is AutoSuggestBox)
+        {
+            box = (UIElement)sender;
+        }
+        if (_controller.SelectedMusicFiles.Count > 0 && box != null && (box.FocusState == FocusState.Keyboard || box.FocusState == FocusState.Pointer || box is AutoSuggestBox))
         {
             //Update Tags
             var propMap = new PropertyMap()
@@ -1644,6 +1649,24 @@ public sealed partial class MainWindow : Window
     /// <param name="sender">object</param>
     /// <param name="e">SizeChangedEventArgs</param>
     private void PropertiesPane_SizeChanged(object sender, SizeChangedEventArgs e) => (PropertiesPane.Content as StackPanel).Margin = new Thickness(0, 0, PropertiesPane.ComputedVerticalScrollBarVisibility == Visibility.Visible ? 14 : 0, 0);
+
+    /// <summary>
+    /// Occurs when the TxtGenre's text is changed
+    /// </summary>
+    /// <param name="sender">AutoSuggestBox</param>
+    /// <param name="args">AutoSuggestBoxTextChangedEventArgs</param>
+    private void TxtGenre_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+    {
+        TxtGenre.ItemsSource = null;
+        if(args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+        {
+            TxtGenre.ItemsSource = _controller.GetGenreSuggestions(TxtGenre.Text);
+        }
+        if(args.Reason != AutoSuggestionBoxTextChangeReason.ProgrammaticChange)
+        {
+            TagPropertyChanged(sender, null);
+        }
+    }
 
     /// <summary>
     /// Occurs when the CopyFingerprintButton is clicked
