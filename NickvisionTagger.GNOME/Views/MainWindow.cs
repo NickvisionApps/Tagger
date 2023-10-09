@@ -1343,27 +1343,11 @@ public partial class MainWindow : Adw.ApplicationWindow
             foreach (var musicFile in _controller.MusicFiles)
             {
                 var row = new MusicFileRow(musicFile);
-                var compareTo = _controller.SortFilesBy switch
+                var header = _controller.GetHeaderForMusicFile(musicFile);
+                if (comparable != header)
                 {
-                    SortBy.Album => musicFile.Album,
-                    SortBy.Artist => musicFile.Artist,
-                    SortBy.Genre => musicFile.Genre,
-                    SortBy.Path => Path.GetDirectoryName(musicFile.Path)!.Replace(_controller.MusicLibraryType == MusicLibraryType.Folder ? _controller.MusicLibraryName : UserDirectories.Home, _controller.MusicLibraryType == MusicLibraryType.Folder ? "" : "~"),
-                    SortBy.Year => musicFile.Year.ToString(),
-                    _ => null
-                };
-                if (!string.IsNullOrEmpty(compareTo) && compareTo[0] == Path.DirectorySeparatorChar && !Directory.Exists(compareTo))
-                {
-                    compareTo = compareTo.Remove(0, 1);
-                }
-                if (compareTo == string.Empty)
-                {
-                    compareTo = _controller.SortFilesBy != SortBy.Path ? _("Unknown") : "";
-                }
-                if (comparable != compareTo)
-                {
-                    comparable = compareTo;
-                    _listHeader = compareTo!;
+                    comparable = header;
+                    _listHeader = header!;
                     if (_listHeader.Contains($"{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}"))
                     {
                         _listHeader = _listHeader.Substring(_listHeader.LastIndexOf($"{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}") + 1);

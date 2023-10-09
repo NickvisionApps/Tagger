@@ -1537,6 +1537,33 @@ public class MainWindowController : IDisposable
     }
 
     /// <summary>
+    /// Gets a header for a MusicFile
+    /// </summary>
+    /// <param name="musicFile">MusicFile</param>
+    /// <returns>The header for the MusicFile or null if not supported by sorting type</returns>
+    public string? GetHeaderForMusicFile(MusicFile musicFile)
+    {
+        var header = SortFilesBy switch
+        {
+            SortBy.Album => musicFile.Album,
+            SortBy.Artist => musicFile.Artist,
+            SortBy.Genre => musicFile.Genre,
+            SortBy.Path => Path.GetDirectoryName(musicFile.Path)!.Replace(MusicLibraryType == MusicLibraryType.Folder ? MusicLibraryName : UserDirectories.Home, MusicLibraryType == MusicLibraryType.Folder ? "" : "~"),
+            SortBy.Year => musicFile.Year.ToString(),
+            _ => null
+        };
+        if (!string.IsNullOrEmpty(header) && header[0] == Path.DirectorySeparatorChar && !Directory.Exists(header))
+        {
+            header = header.Remove(0, 1);
+        }
+        if (header == string.Empty)
+        {
+            header = SortFilesBy != SortBy.Path ? _("Unknown") : "";
+        }
+        return header;
+    }
+
+    /// <summary>
     /// Occurs when the configuration is saved
     /// </summary>
     /// <param name="sender">object?</param>

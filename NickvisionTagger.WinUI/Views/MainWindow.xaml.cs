@@ -11,6 +11,7 @@ using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
 using NickvisionTagger.Shared.Models;
 using NickvisionTagger.WinUI.Controls;
+using NickvisionTagger.WinUI.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -1331,18 +1332,28 @@ public sealed partial class MainWindow : Window
     /// </summary>
     private void MusicLibraryUpdated()
     {
-        ListMusicFiles.Items.Clear();
+        ListMusicFilesCVS.Source = null;
         _musicFileRows.Clear();
         MainMenu.IsEnabled = true;
         if (!string.IsNullOrEmpty(_controller.MusicLibraryName))
         {
+            var data = new Dictionary<string, TitledList>();
             foreach (var musicFile in _controller.MusicFiles)
             {
                 var row = new MusicFileRow(musicFile);
-                ListMusicFiles.Items.Add(row);
+                var header = _controller.GetHeaderForMusicFile(musicFile) ?? _("Default");
+                if(string.IsNullOrEmpty(header))
+                {
+                    header = _("Default");
+                }
+                if(!data.ContainsKey(header))
+                {
+                    data[header] = new TitledList(header);
+                }
+                data[header].Add(row);
                 _musicFileRows.Add(row);
-                //TODO: Headers
             }
+            ListMusicFilesCVS.Source = data.Values.ToList();
             MenuReloadLibrary.IsEnabled = true;
             MenuCloseLibrary.IsEnabled = true;
             MenuCreatePlaylist.IsEnabled = _controller.MusicLibraryType == MusicLibraryType.Folder;

@@ -606,7 +606,29 @@
                                                 </Button>
                                             </Grid>
 
-                                            <ListView x:Name="ListMusicFiles" Grid.Row="1"  SelectionMode="Extended" SelectionChanged="ListMusicFiles_SelectionChanged"/>
+                                            <ListView x:Name="ListMusicFiles" Grid.Row="1" ItemsSource="{x:Bind ListMusicFilesCVS.View, Mode=OneWay}" SelectionMode="Extended" SelectionChanged="ListMusicFiles_SelectionChanged">
+                                                <ListView.Resources>
+                                                    <CollectionViewSource x:Name="ListMusicFilesCVS" IsSourceGrouped="True"/>
+                                                </ListView.Resources>
+                                                
+                                                <ListView.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <ItemsStackPanel AreStickyGroupHeadersEnabled="False"/>
+                                                    </ItemsPanelTemplate>
+                                                </ListView.ItemsPanel>
+
+                                                <ListView.GroupStyle>
+                                                    <GroupStyle>
+                                                        <GroupStyle.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Border>
+                                                                    <TextBlock Text="{Binding Title}" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
+                                                                </Border>
+                                                            </DataTemplate>
+                                                        </GroupStyle.HeaderTemplate>
+                                                    </GroupStyle>
+                                                </ListView.GroupStyle>
+                                            </ListView>
                                         </Grid>
 
                                         <Border Grid.Column="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8">
