@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="format-strings" its:version="2.0" xml:lang="cs">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Format Strings ✍️</title>
+	<title type="link">Formátové řetězce ✍️</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -20,20 +20,20 @@
     </mal:credit>
   </info>
 
-<title>Format Strings</title>
-<p>This page explains the use of format strings for <code>File Name to Tag</code> and <code>Tag to File Name</code> conversions.</p>
+<title>Formátové řetězce</title>
+<p>Tato stránka popisuje využití formátových řetězců pro převody <code>název souboru na značku</code> a <code>značka na název souboru</code>.</p>
 <section>
     <title>Formát</title>
-    <p>Strings of any format with properties wrapped in percent signs (%).</p>
+    <p>Řetězce jakéhokoli formátu s vlastnostmi nacházející se mezi znaky procenta (%).</p>
     <note>
-        <title>Example</title>
-        <p>Format String: <code>%artist%- %title%</code></p>
-        <p>Filename: <code>Artist1 - Song1.mp3</code></p>
-        <p>When running <code>File Name to Tag</code> conversion, this format string and this file name will create a tag with an artist of <code>Artist1</code> and a title of <code>Song1</code>.</p>
+        <title>Příklad</title>
+        <p>Formátový řetězec: <code>%artist% - %title%</code></p>
+        <p>Název souboru: <code>Umělec1 - Skladba1.mp3</code></p>
+        <p>Při spuštění převodu <code>název souboru na značku</code> vytvoří tento formátový řetězec a název souboru značku s umělcem <code>Umělec1</code> a názvem <code>Skladba1</code>.</p>
     </note>
 </section>
 <section>
-    <title>Supported Properties</title>
+    <title>Podporované vlastnosti</title>
     <list>
         <item><p><code>title</code></p></item>
         <item><p><code>artist</code></p></item>
@@ -50,18 +50,18 @@
         <item><p><code>publisher</code></p></item>
     </list>
     <note>
-        <p>When using conversions, custom property names can also be used.</p>
-        <p>For example, a custom property who's name is <code>ENCODER</code> can be used as <code>%encoder%</code>.</p>
+        <p>Při používání převodů lze použít také vlastní názvy vlastností.</p>
+        <p>Pokud je například název vlastnosti <code>ENCODER</code>, lze jej použít jako řetězec <code>%encoder%</code>.</p>
     </note>
 </section>
 <section>
-    <title>Ignoring in File Name to Tag Conversion</title>
-    <p>When running <code>File Name to Tag</code> conversion, an empty <code>%%</code> can be specified to ignore part of the file name when reading it.</p>
+    <title>Ignorování v názvech souborů k převodu na značky</title>
+    <p>Při spuštění převodu <code>název souboru na značku</code> můžete zadat prázdné <code>%%</code> pro ignorování části názvu souboru při jeho čtení.</p>
     <note>
-        <title>Example</title>
-        <p>Format String: <code>%%- %track%. %%</code></p>
-        <p>Filename: <code>Artist1- 05. Song1.mp3</code></p>
-        <p>This format string and this file name will create a tag with a track of <code>05</code> and ignore the rest of the file name.</p>
+        <title>Příklad</title>
+        <p>Formátový řetězec: <code>%%- %track%. %%</code></p>
+        <p>Název souboru: <code>Umělec1- 05. Song1.mp3</code></p>
+        <p>Tento formátový řetězec a název souboru vytvoří značku se stopou <code>05</code> a bude ignorovat zbytek názvu souboru.</p>
     </note>
 </section>
 </page>

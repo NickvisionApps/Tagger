@@ -27,17 +27,17 @@
 <item><p><code>filename</code></p></item>
 <item><p><code>title</code></p></item>
 <item><p><code>artist</code></p></item>
-<item><p><code>album</code></p></item>
-<item><p><code>year</code></p></item>
+<item><p><code>альбом</code></p></item>
+<item><p><code>год</code></p></item>
 <item><p><code>track</code></p></item>
 <item><p><code>tracktotal</code></p></item>
 <item><p><code>albumartist</code></p></item>
-<item><p><code>genre</code></p></item>
+<item><p><code>жанр</code></p></item>
 <item><p><code>comment</code></p></item>
 <item><p><code>beatsperminute (bpm)</code></p></item>
 <item><p><code>composer</code></p></item>
-<item><p><code>description</code></p></item>
-<item><p><code>publisher</code></p></item>
+<item><p><code>описание</code></p></item>
+<item><p><code>издатель</code></p></item>
 <item><p><code>custom</code></p></item>
 </list>
 <p>Properties are case-insensitive.</p></section>
@@ -45,7 +45,7 @@
 <section><title>Syntax Checking</title>
 <p>If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search. If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox.</p></section>
 
-<section><title>Examples</title>
+<section><title>Примеры</title>
 <p><code>!artist=""</code></p>
 <p>This search string will filter the listbox to contain music files whose artist is empty.</p>
 <p><code>!genre="";year="2022"</code></p>

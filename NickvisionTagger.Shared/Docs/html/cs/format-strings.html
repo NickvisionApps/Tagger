@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Format Strings</title>
+<title>Formátové řetězce</title>
 <link rel="stylesheet" type="text/css" href="../C/C.css">
 <script type="text/javascript" src="../C/highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -15,13 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
 </head>
 <body lang="cs" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Tagger Help">Tagger Help</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Format Strings</span></h1></div>
+<a class="trail" href="index.html" title="Nápověda aplikace Označovač">Nápověda aplikace Označovač</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Formátové řetězce</span></h1></div>
 <div class="region">
-<div class="contents pagewide"><p class="p">This page explains the use of format strings for <span class="code">File Name to Tag</span> and <span class="code">Tag to File Name</span> conversions.</p></div>
+<div class="contents pagewide"><p class="p">Tato stránka popisuje využití formátových řetězců pro převody <span class="code">název souboru na značku</span> a <span class="code">značka na název souboru</span>.</p></div>
 <section id=""><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Formát</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p">Strings of any format with properties wrapped in percent signs (%).</p>
+<p class="p">Řetězce jakéhokoli formátu s vlastnostmi nacházející se mezi znaky procenta (%).</p>
 <div class="note" title="Upozornění">
 <svg height="24" width="24" version="1.1">
  <g>
@@ -29,17 +29,17 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
  </g>
 </svg><div class="inner">
-<div class="title title-note"><h3><span class="title">Example</span></h3></div>
+<div class="title title-note"><h3><span class="title">Příklad</span></h3></div>
 <div class="region"><div class="contents">
-<p class="p">Format String: <span class="code">%artist%- %title%</span></p>
-<p class="p">Filename: <span class="code">Artist1 - Song1.mp3</span></p>
-<p class="p">When running <span class="code">File Name to Tag</span> conversion, this format string and this file name will create a tag with an artist of <span class="code">Artist1</span> and a title of <span class="code">Song1</span>.</p>
+<p class="p">Formátový řetězec: <span class="code">%artist% - %title%</span></p>
+<p class="p">Název souboru: <span class="code">Umělec1 - Skladba1.mp3</span></p>
+<p class="p">Při spuštění převodu <span class="code">název souboru na značku</span> vytvoří tento formátový řetězec a název souboru značku s umělcem <span class="code">Umělec1</span> a názvem <span class="code">Skladba1</span>.</p>
 </div></div>
 </div>
 </div>
 </div></div>
 </div></section><section id=""><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">Supported Properties</span></h2></div>
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Podporované vlastnosti</span></h2></div>
 <div class="region"><div class="contents pagewide">
 <div class="list"><div class="inner"><div class="region"><ul class="list">
 <li class="list"><p class="p"><span class="code">title</span></p></li>
@@ -63,15 +63,15 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
  </g>
 </svg><div class="inner"><div class="region"><div class="contents">
-<p class="p">When using conversions, custom property names can also be used.</p>
-<p class="p">For example, a custom property who's name is <span class="code">ENCODER</span> can be used as <span class="code">%encoder%</span>.</p>
+<p class="p">Při používání převodů lze použít také vlastní názvy vlastností.</p>
+<p class="p">Pokud je například název vlastnosti <span class="code">ENCODER</span>, lze jej použít jako řetězec <span class="code">%encoder%</span>.</p>
 </div></div></div>
 </div>
 </div></div>
 </div></section><section id=""><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">Ignoring in File Name to Tag Conversion</span></h2></div>
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Ignorování v názvech souborů k převodu na značky</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p">When running <span class="code">File Name to Tag</span> conversion, an empty <span class="code">%%</span> can be specified to ignore part of the file name when reading it.</p>
+<p class="p">Při spuštění převodu <span class="code">název souboru na značku</span> můžete zadat prázdné <span class="code">%%</span> pro ignorování části názvu souboru při jeho čtení.</p>
 <div class="note" title="Upozornění">
 <svg height="24" width="24" version="1.1">
  <g>
@@ -79,11 +79,11 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
  </g>
 </svg><div class="inner">
-<div class="title title-note"><h3><span class="title">Example</span></h3></div>
+<div class="title title-note"><h3><span class="title">Příklad</span></h3></div>
 <div class="region"><div class="contents">
-<p class="p">Format String: <span class="code">%%- %track%. %%</span></p>
-<p class="p">Filename: <span class="code">Artist1- 05. Song1.mp3</span></p>
-<p class="p">This format string and this file name will create a tag with a track of <span class="code">05</span> and ignore the rest of the file name.</p>
+<p class="p">Formátový řetězec: <span class="code">%%- %track%. %%</span></p>
+<p class="p">Název souboru: <span class="code">Umělec1- 05. Song1.mp3</span></p>
+<p class="p">Tento formátový řetězec a název souboru vytvoří značku se stopou <span class="code">05</span> a bude ignorovat zbytek názvu souboru.</p>
 </div></div>
 </div>
 </div>
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="hgroup pagewide"></div>
 <div class="contents pagewide"><div class="links guidelinks"><div class="inner">
 <div class="title"><h2><span class="title">Další informace</span></h2></div>
-<div class="region"><ul><li class="links "><a href="index.html" title="Tagger Help">Tagger Help</a></li></ul></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Nápověda aplikace Označovač">Nápověda aplikace Označovač</a></li></ul></div>
 </div></div></div>
 </div></section>
 </div>
