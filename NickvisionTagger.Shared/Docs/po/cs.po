@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-09-12 22:14-0400\n"
-"PO-Revision-Date: 2023-09-14 13:06+0000\n"
+"PO-Revision-Date: 2023-10-09 18:03+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/cs/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -65,7 +65,6 @@ msgstr "Zapamatovat naposledy otevřenou knihovnu"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:29
-#, fuzzy
 msgid ""
 "Whether or not to remember the previously used music library and reopen it "
 "when Tagger starts the next time."
@@ -279,12 +278,12 @@ msgstr ""
 #: yelp/C/format-strings.page:8
 msgctxt "link"
 msgid "Format Strings ✍️"
-msgstr ""
+msgstr "Formátové řetězce ✍️"
 
 #. (itstool) path: page/title
 #: yelp/C/format-strings.page:20
 msgid "Format Strings"
-msgstr ""
+msgstr "Formátové řetězce"
 
 #. (itstool) path: page/p
 #: yelp/C/format-strings.page:21
@@ -292,6 +291,8 @@ msgid ""
 "This page explains the use of format strings for <code>File Name to Tag</"
 "code> and <code>Tag to File Name</code> conversions."
 msgstr ""
+"Tato stránka popisuje využití formátových řetězců pro převody <code>název "
+"souboru na značku</code> a <code>značka na název souboru</code>."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:23
@@ -302,21 +303,23 @@ msgstr "Formát"
 #: yelp/C/format-strings.page:24
 msgid "Strings of any format with properties wrapped in percent signs (%)."
 msgstr ""
+"Řetězce jakéhokoli formátu s vlastnostmi nacházející se mezi znaky procenta "
+"(%)."
 
 #. (itstool) path: note/title
 #: yelp/C/format-strings.page:26 yelp/C/format-strings.page:58
 msgid "Example"
-msgstr ""
+msgstr "Příklad"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:27
 msgid "Format String: <code>%artist%- %title%</code>"
-msgstr ""
+msgstr "Formátový řetězec: <code>%artist% - %title%</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:28
 msgid "Filename: <code>Artist1 - Song1.mp3</code>"
-msgstr ""
+msgstr "Název souboru: <code>Umělec1 - Skladba1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:29
@@ -325,81 +328,84 @@ msgid ""
 "and this file name will create a tag with an artist of <code>Artist1</code> "
 "and a title of <code>Song1</code>."
 msgstr ""
+"Při spuštění převodu <code>název souboru na značku</code> vytvoří tento "
+"formátový řetězec a název souboru značku s umělcem <code>Umělec1</code> a "
+"názvem <code>Skladba1</code>."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:33
 msgid "Supported Properties"
-msgstr ""
+msgstr "Podporované vlastnosti"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:35 yelp/C/search.page:31
 msgid "<code>title</code>"
-msgstr ""
+msgstr "<code>title</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:36 yelp/C/search.page:32
 msgid "<code>artist</code>"
-msgstr ""
+msgstr "<code>artist</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:37 yelp/C/search.page:33
 msgid "<code>album</code>"
-msgstr ""
+msgstr "<code>album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:38 yelp/C/search.page:34
 msgid "<code>year</code>"
-msgstr ""
+msgstr "<code>year</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:39 yelp/C/search.page:35
 msgid "<code>track</code>"
-msgstr ""
+msgstr "<code>track</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:40 yelp/C/search.page:36
 msgid "<code>tracktotal</code>"
-msgstr ""
+msgstr "<code>tracktotal</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:41 yelp/C/search.page:37
 msgid "<code>albumartist</code>"
-msgstr ""
+msgstr "<code>albumartist</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:42 yelp/C/search.page:38
 msgid "<code>genre</code>"
-msgstr ""
+msgstr "<code>genre</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:43 yelp/C/search.page:39
 msgid "<code>comment</code>"
-msgstr ""
+msgstr "<code>comment</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:44 yelp/C/search.page:40
 msgid "<code>beatsperminute (bpm)</code>"
-msgstr ""
+msgstr "<code>beatsperminute (bpm)</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:45 yelp/C/search.page:41
 msgid "<code>composer</code>"
-msgstr ""
+msgstr "<code>composer</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:46 yelp/C/search.page:42
 msgid "<code>description</code>"
-msgstr ""
+msgstr "<code>description</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:47 yelp/C/search.page:43
 msgid "<code>publisher</code>"
-msgstr ""
+msgstr "<code>publisher</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:50
 msgid "When using conversions, custom property names can also be used."
-msgstr ""
+msgstr "Při používání převodů lze použít také vlastní názvy vlastností."
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:51
@@ -407,11 +413,13 @@ msgid ""
 "For example, a custom property who's name is <code>ENCODER</code> can be "
 "used as <code>%encoder%</code>."
 msgstr ""
+"Pokud je například název vlastnosti <code>ENCODER</code>, lze jej použít "
+"jako řetězec <code>%encoder%</code>."
 
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:55
 msgid "Ignoring in File Name to Tag Conversion"
-msgstr ""
+msgstr "Ignorování v názvech souborů k převodu na značky"
 
 #. (itstool) path: section/p
 #: yelp/C/format-strings.page:56
@@ -419,16 +427,18 @@ msgid ""
 "When running <code>File Name to Tag</code> conversion, an empty <code>%%</"
 "code> can be specified to ignore part of the file name when reading it."
 msgstr ""
+"Při spuštění převodu <code>název souboru na značku</code> můžete zadat "
+"prázdné <code>%%</code> pro ignorování části názvu souboru při jeho čtení."
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:59
 msgid "Format String: <code>%%- %track%. %%</code>"
-msgstr ""
+msgstr "Formátový řetězec: <code>%%- %track%. %%</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:60
 msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
-msgstr ""
+msgstr "Název souboru: <code>Umělec1- 05. Song1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:61
@@ -436,18 +446,20 @@ msgid ""
 "This format string and this file name will create a tag with a track of "
 "<code>05</code> and ignore the rest of the file name."
 msgstr ""
+"Tento formátový řetězec a název souboru vytvoří značku se stopou <code>05</"
+"code> a bude ignorovat zbytek názvu souboru."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
 msgctxt "link"
 msgid "Tagger Help"
-msgstr ""
+msgstr "Nápověda aplikace Označovač"
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:8
 msgctxt "text"
 msgid "Tagger Help"
-msgstr ""
+msgstr "Nápověda aplikace Označovač"
 
 #. (itstool) path: credit/name
 #: yelp/C/index.page:10
@@ -457,7 +469,7 @@ msgstr "Fyodor Sobolev"
 #. (itstool) path: page/title
 #: yelp/C/index.page:20
 msgid "<_:media-1/> Tagger Help"
-msgstr ""
+msgstr "<_:media-1/> Nápověda aplikace Označovač"
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:21
@@ -465,6 +477,8 @@ msgid ""
 "This documentation will help you understand how to configure <app>Tagger</"
 "app> to get the most of the application."
 msgstr ""
+"Tato dokumentace vám pomůže pochopit, jak nastavit aplikaci <app>Označovač</"
+"app>, abyste ji využili na maximum."
 
 #. (itstool) path: page/p
 #: yelp/C/index.page:22
@@ -474,262 +488,269 @@ msgid ""
 "Tagger/discussions\">discussions</link> on Github, or <link href=\"https://"
 "bit.ly/3GrfEid\">join our Matrix channel</link>."
 msgstr ""
+"Pro získání podpory použijte <link href=\"https://github.com/NickvisionApps/"
+"Tagger/issues\">problémy</link> nebo <link href=\"https://github.com/"
+"NickvisionApps/Tagger/discussions\">diskuze</link> na GitHubu, případně se "
+"<link href=\"https://bit.ly/3GrfEid\">připojte do našeho kanálu "
+"Matrix</link>."
 
 #. (itstool) path: list/title
 #: yelp/C/index.page:26
 msgid "Supported File Extensions"
-msgstr ""
+msgstr "Podporované typy souborů"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:27
 msgid "<code>.mp3</code>"
-msgstr ""
+msgstr "<code>.mp3</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:28
 msgid "<code>.m4a</code>"
-msgstr ""
+msgstr "<code>.m4a</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:29
 msgid "<code>.m4b</code>"
-msgstr ""
+msgstr "<code>.m4b</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:30
 msgid "<code>.ogg</code>"
-msgstr ""
+msgstr "<code>.ogg</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:31
 msgid "<code>.opus</code>"
-msgstr ""
+msgstr "<code>.opus</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:32
 msgid "<code>.oga</code>"
-msgstr ""
+msgstr "<code>.oga</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:33
 msgid "<code>.flac</code>"
-msgstr ""
+msgstr "<code>.flac</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:34
 msgid "<code>.wma</code>"
-msgstr ""
+msgstr "<code>.wma</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:35
 msgid "<code>.wav</code>"
-msgstr ""
+msgstr "<code>.wav</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:36
 msgid "<code>.aac</code>"
-msgstr ""
+msgstr "<code>.aac</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:37
 msgid "<code>.aax</code>"
-msgstr ""
+msgstr "<code>.aax</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:38
 msgid "<code>.aa</code>"
-msgstr ""
+msgstr "<code>.aa</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:39
 msgid "<code>.aif</code>"
-msgstr ""
+msgstr "<code>.aif</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:40
 msgid "<code>.aiff</code>"
-msgstr ""
+msgstr "<code>.aiff</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:41
 msgid "<code>.aifc</code>"
-msgstr ""
+msgstr "<code>.aifc</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:42
 msgid "<code>.dsd</code>"
-msgstr ""
+msgstr "<code>.dsd</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:43
 msgid "<code>.dsf</code>"
-msgstr ""
+msgstr "<code>.dsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:44
 msgid "<code>.ac3</code>"
-msgstr ""
+msgstr "<code>.ac3</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:45
 msgid "<code>.gym</code>"
-msgstr ""
+msgstr "<code>.gym</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:46
 msgid "<code>.ape</code>"
-msgstr ""
+msgstr "<code>.ape</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:47
 msgid "<code>.mpv</code>"
-msgstr ""
+msgstr "<code>.mpv</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:48
 msgid "<code>.mp+</code>"
-msgstr ""
+msgstr "<code>.mp+</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:49
 msgid "<code>.ofr</code>"
-msgstr ""
+msgstr "<code>.ofr</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:50
 msgid "<code>.ofs</code>"
-msgstr ""
+msgstr "<code>.ofs</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:51
 msgid "<code>.psf</code>"
-msgstr ""
+msgstr "<code>.psf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:52
 msgid "<code>.psf1</code>"
-msgstr ""
+msgstr "<code>.psf1</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:53
 msgid "<code>.psf2</code>"
-msgstr ""
+msgstr "<code>.psf2</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:54
 msgid "<code>.minipsf</code>"
-msgstr ""
+msgstr "<code>.minipsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:55
 msgid "<code>.minipsf1</code>"
-msgstr ""
+msgstr "<code>.minipsf1</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:56
 msgid "<code>.minipsf2</code>"
-msgstr ""
+msgstr "<code>.minipsf2</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:57
 msgid "<code>.ssf</code>"
-msgstr ""
+msgstr "<code>.ssf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:58
 msgid "<code>.minissf</code>"
-msgstr ""
+msgstr "<code>.minissf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:59
 msgid "<code>.minidsf</code>"
-msgstr ""
+msgstr "<code>.minidsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:60
 msgid "<code>.gsf</code>"
-msgstr ""
+msgstr "<code>.gsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:61
 msgid "<code>.minigsf</code>"
-msgstr ""
+msgstr "<code>.minigsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:62
 msgid "<code>.qsf</code>"
-msgstr ""
+msgstr "<code>.qsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:63
 msgid "<code>.miniqsf</code>"
-msgstr ""
+msgstr "<code>.miniqsf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:64
 msgid "<code>.spc</code>"
-msgstr ""
+msgstr "<code>.spc</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:65
 msgid "<code>.tak</code>"
-msgstr ""
+msgstr "<code>.tak</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:66
 msgid "<code>.tta</code>"
-msgstr ""
+msgstr "<code>.tta</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:67
 msgid "<code>.vqf</code>"
-msgstr ""
+msgstr "<code>.vqf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:68
 msgid "<code>.bwav</code>"
-msgstr ""
+msgstr "<code>.bwav</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:69
 msgid "<code>.bwf</code>"
-msgstr ""
+msgstr "<code>.bwf</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:70
 msgid "<code>.vgm</code>"
-msgstr ""
+msgstr "<code>.vgm</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:71
 msgid "<code>.vgz</code>"
-msgstr ""
+msgstr "<code>.vgz</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:72
 msgid "<code>.wv</code>"
-msgstr ""
+msgstr "<code>.wv</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/index.page:73
 msgid "<code>.asf</code>"
-msgstr ""
+msgstr "<code>.asf</code>"
 
 #. (itstool) path: info/title
 #: yelp/C/search.page:8
 msgctxt "link"
 msgid "Advanced Search 🔍"
-msgstr ""
+msgstr "Pokročilé vyhledávání 🔍"
 
 #. (itstool) path: page/title
 #: yelp/C/search.page:20
 msgid "Advanced Search"
-msgstr ""
+msgstr "Pokročilé vyhledávání"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:21
 msgid "This page explains how to use Advanced Search in <app>Tagger</app>."
 msgstr ""
+"Tato stránka popisuje, jak používat pokročilé vyhledávání v aplikaci "
+"<app>Označovač</app>."
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:23
@@ -738,11 +759,14 @@ msgid ""
 "allows users to search files' tag contents for certain values, using a "
 "powerful tag-based syntax:"
 msgstr ""
+"Pokročilé vyhledávání je výkonná funkce poskytovaná aplikací <app>Označovač</"
+"app>, která umožňuje uživatelům prohledávat obsah značek souborů pro určité "
+"hodnoty, pomocí výkonné syntaxe založené na značkách:"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:24
 msgid "<code>!prop1=\"value1\";prop2=\"value2\"</code>"
-msgstr ""
+msgstr "<code>!vlast1=\"hodn1\";vlast2=\"hodn2\"</code>"
 
 #. (itstool) path: page/p
 #: yelp/C/search.page:25
@@ -752,31 +776,35 @@ msgid ""
 "quotes. Each property is separated by a semicolon. Notice how the last "
 "property does not end with a semicolon."
 msgstr ""
+"Kde <code>vlast1</code> a <code>vlast2</code> jsou platné vlastnosti značek "
+"a <code>hodn1</code> a <code>hodn2</code> jsou hodnoty pro vyhledání napsané "
+"mezi závorkami. Každá vlastnost je oddělena středníkem. Poslední vlastnost "
+"jím nicméně nekončí."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:28
 msgid "Valid Properties"
-msgstr ""
+msgstr "Platné vlastnosti"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:30
 msgid "<code>filename</code>"
-msgstr ""
+msgstr "<code>filename</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/search.page:44
 msgid "<code>custom</code>"
-msgstr ""
+msgstr "<code>custom</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:46
 msgid "Properties are case-insensitive."
-msgstr ""
+msgstr "U vlastností se rozlišují malá a velká písmena."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:48
 msgid "Syntax Checking"
-msgstr ""
+msgstr "Kontrola syntaxe"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:49
@@ -785,16 +813,20 @@ msgid ""
 "filter the listbox with your search. If the syntax of your string is "
 "invalid, the textbox will turn red and will not filter the listbox."
 msgstr ""
+"Pokud je syntaxe vašeho řetězce platná, změní se barva textového pole na "
+"zelenou a seznam bude vyfiltrován vaším vyhledáváním. Pokud je syntaxe "
+"vašeho řetězce neplatná, změní se barva na červenou a seznam vyfiltrován "
+"nebude."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:51
 msgid "Examples"
-msgstr ""
+msgstr "Příklady"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:52
 msgid "<code>!artist=\"\"</code>"
-msgstr ""
+msgstr "<code>!artist=\"\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:53
@@ -802,11 +834,13 @@ msgid ""
 "This search string will filter the listbox to contain music files whose "
 "artist is empty."
 msgstr ""
+"Toto vyhledávání vyfiltruje seznam tak, aby obsahoval jen hudební soubory, u "
+"kterých je prázdná značka interpreta."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:54
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
-msgstr ""
+msgstr "<code>!genre=\"\";year=\"2022\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:55
@@ -815,11 +849,14 @@ msgid ""
 "genre is empty and whose year is 2022 (Year and Track properties will "
 "validate if the value string is a number)."
 msgstr ""
+"Toto vyhledávání vyfiltruje seznam tak, aby obsahoval jen hudební soubory, u "
+"kterých je prázdná značka žánru a jejichž rok je 2022 (vlastnosti rok a "
+"stopa budou platné, pokud je řetězec hodnoty číslo)."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:56
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
-msgstr ""
+msgstr "<code>!title=\"\";artist=\"bob\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:57
@@ -827,11 +864,13 @@ msgid ""
 "This search string will filter the listbox to contain music files whose "
 "title is empty and whose artist is <code>bob</code>."
 msgstr ""
+"Toto vyhledávání vyfiltruje seznam tak, aby obsahoval jen hudební soubory, u "
+"kterých je prázdná značka názvu a jejichž umělec je <code>bob</code>."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:58
 msgid "<code>!custom=\"mbrd\"</code>"
-msgstr ""
+msgstr "<code>!custom=\"mbrd\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:59
@@ -839,17 +878,19 @@ msgid ""
 "This search string will filter the listbox to contain music files that "
 "contain a custom property with the name <code>mbrd</code>."
 msgstr ""
+"Toto vyhledávání vyfiltruje seznam tak, aby obsahoval jen hudební soubory, "
+"které obsahují vlastní vlastnost s názvem <code>mbrd</code>."
 
 #. (itstool) path: info/title
 #: yelp/C/unsupported.page:8
 msgctxt "link"
 msgid "Unsupported Files 🚫"
-msgstr ""
+msgstr "Nepodporované soubory 🚫"
 
 #. (itstool) path: page/title
 #: yelp/C/unsupported.page:20
 msgid "Unsupported Files"
-msgstr ""
+msgstr "Nepodporované soubory"
 
 #. (itstool) path: page/p
 #: yelp/C/unsupported.page:21
@@ -857,6 +898,8 @@ msgid ""
 "This page explains music files that are currently unsupported by "
 "<app>Tagger</app>."
 msgstr ""
+"Tato stránka popisuje, jaké hudební soubory momentálně nejsou podporovány "
+"aplikací <app>Označovač</app>."
 
 #. (itstool) path: page/p
 #: yelp/C/unsupported.page:22
@@ -864,11 +907,13 @@ msgid ""
 "Tagger uses <link href=\"https://github.com/Zeugma440/atldotnet\">atldotnet</"
 "link> for its backend to read and write metadata."
 msgstr ""
+"Označovač používá jako svůj backend <link href=\"https://github.com/"
+"Zeugma440/atldotnet\">atldotnet</link> pro čtení a zápis metadat."
 
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
 msgid "No Known Issues At This Time"
-msgstr ""
+msgstr "V tuto chvíli nejsou známé žádné problémy"
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:25
@@ -876,27 +921,30 @@ msgid ""
 "<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Report an "
 "issue</link> if you experience any."
 msgstr ""
+"<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Nahlaste "
+"problém</link>, pokud na něj narazíte."
 
 #. (itstool) path: info/title
 #: yelp/C/web-services.page:8
 msgctxt "link"
 msgid "Web Services 🌐"
-msgstr ""
+msgstr "Webové služby 🌐"
 
 #. (itstool) path: page/title
 #: yelp/C/web-services.page:20
 msgid "Web Services"
-msgstr ""
+msgstr "Webové služby"
 
 #. (itstool) path: page/p
 #: yelp/C/web-services.page:21
 msgid "This page describes the web services available in Tagger"
 msgstr ""
+"Tato stránka popisuje, jaké webové služby jsou dostupné v aplikaci Označovač"
 
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:23
 msgid "Download MusicBrainz Metadata"
-msgstr ""
+msgstr "Stáhnout metadata z MusicBrainz"
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:24
@@ -904,6 +952,8 @@ msgid ""
 "Identifies a music file through MusicBrainz and downloads its metadata to "
 "use in Tagger."
 msgstr ""
+"Identifikuje hudební soubor pomocí MusicBrainz a stáhne jeho metadata pro "
+"použití v aplikaci."
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:25
@@ -913,6 +963,10 @@ msgid ""
 "IDs are found, metadata such as title, artist, album, and art will be "
 "downloaded and set in Tagger."
 msgstr ""
+"Tato služba využívá otisk souboru AcoustId (vygenerovaný pomocí "
+"<code>fpcalc</code>) pro nalezení nahrávky MusicBrainz a ID vydání. Při "
+"nalezení ID budou stažena a nastavena metadata jako název, umělec, album a "
+"obal."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:27
