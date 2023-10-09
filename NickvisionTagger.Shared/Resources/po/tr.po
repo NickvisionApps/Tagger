@@ -2,12 +2,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-25 07:52-0400\n"
+"POT-Creation-Date: 2023-10-08 23:24-0400\n"
 "PO-Revision-Date: 2023-09-17 13:37+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-"
@@ -19,8 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.0.2\n"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1491
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1522
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1407
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1438
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1369
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1419
 #, csharp-format
 msgid "{0} of {1} selected"
 msgstr "{0} / {1} seçildi"
@@ -30,52 +32,57 @@ msgstr "{0} / {1} seçildi"
 msgid "{0} Playlist (*{1})"
 msgstr "{0} Çalma Listesi (*{1})"
 
-#: ../../../Controllers/MainWindowController.cs:224
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1439
+#, csharp-format
+msgid "{0} � {1}"
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:198
 msgid "%artist%- %title%"
 msgstr "%artist%- %title%"
 
-#: ../../../Controllers/MainWindowController.cs:224
+#: ../../../Controllers/MainWindowController.cs:198
 msgid "%title%"
 msgstr "%title%"
 
-#: ../../../Controllers/MainWindowController.cs:224
+#: ../../../Controllers/MainWindowController.cs:198
 msgid "%title%- %artist%"
 msgstr "%title%- %artist%"
 
-#: ../../../Controllers/MainWindowController.cs:224
+#: ../../../Controllers/MainWindowController.cs:198
 msgid "%track%- %title%"
 msgstr "%track%- %title%"
 
-#: ../../../Controllers/MainWindowController.cs:501
-#: ../../../Controllers/MainWindowController.cs:512
-#: ../../../Controllers/MainWindowController.cs:517
-#: ../../../Controllers/MainWindowController.cs:522
-#: ../../../Controllers/MainWindowController.cs:527
-#: ../../../Controllers/MainWindowController.cs:539
-#: ../../../Controllers/MainWindowController.cs:551
-#: ../../../Controllers/MainWindowController.cs:563
-#: ../../../Controllers/MainWindowController.cs:568
-#: ../../../Controllers/MainWindowController.cs:573
-#: ../../../Controllers/MainWindowController.cs:578
-#: ../../../Controllers/MainWindowController.cs:583
-#: ../../../Controllers/MainWindowController.cs:595
-#: ../../../Controllers/MainWindowController.cs:600
-#: ../../../Controllers/MainWindowController.cs:609
-#: ../../../Controllers/MainWindowController.cs:1532
-#: ../../../Controllers/MainWindowController.cs:1533
-#: ../../../Controllers/MainWindowController.cs:1534
-#: ../../../Controllers/MainWindowController.cs:1535
-#: ../../../Controllers/MainWindowController.cs:1536
-#: ../../../Controllers/MainWindowController.cs:1537
-#: ../../../Controllers/MainWindowController.cs:1538
-#: ../../../Controllers/MainWindowController.cs:1539
-#: ../../../Controllers/MainWindowController.cs:1540
-#: ../../../Controllers/MainWindowController.cs:1541
-#: ../../../Controllers/MainWindowController.cs:1542
-#: ../../../Controllers/MainWindowController.cs:1543
-#: ../../../Controllers/MainWindowController.cs:1544
-#: ../../../Controllers/MainWindowController.cs:1545
-#: ../../../Controllers/MainWindowController.cs:1549
+#: ../../../Controllers/MainWindowController.cs:612
+#: ../../../Controllers/MainWindowController.cs:623
+#: ../../../Controllers/MainWindowController.cs:628
+#: ../../../Controllers/MainWindowController.cs:633
+#: ../../../Controllers/MainWindowController.cs:638
+#: ../../../Controllers/MainWindowController.cs:650
+#: ../../../Controllers/MainWindowController.cs:662
+#: ../../../Controllers/MainWindowController.cs:674
+#: ../../../Controllers/MainWindowController.cs:679
+#: ../../../Controllers/MainWindowController.cs:684
+#: ../../../Controllers/MainWindowController.cs:689
+#: ../../../Controllers/MainWindowController.cs:694
+#: ../../../Controllers/MainWindowController.cs:706
+#: ../../../Controllers/MainWindowController.cs:711
+#: ../../../Controllers/MainWindowController.cs:720
+#: ../../../Controllers/MainWindowController.cs:1732
+#: ../../../Controllers/MainWindowController.cs:1733
+#: ../../../Controllers/MainWindowController.cs:1734
+#: ../../../Controllers/MainWindowController.cs:1735
+#: ../../../Controllers/MainWindowController.cs:1736
+#: ../../../Controllers/MainWindowController.cs:1737
+#: ../../../Controllers/MainWindowController.cs:1738
+#: ../../../Controllers/MainWindowController.cs:1739
+#: ../../../Controllers/MainWindowController.cs:1740
+#: ../../../Controllers/MainWindowController.cs:1741
+#: ../../../Controllers/MainWindowController.cs:1742
+#: ../../../Controllers/MainWindowController.cs:1743
+#: ../../../Controllers/MainWindowController.cs:1744
+#: ../../../Controllers/MainWindowController.cs:1745
+#: ../../../Controllers/MainWindowController.cs:1749
 msgid "<keep>"
 msgstr "<koru>"
 
@@ -83,7 +90,13 @@ msgstr "<koru>"
 msgid "0 MiB"
 msgstr "0 MiB"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1196
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:163
+#, csharp-format
+msgid "About {0}"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1145
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1205
 msgid ""
 "AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id "
 "for easy identification.\n"
@@ -102,956 +115,524 @@ msgstr ""
 "Hiçbiri sağlanmazsa Tagger, bunun yerine etiketinizin üst verilerini parmak "
 "iziyle ilişkili olarak gönderir."
 
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:74
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:147
+msgid "AcoustId User API Key"
+msgstr "AcoustId Kullanıcı API Anahtarı"
+
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1114
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1071
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:54
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:216
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:149
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:222
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1092
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:128
 #: NickvisionTagger.GNOME/Blueprints/window.blp:540
 msgid "Add"
 msgstr "Ekle"
 
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1174
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:223
+#, fuzzy
+msgid "Add New Property"
+msgstr "Yeni Özel Özellik"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:131
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:41
+#: NickvisionTagger.GNOME/Blueprints/window.blp:23
+msgid "Add to Playlist"
+msgstr "Çalma Listesine Ekle"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:210
+#: NickvisionTagger.GNOME/Blueprints/window.blp:506
+msgid "Additional Properties"
+msgstr "Ek Özellikler"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:179
+#: NickvisionTagger.GNOME/Blueprints/window.blp:225
+msgid "Advanced Search Info"
+msgstr "Gelişmiş Arama Bilgisi"
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1329
 #: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:631
 #: ../../../Models/MusicFile.cs:734
 msgid "album"
 msgstr "album"
 
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1223
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:124
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:199
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:53
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
+#: NickvisionTagger.GNOME/Blueprints/window.blp:456
+msgid "Album"
+msgstr "Albüm"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:138
+#: NickvisionTagger.GNOME/Blueprints/window.blp:38
+msgid "Album Art"
+msgstr "Albüm Kapağı"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:201
+#: NickvisionTagger.GNOME/Blueprints/window.blp:460
+msgid "Album Artist"
+msgstr "Albüm Sanatçısı"
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1378
 #: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:659
 #: ../../../Models/MusicFile.cs:750
 msgid "albumartist"
 msgstr "albumartist"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:691
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:812
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:101
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:298
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1076
+#, fuzzy
+msgid "All files"
+msgstr "Tüm Dosyaları Seç"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:670
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:785
 msgid "All Supported Files"
 msgstr "Tüm Desteklenen Dosyalar"
 
-#: ../../../Controllers/MainWindowController.cs:1068
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:34
+msgid "An application restart is required to change the theme."
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:1215
 msgid "An invalid RecordingId was provided to MusicBrainz"
 msgstr "Geçersiz bir kayıt kimliği MüzikBrainz'e verildi"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:620
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:730
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:773
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:843
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:919
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1148
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1210
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1261
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:602
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:708
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:748
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:816
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:888
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1101
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1159
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1206
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:40
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:52
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:306
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:585
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:620
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:719
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:797
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:863
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:923
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1159
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1218
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:30
 #: NickvisionTagger.GNOME/Blueprints/window.blp:641
 msgid "Apply"
 msgstr "Uygula"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:613
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:723
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:766
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:836
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:912
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1141
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1203
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1254
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:595
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:701
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:741
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:809
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:881
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1094
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1152
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1199
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:304
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:583
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:618
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:717
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:795
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:861
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:921
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1157
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1216
 msgid "Apply Changes?"
 msgstr "Değişiklikler Uygulansın Mı?"
 
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1170
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1325
 #: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:627
 #: ../../../Models/MusicFile.cs:730
 msgid "artist"
 msgstr "sanatçı"
 
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:123
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:197
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:52
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
+#: NickvisionTagger.GNOME/Blueprints/window.blp:452
+msgid "Artist"
+msgstr "Sanatçı"
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:38
+msgid "Automatically Check for Updates"
+msgstr ""
+
 #: ../../../Helpers/MediaHelpers.cs:33
 msgid "B"
 msgstr "B"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:164
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1030
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:162
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:987
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:143
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1469
 #: NickvisionTagger.GNOME/Blueprints/window.blp:49
 msgid "Back"
 msgstr "Arka"
 
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1235
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:213
+#: NickvisionTagger.GNOME/Blueprints/window.blp:513
+msgid "Beats Per Minute"
+msgstr "Dakika Başına Vuruş"
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1390
 #: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:671
 #: ../../../Models/MusicFile.cs:762
 msgid "beatsperminute"
 msgstr "dakika başına vuruş"
 
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1235
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1390
 #: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:671
 #: ../../../Models/MusicFile.cs:762
 msgid "bpm"
 msgstr "bpm"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1773
-#: ../../../Controllers/MainWindowController.cs:1429
-#: ../../../Controllers/MainWindowController.cs:1435
+#: ../../../Controllers/MainWindowController.cs:1629
+#: ../../../Controllers/MainWindowController.cs:1635
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1671
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:227
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1541
 msgid "Calculating..."
 msgstr "Hesaplanıyor..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:615
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:725
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:768
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:838
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:914
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:990
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1009
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1114
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1143
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1196
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1205
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1256
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:597
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:703
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:743
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:811
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:883
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:947
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:966
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1071
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1096
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1145
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1154
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1201
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:34
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:41
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:216
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:308
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:587
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:622
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:721
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:799
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:865
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:925
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1092
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1110
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1128
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1161
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1205
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1220
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:31
 msgid "Cancel"
 msgstr "İptal"
 
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1231
+#: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:28
+msgid "Changelog"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:158
+msgid "Check for Updates"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:55
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:137
+msgid "Clear All Lyrics"
+msgstr "Tüm Şarkı Sözlerini Temizle"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:116
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:26
+msgid "Close Library"
+msgstr "Kitaplığı Kapat"
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1386
 #: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:667
 #: ../../../Models/MusicFile.cs:758
 msgid "comment"
 msgstr "yorum"
 
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1250
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:211
+#: NickvisionTagger.GNOME/Blueprints/window.blp:509
+msgid "Comment"
+msgstr "Yorum"
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1405
 #: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:679
 #: ../../../Models/MusicFile.cs:766
 msgid "composer"
 msgstr "besteci"
 
-#: ../../../Controllers/MainWindowController.cs:200
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:215
+#: NickvisionTagger.GNOME/Blueprints/window.blp:517
+msgid "Composer"
+msgstr "Besteci"
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:42
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:37
+msgid "Configure"
+msgstr "Yapılandır"
+
+#: ../../../Controllers/MainWindowController.cs:174
 msgid "Contributors on GitHub ❤️"
 msgstr "GitHub Katkıcıları ❤️"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:990
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1009
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:947
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:966
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:150
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1110
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1128
 #: NickvisionTagger.GNOME/Blueprints/window.blp:60
 msgid "Convert"
 msgstr "Dönüştür"
 
-#: ../../../Controllers/MainWindowController.cs:806
+#: ../../../Controllers/MainWindowController.cs:943
 #, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
 msgstr[0] "{0} dosya adı etikete dönüştürüldü"
 msgstr[1] "{0} dosya adı etikete dönüştürüldü"
 
-#: ../../../Controllers/MainWindowController.cs:830
+#: ../../../Controllers/MainWindowController.cs:977
 #, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
 msgstr[0] "{0} etiket dosya adına dönüştürüldü"
 msgstr[1] "{0} etiket dosya adına dönüştürüldü"
 
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1262
+#: ../../../Controllers/MainWindowController.cs:922
+#, fuzzy
+msgid "Converting file names to tags..."
+msgstr "Dosya Adını Etikete Dönüştür"
+
+#: ../../../Controllers/MainWindowController.cs:956
+#, fuzzy
+msgid "Converting tags to file names..."
+msgstr "Etiketi Dosya Adına Dönüştür"
+
+#: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:30
+#, fuzzy
+msgid "Copied debug info to clipboard."
+msgstr "Parmak İzini Panoya Kopyala"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:228
+#: NickvisionTagger.GNOME/Blueprints/window.blp:580
+msgid "Copy Fingerprint To Clipboard"
+msgstr "Parmak İzini Panoya Kopyala"
+
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:27
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
+msgid "Corrupted Files Found"
+msgstr "Bozuk Dosyalar Bulundu"
+
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:33
+#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:87
+msgid "Create"
+msgstr "Oluştur"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:130
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:36
+#: NickvisionTagger.GNOME/Blueprints/window.blp:22
+msgid "Create Playlist"
+msgstr "Çalma Listesi Oluştur"
+
+#: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:29
+msgid "Credits"
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1417
 msgid "custom"
 msgstr "özel"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:47
-#: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:59
+#: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:46
+#: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:58
+#: ../../../../NickvisionTagger.WinUI/Controls/ComboBoxDialog.xaml.cs:35
+#: ../../../../NickvisionTagger.WinUI/Controls/ComboBoxDialog.xaml.cs:51
 msgid "Custom"
 msgstr "Özel"
 
-#: ../../../Controllers/MainWindowController.cs:203
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:148
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:221
+#: NickvisionTagger.GNOME/Blueprints/window.blp:532
+msgid "Custom Properties"
+msgstr "Özel Özellikler"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:224
+#: NickvisionTagger.GNOME/Blueprints/window.blp:549
+msgid "Custom properties can only be edited for individual files."
+msgstr "Özel özellikler yalnızca bağımsız dosyalar için düzenlenebilir."
+
+#: ../../../Controllers/MainWindowController.cs:177
 msgid "DaPigGuy"
 msgstr "DaPigGuy"
 
-#: ../../../Controllers/MainWindowController.cs:204
+#: ../../../Controllers/MainWindowController.cs:178
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1254
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1344
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1347
+msgid "Default"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:136
+#, fuzzy
+msgid "Delete Tag"
+msgstr "Etiketleri Sil"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:184
+msgid "Delete Tag (Shift+Delete)"
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:889
+#, fuzzy
+msgid "Deleting tags..."
+msgstr "Etiketler kaydediliyor..."
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1409
 #: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:683
 #: ../../../Models/MusicFile.cs:770
 msgid "description"
 msgstr "açıklama"
 
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:618
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:728
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:771
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:841
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:917
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1146
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1208
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1259
-msgid "Discard"
-msgstr "Gözden Çıkar"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:784
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:854
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:930
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1159
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1221
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1272
-msgid "Discarding tags..."
-msgstr "Etiketler siliniyor..."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:972
-msgid "Discarding unapplied changes..."
-msgstr "Uygulanmayan değişiklikler gözden çıkartılıyor..."
-
-#: ../../../Controllers/MainWindowController.cs:1100
-#, csharp-format
-msgid "Downloaded lyrics for {0} files successfully"
-msgstr "{0} dosya için şarkı sözleri indirildi"
-
-#: ../../../Controllers/MainWindowController.cs:1077
-#, csharp-format
-msgid "Downloaded metadata for {0} files successfully"
-msgstr "{0} dosya için üst veri indirildi"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1164
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1173
-msgid "Downloading lyrics..."
-msgstr "Şarkı sözleri indiriliyor..."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1133
-msgid "Downloading MusicBrainz metadata..."
-msgstr "MusicBrainz üst verileri indiriliyor..."
-
-#: ../../../Controllers/MainWindowController.cs:1070
-msgid "Error"
-msgstr "Hata"
-
-#: ../../../Models/MusicFile.cs:392 ../../../Models/MusicFile.cs:803
-#: ../../../Models/MusicFile.cs:961
-msgid "ERROR"
-msgstr "HATA"
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:279
-msgid "Existing Lyrics"
-msgstr "Var Olan Şarkı Sözleri"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1076
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:110
-msgid "Export Back Album Art"
-msgstr "Albüm Arka Kapağını Dışa Aktar"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1076
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:90
-msgid "Export Front Album Art"
-msgstr "Albüm Ön Kapağını Dışa Aktar"
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:323
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:151
-msgid "Export to LRC"
-msgstr "LRC'ye Dışa Aktar"
-
-#: ../../../Controllers/MainWindowController.cs:951
-msgid "Exported back album art to file successfully"
-msgstr "Albüm arka kapağı dosyaya dışa aktardı"
-
-#: ../../../Controllers/MainWindowController.cs:935
-msgid "Exported front album art to file successfully"
-msgstr "Albüm ön kapağı dosyaya dışa aktarıldı"
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:341
-msgid "Exported successfully to: {0}"
-msgstr "Dışa aktarıldı: {0}"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:528
-msgid "Failed MusicBrainz Lookups"
-msgstr "MusicBrainz Aramaları Başarısız Oldu"
-
-#: ../../../Controllers/MainWindowController.cs:956
-msgid "Failed to export back album art to a file"
-msgstr "Albüm arka kapağı dosyaya dışa aktarılamadı"
-
-#: ../../../Controllers/MainWindowController.cs:940
-msgid "Failed to export front album art to a file"
-msgstr "Albüm ön kapağı dosyaya dışa aktarılamadı"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:990
-#: NickvisionTagger.GNOME/Blueprints/window.blp:62
-msgid "File Name to Tag"
-msgstr "Dosya Adından Etikete"
-
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1162
-msgid "filename"
-msgstr "dosya adı"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1790
-msgid "Fingerprint was copied to clipboard."
-msgstr "Parmak izi panoya kopyalandı."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1470
-msgid "Folder Mode"
-msgstr "Klasör Kipi"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:990
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1009
-msgid "Format String"
-msgstr "Biçimlendirme Dizgesi"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:164
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1030
-#: NickvisionTagger.GNOME/Blueprints/window.blp:41
-msgid "Front"
-msgstr "Ön"
-
-#: ../../../Controllers/MainWindowController.cs:202
-msgid "Fyodor Sobolev"
-msgstr "Fyodor Sobolev"
-
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1227
-#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:663
-#: ../../../Models/MusicFile.cs:754
-msgid "genre"
-msgstr "tür"
-
-#: ../../../Helpers/MediaHelpers.cs:33
-msgid "GiB"
-msgstr "GiB"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1371
-msgid "GitHub Repo"
-msgstr "GitHub Deposu"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:510
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:515
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:520
-#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:18
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:153
-#: NickvisionTagger.GNOME/Blueprints/window.blp:7
-msgid "Help"
-msgstr "Yardım"
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:268
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:144
-msgid "Import from LRC"
-msgstr "LRC'den İçe Aktar"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:525
-msgid "Info"
-msgstr "Bilgi"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1041
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:100
-msgid "Insert Back Album Art"
-msgstr "Albüm Arka Kapağı Ekle"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1041
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:80
-msgid "Insert Front Album Art"
-msgstr "Albüm Ön Kapağı Ekle"
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:281
-msgid "Keep Tagger's lyrics"
-msgstr "Tagger Şarkı Sözlerini Tut"
-
-#: ../../../Helpers/MediaHelpers.cs:33
-msgid "KiB"
-msgstr "KiB"
-
-#: ../../../Controllers/MainWindowController.cs:359
-msgid "Library was changed on disk."
-msgstr "Kitaplık diskte değiştirildi."
-
-#: ../../../Controllers/MainWindowController.cs:410
-#, csharp-format
-msgid "Loaded {0} music file."
-msgid_plural "Loaded {0} music files."
-msgstr[0] "{0} müzik dosyası yüklendi."
-msgstr[1] "{0} müzik dosyası yüklendi."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:865
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:880
-msgid "Loading music file..."
-msgstr "Müzik dosyaları yükleniyor..."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:676
-msgid "Loading music files from folder..."
-msgstr "Müzik dosyaları klasörden yükleniyor..."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:485
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:658
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:741
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:750
-#: ../../../Controllers/MainWindowController.cs:1397
-msgid "Loading music files from library..."
-msgstr "Müzik dosyaları kitaplıktan yükleniyor..."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:537
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:708
-msgid "Loading music files from playlist..."
-msgstr "Müzik dosyaları çalma listesinden yükleniyor..."
-
-#: ../../../Models/MusicFile.cs:72
-msgid "lyrics"
-msgstr "şarkı sözleri"
-
-#: ../../../Controllers/MainWindowController.cs:198
-msgid "Matrix Chat"
-msgstr "Matrix Sohbet"
-
-#: ../../../Helpers/MediaHelpers.cs:33
-msgid "MiB"
-msgstr "MiB"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1196
-msgid "MusicBrainz Recording Id"
-msgstr "MusicBrainz Kayıt Kimliği"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1114
-msgid "New Custom Property"
-msgstr "Yeni Özel Özellik"
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
-msgid "New Synchronized Lyric"
-msgstr "Yeni Eşitlenmiş Şarkı Sözleri"
-
-#: ../../../Controllers/MainWindowController.cs:199
-#: ../../../Controllers/MainWindowController.cs:201
-msgid "Nicholas Logozzo"
-msgstr "Nicholas Logozzo"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:830
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:901
-msgid "No"
-msgstr "Hayır"
-
-#: ../../../Controllers/MainWindowController.cs:1066
-msgid "No AcoustId entry found for the file's fingerprint"
-msgstr "Dosyanın parmak izi için AcoustId girdisi bulunamadı"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:895
-msgid "No files selected for removal."
-msgstr "Kaldırmak için hiçbir dosya seçilmedi."
-
-#: ../../../Controllers/MainWindowController.cs:1100
-msgid "No lyrics were downloaded"
-msgstr "Hiçbir şarkı sözü indirilmedi"
-
-#: ../../../Controllers/MainWindowController.cs:1077
-msgid "No metadata was downloaded"
-msgstr "Hiçbir üst veri indirilmedi"
-
-#: ../../../Controllers/MainWindowController.cs:433
-msgid "No music files are selected."
-msgstr "Hiçbir müzik dosyası seçilmedi."
-
-#: ../../../Controllers/MainWindowController.cs:437
-msgid "No music files in library."
-msgstr "Kitaplıkta müzik dosyası yok."
-
-#: ../../../Controllers/MainWindowController.cs:1067
-msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
-msgstr "AcoustId girdisi için MusicBrainz kayıt kimliği sağlanmadı"
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:319
-msgid "Nothing to export."
-msgstr "Dışa aktarılacak bir şey yok."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1189
-msgid "OK"
-msgstr "Tamam"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1187
-msgid ""
-"Only one file can be submitted to AcoustID at a time. Please select only one "
-"file and try again."
-msgstr ""
-"AcoustIDʼye aynı anda yalnızca bir dosya gönderilebilir. Lütfen yalnızca bir "
-"dosya seçip tekrar deneyin."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:534
-msgid "Open"
-msgstr "Aç"
-
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:45
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:672
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:16
-#: NickvisionTagger.GNOME/Blueprints/window.blp:13
-#: NickvisionTagger.GNOME/Blueprints/window.blp:129
-msgid "Open Folder"
-msgstr "Klasör Aç"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:809
-msgid "Open Music File"
-msgstr "Müzik Dosyası Aç"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:688
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:21
-#: NickvisionTagger.GNOME/Blueprints/window.blp:14
-#: NickvisionTagger.GNOME/Blueprints/window.blp:142
-msgid "Open Playlist"
-msgstr "Çalma Listesi Aç"
-
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:78
-#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:36
-msgid "Path"
-msgstr "Yol"
-
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:83
-msgid "Path (Empty)"
-msgstr "Yol (Boş)"
-
-#: ../../../Controllers/MainWindowController.cs:442
-msgid "Playlist file created successfully."
-msgstr "Çalma listesi oluşturuldu."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1470
-msgid "Playlist Mode"
-msgstr "Çalma Listesi Kipi"
-
-#: ../../../Controllers/MainWindowController.cs:429
-msgid "Playlist path can not be empty."
-msgstr "Çalma listesi yolu boş olamaz."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:990
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1009
-msgid "Please select a format string."
-msgstr "Lütfen biçimlendirme dizgesi seçin."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1114
-msgid "Property Name"
-msgstr "Özellik Adı"
-
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1258
-#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:687
-#: ../../../Models/MusicFile.cs:774
-msgid "publisher"
-msgstr "yayımcı"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:505
-msgid "Reload"
-msgstr "Yeniden Yükle"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1592
-msgid "Remove Custom Property"
-msgstr "Özel Özelliği Kaldır"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:899
-msgid "Remove Files?"
-msgstr "Dosyalar Kaldırılsın Mı?"
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:183
-msgid "Remove Lyric"
-msgstr "Şarkı Sözünü Kaldır"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:935
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:944
-msgid "Removing files from playlist..."
-msgstr "Müzik dosyaları kitaplıktan kaldırılıyor..."
-
-#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:97
-msgid "Save Playlist"
-msgstr "Çalma Listesini Kaydet"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:626
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:736
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:779
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:849
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:925
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:961
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1154
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1216
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1267
-msgid "Saving tags..."
-msgstr "Etiketler kaydediliyor..."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:613
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:723
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:766
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:836
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:912
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1141
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1203
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1254
-msgid ""
-"Some music files still have changes waiting to be applied. What would you "
-"like to do?"
-msgstr ""
-"Bazı müzik dosyalarında uygulanmayı bekleyen değişiklikler var. Ne yapmak "
-"istersin?"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1196
-msgid "Submit"
-msgstr "Gönder"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1196
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:134
-#: NickvisionTagger.GNOME/Blueprints/window.blp:71
-msgid "Submit to AcoustId"
-msgstr "AcoustIdʼye Gönder"
-
-#: ../../../Controllers/MainWindowController.cs:1112
-msgid "Submitted metadata to AcoustId successfully"
-msgstr "AcoustId'ye üst veriler başarıyla gönderildi"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1226
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1235
-msgid "Submitting data to AcoustId..."
-msgstr "AcoustId'ye veriler gönderiliyor..."
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1029
-#: NickvisionTagger.GNOME/Blueprints/window.blp:346
-msgid "Switch to Back Cover"
-msgstr "Arka Kapağa Geç"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1029
-msgid "Switch to Front Cover"
-msgstr "Ön Kapağa Geç"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1009
-#: NickvisionTagger.GNOME/Blueprints/window.blp:63
-msgid "Tag to File Name"
-msgstr "Etiketten Dosya Adına"
-
-#: ../../../Controllers/MainWindowController.cs:194
-#: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:5
-#: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:8
-msgid "Tag your music"
-msgstr "Müziklerinizi etiketleyin"
-
-#: ../../../Controllers/MainWindowController.cs:193
-#: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:4
-#: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:6
-msgid "Tagger"
-msgstr "Tagger"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:899
-msgid ""
-"The selected files will not be deleted from disk but will be removed from "
-"this playlist."
-msgstr ""
-"Seçilen dosyalar diskten silinmeyecek fakat çalma listesinden kaldırılacak."
-
-#: ../../../Controllers/MainWindowController.cs:1069
-msgid "This file does not have a valid fingerprint"
-msgstr "Bu dosyanın geçerli bir parmak izi yok"
-
-#: ../../../Helpers/MediaHelpers.cs:33
-msgid "TiB"
-msgstr "TiB"
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
-msgid "Timestamp (hh:mm:ss or mm:ss.xx)"
-msgstr "Zaman damgası (hh:mm:ss ya da mm:ss.xx)"
-
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1166
-#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:623
-#: ../../../Models/MusicFile.cs:726
-msgid "title"
-msgstr "başlık"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1187
-msgid "Too Many Files Selected"
-msgstr "Çok Fazla Dosya Seçildi"
-
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1193
-#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:643
-#: ../../../Models/MusicFile.cs:742
-msgid "track"
-msgstr "parça"
-
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1208
-#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:651
-#: ../../../Models/MusicFile.cs:746
-msgid "tracktotal"
-msgstr "toplam parça"
-
-#: ../../../Controllers/MainWindowController.cs:205
-msgid "translator-credits"
-msgstr "Sabri Ünal <libreajans@gmail.com>"
-
-#: ../../../Controllers/MainWindowController.cs:466
-msgid "Unable to add file to playlist. File may already exist in playlist."
-msgstr ""
-"Dosya çalma listesine eklenemiyor. Dosya zaten çalma listesinde olabilir."
-
-#: ../../../Controllers/MainWindowController.cs:446
-msgid "Unable to create playlist."
-msgstr "Çalma listesi oluşturulamıyor."
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:345
-msgid "Unable to export to LRC."
-msgstr "LRC'ye dışa aktarılamıyor."
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:294
-msgid "Unable to import from LRC."
-msgstr "LRC'den içe aktarılamıyor."
-
-#: ../../../Controllers/MainWindowController.cs:849
-msgid "Unable to load image file"
-msgstr "Resim dosyası yüklenemedi"
-
-#: ../../../Controllers/MainWindowController.cs:481
-msgid "Unable to remove some files from playlist."
-msgstr "Kimi dosyalar çalma listesinden kaldırılamıyor."
-
-#: ../../../Controllers/MainWindowController.cs:721
-#, csharp-format
-msgid "Unable to save {0}"
-msgstr "{0} kaydedilemedi"
-
-#: ../../../Controllers/MainWindowController.cs:680
-#, csharp-format
-msgid "Unable to save {0}."
-msgstr "{0} kaydedilemedi."
-
-#: ../../../Controllers/MainWindowController.cs:1112
-msgid "Unable to submit to AcoustId. Check API key"
-msgstr "AcoustIdʼye gönderilemiyor. API anahtarını denetleyin"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1427
-msgid "Unknown"
-msgstr "Bilinmiyor"
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:284
-msgid "Use LRC's lyrics"
-msgstr "LRC şarkı sözlerini kullan"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:828
-#, fuzzy
-msgid "Use Relative Paths?"
-msgstr "Göreli Yolları Kullan"
-
-#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:279
-msgid ""
-"What would you like Tagger to do with lyrics found from the LRC file that "
-"conflict with existing lyrics of the same timestamp?"
-msgstr ""
-"Tagger'ın, LRC dosyasında bulunan ve aynı zaman damgasına sahip mevcut şarkı "
-"sözleriyle çelişen şarkı sözleriyle ne yapmasını istersiniz?"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:828
-msgid ""
-"Would you like to save the added file to the playlist using it's relative "
-"path?\n"
-"If not, the full path will be used instead."
-msgstr ""
-
-#: ../../../Controllers/MainWindowController.cs:1136
-#: ../../../Controllers/MainWindowController.cs:1178
-#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:635
-#: ../../../Models/MusicFile.cs:738
-msgid "year"
-msgstr "yıl"
-
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:833
-#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:904
-msgid "Yes"
-msgstr "Evet"
-
-#: NickvisionTagger.GNOME/Blueprints/autocomplete_box.blp:15
-msgid "Suggestions"
-msgstr "Öneriler"
-
-#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
-msgid "Corrupted Files Found"
-msgstr "Bozuk Dosyalar Bulundu"
-
-#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
-msgid ""
-"This music folder contains music files that have corrupted tags. The "
-"following files are affected and will be ignored by Tagger:"
-msgstr ""
-"Bu müzik klasörü, bozuk etiketleri olan müzik dosyaları içeriyor. Aşağıdaki "
-"dosyalar bundan etkileniyor ve Tagger tarafından yok sayılacaklar:"
-
-#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:26
-msgid "Playlist"
-msgstr "Çalma Listesi"
-
-#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:43
-msgid "Select Save Location"
-msgstr "Kayıt Konumu Seç"
-
-#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:50
-msgid "Format"
-msgstr "Biçim"
-
-#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:57
-msgid "Use Relative Paths"
-msgstr "Göreli Yolları Kullan"
-
-#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:67
-msgid "Include Only Selected Files"
-msgstr "Yalnızca Seçili Dosyaları İçer"
-
-#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:87
-msgid "Create"
-msgstr "Oluştur"
-
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:32
-#: NickvisionTagger.GNOME/Blueprints/window.blp:439
-msgid "Lyrics"
-msgstr "Şarkı Sözleri"
-
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:37
-msgid "Configure"
-msgstr "Yapılandır"
-
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:42
-msgid "Type"
-msgstr "Tür"
-
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:50
-msgid "Unsynchronized"
-msgstr "Eşitlenmemiş"
-
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:50
-msgid "Synchronized"
-msgstr "Eşitlenmiş"
-
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:55
-msgid "Language Code"
-msgstr "Dil Kodu"
-
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:48
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:217
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:64
 #: NickvisionTagger.GNOME/Blueprints/window.blp:521
 msgid "Description"
 msgstr "Açıklama"
 
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:73
-msgid "Offset (in milliseconds)"
-msgstr "Ofset (milisaniye cinsinden)"
+#: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:35
+#, csharp-format
+msgid ""
+"Developers:\n"
+"{0}\n"
+"\n"
+"Designers:\n"
+"{1}\n"
+"\n"
+"Artists:\n"
+"{2}\n"
+"\n"
+"Translators:\n"
+"{3}"
+msgstr ""
 
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:600
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:706
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:746
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:814
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:886
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1099
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1157
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1204
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:307
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:586
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:621
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:720
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:798
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:864
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:924
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1160
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1219
+msgid "Discard"
+msgstr "Gözden Çıkar"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:135
+#, fuzzy
+msgid "Discard Unapplied Changed"
+msgstr "Uygulanmamış Değişiklikleri Sil"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:185
+#, fuzzy
+msgid "Discard Unapplied Changed (Ctrl+Z)"
+msgstr "Uygulanmamış Değişiklikleri Sil"
+
+#: ../../../Controllers/MainWindowController.cs:857
+msgid "Discarding tags..."
+msgstr "Etiketler siliniyor..."
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:162
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:174
+msgid "Discussions"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:159
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:170
+#, fuzzy
+msgid "Documentation"
+msgstr "Süre"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:155
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:129
+#: NickvisionTagger.GNOME/Blueprints/window.blp:70
+msgid "Download Lyrics"
+msgstr "Şarkı Sözlerini İndir"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:154
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:124
+#: NickvisionTagger.GNOME/Blueprints/window.blp:69
+msgid "Download MusicBrainz Metadata"
+msgstr "MusicBrainz Üst Verilerini İndir"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:190
+#, fuzzy
+msgid "Download MusicBrainz Metadata (Ctrl+M)"
+msgstr "MusicBrainz Üst Verilerini İndir"
+
+#: ../../../Controllers/MainWindowController.cs:1248
+#, csharp-format
+msgid "Downloaded lyrics for {0} files successfully"
+msgstr "{0} dosya için şarkı sözleri indirildi"
+
+#: ../../../Controllers/MainWindowController.cs:1224
+#, csharp-format
+msgid "Downloaded metadata for {0} files successfully"
+msgstr "{0} dosya için üst veri indirildi"
+
+#: ../../../Controllers/MainWindowController.cs:1234
+msgid "Downloading lyrics..."
+msgstr "Şarkı sözleri indiriliyor..."
+
+#: ../../../Controllers/MainWindowController.cs:1184
+msgid "Downloading MusicBrainz metadata..."
+msgstr "MusicBrainz üst verileri indiriliyor..."
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:411
+msgid "Drop here to open library"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:53
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:118
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:88
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:116
 msgid "Edit"
 msgstr "Düzenle"
 
-#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:137
-msgid "Clear All Lyrics"
-msgstr "Tüm Şarkı Sözlerini Temizle"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:143
-#: NickvisionTagger.GNOME/Blueprints/window.blp:5
-msgid "Preferences"
-msgstr "Tercihler"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:15
-msgid "User Interface"
-msgstr "Kullanıcı Arayüzü"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:18
-msgid "Theme"
-msgstr "Tema"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
-msgctxt "Theme"
-msgid "Light"
-msgstr "Açık"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
-msgctxt "Theme"
-msgid "Dark"
-msgstr "Koyu"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
-msgctxt "Theme"
-msgid "System"
-msgstr "Sistem"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:30
-msgid "Remember Last Opened Library"
-msgstr "Son Açılan Kitaplığı Hatırla"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:46
-msgid "Music Library"
-msgstr "Müzik Kitaplığı"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:49
-msgid "Include Subfolders"
-msgstr "Alt Klasörleri Dahil Et"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:64
-msgid "Sort Files By"
-msgstr "Dosyaları Sırala"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#: NickvisionTagger.GNOME/Blueprints/window.blp:419
-msgid "File Name"
-msgstr "Dosya Adı"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-msgid "File Path"
-msgstr "Dosya Yolu"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#: NickvisionTagger.GNOME/Blueprints/window.blp:448
-msgid "Title"
-msgstr "Başlık"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#: NickvisionTagger.GNOME/Blueprints/window.blp:452
-msgid "Artist"
-msgstr "Sanatçı"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#: NickvisionTagger.GNOME/Blueprints/window.blp:456
-msgid "Album"
-msgstr "Albüm"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#: NickvisionTagger.GNOME/Blueprints/window.blp:468
-msgid "Year"
-msgstr "Yıl"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#: NickvisionTagger.GNOME/Blueprints/window.blp:481
-msgid "Track"
-msgstr "Parça"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
-#: NickvisionTagger.GNOME/Blueprints/window.blp:464
-msgid "Genre"
-msgstr "Tür"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:77
-msgid "Music File"
-msgstr "Müzik Dosyası"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:80
-msgid "Preserve Modification Timestamp"
-msgstr "Değişiklik Zaman Damgasını Koru"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:96
-#: NickvisionTagger.GNOME/Blueprints/window.blp:67
-msgid "Web Services"
-msgstr "Web Servisleri"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:99
-msgid "Overwrite Tag With MusicBrainz"
-msgstr "MusicBrainz ile Etiketin Üzerine Yaz"
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:100
-msgid ""
-"Enable to overwrite existing tag metadata with data found from MusicBrainz. "
-"If disabled, only blank tag properties will be filled."
-msgstr ""
-"MusicBrainzʼden bulunan verilerle mevcut etiket üst verilerinin üzerine "
-"yazmak için etkinleştirin. Devre dışı bırakılırsa, yalnızca boş etiket "
-"özellikleri doldurulur."
-
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:115
-msgid "Overwrite Album Art With MusicBrainz"
-msgstr "MusicBrainz ile Albüm Kapağının Üzerine Yaz"
-
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:67
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:116
 msgid "Enable to overwrite existing album art with art found from MusicBrainz."
 msgstr ""
 "MusicBrainzʼden bulunan kapakla var olan albüm kapağının üzerine yazmayı "
 "etkinleştir."
 
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:131
-msgid "Overwrite Lyrics From Web Service"
-msgstr "Web Hizmetinden Şarkı Sözlerinin Üzerine Yaz"
-
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:71
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:132
 msgid ""
 "Enable to overwrite existing lyrics with that found from downloading lyrics "
@@ -1061,51 +642,1167 @@ msgstr ""
 "yazılmasını etkinleştir. Devre dışı bırakılırsa, yalnızca boş şarkı sözleri "
 "doldurulur."
 
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:147
-msgid "AcoustId User API Key"
-msgstr "AcoustId Kullanıcı API Anahtarı"
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:63
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:100
+msgid ""
+"Enable to overwrite existing tag metadata with data found from MusicBrainz. "
+"If disabled, only blank tag properties will be filled."
+msgstr ""
+"MusicBrainzʼden bulunan verilerle mevcut etiket üst verilerinin üzerine "
+"yazmak için etkinleştirin. Devre dışı bırakılırsa, yalnızca boş etiket "
+"özellikleri doldurulur."
 
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:202
+#, fuzzy
+msgid "Enter album artist here"
+msgstr "albumartist"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:200
+msgid "Enter album here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:198
+msgid "Enter artist here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:214
+#, fuzzy
+msgid "Enter beats per minute here"
+msgstr "dakika başına vuruş"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:212
+msgid "Enter comment here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:216
+msgid "Enter composer here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Controls/ComboBoxDialog.xaml.cs:52
+msgid "Enter custom choice here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:49
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:218
+#, fuzzy
+msgid "Enter description here"
+msgstr "açıklama"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:193
+msgid "Enter file name here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:204
+msgid "Enter genre here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:75
+msgid "Enter key here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:47
+msgid "Enter language code here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:51
+msgid "Enter offset here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:220
+#, fuzzy
+msgid "Enter publisher here"
+msgstr "yayımcı"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:196
+msgid "Enter title here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:208
+msgid "Enter track here"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:209
+#, fuzzy
+msgid "Enter track total here"
+msgstr "toplam parça"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:206
+msgid "Enter year here"
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:1217
+msgid "Error"
+msgstr "Hata"
+
+#: ../../../Models/MusicFile.cs:392 ../../../Models/MusicFile.cs:803
+#: ../../../Models/MusicFile.cs:961
+msgid "ERROR"
+msgstr "HATA"
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:279
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:259
+msgid "Existing Lyrics"
+msgstr "Var Olan Şarkı Sözleri"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:117
+msgid "Exit"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:142
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:146
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:231
+#: NickvisionTagger.GNOME/Blueprints/window.blp:45
+#: NickvisionTagger.GNOME/Blueprints/window.blp:53
+#: NickvisionTagger.GNOME/Blueprints/window.blp:337
+msgid "Export"
+msgstr "Dışa Aktar"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1033
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:110
+msgid "Export Back Album Art"
+msgstr "Albüm Arka Kapağını Dışa Aktar"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1033
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:90
+msgid "Export Front Album Art"
+msgstr "Albüm Ön Kapağını Dışa Aktar"
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:323
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:57
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:151
+msgid "Export to LRC"
+msgstr "LRC'ye Dışa Aktar"
+
+#: ../../../Controllers/MainWindowController.cs:1111
+msgid "Exported back album art to file successfully"
+msgstr "Albüm arka kapağı dosyaya dışa aktardı"
+
+#: ../../../Controllers/MainWindowController.cs:1095
+msgid "Exported front album art to file successfully"
+msgstr "Albüm ön kapağı dosyaya dışa aktarıldı"
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:341
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:310
+msgid "Exported successfully to: {0}"
+msgstr "Dışa aktarıldı: {0}"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:492
+#, fuzzy
+msgid "Failed MusicBrainz Lookup"
+msgstr "MusicBrainz Aramaları Başarısız Oldu"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:537
+msgid "Failed MusicBrainz Lookups"
+msgstr "MusicBrainz Aramaları Başarısız Oldu"
+
+#: ../../../Controllers/MainWindowController.cs:1116
+msgid "Failed to export back album art to a file"
+msgstr "Albüm arka kapağı dosyaya dışa aktarılamadı"
+
+#: ../../../Controllers/MainWindowController.cs:1100
+msgid "Failed to export front album art to a file"
+msgstr "Albüm ön kapağı dosyaya dışa aktarılamadı"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:112
+#, fuzzy
+msgid "File"
+msgstr "Dosya Adı"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:120
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:192
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:49
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
+#: NickvisionTagger.GNOME/Blueprints/window.blp:419
+msgid "File Name"
+msgstr "Dosya Adı"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:947
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:151
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1110
+#: NickvisionTagger.GNOME/Blueprints/window.blp:62
+msgid "File Name to Tag"
+msgstr "Dosya Adından Etikete"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:188
+#, fuzzy
+msgid "File Name to Tag (Ctrl+F)"
+msgstr "Dosya Adından Etikete"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:121
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:50
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
+msgid "File Path"
+msgstr "Dosya Yolu"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:225
+#: NickvisionTagger.GNOME/Blueprints/window.blp:558
+msgid "File Properties"
+msgstr "Dosya Özellikleri"
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1317
+msgid "filename"
+msgstr "dosya adı"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:226
+#: NickvisionTagger.GNOME/Blueprints/window.blp:561
+msgid "Fingerprint"
+msgstr "Parmak izi"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1688
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1662
+msgid "Fingerprint was copied to clipboard."
+msgstr "Parmak izi panoya kopyalandı."
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1386
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1367
+msgid "Folder Mode"
+msgstr "Klasör Kipi"
+
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:37
+#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:50
+msgid "Format"
+msgstr "Biçim"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:947
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:966
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1110
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1128
+msgid "Format String"
+msgstr "Biçimlendirme Dizgesi"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:162
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:987
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:139
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1469
+#: NickvisionTagger.GNOME/Blueprints/window.blp:41
+msgid "Front"
+msgstr "Ön"
+
+#: ../../../Controllers/MainWindowController.cs:176
+msgid "Fyodor Sobolev"
+msgstr "Fyodor Sobolev"
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1382
+#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:663
+#: ../../../Models/MusicFile.cs:754
+msgid "genre"
+msgstr "tür"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:127
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:203
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:56
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
+#: NickvisionTagger.GNOME/Blueprints/window.blp:464
+msgid "Genre"
+msgstr "Tür"
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:76
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:157
 msgid "Get New API Key"
 msgstr "Yeni API Anahtarı Al"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:166
+msgid "Getting Started"
+msgstr ""
+
+#: ../../../Helpers/MediaHelpers.cs:33
+msgid "GiB"
+msgstr "GiB"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1314
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:160
+msgid "GitHub Repo"
+msgstr "GitHub Deposu"
+
+#: ../../../Controllers/MainWindowController.cs:285
+msgid "Good Afternoon!"
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:287
+msgid "Good Day!"
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:286
+msgid "Good Evening!"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:519
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:524
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:529
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:29
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:157
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:459
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:470
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:481
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:18
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:153
+#: NickvisionTagger.GNOME/Blueprints/window.blp:7
+msgid "Help"
+msgstr "Yardım"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:191
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:773
+msgid "Hide Extras Pane"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:268
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:56
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:144
+msgid "Import from LRC"
+msgstr "LRC'den İçe Aktar"
+
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:41
+#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:67
+msgid "Include Only Selected Files"
+msgstr "Yalnızca Seçili Dosyaları İçer"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:534
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:503
+msgid "Info"
+msgstr "Bilgi"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:140
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:144
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:229
+#: NickvisionTagger.GNOME/Blueprints/window.blp:43
+#: NickvisionTagger.GNOME/Blueprints/window.blp:51
+#: NickvisionTagger.GNOME/Blueprints/window.blp:319
+msgid "Insert"
+msgstr "Ekle"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:998
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:100
+msgid "Insert Back Album Art"
+msgstr "Albüm Arka Kapağı Ekle"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:998
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:80
+msgid "Insert Front Album Art"
+msgstr "Albüm Ön Kapağı Ekle"
+
+#: ../../../Controllers/MainWindowController.cs:999
+#, fuzzy
+msgid "Inserting album art..."
+msgstr "Albüm Arka Kapağı Ekle"
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:281
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:261
+msgid "Keep Tagger's lyrics"
+msgstr "Tagger Şarkı Sözlerini Tut"
+
+#: ../../../Helpers/MediaHelpers.cs:33
+msgid "KiB"
+msgstr "KiB"
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:46
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:55
+msgid "Language Code"
+msgstr "Dil Kodu"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:173
+msgid "Let us fix whatever issue you are having."
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:468
+msgid "Library was changed on disk."
+msgstr "Kitaplık diskte değiştirildi."
+
+#: ../../../Controllers/MainWindowController.cs:521
+#, csharp-format
+msgid "Loaded {0} music file."
+msgid_plural "Loaded {0} music files."
+msgstr[0] "{0} müzik dosyası yüklendi."
+msgstr[1] "{0} müzik dosyası yüklendi."
+
+#: ../../../Controllers/MainWindowController.cs:507
+#: ../../../Controllers/MainWindowController.cs:1583
+msgid "Loading music files from library..."
+msgstr "Müzik dosyaları kitaplıktan yükleniyor..."
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:39
+msgid "Lryics"
+msgstr ""
+
+#: ../../../Models/MusicFile.cs:72
+msgid "lyrics"
+msgstr "şarkı sözleri"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:186
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:32
+#: NickvisionTagger.GNOME/Blueprints/window.blp:439
+msgid "Lyrics"
+msgstr "Şarkı Sözleri"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:194
+#: NickvisionTagger.GNOME/Blueprints/window.blp:428
+msgid "Main Properties"
+msgstr "Ana Özellikler"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:137
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:115
+#: NickvisionTagger.GNOME/Blueprints/window.blp:35
+#: NickvisionTagger.GNOME/Blueprints/window.blp:435
+msgid "Manage Lyrics"
+msgstr "Şarkı Sözlerini Yönet"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:187
+#, fuzzy
+msgid "Manage Lyrics (Ctrl+L)"
+msgstr "Şarkı Sözlerini Yönet"
+
+#: ../../../Controllers/MainWindowController.cs:172
+msgid "Matrix Chat"
+msgstr "Matrix Sohbet"
+
+#: ../../../Helpers/MediaHelpers.cs:33
+msgid "MiB"
+msgstr "MiB"
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:57
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:77
+msgid "Music File"
+msgstr "Müzik Dosyası"
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:44
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:46
+msgid "Music Library"
+msgstr "Müzik Kitaplığı"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1145
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1205
+msgid "MusicBrainz Recording Id"
+msgstr "MusicBrainz Kayıt Kimliği"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1071
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1092
+msgid "New Custom Property"
+msgstr "Yeni Özel Özellik"
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:216
+msgid "New Synchronized Lyric"
+msgstr "Yeni Eşitlenmiş Şarkı Sözleri"
+
+#: ../../../Controllers/MainWindowController.cs:425
+msgid "New update available."
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:173
+#: ../../../Controllers/MainWindowController.cs:175
+msgid "Nicholas Logozzo"
+msgstr "Nicholas Logozzo"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:803
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:870
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:853
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:910
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:122
+msgid "No"
+msgstr "Hayır"
+
+#: ../../../Controllers/MainWindowController.cs:1213
+msgid "No AcoustId entry found for the file's fingerprint"
+msgstr "Dosyanın parmak izi için AcoustId girdisi bulunamadı"
+
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:68
+#, fuzzy
+msgid "No file selected"
+msgstr "Hiçbir müzik dosyası seçilmedi."
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:864
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:901
+msgid "No files selected for removal."
+msgstr "Kaldırmak için hiçbir dosya seçilmedi."
+
+#: ../../../Controllers/MainWindowController.cs:1248
+msgid "No lyrics were downloaded"
+msgstr "Hiçbir şarkı sözü indirilmedi"
+
+#: ../../../Controllers/MainWindowController.cs:1224
+msgid "No metadata was downloaded"
+msgstr "Hiçbir üst veri indirilmedi"
+
+#: ../../../Controllers/MainWindowController.cs:544
+msgid "No music files are selected."
+msgstr "Hiçbir müzik dosyası seçilmedi."
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:176
+#: NickvisionTagger.GNOME/Blueprints/window.blp:200
+msgid "No Music Files Found"
+msgstr "Hiçbir Müzik Dosyası Bulunamadı"
+
+#: ../../../Controllers/MainWindowController.cs:548
+msgid "No music files in library."
+msgstr "Kitaplıkta müzik dosyası yok."
+
+#: ../../../Controllers/MainWindowController.cs:1214
+msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
+msgstr "AcoustId girdisi için MusicBrainz kayıt kimliği sağlanmadı"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:180
+#: NickvisionTagger.GNOME/Blueprints/window.blp:277
+msgid "No Selected Music Files"
+msgstr "Seçili Müzik Dosyası Yok"
+
+#: ../../../Controllers/MainWindowController.cs:1261
+msgid "No user api key configured."
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:319
+msgid "Nothing to export."
+msgstr "Dışa aktarılacak bir şey yok."
+
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:40
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:43
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:40
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:43
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:47
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:60
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:65
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:69
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:73
+msgid "Off"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:50
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:73
+msgid "Offset (in milliseconds)"
+msgstr "Ofset (milisaniye cinsinden)"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1138
+#: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:27
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:28
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:497
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1198
+msgid "OK"
+msgstr "Tamam"
+
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:39
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:42
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:39
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:42
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:46
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:59
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:64
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:68
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:72
+#, fuzzy
+msgid "On"
+msgstr "Aç"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1136
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1197
+msgid ""
+"Only one file can be submitted to AcoustID at a time. Please select only one "
+"file and try again."
+msgstr ""
+"AcoustIDʼye aynı anda yalnızca bir dosya gönderilebilir. Lütfen yalnızca bir "
+"dosya seçip tekrar deneyin."
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:543
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:514
+msgid "Open"
+msgstr "Aç"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:167
+#, fuzzy
+msgid "Open a library with music to get started."
+msgstr "Başlamak için müzik içeren bir kitaplık açın"
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:46
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:652
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:43
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:113
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:168
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:16
+#: NickvisionTagger.GNOME/Blueprints/window.blp:13
+#: NickvisionTagger.GNOME/Blueprints/window.blp:129
+msgid "Open Folder"
+msgstr "Klasör Aç"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:782
+msgid "Open Music File"
+msgstr "Müzik Dosyası Aç"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:667
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:114
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:169
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:21
+#: NickvisionTagger.GNOME/Blueprints/window.blp:14
+#: NickvisionTagger.GNOME/Blueprints/window.blp:142
+msgid "Open Playlist"
+msgstr "Çalma Listesi Aç"
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:66
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:115
+msgid "Overwrite Album Art With MusicBrainz"
+msgstr "MusicBrainz ile Albüm Kapağının Üzerine Yaz"
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:70
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:131
+msgid "Overwrite Lyrics From Web Service"
+msgstr "Web Hizmetinden Şarkı Sözlerinin Üzerine Yaz"
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:62
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:99
+msgid "Overwrite Tag With MusicBrainz"
+msgstr "MusicBrainz ile Etiketin Üzerine Yaz"
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:78
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:35
+#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:36
+msgid "Path"
+msgstr "Yol"
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:83
+msgid "Path (Empty)"
+msgstr "Yol (Boş)"
+
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:32
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:129
+#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:26
+msgid "Playlist"
+msgstr "Çalma Listesi"
+
+#: ../../../Controllers/MainWindowController.cs:553
+msgid "Playlist file created successfully."
+msgstr "Çalma listesi oluşturuldu."
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1386
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1367
+msgid "Playlist Mode"
+msgstr "Çalma Listesi Kipi"
+
+#: ../../../Controllers/MainWindowController.cs:540
+msgid "Playlist path can not be empty."
+msgstr "Çalma listesi yolu boş olamaz."
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:947
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:966
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1110
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1128
+msgid "Please select a format string."
+msgstr "Lütfen biçimlendirme dizgesi seçin."
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:58
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:80
+msgid "Preserve Modification Timestamp"
+msgstr "Değişiklik Zaman Damgasını Koru"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:98
+msgid "PREVIEW"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1071
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1092
+msgid "Property Name"
+msgstr "Özellik Adı"
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1413
+#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:687
+#: ../../../Models/MusicFile.cs:774
+msgid "publisher"
+msgstr "yayımcı"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:219
+#: NickvisionTagger.GNOME/Blueprints/window.blp:525
+msgid "Publisher"
+msgstr "Yayımcı"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:171
+msgid "Read more about Tagger's inner workings."
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:514
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:448
+msgid "Reload"
+msgstr "Yeniden Yükle"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:115
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:31
+#: NickvisionTagger.GNOME/Blueprints/window.blp:18
+msgid "Reload Library"
+msgstr "Kitaplığı Yeniden Yükle"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:141
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:145
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:230
+#: NickvisionTagger.GNOME/Blueprints/window.blp:44
+#: NickvisionTagger.GNOME/Blueprints/window.blp:52
+#: NickvisionTagger.GNOME/Blueprints/window.blp:328
+msgid "Remove"
+msgstr "Kaldır"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1508
+#: ../../../../NickvisionTagger.WinUI/Controls/CustomPropertyRow.xaml.cs:22
+msgid "Remove Custom Property"
+msgstr "Özel Özelliği Kaldır"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:868
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:907
+msgid "Remove Files?"
+msgstr "Dosyalar Kaldırılsın Mı?"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:132
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:46
+#: NickvisionTagger.GNOME/Blueprints/window.blp:24
+msgid "Remove from Playlist"
+msgstr "Çalma Listesinden Kaldır"
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:183
+msgid "Remove Lyric"
+msgstr "Şarkı Sözünü Kaldır"
+
+#: ../../../Controllers/MainWindowController.cs:1043
+#, fuzzy
+msgid "Removing album art..."
+msgstr "Albüm Arka Kapağını Kaldır"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:161
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:172
+msgid "Report a Bug"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:119
+msgid "Restart To Apply Theme?"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:97
+msgid "Save Playlist"
+msgstr "Çalma Listesini Kaydet"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:134
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:182
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:55
+msgid "Save Tag"
+msgstr "Etiketi Kaydet"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:183
+#, fuzzy
+msgid "Save Tag (Ctrl+S)"
+msgstr "Etiket Değişikliklerini Uygula (Ctrl+S)"
+
+#: ../../../Controllers/MainWindowController.cs:774
+#: ../../../Controllers/MainWindowController.cs:817
+msgid "Saving tags..."
+msgstr "Etiketler kaydediliyor..."
+
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:36
+#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:43
+msgid "Select Save Location"
+msgstr "Kayıt Konumu Seç"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:181
+#: NickvisionTagger.GNOME/Blueprints/window.blp:278
+msgid "Select some files"
+msgstr "Bazı dosyaları seçin"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:128
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:29
+msgid "Settings"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:765
+msgid "Show Extras Pane"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:595
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:701
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:741
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:809
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:881
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1094
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1152
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1199
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:305
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:584
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:619
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:718
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:796
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:862
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:922
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1158
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1217
+msgid ""
+"Some music files still have changes waiting to be applied. What would you "
+"like to do?"
+msgstr ""
+"Bazı müzik dosyalarında uygulanmayı bekleyen değişiklikler var. Ne yapmak "
+"istersin?"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:119
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:48
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:64
+msgid "Sort Files By"
+msgstr "Dosyaları Sırala"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:175
+msgid "Start a conversation with us."
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1145
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1205
+msgid "Submit"
+msgstr "Gönder"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1145
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:156
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1205
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:134
+#: NickvisionTagger.GNOME/Blueprints/window.blp:71
+msgid "Submit to AcoustId"
+msgstr "AcoustIdʼye Gönder"
+
+#: ../../../Controllers/MainWindowController.cs:1267
+msgid "Submitted metadata to AcoustId successfully"
+msgstr "AcoustId'ye üst veriler başarıyla gönderildi"
+
+#: ../../../Controllers/MainWindowController.cs:1264
+msgid "Submitting data to AcoustId..."
+msgstr "AcoustId'ye veriler gönderiliyor..."
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:986
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:147
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:232
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1253
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1254
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1571
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1572
+#: NickvisionTagger.GNOME/Blueprints/window.blp:346
+msgid "Switch to Back Cover"
+msgstr "Arka Kapağa Geç"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:986
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1253
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1254
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1571
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1572
+msgid "Switch to Front Cover"
+msgstr "Ön Kapağa Geç"
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:45
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:50
+msgid "Synchronized"
+msgstr "Eşitlenmiş"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:133
+#, fuzzy
+msgid "Tag"
+msgstr "Tagger"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:966
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:152
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1128
+#: NickvisionTagger.GNOME/Blueprints/window.blp:63
+msgid "Tag to File Name"
+msgstr "Etiketten Dosya Adına"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:189
+#, fuzzy
+msgid "Tag to File Name (Ctrl+T)"
+msgstr "Etiketten Dosya Adına"
+
+#: ../../../Controllers/MainWindowController.cs:168
+#: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:5
+#: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:8
+msgid "Tag your music"
+msgstr "Müziklerinizi etiketleyin"
+
+#: ../../../Controllers/MainWindowController.cs:167
+#: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:4
+#: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:6
+msgid "Tagger"
+msgstr "Tagger"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:868
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:908
+msgid ""
+"The selected files will not be deleted from disk but will be removed from "
+"this playlist."
+msgstr ""
+"Seçilen dosyalar diskten silinmeyecek fakat çalma listesinden kaldırılacak."
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:33
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:18
+msgid "Theme"
+msgstr "Tema"
+
+#: ../../../Controllers/MainWindowController.cs:1216
+msgid "This file does not have a valid fingerprint"
+msgstr "Bu dosyanın geçerli bir parmak izi yok"
+
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:30
+#: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
+msgid ""
+"This music folder contains music files that have corrupted tags. The "
+"following files are affected and will be ignored by Tagger:"
+msgstr ""
+"Bu müzik klasörü, bozuk etiketleri olan müzik dosyaları içeriyor. Aşağıdaki "
+"dosyalar bundan etkileniyor ve Tagger tarafından yok sayılacaklar:"
+
+#: ../../../Helpers/MediaHelpers.cs:33
+msgid "TiB"
+msgstr "TiB"
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:216
+msgid "Timestamp (hh:mm:ss or mm:ss.xx)"
+msgstr "Zaman damgası (hh:mm:ss ya da mm:ss.xx)"
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1321
+#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:623
+#: ../../../Models/MusicFile.cs:726
+msgid "title"
+msgstr "başlık"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:122
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:195
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:51
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
+#: NickvisionTagger.GNOME/Blueprints/window.blp:448
+msgid "Title"
+msgstr "Başlık"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1136
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1196
+msgid "Too Many Files Selected"
+msgstr "Çok Fazla Dosya Seçildi"
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1348
+#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:643
+#: ../../../Models/MusicFile.cs:742
+msgid "track"
+msgstr "parça"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:126
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:207
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:55
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
+#: NickvisionTagger.GNOME/Blueprints/window.blp:481
+msgid "Track"
+msgstr "Parça"
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1363
+#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:651
+#: ../../../Models/MusicFile.cs:746
+msgid "tracktotal"
+msgstr "toplam parça"
+
+#: ../../../Controllers/MainWindowController.cs:179
+msgid "translator-credits"
+msgstr "Sabri Ünal <libreajans@gmail.com>"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:177
+#: NickvisionTagger.GNOME/Blueprints/window.blp:201
+msgid "Try a different library"
+msgstr "Başka bir kitaplık dene"
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:43
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:42
+msgid "Type"
+msgstr "Tür"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:178
+#: NickvisionTagger.GNOME/Blueprints/window.blp:220
+#, fuzzy
+msgid "Type ! for advanced search"
+msgstr "Dosya adı ara (gelişmiş arama için ! yazın)..."
+
+#: ../../../Controllers/MainWindowController.cs:577
+msgid "Unable to add file to playlist. File may already exist in playlist."
+msgstr ""
+"Dosya çalma listesine eklenemiyor. Dosya zaten çalma listesinde olabilir."
+
+#: ../../../Controllers/MainWindowController.cs:557
+msgid "Unable to create playlist."
+msgstr "Çalma listesi oluşturulamıyor."
+
+#: ../../../Controllers/MainWindowController.cs:442
+#, fuzzy
+msgid "Unable to download and install update."
+msgstr "Resim dosyası yüklenemedi"
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:345
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:316
+msgid "Unable to export to LRC."
+msgstr "LRC'ye dışa aktarılamıyor."
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:294
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:281
+msgid "Unable to import from LRC."
+msgstr "LRC'den içe aktarılamıyor."
+
+#: ../../../Controllers/MainWindowController.cs:995
+msgid "Unable to load image file"
+msgstr "Resim dosyası yüklenemedi"
+
+#: ../../../Controllers/MainWindowController.cs:592
+msgid "Unable to remove some files from playlist."
+msgstr "Kimi dosyalar çalma listesinden kaldırılamıyor."
+
+#: ../../../Controllers/MainWindowController.cs:837
+#, csharp-format
+msgid "Unable to save {0}"
+msgstr "{0} kaydedilemedi"
+
+#: ../../../Controllers/MainWindowController.cs:795
+#, csharp-format
+msgid "Unable to save {0}."
+msgstr "{0} kaydedilemedi."
+
+#: ../../../Controllers/MainWindowController.cs:1267
+msgid "Unable to submit to AcoustId. Check API key"
+msgstr "AcoustIdʼye gönderilemiyor. API anahtarını denetleyin"
+
+#: ../../../Controllers/MainWindowController.cs:1561
+msgid "Unknown"
+msgstr "Bilinmiyor"
+
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:44
+#: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:50
+msgid "Unsynchronized"
+msgstr "Eşitlenmemiş"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:441
+msgid "Update"
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:284
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:262
+msgid "Use LRC's lyrics"
+msgstr "LRC şarkı sözlerini kullan"
+
+#: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:38
+#: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:57
+msgid "Use Relative Paths"
+msgstr "Göreli Yolları Kullan"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:801
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:850
+#, fuzzy
+msgid "Use Relative Paths?"
+msgstr "Göreli Yolları Kullan"
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:32
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:15
+msgid "User Interface"
+msgstr "Kullanıcı Arayüzü"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:153
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:61
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:96
+#: NickvisionTagger.GNOME/Blueprints/window.blp:67
+msgid "Web Services"
+msgstr "Web Servisleri"
+
+#: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:279
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:260
+msgid ""
+"What would you like Tagger to do with lyrics found from the LRC file that "
+"conflict with existing lyrics of the same timestamp?"
+msgstr ""
+"Tagger'ın, LRC dosyasında bulunan ve aynı zaman damgasına sahip mevcut şarkı "
+"sözleriyle çelişen şarkı sözleriyle ne yapmasını istersiniz?"
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:120
+#, csharp-format
+msgid ""
+"Would you like to restart {0} to apply the new theme?\n"
+"Any unsaved work will be lost."
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:801
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:851
+msgid ""
+"Would you like to save the added file to the playlist using it's relative "
+"path?\n"
+"If not, the full path will be used instead."
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:1291
+#: ../../../Controllers/MainWindowController.cs:1333
+#: ../../../Models/MusicFile.cs:72 ../../../Models/MusicFile.cs:635
+#: ../../../Models/MusicFile.cs:738
+msgid "year"
+msgstr "yıl"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:125
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:205
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:54
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
+#: NickvisionTagger.GNOME/Blueprints/window.blp:468
+msgid "Year"
+msgstr "Yıl"
+
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:806
+#: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:873
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:852
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:909
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:121
+msgid "Yes"
+msgstr "Evet"
+
+#: ../../../Controllers/MainWindowController.cs:284
+msgctxt "Morning"
+msgid "Good Morning!"
+msgstr ""
+
+#: ../../../Controllers/MainWindowController.cs:283
+msgctxt "Night"
+msgid "Good Morning!"
+msgstr ""
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:36
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
+msgctxt "Theme"
+msgid "Dark"
+msgstr "Koyu"
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:35
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
+msgctxt "Theme"
+msgid "Light"
+msgstr "Açık"
+
+#: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:37
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
+msgctxt "Theme"
+msgid "System"
+msgstr "Sistem"
+
+#: NickvisionTagger.GNOME/Blueprints/autocomplete_box.blp:15
+msgid "Suggestions"
+msgstr "Öneriler"
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:11
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:143
+#: NickvisionTagger.GNOME/Blueprints/window.blp:5
+msgid "Preferences"
+msgstr "Tercihler"
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:30
+msgid "Remember Last Opened Library"
+msgstr "Son Açılan Kitaplığı Hatırla"
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:49
+msgid "Include Subfolders"
+msgstr "Alt Klasörleri Dahil Et"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:13
 msgctxt "Shortcut"
 msgid "Music Library"
 msgstr "Müzik Kitaplığı"
 
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:26
-msgid "Close Library"
-msgstr "Kitaplığı Kapat"
-
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:31
-#: NickvisionTagger.GNOME/Blueprints/window.blp:18
-msgid "Reload Library"
-msgstr "Kitaplığı Yeniden Yükle"
-
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:36
-#: NickvisionTagger.GNOME/Blueprints/window.blp:22
-msgid "Create Playlist"
-msgstr "Çalma Listesi Oluştur"
-
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:41
-#: NickvisionTagger.GNOME/Blueprints/window.blp:23
-msgid "Add to Playlist"
-msgstr "Çalma Listesine Ekle"
-
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:46
-#: NickvisionTagger.GNOME/Blueprints/window.blp:24
-msgid "Remove from Playlist"
-msgstr "Çalma Listesinden Kaldır"
-
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:52
 msgctxt "Shortcut"
 msgid "Music File"
 msgstr "Müzik Dosyası"
-
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:55
-msgid "Save Tag"
-msgstr "Etiketi Kaydet"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:60
 #: NickvisionTagger.GNOME/Blueprints/window.blp:30
@@ -1138,26 +1835,10 @@ msgstr "Albüm Kapağını Değiştir"
 msgid "Remove Back Album Art"
 msgstr "Albüm Arka Kapağını Kaldır"
 
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:115
-#: NickvisionTagger.GNOME/Blueprints/window.blp:35
-#: NickvisionTagger.GNOME/Blueprints/window.blp:435
-msgid "Manage Lyrics"
-msgstr "Şarkı Sözlerini Yönet"
-
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:121
 msgctxt "Shortcut"
 msgid "Web Services"
 msgstr "Web Servisleri"
-
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:124
-#: NickvisionTagger.GNOME/Blueprints/window.blp:69
-msgid "Download MusicBrainz Metadata"
-msgstr "MusicBrainz Üst Verilerini İndir"
-
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:129
-#: NickvisionTagger.GNOME/Blueprints/window.blp:70
-msgid "Download Lyrics"
-msgstr "Şarkı Sözlerini İndir"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:140
 msgctxt "Shortcut"
@@ -1176,28 +1857,6 @@ msgstr "Çık"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:8
 msgid "About Tagger"
 msgstr "Tagger Hakkında"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:38
-msgid "Album Art"
-msgstr "Albüm Kapağı"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:43
-#: NickvisionTagger.GNOME/Blueprints/window.blp:51
-#: NickvisionTagger.GNOME/Blueprints/window.blp:319
-msgid "Insert"
-msgstr "Ekle"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:44
-#: NickvisionTagger.GNOME/Blueprints/window.blp:52
-#: NickvisionTagger.GNOME/Blueprints/window.blp:328
-msgid "Remove"
-msgstr "Kaldır"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:45
-#: NickvisionTagger.GNOME/Blueprints/window.blp:53
-#: NickvisionTagger.GNOME/Blueprints/window.blp:337
-msgid "Export"
-msgstr "Dışa Aktar"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:85
 msgid "Library Menu"
@@ -1227,85 +1886,13 @@ msgstr "Klasör Aç (Ctrl+O)"
 msgid "Open Playlist (Ctrl+Shift+O)"
 msgstr "Çalma Listesi Aç (Ctrl+Shift+O)"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:200
-msgid "No Music Files Found"
-msgstr "Hiçbir Müzik Dosyası Bulunamadı"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:201
-msgid "Try a different library"
-msgstr "Başka bir kitaplık dene"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:220
-msgid "Search for filename (type ! for advanced search)..."
-msgstr "Dosya adı ara (gelişmiş arama için ! yazın)..."
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:225
-msgid "Advanced Search Info"
-msgstr "Gelişmiş Arama Bilgisi"
-
 #: NickvisionTagger.GNOME/Blueprints/window.blp:231
 msgid "Select All Files"
 msgstr "Tüm Dosyaları Seç"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:277
-msgid "No Selected Music Files"
-msgstr "Seçili Müzik Dosyası Yok"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:278
-msgid "Select some files"
-msgstr "Bazı dosyaları seçin"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:428
-msgid "Main Properties"
-msgstr "Ana Özellikler"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:460
-msgid "Album Artist"
-msgstr "Albüm Sanatçısı"
-
 #: NickvisionTagger.GNOME/Blueprints/window.blp:499
 msgid "Track Total"
 msgstr "Toplam Parça"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:506
-msgid "Additional Properties"
-msgstr "Ek Özellikler"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:509
-msgid "Comment"
-msgstr "Yorum"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:513
-msgid "Beats Per Minute"
-msgstr "Dakika Başına Vuruş"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:517
-msgid "Composer"
-msgstr "Besteci"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:525
-msgid "Publisher"
-msgstr "Yayımcı"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:532
-msgid "Custom Properties"
-msgstr "Özel Özellikler"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:549
-msgid "Custom properties can only be edited for individual files."
-msgstr "Özel özellikler yalnızca bağımsız dosyalar için düzenlenebilir."
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:558
-msgid "File Properties"
-msgstr "Dosya Özellikleri"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:561
-msgid "Fingerprint"
-msgstr "Parmak izi"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:580
-msgid "Copy Fingerprint To Clipboard"
-msgstr "Parmak İzini Panoya Kopyala"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:608
 msgid "Toggle Tags Pane"
@@ -1369,6 +1956,21 @@ msgstr ""
 "— Birçok biçimde (m3u, pls, xspf ve daha fazlası) çalma listeleri açın, "
 "yönetin ve oluşturun"
 
+#~ msgid "Discarding unapplied changes..."
+#~ msgstr "Uygulanmayan değişiklikler gözden çıkartılıyor..."
+
+#~ msgid "Loading music file..."
+#~ msgstr "Müzik dosyaları yükleniyor..."
+
+#~ msgid "Loading music files from folder..."
+#~ msgstr "Müzik dosyaları klasörden yükleniyor..."
+
+#~ msgid "Loading music files from playlist..."
+#~ msgstr "Müzik dosyaları çalma listesinden yükleniyor..."
+
+#~ msgid "Removing files from playlist..."
+#~ msgstr "Müzik dosyaları kitaplıktan kaldırılıyor..."
+
 #, csharp-format
 #~ msgid "lrc"
 #~ msgstr "Şsz"
@@ -1421,9 +2023,6 @@ msgstr ""
 #~ msgstr ""
 #~ "Eşitlenmiş şarkı sözleri, milisaniye cinsinden zaman damgalarıyla "
 #~ "tanımlanan bir dizge sözlüğü olarak saklanır."
-
-#~ msgid "Duration"
-#~ msgstr "Süre"
 
 #~ msgid "File Size"
 #~ msgstr "Dosya Boyutu"
