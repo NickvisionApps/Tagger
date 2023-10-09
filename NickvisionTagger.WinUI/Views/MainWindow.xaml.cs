@@ -1342,11 +1342,11 @@ public sealed partial class MainWindow : Window
             {
                 var row = new MusicFileRow(musicFile);
                 var header = _controller.GetHeaderForMusicFile(musicFile) ?? _("Default");
-                if(string.IsNullOrEmpty(header))
+                if (string.IsNullOrEmpty(header))
                 {
                     header = _("Default");
                 }
-                if(!data.ContainsKey(header))
+                if (!data.ContainsKey(header))
                 {
                     data[header] = new TitledList(header);
                 }
