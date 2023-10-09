@@ -1341,11 +1341,7 @@ public sealed partial class MainWindow : Window
             foreach (var musicFile in _controller.MusicFiles)
             {
                 var row = new MusicFileRow(musicFile);
-                var header = _controller.GetHeaderForMusicFile(musicFile) ?? _("Default");
-                if (string.IsNullOrEmpty(header))
-                {
-                    header = _("Default");
-                }
+                var header = _controller.GetHeaderForMusicFile(musicFile) ?? "";
                 if (!data.ContainsKey(header))
                 {
                     data[header] = new TitledList(header);

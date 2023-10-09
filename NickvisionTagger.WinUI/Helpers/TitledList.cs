@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.UI.Xaml;
+using System.Collections.Generic;
 
 namespace NickvisionTagger.WinUI.Helpers;
 
@@ -11,6 +12,11 @@ public class TitledList : List<object>
     /// The title of the list
     /// </summary>
     public string Title { get; init; }
+
+    /// <summary>
+    /// The visbility of the title widget
+    /// </summary>
+    public Visibility TitleVisibility => !string.IsNullOrEmpty(Title) ? Visibility.Visible : Visibility.Collapsed;
 
     /// <summary>
     /// Constructs a TitledList

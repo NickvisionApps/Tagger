@@ -621,7 +621,7 @@
                                                     <GroupStyle>
                                                         <GroupStyle.HeaderTemplate>
                                                             <DataTemplate>
-                                                                <Border>
+                                                                <Border Visibility="{Binding TitleVisibility}">
                                                                     <TextBlock Text="{Binding Title}" Style="{ThemeResource NavigationViewItemHeaderTextStyle}"/>
                                                                 </Border>
                                                             </DataTemplate>
