@@ -1432,7 +1432,7 @@ public sealed partial class MainWindow : Window
         TxtComposer.Text = _controller.SelectedPropertyMap.Composer;
         TxtDescription.Text = _controller.SelectedPropertyMap.Description;
         TxtPublisher.Text = _controller.SelectedPropertyMap.Publisher;
-        LblDurationFileSize.Text = $"{_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}";
+        LblDurationFileSize.Text = $"{_controller.SelectedPropertyMap.Duration} ï¿½ {_controller.SelectedPropertyMap.FileSize}";
         LblFingerprint.Text = _controller.SelectedPropertyMap.Fingerprint;
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
         if (albumArt == "hasArt")
@@ -1446,9 +1446,9 @@ public sealed partial class MainWindow : Window
             else
             {
                 using var ms = new InMemoryRandomAccessStream();
-                using var writter = new DataWriter(ms.GetOutputStreamAt(0));
-                writter.WriteBytes(art);
-                writter.StoreAsync().GetResults();
+                using var writer = new DataWriter(ms.GetOutputStreamAt(0));
+                writer.WriteBytes(art);
+                writer.StoreAsync().GetResults();
                 var image = new BitmapImage();
                 image.SetSource(ms);
                 ImgAlbumArt.Source = image;

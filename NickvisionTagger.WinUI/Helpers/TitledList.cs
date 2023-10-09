@@ -14,7 +14,7 @@ public class TitledList : List<object>
     public string Title { get; init; }
 
     /// <summary>
-    /// The visbility of the title widget
+    /// The visibility of the title widget
     /// </summary>
     public Visibility TitleVisibility => !string.IsNullOrEmpty(Title) ? Visibility.Visible : Visibility.Collapsed;
 

@@ -79,9 +79,9 @@ public sealed partial class MusicFileRow : UserControl
             if (_art.Length > 0)
             {
                 using var ms = new InMemoryRandomAccessStream();
-                using var writter = new DataWriter(ms.GetOutputStreamAt(0));
-                writter.WriteBytes(_art);
-                writter.StoreAsync().GetResults();
+                using var writer = new DataWriter(ms.GetOutputStreamAt(0));
+                writer.WriteBytes(_art);
+                writer.StoreAsync().GetResults();
                 var image = new BitmapImage();
                 image.SetSource(ms);
                 ArtViewStack.CurrentPageName = "Art";
