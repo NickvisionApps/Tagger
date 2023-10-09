@@ -31,7 +31,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     [LibraryImport("libadwaita-1.so.0")]
     private static partial void gtk_list_box_row_set_header(nint row, nint header);
 
-
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
     private readonly Gtk.DropTarget _dropTarget;
@@ -48,7 +47,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _acoustIdAction;
     private readonly GtkListBoxUpdateHeaderFunc _updateHeaderFunc;
     private AlbumArtType _currentAlbumArtType;
-    private string _listHeader;
+    private string? _listHeader;
     private List<MusicFileRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
     private AutocompleteBox _autocompleteBox;
@@ -1347,11 +1346,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 if (comparable != header)
                 {
                     comparable = header;
-                    _listHeader = header!;
-                    if (_listHeader.Contains($"{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}"))
-                    {
-                        _listHeader = _listHeader.Substring(_listHeader.LastIndexOf($"{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}") + 1);
-                    }
+                    _listHeader = header;
                     if (_listMusicFilesRows.Any())
                     {
                         if (_listMusicFilesRows[^1].HasCssClass("start-row"))

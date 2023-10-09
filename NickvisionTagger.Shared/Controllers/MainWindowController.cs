@@ -1560,6 +1560,10 @@ public class MainWindowController : IDisposable
         {
             header = SortFilesBy != SortBy.Path ? _("Unknown") : "";
         }
+        if (header != null && header.Contains($"{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}"))
+        {
+            header = header.Substring(header.LastIndexOf($"{Path.DirectorySeparatorChar}..{Path.DirectorySeparatorChar}") + 1);
+        }
         return header;
     }
 
