@@ -1,5 +1,5 @@
 using System;
-using static NickvisionTagger.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.Shared.Helpers;
 

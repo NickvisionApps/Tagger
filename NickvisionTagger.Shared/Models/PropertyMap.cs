@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static NickvisionTagger.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.Shared.Models;
 

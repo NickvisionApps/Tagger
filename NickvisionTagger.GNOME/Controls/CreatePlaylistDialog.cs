@@ -4,7 +4,7 @@ using NickvisionTagger.Shared.Models;
 using System;
 using System.IO;
 using System.Linq;
-using static NickvisionTagger.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.GNOME.Controls;
 

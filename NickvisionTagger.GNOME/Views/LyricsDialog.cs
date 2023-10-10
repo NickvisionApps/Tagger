@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using static NickvisionTagger.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.GNOME.Views;
 

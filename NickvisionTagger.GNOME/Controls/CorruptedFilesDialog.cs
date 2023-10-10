@@ -1,8 +1,8 @@
 using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Helpers;
 using System.Collections.Generic;
+using static Nickvision.Aura.Localization.Gettext;
 using static Nickvision.GirExt.GtkExt;
-using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.GNOME.Controls;
 

@@ -26,7 +26,7 @@ using Windows.Storage.Streams;
 using Windows.System;
 using Windows.UI;
 using WinRT.Interop;
-using static NickvisionTagger.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.WinUI.Views;
 
@@ -1658,11 +1658,11 @@ public sealed partial class MainWindow : Window
     private void TxtGenre_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
     {
         TxtGenre.ItemsSource = null;
-        if(args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+        if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
         {
             TxtGenre.ItemsSource = _controller.GetGenreSuggestions(TxtGenre.Text);
         }
-        if(args.Reason != AutoSuggestionBoxTextChangeReason.ProgrammaticChange)
+        if (args.Reason != AutoSuggestionBoxTextChangeReason.ProgrammaticChange)
         {
             TagPropertyChanged(sender, null);
         }

@@ -14,7 +14,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using static NickvisionTagger.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.Shared.Controllers;
 
@@ -148,6 +148,7 @@ public class MainWindowController : IDisposable
             }
         }
         Aura.Init("org.nickvision.tagger", "Nickvision Tagger");
+        AppInfo.EnglishShortName = "Tagger";
         if (Directory.Exists($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
         {
             // Move config files from older versions and delete old directory
