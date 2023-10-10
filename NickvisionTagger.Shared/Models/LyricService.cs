@@ -3,15 +3,14 @@ using HtmlAgilityPack;
 using System;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace NickvisionTagger.Shared.Models;
 
 public enum LyricProviders
 {
-    Music163 = 0, //sync lyric provider
-    Letras, //unsync lyric provider
+    Letras //unsync lyric provider
 }
 
 /// <summary>
@@ -52,7 +51,6 @@ public static class LyricService
         {
             res = provider switch
             {
-                LyricProviders.Music163 => await GetFromMusic163Async(title, artist),
                 LyricProviders.Letras => await GetFromLetrasAsync(title, artist),
                 _ => null
             };
@@ -63,46 +61,7 @@ public static class LyricService
         }
         return res;
     }
-    
-    /// <summary>
-    /// Gets lyrics from Music163
-    /// </summary>
-    /// <param name="title">The title of the song</param>
-    /// <param name="artist">The artist of the song</param>
-    /// <returns>The LyricInfo object if successful, else null</returns>
-    private static async Task<LyricsInfo?> GetFromMusic163Async(string title, string artist)
-    {
-        var url = $"http://music.163.com/api/search/pc?offset=0&limit=1&type=1&s={title.Replace(" ", "")},{artist.Replace(" ", "")}";
-        try
-        {
-            var searchResult = (await _http.GetStringAsync(url)).ToLower();
-            using var searchJson = JsonDocument.Parse(searchResult);
-            if (searchJson.RootElement.GetProperty("code").GetInt32() == 200)
-            {
-                if (searchJson.RootElement.GetProperty("result").GetProperty("songs").GetArrayLength() > 0)
-                {
-                    var first = searchJson.RootElement.GetProperty("result").GetProperty("songs").EnumerateArray().Current;
-                    var lyricUrl = $"https://music.163.com/api/song/lyric?os=pc&lv=-1&kv=-1&tv=-1&id={first.GetProperty("id").GetInt32()}";
-                    var lyricResult = (await _http.GetStringAsync(lyricUrl)).ToLower();
-                    using var lyricJson = JsonDocument.Parse(lyricResult);
-                    if (lyricJson.RootElement.GetProperty("code").GetInt32() == 200)
-                    {
-                        var lrc = lyricJson.RootElement.GetProperty("lrc").GetProperty("lyric").GetString() ?? "";
-                        var lyricsInfo = new LyricsInfo();
-                        lyricsInfo.ParseLRC(lrc);
-                        return lyricsInfo;
-                    }
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-            Console.WriteLine(e.StackTrace);
-        }
-        return null;
-    }
-    
+
     /// <summary>
     /// Gets lyrics from Letras
     /// </summary>
@@ -120,7 +79,7 @@ public static class LyricService
             var lyricsHtml = html.GetElementbyId("letra-cnt");
             return new LyricsInfo()
             {
-                UnsynchronizedLyrics = lyricsHtml.InnerHtml.Replace("<p>", "").Replace("<br>", "\n").Replace("</p>", "\n").Trim()
+                UnsynchronizedLyrics = HttpUtility.HtmlDecode(lyricsHtml.InnerHtml.Replace("<p>", "").Replace("<br>", "\n").Replace("</p>", "\n")).Trim()
             };
         }
         catch (Exception e)

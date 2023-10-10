@@ -1,4 +1,5 @@
 using Nickvision.Aura;
+using System.Runtime.InteropServices;
 
 namespace NickvisionTagger.Shared.Models;
 
@@ -39,6 +40,10 @@ public class Configuration : ConfigurationBase
     /// </summary>
     public Theme Theme { get; set; }
     /// <summary>
+    /// Whether or not to automatically check for updates
+    /// </summary>
+    public bool AutomaticallyCheckForUpdates { get; set; }
+    /// <summary>
     /// Whether or not to remember the last opened folder
     /// </summary>
     public bool RememberLastOpenedFolder { get; set; }
@@ -74,16 +79,22 @@ public class Configuration : ConfigurationBase
     /// The user's AcoustId API Key
     /// </summary>
     public string AcoustIdUserAPIKey { get; set; }
+    /// <summary>
+    /// Whether or not to show the Extras Pane
+    /// </summary>
+    /// <remarks>Used on WinUI only</remarks>
+    public bool ExtrasPane { get; set; }
 
     /// <summary>
     /// Constructs a Configuration
     /// </summary>
     public Configuration()
     {
-        WindowWidth = 800;
-        WindowHeight = 600;
+        WindowWidth = 900;
+        WindowHeight = 700;
         WindowMaximized = false;
         Theme = Theme.System;
+        AutomaticallyCheckForUpdates = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         RememberLastOpenedFolder = true;
         IncludeSubfolders = true;
         SortFilesBy = SortBy.Path;
@@ -93,6 +104,7 @@ public class Configuration : ConfigurationBase
         OverwriteAlbumArtWithMusicBrainz = true;
         OverwriteLyricsWithWebService = true;
         AcoustIdUserAPIKey = "";
+        ExtrasPane = true;
     }
 
     /// <summary>

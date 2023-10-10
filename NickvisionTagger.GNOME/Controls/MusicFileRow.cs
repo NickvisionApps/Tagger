@@ -1,5 +1,5 @@
-using NickvisionTagger.Shared.Models;
 using NickvisionTagger.GNOME.Helpers;
+using NickvisionTagger.Shared.Models;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -15,7 +15,7 @@ public class MusicFileRow : Adw.ActionRow
 
     [Gtk.Connect] private readonly Gtk.Image _artImage;
     [Gtk.Connect] private readonly Gtk.Image _unsavedImage;
-    
+
     /// <summary>
     /// Constructs MusicFileRow
     /// </summary>
@@ -27,7 +27,7 @@ public class MusicFileRow : Adw.ActionRow
         builder.Connect(this);
         Update(musicFile);
     }
-    
+
     /// <summary>
     /// Constructs MusicFileRow
     /// </summary>
@@ -35,14 +35,14 @@ public class MusicFileRow : Adw.ActionRow
     public MusicFileRow(MusicFile musicFile) : this(Builder.FromFile("music_file_row.ui"), musicFile)
     {
     }
-    
+
     /// <summary>
     /// Sets art icon from bytes array
     /// </summary>
     /// <param name="art">Art as byte array</param>
     public void SetArtFromBytes(byte[] art)
     {
-        if(_art.SequenceEqual(art))
+        if (_art.SequenceEqual(art))
         {
             return;
         }
@@ -60,7 +60,7 @@ public class MusicFileRow : Adw.ActionRow
             _artImage.SetFromIconName("audio-x-generic-symbolic");
         }
     }
-    
+
     /// <summary>
     /// Sets unsaved icon visibility
     /// </summary>

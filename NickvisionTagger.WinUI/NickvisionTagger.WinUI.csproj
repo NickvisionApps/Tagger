@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>NickvisionTagger.WinUI</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x86;x64;ARM64</Platforms>
+    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
+    <UseWinUI>true</UseWinUI>
+    <AppxPackage>false</AppxPackage>
+    <WindowsPackageType>None</WindowsPackageType>
+    <ApplicationIcon>Resources\org.nickvision.tagger.ico</ApplicationIcon>
+    <EnableCoreMrtTooling Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">false</EnableCoreMrtTooling>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Controls\*" />
+    <None Remove="Views\*" />
+    <None Remove="Resources\org.nickvision.tagger.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\org.nickvision.tagger.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.0.230907" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Segmented" Version="8.0.230907" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.0.230907" />
+    <PackageReference Include="CommunityToolkit.WinUI.Notifications" Version="7.1.2" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230913002" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
+    <PackageReference Include="Vanara.PInvoke.User32" Version="3.4.16" />
+    <PackageReference Include="Nickvision.Aura" Version="2023.10.0" />
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(GITHUB_ACTIONS)' == ''">
+    <Exec Command="for /F &quot;tokens=*&quot; %%l in (..\NickvisionTagger.Shared\Resources\po\LINGUAS) do @mkdir $(OutDir)\%%l &amp; msgfmt ..\NickvisionTagger.Shared\Resources\po\%%l.po -o $(OutDir)\%%l\application.mo" />
+    <Exec Command="copy Dependencies\fpcalc.exe $(OutDir)" />
+  </Target>
+  
+  <Target Name="PostPublishWindows" AfterTargets="Publish" Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <Exec Command="for /F &quot;tokens=*&quot; %%l in (..\NickvisionTagger.Shared\Resources\po\LINGUAS) do @xcopy $(OutDir)\%%l $(PublishDir)\%%l\ /Y" />
+    <Exec Command="copy Dependencies\fpcalc.exe $(PublishDir)" />
+  </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NickvisionTagger.Shared\NickvisionTagger.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\org.nickvision.tagger.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\StatusPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\ViewStackPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\ViewStack.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <!-- 
+    Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution 
+    Explorer "Package and Publish" context menu entry to be enabled for this project even if 
+    the Windows App SDK Nuget package has not yet been restored.
+  -->
+  <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  </PropertyGroup>
+</Project>

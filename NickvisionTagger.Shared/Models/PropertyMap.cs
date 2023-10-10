@@ -90,7 +90,7 @@ public class PropertyMap : IEquatable<PropertyMap>
     /// The file size of the file
     /// </summary>
     public string FileSize { get; set; }
-    
+
     /// <summary>
     /// Constructs a PropertyMap
     /// </summary>
@@ -99,7 +99,7 @@ public class PropertyMap : IEquatable<PropertyMap>
         CustomProperties = new Dictionary<string, string>();
         Clear();
     }
-    
+
     /// <summary>
     /// Resets the PropertyMap to default values
     /// </summary>
@@ -126,7 +126,7 @@ public class PropertyMap : IEquatable<PropertyMap>
         Fingerprint = "";
         FileSize = _("0 MiB");
     }
-    
+
     /// <summary>
     /// Gets a string representation of the PropertyMap
     /// </summary>
@@ -164,7 +164,7 @@ public class PropertyMap : IEquatable<PropertyMap>
     /// <returns>True if PropertyMaps are equal, else false</returns>
     public override bool Equals(object? obj)
     {
-        if(obj is PropertyMap map)
+        if (obj is PropertyMap map)
         {
             return Equals(map);
         }
@@ -209,7 +209,7 @@ public class PropertyMap : IEquatable<PropertyMap>
     /// <returns>True if obj1 == obj2, else false</returns>
     public static bool operator ==(PropertyMap? obj1, PropertyMap? obj2)
     {
-        if(obj1 is null || obj2 is null)
+        if (obj1 is null || obj2 is null)
         {
             return obj1 is null && obj2 is null;
         }

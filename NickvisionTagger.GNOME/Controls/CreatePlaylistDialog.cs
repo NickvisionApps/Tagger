@@ -15,19 +15,19 @@ public partial class CreatePlaylistDialog : Adw.Window
 {
     private bool _constructing;
     private string _path;
-    
+
     [Gtk.Connect] private readonly Adw.EntryRow _pathRow;
     [Gtk.Connect] private readonly Gtk.Button _selectSaveLocationButton;
     [Gtk.Connect] private readonly Adw.ComboRow _formatRow;
     [Gtk.Connect] private readonly Gtk.Switch _relativePathsSwitch;
     [Gtk.Connect] private readonly Gtk.Switch _selectedFilesOnlySwitch;
     [Gtk.Connect] private readonly Gtk.Button _createButton;
-    
+
     /// <summary>
     /// Occurs when the create button is clicked
     /// </summary>
     public event EventHandler<PlaylistOptions>? OnCreate;
-    
+
     /// <summary>
     /// Constructs a CreatePlaylistDialog
     /// </summary>
@@ -66,7 +66,7 @@ public partial class CreatePlaylistDialog : Adw.Window
     /// <param name="iconName">Icon name for the window</param>
     public CreatePlaylistDialog(Gtk.Window parent, string iconName) : this(Builder.FromFile("create_playlist_dialog.ui"), parent, iconName)
     {
-        
+
     }
 
     /// <summary>
@@ -84,7 +84,7 @@ public partial class CreatePlaylistDialog : Adw.Window
         }
         _createButton.SetSensitive(!empty);
     }
-    
+
     /// <summary>
     /// Occurs when the select save location button is clicked
     /// </summary>

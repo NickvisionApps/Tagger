@@ -1,8 +1,9 @@
-using Nickvision.Aura;
 using NickvisionTagger.GNOME.Controls;
 using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Controllers;
 using NickvisionTagger.Shared.Events;
+using NickvisionTagger.Shared.Helpers;
+using NickvisionTagger.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,11 +12,9 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using NickvisionTagger.Shared.Models;
-using static NickvisionTagger.Shared.Helpers.Gettext;
 using static Nickvision.GirExt.GtkExt;
+using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.GNOME.Views;
 
@@ -30,7 +29,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private static partial void gtk_list_box_set_header_func(nint box, GtkListBoxUpdateHeaderFunc updateHeader, nint data, nint destroy);
     [LibraryImport("libadwaita-1.so.0")]
     private static partial void gtk_list_box_row_set_header(nint row, nint header);
-
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -48,7 +46,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _acoustIdAction;
     private readonly GtkListBoxUpdateHeaderFunc _updateHeaderFunc;
     private AlbumArtType _currentAlbumArtType;
-    private string _listHeader;
+    private string? _listHeader;
     private List<MusicFileRow> _listMusicFilesRows;
     private List<Adw.EntryRow> _customPropertyRows;
     private AutocompleteBox _autocompleteBox;
@@ -290,10 +288,22 @@ public partial class MainWindow : Adw.ApplicationWindow
         OnCloseRequest += OnCloseRequested;
         _controller.NotificationSent += NotificationSent;
         _controller.ShellNotificationSent += ShellNotificationSent;
-        _controller.LoadingStateUpdated += (sender, e) => SetLoadingState(e);
+        _controller.LoadingStateUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () =>
+        {
+            _viewStack.SetVisibleChildName("Loading");
+            _loadingLabel.SetText(e);
+            _loadingProgressBar.SetVisible(false);
+            _loadingProgressLabel.SetVisible(false);
+            _applyAction.SetEnabled(false);
+            _tagActionsButton.SetSensitive(false);
+            return false;
+        });
         _controller.LoadingProgressUpdated += (sender, e) => GLib.Functions.IdleAdd(0, () =>
         {
-            UpdateLoadingProgress(e);
+            _loadingProgressBar.SetVisible(true);
+            _loadingProgressLabel.SetVisible(true);
+            _loadingProgressBar.SetFraction((double)e.Value / (double)e.MaxValue);
+            _loadingProgressLabel.SetLabel(e.Message);
             return false;
         });
         _controller.MusicLibraryUpdated += (sender, e) => GLib.Functions.IdleAdd(0, MusicLibraryUpdated);
@@ -374,7 +384,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _insertAlbumArtButton.SetDetailedActionName("win.insertAlbumArt");
         //Remove Album Art Action
         _removeAlbumArtAction = Gio.SimpleAction.New("removeAlbumArt", null);
-        _removeAlbumArtAction.OnActivate += (sender, e) => RemoveAlbumArt(_currentAlbumArtType);
+        _removeAlbumArtAction.OnActivate += async (sender, e) => await RemoveAlbumArtAsync(_currentAlbumArtType);
         AddAction(_removeAlbumArtAction);
         _removeAlbumArtButton.SetDetailedActionName("win.removeAlbumArt");
         //Export Album Art Action
@@ -389,7 +399,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.insertFrontAlbumArt", new string[] { "<Ctrl>I" });
         //Remove Front Album Art Action
         var actRemoveFrontAlbumArt = Gio.SimpleAction.New("removeFrontAlbumArt", null);
-        actRemoveFrontAlbumArt.OnActivate += (sender, e) => RemoveAlbumArt(AlbumArtType.Front);
+        actRemoveFrontAlbumArt.OnActivate += async (sender, e) => await RemoveAlbumArtAsync(AlbumArtType.Front);
         AddAction(actRemoveFrontAlbumArt);
         application.SetAccelsForAction("win.removeFrontAlbumArt", new string[] { "<Ctrl>Delete" });
         //Export Front Album Art Action
@@ -404,7 +414,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.insertBackAlbumArt", new string[] { "<Ctrl><Shift>I" });
         //Remove Back Album Art Action
         var actRemoveBackAlbumArt = Gio.SimpleAction.New("removeBackAlbumArt", null);
-        actRemoveBackAlbumArt.OnActivate += (sender, e) => RemoveAlbumArt(AlbumArtType.Back);
+        actRemoveBackAlbumArt.OnActivate += async (sender, e) => await RemoveAlbumArtAsync(AlbumArtType.Back);
         AddAction(actRemoveBackAlbumArt);
         application.SetAccelsForAction("win.removeBackAlbumArt", new string[] { "<Ctrl><Shift>Delete" });
         //Export Front Album Art Action
@@ -453,7 +463,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         application.SetAccelsForAction("win.quit", new string[] { "<Ctrl>q" });
         //Help Action
         var actHelp = Gio.SimpleAction.New("help", null);
-        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("index"), 0);
+        actHelp.OnActivate += (sender, e) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("index"), 0);
         AddAction(actHelp);
         application.SetAccelsForAction("win.help", new string[] { "F1" });
         //About Action
@@ -482,7 +492,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _application.AddWindow(this);
         Present();
-        SetLoadingState(_("Loading music files from library..."));
         await _controller.StartupAsync();
         _controller.NetworkMonitor!.StateChanged += (sender, state) =>
         {
@@ -508,17 +517,17 @@ public partial class MainWindow : Adw.ApplicationWindow
         else if (e.Action == "unsupported")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("unsupported"), 0);
+            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("unsupported"), 0);
         }
         else if (e.Action == "format")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("format-string"), 0);
+            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("format-strings"), 0);
         }
         else if (e.Action == "web")
         {
             toast.SetButtonLabel(_("Help"));
-            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("web-services"), 0);
+            toast.OnButtonClicked += (_, _) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("web-services"), 0);
         }
         else if (e.Action == "musicbrainz" && !string.IsNullOrWhiteSpace(e.ActionParam))
         {
@@ -534,7 +543,6 @@ public partial class MainWindow : Adw.ApplicationWindow
             toast.SetButtonLabel(_("Open"));
             toast.OnButtonClicked += async (_, _) =>
             {
-                SetLoadingState(_("Loading music files from playlist..."));
                 await _controller.OpenLibraryAsync(e.ActionParam);
             };
         }
@@ -570,32 +578,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     }
 
     /// <summary>
-    /// Sets the app into a loading state
-    /// </summary>
-    /// <param name="message">The message to show on the loading screen</param>
-    private void SetLoadingState(string message)
-    {
-        _viewStack.SetVisibleChildName("Loading");
-        _loadingLabel.SetText(message);
-        _loadingProgressBar.SetVisible(false);
-        _loadingProgressLabel.SetVisible(false);
-        _applyAction.SetEnabled(false);
-        _tagActionsButton.SetSensitive(false);
-    }
-
-    /// <summary>
-    /// Updates the progress of the loading state
-    /// </summary>
-    /// <param name="e">(int Value, int MaxValue, string Message)</param>
-    private void UpdateLoadingProgress((int Value, int MaxValue, string Message) e)
-    {
-        _loadingProgressBar.SetVisible(true);
-        _loadingProgressLabel.SetVisible(true);
-        _loadingProgressBar.SetFraction((double)e.Value / (double)e.MaxValue);
-        _loadingProgressLabel.SetLabel(e.Message);
-    }
-
-    /// <summary>
     /// Occurs when the window tries to close
     /// </summary>
     /// <param name="sender">Gtk.Window</param>
@@ -607,7 +589,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.WindowWidth = width;
         _controller.WindowHeight = height;
         _controller.WindowMaximized = IsMaximized();
-        Aura.Active.SaveConfig("config");
+        _controller.SaveConfig();
         if (!_controller.CanClose)
         {
             var dialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
@@ -623,7 +605,6 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (ea.Response == "apply")
                 {
-                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                     Close();
                 }
@@ -653,9 +634,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         if (obj is Gio.FileHelper file)
         {
             var path = file.GetPath() ?? "";
-            if (Directory.Exists(path) || (File.Exists(path) && Enum.GetValues<PlaylistFormat>().Select(x => x.GetDotExtension()).Contains(Path.GetExtension(path))))
+            if (MusicLibrary.GetIsValidLibraryPath(path))
             {
-                SetLoadingState(_("Loading music files from library..."));
                 _controller.OpenLibraryAsync(path).Wait();
                 return true;
             }
@@ -673,12 +653,11 @@ public partial class MainWindow : Adw.ApplicationWindow
         try
         {
             var file = await folderDialog.SelectFolderAsync(this);
-            SetLoadingState(_("Loading music files from folder..."));
             await _controller.OpenLibraryAsync(file.GetPath());
         }
         catch { }
     }
-    
+
     /// <summary>
     /// Occurs when the open playlist action is triggered
     /// </summary>
@@ -705,7 +684,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         try
         {
             var file = await fileDialog.OpenAsync(this);
-            SetLoadingState(_("Loading music files from playlist..."));
             await _controller.OpenLibraryAsync(file.GetPath());
         }
         catch { }
@@ -733,12 +711,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (ea.Response == "apply")
                 {
-                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                 }
                 if (ea.Response != "cancel")
                 {
-                    SetLoadingState(_("Loading music files from library..."));
                     await _controller.ReloadLibraryAsync();
                 }
                 dialog.Destroy();
@@ -747,7 +723,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
-            SetLoadingState(_("Loading music files from library..."));
             await _controller.ReloadLibraryAsync();
         }
     }
@@ -776,12 +751,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (ea.Response == "apply")
                 {
-                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(true);
                 }
                 else if (ea.Response == "discard")
                 {
-                    SetLoadingState(_("Discarding tags..."));
                     await _controller.DiscardSelectedUnappliedChangesAsync();
                 }
                 if (ea.Response != "cancel")
@@ -797,7 +770,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             createPlaylistDialog.Present();
         }
     }
-    
+
     /// <summary>
     /// Occurs when the create playlist action is triggered
     /// </summary>
@@ -825,6 +798,12 @@ public partial class MainWindow : Adw.ApplicationWindow
         try
         {
             var file = await fileDialog.OpenAsync(this);
+            var relativeDialog = Adw.MessageDialog.New(this, _("Use Relative Paths?"), _("Would you like to save the added file to the playlist using it's relative path?\nIf not, the full path will be used instead."));
+            relativeDialog.SetIconName(_controller.AppInfo.ID);
+            relativeDialog.AddResponse("no", _("No"));
+            relativeDialog.SetDefaultResponse("no");
+            relativeDialog.SetCloseResponse("no");
+            relativeDialog.AddResponse("yes", _("Yes"));
             if (!_controller.CanClose)
             {
                 var applyDialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));
@@ -840,18 +819,21 @@ public partial class MainWindow : Adw.ApplicationWindow
                 {
                     if (eaa.Response == "apply")
                     {
-                        SetLoadingState(_("Saving tags..."));
                         await _controller.SaveAllTagsAsync(false);
                     }
                     if (eaa.Response == "discard")
                     {
-                        SetLoadingState(_("Discarding tags..."));
                         await _controller.DiscardSelectedUnappliedChangesAsync();
                     }
                     if (eaa.Response != "cancel")
                     {
-                        SetLoadingState(_("Loading music file..."));
-                        await _controller.AddFileToPlaylist(file.GetPath());
+                        relativeDialog.OnResponse += async (ss, eaa) =>
+                        {
+                            await _controller.AddFileToPlaylistAsync(file.GetPath(), eaa.Response == "yes");
+                            relativeDialog.Destroy();
+                        };
+                        relativeDialog.Present();
+
                     }
                     applyDialog.Destroy();
                 };
@@ -859,13 +841,17 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
             else
             {
-                SetLoadingState(_("Loading music file..."));
-                await _controller.AddFileToPlaylist(file.GetPath());
+                relativeDialog.OnResponse += async (ss, eaa) =>
+                {
+                    await _controller.AddFileToPlaylistAsync(file.GetPath(), eaa.Response == "yes");
+                    relativeDialog.Destroy();
+                };
+                relativeDialog.Present();
             }
         }
         catch { }
     }
-    
+
     /// <summary>
     /// Occurs when the add to playlist action is triggered
     /// </summary>
@@ -905,17 +891,14 @@ public partial class MainWindow : Adw.ApplicationWindow
                         {
                             if (eaa.Response == "apply")
                             {
-                                SetLoadingState(_("Saving tags..."));
                                 await _controller.SaveAllTagsAsync(false);
                             }
                             if (eaa.Response == "discard")
                             {
-                                SetLoadingState(_("Discarding tags..."));
                                 await _controller.DiscardSelectedUnappliedChangesAsync();
                             }
                             if (eaa.Response != "cancel")
                             {
-                                SetLoadingState(_("Removing files from playlist..."));
                                 await _controller.RemoveSelectedFilesFromPlaylistAsync();
                             }
                             applyDialog.Destroy();
@@ -924,7 +907,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                     }
                     else
                     {
-                        SetLoadingState(_("Removing files from playlist..."));
                         await _controller.RemoveSelectedFilesFromPlaylistAsync();
                     }
                 }
@@ -939,29 +921,21 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void Apply(Gio.SimpleAction sender, EventArgs e)
-    {
-        SetLoadingState(_("Saving tags..."));
-        await _controller.SaveSelectedTagsAsync();
-    }
+    private async void Apply(Gio.SimpleAction sender, EventArgs e) => await _controller.SaveSelectedTagsAsync();
 
     /// <summary>
     /// Occurs when the discard unapplied changes action is triggered
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void DiscardUnappliedChanges(Gio.SimpleAction sender, EventArgs e)
-    {
-        SetLoadingState(_("Discarding unapplied changes..."));
-        await _controller.DiscardSelectedUnappliedChangesAsync();
-    }
+    private async void DiscardUnappliedChanges(Gio.SimpleAction sender, EventArgs e) => await _controller.DiscardSelectedUnappliedChangesAsync();
 
     /// <summary>
     /// Occurs when the delete tags action is triggered
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private void DeleteTags(Gio.SimpleAction sender, EventArgs e) => _controller.DeleteSelectedTags();
+    private async void DeleteTags(Gio.SimpleAction sender, EventArgs e) => await _controller.DeleteSelectedTagsAsync();
 
     /// <summary>
     /// Occurs when the filename to tag action is triggered
@@ -971,11 +945,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void FilenameToTag(Gio.SimpleAction sender, EventArgs e)
     {
         var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("File Name to Tag"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
-        dialog.OnResponse += (s, ea) =>
+        dialog.OnResponse += async (s, ea) =>
         {
             if (!string.IsNullOrEmpty(dialog.Response))
             {
-                _controller.FilenameToTag(dialog.Response);
+                await _controller.FilenameToTagAsync(dialog.Response);
             }
             dialog.Destroy();
         };
@@ -990,11 +964,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void TagToFilename(Gio.SimpleAction sender, EventArgs e)
     {
         var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("Tag to File Name"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
-        dialog.OnResponse += (s, ea) =>
+        dialog.OnResponse += async (s, ea) =>
         {
             if (!string.IsNullOrEmpty(dialog.Response))
             {
-                _controller.TagToFilename(dialog.Response);
+                await _controller.TagToFilenameAsync(dialog.Response);
             }
             dialog.Destroy();
         };
@@ -1033,7 +1007,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         try
         {
             var file = await openFileDialog.OpenAsync(this);
-            _controller.InsertSelectedAlbumArt(file.GetPath(), type);
+            await _controller.InsertSelectedAlbumArtAsync(file.GetPath(), type);
         }
         catch { }
     }
@@ -1042,7 +1016,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// Occurs when the remove album art action is triggered
     /// </summary>
     /// <param name="type">AlbumArtType</param>
-    private void RemoveAlbumArt(AlbumArtType type) => _controller.RemoveSelectedAlbumArt(type);
+    private async Task RemoveAlbumArtAsync(AlbumArtType type) => await _controller.RemoveSelectedAlbumArtAsync(type);
 
     /// <summary>
     /// Occurs when the export album art action is triggered
@@ -1097,7 +1071,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         var entryDialog = new EntryDialog(this, _controller.AppInfo.ID, _("New Custom Property"), "", _("Property Name"), _("Cancel"), _("Add"));
         entryDialog.OnResponse += (s, ea) =>
         {
-            if (!string.IsNullOrEmpty(entryDialog.Response))
+            if (!string.IsNullOrEmpty(entryDialog.Response) && entryDialog.Response != "NULL")
             {
                 _controller.AddCustomProperty(entryDialog.Response);
             }
@@ -1111,11 +1085,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gio.SimpleAction</param>
     /// <param name="e">EventArgs</param>
-    private async void DownloadMusicBrainzMetadata(Gio.SimpleAction sender, EventArgs e)
-    {
-        SetLoadingState(_("Downloading MusicBrainz metadata..."));
-        await _controller.DownloadMusicBrainzMetadataAsync();
-    }
+    private async void DownloadMusicBrainzMetadata(Gio.SimpleAction sender, EventArgs e) => await _controller.DownloadMusicBrainzMetadataAsync();
 
     private async void DownloadLyrics(Gio.SimpleAction sender, EventArgs e)
     {
@@ -1134,17 +1104,14 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (ea.Response == "apply")
                 {
-                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(false);
                 }
                 else if (ea.Response == "discard")
                 {
-                    SetLoadingState(_("Discarding tags..."));
                     await _controller.DiscardSelectedUnappliedChangesAsync();
                 }
                 if (ea.Response != "cancel")
                 {
-                    SetLoadingState(_("Downloading lyrics..."));
                     await _controller.DownloadLyricsAsync();
                 }
                 dialog.Destroy();
@@ -1153,7 +1120,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         else
         {
-            SetLoadingState(_("Downloading lyrics..."));
             await _controller.DownloadLyricsAsync();
         }
     }
@@ -1196,17 +1162,14 @@ public partial class MainWindow : Adw.ApplicationWindow
                     {
                         if (ea.Response == "apply")
                         {
-                            SetLoadingState(_("Saving tags..."));
                             await _controller.SaveAllTagsAsync(false);
                         }
                         if (ea.Response == "discard")
                         {
-                            SetLoadingState(_("Discarding tags..."));
                             await _controller.DiscardSelectedUnappliedChangesAsync();
                         }
                         if (ea.Response != "cancel")
                         {
-                            SetLoadingState(_("Submitting data to AcoustId..."));
                             await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
                         }
                         dialog.Destroy();
@@ -1215,7 +1178,6 @@ public partial class MainWindow : Adw.ApplicationWindow
                 }
                 else
                 {
-                    SetLoadingState(_("Submitting data to AcoustId..."));
                     await _controller.SubmitToAcoustIdAsync(entryDialog.Response == "NULL" ? null : entryDialog.Response);
                 }
             }
@@ -1247,12 +1209,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 if (ea.Response == "apply")
                 {
-                    SetLoadingState(_("Saving tags..."));
                     await _controller.SaveAllTagsAsync(true);
                 }
                 else if (ea.Response == "discard")
                 {
-                    SetLoadingState(_("Discarding tags..."));
                     await _controller.DiscardSelectedUnappliedChangesAsync();
                 }
                 if (ea.Response != "cancel")
@@ -1290,7 +1250,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void Quit(Gio.SimpleAction sender, EventArgs e)
     {
-        if(!OnCloseRequested(this, e))
+        if (!OnCloseRequested(this, e))
         {
             _application.Quit();
         }
@@ -1381,27 +1341,11 @@ public partial class MainWindow : Adw.ApplicationWindow
             foreach (var musicFile in _controller.MusicFiles)
             {
                 var row = new MusicFileRow(musicFile);
-                var compareTo = _controller.SortFilesBy switch
+                var header = _controller.GetHeaderForMusicFile(musicFile);
+                if (comparable != header)
                 {
-                    SortBy.Album => musicFile.Album,
-                    SortBy.Artist => musicFile.Artist,
-                    SortBy.Genre => musicFile.Genre,
-                    SortBy.Path => Path.GetDirectoryName(musicFile.Path)!.Replace(_controller.MusicLibraryType == MusicLibraryType.Folder ? _controller.MusicLibraryName : UserDirectories.Home, _controller.MusicLibraryType == MusicLibraryType.Folder ? "" : "~"),
-                    SortBy.Year => musicFile.Year.ToString(),
-                    _ => null
-                };
-                if (!string.IsNullOrEmpty(compareTo) && compareTo[0] == Path.DirectorySeparatorChar && !Directory.Exists(compareTo))
-                {
-                    compareTo = compareTo.Remove(0, 1);
-                }
-                if (compareTo == string.Empty)
-                {
-                    compareTo = _controller.SortFilesBy != SortBy.Path ? _("Unknown") : "";
-                }
-                if (comparable != compareTo)
-                {
-                    comparable = compareTo;
-                    _listHeader = compareTo!;
+                    comparable = header;
+                    _listHeader = header;
                     if (_listMusicFilesRows.Any())
                     {
                         if (_listMusicFilesRows[^1].HasCssClass("start-row"))
@@ -1651,8 +1595,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("search"), 0);
-    
+    private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("search"), 0);
+
     /// <summary>
     /// Occurs when the _listMusicFiles's selection is changed
     /// </summary>

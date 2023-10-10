@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="NickvisionTagger.WinUI.Controls.MusicFileRow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NickvisionTagger.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wct="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d">
+
+    <Grid Margin="0,6,0,6" ColumnSpacing="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <local:ViewStack x:Name="ArtViewStack" Grid.Column="0">
+            <local:ViewStack.Pages>
+                <local:ViewStackPage PageName="NoArt">
+                    <FontIcon Width="32" Height="32" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC4F;"/>
+                </local:ViewStackPage>
+
+                <local:ViewStackPage PageName="Art">
+                    <Image x:Name="ImgArt" Width="32" Height="32"/>
+                </local:ViewStackPage>
+            </local:ViewStack.Pages>
+        </local:ViewStack>
+
+        <Grid Grid.Column="1" VerticalAlignment="Center" RowSpacing="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="TxtTitle" Grid.Row="0"/>
+
+            <TextBlock x:Name="TxtSubtitle" Grid.Row="1" Foreground="Gray"/>
+        </Grid>
+
+        <FontIcon x:Name="UnsaveIcon" Grid.Column="2" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xF83F;"/>
+    </Grid>
+</UserControl>

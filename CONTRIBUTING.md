@@ -21,6 +21,7 @@ All types of contributions are encouraged and valued. See the [Table of Contents
     - [Manually](#manually)
   - [Your First Code Contribution](#your-first-code-contribution)
     - [Developing on Linux](#developing-on-linux)
+    - [Developing on Windows](#developing-on-windows)
 - [Styleguides](#styleguides)
 - [Join The Project Team](#join-the-project-team)
 
@@ -54,6 +55,7 @@ A good bug report shouldn't leave others needing to chase you up for more inform
   - Debug information provided by the application
 
     - GNOME: from main menu open About Tagger → Troubleshooting → Debugging Information, here you can copy information to clipboard or save to a file.
+    - WinUI: from Help menu open About Application and click on the button with version, debug information will be copied to clipboard.
   - Stack trace (Traceback)
     - Including any error messages thrown by the application
     - You may need to start the application via the terminal/console to receive an error message for a crash.
@@ -110,7 +112,7 @@ Tagger is available to translate on [Weblate](https://hosted.weblate.org/engage/
 
 To start translating the app, fork the repository and clone it locally.
 
-Application uses [gettext](https://www.gnu.org/software/gettext/manual/gettext.html#PO-Files) for translations. In the `NickvisionTagger.Shared/Resources/po` you will find files that can be edited in your favourite `*.po` files editor or any text editor. If you want to create a new translation, copy `application.pot` file, name the new file `<lang_code>.po`, where `<lang_code>` is the language code for your translation (usually it's 2 letters, but it also can be a locale code to differentiate between different version of the same language, for example `pt` and `pt_BR`) and edit this file. Also add the language code to `LINGUAS` file (please keep codes sorted alphabetically there).
+Tagger uses [gettext](https://www.gnu.org/software/gettext/manual/gettext.html#PO-Files) for translations. In the `NickvisionTagger.Shared/Resources/po` you will find files that can be edited in your favourite `*.po` files editor or any text editor. If you want to create a new translation, copy `tagger.pot` file, name the new file `<lang_code>.po`, where `<lang_code>` is the language code for your translation (usually it's 2 letters, but it also can be a locale code to differentiate between different version of the same language, for example `pt` and `pt_BR`) and edit this file. Also add the language code to `LINGUAS` file (please keep codes sorted alphabetically there).
 
 To check your translation file, make sure your system is in the locale of the language you are translating and run the app. You should see your translated strings!
 
@@ -126,10 +128,11 @@ Once all changes to your translated file are made, commit these changes and crea
 
 #### Structure
 
-Tagger is built using .NET 7 and C#. With these technologies, Tagger is built for GNOME (Linux).
-The solution is setup into 2 projects:
+Tagger is built using .NET 7 and C#. With these technologies, Tagger is built for GNOME (Linux) and Windows.
+The solution is setup into 3 projects:
  - NickvisionTagger.Shared
  - NickvisionTagger.GNOME
+ - NickvisionTagger.WinUI
 
 The whole solution utilizes the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) pattern for separating data and UI views.
 
@@ -150,6 +153,15 @@ Powered by the C# bindings for GTK4/Libadwaita: [gir.core](https://github.com/gi
   - These controls should not be connected to a controller and should be able to be ported to any other application
 - Helpers => Useful objects that are specific for GNOME platform version of the app
 - Blueprints => UI files written in [Blueprint markup language](https://jwestman.pages.gitlab.gnome.org/blueprint-compiler/)
+
+##### NickvisionTagger.WinUI
+
+This project contains all of the code used for the Windows platform version of the app, including installer scripts.
+Powered by the [Windows App SDK](https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/)
+- Views => The views (pages, windows, dialogs) of the app that connect to the shared controllers
+- Controls => Generic controls for the app
+  - These controls should not be connected to a controller and should be able to be ported to any other application
+- Installer => Inno installer scripts
 
 #### Developing on Linux
 
@@ -177,6 +189,26 @@ Use one of the commands to build the app:
 | `dotnet cake --target=Run --ui=gnome` (in repo root folder) or `dotnet run` (in project subfolder) | Builds the application and runs it. Application will not get installed, which might result in some missing icons and lack of desktop integration. |
 | `dotnet cake --target=Publish --prefix=PREFIX --ui=gnome` | Builds the application in `_nickbuild` directory, preparing it to be installed in a provided prefix (examples of a valid prefix: `/usr`, `/app`). If `--self-contained` is added, the application will not need dotnet-runtime to run. 
 | `dotnet cake --target=Install --destdir=DESTDIR` | Copies files to the `DESTDIR`. `--destdir` is optional, by default files are copied to root (`/`). This command should be used after `Publish`. |
+
+##### WinUI
+
+Can not be developed on non-Windows platforms.
+
+#### Developing on Windows
+
+##### WinUI
+Recommended IDE:
+- Visual Studio 2022 setup for use with Windows App SDK
+
+You may also build the app manually without Visual Studio 2022 but the Windows App SDK runtime must be installed. It can be found here: https://learn.microsoft.com/en-us/windows/apps/windows-app-sdk/downloads.
+
+You will also need gettext for Windows to be installed for the app to properly utilize transactions. Get it here: https://mlocati.github.io/articles/gettext-iconv-windows.html
+
+With all dependencies installed a simple `dotnet run` will build and start the app.
+
+##### GNOME
+
+Can not be developed on non-Linux platforms.
 
 ## Styleguides
 

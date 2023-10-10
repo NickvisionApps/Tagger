@@ -1,4 +1,5 @@
 using NickvisionTagger.GNOME.Helpers;
+using NickvisionTagger.Shared.Helpers;
 using System.Collections.Generic;
 using static Nickvision.GirExt.GtkExt;
 using static NickvisionTagger.Shared.Helpers.Gettext;
@@ -28,12 +29,12 @@ public partial class CorruptedFilesDialog : Adw.Window
         //Dialog Settings
         SetIconName(iconName);
         SetTransientFor(parent);
-        _helpButton.OnClicked += (sender, e) => Gtk.Functions.ShowUri(this, Help.GetHelpURL("corrupted"), 0);
+        _helpButton.OnClicked += (sender, e) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("corrupted"), 0);
         foreach (var path in files)
         {
             var row = Adw.ActionRow.New();
             var p = path.Remove(0, parentPath.Length);
-            if(p[0] == '/')
+            if (p[0] == '/')
             {
                 p = p.Remove(0, 1);
             }
@@ -53,7 +54,7 @@ public partial class CorruptedFilesDialog : Adw.Window
                 {
                     await fileLauncher.OpenContainingFolderAsync(this);
                 }
-                catch  { }
+                catch { }
             };
             row.AddSuffix(button);
             row.SetActivatableWidget(button);

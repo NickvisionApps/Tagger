@@ -13,16 +13,8 @@ public static class MediaHelpers
     /// </summary>
     /// <param name="duration">The duration in seconds</param>
     /// <returns>The duration string (HH:MM:SS)</returns>
-    public static string ToDurationString(this int duration)
-    {
-        var seconds = duration % 60;
-        duration /= 60;
-        var minutes = duration % 60;
-        duration /= 60;
-        var hours = duration / 60;
-        return $"{hours:D2}:{minutes:D2}:{seconds:D2}";
-    }
-    
+    public static string ToDurationString(this int duration) => TimeSpan.FromSeconds(duration).ToString("g");
+
     /// <summary>
     /// Converts a file size in bytes to a string (~ MB)
     /// </summary>
@@ -40,7 +32,7 @@ public static class MediaHelpers
         }
         return $"{Math.Ceiling(size * 100.0) / 100.0} {sizes[index]}";
     }
-    
+
     /// <summary>
     /// Format the given duration using the following format
     ///     DDdHH:MM:SS.UUUU
@@ -60,7 +52,7 @@ public static class MediaHelpers
         long seconds = Convert.ToInt64(Math.Floor((long)milliseconds / 1000.00));
         return SecondsToTimecode(seconds) + "." + (milliseconds - seconds * 1000);
     }
-    
+
     /// <summary>
     /// Convert the duration of the given timecode to milliseconds
     /// Supported formats : hh:mm, hh:mm:ss.ddd, mm:ss, hh:mm:ss and mm:ss.ddd
@@ -132,7 +124,7 @@ public static class MediaHelpers
         if (!valid) result = -1;
         return result;
     }
-    
+
     /// <summary>
     /// Format the given duration using the following format
     ///     DDdHH:MM:SS

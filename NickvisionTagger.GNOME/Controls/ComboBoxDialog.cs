@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using static NickvisionTagger.Shared.Helpers.Gettext;
 
@@ -15,17 +14,17 @@ public partial class ComboBoxDialog
     private readonly Adw.PreferencesGroup _group;
     private readonly Adw.ComboRow _choicesRow;
     private readonly Adw.EntryRow _customRow;
-    
+
     /// <summary>
     /// The response of the dialog
     /// </summary>
     public string Response { get; private set; }
-    
+
     /// <summary>
     /// Whether or not the dialog is visible
     /// </summary>
     public bool Visible => _dialog.GetVisible();
-    
+
     /// <summary>
     /// Constructs a ComboBoxDialog
     /// </summary>
@@ -42,7 +41,7 @@ public partial class ComboBoxDialog
         Response = "";
         _choices = choices;
         _supportCustom = supportCustom;
-        if(_supportCustom)
+        if (_supportCustom)
         {
             _choices = _choices.Append(_("Custom")).ToArray();
         }
@@ -59,12 +58,12 @@ public partial class ComboBoxDialog
         _customRow.SetTitle(_("Custom"));
         _customRow.SetVisible(false);
         _customRow.SetActivatesDefault(true);
-        if(_supportCustom)
+        if (_supportCustom)
         {
             _group.Add(_customRow);
             _choicesRow.OnNotify += (sender, e) =>
             {
-                if(e.Pspec.GetName() == "selected-item")
+                if (e.Pspec.GetName() == "selected-item")
                 {
                     _customRow.SetVisible((int)_choicesRow.GetSelected() == _choices.Length - 1);
                 }
@@ -78,7 +77,7 @@ public partial class ComboBoxDialog
         _dialog.SetCloseResponse("cancel");
         _dialog.OnResponse += (sender, e) => SetResponse(e.Response);
     }
-    
+
     public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
     {
         add
@@ -100,16 +99,16 @@ public partial class ComboBoxDialog
     /// Destroys the dialog
     /// </summary>
     public void Destroy() => _dialog.Destroy();
-    
+
     /// <summary>
     /// Sets the response of the dialog as a MessageDialogResponse
     /// </summary>
     /// <param name="response">The string response of the dialog</param>
     private void SetResponse(string response)
     {
-        if(response == "suggested")
+        if (response == "suggested")
         {
-            if(_supportCustom && (int)_choicesRow.GetSelected() == _choices.Length - 1)
+            if (_supportCustom && (int)_choicesRow.GetSelected() == _choices.Length - 1)
             {
                 Response = _customRow.GetText();
             }

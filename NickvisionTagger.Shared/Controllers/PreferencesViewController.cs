@@ -1,6 +1,5 @@
 using Nickvision.Aura;
 using NickvisionTagger.Shared.Models;
-using System;
 
 namespace NickvisionTagger.Shared.Controllers;
 
@@ -34,6 +33,16 @@ public class PreferencesViewController
         get => Configuration.Current.Theme;
 
         set => Configuration.Current.Theme = value;
+    }
+
+    /// <summary>
+    /// Whether or not to automatically check for updates
+    /// </summary>
+    public bool AutomaticallyCheckForUpdates
+    {
+        get => Configuration.Current.AutomaticallyCheckForUpdates;
+
+        set => Configuration.Current.AutomaticallyCheckForUpdates = value;
     }
 
     /// <summary>
@@ -95,7 +104,7 @@ public class PreferencesViewController
 
         set => Configuration.Current.OverwriteAlbumArtWithMusicBrainz = value;
     }
-    
+
     /// <summary>
     /// Whether or not to overwrite a tag's existing lyric data with data from the web
     /// </summary>

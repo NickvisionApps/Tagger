@@ -18,7 +18,7 @@ namespace NickvisionTagger.GNOME.Views;
 public partial class LyricsDialog : Adw.Window
 {
     [StructLayout(LayoutKind.Sequential)]
-    public struct TextIter 
+    public struct TextIter
     {
         public nint dummy1;
         public nint dummy2;
@@ -35,12 +35,12 @@ public partial class LyricsDialog : Adw.Window
         public int dummy13;
         public nint dummy14;
     }
-    
+
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial void gtk_text_buffer_get_bounds(nint buffer, ref TextIter startIter, ref TextIter endIter);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
-    private static partial string gtk_text_buffer_get_text(nint buffer, ref TextIter startIter, ref TextIter endIter, [MarshalAs(UnmanagedType.I1)]bool include_hidden_chars);
-    
+    private static partial string gtk_text_buffer_get_text(nint buffer, ref TextIter startIter, ref TextIter endIter, [MarshalAs(UnmanagedType.I1)] bool include_hidden_chars);
+
     private readonly LyricsDialogController _controller;
     private readonly Gtk.Window _parentWindow;
     private readonly string _iconName;
@@ -58,7 +58,7 @@ public partial class LyricsDialog : Adw.Window
     [Gtk.Connect] private readonly Gtk.Button _importSyncButton;
     [Gtk.Connect] private readonly Gtk.Button _exportSyncButton;
     [Gtk.Connect] private readonly Gtk.ListBox _syncList;
-    
+
     /// <summary>
     /// Constructs a LyricsDialog
     /// </summary>
@@ -92,14 +92,14 @@ public partial class LyricsDialog : Adw.Window
             }
             else
             {
-                _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset.ToString());
+                _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset!.Value.ToString());
                 _syncOffsetRow.SetPosition(-1);
             }
         };
         _addSyncLyricButton.OnClicked += AddSyncLyric;
-        _clearSyncButton.OnClicked += (sender, e) => _controller.ClearSynchronizedLyrics();;
+        _clearSyncButton.OnClicked += (sender, e) => _controller.ClearSynchronizedLyrics(); ;
         _importSyncButton.OnClicked += ImportSyncFromLRC;
-        _exportSyncButton.OnClicked += ExportSyncFromLRC;
+        _exportSyncButton.OnClicked += ExportSyncToLRC;
         //Events
         _controller.SynchronizedLyricCreated += CreateSyncRow;
         _controller.SynchronizedLyricRemoved += RemoveSyncRow;
@@ -113,7 +113,7 @@ public partial class LyricsDialog : Adw.Window
     /// <param name="iconName">Icon name for the window</param>
     public LyricsDialog(LyricsDialogController controller, Gtk.Window parent, string iconName) : this(Builder.FromFile("lyrics_dialog.ui"), controller, parent, iconName)
     {
-        
+
     }
 
     public new void Present()
@@ -163,7 +163,7 @@ public partial class LyricsDialog : Adw.Window
             }
         }
     }
-    
+
     /// <summary>
     /// Occurs when a sync lyric is created
     /// </summary>
@@ -244,7 +244,7 @@ public partial class LyricsDialog : Adw.Window
         };
         entryDialog.OnResponse += (s, ex) =>
         {
-            if (!string.IsNullOrEmpty(entryDialog.Response))
+            if (!string.IsNullOrEmpty(entryDialog.Response) && entryDialog.Response != "NULL")
             {
                 var res = entryDialog.Response.TimecodeToMs();
                 if (res != -1)
@@ -287,7 +287,7 @@ public partial class LyricsDialog : Adw.Window
             {
                 if (_controller.ImportFromLRC(file!.GetPath()!, ex.Response == "overwrite"))
                 {
-                    _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset.ToString());
+                    _syncOffsetRow.SetText(_controller.SynchronizedLyricsOffset!.Value.ToString());
                 }
                 else
                 {
@@ -306,13 +306,13 @@ public partial class LyricsDialog : Adw.Window
         }
         catch { }
     }
-    
+
     /// <summary>
     /// Occurs when the export synchronized lyrics button is clicked
     /// </summary>
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
-    private async void ExportSyncFromLRC(Gtk.Button sender, EventArgs e)
+    private async void ExportSyncToLRC(Gtk.Button sender, EventArgs e)
     {
         if (_controller.SynchronizedLyricsCount!.Value == 0)
         {

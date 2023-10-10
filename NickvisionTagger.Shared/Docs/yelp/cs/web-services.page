@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="web-services" its:version="2.0" xml:lang="cs">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Web Services 🌐</title>
+	<title type="link">Webové služby 🌐</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -20,12 +20,12 @@
     </mal:credit>
   </info>
 
-<title>Web Services</title>
-<p>This page describes the web services available in Tagger</p>
+<title>Webové služby</title>
+<p>Tato stránka popisuje, jaké webové služby jsou dostupné v aplikaci Označovač</p>
 <section>
-    <title>Download MusicBrainz Metadata</title>
-    <p>Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
-    <p>This service utilizes the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+    <title>Stáhnout metadata z MusicBrainz</title>
+    <p>Identifikuje hudební soubor pomocí MusicBrainz a stáhne jeho metadata pro použití v aplikaci.</p>
+    <p>Tato služba využívá otisk souboru AcoustId (vygenerovaný pomocí <code>fpcalc</code>) pro nalezení nahrávky MusicBrainz a ID vydání. Při nalezení ID budou stažena a nastavena metadata jako název, umělec, album a obal.</p>
     <note>
         <p>Finding metadata through MusicBrainz isn't 100% reliable and may not be available for uncommon songs.</p>
     </note>

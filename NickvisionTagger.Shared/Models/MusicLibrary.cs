@@ -25,12 +25,12 @@ public class MusicLibrary : IDisposable
     private bool _includeSubfolders;
     private FileSystemWatcher? _watcher;
     private IPlaylistIO? _playlist;
-    
+
     /// <summary>
     /// An array of supported extensions by Tagger
     /// </summary>
     public static string[] SupportedExtensions { get; }
-    
+
     /// <summary>
     /// The type of the music library
     /// </summary>
@@ -54,7 +54,7 @@ public class MusicLibrary : IDisposable
     /// <summary>
     /// A list of genres in the library
     /// </summary>
-    public List<string> Genres { get; init;  }
+    public List<string> Genres { get; init; }
 
     /// <summary>
     /// The name of the library
@@ -79,14 +79,14 @@ public class MusicLibrary : IDisposable
         SupportedExtensions = new string[]
         {
             ".mp3", ".m4a", ".m4b", ".ogg", ".opus", ".oga", ".flac", ".wma", ".wav",
-            ".aac", ".aax", ".aa", ".aif", ".aiff", ".aifc", ".dsd", ".dsf", ".ac3", 
-            ".gym", ".ape", ".mpv", ".mp+", ".ofr", ".ofs", ".psf", ".psf1", ".psf2", 
-            ".minipsf", ".minipsf1", ".minipsf2", ".ssf", ".minissf", ".minidsf", 
-            ".gsf", ".minigsf", ".qsf", ".miniqsf", ".spc", ".tak", ".tta", ".vqf", 
+            ".aac", ".aax", ".aa", ".aif", ".aiff", ".aifc", ".dsd", ".dsf", ".ac3",
+            ".gym", ".ape", ".mpv", ".mp+", ".ofr", ".ofs", ".psf", ".psf1", ".psf2",
+            ".minipsf", ".minipsf1", ".minipsf2", ".ssf", ".minissf", ".minidsf",
+            ".gsf", ".minigsf", ".qsf", ".miniqsf", ".spc", ".tak", ".tta", ".vqf",
             ".bwav", ".bwf", ".vgm", ".vgz", ".wv", ".asf"
         };
     }
-    
+
     /// <summary>
     /// Constructs a MusicLibrary
     /// </summary>
@@ -128,7 +128,7 @@ public class MusicLibrary : IDisposable
             throw new ArgumentException("Invalid library path");
         }
     }
-    
+
     /// <summary>
     /// Finalizes the MusicLibrary
     /// </summary>
@@ -150,7 +150,14 @@ public class MusicLibrary : IDisposable
             }
         }
     }
-    
+
+    /// <summary>
+    /// Gets whether or not a path is a valid library path
+    /// </summary>
+    /// <param name="path">The path to a library</param>
+    /// <returns>True if valid, else false</returns>
+    public static bool GetIsValidLibraryPath(string path) => Directory.Exists(path) || (File.Exists(path) && Enum.GetValues<PlaylistFormat>().Select(x => x.GetDotExtension()).Contains(System.IO.Path.GetExtension(path)));
+
     /// <summary>
     /// Frees resources used by the MusicLibrary object
     /// </summary>
@@ -176,7 +183,7 @@ public class MusicLibrary : IDisposable
         _watcher?.Dispose();
         _disposed = true;
     }
-    
+
     /// <summary>
     /// Scans the music library for music files and populates the files list. If includeSubfolders is true, scans subfolders as well. If false, only the parent path
     /// </summary>
@@ -199,17 +206,15 @@ public class MusicLibrary : IDisposable
             var files = Type switch
             {
                 MusicLibraryType.Folder => Directory
-                    .GetFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
-                    .Where(x => SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower()))
-                    .ToList(),
+                    .EnumerateFiles(Path, "*.*", IncludeSubfolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly)
+                    .Where(x => SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())),
                 MusicLibraryType.Playlist => _playlist!.FilePaths
-                    .Where(x => (File.Exists(x) || File.Exists(System.IO.Path.GetFullPath(x, System.IO.Path.GetDirectoryName(Path) ?? ""))) && SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower()))
-                    .Select(x => File.Exists(x) ? x : System.IO.Path.GetFullPath(x, System.IO.Path.GetDirectoryName(Path) ?? ""))
-                    .ToList(),
+                    .Where(x => File.Exists(x) && SupportedExtensions.Contains(System.IO.Path.GetExtension(x).ToLower())),
                 _ => new List<string>()
             };
             var i = 0;
-            foreach(var path in files)
+            var filesCount = files.Count();
+            foreach (var path in files)
             {
                 try
                 {
@@ -226,7 +231,7 @@ public class MusicLibrary : IDisposable
                     Console.WriteLine(e);
                 }
                 i++;
-                LoadingProgressUpdated?.Invoke(this, (i, files.Count, $"{i}/{files.Count}"));
+                LoadingProgressUpdated?.Invoke(this, (i, filesCount, $"{i}/{filesCount}"));
             }
             MusicFiles.Sort();
         });
@@ -248,13 +253,14 @@ public class MusicLibrary : IDisposable
         var path = $"{options.Path}{(System.IO.Path.GetExtension(options.Path).ToLower() != options.Format.GetDotExtension() ? options.Format.GetDotExtension() : "")}";
         var playlist = PlaylistIOFactory.GetInstance().GetPlaylistIO(path, ATL.Playlist.PlaylistFormat.LocationFormatting.FilePath, ATL.Playlist.PlaylistFormat.FileEncoding.UTF8_NO_BOM);
         var paths = new List<string>();
+        ATL.Settings.PlaylistWriteAbsolutePath = !options.UseRelativePaths;
         if (options.IncludeOnlySelectedFiles)
         {
             if (selectedFiles == null || selectedFiles.Count == 0)
             {
                 return null;
             }
-            paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Path, x.Path) : x.Path));
+            paths.AddRange(MusicFiles.Where(x => selectedFiles!.Contains(MusicFiles.IndexOf(x))).Select(x => x.Path));
         }
         else
         {
@@ -262,30 +268,32 @@ public class MusicLibrary : IDisposable
             {
                 return null;
             }
-            paths.AddRange(MusicFiles.Select(x => options.UseRelativePaths ? System.IO.Path.GetRelativePath(Path, x.Path) : x.Path));
+            paths.AddRange(MusicFiles.Select(x => x.Path));
         }
         playlist.FilePaths = paths;
+        playlist.Save();
         return path;
     }
-    
+
     /// <summary>
     /// Adds a file to the playlist
     /// </summary>
     /// <param name="path">The path to the music folder</param>
+    /// <param name="useRelativePath">Whether or not to use the file's relative path instead of full</param>
     /// <returns>True if success, else false</returns>
-    public bool AddFileToPlaylist(string path)
+    public bool AddFileToPlaylist(string path, bool useRelativePath)
     {
-        if (Type != MusicLibraryType.Playlist || !File.Exists(path) || !SupportedExtensions.Contains(System.IO.Path.GetExtension(path).ToLower()))
+        if (Type != MusicLibraryType.Playlist || _playlist == null || !File.Exists(path) || !SupportedExtensions.Contains(System.IO.Path.GetExtension(path).ToLower()))
         {
             return false;
         }
-        var paths = _playlist!.FilePaths;
-        if (paths.Contains(path))
+        if (_playlist.FilePaths.Contains(path))
         {
             return false;
         }
-        paths.Add(path);
-        _playlist.FilePaths = paths;
+        ATL.Settings.PlaylistWriteAbsolutePath = !useRelativePath;
+        _playlist.FilePaths.Add(path);
+        _playlist.Save();
         return true;
     }
 
@@ -296,20 +304,19 @@ public class MusicLibrary : IDisposable
     /// <returns>True if success, else false</returns>
     public bool RemoveFilesFromPlaylist(List<int> indexes)
     {
-        if (Type != MusicLibraryType.Playlist || MusicFiles.Count == 0 || indexes.Count == 0)
+        if (Type != MusicLibraryType.Playlist || MusicFiles.Count == 0 || indexes.Count == 0 || _playlist == null)
         {
             return false;
         }
-        var paths = _playlist!.FilePaths;
         foreach (var index in indexes)
         {
             try
             {
-                paths.Remove(MusicFiles[index].Path);
+                _playlist.FilePaths.Remove(MusicFiles[index].Path);
             }
             catch { }
         }
-        _playlist.FilePaths = paths;
+        _playlist.Save();
         return true;
     }
 }
