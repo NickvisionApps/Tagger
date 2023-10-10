@@ -148,6 +148,7 @@ public class MainWindowController : IDisposable
             }
         }
         Aura.Init("org.nickvision.tagger", "Nickvision Tagger");
+        AppInfo.EnglishShortName = "Tagger";
         if (Directory.Exists($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
         {
             // Move config files from older versions and delete old directory
@@ -165,7 +166,6 @@ public class MainWindowController : IDisposable
         Configuration.Current.Saved += ConfigurationSaved;
         AppInfo.Version = "2023.10.0-beta1";
         AppInfo.ShortName = _("Tagger");
-        AppInfo.EnglishShortName = "Tagger";
         AppInfo.Description = _("Tag your music");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
         AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");
