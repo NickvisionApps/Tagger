@@ -14,7 +14,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using static NickvisionTagger.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.Shared.Controllers;
 
@@ -165,6 +165,7 @@ public class MainWindowController : IDisposable
         Configuration.Current.Saved += ConfigurationSaved;
         AppInfo.Version = "2023.10.0-beta1";
         AppInfo.ShortName = _("Tagger");
+        AppInfo.EnglishShortName = "Tagger";
         AppInfo.Description = _("Tag your music");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
         AppInfo.IssueTracker = new Uri("https://github.com/NickvisionApps/Tagger/issues/new");

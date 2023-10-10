@@ -13,8 +13,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using static Nickvision.Aura.Localization.Gettext;
 using static Nickvision.GirExt.GtkExt;
-using static NickvisionTagger.Shared.Helpers.Gettext;
 
 namespace NickvisionTagger.GNOME.Views;
 

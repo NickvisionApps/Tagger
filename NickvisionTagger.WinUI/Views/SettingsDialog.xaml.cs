@@ -6,7 +6,7 @@ using NickvisionTagger.Shared.Models;
 using System;
 using System.Threading.Tasks;
 using Windows.System;
-using static NickvisionTagger.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.WinUI.Views;
 

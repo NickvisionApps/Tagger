@@ -1,4 +1,5 @@
 using Nickvision.Aura;
+using Nickvision.Aura.Configuration;
 using System.Runtime.InteropServices;
 
 namespace NickvisionTagger.Shared.Models;

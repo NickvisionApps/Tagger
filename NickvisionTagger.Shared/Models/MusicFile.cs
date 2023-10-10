@@ -1,6 +1,7 @@
 using ATL;
 using MetaBrainz.MusicBrainz.CoverArt;
 using MetaBrainz.MusicBrainz.Interfaces.Entities;
+using Nickvision.Aura;
 using NickvisionTagger.Shared.Helpers;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static NickvisionTagger.Shared.Helpers.Gettext;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.Shared.Models;
 
@@ -367,7 +368,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 {
                     StartInfo = new ProcessStartInfo()
                     {
-                        FileName = DependencyManager.FpcalcPath,
+                        FileName = DependencyLocator.Find("fpcalc"),
                         Arguments = $"\"{Path}\" -length 120",
                         UseShellExecute = false,
                         RedirectStandardOutput = true,
