@@ -9,16 +9,12 @@
 
   <ItemGroup>
     <PackageReference Include="GirCore.Adw-1" Version="0.4.0" />
-    <PackageReference Include="Nickvision.Aura" Version="2023.10.1" />
+    <PackageReference Include="Nickvision.Aura" Version="2023.10.1.1" />
     <PackageReference Include="Nickvision.GirExt" Version="2023.7.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NickvisionTagger.Shared\NickvisionTagger.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="..\NickvisionTagger.Shared\Docs\po\LINGUAS" />
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
