@@ -19,7 +19,7 @@ namespace NickvisionTagger.WinUI.Views;
 public sealed partial class LyricsDialog : ContentDialog
 {
     private readonly LyricsDialogController _controller;
-    private readonly Action<object> _initalizeWithWindow;
+    private readonly Action<object> _initializeWithWindow;
     private readonly Dictionary<int, SyncLyricRow> _syncRows;
     private bool _showingAnotherDialog;
 
@@ -27,12 +27,12 @@ public sealed partial class LyricsDialog : ContentDialog
     /// Constructs a LyricsDialog
     /// </summary>
     /// <param name="controller">LyricsDialogController</param>
-    /// <param name="initalizeWithWindow">Action</param>
-    public LyricsDialog(LyricsDialogController controller, Action<object> initalizeWithWindow)
+    /// <param name="initializeWithWindow">Action</param>
+    public LyricsDialog(LyricsDialogController controller, Action<object> initializeWithWindow)
     {
         InitializeComponent();
         _controller = controller;
-        _initalizeWithWindow = initalizeWithWindow;
+        _initializeWithWindow = initializeWithWindow;
         _syncRows = new Dictionary<int, SyncLyricRow>();
         _showingAnotherDialog = false;
         //Localize Strings
@@ -247,7 +247,7 @@ public sealed partial class LyricsDialog : ContentDialog
     private async void ImportSyncFromLRC(object sender, RoutedEventArgs e)
     {
         var filePicker = new FileOpenPicker();
-        _initalizeWithWindow(filePicker);
+        _initializeWithWindow(filePicker);
         filePicker.SuggestedStartLocation = PickerLocationId.MusicLibrary;
         filePicker.FileTypeFilter.Add(".lrc");
         filePicker.FileTypeFilter.Add(".LRC");
@@ -293,7 +293,7 @@ public sealed partial class LyricsDialog : ContentDialog
     private async void ExportSyncToLRC(object sender, RoutedEventArgs e)
     {
         var filePicker = new FileSavePicker();
-        _initalizeWithWindow(filePicker);
+        _initializeWithWindow(filePicker);
         filePicker.SuggestedStartLocation = PickerLocationId.MusicLibrary;
         filePicker.FileTypeChoices.Add(_("All files"), new List<string>() { ".lrc", ".LRC" });
         filePicker.DefaultFileExtension = ".lrc";

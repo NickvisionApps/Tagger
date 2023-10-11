@@ -16,17 +16,17 @@ namespace NickvisionTagger.WinUI.Controls;
 /// </summary>
 public sealed partial class CreatePlaylistDialog : ContentDialog
 {
-    private readonly Action<object> _initalizeWithWindow;
+    private readonly Action<object> _initializeWithWindow;
     private string _path;
 
     /// <summary>
     /// Constructs a CreatePlaylistDialog
     /// </summary>
-    /// <param name="initalizeWithWindow">Action</param>
-    public CreatePlaylistDialog(Action<object> initalizeWithWindow)
+    /// <param name="initializeWithWindow">Action</param>
+    public CreatePlaylistDialog(Action<object> initializeWithWindow)
     {
         InitializeComponent();
-        _initalizeWithWindow = initalizeWithWindow;
+        _initializeWithWindow = initializeWithWindow;
         _path = "";
         //Localize Strings
         Title = _("Playlist");
@@ -86,7 +86,7 @@ public sealed partial class CreatePlaylistDialog : ContentDialog
     {
         var playlistExtensions = Enum.GetValues<PlaylistFormat>().Select(x => x.GetDotExtension()).ToList();
         var filePicker = new FileSavePicker();
-        _initalizeWithWindow(filePicker);
+        _initializeWithWindow(filePicker);
         filePicker.SuggestedStartLocation = PickerLocationId.MusicLibrary;
         var exts = new List<string>();
         foreach (var ext in playlistExtensions)
