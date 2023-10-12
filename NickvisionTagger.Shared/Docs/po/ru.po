@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-09-12 22:14-0400\n"
-"PO-Revision-Date: 2023-10-09 18:03+0000\n"
-"Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2023-10-12 14:24+0000\n"
+"Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/"
 "nickvision-tagger/docs/ru/>\n"
 "Language: ru\n"
@@ -38,13 +38,13 @@ msgstr "Nicholas Logozzo"
 #. (itstool) path: page/title
 #: yelp/C/configuration.page:20
 msgid "Configuration"
-msgstr ""
+msgstr "Конфигурация"
 
 #. (itstool) path: page/p
 #: yelp/C/configuration.page:21
 msgid ""
 "This page describes what you can change in the application configuration."
-msgstr ""
+msgstr "Эта страница описывает, что можно изменить в конфигурации приложения."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:24
@@ -53,12 +53,11 @@ msgstr "Тема"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:25
-#, fuzzy
 msgid ""
 "Set light or dark theme, or make <app>Tagger</app> follow your system theme."
 msgstr ""
-"Выберите светлую или тёмную тему, либо позвольте <app>Tagger</app> "
-"соответствовать системной."
+"Задайте светлую или темную тему, или сделайте так, чтобы <app>Tagger</app> "
+"соответствовал теме вашей системы."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:28
@@ -67,11 +66,12 @@ msgstr "Запомнить последнюю открытую библиоте�
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:29
-#, fuzzy
 msgid ""
 "Whether or not to remember the previously used music library and reopen it "
 "when Tagger starts the next time."
-msgstr "Запоминать ли открытую библиотеку между запусками Tagger."
+msgstr ""
+"Нужно ли запоминать ранее использовавшуюся музыкальную библиотеку и "
+"открывать ее при следующем запуске Tagger."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:32
@@ -80,10 +80,9 @@ msgstr "Включать подпапки"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:33
-#, fuzzy
 msgid ""
 "Whether or not to scan for music files into subdirectories of a music folder."
-msgstr "Искать ли музыкальные файлы в подпапках выбранных папок с музыкой."
+msgstr "Сканировать ли музыкальные файлы в подкаталогах музыкальной папки."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:36
@@ -92,13 +91,12 @@ msgstr "Сортировать файлы по"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:37
-#, fuzzy
 msgid ""
 "The property to use when sorting and displaying music files. It can be one "
 "of the following options:"
 msgstr ""
-"Свойство, используемое при сортировке и отображении музыки. Может быть одним "
-"из следующих:"
+"Свойство, используемое при сортировке и отображении музыкальных файлов. Это "
+"может быть один из следующих вариантов:"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:39
@@ -107,19 +105,16 @@ msgstr "<code>Имя файла</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:40
-#, fuzzy
 msgid "<code>Title</code>"
 msgstr "<code>Название</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:41
-#, fuzzy
 msgid "<code>Track</code>"
 msgstr "<code>Дорожка</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:42
-#, fuzzy
 msgid "<code>File Path</code>"
 msgstr "<code>Путь к файлу</code>"
 
@@ -140,11 +135,12 @@ msgstr "Сохранение временной метки модификаци�
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:49
-#, fuzzy
 msgid ""
 "Whether or not to not update a file's write (modified) timestamp when its "
 "tag is saved."
-msgstr "Обновлять ли дату изменения файла при сохранении тегов."
+msgstr ""
+"Следует ли не обновлять временную метку записи (модификации) файла при "
+"сохранении его метки."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:52
@@ -153,13 +149,13 @@ msgstr "Перезапись тегов с помощью MusicBrainz"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:53
-#, fuzzy
 msgid ""
 "Whether or not to overwrite existing tag metadata with data found from "
 "MusicBrainz. If disabled, only blank tag properties will be filled."
 msgstr ""
-"Перезаписывать ли имеющиеся метаданные тегов метаданными из MusicBrainz. "
-"Если выключено, заполнены будут только пустые поля."
+"Следует ли перезаписывать существующие метаданные тегов данными, полученными "
+"из MusicBrainz. Если отключено, то будут заполняться только пустые свойства "
+"тегов."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:56
@@ -168,16 +164,17 @@ msgstr "Переписать обложку альбома с помощью Mus
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:57
-#, fuzzy
 msgid ""
 "Whether or not to overwrite overwrite existing album art with art found from "
 "MusicBrainz."
-msgstr "Перезаписывать ли текущую обложку альбома найденной на MusicBrainz."
+msgstr ""
+"Нужно ли перезаписывать существующие обложки альбомов обложками, найденными "
+"из MusicBrainz."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:60
 msgid "Overwrite Lyrics With Web Service"
-msgstr ""
+msgstr "Перезапись текстов с помощью веб-сервиса"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:61
@@ -185,6 +182,8 @@ msgid ""
 "Whether or not to overwrite a tag's existing lyric data with data from the "
 "web."
 msgstr ""
+"Следует ли перезаписывать имеющиеся в теге текстовые данные данными из "
+"Интернета."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:64
@@ -936,9 +935,8 @@ msgstr "Веб-службы 🌐"
 
 #. (itstool) path: page/title
 #: yelp/C/web-services.page:20
-#, fuzzy
 msgid "Web Services"
-msgstr "Веб-службы"
+msgstr "Веб-сервисы"
 
 #. (itstool) path: page/p
 #: yelp/C/web-services.page:21
@@ -948,7 +946,7 @@ msgstr "Эта страница описывает веб-службы, подд
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:23
 msgid "Download MusicBrainz Metadata"
-msgstr "Скачать метаданные MusicBrainz"
+msgstr "Загрузить метаданные MusicBrainz"
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:24
@@ -976,7 +974,7 @@ msgstr ""
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:31
 msgid "Download Lyrics"
-msgstr "Загрузить лирики"
+msgstr "Загрузить текст песни"
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:32
