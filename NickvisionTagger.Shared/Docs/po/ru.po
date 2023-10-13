@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-09-12 22:14-0400\n"
-"PO-Revision-Date: 2023-10-12 14:24+0000\n"
-"Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
+"PO-Revision-Date: 2023-10-13 19:00+0000\n"
+"Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/"
 "nickvision-tagger/docs/ru/>\n"
 "Language: ru\n"
@@ -810,21 +810,26 @@ msgstr ""
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:46
+#, fuzzy
 msgid "Properties are case-insensitive."
-msgstr ""
+msgstr "Свойства чувствительны к регистру."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:48
 msgid "Syntax Checking"
-msgstr ""
+msgstr "Проверка синтаксиса"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:49
+#, fuzzy
 msgid ""
 "If the syntax of your string is valid, the textbox will turn green and will "
 "filter the listbox with your search. If the syntax of your string is "
 "invalid, the textbox will turn red and will not filter the listbox."
 msgstr ""
+"Если синтаксис правильный, текстовое поле станет зелёным и фильтр "
+"применится. При неправильном синтаксисе поле станет красным и фильтр "
+"применён не будет."
 
 #. (itstool) path: section/title
 #: yelp/C/search.page:51
@@ -838,47 +843,63 @@ msgstr ""
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:53
+#, fuzzy
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "artist is empty."
 msgstr ""
+"Этот поисковый запрос покажет только музыкальные файлы с неуказанным "
+"исполнителем."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:54
+#, fuzzy
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
-msgstr ""
+msgstr "<code>!genre=\"\";year=\"2022\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:55
+#, fuzzy
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "genre is empty and whose year is 2022 (Year and Track properties will "
 "validate if the value string is a number)."
 msgstr ""
+"Этот запрос покажет только музыкальные файлы без указанного жанра и с годом, "
+"указанным как 2022. (Свойства Год и Дорожка действительны только если они "
+"содержат число)"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:56
+#, fuzzy
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
-msgstr ""
+msgstr "<code>!title=\"\";artist=\"bob\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:57
+#, fuzzy
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "title is empty and whose artist is <code>bob</code>."
 msgstr ""
+"Этот запрос отобразит музыкальные файлы исполнителя <code>bob</code> с "
+"незаданным названием."
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:58
+#, fuzzy
 msgid "<code>!custom=\"mbrd\"</code>"
-msgstr ""
+msgstr "<code>!custom=\"mbrd\"</code>"
 
 #. (itstool) path: section/p
 #: yelp/C/search.page:59
+#, fuzzy
 msgid ""
 "This search string will filter the listbox to contain music files that "
 "contain a custom property with the name <code>mbrd</code>."
 msgstr ""
+"Этот запрос отобразит музыкальные файлы, содержащие нестандартное свойство "
+"<code>mbrd</code>."
 
 #. (itstool) path: info/title
 #: yelp/C/unsupported.page:8
@@ -950,10 +971,13 @@ msgstr "Загрузить метаданные MusicBrainz"
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:24
+#, fuzzy
 msgid ""
 "Identifies a music file through MusicBrainz and downloads its metadata to "
 "use in Tagger."
 msgstr ""
+"Идентифицирует композицию в файле с MusicBrainz и скачивает её метаданные "
+"для последующего использования в Tagger."
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:25
@@ -963,13 +987,20 @@ msgid ""
 "IDs are found, metadata such as title, artist, album, and art will be "
 "downloaded and set in Tagger."
 msgstr ""
+"Для определения записи и идентификатора релиза MusicBrainz эта служба "
+"использует отпечаток файла AcoustId, сгенерированный с помощью <code>fpcalc</"
+"code>. Если идентификаторы найдены, метаданные вроде исполнителя, названия, "
+"альбома и обложки будут скачаны и записаны в Tagger."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:27
+#, fuzzy
 msgid ""
 "Finding metadata through MusicBrainz isn't 100% reliable and may not be "
 "available for uncommon songs."
 msgstr ""
+"Нахождение метаданных на MusicBrainz не даёт стопроцентной надёжности и "
+"может не быть доступно для непопулярных записей."
 
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:31
@@ -978,9 +1009,12 @@ msgstr "Загрузить текст песни"
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:32
+#, fuzzy
 msgid ""
 "Uses the tag's title and artist information to search for lyrics of the song."
 msgstr ""
+"Использует информацию о названии композиции и исполнителе тэга для поиска "
+"текста песни."
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:33
@@ -988,6 +1022,7 @@ msgid ""
 "This service utilizes NetEase's Music163 service for obtaining synchronized "
 "lyrics."
 msgstr ""
+"Эта служба использует Music163 от NetEase для получения синхронного текста."
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:34
@@ -995,6 +1030,8 @@ msgid ""
 "If no synchronized lyrics are found/available, Tagger will use Letras for "
 "obtaining unsynchronized lyrics."
 msgstr ""
+"Если синхронный текст не найден или недоступен, Tagger использует Letras для "
+"получения несинхронного."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:36
@@ -1002,6 +1039,8 @@ msgid ""
 "Finding lyrics through these services isn't 100% reliable and may not be "
 "available for uncommon songs."
 msgstr ""
+"Нахождение текста через эти службы не является стопроцентно надёжным и может "
+"не быть доступно для непопулярных записей."
 
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:40
@@ -1010,38 +1049,48 @@ msgstr "Отправить в AcoustId"
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:41
+#, fuzzy
 msgid ""
 "Submits data about a music file (identified via its fingerprint) to "
 "AcoustId's database. There are two things that can be submitted about a "
 "music file:"
 msgstr ""
+"Отправляет отпечатки файла записи в базу данных AcoustId. Отправлены могут "
+"быть 2 свойства файла:"
 
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:44
 msgid "MusicBrainz Recording ID"
-msgstr ""
+msgstr "Идентификатор записи MusicBrainz"
 
 #. (itstool) path: item/p
 #: yelp/C/web-services.page:45
+#, fuzzy
 msgid ""
 "A user can submit a MusicBrainz Recording ID to submit to AcoustId. This "
 "will pull all data from the associated recording id and use that for sending "
 "metadata to AcoustId."
 msgstr ""
+"Пользователь может отправить идентификатор записи MusicBrainz в AcoustId. "
+"Будут получены и отправлены все метаданные, связанные с этой записью."
 
 #. (itstool) path: item/title
 #: yelp/C/web-services.page:48
 msgid "User Metadata"
-msgstr ""
+msgstr "Пользовательские метаданные"
 
 #. (itstool) path: item/p
 #: yelp/C/web-services.page:49
 msgid "A user can submit their metadata from Tagger to AcoustId."
 msgstr ""
+"Пользователь может отправить собственные метаданные в AcoustId из Tagger."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:53
+#, fuzzy
 msgid ""
 "A proper <code>AcoustId User API Key</code> must be set in "
 "<code>Preferences</code> for this service to work."
 msgstr ""
+"Для нормальной работы службы необходим действительный ключ <code>AcoustId "
+"User API Key</code>, заданный в <code>Настройках</code>."
