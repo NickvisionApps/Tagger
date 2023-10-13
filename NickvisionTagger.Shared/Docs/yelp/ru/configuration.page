@@ -14,48 +14,48 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Configuration</title>
-<p>This page describes what you can change in the application configuration.</p>
+<title>Конфигурация</title>
+<p>Эта страница описывает, что можно изменить в конфигурации приложения.</p>
 <terms>
     <item>
 		<title>Тема</title>
-		<p>Set light or dark theme, or make <app>Tagger</app> follow your system theme.</p>
+		<p>Задайте светлую или темную тему, или сделайте так, чтобы <app>Tagger</app> соответствовал теме вашей системы.</p>
 	</item>
     <item>
 		<title>Запомнить последнюю открытую библиотеку</title>
-		<p>Whether or not to remember the previously used music library and reopen it when Tagger starts the next time.</p>
+		<p>Нужно ли запоминать ранее использовавшуюся музыкальную библиотеку и открывать ее при следующем запуске Tagger.</p>
 	</item>
     <item>
 		<title>Включать подпапки</title>
-		<p>Whether or not to scan for music files into subdirectories of a music folder.</p>
+		<p>Сканировать ли музыкальные файлы в подкаталогах музыкальной папки.</p>
 	</item>
     <item>
 		<title>Сортировать файлы по</title>
-		<p>The property to use when sorting and displaying music files. It can be one of the following options:</p>
+		<p>Свойство, используемое при сортировке и отображении музыкальных файлов. Это может быть один из следующих вариантов:</p>
         <list>
             <item><p><code>Имя файла</code></p></item>
-            <item><p><code>Title</code></p></item>
-            <item><p><code>Track</code></p></item>
-            <item><p><code>File Path</code></p></item>
+            <item><p><code>Название</code></p></item>
+            <item><p><code>Дорожка</code></p></item>
+            <item><p><code>Путь к файлу</code></p></item>
             <item><p><code>Альбом</code></p></item>
             <item><p><code>Жанр</code></p></item>
         </list>
 	</item>
     <item>
 		<title>Сохранение временной метки модификации</title>
-		<p>Whether or not to not update a file's write (modified) timestamp when its tag is saved.</p>
+		<p>Следует ли не обновлять временную метку записи (модификации) файла при сохранении его метки.</p>
 	</item>
     <item>
 		<title>Перезапись тегов с помощью MusicBrainz</title>
-		<p>Whether or not to overwrite existing tag metadata with data found from MusicBrainz. If disabled, only blank tag properties will be filled.</p>
+		<p>Следует ли перезаписывать существующие метаданные тегов данными, полученными из MusicBrainz. Если отключено, то будут заполняться только пустые свойства тегов.</p>
 	</item>
     <item>
 		<title>Переписать обложку альбома с помощью MusicBrainz</title>
-		<p>Whether or not to overwrite overwrite existing album art with art found from MusicBrainz.</p>
+		<p>Нужно ли перезаписывать существующие обложки альбомов обложками, найденными из MusicBrainz.</p>
 	</item>
 	<item>
-        <title>Overwrite Lyrics With Web Service</title>
-        <p>Whether or not to overwrite a tag's existing lyric data with data from the web.</p>
+        <title>Перезапись текстов с помощью веб-сервиса</title>
+        <p>Следует ли перезаписывать имеющиеся в теге текстовые данные данными из Интернета.</p>
     </item>
     <item>
 		<title>Ключ API пользователя AcoustId</title>

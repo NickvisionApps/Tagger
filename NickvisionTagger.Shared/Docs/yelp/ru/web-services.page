@@ -14,23 +14,23 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Web Services</title>
+<title>Веб-сервисы</title>
 <p>Эта страница описывает веб-службы, поддерживаемые Tagger</p>
 <section>
-    <title>Скачать метаданные MusicBrainz</title>
+    <title>Загрузить метаданные MusicBrainz</title>
     <p>Identifies a music file through MusicBrainz and downloads its metadata to use in Tagger.</p>
-    <p>This service utilizes the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+    <p>Для определения записи и идентификатора релиза MusicBrainz эта служба использует отпечаток файла AcoustId, сгенерированный с помощью <code>fpcalc</code>. Если идентификаторы найдены, метаданные вроде исполнителя, названия, альбома и обложки будут скачаны и записаны в Tagger.</p>
     <note>
         <p>Finding metadata through MusicBrainz isn't 100% reliable and may not be available for uncommon songs.</p>
     </note>
 </section>
 <section>
-    <title>Загрузить лирики</title>
+    <title>Загрузить текст песни</title>
     <p>Uses the tag's title and artist information to search for lyrics of the song.</p>
-    <p>This service utilizes NetEase's Music163 service for obtaining synchronized lyrics.</p>
-    <p>If no synchronized lyrics are found/available, Tagger will use Letras for obtaining unsynchronized lyrics.</p>
+    <p>Эта служба использует Music163 от NetEase для получения синхронного текста.</p>
+    <p>Если синхронный текст не найден или недоступен, Tagger использует Letras для получения несинхронного.</p>
     <note>
-        <p>Finding lyrics through these services isn't 100% reliable and may not be available for uncommon songs.</p>
+        <p>Нахождение текста через эти службы не является стопроцентно надёжным и может не быть доступно для непопулярных записей.</p>
     </note>
 </section>
 <section>
@@ -38,12 +38,12 @@
     <p>Submits data about a music file (identified via its fingerprint) to AcoustId's database. There are two things that can be submitted about a music file:</p>
         <list>
             <item>
-        		<title>MusicBrainz Recording ID</title>
+        		<title>Идентификатор записи MusicBrainz</title>
         		<p>A user can submit a MusicBrainz Recording ID to submit to AcoustId. This will pull all data from the associated recording id and use that for sending metadata to AcoustId.</p>
         	</item>
             <item>
-        		<title>User Metadata</title>
-        		<p>A user can submit their metadata from Tagger to AcoustId.</p>
+        		<title>Пользовательские метаданные</title>
+        		<p>Пользователь может отправить собственные метаданные в AcoustId из Tagger.</p>
         	</item>
         </list>
     <note>

@@ -27,33 +27,33 @@
     <p>Identifikuje hudební soubor pomocí MusicBrainz a stáhne jeho metadata pro použití v aplikaci.</p>
     <p>Tato služba využívá otisk souboru AcoustId (vygenerovaný pomocí <code>fpcalc</code>) pro nalezení nahrávky MusicBrainz a ID vydání. Při nalezení ID budou stažena a nastavena metadata jako název, umělec, album a obal.</p>
     <note>
-        <p>Finding metadata through MusicBrainz isn't 100% reliable and may not be available for uncommon songs.</p>
+        <p>Vyhledávání metadat pomocí MusicBrainz není 100% spolehlivé a nemusí být dostupné pro méně známé skladby.</p>
     </note>
 </section>
 <section>
     <title>Stáhnout texty</title>
-    <p>Uses the tag's title and artist information to search for lyrics of the song.</p>
-    <p>This service utilizes NetEase's Music163 service for obtaining synchronized lyrics.</p>
-    <p>If no synchronized lyrics are found/available, Tagger will use Letras for obtaining unsynchronized lyrics.</p>
+    <p>Používá název a interpreta značky pro vyhledávní textů skladby.</p>
+    <p>Tato služba využívá službu Music163 společnosti NetEase pro získání synchronizovaných textů.</p>
+    <p>Pokud nejsou dostupné žádné texty, použije aplikace službu Letras pro získání nesynchronizovaných textů.</p>
     <note>
-        <p>Finding lyrics through these services isn't 100% reliable and may not be available for uncommon songs.</p>
+        <p>Vyhledávání textů pomocí těchto služeb není 100% spolehlivé a nemusí být dostupné pro méně známé skladby.</p>
     </note>
 </section>
 <section>
-    <title>Submit to AcoustId</title>
-    <p>Submits data about a music file (identified via its fingerprint) to AcoustId's database. There are two things that can be submitted about a music file:</p>
+    <title>Odeslat do AcoustId</title>
+    <p>Odešle data o hudebním souboru (identifikovaném pomocí svého otisku) do databáze AcoustId. U hudebního souboru lze odeslat dvě věci:</p>
         <list>
             <item>
-        		<title>MusicBrainz Recording ID</title>
-        		<p>A user can submit a MusicBrainz Recording ID to submit to AcoustId. This will pull all data from the associated recording id and use that for sending metadata to AcoustId.</p>
+        		<title>ID nahrávky MusicBrainz</title>
+        		<p>Uživatel může odeslat ID nahrávky MusicBrainz pro odeslání do AcoustId. Tato akce načte všechna data z přiděleného ID nahrávky a použije je pro odeslání dat do AcoustId.</p>
         	</item>
             <item>
-        		<title>User Metadata</title>
-        		<p>A user can submit their metadata from Tagger to AcoustId.</p>
+        		<title>Uživatelská metadata</title>
+        		<p>Uživatel může odeslat svá metadata z aplikace Označovač do AcoustId.</p>
         	</item>
         </list>
     <note>
-        <p>A proper <code>AcoustId User API Key</code> must be set in <code>Preferences</code> for this service to work.</p>
+        <p>Aby tato služba fungovala, musí být v <code>předvolbách</code> nastaven správný <code>klíč API uživatele AcoustId</code>.</p>
     </note>
 </section>
 </page>
