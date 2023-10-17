@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-09-12 22:14-0400\n"
+"POT-Creation-Date: 2023-10-16 20:35-0400\n"
 "PO-Revision-Date: 2023-09-15 13:28+0000\n"
 "Last-Translator: Davide <davide.ferracin@protonmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/"
-"nickvision-tagger/docs/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/nickvision-"
+"tagger/docs/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -106,18 +106,19 @@ msgstr "<code>Nome del file</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:40
+msgid "<code>File Path</code>"
+msgstr "<code>Percorso del file</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:41
 msgid "<code>Title</code>"
 msgstr "<code>Titolo</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:41
-msgid "<code>Track</code>"
-msgstr "<code>Traccia</code>"
-
-#. (itstool) path: item/p
 #: yelp/C/configuration.page:42
-msgid "<code>File Path</code>"
-msgstr "<code>Percorso del file</code>"
+#, fuzzy
+msgid "<code>Artist</code>"
+msgstr "<code>artista</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:43
@@ -126,16 +127,27 @@ msgstr "<code>Album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:44
+#, fuzzy
+msgid "<code>Year</code>"
+msgstr "<code>anno</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:45
+msgid "<code>Track</code>"
+msgstr "<code>Traccia</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:46
 msgid "<code>Genre</code>"
 msgstr "<code>Genere</code>"
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:48
+#: yelp/C/configuration.page:50
 msgid "Preserve Modification Timestamp"
 msgstr "Mantieni l'istante temporale di modifica"
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:49
+#: yelp/C/configuration.page:51
 msgid ""
 "Whether or not to not update a file's write (modified) timestamp when its "
 "tag is saved."
@@ -144,12 +156,12 @@ msgstr ""
 "modificato."
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:52
+#: yelp/C/configuration.page:54
 msgid "Overwrite Tag With MusicBrainz"
 msgstr "Sovrascrivi i tag con With MusicBrainz"
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:53
+#: yelp/C/configuration.page:55
 msgid ""
 "Whether or not to overwrite existing tag metadata with data found from "
 "MusicBrainz. If disabled, only blank tag properties will be filled."
@@ -158,12 +170,12 @@ msgstr ""
 "disabilitato, verranno riempiti solo i campi lasciati vuoti."
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:56
+#: yelp/C/configuration.page:58
 msgid "Overwrite Album Art With MusicBrainz"
 msgstr "Sovrascrivi la copertina con MusicBrainz"
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:57
+#: yelp/C/configuration.page:59
 msgid ""
 "Whether or not to overwrite overwrite existing album art with art found from "
 "MusicBrainz."
@@ -172,12 +184,12 @@ msgstr ""
 "MusicBrainz."
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:60
+#: yelp/C/configuration.page:62
 msgid "Overwrite Lyrics With Web Service"
 msgstr "Sovrascrivi testo con il servizio in rete"
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:61
+#: yelp/C/configuration.page:63
 msgid ""
 "Whether or not to overwrite a tag's existing lyric data with data from the "
 "web."
@@ -186,12 +198,12 @@ msgstr ""
 "recuperati in rete."
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:64
+#: yelp/C/configuration.page:66
 msgid "AcoustId User API Key"
 msgstr "Chiave delle API di AcoustId dell'utente"
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:65
+#: yelp/C/configuration.page:67
 msgid ""
 "An AcoustId User API key to use when fingerprinting music files and looking "
 "up song information."
@@ -200,7 +212,7 @@ msgstr ""
 "relative ai brani."
 
 #. (itstool) path: note/p
-#: yelp/C/configuration.page:67
+#: yelp/C/configuration.page:69
 msgid ""
 "A key can be obtained <link href=\"https://acoustid.org/api-key\">here</link>"
 msgstr ""
@@ -318,7 +330,7 @@ msgstr ""
 "percento (%)."
 
 #. (itstool) path: note/title
-#: yelp/C/format-strings.page:26 yelp/C/format-strings.page:58
+#: yelp/C/format-strings.page:26 yelp/C/format-strings.page:59
 msgid "Example"
 msgstr "Esempio"
 
@@ -413,15 +425,21 @@ msgstr "<code>descrizione</code>"
 msgid "<code>publisher</code>"
 msgstr "<code>editore</code>"
 
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:48 yelp/C/search.page:44
+#, fuzzy
+msgid "<code>publishingdate</code>"
+msgstr "<code>editore</code>"
+
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:50
+#: yelp/C/format-strings.page:51
 msgid "When using conversions, custom property names can also be used."
 msgstr ""
 "Durante le conversioni è possibile usare nomi personalizzati per le "
 "proprietà."
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:51
+#: yelp/C/format-strings.page:52
 msgid ""
 "For example, a custom property who's name is <code>ENCODER</code> can be "
 "used as <code>%encoder%</code>."
@@ -430,12 +448,12 @@ msgstr ""
 "code> può essere usata come <code>%codifica%</code>."
 
 #. (itstool) path: section/title
-#: yelp/C/format-strings.page:55
+#: yelp/C/format-strings.page:56
 msgid "Ignoring in File Name to Tag Conversion"
 msgstr "Da ignorare nella conversione da nome file ad etichetta"
 
 #. (itstool) path: section/p
-#: yelp/C/format-strings.page:56
+#: yelp/C/format-strings.page:57
 msgid ""
 "When running <code>File Name to Tag</code> conversion, an empty <code>%%</"
 "code> can be specified to ignore part of the file name when reading it."
@@ -445,17 +463,17 @@ msgstr ""
 "nome del file durante la lettura."
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:59
+#: yelp/C/format-strings.page:60
 msgid "Format String: <code>%%- %track%. %%</code>"
 msgstr "Stringa di formato: <code>%%- %track%. %%</code>"
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:60
+#: yelp/C/format-strings.page:61
 msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
 msgstr "Nome del file: <code>Artista1 -05. Brano1.mp3</code>"
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:61
+#: yelp/C/format-strings.page:62
 msgid ""
 "This format string and this file name will create a tag with a track of "
 "<code>05</code> and ignore the rest of the file name."
@@ -804,23 +822,23 @@ msgid "<code>filename</code>"
 msgstr "<code>nome del file</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/search.page:44
+#: yelp/C/search.page:45
 msgid "<code>custom</code>"
 msgstr "<code>personalizzato</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:46
+#: yelp/C/search.page:47
 msgid "Properties are case-insensitive."
 msgstr ""
 "Per le proprietà non viene fatta distinzione tra maiuscole e minuscole."
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:48
+#: yelp/C/search.page:49
 msgid "Syntax Checking"
 msgstr "Controllo della sintassi"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:49
+#: yelp/C/search.page:50
 msgid ""
 "If the syntax of your string is valid, the textbox will turn green and will "
 "filter the listbox with your search. If the syntax of your string is "
@@ -832,17 +850,17 @@ msgstr ""
 "casella di riepilogo."
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:51
+#: yelp/C/search.page:52
 msgid "Examples"
 msgstr "Esempi"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:52
+#: yelp/C/search.page:53
 msgid "<code>!artist=\"\"</code>"
 msgstr "<code>!artist=\"\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:53
+#: yelp/C/search.page:54
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "artist is empty."
@@ -851,12 +869,12 @@ msgstr ""
 "contenga i file musicali il cui artista è vuoto."
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:54
+#: yelp/C/search.page:55
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
 msgstr "<code>!genre=\"\";year=\"2022\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:55
+#: yelp/C/search.page:56
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "genre is empty and whose year is 2022 (Year and Track properties will "
@@ -868,12 +886,12 @@ msgstr ""
 "un numero)."
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:56
+#: yelp/C/search.page:57
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
 msgstr "<code>!title=\"\";artist=\"bob\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:57
+#: yelp/C/search.page:58
 msgid ""
 "This search string will filter the listbox to contain music files whose "
 "title is empty and whose artist is <code>bob</code>."
@@ -883,12 +901,12 @@ msgstr ""
 "code>."
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:58
+#: yelp/C/search.page:59
 msgid "<code>!custom=\"mbrd\"</code>"
 msgstr "<code>!custom=\"mbrd\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:59
+#: yelp/C/search.page:60
 msgid ""
 "This search string will filter the listbox to contain music files that "
 "contain a custom property with the name <code>mbrd</code>."
@@ -978,11 +996,10 @@ msgid ""
 "IDs are found, metadata such as title, artist, album, and art will be "
 "downloaded and set in Tagger."
 msgstr ""
-"Questo servizio usa l'impronta AcoustId del file (generata con "
-"<code>fpcalc</code>) per determinare gli identificativi MusicBrainz di "
-"registrazione e di pubblicazione. Se ne vengono trovati, metadati come il "
-"titolo, l'artista, l'album e la copertina saranno scaricati e quindi "
-"impostati in Tagger."
+"Questo servizio usa l'impronta AcoustId del file (generata con <code>fpcalc</"
+"code>) per determinare gli identificativi MusicBrainz di registrazione e di "
+"pubblicazione. Se ne vengono trovati, metadati come il titolo, l'artista, "
+"l'album e la copertina saranno scaricati e quindi impostati in Tagger."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:27
@@ -1002,7 +1019,8 @@ msgstr "Scarica testo"
 #: yelp/C/web-services.page:32
 msgid ""
 "Uses the tag's title and artist information to search for lyrics of the song."
-msgstr "Usare le etichette titolo e artista per cercare il testo della canzone."
+msgstr ""
+"Usare le etichette titolo e artista per cercare il testo della canzone."
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:33
