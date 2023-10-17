@@ -218,6 +218,8 @@ public sealed partial class MainWindow : Window
         TxtDescription.PlaceholderText = _("Enter description here");
         CardPublisher.Header = _("Publisher");
         TxtPublisher.PlaceholderText = _("Enter publisher here");
+        CardPublishingDate.Header = _("Publishing Date");
+        DatePublishingDate.PlaceholderText = _("Pick a date");
         LblCustomProperties.Text = _("Custom Properties");
         LblBtnAddCustomProperty.Text = _("Add");
         ToolTipService.SetToolTip(BtnAddCustomProperty, _("Add New Property"));
@@ -264,12 +266,12 @@ public sealed partial class MainWindow : Window
             var accent = (SolidColorBrush)Application.Current.Resources["AccentFillColorDefaultBrush"];
             _controller.TaskbarItem = TaskbarItem.ConnectWindows(_hwnd, new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb(accent.Color.A, accent.Color.R, accent.Color.G, accent.Color.B)), MainGrid.ActualTheme == ElementTheme.Dark ? System.Drawing.Brushes.Black : System.Drawing.Brushes.White);
             await _controller.StartupAsync();
-            _controller.NetworkMonitor!.StateChanged += (sender, state) =>
+            _controller.NetworkMonitor!.StateChanged += (sender, state) => DispatcherQueue.TryEnqueue(() =>
             {
                 MenuDownloadMusicBrainz.IsEnabled = state;
                 MenuDownloadLyrics.IsEnabled = state;
                 MenuSubmitToAcoustId.IsEnabled = state;
-            };
+            });
             MainMenu.IsEnabled = true;
             //Update sort file by menu
             MenuSortFilesFileName.IsChecked = _controller.SortFilesBy == SortBy.Filename;
@@ -1432,6 +1434,8 @@ public sealed partial class MainWindow : Window
         TxtComposer.Text = _controller.SelectedPropertyMap.Composer;
         TxtDescription.Text = _controller.SelectedPropertyMap.Description;
         TxtPublisher.Text = _controller.SelectedPropertyMap.Publisher;
+        DatePublishingDate.Date = string.IsNullOrEmpty(_controller.SelectedPropertyMap.PublishingDate) ? null : (_controller.SelectedPropertyMap.PublishingDate == _("<keep>") ? null : DateTimeOffset.Parse(_controller.SelectedPropertyMap.PublishingDate));
+        DatePublishingDate.PlaceholderText = _controller.SelectedPropertyMap.PublishingDate == _("<keep>") ? _("<keep>") : _("Pick a date");
         LblDurationFileSize.Text = $"{_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}";
         LblFingerprint.Text = _controller.SelectedPropertyMap.Fingerprint;
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
@@ -1494,11 +1498,11 @@ public sealed partial class MainWindow : Window
     private void TagPropertyChanged(object sender, TextChangedEventArgs e)
     {
         UIElement? box = null;
-        if (sender is TextBox || sender is AutoSuggestBox)
+        if (sender is TextBox || sender is AutoSuggestBox || sender is CalendarDatePicker)
         {
             box = (UIElement)sender;
         }
-        if (_controller.SelectedMusicFiles.Count > 0 && box != null && (box.FocusState == FocusState.Keyboard || box.FocusState == FocusState.Pointer || box is AutoSuggestBox))
+        if (_controller.SelectedMusicFiles.Count > 0 && box != null && (box.FocusState == FocusState.Keyboard || box.FocusState == FocusState.Pointer || box is AutoSuggestBox || (box is CalendarDatePicker && box.FocusState == FocusState.Unfocused)))
         {
             //Update Tags
             var propMap = new PropertyMap()
@@ -1517,6 +1521,7 @@ public sealed partial class MainWindow : Window
                 Composer = TxtComposer.Text,
                 Description = TxtDescription.Text,
                 Publisher = TxtPublisher.Text,
+                PublishingDate = DatePublishingDate.PlaceholderText == _("<keep>") ? _("<keep>") : (DatePublishingDate.Date?.Date.ToShortDateString() ?? ""),
             };
             if (_controller.SelectedMusicFiles.Count == 1)
             {
@@ -1663,6 +1668,19 @@ public sealed partial class MainWindow : Window
             TxtGenre.ItemsSource = _controller.GetGenreSuggestions(TxtGenre.Text);
         }
         if (args.Reason != AutoSuggestionBoxTextChangeReason.ProgrammaticChange)
+        {
+            TagPropertyChanged(sender, null);
+        }
+    }
+
+    /// <summary>
+    /// Occurs when the DatePublishingDate's date is changed
+    /// </summary>
+    /// <param name="sender">CalendarDatePicker</param>
+    /// <param name="args">CalendarDatePickerDateChangedEventArgs</param>
+    private void DatePublishingDate_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+    {
+        if(args.NewDate != null)
         {
             TagPropertyChanged(sender, null);
         }

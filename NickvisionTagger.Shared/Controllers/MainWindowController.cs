@@ -1781,7 +1781,7 @@ public class MainWindowController : IDisposable
             SelectedPropertyMap.Composer = haveSameComposer ? first.Composer : _("<keep>");
             SelectedPropertyMap.Description = haveSameDescription ? first.Description : _("<keep>");
             SelectedPropertyMap.Publisher = haveSamePublisher ? first.Publisher : _("<keep>");
-            SelectedPropertyMap.PublishingDate = haveSamePublisher ? (first.PublishingDate == DateTime.MinValue ? "" : first.PublishingDate.ToShortDateString()) : _("<keep>");
+            SelectedPropertyMap.PublishingDate = haveSamePublishingDate ? (first.PublishingDate == DateTime.MinValue ? "" : first.PublishingDate.ToShortDateString()) : _("<keep>");
             SelectedPropertyMap.FrontAlbumArt = haveSameFrontAlbumArt ? (first.FrontAlbumArt.Length == 0 ? "noArt" : "hasArt") : "keepArt";
             SelectedPropertyMap.BackAlbumArt = haveSameBackAlbumArt ? (first.BackAlbumArt.Length == 0 ? "noArt" : "hasArt") : "keepArt";
             SelectedPropertyMap.Duration = totalDuration.ToDurationString();
