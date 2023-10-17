@@ -63,7 +63,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <summary>
     /// Whether or not the tag is empty
     /// </summary>
-    public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && Composer == "" && Description == "" && Publisher == "" && FrontAlbumArt.Length == 0 && BackAlbumArt.Length == 0 && _track.AdditionalFields.Count == 0;
+    public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && TrackTotal == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && BeatsPerMinute == 0 && Composer == "" && Description == "" && Publisher == "" && FrontAlbumArt.Length == 0 && BackAlbumArt.Length == 0 && _track.AdditionalFields.Count == 0;
 
     /// <summary>
     /// Constructs a static MusicFile
