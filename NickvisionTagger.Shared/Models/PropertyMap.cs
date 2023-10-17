@@ -67,6 +67,10 @@ public class PropertyMap : IEquatable<PropertyMap>
     /// </summary>
     public string Publisher { get; set; }
     /// <summary>
+    /// The publishing date of the file
+    /// </summary>
+    public string PublishingDate { get; set; }
+    /// <summary>
     /// The front album art of the file
     /// </summary>
     public string FrontAlbumArt { get; set; }
@@ -119,6 +123,7 @@ public class PropertyMap : IEquatable<PropertyMap>
         Composer = "";
         Description = "";
         Publisher = "";
+        PublishingDate = "";
         FrontAlbumArt = "";
         BackAlbumArt = "";
         CustomProperties.Clear();
@@ -147,6 +152,7 @@ public class PropertyMap : IEquatable<PropertyMap>
         s += $"Composer: {Composer}\n";
         s += $"Description: {Description}\n";
         s += $"Publisher: {Publisher}\n";
+        s += $"Publishing Date: {PublishingDate}\n";
         s += $"FrontAlbumArt: {FrontAlbumArt}\n";
         s += $"BackAlbumArt: {BackAlbumArt}\n";
         s += $"CustomPropertiesCount: {CustomProperties.Count}\n";
@@ -192,6 +198,7 @@ public class PropertyMap : IEquatable<PropertyMap>
             obj.Composer == Composer &&
             obj.Description == Description &&
             obj.Publisher == Publisher &&
+            obj.PublishingDate == PublishingDate &&
             obj.CustomProperties.Count == CustomProperties.Count && !obj.CustomProperties.Except(CustomProperties).Any();
     }
 
