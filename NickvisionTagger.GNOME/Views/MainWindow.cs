@@ -23,12 +23,34 @@ namespace NickvisionTagger.GNOME.Views;
 /// </summary>
 public partial class MainWindow : Adw.ApplicationWindow
 {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct TaggerDateTime
+    {
+        ulong Usec;
+        nint Tz;
+        int Interval;
+        int Days;
+        int RefCount;
+    }
+
     private delegate void GtkListBoxUpdateHeaderFunc(nint row, nint before, nint data);
 
     [LibraryImport("libadwaita-1.so.0")]
     private static partial void gtk_list_box_set_header_func(nint box, GtkListBoxUpdateHeaderFunc updateHeader, nint data, nint destroy);
     [LibraryImport("libadwaita-1.so.0")]
     private static partial void gtk_list_box_row_set_header(nint row, nint header);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial int g_date_time_get_year(ref TaggerDateTime datetime);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial int g_date_time_get_month(ref TaggerDateTime datetime);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial int g_date_time_get_day_of_month(ref TaggerDateTime datetime);
+    [DllImport("libadwaita-1.so.0")]
+    private static extern ref TaggerDateTime g_date_time_new_local(int year, int month, int day, int hour, int minute, double seconds);
+    [DllImport("libadwaita-1.so.0")]
+    private static extern ref TaggerDateTime gtk_calendar_get_date(nint calendar);
+    [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
+    private static partial void gtk_calendar_select_day(nint calendar, ref TaggerDateTime datetime);
 
     private readonly MainWindowController _controller;
     private readonly Adw.Application _application;
@@ -51,6 +73,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private List<Adw.EntryRow> _customPropertyRows;
     private AutocompleteBox _autocompleteBox;
     private bool _isSelectionOccuring;
+    private bool _updatePublishingDate;
 
     [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
@@ -98,6 +121,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _composerRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
     [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
+    [Gtk.Connect] private readonly Gtk.MenuButton _publishingDateButton;
+    [Gtk.Connect] private readonly Gtk.Calendar _publishingDateCalendar;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _customPropertiesGroup;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
     [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
@@ -112,6 +137,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _listMusicFilesRows = new List<MusicFileRow>();
         _customPropertyRows = new List<Adw.EntryRow>();
         _isSelectionOccuring = false;
+        _updatePublishingDate = true;
         SetDefaultSize(_controller.WindowWidth, _controller.WindowHeight);
         if (_controller.WindowMaximized)
         {
@@ -274,6 +300,25 @@ public partial class MainWindow : Adw.ApplicationWindow
             {
                 TagPropertyChanged();
             }
+        };
+        _publishingDateCalendar.OnDaySelected += (sender, e) =>
+        {
+            if(_updatePublishingDate)
+            {
+                var glibDate = gtk_calendar_get_date(_publishingDateCalendar.Handle);
+                var date = new DateTime(g_date_time_get_year(ref glibDate), g_date_time_get_month(ref glibDate), g_date_time_get_day_of_month(ref glibDate));
+                if (date != DateTime.MinValue)
+                {
+                    _publishingDateButton.SetLabel(date.ToShortDateString());
+                    TagPropertyChanged();
+                }
+                else
+                {
+                    _updatePublishingDate = false;
+                    gtk_calendar_select_day(_publishingDateCalendar.Handle, ref g_date_time_new_local(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0));
+                }
+            }
+            _updatePublishingDate = true;
         };
         _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
         _copyFingerprintButton.OnClicked += CopyFingerprintToClipboard;
@@ -1458,6 +1503,22 @@ public partial class MainWindow : Adw.ApplicationWindow
         _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
         _descriptionRow.SetText(_controller.SelectedPropertyMap.Description);
         _publisherRow.SetText(_controller.SelectedPropertyMap.Publisher);
+        if (string.IsNullOrEmpty(_controller.SelectedPropertyMap.PublishingDate))
+        {
+            gtk_calendar_select_day(_publishingDateCalendar.Handle, ref g_date_time_new_local(DateTime.MinValue.Year, DateTime.MinValue.Month, DateTime.MinValue.Day, 0, 0, 0));
+            _publishingDateButton.SetLabel(_("Pick a date"));
+        }
+        else if (_controller.SelectedPropertyMap.PublishingDate == _("<keep>"))
+        {
+            gtk_calendar_select_day(_publishingDateCalendar.Handle, ref g_date_time_new_local(DateTime.MinValue.Year, DateTime.MinValue.Month, DateTime.MinValue.Day, 0, 0, 0));
+            _publishingDateButton.SetLabel("<keep>");
+        }
+        else
+        {
+            var dateTime = DateTime.Parse(_controller.SelectedPropertyMap.PublishingDate);
+            gtk_calendar_select_day(_publishingDateCalendar.Handle, ref g_date_time_new_local(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0));
+            _publishingDateButton.SetLabel(_controller.SelectedPropertyMap.PublishingDate);
+        }
         _durationFileSizeLabel.SetLabel($"{_controller.SelectedPropertyMap.Duration} • {_controller.SelectedPropertyMap.FileSize}");
         _fingerprintLabel.SetLabel(_controller.SelectedPropertyMap.Fingerprint);
         var albumArt = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedPropertyMap.FrontAlbumArt : _controller.SelectedPropertyMap.BackAlbumArt;
@@ -1645,7 +1706,8 @@ public partial class MainWindow : Adw.ApplicationWindow
                 BeatsPerMinute = _bpmRow.GetText(),
                 Composer = _composerRow.GetText(),
                 Description = _descriptionRow.GetText(),
-                Publisher = _publisherRow.GetText()
+                Publisher = _publisherRow.GetText(),
+                PublishingDate = _publishingDateButton.GetLabel() == _("Pick a date") ? "" : _publishingDateButton.GetLabel()
             };
             if (_controller.SelectedMusicFiles.Count == 1)
             {
