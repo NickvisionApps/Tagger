@@ -475,7 +475,11 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         {
             return;
         }
-        _fpcalc?.Kill(true);
+        try
+        {
+            _fpcalc?.Kill(true);
+        }
+        catch { }
         _fpcalc?.Dispose();
         _disposed = true;
     }
