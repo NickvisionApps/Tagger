@@ -706,7 +706,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 try
                 {
-                    PublishingDate = DateTime.Parse(filename.Substring(0, len));
+                    PublishingDate = DateTime.Parse(filename.Substring(0, len)).Date;
                 }
                 catch { }
             }
