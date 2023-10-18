@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-18 08:47-0400\n"
+"POT-Creation-Date: 2023-10-18 16:41-0400\n"
 "PO-Revision-Date: 2023-10-18 21:31+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -19,15 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Weblate 5.1\n"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1439
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1421
 #, csharp-format
 msgid "{0} • {1}"
 msgstr "{0} • {1}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1452
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1483
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1367
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1417
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1349
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1399
 #, csharp-format
 msgid "{0} of {1} selected"
 msgstr "Vybráno {0} z {1}"
@@ -53,43 +53,43 @@ msgstr "%title%- %artist%"
 msgid "%track%- %title%"
 msgstr "%track%- %title%"
 
-#: ../../../Controllers/MainWindowController.cs:613
-#: ../../../Controllers/MainWindowController.cs:624
-#: ../../../Controllers/MainWindowController.cs:629
-#: ../../../Controllers/MainWindowController.cs:634
-#: ../../../Controllers/MainWindowController.cs:639
-#: ../../../Controllers/MainWindowController.cs:651
-#: ../../../Controllers/MainWindowController.cs:663
-#: ../../../Controllers/MainWindowController.cs:675
-#: ../../../Controllers/MainWindowController.cs:680
-#: ../../../Controllers/MainWindowController.cs:685
-#: ../../../Controllers/MainWindowController.cs:690
-#: ../../../Controllers/MainWindowController.cs:695
-#: ../../../Controllers/MainWindowController.cs:707
-#: ../../../Controllers/MainWindowController.cs:712
-#: ../../../Controllers/MainWindowController.cs:717
-#: ../../../Controllers/MainWindowController.cs:733
+#: ../../../Controllers/MainWindowController.cs:595
+#: ../../../Controllers/MainWindowController.cs:606
+#: ../../../Controllers/MainWindowController.cs:611
+#: ../../../Controllers/MainWindowController.cs:616
+#: ../../../Controllers/MainWindowController.cs:621
+#: ../../../Controllers/MainWindowController.cs:633
+#: ../../../Controllers/MainWindowController.cs:645
+#: ../../../Controllers/MainWindowController.cs:657
+#: ../../../Controllers/MainWindowController.cs:662
+#: ../../../Controllers/MainWindowController.cs:667
+#: ../../../Controllers/MainWindowController.cs:672
+#: ../../../Controllers/MainWindowController.cs:677
+#: ../../../Controllers/MainWindowController.cs:689
+#: ../../../Controllers/MainWindowController.cs:694
+#: ../../../Controllers/MainWindowController.cs:699
+#: ../../../Controllers/MainWindowController.cs:715
+#: ../../../Controllers/MainWindowController.cs:1752
+#: ../../../Controllers/MainWindowController.cs:1753
+#: ../../../Controllers/MainWindowController.cs:1754
+#: ../../../Controllers/MainWindowController.cs:1755
+#: ../../../Controllers/MainWindowController.cs:1756
+#: ../../../Controllers/MainWindowController.cs:1757
+#: ../../../Controllers/MainWindowController.cs:1758
+#: ../../../Controllers/MainWindowController.cs:1759
+#: ../../../Controllers/MainWindowController.cs:1760
+#: ../../../Controllers/MainWindowController.cs:1761
+#: ../../../Controllers/MainWindowController.cs:1762
+#: ../../../Controllers/MainWindowController.cs:1763
+#: ../../../Controllers/MainWindowController.cs:1764
+#: ../../../Controllers/MainWindowController.cs:1765
+#: ../../../Controllers/MainWindowController.cs:1766
 #: ../../../Controllers/MainWindowController.cs:1770
-#: ../../../Controllers/MainWindowController.cs:1771
-#: ../../../Controllers/MainWindowController.cs:1772
-#: ../../../Controllers/MainWindowController.cs:1773
-#: ../../../Controllers/MainWindowController.cs:1774
-#: ../../../Controllers/MainWindowController.cs:1775
-#: ../../../Controllers/MainWindowController.cs:1776
-#: ../../../Controllers/MainWindowController.cs:1777
-#: ../../../Controllers/MainWindowController.cs:1778
-#: ../../../Controllers/MainWindowController.cs:1779
-#: ../../../Controllers/MainWindowController.cs:1780
-#: ../../../Controllers/MainWindowController.cs:1781
-#: ../../../Controllers/MainWindowController.cs:1782
-#: ../../../Controllers/MainWindowController.cs:1783
-#: ../../../Controllers/MainWindowController.cs:1784
-#: ../../../Controllers/MainWindowController.cs:1788
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1511
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1514
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1437
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1438
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1524
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1419
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1420
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1506
 msgid "<keep>"
 msgstr "<ponechat>"
 
@@ -97,13 +97,13 @@ msgstr "<ponechat>"
 msgid "0 MiB"
 msgstr "0 MiB"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:163
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:157
 #, csharp-format
 msgid "About {0}"
 msgstr "O aplikaci {0}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1190
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1207
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1189
 msgid ""
 "AcoustId can associate a song's fingerprint with a MusicBrainz Recording Id "
 "for easy identification.\n"
@@ -131,61 +131,61 @@ msgstr "Klíč API uživatele AcoustId"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1116
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:54
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:216
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:149
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:224
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1094
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:143
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:211
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1076
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:128
 #: NickvisionTagger.GNOME/Blueprints/window.blp:558
 msgid "Add"
 msgstr "Přidat"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:225
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:212
 msgid "Add New Property"
 msgstr "Přidat novou vlastnost"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:131
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:125
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:41
 #: NickvisionTagger.GNOME/Blueprints/window.blp:23
 msgid "Add to Playlist"
 msgstr "Přidat do playlistu"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:210
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:197
 #: NickvisionTagger.GNOME/Blueprints/window.blp:506
 msgid "Additional Properties"
 msgstr "Další vlastnosti"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:179
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:166
 #: NickvisionTagger.GNOME/Blueprints/window.blp:225
 msgid "Advanced Search Info"
 msgstr "Informace o pokročilém vyhledávání"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1342
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1324
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:649
 #: ../../../Models/MusicFile.cs:760
 msgid "album"
 msgstr "album"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:124
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:199
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:118
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:186
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:53
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 #: NickvisionTagger.GNOME/Blueprints/window.blp:456
 msgid "Album"
 msgstr "Album"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:138
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:132
 #: NickvisionTagger.GNOME/Blueprints/window.blp:38
 msgid "Album Art"
 msgstr "Obal alba"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:201
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:188
 #: NickvisionTagger.GNOME/Blueprints/window.blp:460
 msgid "Album Artist"
 msgstr "Umělec alba"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1391
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1373
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:677
 #: ../../../Models/MusicFile.cs:776
 msgid "albumartist"
@@ -193,7 +193,7 @@ msgstr "umělecalba"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:101
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:298
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1078
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1060
 msgid "All files"
 msgstr "Všechny soubory"
 
@@ -206,7 +206,7 @@ msgstr "Všechny podporované soubory"
 msgid "An application restart is required to change the theme."
 msgstr "Pro změnu motivu je vyžadován restart aplikace."
 
-#: ../../../Controllers/MainWindowController.cs:1228
+#: ../../../Controllers/MainWindowController.cs:1210
 msgid "An invalid RecordingId was provided to MusicBrainz"
 msgstr "Službě MusicBrainz bylo poskytnuto neplatné RecordingId"
 
@@ -220,15 +220,15 @@ msgstr "Službě MusicBrainz bylo poskytnuto neplatné RecordingId"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1251
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:40
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:52
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:308
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:587
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:622
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:721
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:799
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:865
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:925
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1161
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1220
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:295
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:569
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:604
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:703
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:781
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:847
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:907
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1143
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1202
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:30
 #: NickvisionTagger.GNOME/Blueprints/window.blp:659
 msgid "Apply"
@@ -242,27 +242,27 @@ msgstr "Použít"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1139
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1197
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1244
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:306
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:585
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:620
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:719
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:797
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:863
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:923
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1159
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1218
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:293
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:567
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:602
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:701
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:779
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:845
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:905
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1141
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1200
 msgid "Apply Changes?"
 msgstr "Použít změny?"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1338
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1320
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:645
 #: ../../../Models/MusicFile.cs:756
 msgid "artist"
 msgstr "umělec"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:123
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:197
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:117
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:184
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:52
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 #: NickvisionTagger.GNOME/Blueprints/window.blp:452
@@ -279,36 +279,36 @@ msgstr "B"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:188
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1032
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:143
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1469
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:137
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1451
 #: NickvisionTagger.GNOME/Blueprints/window.blp:49
 msgid "Back"
 msgstr "Zadní"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:213
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:200
 #: NickvisionTagger.GNOME/Blueprints/window.blp:513
 msgid "Beats Per Minute"
 msgstr "Údery za minutu"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1403
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1385
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:689
 #: ../../../Models/MusicFile.cs:788
 msgid "beatsperminute"
 msgstr "úderyzaminutu"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1403
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1385
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:689
 #: ../../../Models/MusicFile.cs:788
 msgid "bpm"
 msgstr "bpm"
 
-#: ../../../Controllers/MainWindowController.cs:1662
-#: ../../../Controllers/MainWindowController.cs:1668
+#: ../../../Controllers/MainWindowController.cs:1644
+#: ../../../Controllers/MainWindowController.cs:1650
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1733
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:229
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1547
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:216
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1529
 msgid "Calculating..."
 msgstr "Vypočítávání..."
 
@@ -328,19 +328,19 @@ msgstr "Vypočítávání..."
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:34
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:41
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:216
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:310
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:589
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:624
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:723
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:801
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:867
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:927
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:297
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:571
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:606
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:705
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:783
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:849
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:909
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1076
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1094
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1112
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1130
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1163
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1207
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1222
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1145
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1189
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1204
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:31
 msgid "Cancel"
 msgstr "Zrušit"
@@ -349,7 +349,7 @@ msgstr "Zrušit"
 msgid "Changelog"
 msgstr "Seznam změn"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:158
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:152
 msgid "Check for Updates"
 msgstr "Zkontrolovat aktualizace"
 
@@ -358,31 +358,31 @@ msgstr "Zkontrolovat aktualizace"
 msgid "Clear All Lyrics"
 msgstr "Vymazat všechny texty"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:116
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:110
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:26
 msgid "Close Library"
 msgstr "Zavřít knihovnu"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1399
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1381
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:685
 #: ../../../Models/MusicFile.cs:784
 msgid "comment"
 msgstr "komentář"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:211
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:198
 #: NickvisionTagger.GNOME/Blueprints/window.blp:509
 msgid "Comment"
 msgstr "Komentář"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1418
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1400
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:697
 #: ../../../Models/MusicFile.cs:792
 msgid "composer"
 msgstr "skladatel"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:215
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:202
 #: NickvisionTagger.GNOME/Blueprints/window.blp:517
 msgid "Composer"
 msgstr "Skladatel"
@@ -398,14 +398,14 @@ msgstr "Přispěvatelé na GitHubu ❤️"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:992
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1011
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:150
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:144
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1094
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1112
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1130
 #: NickvisionTagger.GNOME/Blueprints/window.blp:60
 msgid "Convert"
 msgstr "Převést"
 
-#: ../../../Controllers/MainWindowController.cs:956
+#: ../../../Controllers/MainWindowController.cs:938
 #, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
@@ -413,7 +413,7 @@ msgstr[0] "Úspěšně převeden {0} název souboru na značku"
 msgstr[1] "Úspěšně převedeny {0} názvy souborů na značky"
 msgstr[2] "Úspěšně převedeno {0} názvů souborů na značky"
 
-#: ../../../Controllers/MainWindowController.cs:990
+#: ../../../Controllers/MainWindowController.cs:972
 #, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
@@ -421,11 +421,11 @@ msgstr[0] "Úspěšně převedena {0} značka na název souboru"
 msgstr[1] "Úspěšně převedeny {0} značky na názvy souborů"
 msgstr[2] "Úspěšně převedeno {0} značek na názvy souborů"
 
-#: ../../../Controllers/MainWindowController.cs:935
+#: ../../../Controllers/MainWindowController.cs:917
 msgid "Converting file names to tags..."
 msgstr "Převod názvů souborů na značky..."
 
-#: ../../../Controllers/MainWindowController.cs:969
+#: ../../../Controllers/MainWindowController.cs:951
 msgid "Converting tags to file names..."
 msgstr "Převod značek na názvy souborů..."
 
@@ -433,7 +433,7 @@ msgstr "Převod značek na názvy souborů..."
 msgid "Copied debug info to clipboard."
 msgstr "Informace o ladění zkopírovány do schránky."
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:230
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:217
 #: NickvisionTagger.GNOME/Blueprints/window.blp:598
 msgid "Copy Fingerprint To Clipboard"
 msgstr "Zkopírovat otisk do schránky"
@@ -448,7 +448,7 @@ msgstr "Nenalezeny poškozené soubory"
 msgid "Create"
 msgstr "Vytvořit"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:130
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:124
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:36
 #: NickvisionTagger.GNOME/Blueprints/window.blp:22
 msgid "Create Playlist"
@@ -458,8 +458,8 @@ msgstr "Vytvořit playlist"
 msgid "Credits"
 msgstr "Poděkování"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1445
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1427
 msgid "custom"
 msgstr "vlastní"
 
@@ -470,13 +470,13 @@ msgstr "vlastní"
 msgid "Custom"
 msgstr "Vlastní"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:148
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:223
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:142
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:210
 #: NickvisionTagger.GNOME/Blueprints/window.blp:550
 msgid "Custom Properties"
 msgstr "Vlastní vlastnosti"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:226
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:213
 #: NickvisionTagger.GNOME/Blueprints/window.blp:567
 msgid "Custom properties can only be edited for individual files."
 msgstr "Vlastní vlastnosti lze upravit pouze u individuálních souborů."
@@ -489,27 +489,27 @@ msgstr "DaPigGuy"
 msgid "David Lapshin"
 msgstr "David Lapshin"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:136
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:130
 msgid "Delete Tag"
 msgstr "Odstranit značku"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:184
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:171
 msgid "Delete Tag (Shift+Delete)"
 msgstr "Odstranit značku (Shift+Delete)"
 
-#: ../../../Controllers/MainWindowController.cs:902
+#: ../../../Controllers/MainWindowController.cs:884
 msgid "Deleting tags..."
 msgstr "Odstraňování značek..."
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1422
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1404
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:701
 #: ../../../Models/MusicFile.cs:796
 msgid "description"
 msgstr "popis"
 
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:48
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:217
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:204
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:64
 #: NickvisionTagger.GNOME/Blueprints/window.blp:521
 msgid "Description"
@@ -550,80 +550,78 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1144
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1202
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1249
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:309
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:588
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:623
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:722
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:800
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:866
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:926
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1162
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1221
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:296
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:570
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:605
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:704
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:782
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:848
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:908
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1144
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1203
 msgid "Discard"
 msgstr "Zrušit"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:135
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:129
 msgid "Discard Unapplied Changed"
 msgstr "Zrušit nepoužité změny"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:185
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:172
 msgid "Discard Unapplied Changed (Ctrl+Z)"
 msgstr "Zrušit nepoužité změny (Ctrl+Z)"
 
-#: ../../../Controllers/MainWindowController.cs:870
+#: ../../../Controllers/MainWindowController.cs:852
 msgid "Discarding tags..."
 msgstr "Zahazování značek..."
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:162
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:174
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:156
 msgid "Discussions"
 msgstr "Diskuze"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:159
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:170
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:153
 msgid "Documentation"
 msgstr "Dokumentace"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:155
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:149
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:129
 #: NickvisionTagger.GNOME/Blueprints/window.blp:70
 msgid "Download Lyrics"
 msgstr "Stáhnout texty"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:154
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:148
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:124
 #: NickvisionTagger.GNOME/Blueprints/window.blp:69
 msgid "Download MusicBrainz Metadata"
 msgstr "Stáhnout metadata z MusicBrainz"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:190
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:177
 msgid "Download MusicBrainz Metadata (Ctrl+M)"
 msgstr "Stáhnout metadata z MusicBrainz (Ctrl+M)"
 
-#: ../../../Controllers/MainWindowController.cs:1261
+#: ../../../Controllers/MainWindowController.cs:1243
 #, csharp-format
 msgid "Downloaded lyrics for {0} files successfully"
 msgstr "Texty pro {0} souborů úspěšně staženy"
 
-#: ../../../Controllers/MainWindowController.cs:1237
+#: ../../../Controllers/MainWindowController.cs:1219
 #, csharp-format
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "Metadata pro {0} souborů úspěšně stažena"
 
-#: ../../../Controllers/MainWindowController.cs:1247
+#: ../../../Controllers/MainWindowController.cs:1229
 msgid "Downloading lyrics..."
 msgstr "Stahování textů..."
 
-#: ../../../Controllers/MainWindowController.cs:1197
+#: ../../../Controllers/MainWindowController.cs:1179
 msgid "Downloading MusicBrainz metadata..."
 msgstr "Stahování metadat z MusicBrainz..."
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:413
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:395
 msgid "Drop here to open library"
 msgstr "Přesuňte sem pro otevření knihovny"
 
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:53
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:118
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:112
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:88
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:116
 msgid "Edit"
@@ -653,27 +651,27 @@ msgstr ""
 "Povolte pro přepsání metadat existující značky metadaty nalezenými na "
 "MusicBrainz. Při zakázání budou vyplněny pouze prázdné vlastnosti značek."
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:202
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:189
 msgid "Enter album artist here"
 msgstr "Sem zadejte umělce alba"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:200
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:187
 msgid "Enter album here"
 msgstr "Sem zadejte album"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:198
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:185
 msgid "Enter artist here"
 msgstr "Sem zadejte umělce"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:214
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:201
 msgid "Enter beats per minute here"
 msgstr "Sem zadejte údery za minutu"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:212
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:199
 msgid "Enter comment here"
 msgstr "Sem zadejte komentář"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:216
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:203
 msgid "Enter composer here"
 msgstr "Sem zadejte skladatele"
 
@@ -682,15 +680,15 @@ msgid "Enter custom choice here"
 msgstr "Sem zadejte vlastní volbu"
 
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:49
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:218
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:205
 msgid "Enter description here"
 msgstr "Sem zadejte popis"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:193
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:180
 msgid "Enter file name here"
 msgstr "Sem zadejte název souboru"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:204
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:191
 msgid "Enter genre here"
 msgstr "Sem zadejte žánr"
 
@@ -706,27 +704,27 @@ msgstr "Sem zadejte jazykový kód"
 msgid "Enter offset here"
 msgstr "Sem zadejte odsazení"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:220
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:207
 msgid "Enter publisher here"
 msgstr "Sem zadejte vydavatele"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:196
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:183
 msgid "Enter title here"
 msgstr "Sem zadejte název"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:208
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:195
 msgid "Enter track here"
 msgstr "Sem zadejte stopu"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:209
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:196
 msgid "Enter track total here"
 msgstr "Sem zadejte celkový počet stop"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:206
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:193
 msgid "Enter year here"
 msgstr "Sem zadejte rok"
 
-#: ../../../Controllers/MainWindowController.cs:1230
+#: ../../../Controllers/MainWindowController.cs:1212
 msgid "Error"
 msgstr "Chyba"
 
@@ -740,13 +738,13 @@ msgstr "CHYBA"
 msgid "Existing Lyrics"
 msgstr "Existující texty"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:117
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:111
 msgid "Exit"
 msgstr "Opustit"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:142
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:146
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:233
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:136
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:140
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:220
 #: NickvisionTagger.GNOME/Blueprints/window.blp:45
 #: NickvisionTagger.GNOME/Blueprints/window.blp:53
 #: NickvisionTagger.GNOME/Blueprints/window.blp:337
@@ -769,11 +767,11 @@ msgstr "Exportovat přední obal alba"
 msgid "Export to LRC"
 msgstr "Exportovat do LRC"
 
-#: ../../../Controllers/MainWindowController.cs:1124
+#: ../../../Controllers/MainWindowController.cs:1106
 msgid "Exported back album art to file successfully"
 msgstr "Zadní obal alba úspěšně exportován do souboru"
 
-#: ../../../Controllers/MainWindowController.cs:1108
+#: ../../../Controllers/MainWindowController.cs:1090
 msgid "Exported front album art to file successfully"
 msgstr "Přední obal alba úspěšně exportován do souboru"
 
@@ -782,7 +780,7 @@ msgstr "Přední obal alba úspěšně exportován do souboru"
 msgid "Exported successfully to: {0}"
 msgstr "Úspěšně exportováno do: {0}"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:494
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:476
 msgid "Failed MusicBrainz Lookup"
 msgstr "Neúspěšné vyhledávání ve službě MusicBrainz"
 
@@ -790,20 +788,20 @@ msgstr "Neúspěšné vyhledávání ve službě MusicBrainz"
 msgid "Failed MusicBrainz Lookups"
 msgstr "Neúspěšná vyhledávání ve službě MusicBrainz"
 
-#: ../../../Controllers/MainWindowController.cs:1129
+#: ../../../Controllers/MainWindowController.cs:1111
 msgid "Failed to export back album art to a file"
 msgstr "Nepodařilo se exportovat zadní obal alba do souboru"
 
-#: ../../../Controllers/MainWindowController.cs:1113
+#: ../../../Controllers/MainWindowController.cs:1095
 msgid "Failed to export front album art to a file"
 msgstr "Nepodařilo se exportovat přední obal alba do souboru"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:112
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:106
 msgid "File"
 msgstr "Soubor"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:120
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:192
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:114
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:179
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:49
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 #: NickvisionTagger.GNOME/Blueprints/window.blp:419
@@ -811,44 +809,44 @@ msgid "File Name"
 msgstr "Název souboru"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:992
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:151
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1112
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:145
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1094
 #: NickvisionTagger.GNOME/Blueprints/window.blp:62
 msgid "File Name to Tag"
 msgstr "Název souboru na značku"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:188
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:175
 msgid "File Name to Tag (Ctrl+F)"
 msgstr "Název souboru na značku (Ctrl+F)"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:121
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:115
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:50
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 msgid "File Path"
 msgstr "Cesta k souboru"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:227
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:214
 #: NickvisionTagger.GNOME/Blueprints/window.blp:576
 msgid "File Properties"
 msgstr "Vlastnosti souboru"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1330
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1312
 msgid "filename"
 msgstr "názevsouboru"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:228
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:215
 #: NickvisionTagger.GNOME/Blueprints/window.blp:579
 msgid "Fingerprint"
 msgstr "Otisk"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1750
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1699
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1681
 msgid "Fingerprint was copied to clipboard."
 msgstr "Otisk byl zkopírován do schránky."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1431
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1365
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1347
 msgid "Folder Mode"
 msgstr "Režim složek"
 
@@ -859,15 +857,15 @@ msgstr "Formát"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:992
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1011
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1094
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1112
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1130
 msgid "Format String"
 msgstr "Formátový řetězec"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:188
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1032
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:139
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1469
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:133
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1451
 #: NickvisionTagger.GNOME/Blueprints/window.blp:41
 msgid "Front"
 msgstr "Přední"
@@ -876,15 +874,15 @@ msgstr "Přední"
 msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1395
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1377
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:681
 #: ../../../Models/MusicFile.cs:780
 msgid "genre"
 msgstr "žánr"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:127
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:203
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:121
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:190
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:56
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 #: NickvisionTagger.GNOME/Blueprints/window.blp:464
@@ -896,47 +894,31 @@ msgstr "Žánr"
 msgid "Get New API Key"
 msgstr "Získat nový klíč API"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:166
-msgid "Getting Started"
-msgstr "Začínáme"
-
 #: ../../../Helpers/MediaHelpers.cs:25
 msgid "GiB"
 msgstr "GiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1359
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:160
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:154
 msgid "GitHub Repo"
 msgstr "GitHub repozitář"
-
-#: ../../../Controllers/MainWindowController.cs:286
-msgid "Good Afternoon!"
-msgstr "Dobré odpoledne!"
-
-#: ../../../Controllers/MainWindowController.cs:288
-msgid "Good Day!"
-msgstr "Dobrý den!"
-
-#: ../../../Controllers/MainWindowController.cs:287
-msgid "Good Evening!"
-msgstr "Dobrý večer!"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:564
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:569
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:574
 #: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:29
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:157
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:461
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:472
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:483
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:151
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:443
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:454
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:465
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:18
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:153
 #: NickvisionTagger.GNOME/Blueprints/window.blp:7
 msgid "Help"
 msgstr "Nápověda"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:191
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:775
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:178
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:757
 msgid "Hide Extras Pane"
 msgstr "Skrýt extra panel"
 
@@ -952,13 +934,13 @@ msgid "Include Only Selected Files"
 msgstr "Zahrnout pouze vybrané soubory"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:579
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:505
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:487
 msgid "Info"
 msgstr "Informace"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:140
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:144
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:231
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:134
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:138
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:218
 #: NickvisionTagger.GNOME/Blueprints/window.blp:43
 #: NickvisionTagger.GNOME/Blueprints/window.blp:51
 #: NickvisionTagger.GNOME/Blueprints/window.blp:319
@@ -975,7 +957,7 @@ msgstr "Vložit zadní obal alba"
 msgid "Insert Front Album Art"
 msgstr "Vložit přední obal alba"
 
-#: ../../../Controllers/MainWindowController.cs:1012
+#: ../../../Controllers/MainWindowController.cs:994
 msgid "Inserting album art..."
 msgstr "Vkládání obalu alba..."
 
@@ -993,15 +975,11 @@ msgstr "KiB"
 msgid "Language Code"
 msgstr "Kód jazyka"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:173
-msgid "Let us fix whatever issue you are having."
-msgstr "Nechte nás opravit jakýkoli problém, který máte."
-
-#: ../../../Controllers/MainWindowController.cs:469
+#: ../../../Controllers/MainWindowController.cs:451
 msgid "Library was changed on disk."
 msgstr "Knihovna byla změněna na disku."
 
-#: ../../../Controllers/MainWindowController.cs:522
+#: ../../../Controllers/MainWindowController.cs:504
 #, csharp-format
 msgid "Loaded {0} music file."
 msgid_plural "Loaded {0} music files."
@@ -1009,8 +987,8 @@ msgstr[0] "Načten {0} hudební soubor."
 msgstr[1] "Načteny {0} hudební soubory."
 msgstr[2] "Načteno {0} hudebních souborů."
 
-#: ../../../Controllers/MainWindowController.cs:508
-#: ../../../Controllers/MainWindowController.cs:1615
+#: ../../../Controllers/MainWindowController.cs:490
+#: ../../../Controllers/MainWindowController.cs:1597
 msgid "Loading music files from library..."
 msgstr "Načítání hudebních souborů z knihovny..."
 
@@ -1022,25 +1000,25 @@ msgstr "Texty"
 msgid "lyrics"
 msgstr "texty"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:186
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:173
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:32
 #: NickvisionTagger.GNOME/Blueprints/window.blp:439
 msgid "Lyrics"
 msgstr "Texty"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:194
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:181
 #: NickvisionTagger.GNOME/Blueprints/window.blp:428
 msgid "Main Properties"
 msgstr "Hlavní vlastnosti"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:137
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:131
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:115
 #: NickvisionTagger.GNOME/Blueprints/window.blp:35
 #: NickvisionTagger.GNOME/Blueprints/window.blp:435
 msgid "Manage Lyrics"
 msgstr "Spravovat texty"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:187
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:174
 msgid "Manage Lyrics (Ctrl+L)"
 msgstr "Spravovat texty (Ctrl+L)"
 
@@ -1063,12 +1041,12 @@ msgid "Music Library"
 msgstr "Hudební knihovna"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1190
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1207
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1189
 msgid "MusicBrainz Recording Id"
 msgstr "ID nahrávky MusicBrainz"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1116
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1094
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1076
 msgid "New Custom Property"
 msgstr "Nová vlastní vlastnost"
 
@@ -1077,7 +1055,7 @@ msgstr "Nová vlastní vlastnost"
 msgid "New Synchronized Lyric"
 msgstr "Nový synchronizovaný řádek"
 
-#: ../../../Controllers/MainWindowController.cs:426
+#: ../../../Controllers/MainWindowController.cs:408
 msgid "New update available."
 msgstr "Dostupná nová aktualizace."
 
@@ -1088,13 +1066,13 @@ msgstr "Nicholas Logozzo"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:848
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:915
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:855
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:912
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:837
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:894
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:122
 msgid "No"
 msgstr "Ne"
 
-#: ../../../Controllers/MainWindowController.cs:1226
+#: ../../../Controllers/MainWindowController.cs:1208
 msgid "No AcoustId entry found for the file's fingerprint"
 msgstr "Pro otisk souboru nebylo nalezeno žádné AcoustId"
 
@@ -1103,41 +1081,41 @@ msgid "No file selected"
 msgstr "Není vybrán žádný soubor"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:909
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:903
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:885
 msgid "No files selected for removal."
 msgstr "Nebyly vybrány žádné soubory k odstranění."
 
-#: ../../../Controllers/MainWindowController.cs:1261
+#: ../../../Controllers/MainWindowController.cs:1243
 msgid "No lyrics were downloaded"
 msgstr "Nebyly staženy žádné texty"
 
-#: ../../../Controllers/MainWindowController.cs:1237
+#: ../../../Controllers/MainWindowController.cs:1219
 msgid "No metadata was downloaded"
 msgstr "Nebyla stažena žádná metadata"
 
-#: ../../../Controllers/MainWindowController.cs:545
+#: ../../../Controllers/MainWindowController.cs:527
 msgid "No music files are selected."
 msgstr "Nejsou vybrány žádné hudební soubory."
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:176
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:163
 #: NickvisionTagger.GNOME/Blueprints/window.blp:200
 msgid "No Music Files Found"
 msgstr "Nenalezeny žádné hudební soubory"
 
-#: ../../../Controllers/MainWindowController.cs:549
+#: ../../../Controllers/MainWindowController.cs:531
 msgid "No music files in library."
 msgstr "Žádné hudební soubory v knihovně."
 
-#: ../../../Controllers/MainWindowController.cs:1227
+#: ../../../Controllers/MainWindowController.cs:1209
 msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
 msgstr "Záznamu AcoustId nebylo poskytnuto žádné MusicBrainz RecordingId"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:180
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:167
 #: NickvisionTagger.GNOME/Blueprints/window.blp:277
 msgid "No Selected Music Files"
 msgstr "Žádné vybrané hudební soubory"
 
-#: ../../../Controllers/MainWindowController.cs:1274
+#: ../../../Controllers/MainWindowController.cs:1256
 msgid "No user api key configured."
 msgstr "Není nastaven žádný uživatelský klíč API."
 
@@ -1165,8 +1143,8 @@ msgstr "Posun (v milisekundách)"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1183
 #: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:27
 #: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:28
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:499
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1200
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:481
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1182
 msgid "OK"
 msgstr "OK"
 
@@ -1183,7 +1161,7 @@ msgid "On"
 msgstr "Zap"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1181
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1199
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1181
 msgid ""
 "Only one file can be submitted to AcoustID at a time. Please select only one "
 "file and try again."
@@ -1192,19 +1170,20 @@ msgstr ""
 "jeden soubor a zkuste to znovu."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:588
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:516
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:498
 msgid "Open"
 msgstr "Otevřít"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:167
-msgid "Open a library with music to get started."
-msgstr "Začněte otevřením hudební knihovny."
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:159
+#: NickvisionTagger.GNOME/Blueprints/window.blp:116
+msgid "Open a library with music to get started"
+msgstr "Začněte otevřením hudební knihovny"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:46
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:697
 #: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:43
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:113
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:168
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:107
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:160
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:16
 #: NickvisionTagger.GNOME/Blueprints/window.blp:13
 #: NickvisionTagger.GNOME/Blueprints/window.blp:129
@@ -1216,8 +1195,8 @@ msgid "Open Music File"
 msgstr "Otevřít hudební soubor"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:712
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:114
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:169
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:108
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:161
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:21
 #: NickvisionTagger.GNOME/Blueprints/window.blp:14
 #: NickvisionTagger.GNOME/Blueprints/window.blp:142
@@ -1251,34 +1230,34 @@ msgstr "Cesta (prázdná)"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1509
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1710
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:222
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1438
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:209
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1420
 msgid "Pick a date"
 msgstr "Vyberte datum"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:32
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:129
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:123
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:26
 msgid "Playlist"
 msgstr "Playlist"
 
-#: ../../../Controllers/MainWindowController.cs:554
+#: ../../../Controllers/MainWindowController.cs:536
 msgid "Playlist file created successfully."
 msgstr "Soubor playlistu úspěšně vytvořen."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1431
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1365
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1347
 msgid "Playlist Mode"
 msgstr "Režim playlistů"
 
-#: ../../../Controllers/MainWindowController.cs:541
+#: ../../../Controllers/MainWindowController.cs:523
 msgid "Playlist path can not be empty."
 msgstr "Cesta playlistu nemůže být prázdná."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:992
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1011
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1094
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1112
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1130
 msgid "Please select a format string."
 msgstr "Vyberte prosím formátový řetězec."
 
@@ -1292,52 +1271,48 @@ msgid "PREVIEW"
 msgstr "NÁHLED"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1116
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1094
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1076
 msgid "Property Name"
 msgstr "Název vlastnosti"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1426
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1408
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:705
 #: ../../../Models/MusicFile.cs:800
 msgid "publisher"
 msgstr "vydavatel"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:219
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:206
 #: NickvisionTagger.GNOME/Blueprints/window.blp:525
 msgid "Publisher"
 msgstr "Vydavatel"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:221
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:208
 #: NickvisionTagger.GNOME/Blueprints/window.blp:529
 msgid "Publishing Date"
 msgstr "Datum vydání"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1430
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1412
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:709
 #: ../../../Models/MusicFile.cs:804
 msgid "publishingdate"
 msgstr "datumvydání"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:171
-msgid "Read more about Tagger's inner workings."
-msgstr "Zjistěte více o tom, jak funguje aplikace Označovač."
-
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:559
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:450
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:432
 msgid "Reload"
 msgstr "Znovu načíst"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:115
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:109
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:31
 #: NickvisionTagger.GNOME/Blueprints/window.blp:18
 msgid "Reload Library"
 msgstr "Znovu načíst knihovnu"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:141
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:145
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:232
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:135
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:139
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:219
 #: NickvisionTagger.GNOME/Blueprints/window.blp:44
 #: NickvisionTagger.GNOME/Blueprints/window.blp:52
 #: NickvisionTagger.GNOME/Blueprints/window.blp:328
@@ -1350,11 +1325,11 @@ msgid "Remove Custom Property"
 msgstr "Odebrat vlastní vlastnost"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:913
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:909
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:891
 msgid "Remove Files?"
 msgstr "Odstranit soubory?"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:132
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:126
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:46
 #: NickvisionTagger.GNOME/Blueprints/window.blp:24
 msgid "Remove from Playlist"
@@ -1364,12 +1339,11 @@ msgstr "Odebrat z playlistu"
 msgid "Remove Lyric"
 msgstr "Odebrat řádek"
 
-#: ../../../Controllers/MainWindowController.cs:1056
+#: ../../../Controllers/MainWindowController.cs:1038
 msgid "Removing album art..."
 msgstr "Odebírání obalu alba..."
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:161
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:172
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:155
 msgid "Report a Bug"
 msgstr "Nahlásit problém"
 
@@ -1381,18 +1355,18 @@ msgstr "Restartovat pro použití motivu?"
 msgid "Save Playlist"
 msgstr "Uložit playlist"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:134
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:182
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:128
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:169
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:55
 msgid "Save Tag"
 msgstr "Uložit značku"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:183
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:170
 msgid "Save Tag (Ctrl+S)"
 msgstr "Uložit značku (Ctrl+S)"
 
-#: ../../../Controllers/MainWindowController.cs:787
-#: ../../../Controllers/MainWindowController.cs:830
+#: ../../../Controllers/MainWindowController.cs:769
+#: ../../../Controllers/MainWindowController.cs:812
 msgid "Saving tags..."
 msgstr "Ukládání značek..."
 
@@ -1401,17 +1375,17 @@ msgstr "Ukládání značek..."
 msgid "Select Save Location"
 msgstr "Vyberte místo uložení"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:181
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:168
 #: NickvisionTagger.GNOME/Blueprints/window.blp:278
 msgid "Select some files"
 msgstr "Vyberte nějaké soubory"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:128
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:122
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:29
 msgid "Settings"
 msgstr "Nastavení"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:767
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:749
 msgid "Show Extras Pane"
 msgstr "Zobrazit extra panel"
 
@@ -1423,67 +1397,63 @@ msgstr "Zobrazit extra panel"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1139
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1197
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1244
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:307
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:586
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:621
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:720
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:798
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:864
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:924
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1160
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1219
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:294
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:568
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:603
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:702
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:780
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:846
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:906
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1142
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1201
 msgid ""
 "Some music files still have changes waiting to be applied. What would you "
 "like to do?"
 msgstr "Některé hudební soubory mají stále čekající změny. Co chcete udělat?"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:119
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:113
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:48
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:64
 msgid "Sort Files By"
 msgstr "Řadit soubory podle"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:175
-msgid "Start a conversation with us."
-msgstr "Začněte s námi konverzaci."
-
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1190
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1207
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1189
 msgid "Submit"
 msgstr "Potvrdit"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1190
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:156
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1207
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:150
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1189
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:134
 #: NickvisionTagger.GNOME/Blueprints/window.blp:71
 msgid "Submit to AcoustId"
 msgstr "Odeslat do AcoustId"
 
-#: ../../../Controllers/MainWindowController.cs:1280
+#: ../../../Controllers/MainWindowController.cs:1262
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "Metadata úspěšně odeslána do AcoustId"
 
-#: ../../../Controllers/MainWindowController.cs:1277
+#: ../../../Controllers/MainWindowController.cs:1259
 msgid "Submitting data to AcoustId..."
 msgstr "Odesílání dat do AcoustId..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1031
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:147
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:234
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1255
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1256
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1577
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1578
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:141
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:221
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1237
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1238
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1559
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1560
 #: NickvisionTagger.GNOME/Blueprints/window.blp:346
 msgid "Switch to Back Cover"
 msgstr "Přepnout na zadní obal"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1031
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1255
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1256
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1577
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1578
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1237
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1238
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1559
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1560
 msgid "Switch to Front Cover"
 msgstr "Přepnout na přední obal"
 
@@ -1492,18 +1462,18 @@ msgstr "Přepnout na přední obal"
 msgid "Synchronized"
 msgstr "Synchronizované"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:133
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:127
 msgid "Tag"
 msgstr "Značka"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1011
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:152
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1130
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:146
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1112
 #: NickvisionTagger.GNOME/Blueprints/window.blp:63
 msgid "Tag to File Name"
 msgstr "Značka na název souboru"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:189
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:176
 msgid "Tag to File Name (Ctrl+T)"
 msgstr "Značka na název souboru (Ctrl+T)"
 
@@ -1513,14 +1483,24 @@ msgstr "Značka na název souboru (Ctrl+T)"
 msgid "Tag your music"
 msgstr "Označte svou hudbu"
 
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:158
+#: NickvisionTagger.GNOME/Blueprints/window.blp:115
+msgid "Tag Your Music"
+msgstr "Označte svou hudbu"
+
 #: ../../../Controllers/MainWindowController.cs:168
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:4
 #: NickvisionTagger.Shared/org.nickvision.tagger.metainfo.xml.in:6
 msgid "Tagger"
 msgstr "Označovač"
 
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:162
+msgid ""
+"Tagger's documentation and support channels are accessible via the Help menu."
+msgstr ""
+
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:913
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:910
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:892
 msgid ""
 "The selected files will not be deleted from disk but will be removed from "
 "this playlist."
@@ -1533,7 +1513,7 @@ msgstr ""
 msgid "Theme"
 msgstr "Motiv"
 
-#: ../../../Controllers/MainWindowController.cs:1229
+#: ../../../Controllers/MainWindowController.cs:1211
 msgid "This file does not have a valid fingerprint"
 msgstr "Tento soubor nemá platný otisk"
 
@@ -1555,15 +1535,15 @@ msgstr "TiB"
 msgid "Timestamp (hh:mm:ss or mm:ss.xx)"
 msgstr "Čas (hh:mm:ss nebo mm:ss.xx)"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1334
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1316
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:641
 #: ../../../Models/MusicFile.cs:752
 msgid "title"
 msgstr "název"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:122
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:195
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:116
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:182
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:51
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 #: NickvisionTagger.GNOME/Blueprints/window.blp:448
@@ -1571,27 +1551,27 @@ msgid "Title"
 msgstr "Název"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1181
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1198
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1180
 msgid "Too Many Files Selected"
 msgstr "Vybráno příliš mnoho souborů"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1361
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1343
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:661
 #: ../../../Models/MusicFile.cs:768
 msgid "track"
 msgstr "stopa"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:126
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:207
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:120
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:194
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:55
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 #: NickvisionTagger.GNOME/Blueprints/window.blp:481
 msgid "Track"
 msgstr "Stopa"
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1376
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1358
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:669
 #: ../../../Models/MusicFile.cs:772
 msgid "tracktotal"
@@ -1601,7 +1581,7 @@ msgstr "celkemstop"
 msgid "translator-credits"
 msgstr "Jonáš Loskot <jonas.loskot@pm.me>, 2023"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:177
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:164
 #: NickvisionTagger.GNOME/Blueprints/window.blp:201
 msgid "Try a different library"
 msgstr "Zkuste jinou knihovnu"
@@ -1611,20 +1591,20 @@ msgstr "Zkuste jinou knihovnu"
 msgid "Type"
 msgstr "Typ"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:178
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:165
 #: NickvisionTagger.GNOME/Blueprints/window.blp:220
 msgid "Type ! for advanced search"
 msgstr "Zadejte ! pro pokročilé vyhledávání"
 
-#: ../../../Controllers/MainWindowController.cs:578
+#: ../../../Controllers/MainWindowController.cs:560
 msgid "Unable to add file to playlist. File may already exist in playlist."
 msgstr "Nepodařilo se přidat soubor do playlistu. Možná v něm již existuje."
 
-#: ../../../Controllers/MainWindowController.cs:558
+#: ../../../Controllers/MainWindowController.cs:540
 msgid "Unable to create playlist."
 msgstr "Nepodařilo se vytvořit playlist."
 
-#: ../../../Controllers/MainWindowController.cs:443
+#: ../../../Controllers/MainWindowController.cs:425
 msgid "Unable to download and install update."
 msgstr "Nepodařilo se stáhnout a nainstalovat aktualizaci."
 
@@ -1638,29 +1618,29 @@ msgstr "Nepodařilo se exportovat do souboru LRC."
 msgid "Unable to import from LRC."
 msgstr "Nepodařilo se importovat soubor LRC."
 
-#: ../../../Controllers/MainWindowController.cs:1008
+#: ../../../Controllers/MainWindowController.cs:990
 msgid "Unable to load image file"
 msgstr "Nepodařilo se načíst soubor s obrázkem"
 
-#: ../../../Controllers/MainWindowController.cs:593
+#: ../../../Controllers/MainWindowController.cs:575
 msgid "Unable to remove some files from playlist."
 msgstr "Nepodařilo se odstranit některé soubory z playlistu."
 
-#: ../../../Controllers/MainWindowController.cs:850
+#: ../../../Controllers/MainWindowController.cs:832
 #, csharp-format
 msgid "Unable to save {0}"
 msgstr "Nepodařilo se uložit soubor {0}"
 
-#: ../../../Controllers/MainWindowController.cs:808
+#: ../../../Controllers/MainWindowController.cs:790
 #, csharp-format
 msgid "Unable to save {0}."
 msgstr "Nepodařilo se uložit {0}."
 
-#: ../../../Controllers/MainWindowController.cs:1280
+#: ../../../Controllers/MainWindowController.cs:1262
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "Nepodařilo se odeslat AcoustId. Zkontrolujte klíč API"
 
-#: ../../../Controllers/MainWindowController.cs:1593
+#: ../../../Controllers/MainWindowController.cs:1575
 msgid "Unknown"
 msgstr "Neznámé"
 
@@ -1669,7 +1649,7 @@ msgstr "Neznámé"
 msgid "Unsynchronized"
 msgstr "Nesynchronizované"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:443
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:425
 msgid "Update"
 msgstr "Aktualizace"
 
@@ -1684,7 +1664,7 @@ msgid "Use Relative Paths"
 msgstr "Použít relativní cesty"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:846
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:852
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:834
 msgid "Use Relative Paths?"
 msgstr "Použít relativní cesty?"
 
@@ -1693,7 +1673,7 @@ msgstr "Použít relativní cesty?"
 msgid "User Interface"
 msgstr "Uživatelské rozhraní"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:153
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:147
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:61
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:96
 #: NickvisionTagger.GNOME/Blueprints/window.blp:67
@@ -1719,7 +1699,7 @@ msgstr ""
 "Jakákoli neuložená práce bude ztracena."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:846
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:853
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:835
 msgid ""
 "Would you like to save the added file to the playlist using it's relative "
 "path?\n"
@@ -1728,15 +1708,15 @@ msgstr ""
 "Chcete uložit přidaný soubor do playlistu pomocí jeho relativní cesty?\n"
 "Pokud ne, bude využita plná cesta."
 
-#: ../../../Controllers/MainWindowController.cs:1304
-#: ../../../Controllers/MainWindowController.cs:1346
+#: ../../../Controllers/MainWindowController.cs:1286
+#: ../../../Controllers/MainWindowController.cs:1328
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:653
 #: ../../../Models/MusicFile.cs:764
 msgid "year"
 msgstr "rok"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:125
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:205
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:119
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:192
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:54
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 #: NickvisionTagger.GNOME/Blueprints/window.blp:468
@@ -1745,21 +1725,11 @@ msgstr "Rok"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:851
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:918
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:854
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:911
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:836
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:893
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:121
 msgid "Yes"
 msgstr "Ano"
-
-#: ../../../Controllers/MainWindowController.cs:285
-msgctxt "Morning"
-msgid "Good Morning!"
-msgstr "Dobré ráno!"
-
-#: ../../../Controllers/MainWindowController.cs:284
-msgctxt "Night"
-msgid "Good Morning!"
-msgstr "Dobré ráno!"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:36
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
@@ -1873,14 +1843,6 @@ msgstr "Knihovna"
 msgid "Main Menu"
 msgstr "Hlavní nabídka"
 
-#: NickvisionTagger.GNOME/Blueprints/window.blp:115
-msgid "Tag Your Music"
-msgstr "Označte svou hudbu"
-
-#: NickvisionTagger.GNOME/Blueprints/window.blp:116
-msgid "Open a library with music to get started"
-msgstr "Začněte otevřením hudební knihovny"
-
 #: NickvisionTagger.GNOME/Blueprints/window.blp:130
 msgid "Open Folder (Ctrl+O)"
 msgstr "Otevřít složku (Ctrl+O)"
@@ -1953,6 +1915,38 @@ msgid ""
 msgstr ""
 "— Otevírání, správa a vytváření playlistů v několika formátech (m3u, pls, "
 "xspf a další)"
+
+#~ msgid "Getting Started"
+#~ msgstr "Začínáme"
+
+#~ msgid "Good Afternoon!"
+#~ msgstr "Dobré odpoledne!"
+
+#~ msgid "Good Day!"
+#~ msgstr "Dobrý den!"
+
+#~ msgid "Good Evening!"
+#~ msgstr "Dobrý večer!"
+
+#~ msgid "Let us fix whatever issue you are having."
+#~ msgstr "Nechte nás opravit jakýkoli problém, který máte."
+
+#~ msgid "Open a library with music to get started."
+#~ msgstr "Začněte otevřením hudební knihovny."
+
+#~ msgid "Read more about Tagger's inner workings."
+#~ msgstr "Zjistěte více o tom, jak funguje aplikace Označovač."
+
+#~ msgid "Start a conversation with us."
+#~ msgstr "Začněte s námi konverzaci."
+
+#~ msgctxt "Morning"
+#~ msgid "Good Morning!"
+#~ msgstr "Dobré ráno!"
+
+#~ msgctxt "Night"
+#~ msgid "Good Morning!"
+#~ msgstr "Dobré ráno!"
 
 #~ msgid "Default"
 #~ msgstr "Výchozí"

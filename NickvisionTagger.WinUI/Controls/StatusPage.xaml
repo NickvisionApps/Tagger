@@ -11,7 +11,7 @@
     <StackPanel x:Name="StackPanel">
         <FontIcon x:Name="GlyphIcon" HorizontalAlignment="Center" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{x:Bind Glyph, Mode=OneWay}" Visibility="Collapsed"/>
 
-        <Image x:Name="AppIcon" HorizontalAlignment="Center" Visibility="Collapsed" Source="../Resources/org.nickvision.tubeconverter.ico"/>
+        <Image x:Name="AppIcon" HorizontalAlignment="Center" Visibility="Collapsed" Source="../Resources/org.nickvision.tagger.ico"/>
 
         <TextBlock x:Name="LblTitle" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" Text="{x:Bind Title, Mode=OneWay}"/>
 

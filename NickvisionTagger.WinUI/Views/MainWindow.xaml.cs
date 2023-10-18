@@ -102,12 +102,6 @@ public sealed partial class MainWindow : Window
         TitleBar.SizeChanged += (sender, e) => SetDragRegionForCustomTitleBar();
         //Window Sizing
         User32.ShowWindow(_hwnd, ShowWindowCommand.SW_SHOWMAXIMIZED);
-        //Home
-        HomeBanner.Background = new AcrylicBrush()
-        {
-            TintOpacity = 0.9,
-            TintColor = MainGrid.ActualTheme == ElementTheme.Light ? ColorHelper.FromArgb(255, 225, 120, 0) : ColorHelper.FromArgb(255, 230, 97, 0)
-        };
         //Localize Strings
         MenuFile.Title = _("File");
         MenuOpenFolder.Text = _("Open Folder");
@@ -161,18 +155,11 @@ public sealed partial class MainWindow : Window
         MenuReportABug.Text = _("Report a Bug");
         MenuDiscussions.Text = _("Discussions");
         MenuAbout.Text = _("About {0}", _controller.AppInfo.ShortName);
-        HomeBannerTitle.Text = _controller.Greeting;
-        HomeBannerDescription.Text = _controller.AppInfo.Description;
-        HomeGettingStartedTitle.Text = _("Getting Started");
-        HomeGettingStartedDescription.Text = _("Open a library with music to get started.");
+        StatusPageHome.Title = _("Tag Your Music");
+        StatusPageHome.Description = _("Open a library with music to get started");
         HomeOpenFolderButtonLabel.Text = _("Open Folder");
         HomeOpenPlaylistButtonLabel.Text = _("Open Playlist");
-        HomeDocumentationTitle.Text = _("Documentation");
-        HomeDocumentationDescription.Text = _("Read more about Tagger's inner workings.");
-        HomeReportABugTitle.Text = _("Report a Bug");
-        HomeReportABugDescription.Text = _("Let us fix whatever issue you are having.");
-        HomeDiscussionsTitle.Text = _("Discussions");
-        HomeDiscussionsDescription.Text = _("Start a conversation with us.");
+        LblHomeHelp.Text = _("Tagger's documentation and support channels are accessible via the Help menu.");
         StatusPageNoFiles.Title = _("No Music Files Found");
         StatusPageNoFiles.Description = _("Try a different library");
         SearchMusicFiles.PlaceholderText = _("Type ! for advanced search");
@@ -339,11 +326,6 @@ public sealed partial class MainWindow : Window
         MenuEdit.Foreground = (SolidColorBrush)Application.Current.Resources[_isActived ? "WindowCaptionForeground" : "WindowCaptionForegroundDisabled"];
         MenuHelp.Foreground = (SolidColorBrush)Application.Current.Resources[_isActived ? "WindowCaptionForeground" : "WindowCaptionForegroundDisabled"];
         AppWindow.TitleBar.ButtonForegroundColor = ((SolidColorBrush)Application.Current.Resources[_isActived ? "WindowCaptionForeground" : "WindowCaptionForegroundDisabled"]).Color;
-        HomeBanner.Background = HomeBanner.Background = new AcrylicBrush()
-        {
-            TintOpacity = 0.9,
-            TintColor = MainGrid.ActualTheme == ElementTheme.Light ? ColorHelper.FromArgb(255, 225, 120, 0) : ColorHelper.FromArgb(255, 230, 97, 0)
-        };
     }
 
     /// <summary>
@@ -1680,7 +1662,7 @@ public sealed partial class MainWindow : Window
     /// <param name="args">CalendarDatePickerDateChangedEventArgs</param>
     private void DatePublishingDate_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
     {
-        if(args.NewDate != null)
+        if (args.NewDate != null)
         {
             TagPropertyChanged(sender, null);
         }
