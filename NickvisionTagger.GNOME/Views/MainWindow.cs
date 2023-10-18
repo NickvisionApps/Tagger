@@ -1511,7 +1511,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         else if (_controller.SelectedPropertyMap.PublishingDate == _("<keep>"))
         {
             gtk_calendar_select_day(_publishingDateCalendar.Handle, ref g_date_time_new_local(DateTime.MinValue.Year, DateTime.MinValue.Month, DateTime.MinValue.Day, 0, 0, 0));
-            _publishingDateButton.SetLabel("<keep>");
+            _publishingDateButton.SetLabel(_("<keep>"));
         }
         else
         {
