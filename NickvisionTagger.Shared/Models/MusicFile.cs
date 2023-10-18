@@ -70,7 +70,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// </summary>
     static MusicFile()
     {
-        _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "lyrics", _("lyrics") };
+        _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "publishingdate", _("publishingdate"), "lyrics", _("lyrics") };
         ATL.Settings.UseFileNameWhenNoTitle = false;
         ATL.Settings.FileBufferSize = 1024;
         ATL.Settings.ID3v2_writePictureDataLengthIndicator = false;
@@ -569,7 +569,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <returns>True if set, else false</returns>
     public bool SetCustomProperty(string name, string value)
     {
-        if (_validProperties.Contains(name.ToLower()))
+        if (_validProperties.Contains(name.ToLower()) || _validProperties.Contains(name.Replace(" ", "").ToLower()))
         {
             return false;
         }
