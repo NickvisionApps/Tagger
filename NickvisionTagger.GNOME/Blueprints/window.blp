@@ -524,6 +524,24 @@ Adw.ApplicationWindow _root {
                               Adw.EntryRow _publisherRow {
                                 title: _("Publisher");
                               }
+
+                              Adw.ActionRow {
+                                title: _("Publishing Date");
+                                activatable-widget: _publishingDateButton;
+
+                                [suffix]
+                                Gtk.MenuButton _publishingDateButton {
+                                  valign: center;
+                                  direction: none;
+                                  popover: Gtk.Popover {
+                                    Gtk.Calendar _publishingDateCalendar {
+                                      name: "calendarPublishingDate";
+                                    }
+                                  };
+
+                                  styles ["calendar-button"]
+                                }
+                              }
                             } 
                           }
                         }

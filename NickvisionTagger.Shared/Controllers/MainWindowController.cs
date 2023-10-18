@@ -646,7 +646,7 @@ public class MainWindowController : IDisposable
                 {
                     pair.Value.Year = 0;
                 }
-                updated = map.Year != _filesBeingEditedOriginals[pair.Key].Year.ToString();
+                updated = map.Year != _filesBeingEditedOriginals[pair.Key].Year;
             }
             if (map.Track != (pair.Value.Track == 0 ? "" : pair.Value.Track.ToString()) && map.Track != _("<keep>"))
             {
@@ -658,7 +658,7 @@ public class MainWindowController : IDisposable
                 {
                     pair.Value.Track = 0;
                 }
-                updated = map.Track != _filesBeingEditedOriginals[pair.Key].Track.ToString();
+                updated = map.Track != _filesBeingEditedOriginals[pair.Key].Track;
             }
             if (map.TrackTotal != (pair.Value.TrackTotal == 0 ? "" : pair.Value.TrackTotal.ToString()) && map.TrackTotal != _("<keep>"))
             {
@@ -670,7 +670,7 @@ public class MainWindowController : IDisposable
                 {
                     pair.Value.TrackTotal = 0;
                 }
-                updated = map.TrackTotal != _filesBeingEditedOriginals[pair.Key].TrackTotal.ToString();
+                updated = map.TrackTotal != _filesBeingEditedOriginals[pair.Key].TrackTotal;
             }
             if (map.AlbumArtist != pair.Value.AlbumArtist && map.AlbumArtist != _("<keep>"))
             {
@@ -702,7 +702,7 @@ public class MainWindowController : IDisposable
                 {
                     pair.Value.BeatsPerMinute = 0;
                 }
-                updated = map.BeatsPerMinute != _filesBeingEditedOriginals[pair.Key].BeatsPerMinute.ToString();
+                updated = map.BeatsPerMinute != _filesBeingEditedOriginals[pair.Key].BeatsPerMinute;
             }
             if (map.Description != pair.Value.Description && map.Description != _("<keep>"))
             {
@@ -713,6 +713,18 @@ public class MainWindowController : IDisposable
             {
                 pair.Value.Publisher = map.Publisher;
                 updated = map.Publisher != _filesBeingEditedOriginals[pair.Key].Publisher;
+            }
+            if(map.PublishingDate != (pair.Value.PublishingDate == DateTime.MinValue ? "" : pair.Value.PublishingDate.ToShortDateString()) && map.PublishingDate != _("<keep>"))
+            {
+                try
+                {
+                    pair.Value.PublishingDate = DateTime.Parse(map.PublishingDate);
+                }
+                catch
+                {
+                    pair.Value.PublishingDate = DateTime.MinValue;
+                }
+                updated = map.PublishingDate != _filesBeingEditedOriginals[pair.Key].PublishingDate;
             }
             if (SelectedMusicFiles.Count == 1)
             {
@@ -1289,7 +1301,7 @@ public class MainWindowController : IDisposable
                 return (false, null);
             }
             var propValPairs = search.Split(';');
-            var validProperties = new string[] { "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "custom", _("custom") };
+            var validProperties = new string[] { "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "publishingdate", _("publishingdate"), "custom", _("custom") };
             var propertyMap = new PropertyMap();
             var customPropName = "";
             foreach (var propVal in propValPairs)
@@ -1415,6 +1427,21 @@ public class MainWindowController : IDisposable
                 {
                     propertyMap.Publisher = val;
                 }
+                else if (prop == "publishingdate" || prop == _("publishingdate"))
+                {
+                    if (val != "NULL")
+                    {
+                        try
+                        {
+                            DateTime.Parse(val);
+                        }
+                        catch
+                        {
+                            return (false, null);
+                        }
+                    }
+                    propertyMap.PublishingDate = val;
+                }
                 else if (prop == "custom" || prop == _("custom"))
                 {
                     customPropName = val;
@@ -1479,6 +1506,10 @@ public class MainWindowController : IDisposable
                     continue;
                 }
                 if (TestAdvancedSearchShouldSkip(musicFile.Publisher, propertyMap.Publisher, ref ratio))
+                {
+                    continue;
+                }
+                if (TestAdvancedSearchShouldSkip(musicFile.PublishingDate, propertyMap.PublishingDate, ref ratio))
                 {
                     continue;
                 }
@@ -1626,6 +1657,7 @@ public class MainWindowController : IDisposable
             SelectedPropertyMap.Composer = first.Composer;
             SelectedPropertyMap.Description = first.Description;
             SelectedPropertyMap.Publisher = first.Publisher;
+            SelectedPropertyMap.PublishingDate = first.PublishingDate == DateTime.MinValue ? "" : first.PublishingDate.ToShortDateString();
             SelectedPropertyMap.Duration = first.Duration.ToDurationString();
             SelectedPropertyMap.Fingerprint = _("Calculating...");
             Task.Run(() =>
@@ -1661,6 +1693,7 @@ public class MainWindowController : IDisposable
             var haveSameComposer = true;
             var haveSameDescription = true;
             var haveSamePublisher = true;
+            var haveSamePublishingDate = true;
             var haveSameFrontAlbumArt = true;
             var haveSameBackAlbumArt = true;
             var totalDuration = 0;
@@ -1719,6 +1752,10 @@ public class MainWindowController : IDisposable
                 {
                     haveSamePublisher = false;
                 }
+                if (first.PublishingDate != pair.Value.PublishingDate)
+                {
+                    haveSamePublishingDate = false;
+                }
                 if (!first.FrontAlbumArt.SequenceEqual(pair.Value.FrontAlbumArt))
                 {
                     haveSameFrontAlbumArt = false;
@@ -1744,6 +1781,7 @@ public class MainWindowController : IDisposable
             SelectedPropertyMap.Composer = haveSameComposer ? first.Composer : _("<keep>");
             SelectedPropertyMap.Description = haveSameDescription ? first.Description : _("<keep>");
             SelectedPropertyMap.Publisher = haveSamePublisher ? first.Publisher : _("<keep>");
+            SelectedPropertyMap.PublishingDate = haveSamePublishingDate ? (first.PublishingDate == DateTime.MinValue ? "" : first.PublishingDate.ToShortDateString()) : _("<keep>");
             SelectedPropertyMap.FrontAlbumArt = haveSameFrontAlbumArt ? (first.FrontAlbumArt.Length == 0 ? "noArt" : "hasArt") : "keepArt";
             SelectedPropertyMap.BackAlbumArt = haveSameBackAlbumArt ? (first.BackAlbumArt.Length == 0 ? "noArt" : "hasArt") : "keepArt";
             SelectedPropertyMap.Duration = totalDuration.ToDurationString();
@@ -1806,6 +1844,36 @@ public class MainWindowController : IDisposable
             {
                 ratio = 100;
                 if (fileValue != int.Parse(propValue))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Tests the value of a music file with the value from a PropertyMap for advanced search
+    /// </summary>
+    /// <param name="fileValue">The DateTime value from the file</param>
+    /// <param name="propValue">The value from the PropertyMap</param>
+    /// <param name="ratio">A variable to store the similarity ratio</param>
+    /// <returns>True to skip the file as a match, else false</returns>
+    private bool TestAdvancedSearchShouldSkip(DateTime fileValue, string propValue, ref int ratio)
+    {
+        if (!string.IsNullOrEmpty(propValue))
+        {
+            if (propValue == "NULL")
+            {
+                if (fileValue == DateTime.MinValue)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                ratio = 100;
+                if (fileValue != DateTime.Parse(propValue).Date)
                 {
                     return true;
                 }

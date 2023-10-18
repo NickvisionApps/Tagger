@@ -775,6 +775,10 @@
                                                                             <TextBox x:Name="TxtPublisher" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                         </wct:SettingsCard>
 
+                                                                        <wct:SettingsCard x:Name="CardPublishingDate">
+                                                                            <CalendarDatePicker x:Name="DatePublishingDate" MinWidth="300" MaxWidth="400" DateChanged="DatePublishingDate_DateChanged"/>
+                                                                        </wct:SettingsCard>
+
                                                                         <MenuFlyoutSeparator/>
 
                                                                         <Grid x:Name="CustomPropertiesHeader">
@@ -798,7 +802,7 @@
 
                                                                         <StackPanel x:Name="ListCustomProperties" Orientation="Vertical" Spacing="6"/>
 
-                                                                        <TextBlock x:Name="LblCustomPropertiesWarning" Foreground="Gray" TextWrapping="WrapWholeWords"/>
+                                                                        <TextBlock x:Name="LblCustomPropertiesWarning" HorizontalAlignment="Center" Margin="0,-12,0,0" Foreground="Gray" TextWrapping="WrapWholeWords"/>
 
                                                                         <MenuFlyoutSeparator/>
 
