@@ -159,6 +159,7 @@ public sealed partial class MainWindow : Window
         StatusPageHome.Description = _("Open a library with music to get started");
         HomeOpenFolderButtonLabel.Text = _("Open Folder");
         HomeOpenPlaylistButtonLabel.Text = _("Open Playlist");
+        LblHomeHelp.Text = _("Tagger's documentation and support channels are accessible via the Help menu.");
         StatusPageNoFiles.Title = _("No Music Files Found");
         StatusPageNoFiles.Description = _("Try a different library");
         SearchMusicFiles.PlaceholderText = _("Type ! for advanced search");
