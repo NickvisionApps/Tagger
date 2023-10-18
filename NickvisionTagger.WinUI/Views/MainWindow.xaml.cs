@@ -156,7 +156,7 @@ public sealed partial class MainWindow : Window
         MenuDiscussions.Text = _("Discussions");
         MenuAbout.Text = _("About {0}", _controller.AppInfo.ShortName);
         StatusPageHome.Title = _("Tag Your Music");
-        StatusPageHome.Description = _("Open a library with music to get started.");
+        StatusPageHome.Description = _("Open a library with music to get started");
         HomeOpenFolderButtonLabel.Text = _("Open Folder");
         HomeOpenPlaylistButtonLabel.Text = _("Open Playlist");
         StatusPageNoFiles.Title = _("No Music Files Found");
