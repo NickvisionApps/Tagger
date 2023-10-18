@@ -1661,7 +1661,7 @@ public sealed partial class MainWindow : Window
     /// <param name="args">CalendarDatePickerDateChangedEventArgs</param>
     private void DatePublishingDate_DateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
     {
-        if(args.NewDate != null)
+        if (args.NewDate != null)
         {
             TagPropertyChanged(sender, null);
         }

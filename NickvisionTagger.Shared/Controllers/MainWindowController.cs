@@ -696,7 +696,7 @@ public class MainWindowController : IDisposable
                 pair.Value.Publisher = map.Publisher;
                 updated = map.Publisher != _filesBeingEditedOriginals[pair.Key].Publisher;
             }
-            if(map.PublishingDate != (pair.Value.PublishingDate == DateTime.MinValue ? "" : pair.Value.PublishingDate.ToShortDateString()) && map.PublishingDate != _("<keep>"))
+            if (map.PublishingDate != (pair.Value.PublishingDate == DateTime.MinValue ? "" : pair.Value.PublishingDate.ToShortDateString()) && map.PublishingDate != _("<keep>"))
             {
                 try
                 {

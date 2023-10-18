@@ -303,7 +303,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         };
         _publishingDateCalendar.OnDaySelected += (sender, e) =>
         {
-            if(_updatePublishingDate)
+            if (_updatePublishingDate)
             {
                 var glibDate = gtk_calendar_get_date(_publishingDateCalendar.Handle);
                 var date = new DateTime(g_date_time_get_year(ref glibDate), g_date_time_get_month(ref glibDate), g_date_time_get_day_of_month(ref glibDate));
