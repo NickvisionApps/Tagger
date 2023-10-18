@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-18 08:47-0400\n"
-"PO-Revision-Date: 2023-10-12 07:02+0000\n"
+"PO-Revision-Date: 2023-10-18 21:31+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/cs/>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.1\n"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1439
-#, fuzzy, csharp-format
+#, csharp-format
 msgid "{0} • {1}"
-msgstr "{0} � {1}"
+msgstr "{0} • {1}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1452
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1483
@@ -1254,7 +1254,7 @@ msgstr "Cesta (prázdná)"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:222
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1438
 msgid "Pick a date"
-msgstr ""
+msgstr "Vyberte datum"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:32
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:129
@@ -1310,17 +1310,15 @@ msgstr "Vydavatel"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:221
 #: NickvisionTagger.GNOME/Blueprints/window.blp:529
-#, fuzzy
 msgid "Publishing Date"
-msgstr "Vydavatel"
+msgstr "Datum vydání"
 
 #: ../../../Controllers/MainWindowController.cs:1304
 #: ../../../Controllers/MainWindowController.cs:1430
 #: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:709
 #: ../../../Models/MusicFile.cs:804
-#, fuzzy
 msgid "publishingdate"
-msgstr "vydavatel"
+msgstr "datumvydání"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:171
 msgid "Read more about Tagger's inner workings."
