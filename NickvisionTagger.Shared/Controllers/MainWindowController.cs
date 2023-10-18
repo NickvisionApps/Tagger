@@ -273,24 +273,6 @@ public class MainWindowController : IDisposable
     }
 
     /// <summary>
-    /// The string for greeting on the home page
-    /// </summary>
-    public string Greeting
-    {
-        get
-        {
-            return DateTime.Now.Hour switch
-            {
-                >= 0 and < 6 => _p("Night", "Good Morning!"),
-                < 12 => _p("Morning", "Good Morning!"),
-                < 18 => _("Good Afternoon!"),
-                < 24 => _("Good Evening!"),
-                _ => _("Good Day!")
-            };
-        }
-    }
-
-    /// <summary>
     /// Whether or not the window can close freely
     /// </summary>
     public bool CanClose
