@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using NickvisionTagger.Shared.Models;
 using System;
-using System.Linq;
 using Windows.Storage.Streams;
 
 namespace NickvisionTagger.WinUI.Controls;

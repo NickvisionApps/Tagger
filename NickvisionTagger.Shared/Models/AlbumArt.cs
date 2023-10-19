@@ -57,7 +57,7 @@ public class AlbumArt : IEquatable<AlbumArt>
     {
         Image = data;
         Type = type;
-        if(Image.Length > 0)
+        if (Image.Length > 0)
         {
             using var image = SixLabors.ImageSharp.Image.Load(Image);
             Width = image.Width;
@@ -65,7 +65,7 @@ public class AlbumArt : IEquatable<AlbumArt>
         }
         else
         {
-            Width = 0; 
+            Width = 0;
             Height = 0;
         }
         ATLPictureInfo = PictureInfo.fromBinaryData(Image, Type == AlbumArtType.Front ? PictureInfo.PIC_TYPE.Front : PictureInfo.PIC_TYPE.Back);

@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static Nickvision.Aura.Localization.Gettext;
@@ -124,7 +123,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             }
             foreach (var invalidChar in _invalidFilenameCharacters)
             {
-                if(newFilename.Contains(invalidChar))
+                if (newFilename.Contains(invalidChar))
                 {
                     newFilename = newFilename.Replace(invalidChar, '_');
                 }
@@ -136,7 +135,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             _filename = newFilename;
         }
     }
-    
+
     /// <summary>
     /// The title of the music file
     /// </summary>

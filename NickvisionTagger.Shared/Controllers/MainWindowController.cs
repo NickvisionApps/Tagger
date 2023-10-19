@@ -176,12 +176,12 @@ public class MainWindowController : IDisposable
         _filesBeingEditedOriginals = new Dictionary<int, PropertyMap>();
         _hadUserFilenameChange = false;
         _validSearchProperties = new string[]
-        { 
-            "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"), 
-            "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), 
-            "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), 
-            "composer", _("composer"), "description", _("description"), "discnumber", _("discnumber"), 
-            "disctotal", _("disctotal"), "publisher", _("publisher"), "publishingdate", _("publishingdate"), 
+        {
+            "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"),
+            "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"),
+            "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"),
+            "composer", _("composer"), "description", _("description"), "discnumber", _("discnumber"),
+            "disctotal", _("disctotal"), "publisher", _("publisher"), "publishingdate", _("publishingdate"),
             "custom", _("custom")
         };
         _genreSuggestions = new string[]
@@ -1008,7 +1008,7 @@ public class MainWindowController : IDisposable
         AlbumArt? pic = null;
         try
         {
-            pic = new (await File.ReadAllBytesAsync(path), type);
+            pic = new AlbumArt(await File.ReadAllBytesAsync(path), type);
         }
         catch
         {
