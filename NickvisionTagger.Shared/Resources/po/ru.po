@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-18 16:41-0400\n"
-"PO-Revision-Date: 2023-10-12 14:20+0000\n"
-"Last-Translator: Fyodor Sobolev <fyodor-sobolev@protonmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/ru/>\n"
+"PO-Revision-Date: 2023-10-19 15:16+0000\n"
+"Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.1\n"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1421
 #, fuzzy, csharp-format
 msgid "{0} • {1}"
-msgstr "{0} � {1}"
+msgstr "{0} • {1}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1452
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1483
@@ -1238,7 +1238,7 @@ msgstr "Путь (пуст)"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:209
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1420
 msgid "Pick a date"
-msgstr ""
+msgstr "Выберите дату"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:32
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:123
@@ -1294,9 +1294,8 @@ msgstr "Издатель"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:208
 #: NickvisionTagger.GNOME/Blueprints/window.blp:529
-#, fuzzy
 msgid "Publishing Date"
-msgstr "Издатель"
+msgstr "Дата публикации"
 
 #: ../../../Controllers/MainWindowController.cs:1286
 #: ../../../Controllers/MainWindowController.cs:1412
@@ -1304,7 +1303,7 @@ msgstr "Издатель"
 #: ../../../Models/MusicFile.cs:804
 #, fuzzy
 msgid "publishingdate"
-msgstr "издатель"
+msgstr "publishingdate"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:559
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:432
@@ -1504,9 +1503,12 @@ msgid "Tagger"
 msgstr "Tagger"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:162
+#, fuzzy
 msgid ""
 "Tagger's documentation and support channels are accessible via the Help menu."
 msgstr ""
+"Документация Tagger и ссылки для получения помощи доступны через раздел "
+"Справка."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:913
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:892
@@ -1588,7 +1590,9 @@ msgstr "итогтрек"
 
 #: ../../../Controllers/MainWindowController.cs:180
 msgid "translator-credits"
-msgstr "Давид Лапшин <ddaudix@gmail.com>, 2023"
+msgstr ""
+"Давид Лапшин <ddaudix@gmail.com>, 2023\n"
+"0куе <>, 2023"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:164
 #: NickvisionTagger.GNOME/Blueprints/window.blp:201
