@@ -64,7 +64,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <summary>
     /// Whether or not the tag is empty
     /// </summary>
-    public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && TrackTotal == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && BeatsPerMinute == 0 && Composer == "" && Description == "" && DiscNumber == 0 && DiscTotal == 0 && Publisher == "" && PublishingDate == DateTime.MinValue && FrontAlbumArt.Length == 0 && BackAlbumArt.Length == 0 && _track.AdditionalFields.Count == 0 && string.IsNullOrEmpty(Lyrics.Description) && string.IsNullOrEmpty(Lyrics.UnsynchronizedLyrics) && Lyrics.SynchronizedLyrics.Count == 0;
+    public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && TrackTotal == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && BeatsPerMinute == 0 && Composer == "" && Description == "" && DiscNumber == 0 && DiscTotal == 0 && Publisher == "" && PublishingDate == DateTime.MinValue && FrontAlbumArt.IsEmpty && BackAlbumArt.IsEmpty && _track.AdditionalFields.Count == 0 && string.IsNullOrEmpty(Lyrics.Description) && string.IsNullOrEmpty(Lyrics.UnsynchronizedLyrics) && Lyrics.SynchronizedLyrics.Count == 0;
 
     /// <summary>
     /// Constructs a static MusicFile
@@ -301,20 +301,20 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <summary>
     /// The front album art of the music file
     /// </summary>
-    public byte[] FrontAlbumArt
+    public AlbumArt FrontAlbumArt
     {
         get
         {
-            var generic = Array.Empty<byte>();
+            var generic = new AlbumArt(Array.Empty<byte>(), AlbumArtType.Front);
             foreach (var picture in _track.EmbeddedPictures)
             {
                 if (picture.PicType == PictureInfo.PIC_TYPE.Front)
                 {
-                    return picture.PictureData;
+                    return new AlbumArt(picture);
                 }
                 if (picture.PicType == PictureInfo.PIC_TYPE.Generic)
                 {
-                    generic = picture.PictureData;
+                    generic = new AlbumArt(picture);
                 }
             }
             return generic;
@@ -324,14 +324,13 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         {
             var backAlbumArt = BackAlbumArt;
             _track.EmbeddedPictures.Clear();
-            if (value.Length > 0)
+            if (!value.IsEmpty)
             {
-                var frontAlbumArt = PictureInfo.fromBinaryData(value, PictureInfo.PIC_TYPE.Front);
-                _track.EmbeddedPictures.Add(frontAlbumArt);
+                _track.EmbeddedPictures.Add(value.ATLPictureInfo);
             }
-            if (backAlbumArt.Length > 0)
+            if (!backAlbumArt.IsEmpty)
             {
-                _track.EmbeddedPictures.Add(PictureInfo.fromBinaryData(backAlbumArt, PictureInfo.PIC_TYPE.Back));
+                _track.EmbeddedPictures.Add(backAlbumArt.ATLPictureInfo);
             }
         }
     }
@@ -339,30 +338,29 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <summary>
     /// The back album art of the music file
     /// </summary>
-    public byte[] BackAlbumArt
+    public AlbumArt BackAlbumArt
     {
         get
         {
             var back = _track.EmbeddedPictures.FirstOrDefault(x => x.PicType == PictureInfo.PIC_TYPE.Back);
             if (back == null)
             {
-                return Array.Empty<byte>();
+                return new AlbumArt(Array.Empty<byte>(), AlbumArtType.Back);
             }
-            return back.PictureData;
+            return new AlbumArt(back);
         }
 
         set
         {
             var frontAlbumArt = FrontAlbumArt;
             _track.EmbeddedPictures.Clear();
-            if (value.Length > 0)
+            if (!value.IsEmpty)
             {
-                var backAlbumArt = PictureInfo.fromBinaryData(value, PictureInfo.PIC_TYPE.Back);
-                _track.EmbeddedPictures.Add(backAlbumArt);
+                _track.EmbeddedPictures.Add(value.ATLPictureInfo);
             }
-            if (frontAlbumArt.Length > 0)
+            if (frontAlbumArt.Image.Length > 0)
             {
-                _track.EmbeddedPictures.Add(PictureInfo.fromBinaryData(frontAlbumArt, PictureInfo.PIC_TYPE.Front));
+                _track.EmbeddedPictures.Add(frontAlbumArt.ATLPictureInfo);
             }
         }
     }
@@ -474,8 +472,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 DiscTotal = DiscTotal == 0 ? "" : DiscTotal.ToString(),
                 Publisher = Publisher,
                 PublishingDate = PublishingDate == DateTime.MinValue ? "" : PublishingDate.ToShortDateString(),
-                FrontAlbumArt = Encoding.UTF8.GetString(FrontAlbumArt),
-                BackAlbumArt = Encoding.UTF8.GetString(BackAlbumArt),
+                FrontAlbumArt = FrontAlbumArt.ToString(),
+                BackAlbumArt = BackAlbumArt.ToString(),
                 CustomProperties = _track.AdditionalFields.ToDictionary(x => x.Key, x => x.Value),
                 Duration = Duration.ToDurationString(),
                 Fingerprint = _fingerprint,
@@ -991,7 +989,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                     PublishingDate = recording.FirstReleaseDate.NearestDate;
                 }
             }
-            if (overwriteAlbumArtWithMusicBrainz || FrontAlbumArt.Length == 0)
+            if (overwriteAlbumArtWithMusicBrainz || FrontAlbumArt.IsEmpty)
             {
                 if (album != null && album.CoverArtArchive != null && album.CoverArtArchive.Count > 0)
                 {
@@ -1005,7 +1003,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                     if (img != null)
                     {
                         var reader = new BinaryReader(img.Data);
-                        FrontAlbumArt = reader.ReadBytes((int)img.Data.Length);
+                        FrontAlbumArt = new AlbumArt(reader.ReadBytes((int)img.Data.Length), AlbumArtType.Front);
                         reader.Dispose();
                         img.Dispose();
                     }
@@ -1109,7 +1107,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     {
         if (obj is MusicFile toCompare)
         {
-            return Path == toCompare.Path;
+            return Equals(toCompare);
         }
         return false;
     }
@@ -1119,7 +1117,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// </summary>
     /// <param name="obj">The MusicFile? object to compare</param>
     /// <returns>True if equals, else false</returns>
-    public bool Equals(MusicFile? obj) => Equals((object?)obj);
+    public bool Equals(MusicFile? obj) => Path == obj?.Path;
 
     /// <summary>
     /// Gets a hash code for the object
