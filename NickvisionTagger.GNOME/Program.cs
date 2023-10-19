@@ -38,6 +38,7 @@ public partial class Program
               * Tagger will now watch a music folder library for changes on disk and prompt the user to reload if necessary
               * Tagger will now display front album art within a music file row itself if available
               * Fixed an issue where downloaded lyrics would sometimes contain html encoded characters
+              * Fixed an issue where file names containing the ""<"" character caused the music file row to not display
               * Improved create playlist dialog ux
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
