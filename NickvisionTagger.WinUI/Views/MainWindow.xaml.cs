@@ -134,10 +134,12 @@ public sealed partial class MainWindow : Window
         MenuAlbumArtFrontInsert.Text = _("Insert");
         MenuAlbumArtFrontRemove.Text = _("Remove");
         MenuAlbumArtFrontExport.Text = _("Export");
+        MenuAlbumArtFrontInfo.Text = _("Info");
         MenuAlbumArtBack.Text = _("Back");
         MenuAlbumArtBackInsert.Text = _("Insert");
         MenuAlbumArtBackRemove.Text = _("Remove");
         MenuAlbumArtBackExport.Text = _("Export");
+        MenuAlbumArtBackInfo.Text = _("Info");
         MenuSwitchAlbumArt.Text = _("Switch to Back Cover");
         MenuCustomProperties.Text = _("Custom Properties");
         MenuCustomPropertiesAdd.Text = _("Add");
@@ -218,10 +220,11 @@ public sealed partial class MainWindow : Window
         CardFingerprint.Header = _("Fingerprint");
         LblFingerprint.Text = _("Calculating...");
         ToolTipService.SetToolTip(BtnCopyFingerprint, _("Copy Fingerprint To Clipboard"));
+        LblBtnAlbumArtSwitch.Text = _("Switch to Back Cover");
         LblBtnAlbumArtInsert.Text = _("Insert");
         LblBtnAlbumArtRemove.Text = _("Remove");
         LblBtnAlbumArtExport.Text = _("Export");
-        LblBtnAlbumArtSwitch.Text = _("Switch to Back Cover");
+        LblBtnAlbumArtInfo.Text = _("Info");
     }
 
     /// <summary>
@@ -1046,7 +1049,7 @@ public sealed partial class MainWindow : Window
         {
             return;
         }
-        var ext = _controller.GetFirstAlbumArtMimeType(type) switch
+        var ext = _controller.GetFirstAlbumArt(type).MimeType switch
         {
             "image/jpeg" => ".jpg",
             "image/png" => ".png",
@@ -1067,6 +1070,34 @@ public sealed partial class MainWindow : Window
         {
             _controller.ExportSelectedAlbumArt(file.Path, type);
         }
+    }
+
+    /// <summary>
+    /// Occurs when the album art info menu item is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private async void AlbumArtInfo(object sender, RoutedEventArgs e)
+    {
+        var type = _currentAlbumArtType;
+        if (ReferenceEquals(sender, MenuAlbumArtFrontInsert))
+        {
+            type = AlbumArtType.Front;
+        }
+        if (ReferenceEquals(sender, MenuAlbumArtBackInsert))
+        {
+            type = AlbumArtType.Back;
+        }
+        var art = _controller.GetFirstAlbumArt(type);
+        var dialog = new ContentDialog()
+        {
+            Title = type == AlbumArtType.Front ? _("Front") : _("Back"),
+            Content = $"{_("Mime Type:")} {art.MimeType}\n\n{_("Width:")} {art.Width}\n\n{_("Height:")} {art.Height}",
+            CloseButtonText = _("Close"),
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = MainGrid.XamlRoot
+        };
+        await dialog.ShowAsync();
     }
 
     /// <summary>
@@ -1430,7 +1461,7 @@ public sealed partial class MainWindow : Window
         {
             ArtViewStack.CurrentPageName = "Image";
             var art = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedMusicFiles.First().Value.FrontAlbumArt : _controller.SelectedMusicFiles.First().Value.BackAlbumArt;
-            if (art.Length == 0)
+            if (art.IsEmpty)
             {
                 ImgAlbumArt.Source = null;
             }
@@ -1438,7 +1469,7 @@ public sealed partial class MainWindow : Window
             {
                 using var ms = new InMemoryRandomAccessStream();
                 using var writer = new DataWriter(ms.GetOutputStreamAt(0));
-                writer.WriteBytes(art);
+                writer.WriteBytes(art.Image);
                 writer.StoreAsync().GetResults();
                 var image = new BitmapImage();
                 image.SetSource(ms);
@@ -1454,12 +1485,15 @@ public sealed partial class MainWindow : Window
             ArtViewStack.CurrentPageName = "NoImage";
         }
         ToolTipService.SetToolTip(ArtViewStack, _currentAlbumArtType == AlbumArtType.Front ? _("Front") : _("Back"));
-        MenuAlbumArtFrontRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
-        MenuAlbumArtBackRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
+        MenuAlbumArtFrontRemove.IsEnabled = _controller.SelectedPropertyMap.FrontAlbumArt == "hasArt" || _controller.SelectedPropertyMap.FrontAlbumArt == "keepArt";
+        MenuAlbumArtBackRemove.IsEnabled = _controller.SelectedPropertyMap.BackAlbumArt == "hasArt" || _controller.SelectedPropertyMap.BackAlbumArt == "keepArt";
         BtnAlbumArtRemove.IsEnabled = ArtViewStack.CurrentPageName != "NoImage";
-        MenuAlbumArtFrontExport.IsEnabled = ArtViewStack.CurrentPageName == "Image";
-        MenuAlbumArtBackExport.IsEnabled = ArtViewStack.CurrentPageName == "Image";
+        MenuAlbumArtFrontExport.IsEnabled = _controller.SelectedPropertyMap.FrontAlbumArt == "hasArt";
+        MenuAlbumArtBackExport.IsEnabled = _controller.SelectedPropertyMap.BackAlbumArt == "hasArt";
         BtnAlbumArtExport.IsEnabled = ArtViewStack.CurrentPageName == "Image";
+        MenuAlbumArtFrontInfo.IsEnabled = _controller.SelectedPropertyMap.FrontAlbumArt == "hasArt";
+        MenuAlbumArtBackInfo.IsEnabled = _controller.SelectedPropertyMap.BackAlbumArt == "hasArt";
+        BtnAlbumArtInfo.IsEnabled = ArtViewStack.CurrentPageName == "Image";
         //Update Custom Properties
         ListCustomProperties.Children.Clear();
         if (_controller.SelectedMusicFiles.Count == 1)
