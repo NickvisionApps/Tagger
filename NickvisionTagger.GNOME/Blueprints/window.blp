@@ -43,6 +43,7 @@ menu tagActionsMenu {
         item(_("Insert"), "win.insertFrontAlbumArt")
         item(_("Remove"), "win.removeFrontAlbumArt")
         item(_("Export"), "win.exportFrontAlbumArt")
+        item(_("Info"), "win.infoFrontAlbumArt")
       }
 
       submenu {
@@ -51,6 +52,7 @@ menu tagActionsMenu {
         item(_("Insert"), "win.insertBackAlbumArt")
         item(_("Remove"), "win.removeBackAlbumArt")
         item(_("Export"), "win.exportBackAlbumArt")
+        item(_("Info"), "win.infoBackAlbumArt")
       }
 
       item(_("Switch Album Art"), "win.switchAlbumArt")
@@ -313,7 +315,9 @@ Adw.ApplicationWindow _root {
                                 halign: center;
                                 valign: center;
 
-                                Gtk.Button _insertAlbumArtButton {
+                                Gtk.Button {
+                                  action-name: "win.insertAlbumArt";
+
                                   Adw.ButtonContent {
                                     icon-name: "list-add-symbolic";
                                     label: _("Insert");
@@ -322,7 +326,9 @@ Adw.ApplicationWindow _root {
                                   styles [ "opaque" ]
                                 }
 
-                                Gtk.Button _removeAlbumArtButton {
+                                Gtk.Button {
+                                  action-name: "win.removeAlbumArt";
+
                                   Adw.ButtonContent {
                                     icon-name: "list-remove-symbolic";
                                     label: _("Remove");
@@ -331,7 +337,9 @@ Adw.ApplicationWindow _root {
                                   styles [ "opaque" ]
                                 }
 
-                                Gtk.Button _exportAlbumArtButton {
+                                Gtk.Button {
+                                  action-name: "win.exportAlbumArt";
+
                                   Adw.ButtonContent {
                                     icon-name: "document-save-symbolic";
                                     label: _("Export");
@@ -340,7 +348,20 @@ Adw.ApplicationWindow _root {
                                   styles [ "opaque" ]
                                 }
 
+                                Gtk.Button {
+                                  action-name: "win.infoAlbumArt";
+
+                                  Adw.ButtonContent {
+                                    icon-name: "help-about-symbolic";
+                                    label: _("Info");
+                                  }
+
+                                  styles [ "opaque" ]
+                                }
+
                                 Gtk.Button _switchAlbumArtButton {
+                                  action-name: "win.switchAlbumArt";
+                                  
                                   Adw.ButtonContent _switchAlbumArtButtonContent {
                                     icon-name: "view-paged-symbolic";
                                     label: _("Switch to Back Cover");

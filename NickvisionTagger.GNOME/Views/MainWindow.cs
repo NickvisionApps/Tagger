@@ -62,6 +62,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _insertAlbumArtAction;
     private readonly Gio.SimpleAction _removeAlbumArtAction;
     private readonly Gio.SimpleAction _exportAlbumArtAction;
+    private readonly Gio.SimpleAction _InfoAlbumArtAction;
     private readonly Gio.SimpleAction _lyricsAction;
     private readonly Gio.SimpleAction _musicBrainzAction;
     private readonly Gio.SimpleAction _downloadLyricsAction;
@@ -99,9 +100,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.ViewStack _selectedViewStack;
     [Gtk.Connect] private readonly Gtk.Label _artTypeLabel;
     [Gtk.Connect] private readonly Adw.ViewStack _artViewStack;
-    [Gtk.Connect] private readonly Gtk.Button _insertAlbumArtButton;
-    [Gtk.Connect] private readonly Gtk.Button _removeAlbumArtButton;
-    [Gtk.Connect] private readonly Gtk.Button _exportAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Button _switchAlbumArtButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _switchAlbumArtButtonContent;
     [Gtk.Connect] private readonly Gtk.Picture _albumArtImage;
@@ -437,22 +435,22 @@ public partial class MainWindow : Adw.ApplicationWindow
         actSwitchAlbumArt.OnActivate += SwitchAlbumArt;
         AddAction(actSwitchAlbumArt);
         application.SetAccelsForAction("win.switchAlbumArt", new string[] { "<Ctrl><Shift>S" });
-        _switchAlbumArtButton.SetDetailedActionName("win.switchAlbumArt");
         //Insert Album Art Action
         _insertAlbumArtAction = Gio.SimpleAction.New("insertAlbumArt", null);
         _insertAlbumArtAction.OnActivate += async (sender, e) => await InsertAlbumArtAsync(_currentAlbumArtType);
         AddAction(_insertAlbumArtAction);
-        _insertAlbumArtButton.SetDetailedActionName("win.insertAlbumArt");
         //Remove Album Art Action
         _removeAlbumArtAction = Gio.SimpleAction.New("removeAlbumArt", null);
         _removeAlbumArtAction.OnActivate += async (sender, e) => await RemoveAlbumArtAsync(_currentAlbumArtType);
         AddAction(_removeAlbumArtAction);
-        _removeAlbumArtButton.SetDetailedActionName("win.removeAlbumArt");
         //Export Album Art Action
         _exportAlbumArtAction = Gio.SimpleAction.New("exportAlbumArt", null);
         _exportAlbumArtAction.OnActivate += async (sender, e) => await ExportAlbumArtAsync(_currentAlbumArtType);
         AddAction(_exportAlbumArtAction);
-        _exportAlbumArtButton.SetDetailedActionName("win.exportAlbumArt");
+        //Info Album Art Action
+        _InfoAlbumArtAction = Gio.SimpleAction.New("infoAlbumArt", null);
+        _InfoAlbumArtAction.OnActivate += (sender, e) => AlbumArtInfo(_currentAlbumArtType);
+        AddAction(_InfoAlbumArtAction);
         //Insert Front Album Art Action
         var actInsertFrontAlbumArt = Gio.SimpleAction.New("insertFrontAlbumArt", null);
         actInsertFrontAlbumArt.OnActivate += async (sender, e) => await InsertAlbumArtAsync(AlbumArtType.Front);
@@ -468,6 +466,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         actExportFrontAlbumArt.OnActivate += async (sender, e) => await ExportAlbumArtAsync(AlbumArtType.Front);
         AddAction(actExportFrontAlbumArt);
         application.SetAccelsForAction("win.exportFrontAlbumArt", new string[] { "<Ctrl>E" });
+        //Info Front Album Art Action
+        var actInfoFrontAlbumArt = Gio.SimpleAction.New("infoFrontAlbumArt", null);
+        actInfoFrontAlbumArt.OnActivate += (sender, e) => AlbumArtInfo(AlbumArtType.Front);
+        AddAction(actInfoFrontAlbumArt);
         //Insert Back Album Art Action
         var actInsertBackAlbumArt = Gio.SimpleAction.New("insertBackAlbumArt", null);
         actInsertBackAlbumArt.OnActivate += async (sender, e) => await InsertAlbumArtAsync(AlbumArtType.Back);
@@ -483,6 +485,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         actExportBackAlbumArt.OnActivate += async (sender, e) => await ExportAlbumArtAsync(AlbumArtType.Back);
         AddAction(actExportBackAlbumArt);
         application.SetAccelsForAction("win.exportBackAlbumArt", new string[] { "<Ctrl><Shift>E" });
+        //Info Back Album Art Action
+        var actInfoBackAlbumArt = Gio.SimpleAction.New("infoBackAlbumArt", null);
+        actInfoBackAlbumArt.OnActivate += (sender, e) => AlbumArtInfo(AlbumArtType.Back);
+        AddAction(actInfoBackAlbumArt);
         //Lyrics Action
         _lyricsAction = Gio.SimpleAction.New("lyrics", null);
         _lyricsAction.OnActivate += Lyrics;
@@ -1103,6 +1109,16 @@ public partial class MainWindow : Adw.ApplicationWindow
             _controller.ExportSelectedAlbumArt(file.GetPath(), type);
         }
         catch { }
+    }
+
+    /// <summary>
+    /// Occurs wen the album art info action is triggered
+    /// </summary>
+    /// <param name="type">AlbumArtType</param>
+    private void AlbumArtInfo(AlbumArtType type)
+    {
+        var dialog = new AlbumArtInfoDialog(_controller.GetFirstAlbumArt(type), this, _controller.AppInfo.ID);
+        dialog.Present();
     }
 
     /// <summary>
