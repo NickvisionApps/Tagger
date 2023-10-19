@@ -34,7 +34,8 @@ public partial class Program
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
             @"* Added the option to use relative paths when creating a playlist. This means that Tagger also now supports opening playlists with relative paths
-              * Added the PublishingDate field to additional properties
+              * Added the Disc Number, Disc Total, and Publishing Date fields to additional properties
+              * Added information dialog for album art
               * Tagger will now watch a music folder library for changes on disk and prompt the user to reload if necessary
               * Tagger will now display front album art within a music file row itself if available
               * Fixed an issue where downloaded lyrics would sometimes contain html encoded characters
