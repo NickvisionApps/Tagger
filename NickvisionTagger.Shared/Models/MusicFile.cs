@@ -33,6 +33,7 @@ public enum MusicBrainzLoadStatus
 public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFile>
 {
     private static string[] _validProperties;
+    private static IEnumerable<char> _invalidFilenameCharacters;
 
     private bool _disposed;
     private Track _track;
@@ -71,10 +72,11 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     static MusicFile()
     {
         _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "publishingdate", _("publishingdate"), "lyrics", _("lyrics") };
+        _invalidFilenameCharacters = System.IO.Path.GetInvalidPathChars().Union(System.IO.Path.GetInvalidFileNameChars());
+        SortFilesBy = SortBy.Path;
         ATL.Settings.UseFileNameWhenNoTitle = false;
         ATL.Settings.FileBufferSize = 1024;
         ATL.Settings.ID3v2_writePictureDataLengthIndicator = false;
-        SortFilesBy = SortBy.Path;
     }
 
     /// <summary>
@@ -120,13 +122,16 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 newFilename += _dotExtension;
             }
-            foreach (var invalidChar in System.IO.Path.GetInvalidPathChars().Union(System.IO.Path.GetInvalidFileNameChars()))
+            foreach (var invalidChar in _invalidFilenameCharacters)
             {
-                newFilename = newFilename.Replace(invalidChar, '_');
+                if(newFilename.Contains(invalidChar))
+                {
+                    newFilename = newFilename.Replace(invalidChar, '_');
+                }
             }
             if (File.Exists(newFilename))
             {
-                throw new ArgumentException($"A file already exists with this filename: {newFilename}");
+                return;
             }
             _filename = newFilename;
         }
