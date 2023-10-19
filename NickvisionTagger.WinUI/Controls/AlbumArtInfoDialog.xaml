@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="NickvisionTagger.WinUI.Controls.AlbumArtInfoDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NickvisionTagger.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wct="using:CommunityToolkit.WinUI.Controls"
+    mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
+    DefaultButton="Close">
+
+    <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto" MinWidth="500" SizeChanged="ScrollViewer_SizeChanged">
+        <StackPanel x:Name="StackPanel" Orientation="Vertical" Spacing="6">
+            <wct:SettingsCard x:Name="CardMimeType">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE97C;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <TextBlock x:Name="LblMimeType"/>
+            </wct:SettingsCard>
+
+            <wct:SettingsCard x:Name="CardWidth">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED5E;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <TextBlock x:Name="LblWidth"/>
+            </wct:SettingsCard>
+
+            <wct:SettingsCard x:Name="CardHeight">
+                <wct:SettingsCard.HeaderIcon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED5E;"/>
+                </wct:SettingsCard.HeaderIcon>
+
+                <TextBlock x:Name="LblHeight"/>
+            </wct:SettingsCard>
+        </StackPanel>
+    </ScrollViewer>
+</ContentDialog>

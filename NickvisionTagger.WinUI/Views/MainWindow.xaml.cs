@@ -1088,13 +1088,8 @@ public sealed partial class MainWindow : Window
         {
             type = AlbumArtType.Back;
         }
-        var art = _controller.GetFirstAlbumArt(type);
-        var dialog = new ContentDialog()
+        var dialog = new AlbumArtInfoDialog(_controller.GetFirstAlbumArt(type))
         {
-            Title = type == AlbumArtType.Front ? _("Front") : _("Back"),
-            Content = $"{_("Mime Type:")} {art.MimeType}\n\n{_("Width:")} {art.Width}\n\n{_("Height:")} {art.Height}",
-            CloseButtonText = _("Close"),
-            DefaultButton = ContentDialogButton.Close,
             XamlRoot = MainGrid.XamlRoot
         };
         await dialog.ShowAsync();
