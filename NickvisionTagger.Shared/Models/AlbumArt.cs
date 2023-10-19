@@ -91,7 +91,7 @@ public class AlbumArt : IEquatable<AlbumArt>
             Height = 0;
         }
         ATLPictureInfo = pictureInfo;
-        ATLPictureInfo.PicType = Type == AlbumArtType.Front ? PictureInfo.PIC_TYPE.Front : PictureInfo.PIC_TYPE.Back; //ensure PicType incase of generic
+        ATLPictureInfo.PicType = Type == AlbumArtType.Front ? PictureInfo.PIC_TYPE.Front : PictureInfo.PIC_TYPE.Back; //ensure PicType in case of generic
     }
 
     /// <summary>
