@@ -12,7 +12,19 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Давид Лапшин</mal:name>
+      <mal:email>ddaudix@gmail.com</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>0куе</mal:name>
+      <mal:email/>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
 
 <title>Format Strings</title>
 <p>This page explains the use of format strings for <code>File Name to Tag</code> and <code>Tag to File Name</code> conversions.</p>
@@ -22,29 +34,29 @@
     <note>
         <title>Пример</title>
         <p>Format String: <code>%artist%- %title%</code></p>
-        <p>Filename: <code>Artist1 - Song1.mp3</code></p>
-        <p>When running <code>File Name to Tag</code> conversion, this format string and this file name will create a tag with an artist of <code>Artist1</code> and a title of <code>Song1</code>.</p>
+        <p>Имя файла: <code>Исполнитель1 - Композиция1.mp3</code></p>
+        <p>При использовании преобразования <code>Имён файлов в теги</code> эта строка и это имя файла создадут тег исполнителя <code>Исполнитель1</code> и название <code>Композиция1</code>.</p>
     </note>
 </section>
 <section>
     <title>Поддерживаемые свойства</title>
     <list>
-        <item><p><code>title</code></p></item>
-        <item><p><code>artist</code></p></item>
-        <item><p><code>альбом</code></p></item>
-        <item><p><code>год</code></p></item>
-        <item><p><code>track</code></p></item>
-        <item><p><code>tracktotal</code></p></item>
-        <item><p><code>albumartist</code></p></item>
-        <item><p><code>жанр</code></p></item>
-        <item><p><code>comment</code></p></item>
-        <item><p><code>beatsperminute (bpm)</code></p></item>
-        <item><p><code>composer</code></p></item>
-        <item><p><code>описание</code></p></item>
+        <item><p><code>title</code> (название)</p></item>
+        <item><p><code>artist</code> (исполнитель)</p></item>
+        <item><p><code>album</code> (альбом)</p></item>
+        <item><p><code>year</code> (год)</p></item>
+        <item><p><code>track</code> (дорожка)</p></item>
+        <item><p><code>tracktotal</code> (количество дорожек)</p></item>
+        <item><p><code>albumartist</code> (исполнитель альбома)</p></item>
+        <item><p><code>genre</code> (жанр)</p></item>
+        <item><p><code>comment</code> (комментарий)</p></item>
+        <item><p><code>beatsperminute (bpm)</code> (ударов в минуту)</p></item>
+        <item><p><code>composer</code> (композитор)</p></item>
+        <item><p><code>description</code> (описание)</p></item>
         <item><p><code>discnumber</code></p></item>
         <item><p><code>disctotal</code></p></item>
-        <item><p><code>издатель</code></p></item>
-        <item><p><code>датапубликации</code></p></item>
+        <item><p><code>publisher</code> (издатель)</p></item>
+        <item><p><code>publishingdate</code> (дата публикации)</p></item>
     </list>
     <note>
         <p>When using conversions, custom property names can also be used.</p>
@@ -57,7 +69,7 @@
     <note>
         <title>Пример</title>
         <p>Format String: <code>%%- %track%. %%</code></p>
-        <p>Filename: <code>Artist1- 05. Song1.mp3</code></p>
+        <p>Имя файла: <code>Исполнитель1- 05. Композиция1.mp3</code></p>
         <p>This format string and this file name will create a tag with a track of <code>05</code> and ignore the rest of the file name.</p>
     </note>
 </section>

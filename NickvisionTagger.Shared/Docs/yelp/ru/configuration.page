@@ -12,7 +12,19 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Давид Лапшин</mal:name>
+      <mal:email>ddaudix@gmail.com</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>0куе</mal:name>
+      <mal:email/>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
 
 <title>Конфигурация</title>
 <p>Эта страница описывает, что можно изменить в конфигурации приложения.</p>
@@ -36,9 +48,9 @@
             <item><p><code>Имя файла</code></p></item>
             <item><p><code>Путь к файлу</code></p></item>
             <item><p><code>Название</code></p></item>
-            <item><p><code>Artist</code></p></item>
+            <item><p><code>Исполнитель</code></p></item>
             <item><p><code>Альбом</code></p></item>
-            <item><p><code>Year</code></p></item>
+            <item><p><code>Год</code></p></item>
             <item><p><code>Дорожка</code></p></item>
             <item><p><code>Жанр</code></p></item>
         </list>
@@ -61,7 +73,7 @@
     </item>
     <item>
 		<title>Ключ API пользователя AcoustId</title>
-		<p>An AcoustId User API key to use when fingerprinting music files and looking up song information.</p>
+		<p>Пользовательский ключ API AcoustId для определения музыкальных файлов и нахождения информации о музыке.</p>
 		<note>
 			<p>Получить ключ можно <link href="https://acoustid.org/api-key">здесь</link></p>
 		</note>
