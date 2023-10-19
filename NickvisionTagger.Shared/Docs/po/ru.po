@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-10-16 20:35-0400\n"
+"POT-Creation-Date: 2023-10-19 11:01-0400\n"
 "PO-Revision-Date: 2023-10-18 15:22+0000\n"
 "Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/"
-"nickvision-tagger/docs/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
+"tagger/docs/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -325,7 +325,7 @@ msgid "Strings of any format with properties wrapped in percent signs (%)."
 msgstr ""
 
 #. (itstool) path: note/title
-#: yelp/C/format-strings.page:26 yelp/C/format-strings.page:59
+#: yelp/C/format-strings.page:26 yelp/C/format-strings.page:61
 msgid "Example"
 msgstr "Пример"
 
@@ -423,16 +423,28 @@ msgstr "<code>описание</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:47 yelp/C/search.page:43
+#, fuzzy
+msgid "<code>discnumber</code>"
+msgstr "<code>композитор</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:48 yelp/C/search.page:44
+#, fuzzy
+msgid "<code>disctotal</code>"
+msgstr "<code>количество дорожек</code>"
+
+#. (itstool) path: item/p
+#: yelp/C/format-strings.page:49 yelp/C/search.page:45
 msgid "<code>publisher</code>"
 msgstr "<code>издатель</code>"
 
 #. (itstool) path: item/p
-#: yelp/C/format-strings.page:48 yelp/C/search.page:44
+#: yelp/C/format-strings.page:50 yelp/C/search.page:46
 msgid "<code>publishingdate</code>"
 msgstr "<code>датапубликации</code>"
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:51
+#: yelp/C/format-strings.page:53
 #, fuzzy
 msgid "When using conversions, custom property names can also be used."
 msgstr ""
@@ -440,7 +452,7 @@ msgstr ""
 "свойств."
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:52
+#: yelp/C/format-strings.page:54
 msgid ""
 "For example, a custom property who's name is <code>ENCODER</code> can be "
 "used as <code>%encoder%</code>."
@@ -449,30 +461,30 @@ msgstr ""
 "<code>%encoder%</code>."
 
 #. (itstool) path: section/title
-#: yelp/C/format-strings.page:56
+#: yelp/C/format-strings.page:58
 msgid "Ignoring in File Name to Tag Conversion"
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/format-strings.page:57
+#: yelp/C/format-strings.page:59
 msgid ""
 "When running <code>File Name to Tag</code> conversion, an empty <code>%%</"
 "code> can be specified to ignore part of the file name when reading it."
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:60
+#: yelp/C/format-strings.page:62
 msgid "Format String: <code>%%- %track%. %%</code>"
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:61
+#: yelp/C/format-strings.page:63
 #, fuzzy
 msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
 msgstr "Имя файла: <code>Исполнитель1- 05. Мелодия1.mp3</code>"
 
 #. (itstool) path: note/p
-#: yelp/C/format-strings.page:62
+#: yelp/C/format-strings.page:64
 msgid ""
 "This format string and this file name will create a tag with a track of "
 "<code>05</code> and ignore the rest of the file name."
@@ -821,23 +833,23 @@ msgid "<code>filename</code>"
 msgstr ""
 
 #. (itstool) path: item/p
-#: yelp/C/search.page:45
+#: yelp/C/search.page:47
 msgid "<code>custom</code>"
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:47
+#: yelp/C/search.page:49
 #, fuzzy
 msgid "Properties are case-insensitive."
 msgstr "Свойства чувствительны к регистру."
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:49
+#: yelp/C/search.page:51
 msgid "Syntax Checking"
 msgstr "Проверка синтаксиса"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:50
+#: yelp/C/search.page:52
 #, fuzzy
 msgid ""
 "If the syntax of your string is valid, the textbox will turn green and will "
@@ -849,17 +861,17 @@ msgstr ""
 "применён не будет."
 
 #. (itstool) path: section/title
-#: yelp/C/search.page:52
+#: yelp/C/search.page:54
 msgid "Examples"
 msgstr "Примеры"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:53
+#: yelp/C/search.page:55
 msgid "<code>!artist=\"\"</code>"
 msgstr ""
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:54
+#: yelp/C/search.page:56
 #, fuzzy
 msgid ""
 "This search string will filter the listbox to contain music files whose "
@@ -869,13 +881,13 @@ msgstr ""
 "исполнителем."
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:55
+#: yelp/C/search.page:57
 #, fuzzy
 msgid "<code>!genre=\"\";year=\"2022\"</code>"
 msgstr "<code>!genre=\"\";year=\"2022\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:56
+#: yelp/C/search.page:58
 #, fuzzy
 msgid ""
 "This search string will filter the listbox to contain music files whose "
@@ -887,13 +899,13 @@ msgstr ""
 "содержат число)"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:57
+#: yelp/C/search.page:59
 #, fuzzy
 msgid "<code>!title=\"\";artist=\"bob\"</code>"
 msgstr "<code>!title=\"\";artist=\"bob\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:58
+#: yelp/C/search.page:60
 #, fuzzy
 msgid ""
 "This search string will filter the listbox to contain music files whose "
@@ -903,13 +915,13 @@ msgstr ""
 "незаданным названием."
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:59
+#: yelp/C/search.page:61
 #, fuzzy
 msgid "<code>!custom=\"mbrd\"</code>"
 msgstr "<code>!custom=\"mbrd\"</code>"
 
 #. (itstool) path: section/p
-#: yelp/C/search.page:60
+#: yelp/C/search.page:62
 #, fuzzy
 msgid ""
 "This search string will filter the listbox to contain music files that "
