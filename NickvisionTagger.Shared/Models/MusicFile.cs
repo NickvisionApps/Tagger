@@ -64,14 +64,14 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// <summary>
     /// Whether or not the tag is empty
     /// </summary>
-    public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && TrackTotal == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && BeatsPerMinute == 0 && Composer == "" && Description == "" && Publisher == "" && PublishingDate == DateTime.MinValue && FrontAlbumArt.Length == 0 && BackAlbumArt.Length == 0 && _track.AdditionalFields.Count == 0 && string.IsNullOrEmpty(Lyrics.Description) && string.IsNullOrEmpty(Lyrics.UnsynchronizedLyrics) && Lyrics.SynchronizedLyrics.Count == 0;
+    public bool IsTagEmpty => Title == "" && Artist == "" && Album == "" && Year == 0 && Track == 0 && TrackTotal == 0 && AlbumArtist == "" && Genre == "" && Comment == "" && BeatsPerMinute == 0 && Composer == "" && Description == "" && DiscNumber == 0 && DiscTotal == 0 && Publisher == "" && PublishingDate == DateTime.MinValue && FrontAlbumArt.Length == 0 && BackAlbumArt.Length == 0 && _track.AdditionalFields.Count == 0 && string.IsNullOrEmpty(Lyrics.Description) && string.IsNullOrEmpty(Lyrics.UnsynchronizedLyrics) && Lyrics.SynchronizedLyrics.Count == 0;
 
     /// <summary>
     /// Constructs a static MusicFile
     /// </summary>
     static MusicFile()
     {
-        _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "publisher", _("publisher"), "publishingdate", _("publishingdate"), "lyrics", _("lyrics") };
+        _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "discnumber", _("discnumber"), "disctotal", _("disctotal"), "publisher", _("publisher"), "publishingdate", _("publishingdate"), "lyrics", _("lyrics") };
         _invalidFilenameCharacters = System.IO.Path.GetInvalidPathChars().Union(System.IO.Path.GetInvalidFileNameChars());
         SortFilesBy = SortBy.Path;
         ATL.Settings.UseFileNameWhenNoTitle = false;
@@ -136,7 +136,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             _filename = newFilename;
         }
     }
-
+    
     /// <summary>
     /// The title of the music file
     /// </summary>
@@ -255,6 +255,26 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         get => _track.Description ?? "";
 
         set => _track.Description = value;
+    }
+
+    /// <summary>
+    /// The disc number of the music file
+    /// </summary>
+    public int DiscNumber
+    {
+        get => _track.DiscNumber ?? 0;
+
+        set => _track.DiscNumber = value;
+    }
+
+    /// <summary>
+    /// The disc total of the music file
+    /// </summary>
+    public int DiscTotal
+    {
+        get => _track.DiscTotal ?? 0;
+
+        set => _track.DiscTotal = value;
     }
 
     /// <summary>
@@ -450,6 +470,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 BeatsPerMinute = BeatsPerMinute == 0 ? "" : BeatsPerMinute.ToString(),
                 Composer = Composer,
                 Description = Description,
+                DiscNumber = DiscNumber == 0 ? "" : DiscNumber.ToString(),
+                DiscTotal = DiscTotal == 0 ? "" : DiscTotal.ToString(),
                 Publisher = Publisher,
                 PublishingDate = PublishingDate == DateTime.MinValue ? "" : PublishingDate.ToShortDateString(),
                 FrontAlbumArt = Encoding.UTF8.GetString(FrontAlbumArt),
@@ -545,6 +567,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         BeatsPerMinute = 0;
         Composer = "";
         Description = "";
+        DiscNumber = 0;
+        DiscTotal = 0;
         Publisher = "";
         PublishingDate = DateTime.MinValue;
         _track.EmbeddedPictures.Clear();
@@ -707,6 +731,22 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 Description = filename.Substring(0, len);
             }
+            else if (value == "discnumber" || value == _("discnumber"))
+            {
+                try
+                {
+                    DiscNumber = int.Parse(filename.Substring(0, len));
+                }
+                catch { }
+            }
+            else if (value == "disctotal" || value == _("disctotal"))
+            {
+                try
+                {
+                    DiscTotal = int.Parse(filename.Substring(0, len));
+                }
+                catch { }
+            }
             else if (value == "publisher" || value == _("publisher"))
             {
                 Publisher = filename.Substring(0, len);
@@ -801,6 +841,14 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 else if (value == "description" || value == _("description"))
                 {
                     replace = Description;
+                }
+                else if (value == "discnumber" || value == _("discnumber"))
+                {
+                    replace = DiscNumber.ToString("D2");
+                }
+                else if (value == "disctotal" || value == _("disctotal"))
+                {
+                    replace = DiscTotal.ToString("D2");
                 }
                 else if (value == "publisher" || value == _("publisher"))
                 {
@@ -920,7 +968,6 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 if (recording.FirstReleaseDate != null)
                 {
                     Year = recording.FirstReleaseDate.Year ?? 0;
-                    PublishingDate = recording.FirstReleaseDate.NearestDate;
                 }
             }
             if (overwriteTagWithMusicBrainz || string.IsNullOrEmpty(AlbumArtist))
@@ -935,6 +982,13 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 if (recording.Genres != null && recording.Genres.Count > 0)
                 {
                     Genre = recording.Genres[0].Name ?? "";
+                }
+            }
+            if (overwriteTagWithMusicBrainz || PublishingDate == DateTime.MinValue)
+            {
+                if (recording.FirstReleaseDate != null)
+                {
+                    PublishingDate = recording.FirstReleaseDate.NearestDate;
                 }
             }
             if (overwriteAlbumArtWithMusicBrainz || FrontAlbumArt.Length == 0)

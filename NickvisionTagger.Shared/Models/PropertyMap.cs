@@ -63,6 +63,14 @@ public class PropertyMap : IEquatable<PropertyMap>
     /// </summary>
     public string Description { get; set; }
     /// <summary>
+    /// The disc number of the file
+    /// </summary>
+    public string DiscNumber { get; set; }
+    /// <summary>
+    /// The disc total of the file
+    /// </summary>
+    public string DiscTotal { get; set; }
+    /// <summary>
     /// The publisher of the file
     /// </summary>
     public string Publisher { get; set; }
@@ -122,6 +130,8 @@ public class PropertyMap : IEquatable<PropertyMap>
         BeatsPerMinute = "";
         Composer = "";
         Description = "";
+        DiscNumber = "";
+        DiscTotal = "";
         Publisher = "";
         PublishingDate = "";
         FrontAlbumArt = "";
@@ -151,15 +161,17 @@ public class PropertyMap : IEquatable<PropertyMap>
         s += $"BeatsPerMinute: {BeatsPerMinute}\n";
         s += $"Composer: {Composer}\n";
         s += $"Description: {Description}\n";
+        s += $"DiscNumber: {DiscNumber}\n";
+        s += $"DiscTotal: {DiscNumber}\n";
         s += $"Publisher: {Publisher}\n";
-        s += $"Publishing Date: {PublishingDate}\n";
+        s += $"PublishingDate: {PublishingDate}\n";
         s += $"FrontAlbumArt: {FrontAlbumArt}\n";
         s += $"BackAlbumArt: {BackAlbumArt}\n";
         s += $"CustomPropertiesCount: {CustomProperties.Count}\n";
         s += $"Duration: {Duration}\n";
         s += $"Fingerprint: {Fingerprint}\n";
         s += $"FileSize: {FileSize}\n";
-        s += "=========";
+        s += "=================";
         return s;
     }
 
@@ -197,6 +209,8 @@ public class PropertyMap : IEquatable<PropertyMap>
             obj.BeatsPerMinute == BeatsPerMinute &&
             obj.Composer == Composer &&
             obj.Description == Description &&
+            obj.DiscNumber == DiscNumber &&
+            obj.DiscTotal == DiscTotal &&
             obj.Publisher == Publisher &&
             obj.PublishingDate == PublishingDate &&
             obj.CustomProperties.Count == CustomProperties.Count && !obj.CustomProperties.Except(CustomProperties).Any();
