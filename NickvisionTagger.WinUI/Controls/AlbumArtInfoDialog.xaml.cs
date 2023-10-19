@@ -18,8 +18,8 @@ public sealed partial class AlbumArtInfoDialog : ContentDialog
         CardHeight.Header = _("Height");
         //Load
         LblMimeType.Text = art.MimeType;
-        LblWidth.Text = art.Width.ToString();
-        LblHeight.Text = art.Height.ToString();
+        LblWidth.Text = _("{0} pixels", art.Width);
+        LblHeight.Text = _("{0} pixels", art.Height);
     }
 
     /// <summary>
