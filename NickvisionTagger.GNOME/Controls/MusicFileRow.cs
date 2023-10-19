@@ -11,7 +11,7 @@ namespace NickvisionTagger.GNOME.Controls;
 /// </summary>
 public class MusicFileRow : Adw.ActionRow
 {
-    private byte[] _art;
+    private AlbumArt _art;
 
     [Gtk.Connect] private readonly Gtk.Image _artImage;
     [Gtk.Connect] private readonly Gtk.Image _unsavedImage;
@@ -23,7 +23,7 @@ public class MusicFileRow : Adw.ActionRow
     /// <param name="musicFile">MusicFile</param>
     private MusicFileRow(Gtk.Builder builder, MusicFile musicFile) : base(builder.GetPointer("_root"), false)
     {
-        _art = Array.Empty<byte>();
+        _art = new AlbumArt(Array.Empty<byte>(), AlbumArtType.Front);
         builder.Connect(this);
         Update(musicFile);
     }
@@ -37,20 +37,20 @@ public class MusicFileRow : Adw.ActionRow
     }
 
     /// <summary>
-    /// Sets art icon from bytes array
+    /// Sets art icon from AlbmArt object
     /// </summary>
-    /// <param name="art">Art as byte array</param>
-    public void SetArtFromBytes(byte[] art)
+    /// <param name="art">AlbumArt</param>
+    public void SetArtFromAlbumArt(AlbumArt art)
     {
-        if (_art.SequenceEqual(art))
+        if (_art == art)
         {
             return;
         }
         _art = art;
-        if (_art.Length > 0)
+        if (!_art.IsEmpty)
         {
             _artImage.AddCssClass("list-icon");
-            using var bytes = GLib.Bytes.From(_art.AsSpan());
+            using var bytes = GLib.Bytes.From(_art.Image.AsSpan());
             using var texture = Gdk.Texture.NewFromBytes(bytes);
             _artImage.SetFromPaintable(texture);
         }
@@ -83,6 +83,6 @@ public class MusicFileRow : Adw.ActionRow
             SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
             SetSubtitle("");
         }
-        SetArtFromBytes(musicFile.FrontAlbumArt);
+        SetArtFromAlbumArt(musicFile.FrontAlbumArt);
     }
 }

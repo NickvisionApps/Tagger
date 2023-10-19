@@ -1094,7 +1094,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         saveFileDialog.SetTitle(type == AlbumArtType.Front ? _("Export Front Album Art") : _("Export Back Album Art"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         var filter = Gtk.FileFilter.New();
-        filter.AddMimeType(_controller.GetFirstAlbumArtMimeType(type));
+        filter.AddMimeType(_controller.GetFirstAlbumArt(type).MimeType);
         filters.Append(filter);
         saveFileDialog.SetFilters(filters);
         try
@@ -1544,13 +1544,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _artViewStack.SetVisibleChildName("Image");
             var art = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedMusicFiles.First().Value.FrontAlbumArt : _controller.SelectedMusicFiles.First().Value.BackAlbumArt;
-            if (art.Length == 0)
+            if (art.IsEmpty)
             {
                 _albumArtImage.SetPaintable(null);
             }
             else
             {
-                using var bytes = GLib.Bytes.From(art.AsSpan());
+                using var bytes = GLib.Bytes.From(art.Image.AsSpan());
                 using var texture = Gdk.Texture.NewFromBytes(bytes);
                 _albumArtImage.SetPaintable(texture);
             }
