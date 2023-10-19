@@ -500,6 +500,38 @@ Adw.ApplicationWindow _root {
                                 }
                               }
                             }
+
+                            Gtk.Box {
+                              orientation: horizontal;
+                              margin-top: 6;
+                              
+                              Adw.PreferencesGroup {
+                                halign: start;
+                                hexpand: true;
+                                
+                                Adw.EntryRow _discNumberRow {
+                                  title: _("Disc Number");
+                                }
+                              }
+                              
+                              Gtk.Label {
+                                margin-start: 12;
+                                margin-end: 12;
+                                halign: center;
+                                label: "/";
+                                
+                                styles ["title-4"]
+                              }
+                              
+                              Adw.PreferencesGroup {
+                                halign: end;
+                                hexpand: true;
+                                
+                                Adw.EntryRow _discTotalRow {
+                                  title: _("Disc Total");
+                                }
+                              }
+                            }
                             
                             Adw.PreferencesGroup {
                               margin-top: 12;

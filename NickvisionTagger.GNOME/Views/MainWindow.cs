@@ -120,6 +120,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _bpmRow;
     [Gtk.Connect] private readonly Adw.EntryRow _composerRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _discNumberRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _discTotalRow;
     [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
     [Gtk.Connect] private readonly Gtk.MenuButton _publishingDateButton;
     [Gtk.Connect] private readonly Gtk.Calendar _publishingDateCalendar;
@@ -288,6 +290,20 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         _descriptionRow.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _discNumberRow.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _discTotalRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
@@ -1502,6 +1518,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         _bpmRow.SetText(_controller.SelectedPropertyMap.BeatsPerMinute);
         _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
         _descriptionRow.SetText(_controller.SelectedPropertyMap.Description);
+        _discNumberRow.SetText(_controller.SelectedPropertyMap.DiscNumber);
+        _discTotalRow.SetText(_controller.SelectedPropertyMap.DiscTotal);
         _publisherRow.SetText(_controller.SelectedPropertyMap.Publisher);
         if (string.IsNullOrEmpty(_controller.SelectedPropertyMap.PublishingDate))
         {
@@ -1706,6 +1724,8 @@ public partial class MainWindow : Adw.ApplicationWindow
                 BeatsPerMinute = _bpmRow.GetText(),
                 Composer = _composerRow.GetText(),
                 Description = _descriptionRow.GetText(),
+                DiscNumber = _discNumberRow.GetText(),
+                DiscTotal = _discTotalRow.GetText(),
                 Publisher = _publisherRow.GetText(),
                 PublishingDate = _publishingDateButton.GetLabel() == _("Pick a date") ? "" : _publishingDateButton.GetLabel()
             };
