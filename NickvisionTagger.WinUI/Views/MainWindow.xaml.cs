@@ -203,6 +203,9 @@ public sealed partial class MainWindow : Window
         TxtComposer.PlaceholderText = _("Enter composer here");
         CardDescription.Header = _("Description");
         TxtDescription.PlaceholderText = _("Enter description here");
+        CardDisc.Header = _("Disc");
+        TxtDiscNumber.PlaceholderText = _("Enter disc number here");
+        TxtDiscTotal.PlaceholderText = _("Enter disc total here");
         CardPublisher.Header = _("Publisher");
         TxtPublisher.PlaceholderText = _("Enter publisher here");
         CardPublishingDate.Header = _("Publishing Date");
@@ -1415,6 +1418,8 @@ public sealed partial class MainWindow : Window
         TxtBPM.Text = _controller.SelectedPropertyMap.BeatsPerMinute;
         TxtComposer.Text = _controller.SelectedPropertyMap.Composer;
         TxtDescription.Text = _controller.SelectedPropertyMap.Description;
+        TxtDiscNumber.Text = _controller.SelectedPropertyMap.DiscNumber;
+        TxtDiscTotal.Text = _controller.SelectedPropertyMap.DiscTotal;
         TxtPublisher.Text = _controller.SelectedPropertyMap.Publisher;
         DatePublishingDate.Date = string.IsNullOrEmpty(_controller.SelectedPropertyMap.PublishingDate) ? null : (_controller.SelectedPropertyMap.PublishingDate == _("<keep>") ? null : DateTimeOffset.Parse(_controller.SelectedPropertyMap.PublishingDate));
         DatePublishingDate.PlaceholderText = _controller.SelectedPropertyMap.PublishingDate == _("<keep>") ? _("<keep>") : _("Pick a date");
@@ -1502,6 +1507,8 @@ public sealed partial class MainWindow : Window
                 BeatsPerMinute = TxtBPM.Text,
                 Composer = TxtComposer.Text,
                 Description = TxtDescription.Text,
+                DiscNumber = TxtDiscNumber.Text,
+                DiscTotal = TxtDiscTotal.Text,
                 Publisher = TxtPublisher.Text,
                 PublishingDate = DatePublishingDate.PlaceholderText == _("<keep>") ? _("<keep>") : (DatePublishingDate.Date?.Date.ToShortDateString() ?? ""),
             };

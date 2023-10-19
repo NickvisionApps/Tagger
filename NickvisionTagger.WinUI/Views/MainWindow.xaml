@@ -676,6 +676,16 @@
                                                                             <TextBox x:Name="TxtDescription" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                         </wct:SettingsCard>
 
+                                                                        <wct:SettingsCard x:Name="CardDisc">
+                                                                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                                                                <TextBox x:Name="TxtDiscNumber" MinWidth="150" TextChanged="TagPropertyChanged"/>
+
+                                                                                <TextBlock VerticalAlignment="Center" Text="/"/>
+
+                                                                                <TextBox x:Name="TxtDiscTotal" MinWidth="150" TextChanged="TagPropertyChanged"/>
+                                                                            </StackPanel>
+                                                                        </wct:SettingsCard>
+
                                                                         <wct:SettingsCard x:Name="CardPublisher">
                                                                             <TextBox x:Name="TxtPublisher" MinWidth="300" MaxWidth="400" TextChanged="TagPropertyChanged"/>
                                                                         </wct:SettingsCard>
