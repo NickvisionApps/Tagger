@@ -790,7 +790,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         {
             string value = match.Value.Remove(0, 1); //remove first %
             value = value.Remove(value.Length - 1, 1); //remove last %;
-            if (_validProperties.Contains(value.ToLower()))
+            if (_validProperties.Contains(value.ToLower()) && value.ToLower() != "lyrics" && value.ToLower() != _("lyrics"))
             {
                 value = value.ToLower();
                 var replace = "";
