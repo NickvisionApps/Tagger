@@ -5,8 +5,15 @@ using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.WinUI.Controls;
 
+/// <summary>
+/// A dialog for showing album art info
+/// </summary>
 public sealed partial class AlbumArtInfoDialog : ContentDialog
 {
+    /// <summary>
+    /// Constructs a AlbumArtInfoDialog
+    /// </summary>
+    /// <param name="art">AlbumArt</param>
     public AlbumArtInfoDialog(AlbumArt art)
     {
         InitializeComponent();
