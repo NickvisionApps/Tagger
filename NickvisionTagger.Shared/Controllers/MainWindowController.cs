@@ -239,16 +239,6 @@ public class MainWindowController : IDisposable
     }
 
     /// <summary>
-    /// Whether or not to show the Extras Pane
-    /// </summary>
-    public bool ExtrasPane
-    {
-        get => Configuration.Current.ExtrasPane;
-
-        set => Configuration.Current.ExtrasPane = value;
-    }
-
-    /// <summary>
     /// What to sort files in a music library by
     /// </summary>
     public SortBy SortFilesBy
@@ -256,6 +246,26 @@ public class MainWindowController : IDisposable
         get => Configuration.Current.SortFilesBy;
 
         set => Configuration.Current.SortFilesBy = value;
+    }
+
+    /// <summary>
+    /// Whether or not filename characters should be limited to those only supported by Windows
+    /// </summary>
+    public bool LimitFilenameCharacters
+    {
+        get => Configuration.Current.LimitFilenameCharacters;
+
+        set => Configuration.Current.LimitFilenameCharacters = value;
+    }
+
+    /// <summary>
+    /// Whether or not to show the Extras Pane
+    /// </summary>
+    public bool ExtrasPane
+    {
+        get => Configuration.Current.ExtrasPane;
+
+        set => Configuration.Current.ExtrasPane = value;
     }
 
     /// <summary>

@@ -68,6 +68,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _downloadLyricsAction;
     private readonly Gio.SimpleAction _acoustIdAction;
     private readonly GtkListBoxUpdateHeaderFunc _updateHeaderFunc;
+    private readonly Gtk.EventControllerKey _filenameKeyController;
     private AlbumArtType _currentAlbumArtType;
     private string? _listHeader;
     private List<MusicFileRow> _listMusicFilesRows;
@@ -181,6 +182,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         gtk_list_box_set_header_func(_listMusicFiles.Handle, _updateHeaderFunc, IntPtr.Zero, IntPtr.Zero);
+        _filenameKeyController = Gtk.EventControllerKey.New();
+        _filenameKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        _filenameKeyController.OnKeyPressed += OnFilenameKeyPressed;
+        _filenameRow.AddController(_filenameKeyController);
         _listMusicFiles.OnSelectedRowsChanged += ListMusicFiles_SelectionChanged;
         var switchAlbumArtLabel = (Gtk.Label)_switchAlbumArtButtonContent.GetLastChild();
         switchAlbumArtLabel.SetWrap(true);
@@ -1691,6 +1696,25 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="sender">Gtk.Button</param>
     /// <param name="e">EventArgs</param>
     private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("search"), 0);
+
+    /// <summary>
+    /// Occurs when a key is pressed on the filename entry
+    /// </summary>
+    /// <param name="sender">Gtk.EventControllerKey</param>
+    /// <param name="e">Gtk.EventControllerKey.KeyPressedSignalArgs</param>
+    private bool OnFilenameKeyPressed(Gtk.EventControllerKey sender, Gtk.EventControllerKey.KeyPressedSignalArgs e)
+    {
+        var res = e.Keyval == 0x2f; // '/'
+        if (!res && _controller.LimitFilenameCharacters)
+        {
+            res = e.Keyval switch
+            {
+                0x22 or 0x3c or 0x3e or 0x3a or 0x5c or 0x7c or 0x3f or 0x2a => true, // '"', '<', '>', ':', '\\', '|', '?', '*'
+                _ => false
+            };
+        }
+        return res;
+    }
 
     /// <summary>
     /// Occurs when the _listMusicFiles's selection is changed
