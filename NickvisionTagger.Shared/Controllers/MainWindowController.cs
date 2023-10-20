@@ -366,6 +366,7 @@ public class MainWindowController : IDisposable
         {
             await CheckForUpdatesAsync();
         }
+        MusicFile.LimitFilenameCharacters = Configuration.Current.LimitFilenameCharacters;
         NetworkMonitor = await NetworkMonitor.NewAsync();
         if (_libraryToLaunch != null)
         {
@@ -1634,6 +1635,7 @@ public class MainWindowController : IDisposable
     /// <param name="e">EventArgs</param>
     private async void ConfigurationSaved(object? sender, EventArgs e)
     {
+        MusicFile.LimitFilenameCharacters = Configuration.Current.LimitFilenameCharacters;
         if (_musicLibrary != null)
         {
             var includeSubfoldersChanged = _musicLibrary.IncludeSubfolders != Configuration.Current.IncludeSubfolders;

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-10-19 15:12-0400\n"
+"POT-Creation-Date: 2023-10-19 21:31-0400\n"
 "PO-Revision-Date: 2023-10-19 15:16+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-"
@@ -156,11 +156,28 @@ msgstr ""
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:54
+msgid "Limit File Name Characters"
+msgstr ""
+
+#. (itstool) path: item/p
+#: yelp/C/configuration.page:55
+msgid ""
+"Whether or not filename characters should be limited to those only supported "
+"by Windows."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/configuration.page:57
+msgid "This option is only available on non-Windows systems."
+msgstr ""
+
+#. (itstool) path: item/title
+#: yelp/C/configuration.page:61
 msgid "Overwrite Tag With MusicBrainz"
 msgstr "Sobreescribir etiqueta con MusicBrainz"
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:55
+#: yelp/C/configuration.page:62
 msgid ""
 "Whether or not to overwrite existing tag metadata with data found from "
 "MusicBrainz. If disabled, only blank tag properties will be filled."
@@ -170,12 +187,12 @@ msgstr ""
 "propiedades de etiqueta en blanco."
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:58
+#: yelp/C/configuration.page:65
 msgid "Overwrite Album Art With MusicBrainz"
 msgstr "Sobreescribir la portada del álbum con MusicBrainz"
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:59
+#: yelp/C/configuration.page:66
 msgid ""
 "Whether or not to overwrite overwrite existing album art with art found from "
 "MusicBrainz."
@@ -184,12 +201,12 @@ msgstr ""
 "encontradas en MusicBrainz."
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:62
+#: yelp/C/configuration.page:69
 msgid "Overwrite Lyrics With Web Service"
 msgstr "Sobrescribir las letras con el servicio web"
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:63
+#: yelp/C/configuration.page:70
 msgid ""
 "Whether or not to overwrite a tag's existing lyric data with data from the "
 "web."
@@ -198,12 +215,12 @@ msgstr ""
 "etiqueta con los datos de la web."
 
 #. (itstool) path: item/title
-#: yelp/C/configuration.page:66
+#: yelp/C/configuration.page:73
 msgid "AcoustId User API Key"
 msgstr "Clave API de usuario de AcoustId"
 
 #. (itstool) path: item/p
-#: yelp/C/configuration.page:67
+#: yelp/C/configuration.page:74
 msgid ""
 "An AcoustId User API key to use when fingerprinting music files and looking "
 "up song information."
@@ -212,7 +229,7 @@ msgstr ""
 "de música y buscar información sobre canciones."
 
 #. (itstool) path: note/p
-#: yelp/C/configuration.page:69
+#: yelp/C/configuration.page:76
 msgid ""
 "A key can be obtained <link href=\"https://acoustid.org/api-key\">here</link>"
 msgstr ""

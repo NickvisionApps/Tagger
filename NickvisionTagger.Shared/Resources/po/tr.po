@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-19 15:12-0400\n"
+"POT-Creation-Date: 2023-10-19 21:31-0400\n"
 "PO-Revision-Date: 2023-10-12 17:15+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-"
@@ -61,26 +61,24 @@ msgstr "%title%- %artist%"
 msgid "%track%- %title%"
 msgstr "%track%- %title%"
 
-#: ../../../Controllers/MainWindowController.cs:596
-#: ../../../Controllers/MainWindowController.cs:607
-#: ../../../Controllers/MainWindowController.cs:612
-#: ../../../Controllers/MainWindowController.cs:617
-#: ../../../Controllers/MainWindowController.cs:622
-#: ../../../Controllers/MainWindowController.cs:634
-#: ../../../Controllers/MainWindowController.cs:646
-#: ../../../Controllers/MainWindowController.cs:658
-#: ../../../Controllers/MainWindowController.cs:663
-#: ../../../Controllers/MainWindowController.cs:668
-#: ../../../Controllers/MainWindowController.cs:673
-#: ../../../Controllers/MainWindowController.cs:678
-#: ../../../Controllers/MainWindowController.cs:690
-#: ../../../Controllers/MainWindowController.cs:695
-#: ../../../Controllers/MainWindowController.cs:707
-#: ../../../Controllers/MainWindowController.cs:719
-#: ../../../Controllers/MainWindowController.cs:724
-#: ../../../Controllers/MainWindowController.cs:740
-#: ../../../Controllers/MainWindowController.cs:1810
-#: ../../../Controllers/MainWindowController.cs:1811
+#: ../../../Controllers/MainWindowController.cs:597
+#: ../../../Controllers/MainWindowController.cs:608
+#: ../../../Controllers/MainWindowController.cs:613
+#: ../../../Controllers/MainWindowController.cs:618
+#: ../../../Controllers/MainWindowController.cs:623
+#: ../../../Controllers/MainWindowController.cs:635
+#: ../../../Controllers/MainWindowController.cs:647
+#: ../../../Controllers/MainWindowController.cs:659
+#: ../../../Controllers/MainWindowController.cs:664
+#: ../../../Controllers/MainWindowController.cs:669
+#: ../../../Controllers/MainWindowController.cs:674
+#: ../../../Controllers/MainWindowController.cs:679
+#: ../../../Controllers/MainWindowController.cs:691
+#: ../../../Controllers/MainWindowController.cs:696
+#: ../../../Controllers/MainWindowController.cs:708
+#: ../../../Controllers/MainWindowController.cs:720
+#: ../../../Controllers/MainWindowController.cs:725
+#: ../../../Controllers/MainWindowController.cs:741
 #: ../../../Controllers/MainWindowController.cs:1812
 #: ../../../Controllers/MainWindowController.cs:1813
 #: ../../../Controllers/MainWindowController.cs:1814
@@ -96,7 +94,9 @@ msgstr "%track%- %title%"
 #: ../../../Controllers/MainWindowController.cs:1824
 #: ../../../Controllers/MainWindowController.cs:1825
 #: ../../../Controllers/MainWindowController.cs:1826
-#: ../../../Controllers/MainWindowController.cs:1830
+#: ../../../Controllers/MainWindowController.cs:1827
+#: ../../../Controllers/MainWindowController.cs:1828
+#: ../../../Controllers/MainWindowController.cs:1832
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1545
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1548
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1450
@@ -135,7 +135,7 @@ msgstr ""
 "iziyle ilişkili olarak gönderir."
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:74
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:147
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:163
 msgid "AcoustId User API Key"
 msgstr "AcoustId Kullanıcı API Anahtarı"
 
@@ -172,9 +172,9 @@ msgid "Advanced Search Info"
 msgstr "Gelişmiş Arama Bilgisi"
 
 #: ../../../Controllers/MainWindowController.cs:180
-#: ../../../Controllers/MainWindowController.cs:1332
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:675
-#: ../../../Models/MusicFile.cs:802
+#: ../../../Controllers/MainWindowController.cs:1333
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:688
+#: ../../../Models/MusicFile.cs:815
 msgid "album"
 msgstr "album"
 
@@ -197,9 +197,9 @@ msgid "Album Artist"
 msgstr "Albüm Sanatçısı"
 
 #: ../../../Controllers/MainWindowController.cs:181
-#: ../../../Controllers/MainWindowController.cs:1381
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:703
-#: ../../../Models/MusicFile.cs:818
+#: ../../../Controllers/MainWindowController.cs:1382
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:716
+#: ../../../Models/MusicFile.cs:831
 msgid "albumartist"
 msgstr "albumartist"
 
@@ -218,7 +218,7 @@ msgstr "Tüm Desteklenen Dosyalar"
 msgid "An application restart is required to change the theme."
 msgstr "Temayı değiştirmek için uygulamanın yeniden başlatılması gerekir."
 
-#: ../../../Controllers/MainWindowController.cs:1219
+#: ../../../Controllers/MainWindowController.cs:1220
 msgid "An invalid RecordingId was provided to MusicBrainz"
 msgstr "Geçersiz bir kayıt kimliği MüzikBrainz'e verildi"
 
@@ -267,9 +267,9 @@ msgid "Apply Changes?"
 msgstr "Değişiklikler Uygulansın Mı?"
 
 #: ../../../Controllers/MainWindowController.cs:180
-#: ../../../Controllers/MainWindowController.cs:1328
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:671
-#: ../../../Models/MusicFile.cs:798
+#: ../../../Controllers/MainWindowController.cs:1329
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:684
+#: ../../../Models/MusicFile.cs:811
 msgid "artist"
 msgstr "sanatçı"
 
@@ -305,21 +305,21 @@ msgid "Beats Per Minute"
 msgstr "Dakika Başına Vuruş"
 
 #: ../../../Controllers/MainWindowController.cs:182
-#: ../../../Controllers/MainWindowController.cs:1393
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:715
-#: ../../../Models/MusicFile.cs:830
+#: ../../../Controllers/MainWindowController.cs:1394
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:728
+#: ../../../Models/MusicFile.cs:843
 msgid "beatsperminute"
 msgstr "dakika başına vuruş"
 
 #: ../../../Controllers/MainWindowController.cs:182
-#: ../../../Controllers/MainWindowController.cs:1393
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:715
-#: ../../../Models/MusicFile.cs:830
+#: ../../../Controllers/MainWindowController.cs:1394
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:728
+#: ../../../Models/MusicFile.cs:843
 msgid "bpm"
 msgstr "bpm"
 
-#: ../../../Controllers/MainWindowController.cs:1692
-#: ../../../Controllers/MainWindowController.cs:1698
+#: ../../../Controllers/MainWindowController.cs:1694
+#: ../../../Controllers/MainWindowController.cs:1700
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1769
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:221
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1565
@@ -382,9 +382,9 @@ msgid "Close Library"
 msgstr "Kitaplığı Kapat"
 
 #: ../../../Controllers/MainWindowController.cs:182
-#: ../../../Controllers/MainWindowController.cs:1389
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:711
-#: ../../../Models/MusicFile.cs:826
+#: ../../../Controllers/MainWindowController.cs:1390
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:724
+#: ../../../Models/MusicFile.cs:839
 msgid "comment"
 msgstr "yorum"
 
@@ -394,9 +394,9 @@ msgid "Comment"
 msgstr "Yorum"
 
 #: ../../../Controllers/MainWindowController.cs:183
-#: ../../../Controllers/MainWindowController.cs:1408
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:723
-#: ../../../Models/MusicFile.cs:834
+#: ../../../Controllers/MainWindowController.cs:1409
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:736
+#: ../../../Models/MusicFile.cs:847
 msgid "composer"
 msgstr "besteci"
 
@@ -423,25 +423,25 @@ msgstr "GitHub Katkıcıları ❤️"
 msgid "Convert"
 msgstr "Dönüştür"
 
-#: ../../../Controllers/MainWindowController.cs:963
+#: ../../../Controllers/MainWindowController.cs:964
 #, csharp-format
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
 msgstr[0] "{0} dosya adı etikete dönüştürüldü"
 msgstr[1] "{0} dosya adı etikete dönüştürüldü"
 
-#: ../../../Controllers/MainWindowController.cs:997
+#: ../../../Controllers/MainWindowController.cs:998
 #, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
 msgstr[0] "{0} etiket dosya adına dönüştürüldü"
 msgstr[1] "{0} etiket dosya adına dönüştürüldü"
 
-#: ../../../Controllers/MainWindowController.cs:942
+#: ../../../Controllers/MainWindowController.cs:943
 msgid "Converting file names to tags..."
 msgstr "Dosya adları etikete dönüştürülüyor..."
 
-#: ../../../Controllers/MainWindowController.cs:976
+#: ../../../Controllers/MainWindowController.cs:977
 msgid "Converting tags to file names..."
 msgstr "Etiketler dosya adlarına dönüştürülüyor..."
 
@@ -475,7 +475,7 @@ msgid "Credits"
 msgstr "Hazırlayanlar"
 
 #: ../../../Controllers/MainWindowController.cs:185
-#: ../../../Controllers/MainWindowController.cs:1465
+#: ../../../Controllers/MainWindowController.cs:1466
 msgid "custom"
 msgstr "özel"
 
@@ -513,14 +513,14 @@ msgstr "Etiketi Sil"
 msgid "Delete Tag (Shift+Delete)"
 msgstr "Etiketi Sil (Shift+Delete)"
 
-#: ../../../Controllers/MainWindowController.cs:909
+#: ../../../Controllers/MainWindowController.cs:910
 msgid "Deleting tags..."
 msgstr "Etiketler siliniyor..."
 
 #: ../../../Controllers/MainWindowController.cs:183
-#: ../../../Controllers/MainWindowController.cs:1412
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:727
-#: ../../../Models/MusicFile.cs:838
+#: ../../../Controllers/MainWindowController.cs:1413
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:740
+#: ../../../Models/MusicFile.cs:851
 msgid "description"
 msgstr "açıklama"
 
@@ -591,21 +591,21 @@ msgstr "Uygulanmamış Değişiklikleri Gözden Çıkar"
 msgid "Discard Unapplied Changed (Ctrl+Z)"
 msgstr "Uygulanmamış Değişiklikleri Gözden Çıkar (Ctrl+Z)"
 
-#: ../../../Controllers/MainWindowController.cs:877
+#: ../../../Controllers/MainWindowController.cs:878
 msgid "Discarding tags..."
 msgstr "Etiketler gözden çıkarılıyor..."
 
 #: ../../../Controllers/MainWindowController.cs:183
-#: ../../../Controllers/MainWindowController.cs:1416
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:731
-#: ../../../Models/MusicFile.cs:842
+#: ../../../Controllers/MainWindowController.cs:1417
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:744
+#: ../../../Models/MusicFile.cs:855
 msgid "discnumber"
 msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:184
-#: ../../../Controllers/MainWindowController.cs:1431
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:739
-#: ../../../Models/MusicFile.cs:846
+#: ../../../Controllers/MainWindowController.cs:1432
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:752
+#: ../../../Models/MusicFile.cs:859
 #, fuzzy
 msgid "disctotal"
 msgstr "toplam parça"
@@ -634,21 +634,21 @@ msgstr "MusicBrainz Üst Verilerini İndir"
 msgid "Download MusicBrainz Metadata (Ctrl+M)"
 msgstr "MusicBrainz Üst Verilerini İndir (Ctrl+M)"
 
-#: ../../../Controllers/MainWindowController.cs:1252
+#: ../../../Controllers/MainWindowController.cs:1253
 #, csharp-format
 msgid "Downloaded lyrics for {0} files successfully"
 msgstr "{0} dosya için şarkı sözleri indirildi"
 
-#: ../../../Controllers/MainWindowController.cs:1228
+#: ../../../Controllers/MainWindowController.cs:1229
 #, csharp-format
 msgid "Downloaded metadata for {0} files successfully"
 msgstr "{0} dosya için üst veri indirildi"
 
-#: ../../../Controllers/MainWindowController.cs:1238
+#: ../../../Controllers/MainWindowController.cs:1239
 msgid "Downloading lyrics..."
 msgstr "Şarkı sözleri indiriliyor..."
 
-#: ../../../Controllers/MainWindowController.cs:1188
+#: ../../../Controllers/MainWindowController.cs:1189
 msgid "Downloading MusicBrainz metadata..."
 msgstr "MusicBrainz üst verileri indiriliyor..."
 
@@ -664,14 +664,14 @@ msgid "Edit"
 msgstr "Düzenle"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:67
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:116
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:132
 msgid "Enable to overwrite existing album art with art found from MusicBrainz."
 msgstr ""
 "MusicBrainzʼden bulunan kapakla var olan albüm kapağının üzerine yazmayı "
 "etkinleştir."
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:71
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:132
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:148
 msgid ""
 "Enable to overwrite existing lyrics with that found from downloading lyrics "
 "from the web. If disabled, only blank lyrics will be filled."
@@ -681,7 +681,7 @@ msgstr ""
 "doldurulur."
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:63
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:100
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:116
 msgid ""
 "Enable to overwrite existing tag metadata with data found from MusicBrainz. "
 "If disabled, only blank tag properties will be filled."
@@ -773,12 +773,12 @@ msgstr "Toplam parça sayısını buraya girin"
 msgid "Enter year here"
 msgstr "Yılı buraya girin"
 
-#: ../../../Controllers/MainWindowController.cs:1221
+#: ../../../Controllers/MainWindowController.cs:1222
 msgid "Error"
 msgstr "Hata"
 
-#: ../../../Models/MusicFile.cs:426 ../../../Models/MusicFile.cs:883
-#: ../../../Models/MusicFile.cs:1048
+#: ../../../Models/MusicFile.cs:439 ../../../Models/MusicFile.cs:896
+#: ../../../Models/MusicFile.cs:1061
 msgid "ERROR"
 msgstr "HATA"
 
@@ -816,11 +816,11 @@ msgstr "Albüm Ön Kapağını Dışa Aktar"
 msgid "Export to LRC"
 msgstr "LRC'ye Dışa Aktar"
 
-#: ../../../Controllers/MainWindowController.cs:1131
+#: ../../../Controllers/MainWindowController.cs:1132
 msgid "Exported back album art to file successfully"
 msgstr "Albüm arka kapağı dosyaya dışa aktardı"
 
-#: ../../../Controllers/MainWindowController.cs:1115
+#: ../../../Controllers/MainWindowController.cs:1116
 msgid "Exported front album art to file successfully"
 msgstr "Albüm ön kapağı dosyaya dışa aktarıldı"
 
@@ -837,11 +837,11 @@ msgstr "MusicBrainz Aramaları Başarısız Oldu"
 msgid "Failed MusicBrainz Lookups"
 msgstr "MusicBrainz Aramaları Başarısız Oldu"
 
-#: ../../../Controllers/MainWindowController.cs:1136
+#: ../../../Controllers/MainWindowController.cs:1137
 msgid "Failed to export back album art to a file"
 msgstr "Albüm arka kapağı dosyaya dışa aktarılamadı"
 
-#: ../../../Controllers/MainWindowController.cs:1120
+#: ../../../Controllers/MainWindowController.cs:1121
 msgid "Failed to export front album art to a file"
 msgstr "Albüm ön kapağı dosyaya dışa aktarılamadı"
 
@@ -880,7 +880,7 @@ msgid "File Properties"
 msgstr "Dosya Özellikleri"
 
 #: ../../../Controllers/MainWindowController.cs:180
-#: ../../../Controllers/MainWindowController.cs:1320
+#: ../../../Controllers/MainWindowController.cs:1321
 msgid "filename"
 msgstr "dosya adı"
 
@@ -926,9 +926,9 @@ msgid "Fyodor Sobolev"
 msgstr "Fyodor Sobolev"
 
 #: ../../../Controllers/MainWindowController.cs:182
-#: ../../../Controllers/MainWindowController.cs:1385
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:707
-#: ../../../Models/MusicFile.cs:822
+#: ../../../Controllers/MainWindowController.cs:1386
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:720
+#: ../../../Models/MusicFile.cs:835
 msgid "genre"
 msgstr "tür"
 
@@ -941,7 +941,7 @@ msgid "Genre"
 msgstr "Tür"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:76
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:157
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:173
 msgid "Get New API Key"
 msgstr "Yeni API Anahtarı Al"
 
@@ -1020,7 +1020,7 @@ msgstr "Albüm Arka Kapağı Ekle"
 msgid "Insert Front Album Art"
 msgstr "Albüm Ön Kapağı Ekle"
 
-#: ../../../Controllers/MainWindowController.cs:1019
+#: ../../../Controllers/MainWindowController.cs:1020
 msgid "Inserting album art..."
 msgstr "Albüm kapağı ekleniyor..."
 
@@ -1038,19 +1038,19 @@ msgstr "KiB"
 msgid "Language Code"
 msgstr "Dil Kodu"
 
-#: ../../../Controllers/MainWindowController.cs:452
+#: ../../../Controllers/MainWindowController.cs:453
 msgid "Library was changed on disk."
 msgstr "Kitaplık diskte değiştirildi."
 
-#: ../../../Controllers/MainWindowController.cs:505
+#: ../../../Controllers/MainWindowController.cs:506
 #, csharp-format
 msgid "Loaded {0} music file."
 msgid_plural "Loaded {0} music files."
 msgstr[0] "{0} müzik dosyası yüklendi."
 msgstr[1] "{0} müzik dosyası yüklendi."
 
-#: ../../../Controllers/MainWindowController.cs:491
-#: ../../../Controllers/MainWindowController.cs:1643
+#: ../../../Controllers/MainWindowController.cs:492
+#: ../../../Controllers/MainWindowController.cs:1645
 msgid "Loading music files from library..."
 msgstr "Müzik dosyaları kitaplıktan yükleniyor..."
 
@@ -1058,7 +1058,7 @@ msgstr "Müzik dosyaları kitaplıktan yükleniyor..."
 msgid "Lryics"
 msgstr "Şarkı Sözleri"
 
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:790
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:803
 msgid "lyrics"
 msgstr "şarkı sözleri"
 
@@ -1123,7 +1123,7 @@ msgstr "Yeni Özel Özellik"
 msgid "New Synchronized Lyric"
 msgstr "Yeni Eşitlenmiş Şarkı Sözleri"
 
-#: ../../../Controllers/MainWindowController.cs:409
+#: ../../../Controllers/MainWindowController.cs:410
 msgid "New update available."
 msgstr "Yeni güncelleme var."
 
@@ -1140,7 +1140,7 @@ msgstr "Nicholas Logozzo"
 msgid "No"
 msgstr "Hayır"
 
-#: ../../../Controllers/MainWindowController.cs:1217
+#: ../../../Controllers/MainWindowController.cs:1218
 msgid "No AcoustId entry found for the file's fingerprint"
 msgstr "Dosyanın parmak izi için AcoustId girdisi bulunamadı"
 
@@ -1153,15 +1153,15 @@ msgstr "Hiçbir dosya seçilmedi"
 msgid "No files selected for removal."
 msgstr "Kaldırmak için hiçbir dosya seçilmedi."
 
-#: ../../../Controllers/MainWindowController.cs:1252
+#: ../../../Controllers/MainWindowController.cs:1253
 msgid "No lyrics were downloaded"
 msgstr "Hiçbir şarkı sözü indirilmedi"
 
-#: ../../../Controllers/MainWindowController.cs:1228
+#: ../../../Controllers/MainWindowController.cs:1229
 msgid "No metadata was downloaded"
 msgstr "Hiçbir üst veri indirilmedi"
 
-#: ../../../Controllers/MainWindowController.cs:528
+#: ../../../Controllers/MainWindowController.cs:529
 msgid "No music files are selected."
 msgstr "Hiçbir müzik dosyası seçilmedi."
 
@@ -1170,11 +1170,11 @@ msgstr "Hiçbir müzik dosyası seçilmedi."
 msgid "No Music Files Found"
 msgstr "Hiçbir Müzik Dosyası Bulunamadı"
 
-#: ../../../Controllers/MainWindowController.cs:532
+#: ../../../Controllers/MainWindowController.cs:533
 msgid "No music files in library."
 msgstr "Kitaplıkta müzik dosyası yok."
 
-#: ../../../Controllers/MainWindowController.cs:1218
+#: ../../../Controllers/MainWindowController.cs:1219
 msgid "No MusicBrainz RecordingId was provided for the AcoustId entry"
 msgstr "AcoustId girdisi için MusicBrainz kayıt kimliği sağlanmadı"
 
@@ -1183,7 +1183,7 @@ msgstr "AcoustId girdisi için MusicBrainz kayıt kimliği sağlanmadı"
 msgid "No Selected Music Files"
 msgstr "Seçili Müzik Dosyası Yok"
 
-#: ../../../Controllers/MainWindowController.cs:1265
+#: ../../../Controllers/MainWindowController.cs:1266
 msgid "No user api key configured."
 msgstr "Hiçbir kullanıcı anahtarı yapılandırılmadı."
 
@@ -1272,17 +1272,17 @@ msgid "Open Playlist"
 msgstr "Çalma Listesi Aç"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:66
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:115
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:131
 msgid "Overwrite Album Art With MusicBrainz"
 msgstr "MusicBrainz ile Albüm Kapağının Üzerine Yaz"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:70
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:131
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:147
 msgid "Overwrite Lyrics From Web Service"
 msgstr "Web Hizmetinden Şarkı Sözlerinin Üzerine Yaz"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:62
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:99
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:115
 msgid "Overwrite Tag With MusicBrainz"
 msgstr "MusicBrainz ile Etiketin Üzerine Yaz"
 
@@ -1309,7 +1309,7 @@ msgstr ""
 msgid "Playlist"
 msgstr "Çalma Listesi"
 
-#: ../../../Controllers/MainWindowController.cs:537
+#: ../../../Controllers/MainWindowController.cs:538
 msgid "Playlist file created successfully."
 msgstr "Çalma listesi oluşturuldu."
 
@@ -1318,7 +1318,7 @@ msgstr "Çalma listesi oluşturuldu."
 msgid "Playlist Mode"
 msgstr "Çalma Listesi Kipi"
 
-#: ../../../Controllers/MainWindowController.cs:524
+#: ../../../Controllers/MainWindowController.cs:525
 msgid "Playlist path can not be empty."
 msgstr "Çalma listesi yolu boş olamaz."
 
@@ -1344,9 +1344,9 @@ msgid "Property Name"
 msgstr "Özellik Adı"
 
 #: ../../../Controllers/MainWindowController.cs:184
-#: ../../../Controllers/MainWindowController.cs:1446
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:747
-#: ../../../Models/MusicFile.cs:850
+#: ../../../Controllers/MainWindowController.cs:1447
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:760
+#: ../../../Models/MusicFile.cs:863
 msgid "publisher"
 msgstr "yayımcı"
 
@@ -1362,9 +1362,9 @@ msgid "Publishing Date"
 msgstr "Yayımcı"
 
 #: ../../../Controllers/MainWindowController.cs:184
-#: ../../../Controllers/MainWindowController.cs:1450
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:751
-#: ../../../Models/MusicFile.cs:854
+#: ../../../Controllers/MainWindowController.cs:1451
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:764
+#: ../../../Models/MusicFile.cs:867
 #, fuzzy
 msgid "publishingdate"
 msgstr "yayımcı"
@@ -1409,7 +1409,7 @@ msgstr "Çalma Listesinden Kaldır"
 msgid "Remove Lyric"
 msgstr "Şarkı Sözünü Kaldır"
 
-#: ../../../Controllers/MainWindowController.cs:1063
+#: ../../../Controllers/MainWindowController.cs:1064
 msgid "Removing album art..."
 msgstr "Albüm kapağı kaldırılıyor..."
 
@@ -1435,8 +1435,8 @@ msgstr "Etiketi Kaydet"
 msgid "Save Tag (Ctrl+S)"
 msgstr "Etiketi Kaydet (Ctrl+S)"
 
-#: ../../../Controllers/MainWindowController.cs:794
-#: ../../../Controllers/MainWindowController.cs:837
+#: ../../../Controllers/MainWindowController.cs:795
+#: ../../../Controllers/MainWindowController.cs:838
 msgid "Saving tags..."
 msgstr "Etiketler kaydediliyor..."
 
@@ -1502,11 +1502,11 @@ msgstr "Gönder"
 msgid "Submit to AcoustId"
 msgstr "AcoustIdʼye Gönder"
 
-#: ../../../Controllers/MainWindowController.cs:1271
+#: ../../../Controllers/MainWindowController.cs:1272
 msgid "Submitted metadata to AcoustId successfully"
 msgstr "AcoustId'ye üst veriler başarıyla gönderildi"
 
-#: ../../../Controllers/MainWindowController.cs:1268
+#: ../../../Controllers/MainWindowController.cs:1269
 msgid "Submitting data to AcoustId..."
 msgstr "AcoustId'ye veriler gönderiliyor..."
 
@@ -1584,7 +1584,7 @@ msgstr ""
 msgid "Theme"
 msgstr "Tema"
 
-#: ../../../Controllers/MainWindowController.cs:1220
+#: ../../../Controllers/MainWindowController.cs:1221
 msgid "This file does not have a valid fingerprint"
 msgstr "Bu dosyanın geçerli bir parmak izi yok"
 
@@ -1607,9 +1607,9 @@ msgid "Timestamp (hh:mm:ss or mm:ss.xx)"
 msgstr "Zaman damgası (hh:mm:ss ya da mm:ss.xx)"
 
 #: ../../../Controllers/MainWindowController.cs:180
-#: ../../../Controllers/MainWindowController.cs:1324
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:667
-#: ../../../Models/MusicFile.cs:794
+#: ../../../Controllers/MainWindowController.cs:1325
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:680
+#: ../../../Models/MusicFile.cs:807
 msgid "title"
 msgstr "başlık"
 
@@ -1627,9 +1627,9 @@ msgid "Too Many Files Selected"
 msgstr "Çok Fazla Dosya Seçildi"
 
 #: ../../../Controllers/MainWindowController.cs:181
-#: ../../../Controllers/MainWindowController.cs:1351
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:687
-#: ../../../Models/MusicFile.cs:810
+#: ../../../Controllers/MainWindowController.cs:1352
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:700
+#: ../../../Models/MusicFile.cs:823
 msgid "track"
 msgstr "parça"
 
@@ -1642,9 +1642,9 @@ msgid "Track"
 msgstr "Parça"
 
 #: ../../../Controllers/MainWindowController.cs:181
-#: ../../../Controllers/MainWindowController.cs:1366
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:695
-#: ../../../Models/MusicFile.cs:814
+#: ../../../Controllers/MainWindowController.cs:1367
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:708
+#: ../../../Models/MusicFile.cs:827
 msgid "tracktotal"
 msgstr "toplam parça"
 
@@ -1667,16 +1667,16 @@ msgstr "Tür"
 msgid "Type ! for advanced search"
 msgstr "gelişmiş arama için ! yazın"
 
-#: ../../../Controllers/MainWindowController.cs:561
+#: ../../../Controllers/MainWindowController.cs:562
 msgid "Unable to add file to playlist. File may already exist in playlist."
 msgstr ""
 "Dosya çalma listesine eklenemiyor. Dosya zaten çalma listesinde olabilir."
 
-#: ../../../Controllers/MainWindowController.cs:541
+#: ../../../Controllers/MainWindowController.cs:542
 msgid "Unable to create playlist."
 msgstr "Çalma listesi oluşturulamıyor."
 
-#: ../../../Controllers/MainWindowController.cs:426
+#: ../../../Controllers/MainWindowController.cs:427
 msgid "Unable to download and install update."
 msgstr "Güncellemeler indirilip kurulamadı."
 
@@ -1690,29 +1690,29 @@ msgstr "LRC'ye dışa aktarılamıyor."
 msgid "Unable to import from LRC."
 msgstr "LRC'den içe aktarılamıyor."
 
-#: ../../../Controllers/MainWindowController.cs:1015
+#: ../../../Controllers/MainWindowController.cs:1016
 msgid "Unable to load image file"
 msgstr "Resim dosyası yüklenemedi"
 
-#: ../../../Controllers/MainWindowController.cs:576
+#: ../../../Controllers/MainWindowController.cs:577
 msgid "Unable to remove some files from playlist."
 msgstr "Kimi dosyalar çalma listesinden kaldırılamıyor."
 
-#: ../../../Controllers/MainWindowController.cs:857
+#: ../../../Controllers/MainWindowController.cs:858
 #, csharp-format
 msgid "Unable to save {0}"
 msgstr "{0} kaydedilemedi"
 
-#: ../../../Controllers/MainWindowController.cs:815
+#: ../../../Controllers/MainWindowController.cs:816
 #, csharp-format
 msgid "Unable to save {0}."
 msgstr "{0} kaydedilemedi."
 
-#: ../../../Controllers/MainWindowController.cs:1271
+#: ../../../Controllers/MainWindowController.cs:1272
 msgid "Unable to submit to AcoustId. Check API key"
 msgstr "AcoustIdʼye gönderilemiyor. API anahtarını denetleyin"
 
-#: ../../../Controllers/MainWindowController.cs:1621
+#: ../../../Controllers/MainWindowController.cs:1622
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
@@ -1747,7 +1747,7 @@ msgstr "Kullanıcı Arayüzü"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:149
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:61
-#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:96
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:112
 #: NickvisionTagger.GNOME/Blueprints/window.blp:69
 msgid "Web Services"
 msgstr "Web Servisleri"
@@ -1788,9 +1788,9 @@ msgstr ""
 "Aksi takdirde göreli yol yerine tam yol kullanılacaktır."
 
 #: ../../../Controllers/MainWindowController.cs:181
-#: ../../../Controllers/MainWindowController.cs:1336
-#: ../../../Models/MusicFile.cs:73 ../../../Models/MusicFile.cs:679
-#: ../../../Models/MusicFile.cs:806
+#: ../../../Controllers/MainWindowController.cs:1337
+#: ../../../Models/MusicFile.cs:79 ../../../Models/MusicFile.cs:692
+#: ../../../Models/MusicFile.cs:819
 msgid "year"
 msgstr "yıl"
 
@@ -1845,6 +1845,14 @@ msgstr "Son Açılan Kitaplığı Hatırla"
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:49
 msgid "Include Subfolders"
 msgstr "Alt Klasörleri Dahil Et"
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:95
+msgid "Limit File Name Characters"
+msgstr ""
+
+#: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:96
+msgid "Restricts characters in file names to only those supported by Windows."
+msgstr ""
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:13
 msgctxt "Shortcut"

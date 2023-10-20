@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static Nickvision.Aura.Localization.Gettext;
@@ -32,7 +33,8 @@ public enum MusicBrainzLoadStatus
 public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFile>
 {
     private static string[] _validProperties;
-    private static IEnumerable<char> _invalidFilenameCharacters;
+    private static IEnumerable<char> _invalidWindowsFilenameCharacters;
+    private static IEnumerable<char> _invalidSystemFilenameCharacters;
 
     private bool _disposed;
     private Track _track;
@@ -46,6 +48,10 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// What to sort files in a music folder by
     /// </summary>
     public static SortBy SortFilesBy { get; set; }
+    /// <summary>
+    /// Whether or not filename characters should be limited to those only supported by Windows
+    /// </summary>
+    public static bool LimitFilenameCharacters { get; set; }
 
     /// <summary>
     /// The path of the music file
@@ -71,8 +77,10 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     static MusicFile()
     {
         _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "discnumber", _("discnumber"), "disctotal", _("disctotal"), "publisher", _("publisher"), "publishingdate", _("publishingdate"), "lyrics", _("lyrics") };
-        _invalidFilenameCharacters = System.IO.Path.GetInvalidPathChars().Union(System.IO.Path.GetInvalidFileNameChars());
+        _invalidWindowsFilenameCharacters = new List<char>() { '"', '<', '>', ':', '\\', '/', '|', '?', '*' };
+        _invalidSystemFilenameCharacters = System.IO.Path.GetInvalidPathChars().Union(System.IO.Path.GetInvalidFileNameChars());
         SortFilesBy = SortBy.Path;
+        LimitFilenameCharacters = false;
         ATL.Settings.UseFileNameWhenNoTitle = false;
         ATL.Settings.FileBufferSize = 1024;
         ATL.Settings.ID3v2_writePictureDataLengthIndicator = false;
@@ -121,7 +129,12 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 newFilename += _dotExtension;
             }
-            foreach (var invalidChar in _invalidFilenameCharacters)
+            var invalidCharacters = _invalidSystemFilenameCharacters;
+            if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LimitFilenameCharacters)
+            {
+                invalidCharacters = _invalidSystemFilenameCharacters.Union(_invalidWindowsFilenameCharacters);
+            }
+            foreach (var invalidChar in invalidCharacters)
             {
                 if (newFilename.Contains(invalidChar))
                 {

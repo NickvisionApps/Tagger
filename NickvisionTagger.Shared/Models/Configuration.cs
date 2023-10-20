@@ -65,6 +65,10 @@ public class Configuration : ConfigurationBase
     /// </summary>
     public bool PreserveModificationTimestamp { get; set; }
     /// <summary>
+    /// Whether or not filename characters should be limited to those only supported by Windows
+    /// </summary>
+    public bool LimitFilenameCharacters { get; set; }
+    /// <summary>
     /// Whether or not to overwrite a tag's existing data with data from MusicBrainz
     /// </summary>
     public bool OverwriteTagWithMusicBrainz { get; set; }
@@ -101,6 +105,7 @@ public class Configuration : ConfigurationBase
         SortFilesBy = SortBy.Path;
         LastOpenedFolder = "";
         PreserveModificationTimestamp = false;
+        LimitFilenameCharacters = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         OverwriteTagWithMusicBrainz = true;
         OverwriteAlbumArtWithMusicBrainz = true;
         OverwriteLyricsWithWebService = true;
