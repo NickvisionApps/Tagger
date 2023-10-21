@@ -1,5 +1,8 @@
 ﻿using ATL;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -35,6 +38,10 @@ public class AlbumArt : IEquatable<AlbumArt>
     /// The height of the album art
     /// </summary>
     public int Height { get; private set; }
+    /// <summary>
+    /// <see cref="Image"/> converted to 32x32 JPEG, as byte[]
+    /// </summary>
+    public byte[] Icon { get; init; }
     /// <summary>
     /// The ATL.PictureInfo object of the album art
     /// </summary>
@@ -84,11 +91,16 @@ public class AlbumArt : IEquatable<AlbumArt>
             using var image = SixLabors.ImageSharp.Image.Load(Image);
             Width = image.Width;
             Height = image.Height;
+            image.Mutate(x => x.Resize(32, 32));
+            using var ms = new MemoryStream();
+            image.SaveAsJpeg(ms);
+            Icon = ms.ToArray();
         }
         else
         {
             Width = 0;
             Height = 0;
+            Icon = Array.Empty<byte>();
         }
         ATLPictureInfo = pictureInfo;
         ATLPictureInfo.PicType = Type == AlbumArtType.Front ? PictureInfo.PIC_TYPE.Front : PictureInfo.PIC_TYPE.Back; //ensure PicType in case of generic
