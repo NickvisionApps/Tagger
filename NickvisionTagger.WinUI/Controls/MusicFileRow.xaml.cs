@@ -79,7 +79,7 @@ public sealed partial class MusicFileRow : UserControl
             {
                 using var ms = new InMemoryRandomAccessStream();
                 using var writer = new DataWriter(ms.GetOutputStreamAt(0));
-                writer.WriteBytes(_art.Image);
+                writer.WriteBytes(_art.Icon);
                 writer.StoreAsync().GetResults();
                 var image = new BitmapImage();
                 image.SetSource(ms);

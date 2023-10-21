@@ -22,10 +22,8 @@ public enum AlbumArtType
 /// </summary>
 public class AlbumArt : IEquatable<AlbumArt>
 {
-    /// <summary>
-    /// The byte[] of the album art image
-    /// </summary>
-    public byte[] Image { get; init; }
+    private byte[] _image;
+
     /// <summary>
     /// The type of the album art
     /// </summary>
@@ -33,11 +31,11 @@ public class AlbumArt : IEquatable<AlbumArt>
     /// <summary>
     /// The width of the album art
     /// </summary>
-    public int Width { get; private set; }
+    public int Width { get; init; }
     /// <summary>
     /// The height of the album art
     /// </summary>
-    public int Height { get; private set; }
+    public int Height { get; init; }
     /// <summary>
     /// <see cref="Image"/> converted to 32x32 JPEG, as byte[]
     /// </summary>
@@ -45,7 +43,7 @@ public class AlbumArt : IEquatable<AlbumArt>
     /// <summary>
     /// The ATL.PictureInfo object of the album art
     /// </summary>
-    public PictureInfo ATLPictureInfo { get; private set; }
+    public PictureInfo ATLPictureInfo { get; init; }
 
     /// <summary>
     /// Whether or not the album art is empty
@@ -64,17 +62,6 @@ public class AlbumArt : IEquatable<AlbumArt>
     {
         Image = data;
         Type = type;
-        if (Image.Length > 0)
-        {
-            using var image = SixLabors.ImageSharp.Image.Load(Image);
-            Width = image.Width;
-            Height = image.Height;
-        }
-        else
-        {
-            Width = 0;
-            Height = 0;
-        }
         ATLPictureInfo = PictureInfo.fromBinaryData(Image, Type == AlbumArtType.Front ? PictureInfo.PIC_TYPE.Front : PictureInfo.PIC_TYPE.Back);
     }
 
@@ -86,24 +73,37 @@ public class AlbumArt : IEquatable<AlbumArt>
     {
         Image = pictureInfo.PictureData;
         Type = pictureInfo.PicType == PictureInfo.PIC_TYPE.Back ? AlbumArtType.Back : AlbumArtType.Front; //PIC_TYPE.Generic classifies as AlbumArtTpye.Front
-        if (Image.Length > 0)
-        {
-            using var image = SixLabors.ImageSharp.Image.Load(Image);
-            Width = image.Width;
-            Height = image.Height;
-            image.Mutate(x => x.Resize(32, 32));
-            using var ms = new MemoryStream();
-            image.SaveAsJpeg(ms);
-            Icon = ms.ToArray();
-        }
-        else
-        {
-            Width = 0;
-            Height = 0;
-            Icon = Array.Empty<byte>();
-        }
         ATLPictureInfo = pictureInfo;
         ATLPictureInfo.PicType = Type == AlbumArtType.Front ? PictureInfo.PIC_TYPE.Front : PictureInfo.PIC_TYPE.Back; //ensure PicType in case of generic
+    }
+
+    /// <summary>
+    /// The byte[] of the album art image
+    /// </summary>
+    public byte[] Image
+    {
+        get => _image;
+
+        init
+        {
+            _image = value;
+            if (_image.Length > 0)
+            {
+                using var image = SixLabors.ImageSharp.Image.Load(_image);
+                Width = image.Width;
+                Height = image.Height;
+                image.Mutate(x => x.Resize(32, 32));
+                using var ms = new MemoryStream();
+                image.SaveAsJpeg(ms);
+                Icon = ms.ToArray();
+            }
+            else
+            {
+                Width = 0;
+                Height = 0;
+                Icon = Array.Empty<byte>();
+            }
+        }
     }
 
     /// <summary>
