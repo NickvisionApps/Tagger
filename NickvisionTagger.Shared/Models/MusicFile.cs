@@ -43,6 +43,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     private DateTime _modificationTimestamp;
     private Process? _fpcalc;
     private string _fingerprint;
+    private AlbumArt? _frontArt;
+    private AlbumArt? _backArt;
 
     /// <summary>
     /// What to sort files in a music folder by
@@ -108,6 +110,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         _modificationTimestamp = File.GetLastWriteTime(Path);
         _fpcalc = null;
         _fingerprint = "";
+        _frontArt = FrontAlbumArt;
+        _backArt = BackAlbumArt;
     }
 
     /// <summary>
@@ -317,19 +321,28 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     {
         get
         {
-            var generic = new AlbumArt(Array.Empty<byte>(), AlbumArtType.Front);
+            if (_frontArt != null)
+            {
+                return _frontArt;
+            }
+            AlbumArt? art = null;
             foreach (var picture in _track.EmbeddedPictures)
             {
                 if (picture.PicType == PictureInfo.PIC_TYPE.Front)
                 {
-                    return new AlbumArt(picture);
+                    art = new AlbumArt(picture);
+                    break;
                 }
                 if (picture.PicType == PictureInfo.PIC_TYPE.Generic)
                 {
-                    generic = new AlbumArt(picture);
+                    art = new AlbumArt(picture);
                 }
             }
-            return generic;
+            if (art == null)
+            {
+                art = new AlbumArt(Array.Empty<byte>(), AlbumArtType.Front);
+            }
+            return art;
         }
 
         set
@@ -344,6 +357,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 _track.EmbeddedPictures.Add(backAlbumArt.ATLPictureInfo);
             }
+            _frontArt = value;
         }
     }
 
@@ -354,6 +368,10 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     {
         get
         {
+            if (_backArt != null)
+            {
+                return _backArt;
+            }
             var back = _track.EmbeddedPictures.FirstOrDefault(x => x.PicType == PictureInfo.PIC_TYPE.Back);
             if (back == null)
             {
@@ -374,6 +392,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 _track.EmbeddedPictures.Add(frontAlbumArt.ATLPictureInfo);
             }
+            _backArt = value;
         }
     }
 
