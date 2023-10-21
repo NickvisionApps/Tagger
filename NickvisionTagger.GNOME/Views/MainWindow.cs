@@ -62,7 +62,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _insertAlbumArtAction;
     private readonly Gio.SimpleAction _removeAlbumArtAction;
     private readonly Gio.SimpleAction _exportAlbumArtAction;
-    private readonly Gio.SimpleAction _InfoAlbumArtAction;
+    private readonly Gio.SimpleAction _infoAlbumArtAction;
     private readonly Gio.SimpleAction _lyricsAction;
     private readonly Gio.SimpleAction _musicBrainzAction;
     private readonly Gio.SimpleAction _downloadLyricsAction;
@@ -453,9 +453,9 @@ public partial class MainWindow : Adw.ApplicationWindow
         _exportAlbumArtAction.OnActivate += async (sender, e) => await ExportAlbumArtAsync(_currentAlbumArtType);
         AddAction(_exportAlbumArtAction);
         //Info Album Art Action
-        _InfoAlbumArtAction = Gio.SimpleAction.New("infoAlbumArt", null);
-        _InfoAlbumArtAction.OnActivate += (sender, e) => AlbumArtInfo(_currentAlbumArtType);
-        AddAction(_InfoAlbumArtAction);
+        _infoAlbumArtAction = Gio.SimpleAction.New("infoAlbumArt", null);
+        _infoAlbumArtAction.OnActivate += (sender, e) => AlbumArtInfo(_currentAlbumArtType);
+        AddAction(_infoAlbumArtAction);
         //Insert Front Album Art Action
         var actInsertFrontAlbumArt = Gio.SimpleAction.New("insertFrontAlbumArt", null);
         actInsertFrontAlbumArt.OnActivate += async (sender, e) => await InsertAlbumArtAsync(AlbumArtType.Front);
@@ -1592,6 +1592,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         _insertAlbumArtAction.SetEnabled(true);
         _removeAlbumArtAction.SetEnabled(_artViewStack.GetVisibleChildName() != "NoImage");
+        _infoAlbumArtAction.SetEnabled(albumArt == "hasArt");
         _exportAlbumArtAction.SetEnabled(albumArt == "hasArt");
         //Update Custom Properties
         foreach (var row in _customPropertyRows)
