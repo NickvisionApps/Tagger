@@ -1415,11 +1415,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         foreach (var row in _listMusicFilesRows)
         {
             _listMusicFiles.Remove(row);
+            GLib.Internal.MainContext.Iteration(GLib.Internal.MainContext.Default(), false);
         }
         _listMusicFilesRows.Clear();
         if (!string.IsNullOrEmpty(_controller.MusicLibraryName))
         {
             string? comparable = null;
+            _loadingLabel.SetLabel(_("Making everything pretty..."));
             foreach (var musicFile in _controller.MusicFiles)
             {
                 var row = new MusicFileRow(musicFile);
@@ -1442,8 +1444,10 @@ public partial class MainWindow : Adw.ApplicationWindow
                     }
                     row.AddCssClass("start-row");
                 }
+                GLib.Internal.MainContext.Iteration(GLib.Internal.MainContext.Default(), false);
                 _listMusicFiles.Append(row);
                 _listMusicFilesRows.Add(row);
+                GLib.Internal.MainContext.Iteration(GLib.Internal.MainContext.Default(), false);
             }
             if (_listMusicFilesRows.Any())
             {
