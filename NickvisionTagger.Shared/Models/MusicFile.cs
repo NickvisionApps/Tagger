@@ -150,7 +150,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 newFilename += _dotExtension;
             }
             var invalidCharacters = _invalidSystemFilenameCharacters;
-            if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LimitFilenameCharacters)
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LimitFilenameCharacters)
             {
                 invalidCharacters = _invalidSystemFilenameCharacters.Union(_invalidWindowsFilenameCharacters);
             }

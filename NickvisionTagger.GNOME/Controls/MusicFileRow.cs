@@ -1,7 +1,6 @@
 using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Models;
 using System;
-using System.Text.RegularExpressions;
 
 namespace NickvisionTagger.GNOME.Controls;
 
