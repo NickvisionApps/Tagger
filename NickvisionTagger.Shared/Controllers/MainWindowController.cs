@@ -156,7 +156,7 @@ public class MainWindowController : IDisposable
         }
         Aura.Active.SetConfig<Configuration>("config");
         Configuration.Current.Saved += ConfigurationSaved;
-        AppInfo.Version = "2023.10.0-beta1";
+        AppInfo.Version = "2023.10.0-beta2";
         AppInfo.ShortName = _("Tagger");
         AppInfo.Description = _("Tag your music");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
