@@ -43,8 +43,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     private DateTime _modificationTimestamp;
     private Process? _fpcalc;
     private string _fingerprint;
-    private AlbumArt? _frontArt;
-    private AlbumArt? _backArt;
+    private AlbumArt _frontAlbumArt;
+    private AlbumArt _backAlbumArt;
 
     /// <summary>
     /// What to sort files in a music folder by
@@ -110,8 +110,24 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         _modificationTimestamp = File.GetLastWriteTime(Path);
         _fpcalc = null;
         _fingerprint = "";
-        _frontArt = FrontAlbumArt;
-        _backArt = BackAlbumArt;
+        //Load Front Album Art
+        PictureInfo? front = null;
+        foreach (var picture in _track.EmbeddedPictures)
+        {
+            if (picture.PicType == PictureInfo.PIC_TYPE.Front)
+            {
+                front = picture;
+                break;
+            }
+            if (picture.PicType == PictureInfo.PIC_TYPE.Generic)
+            {
+                front = picture;
+            }
+        }
+        _frontAlbumArt = front != null ? new AlbumArt(front) : new AlbumArt(Array.Empty<byte>(), AlbumArtType.Front);
+        //Load Back Album Art
+        var back = _track.EmbeddedPictures.FirstOrDefault(x => x.PicType == PictureInfo.PIC_TYPE.Back);
+        _backAlbumArt = back != null ? new AlbumArt(back) : new AlbumArt(Array.Empty<byte>(), AlbumArtType.Back);
     }
 
     /// <summary>
@@ -319,31 +335,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// </summary>
     public AlbumArt FrontAlbumArt
     {
-        get
-        {
-            if (_frontArt != null)
-            {
-                return _frontArt;
-            }
-            AlbumArt? art = null;
-            foreach (var picture in _track.EmbeddedPictures)
-            {
-                if (picture.PicType == PictureInfo.PIC_TYPE.Front)
-                {
-                    art = new AlbumArt(picture);
-                    break;
-                }
-                if (picture.PicType == PictureInfo.PIC_TYPE.Generic)
-                {
-                    art = new AlbumArt(picture);
-                }
-            }
-            if (art == null)
-            {
-                art = new AlbumArt(Array.Empty<byte>(), AlbumArtType.Front);
-            }
-            return art;
-        }
+        get => _frontAlbumArt;
 
         set
         {
@@ -357,7 +349,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 _track.EmbeddedPictures.Add(backAlbumArt.ATLPictureInfo);
             }
-            _frontArt = value;
+            _frontAlbumArt = value;
         }
     }
 
@@ -366,19 +358,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     /// </summary>
     public AlbumArt BackAlbumArt
     {
-        get
-        {
-            if (_backArt != null)
-            {
-                return _backArt;
-            }
-            var back = _track.EmbeddedPictures.FirstOrDefault(x => x.PicType == PictureInfo.PIC_TYPE.Back);
-            if (back == null)
-            {
-                return new AlbumArt(Array.Empty<byte>(), AlbumArtType.Back);
-            }
-            return new AlbumArt(back);
-        }
+        get => _backAlbumArt;
 
         set
         {
@@ -392,7 +372,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 _track.EmbeddedPictures.Add(frontAlbumArt.ATLPictureInfo);
             }
-            _backArt = value;
+            _backAlbumArt = value;
         }
     }
 
