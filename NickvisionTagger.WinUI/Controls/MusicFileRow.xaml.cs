@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using NickvisionTagger.Shared.Models;
 using System;
-using System.Linq;
 using Windows.Storage.Streams;
 
 namespace NickvisionTagger.WinUI.Controls;
@@ -13,7 +12,7 @@ namespace NickvisionTagger.WinUI.Controls;
 /// </summary>
 public sealed partial class MusicFileRow : UserControl
 {
-    private byte[] _art;
+    private AlbumArt _art;
 
     /// <summary>
     /// Constructs a MusicFileRow
@@ -22,7 +21,7 @@ public sealed partial class MusicFileRow : UserControl
     public MusicFileRow(MusicFile musicFile)
     {
         InitializeComponent();
-        _art = Array.Empty<byte>();
+        _art = new AlbumArt(Array.Empty<byte>(), AlbumArtType.Front);
         ArtViewStack.CurrentPageName = "NoArt";
         ShowUnsaveIcon = false;
         Update(musicFile);
@@ -65,22 +64,22 @@ public sealed partial class MusicFileRow : UserControl
     /// <summary>
     /// The album art of the row
     /// </summary>
-    public byte[] Art
+    public AlbumArt Art
     {
         get => _art;
 
         set
         {
-            if (_art.SequenceEqual(value))
+            if (_art == value)
             {
                 return;
             }
             _art = value;
-            if (_art.Length > 0)
+            if (!_art.IsEmpty)
             {
                 using var ms = new InMemoryRandomAccessStream();
                 using var writer = new DataWriter(ms.GetOutputStreamAt(0));
-                writer.WriteBytes(_art);
+                writer.WriteBytes(_art.Icon);
                 writer.StoreAsync().GetResults();
                 var image = new BitmapImage();
                 image.SetSource(ms);

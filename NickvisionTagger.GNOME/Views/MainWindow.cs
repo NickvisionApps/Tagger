@@ -62,11 +62,13 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _insertAlbumArtAction;
     private readonly Gio.SimpleAction _removeAlbumArtAction;
     private readonly Gio.SimpleAction _exportAlbumArtAction;
+    private readonly Gio.SimpleAction _infoAlbumArtAction;
     private readonly Gio.SimpleAction _lyricsAction;
     private readonly Gio.SimpleAction _musicBrainzAction;
     private readonly Gio.SimpleAction _downloadLyricsAction;
     private readonly Gio.SimpleAction _acoustIdAction;
     private readonly GtkListBoxUpdateHeaderFunc _updateHeaderFunc;
+    private readonly Gtk.EventControllerKey _filenameKeyController;
     private AlbumArtType _currentAlbumArtType;
     private string? _listHeader;
     private List<MusicFileRow> _listMusicFilesRows;
@@ -99,9 +101,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.ViewStack _selectedViewStack;
     [Gtk.Connect] private readonly Gtk.Label _artTypeLabel;
     [Gtk.Connect] private readonly Adw.ViewStack _artViewStack;
-    [Gtk.Connect] private readonly Gtk.Button _insertAlbumArtButton;
-    [Gtk.Connect] private readonly Gtk.Button _removeAlbumArtButton;
-    [Gtk.Connect] private readonly Gtk.Button _exportAlbumArtButton;
     [Gtk.Connect] private readonly Gtk.Button _switchAlbumArtButton;
     [Gtk.Connect] private readonly Adw.ButtonContent _switchAlbumArtButtonContent;
     [Gtk.Connect] private readonly Gtk.Picture _albumArtImage;
@@ -120,6 +119,8 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _bpmRow;
     [Gtk.Connect] private readonly Adw.EntryRow _composerRow;
     [Gtk.Connect] private readonly Adw.EntryRow _descriptionRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _discNumberRow;
+    [Gtk.Connect] private readonly Adw.EntryRow _discTotalRow;
     [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
     [Gtk.Connect] private readonly Gtk.MenuButton _publishingDateButton;
     [Gtk.Connect] private readonly Gtk.Calendar _publishingDateCalendar;
@@ -181,6 +182,10 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         gtk_list_box_set_header_func(_listMusicFiles.Handle, _updateHeaderFunc, IntPtr.Zero, IntPtr.Zero);
+        _filenameKeyController = Gtk.EventControllerKey.New();
+        _filenameKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
+        _filenameKeyController.OnKeyPressed += OnFilenameKeyPressed;
+        _filenameRow.AddController(_filenameKeyController);
         _listMusicFiles.OnSelectedRowsChanged += ListMusicFiles_SelectionChanged;
         var switchAlbumArtLabel = (Gtk.Label)_switchAlbumArtButtonContent.GetLastChild();
         switchAlbumArtLabel.SetWrap(true);
@@ -288,6 +293,20 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
         };
         _descriptionRow.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _discNumberRow.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "text")
+            {
+                TagPropertyChanged();
+            }
+        };
+        _discTotalRow.OnNotify += (sender, e) =>
         {
             if (e.Pspec.GetName() == "text")
             {
@@ -421,22 +440,22 @@ public partial class MainWindow : Adw.ApplicationWindow
         actSwitchAlbumArt.OnActivate += SwitchAlbumArt;
         AddAction(actSwitchAlbumArt);
         application.SetAccelsForAction("win.switchAlbumArt", new string[] { "<Ctrl><Shift>S" });
-        _switchAlbumArtButton.SetDetailedActionName("win.switchAlbumArt");
         //Insert Album Art Action
         _insertAlbumArtAction = Gio.SimpleAction.New("insertAlbumArt", null);
         _insertAlbumArtAction.OnActivate += async (sender, e) => await InsertAlbumArtAsync(_currentAlbumArtType);
         AddAction(_insertAlbumArtAction);
-        _insertAlbumArtButton.SetDetailedActionName("win.insertAlbumArt");
         //Remove Album Art Action
         _removeAlbumArtAction = Gio.SimpleAction.New("removeAlbumArt", null);
         _removeAlbumArtAction.OnActivate += async (sender, e) => await RemoveAlbumArtAsync(_currentAlbumArtType);
         AddAction(_removeAlbumArtAction);
-        _removeAlbumArtButton.SetDetailedActionName("win.removeAlbumArt");
         //Export Album Art Action
         _exportAlbumArtAction = Gio.SimpleAction.New("exportAlbumArt", null);
         _exportAlbumArtAction.OnActivate += async (sender, e) => await ExportAlbumArtAsync(_currentAlbumArtType);
         AddAction(_exportAlbumArtAction);
-        _exportAlbumArtButton.SetDetailedActionName("win.exportAlbumArt");
+        //Info Album Art Action
+        _infoAlbumArtAction = Gio.SimpleAction.New("infoAlbumArt", null);
+        _infoAlbumArtAction.OnActivate += (sender, e) => AlbumArtInfo(_currentAlbumArtType);
+        AddAction(_infoAlbumArtAction);
         //Insert Front Album Art Action
         var actInsertFrontAlbumArt = Gio.SimpleAction.New("insertFrontAlbumArt", null);
         actInsertFrontAlbumArt.OnActivate += async (sender, e) => await InsertAlbumArtAsync(AlbumArtType.Front);
@@ -452,6 +471,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         actExportFrontAlbumArt.OnActivate += async (sender, e) => await ExportAlbumArtAsync(AlbumArtType.Front);
         AddAction(actExportFrontAlbumArt);
         application.SetAccelsForAction("win.exportFrontAlbumArt", new string[] { "<Ctrl>E" });
+        //Info Front Album Art Action
+        var actInfoFrontAlbumArt = Gio.SimpleAction.New("infoFrontAlbumArt", null);
+        actInfoFrontAlbumArt.OnActivate += (sender, e) => AlbumArtInfo(AlbumArtType.Front);
+        AddAction(actInfoFrontAlbumArt);
         //Insert Back Album Art Action
         var actInsertBackAlbumArt = Gio.SimpleAction.New("insertBackAlbumArt", null);
         actInsertBackAlbumArt.OnActivate += async (sender, e) => await InsertAlbumArtAsync(AlbumArtType.Back);
@@ -467,6 +490,10 @@ public partial class MainWindow : Adw.ApplicationWindow
         actExportBackAlbumArt.OnActivate += async (sender, e) => await ExportAlbumArtAsync(AlbumArtType.Back);
         AddAction(actExportBackAlbumArt);
         application.SetAccelsForAction("win.exportBackAlbumArt", new string[] { "<Ctrl><Shift>E" });
+        //Info Back Album Art Action
+        var actInfoBackAlbumArt = Gio.SimpleAction.New("infoBackAlbumArt", null);
+        actInfoBackAlbumArt.OnActivate += (sender, e) => AlbumArtInfo(AlbumArtType.Back);
+        AddAction(actInfoBackAlbumArt);
         //Lyrics Action
         _lyricsAction = Gio.SimpleAction.New("lyrics", null);
         _lyricsAction.OnActivate += Lyrics;
@@ -1078,7 +1105,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         saveFileDialog.SetTitle(type == AlbumArtType.Front ? _("Export Front Album Art") : _("Export Back Album Art"));
         var filters = Gio.ListStore.New(Gtk.FileFilter.GetGType());
         var filter = Gtk.FileFilter.New();
-        filter.AddMimeType(_controller.GetFirstAlbumArtMimeType(type));
+        filter.AddMimeType(_controller.GetFirstAlbumArt(type).MimeType);
         filters.Append(filter);
         saveFileDialog.SetFilters(filters);
         try
@@ -1087,6 +1114,16 @@ public partial class MainWindow : Adw.ApplicationWindow
             _controller.ExportSelectedAlbumArt(file.GetPath(), type);
         }
         catch { }
+    }
+
+    /// <summary>
+    /// Occurs wen the album art info action is triggered
+    /// </summary>
+    /// <param name="type">AlbumArtType</param>
+    private void AlbumArtInfo(AlbumArtType type)
+    {
+        var dialog = new AlbumArtInfoDialog(_controller.GetFirstAlbumArt(type), this, _controller.AppInfo.ID);
+        dialog.Present();
     }
 
     /// <summary>
@@ -1378,11 +1415,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         foreach (var row in _listMusicFilesRows)
         {
             _listMusicFiles.Remove(row);
+            GLib.Internal.MainContext.Iteration(GLib.Internal.MainContext.Default(), false);
         }
         _listMusicFilesRows.Clear();
         if (!string.IsNullOrEmpty(_controller.MusicLibraryName))
         {
             string? comparable = null;
+            _loadingLabel.SetLabel(_("Making everything pretty..."));
             foreach (var musicFile in _controller.MusicFiles)
             {
                 var row = new MusicFileRow(musicFile);
@@ -1405,8 +1444,10 @@ public partial class MainWindow : Adw.ApplicationWindow
                     }
                     row.AddCssClass("start-row");
                 }
+                GLib.Internal.MainContext.Iteration(GLib.Internal.MainContext.Default(), false);
                 _listMusicFiles.Append(row);
                 _listMusicFilesRows.Add(row);
+                GLib.Internal.MainContext.Iteration(GLib.Internal.MainContext.Default(), false);
             }
             if (_listMusicFilesRows.Any())
             {
@@ -1502,6 +1543,8 @@ public partial class MainWindow : Adw.ApplicationWindow
         _bpmRow.SetText(_controller.SelectedPropertyMap.BeatsPerMinute);
         _composerRow.SetText(_controller.SelectedPropertyMap.Composer);
         _descriptionRow.SetText(_controller.SelectedPropertyMap.Description);
+        _discNumberRow.SetText(_controller.SelectedPropertyMap.DiscNumber);
+        _discTotalRow.SetText(_controller.SelectedPropertyMap.DiscTotal);
         _publisherRow.SetText(_controller.SelectedPropertyMap.Publisher);
         if (string.IsNullOrEmpty(_controller.SelectedPropertyMap.PublishingDate))
         {
@@ -1526,13 +1569,13 @@ public partial class MainWindow : Adw.ApplicationWindow
         {
             _artViewStack.SetVisibleChildName("Image");
             var art = _currentAlbumArtType == AlbumArtType.Front ? _controller.SelectedMusicFiles.First().Value.FrontAlbumArt : _controller.SelectedMusicFiles.First().Value.BackAlbumArt;
-            if (art.Length == 0)
+            if (art.IsEmpty)
             {
                 _albumArtImage.SetPaintable(null);
             }
             else
             {
-                using var bytes = GLib.Bytes.From(art.AsSpan());
+                using var bytes = GLib.Bytes.From(art.Image.AsSpan());
                 using var texture = Gdk.Texture.NewFromBytes(bytes);
                 _albumArtImage.SetPaintable(texture);
             }
@@ -1549,6 +1592,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         }
         _insertAlbumArtAction.SetEnabled(true);
         _removeAlbumArtAction.SetEnabled(_artViewStack.GetVisibleChildName() != "NoImage");
+        _infoAlbumArtAction.SetEnabled(albumArt == "hasArt");
         _exportAlbumArtAction.SetEnabled(albumArt == "hasArt");
         //Update Custom Properties
         foreach (var row in _customPropertyRows)
@@ -1659,6 +1703,25 @@ public partial class MainWindow : Adw.ApplicationWindow
     private void AdvancedSearchInfo(Gtk.Button sender, EventArgs e) => Gtk.Functions.ShowUri(this, DocumentationHelpers.GetHelpURL("search"), 0);
 
     /// <summary>
+    /// Occurs when a key is pressed on the filename entry
+    /// </summary>
+    /// <param name="sender">Gtk.EventControllerKey</param>
+    /// <param name="e">Gtk.EventControllerKey.KeyPressedSignalArgs</param>
+    private bool OnFilenameKeyPressed(Gtk.EventControllerKey sender, Gtk.EventControllerKey.KeyPressedSignalArgs e)
+    {
+        var res = e.Keyval == 0x2f; // '/'
+        if (!res && _controller.LimitFilenameCharacters)
+        {
+            res = e.Keyval switch
+            {
+                0x22 or 0x3c or 0x3e or 0x3a or 0x5c or 0x7c or 0x3f or 0x2a => true, // '"', '<', '>', ':', '\\', '|', '?', '*'
+                _ => false
+            };
+        }
+        return res;
+    }
+
+    /// <summary>
     /// Occurs when the _listMusicFiles's selection is changed
     /// </summary>
     /// <param name="sender">Gtk.ListBox</param>
@@ -1706,6 +1769,8 @@ public partial class MainWindow : Adw.ApplicationWindow
                 BeatsPerMinute = _bpmRow.GetText(),
                 Composer = _composerRow.GetText(),
                 Description = _descriptionRow.GetText(),
+                DiscNumber = _discNumberRow.GetText(),
+                DiscTotal = _discTotalRow.GetText(),
                 Publisher = _publisherRow.GetText(),
                 PublishingDate = _publishingDateButton.GetLabel() == _("Pick a date") ? "" : _publishingDateButton.GetLabel()
             };

@@ -1,0 +1,56 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.Window _root {
+  default-width: 360;
+  modal: true;
+  resizable: false;
+
+  content: Gtk.Box {
+    orientation: vertical;
+
+    Adw.HeaderBar {
+      title-widget: Gtk.Label {};
+      styles ["flat"]
+    }
+
+    Gtk.WindowHandle {
+      Gtk.Box {
+        orientation: vertical;
+        spacing: 24;
+        margin-bottom: 24;
+
+        Gtk.Label _titleLabel {
+          styles ["title-2"]
+        }
+
+        Adw.PreferencesGroup {
+          margin-start: 24;
+          margin-end: 24;
+
+          Adw.ActionRow _mimeTypeRow {
+            title: _("Mime Type");
+            subtitle-selectable: true;
+          }
+
+          Adw.ActionRow _widthRow {
+            title: _("Width");
+            subtitle-selectable: true;
+          }
+
+          Adw.ActionRow _heightRow {
+            title: _("Height");
+            subtitle-selectable: true;
+          }
+        }
+      }
+    }
+  };
+  
+  Gtk.ShortcutController {
+    Gtk.Shortcut {
+      trigger: "Escape";
+      action: "action(window.close)";
+    }
+  }
+}

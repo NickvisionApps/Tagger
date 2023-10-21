@@ -86,6 +86,16 @@ public class PreferencesViewController
     }
 
     /// <summary>
+    /// Whether or not filename characters should be limited to those only supported by Windows
+    /// </summary>
+    public bool LimitFilenameCharacters
+    {
+        get => Configuration.Current.LimitFilenameCharacters;
+
+        set => Configuration.Current.LimitFilenameCharacters = value;
+    }
+
+    /// <summary>
     /// Whether or not to overwrite a tag's existing data with data from MusicBrainz
     /// </summary>
     public bool OverwriteTagWithMusicBrainz

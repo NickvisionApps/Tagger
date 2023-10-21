@@ -12,33 +12,47 @@
 		<years its:translate="no">2023</years>
 	</credit>
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
-</info>
+
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Давид Лапшин</mal:name>
+      <mal:email>ddaudix@gmail.com</mal:email>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>0куе</mal:name>
+      <mal:email/>
+      <mal:years>2023</mal:years>
+    </mal:credit>
+  </info>
 
 <title>Расширенный поиск</title>
 <p>This page explains how to use Advanced Search in <app>Tagger</app>.</p>
 
 <p>Advanced Search is a powerful feature provided by <app>Tagger</app> that allows users to search files' tag contents for certain values, using a powerful tag-based syntax:</p>
-<p><code>!prop1="value1";prop2="value2"</code></p>
+<p><code>!prop1="значение1";prop2="значение2"</code></p>
 <p>Where <code>prop1</code>, <code>prop2</code> are valid tag properties and <code>value1</code>, <code>value2</code> are the values to search wrapped in quotes. Each property is separated by a semicolon. Notice how the last property does not end with a semicolon.</p>
 
 <section>
 <title>Valid Properties</title>
 <list>
 <item><p><code>filename</code></p></item>
-<item><p><code>title</code></p></item>
-<item><p><code>artist</code></p></item>
-<item><p><code>альбом</code></p></item>
-<item><p><code>год</code></p></item>
-<item><p><code>track</code></p></item>
-<item><p><code>tracktotal</code></p></item>
-<item><p><code>albumartist</code></p></item>
-<item><p><code>жанр</code></p></item>
-<item><p><code>comment</code></p></item>
-<item><p><code>beatsperminute (bpm)</code></p></item>
-<item><p><code>composer</code></p></item>
-<item><p><code>описание</code></p></item>
-<item><p><code>издатель</code></p></item>
-<item><p><code>датапубликации</code></p></item>
+<item><p><code>title</code> (название)</p></item>
+<item><p><code>artist</code> (исполнитель)</p></item>
+<item><p><code>album</code> (альбом)</p></item>
+<item><p><code>year</code> (год)</p></item>
+<item><p><code>track</code> (дорожка)</p></item>
+<item><p><code>tracktotal</code> (количество дорожек)</p></item>
+<item><p><code>albumartist</code> (исполнитель альбома)</p></item>
+<item><p><code>genre</code> (жанр)</p></item>
+<item><p><code>comment</code> (комментарий)</p></item>
+<item><p><code>beatsperminute (bpm)</code> (ударов в минуту)</p></item>
+<item><p><code>composer</code> (композитор)</p></item>
+<item><p><code>description</code> (описание)</p></item>
+<item><p><code>discnumber</code></p></item>
+<item><p><code>disctotal</code></p></item>
+<item><p><code>publisher</code> (издатель)</p></item>
+<item><p><code>publishingdate</code> (дата публикации)</p></item>
 <item><p><code>custom</code></p></item>
 </list>
 <p>Properties are case-insensitive.</p></section>

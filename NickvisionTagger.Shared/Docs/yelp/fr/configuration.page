@@ -54,6 +54,13 @@
 		<p>Indique s’il faut ou non mettre à jour l’horodatage de la dernière écriture (modification) d’un fichier lorsqu’une balise est enregistrée.</p>
 	</item>
     <item>
+        <title>Limit File Name Characters</title>
+        <p>Whether or not filename characters should be limited to those only supported by Windows.</p>
+        <note>
+            <p>This option is only available on non-Windows systems.</p>
+        </note>
+    </item>
+    <item>
 		<title>Écraser la balise avec MusicBrainz</title>
 		<p>Indique s’il faut ou non écraser les métadonnées des balises existantes avec les données récupérées depuis MusicBrainz. Si cette option est désactivée, seules les propriétés des balises laissées vides seront remplies.</p>
 	</item>

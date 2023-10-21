@@ -90,6 +90,22 @@ Adw.PreferencesWindow _root {
           valign: center;
         }
       }
+
+      Adw.ActionRow {
+        title: _("Limit File Name Characters");
+        subtitle: _("Restricts characters in file names to only those supported by Windows.");
+        activatable-widget: _limitCharactersSwitch;
+
+        [prefix]
+        Gtk.Image {
+          icon-name: "insert-text-symbolic";
+        }
+
+        [suffix]
+        Gtk.Switch _limitCharactersSwitch {
+          valign: center;
+        }
+      }
     }
 
     Adw.PreferencesGroup {

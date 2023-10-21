@@ -42,9 +42,9 @@
             <item><p><code>Nombre de archivo</code></p></item>
             <item><p><code>Ruta del archivo</code></p></item>
             <item><p><code>Título</code></p></item>
-            <item><p><code>Artist</code></p></item>
+            <item><p><code>Artista</code></p></item>
             <item><p><code>Álbum</code></p></item>
-            <item><p><code>Year</code></p></item>
+            <item><p><code>Año</code></p></item>
             <item><p><code>Pista</code></p></item>
             <item><p><code>Género</code></p></item>
         </list>
@@ -53,6 +53,13 @@
 		<title>Conservar fecha de modificación</title>
 		<p>Si actualizar o no la marca de tiempo de escritura (modificado) de un archivo cuando se guarda su etiqueta.</p>
 	</item>
+    <item>
+        <title>Limit File Name Characters</title>
+        <p>Whether or not filename characters should be limited to those only supported by Windows.</p>
+        <note>
+            <p>This option is only available on non-Windows systems.</p>
+        </note>
+    </item>
     <item>
 		<title>Sobreescribir etiqueta con MusicBrainz</title>
 		<p>Si sobreescribir o no los metadatos de las etiquetas existentes con los datos encontrados en MusicBrainz. Si se desactiva, sólo se rellenarán las propiedades de etiqueta en blanco.</p>
