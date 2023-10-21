@@ -8,7 +8,7 @@
 - Edit unsynchronized and synchronized lyrics for a file (with LRC import and export support)
 - Convert filenames to tags and tags to filenames with ease
 - Lookup file information using MusicBrainz
-- Lookup lyric information using Music163 and Letras
+- Lookup lyric information using Letras
 - Open, manage, and create playlists in many formats (m3u, pls, xspf, and more)
 
 # Installation
