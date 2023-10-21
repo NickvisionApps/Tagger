@@ -74,12 +74,12 @@ public class MusicFileRow : Adw.ActionRow
     {
         if (!string.IsNullOrEmpty(musicFile.Title))
         {
-            SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{Regex.Replace(musicFile.Title, "\\&", "&amp;")}");
-            SetSubtitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+            SetTitle($"{(musicFile.Track != 0 ? $"{musicFile.Track:D2} - " : "")}{musicFile.Title}");
+            SetSubtitle(musicFile.Filename);
         }
         else
         {
-            SetTitle(Regex.Replace(musicFile.Filename, "\\&", "&amp;"));
+            SetTitle(musicFile.Filename);
             SetSubtitle("");
         }
         SetArtFromAlbumArt(musicFile.FrontAlbumArt);
