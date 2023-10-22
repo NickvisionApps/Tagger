@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 22:12-0400\n"
-"PO-Revision-Date: 2023-10-19 15:16+0000\n"
+"PO-Revision-Date: 2023-10-22 02:09+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/cs/>\n"
@@ -38,7 +38,7 @@ msgstr "Vybráno {0} z {1}"
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:29
 #, csharp-format
 msgid "{0} pixels"
-msgstr ""
+msgstr "{0} pixelů"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:103
 #, csharp-format
@@ -374,7 +374,7 @@ msgstr "Vymazat všechny texty"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:22
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:110
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:26
@@ -561,9 +561,8 @@ msgstr ""
 "{3}"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:208
-#, fuzzy
 msgid "Disc"
-msgstr "Zrušit"
+msgstr "Disk"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:672
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:778
@@ -602,15 +601,14 @@ msgstr "Zahazování značek..."
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:743
 #: ../../../Models/MusicFile.cs:854
 msgid "discnumber"
-msgstr ""
+msgstr "číslodisku"
 
 #: ../../../Controllers/MainWindowController.cs:184
 #: ../../../Controllers/MainWindowController.cs:1442
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:751
 #: ../../../Models/MusicFile.cs:858
-#, fuzzy
 msgid "disctotal"
-msgstr "celkemstop"
+msgstr "celkemdisků"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:158
 msgid "Discussions"
@@ -723,14 +721,12 @@ msgid "Enter description here"
 msgstr "Sem zadejte popis"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:209
-#, fuzzy
 msgid "Enter disc number here"
-msgstr "Sem zadejte název souboru"
+msgstr "Sem zadejte číslo disku"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:210
-#, fuzzy
 msgid "Enter disc total here"
-msgstr "Sem zadejte celkový počet stop"
+msgstr "Sem zadejte celkový počet disků"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:182
 msgid "Enter file name here"
@@ -955,9 +951,8 @@ msgstr "GitHub repozitář"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:25
 #: NickvisionTagger.GNOME/Blueprints/album_art_info_dialog.blp:42
-#, fuzzy
 msgid "Height"
-msgstr "Světlý"
+msgstr "Výška"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:591
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:596
@@ -1075,7 +1070,7 @@ msgstr "Hlavní vlastnosti"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1424
 msgid "Making everything pretty..."
-msgstr ""
+msgstr "Zkrášlování..."
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:131
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:115
@@ -1098,9 +1093,8 @@ msgstr "MiB"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:23
 #: NickvisionTagger.GNOME/Blueprints/album_art_info_dialog.blp:32
-#, fuzzy
 msgid "Mime Type"
-msgstr "Typ"
+msgstr "Typ Mime"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:57
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:77
@@ -1766,7 +1760,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:24
 #: NickvisionTagger.GNOME/Blueprints/album_art_info_dialog.blp:37
 msgid "Width"
-msgstr ""
+msgstr "Šířka"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:120
 #, csharp-format
@@ -1848,11 +1842,11 @@ msgstr "Zahrnout podsložky"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:95
 msgid "Limit File Name Characters"
-msgstr ""
+msgstr "Omezit znaky v názvech souborů"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:96
 msgid "Restricts characters in file names to only those supported by Windows."
-msgstr ""
+msgstr "Omezí znaky v názvech souborů na znaky podporované systémem Windows."
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:13
 msgctxt "Shortcut"
@@ -1948,12 +1942,11 @@ msgstr "Celkem stop"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:534
 msgid "Disc Number"
-msgstr ""
+msgstr "Číslo disku"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:552
-#, fuzzy
 msgid "Disc Total"
-msgstr "Celkem stop"
+msgstr "Celkem disků"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:679
 msgid "Toggle Tags Pane"
