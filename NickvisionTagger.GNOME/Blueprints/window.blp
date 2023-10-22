@@ -583,16 +583,30 @@ Adw.ApplicationWindow _root {
                                 activatable-widget: _publishingDateButton;
 
                                 [suffix]
-                                Gtk.MenuButton _publishingDateButton {
-                                  valign: center;
-                                  direction: none;
-                                  popover: Gtk.Popover {
-                                    Gtk.Calendar _publishingDateCalendar {
-                                      name: "calendarPublishingDate";
-                                    }
-                                  };
+                                Gtk.Box {
+                                  orientation: horizontal;
+                                  spacing: 6;
 
-                                  styles ["calendar-button"]
+                                  Gtk.MenuButton _publishingDateButton {
+                                    valign: center;
+                                    direction: none;
+                                    popover: Gtk.Popover {
+                                      Gtk.Calendar _publishingDateCalendar {
+                                        name: "calendarPublishingDate";
+                                      }
+                                    };
+
+                                    styles ["calendar-button"]
+                                  }
+
+
+                                  Gtk.Button _clearPublishingDateButton {
+                                    valign: center;
+                                    tooltip-text: _("Clear Publishing Date");
+                                    icon-name: "user-trash-symbolic";
+
+                                    styles ["flat"]
+                                  }
                                 }
                               }
                             } 
@@ -604,7 +618,7 @@ Adw.ApplicationWindow _root {
 
                           header-suffix: Gtk.Button _addNewPropertyButton {
                             valign: center;
-                            tooltip-text: "Add New Property";
+                            tooltip-text: _("Add New Property");
                             action-name: "win.addCustomProperty";
 
                             Adw.ButtonContent {
