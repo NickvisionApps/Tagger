@@ -1167,22 +1167,25 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             SortBy.Title => a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == -1
                 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == -1
-                || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track < b?.Track
-                || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
+                || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.DiscNumber < b?.DiscNumber
+                || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track < b?.Track
+                || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == -1
                 || a?.Album == b?.Album && a?.DiscNumber < b?.DiscNumber
                 || a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track < b?.Track
                 || a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Year => a?.Year.CompareTo(b?.Year) == -1
                 || a?.Year == b?.Year && a?.Album.CompareTo(b?.Album) == -1
-                || a?.Year == b?.Year && a?.Album == b?.Album && a?.Track < b?.Track
-                || a?.Year == b?.Year && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
+                || a?.Year == b?.Year && a?.Album == b?.Album && a?.DiscNumber < b?.DiscNumber
+                || a?.Year == b?.Year && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track < b?.Track
+                || a?.Year == b?.Year && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Track => a?.Track.CompareTo(b?.Track) == -1
                 || a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
             SortBy.Genre => a?.Genre.CompareTo(b?.Genre) == -1
                 || a?.Genre == b?.Genre && a?.Album.CompareTo(b?.Album) == -1
-                || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.Track < b?.Track
-                || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
+                || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.DiscNumber < b?.DiscNumber
+                || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track < b?.Track
+                || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == -1,
             _ => false
         };
     }
@@ -1202,22 +1205,25 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             SortBy.Title => a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Artist => a?.Artist.CompareTo(b?.Artist) == 1
                 || a?.Artist == b?.Artist && a?.Album.CompareTo(b?.Album) == 1
-                || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track > b?.Track
-                || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
+                || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.DiscNumber > b?.DiscNumber
+                || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track > b?.Track
+                || a?.Artist == b?.Artist && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Album => a?.Album.CompareTo(b?.Album) == 1
                 || a?.Album == b?.Album && a?.DiscNumber > b?.DiscNumber
                 || a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track > b?.Track
                 || a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Year => a?.Year.CompareTo(b?.Year) == 1
                 || a?.Year == b?.Year && a?.Album.CompareTo(b?.Album) == 1
-                || a?.Year == b?.Year && a?.Album == b?.Album && a?.Track > b?.Track
-                || a?.Year == b?.Year && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
+                || a?.Year == b?.Year && a?.Album == b?.Album && a?.DiscNumber > b?.DiscNumber
+                || a?.Year == b?.Year && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track > b?.Track
+                || a?.Year == b?.Year && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Track => a?.Track.CompareTo(b?.Track) == 1
                 || a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             SortBy.Genre => a?.Genre.CompareTo(b?.Genre) == 1
                 || a?.Genre == b?.Genre && a?.Album.CompareTo(b?.Album) == 1
-                || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.Track > b?.Track
-                || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
+                || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.DiscNumber > b?.DiscNumber
+                || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track > b?.Track
+                || a?.Genre == b?.Genre && a?.Album == b?.Album && a?.DiscNumber == b?.DiscNumber && a?.Track == b?.Track && a?.Title.CompareTo(b?.Title) == 1,
             _ => false
         };
     }
