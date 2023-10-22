@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-10-19 21:31-0400\n"
-"PO-Revision-Date: 2023-10-18 21:31+0000\n"
+"PO-Revision-Date: 2023-10-22 02:09+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/cs/>\n"
@@ -152,7 +152,7 @@ msgstr "Zda aktualizovat časové razítko úpravy souboru při uložení značk
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:54
 msgid "Limit File Name Characters"
-msgstr ""
+msgstr "Omezit znaky v názvech souborů"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:55
@@ -160,11 +160,13 @@ msgid ""
 "Whether or not filename characters should be limited to those only supported "
 "by Windows."
 msgstr ""
+"Zda mají být znaky v názvech souborů omezeny pouze na znaky podporované "
+"systémem Windows."
 
 #. (itstool) path: note/p
 #: yelp/C/configuration.page:57
 msgid "This option is only available on non-Windows systems."
-msgstr ""
+msgstr "Tato možnost je dostupná pouze na ne-Windowsových systémech."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:61
@@ -426,15 +428,13 @@ msgstr "<code>description</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:47 yelp/C/search.page:43
-#, fuzzy
 msgid "<code>discnumber</code>"
-msgstr "<code>composer</code>"
+msgstr "<code>číslodisku</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:48 yelp/C/search.page:44
-#, fuzzy
 msgid "<code>disctotal</code>"
-msgstr "<code>tracktotal</code>"
+msgstr "<code>celkemdisků</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:49 yelp/C/search.page:45
