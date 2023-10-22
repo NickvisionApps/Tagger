@@ -212,6 +212,7 @@ public sealed partial class MainWindow : Window
         TxtPublisher.PlaceholderText = _("Enter publisher here");
         CardPublishingDate.Header = _("Publishing Date");
         DatePublishingDate.PlaceholderText = _("Pick a date");
+        ToolTipService.SetToolTip(BtnClearPublishingDate, _("Clear Publishing Date"));
         LblCustomProperties.Text = _("Custom Properties");
         LblBtnAddCustomProperty.Text = _("Add");
         ToolTipService.SetToolTip(BtnAddCustomProperty, _("Add New Property"));
@@ -1702,6 +1703,17 @@ public sealed partial class MainWindow : Window
         {
             TagPropertyChanged(sender, null);
         }
+    }
+
+    /// <summary>
+    /// Occurs when the clear publishing date button is clicked
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">RoutedEventArgs</param>
+    private void ClearPublishingDate(object sender, RoutedEventArgs e)
+    {
+        DatePublishingDate.Date = null;
+        TagPropertyChanged(DatePublishingDate, null);
     }
 
     /// <summary>
