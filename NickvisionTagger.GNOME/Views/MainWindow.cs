@@ -124,6 +124,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Adw.EntryRow _publisherRow;
     [Gtk.Connect] private readonly Gtk.MenuButton _publishingDateButton;
     [Gtk.Connect] private readonly Gtk.Calendar _publishingDateCalendar;
+    [Gtk.Connect] private readonly Gtk.Button _clearPublishingDateButton;
     [Gtk.Connect] private readonly Adw.PreferencesGroup _customPropertiesGroup;
     [Gtk.Connect] private readonly Gtk.Label _fingerprintLabel;
     [Gtk.Connect] private readonly Gtk.Button _copyFingerprintButton;
@@ -338,6 +339,13 @@ public partial class MainWindow : Adw.ApplicationWindow
                 }
             }
             _updatePublishingDate = true;
+        };
+        _clearPublishingDateButton.OnClicked += (sender, e) =>
+        {
+            _updatePublishingDate = false;
+            _publishingDateButton.SetLabel(_("Pick a date"));
+            gtk_calendar_select_day(_publishingDateCalendar.Handle, ref g_date_time_new_local(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 0, 0, 0));
+            TagPropertyChanged();
         };
         _fingerprintLabel.SetEllipsize(Pango.EllipsizeMode.End);
         _copyFingerprintButton.OnClicked += CopyFingerprintToClipboard;
@@ -1016,7 +1024,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void FilenameToTag(Gio.SimpleAction sender, EventArgs e)
     {
-        var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("File Name to Tag"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
+        var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("File Name to Tag"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _controller.PreviousFTTFormatString, _("Cancel"), _("Convert"));
         dialog.OnResponse += async (s, ea) =>
         {
             if (!string.IsNullOrEmpty(dialog.Response))
@@ -1035,7 +1043,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">EventArgs</param>
     private void TagToFilename(Gio.SimpleAction sender, EventArgs e)
     {
-        var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("Tag to File Name"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"));
+        var dialog = new ComboBoxDialog(this, _controller.AppInfo.ID, _("Tag to File Name"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _controller.PreviousTTFFormatString, _("Cancel"), _("Convert"));
         dialog.OnResponse += async (s, ea) =>
         {
             if (!string.IsNullOrEmpty(dialog.Response))

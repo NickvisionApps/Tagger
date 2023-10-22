@@ -703,7 +703,15 @@
                                                                         </wct:SettingsCard>
 
                                                                         <wct:SettingsCard x:Name="CardPublishingDate">
-                                                                            <CalendarDatePicker x:Name="DatePublishingDate" MinWidth="300" MaxWidth="400" DateChanged="DatePublishingDate_DateChanged"/>
+                                                                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                                                                <CalendarDatePicker x:Name="DatePublishingDate" MinWidth="300" MaxWidth="400" DateChanged="DatePublishingDate_DateChanged"/>
+
+                                                                                <Button x:Name="BtnClearPublishingDate" Height="32" Click="ClearPublishingDate">
+                                                                                    <Button.Content>
+                                                                                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE106;"/>
+                                                                                    </Button.Content>
+                                                                                </Button>
+                                                                            </StackPanel>
                                                                         </wct:SettingsCard>
 
                                                                         <MenuFlyoutSeparator/>

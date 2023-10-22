@@ -23,9 +23,10 @@ public sealed partial class ComboBoxDialog : ContentDialog
     /// <param name="choicesTitle">The title of the choices of the dialog</param>
     /// <param name="choices">The choices of the dialog</param>
     /// <param name="supportCustom">Whether or not a custom entry is supported</param>
+    /// <param name="previousChoice">The previous choice used if available</param>
     /// <param name="closeText">The text of the close button</param>
     /// <param name="primaryText">The text of the primary button</param>
-    public ComboBoxDialog(string title, string message, string choicesTitle, string[] choices, bool supportCustom, string closeText, string primaryText)
+    public ComboBoxDialog(string title, string message, string choicesTitle, string[] choices, bool supportCustom, string? previousChoice, string closeText, string primaryText)
     {
         InitializeComponent();
         _choices = choices;
@@ -51,6 +52,17 @@ public sealed partial class ComboBoxDialog : ContentDialog
         CardCustom.Header = _("Custom");
         TxtCustom.PlaceholderText = _("Enter custom choice here");
         CmbChoices.SelectedIndex = 0;
+        //Load Previous
+        var previous = Array.IndexOf(_choices, previousChoice);
+        if (previous != -1)
+        {
+            CmbChoices.SelectedIndex = previous;
+        }
+        else if (!string.IsNullOrEmpty(previousChoice))
+        {
+            CmbChoices.SelectedIndex = _choices.Length - 1;
+            TxtCustom.Text = previousChoice;
+        }
     }
 
     /// <summary>

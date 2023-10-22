@@ -85,6 +85,14 @@ public class Configuration : ConfigurationBase
     /// </summary>
     public string AcoustIdUserAPIKey { get; set; }
     /// <summary>
+    /// The previous format string used by filename to tag
+    /// </summary>
+    public string PreviousFTTFormatString { get; set; }
+    /// <summary>
+    /// The previous format string used by tag to filename
+    /// </summary>
+    public string PreviousTTFFormatString { get; set; }
+    /// <summary>
     /// Whether or not to show the Extras Pane
     /// </summary>
     /// <remarks>Used on WinUI only</remarks>
@@ -110,6 +118,8 @@ public class Configuration : ConfigurationBase
         OverwriteAlbumArtWithMusicBrainz = true;
         OverwriteLyricsWithWebService = true;
         AcoustIdUserAPIKey = "";
+        PreviousFTTFormatString = "";
+        PreviousTTFFormatString = "";
         ExtrasPane = true;
     }
 

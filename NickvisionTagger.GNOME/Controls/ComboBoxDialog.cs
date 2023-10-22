@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using static Nickvision.Aura.Localization.Gettext;
 
@@ -34,9 +35,11 @@ public partial class ComboBoxDialog
     /// <param name="message">The message of the dialog</param>
     /// <param name="choicesTitle">The title of the choices of the dialog</param>
     /// <param name="choices">The choices of the dialog</param>
+    /// <param name="supportCustom">Whether or not a custom entry is supported</param>
+    /// <param name="previousChoice">The previous choice used if available</param>
     /// <param name="cancelText">The text of the cancel button</param>
     /// <param name="suggestedText">The text of the suggested button</param>
-    public ComboBoxDialog(Gtk.Window parentWindow, string iconName, string title, string message, string choicesTitle, string[] choices, bool supportCustom, string cancelText, string suggestedText)
+    public ComboBoxDialog(Gtk.Window parentWindow, string iconName, string title, string message, string choicesTitle, string[] choices, bool supportCustom, string? previousChoice, string cancelText, string suggestedText)
     {
         Response = "";
         _choices = choices;
@@ -76,6 +79,16 @@ public partial class ComboBoxDialog
         _dialog.SetDefaultResponse("suggested");
         _dialog.SetCloseResponse("cancel");
         _dialog.OnResponse += (sender, e) => SetResponse(e.Response);
+        var previous = Array.IndexOf(_choices, previousChoice);
+        if (previous != -1)
+        {
+            _choicesRow.SetSelected((uint)previous);
+        }
+        else if (!string.IsNullOrEmpty(previousChoice))
+        {
+            _choicesRow.SetSelected((uint)(_choices.Length - 1));
+            _customRow.SetText(previousChoice);
+        }
     }
 
     public event GObject.SignalHandler<Adw.MessageDialog, Adw.MessageDialog.ResponseSignalArgs> OnResponse
