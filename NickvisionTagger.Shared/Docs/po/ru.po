@@ -2,10 +2,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-10-19 21:31-0400\n"
-"PO-Revision-Date: 2023-10-19 15:16+0000\n"
+"PO-Revision-Date: 2023-10-22 12:59+0000\n"
 "Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/docs/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/docs/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -157,7 +157,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:54
 msgid "Limit File Name Characters"
-msgstr ""
+msgstr "Ограничить символы в именах файлов"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:55
@@ -165,11 +165,14 @@ msgid ""
 "Whether or not filename characters should be limited to those only supported "
 "by Windows."
 msgstr ""
+"Следует ли Tagger использовать в именах файлов только символы, "
+"поддерживаемые Windows."
 
 #. (itstool) path: note/p
 #: yelp/C/configuration.page:57
+#, fuzzy
 msgid "This option is only available on non-Windows systems."
-msgstr ""
+msgstr "Эта опция недоступна под Windows."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:61
@@ -447,15 +450,13 @@ msgstr "<code>description</code> (описание)"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:47 yelp/C/search.page:43
-#, fuzzy
 msgid "<code>discnumber</code>"
-msgstr "<code>composer</code> (композитор)"
+msgstr "<code>discnumber</code> (номер диска)"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:48 yelp/C/search.page:44
-#, fuzzy
 msgid "<code>disctotal</code>"
-msgstr "<code>tracktotal</code> (количество дорожек)"
+msgstr "<code>disctotal</code> (количество дисков)"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:49 yelp/C/search.page:45
