@@ -31,6 +31,7 @@ public partial class App : Application
 - Tagger will now display front album art within a music file row itself if available
 - Tagger will now remember previously used format strings for file name to tag and tag to file name conversions
 - Fixed an issue where downloaded lyrics would sometimes contain html encoded characters
+- Fixed an issue where the duration displayed for multiple selected files was wrong
 - Improved create playlist dialog ux
 - Updated translations (Thanks everyone on Weblate!)";
         if (_controller.Theme != Theme.System)

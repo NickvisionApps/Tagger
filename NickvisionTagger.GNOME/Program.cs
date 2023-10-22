@@ -42,6 +42,7 @@ public partial class Program
               * Tagger will now remember previously used format strings for file name to tag and tag to file name conversions
               * Fixed an issue where downloaded lyrics would sometimes contain html encoded characters
               * Fixed an issue where file names containing the ""<"" character caused the music file row to not display
+              * Fixed an issue where the duration displayed for multiple selected files was wrong
               * Improved create playlist dialog ux
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
