@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-20 22:12-0400\n"
-"PO-Revision-Date: 2023-10-19 19:10+0000\n"
-"Last-Translator: Daudix UFO <ddaudix@gmail.com>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/ru/>\n"
+"PO-Revision-Date: 2023-10-22 12:59+0000\n"
+"Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +39,7 @@ msgstr "Выбрано {0} из {1}"
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:29
 #, csharp-format
 msgid "{0} pixels"
-msgstr ""
+msgstr "{0} пикселей"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:103
 #, csharp-format
@@ -376,7 +376,7 @@ msgstr "Очистить весь текст"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:22
 msgid "Close"
-msgstr ""
+msgstr "Закрыть"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:110
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:26
@@ -564,9 +564,8 @@ msgstr ""
 "{3}"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:208
-#, fuzzy
 msgid "Disc"
-msgstr "Отменить"
+msgstr "Диск"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:672
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:778
@@ -605,15 +604,14 @@ msgstr "Отбраковка тегов..."
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:743
 #: ../../../Models/MusicFile.cs:854
 msgid "discnumber"
-msgstr ""
+msgstr "номер диска"
 
 #: ../../../Controllers/MainWindowController.cs:184
 #: ../../../Controllers/MainWindowController.cs:1442
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:751
 #: ../../../Models/MusicFile.cs:858
-#, fuzzy
 msgid "disctotal"
-msgstr "итогтрек"
+msgstr "количество дисков"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:158
 msgid "Discussions"
@@ -728,14 +726,12 @@ msgid "Enter description here"
 msgstr "Введите описание здесь"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:209
-#, fuzzy
 msgid "Enter disc number here"
-msgstr "Введите имя файла здесь"
+msgstr "Введите номер диска здесь"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:210
-#, fuzzy
 msgid "Enter disc total here"
-msgstr "Введите общее количество треков здесь"
+msgstr "Введите количество дисков здесь"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:182
 msgid "Enter file name here"
@@ -960,9 +956,8 @@ msgstr "Репозиторий GitHub"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:25
 #: NickvisionTagger.GNOME/Blueprints/album_art_info_dialog.blp:42
-#, fuzzy
 msgid "Height"
-msgstr "Светлая"
+msgstr "Высота"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:591
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:596
@@ -1080,7 +1075,7 @@ msgstr "Основные свойства"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1424
 msgid "Making everything pretty..."
-msgstr ""
+msgstr "Делаем всё красивым..."
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:131
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:115
@@ -1103,9 +1098,8 @@ msgstr "МиБ"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:23
 #: NickvisionTagger.GNOME/Blueprints/album_art_info_dialog.blp:32
-#, fuzzy
 msgid "Mime Type"
-msgstr "Тип"
+msgstr "MIME-тип"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:57
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:77
@@ -1374,7 +1368,7 @@ msgstr "Дата публикации"
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:763
 #: ../../../Models/MusicFile.cs:866
 msgid "publishingdate"
-msgstr "publishingdate"
+msgstr "датапубликации"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:586
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:438
@@ -1654,7 +1648,7 @@ msgstr "Номер трека"
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:707
 #: ../../../Models/MusicFile.cs:826
 msgid "tracktotal"
-msgstr "итогтрек"
+msgstr "количестводорожек"
 
 #: ../../../Controllers/MainWindowController.cs:172
 msgid "translator-credits"
@@ -1773,7 +1767,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:24
 #: NickvisionTagger.GNOME/Blueprints/album_art_info_dialog.blp:37
 msgid "Width"
-msgstr ""
+msgstr "Ширина"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:120
 #, csharp-format
@@ -1856,11 +1850,11 @@ msgstr "Включать подпапки"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:95
 msgid "Limit File Name Characters"
-msgstr ""
+msgstr "Ограничить символы в именах файлов"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:96
 msgid "Restricts characters in file names to only those supported by Windows."
-msgstr ""
+msgstr "Использовать только поддерживаемые Windows символы в именах файлов."
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:13
 msgctxt "Shortcut"
@@ -1952,16 +1946,15 @@ msgstr "Выбрать все файлы"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:520
 msgid "Track Total"
-msgstr "Трек Всего"
+msgstr "Количество дорожек"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:534
 msgid "Disc Number"
-msgstr ""
+msgstr "Номер диска"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:552
-#, fuzzy
 msgid "Disc Total"
-msgstr "Трек Всего"
+msgstr "Количество дисков"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:679
 msgid "Toggle Tags Pane"
