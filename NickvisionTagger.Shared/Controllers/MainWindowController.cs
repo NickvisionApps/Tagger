@@ -81,6 +81,14 @@ public class MainWindowController : IDisposable
     /// The list of paths to corrupted music files in the music library
     /// </summary>
     public List<string> CorruptedFiles => _musicLibrary?.CorruptedFiles ?? new List<string>();
+    /// <summary>
+    /// The previous format string used by filename to tag
+    /// </summary>
+    public string PreviousFTTFormatString => Configuration.Current.PreviousFTTFormatString;
+    /// <summary>
+    /// The previous format string used by tag to filename
+    /// </summary>
+    public string PreviousTTFFormatString => Configuration.Current.PreviousTTFFormatString;
 
     /// <summary>
     /// Occurs when a notification is sent
@@ -969,6 +977,8 @@ public class MainWindowController : IDisposable
             if (success > 0)
             {
                 UpdateSelectedMusicFilesProperties();
+                Configuration.Current.PreviousFTTFormatString = formatString;
+                Aura.Active.SaveConfig("config");
             }
             MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} file name to tag successfully", "Converted {0} file names to tags successfully", success, success), NotificationSeverity.Success, "format"));
@@ -1003,6 +1013,8 @@ public class MainWindowController : IDisposable
             if (success > 0)
             {
                 UpdateSelectedMusicFilesProperties();
+                Configuration.Current.PreviousTTFFormatString = formatString;
+                Aura.Active.SaveConfig("config");
             }
             MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} tag to file name successfully", "Converted {0} tags to file names successfully", success, success), NotificationSeverity.Success, "format"));

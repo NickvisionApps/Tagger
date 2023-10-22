@@ -29,6 +29,7 @@ public partial class App : Application
 - Added information dialog for album art
 - Tagger will now watch a music folder library for changes on disk and prompt the user to reload if necessary
 - Tagger will now display front album art within a music file row itself if available
+- Tagger will now remember previously used format strings for file name to tag and tag to file name conversions
 - Fixed an issue where downloaded lyrics would sometimes contain html encoded characters
 - Improved create playlist dialog ux
 - Updated translations (Thanks everyone on Weblate!)";

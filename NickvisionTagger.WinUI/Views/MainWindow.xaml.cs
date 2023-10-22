@@ -1120,7 +1120,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void FilenameToTag(object sender, RoutedEventArgs e)
     {
-        var dialog = new ComboBoxDialog(_("File Name to Tag"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"))
+        var dialog = new ComboBoxDialog(_("File Name to Tag"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _controller.PreviousFTTFormatString, _("Cancel"), _("Convert"))
         {
             XamlRoot = MainGrid.XamlRoot
         };
@@ -1138,7 +1138,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void TagToFilename(object sender, RoutedEventArgs e)
     {
-        var dialog = new ComboBoxDialog(_("Tag to File Name"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _("Cancel"), _("Convert"))
+        var dialog = new ComboBoxDialog(_("Tag to File Name"), _("Please select a format string."), _("Format String"), _controller.FormatStrings, true, _controller.PreviousTTFFormatString, _("Cancel"), _("Convert"))
         {
             XamlRoot = MainGrid.XamlRoot
         };
