@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-22 13:24-0400\n"
+"POT-Creation-Date: 2023-10-22 23:07-0400\n"
 "PO-Revision-Date: 2023-07-29 14:02+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/nickvision-"
@@ -592,14 +592,15 @@ msgstr "Odbaci"
 msgid "Discard"
 msgstr "Odbaci"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:129
-#, fuzzy
-msgid "Discard Unapplied Changed"
-msgstr "Odbaci neprimjenjene promjene"
-
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:174
 #, fuzzy
 msgid "Discard Unapplied Changed (Ctrl+Z)"
+msgstr "Odbaci neprimjenjene promjene"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:129
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:60
+#: NickvisionTagger.GNOME/Blueprints/window.blp:30
+msgid "Discard Unapplied Changes"
 msgstr "Odbaci neprimjenjene promjene"
 
 #: ../../../Controllers/MainWindowController.cs:896
@@ -1081,14 +1082,11 @@ msgstr[2] "Učitano je {0} glazbenih datoteka."
 msgid "Loading music files from library..."
 msgstr "Učitavanje glazbenih datoteka iz mape …"
 
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:39
-msgid "Lryics"
-msgstr ""
-
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:802
 msgid "lyrics"
 msgstr ""
 
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:39
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:175
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:32
 #: NickvisionTagger.GNOME/Blueprints/window.blp:460
@@ -1911,11 +1909,6 @@ msgctxt "Shortcut"
 msgid "Music File"
 msgstr "Glazbena datoteka"
 
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:60
-#: NickvisionTagger.GNOME/Blueprints/window.blp:30
-msgid "Discard Unapplied Changes"
-msgstr "Odbaci neprimjenjene promjene"
-
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:65
 #: NickvisionTagger.GNOME/Blueprints/window.blp:31
 msgid "Delete Tags"
@@ -2058,6 +2051,10 @@ msgid ""
 "— Open, manage, and create playlists in many formats (m3u, pls, xspf, and "
 "more)"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Discard Unapplied Changed"
+#~ msgstr "Odbaci neprimjenjene promjene"
 
 #, fuzzy
 #~ msgid "Open a library with music to get started."

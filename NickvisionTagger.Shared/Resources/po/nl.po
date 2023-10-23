@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-22 13:24-0400\n"
+"POT-Creation-Date: 2023-10-22 23:07-0400\n"
 "PO-Revision-Date: 2023-08-13 09:57+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -585,14 +585,15 @@ msgstr "Verwerpen"
 msgid "Discard"
 msgstr "Verwerpen"
 
-#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:129
-#, fuzzy
-msgid "Discard Unapplied Changed"
-msgstr "Wijzigingen verwerpen"
-
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:174
 #, fuzzy
 msgid "Discard Unapplied Changed (Ctrl+Z)"
+msgstr "Wijzigingen verwerpen"
+
+#: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:129
+#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:60
+#: NickvisionTagger.GNOME/Blueprints/window.blp:30
+msgid "Discard Unapplied Changes"
 msgstr "Wijzigingen verwerpen"
 
 #: ../../../Controllers/MainWindowController.cs:896
@@ -1074,15 +1075,12 @@ msgstr[1] "Er zijn %d muziekbestanden geladen."
 msgid "Loading music files from library..."
 msgstr "Bezig met laden van muziekbestanden…"
 
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:39
-msgid "Lryics"
-msgstr ""
-
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:802
 #, fuzzy
 msgid "lyrics"
 msgstr "Songtekst"
 
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:39
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:175
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:32
 #: NickvisionTagger.GNOME/Blueprints/window.blp:460
@@ -1912,11 +1910,6 @@ msgctxt "Shortcut"
 msgid "Music File"
 msgstr "Muziekbestand"
 
-#: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:60
-#: NickvisionTagger.GNOME/Blueprints/window.blp:30
-msgid "Discard Unapplied Changes"
-msgstr "Wijzigingen verwerpen"
-
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:65
 #: NickvisionTagger.GNOME/Blueprints/window.blp:31
 msgid "Delete Tags"
@@ -2061,6 +2054,10 @@ msgid ""
 "— Open, manage, and create playlists in many formats (m3u, pls, xspf, and "
 "more)"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Discard Unapplied Changed"
+#~ msgstr "Wijzigingen verwerpen"
 
 #, fuzzy
 #~ msgid "Open a library with music to get started."
