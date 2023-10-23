@@ -36,7 +36,7 @@ public sealed partial class LyricsDialog : ContentDialog
         _syncRows = new Dictionary<int, SyncLyricRow>();
         _showingAnotherDialog = false;
         //Localize Strings
-        Title = _("Lryics");
+        Title = _("Lyrics");
         PrimaryButtonText = _("Apply");
         CloseButtonText = _("Cancel");
         LblConfigure.Text = _("Configure");
