@@ -126,7 +126,7 @@ public sealed partial class MainWindow : Window
         MenuRemoveFromPlaylist.Text = _("Remove from Playlist");
         MenuTag.Title = _("Tag");
         MenuSaveTag.Text = _("Save Tag");
-        MenuDiscardChanges.Text = _("Discard Unapplied Changed");
+        MenuDiscardChanges.Text = _("Discard Unapplied Changes");
         MenuDeleteTag.Text = _("Delete Tag");
         MenuManageLyrics.Text = _("Manage Lyrics");
         MenuAlbumArt.Text = _("Album Art");
