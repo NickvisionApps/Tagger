@@ -19,18 +19,18 @@
 <section>
     <title>Metadaten von MusicBrainz herunterladen</title>
     <p>Identifiziert eine Audiodatei mit MusicBrainz und lädt Metadaten für die Nutzung in Tagger herunter.</p>
-    <p>This service utilizes the AcoustId fingerprint of the file (generated with <code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If IDs are found, metadata such as title, artist, album, and art will be downloaded and set in Tagger.</p>
+    <p>Dieser Dienst nutzt den AcoustId-Fingerabdruck der Datei (generiert mit <code>fpcalc</code>) um die MusicBrainz Aufnahme- und Release-IDs zu bestimmen. Wenn IDs gefunden werden, werden Metadaten, wie Titel, Interpret, Album und Coverbild heruntergeladen und in Tagger gesetzt.</p>
     <note>
-        <p>Finding metadata through MusicBrainz isn't 100% reliable and may not be available for uncommon songs.</p>
+        <p>Metadaten aus MusicBrainz sind nicht zu 100% zuverlässig und sind ggf. für unbekannte Lieder nicht verfügbar.</p>
     </note>
 </section>
 <section>
     <title>Songtexte herunterladen</title>
-    <p>Uses the tag's title and artist information to search for lyrics of the song.</p>
-    <p>This service utilizes NetEase's Music163 service for obtaining synchronized lyrics.</p>
-    <p>If no synchronized lyrics are found/available, Tagger will use Letras for obtaining unsynchronized lyrics.</p>
+    <p>Nutzt Titel- und Interpretinformationen um nach Songtexten zu suchen.</p>
+    <p>Dieser Dienst nutzt den Dienst Music163 von NetEase, um synchronisierte Sontexte zu erhalten.</p>
+    <p>Wenn keine synchronisierten Songtexte gefunden werden / verfügbar sind, nutzt Tagger Letras um unsynchronisierte Songtexte zu erhalten.</p>
     <note>
-        <p>Finding lyrics through these services isn't 100% reliable and may not be available for uncommon songs.</p>
+        <p>Songtexte aus diesen Diensten sind nicht zu 100% zuverlässig und sind ggf. für unbekannte Lieder nicht verfügbar.</p>
     </note>
 </section>
 <section>

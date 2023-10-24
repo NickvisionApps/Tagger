@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-10-22 23:07-0400\n"
-"PO-Revision-Date: 2023-09-19 20:02+0000\n"
+"PO-Revision-Date: 2023-10-24 05:32+0000\n"
 "Last-Translator: Simon Hahne <simonhahne@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/de/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.1.1-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -66,13 +66,12 @@ msgstr "Zuletzt geöffnete Bibliothek merken"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:29
-#, fuzzy
 msgid ""
 "Whether or not to remember the previously used music library and reopen it "
 "when Tagger starts the next time."
 msgstr ""
-"Legt fest, ob der zuletzt geöffnete Musik-Ordner gemerkt und bei nächsten "
-"Öffnen von <app>Tagger</app> erneut geöffnet werden soll."
+"Legt fest, ob die zuletzt geöffnete Musik-Bibliothek gemerkt und beim "
+"nächsten Öffnen von Tagger erneut geöffnet werden soll."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:32
@@ -117,9 +116,8 @@ msgstr "<code>Titel</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:42
-#, fuzzy
 msgid "<code>Artist</code>"
-msgstr "<code>artist</code>"
+msgstr "<code>Künstler</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:43
@@ -128,9 +126,8 @@ msgstr "<code>Album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:44
-#, fuzzy
 msgid "<code>Year</code>"
-msgstr "<code>year</code>"
+msgstr "<code>Jahr</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:45
@@ -159,7 +156,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:54
 msgid "Limit File Name Characters"
-msgstr ""
+msgstr "Zeichen in Dateinamen einschränken"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:55
@@ -167,11 +164,13 @@ msgid ""
 "Whether or not filename characters should be limited to those only supported "
 "by Windows."
 msgstr ""
+"Legt fest, ob Zeichen in Dateinamen auf diejenigen eingeschränkt werden "
+"sollen, die von Windows unterstützt werden."
 
 #. (itstool) path: note/p
 #: yelp/C/configuration.page:57
 msgid "This option is only available on non-Windows systems."
-msgstr ""
+msgstr "Diese Option ist nur auf Nicht-Windows-Systemen verfügbar."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:61
@@ -209,12 +208,11 @@ msgstr "Songtexte mit Web-Service überschreiben"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:70
-#, fuzzy
 msgid ""
 "Whether or not to overwrite a tag's existing lyric data with data from the "
 "web."
 msgstr ""
-"Legt fest, ob ein existierendes Albumcover mit Daten von MusicBrainz "
+"Legt fest, ob existierende Songtexte mit Daten aus dem Internet "
 "überschrieben werden soll."
 
 #. (itstool) path: item/title
@@ -444,15 +442,13 @@ msgstr "<code>description</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:47 yelp/C/search.page:43
-#, fuzzy
 msgid "<code>discnumber</code>"
-msgstr "<code>composer</code>"
+msgstr "<code>discnumber</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:48 yelp/C/search.page:44
-#, fuzzy
 msgid "<code>disctotal</code>"
-msgstr "<code>tracktotal</code>"
+msgstr "<code>disctotal</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:49 yelp/C/search.page:45
@@ -461,9 +457,8 @@ msgstr "<code>publisher</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:50 yelp/C/search.page:46
-#, fuzzy
 msgid "<code>publishingdate</code>"
-msgstr "<code>publisher</code>"
+msgstr "<code>publishingdate</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:53
@@ -482,7 +477,7 @@ msgstr ""
 #. (itstool) path: section/title
 #: yelp/C/format-strings.page:58
 msgid "Ignoring in File Name to Tag Conversion"
-msgstr ""
+msgstr "Teile von Dateinamen in Konvertierung zu Tags ignorieren"
 
 #. (itstool) path: section/p
 #: yelp/C/format-strings.page:59
@@ -490,29 +485,27 @@ msgid ""
 "When running <code>File Name to Tag</code> conversion, an empty <code>%%</"
 "code> can be specified to ignore part of the file name when reading it."
 msgstr ""
+"Wenn die <code>Dateiname zu Tag</code> Konvertierung ausgeführt wird, kann "
+"<code>%%</code> angegeben werden um Teile des Dateinamens zu ignorieren."
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:62
-#, fuzzy
 msgid "Format String: <code>%%- %track%. %%</code>"
-msgstr "Formatvorlage: <code>%artist%- %title%</code>"
+msgstr "Formatvorlage: <code>%%- %track%. %%</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:63
-#, fuzzy
 msgid "Filename: <code>Artist1- 05. Song1.mp3</code>"
-msgstr "Dateiname: <code>Interpret1 - Song1.mp3</code>"
+msgstr "Dateiname: <code>Artist1- 05. Song1.mp3</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:64
-#, fuzzy
 msgid ""
 "This format string and this file name will create a tag with a track of "
 "<code>05</code> and ignore the rest of the file name."
 msgstr ""
-"Wird die <code>Dateiname zu Tag</code> Konvertierung ausgeführt, erstellt "
-"die Formatvorlage und der Dateiname einen Tag mit Interpret "
-"<code>Interpret1</code> und Titel <code>Song1</code>."
+"Diese Formatvorlage und dieser Dateiname erstellen einen Tag mit dem Track "
+"<code>05</code> und ignorieren den Rest des Dateinamens."
 
 #. (itstool) path: info/title
 #: yelp/C/index.page:7
@@ -974,18 +967,16 @@ msgstr ""
 #. (itstool) path: section/title
 #: yelp/C/unsupported.page:24
 msgid "No Known Issues At This Time"
-msgstr ""
+msgstr "Aktuell keine bekannten Probleme"
 
 #. (itstool) path: section/p
 #: yelp/C/unsupported.page:25
-#, fuzzy
 msgid ""
 "<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Report an "
 "issue</link> if you experience any."
 msgstr ""
-"Wenn die Fehlermeldung nicht \"permission denied\" ist, dann erstelle bitte "
-"<link href=\"https://github.com/NickvisionApps/Tagger/issues/174\">ein neues "
-"Issue</link>."
+"<link href=\"https://github.com/NickvisionApps/Tagger/issues\">Melde ein "
+"Problem</link> wenn du eines feststellst."
 
 #. (itstool) path: info/title
 #: yelp/C/web-services.page:8
@@ -1019,7 +1010,6 @@ msgstr ""
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:25
-#, fuzzy
 msgid ""
 "This service utilizes the AcoustId fingerprint of the file (generated with "
 "<code>fpcalc</code>) to determine MusicBrainz recording and release IDs. If "
@@ -1033,7 +1023,6 @@ msgstr ""
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:27
-#, fuzzy
 msgid ""
 "Finding metadata through MusicBrainz isn't 100% reliable and may not be "
 "available for uncommon songs."
@@ -1050,7 +1039,7 @@ msgstr "Songtexte herunterladen"
 #: yelp/C/web-services.page:32
 msgid ""
 "Uses the tag's title and artist information to search for lyrics of the song."
-msgstr ""
+msgstr "Nutzt Titel- und Interpretinformationen um nach Songtexten zu suchen."
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:33
@@ -1058,6 +1047,8 @@ msgid ""
 "This service utilizes NetEase's Music163 service for obtaining synchronized "
 "lyrics."
 msgstr ""
+"Dieser Dienst nutzt den Dienst Music163 von NetEase, um synchronisierte "
+"Sontexte zu erhalten."
 
 #. (itstool) path: section/p
 #: yelp/C/web-services.page:34
@@ -1065,16 +1056,17 @@ msgid ""
 "If no synchronized lyrics are found/available, Tagger will use Letras for "
 "obtaining unsynchronized lyrics."
 msgstr ""
+"Wenn keine synchronisierten Songtexte gefunden werden / verfügbar sind, "
+"nutzt Tagger Letras um unsynchronisierte Songtexte zu erhalten."
 
 #. (itstool) path: note/p
 #: yelp/C/web-services.page:36
-#, fuzzy
 msgid ""
 "Finding lyrics through these services isn't 100% reliable and may not be "
 "available for uncommon songs."
 msgstr ""
-"Metadaten aus MusicBrainz sind nicht zu 100% zuverlässig und sind ggf. für "
-"unbekannte Lieder nicht verfügbar."
+"Songtexte aus diesen Diensten sind nicht zu 100% zuverlässig und sind ggf. "
+"für unbekannte Lieder nicht verfügbar."
 
 #. (itstool) path: section/title
 #: yelp/C/web-services.page:40
