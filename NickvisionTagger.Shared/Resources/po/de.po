@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-22 23:07-0400\n"
-"PO-Revision-Date: 2023-10-24 05:32+0000\n"
+"PO-Revision-Date: 2023-10-30 05:03+0000\n"
 "Last-Translator: Simon Hahne <simonhahne@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/de/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1.1-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1453
 #, csharp-format
@@ -479,7 +479,7 @@ msgstr "Wiedergabeliste erstellen"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:29
 msgid "Credits"
-msgstr "Credits"
+msgstr "Danksagungen"
 
 #: ../../../Controllers/MainWindowController.cs:193
 #: ../../../Controllers/MainWindowController.cs:1488
@@ -568,9 +568,8 @@ msgstr ""
 "{3}"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:208
-#, fuzzy
 msgid "Disc"
-msgstr "Verwerfen"
+msgstr "Platte"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:680
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:786
@@ -611,15 +610,14 @@ msgstr "Tags werden verworfen..."
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:743
 #: ../../../Models/MusicFile.cs:854
 msgid "discnumber"
-msgstr ""
+msgstr "plattennummer"
 
 #: ../../../Controllers/MainWindowController.cs:192
 #: ../../../Controllers/MainWindowController.cs:1454
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:751
 #: ../../../Models/MusicFile.cs:858
-#, fuzzy
 msgid "disctotal"
-msgstr "songanzahl"
+msgstr "plattengesamt"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:158
 msgid "Discussions"
@@ -732,14 +730,12 @@ msgid "Enter description here"
 msgstr "Beschreibung hier eintragen"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:209
-#, fuzzy
 msgid "Enter disc number here"
-msgstr "Dateinamen hier eintragen"
+msgstr "Plattennummer hier eintragen"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:210
-#, fuzzy
 msgid "Enter disc total here"
-msgstr "Trackanzahl hier eintragen"
+msgstr "Plattenanzahl hier eintragen"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:182
 msgid "Enter file name here"
@@ -1356,7 +1352,7 @@ msgstr "Eigenschaft-Name"
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:759
 #: ../../../Models/MusicFile.cs:862
 msgid "publisher"
-msgstr "Verlag"
+msgstr "Herausgeber"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:211
 #: NickvisionTagger.GNOME/Blueprints/window.blp:578
@@ -1372,9 +1368,8 @@ msgstr "Veröffentlichungsdatum"
 #: ../../../Controllers/MainWindowController.cs:1473
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:763
 #: ../../../Models/MusicFile.cs:866
-#, fuzzy
 msgid "publishingdate"
-msgstr "Verlag"
+msgstr "veröffentlichungsdatum"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:594
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:439
@@ -1954,12 +1949,11 @@ msgstr "Song-Anzahl"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:534
 msgid "Disc Number"
-msgstr ""
+msgstr "Plattennummer"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:552
-#, fuzzy
 msgid "Disc Total"
-msgstr "Song-Anzahl"
+msgstr "Plattenanzahl"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:693
 msgid "Toggle Tags Pane"
