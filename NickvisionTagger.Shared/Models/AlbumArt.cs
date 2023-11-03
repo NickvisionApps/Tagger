@@ -89,13 +89,22 @@ public class AlbumArt : IEquatable<AlbumArt>
             _image = value;
             if (_image.Length > 0)
             {
-                using var image = SixLabors.ImageSharp.Image.Load(_image);
-                Width = image.Width;
-                Height = image.Height;
-                image.Mutate(x => x.Resize(32, 32));
-                using var ms = new MemoryStream();
-                image.SaveAsJpeg(ms);
-                Icon = ms.ToArray();
+                try
+                {
+                    using var image = SixLabors.ImageSharp.Image.Load(_image);
+                    Width = image.Width;
+                    Height = image.Height;
+                    image.Mutate(x => x.Resize(32, 32));
+                    using var ms = new MemoryStream();
+                    image.SaveAsJpeg(ms);
+                    Icon = ms.ToArray();
+                }
+                catch
+                {
+                    Width = 0;
+                    Height = 0;
+                    Icon = _image;
+                }
             }
             else
             {
