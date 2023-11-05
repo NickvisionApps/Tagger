@@ -101,9 +101,7 @@ public class AlbumArt : IEquatable<AlbumArt>
                 }
                 catch
                 {
-                    Width = 0;
-                    Height = 0;
-                    Icon = _image;
+                    throw new FileLoadException("Corrupted album art.");
                 }
             }
             else
