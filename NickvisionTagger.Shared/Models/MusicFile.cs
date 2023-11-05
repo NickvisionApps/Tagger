@@ -81,7 +81,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "discnumber", _("discnumber"), "disctotal", _("disctotal"), "publisher", _("publisher"), "publishingdate", _("publishingdate"), "lyrics", _("lyrics") };
         _invalidWindowsFilenameCharacters = new List<char>() { '"', '<', '>', ':', '\\', '/', '|', '?', '*' };
         _invalidSystemFilenameCharacters = System.IO.Path.GetInvalidPathChars().Union(System.IO.Path.GetInvalidFileNameChars()).ToList();
-        if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             _invalidSystemFilenameCharacters.Remove('\\');
         }
@@ -111,7 +111,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         catch (Exception e)
         {
             Console.WriteLine(e.Message + "\n" + e.StackTrace);
-            throw new FileLoadException($"Unable to load music file: \"{Path}\". Tag could be corrupted.");
+            throw new CorruptedMusicFileException(CorruptionType.InvalidTagData);
         }
         _dotExtension = System.IO.Path.GetExtension(Path).ToLower();
         _filename = System.IO.Path.GetFileName(Path);
@@ -543,7 +543,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 var newPath = $"{System.IO.Path.GetDirectoryName(Path)}{System.IO.Path.DirectorySeparatorChar}{Filename}";
                 Directory.CreateDirectory(System.IO.Path.GetDirectoryName(newPath)!);
                 var i = 1;
-                while(File.Exists(newPath))
+                while (File.Exists(newPath))
                 {
                     newPath = newPath.Remove(newPath.IndexOf($" ({i - 1})")) + $" ({i})";
                 }

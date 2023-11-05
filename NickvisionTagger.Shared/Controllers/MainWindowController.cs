@@ -80,7 +80,7 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// The list of paths to corrupted music files in the music library
     /// </summary>
-    public List<string> CorruptedFiles => _musicLibrary?.CorruptedFiles ?? new List<string>();
+    public List<CorruptedMusicFile> CorruptedFiles => _musicLibrary?.CorruptedFiles ?? new List<CorruptedMusicFile>();
     /// <summary>
     /// The previous format string used by filename to tag
     /// </summary>

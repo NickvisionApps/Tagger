@@ -34,6 +34,7 @@ public partial class Program
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
             @"* Added the ability to specify ""/"" in a Tag to File Name format string to move files to a new directory when renaming files
+              * Tagger now has the ability to fix corrupted file right from within the app
               * Tagger will now display files with corrupted album art as corrupted files
               * Fixed an issue where some custom properties for vorbis and wav files could not be removed
               * Updated translations (Thanks everyone on Weblate!)";

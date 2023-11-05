@@ -101,7 +101,7 @@ public class AlbumArt : IEquatable<AlbumArt>
                 }
                 catch
                 {
-                    throw new FileLoadException("Corrupted album art.");
+                    throw new CorruptedMusicFileException(CorruptionType.InvalidAlubmArt);
                 }
             }
             else
