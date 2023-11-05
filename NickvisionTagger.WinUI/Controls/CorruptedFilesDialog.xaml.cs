@@ -35,7 +35,7 @@ public sealed partial class CorruptedFilesDialog : ContentDialog
         foreach (var file in _files)
         {
             var path = file.Path.Remove(0, parentPath.Length);
-            if (path[0] == '/')
+            if (path[0] == '\\')
             {
                 path = path.Remove(0, 1);
             }
