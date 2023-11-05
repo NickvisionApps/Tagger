@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-05 12:07-0500\n"
+"POT-Creation-Date: 2023-11-05 13:06-0500\n"
 "PO-Revision-Date: 2023-10-23 03:05+0000\n"
 "Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/nickvision-"
@@ -460,7 +460,7 @@ msgstr "Hata ayıklama bilgisi panoya kopyalandı."
 msgid "Copy Fingerprint To Clipboard"
 msgstr "Parmak İzini Panoya Kopyala"
 
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:27
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:30
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
 msgid "Corrupted Files Found"
 msgstr "Bozuk Dosyalar Bulundu"
@@ -853,6 +853,12 @@ msgstr "Albüm ön kapağı dosyaya dışa aktarılamadı"
 msgid "File"
 msgstr "Dosya"
 
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:61
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:64
+#, fuzzy
+msgid "File fixed successfully"
+msgstr "Çalma listesi oluşturuldu."
+
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:114
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:181
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:49
@@ -897,6 +903,12 @@ msgstr "Parmak izi"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1729
 msgid "Fingerprint was copied to clipboard."
 msgstr "Parmak izi panoya kopyalandı."
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:50
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:47
+#, fuzzy
+msgid "Fix File"
+msgstr "Müzik Dosyası"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1480
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1377
@@ -966,7 +978,7 @@ msgstr "Yükseklik"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:599
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:604
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:609
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:29
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:32
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:153
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:450
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:461
@@ -1213,7 +1225,7 @@ msgstr "Ofset (milisaniye cinsinden)"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1228
 #: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:27
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:28
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:31
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:488
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1212
 msgid "OK"
@@ -1250,9 +1262,7 @@ msgstr "Aç"
 msgid "Open a library with music to get started"
 msgstr "Başlamak için müzik içeren bir kitaplık açın"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:46
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:732
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:44
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:107
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:162
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:16
@@ -1591,7 +1601,7 @@ msgstr "Tema"
 msgid "This file does not have a valid fingerprint"
 msgstr "Bu dosyanın geçerli bir parmak izi yok"
 
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:30
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:33
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
 msgid ""
 "This music folder contains music files that have corrupted tags. The "
@@ -1687,6 +1697,12 @@ msgstr "Güncellemeler indirilip kurulamadı."
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:316
 msgid "Unable to export to LRC."
 msgstr "LRC'ye dışa aktarılamıyor."
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:61
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:64
+#, fuzzy
+msgid "Unable to fix file"
+msgstr "Resim dosyası yüklenemedi"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:294
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:281

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-05 12:07-0500\n"
+"POT-Creation-Date: 2023-11-05 13:06-0500\n"
 "PO-Revision-Date: 2023-10-23 17:02+0000\n"
 "Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
@@ -464,7 +464,7 @@ msgstr "Отладочная информация скопирована в бу
 msgid "Copy Fingerprint To Clipboard"
 msgstr "Скопировать отпечаток в буфер обмена"
 
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:27
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:30
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
 msgid "Corrupted Files Found"
 msgstr "Найдены поврежденные файлы"
@@ -857,6 +857,12 @@ msgstr "Не удалось экспортировать обложки альб
 msgid "File"
 msgstr "Файл"
 
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:61
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:64
+#, fuzzy
+msgid "File fixed successfully"
+msgstr "Файл плейлиста создан успешно."
+
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:114
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:181
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:49
@@ -901,6 +907,12 @@ msgstr "Отпечаток"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1729
 msgid "Fingerprint was copied to clipboard."
 msgstr "Отпечаток был скопирован в буфер обмена."
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:50
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:47
+#, fuzzy
+msgid "Fix File"
+msgstr "Файлы"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1480
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1377
@@ -970,7 +982,7 @@ msgstr "Высота"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:599
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:604
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:609
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:29
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:32
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:153
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:450
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:461
@@ -1218,7 +1230,7 @@ msgstr "Смещение (в миллисекундах)"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1228
 #: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:27
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:28
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:31
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:488
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1212
 msgid "OK"
@@ -1255,9 +1267,7 @@ msgstr "Открыть"
 msgid "Open a library with music to get started"
 msgstr "Откройте библиотеку с музыкой, чтобы начать"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:46
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:732
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:44
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:107
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:162
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:16
@@ -1596,7 +1606,7 @@ msgstr "Тема"
 msgid "This file does not have a valid fingerprint"
 msgstr "Этот файл не имеет действительного отпечатка"
 
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:30
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:33
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
 msgid ""
 "This music folder contains music files that have corrupted tags. The "
@@ -1693,6 +1703,12 @@ msgstr "Не удалось загрузить и установить обно�
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:316
 msgid "Unable to export to LRC."
 msgstr "Невозможно экспортировать в LRC."
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:61
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:64
+#, fuzzy
+msgid "Unable to fix file"
+msgstr "Не удалось загрузить файл изображения"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:294
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:281

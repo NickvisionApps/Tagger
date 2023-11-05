@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-05 12:07-0500\n"
+"POT-Creation-Date: 2023-11-05 13:06-0500\n"
 "PO-Revision-Date: 2023-08-13 09:57+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -466,7 +466,7 @@ msgstr ""
 msgid "Copy Fingerprint To Clipboard"
 msgstr ""
 
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:27
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:30
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
 #, fuzzy
 msgid "Corrupted Files Found"
@@ -863,6 +863,12 @@ msgstr ""
 msgid "File"
 msgstr "Bestandsnaam"
 
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:61
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:64
+#, fuzzy
+msgid "File fixed successfully"
+msgstr "De tags zijn opgeslagen."
+
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:114
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:181
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:49
@@ -909,6 +915,12 @@ msgstr "Controlesom"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1729
 msgid "Fingerprint was copied to clipboard."
 msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:50
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:47
+#, fuzzy
+msgid "Fix File"
+msgstr "Muziekbestand"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1480
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1377
@@ -980,7 +992,7 @@ msgstr "Licht"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:599
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:604
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:609
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:29
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:32
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:153
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:450
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:461
@@ -1239,7 +1251,7 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1228
 #: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:27
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:28
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:31
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:488
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1212
 msgid "OK"
@@ -1281,9 +1293,7 @@ msgstr ""
 "Open een map met muziekbestanden of sleep een map hierheen om aan de slag te "
 "gaan."
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:46
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:732
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:44
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:107
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:162
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:16
@@ -1637,7 +1647,7 @@ msgstr "Thema"
 msgid "This file does not have a valid fingerprint"
 msgstr ""
 
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:30
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:33
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
 #, fuzzy
 msgid ""
@@ -1734,6 +1744,11 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:345
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:316
 msgid "Unable to export to LRC."
+msgstr ""
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:61
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:64
+msgid "Unable to fix file"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:294
