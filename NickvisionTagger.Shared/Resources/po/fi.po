@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-22 23:07-0400\n"
-"PO-Revision-Date: 2023-10-22 02:09+0000\n"
+"PO-Revision-Date: 2023-11-05 16:25+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-"
-"tagger/app/fi/>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1453
 #, csharp-format
@@ -43,7 +43,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:103
 #, csharp-format
 msgid "{0} Playlist (*{1})"
-msgstr ""
+msgstr "{0} Soittolista (*{1})"
 
 #: ../../../Controllers/MainWindowController.cs:208
 msgid "%artist%- %title%"
@@ -296,7 +296,7 @@ msgstr "Takaisin"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:202
 #: NickvisionTagger.GNOME/Blueprints/window.blp:566
 msgid "Beats Per Minute"
-msgstr ""
+msgstr "Tempo"
 
 #: ../../../Controllers/MainWindowController.cs:190
 #: ../../../Controllers/MainWindowController.cs:1416
@@ -368,9 +368,8 @@ msgstr "Tyhjennä kaikki sanoitukset"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:215
 #: NickvisionTagger.GNOME/Blueprints/window.blp:605
-#, fuzzy
 msgid "Clear Publishing Date"
-msgstr "Julkaisija"
+msgstr "Tyhjennä julkaisupäivä"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:22
 msgid "Close"
@@ -428,22 +427,22 @@ msgstr "Muunna"
 msgid "Converted {0} file name to tag successfully"
 msgid_plural "Converted {0} file names to tags successfully"
 msgstr[0] "Muunnettiin {0} tiedostonimi tunnisteeksi"
-msgstr[1] "Muunnettiin {0} tiedostonimeä tunnisteiksi"
+msgstr[1] "Muunnettiin {0} tiedostonimeä tageiksi"
 
 #: ../../../Controllers/MainWindowController.cs:1020
 #, csharp-format
 msgid "Converted {0} tag to file name successfully"
 msgid_plural "Converted {0} tags to file names successfully"
 msgstr[0] "Muunnettiin {0} tunniste tiedostonimeksi"
-msgstr[1] "Muunnettiin {0} tunnistetta tiedostonimiksi"
+msgstr[1] "Muunnettiin {0} tagia tiedostonimiksi"
 
 #: ../../../Controllers/MainWindowController.cs:961
 msgid "Converting file names to tags..."
-msgstr "Muunnetaan tiedostonimiä tunnisteiksi..."
+msgstr "Muunnetaan tiedostonimiä tageiksi..."
 
 #: ../../../Controllers/MainWindowController.cs:997
 msgid "Converting tags to file names..."
-msgstr "Muunnetaan tunnisteita tiedostonimiksi..."
+msgstr "Muunnetaan tageja tiedostonimiksi..."
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:30
 msgid "Copied debug info to clipboard."
@@ -496,6 +495,8 @@ msgstr "Mukautettu ominaisuus"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:634
 msgid "Custom properties can only be edited for individual files."
 msgstr ""
+"Mukautettuja ominaisuuksia voi muokata vain yksittäisten tiedostojen "
+"kohdalla."
 
 #: ../../../Controllers/MainWindowController.cs:178
 msgid "DaPigGuy"
@@ -506,18 +507,16 @@ msgid "David Lapshin"
 msgstr "David Lapshin"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:130
-#, fuzzy
 msgid "Delete Tag"
-msgstr "Poista tagit"
+msgstr "Poista tagi"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:173
 msgid "Delete Tag (Shift+Delete)"
-msgstr ""
+msgstr "Poista tagi (Shift+Delete)"
 
 #: ../../../Controllers/MainWindowController.cs:928
-#, fuzzy
 msgid "Deleting tags..."
-msgstr "Tallennetaan tageja..."
+msgstr "Poistetaan tageja..."
 
 #: ../../../Controllers/MainWindowController.cs:191
 #: ../../../Controllers/MainWindowController.cs:1435
@@ -550,9 +549,8 @@ msgid ""
 msgstr ""
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:208
-#, fuzzy
 msgid "Disc"
-msgstr "Hylkää"
+msgstr "Levy"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:680
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:786
@@ -575,9 +573,8 @@ msgid "Discard"
 msgstr "Hylkää"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:174
-#, fuzzy
 msgid "Discard Unapplied Changed (Ctrl+Z)"
-msgstr "Hylkää toteuttamattomat muutokset"
+msgstr "Hylkää toteuttamattomat muutokset (Ctrl+Z)"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:129
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:60
@@ -836,9 +833,8 @@ msgid "Failed to export front album art to a file"
 msgstr ""
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:106
-#, fuzzy
 msgid "File"
-msgstr "Tiedostonimi"
+msgstr "Tiedosto"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:114
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:181
@@ -856,9 +852,8 @@ msgid "File Name to Tag"
 msgstr "Tiedostonimi tunnisteeksi"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:177
-#, fuzzy
 msgid "File Name to Tag (Ctrl+F)"
-msgstr "Tiedostonimi tunnisteeksi"
+msgstr "Tiedostonimi tagiksi (Ctrl+F)"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:115
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:50
@@ -948,9 +943,8 @@ msgstr "GitHub-tietovarasto"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:25
 #: NickvisionTagger.GNOME/Blueprints/album_art_info_dialog.blp:42
-#, fuzzy
 msgid "Height"
-msgstr "Vaalea"
+msgstr "Korkeus"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:599
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:604
@@ -979,9 +973,8 @@ msgstr "Tuo LRC:stä"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:41
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:67
-#, fuzzy
 msgid "Include Only Selected Files"
-msgstr "Ei valittuja musiikkitiedostoja"
+msgstr "Sisällytä vain valitut tiedostot"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:614
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:137
@@ -1006,16 +999,16 @@ msgstr "Syötä"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1078
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:100
 msgid "Insert Back Album Art"
-msgstr ""
+msgstr "Syötä takakannen kuvitus"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1078
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:80
 msgid "Insert Front Album Art"
-msgstr ""
+msgstr "Syötä etukannen kuvitus"
 
 #: ../../../Controllers/MainWindowController.cs:1042
 msgid "Inserting album art..."
-msgstr ""
+msgstr "Syötetään albumin kuvitusta..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:281
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:261
@@ -1305,7 +1298,7 @@ msgstr "Soittolista"
 
 #: ../../../Controllers/MainWindowController.cs:556
 msgid "Playlist file created successfully."
-msgstr ""
+msgstr "Soittolistatiedosto luotu onnistuneesti."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1480
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1377
@@ -1314,7 +1307,7 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:543
 msgid "Playlist path can not be empty."
-msgstr ""
+msgstr "Soittolistan polku ei voi olla tyhjä."
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1027
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1046
@@ -1351,9 +1344,8 @@ msgstr "Julkaisija"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:213
 #: NickvisionTagger.GNOME/Blueprints/window.blp:582
-#, fuzzy
 msgid "Publishing Date"
-msgstr "Julkaisija"
+msgstr "Julkaisupäivä"
 
 #: ../../../Controllers/MainWindowController.cs:192
 #: ../../../Controllers/MainWindowController.cs:1473
@@ -1404,9 +1396,8 @@ msgid "Remove Lyric"
 msgstr "Poista sanoitus"
 
 #: ../../../Controllers/MainWindowController.cs:1086
-#, fuzzy
 msgid "Removing album art..."
-msgstr "Poista albumin takakannen kuvitus"
+msgstr "Poistetaan albumin kuvitusta..."
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:157
 msgid "Report a Bug"
@@ -1427,9 +1418,8 @@ msgid "Save Tag"
 msgstr "Tallenna tagi"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:172
-#, fuzzy
 msgid "Save Tag (Ctrl+S)"
-msgstr "Toteuta muutokset tunnisteeseen (Ctrl+S)"
+msgstr "Tallenna tagi (Ctrl+S)"
 
 #: ../../../Controllers/MainWindowController.cs:813
 #: ../../../Controllers/MainWindowController.cs:856
@@ -1537,12 +1527,11 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1142
 #: NickvisionTagger.GNOME/Blueprints/window.blp:65
 msgid "Tag to File Name"
-msgstr ""
+msgstr "Tagi tiedostonimeksi"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:178
-#, fuzzy
 msgid "Tag to File Name (Ctrl+T)"
-msgstr "Muunna tunniste tiedostonimeksi"
+msgstr "Tagi tiedostonimeksi (Ctrl+T)"
 
 #: ../../../Controllers/MainWindowController.cs:169
 #: NickvisionTagger.Shared/org.nickvision.tagger.desktop.in:5
@@ -1657,23 +1646,20 @@ msgstr "Tyyppi"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:167
 #: NickvisionTagger.GNOME/Blueprints/window.blp:222
-#, fuzzy
 msgid "Type ! for advanced search"
-msgstr "Etsi tiedostonimeä (kirjoita ! avataksesi edistyneen haun)..."
+msgstr "Kirjoita ! avataksesi edistyneen haun"
 
 #: ../../../Controllers/MainWindowController.cs:580
 msgid "Unable to add file to playlist. File may already exist in playlist."
 msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:560
-#, fuzzy
 msgid "Unable to create playlist."
-msgstr "Ei voi tallentaa {0}."
+msgstr "Soittolistaa ei voitu luoda."
 
 #: ../../../Controllers/MainWindowController.cs:445
-#, fuzzy
 msgid "Unable to download and install update."
-msgstr "Kuvatiedoston lataaminen ei onnistu"
+msgstr "Päivityksen lataaminen ja asentaminen ei onnistunut."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:345
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:316
@@ -1932,12 +1918,11 @@ msgstr "Kappaleita yhteensä"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:534
 msgid "Disc Number"
-msgstr ""
+msgstr "Levyn numero"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:552
-#, fuzzy
 msgid "Disc Total"
-msgstr "Kappaleita yhteensä"
+msgstr "Levyjä yhteensä"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:693
 msgid "Toggle Tags Pane"
