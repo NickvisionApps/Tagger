@@ -16,10 +16,11 @@
 
 <title>Korrupte Dateien</title>
 <p>Diese Seite erklärt Audiodateien mit korrupten Daten.</p>
+<p>Wenn <app>Tagger</app> nicht in der Lage ist, eine Datei zu lesen, wird sie ignoriert. Die beschädigten Dateien werden in einem Dialogfeld aufgelistet, damit du sie entsprechend verwalten und reparieren kannst.</p>
+<p>This dialog will offer the option to have Tagger run the appropriate command to try and fix the corrupted file.</p>
 <section>
     <title>Ungültige Daten</title>
     <p>Ein ungültiger Tag-Header oder Junk-Daten in einer Datei können zu Problemen beim Lesen von Informationen über eine Datei und sogar zu Wiedergabeproblemen führen. Einige Websites fügen zusätzliche Junk-Daten in Dateien ein, die wiederum zu Beschädigungen führen.</p>
-    <p>Wenn <app>Tagger</app> nicht in der Lage ist, eine Datei zu lesen, wird sie ignoriert. Die beschädigten Dateien werden in einem Dialogfeld aufgelistet, damit du sie entsprechend verwalten und reparieren kannst.</p>
     <note style="advanced">
         <p>FFmpeg kann genutzt werden um beschädigte Dateien zu reparieren. Führe dazu den folgenden Befehl aus um die Datei neu zu enkodieren und Junk-Daten zu entfernen:</p>
         <code>ffmpeg -i in.mp3 out.mp3</code>
@@ -27,6 +28,15 @@
     </note>
     <note style="advanced">
          <p>Die kannst alternativ <link href="https://www.freac.org">fre:ac</link> nutzen um Dateien neu zu enkodieren, ohne sie in ein anderes Format umzuwandeln.</p>
+    </note>
+</section>
+<section>
+    <title>Invalid Album Art</title>
+    <p>An invalid or corrupted embedded album art format can cause issues in displaying music files in Tagger.</p>
+    <note style="advanced">
+        <p>FFmpeg can be used to fix album art issues. Run the following command to remove album art data from a file:</p>
+        <code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3</code>
+        <p>wobei <code>in.mp3</code> der Dateipfad zur beschädigten Datei ist und <code>out.mp3</code> der Pfad an dem die reparierte Datei gespeichert werden soll.</p>
     </note>
 </section>
 </page>

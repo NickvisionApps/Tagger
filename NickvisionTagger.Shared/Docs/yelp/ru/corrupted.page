@@ -28,10 +28,11 @@
 
 <title>Повреждённые файлы</title>
 <p>This page explains music files with corrupted data.</p>
+<p>If <app>Tagger</app> is unable to read a file, it will be ignored and a dialog will be displayed listing corrupted files for you to manage and fix accordingly.</p>
+<p>This dialog will offer the option to have Tagger run the appropriate command to try and fix the corrupted file.</p>
 <section>
     <title>Invalid Data</title>
     <p>An invalid tag header or junk data in a file can cause issues when reading information about a file and even cause playback issues. Some websites add extra junk data in files which in turn causes corruption.</p>
-    <p>If <app>Tagger</app> is unable to read a file, it will be ignored and a dialog will be displayed listing corrupted files for you to manage and fix accordingly.</p>
     <note style="advanced">
         <p>FFmpeg can be used to fix corruption issues. Run the following command to re-encode a file's tag and remove junk data:</p>
         <code>ffmpeg -i in.mp3 out.mp3</code>
@@ -39,6 +40,17 @@
     </note>
     <note style="advanced">
          <p>You can also use <link href="https://www.freac.org">fre:ac</link> to re-encode files without convertion to another format.</p>
+    </note>
+</section>
+<section>
+    <title>Invalid Album Art</title>
+    <p>An invalid or corrupted embedded album art format can cause issues in displaying music files in Tagger.</p>
+    <note style="advanced">
+        <p>FFmpeg can be used to fix album art issues. Run the following command to remove album art data from a file:</p>
+        <code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3</code>
+        <p>
+            where <code>in.mp3</code> is the file path of the corrupted file and <code>out.mp3</code> is the path to export the re-encoded file.
+        </p>
     </note>
 </section>
 </page>

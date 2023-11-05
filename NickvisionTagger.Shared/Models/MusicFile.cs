@@ -33,8 +33,8 @@ public enum MusicBrainzLoadStatus
 public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFile>
 {
     private static string[] _validProperties;
-    private static IEnumerable<char> _invalidWindowsFilenameCharacters;
-    private static IEnumerable<char> _invalidSystemFilenameCharacters;
+    private static List<char> _invalidWindowsFilenameCharacters;
+    private static List<char> _invalidSystemFilenameCharacters;
 
     private bool _disposed;
     private Track _track;
@@ -80,7 +80,15 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     {
         _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "discnumber", _("discnumber"), "disctotal", _("disctotal"), "publisher", _("publisher"), "publishingdate", _("publishingdate"), "lyrics", _("lyrics") };
         _invalidWindowsFilenameCharacters = new List<char>() { '"', '<', '>', ':', '\\', '/', '|', '?', '*' };
-        _invalidSystemFilenameCharacters = System.IO.Path.GetInvalidPathChars().Union(System.IO.Path.GetInvalidFileNameChars());
+        _invalidSystemFilenameCharacters = System.IO.Path.GetInvalidPathChars().Union(System.IO.Path.GetInvalidFileNameChars()).ToList();
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            _invalidSystemFilenameCharacters.Remove('\\');
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        {
+            _invalidSystemFilenameCharacters.Remove('/');
+        }
         SortFilesBy = SortBy.Path;
         LimitFilenameCharacters = false;
         ATL.Settings.UseFileNameWhenNoTitle = false;
@@ -103,7 +111,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         catch (Exception e)
         {
             Console.WriteLine(e.Message + "\n" + e.StackTrace);
-            throw new FileLoadException($"Unable to load music file: \"{Path}\". Tag could be corrupted.");
+            throw new CorruptedMusicFileException(CorruptionType.InvalidTagData);
         }
         _dotExtension = System.IO.Path.GetExtension(Path).ToLower();
         _filename = System.IO.Path.GetFileName(Path);
@@ -149,7 +157,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 newFilename += _dotExtension;
             }
-            var invalidCharacters = _invalidSystemFilenameCharacters;
+            IEnumerable<char> invalidCharacters = _invalidSystemFilenameCharacters;
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LimitFilenameCharacters)
             {
                 invalidCharacters = _invalidSystemFilenameCharacters.Union(_invalidWindowsFilenameCharacters);
@@ -533,6 +541,17 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             if (System.IO.Path.GetFileName(Path) != Filename)
             {
                 var newPath = $"{System.IO.Path.GetDirectoryName(Path)}{System.IO.Path.DirectorySeparatorChar}{Filename}";
+                Directory.CreateDirectory(System.IO.Path.GetDirectoryName(newPath)!);
+                if(File.Exists(newPath))
+                {
+                    newPath = newPath.Remove(newPath.IndexOf(_dotExtension)) + $" (1){_dotExtension}";
+                }
+                var i = 2;
+                while (File.Exists(newPath))
+                {
+                    newPath = newPath.Remove(newPath.IndexOf($" ({i - 1})")) + $" ({i}){_dotExtension}";
+                    i++;
+                }
                 File.Move(Path, newPath);
                 Path = newPath;
                 _track = new Track(Path);

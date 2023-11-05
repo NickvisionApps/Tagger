@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-10-22 23:07-0400\n"
+"POT-Creation-Date: 2023-11-05 13:06-0500\n"
 "PO-Revision-Date: 2023-10-24 05:32+0000\n"
 "Last-Translator: Simon Hahne <simonhahne@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/nickvision-tagger/"
@@ -253,13 +253,31 @@ msgstr "Korrupte Dateien"
 msgid "This page explains music files with corrupted data."
 msgstr "Diese Seite erklärt Audiodateien mit korrupten Daten."
 
-#. (itstool) path: section/title
+#. (itstool) path: page/p
+#: yelp/C/corrupted.page:22
+msgid ""
+"If <app>Tagger</app> is unable to read a file, it will be ignored and a "
+"dialog will be displayed listing corrupted files for you to manage and fix "
+"accordingly."
+msgstr ""
+"Wenn <app>Tagger</app> nicht in der Lage ist, eine Datei zu lesen, wird sie "
+"ignoriert. Die beschädigten Dateien werden in einem Dialogfeld aufgelistet, "
+"damit du sie entsprechend verwalten und reparieren kannst."
+
+#. (itstool) path: page/p
 #: yelp/C/corrupted.page:23
+msgid ""
+"This dialog will offer the option to have Tagger run the appropriate command "
+"to try and fix the corrupted file."
+msgstr ""
+
+#. (itstool) path: section/title
+#: yelp/C/corrupted.page:25
 msgid "Invalid Data"
 msgstr "Ungültige Daten"
 
 #. (itstool) path: section/p
-#: yelp/C/corrupted.page:24
+#: yelp/C/corrupted.page:26
 msgid ""
 "An invalid tag header or junk data in a file can cause issues when reading "
 "information about a file and even cause playback issues. Some websites add "
@@ -270,19 +288,8 @@ msgstr ""
 "Wiedergabeproblemen führen. Einige Websites fügen zusätzliche Junk-Daten in "
 "Dateien ein, die wiederum zu Beschädigungen führen."
 
-#. (itstool) path: section/p
-#: yelp/C/corrupted.page:25
-msgid ""
-"If <app>Tagger</app> is unable to read a file, it will be ignored and a "
-"dialog will be displayed listing corrupted files for you to manage and fix "
-"accordingly."
-msgstr ""
-"Wenn <app>Tagger</app> nicht in der Lage ist, eine Datei zu lesen, wird sie "
-"ignoriert. Die beschädigten Dateien werden in einem Dialogfeld aufgelistet, "
-"damit du sie entsprechend verwalten und reparieren kannst."
-
 #. (itstool) path: note/p
-#: yelp/C/corrupted.page:27
+#: yelp/C/corrupted.page:28
 msgid ""
 "FFmpeg can be used to fix corruption issues. Run the following command to re-"
 "encode a file's tag and remove junk data:"
@@ -292,13 +299,13 @@ msgstr ""
 "entfernen:"
 
 #. (itstool) path: note/code
-#: yelp/C/corrupted.page:28
+#: yelp/C/corrupted.page:29
 #, no-wrap
 msgid "ffmpeg -i in.mp3 out.mp3"
 msgstr "ffmpeg -i in.mp3 out.mp3"
 
 #. (itstool) path: note/p
-#: yelp/C/corrupted.page:29
+#: yelp/C/corrupted.page:30 yelp/C/corrupted.page:42
 msgid ""
 "where <code>in.mp3</code> is the file path of the corrupted file and "
 "<code>out.mp3</code> is the path to export the re-encoded file."
@@ -308,7 +315,7 @@ msgstr ""
 "soll."
 
 #. (itstool) path: note/p
-#: yelp/C/corrupted.page:32
+#: yelp/C/corrupted.page:33
 msgid ""
 "You can also use <link href=\"https://www.freac.org\">fre:ac</link> to re-"
 "encode files without convertion to another format."
@@ -316,6 +323,36 @@ msgstr ""
 "Die kannst alternativ <link href=\"https://www.freac.org\">fre:ac</link> "
 "nutzen um Dateien neu zu enkodieren, ohne sie in ein anderes Format "
 "umzuwandeln."
+
+#. (itstool) path: section/title
+#: yelp/C/corrupted.page:37
+#, fuzzy
+msgid "Invalid Album Art"
+msgstr "Ungültige Daten"
+
+#. (itstool) path: section/p
+#: yelp/C/corrupted.page:38
+msgid ""
+"An invalid or corrupted embedded album art format can cause issues in "
+"displaying music files in Tagger."
+msgstr ""
+
+#. (itstool) path: note/p
+#: yelp/C/corrupted.page:40
+#, fuzzy
+msgid ""
+"FFmpeg can be used to fix album art issues. Run the following command to "
+"remove album art data from a file:"
+msgstr ""
+"FFmpeg kann genutzt werden um beschädigte Dateien zu reparieren. Führe dazu "
+"den folgenden Befehl aus um die Datei neu zu enkodieren und Junk-Daten zu "
+"entfernen:"
+
+#. (itstool) path: note/code
+#: yelp/C/corrupted.page:41
+#, no-wrap
+msgid "ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3"
+msgstr ""
 
 #. (itstool) path: info/title
 #: yelp/C/format-strings.page:8

@@ -48,9 +48,9 @@ public class MusicLibrary : IDisposable
     /// </summary>
     public List<MusicFile> MusicFiles { get; init; }
     /// <summary>
-    /// The list of paths of corrupted music files
+    /// The list of CorruptedMusicFile objects
     /// </summary>
-    public List<string> CorruptedFiles { get; init; }
+    public List<CorruptedMusicFile> CorruptedFiles { get; init; }
     /// <summary>
     /// A list of genres in the library
     /// </summary>
@@ -99,7 +99,7 @@ public class MusicLibrary : IDisposable
         IncludeSubfolders = true;
         SortFilesBy = SortBy.Filename;
         MusicFiles = new List<MusicFile>();
-        CorruptedFiles = new List<string>();
+        CorruptedFiles = new List<CorruptedMusicFile>();
         Genres = new List<string>();
         if (Directory.Exists(Path))
         {
@@ -225,10 +225,9 @@ public class MusicLibrary : IDisposable
                         Genres.Add(musicFile.Genre);
                     }
                 }
-                catch (FileLoadException e)
+                catch (CorruptedMusicFileException e)
                 {
-                    CorruptedFiles.Add(path);
-                    Console.WriteLine(e);
+                    CorruptedFiles.Add(new CorruptedMusicFile(path, e.CorruptionType));
                 }
                 i++;
                 LoadingProgressUpdated?.Invoke(this, (i, filesCount, $"{i}/{filesCount}"));

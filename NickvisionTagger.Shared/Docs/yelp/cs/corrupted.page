@@ -22,10 +22,11 @@
 
 <title>Poškozené soubory</title>
 <p>Tato stránka vysvětluje hudební soubory s poškozenými daty.</p>
+<p>Pokud <app>Označovač</app> nedokáže přečíst soubor, bude ignorován a bude zobrazen dialog se seznamem poškozených souborů, které následně můžete spravovat a opravit.</p>
+<p>This dialog will offer the option to have Tagger run the appropriate command to try and fix the corrupted file.</p>
 <section>
     <title>Neplatná data</title>
     <p>Neplatná hlavička značky nebo nevyžádaná data v souboru mohou způsobit problémy při čtení informací o souboru a dokonce i problémy s přehráváním. Některé webové stránky přidávají do souborů další nevyžádaná data, která následně způsobují poškození.</p>
-    <p>Pokud <app>Označovač</app> nedokáže přečíst soubor, bude ignorován a bude zobrazen dialog se seznamem poškozených souborů, které následně můžete spravovat a opravit.</p>
     <note style="advanced">
         <p>Pro opravení problémů s poškozením lze použít FFmpeg. Spusťte následující příkaz pro opětovné zakódování značky souboru a odebrání nevyžádaných dat:</p>
         <code>ffmpeg -i vstup.mp3 výstup.mp3</code>
@@ -33,6 +34,15 @@
     </note>
     <note style="advanced">
          <p>Pro opětovné kódování souborů bez převodu na jiný formát můžete použít také službu <link href="https://www.freac.org">fre:ac</link>.</p>
+    </note>
+</section>
+<section>
+    <title>Invalid Album Art</title>
+    <p>An invalid or corrupted embedded album art format can cause issues in displaying music files in Tagger.</p>
+    <note style="advanced">
+        <p>FFmpeg can be used to fix album art issues. Run the following command to remove album art data from a file:</p>
+        <code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3</code>
+        <p>kde je <code>vstup.mp3</code> cesta k poškozenému souboru a <code>výstup.mp3</code> cesta k exportovanému opětovně kódovanému souboru.</p>
     </note>
 </section>
 </page>

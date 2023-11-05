@@ -7,12 +7,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-22 23:07-0400\n"
+"POT-Creation-Date: 2023-11-05 13:06-0500\n"
 "PO-Revision-Date: 2023-10-27 21:06+0000\n"
-"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted.weblate"
-".org>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/"
-"nickvision-tagger/app/es/>\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@users.noreply.hosted."
+"weblate.org>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/nickvision-"
+"tagger/app/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -176,8 +176,8 @@ msgstr "Información de búsqueda avanzada"
 
 #: ../../../Controllers/MainWindowController.cs:188
 #: ../../../Controllers/MainWindowController.cs:1355
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:687
-#: ../../../Models/MusicFile.cs:814
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:701
+#: ../../../Models/MusicFile.cs:828
 msgid "album"
 msgstr "álbum"
 
@@ -201,8 +201,8 @@ msgstr "Artista del álbum"
 
 #: ../../../Controllers/MainWindowController.cs:189
 #: ../../../Controllers/MainWindowController.cs:1404
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:715
-#: ../../../Models/MusicFile.cs:830
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:729
+#: ../../../Models/MusicFile.cs:844
 msgid "albumartist"
 msgstr "artistadelálbum"
 
@@ -271,8 +271,8 @@ msgstr "¿Aplicar cambios?"
 
 #: ../../../Controllers/MainWindowController.cs:188
 #: ../../../Controllers/MainWindowController.cs:1351
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:683
-#: ../../../Models/MusicFile.cs:810
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:697
+#: ../../../Models/MusicFile.cs:824
 msgid "artist"
 msgstr "artista"
 
@@ -309,15 +309,15 @@ msgstr "Pulsaciones por minuto"
 
 #: ../../../Controllers/MainWindowController.cs:190
 #: ../../../Controllers/MainWindowController.cs:1416
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:727
-#: ../../../Models/MusicFile.cs:842
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:741
+#: ../../../Models/MusicFile.cs:856
 msgid "beatsperminute"
 msgstr "pulsacionesporminuto"
 
 #: ../../../Controllers/MainWindowController.cs:190
 #: ../../../Controllers/MainWindowController.cs:1416
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:727
-#: ../../../Models/MusicFile.cs:842
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:741
+#: ../../../Models/MusicFile.cs:856
 msgid "bpm"
 msgstr "ppm"
 
@@ -391,8 +391,8 @@ msgstr "Cerrar la biblioteca"
 
 #: ../../../Controllers/MainWindowController.cs:190
 #: ../../../Controllers/MainWindowController.cs:1412
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:723
-#: ../../../Models/MusicFile.cs:838
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:737
+#: ../../../Models/MusicFile.cs:852
 msgid "comment"
 msgstr "comentario"
 
@@ -403,8 +403,8 @@ msgstr "Comentario"
 
 #: ../../../Controllers/MainWindowController.cs:191
 #: ../../../Controllers/MainWindowController.cs:1431
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:735
-#: ../../../Models/MusicFile.cs:846
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:749
+#: ../../../Models/MusicFile.cs:860
 msgid "composer"
 msgstr "compositor"
 
@@ -462,7 +462,7 @@ msgstr "Información de depuración copiada en el portapapeles."
 msgid "Copy Fingerprint To Clipboard"
 msgstr "Copiar firma al portapapeles"
 
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:27
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:30
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
 msgid "Corrupted Files Found"
 msgstr "Se han encontrado archivos dañados"
@@ -529,8 +529,8 @@ msgstr "Borrando las etiquetas..."
 
 #: ../../../Controllers/MainWindowController.cs:191
 #: ../../../Controllers/MainWindowController.cs:1435
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:739
-#: ../../../Models/MusicFile.cs:850
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:753
+#: ../../../Models/MusicFile.cs:864
 msgid "description"
 msgstr "descripción"
 
@@ -608,15 +608,15 @@ msgstr "Descartando las etiquetas..."
 
 #: ../../../Controllers/MainWindowController.cs:191
 #: ../../../Controllers/MainWindowController.cs:1439
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:743
-#: ../../../Models/MusicFile.cs:854
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:757
+#: ../../../Models/MusicFile.cs:868
 msgid "discnumber"
 msgstr "númerodeldisco"
 
 #: ../../../Controllers/MainWindowController.cs:192
 #: ../../../Controllers/MainWindowController.cs:1454
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:751
-#: ../../../Models/MusicFile.cs:858
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:765
+#: ../../../Models/MusicFile.cs:872
 msgid "disctotal"
 msgstr "totaldeldisco"
 
@@ -785,8 +785,8 @@ msgstr "Introduzca aquí el año"
 msgid "Error"
 msgstr "Error"
 
-#: ../../../Models/MusicFile.cs:438 ../../../Models/MusicFile.cs:895
-#: ../../../Models/MusicFile.cs:1060
+#: ../../../Models/MusicFile.cs:446 ../../../Models/MusicFile.cs:909
+#: ../../../Models/MusicFile.cs:1074
 msgid "ERROR"
 msgstr "ERROR"
 
@@ -857,6 +857,12 @@ msgstr "Error al exportar portada del álbum a un archivo"
 msgid "File"
 msgstr "Archivo"
 
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:61
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:64
+#, fuzzy
+msgid "File fixed successfully"
+msgstr "Archivo de la lista de reproducción creado correctamente."
+
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:114
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:181
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:49
@@ -902,6 +908,12 @@ msgstr "Firma"
 msgid "Fingerprint was copied to clipboard."
 msgstr "La firma se ha copiado al portapapeles."
 
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:50
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:47
+#, fuzzy
+msgid "Fix File"
+msgstr "Archivo de música"
+
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1480
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1377
 msgid "Folder Mode"
@@ -935,8 +947,8 @@ msgstr "Fyodor Sobolev"
 
 #: ../../../Controllers/MainWindowController.cs:190
 #: ../../../Controllers/MainWindowController.cs:1408
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:719
-#: ../../../Models/MusicFile.cs:834
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:733
+#: ../../../Models/MusicFile.cs:848
 msgid "genre"
 msgstr "género"
 
@@ -970,7 +982,7 @@ msgstr "Altura"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:599
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:604
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:609
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:29
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:32
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:153
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:450
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:461
@@ -1061,7 +1073,7 @@ msgstr[1] "Cargados {0} archivos de música."
 msgid "Loading music files from library..."
 msgstr "Cargando los archivos de música de la biblioteca..."
 
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:802
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:816
 msgid "lyrics"
 msgstr "letras"
 
@@ -1219,7 +1231,7 @@ msgstr "Desfase (en milisegundos)"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1228
 #: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:27
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:28
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:31
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:488
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1212
 msgid "OK"
@@ -1256,9 +1268,7 @@ msgstr "Abrir"
 msgid "Open a library with music to get started"
 msgstr "Abra una biblioteca con música para empezar"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:46
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:732
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:43
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:107
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:162
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:16
@@ -1355,8 +1365,8 @@ msgstr "Nombre de la propiedad"
 
 #: ../../../Controllers/MainWindowController.cs:192
 #: ../../../Controllers/MainWindowController.cs:1469
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:759
-#: ../../../Models/MusicFile.cs:862
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:773
+#: ../../../Models/MusicFile.cs:876
 msgid "publisher"
 msgstr "editor"
 
@@ -1372,8 +1382,8 @@ msgstr "Fecha de publicación"
 
 #: ../../../Controllers/MainWindowController.cs:192
 #: ../../../Controllers/MainWindowController.cs:1473
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:763
-#: ../../../Models/MusicFile.cs:866
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:777
+#: ../../../Models/MusicFile.cs:880
 msgid "publishingdate"
 msgstr "fechadepublicación"
 
@@ -1599,7 +1609,7 @@ msgstr "Tema"
 msgid "This file does not have a valid fingerprint"
 msgstr "Este archivo no tiene una huella digital válida"
 
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:30
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:33
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
 msgid ""
 "This music folder contains music files that have corrupted tags. The "
@@ -1620,8 +1630,8 @@ msgstr "Marca de tiempo (hh:mm:ss o mm:ss.xx)"
 
 #: ../../../Controllers/MainWindowController.cs:188
 #: ../../../Controllers/MainWindowController.cs:1347
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:679
-#: ../../../Models/MusicFile.cs:806
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:693
+#: ../../../Models/MusicFile.cs:820
 msgid "title"
 msgstr "título"
 
@@ -1640,8 +1650,8 @@ msgstr "Demasiados archivos seleccionados"
 
 #: ../../../Controllers/MainWindowController.cs:189
 #: ../../../Controllers/MainWindowController.cs:1374
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:699
-#: ../../../Models/MusicFile.cs:822
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:713
+#: ../../../Models/MusicFile.cs:836
 msgid "track"
 msgstr "pista"
 
@@ -1655,8 +1665,8 @@ msgstr "Pista"
 
 #: ../../../Controllers/MainWindowController.cs:189
 #: ../../../Controllers/MainWindowController.cs:1389
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:707
-#: ../../../Models/MusicFile.cs:826
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:721
+#: ../../../Models/MusicFile.cs:840
 msgid "tracktotal"
 msgstr "pistatotal"
 
@@ -1697,6 +1707,12 @@ msgstr "No se puede descargar e instalar la actualización."
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:316
 msgid "Unable to export to LRC."
 msgstr "No se puede exportar al LRC."
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:61
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:64
+#, fuzzy
+msgid "Unable to fix file"
+msgstr "No se ha podido cargar el archivo de imagen"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:294
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:281
@@ -1801,8 +1817,8 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:189
 #: ../../../Controllers/MainWindowController.cs:1359
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:691
-#: ../../../Models/MusicFile.cs:818
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:705
+#: ../../../Models/MusicFile.cs:832
 msgid "year"
 msgstr "año"
 

@@ -80,7 +80,7 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// The list of paths to corrupted music files in the music library
     /// </summary>
-    public List<string> CorruptedFiles => _musicLibrary?.CorruptedFiles ?? new List<string>();
+    public List<CorruptedMusicFile> CorruptedFiles => _musicLibrary?.CorruptedFiles ?? new List<CorruptedMusicFile>();
     /// <summary>
     /// The previous format string used by filename to tag
     /// </summary>
@@ -164,7 +164,7 @@ public class MainWindowController : IDisposable
         }
         Aura.Active.SetConfig<Configuration>("config");
         Configuration.Current.Saved += ConfigurationSaved;
-        AppInfo.Version = "2023.11.0";
+        AppInfo.Version = "2023.11.1-next";
         AppInfo.ShortName = _("Tagger");
         AppInfo.Description = _("Tag your music");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");

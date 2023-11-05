@@ -7,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-22 23:07-0400\n"
+"POT-Creation-Date: 2023-11-05 13:06-0500\n"
 "PO-Revision-Date: 2023-11-05 16:25+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/"
-"nickvision-tagger/app/fi/>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-"
+"tagger/app/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -167,8 +167,8 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:188
 #: ../../../Controllers/MainWindowController.cs:1355
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:687
-#: ../../../Models/MusicFile.cs:814
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:701
+#: ../../../Models/MusicFile.cs:828
 msgid "album"
 msgstr "albumi"
 
@@ -192,8 +192,8 @@ msgstr "Albumin esittäjä"
 
 #: ../../../Controllers/MainWindowController.cs:189
 #: ../../../Controllers/MainWindowController.cs:1404
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:715
-#: ../../../Models/MusicFile.cs:830
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:729
+#: ../../../Models/MusicFile.cs:844
 msgid "albumartist"
 msgstr ""
 
@@ -262,8 +262,8 @@ msgstr "Toteutetaanko muutokset?"
 
 #: ../../../Controllers/MainWindowController.cs:188
 #: ../../../Controllers/MainWindowController.cs:1351
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:683
-#: ../../../Models/MusicFile.cs:810
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:697
+#: ../../../Models/MusicFile.cs:824
 msgid "artist"
 msgstr "esittäjä"
 
@@ -300,15 +300,15 @@ msgstr "Tempo"
 
 #: ../../../Controllers/MainWindowController.cs:190
 #: ../../../Controllers/MainWindowController.cs:1416
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:727
-#: ../../../Models/MusicFile.cs:842
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:741
+#: ../../../Models/MusicFile.cs:856
 msgid "beatsperminute"
 msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:190
 #: ../../../Controllers/MainWindowController.cs:1416
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:727
-#: ../../../Models/MusicFile.cs:842
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:741
+#: ../../../Models/MusicFile.cs:856
 msgid "bpm"
 msgstr ""
 
@@ -382,8 +382,8 @@ msgstr "Sulje kirjasto"
 
 #: ../../../Controllers/MainWindowController.cs:190
 #: ../../../Controllers/MainWindowController.cs:1412
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:723
-#: ../../../Models/MusicFile.cs:838
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:737
+#: ../../../Models/MusicFile.cs:852
 msgid "comment"
 msgstr "kommentti"
 
@@ -394,8 +394,8 @@ msgstr "Kommentti"
 
 #: ../../../Controllers/MainWindowController.cs:191
 #: ../../../Controllers/MainWindowController.cs:1431
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:735
-#: ../../../Models/MusicFile.cs:846
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:749
+#: ../../../Models/MusicFile.cs:860
 msgid "composer"
 msgstr "säveltäjä"
 
@@ -453,7 +453,7 @@ msgstr "Vianjäljitystiedot on kopioitu leikepöydälle."
 msgid "Copy Fingerprint To Clipboard"
 msgstr "Kopioi sormenjälki leikepöydälle"
 
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:27
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:30
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:31
 msgid "Corrupted Files Found"
 msgstr "Rikkoutuneita tiedostoja löytynyt"
@@ -520,8 +520,8 @@ msgstr "Poistetaan tageja..."
 
 #: ../../../Controllers/MainWindowController.cs:191
 #: ../../../Controllers/MainWindowController.cs:1435
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:739
-#: ../../../Models/MusicFile.cs:850
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:753
+#: ../../../Models/MusicFile.cs:864
 msgid "description"
 msgstr "kuvaus"
 
@@ -588,15 +588,15 @@ msgstr "Hylätään tagit..."
 
 #: ../../../Controllers/MainWindowController.cs:191
 #: ../../../Controllers/MainWindowController.cs:1439
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:743
-#: ../../../Models/MusicFile.cs:854
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:757
+#: ../../../Models/MusicFile.cs:868
 msgid "discnumber"
 msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:192
 #: ../../../Controllers/MainWindowController.cs:1454
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:751
-#: ../../../Models/MusicFile.cs:858
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:765
+#: ../../../Models/MusicFile.cs:872
 #, fuzzy
 msgid "disctotal"
 msgstr "kappale"
@@ -763,8 +763,8 @@ msgstr ""
 msgid "Error"
 msgstr "Virhe"
 
-#: ../../../Models/MusicFile.cs:438 ../../../Models/MusicFile.cs:895
-#: ../../../Models/MusicFile.cs:1060
+#: ../../../Models/MusicFile.cs:446 ../../../Models/MusicFile.cs:909
+#: ../../../Models/MusicFile.cs:1074
 msgid "ERROR"
 msgstr "VIRHE"
 
@@ -836,6 +836,12 @@ msgstr ""
 msgid "File"
 msgstr "Tiedosto"
 
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:61
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:64
+#, fuzzy
+msgid "File fixed successfully"
+msgstr "Soittolistatiedosto luotu onnistuneesti."
+
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:114
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:181
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:49
@@ -881,6 +887,12 @@ msgstr "Sormenjälki"
 msgid "Fingerprint was copied to clipboard."
 msgstr "Sormenjälki kopioitiin leikepöydälle."
 
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:50
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:47
+#, fuzzy
+msgid "Fix File"
+msgstr "Musiikkitiedosto"
+
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1480
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1377
 msgid "Folder Mode"
@@ -914,8 +926,8 @@ msgstr "Fyodor Sobolev"
 
 #: ../../../Controllers/MainWindowController.cs:190
 #: ../../../Controllers/MainWindowController.cs:1408
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:719
-#: ../../../Models/MusicFile.cs:834
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:733
+#: ../../../Models/MusicFile.cs:848
 msgid "genre"
 msgstr "tyylilaji"
 
@@ -949,7 +961,7 @@ msgstr "Korkeus"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:599
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:604
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:609
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:29
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:32
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:153
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:450
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:461
@@ -1040,7 +1052,7 @@ msgstr[1] "Ladattiin {0} musiikkitiedostoa."
 msgid "Loading music files from library..."
 msgstr "Ladataan musiikkitiedostoja kirjastosta..."
 
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:802
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:816
 #, fuzzy
 msgid "lyrics"
 msgstr "Sanoitukset"
@@ -1198,7 +1210,7 @@ msgstr "Siirtymä (millisekunneissa)"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1228
 #: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:27
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:28
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:31
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:488
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1212
 msgid "OK"
@@ -1233,9 +1245,7 @@ msgstr "Avaa"
 msgid "Open a library with music to get started"
 msgstr "Aloita avaamalla musiikkia sisältävä kirjasto"
 
-#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:46
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:732
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:43
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:107
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:162
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:16
@@ -1332,8 +1342,8 @@ msgstr "Ominaisuuden nimi"
 
 #: ../../../Controllers/MainWindowController.cs:192
 #: ../../../Controllers/MainWindowController.cs:1469
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:759
-#: ../../../Models/MusicFile.cs:862
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:773
+#: ../../../Models/MusicFile.cs:876
 msgid "publisher"
 msgstr "julkaisija"
 
@@ -1349,8 +1359,8 @@ msgstr "Julkaisupäivä"
 
 #: ../../../Controllers/MainWindowController.cs:192
 #: ../../../Controllers/MainWindowController.cs:1473
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:763
-#: ../../../Models/MusicFile.cs:866
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:777
+#: ../../../Models/MusicFile.cs:880
 #, fuzzy
 msgid "publishingdate"
 msgstr "julkaisija"
@@ -1571,7 +1581,7 @@ msgstr "Teema"
 msgid "This file does not have a valid fingerprint"
 msgstr "Tällä tiedostolla ei ole kelvollista sormenjälkeä"
 
-#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:30
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:33
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:36
 msgid ""
 "This music folder contains music files that have corrupted tags. The "
@@ -1589,8 +1599,8 @@ msgstr "Aikaleima (hh:mm:ss tai mm:ss.xx)"
 
 #: ../../../Controllers/MainWindowController.cs:188
 #: ../../../Controllers/MainWindowController.cs:1347
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:679
-#: ../../../Models/MusicFile.cs:806
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:693
+#: ../../../Models/MusicFile.cs:820
 msgid "title"
 msgstr "nimi"
 
@@ -1609,8 +1619,8 @@ msgstr "Liian monta tiedostoa valittu"
 
 #: ../../../Controllers/MainWindowController.cs:189
 #: ../../../Controllers/MainWindowController.cs:1374
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:699
-#: ../../../Models/MusicFile.cs:822
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:713
+#: ../../../Models/MusicFile.cs:836
 msgid "track"
 msgstr "kappale"
 
@@ -1624,8 +1634,8 @@ msgstr "Kappale"
 
 #: ../../../Controllers/MainWindowController.cs:189
 #: ../../../Controllers/MainWindowController.cs:1389
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:707
-#: ../../../Models/MusicFile.cs:826
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:721
+#: ../../../Models/MusicFile.cs:840
 #, fuzzy
 msgid "tracktotal"
 msgstr "kappale"
@@ -1666,6 +1676,12 @@ msgstr "Päivityksen lataaminen ja asentaminen ei onnistunut."
 #, fuzzy
 msgid "Unable to export to LRC."
 msgstr "Ei voi tallentaa {0}."
+
+#: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:61
+#: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:64
+#, fuzzy
+msgid "Unable to fix file"
+msgstr "Kuvatiedoston lataaminen ei onnistu"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:294
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:281
@@ -1764,8 +1780,8 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:189
 #: ../../../Controllers/MainWindowController.cs:1359
-#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:691
-#: ../../../Models/MusicFile.cs:818
+#: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:705
+#: ../../../Models/MusicFile.cs:832
 msgid "year"
 msgstr "vuosi"
 
