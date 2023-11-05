@@ -38,6 +38,7 @@ public sealed partial class CorruptedFilesDialog : ContentDialog
             }
             var button = new Button()
             {
+                VerticalAlignment = VerticalAlignment.Center,
                 Content = new SymbolIcon(Symbol.OpenLocal)
             };
             ToolTipService.SetToolTip(button, _("Open Folder"));

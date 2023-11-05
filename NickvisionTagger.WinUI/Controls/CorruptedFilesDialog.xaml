@@ -12,15 +12,15 @@
 
     <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto" MinWidth="500" SizeChanged="ScrollViewer_SizeChanged">
         <StackPanel x:Name="StackPanel" Orientation="Vertical" Spacing="6">
-            <Grid ColumnSpacing="6">
+            <Grid ColumnSpacing="12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock x:Name="LblMessage" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBlock x:Name="LblMessage" Grid.Column="0" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
 
-                <Button Grid.Column="1" Click="Help">
+                <Button Grid.Column="1" VerticalAlignment="Center" Click="Help">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE11B;"/>
