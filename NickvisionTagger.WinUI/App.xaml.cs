@@ -23,7 +23,7 @@ public partial class App : Application
         InitializeComponent();
         _controller = new MainWindowController(Array.Empty<string>());
         _controller.AppInfo.Changelog =
-            @"- Fixed an issue where Tagger crashed on loading album art for some files
+            @"- Tagger will now display files with corrupted album art as corrupted files
 - Updated translations (Thanks everyone on Weblate!)";
         if (_controller.Theme != Theme.System)
         {
