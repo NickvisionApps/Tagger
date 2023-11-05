@@ -545,7 +545,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 var i = 1;
                 while (File.Exists(newPath))
                 {
-                    newPath = newPath.Remove(newPath.IndexOf($" ({i - 1})")) + $" ({i})";
+                    var oldNumber = $" ({i - 1})";
+                    newPath = newPath.Remove(newPath.IndexOf(oldNumber), oldNumber.Length) + $" ({i})";
                 }
                 File.Move(Path, newPath);
                 Path = newPath;
