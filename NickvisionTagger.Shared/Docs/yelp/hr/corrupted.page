@@ -16,10 +16,10 @@
 
 <title>Oštećene datoteke</title>
 <p>Ova stranica objašnjava glazbene datoteke s oštećenim podacima.</p>
+<p>Ako <app>Tagger</app> ne može čitati datoteku, Tagger će je zanemariti i prikazat će se dijaloški okvir s popisom oštećenih datoteka za upravljanje i ispravljanje tih datoteka.</p>
 <section>
     <title>Neispravni podaci</title>
     <p>Neispravno zaglavlje oznake ili nevaljani podaci u datoteci mogu prouzročiti probleme prilikom čitanja informacija o datoteci te probleme s reprodukcijom. Neke web stranice dodaju dodatne nevaljane podatke u datoteke što uzrokuje oštećenje.</p>
-    <p>Ako <app>Tagger</app> ne može čitati datoteku, Tagger će je zanemariti i prikazat će se dijaloški okvir s popisom oštećenih datoteka za upravljanje i ispravljanje tih datoteka.</p>
     <note style="advanced">
         <p>FFmpeg se može koristiti za ispravljanje oštećene datoeke. Pokreni sljedeću naredbu za ponovno kodiranje oznake datoteke i uklanjanje nevaljanih podataka:</p>
         <code>ffmpeg -i in.mp3 out.mp3</code>
@@ -27,6 +27,15 @@
     </note>
     <note style="advanced">
          <p>Za ponovno kodiranje datoteka bez pretvaranja u jedan drugi format također možete koristiti <link href="https://www.freac.org">fre:ac</link>.</p>
+    </note>
+</section>
+<section>
+    <title>Invalid Album Art</title>
+    <p>An invalid or corrupted embedded album art format can cause issues in displaying music files in Tagger.</p>
+    <note style="advanced">
+        <p>FFmpeg can be used to fix album art issues. Run the following command to remove album art data from a file:</p>
+        <code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3</code>
+        <p>gdje je <code>in.mp3</code> staza oštećene datoteke, a <code>out.mp3</code> staza za izvoz ponovo kodirane datoteke.</p>
     </note>
 </section>
 </page>

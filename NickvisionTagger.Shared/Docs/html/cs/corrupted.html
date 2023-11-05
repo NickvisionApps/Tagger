@@ -17,12 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
 <a class="trail" href="index.html" title="Nápověda aplikace Označovač">Nápověda aplikace Označovač</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Poškozené soubory</span></h1></div>
 <div class="region">
-<div class="contents pagewide"><p class="p">Tato stránka vysvětluje hudební soubory s poškozenými daty.</p></div>
+<div class="contents pagewide">
+<p class="p">Tato stránka vysvětluje hudební soubory s poškozenými daty.</p>
+<p class="p">Pokud <span class="app">Označovač</span> nedokáže přečíst soubor, bude ignorován a bude zobrazen dialog se seznamem poškozených souborů, které následně můžete spravovat a opravit.</p>
+</div>
 <section id=""><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Neplatná data</span></h2></div>
 <div class="region"><div class="contents pagewide">
 <p class="p">Neplatná hlavička značky nebo nevyžádaná data v souboru mohou způsobit problémy při čtení informací o souboru a dokonce i problémy s přehráváním. Některé webové stránky přidávají do souborů další nevyžádaná data, která následně způsobují poškození.</p>
-<p class="p">Pokud <span class="app">Označovač</span> nedokáže přečíst soubor, bude ignorován a bude zobrazen dialog se seznamem poškozených souborů, které následně můžete spravovat a opravit.</p>
 <div class="note note-advanced" title="Pokročilé">
 <svg height="24" width="24" version="1.1">
  <g>
@@ -58,6 +60,31 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
  </g>
 </svg><div class="inner"><div class="region"><div class="contents"><p class="p">Pro opětovné kódování souborů bez převodu na jiný formát můžete použít také službu <span class="link"><a href="https://www.freac.org" title="https://www.freac.org">fre:ac</a></span>.</p></div></div></div>
+</div>
+</div></div>
+</div></section><section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Invalid Album Art</span></h2></div>
+<div class="region"><div class="contents pagewide">
+<p class="p">An invalid or corrupted embedded album art format can cause issues in displaying music files in Tagger.</p>
+<div class="note note-advanced" title="Pokročilé">
+<svg height="24" width="24" version="1.1">
+ <g>
+  <path class="yelp-svg-fill" d="m5.4473 12.572c-2.039 0.957-3.4473 3.019-3.4473 5.428v4h20v-4c0-2.406-1.406-4.466-3.441-5.424a8 8 0 0 1 -6.559 3.424 8 8 0 0 1 -6.5527 -3.428z"></path>
+  <path class="yelp-svg-fill" d="m12 3a5 5 0 0 0 -5 5 5 5 0 0 0 5 5 5 5 0 0 0 5 -5 5 5 0 0 0 -5 -5zm0 3a2 2 0 0 1 2 2 2 2 0 0 1 -2 2 2 2 0 0 1 -2 -2 2 2 0 0 1 2 -2z"></path>
+  <path class="yelp-svg-fill" d="m15.312 6 3.688 1v2l-3.4688 1z"></path>
+  <path class="yelp-svg-fill" d="m14 11.312-1 3.688h-2l-1-3.469z"></path>
+  <path class="yelp-svg-fill" d="m10 4.6875 1-3.6875h2l1 3.4688z"></path>
+  <path class="yelp-svg-fill" d="m8.6875 10-3.6875-1v-2l3.4688-1z"></path>
+  <path class="yelp-svg-fill" d="m12.928 4.2435 3.3146-1.9003 1.4142 1.4142-1.7457 3.1599z"></path>
+  <path class="yelp-svg-fill" d="m15.757 8.9281 1.9003 3.3146-1.4142 1.4142-3.1599-1.7457z"></path>
+  <path class="yelp-svg-fill" d="m8.2435 7.0719-1.9004-3.3145 1.4143-1.4143 3.1596 1.7457z"></path>
+  <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
+ </g>
+</svg><div class="inner"><div class="region"><div class="contents">
+<p class="p">FFmpeg can be used to fix album art issues. Run the following command to remove album art data from a file:</p>
+<div class="code"><pre class="contents"><code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3</code></pre></div>
+<p class="p">kde je <span class="code">vstup.mp3</span> cesta k poškozenému souboru a <span class="code">výstup.mp3</span> cesta k exportovanému opětovně kódovanému souboru.</p>
+</div></div></div>
 </div>
 </div></div>
 </div></section><section class="links" role="navigation"><div class="inner">

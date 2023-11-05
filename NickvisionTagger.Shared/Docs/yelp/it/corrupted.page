@@ -16,10 +16,10 @@
 
 <title>File corrotti</title>
 <p>Questa pagina descrive i brani con dati corrotti.</p>
+<p>Se <app>Tagger</app> non è in grado di leggere un file, questo sarà ignorato. Al termine della procedura verrà visualizzata una schermata con l'elenco dei file corrotti da sistemare.</p>
 <section>
     <title>Dati non validi</title>
     <p>Un'intestazione errata o dati spuri possono causare problemi durante la lettura delle informazioni del file o causare addirittura problemi di riproduzione del brano. Alcuni siti internet possono aggiungere dati extra che possono di conseguenza corrompere il file.</p>
-    <p>Se <app>Tagger</app> non è in grado di leggere un file, questo sarà ignorato. Al termine della procedura verrà visualizzata una schermata con l'elenco dei file corrotti da sistemare.</p>
     <note style="advanced">
         <p>FFmpeg può essere usato per correggere problemi di corruzione dei file. Esegui il seguente comando per codificare nuovamente i tag del file e rimuovere dati spuri:</p>
         <code>ffmpeg -i in.mp3 out.mp3</code>
@@ -27,6 +27,15 @@
     </note>
     <note style="advanced">
          <p>Puoi usare anche <link href="https://www.freac.org">fre:ac</link> per codificare nuovamente i file senza convertirli in altri formati.</p>
+    </note>
+</section>
+<section>
+    <title>Invalid Album Art</title>
+    <p>An invalid or corrupted embedded album art format can cause issues in displaying music files in Tagger.</p>
+    <note style="advanced">
+        <p>FFmpeg can be used to fix album art issues. Run the following command to remove album art data from a file:</p>
+        <code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3</code>
+        <p>dove <code>in.mp3</code> è il percorso che punta al file corrotto e <code>out.mp3</code> è il percorso in cui salvare i file ricodificato.</p>
     </note>
 </section>
 </page>

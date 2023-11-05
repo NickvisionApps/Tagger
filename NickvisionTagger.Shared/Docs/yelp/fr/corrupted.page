@@ -22,10 +22,10 @@
 
 <title>Fichiers corrompus</title>
 <p>Cette page explique les fichiers musicaux avec des données corrompues.</p>
+<p>Si <app>Tagger</app> est incapable de lire un fichier, il sera ignoré et une fenêtre de dialogue listera les fichiers corrompus pour que vous puissiez les traiter.</p>
 <section>
     <title>Données invalides</title>
     <p>Un intitulé de balise invalide ou des données incorrectes peuvent créer des problèmes quant à la lecture des informations sur un fichier, et même des erreurs de lecture. Certains sites web ajoutent des données supplémentaires excessives dans les fichiers, pouvant les corrompre.</p>
-    <p>Si <app>Tagger</app> est incapable de lire un fichier, il sera ignoré et une fenêtre de dialogue listera les fichiers corrompus pour que vous puissiez les traiter.</p>
     <note style="advanced">
         <p>FFmpeg peut être utilisé pour corriger les problèmes de corruption. Exécutez la commande suivante pour ré-encoder les balises d’un fichier et supprimer les données inutiles :</p>
         <code>ffmpeg -i in.mp3 out.mp3</code>
@@ -33,6 +33,15 @@
     </note>
     <note style="advanced">
          <p>Vous pouvez aussi utiliser <link href="https://www.freac.org">fre:ac</link> pour ré-encoder les fichiers sans conversion dans un autre format.</p>
+    </note>
+</section>
+<section>
+    <title>Invalid Album Art</title>
+    <p>An invalid or corrupted embedded album art format can cause issues in displaying music files in Tagger.</p>
+    <note style="advanced">
+        <p>FFmpeg can be used to fix album art issues. Run the following command to remove album art data from a file:</p>
+        <code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3</code>
+        <p>où <code>in.mp3</code> est le chemin d’accès du fichier corrompu et <code>out.mp3</code> est le chemin pour exporter le fichier ré-encodé.</p>
     </note>
 </section>
 </page>
