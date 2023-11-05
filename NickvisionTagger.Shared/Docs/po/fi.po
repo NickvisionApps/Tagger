@@ -1,22 +1,22 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-11-05 11:45-0500\n"
-"PO-Revision-Date: 2023-10-22 02:09+0000\n"
+"POT-Creation-Date: 2023-10-22 23:07-0400\n"
+"PO-Revision-Date: 2023-11-05 16:25+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
-"Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-"
-"tagger/docs/fi/>\n"
+"Language-Team: Finnish <https://hosted.weblate.org/projects/"
+"nickvision-tagger/docs/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
 msgid "translator-credits"
-msgstr ""
+msgstr "Jiri Grönroos"
 
 #. (itstool) path: info/title
 #: yelp/C/configuration.page:8
@@ -230,25 +230,25 @@ msgstr ""
 msgid "This page explains music files with corrupted data."
 msgstr ""
 
-#. (itstool) path: page/p
-#: yelp/C/corrupted.page:22
-msgid ""
-"If <app>Tagger</app> is unable to read a file, it will be ignored and a "
-"dialog will be displayed listing corrupted files for you to manage and fix "
-"accordingly."
+#. (itstool) path: section/title
+#: yelp/C/corrupted.page:23
+msgid "Invalid Data"
 msgstr ""
 
-#. (itstool) path: section/title
+#. (itstool) path: section/p
 #: yelp/C/corrupted.page:24
-msgid "Invalid Data"
+msgid ""
+"An invalid tag header or junk data in a file can cause issues when reading "
+"information about a file and even cause playback issues. Some websites add "
+"extra junk data in files which in turn causes corruption."
 msgstr ""
 
 #. (itstool) path: section/p
 #: yelp/C/corrupted.page:25
 msgid ""
-"An invalid tag header or junk data in a file can cause issues when reading "
-"information about a file and even cause playback issues. Some websites add "
-"extra junk data in files which in turn causes corruption."
+"If <app>Tagger</app> is unable to read a file, it will be ignored and a "
+"dialog will be displayed listing corrupted files for you to manage and fix "
+"accordingly."
 msgstr ""
 
 #. (itstool) path: note/p
@@ -265,7 +265,7 @@ msgid "ffmpeg -i in.mp3 out.mp3"
 msgstr ""
 
 #. (itstool) path: note/p
-#: yelp/C/corrupted.page:29 yelp/C/corrupted.page:41
+#: yelp/C/corrupted.page:29
 msgid ""
 "where <code>in.mp3</code> is the file path of the corrupted file and "
 "<code>out.mp3</code> is the path to export the re-encoded file."
@@ -276,31 +276,6 @@ msgstr ""
 msgid ""
 "You can also use <link href=\"https://www.freac.org\">fre:ac</link> to re-"
 "encode files without convertion to another format."
-msgstr ""
-
-#. (itstool) path: section/title
-#: yelp/C/corrupted.page:36
-msgid "Invalid Album Art"
-msgstr ""
-
-#. (itstool) path: section/p
-#: yelp/C/corrupted.page:37
-msgid ""
-"An invalid or corrupted embedded album art format can cause issues in "
-"displaying music files in Tagger."
-msgstr ""
-
-#. (itstool) path: note/p
-#: yelp/C/corrupted.page:39
-msgid ""
-"FFmpeg can be used to fix album art issues. Run the following command to "
-"remove album art data from a file:"
-msgstr ""
-
-#. (itstool) path: note/code
-#: yelp/C/corrupted.page:40
-#, no-wrap
-msgid "ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3"
 msgstr ""
 
 #. (itstool) path: info/title
