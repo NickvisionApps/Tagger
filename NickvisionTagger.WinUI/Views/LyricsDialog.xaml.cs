@@ -121,7 +121,7 @@ public sealed partial class LyricsDialog : ContentDialog
         if (!_syncRows.ContainsKey(e.Timestamp))
         {
             var row = new SyncLyricRow(e);
-            row.LyricApplied += (s, ea) => _controller.SetSynchronizedLyric(e.Timestamp, ea);
+            row.LyricChanged += (s, ea) => _controller.SetSynchronizedLyric(e.Timestamp, ea);
             row.LyricRemoved += (s, ea) => _controller.RemoveSynchronizedLyric(e.Timestamp);
             ListSync.Children.Add(row);
             _syncRows.Add(e.Timestamp, row);
