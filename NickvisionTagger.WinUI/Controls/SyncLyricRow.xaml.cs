@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
 using System;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.WinUI.Controls;
 
@@ -29,6 +30,8 @@ public sealed partial class SyncLyricRow : UserControl
         InitializeComponent();
         Card.Header = e.Timestamp.MillisecondsToTimecode();
         TxtLyric.Text = e.Lyric;
+        //Localize Strings
+        ToolTipService.SetToolTip(BtnRemove, _("Remove Lyric"));
     }
 
     /// <summary>
