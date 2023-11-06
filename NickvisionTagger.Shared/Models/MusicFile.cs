@@ -88,6 +88,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
             _invalidSystemFilenameCharacters.Remove('/');
+            _invalidWindowsFilenameCharacters.Remove('/');
         }
         SortFilesBy = SortBy.Path;
         LimitFilenameCharacters = false;
