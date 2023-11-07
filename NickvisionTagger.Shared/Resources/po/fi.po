@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-06 16:44-0500\n"
+"POT-Creation-Date: 2023-11-06 22:15-0500\n"
 "PO-Revision-Date: 2023-11-05 16:25+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/nickvision-"
@@ -135,7 +135,7 @@ msgstr "AcoustId:n käyttäjän API-avain"
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1161
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:54
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:216
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:56
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:145
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:217
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1106
@@ -198,7 +198,7 @@ msgid "albumartist"
 msgstr ""
 
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:101
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:298
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:296
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1067
 msgid "All files"
 msgstr "Kaikki tiedostot"
@@ -335,7 +335,6 @@ msgstr "Lasketaan..."
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1291
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:34
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:41
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:216
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:304
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:578
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:613
@@ -361,7 +360,7 @@ msgstr "Muutosloki"
 msgid "Check for Updates"
 msgstr "Tarkista päivitykset"
 
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:55
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:57
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:137
 msgid "Clear All Lyrics"
 msgstr "Tyhjennä kaikki sanoitukset"
@@ -763,13 +762,13 @@ msgstr ""
 msgid "Error"
 msgstr "Virhe"
 
-#: ../../../Models/MusicFile.cs:447 ../../../Models/MusicFile.cs:915
-#: ../../../Models/MusicFile.cs:1080
+#: ../../../Models/MusicFile.cs:447 ../../../Models/MusicFile.cs:919
+#: ../../../Models/MusicFile.cs:1084
 msgid "ERROR"
 msgstr "VIRHE"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:279
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:259
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:257
 msgid "Existing Lyrics"
 msgstr "Olemassa olevat sanoitukset"
 
@@ -797,7 +796,7 @@ msgid "Export Front Album Art"
 msgstr "Vie albumin etukuvitus"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:323
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:57
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:59
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:151
 #, fuzzy
 msgid "Export to LRC"
@@ -812,7 +811,7 @@ msgid "Exported front album art to file successfully"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:341
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:310
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:308
 msgid "Exported successfully to: {0}"
 msgstr "Viety onnistuneesti: {0}"
 
@@ -978,7 +977,7 @@ msgid "Hide Extras Pane"
 msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:268
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:56
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:58
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:144
 msgid "Import from LRC"
 msgstr "Tuo LRC:stä"
@@ -1023,7 +1022,7 @@ msgid "Inserting album art..."
 msgstr "Syötetään albumin kuvitusta..."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:281
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:261
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:259
 msgid "Keep Tagger's lyrics"
 msgstr ""
 
@@ -1118,7 +1117,6 @@ msgid "New Custom Property"
 msgstr "Uusi mukautettu ominaisuus"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:216
 msgid "New Synchronized Lyric"
 msgstr "Uusi synkronoitu sanoitus"
 
@@ -1594,7 +1592,7 @@ msgid "TiB"
 msgstr "TiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:216
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:55
 msgid "Timestamp (hh:mm:ss or mm:ss.xx)"
 msgstr "Aikaleima (hh:mm:ss tai mm:ss.xx)"
 
@@ -1673,7 +1671,7 @@ msgid "Unable to download and install update."
 msgstr "Päivityksen lataaminen ja asentaminen ei onnistunut."
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:345
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:316
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:314
 #, fuzzy
 msgid "Unable to export to LRC."
 msgstr "Ei voi tallentaa {0}."
@@ -1685,7 +1683,7 @@ msgid "Unable to fix file"
 msgstr "Kuvatiedoston lataaminen ei onnistu"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:294
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:281
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:279
 msgid "Unable to import from LRC."
 msgstr "Tuonti LRC:stä ei onnistu."
 
@@ -1726,7 +1724,7 @@ msgid "Update"
 msgstr "Päivitä"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:284
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:262
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:260
 msgid "Use LRC's lyrics"
 msgstr "Käytä LRC:n sanoituksia"
 
@@ -1753,7 +1751,7 @@ msgid "Web Services"
 msgstr "Verkkopalvelut"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:279
-#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:260
+#: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:258
 msgid ""
 "What would you like Tagger to do with lyrics found from the LRC file that "
 "conflict with existing lyrics of the same timestamp?"

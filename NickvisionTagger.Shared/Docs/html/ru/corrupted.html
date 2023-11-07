@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="contents pagewide">
 <p class="p">This page explains music files with corrupted data.</p>
 <p class="p">If <span class="app">Tagger</span> is unable to read a file, it will be ignored and a dialog will be displayed listing corrupted files for you to manage and fix accordingly.</p>
-<p class="p">This dialog will offer the option to have Tagger run the appropriate command to try and fix the corrupted file.</p>
+<p class="p">В этом окне будет предложена опция, при которой Tagger выполнит команду, которая, возможно, исправит повреждённый файл.</p>
 </div>
 <section id=""><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Invalid Data</span></h2></div>
@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div></div>
 </div></section><section id=""><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">Invalid Album Art</span></h2></div>
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Неправильное изображение обложки</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p">An invalid or corrupted embedded album art format can cause issues in displaying music files in Tagger.</p>
+<p class="p">Неправильное или повреждённое встроенное изображение обложки альбома может создавать проблемы при отображении музыки в Tagger.</p>
 <div class="note note-advanced" title="Подробности">
 <svg height="24" width="24" version="1.1">
  <g>
@@ -82,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
  </g>
 </svg><div class="inner"><div class="region"><div class="contents">
-<p class="p">FFmpeg can be used to fix album art issues. Run the following command to remove album art data from a file:</p>
-<div class="code"><pre class="contents"><code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3</code></pre></div>
+<p class="p">Вы можете использовать FFmpeg для исправления проблемных обложек. Выполните следующую команду для удаления обложки из файла:</p>
+<div class="code"><pre class="contents"><code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i исходный.mp3 новый.mp3</code></pre></div>
 <p class="p">
             where <span class="code">in.mp3</span> is the file path of the corrupted file and <span class="code">out.mp3</span> is the path to export the re-encoded file.
         </p>
