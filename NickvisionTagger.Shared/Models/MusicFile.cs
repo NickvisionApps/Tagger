@@ -545,13 +545,13 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 Directory.CreateDirectory(System.IO.Path.GetDirectoryName(newPath)!);
                 if(File.Exists(newPath))
                 {
-                    newPath = newPath.Remove(newPath.IndexOf(_dotExtension)) + $" (1){_dotExtension}";
-                }
-                var i = 2;
-                while (File.Exists(newPath))
-                {
-                    newPath = newPath.Remove(newPath.IndexOf($" ({i - 1})")) + $" ({i}){_dotExtension}";
-                    i++;
+                    newPath = newPath.Remove(newPath.IndexOf(_dotExtension));
+                    var i = 1;
+                    while(File.Exists($"{newPath} ({i}){_dotExtension}"))
+                    {
+                        i++;
+                    }
+                    newPath += $" ({i}){_dotExtension}";
                 }
                 File.Move(Path, newPath);
                 Path = newPath;
