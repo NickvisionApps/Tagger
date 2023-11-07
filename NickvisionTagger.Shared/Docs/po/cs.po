@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-11-05 13:06-0500\n"
-"PO-Revision-Date: 2023-10-22 02:09+0000\n"
+"PO-Revision-Date: 2023-11-07 03:13+0000\n"
 "Last-Translator: Fjuro <ifjuro@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/cs/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -259,6 +259,8 @@ msgid ""
 "This dialog will offer the option to have Tagger run the appropriate command "
 "to try and fix the corrupted file."
 msgstr ""
+"Tento dialog vám nabídne možnost nechat aplikaci spustit příslušný příkaz a "
+"pokusit se opravit poškozený soubor."
 
 #. (itstool) path: section/title
 #: yelp/C/corrupted.page:25
@@ -312,9 +314,8 @@ msgstr ""
 
 #. (itstool) path: section/title
 #: yelp/C/corrupted.page:37
-#, fuzzy
 msgid "Invalid Album Art"
-msgstr "Neplatná data"
+msgstr "Neplatný obal alba"
 
 #. (itstool) path: section/p
 #: yelp/C/corrupted.page:38
@@ -322,22 +323,23 @@ msgid ""
 "An invalid or corrupted embedded album art format can cause issues in "
 "displaying music files in Tagger."
 msgstr ""
+"Neplatný nebo poškozený formát vloženého obalu alba může způsobit problémy "
+"při zobrazování hudebních souborů v aplikaci Označovač."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:40
-#, fuzzy
 msgid ""
 "FFmpeg can be used to fix album art issues. Run the following command to "
 "remove album art data from a file:"
 msgstr ""
-"Pro opravení problémů s poškozením lze použít FFmpeg. Spusťte následující "
-"příkaz pro opětovné zakódování značky souboru a odebrání nevyžádaných dat:"
+"Pro opravení problémů s obalem alba lze použít FFmpeg. Spusťte následující "
+"příkaz pro odebrání data o obalu alba ze souboru:"
 
 #. (itstool) path: note/code
 #: yelp/C/corrupted.page:41
 #, no-wrap
 msgid "ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3"
-msgstr ""
+msgstr "ffmpeg -map 0:a -c:a copy -map_metadata -1 -i vstup.mp3 vystup.mp3"
 
 #. (itstool) path: info/title
 #: yelp/C/format-strings.page:8
