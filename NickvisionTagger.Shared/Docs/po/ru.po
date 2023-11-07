@@ -2,17 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-11-05 13:06-0500\n"
-"PO-Revision-Date: 2023-10-22 12:59+0000\n"
+"PO-Revision-Date: 2023-11-07 03:13+0000\n"
 "Last-Translator: 0que <0que@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/nickvision-"
-"tagger/docs/ru/>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/"
+"nickvision-tagger/docs/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -273,6 +273,8 @@ msgid ""
 "This dialog will offer the option to have Tagger run the appropriate command "
 "to try and fix the corrupted file."
 msgstr ""
+"В этом окне будет предложена опция, при которой Tagger выполнит команду, "
+"которая, возможно, исправит повреждённый файл."
 
 #. (itstool) path: section/title
 #: yelp/C/corrupted.page:25
@@ -330,9 +332,8 @@ msgstr ""
 
 #. (itstool) path: section/title
 #: yelp/C/corrupted.page:37
-#, fuzzy
 msgid "Invalid Album Art"
-msgstr "Неправильные данные"
+msgstr "Неправильное изображение обложки"
 
 #. (itstool) path: section/p
 #: yelp/C/corrupted.page:38
@@ -340,22 +341,23 @@ msgid ""
 "An invalid or corrupted embedded album art format can cause issues in "
 "displaying music files in Tagger."
 msgstr ""
+"Неправильное или повреждённое встроенное изображение обложки альбома может "
+"создавать проблемы при отображении музыки в Tagger."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:40
-#, fuzzy
 msgid ""
 "FFmpeg can be used to fix album art issues. Run the following command to "
 "remove album art data from a file:"
 msgstr ""
-"Вы можете использовать FFmpeg для исправления повреждённых файлов. Выполните "
-"следующую команду для перекодирования тэга файла и удаления мусорных данных:"
+"Вы можете использовать FFmpeg для исправления проблемных обложек. Выполните "
+"следующую команду для удаления обложки из файла:"
 
 #. (itstool) path: note/code
 #: yelp/C/corrupted.page:41
 #, no-wrap
 msgid "ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3"
-msgstr ""
+msgstr "ffmpeg -map 0:a -c:a copy -map_metadata -1 -i исходный.mp3 новый.mp3"
 
 #. (itstool) path: info/title
 #: yelp/C/format-strings.page:8
