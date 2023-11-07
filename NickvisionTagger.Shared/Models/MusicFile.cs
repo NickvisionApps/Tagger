@@ -85,7 +85,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         {
             _invalidSystemFilenameCharacters.Remove('\\');
         }
-        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        else
         {
             _invalidSystemFilenameCharacters.Remove('/');
             _invalidWindowsFilenameCharacters.Remove('/');
@@ -886,6 +886,10 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 else if (value == "publishingdate" || value == _("publishingdate"))
                 {
                     replace = PublishingDate == DateTime.MinValue ? "" : PublishingDate.ToShortDateString();
+                }
+                if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && LimitFilenameCharacters)
+                {
+                    replace = replace.Replace('/', '_');
                 }
                 formatString = formatString.Replace(match.Value, replace);
             }
