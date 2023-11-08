@@ -33,13 +33,14 @@ SolidCompression=yes
 WizardStyle=modern
 PrivilegesRequired=admin
 DirExistsWarning=no
+CloseApplications=force
 
 [Code]
 procedure SetupDotnet();
 var
   ResultCode: Integer;
 begin
-  if not Exec(ExpandConstant('{app}\deps\dotnet-runtime-7.0.11-win-x64.exe'), '/install /quiet /norestart', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode)
+  if not Exec(ExpandConstant('{app}\deps\dotnet-runtime-7.0.11-win-x64.exe'), '/install /quiet /norestart', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
   then
     MsgBox('Unable to install .NET . Please try again', mbError, MB_OK);
 end;
@@ -48,7 +49,7 @@ procedure SetupWinAppSDK();
 var
   ResultCode: Integer;
 begin
-  if not Exec(ExpandConstant('{app}\deps\WindowsAppRuntimeInstall-x64.exe'), '--quiet', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode)
+  if not Exec(ExpandConstant('{app}\deps\WindowsAppRuntimeInstall-x64.exe'), '--quiet', '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
   then
     MsgBox('Unable to install Windows App SDK. Please try again', mbError, MB_OK);
 end;
