@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
 using System;
+using static Nickvision.Aura.Localization.Gettext;
 
 namespace NickvisionTagger.WinUI.Controls;
 
@@ -12,9 +13,9 @@ namespace NickvisionTagger.WinUI.Controls;
 public sealed partial class SyncLyricRow : UserControl
 {
     /// <summary>
-    /// Occurs when a lyric's text is applied
+    /// Occurs when a lyric's text is changed
     /// </summary>
-    public event EventHandler<string>? LyricApplied;
+    public event EventHandler<string>? LyricChanged;
     /// <summary>
     /// Occurs when a lyric is to be removed
     /// </summary>
@@ -29,6 +30,8 @@ public sealed partial class SyncLyricRow : UserControl
         InitializeComponent();
         Card.Header = e.Timestamp.MillisecondsToTimecode();
         TxtLyric.Text = e.Lyric;
+        //Localize Strings
+        ToolTipService.SetToolTip(BtnRemove, _("Remove Lyric"));
     }
 
     /// <summary>
@@ -36,14 +39,7 @@ public sealed partial class SyncLyricRow : UserControl
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">TextChangedEventArgs</param>
-    private void TxtLyric_TextChanged(object sender, TextChangedEventArgs e) => BtnApply.IsEnabled = !string.IsNullOrEmpty(TxtLyric.Text);
-
-    /// <summary>
-    /// Occurs when the apply button is clicked
-    /// </summary>
-    /// <param name="sender">object</param>
-    /// <param name="e">RoutedEventArgs</param>
-    private void Apply(object sender, RoutedEventArgs e) => LyricApplied?.Invoke(this, TxtLyric.Text);
+    private void TxtLyric_TextChanged(object sender, TextChangedEventArgs e) => LyricChanged?.Invoke(this, TxtLyric.Text);
 
     /// <summary>
     /// Occurs when the remove button is clicked

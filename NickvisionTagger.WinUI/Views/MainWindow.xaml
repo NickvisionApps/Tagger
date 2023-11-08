@@ -489,7 +489,7 @@
                     </nickvision:ViewStackPage>
 
                     <nickvision:ViewStackPage PageName="Library">
-                        <nickvision:ViewStack x:Name="FilesViewStack" Margin="6,0,6,0">
+                        <nickvision:ViewStack x:Name="FilesViewStack" Margin="6,0,0,0">
                             <nickvision:ViewStack.Pages>
                                 <nickvision:ViewStackPage PageName="NoFiles">
                                     <nickvision:StatusPage x:Name="StatusPageNoFiles" HorizontalAlignment="Center" VerticalAlignment="Center" Glyph="&#xE93C;"/>

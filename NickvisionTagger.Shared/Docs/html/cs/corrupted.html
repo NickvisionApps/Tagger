@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="contents pagewide">
 <p class="p">Tato stránka vysvětluje hudební soubory s poškozenými daty.</p>
 <p class="p">Pokud <span class="app">Označovač</span> nedokáže přečíst soubor, bude ignorován a bude zobrazen dialog se seznamem poškozených souborů, které následně můžete spravovat a opravit.</p>
-<p class="p">This dialog will offer the option to have Tagger run the appropriate command to try and fix the corrupted file.</p>
+<p class="p">Tento dialog vám nabídne možnost nechat aplikaci spustit příslušný příkaz a pokusit se opravit poškozený soubor.</p>
 </div>
 <section id=""><div class="inner">
 <div class="hgroup pagewide"><h2 class="title"><span class="title">Neplatná data</span></h2></div>
@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div></div>
 </div></section><section id=""><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">Invalid Album Art</span></h2></div>
+<div class="hgroup pagewide"><h2 class="title"><span class="title">Neplatný obal alba</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p">An invalid or corrupted embedded album art format can cause issues in displaying music files in Tagger.</p>
+<p class="p">Neplatný nebo poškozený formát vloženého obalu alba může způsobit problémy při zobrazování hudebních souborů v aplikaci Označovač.</p>
 <div class="note note-advanced" title="Pokročilé">
 <svg height="24" width="24" version="1.1">
  <g>
@@ -82,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
  </g>
 </svg><div class="inner"><div class="region"><div class="contents">
-<p class="p">FFmpeg can be used to fix album art issues. Run the following command to remove album art data from a file:</p>
-<div class="code"><pre class="contents"><code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3</code></pre></div>
+<p class="p">Pro opravení problémů s obalem alba lze použít FFmpeg. Spusťte následující příkaz pro odebrání data o obalu alba ze souboru:</p>
+<div class="code"><pre class="contents"><code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i vstup.mp3 vystup.mp3</code></pre></div>
 <p class="p">kde je <span class="code">vstup.mp3</span> cesta k poškozenému souboru a <span class="code">výstup.mp3</span> cesta k exportovanému opětovně kódovanému souboru.</p>
 </div></div></div>
 </div>

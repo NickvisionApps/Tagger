@@ -164,7 +164,7 @@ public class MainWindowController : IDisposable
         }
         Aura.Active.SetConfig<Configuration>("config");
         Configuration.Current.Saved += ConfigurationSaved;
-        AppInfo.Version = "2023.11.1";
+        AppInfo.Version = "2023.11.2-next";
         AppInfo.ShortName = _("Tagger");
         AppInfo.Description = _("Tag your music");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
@@ -416,17 +416,14 @@ public class MainWindowController : IDisposable
     /// </summary>
     public async Task CheckForUpdatesAsync()
     {
-        if (!AppInfo.IsDevVersion)
+        if (_updater == null)
         {
-            if (_updater == null)
-            {
-                _updater = await Updater.NewAsync();
-            }
-            var version = await _updater!.GetCurrentStableVersionAsync();
-            if (version != null && version > new System.Version(AppInfo.Version))
-            {
-                NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("New update available."), NotificationSeverity.Success, "update"));
-            }
+            _updater = await Updater.NewAsync();
+        }
+        var version = await _updater!.GetCurrentStableVersionAsync();
+        if (version != null && (!AppInfo.IsDevVersion ? version > new System.Version(AppInfo.Version) : version >= new System.Version(AppInfo.Version.Remove(AppInfo.Version.IndexOf('-')))))
+        {
+            NotificationSent?.Invoke(this, new NotificationSentEventArgs(_("New update available."), NotificationSeverity.Success, "update"));
         }
     }
 

@@ -39,12 +39,10 @@
     <binary>org.nickvision.tagger</binary>
   </provides>
   <releases>
-    <release version="2023.11.1" date="2023-11-05">
+    <release version="2023.11.2-next" date="2023-11-05">
       <description translatable="no">
-        <p>- Added the ability to specify ""/"" in a Tag to File Name format string to move files to a new directory when renaming files</p>
-        <p>- Tagger now has the ability to fix corrupted file right from within the app</p>
-        <p>- Tagger will now display files with corrupted album art as corrupted files</p>
-        <p>- Fixed an issue where some custom properties for vorbis and wav files could not be removed</p>
+        <p>- On GNOME, fixed an issue where specifying the directory separator in Tag to File Name when Limit Filename Characters was enabled caused new directories to not be made</p>
+        <p>- On WinUI, improved the UX of the Lyrics dialog</p>
         <p>- Updated translations (Thanks everyone on Weblate!)</p>
       </description>
     </release>

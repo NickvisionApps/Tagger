@@ -11,7 +11,7 @@
     mc:Ignorable="d" Style="{StaticResource DefaultContentDialogStyle}"
     DefaultButton="Primary" Loaded="Dialog_Loaded">
 
-    <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto" MinWidth="500" SizeChanged="ScrollViewer_SizeChanged">
+    <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto" MinWidth="600" SizeChanged="ScrollViewer_SizeChanged">
         <StackPanel x:Name="StackPanel" Orientation="Vertical" Spacing="6">
             <TextBlock x:Name="LblConfigure" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
             
@@ -64,7 +64,7 @@
                 <TextBlock x:Name="LblEdit" VerticalAlignment="Center" Style="{StaticResource NavigationViewItemHeaderTextStyle}"/>
 
                 <StackPanel x:Name="SyncControls" Grid.Column="1" Orientation="Horizontal" Spacing="6">
-                    <Button x:Name="BtnAddSyncLyric" Click="AddSyncLyric">
+                    <Button x:Name="BtnAddSyncLyric">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal" Spacing="6">
                                 <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>
@@ -72,6 +72,16 @@
                                 <TextBlock x:Name="LblBtnAddSyncLyric" TextWrapping="WrapWholeWords"/>
                             </StackPanel>
                         </Button.Content>
+
+                        <Button.Flyout>
+                            <Flyout x:Name="FlyoutAddSyncLyric" Placement="Bottom">
+                                <StackPanel Orientation="Vertical" Spacing="6">
+                                    <TextBox x:Name="TxtAddSyncLyric" MinWidth="200" TextChanged="TxtAddSyncLyric_TextChanged"/>
+
+                                    <Button x:Name="BtnAddSyncLyricConfirm" Style="{ThemeResource AccentButtonStyle}" Click="AddSyncLyric"/>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
                     </Button>
 
                     <Button x:Name="BtnClearAllSyncLyrics" Height="32" Click="ClearAllSyncLyrics">

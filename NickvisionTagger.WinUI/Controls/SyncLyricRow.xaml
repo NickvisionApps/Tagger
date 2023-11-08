@@ -13,12 +13,6 @@
         <StackPanel Orientation="Horizontal" Spacing="6">
             <TextBox x:Name="TxtLyric" Width="274" IsSpellCheckEnabled="True" TextChanged="TxtLyric_TextChanged"/>
 
-            <Button x:Name="BtnApply" Height="32" VerticalAlignment="Center" IsEnabled="False" Click="Apply">
-                <Button.Content>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE73E;"/>
-                </Button.Content>
-            </Button>
-
             <Button x:Name="BtnRemove" Height="32" VerticalAlignment="Center" Click="Remove">
                 <Button.Content>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE108;"/>

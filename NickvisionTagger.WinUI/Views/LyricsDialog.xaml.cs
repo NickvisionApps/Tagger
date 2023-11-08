@@ -52,6 +52,8 @@ public sealed partial class LyricsDialog : ContentDialog
         ToolTipService.SetToolTip(BtnApplyOffset, _("Apply"));
         LblEdit.Text = _("Edit");
         LblBtnAddSyncLyric.Text = _("Add");
+        TxtAddSyncLyric.Header = _("Timestamp (hh:mm:ss or mm:ss.xx)");
+        BtnAddSyncLyricConfirm.Content = _("Add");
         ToolTipService.SetToolTip(BtnClearAllSyncLyrics, _("Clear All Lyrics"));
         ToolTipService.SetToolTip(BtnImportLRC, _("Import from LRC"));
         ToolTipService.SetToolTip(BtnExportLRC, _("Export to LRC"));
@@ -121,7 +123,7 @@ public sealed partial class LyricsDialog : ContentDialog
         if (!_syncRows.ContainsKey(e.Timestamp))
         {
             var row = new SyncLyricRow(e);
-            row.LyricApplied += (s, ea) => _controller.SetSynchronizedLyric(e.Timestamp, ea);
+            row.LyricChanged += (s, ea) => _controller.SetSynchronizedLyric(e.Timestamp, ea);
             row.LyricRemoved += (s, ea) => _controller.RemoveSynchronizedLyric(e.Timestamp);
             ListSync.Children.Add(row);
             _syncRows.Add(e.Timestamp, row);
@@ -207,28 +209,24 @@ public sealed partial class LyricsDialog : ContentDialog
     }
 
     /// <summary>
+    /// Occurs when TxtAddSyncLyric's text is changed
+    /// </summary>
+    /// <param name="sender">object</param>
+    /// <param name="e">TextChangedEventArgs</param>
+    private void TxtAddSyncLyric_TextChanged(object sender, TextChangedEventArgs e) => BtnAddSyncLyricConfirm.IsEnabled = TxtAddSyncLyric.Text.TimecodeToMs() != -1;
+
+    /// <summary>
     /// Occurs when the add sync lyric button is clicked
     /// </summary>
     /// <param name="sender">object</param>
     /// <param name="e">RoutedEventArgs</param>
-    private async void AddSyncLyric(object sender, RoutedEventArgs e)
+    private void AddSyncLyric(object sender, RoutedEventArgs e)
     {
-        var entryDialog = new EntryDialog(_("New Synchronized Lyric"), "", _("Timestamp (hh:mm:ss or mm:ss.xx)"), _("Cancel"), _("Add"))
+        FlyoutAddSyncLyric.Hide();
+        var ms = TxtAddSyncLyric.Text.TimecodeToMs();
+        if (ms != -1)
         {
-            Validator = x => x.TimecodeToMs() != -1,
-            XamlRoot = XamlRoot
-        };
-        _showingAnotherDialog = true;
-        Hide();
-        var res = await entryDialog.ShowAsync();
-        _showingAnotherDialog = false;
-        if (!string.IsNullOrEmpty(res) && res != "NULL")
-        {
-            var ms = res.TimecodeToMs();
-            if (ms != -1)
-            {
-                _controller.AddSynchronizedLyric(ms);
-            }
+            _controller.AddSynchronizedLyric(ms);
         }
     }
 
