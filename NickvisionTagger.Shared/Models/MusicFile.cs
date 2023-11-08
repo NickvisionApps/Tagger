@@ -79,7 +79,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
     static MusicFile()
     {
         _validProperties = new string[] { "title", _("title"), "artist", _("artist"), "album", _("album"), "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"), "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"), "composer", _("composer"), "description", _("description"), "discnumber", _("discnumber"), "disctotal", _("disctotal"), "publisher", _("publisher"), "publishingdate", _("publishingdate"), "lyrics", _("lyrics") };
-        _invalidWindowsFilenameCharacters = new List<char>() { '"', '<', '>', ':', '\\', '/', '|', '?', '*' };
+        _invalidWindowsFilenameCharacters = new List<char>() { '"', '<', '>', ':', '\\', '|', '?', '*' };
         _invalidSystemFilenameCharacters = System.IO.Path.GetInvalidPathChars().Union(System.IO.Path.GetInvalidFileNameChars()).ToList();
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
@@ -87,8 +87,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         }
         else
         {
-            _invalidSystemFilenameCharacters.Remove('/');
-            _invalidWindowsFilenameCharacters.Remove('/');
+            _invalidSystemFilenameCharacters.Remove(System.IO.Path.DirectorySeparatorChar);
         }
         SortFilesBy = SortBy.Path;
         LimitFilenameCharacters = false;
@@ -543,11 +542,11 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
             {
                 var newPath = $"{System.IO.Path.GetDirectoryName(Path)}{System.IO.Path.DirectorySeparatorChar}{Filename}";
                 Directory.CreateDirectory(System.IO.Path.GetDirectoryName(newPath)!);
-                if(File.Exists(newPath))
+                if (File.Exists(newPath))
                 {
                     newPath = newPath.Remove(newPath.IndexOf(_dotExtension));
                     var i = 1;
-                    while(File.Exists($"{newPath} ({i}){_dotExtension}"))
+                    while (File.Exists($"{newPath} ({i}){_dotExtension}"))
                     {
                         i++;
                     }
@@ -887,7 +886,7 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
                 {
                     replace = PublishingDate == DateTime.MinValue ? "" : PublishingDate.ToShortDateString();
                 }
-                replace = replace.Replace(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? '\\' : '/', '_');
+                replace = replace.Replace(System.IO.Path.DirectorySeparatorChar, '_');
                 formatString = formatString.Replace(match.Value, replace);
             }
             else if (customProps.Contains(value))
