@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2023-11-05 13:06-0500\n"
-"PO-Revision-Date: 2023-09-14 22:10+0000\n"
+"PO-Revision-Date: 2023-11-09 11:14+0000\n"
 "Last-Translator: rene-coty <irenee.thirion@e.email>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/nickvision-tagger/"
 "docs/fr/>\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -118,9 +118,8 @@ msgstr "<code>Titre</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:42
-#, fuzzy
 msgid "<code>Artist</code>"
-msgstr "<code>artiste</code>"
+msgstr "<code>Artiste</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:43
@@ -129,9 +128,8 @@ msgstr "<code>Album</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:44
-#, fuzzy
 msgid "<code>Year</code>"
-msgstr "<code>année</code>"
+msgstr "<code>Année</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:45
@@ -160,7 +158,7 @@ msgstr ""
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:54
 msgid "Limit File Name Characters"
-msgstr ""
+msgstr "Limiter les caractères du nom du fichier"
 
 #. (itstool) path: item/p
 #: yelp/C/configuration.page:55
@@ -168,11 +166,14 @@ msgid ""
 "Whether or not filename characters should be limited to those only supported "
 "by Windows."
 msgstr ""
+"Indique si les caractères des noms de fichiers devraient être limités à ceux "
+"uniquement pris en charge par Windows."
 
 #. (itstool) path: note/p
 #: yelp/C/configuration.page:57
 msgid "This option is only available on non-Windows systems."
 msgstr ""
+"Cette option est uniquement disponible pour les systèmes autres que Windows."
 
 #. (itstool) path: item/title
 #: yelp/C/configuration.page:61
@@ -272,6 +273,8 @@ msgid ""
 "This dialog will offer the option to have Tagger run the appropriate command "
 "to try and fix the corrupted file."
 msgstr ""
+"Cette boîte de dialogue ouvre l’option pour Tagger d’exécuter les commandes "
+"appropriées pour essayer de réparer le fichier corrompu."
 
 #. (itstool) path: section/title
 #: yelp/C/corrupted.page:25
@@ -326,9 +329,8 @@ msgstr ""
 
 #. (itstool) path: section/title
 #: yelp/C/corrupted.page:37
-#, fuzzy
 msgid "Invalid Album Art"
-msgstr "Données invalides"
+msgstr "Couverture d’album invalide"
 
 #. (itstool) path: section/p
 #: yelp/C/corrupted.page:38
@@ -336,23 +338,24 @@ msgid ""
 "An invalid or corrupted embedded album art format can cause issues in "
 "displaying music files in Tagger."
 msgstr ""
+"Un format invalide ou corrompu de couverture d’album peut causer des "
+"problèmes dans l’affichage des fichiers de musique dans Tagger."
 
 #. (itstool) path: note/p
 #: yelp/C/corrupted.page:40
-#, fuzzy
 msgid ""
 "FFmpeg can be used to fix album art issues. Run the following command to "
 "remove album art data from a file:"
 msgstr ""
-"FFmpeg peut être utilisé pour corriger les problèmes de corruption. Exécutez "
-"la commande suivante pour ré-encoder les balises d’un fichier et supprimer "
-"les données inutiles :"
+"FFmpeg peut être utilisé pour corriger les problèmes de couverture d’album. "
+"Exécutez la commande suivante pour supprimer les données de la couverture d’"
+"album d’un fichier :"
 
 #. (itstool) path: note/code
 #: yelp/C/corrupted.page:41
 #, no-wrap
 msgid "ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3"
-msgstr ""
+msgstr "ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3"
 
 #. (itstool) path: info/title
 #: yelp/C/format-strings.page:8
@@ -480,15 +483,13 @@ msgstr "<code>description</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:47 yelp/C/search.page:43
-#, fuzzy
 msgid "<code>discnumber</code>"
-msgstr "<code>compositeur</code>"
+msgstr "<code>numérodisque</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:48 yelp/C/search.page:44
-#, fuzzy
 msgid "<code>disctotal</code>"
-msgstr "<code>pistestotal</code>"
+msgstr "<code>totaldisques</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:49 yelp/C/search.page:45
@@ -497,9 +498,8 @@ msgstr "<code>maisondedisques</code>"
 
 #. (itstool) path: item/p
 #: yelp/C/format-strings.page:50 yelp/C/search.page:46
-#, fuzzy
 msgid "<code>publishingdate</code>"
-msgstr "<code>maisondedisques</code>"
+msgstr "<code>datedesortie</code>"
 
 #. (itstool) path: note/p
 #: yelp/C/format-strings.page:53
