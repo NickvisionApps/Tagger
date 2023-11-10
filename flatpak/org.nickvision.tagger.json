@@ -1,7 +1,7 @@
 {
     "app-id" : "org.nickvision.tagger",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "44",
+    "runtime-version" : "45",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.dotnet7"
@@ -18,7 +18,6 @@
         "--device=dri",
         "--share=ipc",
         "--share=network",
-        "--system-talk-name=org.freedesktop.NetworkManager",
         "--filesystem=home"
     ],
     "cleanup":[
