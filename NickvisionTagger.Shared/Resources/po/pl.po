@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-06 22:15-0500\n"
-"PO-Revision-Date: 2023-10-13 19:00+0000\n"
+"PO-Revision-Date: 2023-11-12 21:18+0000\n"
 "Last-Translator: Eryk Michalak <gnu.ewm@protonmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/pl/>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1453
 #, csharp-format
 msgid "{0} • {1}"
-msgstr ""
+msgstr "{0} • {1}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1501
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1532
@@ -31,7 +31,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1429
 #, csharp-format
 msgid "{0} of {1} selected"
-msgstr ""
+msgstr "Wybrano {0} z {1}"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/AlbumArtInfoDialog.cs:34
 #: ../../../../NickvisionTagger.GNOME/Controls/AlbumArtInfoDialog.cs:35
@@ -39,7 +39,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:29
 #, csharp-format
 msgid "{0} pixels"
-msgstr ""
+msgstr "{0} pikseli"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:103
 #, csharp-format
@@ -104,7 +104,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1452
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1543
 msgid "<keep>"
-msgstr ""
+msgstr "<zachowaj>"
 
 #: ../../../Models/PropertyMap.cs:142
 msgid "0 MiB"
@@ -304,7 +304,7 @@ msgstr ""
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:747
 #: ../../../Models/MusicFile.cs:862
 msgid "beatsperminute"
-msgstr ""
+msgstr "uderzenia na minutę"
 
 #: ../../../Controllers/MainWindowController.cs:190
 #: ../../../Controllers/MainWindowController.cs:1416
@@ -385,12 +385,12 @@ msgstr ""
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:743
 #: ../../../Models/MusicFile.cs:858
 msgid "comment"
-msgstr ""
+msgstr "komentarz"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:200
 #: NickvisionTagger.GNOME/Blueprints/window.blp:562
 msgid "Comment"
-msgstr ""
+msgstr "Komentarz"
 
 #: ../../../Controllers/MainWindowController.cs:191
 #: ../../../Controllers/MainWindowController.cs:1431
@@ -471,12 +471,12 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:29
 msgid "Credits"
-msgstr ""
+msgstr "Twórcy"
 
 #: ../../../Controllers/MainWindowController.cs:193
 #: ../../../Controllers/MainWindowController.cs:1488
 msgid "custom"
-msgstr ""
+msgstr "niestandardowe"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:49
 #: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:61
@@ -547,9 +547,8 @@ msgid ""
 msgstr ""
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:208
-#, fuzzy
 msgid "Disc"
-msgstr "Odrzuć"
+msgstr "Dysk"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:680
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:786
@@ -880,9 +879,8 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:50
 #: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:47
-#, fuzzy
 msgid "Fix File"
-msgstr "Plik"
+msgstr "Napraw plik"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1480
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1377
@@ -1274,7 +1272,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:35
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:36
 msgid "Path"
-msgstr ""
+msgstr "Ścieżka"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:83
 msgid "Path (Empty)"
@@ -1292,7 +1290,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:123
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:26
 msgid "Playlist"
-msgstr ""
+msgstr "Playlista"
 
 #: ../../../Controllers/MainWindowController.cs:556
 msgid "Playlist file created successfully."
@@ -1321,7 +1319,7 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:98
 msgid "PREVIEW"
-msgstr ""
+msgstr "PODGLĄD"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1161
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1106
@@ -1333,12 +1331,12 @@ msgstr ""
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:779
 #: ../../../Models/MusicFile.cs:882
 msgid "publisher"
-msgstr ""
+msgstr "wydawca"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:211
 #: NickvisionTagger.GNOME/Blueprints/window.blp:578
 msgid "Publisher"
-msgstr ""
+msgstr "Wydawca"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:213
 #: NickvisionTagger.GNOME/Blueprints/window.blp:582
@@ -1355,7 +1353,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:594
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:439
 msgid "Reload"
-msgstr ""
+msgstr "Załaduj ponownie"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:109
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:31
@@ -1370,7 +1368,7 @@ msgstr ""
 #: NickvisionTagger.GNOME/Blueprints/window.blp:53
 #: NickvisionTagger.GNOME/Blueprints/window.blp:334
 msgid "Remove"
-msgstr ""
+msgstr "Usuń"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1621
 #: ../../../../NickvisionTagger.WinUI/Controls/CustomPropertyRow.xaml.cs:22
@@ -1437,7 +1435,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:122
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:29
 msgid "Settings"
-msgstr ""
+msgstr "Ustawienia"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:756
 msgid "Show Extras Pane"
@@ -1474,7 +1472,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1235
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1219
 msgid "Submit"
-msgstr ""
+msgstr "Prześlij"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1235
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:152
@@ -1514,11 +1512,11 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:45
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:50
 msgid "Synchronized"
-msgstr ""
+msgstr "Zsynchronizowane"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:127
 msgid "Tag"
-msgstr ""
+msgstr "Tag"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1046
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:148
@@ -1563,7 +1561,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:33
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:18
 msgid "Theme"
-msgstr ""
+msgstr "Motyw"
 
 #: ../../../Controllers/MainWindowController.cs:1243
 msgid "This file does not have a valid fingerprint"
@@ -1578,7 +1576,7 @@ msgstr ""
 
 #: ../../../Helpers/MediaHelpers.cs:25
 msgid "TiB"
-msgstr ""
+msgstr "TiB"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:241
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:55
@@ -1590,7 +1588,7 @@ msgstr ""
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:699
 #: ../../../Models/MusicFile.cs:826
 msgid "title"
-msgstr ""
+msgstr "tytuł"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:116
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:184
@@ -1598,7 +1596,7 @@ msgstr ""
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 #: NickvisionTagger.GNOME/Blueprints/window.blp:469
 msgid "Title"
-msgstr ""
+msgstr "Tytuł"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1226
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1210
@@ -1610,7 +1608,7 @@ msgstr ""
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:719
 #: ../../../Models/MusicFile.cs:842
 msgid "track"
-msgstr ""
+msgstr "ścieżka"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:120
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:196
@@ -1618,7 +1616,7 @@ msgstr ""
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:66
 #: NickvisionTagger.GNOME/Blueprints/window.blp:502
 msgid "Track"
-msgstr ""
+msgstr "Ścieżka"
 
 #: ../../../Controllers/MainWindowController.cs:189
 #: ../../../Controllers/MainWindowController.cs:1389
@@ -1629,7 +1627,7 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:180
 msgid "translator-credits"
-msgstr ""
+msgstr "ewm"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:166
 #: NickvisionTagger.GNOME/Blueprints/window.blp:203
@@ -1639,7 +1637,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:43
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:42
 msgid "Type"
-msgstr ""
+msgstr "Rodzaj"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:167
 #: NickvisionTagger.GNOME/Blueprints/window.blp:222
@@ -1697,12 +1695,12 @@ msgstr ""
 
 #: ../../../Controllers/MainWindowController.cs:1644
 msgid "Unknown"
-msgstr ""
+msgstr "Nieznane"
 
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:44
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:50
 msgid "Unsynchronized"
-msgstr ""
+msgstr "NIezsynchronizowane"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:432
 msgid "Update"
