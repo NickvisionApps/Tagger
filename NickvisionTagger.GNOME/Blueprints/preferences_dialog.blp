@@ -26,18 +26,12 @@ Adw.PreferencesWindow _root {
         }
       }
 
-      Adw.ActionRow {
+      Adw.SwitchRow _rememberLastOpenedFolderRow {
         title: _("Remember Last Opened Library");
-        activatable-widget: _rememberLastOpenedFolderSwitch;
 
         [prefix]
         Gtk.Image {
           icon-name: "folder-symbolic";
-        }
-
-        [suffix]
-        Gtk.Switch _rememberLastOpenedFolderSwitch {
-          valign: center;
         }
       }
     }
@@ -45,18 +39,12 @@ Adw.PreferencesWindow _root {
     Adw.PreferencesGroup {
       title: _("Music Library");
 
-      Adw.ActionRow {
+      Adw.SwitchRow _includeSubfoldersRow {
         title: _("Include Subfolders");
-        activatable-widget: _includeSubfoldersSwitch;
 
         [prefix]
         Gtk.Image {
           icon-name: "folder-remote-symbolic";
-        }
-
-        [suffix]
-        Gtk.Switch _includeSubfoldersSwitch {
-          valign: center;
         }
       }
 
@@ -76,34 +64,22 @@ Adw.PreferencesWindow _root {
     Adw.PreferencesGroup {
       title: _("Music File");
 
-      Adw.ActionRow {
+      Adw.SwitchRow _preserveModificationTimestampRow {
         title: _("Preserve Modification Timestamp");
-        activatable-widget: _preserveModificationTimestampSwitch;
 
         [prefix]
         Gtk.Image {
           icon-name: "editor-symbolic";
         }
-
-        [suffix]
-        Gtk.Switch _preserveModificationTimestampSwitch {
-          valign: center;
-        }
       }
 
-      Adw.ActionRow {
+      Adw.SwitchRow _limitCharactersRow {
         title: _("Limit File Name Characters");
         subtitle: _("Restricts characters in file names to only those supported by Windows.");
-        activatable-widget: _limitCharactersSwitch;
 
         [prefix]
         Gtk.Image {
           icon-name: "insert-text-symbolic";
-        }
-
-        [suffix]
-        Gtk.Switch _limitCharactersSwitch {
-          valign: center;
         }
       }
     }
@@ -111,51 +87,33 @@ Adw.PreferencesWindow _root {
     Adw.PreferencesGroup {
       title: _("Web Services");
 
-      Adw.ActionRow {
+      Adw.SwitchRow _overwriteTagWithMusicBrainzRow {
         title: _("Overwrite Tag With MusicBrainz");
         subtitle: _("Enable to overwrite existing tag metadata with data found from MusicBrainz. If disabled, only blank tag properties will be filled.");
-        activatable-widget: _overwriteTagWithMusicBrainzSwitch;
 
         [prefix]
         Gtk.Image {
           icon-name: "tag-outline-symbolic";
         }
-
-        [suffix]
-        Gtk.Switch _overwriteTagWithMusicBrainzSwitch {
-          valign: center;
-        }
       }
 
-      Adw.ActionRow {
+      Adw.SwitchRow _overwriteAlbumArtWithMusicBrainzRow {
         title: _("Overwrite Album Art With MusicBrainz");
         subtitle: _("Enable to overwrite existing album art with art found from MusicBrainz.");
-        activatable-widget: _overwriteAlbumArtWithMusicBrainzSwitch;
 
         [prefix]
         Gtk.Image {
           icon-name: "image-symbolic";
         }
-
-        [suffix]
-        Gtk.Switch _overwriteAlbumArtWithMusicBrainzSwitch {
-          valign: center;
-        }
       }
       
-      Adw.ActionRow {
+      Adw.SwitchRow _overwriteLyricsWithWebRow {
         title: _("Overwrite Lyrics From Web Service");
         subtitle: _("Enable to overwrite existing lyrics with that found from downloading lyrics from the web. If disabled, only blank lyrics will be filled.");
-        activatable-widget: _overwriteLyricsWithWebSwitch;
 
         [prefix]
         Gtk.Image {
           icon-name: "quotation-symbolic";
-        }
-
-        [suffix]
-        Gtk.Switch _overwriteLyricsWithWebSwitch {
-          valign: center;
         }
       }
 

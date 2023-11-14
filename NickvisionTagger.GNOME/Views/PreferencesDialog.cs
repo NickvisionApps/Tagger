@@ -15,14 +15,14 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     private readonly Adw.Application _application;
 
     [Gtk.Connect] private readonly Adw.ComboRow _themeRow;
-    [Gtk.Connect] private readonly Gtk.Switch _rememberLastOpenedFolderSwitch;
-    [Gtk.Connect] private readonly Gtk.Switch _includeSubfoldersSwitch;
+    [Gtk.Connect] private readonly Adw.SwitchRow _rememberLastOpenedFolderRow;
+    [Gtk.Connect] private readonly Adw.SwitchRow _includeSubfoldersRow;
     [Gtk.Connect] private readonly Adw.ComboRow _sortFilesRow;
-    [Gtk.Connect] private readonly Gtk.Switch _preserveModificationTimestampSwitch;
-    [Gtk.Connect] private readonly Gtk.Switch _limitCharactersSwitch;
-    [Gtk.Connect] private readonly Gtk.Switch _overwriteTagWithMusicBrainzSwitch;
-    [Gtk.Connect] private readonly Gtk.Switch _overwriteAlbumArtWithMusicBrainzSwitch;
-    [Gtk.Connect] private readonly Gtk.Switch _overwriteLyricsWithWebSwitch;
+    [Gtk.Connect] private readonly Adw.SwitchRow _preserveModificationTimestampRow;
+    [Gtk.Connect] private readonly Adw.SwitchRow _limitCharactersRow;
+    [Gtk.Connect] private readonly Adw.SwitchRow _overwriteTagWithMusicBrainzRow;
+    [Gtk.Connect] private readonly Adw.SwitchRow _overwriteAlbumArtWithMusicBrainzRow;
+    [Gtk.Connect] private readonly Adw.SwitchRow _overwriteLyricsWithWebRow;
     [Gtk.Connect] private readonly Adw.EntryRow _acoustIdRow;
     [Gtk.Connect] private readonly Gtk.Button _acoustIdButton;
 
@@ -46,14 +46,14 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
         OnHide += Hide;
         //Load Config
         _themeRow.SetSelected((uint)_controller.Theme);
-        _rememberLastOpenedFolderSwitch.SetActive(_controller.RememberLastOpenedFolder);
-        _includeSubfoldersSwitch.SetActive(_controller.IncludeSubfolders);
+        _rememberLastOpenedFolderRow.SetActive(_controller.RememberLastOpenedFolder);
+        _includeSubfoldersRow.SetActive(_controller.IncludeSubfolders);
         _sortFilesRow.SetSelected((uint)_controller.SortFilesBy);
-        _preserveModificationTimestampSwitch.SetActive(_controller.PreserveModificationTimestamp);
-        _limitCharactersSwitch.SetActive(_controller.LimitFilenameCharacters);
-        _overwriteTagWithMusicBrainzSwitch.SetActive(_controller.OverwriteTagWithMusicBrainz);
-        _overwriteAlbumArtWithMusicBrainzSwitch.SetActive(_controller.OverwriteAlbumArtWithMusicBrainz);
-        _overwriteLyricsWithWebSwitch.SetActive(_controller.OverwriteLyricsWithWebService);
+        _preserveModificationTimestampRow.SetActive(_controller.PreserveModificationTimestamp);
+        _limitCharactersRow.SetActive(_controller.LimitFilenameCharacters);
+        _overwriteTagWithMusicBrainzRow.SetActive(_controller.OverwriteTagWithMusicBrainz);
+        _overwriteAlbumArtWithMusicBrainzRow.SetActive(_controller.OverwriteAlbumArtWithMusicBrainz);
+        _overwriteLyricsWithWebRow.SetActive(_controller.OverwriteLyricsWithWebService);
         _acoustIdRow.SetText(_controller.AcoustIdUserAPIKey);
     }
 
@@ -74,14 +74,14 @@ public partial class PreferencesDialog : Adw.PreferencesWindow
     /// <param name="e">EventArgs</param>
     private void Hide(Gtk.Widget sender, EventArgs e)
     {
-        _controller.RememberLastOpenedFolder = _rememberLastOpenedFolderSwitch.GetActive();
-        _controller.IncludeSubfolders = _includeSubfoldersSwitch.GetActive();
+        _controller.RememberLastOpenedFolder = _rememberLastOpenedFolderRow.GetActive();
+        _controller.IncludeSubfolders = _includeSubfoldersRow.GetActive();
         _controller.SortFilesBy = (SortBy)_sortFilesRow.GetSelected();
-        _controller.PreserveModificationTimestamp = _preserveModificationTimestampSwitch.GetActive();
-        _controller.LimitFilenameCharacters = _limitCharactersSwitch.GetActive();
-        _controller.OverwriteTagWithMusicBrainz = _overwriteTagWithMusicBrainzSwitch.GetActive();
-        _controller.OverwriteAlbumArtWithMusicBrainz = _overwriteAlbumArtWithMusicBrainzSwitch.GetActive();
-        _controller.OverwriteLyricsWithWebService = _overwriteLyricsWithWebSwitch.GetActive();
+        _controller.PreserveModificationTimestamp = _preserveModificationTimestampRow.GetActive();
+        _controller.LimitFilenameCharacters = _limitCharactersRow.GetActive();
+        _controller.OverwriteTagWithMusicBrainz = _overwriteTagWithMusicBrainzRow.GetActive();
+        _controller.OverwriteAlbumArtWithMusicBrainz = _overwriteAlbumArtWithMusicBrainzRow.GetActive();
+        _controller.OverwriteLyricsWithWebService = _overwriteLyricsWithWebRow.GetActive();
         _controller.AcoustIdUserAPIKey = _acoustIdRow.GetText();
         _controller.SaveConfiguration();
         Destroy();
