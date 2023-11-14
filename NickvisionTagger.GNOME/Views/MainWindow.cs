@@ -14,7 +14,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static Nickvision.Aura.Localization.Gettext;
-using static Nickvision.GirExt.GtkExt;
 
 namespace NickvisionTagger.GNOME.Views;
 
@@ -33,12 +32,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         int RefCount;
     }
 
-    private delegate void GtkListBoxUpdateHeaderFunc(nint row, nint before, nint data);
-
-    [LibraryImport("libadwaita-1.so.0")]
-    private static partial void gtk_list_box_set_header_func(nint box, GtkListBoxUpdateHeaderFunc updateHeader, nint data, nint destroy);
-    [LibraryImport("libadwaita-1.so.0")]
-    private static partial void gtk_list_box_row_set_header(nint row, nint header);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref TaggerDateTime datetime);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -67,7 +60,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _musicBrainzAction;
     private readonly Gio.SimpleAction _downloadLyricsAction;
     private readonly Gio.SimpleAction _acoustIdAction;
-    private readonly GtkListBoxUpdateHeaderFunc _updateHeaderFunc;
     private readonly Gtk.EventControllerKey _filenameKeyController;
     private AlbumArtType _currentAlbumArtType;
     private string? _listHeader;
@@ -165,7 +157,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _searchSeparator.SetVisible(musicFilesVadjustment.GetValue() > 0);
             }
         };
-        _updateHeaderFunc = (rowPtr, _, _) =>
+        _listMusicFiles.SetHeaderFunc((row, before) =>
         {
             if (!string.IsNullOrEmpty(_listHeader))
             {
@@ -178,11 +170,10 @@ public partial class MainWindow : Adw.ApplicationWindow
                 label.SetMarginBottom(6);
                 label.SetHalign(Gtk.Align.Start);
                 label.SetEllipsize(Pango.EllipsizeMode.End);
-                gtk_list_box_row_set_header(rowPtr, label.Handle);
+                row.SetHeader(label);
                 _listHeader = string.Empty;
             }
-        };
-        gtk_list_box_set_header_func(_listMusicFiles.Handle, _updateHeaderFunc, IntPtr.Zero, IntPtr.Zero);
+        });
         _filenameKeyController = Gtk.EventControllerKey.New();
         _filenameKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _filenameKeyController.OnKeyPressed += OnFilenameKeyPressed;
@@ -1583,7 +1574,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
             else
             {
-                using var bytes = GLib.Bytes.From(art.Image.AsSpan());
+                using var bytes = GLib.Bytes.New(art.Image.AsSpan());
                 using var texture = Gdk.Texture.NewFromBytes(bytes);
                 _albumArtImage.SetPaintable(texture);
             }

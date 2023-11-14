@@ -1,4 +1,3 @@
-using Nickvision.GirExt;
 using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Models;
 using System;

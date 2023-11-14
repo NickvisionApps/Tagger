@@ -3,7 +3,6 @@ using NickvisionTagger.Shared.Controllers;
 using NickvisionTagger.Shared.Models;
 using System;
 using System.Threading.Tasks;
-using static Nickvision.GirExt.GtkExt;
 
 namespace NickvisionTagger.GNOME.Views;
 

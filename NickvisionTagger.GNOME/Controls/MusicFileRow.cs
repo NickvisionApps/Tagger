@@ -48,7 +48,7 @@ public class MusicFileRow : Adw.ActionRow
         if (!_art.IsEmpty)
         {
             _artImage.AddCssClass("list-icon");
-            using var bytes = GLib.Bytes.From(_art.Icon.AsSpan());
+            using var bytes = GLib.Bytes.New(_art.Icon.AsSpan());
             using var texture = Gdk.Texture.NewFromBytes(bytes);
             _artImage.SetFromPaintable(texture);
         }
