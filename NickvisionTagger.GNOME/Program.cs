@@ -33,7 +33,7 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
-            @"* Fixed an issue where specifying the directory separator in Tag to File Name when Limit Filename Characters was enabled caused new directories to not be made
+            @"* Updated to GNOME 45 runtime with latest libadwaita design
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
