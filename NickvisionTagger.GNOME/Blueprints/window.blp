@@ -77,7 +77,8 @@ menu tagActionsMenu {
 
 Adw.ApplicationWindow _root {
   Adw.Breakpoint {
-    condition ("max-width: 440")
+    condition ("max-width: 660sp")
+
     setters {
       _librarySplitView.collapsed: true;
     }
@@ -247,9 +248,10 @@ Adw.ApplicationWindow _root {
           name: "Library";
           child: Adw.OverlaySplitView _librarySplitView {
             show-sidebar: false;
+            min-sidebar-width: 400;
+            max-sidebar-width: 460;
 
             sidebar: Gtk.Box {
-              width-request: 400;
               orientation: vertical;
 
               Gtk.Box {
