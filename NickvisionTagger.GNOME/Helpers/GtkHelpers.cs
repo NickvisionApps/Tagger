@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace NickvisionTagger.GNOME.Helpers;
 
+/// <summary>
+/// Helper methods for GTK
+/// </summary>
 public unsafe static partial class GtkHelpers
 {
     [StructLayout(LayoutKind.Sequential)]
