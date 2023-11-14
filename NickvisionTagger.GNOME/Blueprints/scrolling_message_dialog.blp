@@ -6,44 +6,30 @@ Adw.Window _root {
   modal: true;
   resizable: false;
 
-  content: Gtk.Box {
-    orientation: vertical;
-
+  content: Adw.ToolbarView {
+    [top]
     Adw.HeaderBar {
-      title-widget: Gtk.Label { };
+      title-widget: Adw.WindowTitle _title { };
 
       styles ["flat"]
     }
 
-    Gtk.WindowHandle {
-      Gtk.Box {
-        orientation: vertical;
+    content: Gtk.WindowHandle {
+     Gtk.ScrolledWindow {
+        propagate-natural-height: true;
+        max-content-height: 300;
+        hscrollbar-policy: never;
 
-        Gtk.Label _titleLabel {
-          styles ["title-2"]
-          margin-bottom: 24;
-        }
-
-        Gtk.Separator {}
-      
-        Gtk.ScrolledWindow {
-          propagate-natural-height: true;
-          max-content-height: 300;
-          hscrollbar-policy: never;
-
-          child: Gtk.Label _messageLabel {
-            margin-top: 12;
-            margin-start: 12;
-            margin-end: 12;
-            margin-bottom: 12;
-            wrap-mode: word_char;
-            wrap: true;
-          };
-          
-          styles ["view"]
-        }
+        child: Gtk.Label _messageLabel {
+          margin-top: 6;
+          margin-start: 12;
+          margin-end: 12;
+          margin-bottom: 12;
+          wrap-mode: word_char;
+          wrap: true;
+        };
       }
-    }
+    };
   };
 
   Gtk.ShortcutController {

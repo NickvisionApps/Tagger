@@ -4,7 +4,7 @@ namespace NickvisionTagger.GNOME.Controls;
 
 public partial class ScrollingMessageDialog : Adw.Window
 {
-    [Gtk.Connect] private readonly Gtk.Label _titleLabel;
+    [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Label _messageLabel;
 
     /// <summary>
@@ -21,7 +21,7 @@ public partial class ScrollingMessageDialog : Adw.Window
         //Dialog Settings
         SetIconName(iconName);
         SetTransientFor(parent);
-        _titleLabel.SetLabel(title);
+        _title.SetTitle(title);
         _messageLabel.SetLabel(message);
     }
 
