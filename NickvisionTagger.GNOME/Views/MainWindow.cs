@@ -1491,7 +1491,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             _applyAction.SetEnabled(false);
             _tagActionsButton.SetSensitive(false);
             _viewStack.SetVisibleChildName("Library");
-            _librarySplitView.SetShowSidebar(_controller.MusicFiles.Count > 0 ? true : false);
+            _librarySplitView.SetShowSidebar(_controller.MusicFiles.Count > 0);
             _splitViewToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
             _libraryViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "NoSelected" : "NoFiles");
         }
