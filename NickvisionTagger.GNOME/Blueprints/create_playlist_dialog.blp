@@ -8,9 +8,8 @@ Adw.Window _root {
   resizable: true;
   default-widget: _createButton;
 
-  content: Gtk.Box {
-    orientation: vertical;
-
+  content: Adw.ToolbarView {
+    [top]
     Adw.HeaderBar {
       title-widget: Gtk.Label { };
 
@@ -53,24 +52,12 @@ Adw.Window _root {
             };
           }
           
-          Adw.ActionRow {
+          Adw.SwitchRow _relativePathsRow {
             title: _("Use Relative Paths");
-            activatable-widget: _relativePathsSwitch;
-            
-            [suffix]
-            Gtk.Switch _relativePathsSwitch {
-              valign: center;
-            }
           }
           
-          Adw.ActionRow {
+          Adw.SwitchRow _selectedFilesOnlyRow {
             title: _("Include Only Selected Files");
-            activatable-widget: _selectedFilesOnlySwitch;
-            
-            [suffix]
-            Gtk.Switch _selectedFilesOnlySwitch {
-              valign: center;
-            }
           }
         }
         

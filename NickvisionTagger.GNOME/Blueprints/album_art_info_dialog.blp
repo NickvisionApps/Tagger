@@ -6,15 +6,14 @@ Adw.Window _root {
   modal: true;
   resizable: false;
 
-  content: Gtk.Box {
-    orientation: vertical;
-
+  content: Adw.ToolbarView {
+    [top]
     Adw.HeaderBar {
       title-widget: Gtk.Label {};
       styles ["flat"]
     }
 
-    Gtk.WindowHandle {
+    content: Gtk.WindowHandle {
       Gtk.Box {
         orientation: vertical;
         spacing: 24;
@@ -31,20 +30,26 @@ Adw.Window _root {
           Adw.ActionRow _mimeTypeRow {
             title: _("Mime Type");
             subtitle-selectable: true;
+
+            styles ["property"]
           }
 
           Adw.ActionRow _widthRow {
             title: _("Width");
             subtitle-selectable: true;
+
+            styles ["property"]
           }
 
           Adw.ActionRow _heightRow {
             title: _("Height");
             subtitle-selectable: true;
+
+            styles ["property"]
           }
         }
       }
-    }
+    };
   };
   
   Gtk.ShortcutController {

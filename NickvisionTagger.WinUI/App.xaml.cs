@@ -23,8 +23,7 @@ public partial class App : Application
         InitializeComponent();
         _controller = new MainWindowController(Array.Empty<string>());
         _controller.AppInfo.Changelog =
-            @"- Improved the UX of the Lyrics dialog
-- Updated translations (Thanks everyone on Weblate!)";
+            @"- Updated translations (Thanks everyone on Weblate!)";
         if (_controller.Theme != Theme.System)
         {
             RequestedTheme = _controller.Theme switch

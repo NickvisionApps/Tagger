@@ -14,7 +14,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static Nickvision.Aura.Localization.Gettext;
-using static Nickvision.GirExt.GtkExt;
 
 namespace NickvisionTagger.GNOME.Views;
 
@@ -33,12 +32,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         int RefCount;
     }
 
-    private delegate void GtkListBoxUpdateHeaderFunc(nint row, nint before, nint data);
-
-    [LibraryImport("libadwaita-1.so.0")]
-    private static partial void gtk_list_box_set_header_func(nint box, GtkListBoxUpdateHeaderFunc updateHeader, nint data, nint destroy);
-    [LibraryImport("libadwaita-1.so.0")]
-    private static partial void gtk_list_box_row_set_header(nint row, nint header);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
     private static partial int g_date_time_get_year(ref TaggerDateTime datetime);
     [LibraryImport("libadwaita-1.so.0", StringMarshalling = StringMarshalling.Utf8)]
@@ -67,7 +60,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     private readonly Gio.SimpleAction _musicBrainzAction;
     private readonly Gio.SimpleAction _downloadLyricsAction;
     private readonly Gio.SimpleAction _acoustIdAction;
-    private readonly GtkListBoxUpdateHeaderFunc _updateHeaderFunc;
     private readonly Gtk.EventControllerKey _filenameKeyController;
     private AlbumArtType _currentAlbumArtType;
     private string? _listHeader;
@@ -77,10 +69,11 @@ public partial class MainWindow : Adw.ApplicationWindow
     private bool _isSelectionOccuring;
     private bool _updatePublishingDate;
 
-    [Gtk.Connect] private readonly Adw.HeaderBar _headerBar;
+    [Gtk.Connect] private readonly Adw.ToolbarView _toolbarView;
     [Gtk.Connect] private readonly Adw.WindowTitle _title;
     [Gtk.Connect] private readonly Gtk.Button _libraryButton;
-    [Gtk.Connect] private readonly Gtk.ToggleButton _flapToggleButton;
+    [Gtk.Connect] private readonly Gtk.CenterBox _bottomBar;
+    [Gtk.Connect] private readonly Gtk.ToggleButton _splitViewToggleButton;
     [Gtk.Connect] private readonly Gtk.Image _imageLibraryMode;
     [Gtk.Connect] private readonly Gtk.Label _selectionLabel;
     [Gtk.Connect] private readonly Gtk.Button _applyButton;
@@ -90,15 +83,14 @@ public partial class MainWindow : Adw.ApplicationWindow
     [Gtk.Connect] private readonly Gtk.Label _loadingLabel;
     [Gtk.Connect] private readonly Gtk.ProgressBar _loadingProgressBar;
     [Gtk.Connect] private readonly Gtk.Label _loadingProgressLabel;
-    [Gtk.Connect] private readonly Adw.Flap _libraryFlap;
-    [Gtk.Connect] private readonly Adw.ViewStack _filesViewStack;
+    [Gtk.Connect] private readonly Adw.OverlaySplitView _librarySplitView;
     [Gtk.Connect] private readonly Gtk.SearchEntry _musicFilesSearch;
     [Gtk.Connect] private readonly Gtk.Button _advancedSearchInfoButton;
     [Gtk.Connect] private readonly Gtk.Button _selectAllButton;
     [Gtk.Connect] private readonly Gtk.Separator _searchSeparator;
     [Gtk.Connect] private readonly Gtk.ScrolledWindow _scrolledWindowMusicFiles;
     [Gtk.Connect] private readonly Gtk.ListBox _listMusicFiles;
-    [Gtk.Connect] private readonly Adw.ViewStack _selectedViewStack;
+    [Gtk.Connect] private readonly Adw.ViewStack _libraryViewStack;
     [Gtk.Connect] private readonly Gtk.Label _artTypeLabel;
     [Gtk.Connect] private readonly Adw.ViewStack _artViewStack;
     [Gtk.Connect] private readonly Gtk.Button _switchAlbumArtButton;
@@ -154,6 +146,22 @@ public partial class MainWindow : Adw.ApplicationWindow
         //Build UI
         builder.Connect(this);
         _title.SetTitle(_controller.AppInfo.ShortName);
+        _librarySplitView.OnNotify += (sender, e) =>
+        {
+            if (e.Pspec.GetName() == "show-sidebar")
+            {
+                if (_librarySplitView.GetShowSidebar())
+                {
+                    _toolbarView.SetTopBarStyle(Adw.ToolbarStyle.Raised);
+                    _toolbarView.SetBottomBarStyle(Adw.ToolbarStyle.Raised);
+                }
+                else
+                {
+                    _toolbarView.SetTopBarStyle(Adw.ToolbarStyle.Flat);
+                    _toolbarView.SetBottomBarStyle(Adw.ToolbarStyle.Flat);
+                }
+            }
+        };
         _musicFilesSearch.OnSearchChanged += SearchChanged;
         _advancedSearchInfoButton.OnClicked += AdvancedSearchInfo;
         _selectAllButton.OnClicked += (sender, e) => _listMusicFiles.SelectAll();
@@ -165,7 +173,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                 _searchSeparator.SetVisible(musicFilesVadjustment.GetValue() > 0);
             }
         };
-        _updateHeaderFunc = (rowPtr, _, _) =>
+        _listMusicFiles.SetHeaderFunc((row, before) =>
         {
             if (!string.IsNullOrEmpty(_listHeader))
             {
@@ -178,11 +186,10 @@ public partial class MainWindow : Adw.ApplicationWindow
                 label.SetMarginBottom(6);
                 label.SetHalign(Gtk.Align.Start);
                 label.SetEllipsize(Pango.EllipsizeMode.End);
-                gtk_list_box_row_set_header(rowPtr, label.Handle);
+                row.SetHeader(label);
                 _listHeader = string.Empty;
             }
-        };
-        gtk_list_box_set_header_func(_listMusicFiles.Handle, _updateHeaderFunc, IntPtr.Zero, IntPtr.Zero);
+        });
         _filenameKeyController = Gtk.EventControllerKey.New();
         _filenameKeyController.SetPropagationPhase(Gtk.PropagationPhase.Capture);
         _filenameKeyController.OnKeyPressed += OnFilenameKeyPressed;
@@ -1473,7 +1480,7 @@ public partial class MainWindow : Adw.ApplicationWindow
                     _listMusicFilesRows[^1].AddCssClass("end-row");
                 }
             }
-            _headerBar.RemoveCssClass("flat");
+            _bottomBar.SetVisible(true);
             _title.SetSubtitle(_controller.MusicLibraryName);
             _libraryButton.SetVisible(true);
             _imageLibraryMode.SetFromIconName(_controller.MusicLibraryType == MusicLibraryType.Folder ? "folder-visiting-symbolic" : "playlist-symbolic");
@@ -1484,14 +1491,13 @@ public partial class MainWindow : Adw.ApplicationWindow
             _applyAction.SetEnabled(false);
             _tagActionsButton.SetSensitive(false);
             _viewStack.SetVisibleChildName("Library");
-            _libraryFlap.SetFoldPolicy(_controller.MusicFiles.Count > 0 ? Adw.FlapFoldPolicy.Auto : Adw.FlapFoldPolicy.Always);
-            _libraryFlap.SetRevealFlap(true);
-            _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
-            _filesViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "Files" : "NoFiles");
+            _librarySplitView.SetShowSidebar(_controller.MusicFiles.Count > 0);
+            _splitViewToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
+            _libraryViewStack.SetVisibleChildName(_controller.MusicFiles.Count > 0 ? "NoSelected" : "NoFiles");
         }
         else
         {
-            _headerBar.AddCssClass("flat");
+            _bottomBar.SetVisible(false);
             _title.SetSubtitle("");
             _libraryButton.SetVisible(false);
             _imageLibraryMode.SetFromIconName("");
@@ -1510,7 +1516,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _viewStack.SetVisibleChildName("Library");
         _libraryButton.SetVisible(true);
-        _flapToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
+        _splitViewToggleButton.SetSensitive(_controller.MusicFiles.Count > 0);
         _applyAction.SetEnabled(pending);
         _tagActionsButton.SetSensitive(_controller.SelectedMusicFiles.Count != 0);
         var i = 0;
@@ -1583,7 +1589,7 @@ public partial class MainWindow : Adw.ApplicationWindow
             }
             else
             {
-                using var bytes = GLib.Bytes.From(art.Image.AsSpan());
+                using var bytes = GLib.Bytes.New(art.Image.AsSpan());
                 using var texture = Gdk.Texture.NewFromBytes(bytes);
                 _albumArtImage.SetPaintable(texture);
             }
@@ -1738,7 +1744,7 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         _isSelectionOccuring = true;
         var selectedIndexes = sender.GetSelectedRowsIndices();
-        _selectedViewStack.SetVisibleChildName(selectedIndexes.Count > 0 ? "Selected" : "NoSelected");
+        _libraryViewStack.SetVisibleChildName(selectedIndexes.Count > 0 ? "Selected" : (_controller.MusicFiles.Count > 0 ? "NoSelected" : "NoFiles"));
         if (_currentAlbumArtType != AlbumArtType.Front)
         {
             SwitchAlbumArt(null, e);

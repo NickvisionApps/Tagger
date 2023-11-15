@@ -1,4 +1,3 @@
-using Nickvision.GirExt;
 using NickvisionTagger.GNOME.Helpers;
 using NickvisionTagger.Shared.Models;
 using System;
@@ -19,8 +18,8 @@ public partial class CreatePlaylistDialog : Adw.Window
     [Gtk.Connect] private readonly Adw.EntryRow _pathRow;
     [Gtk.Connect] private readonly Gtk.Button _selectSaveLocationButton;
     [Gtk.Connect] private readonly Adw.ComboRow _formatRow;
-    [Gtk.Connect] private readonly Gtk.Switch _relativePathsSwitch;
-    [Gtk.Connect] private readonly Gtk.Switch _selectedFilesOnlySwitch;
+    [Gtk.Connect] private readonly Adw.SwitchRow _relativePathsRow;
+    [Gtk.Connect] private readonly Adw.SwitchRow _selectedFilesOnlyRow;
     [Gtk.Connect] private readonly Gtk.Button _createButton;
 
     /// <summary>
@@ -132,7 +131,7 @@ public partial class CreatePlaylistDialog : Adw.Window
     /// <param name="e">EventArgs</param>
     private void Create(Gtk.Button sender, EventArgs e)
     {
-        OnCreate?.Invoke(this, new PlaylistOptions(_path, (PlaylistFormat)_formatRow.GetSelected(), _relativePathsSwitch.GetActive(), _selectedFilesOnlySwitch.GetActive()));
+        OnCreate?.Invoke(this, new PlaylistOptions(_path, (PlaylistFormat)_formatRow.GetSelected(), _relativePathsRow.GetActive(), _selectedFilesOnlyRow.GetActive()));
         Destroy();
     }
 }

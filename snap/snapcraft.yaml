@@ -39,7 +39,7 @@ parts:
     after: [ chromaprint ]
     # See 'snapcraft plugins'
     plugin: nil
-    source: https://github.com/NickvisionApps/Tagger.git
+    source: .
     build-packages:
       - blueprint-compiler
       - wget

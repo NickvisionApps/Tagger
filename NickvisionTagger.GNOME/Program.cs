@@ -22,7 +22,7 @@ public partial class Program
     /// </summary>
     /// <param name="args">string[]</param>
     /// <returns>Return code from Adw.Application.Run()</returns>
-    public static int Main(string[] args) => new Program(args).Run();
+    public static int Main(string[] args) => new Program(args).Run(args);
 
     /// <summary>
     /// Constructs a Program
@@ -33,7 +33,7 @@ public partial class Program
         _mainWindow = null;
         _mainWindowController = new MainWindowController(args);
         _mainWindowController.AppInfo.Changelog =
-            @"* Fixed an issue where specifying the directory separator in Tag to File Name when Limit Filename Characters was enabled caused new directories to not be made
+            @"* Updated to GNOME 45 runtime with latest libadwaita design
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))
@@ -66,12 +66,16 @@ public partial class Program
     /// <summary>
     /// Runs the program
     /// </summary>
+    /// <param name="args">Command-line arguments</param>
     /// <returns>Return code from Adw.Application.Run()</returns>
-    public int Run()
+    public int Run(string[] args)
     {
         try
         {
-            return _application.RunWithSynchronizationContext();
+            var argv = new string[args.Length + 1];
+            argv[0] = "org.nickvision.tagger";
+            args.CopyTo(argv, 1);
+            return _application.RunWithSynchronizationContext(argv);
         }
         catch (Exception ex)
         {
