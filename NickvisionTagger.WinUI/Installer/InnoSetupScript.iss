@@ -3,7 +3,7 @@
 
 #define MyAppName "Nickvision Tagger"
 #define MyAppShortName "Tagger"
-#define MyAppVersion "2023.11.2"
+#define MyAppVersion "2023.11.3"
 #define MyAppPublisher "Nickvision"
 #define MyAppURL "https://nickvision.org"
 #define MyAppExeName "NickvisionTagger.WinUI.exe"

@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <name>Tagger</name>
+  <project_group>Nickvision</project_group>
   <developer_name>Nickvision</developer_name>
   <summary>Tag your music</summary>
   <description>
@@ -34,12 +35,11 @@
   <url type="bugtracker">https://github.com/NickvisionApps/Tagger/issues</url>
   <url type="donation">https://github.com/sponsors/nlogozzo</url>
   <url type="translate">https://github.com/NickvisionApps/Tagger/blob/master/CONTRIBUTING.md#providing-translations</url>
-  <project_group>Nickvision</project_group>
   <provides>
     <binary>org.nickvision.tagger</binary>
   </provides>
   <releases>
-    <release version="2023.11.3-next" date="2023-11-10">
+    <release version="2023.11.3" date="2023-11-17">
       <description translatable="no">
         <p>- Updated to GNOME 45 runtime with latest libadwaita design</p>
         <p>- Updated to .NET 8.0</p>
@@ -48,4 +48,16 @@
     </release>
   </releases>
   <content_rating type="oars-1.1" />
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+  <custom>
+    <value key="Purism::form_factor">workstation</value>
+    <value key="Purism::form_factor">mobile</value>
+  </custom>
 </component>
