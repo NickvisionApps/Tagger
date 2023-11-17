@@ -23,7 +23,8 @@ public partial class App : Application
         InitializeComponent();
         _controller = new MainWindowController(Array.Empty<string>());
         _controller.AppInfo.Changelog =
-            @"- Updated translations (Thanks everyone on Weblate!)";
+            @"- Updated to .NET 8.0
+- Updated translations (Thanks everyone on Weblate!)";
         if (_controller.Theme != Theme.System)
         {
             RequestedTheme = _controller.Theme switch

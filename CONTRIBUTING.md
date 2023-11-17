@@ -128,7 +128,7 @@ Once all changes to your translated file are made, commit these changes and crea
 
 #### Structure
 
-Tagger is built using .NET 7 and C#. With these technologies, Tagger is built for GNOME (Linux) and Windows.
+Tagger is built using .NET 8 and C#. With these technologies, Tagger is built for GNOME (Linux) and Windows.
 The solution is setup into 3 projects:
  - NickvisionTagger.Shared
  - NickvisionTagger.GNOME
@@ -174,7 +174,7 @@ Recommended IDEs:
 You may also make your changes via any code editor and use [`flatpak-builder`](https://docs.flatpak.org/en/latest/flatpak-builder.html) to run the application locally through flatpak.
 
 You may also build the app manually without using flatpak. List of dependencies:
-- dotnet >=7.0
+- dotnet >=8.0
 - GTK >=4.12
 - libadwaita >=1.4
 - [cake](https://cakebuild.net/) (build only)
