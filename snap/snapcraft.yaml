@@ -11,6 +11,13 @@ architectures:
   - build-on: armhf
 
 parts:
+  blueprint-compiler:
+    source: https://gitlab.gnome.org/jwestman/blueprint-compiler.git
+    source-tag: 'v0.10.0'
+    plugin: meson
+    meson-parameters:
+      - --prefix=/usr
+    override-prime: ''
   chromaprint:
     plugin: cmake
     source: https://github.com/acoustid/chromaprint.git
@@ -36,12 +43,10 @@ parts:
       - -usr/include
 
   tagger:
-    after: [ chromaprint ]
-    # See 'snapcraft plugins'
+    after: [ chromaprint, blueprint-compiler ]
     plugin: nil
     source: .
     build-packages:
-      - blueprint-compiler
       - wget
     override-pull: |
       craftctl default
@@ -52,6 +57,8 @@ parts:
     override-build: |
       export DOTNET_ROOT=$HOME/.dotnet
       export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin
+      export PYTHONPATH=$CRAFT_STAGE/usr/lib/python3/dist-packages:$PYTHONPATH
+      export GI_TYPELIB_PATH=/snap/gnome-42-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:/snap/gnome-42-2204-sdk/current/usr/lib/girepository-1.0
       cd $CRAFT_PART_SRC
       dotnet tool restore
       dotnet cake --target=Publish --prefix=/snap/tagger/current/usr --ui=gnome --self-contained
