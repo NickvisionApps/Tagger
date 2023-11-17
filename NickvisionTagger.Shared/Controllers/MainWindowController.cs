@@ -1,10 +1,10 @@
 using ATL;
 using FuzzySharp;
 using Nickvision.Aura;
+using Nickvision.Aura.Events;
 using Nickvision.Aura.Network;
 using Nickvision.Aura.Taskbar;
 using Nickvision.Aura.Update;
-using NickvisionTagger.Shared.Events;
 using NickvisionTagger.Shared.Helpers;
 using NickvisionTagger.Shared.Models;
 using System;

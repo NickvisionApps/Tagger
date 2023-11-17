@@ -52,7 +52,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how can you help the proje
 </details>
 
 # Dependencies
-- [.NET 7](https://dotnet.microsoft.com/en-us/)
+- [.NET 8](https://dotnet.microsoft.com/en-us/)
 - [chromaprint](https://acoustid.org/chromaprint)
 
 # Code of Conduct
