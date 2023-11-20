@@ -14,7 +14,7 @@ parts:
   blueprint-compiler:
     source: https://gitlab.gnome.org/jwestman/blueprint-compiler.git
     source-tag: 'v0.10.0'
-    source-depth: '1'
+    source-depth: 1
     plugin: meson
     meson-parameters:
       - --prefix=/usr
