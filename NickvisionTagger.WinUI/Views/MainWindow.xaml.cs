@@ -1283,6 +1283,7 @@ public sealed partial class MainWindow : Window
     /// <param name="e">RoutedEventArgs</param>
     private async void WindowsUpdate(object sender, RoutedEventArgs e)
     {
+        MainMenu.IsEnabled = false;
         InfoBar.IsOpen = false;
         var page = ViewStack.CurrentPageName;
         ViewStack.CurrentPageName = "Startup";
