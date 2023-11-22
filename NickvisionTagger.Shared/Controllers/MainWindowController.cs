@@ -134,6 +134,9 @@ public class MainWindowController : IDisposable
     /// <param name="args">Command-line arguments</param>
     public MainWindowController(string[] args)
     {
+        Aura.Init("org.nickvision.tagger", "Nickvision Tagger");
+        AppInfo.EnglishShortName = "Tagger";
+        //Vars
         _disposed = false;
         if (args.Length > 0)
         {
@@ -147,23 +150,38 @@ public class MainWindowController : IDisposable
                 _libraryToLaunch = path;
             }
         }
-        Aura.Init("org.nickvision.tagger", "Nickvision Tagger");
-        AppInfo.EnglishShortName = "Tagger";
-        if (Directory.Exists($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
-        {
-            // Move config files from older versions and delete old directory
-            try
-            {
-                foreach (var file in Directory.GetFiles($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}"))
-                {
-                    File.Move(file, $"{UserDirectories.ApplicationConfig}{Path.DirectorySeparatorChar}{Path.GetFileName(file)}");
-                }
-            }
-            catch (IOException) { }
-            Directory.Delete($"{UserDirectories.Config}{Path.DirectorySeparatorChar}Nickvision{Path.DirectorySeparatorChar}{AppInfo.Name}", true);
-        }
-        Aura.Active.SetConfig<Configuration>("config");
-        Configuration.Current.Saved += ConfigurationSaved;
+        _forceAllowClose = false;
+        _musicLibrary = null;
+        _musicFileChangedFromUpdate = new List<bool>();
+        _filesBeingEditedOriginals = new Dictionary<int, PropertyMap>();
+        _hadUserFilenameChange = false;
+        _validSearchProperties =
+        [
+            "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"),
+            "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"),
+            "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"),
+            "composer", _("composer"), "description", _("description"), "discnumber", _("discnumber"),
+            "disctotal", _("disctotal"), "publisher", _("publisher"), "publishingdate", _("publishingdate"),
+            "custom", _("custom")
+        ];
+        _genreSuggestions =
+        [
+            "Blues", "Classic rock", "Country", "Dance", "Disco", "Funk", "Grunge", "Hip-hop", "Jazz", "Metal",
+            "New age", "Oldies", "Other", "Pop", "Rhythm and blues", "Rap", "Reggae", "Rock", "Techno", "Industrial",
+            "Alternative", "Ska", "Death metal", "Pranks", "Soundtrack", "Euro-techno", "Ambient", "Trip-hop", "Vocal",
+            "Jazz & funk", "Fusion", "Trance", "Classical", "Instrumental", "Acid", "House", "Game", "Sound clip",
+            "Gospel", "Noise", "Alternative rock", "Bass", "Soul", "Punk", "Space", "Meditative", "Instrumental pop",
+            "Instrumental rock", "Ethnic", "Gothic", "Techno-industrial", "Electronic", "Pop-folk", "Eurodance",
+            "Dream", "Southern rock", "Comedy", "Gangsta", "Top 40", "Christian rap", "Pop/funk", "New wave", "Rave",
+            "Trailer", "Low-fi", "Tribal", "Polka", "Retro", "Musical", "Rock 'n' roll", "Hard rock", "Folk", "Swing",
+            "Latin", "Chorus", "Acoustic", "Opera", "Club", "Tango", "Samba", "Freestyle", "A cappella", "Dance hall",
+            "Indie", "Merengue", "Salsa", "Bachata", "Christmas", "EDM"
+        ];
+        FormatStrings = [_("%artist%- %title%"), _("%title%- %artist%"), _("%track%- %title%"), _("%title%")];
+        MusicFileSaveStates = new List<bool>();
+        SelectedMusicFiles = new Dictionary<int, MusicFile>();
+        SelectedPropertyMap = new PropertyMap();
+        //AppInfo
         AppInfo.Version = "2023.11.3";
         AppInfo.ShortName = _("Tagger");
         AppInfo.Description = _("Tag your music");
@@ -178,37 +196,8 @@ public class MainWindowController : IDisposable
         AppInfo.Designers[_("DaPigGuy")] = new Uri("https://github.com/DaPigGuy");
         AppInfo.Artists[_("David Lapshin")] = new Uri("https://github.com/daudix-UFO");
         AppInfo.TranslatorCredits = _("translator-credits");
-        _forceAllowClose = false;
-        _musicLibrary = null;
-        _musicFileChangedFromUpdate = new List<bool>();
-        _filesBeingEditedOriginals = new Dictionary<int, PropertyMap>();
-        _hadUserFilenameChange = false;
-        _validSearchProperties = new string[]
-        {
-            "filename", _("filename"), "title", _("title"), "artist", _("artist"), "album", _("album"),
-            "year", _("year"), "track", _("track"), "tracktotal", _("tracktotal"), "albumartist", _("albumartist"),
-            "genre", _("genre"), "comment", _("comment"), "beatsperminute", _("beatsperminute"), "bpm", _("bpm"),
-            "composer", _("composer"), "description", _("description"), "discnumber", _("discnumber"),
-            "disctotal", _("disctotal"), "publisher", _("publisher"), "publishingdate", _("publishingdate"),
-            "custom", _("custom")
-        };
-        _genreSuggestions = new string[]
-        {
-            "Blues", "Classic rock", "Country", "Dance", "Disco", "Funk", "Grunge", "Hip-hop", "Jazz", "Metal",
-            "New age", "Oldies", "Other", "Pop", "Rhythm and blues", "Rap", "Reggae", "Rock", "Techno", "Industrial",
-            "Alternative", "Ska", "Death metal", "Pranks", "Soundtrack", "Euro-techno", "Ambient", "Trip-hop", "Vocal",
-            "Jazz & funk", "Fusion", "Trance", "Classical", "Instrumental", "Acid", "House", "Game", "Sound clip",
-            "Gospel", "Noise", "Alternative rock", "Bass", "Soul", "Punk", "Space", "Meditative", "Instrumental pop",
-            "Instrumental rock", "Ethnic", "Gothic", "Techno-industrial", "Electronic", "Pop-folk", "Eurodance",
-            "Dream", "Southern rock", "Comedy", "Gangsta", "Top 40", "Christian rap", "Pop/funk", "New wave", "Rave",
-            "Trailer", "Low-fi", "Tribal", "Polka", "Retro", "Musical", "Rock 'n' roll", "Hard rock", "Folk", "Swing",
-            "Latin", "Chorus", "Acoustic", "Opera", "Club", "Tango", "Samba", "Freestyle", "A cappella", "Dance hall",
-            "Indie", "Merengue", "Salsa", "Bachata", "Christmas", "EDM"
-        };
-        FormatStrings = new string[] { _("%artist%- %title%"), _("%title%- %artist%"), _("%track%- %title%"), _("%title%") };
-        MusicFileSaveStates = new List<bool>();
-        SelectedMusicFiles = new Dictionary<int, MusicFile>();
-        SelectedPropertyMap = new PropertyMap();
+        //Events
+        Configuration.Current.Saved += ConfigurationSaved;
     }
 
     /// <summary>
@@ -409,7 +398,7 @@ public class MainWindowController : IDisposable
     /// <summary>
     /// Saves the app's configuration file to disk
     /// </summary>
-    public void SaveConfig() => Aura.Active.SaveConfig("config");
+    public void SaveConfiguration() => Configuration.Current.Save();
 
     /// <summary>
     /// Checks for an application update and notifies the user if one is available
@@ -473,7 +462,7 @@ public class MainWindowController : IDisposable
         if (Configuration.Current.RememberLastOpenedFolder)
         {
             Configuration.Current.LastOpenedFolder = _musicLibrary.Path;
-            Aura.Active.SaveConfig("config");
+            Configuration.Current.Save();
         }
         await ReloadLibraryAsync();
     }
@@ -492,7 +481,7 @@ public class MainWindowController : IDisposable
         if (Configuration.Current.RememberLastOpenedFolder)
         {
             Configuration.Current.LastOpenedFolder = "";
-            Aura.Active.SaveConfig("config");
+            Configuration.Current.Save();
         }
         MusicLibraryUpdated?.Invoke(this, EventArgs.Empty);
     }
@@ -975,7 +964,7 @@ public class MainWindowController : IDisposable
             {
                 UpdateSelectedMusicFilesProperties();
                 Configuration.Current.PreviousFTTFormatString = formatString;
-                Aura.Active.SaveConfig("config");
+                Configuration.Current.Save();
             }
             MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} file name to tag successfully", "Converted {0} file names to tags successfully", success, success), NotificationSeverity.Success, "format"));
@@ -1011,7 +1000,7 @@ public class MainWindowController : IDisposable
             {
                 UpdateSelectedMusicFilesProperties();
                 Configuration.Current.PreviousTTFFormatString = formatString;
-                Aura.Active.SaveConfig("config");
+                Configuration.Current.Save();
             }
             MusicFileSaveStatesChanged?.Invoke(this, MusicFileSaveStates.Any(x => !x));
             NotificationSent?.Invoke(this, new NotificationSentEventArgs(_n("Converted {0} tag to file name successfully", "Converted {0} tags to file names successfully", success, success), NotificationSeverity.Success, "format"));

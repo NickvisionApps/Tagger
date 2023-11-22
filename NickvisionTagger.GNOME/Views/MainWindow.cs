@@ -676,7 +676,7 @@ public partial class MainWindow : Adw.ApplicationWindow
         _controller.WindowWidth = width;
         _controller.WindowHeight = height;
         _controller.WindowMaximized = IsMaximized();
-        _controller.SaveConfig();
+        _controller.SaveConfiguration();
         if (!_controller.CanClose)
         {
             var dialog = Adw.MessageDialog.New(this, _("Apply Changes?"), _("Some music files still have changes waiting to be applied. What would you like to do?"));

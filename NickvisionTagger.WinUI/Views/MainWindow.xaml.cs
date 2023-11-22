@@ -678,7 +678,7 @@ public sealed partial class MainWindow : Window
             sortBy = SortBy.Genre;
         }
         _controller.SortFilesBy = sortBy;
-        _controller.SaveConfig();
+        _controller.SaveConfiguration();
         //Update sort file by menu
         MenuSortFilesFileName.IsChecked = _controller.SortFilesBy == SortBy.Filename;
         MenuSortFilesFilePath.IsChecked = _controller.SortFilesBy == SortBy.Path;
@@ -765,7 +765,7 @@ public sealed partial class MainWindow : Window
             CmdBtnExtrasPane.Icon = new SymbolIcon(Symbol.ClosePane);
             _controller.ExtrasPane = true;
         }
-        _controller.SaveConfig();
+        _controller.SaveConfiguration();
     }
 
     /// <summary>

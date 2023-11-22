@@ -1,5 +1,4 @@
 using Nickvision.Aura;
-using Nickvision.Aura.Configuration;
 using System.Runtime.InteropServices;
 
 namespace NickvisionTagger.Shared.Models;
@@ -126,5 +125,5 @@ public class Configuration : ConfigurationBase
     /// <summary>
     /// Gets the singleton object
     /// </summary>
-    internal static Configuration Current => (Configuration)Aura.Active.ConfigFiles["config"];
+    internal static Configuration Current => Aura.Active.GetConfig<Configuration>("config");
 }
