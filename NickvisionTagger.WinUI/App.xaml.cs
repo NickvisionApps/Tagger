@@ -23,7 +23,7 @@ public partial class App : Application
         InitializeComponent();
         _controller = new MainWindowController(Array.Empty<string>());
         _controller.AppInfo.Changelog =
-            @"- Updated to .NET 8.0
+            @"- Fixed an issue where album art was not deleted correctly on delete tag action
 - Updated translations (Thanks everyone on Weblate!)";
         if (_controller.Theme != Theme.System)
         {

@@ -600,6 +600,8 @@ public class MusicFile : IComparable<MusicFile>, IDisposable, IEquatable<MusicFi
         Publisher = "";
         PublishingDate = DateTime.MinValue;
         _track.EmbeddedPictures.Clear();
+        _frontAlbumArt = new AlbumArt(Array.Empty<byte>(), AlbumArtType.Front);
+        _backAlbumArt = new AlbumArt(Array.Empty<byte>(), AlbumArtType.Back);
         _track.AdditionalFields.Clear();
         Lyrics = new LyricsInfo();
     }

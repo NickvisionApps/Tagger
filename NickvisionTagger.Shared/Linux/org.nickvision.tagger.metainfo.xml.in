@@ -39,10 +39,9 @@
     <binary>org.nickvision.tagger</binary>
   </provides>
   <releases>
-    <release version="2023.11.3" date="2023-11-17">
+    <release version="2023.11.4-next" date="2023-11-17">
       <description translatable="no">
-        <p>- Updated to GNOME 45 runtime with latest libadwaita design</p>
-        <p>- Updated to .NET 8.0</p>
+        <p>- Fixed an issue where album art was not deleted correctly on delete tag action</p>
         <p>- Updated translations (Thanks everyone on Weblate!)</p>
       </description>
     </release>

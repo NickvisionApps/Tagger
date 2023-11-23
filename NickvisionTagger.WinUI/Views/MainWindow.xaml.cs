@@ -100,8 +100,6 @@ public sealed partial class MainWindow : Window
         AppWindow.SetIcon(@"Resources\org.nickvision.tagger.ico");
         TitleBar.Loaded += (sender, e) => SetDragRegionForCustomTitleBar();
         TitleBar.SizeChanged += (sender, e) => SetDragRegionForCustomTitleBar();
-        //Window Sizing
-        User32.ShowWindow(_hwnd, ShowWindowCommand.SW_SHOWMAXIMIZED);
         //Localize Strings
         MenuFile.Title = _("File");
         MenuOpenFolder.Text = _("Open Folder");
