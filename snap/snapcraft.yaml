@@ -36,7 +36,7 @@ parts:
       - -usr/include
 
   tagger:
-    after: [ chromaprint, blueprint-compiler ]
+    after: [ chromaprint ]
     plugin: nil
     source: .
     build-packages:
