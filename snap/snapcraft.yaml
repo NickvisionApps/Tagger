@@ -11,14 +11,6 @@ architectures:
   - build-on: armhf
 
 parts:
-  blueprint-compiler:
-    source: https://gitlab.gnome.org/jwestman/blueprint-compiler.git
-    source-tag: 'v0.10.0'
-    source-depth: 1
-    plugin: meson
-    meson-parameters:
-      - --prefix=/usr
-    override-prime: ''
   chromaprint:
     plugin: cmake
     source: https://github.com/acoustid/chromaprint.git
@@ -49,6 +41,8 @@ parts:
     source: .
     build-packages:
       - wget
+    build-snaps:
+      - blueprint-compiler/latest/edge
     build-environment:
       - DOTNET_CLI_TELEMETRY_OPTOUT: '1'
       - PATH: $HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin:$PATH
