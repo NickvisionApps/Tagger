@@ -47,8 +47,6 @@ parts:
       - DOTNET_CLI_TELEMETRY_OPTOUT: '1'
       - PATH: $HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin:$PATH
       - DOTNET_ROOT: $HOME/.dotnet
-      - PYTHONPATH: $CRAFT_STAGE/usr/lib/python3/dist-packages:$PYTHONPATH
-      - GI_TYPELIB_PATH: /snap/gnome-42-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:/snap/gnome-42-2204-sdk/current/usr/lib/girepository-1.0
     override-pull: |
       craftctl default
       wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
