@@ -11,14 +11,6 @@ architectures:
   - build-on: armhf
 
 parts:
-  blueprint-compiler:
-    source: https://gitlab.gnome.org/jwestman/blueprint-compiler.git
-    source-tag: 'v0.10.0'
-    source-depth: 1
-    plugin: meson
-    meson-parameters:
-      - --prefix=/usr
-    override-prime: ''
   chromaprint:
     plugin: cmake
     source: https://github.com/acoustid/chromaprint.git
@@ -44,17 +36,17 @@ parts:
       - -usr/include
 
   tagger:
-    after: [ chromaprint, blueprint-compiler ]
+    after: [ chromaprint ]
     plugin: nil
     source: .
     build-packages:
       - wget
+    build-snaps:
+      - blueprint-compiler/latest/edge
     build-environment:
       - DOTNET_CLI_TELEMETRY_OPTOUT: '1'
       - PATH: $HOME/.dotnet:$HOME/.dotnet/tools:$HOME/.cargo/bin:$PATH
       - DOTNET_ROOT: $HOME/.dotnet
-      - PYTHONPATH: $CRAFT_STAGE/usr/lib/python3/dist-packages:$PYTHONPATH
-      - GI_TYPELIB_PATH: /snap/gnome-42-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:/snap/gnome-42-2204-sdk/current/usr/lib/girepository-1.0
     override-pull: |
       craftctl default
       wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
