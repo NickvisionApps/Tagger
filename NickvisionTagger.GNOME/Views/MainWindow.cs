@@ -719,7 +719,6 @@ public partial class MainWindow : Adw.ApplicationWindow
     {
         var file = new Gio.FileHelper(e.Value.GetObject()!.Handle, false);
         var path = file.GetPath() ?? "";
-        Console.WriteLine(path);
         if (MusicLibrary.GetIsValidLibraryPath(path))
         {
             Task.Run(async () => await _controller.OpenLibraryAsync(path));
