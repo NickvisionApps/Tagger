@@ -717,15 +717,13 @@ public partial class MainWindow : Adw.ApplicationWindow
     /// <param name="e">Gtk.DropTarget.DropSignalArgs</param>
     private bool OnDrop(Gtk.DropTarget sender, Gtk.DropTarget.DropSignalArgs e)
     {
-        var obj = e.Value.GetObject();
-        if (obj is Gio.FileHelper file)
+        var file = new Gio.FileHelper(e.Value.GetObject()!.Handle, false);
+        var path = file.GetPath() ?? "";
+        Console.WriteLine(path);
+        if (MusicLibrary.GetIsValidLibraryPath(path))
         {
-            var path = file.GetPath() ?? "";
-            if (MusicLibrary.GetIsValidLibraryPath(path))
-            {
-                _controller.OpenLibraryAsync(path).Wait();
-                return true;
-            }
+            Task.Run(async () => await _controller.OpenLibraryAsync(path));
+            return true;
         }
         return false;
     }
