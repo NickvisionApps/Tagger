@@ -17,10 +17,10 @@
 <title>Format Strings</title>
 <p>This page explains the use of format strings for <code>File Name to Tag</code> and <code>Tag to File Name</code> conversions.</p>
 <section>
-    <title>Format</title>
+    <title>Opmaak</title>
     <p>Strings of any format with properties wrapped in percent signs (%).</p>
     <note>
-        <title>Example</title>
+        <title>Voorbeeld</title>
         <p>Format String: <code>%artist%- %title%</code></p>
         <p>Filename: <code>Artist1 - Song1.mp3</code></p>
         <p>When running <code>File Name to Tag</code> conversion, this format string and this file name will create a tag with an artist of <code>Artist1</code> and a title of <code>Song1</code>.</p>
@@ -29,22 +29,22 @@
 <section>
     <title>Supported Properties</title>
     <list>
-        <item><p><code>title</code></p></item>
-        <item><p><code>artist</code></p></item>
+        <item><p><code>titel</code></p></item>
+        <item><p><code>artiest</code></p></item>
         <item><p><code>album</code></p></item>
-        <item><p><code>year</code></p></item>
-        <item><p><code>track</code></p></item>
-        <item><p><code>tracktotal</code></p></item>
-        <item><p><code>albumartist</code></p></item>
+        <item><p><code>jaar</code></p></item>
+        <item><p><code>nummer</code></p></item>
+        <item><p><code>aantal_nummers</code></p></item>
+        <item><p><code>albumartiest</code></p></item>
         <item><p><code>genre</code></p></item>
-        <item><p><code>comment</code></p></item>
+        <item><p><code>opmerking</code></p></item>
         <item><p><code>beatsperminute (bpm)</code></p></item>
-        <item><p><code>composer</code></p></item>
-        <item><p><code>description</code></p></item>
-        <item><p><code>discnumber</code></p></item>
-        <item><p><code>disctotal</code></p></item>
-        <item><p><code>publisher</code></p></item>
-        <item><p><code>publishingdate</code></p></item>
+        <item><p><code>componist</code></p></item>
+        <item><p><code>omschrijving</code></p></item>
+        <item><p><code>schijfnummer</code></p></item>
+        <item><p><code>aantal_schijven</code></p></item>
+        <item><p><code>uitgever</code></p></item>
+        <item><p><code>publicatiedatum</code></p></item>
     </list>
     <note>
         <p>When using conversions, custom property names can also be used.</p>
@@ -55,7 +55,7 @@
     <title>Ignoring in File Name to Tag Conversion</title>
     <p>When running <code>File Name to Tag</code> conversion, an empty <code>%%</code> can be specified to ignore part of the file name when reading it.</p>
     <note>
-        <title>Example</title>
+        <title>Voorbeeld</title>
         <p>Format String: <code>%%- %track%. %%</code></p>
         <p>Filename: <code>Artist1- 05. Song1.mp3</code></p>
         <p>This format string and this file name will create a tag with a track of <code>05</code> and ignore the rest of the file name.</p>

@@ -2,7 +2,7 @@
 <page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="nl">
 <info>
 	<link type="guide" xref="index"/>
-	<title type="link">Configuration 🔧</title>
+	<title type="link">Configuratie 🔧</title>
 	<credit type="author copyright">
 		<name>Nicholas Logozzo</name>
 		<years its:translate="no">2023</years>
@@ -14,11 +14,11 @@
 	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
 </info>
 
-<title>Configuration</title>
+<title>Configuratie</title>
 <p>This page describes what you can change in the application configuration.</p>
 <terms>
     <item>
-		<title>Theme</title>
+		<title>Thema</title>
 		<p>Set light or dark theme, or make <app>Tagger</app> follow your system theme.</p>
 	</item>
     <item>
@@ -26,25 +26,25 @@
 		<p>Whether or not to remember the previously used music library and reopen it when Tagger starts the next time.</p>
 	</item>
     <item>
-		<title>Include Subfolders</title>
+		<title>Submappen scannen</title>
 		<p>Whether or not to scan for music files into subdirectories of a music folder.</p>
 	</item>
     <item>
 		<title>Bestanden sorteren op</title>
 		<p>The property to use when sorting and displaying music files. It can be one of the following options:</p>
         <list>
-            <item><p><code>File Name</code></p></item>
-            <item><p><code>File Path</code></p></item>
-            <item><p><code>Title</code></p></item>
-            <item><p><code>Artist</code></p></item>
+            <item><p><code>Bestandsnaam</code></p></item>
+            <item><p><code>Bestandspad</code></p></item>
+            <item><p><code>Titel</code></p></item>
+            <item><p><code>Artiest</code></p></item>
             <item><p><code>Album</code></p></item>
-            <item><p><code>Year</code></p></item>
-            <item><p><code>Track</code></p></item>
+            <item><p><code>Jaar</code></p></item>
+            <item><p><code>Nummer</code></p></item>
             <item><p><code>Genre</code></p></item>
         </list>
 	</item>
     <item>
-		<title>Preserve Modification Timestamp</title>
+		<title>Bewerkings­tijdstip behouden</title>
 		<p>Whether or not to not update a file's write (modified) timestamp when its tag is saved.</p>
 	</item>
     <item>
