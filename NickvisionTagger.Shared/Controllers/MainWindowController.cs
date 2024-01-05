@@ -182,7 +182,7 @@ public class MainWindowController : IDisposable
         SelectedMusicFiles = new Dictionary<int, MusicFile>();
         SelectedPropertyMap = new PropertyMap();
         //AppInfo
-        AppInfo.Version = "2023.11.4-next";
+        AppInfo.Version = "2024.1.0-next";
         AppInfo.ShortName = _("Tagger");
         AppInfo.Description = _("Tag your music");
         AppInfo.SourceRepo = new Uri("https://github.com/NickvisionApps/Tagger");
