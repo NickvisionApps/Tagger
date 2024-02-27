@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: org.nickvision.tagger\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 19:51-0500\n"
-"PO-Revision-Date: 2024-02-15 17:02+0000\n"
+"PO-Revision-Date: 2024-02-27 18:50+0000\n"
 "Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/nl/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1453
 #, csharp-format
@@ -734,7 +734,7 @@ msgstr "Voer genre hier in"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:75
 msgid "Enter key here"
-msgstr ""
+msgstr "Voer sleutel hier in"
 
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:47
 msgid "Enter language code here"
@@ -742,20 +742,19 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:51
 msgid "Enter offset here"
-msgstr ""
+msgstr "Voer afwijking hier in"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:212
-#, fuzzy
 msgid "Enter publisher here"
-msgstr "uitgever"
+msgstr "Voer uitgever hier in"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:185
 msgid "Enter title here"
-msgstr ""
+msgstr "Voer titel hier in"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:197
 msgid "Enter track here"
-msgstr ""
+msgstr "Voer nummer hier in"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:198
 #, fuzzy
@@ -764,7 +763,7 @@ msgstr "aantalnummers"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:195
 msgid "Enter year here"
-msgstr ""
+msgstr "Voer jaar hier in"
 
 #: ../../../Controllers/MainWindowController.cs:1241
 msgid "Error"
@@ -795,15 +794,13 @@ msgstr "Exporteren"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1120
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:110
-#, fuzzy
 msgid "Export Back Album Art"
-msgstr "Albumhoes toevoegen"
+msgstr "Achter­kant van album­hoes exporteren"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1120
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:90
-#, fuzzy
 msgid "Export Front Album Art"
-msgstr "Albumhoes toevoegen"
+msgstr "Voor­kant van album­hoes exporteren"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:322
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:59
@@ -824,15 +821,15 @@ msgstr "Er zijn %d tags omgezet in bestandsnamen"
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:340
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:308
 msgid "Exported successfully to: {0}"
-msgstr ""
+msgstr "Succesvol geëxporteerd naar: {0}"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:483
 msgid "Failed MusicBrainz Lookup"
-msgstr ""
+msgstr "MusicBrainz-zoekopdracht mislukt"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:624
 msgid "Failed MusicBrainz Lookups"
-msgstr ""
+msgstr "MusicBrainz-zoekopdrachten mislukt"
 
 #: ../../../Controllers/MainWindowController.cs:1156
 msgid "Failed to export back album art to a file"
@@ -848,9 +845,8 @@ msgstr "Bestand"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CorruptedFilesDialog.cs:61
 #: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:64
-#, fuzzy
 msgid "File fixed successfully"
-msgstr "De tags zijn opgeslagen."
+msgstr "Bestand succesvol gerepareerd"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:114
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:181
@@ -864,9 +860,8 @@ msgstr "Bestandsnaam"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:147
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1124
 #: NickvisionTagger.GNOME/Blueprints/window.blp:64
-#, fuzzy
 msgid "File Name to Tag"
-msgstr "Bestandsnaam naar tag"
+msgstr "Bestands­naam naar label"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:177
 #, fuzzy
@@ -986,7 +981,7 @@ msgstr "Hulp"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:180
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:764
 msgid "Hide Extras Pane"
-msgstr ""
+msgstr "Extra's-paneel verbergen"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:267
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:58
@@ -1022,15 +1017,13 @@ msgstr "Invoegen"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1085
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:100
-#, fuzzy
 msgid "Insert Back Album Art"
-msgstr "Albumhoes toevoegen"
+msgstr "Achter­kant van album­hoes toe­voegen"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1085
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:80
-#, fuzzy
 msgid "Insert Front Album Art"
-msgstr "Albumhoes toevoegen"
+msgstr "Voor­kant van album­hoes toe­voegen"
 
 #: ../../../Controllers/MainWindowController.cs:1039
 msgid "Inserting album art..."
@@ -1039,7 +1032,7 @@ msgstr "Bezig met toevoegen van albumhoes…"
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:280
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:259
 msgid "Keep Tagger's lyrics"
-msgstr ""
+msgstr "Song­teksten bewaren"
 
 #: ../../../Helpers/MediaHelpers.cs:25
 msgid "KiB"
@@ -1085,7 +1078,7 @@ msgstr "Hoofd­eigenschappen"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1439
 msgid "Making everything pretty..."
-msgstr ""
+msgstr "Alles mooi­maken…"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:131
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:115
@@ -1095,9 +1088,8 @@ msgid "Manage Lyrics"
 msgstr "Songtekst beheren"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:176
-#, fuzzy
 msgid "Manage Lyrics (Ctrl+L)"
-msgstr "Songtekst beheren"
+msgstr "Song­teksten beheren (Ctrl+L)"
 
 #: ../../../Controllers/MainWindowController.cs:173
 msgid "Matrix Chat"
@@ -1134,11 +1126,11 @@ msgstr "Nieuwe aangepaste eigenschap"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:240
 msgid "New Synchronized Lyric"
-msgstr ""
+msgstr "Nieuwe gesynchroniseerde song­tekst"
 
 #: ../../../Controllers/MainWindowController.cs:426
 msgid "New update available."
-msgstr ""
+msgstr "Update beschikbaar"
 
 #: ../../../Controllers/MainWindowController.cs:174
 #: ../../../Controllers/MainWindowController.cs:176
@@ -1158,9 +1150,8 @@ msgid "No AcoustId entry found for the file's fingerprint"
 msgstr ""
 
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:68
-#, fuzzy
 msgid "No file selected"
-msgstr "Bezig met laden van muziekbestanden…"
+msgstr "Geen bestand geselecteerd"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:951
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:892
@@ -1170,11 +1161,11 @@ msgstr "Bezig met laden van muziekbestanden…"
 
 #: ../../../Controllers/MainWindowController.cs:1272
 msgid "No lyrics were downloaded"
-msgstr ""
+msgstr "Er zijn geen song­teksten gedownload"
 
 #: ../../../Controllers/MainWindowController.cs:1248
 msgid "No metadata was downloaded"
-msgstr ""
+msgstr "Er zijn geen meta­gegevens gedownload"
 
 #: ../../../Controllers/MainWindowController.cs:544
 #, fuzzy
@@ -1197,9 +1188,8 @@ msgstr ""
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:169
 #: NickvisionTagger.GNOME/Blueprints/window.blp:321
-#, fuzzy
 msgid "No Selected Music Files"
-msgstr "Er zijn geen muziekbestanden aangetroffen"
+msgstr "Geen geselecteerde muziek­bestanden"
 
 #: ../../../Controllers/MainWindowController.cs:1285
 msgid "No user api key configured."
@@ -1224,7 +1214,7 @@ msgstr "Uit"
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:50
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:70
 msgid "Offset (in milliseconds)"
-msgstr ""
+msgstr "Afwijking (in milli­seconden)"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1235
 #: ../../../../NickvisionTagger.WinUI/Controls/AboutDialog.xaml.cs:27
@@ -1323,7 +1313,7 @@ msgstr "Pad (leeg)"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:214
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1452
 msgid "Pick a date"
-msgstr ""
+msgstr "Kies een datum"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:32
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:123
@@ -1432,13 +1422,12 @@ msgid "Remove Lyric"
 msgstr "Songtekst verwijderen"
 
 #: ../../../Controllers/MainWindowController.cs:1083
-#, fuzzy
 msgid "Removing album art..."
-msgstr "Bezig met toevoegen van albumhoes…"
+msgstr "Album­hoes verwijderen…"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:157
 msgid "Report a Bug"
-msgstr ""
+msgstr "Probleem melden"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:119
 msgid "Restart To Apply Theme?"
@@ -1455,9 +1444,8 @@ msgid "Save Tag"
 msgstr "Tag opslaan"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:172
-#, fuzzy
 msgid "Save Tag (Ctrl+S)"
-msgstr "Tagwijzigingen opslaan (Ctrl+S)"
+msgstr "Label opslaan (Ctrl+S)"
 
 #: ../../../Controllers/MainWindowController.cs:810
 #: ../../../Controllers/MainWindowController.cs:853
@@ -1481,7 +1469,7 @@ msgstr "Instellingen"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:756
 msgid "Show Extras Pane"
-msgstr ""
+msgstr "Extra's-paneel tonen"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:682
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:788
@@ -1533,9 +1521,8 @@ msgid "Submitted metadata to AcoustId successfully"
 msgstr "De metagegevens zijn verstuurd naar AcoustId."
 
 #: ../../../Controllers/MainWindowController.cs:1288
-#, fuzzy
 msgid "Submitting data to AcoustId..."
-msgstr "Bezig met versturen naar AcoustId…"
+msgstr "Gegevens opsturen naar AcoustId…"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1073
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:143
@@ -1546,7 +1533,7 @@ msgstr "Bezig met versturen naar AcoustId…"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1597
 #: NickvisionTagger.GNOME/Blueprints/window.blp:409
 msgid "Switch to Back Cover"
-msgstr ""
+msgstr "Wisselen naar achter­kant van album­hoes"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1073
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1267
@@ -1554,7 +1541,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1596
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1597
 msgid "Switch to Front Cover"
-msgstr ""
+msgstr "Wisselen naar voor­kant van album­hoes"
 
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:45
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:47
@@ -1569,9 +1556,8 @@ msgstr "Label"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:148
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1142
 #: NickvisionTagger.GNOME/Blueprints/window.blp:65
-#, fuzzy
 msgid "Tag to File Name"
-msgstr "Tag naar bestandsnaam"
+msgstr "Label naar bestands­naam"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:178
 #, fuzzy
@@ -1732,12 +1718,12 @@ msgstr ""
 #: ../../../Controllers/MainWindowController.cs:873
 #, csharp-format
 msgid "Unable to save {0}"
-msgstr ""
+msgstr "Kan {0} niet opslaan"
 
 #: ../../../Controllers/MainWindowController.cs:831
 #, csharp-format
 msgid "Unable to save {0}."
-msgstr ""
+msgstr "Kan {0} niet opslaan."
 
 #: ../../../Controllers/MainWindowController.cs:1291
 #, fuzzy
@@ -1760,7 +1746,7 @@ msgstr "Bijwerken"
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:283
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:260
 msgid "Use LRC's lyrics"
-msgstr ""
+msgstr "Song­teksten van LRC gebruiken"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/CreatePlaylistDialog.xaml.cs:38
 #: NickvisionTagger.GNOME/Blueprints/create_playlist_dialog.blp:56
@@ -1770,7 +1756,7 @@ msgstr "Relatieve paden gebruiken"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:888
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:841
 msgid "Use Relative Paths?"
-msgstr ""
+msgstr "Relatieve paden gebruiken?"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:32
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:15
@@ -1905,9 +1891,8 @@ msgid "Convert Tag to File Name"
 msgstr "Tag omzetten in bestandsnaam"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:85
-#, fuzzy
 msgid "Remove Front Album Art"
-msgstr "Albumhoes verwijderen"
+msgstr "Voor­kant van album­hoes verwijderen"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:95
 #: NickvisionTagger.GNOME/Blueprints/window.blp:58
@@ -1915,9 +1900,8 @@ msgid "Switch Album Art"
 msgstr "Album­afbeelding wisselen"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:105
-#, fuzzy
 msgid "Remove Back Album Art"
-msgstr "Albumhoes verwijderen"
+msgstr "Achter­kant van album­hoes verwijderen"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:121
 msgctxt "Shortcut"
