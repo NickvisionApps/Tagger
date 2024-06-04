@@ -195,9 +195,6 @@ public partial class MainWindow : Adw.ApplicationWindow
         _filenameKeyController.OnKeyPressed += OnFilenameKeyPressed;
         _filenameRow.AddController(_filenameKeyController);
         _listMusicFiles.OnSelectedRowsChanged += ListMusicFiles_SelectionChanged;
-        var switchAlbumArtLabel = (Gtk.Label)_switchAlbumArtButtonContent.GetLastChild();
-        switchAlbumArtLabel.SetWrap(true);
-        switchAlbumArtLabel.SetJustify(Gtk.Justification.Center);
         _artTypeLabel.SetLabel(_currentAlbumArtType == AlbumArtType.Front ? _("Front") : _("Back"));
         _filenameRow.OnNotify += (sender, e) =>
         {
