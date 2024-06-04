@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="search" its:version="2.0" xml:lang="bg">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Advanced Search 🔍</title>
+	<credit type="author copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Advanced Search</title>
+<p>This page explains how to use Advanced Search in <app>Tagger</app>.</p>
+
+<p>Advanced Search is a powerful feature provided by <app>Tagger</app> that allows users to search files' tag contents for certain values, using a powerful tag-based syntax:</p>
+<p><code>!prop1="value1";prop2="value2"</code></p>
+<p>Where <code>prop1</code>, <code>prop2</code> are valid tag properties and <code>value1</code>, <code>value2</code> are the values to search wrapped in quotes. Each property is separated by a semicolon. Notice how the last property does not end with a semicolon.</p>
+
+<section>
+<title>Valid Properties</title>
+<list>
+<item><p><code>filename</code></p></item>
+<item><p><code>title</code></p></item>
+<item><p><code>artist</code></p></item>
+<item><p><code>album</code></p></item>
+<item><p><code>year</code></p></item>
+<item><p><code>track</code></p></item>
+<item><p><code>tracktotal</code></p></item>
+<item><p><code>albumartist</code></p></item>
+<item><p><code>genre</code></p></item>
+<item><p><code>comment</code></p></item>
+<item><p><code>beatsperminute (bpm)</code></p></item>
+<item><p><code>composer</code></p></item>
+<item><p><code>description</code></p></item>
+<item><p><code>discnumber</code></p></item>
+<item><p><code>disctotal</code></p></item>
+<item><p><code>publisher</code></p></item>
+<item><p><code>publishingdate</code></p></item>
+<item><p><code>custom</code></p></item>
+</list>
+<p>Properties are case-insensitive.</p></section>
+
+<section><title>Syntax Checking</title>
+<p>If the syntax of your string is valid, the textbox will turn green and will filter the listbox with your search. If the syntax of your string is invalid, the textbox will turn red and will not filter the listbox.</p></section>
+
+<section><title>Examples</title>
+<p><code>!artist=""</code></p>
+<p>This search string will filter the listbox to contain music files whose artist is empty.</p>
+<p><code>!genre="";year="2022"</code></p>
+<p>This search string will filter the listbox to contain music files whose genre is empty and whose year is 2022 (Year and Track properties will validate if the value string is a number).</p>
+<p><code>!title="";artist="bob"</code></p>
+<p>This search string will filter the listbox to contain music files whose title is empty and whose artist is <code>bob</code>.</p>
+<p><code>!custom="mbrd"</code></p>
+<p>This search string will filter the listbox to contain music files that contain a custom property with the name <code>mbrd</code>.</p></section>
+</page>

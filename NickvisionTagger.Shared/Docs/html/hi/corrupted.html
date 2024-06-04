@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Archivos dañados</title>
+<title>दूषित फ़ाइलें</title>
 <link rel="stylesheet" type="text/css" href="../C/C.css">
 <script type="text/javascript" src="../C/highlight.pack.js"></script><script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -13,20 +13,20 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 }, false);</script><script type="text/javascript" src="../C/yelp.js"></script>
 </head>
-<body lang="es" dir="ltr"><main><div class="page">
+<body lang="hi" dir="ltr"><main><div class="page">
 <header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
-<a class="trail" href="index.html" title="Ayuda de Tagger">Ayuda de Tagger</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">Archivos dañados</span></h1></div>
+<a class="trail" href="index.html" title="Tagger सहायता">Tagger सहायता</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">दूषित फ़ाइलें</span></h1></div>
 <div class="region">
 <div class="contents pagewide">
-<p class="p">En esta página se explican los archivos de música con datos dañados.</p>
-<p class="p">Si <span class="app">Tagger</span> no puede leer un archivo, se ignorará y se mostrará un diálogo con una lista de los archivos dañados para que los gestione y corrija en consecuencia.</p>
-<p class="p">Este cuadro de diálogo ofrecerá la opción de que Tagger ejecute el comando adecuado para intentar reparar el archivo dañado.</p>
+<p class="p">यह पृष्ठ दूषित डेटा वाली संगीत फ़ाइलों की व्याख्या करता है।</p>
+<p class="p">यदि <span class="app">Tagger</span> किसी फ़ाइल को पढ़ने में असमर्थ है, तो इसे अनदेखा कर दिया जाएगा और आपके लिए प्रबंधित करने और तदनुसार ठीक करने के लिए दूषित फ़ाइलों को सूचीबद्ध करने वाला एक संवाद प्रदर्शित किया जाएगा।</p>
+<p class="p">यह संवाद दूषित फ़ाइल को आज़माने और ठीक करने के लिए Tagger को उचित कमांड चलाने का विकल्प प्रदान करेगा।</p>
 </div>
 <section id=""><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">Datos no válidos</span></h2></div>
+<div class="hgroup pagewide"><h2 class="title"><span class="title">अमान्य डेटा</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p">Un encabezado de etiqueta no válido o datos basura en un archivo pueden causar problemas al leer la información sobre un archivo e incluso causar problemas de reproducción. Algunas páginas web añaden datos basura a los archivos, lo que a su vez provoca su corrupción.</p>
-<div class="note note-advanced" title="Avanzada">
+<p class="p">किसी फ़ाइल में अमान्य टैग हेडर या जंक डेटा किसी फ़ाइल के बारे में जानकारी पढ़ते समय समस्याएँ पैदा कर सकता है और यहाँ तक कि प्लेबैक समस्याएँ भी पैदा कर सकता है। कुछ वेबसाइटें फ़ाइलों में अतिरिक्त जंक डेटा जोड़ देती हैं जो बदले में भ्रष्टाचार का कारण बनता है।</p>
+<div class="note note-advanced" title="विस्तृत">
 <svg height="24" width="24" version="1.1">
  <g>
   <path class="yelp-svg-fill" d="m5.4473 12.572c-2.039 0.957-3.4473 3.019-3.4473 5.428v4h20v-4c0-2.406-1.406-4.466-3.441-5.424a8 8 0 0 1 -6.559 3.424 8 8 0 0 1 -6.5527 -3.428z"></path>
@@ -41,12 +41,12 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
  </g>
 </svg><div class="inner"><div class="region"><div class="contents">
-<p class="p">FFmpeg puede usarse para arreglar problemas de corrupción. Ejecute el siguiente comando para recodificar la etiqueta de un archivo y eliminar los datos basura:</p>
+<p class="p">FFmpeg का इस्तेमाल भ्रष्टाचार के मुद्दों को ठीक करने के लिए किया जा सकता है। फ़ाइल के टैग को फिर से एनकोड करने और जंक डेटा को हटाने के लिए निम्नलिखित कमांड चलाएँ:</p>
 <div class="code"><pre class="contents"><code>ffmpeg -i in.mp3 out.mp3</code></pre></div>
-<p class="p">donde <span class="code">in.mp3</span> es la ruta del archivo dañado y <span class="code">out.mp3</span> es la ruta para exportar el archivo recodificado.</p>
+<p class="p">जहां <span class="code">in.mp3</span> दूषित फ़ाइल का फ़ाइल पथ है और <span class="code">out.mp3</span> पुन: एन्कोड की गई फ़ाइल को निर्यात करने का पथ है।</p>
 </div></div></div>
 </div>
-<div class="note note-advanced" title="Avanzada">
+<div class="note note-advanced" title="विस्तृत">
 <svg height="24" width="24" version="1.1">
  <g>
   <path class="yelp-svg-fill" d="m5.4473 12.572c-2.039 0.957-3.4473 3.019-3.4473 5.428v4h20v-4c0-2.406-1.406-4.466-3.441-5.424a8 8 0 0 1 -6.559 3.424 8 8 0 0 1 -6.5527 -3.428z"></path>
@@ -60,14 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m8.2435 7.0719-1.9004-3.3145 1.4143-1.4143 3.1596 1.7457z"></path>
   <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
  </g>
-</svg><div class="inner"><div class="region"><div class="contents"><p class="p">También puede usar <span class="link"><a href="https://www.freac.org" title="https://www.freac.org">fre:ac</a></span> para recodificar archivos sin convertirlos a otro formato.</p></div></div></div>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">आप फ़ाइलों को किसी अन्य प्रारूप में कनवर्ट किए बिना पुन: एन्कोड करने के लिए <span class="link"><a href="https://www.freac.org" title="https://www.freac.org">fre:ac</a></span> का भी उपयोग कर सकते हैं।</p></div></div></div>
 </div>
 </div></div>
 </div></section><section id=""><div class="inner">
-<div class="hgroup pagewide"><h2 class="title"><span class="title">Carátula del álbum no válida</span></h2></div>
+<div class="hgroup pagewide"><h2 class="title"><span class="title">अमान्य एल्बम आर्ट</span></h2></div>
 <div class="region"><div class="contents pagewide">
-<p class="p">Un formato de carátula no válido o dañado puede causar problemas en la visualización de los archivos de música en Tagger.</p>
-<div class="note note-advanced" title="Avanzada">
+<p class="p">अमान्य या दूषित एम्बेडेड एल्बम आर्ट प्रारूप Tagger में संगीत फ़ाइलों को प्रदर्शित करने में समस्याएँ पैदा कर सकता है।</p>
+<div class="note note-advanced" title="विस्तृत">
 <svg height="24" width="24" version="1.1">
  <g>
   <path class="yelp-svg-fill" d="m5.4473 12.572c-2.039 0.957-3.4473 3.019-3.4473 5.428v4h20v-4c0-2.406-1.406-4.466-3.441-5.424a8 8 0 0 1 -6.559 3.424 8 8 0 0 1 -6.5527 -3.428z"></path>
@@ -82,48 +82,43 @@ document.addEventListener('DOMContentLoaded', function() {
   <path class="yelp-svg-fill" d="m11.072 11.757-3.3146 1.9-1.4143-1.414 1.7457-3.1602z"></path>
  </g>
 </svg><div class="inner"><div class="region"><div class="contents">
-<p class="p">FFmpeg puede usarse para solucionar problemas en las carátulas de los álbumes. Ejecute el siguiente comando para eliminar los datos de las carátulas de un archivo:</p>
+<p class="p">एल्बम आर्ट संबंधी समस्याओं को ठीक करने के लिए FFmpeg का उपयोग किया जा सकता है। किसी फ़ाइल से एल्बम आर्ट डेटा हटाने के लिए निम्न आदेश चलाएँ:</p>
 <div class="code"><pre class="contents"><code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3</code></pre></div>
-<p class="p">donde <span class="code">in.mp3</span> es la ruta del archivo dañado y <span class="code">out.mp3</span> es la ruta para exportar el archivo recodificado.</p>
+<p class="p">जहां <span class="code">in.mp3</span> दूषित फ़ाइल का फ़ाइल पथ है और <span class="code">out.mp3</span> पुन: एन्कोड की गई फ़ाइल को निर्यात करने का पथ है।</p>
 </div></div></div>
 </div>
 </div></div>
 </div></section><section class="links" role="navigation"><div class="inner">
 <div class="hgroup pagewide"></div>
 <div class="contents pagewide"><div class="links guidelinks"><div class="inner">
-<div class="title"><h2><span class="title">Más información</span></h2></div>
-<div class="region"><ul><li class="links "><a href="index.html" title="Ayuda de Tagger">Ayuda de Tagger</a></li></ul></div>
+<div class="title"><h2><span class="title">अधिक जानकारी</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Tagger सहायता">Tagger सहायता</a></li></ul></div>
 </div></div></div>
 </div></section>
 </div>
 <div class="clear"></div></article><footer><div class="inner pagewide"><div class="about ui-expander" role="contentinfo">
 <div class="yelp-data yelp-data-ui-expander" data-yelp-expanded="false"></div>
 <div class="inner">
-<div class="hgroup"><h2><span class="title">Acerca de</span></h2></div>
+<div class="hgroup"><h2><span class="title">के बारे में</span></h2></div>
 <div class="region"><div class="contents">
 <div class="copyrights">
-<div class="copyright">© 2023 Nicholas Logozzo</div>
-<div class="copyright">© 2023 Nicholas Logozzo</div>
-<div class="copyright">© 2023 Óscar Fernández Díaz</div>
+<div class="copyright">© 2023 निकोलस लोगोज़ो</div>
+<div class="copyright">© 2023 निकोलस लोगोज़ो</div>
 </div>
 <div class="credits">
 <div class="credits-authors">
-<div class="title"><span class="title">Escrito por</span></div>
-<ul class="credits"><li>Nicholas Logozzo</li></ul>
-</div>
-<div class="credits-translators">
-<div class="title"><span class="title">Traducido por</span></div>
-<ul class="credits"><li>Óscar Fernández Díaz</li></ul>
+<div class="title"><span class="title">लेखक</span></div>
+<ul class="credits"><li>निकोलस लोगोज़ो</li></ul>
 </div>
 <div class="credits-publishers">
-<div class="title"><span class="title">Publicado por</span></div>
-<ul class="credits"><li>Nicholas Logozzo</li></ul>
+<div class="title"><span class="title">द्वारा प्रकाशित</span></div>
+<ul class="credits"><li>निकोलस लोगोज़ो</li></ul>
 </div>
 <div class="credits-blank"></div>
 <div class="credits-blank"></div>
 </div>
 <div class="license">
-<div class="title"><span class="title">Creative Commons</span></div>
+<div class="title"><span class="title">क्रियेटिव कोमनस</span></div>
 <div class="contents"><p class="p">Creative Commons Attribution 4.0 International License</p></div>
 </div>
 </div></div>

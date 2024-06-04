@@ -24,6 +24,7 @@ public partial class App : Application
         _controller = new MainWindowController(Array.Empty<string>());
         _controller.AppInfo.Changelog =
             @"- Fixed an issue where album art was not deleted correctly on delete tag action
+- Updated dependencies
 - Updated translations (Thanks everyone on Weblate!)";
         if (_controller.Theme != Theme.System)
         {

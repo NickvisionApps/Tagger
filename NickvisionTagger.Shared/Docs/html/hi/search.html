@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>उन्नत खोज</title>
+<link rel="stylesheet" type="text/css" href="../C/C.css">
+<script type="text/javascript" src="../C/highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="../C/yelp.js"></script>
+</head>
+<body lang="hi" dir="ltr"><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Tagger सहायता">Tagger सहायता</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">उन्नत खोज</span></h1></div>
+<div class="region">
+<div class="contents pagewide">
+<p class="p">यह पृष्ठ बताता है कि <span class="app">Tagger</span> में उन्नत खोज का उपयोग कैसे करें।</p>
+<p class="p">उन्नत खोज <span class="app">Tagger</span> द्वारा प्रदान की गई एक शक्तिशाली सुविधा है जो उपयोगकर्ताओं को एक शक्तिशाली टैग-आधारित सिंटैक्स का उपयोग करके, कुछ मूल्यों के लिए फ़ाइलों की टैग सामग्री को खोजने की अनुमति देती है:</p>
+<p class="p"><span class="code">!prop1="मान1";prop2="मान2"</span></p>
+<p class="p">जहां <span class="code">prop1</span>, <span class="code">prop2</span> वैध टैग प्रॉपर्टीज हैं और <span class="code">मान1</span>, <span class="code">मान2</span> उद्धरण चिह्नों में खोजे जाने वाले मान हैं। प्रत्येक प्रॉपर्टी को अर्धविराम से अलग किया जाता है. ध्यान दें कि कैसे अंतिम प्रॉपर्टी अर्धविराम के साथ समाप्त नहीं होता है।</p>
+</div>
+<section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">वैध प्रॉपर्टी</span></h2></div>
+<div class="region"><div class="contents pagewide">
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list"><p class="p"><span class="code">फ़ाइलनाम</span></p></li>
+<li class="list"><p class="p"><span class="code">शीर्षक</span></p></li>
+<li class="list"><p class="p"><span class="code">कलाकार=''</span></p></li>
+<li class="list"><p class="p"><span class="code">एल्बम</span></p></li>
+<li class="list"><p class="p"><span class="code">वर्ष</span></p></li>
+<li class="list"><p class="p"><span class="code">ट्रैक</span></p></li>
+<li class="list"><p class="p"><span class="code">ट्रैकटोटल</span></p></li>
+<li class="list"><p class="p"><span class="code">एल्बमकलाकार</span></p></li>
+<li class="list"><p class="p"><span class="code">शैली</span></p></li>
+<li class="list"><p class="p"><span class="code">टिप्पणी</span></p></li>
+<li class="list"><p class="p"><span class="code">बीट्सपरमिनट (bpm)</span></p></li>
+<li class="list"><p class="p"><span class="code">संगीतकार</span></p></li>
+<li class="list"><p class="p"><span class="code">विवरण</span></p></li>
+<li class="list"><p class="p"><span class="code">डिस्कनंबर</span></p></li>
+<li class="list"><p class="p"><span class="code">डिस्कटोटल</span></p></li>
+<li class="list"><p class="p"><span class="code">प्रकाशक</span></p></li>
+<li class="list"><p class="p"><span class="code">प्रकाशनतिथि</span></p></li>
+<li class="list"><p class="p"><span class="code">कस्टम</span></p></li>
+</ul></div></div></div>
+<p class="p">प्रॉपर्टीज केस-असंवेदनशील हैं।</p>
+</div></div>
+</div></section><section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">सिंटैक्स जाँच</span></h2></div>
+<div class="region"><div class="contents pagewide"><p class="p">यदि आपकी स्ट्रिंग का सिंटैक्स मान्य है, तो टेक्स्टबॉक्स हरा हो जाएगा और आपकी खोज के साथ सूचीबॉक्स को फ़िल्टर कर देगा। यदि आपकी स्ट्रिंग का सिंटैक्स अमान्य है, तो टेक्स्टबॉक्स लाल हो जाएगा और सूचीबॉक्स को फ़िल्टर नहीं करेगा।</p></div></div>
+</div></section><section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">उदाहरण</span></h2></div>
+<div class="region"><div class="contents pagewide">
+<p class="p"><span class="code">!कलाकार=''</span></p>
+<p class="p">यह खोज स्ट्रिंग उन संगीत फ़ाइलों को शामिल करने के लिए सूची बॉक्स को फ़िल्टर करेगी जिनका कलाकार खाली है।</p>
+<p class="p"><span class="code">!शैली="";वर्ष="2022"</span></p>
+<p class="p">यह खोज स्ट्रिंग उन संगीत फ़ाइलों को शामिल करने के लिए सूची बॉक्स को फ़िल्टर करेगी जिनकी शैली खाली है और जिनका वर्ष 2022 है (यदि मान स्ट्रिंग एक संख्या है तो वर्ष और ट्रैक प्रॉपर्टीज मान्य होंगे)।</p>
+<p class="p"><span class="code">!शीर्षक="";कलाकार="बॉब"</span></p>
+<p class="p">यह खोज स्ट्रिंग सूची बॉक्स को फ़िल्टर करके उन संगीत फ़ाइलों को शामिल करेगी जिनका शीर्षक खाली है और जिनका कलाकार <span class="code">बॉब</span> है।</p>
+<p class="p"><span class="code">!कस्टम='mbrd'</span></p>
+<p class="p">यह खोज स्ट्रिंग उन संगीत फ़ाइलों को शामिल करने के लिए सूची बॉक्स को फ़िल्टर करेगी जिनमें <span class="code">mbrd</span> नाम के साथ एक कस्टम प्रॉपर्टी शामिल है।</p>
+</div></div>
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">अधिक जानकारी</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Tagger सहायता">Tagger सहायता</a></li></ul></div>
+</div></div></div>
+</div></section>
+</div>
+<div class="clear"></div></article><footer><div class="inner pagewide"><div class="about ui-expander" role="contentinfo">
+<div class="yelp-data yelp-data-ui-expander" data-yelp-expanded="false"></div>
+<div class="inner">
+<div class="hgroup"><h2><span class="title">के बारे में</span></h2></div>
+<div class="region"><div class="contents">
+<div class="copyrights">
+<div class="copyright">© 2023 निकोलस लोगोज़ो</div>
+<div class="copyright">© 2023 निकोलस लोगोज़ो</div>
+</div>
+<div class="credits">
+<div class="credits-authors">
+<div class="title"><span class="title">लेखक</span></div>
+<ul class="credits"><li>निकोलस लोगोज़ो</li></ul>
+</div>
+<div class="credits-publishers">
+<div class="title"><span class="title">द्वारा प्रकाशित</span></div>
+<ul class="credits"><li>निकोलस लोगोज़ो</li></ul>
+</div>
+<div class="credits-blank"></div>
+<div class="credits-blank"></div>
+</div>
+<div class="license">
+<div class="title"><span class="title">क्रियेटिव कोमनस</span></div>
+<div class="contents"><p class="p">Creative Commons Attribution 4.0 International License</p></div>
+</div>
+</div></div>
+</div>
+</div></div></footer>
+</div></main></body>
+</html>

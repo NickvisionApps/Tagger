@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>वेब सेवाएं</title>
+<link rel="stylesheet" type="text/css" href="../C/C.css">
+<script type="text/javascript" src="../C/highlight.pack.js"></script><script>
+document.addEventListener('DOMContentLoaded', function() {
+  var matches = document.querySelectorAll('code.syntax')
+  for (var i = 0; i < matches.length; i++) {
+    hljs.highlightBlock(matches[i]);
+  }
+}, false);</script><script type="text/javascript" src="../C/yelp.js"></script>
+</head>
+<body lang="hi" dir="ltr"><main><div class="page">
+<header><div class="inner pagewide"><div class="trails" role="navigation"><div class="trail">
+<a class="trail" href="index.html" title="Tagger सहायता">Tagger सहायता</a> » </div></div></div></header><article><div class="hgroup pagewide"><h1 class="title"><span class="title">वेब सेवाएं</span></h1></div>
+<div class="region">
+<div class="contents pagewide"><p class="p">यह पृष्ठ Tagger में उपलब्ध वेब सेवाओं का वर्णन करता है</p></div>
+<section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">MusicBrainz मेटाडेटा डाउनलोड करें</span></h2></div>
+<div class="region"><div class="contents pagewide">
+<p class="p">MusicBrainz के माध्यम से एक संगीत फ़ाइल की पहचान करता है और Tagger में उपयोग करने के लिए उसका मेटाडेटा डाउनलोड करता है।</p>
+<p class="p">यह सेवा MusicBrainz रिकॉर्डिंग और रिलीज़ ID निर्धारित करने के लिए फ़ाइल के AcoustId फ़िंगरप्रिंट (<span class="code">fpcalc</span> के साथ उत्पन्न) का उपयोग करती है। यदि ID पाई जाती है, तो शीर्षक, कलाकार, एल्बम और आर्ट जैसे मेटाडेटा को डाउनलोड किया जाएगा और Tagger में सेट किया जाएगा।</p>
+<div class="note" title="टिप्पणी">
+<svg height="24" width="24" version="1.1">
+ <g>
+  <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
+  <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
+ </g>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">MusicBrainz के माध्यम से मेटाडेटा ढूँढना 100% विश्वसनीय नहीं है और असामान्य गानों के लिए उपलब्ध नहीं हो सकता है।</p></div></div></div>
+</div>
+</div></div>
+</div></section><section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">गाने के बोल डाउनलोड करें</span></h2></div>
+<div class="region"><div class="contents pagewide">
+<p class="p">गाने के बोल खोजने के लिए टैग के शीर्षक और कलाकार की जानकारी का उपयोग करता है।</p>
+<p class="p">यह सेवा सिंक्रनाइज़ बोल प्राप्त करने के लिए NetEase की Music163 सेवा का उपयोग करती है।</p>
+<p class="p">यदि कोई सिंक्रोनाइज़्ड बोल नहीं मिलता/उपलब्ध है, तो Tagger अनसिंक्रनाइज़्ड बोल प्राप्त करने के लिए Letras का उपयोग करेगा।</p>
+<div class="note" title="टिप्पणी">
+<svg height="24" width="24" version="1.1">
+ <g>
+  <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
+  <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
+ </g>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">इन सेवाओं के माध्यम से बोल ढूँढना 100% विश्वसनीय नहीं है और असामान्य गीतों के लिए उपलब्ध नहीं हो सकता है।</p></div></div></div>
+</div>
+</div></div>
+</div></section><section id=""><div class="inner">
+<div class="hgroup pagewide"><h2 class="title"><span class="title">AcoustId पर सबमिट करें</span></h2></div>
+<div class="region"><div class="contents pagewide">
+<p class="p">AcoustId के डेटाबेस में एक संगीत फ़ाइल (उसकी फ़िंगरप्रिंट के माध्यम से पहचानी गई) के बारे में डेटा सबमिट करता है। किसी संगीत फ़ाइल के बारे में दो चीज़ें सबमिट की जा सकती हैं:</p>
+<div class="list"><div class="inner"><div class="region"><ul class="list">
+<li class="list">
+<div class="title title-item"><h3><span class="title">MusicBrainz रिकॉर्डिंग ID</span></h3></div>
+<p class="p">एक उपयोगकर्ता AcoustId पर सबमिट करने के लिए एक MusicBrainz रिकॉर्डिंग ID सबमिट कर सकता है। यह संबंधित रिकॉर्डिंग ID से सभी डेटा खींच लेगा और AcoustId पर मेटाडेटा भेजने के लिए उसका उपयोग करेगा।</p>
+</li>
+<li class="list">
+<div class="title title-item"><h3><span class="title">उपयोगकर्ता मेटाडेटा</span></h3></div>
+<p class="p">उपयोगकर्ता अपना मेटाडेटा Tagger से AcoustId पर सबमिट कर सकता है।</p>
+</li>
+</ul></div></div></div>
+<div class="note" title="टिप्पणी">
+<svg height="24" width="24" version="1.1">
+ <g>
+  <path class="yelp-svg-fill" d="m4 3h16c0.554 0 1 0.446 1 1v11h-6v6h-11c-0.554 0-1-0.446-1-1v-16c0-0.554 0.446-1 1-1z"></path>
+  <path class="yelp-svg-fill" d="m17 16h4l-5 5v-4c0-0.554 0.446-1 1-1z"></path>
+ </g>
+</svg><div class="inner"><div class="region"><div class="contents"><p class="p">इस सेवा के काम करने के लिए एक उचित <span class="code">AcoustId उपयोगकर्ता API कुंजी</span> को <span class="code">Preferences</span> में सेट किया जाना चाहिए।</p></div></div></div>
+</div>
+</div></div>
+</div></section><section class="links" role="navigation"><div class="inner">
+<div class="hgroup pagewide"></div>
+<div class="contents pagewide"><div class="links guidelinks"><div class="inner">
+<div class="title"><h2><span class="title">अधिक जानकारी</span></h2></div>
+<div class="region"><ul><li class="links "><a href="index.html" title="Tagger सहायता">Tagger सहायता</a></li></ul></div>
+</div></div></div>
+</div></section>
+</div>
+<div class="clear"></div></article><footer><div class="inner pagewide"><div class="about ui-expander" role="contentinfo">
+<div class="yelp-data yelp-data-ui-expander" data-yelp-expanded="false"></div>
+<div class="inner">
+<div class="hgroup"><h2><span class="title">के बारे में</span></h2></div>
+<div class="region"><div class="contents">
+<div class="copyrights">
+<div class="copyright">© 2023 निकोलस लोगोज़ो</div>
+<div class="copyright">© 2023 निकोलस लोगोज़ो</div>
+</div>
+<div class="credits">
+<div class="credits-authors">
+<div class="title"><span class="title">लेखक</span></div>
+<ul class="credits"><li>निकोलस लोगोज़ो</li></ul>
+</div>
+<div class="credits-publishers">
+<div class="title"><span class="title">द्वारा प्रकाशित</span></div>
+<ul class="credits"><li>निकोलस लोगोज़ो</li></ul>
+</div>
+<div class="credits-blank"></div>
+<div class="credits-blank"></div>
+</div>
+<div class="license">
+<div class="title"><span class="title">क्रियेटिव कोमनस</span></div>
+<div class="contents"><p class="p">Creative Commons Attribution 4.0 International License</p></div>
+</div>
+</div></div>
+</div>
+</div></div></footer>
+</div></main></body>
+</html>

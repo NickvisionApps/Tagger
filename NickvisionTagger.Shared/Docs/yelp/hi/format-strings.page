@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="format-strings" its:version="2.0" xml:lang="hi">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">प्रारूप स्ट्रिंग्स ✍️</title>
+	<credit type="author copyright">
+		<name>निकोलस लोगोज़ो</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>निकोलस लोगोज़ो</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>प्रारूप स्ट्रिंग्स</title>
+<p>यह पृष्ठ <code>फ़ाइल नाम से टैग</code> और <code>फ़ाइल नाम टैग</code> रूपांतरणों के लिए प्रारूप स्ट्रिंग के उपयोग की व्याख्या करता है।</p>
+<section>
+    <title>प्रारूप</title>
+    <p>प्रतिशत चिह्नों (%) में लिपटे गुणों के साथ किसी भी प्रारूप की स्ट्रिंग।</p>
+    <note>
+        <title>उदाहरण</title>
+        <p>प्रारूप स्ट्रिंग: <code>%कलाकार%-%शीर्षक%</code></p>
+        <p>फ़ाइल नाम: <code>कलाकार1 - गीत1.mp3</code></p>
+        <p><code>फ़ाइल नाम से टैग</code> रूपांतरण चलाते समय, यह प्रारूप स्ट्रिंग और यह फ़ाइल नाम <code>कलाकार1</code> के एक कलाकार और <code>सॉन्ग1</code> के शीर्षक के साथ एक टैग बनाएगा। ।</p>
+    </note>
+</section>
+<section>
+    <title>समर्थित प्रॉपर्टी</title>
+    <list>
+        <item><p><code>शीर्षक</code></p></item>
+        <item><p><code>कलाकार=''</code></p></item>
+        <item><p><code>एल्बम</code></p></item>
+        <item><p><code>वर्ष</code></p></item>
+        <item><p><code>ट्रैक</code></p></item>
+        <item><p><code>ट्रैकटोटल</code></p></item>
+        <item><p><code>एल्बमकलाकार</code></p></item>
+        <item><p><code>शैली</code></p></item>
+        <item><p><code>टिप्पणी</code></p></item>
+        <item><p><code>बीट्सपरमिनट (bpm)</code></p></item>
+        <item><p><code>संगीतकार</code></p></item>
+        <item><p><code>विवरण</code></p></item>
+        <item><p><code>डिस्कनंबर</code></p></item>
+        <item><p><code>डिस्कटोटल</code></p></item>
+        <item><p><code>प्रकाशक</code></p></item>
+        <item><p><code>प्रकाशनतिथि</code></p></item>
+    </list>
+    <note>
+        <p>रूपांतरणों का उपयोग करते समय, कस्टम प्रॉपर्टी नामों का भी उपयोग किया जा सकता है।</p>
+        <p>उदाहरण के लिए, एक कस्टम प्रॉपर्टी जिसका नाम <code>ENCODER</code> है, उसे <code>%encoder%</code> के रूप में उपयोग किया जा सकता है।</p>
+    </note>
+</section>
+<section>
+    <title>फ़ाइल नाम से लेकर टैग रूपांतरण तक की अनदेखी</title>
+    <p><code>फ़ाइल नाम से टैग</code> रूपांतरण चलाते समय, इसे पढ़ते समय फ़ाइल नाम के भाग को अनदेखा करने के लिए एक खाली <code>%%</code> निर्दिष्ट किया जा सकता है।</p>
+    <note>
+        <title>उदाहरण</title>
+        <p>प्रारूप स्ट्रिंग: <code>%%- %शीर्षक%. %%</code></p>
+        <p>फ़ाइल नाम: <code>कलाकार1- 05. गाना1.mp3</code></p>
+        <p>यह प्रारूप स्ट्रिंग और यह फ़ाइल नाम <code>05</code> के ट्रैक के साथ एक टैग बनाएगा और शेष फ़ाइल नाम को अनदेखा कर देगा।</p>
+    </note>
+</section>
+</page>

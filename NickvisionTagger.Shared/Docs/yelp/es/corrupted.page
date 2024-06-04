@@ -40,7 +40,7 @@
     <title>Carátula del álbum no válida</title>
     <p>Un formato de carátula no válido o dañado puede causar problemas en la visualización de los archivos de música en Tagger.</p>
     <note style="advanced">
-        <p>FFmpeg puede utilizarse para solucionar problemas en las carátulas de los álbumes. Ejecute el siguiente comando para eliminar los datos de las carátulas de un archivo:</p>
+        <p>FFmpeg puede usarse para solucionar problemas en las carátulas de los álbumes. Ejecute el siguiente comando para eliminar los datos de las carátulas de un archivo:</p>
         <code>ffmpeg -map 0:a -c:a copy -map_metadata -1 -i in.mp3 out.mp3</code>
         <p>donde <code>in.mp3</code> es la ruta del archivo dañado y <code>out.mp3</code> es la ruta para exportar el archivo recodificado.</p>
     </note>

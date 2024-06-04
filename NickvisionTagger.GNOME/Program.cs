@@ -35,6 +35,7 @@ public partial class Program
         _mainWindowController.AppInfo.Changelog =
             @"* Fixed an issue where album art was not deleted correctly on delete tag action
               * Fixed an issue where dragging and dropping a library was not working
+              * Updated dependencies
               * Updated translations (Thanks everyone on Weblate!)";
         _application.OnActivate += OnActivate;
         if (File.Exists(Path.GetFullPath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)) + "/org.nickvision.tagger.gresource"))

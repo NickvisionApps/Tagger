@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="topic" id="configuration" its:version="2.0" xml:lang="bg">
+<info>
+	<link type="guide" xref="index"/>
+	<title type="link">Configuration 🔧</title>
+	<credit type="author copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<credit type="publisher copyright">
+		<name>Nicholas Logozzo</name>
+		<years its:translate="no">2023</years>
+	</credit>
+	<license href="http://creativecommons.org/licenses/by/4.0/" its:translate="no"><p>Creative Commons Attribution 4.0 International License</p></license>
+</info>
+
+<title>Configuration</title>
+<p>This page describes what you can change in the application configuration.</p>
+<terms>
+    <item>
+		<title>Тема</title>
+		<p>Set light or dark theme, or make <app>Tagger</app> follow your system theme.</p>
+	</item>
+    <item>
+		<title>Запомняне на последно отворената фонотека</title>
+		<p>Whether or not to remember the previously used music library and reopen it when Tagger starts the next time.</p>
+	</item>
+    <item>
+		<title>Включване и на подпапките</title>
+		<p>Whether or not to scan for music files into subdirectories of a music folder.</p>
+	</item>
+    <item>
+		<title>Подреждане на файлове по</title>
+		<p>The property to use when sorting and displaying music files. It can be one of the following options:</p>
+        <list>
+            <item><p><code>File Name</code></p></item>
+            <item><p><code>File Path</code></p></item>
+            <item><p><code>Title</code></p></item>
+            <item><p><code>Artist</code></p></item>
+            <item><p><code>Album</code></p></item>
+            <item><p><code>Year</code></p></item>
+            <item><p><code>Track</code></p></item>
+            <item><p><code>Genre</code></p></item>
+        </list>
+	</item>
+    <item>
+		<title>Запазване на датата на редакция</title>
+		<p>Whether or not to not update a file's write (modified) timestamp when its tag is saved.</p>
+	</item>
+    <item>
+        <title>Ограничаване на броя на символите в името на файла</title>
+        <p>Whether or not filename characters should be limited to those only supported by Windows.</p>
+        <note>
+            <p>This option is only available on non-Windows systems.</p>
+        </note>
+    </item>
+    <item>
+		<title>Презаписване на етикета с MusicBrainz</title>
+		<p>Whether or not to overwrite existing tag metadata with data found from MusicBrainz. If disabled, only blank tag properties will be filled.</p>
+	</item>
+    <item>
+		<title>Презаписване на обложката на албума с MusicBrainz</title>
+		<p>Whether or not to overwrite overwrite existing album art with art found from MusicBrainz.</p>
+	</item>
+	<item>
+        <title>Overwrite Lyrics With Web Service</title>
+        <p>Whether or not to overwrite a tag's existing lyric data with data from the web.</p>
+    </item>
+    <item>
+		<title>Потребителски AcoustId API ключ</title>
+		<p>An AcoustId User API key to use when fingerprinting music files and looking up song information.</p>
+		<note>
+			<p>A key can be obtained <link href="https://acoustid.org/api-key">here</link></p>
+		</note>
+	</item>
+</terms>
+</page>
