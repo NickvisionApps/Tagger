@@ -8,19 +8,21 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 19:51-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-08-07 13:09+0000\n"
+"Last-Translator: Fúlvio Leo <fulviokaldas@outlook.com>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
+"nickvision-tagger/app/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1453
 #, csharp-format
 msgid "{0} • {1}"
-msgstr ""
+msgstr "{0} • {1}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1507
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1538
@@ -28,7 +30,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1429
 #, csharp-format
 msgid "{0} of {1} selected"
-msgstr ""
+msgstr "{0} de {1} selecionado(s)"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/AlbumArtInfoDialog.cs:34
 #: ../../../../NickvisionTagger.GNOME/Controls/AlbumArtInfoDialog.cs:35
@@ -36,28 +38,28 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:29
 #, csharp-format
 msgid "{0} pixels"
-msgstr ""
+msgstr "{0} pixels"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/CreatePlaylistDialog.cs:102
 #, csharp-format
 msgid "{0} Playlist (*{1})"
-msgstr ""
+msgstr "{0} Lista de Reprodução (*{1})"
 
 #: ../../../Controllers/MainWindowController.cs:208
 msgid "%artist%- %title%"
-msgstr ""
+msgstr "%artist%- %title%"
 
 #: ../../../Controllers/MainWindowController.cs:208
 msgid "%title%"
-msgstr ""
+msgstr "%title%"
 
 #: ../../../Controllers/MainWindowController.cs:208
 msgid "%title%- %artist%"
-msgstr ""
+msgstr "%title%- %artist%"
 
 #: ../../../Controllers/MainWindowController.cs:208
 msgid "%track%- %title%"
-msgstr ""
+msgstr "%track%- %title%"
 
 #: ../../../Controllers/MainWindowController.cs:612
 #: ../../../Controllers/MainWindowController.cs:623
@@ -101,16 +103,16 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1452
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1543
 msgid "<keep>"
-msgstr ""
+msgstr "<manter>"
 
 #: ../../../Models/PropertyMap.cs:142
 msgid "0 MiB"
-msgstr ""
+msgstr "0 MiB"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:159
 #, csharp-format
 msgid "About {0}"
-msgstr ""
+msgstr "Sobre {0}"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1242
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1219
@@ -124,11 +126,19 @@ msgid ""
 "If none is provided, Tagger will submit your tag's metadata in association "
 "with the fingerprint instead."
 msgstr ""
+"O AcoustId pode associar a impressão digital de uma música a um ID de "
+"gravação do MusicBrainz para fácil identificação.\n"
+"\n"
+"Se você tiver um ID de gravação do MusicBrainz para esta música, forneça-o "
+"abaixo.\n"
+"\n"
+"Se nenhum for fornecido, o Tagger enviará os metadados da sua tag em "
+"associação com a impressão digital."
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:74
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:121
 msgid "AcoustId User API Key"
-msgstr ""
+msgstr "Chave de API do usuário AcoustId"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:240
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1168
@@ -140,35 +150,35 @@ msgstr ""
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:125
 #: NickvisionTagger.GNOME/Blueprints/window.blp:667
 msgid "Add"
-msgstr ""
+msgstr "Adicionar"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:218
 #: NickvisionTagger.GNOME/Blueprints/window.blp:663
 msgid "Add New Property"
-msgstr ""
+msgstr "Adicionar Nova Propriedade"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:125
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:41
 #: NickvisionTagger.GNOME/Blueprints/window.blp:23
 msgid "Add to Playlist"
-msgstr ""
+msgstr "Adicionar à Lista de Reprodução"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:199
 #: NickvisionTagger.GNOME/Blueprints/window.blp:601
 msgid "Additional Properties"
-msgstr ""
+msgstr "Propriedades Adicionais"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:168
 #: NickvisionTagger.GNOME/Blueprints/window.blp:274
 msgid "Advanced Search Info"
-msgstr ""
+msgstr "Informações de Pesquisa Avançada"
 
 #: ../../../Controllers/MainWindowController.cs:188
 #: ../../../Controllers/MainWindowController.cs:1352
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:706
 #: ../../../Models/MusicFile.cs:833
 msgid "album"
-msgstr ""
+msgstr "álbum"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:118
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:188
@@ -176,17 +186,17 @@ msgstr ""
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:54
 #: NickvisionTagger.GNOME/Blueprints/window.blp:519
 msgid "Album"
-msgstr ""
+msgstr "Álbum"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:132
 #: NickvisionTagger.GNOME/Blueprints/window.blp:38
 msgid "Album Art"
-msgstr ""
+msgstr "Arte do Álbum"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:190
 #: NickvisionTagger.GNOME/Blueprints/window.blp:523
 msgid "Album Artist"
-msgstr ""
+msgstr "Artista do Álbum"
 
 #: ../../../Controllers/MainWindowController.cs:189
 #: ../../../Controllers/MainWindowController.cs:1401

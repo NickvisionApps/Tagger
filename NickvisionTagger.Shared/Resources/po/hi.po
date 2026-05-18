@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-14 19:51-0500\n"
-"PO-Revision-Date: 2024-03-29 14:01+0000\n"
+"PO-Revision-Date: 2024-07-07 21:09+0000\n"
 "Last-Translator: Scrambled777 <weblate.scrambled777@simplelogin.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/nickvision-tagger/"
 "app/hi/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1453
 #, csharp-format
@@ -47,19 +47,19 @@ msgstr "{0} प्लेलिस्ट (*{1})"
 
 #: ../../../Controllers/MainWindowController.cs:208
 msgid "%artist%- %title%"
-msgstr "%कलाकार%- %शीर्षक%"
+msgstr "%artist%- %title%"
 
 #: ../../../Controllers/MainWindowController.cs:208
 msgid "%title%"
-msgstr "%शीर्षक%"
+msgstr "%title%"
 
 #: ../../../Controllers/MainWindowController.cs:208
 msgid "%title%- %artist%"
-msgstr "%शीर्षक%-%कलाकार%"
+msgstr "%title%- %artist%"
 
 #: ../../../Controllers/MainWindowController.cs:208
 msgid "%track%- %title%"
-msgstr "%ट्रैक%- %शीर्षक%"
+msgstr "%track%- %title%"
 
 #: ../../../Controllers/MainWindowController.cs:612
 #: ../../../Controllers/MainWindowController.cs:623
@@ -103,7 +103,7 @@ msgstr "%ट्रैक%- %शीर्षक%"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1452
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1543
 msgid "<keep>"
-msgstr "<रखें>"
+msgstr "<keep>"
 
 #: ../../../Models/PropertyMap.cs:142
 msgid "0 MiB"
@@ -132,13 +132,13 @@ msgstr ""
 "यदि आपके पास इस गाने के लिए MusicBrainz रिकॉर्डिंग Id है, तो कृपया इसे नीचे "
 "प्रदान करें।\n"
 "\n"
-"यदि कोई भी प्रदान नहीं किया गया है, तो Tagger फिंगरप्रिंट के साथ आपके टैग का "
+"यदि कोई भी प्रदान नहीं किया गया है, तो टैगर फिंगरप्रिंट के साथ आपके टैग का "
 "मेटाडेटा सबमिट करेगा।"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:74
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:121
 msgid "AcoustId User API Key"
-msgstr "AcoustId उपयोगकर्ता API कुंजी"
+msgstr "AcoustId उपयोक्ता API कुंजी"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:240
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1168
@@ -218,11 +218,11 @@ msgstr "सभी समर्थित फाइलें"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:34
 msgid "An application restart is required to change the theme."
-msgstr "थीम बदलने के लिए एप्लिकेशन को पुनरारंभ करना आवश्यक है।"
+msgstr "थीम बदलने के लिए अनुप्रयोग को पुनरारंभ करना आवश्यक है।"
 
 #: ../../../Controllers/MainWindowController.cs:1239
 msgid "An invalid RecordingId was provided to MusicBrainz"
-msgstr "MusicBrainz को एक अमान्य रिकॉर्डिंग ID प्रदान की गई थी"
+msgstr "MusicBrainz को अमान्य रिकॉर्डिंग ID प्रदान की गई थी"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:689
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:795
@@ -285,7 +285,7 @@ msgstr "कलाकार"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:38
 msgid "Automatically Check for Updates"
-msgstr "अपडेट के लिए स्वचालित रूप से जाँच करें"
+msgstr "अपडेट के लिए स्वचालित रूप से जांचे"
 
 #: ../../../Helpers/MediaHelpers.cs:25
 msgid "B"
@@ -299,7 +299,7 @@ msgstr "B"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1483
 #: NickvisionTagger.GNOME/Blueprints/window.blp:50
 msgid "Back"
-msgstr "वापस"
+msgstr "पीछे"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:202
 #: NickvisionTagger.GNOME/Blueprints/window.blp:608
@@ -414,11 +414,11 @@ msgstr "संगीतकार"
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:42
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:34
 msgid "Configure"
-msgstr "कॉन्फ़िगर"
+msgstr "विन्यस्त करें"
 
 #: ../../../Controllers/MainWindowController.cs:175
 msgid "Contributors on GitHub ❤️"
-msgstr "GitHub पर योगदानकर्ता ❤️"
+msgstr "गिटहब पर योगदानकर्ता ❤️"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1034
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1053
@@ -483,26 +483,26 @@ msgstr "श्रेय"
 #: ../../../Controllers/MainWindowController.cs:193
 #: ../../../Controllers/MainWindowController.cs:1485
 msgid "custom"
-msgstr "कस्टम"
+msgstr "तदनुकूल"
 
 #: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:49
 #: ../../../../NickvisionTagger.GNOME/Controls/ComboBoxDialog.cs:61
 #: ../../../../NickvisionTagger.WinUI/Controls/ComboBoxDialog.xaml.cs:36
 #: ../../../../NickvisionTagger.WinUI/Controls/ComboBoxDialog.xaml.cs:52
 msgid "Custom"
-msgstr "कस्टम"
+msgstr "तदनुकूल"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:144
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:216
 #: NickvisionTagger.GNOME/Blueprints/window.blp:659
 msgid "Custom Properties"
-msgstr "कस्टम प्रॉपर्टी"
+msgstr "तदनुकूल प्रॉपर्टी"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:219
 #: NickvisionTagger.GNOME/Blueprints/window.blp:676
 msgid "Custom properties can only be edited for individual files."
 msgstr ""
-"कस्टम प्रॉपर्टीज को केवल व्यक्तिगत फाइलों के लिए संपादित किया जा सकता है।"
+"तदनुकूल प्रॉपर्टीज को केवल व्यक्तिगत फाइलों के लिए संपादित किया जा सकता है।"
 
 #: ../../../Controllers/MainWindowController.cs:178
 msgid "DaPigGuy"
@@ -514,15 +514,15 @@ msgstr "डेविड लैपशिन"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:130
 msgid "Delete Tag"
-msgstr "टैग हटाएं"
+msgstr "टैग मिटाएं"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:173
 msgid "Delete Tag (Shift+Delete)"
-msgstr "टैग हटाएं (Shift+Delete)"
+msgstr "टैग मिटाएं (Shift+Delete)"
 
 #: ../../../Controllers/MainWindowController.cs:925
 msgid "Deleting tags..."
-msgstr "टैग हटाये जा रहे हैं…"
+msgstr "टैग मिटाये जा रहे हैं…"
 
 #: ../../../Controllers/MainWindowController.cs:191
 #: ../../../Controllers/MainWindowController.cs:1432
@@ -559,7 +559,7 @@ msgstr ""
 "डिज़ाइनर:\n"
 "{1}\n"
 "\n"
-"कलाकार की:\n"
+"कलाकार:\n"
 "{2}\n"
 "\n"
 "अनुवादक:\n"
@@ -587,35 +587,35 @@ msgstr "डिस्क"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1174
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1233
 msgid "Discard"
-msgstr "खारिज"
+msgstr "त्यागें"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:174
 msgid "Discard Unapplied Changed (Ctrl+Z)"
-msgstr "लागू न किए गए परिवर्तन को खारिज करें (Ctrl+Z)"
+msgstr "लागू न किए गए परिवर्तन त्यागें (Ctrl+Z)"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:129
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:60
 #: NickvisionTagger.GNOME/Blueprints/window.blp:30
 msgid "Discard Unapplied Changes"
-msgstr "अप्रयुक्त परिवर्तन खारिज करें"
+msgstr "अप्रयुक्त परिवर्तन त्यागें"
 
 #: ../../../Controllers/MainWindowController.cs:893
 msgid "Discarding tags..."
-msgstr "टैग खारिज किए जा रहे हैं…"
+msgstr "टैग त्यागें जा रहे हैं…"
 
 #: ../../../Controllers/MainWindowController.cs:191
 #: ../../../Controllers/MainWindowController.cs:1436
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:762
 #: ../../../Models/MusicFile.cs:873
 msgid "discnumber"
-msgstr "डिस्कनंबर"
+msgstr "डिस्कसंख्या"
 
 #: ../../../Controllers/MainWindowController.cs:192
 #: ../../../Controllers/MainWindowController.cs:1451
 #: ../../../Models/MusicFile.cs:81 ../../../Models/MusicFile.cs:770
 #: ../../../Models/MusicFile.cs:877
 msgid "disctotal"
-msgstr "डिस्कटोटल"
+msgstr "डिस्ककुल"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:158
 msgid "Discussions"
@@ -661,7 +661,7 @@ msgstr "MusicBrainz मेटाडेटा डाउनलोड हो रह
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:402
 msgid "Drop here to open library"
-msgstr "लाइब्रेरी खोलने के लिए यहां आएं"
+msgstr "लाइब्रेरी खोलने के लिए यहां छोड़ें"
 
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:53
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:112
@@ -693,7 +693,7 @@ msgid ""
 "If disabled, only blank tag properties will be filled."
 msgstr ""
 "MusicBrainz से प्राप्त डेटा के साथ मौजूदा टैग मेटाडेटा को अधिलेखित करने में "
-"सक्षम करें। यदि अक्षम किया गया है, तो केवल रिक्त टैग गुण भरे जाएंगे।"
+"सक्षम करें। यदि अक्षम किया गया है, तो केवल रिक्त टैग प्रॉपर्टी भरे जाएंगे।"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:191
 msgid "Enter album artist here"
@@ -721,7 +721,7 @@ msgstr "यहां संगीतकार दर्ज करें"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/ComboBoxDialog.xaml.cs:53
 msgid "Enter custom choice here"
-msgstr "यहां कस्टम विकल्प दर्ज करें"
+msgstr "यहां तदनुकूल विकल्प दर्ज करें"
 
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:49
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:207
@@ -730,11 +730,11 @@ msgstr "यहां विवरण दर्ज करें"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:209
 msgid "Enter disc number here"
-msgstr "यहां डिस्क नंबर दर्ज करें"
+msgstr "यहां डिस्क संख्या दर्ज करें"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:210
 msgid "Enter disc total here"
-msgstr "यहां डिस्क टोटल दर्ज करें"
+msgstr "यहां डिस्क कुल दर्ज करें"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:182
 msgid "Enter file name here"
@@ -821,11 +821,11 @@ msgstr "LRC को निर्यात करें"
 
 #: ../../../Controllers/MainWindowController.cs:1151
 msgid "Exported back album art to file successfully"
-msgstr "बैक एल्बम आर्ट को फाइल में सफलतापूर्वक निर्यात किया गया"
+msgstr "पीछे की एल्बम आर्ट को फाइल में सफलतापूर्वक निर्यात किया गया"
 
 #: ../../../Controllers/MainWindowController.cs:1135
 msgid "Exported front album art to file successfully"
-msgstr "फ्रंट एल्बम आर्ट को फाइल में सफलतापूर्वक निर्यात किया गया"
+msgstr "सामने की एल्बम आर्ट को फाइल में सफलतापूर्वक निर्यात किया गया"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:340
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:308
@@ -842,11 +842,11 @@ msgstr "MusicBrainz लुकअप विफल"
 
 #: ../../../Controllers/MainWindowController.cs:1156
 msgid "Failed to export back album art to a file"
-msgstr "बैक एल्बम आर्ट को फाइल में निर्यात करने में विफल"
+msgstr "पीछे की एल्बम आर्ट को फाइल में निर्यात करने में विफल"
 
 #: ../../../Controllers/MainWindowController.cs:1140
 msgid "Failed to export front album art to a file"
-msgstr "फ्रंट एल्बम आर्ट को फाइल में निर्यात करने में विफल"
+msgstr "सामने की एल्बम आर्ट को फाइल में निर्यात करने में विफल"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:106
 msgid "File"
@@ -863,18 +863,18 @@ msgstr "फाइल सफलतापूर्वक ठीक कर दी �
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:54
 #: NickvisionTagger.GNOME/Blueprints/window.blp:482
 msgid "File Name"
-msgstr "फाइल का नाम"
+msgstr "फाइल नाम"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1034
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:147
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1124
 #: NickvisionTagger.GNOME/Blueprints/window.blp:64
 msgid "File Name to Tag"
-msgstr "टैग को फाइल का नाम"
+msgstr "फाइलनाम से टैग"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:177
 msgid "File Name to Tag (Ctrl+F)"
-msgstr "टैग को फाइल का नाम (Ctrl + F)"
+msgstr "फाइलनाम से टैग (Ctrl + F)"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:115
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:50
@@ -885,12 +885,12 @@ msgstr "फाइल पथ"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:220
 #: NickvisionTagger.GNOME/Blueprints/window.blp:685
 msgid "File Properties"
-msgstr "फाइल गुण"
+msgstr "फाइल प्रॉपर्टी"
 
 #: ../../../Controllers/MainWindowController.cs:188
 #: ../../../Controllers/MainWindowController.cs:1340
 msgid "filename"
-msgstr "फाइल का नाम"
+msgstr "फाइलनाम"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:221
 #: NickvisionTagger.GNOME/Blueprints/window.blp:688
@@ -965,7 +965,7 @@ msgstr "GiB"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1411
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:156
 msgid "GitHub Repo"
-msgstr "GitHub रेपो"
+msgstr "गिटहब रेपो"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:25
 #: NickvisionTagger.GNOME/Blueprints/album_art_info_dialog.blp:45
@@ -989,7 +989,7 @@ msgstr "सहायता"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:180
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:764
 msgid "Hide Extras Pane"
-msgstr "अतिरिक्त फलक छिपाएँ"
+msgstr "अतिरिक्त फलक छिपाएं"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:267
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:58
@@ -1025,21 +1025,21 @@ msgstr "डालें"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1085
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:100
 msgid "Insert Back Album Art"
-msgstr "बैक एल्बम आर्ट डालें"
+msgstr "पीछे की एल्बम आर्ट डालें"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1085
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:80
 msgid "Insert Front Album Art"
-msgstr "फ्रंट एल्बम आर्ट डालें"
+msgstr "सामने की एल्बम आर्ट डालें"
 
 #: ../../../Controllers/MainWindowController.cs:1039
 msgid "Inserting album art..."
-msgstr "एल्बम आर्ट सम्मिलित किया जा रहा है…"
+msgstr "एल्बम आर्ट सम्मिलित की जा रही है…"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:280
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:259
 msgid "Keep Tagger's lyrics"
-msgstr "Tagger के बोल रखें"
+msgstr "टैगर के बोल रखें"
 
 #: ../../../Helpers/MediaHelpers.cs:25
 msgid "KiB"
@@ -1080,7 +1080,7 @@ msgstr "बोल"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:183
 #: NickvisionTagger.GNOME/Blueprints/window.blp:491
 msgid "Main Properties"
-msgstr "मुख्य गुण"
+msgstr "मुख्य प्रॉपर्टी"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1439
 msgid "Making everything pretty..."
@@ -1099,7 +1099,7 @@ msgstr "गीत के बोल प्रबंधित करें (Ctrl +
 
 #: ../../../Controllers/MainWindowController.cs:173
 msgid "Matrix Chat"
-msgstr "Matrix चैट"
+msgstr "मैट्रिक्स चैट"
 
 #: ../../../Helpers/MediaHelpers.cs:25
 msgid "MiB"
@@ -1108,7 +1108,7 @@ msgstr "MiB"
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:23
 #: NickvisionTagger.GNOME/Blueprints/album_art_info_dialog.blp:31
 msgid "Mime Type"
-msgstr "Mime प्रकार"
+msgstr "माइम प्रकार"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:57
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:65
@@ -1128,7 +1128,7 @@ msgstr "MusicBrainz रिकॉर्डिंग Id"
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1168
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1106
 msgid "New Custom Property"
-msgstr "नया कस्टम प्रॉपर्टी"
+msgstr "नया तदनुकूल प्रॉपर्टी"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:240
 msgid "New Synchronized Lyric"
@@ -1197,7 +1197,7 @@ msgstr "कोई चयनित संगीत फाइलें नही�
 
 #: ../../../Controllers/MainWindowController.cs:1285
 msgid "No user api key configured."
-msgstr "कोई उपयोगकर्ता API कुंजी कॉन्फ़िगर नहीं की गई।"
+msgstr "कोई उपयोक्ता API कुंजी कॉन्फ़िगर नहीं की गई।"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:318
 msgid "Nothing to export."
@@ -1396,28 +1396,28 @@ msgstr "लाइब्रेरी पुनः लोड करें"
 #: NickvisionTagger.GNOME/Blueprints/window.blp:53
 #: NickvisionTagger.GNOME/Blueprints/window.blp:376
 msgid "Remove"
-msgstr "हटाएँ"
+msgstr "हटाएं"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1627
 #: ../../../../NickvisionTagger.WinUI/Controls/CustomPropertyRow.xaml.cs:22
 msgid "Remove Custom Property"
-msgstr "कस्टम प्रॉपर्टी हटाएँ"
+msgstr "तदनुकूल प्रॉपर्टी हटाएं"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:955
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:898
 msgid "Remove Files?"
-msgstr "फाइलें हटाएँ?"
+msgstr "फाइलें हटाएं?"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:126
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:46
 #: NickvisionTagger.GNOME/Blueprints/window.blp:24
 msgid "Remove from Playlist"
-msgstr "प्लेलिस्ट से हटाएँ"
+msgstr "प्लेलिस्ट से हटाएं"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:182
 #: ../../../../NickvisionTagger.WinUI/Controls/SyncLyricRow.xaml.cs:34
 msgid "Remove Lyric"
-msgstr "बोल हटाएँ"
+msgstr "बोल हटाएं"
 
 #: ../../../Controllers/MainWindowController.cs:1083
 msgid "Removing album art..."
@@ -1467,7 +1467,7 @@ msgstr "सेटिंग्स"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:756
 msgid "Show Extras Pane"
-msgstr "एक्स्ट्रा फलक दिखाएँ"
+msgstr "अतिरिक्त फलक दिखाएं"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:682
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:788
@@ -1497,7 +1497,7 @@ msgstr ""
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:48
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:52
 msgid "Sort Files By"
-msgstr "फाइलों को इसके अनुसार क्रमबद्ध करें"
+msgstr "फाइलों ऐसे छांटे"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1242
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1219
@@ -1510,15 +1510,15 @@ msgstr "जमा करें"
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:134
 #: NickvisionTagger.GNOME/Blueprints/window.blp:73
 msgid "Submit to AcoustId"
-msgstr "AcoustId पर सबमिट करें"
+msgstr "AcoustId पर जमा करें"
 
 #: ../../../Controllers/MainWindowController.cs:1291
 msgid "Submitted metadata to AcoustId successfully"
-msgstr "AcoustId पर मेटाडेटा सफलतापूर्वक सबमिट किया गया"
+msgstr "AcoustId पर मेटाडेटा सफलतापूर्वक जमा किया गया"
 
 #: ../../../Controllers/MainWindowController.cs:1288
 msgid "Submitting data to AcoustId..."
-msgstr "AcoustId पर डेटा सबमिट किया जा रहा है…"
+msgstr "AcoustId पर डेटा जमा किया जा रहा है…"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1073
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:143
@@ -1529,7 +1529,7 @@ msgstr "AcoustId पर डेटा सबमिट किया जा रह�
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1597
 #: NickvisionTagger.GNOME/Blueprints/window.blp:409
 msgid "Switch to Back Cover"
-msgstr "बैक कवर पर स्विच करें"
+msgstr "पीछे के कवर पर जाएं"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:1073
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1267
@@ -1537,12 +1537,12 @@ msgstr "बैक कवर पर स्विच करें"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1596
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1597
 msgid "Switch to Front Cover"
-msgstr "फ्रंट कवर पर स्विच करें"
+msgstr "सामने के कवर पर जाएं"
 
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:45
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:47
 msgid "Synchronized"
-msgstr "सिंक्रनाइज़"
+msgstr "समन्वयित"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:127
 msgid "Tag"
@@ -1553,11 +1553,11 @@ msgstr "टैग"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:1142
 #: NickvisionTagger.GNOME/Blueprints/window.blp:65
 msgid "Tag to File Name"
-msgstr "फाइल नाम पर टैग करें"
+msgstr "टैग से फाइल नाम"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:178
 msgid "Tag to File Name (Ctrl+T)"
-msgstr "फाइल नाम पर टैग करें (Ctrl+T)"
+msgstr "टैग से फाइल नाम (Ctrl+T)"
 
 #: ../../../Controllers/MainWindowController.cs:169
 msgid "Tag your music"
@@ -1570,13 +1570,13 @@ msgstr "अपने संगीत को टैग करें"
 
 #: ../../../Controllers/MainWindowController.cs:168
 msgid "Tagger"
-msgstr "Tagger"
+msgstr "टैगर"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:164
 msgid ""
 "Tagger's documentation and support channels are accessible via the Help menu."
 msgstr ""
-"Tagger के दस्तावेज़ीकरण और सहायता चैनल सहायता मेनू के माध्यम से पहुंच योग्य "
+"टैगर के दस्तावेज़ीकरण और सहायता चैनल सहायता मेनू के माध्यम से पहुंच योग्य "
 "हैं।"
 
 #: ../../../../NickvisionTagger.GNOME/Views/MainWindow.cs:955
@@ -1585,7 +1585,7 @@ msgid ""
 "The selected files will not be deleted from disk but will be removed from "
 "this playlist."
 msgstr ""
-"चयनित फाइलें डिस्क से नहीं हटाई जाएंगी बल्कि इस प्लेलिस्ट से हटा दी जाएंगी।"
+"चयनित फाइलें डिस्क से नहीं मिटाई जाएंगी बल्कि इस प्लेलिस्ट से हटा दी जाएंगी।"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:33
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:18
@@ -1594,7 +1594,7 @@ msgstr "थीम"
 
 #: ../../../Controllers/MainWindowController.cs:1240
 msgid "This file does not have a valid fingerprint"
-msgstr "इस फाइल में वैध फ़िंगरप्रिंट नहीं है"
+msgstr "इस फाइल में मान्य फ़िंगरप्रिंट नहीं है"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/CorruptedFilesDialog.xaml.cs:33
 #: NickvisionTagger.GNOME/Blueprints/corrupted_files_dialog.blp:35
@@ -1603,7 +1603,7 @@ msgid ""
 "following files are affected and will be ignored by Tagger:"
 msgstr ""
 "इस संगीत फोल्डर में ऐसी संगीत फाइलें हैं जिनके टैग दूषित हैं। निम्नलिखित "
-"फाइलों प्रभावित हैं और Tagger द्वारा अनदेखा कर दी जाएंगी:"
+"फाइलों प्रभावित हैं और टैगर द्वारा अनदेखा कर दी जाएंगी:"
 
 #: ../../../Helpers/MediaHelpers.cs:25
 msgid "TiB"
@@ -1663,7 +1663,7 @@ msgstr "Scrambled777 <weblate.scrambled777@simplelogin.com>"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:166
 #: NickvisionTagger.GNOME/Blueprints/window.blp:313
 msgid "Try a different library"
-msgstr "कोई भिन्न लाइब्रेरी आज़माएँ"
+msgstr "कोई भिन्न लाइब्रेरी आज़माएं"
 
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:43
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:39
@@ -1678,7 +1678,7 @@ msgstr "प्रकार ! उन्नत खोज के लिए"
 #: ../../../Controllers/MainWindowController.cs:577
 msgid "Unable to add file to playlist. File may already exist in playlist."
 msgstr ""
-"प्लेलिस्ट में फाइल जोड़ने में असमर्थ. फाइल पहले से ही प्लेलिस्ट में मौजूद हो "
+"प्लेलिस्ट में फाइल जोड़ने में असमर्थ। फाइल पहले से ही प्लेलिस्ट में मौजूद हो "
 "सकती है।"
 
 #: ../../../Controllers/MainWindowController.cs:557
@@ -1687,7 +1687,7 @@ msgstr "प्लेलिस्ट बनाने में असमर्थ
 
 #: ../../../Controllers/MainWindowController.cs:442
 msgid "Unable to download and install update."
-msgstr "अपडेट डाउनलोड और इंस्टॉल करने में असमर्थ।"
+msgstr "अपडेट डाउनलोड और स्थापित करने में असमर्थ।"
 
 #: ../../../../NickvisionTagger.GNOME/Views/LyricsDialog.cs:344
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:314
@@ -1724,7 +1724,7 @@ msgstr "{0} सहेजने में असमर्थ।"
 
 #: ../../../Controllers/MainWindowController.cs:1291
 msgid "Unable to submit to AcoustId. Check API key"
-msgstr "AcoustId को सबमिट करने में असमर्थ. API कुंजी जांचें"
+msgstr "AcoustId पर जमा करने में असमर्थ। API कुंजी जांचें"
 
 #: ../../../Controllers/MainWindowController.cs:1641
 msgid "Unknown"
@@ -1733,7 +1733,7 @@ msgstr "अज्ञात"
 #: ../../../../NickvisionTagger.WinUI/Views/LyricsDialog.xaml.cs:44
 #: NickvisionTagger.GNOME/Blueprints/lyrics_dialog.blp:47
 msgid "Unsynchronized"
-msgstr "अनसिंक्रनाइज़्ड"
+msgstr "असमन्वयित"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:432
 msgid "Update"
@@ -1757,7 +1757,7 @@ msgstr "सापेक्ष पथ का उपयोग करें?"
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:32
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:15
 msgid "User Interface"
-msgstr "उपयोगकर्ता इंटरफ़ेस"
+msgstr "उपयोक्ता इंटरफ़ेस"
 
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:149
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:61
@@ -1772,7 +1772,7 @@ msgid ""
 "What would you like Tagger to do with lyrics found from the LRC file that "
 "conflict with existing lyrics of the same timestamp?"
 msgstr ""
-"आप चाहेंगे कि Tagger LRC फाइल से मिले उन बोलो के साथ क्या करे जो समान "
+"आप चाहेंगे कि टैगर LRC फाइल से मिले उन बोलो के साथ क्या करे जो समान "
 "टाइमस्टैम्प के मौजूदा बोलो के साथ विरोधाभासी हैं?"
 
 #: ../../../../NickvisionTagger.WinUI/Controls/AlbumArtInfoDialog.xaml.cs:24
@@ -1821,7 +1821,7 @@ msgstr "वर्ष"
 #: ../../../../NickvisionTagger.WinUI/Views/MainWindow.xaml.cs:900
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:121
 msgid "Yes"
-msgstr "हाँ"
+msgstr "हां"
 
 #: ../../../../NickvisionTagger.WinUI/Views/SettingsDialog.xaml.cs:36
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:20
@@ -1849,7 +1849,7 @@ msgstr "सुझाव"
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:143
 #: NickvisionTagger.GNOME/Blueprints/window.blp:5
 msgid "Preferences"
-msgstr "प्राथमिकताएँ"
+msgstr "प्राथमिकताएं"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:30
 msgid "Remember Last Opened Library"
@@ -1857,7 +1857,7 @@ msgstr "अंतिम बार खोली गई लाइब्रेर�
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:43
 msgid "Include Subfolders"
-msgstr "सबफोल्डर्स शामिल करें"
+msgstr "उप-फोल्डर शामिल करें"
 
 #: NickvisionTagger.GNOME/Blueprints/preferences_dialog.blp:77
 msgid "Limit File Name Characters"
@@ -1881,19 +1881,19 @@ msgstr "संगीत फाइल"
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:65
 #: NickvisionTagger.GNOME/Blueprints/window.blp:31
 msgid "Delete Tags"
-msgstr "टैग हटाएं"
+msgstr "टैग मिटाएं"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:70
 msgid "Convert File Name to Tag"
-msgstr "फाइल नाम को टैग में कनवर्ट करें"
+msgstr "फ़ाइल नाम को टैग में बदलें"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:75
 msgid "Convert Tag to File Name"
-msgstr "टैग को फाइल नाम में कनवर्ट करें"
+msgstr "टैग को फाइल नाम में बदलें"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:85
 msgid "Remove Front Album Art"
-msgstr "फ्रंट एल्बम आर्ट हटाएँ"
+msgstr "सामने की एल्बम आर्ट हटाएं"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:95
 #: NickvisionTagger.GNOME/Blueprints/window.blp:58
@@ -1902,7 +1902,7 @@ msgstr "एल्बम आर्ट बदलें"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:105
 msgid "Remove Back Album Art"
-msgstr "बैक एल्बम आर्ट हटाएँ"
+msgstr "पीछे की एल्बम आर्ट हटाएं"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:121
 msgctxt "Shortcut"
@@ -1912,7 +1912,7 @@ msgstr "वेब सेवाएं"
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:140
 msgctxt "Shortcut"
 msgid "Application"
-msgstr "एप्लिकेशन"
+msgstr "अनुप्रयोग"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:148
 #: NickvisionTagger.GNOME/Blueprints/window.blp:6
@@ -1921,11 +1921,11 @@ msgstr "कीबोर्ड शॉर्टकट"
 
 #: NickvisionTagger.GNOME/Blueprints/shortcuts_dialog.blp:158
 msgid "Quit"
-msgstr "छोड़ें"
+msgstr "बंद करें"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:8
 msgid "About Tagger"
-msgstr "Tagger के बारे में"
+msgstr "टैगर के बारे में"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:96
 msgid "Library Menu"
@@ -1937,7 +1937,7 @@ msgstr "लाइब्रेरी"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:110
 msgid "Main Menu"
-msgstr "मुख्य मेन्यू"
+msgstr "मुख्य मेनू"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:125
 msgid "Toggle Tags Pane"
@@ -1945,11 +1945,11 @@ msgstr "टैग फलक टॉगल करें"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:153
 msgid "Tag Actions"
-msgstr "टैग क्रियाएँ"
+msgstr "टैग कार्रवाइयां"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:159
 msgid "Apply Changes To Tag (Ctrl+S)"
-msgstr "टैग में परिवर्तन लागू करें (Ctrl+S)"
+msgstr "टैग पर परिवर्तन लागू करें (Ctrl+S)"
 
 #: NickvisionTagger.GNOME/Blueprints/window.blp:194
 msgid "Open Folder (Ctrl+O)"
